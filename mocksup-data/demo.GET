@@ -1,0 +1,12 @@
+
+<% if (query.name) { %>
+  {
+  "ok": true,
+  "name": '1234'
+}
+<% } else {%>
+  {
+  "ok": true,
+  "name": '456'
+}
+<% }%>

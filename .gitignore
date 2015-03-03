@@ -1,0 +1,47 @@
+# node.js / npm
+lib-cov
+*.seed
+*.log
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results
+
+node_modules
+
+.tags
+npm-debug.log
+
+
+# misc / editors
+*~
+*#
+.DS_STORE
+.netbeans
+nbproject
+.idea
+.nide
+*.iml
+
+# bower components
+src/components
+src/test/components
+
+
+# Test
+coverage.html
+test-results.xml
+report-html
+karma_html
+
+# Grunt
+.tmp
+/dist
+
+# Base
+coverage
+apidoc
