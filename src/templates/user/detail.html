@@ -1,1 +1,141 @@
-user
+<div ng-include="'templates/user/basic.html'"></div>
+
+<!-- 投资信息 -->
+<div class="item-panel">
+	<div class="title">
+	    <h3>投资信息</h3>
+	</div>
+	<div class="item">
+		<div class="item-heading">
+			<h4>投资总数</h4>
+			<span class="bage">6</span>		
+		</div>
+		<div class="item-body">
+			<div class="clearfix">
+				<div class="desc">个人单笔投资</div>
+				<div class="investment">￥ 500万 - 1000万</div>
+			</div>
+			<div class="clearfix">
+				<div class="desc">所在机构单笔投资</div>
+				<div class="investment">$ 5000万 - 1亿</div>
+			</div>
+		</div>
+	</div>
+	<div class="item">
+		<div class="item-heading">
+			<h4>关注领域</h4>
+		</div>
+		<div class="item-body field">
+			<span>移动互联网</span>	
+			<span>电子商务</span>	
+			<span>O2O</span>	
+		</div>
+	</div>
+	<div class="item">
+		<div class="item-heading">
+			<h4>投资阶段</h4>
+		</div>
+		<div class="item-body investment-phase">
+			<span>早期</span>
+			<span>成长型</span>
+		</div>
+	</div>
+</div>
+
+<!-- 投资经历 -->
+<div class="item-panel">
+	<div class="title">
+		<h3>投资经历</h3>
+		<span class="bage">6</span>
+	</div>
+	<div class="panel-body">
+		<ul class="list-item">
+			<li ng-repeat="item in [1,2]">
+				<a class="logo" href="#">
+					<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
+				</a>
+				<div class="info">
+					<a href="#">华为</a>
+					<p class="one-line">提供业界领先的终端产品</p>
+					<div class="clearfix">
+						<span class="pull-left">E轮及以后 <i class="time">(2014.02)</i></span>
+						<span class="pull-right">￥ <i class="money">800</i>万</span>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<a class="load-more" href="#"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+	</div>
+</div>
+
+<!-- 创业经历 -->
+<div class="item-panel">
+	<div class="title">
+		<h3>创业经历</h3>
+		<span class="bage">6</span>
+	</div>
+	<div class="panel-body">
+		<ul class="list-item">
+			<li ng-repeat="item in [1,2]">
+				<a class="logo" href="#">
+					<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
+				</a>
+				<div class="info">
+					<a href="#">1号店超市</a>
+					<p class="one-line">数百万种商品在线热销</p>
+					<div class="clearfix">
+						<span class="pull-left">创始人兼CEO</span>
+						<span class="pull-right time">2013.09 - 至今</span>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<a class="load-more" href="#"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+	</div>
+</div>
+
+<!-- 工作经历 -->
+<div class="item-panel">
+	<div class="title">
+		<h3>工作经历</h3>
+		<span class="bage">6</span>
+	</div>
+	<div class="panel-body">
+		<ul class="list-item">
+			<li ng-repeat="item in [1,2]">
+				<a class="logo" href="#">
+					<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
+				</a>
+				<div class="info">
+					<a href="#">1号店超市</a>
+					<p class="one-line">数百万种商品在线热销</p>
+					<div class="clearfix">
+						<span class="pull-left">VP</span>
+						<span class="pull-right time">2013.09 - 至今</span>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<a class="load-more" href="#"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

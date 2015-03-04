@@ -1,0 +1,161 @@
+body {
+	width: 640px;
+	margin: 0 auto;
+	font-size: 28px;
+	line-height: 46px;
+	color: @base-color;
+	background-color: #f0f0f0;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+// 图片边框
+.img-circle {
+	&.blue {
+		border: 3px solid #517496;
+	}
+}
+
+// nav
+.pub-nav {
+	padding: 22px 34px;
+	background-color: @theme-color;
+
+	h1 {
+		line-height: 0;
+		margin: 0;
+	}
+}
+
+.basic {
+	padding: 0 34px;
+}
+
+
+// 标题
+.title{
+    padding: 30px 20px 0;
+    border-bottom: 4px solid @title-border;
+
+    h3{
+        font-size: 32px;
+        display: inline-block;
+        margin: 0 0 -4px;
+       	padding: 0 10px 20px;
+        border-bottom:4px solid @title-light-border;
+        font-weight: bold;
+        color: @title-color;
+    }
+    [class^="icon-"], [class*=" icon-"] {
+        float: right;
+        font-size: 24px;
+        line-height: 36px;
+        color: #b4b4b4;
+    }
+    .total-num {
+        background: #5e75db;
+        color: #fff;
+        padding: 2px 8px;
+        line-height: 14px;
+        float: left;
+        border-radius: 3px;
+        margin-left: 18px;
+        margin-top: 5px;
+    }
+}
+
+// 字数统计
+.bage {
+	padding: 0 12px;
+	line-height: 28px;
+	background-color: #a7cded;
+	font-size: 20px;
+	color: @base-white;
+	border-radius: 6px;
+	display: inline-block;
+	vertical-align: text-top;
+	position: relative;
+	top: 2px;
+}
+
+// 列表
+.list-item {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	margin-top: -2px;
+
+	li {
+		padding: 40px 30px;
+		border-top: 2px solid #eee;
+	}
+
+	.logo {
+		float: left;
+	}
+
+	.info {
+		margin-left: 140px;
+
+		> a {
+			color: @font-color-dark;
+			font-size: 30px;
+			line-height: 32px;
+			font-weight: bold;
+		}
+
+		p {
+			margin: 0;
+
+			&.one-line {
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+		}
+	}
+}
+
+// 查看更多
+.load-more {
+	text-align: center;
+	display: block;
+	line-height: 80px;
+	color: @base-color;
+	font-size: 24px;
+	background-color: #f9f9f9;
+	border-top: 2px solid #eee;
+}
+
+// 时间
+.time {
+	color: #bbb;
+	font-style: normal;
+}
+
+// 金额
+.money {
+	color: #f90;
+	font-style: normal;
+}
+
+// 分享
+.share {
+	margin-top: 20px;
+	
+	a {
+		display: inline-block;
+		color: #bdced1;
+		width: 38px;
+		height: 38px;
+		border-radius: 10px;
+		background-color: #7096a6;
+		text-align: center;
+		line-height: 38px;
+		font-size: 30px;
+		margin: 0 10px 0 -2px;
+	}
+}
+
