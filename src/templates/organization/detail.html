@@ -1,7 +1,7 @@
 <div ng-include="'templates/organization/basic.html'"></div>
 
-<!-- 公司介绍 -->
 <div class="org-detail">
+	<!-- 公司介绍 -->
 	<div class="item-panel">
 		<div class="title">
 			<h3>公司介绍</h3>
@@ -14,10 +14,8 @@
 			<a class="load-more" href="#"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
 		</div>
 	</div>
-</div>
 
-<!-- 相关链接 -->
-<div class="org-detail">
+	<!-- 相关链接 -->
 	<div class="item-panel">
 		<div class="title">
 			<h3>相关链接</h3>
@@ -30,36 +28,145 @@
 			<a href="#">PC链接</a>
 		</div>
 	</div>
-</div>
 
-<!-- 子产品介绍 -->
-<div class="item-panel">
-	
-</div>
-
-<!-- 创始团队 -->
-<div class="item-panel">
-	<div class="title">
-		<h3>创始团队</h3>
-	</div>
-	<div class="panel-body">
-		<ul class="list-item">
-			<li ng-repeat="item in [1,2]">
-				<a class="logo" href="#">
-					<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
-				</a>
-				<div class="info">
-					<a href="#">雷军</a>
-					<p>著名天使投资人，小米科技创始人</p>
-					<span>创始人兼CEO</span>
-				</div>
-			</li>
-		</ul>
+	<!-- 子产品介绍 -->
+	<div class="item-panel">
+		<div class="sub-product">
+			<div>
+				<span>小米盒子增强版</span>
+				<i>NEXT</i>
+				<a href="#">查看官网</a>
+			</div>
+			<div>
+				<span>小米盒子增强版</span>
+				<i>NEXT</i>
+				<a href="#">查看官网</a>
+			</div>
+		</div>
 		<a class="load-more" href="#"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
 	</div>
+
+	<!-- 创始团队 -->
+	<div class="item-panel">
+		<div class="title">
+			<h3>创始团队</h3>
+		</div>
+		<div class="panel-body">
+			<ul class="list-item">
+				<li ng-repeat="item in [1,2]">
+					<a class="logo" href="#">
+						<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
+					</a>
+					<div class="info">
+						<a href="#">雷军</a>
+						<p>著名天使投资人，小米科技创始人</p>
+						<span>创始人兼CEO</span>
+					</div>
+				</li>
+			</ul>
+			<a class="load-more" href="#"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		</div>
+	</div>
+
+	<!-- 融资经历 -->
+	<div class="item-panel finance-panel">
+		<div class="title">
+			<h3>融资经历</h3>
+		</div>
+		<div class="panel-body">
+			<div class="round-info">
+				<div class="round">A轮</div>
+				<div class="info">
+					<span>$<span class="money">2000</span>万</span>
+					|
+					<span>估值$5000万</span>	
+					|
+					<span class="time">2013.02</span>
+				</div>
+			</div>
+			<ul class="list-item">
+				<li ng-repeat="item in [1,2]">
+					<a class="logo" href="#">
+						<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
+					</a>
+					<div class="info">
+						<a href="#">雷军</a> 
+						<span class="bage">待确认</span>
+						<p>著名天使投资人，小米科技创始人</p>
+						<span>创始人兼CEO</span>
+					</div>
+				</li>
+			</ul>
+			<div class="round-info">
+				<div class="round">天使轮</div>
+				<div class="info">
+					<span>融资信息未披露</span>
+				</div>
+			</div>
+			<ul class="list-item">
+				<li ng-repeat="item in [1,2]">
+					<a class="logo" href="#">
+						<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
+					</a>
+					<div class="info">
+						<a href="#">雷军</a>
+						<p>著名天使投资人，小米科技创始人</p>
+						<span>创始人兼CEO</span>
+					</div>
+				</li>
+			</ul>
+			<a class="load-more" href="#"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		</div>
+	</div>
+
+	<!-- 过往投资方 -->
+	<div class="item-panel past-investor">
+		<div class="title">
+			<h3>过往投资方</h3>
+			<span class="bage">4</span>
+		</div>
+		<div class="panel-body">
+			<ul class="list-item">
+				<li ng-repeat="item in [1,2]">
+					<a class="logo" href="#">
+						<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
+					</a>
+					<div class="info">
+						<a href="#">雷军</a>
+						<p>全球华语排名领先票务网站、官方购票渠道!</p>
+					</div>
+				</li>
+			</ul>
+			<a class="load-more" href="#"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		</div>
+	</div>
+
+	<!-- 团队成员 -->
+	<div class="item-panel past-investor">
+		<div class="title">
+			<h3>团队成员</h3>
+			<span class="bage">4</span>
+		</div>
+		<div class="panel-body">
+			<ul class="list-item">
+				<li ng-repeat="item in [1,2]">
+					<a class="logo" href="#">
+						<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
+					</a>
+					<div class="info">
+						<a href="#">詹姆斯</a>
+						<p>首席设计师，曾任职谷歌、脸谱等知名公司</p>
+					</div>
+				</li>
+			</ul>
+			<a class="load-more" href="#"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		</div>
+	</div>
 </div>
 
-<!-- 融资经历 -->
+
+
+
 
 
 

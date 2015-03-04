@@ -11,6 +11,10 @@ a:hover {
 	text-decoration: none;
 }
 
+p {
+	word-break: break-all;
+}
+
 // 图片边框
 .img-circle {
 	&.blue {
@@ -85,11 +89,14 @@ a:hover {
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	margin-top: -2px;
 
 	li {
 		padding: 40px 30px;
 		border-top: 2px solid #eee;
+
+		&:first-child {
+			border: none;
+		}
 	}
 
 	.logo {
