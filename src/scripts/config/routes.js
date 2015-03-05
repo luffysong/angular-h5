@@ -42,7 +42,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('organization_detail', {
         url: '/organization/{id}',
         templateUrl: 'templates/organization/detail.html',
-        controller: 'UserDetailController'
+        controller: 'OrganizationDetailController'
     });
 
 });

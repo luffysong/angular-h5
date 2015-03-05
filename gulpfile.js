@@ -110,6 +110,18 @@ gulp.task('scripts:init', ['scripts:init:controllers', 'scripts:init:directives'
 
 
 
+// Scripts Ui Bootstrap Template
+gulp.task('scripts:ui:template', function () {
+    return gulp.src(config.angularUiTpls)
+        .pipe($.html2js({
+            outputModuleName: 'ui.bootstrap.tpls',
+            base: 'src/components/angular-ui-bootstrap/'
+        }))
+        .pipe($.concat('template.js'))
+        .pipe(gulp.dest('.tmp/scripts/'))
+        .pipe($.size());
+});
+
 // Scripts Vendor
 gulp.task('scripts:vendor', function () {
     return gulp.src(config.vendors)
@@ -137,7 +149,7 @@ gulp.task('scripts:browserify', ['scripts:init'], function () {
 });
 
 // Scripts
-gulp.task('scripts', ['scripts:vendor', 'scripts:browserify']);
+gulp.task('scripts', ['scripts:vendor', 'scripts:browserify', 'scripts:ui:template']);
 
 gulp.task('karma', ['scripts:vendor', 'scripts:init'], function () {
     karma.server.start({

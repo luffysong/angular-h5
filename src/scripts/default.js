@@ -5,6 +5,7 @@ require('./config/setting');
 require('./config/dictionary');
 require('./config/city');
 
+angular.module('ui.carousel', ['ui.bootstrap.carousel', 'ui.bootstrap.tpls']);
 
 angular.module('defaultApp.filter', []);
 angular.module('defaultApp.directive', []);
@@ -19,8 +20,10 @@ require('./controllers');
 /*##require('./templates')##*/
 
 var depModules = [
-    'ngAnimate',
+    // 'ngAnimate',
+    // 'ngTouch',
     'ui.router',
+    'ui.carousel',
     'defaultApp.filter',
     'defaultApp.directive',
     'defaultApp.service',
