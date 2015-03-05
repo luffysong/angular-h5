@@ -9,7 +9,7 @@
 		<div class="panel-body">
 
 
-		<div class="carousel-box">
+		<div class="carousel-box" ng-swipe-left="next()" ng-swipe-right="prev()">
 			<carousel interval="myInterval">
 				<slide ng-repeat="slide in slides" active="slide.active">
 					<img ng-src="{{slide.image}}" style="margin:auto;">

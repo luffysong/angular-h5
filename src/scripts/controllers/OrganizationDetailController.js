@@ -4,22 +4,10 @@
 
 var angular = require('angular');
 
-angular.module('defaultApp.controller').controller('OrganizationDetailController', [
+angular.module('defaultApp.controller',['ngTouch']).controller('OrganizationDetailController', [
     '$scope', '$location',
     function($scope, $location) {
-        //   	$scope.myInterval = 2000;
-        // var slides = $scope.slides = [];
-        // $scope.addSlide = function() {
-        // 	var newWidth = 600 + slides.length + 1;
-        // 	slides.push({
-        // 	  image: 'http://placehold.it/580x340/09f/fff'
-        // 	});
-        // };
-        // for (var i=0; i<4; i++) {
-        // 	$scope.addSlide();
-        // }
-
-        $scope.myInterval = 2000;
+        $scope.myInterval = 5000;
         var slides = $scope.slides = [];
         $scope.addSlide = function() {
             var newWidth = 600 + slides.length + 1;
