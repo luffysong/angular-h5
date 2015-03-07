@@ -6,9 +6,9 @@ var angular = require('angular');
 
 angular.module('defaultApp.filter').filter('investorLink', function () {
     return function (input,idKey,typeKey) {
-        var userLink = 'users.overview({id:"{{id}}"})';
-        var companyLink = 'companys.detail.overview({id:"{{id}}"})';
-        var orgLink = 'organizations.overview({id:"{{id}}"})';
+        var userLink = 'user_detail({id:"{{id}}"})';
+        var companyLink = 'company_detail({id:"{{id}}"})';
+        var orgLink = 'organization_detail({id:"{{id}}"})';
 
         var types = {
             "COMPANY":companyLink,
@@ -22,6 +22,8 @@ angular.module('defaultApp.filter').filter('investorLink', function () {
                 "3":companyLink
             };
         }
+
+        if(types[input[typeKey]]==orgLink)return '.';
 
         return types[input[typeKey]].replace('{{id}}',input[idKey]);
     };

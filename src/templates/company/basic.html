@@ -1,0 +1,28 @@
+<div class="company-basic">
+	<div class="basic-body">
+		<img class="img-circle" ng-src="{{company.value.basic.logo | image:140:'logo'}}" alt="" width="140" height="140">
+		<h4 class="company-name">
+			{{company.value.basic.name}}
+		</h4>
+		<div class="brief">
+			<p>{{company.value.basic.brief}}</p>
+		</div>
+		<a class="website" href="{{company.value.basic.website}}">{{company.value.basic.website}}</a>
+		<div class="tags">
+			<span>互联网</span>
+			<span>智能设备</span>
+			<span>发烧友</span>
+		</div>
+	</div>
+	<div class="org-footer clearfix">
+		<div class="pull-left">
+			<span class="location" ng-if="company.value.basic.address1 || company.value.basic.address2 || company.value.basic.address3"><i class="icon-h5-location"></i>{{company.value.basic.address1}} {{company.value.basic.address2}} {{company.value.basic.address3}}</span>	
+			<span ng-if="company.value.basic.startDate" class="year"><i class="icon-h5-time"></i>{{company.value.basic.startDate}}</span>	
+		</div>
+		<div class="pull-right share">
+			<a ng-if="company.value.basic.linkedin" href="{{company.value.basic.linkedin}}" class="icon-linkedin"></a>
+			<a ng-if="company.value.basic.weibo" href="{{company.value.basic.weibo}}" class="icon-wechat"></a>
+			<a ng-if="company.value.basic.weixin" href="{{company.value.basic.weixin}}" class="icon-weibo"></a>
+		</div>
+	</div>
+</div>

@@ -7,47 +7,13 @@
 			<h3>公司介绍</h3>
 		</div>
 		<div class="panel-body">
-
-
-		<div class="carousel-box" ng-swipe-left="next()" ng-swipe-right="prev()">
-			<carousel interval="myInterval">
-				<slide ng-repeat="slide in slides" active="slide.active">
-					<img ng-src="{{slide.image}}" style="margin:auto;">
-					<div class="carousel-caption">
-						<h4>Slide {{$index}}</h4>
-						<p>{{slide.text}}</p>
-					</div>
-				</slide>
-			</carousel>
-		</div>
-  <!-- <div class="row">
-    <div class="col-md-6">
-      <button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
-    </div>
-    <div class="col-md-6">
-      Interval, in milliseconds: <input type="number" class="form-control" ng-model="myInterval">
-      <br />Enter a negative number or 0 to stop the interval.
-    </div>
-  </div> -->
-
-
-
-			<!-- <div class="carousel">
-				<div class="carousel-container">
-					<img src="http://placehold.it/580x340/09f/fff" alt="" width="580" height="340">
-					<img src="http://placehold.it/580x340/09f/fff" alt="" width="580" height="340">
-					<img src="http://placehold.it/580x340/09f/fff" alt="" width="580" height="340">
-					<img src="http://placehold.it/580x340/09f/fff" alt="" width="580" height="340">
-					<img src="http://placehold.it/580x340/09f/fff" alt="" width="580" height="340">
-				</div>
-				<div class="point">
-					<a href="#"></a>
-					<a href="#"></a>
-					<a href="#"></a>
-					<a href="#"></a>
-					<a href="#"></a>
-				</div>
-			</div> -->
+			<div class="carousel-box" ng-swipe-left="next()" ng-swipe-right="prev()">
+				<carousel interval="myInterval">
+					<slide ng-repeat="slide in slides" active="slide.active">
+						<img ng-src="{{slide.image}}" width="580" height="340">
+					</slide>
+				</carousel>
+			</div>
 			<p class="company-intro">小米公司正式成立于2010年4月，是一家专注于智能产品自主研发的移动互联网公司。“为发烧而生”是小米的产品理念。小米公司首创了用互联网模式开发手机操作系统、发烧友参与开发改进的模式。</p>
 			<a class="load-more" href="#"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
 		</div>
@@ -69,6 +35,9 @@
 
 	<!-- 子产品介绍 -->
 	<div class="item-panel">
+		<div class="title">
+			<h3>子产品介绍</h3>
+		</div>
 		<div class="sub-product">
 			<div>
 				<span>小米盒子增强版</span>

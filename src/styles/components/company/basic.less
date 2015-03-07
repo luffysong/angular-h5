@@ -1,15 +1,22 @@
-.org-basic {
+.company-basic {
 	background: url(images/org-basic-bg.jpg) center 0 no-repeat;
+	position: relative;
+	height: 543px;
 
 	.basic-body {
 		text-align: center;
 		padding: 40px 30px 50px;
 	}
 
-	.org-name {
+	.company-name {
 		margin: 10px 0;
 		color: @base-white;
 		font-size: 44px;
+	}
+
+	.brief {
+		max-height: 72px;
+		overflow: hidden; 
 	}
 
 	p {
@@ -41,6 +48,10 @@
 	.org-footer {
 		padding: 10px 30px;
 		background-color: rgba(0,0,0,.3);
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
 
 		.location, .year {
 			font-size: 26px;

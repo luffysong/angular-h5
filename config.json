@@ -37,7 +37,9 @@
         "src/components/angular-ui-router/release/angular-ui-router.min.js",
         "src/components/qrcode-generator/js/qrcode.js",
         "src/components/qrcode-generator/js/qrcode_UTF8.js",
-        "src/components/angular-qrcode/qrcode.js"
+        "src/components/angular-qrcode/qrcode.js",
+        "src/components/clamp.js/clamp.min.js"
+
     ],
     "angularUiTpls": [
         "src/components/angular-ui-bootstrap/template/carousel/carousel.html",

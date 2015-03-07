@@ -1,1 +1,214 @@
-company
+<div ng-include="'templates/company/basic.html'"></div>
+
+<div class="org-detail">
+	<!-- 公司介绍 -->
+	<div class="item-panel">
+		<div class="title">
+			<h3>公司介绍</h3>
+		</div>
+		<div class="panel-body">
+			<div class="carousel-box" ng-swipe-left="next()" ng-swipe-right="prev()">
+				<carousel interval="myInterval">
+					<slide ng-repeat="slide in slides" active="slide.active">
+						<img ng-src="{{slide.image}}" width="580" height="340">
+					</slide>
+				</carousel>
+			</div>
+			<p class="company-intro" clamp="introLines">{{company.value.company.intro}}</p>
+			<a class="load-more" ng-click="introLines==4?(introLines=100):(introLines=4)" ng-hide="introLines>4"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		</div>
+	</div>
+
+	<!-- 相关链接 -->
+	<div class="item-panel" ng-if="company.value.company.iphoneAppstoreLink || company.value.company.androidLink || company.value.company.webLink || company.value.company.ipadAppstoreLink || company.value.company.pcLink">
+		<div class="title">
+			<h3>相关链接</h3>
+		</div>
+		<div class="panel-body links-panel">
+			<a ng-if="company.value.company.iphoneAppstoreLink" href="{{company.value.company.iphoneAppstoreLink}}">iPhone链接</a>
+			<a ng-if="company.value.company.androidLink" href="{{company.value.company.androidLink}}">Android链接</a>
+			<a ng-if="company.value.company.webLink" href="{{company.value.company.webLink}}">Web链接</a>
+			<a ng-if="company.value.company.ipadAppstoreLink" href="{{company.value.company.ipadAppstoreLink}}">iPad链接</a>
+			<a ng-if="company.value.company.pcLink" href="{{company.value.company.pcLink}}">PC链接</a>
+		</div>
+	</div>
+
+	<!-- 子产品介绍 -->
+	<div class="item-panel" ng-if="product.list.length">
+		<div class="title">
+			<h3>子产品介绍</h3>
+		</div>
+		<div class="sub-product">
+			<div ng-repeat="item in product.list | limitTo: product.listLimit">
+				<span>{{item.name}}</span>
+				<a href="{{item.nextLink}}" class="next-link">NEXT</a>
+				<a href="{{item.website}}">查看官网</a>
+			</div>
+		</div>
+		<a class="load-more" ng-click="product.listLimit = product.listLimit+3" ng-show="product.list.length && (product.listLimit < product.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+	</div>
+
+	<!-- 创始团队 -->
+	<div class="item-panel" ng-if="founder.list.length | limitTo: founder.listLimit">
+		<div class="title">
+			<h3>创始团队</h3>
+		</div>
+		<div class="panel-body">
+			<ul class="list-item">
+				<li ng-repeat="item in founder.list">
+					<a class="logo" ui-sref="company_detail({id: item.id})">
+						<img class="img-rounded" ng-src="{{item.avatar}}" alt="" width="120" height="120">
+					</a>
+					<div class="info">
+						<a ui-sref="company_detail({id: item.id})">{{item.name}}</a>
+						<p>{{item.intro}}</p>
+						<span>{{item.position}}</span>
+					</div>
+				</li>
+			</ul>
+			<a class="load-more" ng-click="founder.listLimit = founder.listLimit+3" ng-show="founder.list.length && (founder.listLimit < founder.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		</div>
+	</div>
+
+	<!-- 融资经历 -->
+	<div class="item-panel finance-panel" ng-if="finance.list.length">
+		<div class="title">
+			<h3>融资经历</h3>
+		</div>
+		<div class="panel-body">
+			<div ng-repeat="item in finance.list | limitTo: finance.listLimit">
+				<div class="round-info">
+					<div class="round">{{item.phase | dict_FinancePhase}}</div>
+					<div class="info">
+						<span ng-if="item.financeValue">
+							<span class="money">{{item.financeValueUnit | moneyUnit}} {{item.financeValue}}</span>万
+							|
+						</span>
+						<span ng-if="item.estimateValue">
+							估值{{item.estimateValueUnit | moneyUnit}} {{item.estimateValue}}万
+							|
+						</span>	
+						<span ng-if="item.financeDate" class="time">{{item.financeDate | date:'yyyy.MM'}}</span>
+						<span ng-if="!(item.financeValue || item.estimateValue || item.financeDate)">融资信息未披露</span>
+					</div>
+				</div>
+				<ul class="list-item">
+					<li ng-repeat="obj in item.entitys">
+						<a class="logo" ui-sref="{{obj | investorLink:'entityId':'entityType'}}">
+							<img class="img-rounded" ng-src="{{obj.logo | image:50:'logo'}}" alt="" width="120" height="120">
+						</a>
+						<div class="info">
+							<a ui-sref="{{obj | investorLink:'entityId':'entityType'}}">{{obj.name}}</a> 
+							<span class="bage" ng-show="item.status!='CONFIRMED'">待确认</span>
+							<p>{{obj.brief | substr: 26}}</p>
+							<!-- <a ui-sref="company_detail({id: item.id})">更多&gt;&gt;</a> -->
+						</div>
+					</li>
+				</ul>
+			</div>
+			<a class="load-more" ng-click="finance.listLimit = finance.listLimit+3" ng-show="finance.list.length && (finance.listLimit < finance.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+			<!-- <div class="round-info">
+				<div class="round">天使轮</div>
+				<div class="info">
+					<span>融资信息未披露</span>
+				</div>
+			</div>
+			<ul class="list-item">
+				<li ng-repeat="item in [1,2]">
+					<a class="logo" href="#">
+						<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
+					</a>
+					<div class="info">
+						<a href="#">雷军</a>
+						<p>著名天使投资人，小米科技创始人</p>
+						<span>创始人兼CEO</span>
+					</div>
+				</li>
+			</ul> -->
+			
+		</div>
+	</div>
+
+	<!-- 过往投资方 -->
+	<div class="item-panel past-investor" ng-if="investor.list.length">
+		<div class="title">
+			<h3>过往投资方</h3>
+			<span class="bage">{{investor.list.length}}</span>
+		</div>
+		<div class="panel-body">
+			<ul class="list-item">
+				<li ng-repeat="item in investor.list | limitTo: investor.listLimit">
+					<a class="logo" ui-sref="{{item | investorLink:'entityId':'entityType'}}">
+						<img class="img-rounded" ng-src="{{item.avatar||item.logo | image:120:'logo'}}" alt="" width="120" height="120">
+					</a>
+					<div class="info">
+						<a ui-sref="{{item | investorLink:'entityId':'entityType'}}">{{item.name}}</a>
+						<p clamp="3">{{item.intro || item.brief}}</p>
+					</div>
+				</li>
+			</ul>
+			<a class="load-more" ng-click="investor.listLimit = investor.listLimit+2" ng-show="investor.list.length && (investor.listLimit < investor.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		</div>
+	</div>
+
+	<!-- 团队成员 -->
+	<div class="item-panel past-investor" ng-if="employee.list.length">
+		<div class="title">
+			<h3>团队成员</h3>
+			<span class="bage">{{employee.list.length}}</span>
+		</div>
+		<div class="panel-body">
+			<ul class="list-item">
+				<li ng-repeat="item in employee.list | limitTo: employee.listLimit">
+					<a class="logo" ui-sref="user_detail({id: item.id})">
+						<img class="img-rounded" ng-src="{{item.avatar|image:120:'avatar'}}" alt="" width="120" height="120">
+					</a>
+					<div class="info">
+						<a ui-sref="user_detail.overview({id:item.id})">{{item.name}}</a>
+						<p>{{item.intro}}</p>
+					</div>
+				</li>
+			</ul>
+			<a class="load-more" ng-click="employee.listLimit = employee.listLimit + 2" ng-show="employee.list && (employee.listLimit<employee.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -67,7 +67,7 @@ gulp.task('styles', function () {
 var scriptsInit = function (modulesPath) {
     var scriptText = '';
     fs.readdirSync(modulesPath).forEach(function (file) {
-        if (file !== 'index.js') {
+        if (file !== 'index.js' && file.indexOf('.js')>-1) {
             scriptText += 'require(\'./' + file.replace('.js', '') + '\');\n'
         }
     });

@@ -28,19 +28,19 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     // 公司详情页
     $stateProvider.state('company_detail', {
-        url: '/company/{id}',
+        url: '/company/{id}/overview',
         templateUrl: 'templates/company/detail.html',
         controller: 'CompanyDetailController'
     });
     // 用户详情页
     $stateProvider.state('user_detail', {
-        url: '/user/{id}',
+        url: '/user/{id}/overview',
         templateUrl: 'templates/user/detail.html',
         controller: 'UserDetailController'
     });
     // 机构详情页
     $stateProvider.state('organization_detail', {
-        url: '/organization/{id}',
+        url: '/organization/{id}/overview',
         templateUrl: 'templates/organization/detail.html',
         controller: 'OrganizationDetailController'
     });

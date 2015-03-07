@@ -1,14 +1,12 @@
 <div class="org-basic">
 	<div class="basic-body">
-		<a href="#" class="org-logo">
-			<img class="img-circle" src="http://placehold.it/140x140/09f/fff" alt="" width="140" height="140">
-		</a>
+		<img class="img-circle" ng-src="{{orgBasicData.data.logo | image:140:'logo'}}" alt="" width="140" height="140">
 		<h4 class="org-name">
-			<a href="#">小米科技</a>
+			{{orgBasicData.data.nameAbbr}}
 		</h4>
 		<p>专注于智能产品自主研发</p>
 		<p>产品理念：为发烧而生</p>
-		<a class="website" href="#">www.mi.com</a>
+		<a class="website" href="{{orgBasicData.data.website}}">{{orgBasicData.data.website}}</a>
 		<div class="tags">
 			<span>互联网</span>
 			<span>智能设备</span>
