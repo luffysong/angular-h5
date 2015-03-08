@@ -22,6 +22,7 @@ require('./controllers');
 var depModules = [
     // 'ngAnimate',
     // 'ngTouch',
+    'ngCookies',
     'ui.router',
     'ui.carousel',
     'defaultApp.filter',

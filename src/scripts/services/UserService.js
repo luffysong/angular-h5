@@ -3,10 +3,11 @@
  */
 
 var angular = require('angular');
+
 angular.module('defaultApp.service').service('UserService', [
-	'$location', 'BasicService', 'dateFilter', 'appendTransform', '$http', '$cookies', '$stateParams',
-	function($location, BasicService, dateFilter, appendTransform, $http, $cookies, $stateParams) {
-		var service = BasicService('/api/user/:id/:sub/:subid', {
+    '$location', 'BasicService', 'dateFilter', 'appendTransform', '$http', '$cookies', '$stateParams',
+    function ($location, BasicService, dateFilter, appendTransform, $http, $cookies, $stateParams) {
+        var service = BasicService('/api/user/:id/:sub/:subid', {
             save: {
                 method: "POST",
                 transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
@@ -24,29 +25,29 @@ angular.module('defaultApp.service').service('UserService', [
                 }
             }
         }, {
-			sub: [
-				"followed",
-				"basic",
-				"base",
-				"info",
-				"investment",
-				"company",
-				"finacing",
-				"work",
-				"send-sms"
-				// "finance_sort",
-				// "company_sort",
+            sub: [
+                "followed",
+                "basic",
+                "base",
+                "info",
+                "investment",
+                "company",
+                "finacing",
+                "work",
+                "send-sms"
+                // "finance_sort",
+                // "company_sort",
 
-				// "work_sort"
-			]
-		}, {
-			'basic': {
-				get: {
-					method: "GET",
-					params: {
-						mode: $stateParams.mode
-					},
-					transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
+                // "work_sort"
+            ]
+        }, {
+            'basic': {
+                get: {
+                    method: "GET",
+                    params: {
+                        mode: $stateParams.mode
+                    },
+                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
                         if(data.code==0 && window.localStorage && (data.data.email||data.data.phone) && service.getUID()==data.data.id){
 
                             localStorage.setItem('uemail', data.data.email);
@@ -60,14 +61,20 @@ angular.module('defaultApp.service').service('UserService', [
                         //}
 
 
-						return data;
-					})
-				},
+                        return data;
+                    })
+                },
                 update: {
                     method: 'PUT',
                     transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
                         if(!data.phone){
                             delete data.phone;
+                        }
+                        if(data.city===''){
+                            data.city=0;
+                        }
+                        if(data.country===''){
+                            data.country=0;
                         }
 
                         try{
@@ -98,26 +105,26 @@ angular.module('defaultApp.service').service('UserService', [
                         return data;
                     })
                 }
-			},
-			'base': {
-				update: {
-					method: 'PUT',
-					transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
+            },
+            'base': {
+                update: {
+                    method: 'PUT',
+                    transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
 
 
-						return data;
-					})
-				}
-			},
-			'company': {
-				query: {
-					method: 'GET',
-					transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
-						data.data.expList.forEach(function(item) {
+                        return data;
+                    })
+                }
+            },
+            'company': {
+                query: {
+                    method: 'GET',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
+                        data.data.expList.forEach(function(item) {
                             if(!item.startDate)return;
-							var startDate = new Date(item.startDate);
-							item.startYear = startDate.getFullYear() + "";
-							item.startMonth = startDate.getMonth() + 1 + "";
+                            var startDate = new Date(item.startDate);
+                            item.startYear = startDate.getFullYear() + "";
+                            item.startMonth = startDate.getMonth() + 1 + "";
                             if(!item.endDate)return;
                             if(!item.isCurrent){
                                 var endDate = new Date(item.endDate);
@@ -125,11 +132,11 @@ angular.module('defaultApp.service').service('UserService', [
                                 item.endMonth = endDate.getMonth() + 1 + "";
                             }
 
-						})
+                        })
 
-						return data;
-					})
-				},
+                        return data;
+                    })
+                },
                 save: {
                     method: "POST",
                     transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
@@ -162,11 +169,11 @@ angular.module('defaultApp.service').service('UserService', [
                         return data;
                     })
                 }
-			},
-			'work': {
-				save: {
-					method: "POST",
-					transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
+            },
+            'work': {
+                save: {
+                    method: "POST",
+                    transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
 
                         if(data.groupIdType && data.groupId){
                             data.startDate = data.startDate || [data.startYear, data.startMonth, '01'].join('-') + ' 01:01:01';
@@ -180,92 +187,92 @@ angular.module('defaultApp.service').service('UserService', [
                             return data;
                         }
 
-						if (data.groupIdType == 3) {
-							var c = data.company;
-							data.groupId = c.id;
-							data.position = c.position;
-							data.positionDetail = c.positionDetail;
-							data.groupIdType = data.groupIdType;
-							data.startDate = [c.startYear, c.startMonth, '01'].join('-') + ' 01:01:01';
+                        if (data.groupIdType == 3) {
+                            var c = data.company;
+                            data.groupId = c.id;
+                            data.position = c.position;
+                            data.positionDetail = c.positionDetail;
+                            data.groupIdType = data.groupIdType;
+                            data.startDate = [c.startYear, c.startMonth, '01'].join('-') + ' 01:01:01';
 
-							if (!c.isCurrent) {
-								data.endDate = [c.endYear, c.endMonth, '01'].join('-') + ' 01:01:01';
+                            if (!c.isCurrent) {
+                                data.endDate = [c.endYear, c.endMonth, '01'].join('-') + ' 01:01:01';
                                 data.isCurrent = false;
-							}else{
+                            }else{
                                 data.isCurrent = true;
                             }
-						}
+                        }
 
-						if (data.groupIdType == 2) {
-							var c = data.organization;
-							data.groupId = c.id;
-							data.position = c.position;
-							data.positionDetail = c.positionDetail;
-							data.groupIdType = data.groupIdType;
-							data.startDate = [c.startYear, c.startMonth, '01'].join('-') + ' 01:01:01';
-							if (!c.isCurrent) {
-								data.endDate = [c.endYear, c.endMonth, '01'].join('-') + ' 01:01:01';
+                        if (data.groupIdType == 2) {
+                            var c = data.organization;
+                            data.groupId = c.id;
+                            data.position = c.position;
+                            data.positionDetail = c.positionDetail;
+                            data.groupIdType = data.groupIdType;
+                            data.startDate = [c.startYear, c.startMonth, '01'].join('-') + ' 01:01:01';
+                            if (!c.isCurrent) {
+                                data.endDate = [c.endYear, c.endMonth, '01'].join('-') + ' 01:01:01';
                                 data.isCurrent = false;
-							}else{
+                            }else{
                                 data.isCurrent = true;
                             }
-						}
+                        }
 
                         data.current = data.current || data.isCurrent;
 
-						delete data.company;
-						delete data.organization;
-						return data;
-					}),
-					transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
+                        delete data.company;
+                        delete data.organization;
+                        return data;
+                    }),
+                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
 
-						return data;
-					})
-				},
-				update: {
-					method: 'PUT',
-					transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
-						data.startDate = [data.startYear, data.startMonth, '01'].join('-') + ' 01:01:01';
-						if (!data.isCurrent) {
-								data.endDate = [data.endYear, data.endMonth, '01'].join('-') + ' 01:01:01';
+                        return data;
+                    })
+                },
+                update: {
+                    method: 'PUT',
+                    transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
+                        data.startDate = [data.startYear, data.startMonth, '01'].join('-') + ' 01:01:01';
+                        if (!data.isCurrent) {
+                                data.endDate = [data.endYear, data.endMonth, '01'].join('-') + ' 01:01:01';
                             data.isCurrent = false;
-							}
+                            }
                         data.current = data.current || data.isCurrent;
-						return data;
-					})
-				},
-				query: {
-					method: 'GET',
-					transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
-						data.data.expList.forEach(function(item) {
+                        return data;
+                    })
+                },
+                query: {
+                    method: 'GET',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
+                        data.data.expList.forEach(function(item) {
                             if(!item.startDate)return;
-							var startDate = new Date(item.startDate);
-							item.startYear = startDate.getFullYear() + "";
-							item.startMonth = startDate.getMonth() + 1 + "";
+                            var startDate = new Date(item.startDate);
+                            item.startYear = startDate.getFullYear() + "";
+                            item.startMonth = startDate.getMonth() + 1 + "";
                             if(!item.endDate)return;
                             if(!item.isCurrent){
                                 var endDate = new Date(item.endDate);
                                 item.endYear = endDate.getFullYear() + "";
                                 item.endMonth = endDate.getMonth() + 1 + "";
                             }
-						})
+                        })
 
-						return data;
-					})
-				}
-			},
-			'finacing': {
-				query: {
-					method: 'GET',
-					transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
+                        return data;
+                    })
+                }
+            },
+            'finacing': {
+                query: {
+                    method: 'GET',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
                         if(!data.data || data.code!=0)return data;
-						data.data.data.forEach(function(item) {
+                        data.data.data.forEach(function(item) {
                             adaptFinanceItem(item);
-						})
+                        })
 
-						return data;
-					})
-				},
+                        return data;
+                    })
+                },
                 save: {
                     method: "POST",
                     transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
@@ -293,14 +300,14 @@ angular.module('defaultApp.service').service('UserService', [
                         return data;
                     })
                 }
-			},
-			'send-sms': {
-				'send': {
-					method: "post"
-				}
-			}
+            },
+            'send-sms': {
+                'send': {
+                    method: "post"
+                }
+            }
 
-		});
+        });
 
         function adaptFinanceItem(item){
 
@@ -329,10 +336,10 @@ angular.module('defaultApp.service').service('UserService', [
             }
         }
 
-		service.getUID = function() {
-			return $cookies.kr_plus_id;
-			//return 115;
-		};
+        service.getUID = function() {
+            return $cookies.kr_plus_id;
+            //return 115;
+        };
         service.isProfileValid = function(callback) {
             if(!window.localStorage || !service.getUID()){
                 callback(false);
@@ -377,7 +384,7 @@ angular.module('defaultApp.service').service('UserService', [
         };
 
 
-		service.isEmailValid = function(callback) {
+        service.isEmailValid = function(callback) {
 
             if(!window.localStorage || !service.getUID()){
                 callback(false);
@@ -394,7 +401,7 @@ angular.module('defaultApp.service').service('UserService', [
                 localStorage.setItem('isEmailActivate', data.isEmailActivate);
                 callback(data.isEmailActivate);
             });
-		};
+        };
         service.getMyEmail = function(callback){
             if(!window.localStorage || !service.getUID()){
                 callback(null);
@@ -417,6 +424,6 @@ angular.module('defaultApp.service').service('UserService', [
         }
 
 
-		return service;
-	}
+        return service;
+    }
 ]);

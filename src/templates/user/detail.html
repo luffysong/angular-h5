@@ -5,118 +5,115 @@
 	<div class="title">
 	    <h3>投资信息</h3>
 	</div>
-	<div class="item">
+	<div class="item" ng-if="user.invest_cases.length">
 		<div class="item-heading">
 			<h4>投资总数</h4>
-			<span class="bage">6</span>		
+			<span class="bage">{{user.invest_cases.length || 0}}</span>		
 		</div>
-		<div class="item-body">
+		<div class="item-body" ng-if="user.investMoneyBegin">
 			<div class="clearfix">
 				<div class="desc">个人单笔投资</div>
-				<div class="investment">￥ 500万 - 1000万</div>
+				<div class="investment" ng-if="user.investMoneyBegin!='0'">{{personunit_type}}{{user.investMoneyBegin}}万-{{personunit_type}}{{user.investMoneyEnd}}万</div>
 			</div>
 			<div class="clearfix">
 				<div class="desc">所在机构单笔投资</div>
-				<div class="investment">$ 5000万 - 1亿</div>
+				<div class="investment" ng-if="user.orgMoneyBegin!='0'">{{orgunit_type}}{{user.orgMoneyBegin}}万-{{orgunit_type}}{{user.orgMoneyEnd}}万</div>
 			</div>
 		</div>
 	</div>
-	<div class="item">
+	<div class="item" ng-if="user.industry.length">
 		<div class="item-heading">
 			<h4>关注领域</h4>
 		</div>
 		<div class="item-body field">
-			<span>移动互联网</span>	
-			<span>电子商务</span>	
-			<span>O2O</span>	
+			<span ng-repeat="field in user.industry">{{field | dict_InvestorFollowedIndustry}}</span>	
 		</div>
 	</div>
-	<div class="item">
+	<div class="item" ng-if="user.isInvestPhase">
 		<div class="item-heading">
 			<h4>投资阶段</h4>
 		</div>
 		<div class="item-body investment-phase">
-			<span>早期</span>
-			<span>成长型</span>
+			<span>{{user.isInvestPhase}}</span>
 		</div>
 	</div>
 </div>
 
 <!-- 投资经历 -->
-<div class="item-panel">
+<div class="item-panel" ng-if="user.invest_cases.length">
 	<div class="title">
 		<h3>投资经历</h3>
-		<span class="bage">6</span>
+		<span class="bage">{{user.invest_cases.length || 0}}</span>
 	</div>
 	<div class="panel-body">
 		<ul class="list-item">
-			<li ng-repeat="item in [1,2]">
-				<a class="logo" href="#">
-					<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
+			<li ng-repeat="invest_case in user.invest_cases | limitTo: user.investCasesLimit">
+				<a class="logo" ui-sref="company_detail({id: invest_case.company.id})">
+					<img class="img-rounded" ng-src="{{invest_case.logo | image:120:'logo'}}" alt="" width="120" height="120">
 				</a>
 				<div class="info">
-					<a href="#">华为</a>
-					<p class="one-line">提供业界领先的终端产品</p>
+					<a ui-sref="companys.detail.overview({id: invest_case.company.id})">{{invest_case.company.name}}</a>
+					<p class="one-line">{{invest_case.company.brief}}</p>
 					<div class="clearfix">
-						<span class="pull-left">E轮及以后 <i class="time">(2014.02)</i></span>
-						<span class="pull-right">￥ <i class="money">800</i>万</span>
+						<span class="pull-left">{{invest_case.phase || '未知轮次' | dict_FinancePhase}} <i class="time">（{{invest_case.financeDate|date:'yyyy.MM'}}）</i></span>
+						<span class="pull-right"><i class="money">{{invest_case.financeValue}}万</i>{{invest_case.financeValueUnit | moneyUnit : true}}</span>
 					</div>
 				</div>
 			</li>
 		</ul>
-		<a class="load-more" href="#"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		<a class="load-more" ng-if="user.invest_cases.length && (user.investCasesLimit < user.invest_cases.length)" ng-click="user.investCasesLimit=user.investCasesLimit+2" href="javascript:void(0)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
 	</div>
 </div>
 
 <!-- 创业经历 -->
-<div class="item-panel">
+<div class="item-panel" ng-if="user.founder_cases.length">
 	<div class="title">
 		<h3>创业经历</h3>
-		<span class="bage">6</span>
+		<span class="bage">{{user.founder_cases.length}}</span>
 	</div>
 	<div class="panel-body">
 		<ul class="list-item">
-			<li ng-repeat="item in [1,2]">
-				<a class="logo" href="#">
-					<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
+			<li ng-repeat="founder_case in user.founder_cases | limitTo: user.founderLimit">
+				<a class="logo" ui-sref="company_detail({id: founder_case.groupId})">
+					<img class="img-rounded" ng-src="{{founder_case.logo | image:120:'logo'}}" alt="" width="120" height="120">
 				</a>
 				<div class="info">
-					<a href="#">1号店超市</a>
-					<p class="one-line">数百万种商品在线热销</p>
+					<a ui-sref="company_detail({id: founder_case.groupId})">{{founder_case.groupName}}</a>
+					<p class="one-line">{{founder_case.brief}}</p>
 					<div class="clearfix">
-						<span class="pull-left">创始人兼CEO</span>
-						<span class="pull-right time">2013.09 - 至今</span>
+						<span class="pull-left">{{founder_case.position | dict_EmployeeType}}</span>
+						<span class="pull-right time">（{{founder_case.startYear}}-{{founder_case.startMonth}}） {{founder_case.isCurrent?'至今':'（'+founder_case.endYear+'-'+founder_case.endMonth+'）'}}</span>
 					</div>
 				</div>
 			</li>
 		</ul>
-		<a class="load-more" href="#"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		<a class="load-more" ng-if="user.founder_cases.length && (user.founderLimit < user.founder_cases.length)" ng-click="user.founderLimit=user.founderLimit+2" href="javascript:void(0)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
 	</div>
 </div>
 
 <!-- 工作经历 -->
-<div class="item-panel">
+<div class="item-panel" ng-if="user.worked_cases.length">
 	<div class="title">
 		<h3>工作经历</h3>
-		<span class="bage">6</span>
+		<span class="bage">{{user.worked_cases.length}}</span>
 	</div>
 	<div class="panel-body">
 		<ul class="list-item">
-			<li ng-repeat="item in [1,2]">
-				<a class="logo" href="#">
-					<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
+			<li ng-repeat="worked_case in user.worked_cases | limitTo: user.workedLimit">
+				<a class="logo" ui-sref="{{worked_case | investorLink:'groupId':'groupIdType'}}">
+					<img class="img-rounded" ng-src="{{worked_case.logo | image:120:'logo'}}" alt="" width="120" height="120">
 				</a>
 				<div class="info">
-					<a href="#">1号店超市</a>
-					<p class="one-line">数百万种商品在线热销</p>
+					<a ui-sref="{{worked_case | investorLink:'groupId':'groupIdType'}}">{{worked_case.groupName}}</a>
+					<p class="one-line">{{worked_case.description}}</p>
 					<div class="clearfix">
-						<span class="pull-left">VP</span>
-						<span class="pull-right time">2013.09 - 至今</span>
+						<span class="pull-left">{{worked_case.position | dict_OrgPositionType | dict_WorkPositionType}} {{worked_case.positionDetail}}</span>
+						<span class="pull-right time">（{{worked_case.startDate | date: 'yyyy.MM'}}-{{worked_case.isCurrent?"至今":worked_case.endDate | date: 'yyyy.MM'}}）</span>
 					</div>
 				</div>
 			</li>
 		</ul>
-		<a class="load-more" href="#"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		<a class="load-more" ng-if="user.worked_cases.length && (user.workedLimit < user.worked_cases.length)" ng-click="user.workedLimit=user.workedLimit+2" href="javascript:void(0)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
 	</div>
 </div>
 

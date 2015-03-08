@@ -14,18 +14,48 @@ angular.module('defaultApp.controller').controller('UserDetailController', [
 
         UserService.basic.get({id: $stateParams.id}, function (response) {
             angular.extend($scope.user, response);
-            console.log(response);
-            // 默认显示 4 个
-            if ($scope.user.orgMoneyUnit == "USD") {
-                $scope.orgunit_type = "$"
-            } else if($scope.user.investMoneyUnit == "CNY") {
-                $scope.orgunit_type = "￥"
-            }
-            if ($scope.user.investMoneyUnit == "USD") {
-                $scope.personunit_type = "$"
-            } else if($scope.user.orgMoneyUnit == "CNY"){
-                $scope.personunit_type = "￥"
-            }
+            // // 默认显示 4 个
+            // if ($scope.user.orgMoneyUnit == "USD") {
+            //     $scope.orgunit_type = "$"
+            // } else if($scope.user.investMoneyUnit == "CNY") {
+            //     $scope.orgunit_type = "￥"
+            // }
+            // if ($scope.user.investMoneyUnit == "USD") {
+            //     $scope.personunit_type = "$"
+            // } else if($scope.user.orgMoneyUnit == "CNY"){
+            //     $scope.personunit_type = "￥"
+            // }
+        });
+
+        //投资信息，投资经历
+        UserService.finacing.query({
+            id: $stateParams.id
+        }, function (response) {
+            $scope.user.invest_cases = response.data;
+        });
+
+
+        // 创业经历
+        $scope.user.investCasesLimit = 2;
+
+        //获取创业经历
+        $scope.user.founderLimit = 2;
+        UserService.company.query({
+            id: $stateParams.id
+        }, function (response) {
+            $scope.user.founder_cases = response.expList;
+            console.log($scope.user.founder_cases);
+
+        });
+
+        // 工作经历
+        $scope.user.workedLimit = 2;
+        UserService.work.query({
+            id: $stateParams.id
+        }, function (response) {
+            $scope.user.worked_cases = response.expList;
         });
     }
 ]);
+
+

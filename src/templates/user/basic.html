@@ -1,22 +1,27 @@
 <div class="user-basic">
-	<a href="#" class="user-avatar">
-		<img class="img-circle blue" src="/styles/images/user-avatar.jpg" alt="" width="146" height="146">
-	</a>
+	<img class="user-avatar img-circle blue" ng-src="{{user.avatar | image:146:'avatar'}}" alt="" width="146" height="146">
 	<div class="user-basic-info">
 		<div>
-			<a href="#" class="user-name">乔布斯</a>
-			<img src="/styles/images/indentity-entrepreneurs.png" alt="">
-			<img src="/styles/images/hq-investor.png" alt="">
+			<span class="user-name">{{user.name}}</span>
+			<img ng-if="user.enterpriser"   tooltip="36氪创业者"  class="identity-icon" src="styles/images/indentity-entrepreneurs.png"
+                     width="28" alt="">
+            <img ng-if="user.investorType==20" tooltip="36氪投资人" class="identity-icon" src="styles/images/indentity-investors.png"
+                 width="28" alt="">
+            <img ng-if="user.investorType==10" tooltip="36氪优质投资人" class="identity-icon" src="styles/images/hq-investor.png"
+                 width="28" alt="">
+			<!-- <img src="/styles/images/indentity-entrepreneurs.png" alt="">
+			<img src="/styles/images/hq-investor.png" alt=""> -->
 		</div>
-		<p>顺为基金创始合伙人；小米科技创始人兼CEO</p>
+		<p>{{user.intro}}</p>
 		<div class="tags">
-			<span><i class="icon-h5-location"></i>北京</span>	
-			<span><i class="icon-h5-school"></i>清华大学</span>	
+			<span ng-if="user.country"><i class="icon-h5-location"></i>{{user.country | city}}</span>	
+			<span ng-if="user.school.length"><i class="icon-h5-school"></i><span ng-repeat="school in user.school">{{school}}</span></span>	
 		</div>
+
 		<div class="share">
-			<a href="#" class="icon-linkedin"></a>
-			<a href="#" class="icon-wechat"></a>
-			<a href="#" class="icon-weibo"></a>
+			<a href="{{user.linkedin}}" ng-show="user.linkedin" class="icon-linkedin"></a>
+			<a href="#" class="icon-wechat" ng-show="user.weixin"></a>
+			<a href="{{user.weibo}}" ng-show="user.weibo" class="icon-weibo"></a>
 		</div>
 	</div>
 </div>
