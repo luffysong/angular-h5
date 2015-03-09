@@ -1,6 +1,6 @@
 <div ng-include="'templates/company/basic.html'"></div>
 
-<div class="org-detail">
+<div class="company-detail">
 	<!-- 公司介绍 -->
 	<div class="item-panel" ng-if="slides.length || company-intro">
 		<div class="title">
@@ -41,7 +41,7 @@
 		<div class="sub-product">
 			<div ng-repeat="item in product.list | limitTo: product.listLimit">
 				<span>{{item.name}}</span>
-				<a href="{{item.nextLink}}" class="next-link">NEXT</a>
+				<a ng-href="{{item.nextLink?'http://next.36kr.com/posts/'+item.nextLink:'javascript:void(0)'}}" class="next-link" ng-class="{nolink: !item.nextLink}">NEXT</a>
 				<a href="{{item.website}}">查看官网</a>
 			</div>
 		</div>
@@ -49,13 +49,13 @@
 	</div>
 
 	<!-- 创始团队 -->
-	<div class="item-panel" ng-if="founder.list.length | limitTo: founder.listLimit">
+	<div class="item-panel" ng-if="founder.list.length">
 		<div class="title">
 			<h3>创始团队</h3>
 		</div>
 		<div class="panel-body">
 			<ul class="list-item">
-				<li ng-repeat="item in founder.list">
+				<li ng-repeat="item in founder.list | limitTo: founder.listLimit">
 					<a class="logo" ui-sref="user_detail({id: item.id})">
 						<img class="img-rounded" ng-src="{{item.avatar|image:120:'avatar'}}" alt="" width="120" height="120">
 					</a>
@@ -66,7 +66,7 @@
 					</div>
 				</li>
 			</ul>
-			<a class="load-more" ng-click="founder.listLimit = founder.listLimit+3" ng-show="founder.list.length && (founder.listLimit < founder.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+			<a class="load-more" ng-click="founder.listLimit = founder.listLimit+2" ng-show="founder.list.length && (founder.listLimit < founder.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
 		</div>
 	</div>
 
@@ -105,8 +105,8 @@
 					</li>
 				</ul>
 			</div>
-			<a class="load-more" ng-click="finance.listLimit = finance.listLimit+3" ng-show="finance.list.length && (finance.listLimit < finance.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
 		</div>
+		<a class="load-more" ng-click="finance.listLimit = finance.listLimit+2" ng-show="finance.list.length && (finance.listLimit < finance.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
 	</div>
 
 	<!-- 过往投资方 -->
