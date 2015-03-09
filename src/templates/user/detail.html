@@ -108,7 +108,7 @@
 					<p class="one-line">{{worked_case.description}}</p>
 					<div class="clearfix">
 						<span class="pull-left">{{worked_case.position | dict_OrgPositionType | dict_WorkPositionType}} {{worked_case.positionDetail}}</span>
-						<span class="pull-right time">（{{worked_case.startDate | date: 'yyyy.MM'}}-{{worked_case.isCurrent?"至今":worked_case.endDate | date: 'yyyy.MM'}}）</span>
+						<span class="pull-right time" ng-if="worked_case.startDate">（{{worked_case.startDate | date: 'yyyy.MM'}}-{{worked_case.isCurrent?"至今":worked_case.endDate | date: 'yyyy.MM'}}）</span>
 					</div>
 				</div>
 			</li>
