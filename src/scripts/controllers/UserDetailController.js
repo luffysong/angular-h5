@@ -14,17 +14,17 @@ angular.module('defaultApp.controller').controller('UserDetailController', [
 
         UserService.basic.get({id: $stateParams.id}, function (response) {
             angular.extend($scope.user, response);
-            // // 默认显示 4 个
-            // if ($scope.user.orgMoneyUnit == "USD") {
-            //     $scope.orgunit_type = "$"
-            // } else if($scope.user.investMoneyUnit == "CNY") {
-            //     $scope.orgunit_type = "￥"
-            // }
-            // if ($scope.user.investMoneyUnit == "USD") {
-            //     $scope.personunit_type = "$"
-            // } else if($scope.user.orgMoneyUnit == "CNY"){
-            //     $scope.personunit_type = "￥"
-            // }
+            // 默认显示 4 个
+            if ($scope.user.orgMoneyUnit == "USD") {
+                $scope.orgunit_type = "$"
+            } else if($scope.user.orgMoneyUnit == "CNY") {
+                $scope.orgunit_type = "￥"
+            }
+            if ($scope.user.investMoneyUnit == "USD") {
+                $scope.personunit_type = "$"
+            } else if($scope.user.investMoneyUnit == "CNY"){
+                $scope.personunit_type = "￥"
+            }
         });
 
         //投资信息，投资经历
@@ -44,7 +44,6 @@ angular.module('defaultApp.controller').controller('UserDetailController', [
             id: $stateParams.id
         }, function (response) {
             $scope.user.founder_cases = response.expList;
-            console.log($scope.user.founder_cases);
 
         });
 

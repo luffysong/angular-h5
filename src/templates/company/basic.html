@@ -7,14 +7,15 @@
 		<div class="brief">
 			<p>{{company.value.basic.brief}}</p>
 		</div>
-		<a class="website" href="{{company.value.basic.website}}">{{company.value.basic.website}}</a>
+		<div>
+			<a class="website" href="{{company.value.basic.website}}">{{company.value.basic.website}}</a>
+		</div>
 		<div class="tags">
-			<span>互联网</span>
-			<span>智能设备</span>
-			<span>发烧友</span>
+			<span ng-show="company.value.basic.industry">{{company.value.basic.industry | dict_CompanyIndustry}}</span>
+			<span ng-repeat="item in company.value.tags">{{item.name}}</span>
 		</div>
 	</div>
-	<div class="org-footer clearfix">
+	<div class="org-footer clearfix" ng-if="company.value.basic.address1 || company.value.basic.address2 || company.value.basic.address3 || company.value.basic.startDate || company.value.basic.linkedin || company.value.basic.weibo || company.value.basic.weixin">
 		<div class="pull-left">
 			<span class="location" ng-if="company.value.basic.address1 || company.value.basic.address2 || company.value.basic.address3"><i class="icon-h5-location"></i>{{company.value.basic.address1}} {{company.value.basic.address2}} {{company.value.basic.address3}}</span>	
 			<span ng-if="company.value.basic.startDate" class="year"><i class="icon-h5-time"></i>{{company.value.basic.startDate}}</span>	

@@ -5,8 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller',['ngTouch']).controller('CompanyDetailController', [
-    '$scope', '$location', '$stateParams', '$state', 'CompanyService', '$timeout',
-    function($scope, $location, $stateParams, $state, CompanyService, $timeout) {
+    '$scope', '$location', '$stateParams', '$state', 'CompanyService', '$timeout', 'UserService',
+    function($scope, $location, $stateParams, $state, CompanyService, $timeout, UserService) {
 
         $scope.companyId = $stateParams.id || 12;
 
@@ -100,9 +100,7 @@ angular.module('defaultApp.controller',['ngTouch']).controller('CompanyDetailCon
                 id: $scope.companyId
             }, function (data) {
                 $scope.finance.list = data.data;
-                // $scope.finance.list.forEach(function(item){
-                //     item.entitysLimit = 3;
-                // });
+                console.log(data.data);
             }, function (err) {
                 ErrorService.alert(err);
             })
@@ -153,17 +151,6 @@ angular.module('defaultApp.controller',['ngTouch']).controller('CompanyDetailCon
         };
         $scope.loadEmployeeData();
 
-
-        // $scope.user = {
-        //     // investCasesLimit: 3
-        // };
-
-        // UserService.basic.get({id: $stateParams.id}, function (response) {
-        //     angular.extend($scope.user, response);
-        //     console.log(444);
-        //     console.log(response);
-            
-        // });
 
     }
 ]);

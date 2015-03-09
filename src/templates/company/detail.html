@@ -2,7 +2,7 @@
 
 <div class="org-detail">
 	<!-- 公司介绍 -->
-	<div class="item-panel">
+	<div class="item-panel" ng-if="slides.length || company-intro">
 		<div class="title">
 			<h3>公司介绍</h3>
 		</div>
@@ -56,11 +56,11 @@
 		<div class="panel-body">
 			<ul class="list-item">
 				<li ng-repeat="item in founder.list">
-					<a class="logo" ui-sref="company_detail({id: item.id})">
-						<img class="img-rounded" ng-src="{{item.avatar}}" alt="" width="120" height="120">
+					<a class="logo" ui-sref="user_detail({id: item.id})">
+						<img class="img-rounded" ng-src="{{item.avatar|image:120:'avatar'}}" alt="" width="120" height="120">
 					</a>
 					<div class="info">
-						<a ui-sref="company_detail({id: item.id})">{{item.name}}</a>
+						<a ui-sref="user_detail({id: item.id})">{{item.name}}</a>
 						<p>{{item.intro}}</p>
 						<span>{{item.position}}</span>
 					</div>
@@ -95,37 +95,17 @@
 				<ul class="list-item">
 					<li ng-repeat="obj in item.entitys">
 						<a class="logo" ui-sref="{{obj | investorLink:'entityId':'entityType'}}">
-							<img class="img-rounded" ng-src="{{obj.logo | image:50:'logo'}}" alt="" width="120" height="120">
+							<img class="img-rounded" ng-src="{{obj.logo | image:120:'logo'}}" alt="" width="120" height="120">
 						</a>
 						<div class="info">
 							<a ui-sref="{{obj | investorLink:'entityId':'entityType'}}">{{obj.name}}</a> 
 							<span class="bage" ng-show="item.status!='CONFIRMED'">待确认</span>
 							<p>{{obj.brief | substr: 26}}</p>
-							<!-- <a ui-sref="company_detail({id: item.id})">更多&gt;&gt;</a> -->
 						</div>
 					</li>
 				</ul>
 			</div>
 			<a class="load-more" ng-click="finance.listLimit = finance.listLimit+3" ng-show="finance.list.length && (finance.listLimit < finance.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
-			<!-- <div class="round-info">
-				<div class="round">天使轮</div>
-				<div class="info">
-					<span>融资信息未披露</span>
-				</div>
-			</div>
-			<ul class="list-item">
-				<li ng-repeat="item in [1,2]">
-					<a class="logo" href="#">
-						<img class="img-rounded" src="http://placehold.it/120x120/09f/fff" alt="" width="120" height="120">
-					</a>
-					<div class="info">
-						<a href="#">雷军</a>
-						<p>著名天使投资人，小米科技创始人</p>
-						<span>创始人兼CEO</span>
-					</div>
-				</li>
-			</ul> -->
-			
 		</div>
 	</div>
 
@@ -164,7 +144,7 @@
 						<img class="img-rounded" ng-src="{{item.avatar|image:120:'avatar'}}" alt="" width="120" height="120">
 					</a>
 					<div class="info">
-						<a ui-sref="user_detail.overview({id:item.id})">{{item.name}}</a>
+						<a ui-sref="user_detail({id:item.id})">{{item.name}}</a>
 						<p>{{item.intro}}</p>
 					</div>
 				</li>

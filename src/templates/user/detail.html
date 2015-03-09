@@ -1,11 +1,11 @@
 <div ng-include="'templates/user/basic.html'"></div>
 
 <!-- 投资信息 -->
-<div class="item-panel">
+<div class="item-panel" ng-if="user.invest_cases.length">
 	<div class="title">
 	    <h3>投资信息</h3>
 	</div>
-	<div class="item" ng-if="user.invest_cases.length">
+	<div class="item">
 		<div class="item-heading">
 			<h4>投资总数</h4>
 			<span class="bage">{{user.invest_cases.length || 0}}</span>		
@@ -52,7 +52,7 @@
 					<img class="img-rounded" ng-src="{{invest_case.logo | image:120:'logo'}}" alt="" width="120" height="120">
 				</a>
 				<div class="info">
-					<a ui-sref="companys.detail.overview({id: invest_case.company.id})">{{invest_case.company.name}}</a>
+					<a ui-sref="company_detail({id: invest_case.company.id})">{{invest_case.company.name}}</a>
 					<p class="one-line">{{invest_case.company.brief}}</p>
 					<div class="clearfix">
 						<span class="pull-left">{{invest_case.phase || '未知轮次' | dict_FinancePhase}} <i class="time">（{{invest_case.financeDate|date:'yyyy.MM'}}）</i></span>
