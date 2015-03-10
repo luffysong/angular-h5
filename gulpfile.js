@@ -458,7 +458,7 @@ gulp.task('build:rev', ['build:html'], function () {
 // Build Rev Replace
 gulp.task('build:rev:replace', ['build:rev'], function () {
     var manifest = require('./.tmp/manifest.json');
-    return gulp.src(['dist/**/*.{css,html}', 'dist/**/*default*'])
+    return gulp.src(['dist/**/*.{css,html}', 'dist/**/*scripts*'])
         .pipe($.fingerprint(manifest, {
             verbose:true,
             prefix:CDNPrefix,
