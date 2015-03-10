@@ -398,7 +398,7 @@ gulp.task('build:templates', function () {
 });
 
 // Build Scripts
-gulp.task('build:scripts', ['scripts:vendor', 'scripts:init', 'build:templates'], function () {
+gulp.task('build:scripts', ['scripts:vendor', 'scripts:ui:template', 'scripts:init', 'build:templates'], function () {
     return gulp.src(['src/scripts/*.js'])
         .pipe($.replace(/\/\*##(.+)##\*\//, '$1'))
         .pipe($.browserify())
@@ -473,7 +473,7 @@ gulp.task('build', ['clean', 'header'], function () {
 });
 
 gulp.task('build:cdn',function(){
-    CDNPrefix = '//krplus-cdn.b0.upaiyun.com';
+    CDNPrefix = '//krplus-cdn.b0.upaiyun.com/m';
     gulp.start('build');
 })
 
@@ -481,7 +481,7 @@ gulp.task('build:cdn',function(){
 gulp.task('local:build', ['build'], function(){
     $.connect.server({
         root: ['dist'],
-        port: 9001,
+        port: 9002,
         middleware: function (connect, opt) {
             var url = require('url');
             var proxy = require('proxy-middleware');

@@ -1,2 +1,3 @@
 #!/bin/sh
-rsync -e "ssh -p 22" -rvltOD ./* hanwen@119.254.111.175:~/kr-plus-h5-dev
+gulp build:cdn
+rsync -e "ssh -p 22" -rvltOD ./dist/* hanwen@119.254.111.175:~/kr-plus-dev/dist/m

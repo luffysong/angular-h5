@@ -30,6 +30,7 @@
         "src/components/jquery/dist/jquery.min.js",
         "src/components/angular/angular.min.js",
         "src/components/angular-sanitize/angular-sanitize.min.js",
+        "src/components/angular-touch/angular-touch.min.js",
         "src/components/angular-cookies/angular-cookies.min.js",
         "src/components/angular-resource/angular-resource.min.js",
         "src/components/angular-ui-bootstrap/src/carousel/carousel.js",

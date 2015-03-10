@@ -4,7 +4,7 @@
 
 var angular = require('angular');
 
-angular.module('defaultApp.controller',['ngTouch']).controller('CompanyDetailController', [
+angular.module('defaultApp.controller').controller('CompanyDetailController', [
     '$scope', '$location', '$stateParams', '$state', 'CompanyService', '$timeout', 'UserService',
     function($scope, $location, $stateParams, $state, CompanyService, $timeout, UserService) {
 
