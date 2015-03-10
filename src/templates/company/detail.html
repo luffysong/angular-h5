@@ -14,7 +14,9 @@
 					</slide>
 				</carousel>
 			</div>
-			<p class="company-intro" clamp="introLines">{{company.value.company.intro}}</p>
+			<div class="company-intro">
+				<p clamp="introLines">{{company.value.company.intro}}</p>
+			</div>
 			<a class="load-more" ng-click="introLines==4?(introLines=100):(introLines=4)" ng-hide="introLines>4"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
 		</div>
 	</div>
