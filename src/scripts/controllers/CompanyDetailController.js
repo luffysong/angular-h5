@@ -84,7 +84,6 @@ angular.module('defaultApp.controller',['ngTouch']).controller('CompanyDetailCon
                 id: $scope.companyId
             }, function (data) {
                 $scope.founder.list = data.data;
-                console.log(data.data);
             }, function (err) {
                 ErrorService.alert(err);
             })
