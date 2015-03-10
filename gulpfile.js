@@ -12,7 +12,7 @@ var urlAdjuster = require('gulp-css-url-adjuster');
 
 var config = require('./config.json');
 
-var reloadTimeout;
+var reloadTimeout, CDNPrefix;
 function reloadPage() {
     return es.map(function (file, callback) {
         if (reloadTimeout) {
@@ -461,6 +461,7 @@ gulp.task('build:rev:replace', ['build:rev'], function () {
     return gulp.src(['dist/**/*.{css,html}', 'dist/**/*default*'])
         .pipe($.fingerprint(manifest, {
             verbose:true,
+            prefix:CDNPrefix,
             regex: /(?:url\(\\?["']?(.+?)\\?['"]?\)|src=\\?["'](.+?)\\?['"]|src=([^\s\>]+)(?:\>|\s)|href=\\?["'](.+?)\\?['"]|href=([^\s\>]+)(?:\>|\s))/g
         }))
         .pipe(gulp.dest('dist'));
@@ -471,10 +472,16 @@ gulp.task('build', ['clean', 'header'], function () {
     gulp.start('build:rev:replace');
 });
 
+gulp.task('build:cdn',function(){
+    CDNPrefix = '//krplus-cdn.b0.upaiyun.com';
+    gulp.start('build');
+})
+
+
 gulp.task('local:build', ['build'], function(){
     $.connect.server({
         root: ['dist'],
-        port: 9000,
+        port: 9001,
         middleware: function (connect, opt) {
             var url = require('url');
             var proxy = require('proxy-middleware');
