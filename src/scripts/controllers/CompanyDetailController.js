@@ -77,7 +77,7 @@ angular.module('defaultApp.controller',['ngTouch']).controller('CompanyDetailCon
         // 创始团队
         $scope.founder = {
             list: [],
-            listLimit: 3
+            listLimit: 2
         }
         $scope.loadFounderData = function (callback) {
             CompanyService.founder.query({
@@ -93,14 +93,13 @@ angular.module('defaultApp.controller',['ngTouch']).controller('CompanyDetailCon
         //获取融资经历数据
         $scope.finance = {
             list: [],
-            listLimit: 1
+            listLimit: 2
         }
         $scope.loadFinanceData = function (callback) {
             CompanyService.finance.query({
                 id: $scope.companyId
             }, function (data) {
                 $scope.finance.list = data.data;
-                console.log(data.data);
             }, function (err) {
                 ErrorService.alert(err);
             })

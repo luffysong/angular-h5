@@ -56,7 +56,7 @@
 					<p class="one-line">{{invest_case.company.brief}}</p>
 					<div class="clearfix">
 						<span class="pull-left">{{invest_case.phase || '未知轮次' | dict_FinancePhase}} <i class="time">（{{invest_case.financeDate|date:'yyyy.MM'}}）</i></span>
-						<span class="pull-right"><i class="money">{{invest_case.financeValue}}万</i>{{invest_case.financeValueUnit | moneyUnit : true}}</span>
+						<span class="pull-right" ng-if="invest_case.financeValue"><i class="money">{{invest_case.financeValue}}万</i>{{invest_case.financeValueUnit | moneyUnit : true}}</span>
 					</div>
 				</div>
 			</li>
@@ -82,7 +82,7 @@
 					<p class="one-line">{{founder_case.brief}}</p>
 					<div class="clearfix">
 						<span class="pull-left">{{founder_case.position | dict_EmployeeType}}</span>
-						<span class="pull-right time">（{{founder_case.startYear}}-{{founder_case.startMonth}}） {{founder_case.isCurrent?'至今':'（'+founder_case.endYear+'-'+founder_case.endMonth+'）'}}</span>
+						<span class="pull-right time">{{founder_case.endDate | date: 'yyyy.MM'}} - {{founder_case.isCurrent?'至今':'（'+founder_case.endYear+'-'+founder_case.endMonth+'）'}}</span>
 					</div>
 				</div>
 			</li>
@@ -108,7 +108,7 @@
 					<p class="one-line">{{worked_case.description}}</p>
 					<div class="clearfix">
 						<span class="pull-left">{{worked_case.position | dict_OrgPositionType | dict_WorkPositionType}} {{worked_case.positionDetail}}</span>
-						<span class="pull-right time" ng-if="worked_case.startDate">（{{worked_case.startDate | date: 'yyyy.MM'}}-{{worked_case.isCurrent?"至今":worked_case.endDate | date: 'yyyy.MM'}}）</span>
+						<span class="pull-right time" ng-if="worked_case.startDate">{{worked_case.startDate | date: 'yyyy.MM'}} - {{worked_case.isCurrent?"至今":worked_case.endDate | date: 'yyyy.MM'}}</span>
 					</div>
 				</div>
 			</li>

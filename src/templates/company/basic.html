@@ -15,15 +15,15 @@
 			<span ng-repeat="item in company.value.tags">{{item.name}}</span>
 		</div>
 	</div>
-	<div class="org-footer clearfix" ng-if="company.value.basic.address1 || company.value.basic.address2 || company.value.basic.address3 || company.value.basic.startDate || company.value.basic.linkedin || company.value.basic.weibo || company.value.basic.weixin">
+	<div class="org-footer clearfix" ng-if="company.value.basic.address1 || company.value.basic.startDate || company.value.basic.linkedin || company.value.basic.weibo || company.value.basic.weixin">
 		<div class="pull-left">
-			<span class="location" ng-if="company.value.basic.address1 || company.value.basic.address2 || company.value.basic.address3"><i class="icon-h5-location"></i>{{company.value.basic.address1}} {{company.value.basic.address2}} {{company.value.basic.address3}}</span>	
+			<span class="location" ng-if="company.value.basic.address1"><i class="icon-h5-location"></i>{{company.value.basic.address1 | city}}</span>	
 			<span ng-if="company.value.basic.startDate" class="year"><i class="icon-h5-time"></i>{{company.value.basic.startDate}}</span>	
 		</div>
 		<div class="pull-right share">
 			<a ng-if="company.value.basic.linkedin" href="{{company.value.basic.linkedin}}" class="icon-linkedin"></a>
-			<a ng-if="company.value.basic.weibo" href="{{company.value.basic.weibo}}" class="icon-wechat"></a>
-			<a ng-if="company.value.basic.weixin" href="{{company.value.basic.weixin}}" class="icon-weibo"></a>
+			<a ng-if="company.value.basic.weibo" href="{{company.value.basic.weixin}}" class="icon-wechat"></a>
+			<a ng-if="company.value.basic.weixin" href="{{company.value.basic.weibo}}" class="icon-weibo"></a>
 		</div>
 	</div>
 </div>
