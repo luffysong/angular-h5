@@ -21,7 +21,7 @@ angular.module('defaultApp.service').config([
 
                     if (response.data.code != 0) {
                         if(response.data.code == 4031){
-                            if(confirm('您的资料还未完善，是否现在去完善？')){
+                            if(confirm('你的资料还未完善，是否现在去完善？')){
                                 location.hash="#/guide/welcome";
                                 return $q.reject(null);
                             }
