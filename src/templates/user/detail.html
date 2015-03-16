@@ -82,7 +82,7 @@
 					<p class="one-line">{{founder_case.brief}}</p>
 					<div class="clearfix">
 						<span class="pull-left">{{founder_case.position | dict_EmployeeType}}</span>
-						<span class="pull-right time">{{founder_case.endDate | date: 'yyyy.MM'}} - {{founder_case.isCurrent?'至今':+founder_case.endYear+'.'+founder_case.endMonth}}</span>
+						<span class="pull-right time">{{founder_case.startDate | date: 'yyyy.MM'}} - {{founder_case.isCurrent?'至今':founder_case.endDate | date: 'yyyy.MM'}}</span>
 					</div>
 				</div>
 			</li>
