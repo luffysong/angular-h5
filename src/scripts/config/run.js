@@ -3,7 +3,10 @@ angular.module('defaultApp')
         $rootScope.REGEXP = $rootScope.REGEXP || {};
         $rootScope.REGEXP.phone = /^1\d{10}$/;
     })
-    .run(function ($http, $rootScope) {
+    .run(function ($http, $rootScope,notify) {
+    	notify.config({
+            templateUrl: 'templates/angular-notify.html'
+        });
     });
 
 

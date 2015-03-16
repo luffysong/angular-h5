@@ -30,7 +30,8 @@ var depModules = [
     'defaultApp.service',
     'defaultApp.controller',
     'templates',
-    'monospaced.qrcode'
+    'monospaced.qrcode',
+    'cgNotify'
 ];
 
 if(window.MOCKMODE_ON){
