@@ -5,8 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('CompanyDetailController', [
-    '$scope', '$location', '$stateParams', '$state', 'CompanyService', '$timeout', 'UserService', 'ErrorService',
-    function($scope, $location, $stateParams, $state, CompanyService, $timeout, UserService, ErrorService) {
+    '$scope', '$location', '$stateParams', '$state', 'CompanyService', '$timeout', 'UserService', 'ErrorService', 'DictionaryService',
+    function($scope, $location, $stateParams, $state, CompanyService, $timeout, UserService, ErrorService, DictionaryService) {
 
         $scope.companyId = $stateParams.id || 12;
 

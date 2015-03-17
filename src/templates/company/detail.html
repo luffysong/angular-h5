@@ -64,7 +64,7 @@
 					<div class="info">
 						<a ui-sref="user_detail({id: item.id})">{{item.name}}</a>
 						<p>{{item.intro}}</p>
-						<span>{{item.position}}</span>
+						<span>{{item.type | dict_StartupPositionType}} {{item.position}}</span>
 					</div>
 				</li>
 			</ul>
@@ -147,7 +147,7 @@
 					</a>
 					<div class="info">
 						<a ui-sref="user_detail({id:item.id})">{{item.name}}</a>
-						<p>{{item.intro}}</p>
+						<p>{{item.type | dict_EmployeeType}} {{item.position}}</p>
 					</div>
 				</li>
 			</ul>
