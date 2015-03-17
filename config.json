@@ -2,15 +2,15 @@
     "proxys": [
         {
             "path": "/api",
-            "source": "http://krplus.test.36tr.com"
+            "source": "http://rong.36kr.com"
         },
         {
             "path": "/user",
-            "source": "http://krplus.test.36tr.com/user"
+            "source": "http://rong.36kr.com/user"
         },
         {
             "path": "/oauth",
-            "source": "http://krplus.test.36tr.com/oauth"
+            "source": "http://rong.36kr.com/oauth"
         }
     ],
     "upyun": {

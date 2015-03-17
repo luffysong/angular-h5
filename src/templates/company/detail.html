@@ -59,7 +59,7 @@
 			<ul class="list-item">
 				<li ng-repeat="item in founder.list | limitTo: founder.listLimit">
 					<a class="logo" ui-sref="user_detail({id: item.id})">
-						<img class="img-rounded" ng-src="{{item.avatar|image:120:'avatar'}}" alt="" width="120" height="120">
+						<img class="img-rounded" ng-src="{{item.avatar|image:120:'avatar'}}" alt="" width="120">
 					</a>
 					<div class="info">
 						<a ui-sref="user_detail({id: item.id})">{{item.name}}</a>
@@ -97,7 +97,7 @@
 				<ul class="list-item">
 					<li ng-repeat="obj in item.entitys">
 						<a class="logo" ui-sref="{{obj | investorLink:'entityId':'entityType'}}">
-							<img class="img-rounded" ng-src="{{obj.logo | image:120:'logo'}}" alt="" width="120" height="120">
+							<img class="img-rounded" ng-src="{{obj.logo | image:120:'logo'}}" alt="" width="120">
 						</a>
 						<div class="info">
 							<a ui-sref="{{obj | investorLink:'entityId':'entityType'}}">{{obj.name}}</a> 
@@ -121,7 +121,7 @@
 			<ul class="list-item">
 				<li ng-repeat="item in investor.list | limitTo: investor.listLimit">
 					<a class="logo" ui-sref="{{item | investorLink:'entityId':'entityType'}}">
-						<img class="img-rounded" ng-src="{{item.avatar||item.logo | image:120:'logo'}}" alt="" width="120" height="120">
+						<img class="img-rounded" ng-src="{{item.avatar||item.logo | image:120:'logo'}}" alt="" width="120">
 					</a>
 					<div class="info">
 						<a ui-sref="{{item | investorLink:'entityId':'entityType'}}">{{item.name}}</a>
@@ -143,7 +143,7 @@
 			<ul class="list-item">
 				<li ng-repeat="item in employee.list | limitTo: employee.listLimit">
 					<a class="logo" ui-sref="user_detail({id: item.id})">
-						<img class="img-rounded" ng-src="{{item.avatar|image:120:'avatar'}}" alt="" width="120" height="120">
+						<img class="img-rounded" ng-src="{{item.avatar|image:120:'avatar'}}" alt="" width="120">
 					</a>
 					<div class="info">
 						<a ui-sref="user_detail({id:item.id})">{{item.name}}</a>
