@@ -83,11 +83,11 @@
 					<div class="round">{{item.phase | dict_FinancePhase}}</div>
 					<div class="info">
 						<span ng-if="item.financeValue">
-							<span class="money">{{item.financeValueUnit | moneyUnit}} {{item.financeValue}}</span>万
+							<span class="money">{{item.financeValueUnit | moneyUnit}} {{item.financeValue | wanText}}</span>
 							|
 						</span>
 						<span ng-if="item.estimateValue">
-							估值{{item.estimateValueUnit | moneyUnit}} {{item.estimateValue}}万
+							估值{{item.estimateValueUnit | moneyUnit}} {{item.estimateValue | wanText}}
 							|
 						</span>	
 						<span ng-if="item.financeDate" class="time">{{item.financeDate | date:'yyyy.MM'}}</span>
