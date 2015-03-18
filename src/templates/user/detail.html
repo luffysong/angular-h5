@@ -1,5 +1,9 @@
 <div ng-include="'templates/user/basic.html'"></div>
 
+<!-- 暂无数据 -->
+<div ng-include="'templates/null.html'" ng-if="!(user.invest_cases.length || user.invest_cases.length || user.founder_cases.length || user.worked_cases.length)"></div>
+
+
 <!-- 投资信息 -->
 <div class="item-panel" ng-if="user.invest_cases.length">
 	<div class="title">
@@ -10,14 +14,14 @@
 			<h4>投资总数</h4>
 			<span class="bage">{{user.invest_cases.length || 0}}</span>		
 		</div>
-		<div class="item-body" ng-if="user.investMoneyBegin">
-			<div class="clearfix">
+		<div class="item-body">
+			<div class="clearfix" ng-if="user.investMoneyBegin || user.investMoneyEnd">
 				<div class="desc">个人单笔投资</div>
-				<div class="investment" ng-if="user.investMoneyBegin!='0'">{{personunit_type}}{{user.investMoneyBegin}}万-{{personunit_type}}{{user.investMoneyEnd}}万</div>
+				<div class="investment">{{personunit_type}}{{user.investMoneyBegin | wanText}} - {{personunit_type}}{{user.investMoneyEnd | wanText}}</div>
 			</div>
-			<div class="clearfix">
+			<div class="clearfix" ng-if="user.orgMoneyBegin || user.orgMoneyEnd">
 				<div class="desc">所在机构单笔投资</div>
-				<div class="investment" ng-if="user.orgMoneyBegin!='0'">{{orgunit_type}}{{user.orgMoneyBegin}}万-{{orgunit_type}}{{user.orgMoneyEnd}}万</div>
+				<div class="investment">{{orgunit_type}}{{user.orgMoneyBegin | wanText}} - {{orgunit_type}}{{user.orgMoneyEnd | wanText}}</div>
 			</div>
 		</div>
 	</div>
@@ -47,7 +51,8 @@
 	</div>
 	<div class="panel-body">
 		<ul class="list-item">
-			<li ng-repeat="invest_case in user.invest_cases | limitTo: user.investCasesLimit">
+			<!-- <li ng-repeat="invest_case in user.invest_cases | limitTo: user.investCasesLimit"> -->
+			<li ng-repeat="invest_case in user.invest_cases">
 				<a class="logo" ui-sref="company_detail({id: invest_case.company.id})">
 					<img class="img-rounded" ng-src="{{invest_case.company.logo | image:120:'logo'}}" alt="" width="120">
 				</a>
@@ -56,12 +61,12 @@
 					<p class="one-line">{{invest_case.company.brief}}</p>
 					<div class="clearfix">
 						<span class="pull-left">{{invest_case.phase || '未知轮次' | dict_FinancePhase}} <i class="time">（{{invest_case.financeDate|date:'yyyy.MM'}}）</i></span>
-						<span class="pull-right" ng-if="invest_case.financeValue"><i class="money">{{invest_case.financeValue}}万</i>{{invest_case.financeValueUnit | moneyUnit : true}}</span>
+						<span class="pull-right" ng-if="invest_case.financeValue">{{invest_case.financeValueUnit | moneyUnit}} <i class="money">{{invest_case.financeValue | wanText}}</i></span>
 					</div>
 				</div>
 			</li>
 		</ul>
-		<a class="load-more" ng-if="user.invest_cases.length && (user.investCasesLimit < user.invest_cases.length)" ng-click="user.investCasesLimit=user.investCasesLimit+2" href="javascript:void(0)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		<!-- <a class="load-more" ng-if="user.invest_cases.length && (user.investCasesLimit < user.invest_cases.length)" ng-click="user.investCasesLimit=user.investCasesLimit+2" href="javascript:void(0)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a> -->
 	</div>
 </div>
 
@@ -73,7 +78,8 @@
 	</div>
 	<div class="panel-body">
 		<ul class="list-item">
-			<li ng-repeat="founder_case in user.founder_cases | limitTo: user.founderLimit">
+			<!-- <li ng-repeat="founder_case in user.founder_cases | limitTo: user.founderLimit"> -->
+			<li ng-repeat="founder_case in user.founder_cases">
 				<a class="logo" ui-sref="company_detail({id: founder_case.groupId})">
 					<img class="img-rounded" ng-src="{{founder_case.logo | image:120:'logo'}}" alt="" width="120">
 				</a>
@@ -87,7 +93,7 @@
 				</div>
 			</li>
 		</ul>
-		<a class="load-more" ng-if="user.founder_cases.length && (user.founderLimit < user.founder_cases.length)" ng-click="user.founderLimit=user.founderLimit+2" href="javascript:void(0)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		<!-- <a class="load-more" ng-if="user.founder_cases.length && (user.founderLimit < user.founder_cases.length)" ng-click="user.founderLimit=user.founderLimit+2" href="javascript:void(0)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a> -->
 	</div>
 </div>
 
@@ -99,7 +105,8 @@
 	</div>
 	<div class="panel-body">
 		<ul class="list-item">
-			<li ng-repeat="worked_case in user.worked_cases | limitTo: user.workedLimit">
+			<!-- <li ng-repeat="worked_case in user.worked_cases | limitTo: user.workedLimit"> -->
+			<li ng-repeat="worked_case in user.worked_cases">
 				<a class="logo" ui-sref="{{worked_case | investorLink:'groupId':'groupIdType'}}">
 					<img class="img-rounded" ng-src="{{worked_case.logo | image:120:'logo'}}" alt="" width="120" >
 				</a>
@@ -113,7 +120,7 @@
 				</div>
 			</li>
 		</ul>
-		<a class="load-more" ng-if="user.worked_cases.length && (user.workedLimit < user.worked_cases.length)" ng-click="user.workedLimit=user.workedLimit+2" href="javascript:void(0)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		<!-- <a class="load-more" ng-if="user.worked_cases.length && (user.workedLimit < user.worked_cases.length)" ng-click="user.workedLimit=user.workedLimit+2" href="javascript:void(0)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a> -->
 	</div>
 </div>
 

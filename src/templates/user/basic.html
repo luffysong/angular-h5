@@ -17,9 +17,9 @@
 		</div>
 
 		<div class="share">
-			<a href="{{user.linkedin}}" ng-show="user.linkedin" class="icon-linkedin"></a>
+			<a href="{{user.linkedin}}" class="icon-linkedin" ng-class="{disabled: !user.linkedin}"></a>
 			<!-- <a href="#" class="icon-wechat" ng-show="user.weixin"></a> -->
-			<a href="{{user.weibo}}" ng-show="user.weibo" class="icon-weibo"></a>
+			<a href="{{user.weibo}}" class="icon-weibo" ng-class="{disabled: !user.weibo}"></a>
 		</div>
 	</div>
 </div>

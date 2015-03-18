@@ -1,4 +1,8 @@
 <div ng-include="'templates/company/basic.html'"></div>
+<!-- <div ng-include="'templates/null.html'"></div> -->
+
+<!-- 暂无数据 -->
+<div ng-include="'templates/null.html'" ng-if="!(slides.length || company.value.company.intro || company.value.company.iphoneAppstoreLink || company.value.company.androidLink || company.value.company.webLink || company.value.company.ipadAppstoreLink || company.value.company.pcLink || product.list.length || founder.list.length || finance.list.length || investor.list.length || employee.list.length)"></div>
 
 <div class="company-detail">
 	<!-- 公司介绍 -->
@@ -15,9 +19,10 @@
 				</carousel>
 			</div>
 			<div class="company-intro">
-				<p clamp="introLines">{{company.value.company.intro}}</p>
+				<!-- <p clamp="introLines">{{company.value.company.intro}}</p> -->
+				<p>{{company.value.company.intro}}</p>
 			</div>
-			<a class="load-more" ng-click="introLines==4?(introLines=100):(introLines=4)" ng-hide="introLines>4"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+			<!-- <a class="load-more" ng-click="introLines==4?(introLines=100):(introLines=4)" ng-hide="introLines>4"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a> -->
 		</div>
 	</div>
 
@@ -41,13 +46,14 @@
 			<h3>子产品介绍</h3>
 		</div>
 		<div class="sub-product">
-			<div ng-repeat="item in product.list | limitTo: product.listLimit">
+			<!-- <div ng-repeat="item in product.list | limitTo: product.listLimit"> -->
+			<div ng-repeat="item in product.list">
 				<span>{{item.name}}</span>
 				<a ng-href="{{item.nextLink?'http://next.36kr.com/posts/'+item.nextLink:'javascript:void(0)'}}" class="next-link" ng-class="{nolink: !item.nextLink}">NEXT</a>
 				<a href="{{item.website}}">查看官网</a>
 			</div>
 		</div>
-		<a class="load-more" ng-click="product.listLimit = product.listLimit+3" ng-show="product.list.length && (product.listLimit < product.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		<!-- <a class="load-more" ng-click="product.listLimit = product.listLimit+3" ng-show="product.list.length && (product.listLimit < product.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a> -->
 	</div>
 
 	<!-- 创始团队 -->
@@ -57,7 +63,8 @@
 		</div>
 		<div class="panel-body">
 			<ul class="list-item">
-				<li ng-repeat="item in founder.list | limitTo: founder.listLimit">
+				<!-- <li ng-repeat="item in founder.list | limitTo: founder.listLimit"> -->
+				<li ng-repeat="item in founder.list">
 					<a class="logo" ui-sref="user_detail({id: item.id})">
 						<img class="img-rounded" ng-src="{{item.avatar|image:120:'avatar'}}" alt="" width="120">
 					</a>
@@ -68,7 +75,7 @@
 					</div>
 				</li>
 			</ul>
-			<a class="load-more" ng-click="founder.listLimit = founder.listLimit+2" ng-show="founder.list.length && (founder.listLimit < founder.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+			<!-- <a class="load-more" ng-click="founder.listLimit = founder.listLimit+2" ng-show="founder.list.length && (founder.listLimit < founder.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a> -->
 		</div>
 	</div>
 
@@ -78,20 +85,25 @@
 			<h3>融资经历</h3>
 		</div>
 		<div class="panel-body">
-			<div ng-repeat="item in finance.list | limitTo: finance.listLimit">
-				<div class="round-info">
-					<div class="round">{{item.phase | dict_FinancePhase}}</div>
-					<div class="info">
-						<span ng-if="item.financeValue">
-							<span class="money">{{item.financeValueUnit | moneyUnit}} {{item.financeValue | wanText}}</span>
-							|
-						</span>
-						<span ng-if="item.estimateValue">
-							估值{{item.estimateValueUnit | moneyUnit}} {{item.estimateValue | wanText}}
-							|
-						</span>	
+			<!-- <div ng-repeat="item in finance.list | limitTo: finance.listLimit"> -->
+			<div ng-repeat="item in finance.list">
+				<div class="heading">
+					<div class="summary-panel round-info">
+						<div class="round">{{item.phase | dict_FinancePhase}}</div>
+						<span class="confirm-status" ng-if="item.status!='CONFIRMED'">待确认</span>
+						<span class="no-entitys" ng-if="!item.entitys.length">未披露</span>
 						<span ng-if="item.financeDate" class="time">{{item.financeDate | date:'yyyy.MM'}}</span>
-						<span ng-if="!(item.financeValue || item.estimateValue || item.financeDate)">融资信息未披露</span>
+					</div>
+					<div class="summary-panel finance-info">
+						<span>
+							融资金额&nbsp;&nbsp;<i class="money-unit" ng-if="item.financeValue">{{item.financeValueUnit | moneyUnit}} </i><span class="money" ng-if="item.financeValue">{{item.financeValue | wanText}}</span>
+							<span class="money" ng-if="!item.financeValue">未知</span>
+						</span>
+						<span class="dividing">|</span>	
+						<span>
+							融资估值&nbsp;&nbsp;<i class="money-unit" ng-if="item.estimateValue">{{item.estimateValueUnit | moneyUnit}} </i><span class="money-value" ng-if="item.estimateValue">{{item.estimateValue | wanText}}</span>
+							<span class="money-value" ng-if="!item.estimateValue">未知</span>
+						</span>	
 					</div>
 				</div>
 				<ul class="list-item">
@@ -101,14 +113,14 @@
 						</a>
 						<div class="info">
 							<a ui-sref="{{obj | investorLink:'entityId':'entityType'}}">{{obj.name}}</a> 
-							<span class="bage" ng-show="item.status!='CONFIRMED'">待确认</span>
+							<!-- <span class="bage" ng-show="item.status!='CONFIRMED'">待确认</span> -->
 							<p>{{obj.brief | substr: 26}}</p>
 						</div>
 					</li>
 				</ul>
 			</div>
 		</div>
-		<a class="load-more" ng-click="finance.listLimit = finance.listLimit+2" ng-show="finance.list.length && (finance.listLimit < finance.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+		<!-- <a class="load-more" ng-click="finance.listLimit = finance.listLimit+2" ng-show="finance.list.length && (finance.listLimit < finance.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a> -->
 	</div>
 
 	<!-- 过往投资方 -->
@@ -119,7 +131,8 @@
 		</div>
 		<div class="panel-body">
 			<ul class="list-item">
-				<li ng-repeat="item in investor.list | limitTo: investor.listLimit">
+				<!-- <li ng-repeat="item in investor.list | limitTo: investor.listLimit"> -->
+				<li ng-repeat="item in investor.list">
 					<a class="logo" ui-sref="{{item | investorLink:'entityId':'entityType'}}">
 						<img class="img-rounded" ng-src="{{item.avatar||item.logo | image:120:'logo'}}" alt="" width="120">
 					</a>
@@ -129,7 +142,7 @@
 					</div>
 				</li>
 			</ul>
-			<a class="load-more" ng-click="investor.listLimit = investor.listLimit+2" ng-show="investor.list.length && (investor.listLimit < investor.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+			<!-- <a class="load-more" ng-click="investor.listLimit = investor.listLimit+2" ng-show="investor.list.length && (investor.listLimit < investor.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a> -->
 		</div>
 	</div>
 
@@ -141,7 +154,8 @@
 		</div>
 		<div class="panel-body">
 			<ul class="list-item">
-				<li ng-repeat="item in employee.list | limitTo: employee.listLimit">
+				<!-- <li ng-repeat="item in employee.list | limitTo: employee.listLimit"> -->
+				<li ng-repeat="item in employee.list">
 					<a class="logo" ui-sref="user_detail({id: item.id})">
 						<img class="img-rounded" ng-src="{{item.avatar|image:120:'avatar'}}" alt="" width="120">
 					</a>
@@ -151,10 +165,12 @@
 					</div>
 				</li>
 			</ul>
-			<a class="load-more" ng-click="employee.listLimit = employee.listLimit + 2" ng-show="employee.list && (employee.listLimit<employee.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a>
+			<!-- <a class="load-more" ng-click="employee.listLimit = employee.listLimit + 2" ng-show="employee.list && (employee.listLimit<employee.list.length)"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a> -->
 		</div>
 	</div>
 </div>
+
+
 
 
 
