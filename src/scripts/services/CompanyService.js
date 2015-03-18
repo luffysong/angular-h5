@@ -83,7 +83,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                     if(!data.level){
                         data.mode = 'fast';
                     }else{
-            
+
 
                         data.startDate = dateFilter( data.startDate, 'yyyy-MM-dd hh:mm:ss');
 
@@ -140,6 +140,12 @@ angular.module('defaultApp.service').service('CompanyService', [
                     data.type = data.level;
                     return data;
                 })
+            },
+            getManaged: {
+                method: 'GET',
+                params: {
+                    type: 'managed'
+                }
             }
         }, {
             sub: [
@@ -260,7 +266,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                 save: {
                     method: "POST",
                     transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
-                        data.financeDate = dateFilter(new Date([data.investYear, data.investMonth, '1'].join('/')), 'yyyy-MM-dd hh:mm:ss');
+                        data.financeDate = dateFilter(new Date([data.startYear, data.startMonth, '1'].join('/')), 'yyyy-MM-dd hh:mm:ss');
 
                         data.entitys.forEach(function (item) {
                             if (item.id) {
@@ -286,10 +292,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                 update: {
                     method: "PUT",
                     transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
-
-
-
-                        data.financeDate = dateFilter(new Date([data.investYear, data.investMonth, '1'].join('/')), 'yyyy-MM-dd hh:mm:ss');
+                        data.financeDate = dateFilter(new Date([data.startYear, data.startMonth, '1'].join('/')), 'yyyy-MM-dd hh:mm:ss');
                         data.entitys &&  data.entitys.forEach(function (item) {
                             if (item.id) {
                                 if (!item.entityId) {
@@ -368,12 +371,71 @@ angular.module('defaultApp.service').service('CompanyService', [
                 item.phase==""
             }
             var time = new Date(item.financeDate);
-            item.investYear = time.getFullYear() + "";
-            item.investMonth = time.getMonth() + 1 + "";
+            item.startYear = time.getFullYear() + "";
+            item.startMonth = time.getMonth() + 1 + "";
             if(!item.entitys && item.details){
                 item.entitys = item.details;
+                item.showNotifyTip = false;
+                item.showInviteTip = false;
+                item.entitys.forEach(function(entity){
+                    if(entity.status=='PENDING' && entity.source=='INVESTOR'){
+                        item.showNotifyTip = true;
+                    }
+                    if(entity.status=='PENDING' && entity.source=='FINANCIER'){
+                        item.showInviteTip = true;
+                    }
+                });
                 delete item.details;
             }
+
+        }
+
+        service.getCompanyListForHome = function(callback){
+
+            $http.get('/api/organization/finished-com').success(function(data){
+                var list = [];
+                if(data.data){
+                    data.data.forEach(function(item, i){
+                        var company = {
+                            'company_logo': item.company.logo,
+                            'company_bg': 'http://krplus-pic.b0.upaiyun.com/home/company-bg-'+(i%3)+'.jpg',
+                            'company_name': item.company.name,
+                            'finance_start': {
+                                'date': dateFilter(new Date(item.startDateStr), 'yyyy.MM'),
+                                'user_id': item.user.id,
+                                'user_name': item.user.name,
+                                'user_desc': item.user.intro,
+                                'user_image': item.user.avatar
+                            },
+                            'finance_rounds': []
+                        };
+                        item.financeExpList.forEach(function(exp, i){
+                            var round = {
+                                'date': dateFilter(new Date(exp.fundDateStr), 'yyyy.MM'),
+                                'round': exp.phase,
+                                'money': exp.fundValue,
+                                'investor_count': 0,
+                                'investor_type': '',
+                                'investor_name': '',
+                                'investor_id': 0,
+                                'show': false
+                            };
+                            if(exp.financeEntityList.length>0){
+                                round.investor_count = exp.financeEntityList.length;
+                                round.investor_type = exp.financeEntityList[0].entityType;
+                                round.investor_name = exp.financeEntityList[0].entityName;
+                                round.investor_id = exp.financeEntityList[0].entityId;
+                                round.show = exp.financeEntityList[0].show;
+                            }
+                            company.finance_rounds.push(round);
+                        });
+                        list.push(company);
+                    });
+                }
+                callback && callback(list);
+            }).error(function(err){
+                console.log(err);
+            });
 
         }
 

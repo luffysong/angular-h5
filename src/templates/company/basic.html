@@ -8,7 +8,7 @@
 			<p>{{company.value.basic.brief}}</p>
 		</div>
 		<div>
-			<a class="website" href="{{company.value.basic.website}}">{{company.value.basic.website}}</a>
+			<a class="website" href="{{company.value.basic.website}}" ng-if="company.value.basic.website">{{company.value.basic.website}}</a>
 		</div>
 		<div class="tags">
 			<span ng-show="company.value.basic.industry">{{company.value.basic.industry | dict_CompanyIndustry}}</span>

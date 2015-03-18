@@ -3,10 +3,7 @@ var angular = require('angular');
 angular.module('defaultApp').config(function ($locationProvider, $stateProvider, $urlRouterProvider, $provide, $sceDelegateProvider) {
 
     $sceDelegateProvider.resourceUrlWhitelist([
-        // Allow same origin resource loads.
         'self'
-        // Allow loading from our assets domain.  Notice the difference between * and **.
-        //'http://*./**'
     ]);
 
     //$provide.decorator('$uiViewScroll', function () {
