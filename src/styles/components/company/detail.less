@@ -11,6 +11,7 @@
 
 	.img-responsive, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
 		height: 340px;
+		display: inline-block;
 	}
 
 	.carousel-indicators {
@@ -30,6 +31,15 @@
 	.carousel-control {
 		display: none;
 	}
+
+	.carousel-item {
+		width: 100%;
+		height: 340px;
+		overflow: hidden;
+		text-align: center;
+		display: block;
+	}
+
 	.carousel {
 		position: relative;
 	}
@@ -37,6 +47,9 @@
 	.company-intro {
 		padding: 24px 30px;
 		line-height: 48px;
+		p {
+			line-height: 40px;
+		}
 	}
 
 	.links-panel {

@@ -2,7 +2,7 @@ body {
 	width: 640px;
 	margin: 0 auto;
 	font-size: 28px;
-	line-height: 46px;
+	line-height: 48px;
 	color: @base-color;
 	background-color: #f0f0f0;
 }
@@ -112,10 +112,19 @@ p {
 			font-size: 30px;
 			line-height: 32px;
 			font-weight: bold;
+			position: relative;
+			top: -5px;
+		}
+
+		.position {
+			margin-top: 5px;
+			display: block;
+			font-size: 24px;
 		}
 
 		p {
 			margin: 0;
+			line-height: 40px;
 
 			&.one-line {
 				overflow: hidden;

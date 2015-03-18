@@ -14,13 +14,18 @@
 			<div class="carousel-box" ng-swipe-left="next()" ng-swipe-right="prev()" ng-if="slides.length">
 				<carousel interval="myInterval">
 					<slide ng-repeat="slide in slides" active="slide.active">
-						<img ng-src="{{slide.image}}" width="580" height="340">
+						<a href="{{slide.image}}" class="carousel-item">
+							<img ng-src="{{slide.image}}">
+						</a>
 					</slide>
 				</carousel>
 			</div>
 			<div class="company-intro">
 				<!-- <p clamp="introLines">{{company.value.company.intro}}</p> -->
-				<p>{{company.value.company.intro}}</p>
+				<div ng-if="intro.html!=''" ng-bind-html="intro.html">
+
+
+				<!-- <p>{{company.value.company.intro}}</p> -->
 			</div>
 			<!-- <a class="load-more" ng-click="introLines==4?(introLines=100):(introLines=4)" ng-hide="introLines>4"><i class="glyphicon glyphicon-menu-down"></i> 查看更多</a> -->
 		</div>
@@ -71,7 +76,7 @@
 					<div class="info">
 						<a ui-sref="user_detail({id: item.id})">{{item.name}}</a>
 						<p>{{item.intro}}</p>
-						<span>{{item.type | dict_StartupPositionType}} {{item.position}}</span>
+						<span class="position">{{item.type | dict_StartupPositionType}} {{item.position}}</span>
 					</div>
 				</li>
 			</ul>

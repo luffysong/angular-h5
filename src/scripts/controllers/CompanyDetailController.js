@@ -18,12 +18,19 @@ angular.module('defaultApp.controller').controller('CompanyDetailController', [
             value: {}
         };
 
+        $scope.intro = {
+            value: {}
+        };
+
         // 获取公司基本信息
         $scope.companyBasicData = function(callback) {
             CompanyService.get({
                 id: $scope.companyId
             }, function(data) {
                 $scope.company.value = data;
+                $scope.intro.value = {
+                    intro: data.company.intro
+                }
                 callback && callback(data);
             }, function(err) {
 
@@ -44,6 +51,15 @@ angular.module('defaultApp.controller').controller('CompanyDetailController', [
             for (var i = 0; i < $scope.company.value.other.pictures.length; i++) {
                 $scope.addSlide(i);
             }
+        });
+
+        // 格式化公司介绍
+        $scope.$watch('intro.value.intro', function(val){
+            if(!$scope.intro.value.intro) {
+                return;
+            }
+
+            $scope.intro.html = val.replace(/>/g,'&gt;').replace(/</g,'&lt;').replace(/\n/g, '<br/>');
         });
 
         $scope.introLines = 5;
