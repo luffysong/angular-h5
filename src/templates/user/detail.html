@@ -88,7 +88,7 @@
 					<p class="one-line">{{founder_case.brief}}</p>
 					<div class="clearfix">
 						<span class="pull-left">{{founder_case.position | dict_EmployeeType}}</span>
-						<span class="pull-right time">{{founder_case.startDate | date: 'yyyy.MM'}} - {{founder_case.isCurrent?'至今':founder_case.endDate | date: 'yyyy.MM'}}</span>
+						<span class="pull-right time" ng-if="founder_case.startDate">{{founder_case.startDate | date: 'yyyy.MM'}} - {{founder_case.isCurrent?'至今':founder_case.endDate | date: 'yyyy.MM'}}</span>
 					</div>
 				</div>
 			</li>
