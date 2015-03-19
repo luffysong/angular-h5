@@ -58,6 +58,7 @@
 				</a>
 				<div class="info">
 					<a ui-sref="company_detail({id: invest_case.company.id})">{{invest_case.company.name}}</a>
+					<span class="confirm-status" ng-show="invest_case.status!='CONFIRMED'">待确认</span>
 					<p class="one-line">{{invest_case.company.brief}}</p>
 					<div class="clearfix">
 						<span class="pull-left">{{invest_case.phase || '未知轮次' | dict_FinancePhase}} <i class="time">（{{invest_case.financeDate|date:'yyyy.MM'}}）</i></span>
@@ -85,6 +86,7 @@
 				</a>
 				<div class="info">
 					<a ui-sref="company_detail({id: founder_case.groupId})">{{founder_case.groupName}}</a>
+					<span class="confirm-status" ng-show="!founder_case.isConfirmed">待确认</span>
 					<p class="one-line">{{founder_case.brief}}</p>
 					<div class="clearfix">
 						<span class="pull-left">{{founder_case.position | dict_EmployeeType}}</span>
@@ -112,6 +114,7 @@
 				</a>
 				<div class="info">
 					<a ui-sref="{{worked_case | investorLink:'groupId':'groupIdType'}}">{{worked_case.groupName}}</a>
+					<span class="confirm-status" ng-show="!worked_case.isConfirmed">待确认</span>
 					<p class="one-line">{{worked_case.description}}</p>
 					<div class="clearfix">
 						<span class="pull-left">{{worked_case.position | dict_OrgPositionType | dict_WorkPositionType}} {{worked_case.positionDetail}}</span>
