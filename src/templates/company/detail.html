@@ -76,6 +76,7 @@
 					<div class="info">
 						<a ui-sref="user_detail({id: item.id})">{{item.name | substr: 10}}</a>
 						<span class="confirm-status" ng-show="item.status!='CONFIRMED'">待确认</span>
+						<span class="manager-status" ng-show="company.value.basic.managerId==item.id">管理员</span>
 						<p>{{item.intro}}</p>
 						<span class="position">{{item.type | dict_StartupPositionType}} {{item.position}}</span>
 					</div>
