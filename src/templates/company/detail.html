@@ -74,7 +74,7 @@
 						<img class="img-rounded" ng-src="{{item.avatar|image:120:'avatar'}}" alt="" width="120">
 					</a>
 					<div class="info">
-						<a ui-sref="user_detail({id: item.id})">{{item.name}}</a>
+						<a ui-sref="user_detail({id: item.id})">{{item.name | substr: 10}}</a>
 						<span class="confirm-status" ng-show="item.status!='CONFIRMED'">待确认</span>
 						<p>{{item.intro}}</p>
 						<span class="position">{{item.type | dict_StartupPositionType}} {{item.position}}</span>
@@ -143,7 +143,7 @@
 						<img class="img-rounded" ng-src="{{item.avatar||item.logo | image:120:'logo'}}" alt="" width="120">
 					</a>
 					<div class="info">
-						<a ui-sref="{{item | investorLink:'entityId':'entityType'}}">{{item.name}}</a>
+						<a ui-sref="{{item | investorLink:'entityId':'entityType'}}">{{item.name | substr: 10}}</a>
 						<span class="confirm-status" ng-show="item.status!='CONFIRMED'">待确认</span>
 						<p clamp="3">{{item.intro || item.brief}}</p>
 					</div>
@@ -167,7 +167,7 @@
 						<img class="img-rounded" ng-src="{{item.avatar|image:120:'avatar'}}" alt="" width="120">
 					</a>
 					<div class="info">
-						<a ui-sref="user_detail({id:item.id})">{{item.name}}</a>
+						<a ui-sref="user_detail({id:item.id})">{{item.name | substr: 10}}</a>
 						<span class="confirm-status" ng-show="item.status!='CONFIRMED'">待确认</span>
 						<p>{{item.type | dict_EmployeeType}} {{item.position}}</p>
 					</div>
