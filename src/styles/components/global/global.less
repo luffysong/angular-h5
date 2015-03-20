@@ -220,3 +220,38 @@ p {
 	background-color: #94d7b5;
 	color: #fff;
 }
+
+// 下载
+.download {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	padding: 16px 0;
+	background-color: rgba(27,92,148,.97);
+	color: #fff;
+	line-height: 30px;
+	z-index: 100;
+
+	.closed {
+		position: absolute;
+		right: 30px;
+		top: 14px;
+		color: rgba(255,255,255,.4);
+	}
+}
+
+// 蒙层
+.mask {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background-color: rgba(19,19,20,.95);
+	padding: 30px;
+	text-align: right;
+	z-index: 101;
+	display: none;
+}

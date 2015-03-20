@@ -1,0 +1,63 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=640">
+    <title>36氪融资</title>
+    <base href="/">
+    <!-- build:css /styles/base.css -->
+    <link rel="stylesheet" href="/styles/base.css">
+    <!-- endbuild -->
+</head>
+<body>
+
+    <div class="mask mask-apple">
+		<img src="/styles/images/guide.png" alt="">
+	</div>
+
+	<div class="mask mask-android">
+		<img src="/styles/images/guide-android.png" alt="">
+	</div>
+
+<!-- build:js /scripts/scripts.js -->
+<script src="/scripts/vendor.js"></script>
+<!-- endbuild -->
+<script>
+    var appurl = 'kr36://open';   //appurl
+    var appstore='http://app.36kr.com';//app下载地址
+    var intent = "kr36://open";
+    var userSystem=navigator.userAgent; //userAgent
+    function preventPopup() { //定义preventPopup函数
+        clearTimeout(timeout);
+        window.removeEventListener('pagehide', preventPopup);
+    }
+    function startApp(){ //定义startApp函数
+        if(navigator.userAgent.match(/Chrome/)&&navigator.userAgent.match(/Android/)){ //chrome浏览器
+            document.location = appstore;
+        }else{
+            var ifr = document.createElement('iframe');
+            ifr.src = appurl;
+            ifr.style.display = 'none';
+            document.body.appendChild(ifr);
+            window.setTimeout(function(){
+                document.body.removeChild(ifr);
+            },500);
+            timeout = setTimeout(function(){
+                document.location = appstore;
+            }, 1000);
+        }
+        window.addEventListener('pagehide', preventPopup);
+    }
+    if(userSystem.match(/MicroMessenger/i)=="MicroMessenger"){ //在微信中打开
+        if(userSystem.indexOf('Android') > -1){
+            $('.mask-android').show();//android
+        }else{
+            $('.mask-apple').show();  //ios用safari打开
+        }
+    }else{
+        startApp();
+    }
+
+</script>
+</body>
+</html>

@@ -10,6 +10,8 @@ angular.module('defaultApp.controller').controller('CompanyDetailController', [
 
         $scope.companyId = $stateParams.id || 12;
 
+
+
         $scope.company = {
             value: {}
         };
@@ -31,11 +33,29 @@ angular.module('defaultApp.controller').controller('CompanyDetailController', [
                 $scope.intro.value = {
                     intro: data.company.intro
                 }
+                if($scope.company.value.funds.privilege) {
+                    $stateParams.type = 1;
+                } else {
+                    $stateParams.type = 4;
+                }
+                
+                $location.search('type=' + $stateParams.type);
+
                 callback && callback(data);
             }, function(err) {
 
             })
         };
+
+
+
+        // if($scope.company.value.funds.privilege) {
+        //     $stateParams.type = 1;
+        // } else {
+        //     $stateParams.type = 4;
+        // }
+        // console.log($stateParams);
+
 
         $scope.companyBasicData(function() {
             // 轮播图

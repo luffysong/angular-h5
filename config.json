@@ -2,15 +2,15 @@
     "proxys": [
         {
             "path": "/api",
-            "source": "http://rong.36kr.com"
+            "source": "http://rong.test.36kr.com"
         },
         {
             "path": "/user",
-            "source": "http://rong.36kr.com/user"
+            "source": "http://rong.test.36kr.com/user"
         },
         {
             "path": "/oauth",
-            "source": "http://rong.36kr.com/oauth"
+            "source": "http://rong.test.36kr.com/oauth"
         }
     ],
     "upyun": {
