@@ -38,6 +38,8 @@
 			var str = window.location.hash;
 			var cid;
 			var type;
+			var uid;
+			var url;
 
 			if(str.indexOf('company') != -1) {
 				cid = str.substr(10);
@@ -45,15 +47,21 @@
 					var num = cid.indexOf('?');
 					cid = cid.substr(0,num);
 				}
+
+				if(str.indexOf('?') != -1) {
+					var num = str.indexOf('?');
+					type = str.substr(num + 1);
+				}
+				url = 'hub.html?id=' + cid + '&' + type;
 			}
 
-			if(str.indexOf('?') != -1) {
-				var num = str.indexOf('?');
-				type = str.substr(num + 1);
-				console.log(type);
+			
+
+			if(str.indexOf('user') != -1) {
+				uid = str.substr(7);
+				url = 'hub.html?id=' + uid + '&type=4';
 			}
 
-			var url = 'hub.html?id=' + cid + '&' + type;
 			window.location.href = url;
 		});
 
