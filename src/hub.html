@@ -14,6 +14,7 @@
     <div class="mask mask-apple">
 		<img src="/styles/images/guide.png" alt="">
 	</div>
+
 	<div class="mask mask-android">
 		<img src="/styles/images/guide.png" alt="">
 	</div>
@@ -36,7 +37,7 @@
 			} 
 		} 
 
-		if(!isWeiXin()) {
+		if(isWeiXin()) {
 			if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
 				$('.mask-apple').show();
 			} else if (/(Android)/i.test(navigator.userAgent)) {
