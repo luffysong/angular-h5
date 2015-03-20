@@ -133,7 +133,7 @@ p {
 			}
 		}
 
-		.confirm-status {
+		.confirm-status, .manager-status {
 			top: -10px;
 		}
 	}
@@ -204,13 +204,19 @@ p {
 }
 
 // 待确认
-.confirm-status {
+.confirm-status, .manager-status {
 	padding: 0 10px;
 	line-height: 28px;
-	background-color: #e8e8e8;
-	color: #666;
 	font-size: 18px;
 	position: relative;
 	top: 2px;
 	display: inline-block;
+}
+.confirm-status {
+	background-color: #e8e8e8;
+	color: #666;
+}
+.manager-status {
+	background-color: #94d7b5;
+	color: #fff;
 }

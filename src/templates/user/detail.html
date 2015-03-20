@@ -57,7 +57,7 @@
 					<img class="img-rounded" ng-src="{{invest_case.company.logo | image:120:'logo'}}" alt="" width="120">
 				</a>
 				<div class="info">
-					<a ui-sref="company_detail({id: invest_case.company.id})">{{invest_case.company.name}}</a>
+					<a ui-sref="company_detail({id: invest_case.company.id})">{{invest_case.company.name | substr: 10}}</a>
 					<span class="confirm-status" ng-show="invest_case.status!='CONFIRMED'">待确认</span>
 					<p class="one-line">{{invest_case.company.brief}}</p>
 					<div class="clearfix">
@@ -85,7 +85,7 @@
 					<img class="img-rounded" ng-src="{{founder_case.logo | image:120:'logo'}}" alt="" width="120">
 				</a>
 				<div class="info">
-					<a ui-sref="company_detail({id: founder_case.groupId})">{{founder_case.groupName}}</a>
+					<a ui-sref="company_detail({id: founder_case.groupId})">{{founder_case.groupName | substr: 10}}</a>
 					<span class="confirm-status" ng-show="!founder_case.isConfirmed">待确认</span>
 					<p class="one-line">{{founder_case.brief}}</p>
 					<div class="clearfix">
@@ -113,7 +113,7 @@
 					<img class="img-rounded" ng-src="{{worked_case.logo | image:120:'logo'}}" alt="" width="120" >
 				</a>
 				<div class="info">
-					<a ui-sref="{{worked_case | investorLink:'groupId':'groupIdType'}}">{{worked_case.groupName}}</a>
+					<a ui-sref="{{worked_case | investorLink:'groupId':'groupIdType'}}">{{worked_case.groupName | substr: 10}}</a>
 					<span class="confirm-status" ng-show="!worked_case.isConfirmed">待确认</span>
 					<p class="one-line">{{worked_case.description}}</p>
 					<div class="clearfix">
