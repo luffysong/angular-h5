@@ -1,0 +1,55 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=640">
+    <title>36氪融资</title>
+    <base href="/">
+    <!-- build:css /styles/base.css -->
+    <link rel="stylesheet" href="/styles/base.css">
+    <!-- endbuild -->
+</head>
+<body>
+	
+    <div class="mask mask-apple">
+		<img src="/styles/images/guide.png" alt="">
+	</div>
+	<div class="mask mask-android">
+		<img src="/styles/images/guide.png" alt="">
+	</div>
+
+<!-- build:js /scripts/scripts.js -->
+<script src="/scripts/vendor.js"></script>
+<script src="/scripts/template.js"></script>
+<script src="/scripts/default.js"></script>
+<!-- endbuild -->
+<script>
+	window.onload = function(){ 
+
+		// 判断是否是微信
+		function isWeiXin(){ 
+			var ua = window.navigator.userAgent.toLowerCase(); 
+			if(ua.match(/MicroMessenger/i) == 'micromessenger'){ 
+				return true; 
+				}else{ 
+				return false; 
+			} 
+		} 
+
+		if(!isWeiXin()) {
+			if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+				$('.mask-apple').show();
+			} else if (/(Android)/i.test(navigator.userAgent)) {
+				$('.mask-android').show();
+			}
+		} else {
+			if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+				alert('apple:' + window.location.href);
+			} else if (/(Android)/i.test(navigator.userAgent)) {
+				alert('Android');
+			}
+		}
+	} 
+</script>
+</body>
+</html>

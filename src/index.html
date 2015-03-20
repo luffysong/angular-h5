@@ -18,6 +18,11 @@
 		</h1>
 	</nav>
 	<ui-view></ui-view>
+
+	<footer class="download">
+		<div class="download-kr">点击下载“36氪”，查看更多</div>
+		<a href="#" class="closed">&times;</a>
+	</footer>
     
 
 <!-- build:js /scripts/scripts.js -->
@@ -25,5 +30,39 @@
 <script src="/scripts/template.js"></script>
 <script src="/scripts/default.js"></script>
 <!-- endbuild -->
+<script>
+	window.onload = function(){ 
+		$('.download-kr').click(function(e) {
+			e.stopPropagation();
+
+			var str = window.location.hash;
+			var cid;
+			var type;
+
+			if(str.indexOf('company') != -1) {
+				cid = str.substr(10);
+				if(cid.indexOf('?')) {
+					var num = cid.indexOf('?');
+					cid = cid.substr(0,num);
+				}
+			}
+
+			if(str.indexOf('?') != -1) {
+				var num = str.indexOf('?');
+				type = str.substr(num + 1);
+				console.log(type);
+			}
+
+			var url = 'hub.html?id=' + cid + '&' + type;
+			window.location.href = url;
+		});
+
+		$('.closed').click(function(e) {
+			e.preventDefault();
+			$('.download').hide();
+		});
+	} 
+	
+</script>
 </body>
 </html>

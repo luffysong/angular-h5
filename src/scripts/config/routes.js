@@ -23,6 +23,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     $locationProvider.html5Mode(false);
 
+    $stateProvider.state('guide', {
+        url: '/guide',
+        templateUrl: 'templates/guide.html'
+        // controller: 'CompanyDetailController'
+    });
+
     // 公司详情页
     $stateProvider.state('company_detail', {
         url: '/company/{id}',
