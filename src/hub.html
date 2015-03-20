@@ -16,7 +16,7 @@
 	</div>
 
 	<div class="mask mask-android">
-		<img src="/styles/images/guide.png" alt="">
+		<img src="/styles/images/guide-android.png" alt="">
 	</div>
 
 <!-- build:js /scripts/scripts.js -->
@@ -37,7 +37,7 @@
 			} 
 		} 
 
-		if(isWeiXin()) {
+		if(!isWeiXin()) {
 			if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
 				$('.mask-apple').show();
 			} else if (/(Android)/i.test(navigator.userAgent)) {
@@ -45,9 +45,11 @@
 			}
 		} else {
 			if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-				alert('apple:' + window.location.href);
+				window.location.href = 'kr36://open';
+				// alert('apple:' + window.location.href);
 			} else if (/(Android)/i.test(navigator.userAgent)) {
-				alert('Android');
+				// alert('Android');
+				window.location.href = 'kr36://open';
 			}
 		}
 	} 
