@@ -24,7 +24,7 @@
 <!-- endbuild -->
 <script>
     var appurl = 'kr36://open';   //appurl
-    var appstore='http://app.36kr.com';//app下载地址
+//    var appstore='http://app.36kr.com';//app下载地址
     var intent = "kr36://open";
     var userSystem=navigator.userAgent; //userAgent
     function preventPopup() { //定义preventPopup函数
@@ -33,7 +33,7 @@
     }
     function startApp(){ //定义startApp函数
         if(navigator.userAgent.match(/Chrome/)&&navigator.userAgent.match(/Android/)){ //chrome浏览器
-            document.location = appstore;
+            document.location = 'http://fir.im/45sa';
         }else{
             var ifr = document.createElement('iframe');
             ifr.src = appurl;
@@ -43,7 +43,7 @@
                 document.body.removeChild(ifr);
             },500);
             timeout = setTimeout(function(){
-                document.location = appstore;
+                document.location = "http://fir.im/wcpu";
             }, 1000);
         }
         window.addEventListener('pagehide', preventPopup);

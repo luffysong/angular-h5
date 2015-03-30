@@ -48,4 +48,10 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controller: 'OrganizationDetailController'
     });
 
+    $stateProvider.state('search', {
+        url: '/search',
+        templateUrl: 'templates/search/result.html',
+        controller: 'SearchController'
+    });
+
 });

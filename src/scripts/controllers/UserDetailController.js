@@ -13,6 +13,7 @@ angular.module('defaultApp.controller').controller('UserDetailController', [
         };
 
         UserService.basic.get({id: $stateParams.id}, function (response) {
+            document.title=response.name + " | 36氪融资";
             angular.extend($scope.user, response);
             // 默认显示 4 个
             if ($scope.user.orgMoneyUnit == "USD") {

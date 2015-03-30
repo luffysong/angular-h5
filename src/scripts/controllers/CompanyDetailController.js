@@ -4,9 +4,8 @@
 
 var angular = require('angular');
 
-angular.module('defaultApp.controller').controller('CompanyDetailController', [
-    '$scope', '$location', '$stateParams', '$state', 'CompanyService', '$timeout', 'UserService', 'ErrorService', 'DictionaryService',
-    function($scope, $location, $stateParams, $state, CompanyService, $timeout, UserService, ErrorService, DictionaryService) {
+angular.module('defaultApp.controller').controller('CompanyDetailController',
+    function($scope, $location, $stateParams, $state, CompanyService, $timeout, UserService, ErrorService, $rootScope) {
 
         $scope.companyId = $stateParams.id || 12;
 
@@ -30,6 +29,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController', [
                 id: $scope.companyId
             }, function(data) {
                 $scope.company.value = data;
+                document.title=data.basic.name + " | 36氪融资";
                 $scope.intro.value = {
                     intro: data.company.intro
                 }
@@ -38,7 +38,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController', [
                 } else {
                     $stateParams.type = 4;
                 }
-                
+
                 $location.search('type=' + $stateParams.type);
 
                 callback && callback(data);
@@ -188,4 +188,4 @@ angular.module('defaultApp.controller').controller('CompanyDetailController', [
 
 
     }
-]);
+);

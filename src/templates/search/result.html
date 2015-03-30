@@ -1,0 +1,15 @@
+<div class="search-wrap">
+    <form ng-submit="doSearch($event)">
+        <input type="search" ng-model="keyword" placeholder="请输入公司名称"/>
+    </form>
+    <div class="list">
+        <div class="result-item" ng-repeat="item in searchResult" ui-sref="company_detail({id: item.id})">
+            <img ng-src="{{item.logo | image:100:'logo'}}" alt=""/>
+            <div class="desc">
+                <div class="name">{{item.name}}</div>
+                <div class="brief">{{item.brief}}</div>
+            </div>
+        </div>
+
+    </div>
+</div>

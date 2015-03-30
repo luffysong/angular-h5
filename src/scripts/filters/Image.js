@@ -29,7 +29,7 @@ angular.module('defaultApp.filter').filter('image', function () {
         if(!input || input.indexOf('http')==-1){
             src = defaults[type];
         }
-        if(src.indexOf('http://krplus.b0.upaiyun.com/')>-1){
+        if(src.indexOf('.b0.upaiyun.com/')>-1){
             src = src.replace(/\!.+$/, "");
             src = src+'!'+realSize;
         }
