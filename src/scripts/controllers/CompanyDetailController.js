@@ -29,7 +29,15 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 id: $scope.companyId
             }, function(data) {
                 $scope.company.value = data;
+
                 document.title=data.basic.name + " | 36氪融资";
+                WEIXINSHARE = {
+                    shareTitle: data.basic.name + " | 36氪融资",
+                    shareDesc: data.basic.brief || data.basic.name,
+                    shareImg: data.basic.logo || 'http://img.36tr.com/logo/20140520/537aecb26e02d'
+                };
+
+
                 $scope.intro.value = {
                     intro: data.company.intro
                 }
@@ -146,7 +154,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         $scope.investor = {
             list: [],
             listLimit: 2
-        }
+        };
         $scope.loadInvestorData = function (callback) {
             CompanyService.investor.query({
                 id: $scope.companyId,
