@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/styles/base.css">
     <!-- endbuild -->
 </head>
-<body>
+<body class="download-show">
 	<nav class="pub-nav">
 		<h1 class="logo">
 			<a href="#">
@@ -79,6 +79,7 @@
 		$('.closed').click(function(e) {
 			e.preventDefault();
 			$('.download').hide();
+			$('body').removeClass('download-show');
 		});
 	}
 
