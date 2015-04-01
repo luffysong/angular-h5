@@ -20,6 +20,7 @@ angular.module('defaultApp.controller').controller('UserDetailController', [
                 shareDesc: response.intro || response.name,
                 shareImg: response.avatar || 'http://img.36tr.com/logo/20140520/537aecb26e02d'
             };
+            InitWeixin();
 
 
             angular.extend($scope.user, response);

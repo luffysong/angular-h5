@@ -36,6 +36,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                     shareDesc: data.basic.brief || data.basic.name,
                     shareImg: data.basic.logo || 'http://img.36tr.com/logo/20140520/537aecb26e02d'
                 };
+                InitWeixin();
 
 
                 $scope.intro.value = {
