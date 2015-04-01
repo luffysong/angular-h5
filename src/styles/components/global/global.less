@@ -5,6 +5,11 @@ body {
 	line-height: 48px;
 	color: @base-color;
 	background-color: #f0f0f0;
+	transition: padding linear .3s;
+	
+	&.download-show {
+		padding-bottom: 50px;
+	}
 }
 
 a:hover {
@@ -236,9 +241,10 @@ p {
 
 	.closed {
 		position: absolute;
-		right: 30px;
-		top: 14px;
+		right: 16px;
+		top: 0;
 		color: rgba(255,255,255,.4);
+		padding: 14px;
 	}
 }
 
