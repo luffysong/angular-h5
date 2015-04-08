@@ -3,9 +3,8 @@
         var signature = '';
         var nonceStr = 'xcvdsjlk$klsc';
         var timestamp = parseInt(new Date().getTime()/1000);
-        var host = location.href.indexOf('dev')==-1?'rong.36kr.com':'rong.dev.36kr.com';
 
-        $.get('http://'+host+'/api/weixin/token', {
+        $.get('/api/weixin/token', {
             url: location.href.replace(/#.*$/, ''),
             timestamp: timestamp,
             noncestr: nonceStr

@@ -30,9 +30,9 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }, function(data) {
                 $scope.company.value = data;
 
-                document.title=data.basic.name + " | 36氪融资";
+                document.title=data.basic.name + " | 36氪";
                 WEIXINSHARE = {
-                    shareTitle: data.basic.name + " | 36氪融资",
+                    shareTitle: data.basic.name + " | 36氪",
                     shareDesc: data.basic.brief || data.basic.name,
                     shareImg: data.basic.logo || 'http://img.36tr.com/logo/20140520/537aecb26e02d'
                 };
