@@ -12,7 +12,7 @@ var urlAdjuster = require('gulp-css-url-adjuster');
 
 var config = require('./config.json');
 
-var reloadTimeout, CDNPrefix;
+var reloadTimeout, CDNPrefix, buildMode='prod';
 function reloadPage() {
     return es.map(function (file, callback) {
         if (reloadTimeout) {
@@ -124,7 +124,9 @@ gulp.task('scripts:ui:template', function () {
 
 // Scripts Vendor
 gulp.task('scripts:vendor', function () {
-    return gulp.src(config.vendors)
+    var files = config.vendors;
+    files.push('src/scripts/config/env_'+buildMode+'.js');
+    return gulp.src(files)
         .pipe($.sourcemaps.init())
         .pipe($.concat('vendor.js'))
         //.pipe($.ngmin())
@@ -319,10 +321,10 @@ gulp.task('connect:remote', function () {
     $.connect.server({
         root: ['.tmp', 'src'],
         port: 9001,
-        livereload: true,
+        //livereload: true,
         middleware: function (connect, opt) {
             var url = require('url');
-            var proxy = require('proxy-middleware');
+            var proxy = require('./tasks/proxy.js');
 
             var _proxy = function (path, source) {
                 var options = url.parse(source);
@@ -333,7 +335,11 @@ gulp.task('connect:remote', function () {
             var map = [gzip.gzip({ matchType: /javascript/ })];
 
             map = map.concat(_.map(config.proxys, function (proxy) {
-                return _proxy(proxy.path, proxy.source);
+                var source = proxy.source;
+                if(apiHost){
+                    source = source.replace('http://rong.dev.36kr.com', apiHost);
+                }
+                return _proxy(proxy.path, source);
             }));
             //map.push(historyApiFallback);
             return map;
@@ -472,11 +478,21 @@ gulp.task('build', ['clean', 'header'], function () {
     gulp.start('build:rev:replace');
 });
 
-gulp.task('build:cdn',function(){
+gulp.task('build:test',function(){
+    buildMode = 'test';
+    CDNPrefix = '/m';
+    gulp.start('build');
+});
+gulp.task('build:dev',function(){
+    buildMode = 'dev';
+    CDNPrefix = '/m';
+    gulp.start('build');
+});
+gulp.task('build:prod',function(){
+    buildMode = 'prod';
     CDNPrefix = '//krplus-cdn.b0.upaiyun.com/m';
     gulp.start('build');
-})
-
+});
 
 gulp.task('local:build', ['build'], function(){
     $.connect.server({
@@ -524,6 +540,25 @@ gulp.task('local', ['watch', 'scripts', 'connect', 'local:mock', 'styles', 'head
 });
 
 gulp.task('remote', ['watch', 'scripts', 'connect:remote', 'styles', 'header']);
+
+gulp.task('remote:prod', function(){
+    buildMode = 'prod';
+    apiHost = 'http://rong.36kr.com';
+    gulp.start('remote');
+});
+
+gulp.task('remote:dev', function(){
+    buildMode = 'dev';
+    apiHost = 'http://rong.dev.36kr.com';
+    gulp.start('remote');
+});
+
+
+gulp.task('remote:test', function(){
+    buildMode = 'test';
+    gulp.start('remote');
+});
+
 
 //编译页头
 gulp.task('header', function(){

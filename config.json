@@ -2,7 +2,7 @@
     "proxys": [
         {
             "path": "/api",
-            "source": "http://rong.dev.36kr.com"
+            "source": "http://rong.dev.36kr.com/api"
         },
         {
             "path": "/user",
