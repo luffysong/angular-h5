@@ -332,7 +332,7 @@ gulp.task('connect:remote', function () {
                 return proxy(options);
             };
 
-            var map = [gzip.gzip({ matchType: /javascript/ })];
+            var map = [];
 
             map = map.concat(_.map(config.proxys, function (proxy) {
                 var source = proxy.source;
@@ -560,12 +560,18 @@ gulp.task('remote:test', function(){
     gulp.start('remote');
 });
 
-
 //编译页头
 gulp.task('header', function(){
-    require('./tasks/buildNav.js')();
-});
+    var headers = {
+        test: 'http://krplus-cdn.b0.upaiyun.com/common-module/common-header-test/script.js',
+        dev: 'http://krplus-cdn.b0.upaiyun.com/common-module/common-header-dev/script.js',
+        prod: 'http://krplus-cdn.b0.upaiyun.com/common-module/common-header/script.js'
+    };
 
+    return gulp.src(['src/*.html'])
+        .pipe($.replace('%%%headerSrc%%%', headers[buildMode]))
+        .pipe(gulp.dest('.tmp'));
+});
 // 默认任务
 gulp.task('default', ['serve']);
 
