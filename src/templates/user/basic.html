@@ -1,14 +1,14 @@
 <div class="user-basic">
-	<img class="user-avatar img-circle blue" ng-src="{{user.avatar | image:146:'avatar'}}" alt="" width="146">
+	<img class="user-avatar img-circle blue" ng-src="{{user.avatar | image:80:'avatar'}}" alt="" width="80">
 	<div class="user-basic-info">
 		<div>
 			<span class="user-name">{{user.name}}</span>
 			<img ng-if="user.enterpriser"   tooltip="36氪创业者"  class="identity-icon" src="/styles/images/indentity-entrepreneurs.png"
-                     width="38" alt="">
+                     width="26" alt="">
             <img ng-if="user.investorType==20" tooltip="36氪投资人" class="identity-icon" src="/styles/images/indentity-investors.png"
-                 width="38" alt="">
+                 width="26" alt="">
             <img ng-if="user.investorType==10" tooltip="36氪优质投资人" class="identity-icon" src="/styles/images/hq-investor.png"
-                 width="38" alt="">
+                 width="26" alt="">
 		</div>
 		<p>{{user.intro}}</p>
 		<div class="tags">
@@ -16,7 +16,7 @@
 			<span ng-if="user.school.length"><i class="icon-h5-school"></i><span ng-repeat="school in user.school">{{school}}</span></span>
 		</div>
 
-		<div class="share">
+		<div class="share clearfix">
 			<a href="{{user.linkedin}}" class="icon-linkedin" ng-class="{disabled: !user.linkedin}"></a>
 			<!-- <a href="#" class="icon-wechat" ng-show="user.weixin"></a> -->
 			<a href="{{user.weibo}}" class="icon-weibo" ng-class="{disabled: !user.weibo}"></a>
