@@ -41,6 +41,7 @@ angular.module('defaultApp.service').config([
         $httpProvider.defaults.headers.post = {'Content-Type': 'application/x-www-form-urlencoded'};
         $httpProvider.defaults.headers.put = {'Content-Type': 'application/x-www-form-urlencoded'};
         $httpProvider.defaults.headers.delete = {'Content-Type': 'application/x-www-form-urlencoded'};
+        $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.transformRequest = function (data) {
             if (data === undefined) return data;
             if (!angular.isObject(data)) return data;

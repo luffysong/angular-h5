@@ -45,15 +45,15 @@ p {
 
 // 标题
 .title{
-    padding: 30px 20px 0;
-    border-bottom: 4px solid @title-border;
+    padding: 16px 10px 0;
+    border-bottom: 2px solid @title-border;
 
     h3{
-        font-size: 32px;
+        font-size: 18px;
         display: inline-block;
-        margin: 0 0 -4px;
-       	padding: 0 10px 20px;
-        border-bottom:4px solid @title-light-border;
+        margin: 0 0 -2px;
+       	padding: 0 5px 10px;
+        border-bottom: 2px solid @title-light-border;
         font-weight: bold;
         color: @title-color;
     }
@@ -77,16 +77,16 @@ p {
 
 // 字数统计
 .bage {
-	padding: 0 12px;
-	line-height: 28px;
+	padding: 0 6px;
+	line-height: 16px;
 	background-color: #a7cded;
-	font-size: 20px;
+	font-size: 4px;
 	color: @base-white;
-	border-radius: 6px;
+	border-radius: 3px;
 	display: inline-block;
 	vertical-align: text-top;
 	position: relative;
-	top: 2px;
+	top: -1px;
 }
 
 // 列表
@@ -96,8 +96,8 @@ p {
 	list-style: none;
 
 	li {
-		padding: 40px 30px;
-		border-top: 2px solid #eee;
+		padding: 20px 10px;
+		border-top: 1px solid #eee;
 		.clearfix;
 
 		&:first-child {
@@ -107,29 +107,33 @@ p {
 
 	.logo {
 		float: left;
+
+		> img {
+			border-radius: 3px;
+		}
 	}
 
 	.info {
-		margin-left: 140px;
+		margin-left: 70px;
 
 		> a {
 			color: @font-color-dark;
-			font-size: 30px;
-			line-height: 32px;
+			font-size: 16px;
+			line-height: 20px;
 			font-weight: bold;
 			position: relative;
-			top: -5px;
+			top: -2px;
 		}
 
 		.position {
-			margin-top: 5px;
+			margin-top: 3px;
 			display: block;
-			font-size: 24px;
+			font-size: 12px;
 		}
 
 		p {
 			margin: 0;
-			line-height: 40px;
+			line-height: 20px;
 
 			&.one-line {
 				overflow: hidden;
@@ -139,7 +143,7 @@ p {
 		}
 
 		.confirm-status, .manager-status {
-			top: -10px;
+			top: -3px;
 		}
 	}
 }
@@ -210,9 +214,9 @@ p {
 
 // 待确认
 .confirm-status, .manager-status {
-	padding: 0 10px;
-	line-height: 28px;
-	font-size: 18px;
+	padding: 0 6px;
+	line-height: 20px;
+	font-size: 12px;
 	position: relative;
 	top: 2px;
 	display: inline-block;
