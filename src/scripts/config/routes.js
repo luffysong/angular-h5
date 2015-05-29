@@ -23,11 +23,11 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     $locationProvider.html5Mode(false);
 
-    $stateProvider.state('guide', {
-        url: '/guide',
-        templateUrl: 'templates/guide.html'
-        // controller: 'CompanyDetailController'
-    });
+    // $stateProvider.state('guide', {
+    //     url: '/guide',
+    //     templateUrl: 'templates/guide.html'
+    //     // controller: 'CompanyDetailController'
+    // });
 
     // 公司详情页
     $stateProvider.state('company_detail', {
@@ -52,6 +52,23 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url: '/search',
         templateUrl: 'templates/search/result.html',
         controller: 'SearchController'
+    });
+
+    // welcome
+    $stateProvider.state('guide', {
+        url: '/guide',
+        template: '<div ui-view></div>'
+    });
+
+    $stateProvider.state('guide.welcome', {
+        url: '/welcome',
+        templateUrl: 'templates/guide/welcome.html',
+        controller: 'GuideWelcomeController'
+        // data: {
+        //     permissions: {
+        //         only: ['login']
+        //     }
+        // }
     });
 
 });

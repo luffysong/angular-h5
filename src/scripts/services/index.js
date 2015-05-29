@@ -1,8 +1,10 @@
 require('./BasicService');
+require('./CheckFormService');
 require('./CompanyService');
 require('./DefaultService');
 require('./DictionaryService');
 require('./ErrorService');
 require('./OrganizationService');
 require('./SearchService');
+require('./UIAvatarEdit');
 require('./UserService');

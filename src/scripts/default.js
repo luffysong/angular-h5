@@ -6,6 +6,8 @@ require('./config/dictionary');
 require('./config/city');
 
 angular.module('ui.carousel', ['ui.bootstrap.carousel', 'ui.bootstrap.tpls']);
+// angular.module('ui.modal', ['ui.bootstrap.pagination', 'ui.bootstrap.modal', 'ui.bootstrap.tpls','ui.bootstrap.tooltip','ui.bootstrap.rating']);
+
 
 angular.module('defaultApp.filter', []);
 angular.module('defaultApp.directive', []);

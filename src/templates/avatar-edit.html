@@ -1,0 +1,86 @@
+<div class="upload-modal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="$close()" ng-if="!progress"><span
+            aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">图片设置</h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="clearfix">
+            <div class="avatar">
+                <div class="avatar-con">
+                        <div class="choose-avatar" ng-if="!imageSrc">
+                            <a href="javascript:;" class="btn btn-upload" ng-disabled="readingFile">{{readingFile?'正在生成':'选择图片'}}
+                                <!-- <input type="file" name="weixin"> -->
+                                <input type="file" accept="image/*" capture="camera" kr-model="file"
+                                       kr-change="getFile()" id="jcropImgFile" name="file" kr-file-select/>
+                            </a>
+
+                            <p>
+                                支持JPG、PNG、GIF
+                                <br/>
+                                大小不超过5M
+                            </p>
+                        </div>
+                        <div ng-if="imageSrc" img-cropped class="jcrop-wrap" src="imageSrc" rotate="previewRotate"
+                             selected="selected(cords, _pic)" ng-style="corpWrapStyle"></div>
+                </div>
+                <div class="avatar-op" ng-if="!progress">
+
+                    <a href="javascript:;" class="btn re-upload" ng-if="imageSrc" ng-disabled="readingFile">{{readingFile?'正在生成':'重新上传'}}
+                        <input type="file" accept="image/*" capture="camera" kr-model="file" kr-change="getFile()"
+                               name="file" kr-file-select/>
+                    </a>
+                    <a href class="turn icon-turn-right" ng-if="imageSrc" tooltip="向右翻转" ng-click="rotateRight()"></a>
+                    <a href class="turn icon-turn-left" ng-if="imageSrc" tooltip="向左翻转" ng-click="rotateLeft()"></a>
+                </div>
+            </div>
+            <div class="preview">
+                <div class="preview-tit">
+                    <i class="glyphicon glyphicon-eye-open"></i> 预览
+                </div>
+                <div ng-show="imageSrc">
+                    <div style="zoom:1.2" class="img-rounded">
+                        <div class="cropped-image" ng-show="cropped"
+                             ng-style="{width: '100px', height: '100px', overflow: 'hidden'}"><img class="preview"
+                                                                                                   ng-src="{{imageSrc}}"
+                                                                                                   ng-style="previewStyle"/>
+                        </div>
+                    </div>
+                    <!--<img src="http://placehold.it/120x120/09f/fff" alt="">-->
+                    <span>120 X 120</span>
+                </div>
+                <div ng-show="imageSrc">
+                    <div style="zoom:0.7" class="img-rounded">
+                        <div class="cropped-image" ng-show="cropped"
+                             ng-style="{width: '100px', height: '100px', overflow: 'hidden'}"><img class="preview"
+                                                                                                   ng-src="{{imageSrc}}"
+                                                                                                   ng-style="previewStyle"/>
+                        </div>
+                    </div>
+                    <span>70 X 70</span>
+                </div>
+                <div ng-show="imageSrc">
+                    <div style="zoom:0.3" class="img-rounded">
+                        <div class="cropped-image" ng-show="cropped"
+                             ng-style="{width: '100px', height: '100px', overflow: 'hidden'}"><img class="preview"
+                                                                                                   ng-src="{{imageSrc}}"
+                                                                                                   ng-style="previewStyle"/>
+                        </div>
+                    </div>
+                    <span>30 X 30</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!-- <div ng-repeat="file in _demoFiles"><img src="{{file}}" style="width: 200px;height:200px;"></div> -->
+        <button class="btn btn-primary" ng-class="{disabled: !imageSrc}" ng-click="ok()" ng-if="!progress">确定</button>
+        <button class="btn btn-warning" ng-click="cancel()" ng-if="!progress">取消</button>
+        <div class="progress" ng-if="progress">
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" ng-style="{width:progress+'%'}"  style="min-width: 2em;">
+                <span>{{progress}}%</span>
+            </div>
+        </div>
+    </div>
+</div>

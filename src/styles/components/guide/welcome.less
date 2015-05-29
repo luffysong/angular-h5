@@ -1,0 +1,149 @@
+.welcome-words {
+	text-align: center;
+	padding: 20px 10px;
+	background-color: #f7f7f7;
+	border-bottom: 1px solid #ddd;
+	span {
+		font-size: 16px;
+		color: @light-color;
+		line-height: 20px;
+	}
+	p {
+		font-size: 14px;
+		line-height: 20px;
+		color: #999;
+		margin: 6px 0 0;
+	}
+}
+
+.welcome-form {
+	background-color: @base-white;
+	> .form-group {
+		padding: 16px 0;
+		margin: 0 10px;
+		border-bottom: 1px solid #ddd;
+		.clearfix;
+
+		&:last-child {
+			background-color: #f7f7f7;
+			margin: 0;
+			border-top: 1px solid #ddd;
+			margin-top: -1px;
+			padding: 24px 10px;
+		}
+	}
+
+	.label-control {
+		float: left;
+		width: 70px;
+		color: @title-color;
+		text-align: right;
+		margin-right: 16px;
+	}
+
+	.col {
+		float: left;
+		width: 160px;
+		&.validate-code {
+			&, & > input {
+				width: 110px;
+			}
+		}
+
+		input {
+			border: none;
+			padding: 0;
+
+
+		}
+	}
+
+	.get-code {
+		float: right;
+		color: @light-color;
+		padding: 0 10px;
+	}
+
+	.btn-auth {
+		display: block;
+		margin: 0 30px;
+		background-color: @light-color;
+		line-height: 40px;
+		font-size: 16px;
+		color: @base-white;
+	}
+}
+
+.upload-avatar {
+	text-align: center;
+	padding: 16px 10px 20px;
+	border-bottom: 1px solid #ddd;
+	.file-upload  {
+		position: relative;
+		display: inline-block;
+		&:before {
+			content: url('images/update-avatar.png');
+			position: absolute;
+			right: 0;
+			bottom: 0;
+		}
+		> img {
+			.img-circle;
+		}
+	}
+
+	.avatar-label {
+		display: block;
+		margin-top: 12px;
+		float: none;
+		width: auto;
+		text-align: center;
+	}
+}
+
+.error-alert {
+	position: fixed;
+	line-height: 30px;
+	width: 100%;
+	left: 0;
+	top: 0;
+	color: @base-white;
+	text-align: center;
+	background-color: #f28d00;
+	z-index: 1000;
+	// transform: translateY(0);
+	// animation: show ease 4s;
+	
+
+	&.ng-hide {
+		// animation: hide ease 10s;
+	}
+}
+
+// @keyframes show {
+// 	0% {
+// 		display: block;
+// 		transform: translateY(-30px);
+// 	}
+
+// 	30% {
+// 		transform: translateY(0px);
+// 	}
+// 	60% {
+// 		transform: translateY(0px);
+// 	}
+// 	100% {
+// 		transform: translateY(-30px);
+// 	}
+// }
+
+// @keyframes hide {
+// 	0% {
+// 		transform: translateY(0);
+// 	}
+
+// 	100% {
+// 		transform: translateY(-30px);
+
+// 	}
+// }
