@@ -78,11 +78,6 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 });
             },800);
         });
-        if(window.sessionStorage.applySpaceStatus) {
-            $scope.applySpaceEnter = true;
-        } else {
-            $scope.applySpaceEnter = false;
-        }
 
         $scope.submitForm = function(e){
             e && e.preventDefault();
@@ -90,7 +85,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             UserService.basic.update({
                 id: $scope.userId
             }, {
-                avatar: $scope.intro.value.pictures,
+                avatar: $scope.user.avatar,
                 name: $scope.user.name,
                 email: $scope.user.email,
                 phone: $scope.user.phone,
@@ -146,17 +141,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 // });
             });
         }
-
-        $scope.passport = {};
         $scope.intro = {};
-        $scope.passport.value = {
-            intro:"",
-            pictures:""
-        };
-        $scope.intro.value = {
-            intro:"",
-            pictures:"http://krplus.b0.upaiyun.com/default_avatar.png!70"
-        };
 
         // 上传头像
         $scope.imgFileSelected  = function(files, e){
@@ -167,21 +152,10 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 });
                 return;
             }
-            if($scope.target == "passport"){
-                if($scope.btnText == $scope.text["re-upload"]){
-                    $scope.passport.value.pictures = "";
-                }
-            }else {
-                if($scope.passport.btnText == $scope.text["re-upload"]){
-                    $scope.intro.value.pictures = "";
-                }
-            }
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 $scope.intro.uploading = true;
                 $scope.intro.progress = 0;
-                $scope.passport.uploading = true;
-                $scope.passport.progress = 0;
                 DefaultService.getUpToken({
                     'x-gmkerl-type': 'fix_width', //限定宽度,高度自适应
                     'x-gmkerl-value': '900',      //限定的宽度的值
@@ -194,7 +168,6 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                         withCredentials: false
                     }).progress(function (evt) {
                         $scope.intro.progress = evt.loaded * 100 / evt.total;
-                        $scope.passport.progress = evt.loaded * 100 / evt.total;
                     }).success(function (data, status, headers, config) {
                         var filename = data.url.toLowerCase();
                         if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
@@ -209,15 +182,12 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                             });
                         }
                         $scope.intro.uploading = false;
-                        $scope.passport.uploading = false;
                         $scope.btnText = $scope.text["re-upload"];
-                        $scope.passport.btnText = $scope.text["re-upload"];
                     }).error(function(){
                         ErrorService.alert({
                             msg: '格式不支持，请重新上传！'
                         });
                         $scope.intro.uploading = false;
-                        $scope.passport.uploading = false;
                     });
                 }, function (err) {
                     $scope.intro.uploading = false;
@@ -230,10 +200,6 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             "re-upload":"重新上传"
         };
         $scope.btnText = $scope.text["un-upload"];
-        $scope.passport.btnText = $scope.text["un-upload"];
-        $scope.uploadCard = function(target){
-            $scope.target = target;
-        }
     }
 );
 
