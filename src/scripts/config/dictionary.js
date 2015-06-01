@@ -2,551 +2,1007 @@ window.DICTIONARY_DATA =  {
     "AuditStatus": [
         {
             "desc": "初始",
+            "id": 0,
             "value": "DEFAULT"
         },
         {
-            "desc": "提交待审核",
-            "value": "SUBMITTED"
+            "desc": "审核中",
+            "id": 1,
+            "value": "PENDING"
         },
         {
             "desc": "审核通过",
+            "id": 2,
             "value": "PASSED"
         },
         {
             "desc": "驳回",
+            "id": 3,
             "value": "REJECTED"
-        }
-    ],
-    "ConfirmStatus": [
-        {
-            "desc": "待确认",
-            "value": "PENDING"
         },
         {
-            "desc": "已确认",
-            "value": "CONFIRMED"
-        }
-    ],
-    "EntityType": [
-        {
-            "desc": "个人",
-            "value": "INDIVIDUAL"
-        },
-        {
-            "desc": "投资机构",
-            "value": "ORGANIZATION"
-        },
-        {
-            "desc": "公司",
-            "value": "COMPANY"
-        }
-    ],
-    "CompanyStatus": [
-        {
-            "desc": "初始",
-            "value": "INIT"
-        },
-        {
-            "desc": "审核中",
-            "value": "AUDITING"
-        },
-        {
-            "desc": "已创建",
-            "value": "CREATED"
-        },
-        {
-            "desc": "认领中",
-            "value": "CLAIMING"
-        },
-        {
-            "desc": "已认领",
-            "value": "CLAIMED"
-        }
-    ],
-    "CompanyIndustry": [
-        {
-            "desc": "电子商务",
-            "value": "E_COMMERCE"
-        },
-        {
-            "desc": "社交网络",
-            "value": "SOCIAL_NETWORK"
-        },
-        {
-            "desc": "广告营销",
-            "value": "ADVERTISING_MARKETING"
-        },
-        {
-            "desc": "游戏动漫",
-            "value": "GAME_ANIMATION"
-        },
-        {
-            "desc": "智能硬件",
-            "value": "INTELLIGENT_HARDWARE"
-        },
-        {
-            "desc": "媒体",
-            "value": "MEDIA"
-        },
-        {
-            "desc": "软件",
-            "value": "SOFTWARE"
-        },
-        {
-            "desc": "消费生活",
-            "value": "CONSUMER_LIFESTYLE"
-        },
-        {
-            "desc": "金融",
-            "value": "FINANCE"
-        },
-        {
-            "desc": "医疗健康",
-            "value": "MEDICAL_HEALTH"
-        },
-        {
-            "desc": "服务行业",
-            "value": "SERVICE_INDUSTRIES"
-        },
-        {
-            "desc": "旅游户外",
-            "value": "TRAVEL_OUTDOORS"
-        },
-        {
-            "desc": "房产家居",
-            "value": "PROPERTY_AND_HOME_FURNISHINGS"
-        },
-        {
-            "desc": "文体艺术",
-            "value": "CULTURE_SPORTS_ART"
-        },
-        {
-            "desc": "教育培训",
-            "value": "EDUCATION_TRAINING"
-        },
-        {
-            "desc": "汽车交通",
-            "value": "AUTO"
-        },
-        {
-            "desc": "其他",
-            "value": "OTHER"
-        }
-    ],
-    "CompanyFinancePhase": [
-        {
-            "desc": "未融资",
-            "value": "NONE"
-        },
-        {
-            "desc": "天使轮",
-            "value": "ANGEL"
-        },
-        {
-            "desc": "Pre-A轮",
-            "value": "PRE_A"
-        },
-        {
-            "desc": "A轮",
-            "value": "A"
-        },
-        {
-            "desc": "B轮",
-            "value": "B"
-        },
-        {
-            "desc": "C轮",
-            "value": "C"
-        },
-        {
-            "desc": "D轮",
-            "value": "D"
-        },
-        {
-            "desc": "E轮及以后",
-            "value": "E"
-        },
-        {
-            "desc": "已被收购",
-            "value": "ACQUIRED"
-        },
-        {
-            "desc": "已上市",
-            "value": "LISTED"
-        }
-    ],
-    "CompanyOperationStatus": [
-        {
-            "desc": "运营中",
-            "value": "OPEN"
-        },
-        {
-            "desc": "停止运营",
-            "value": "CLOSED"
+            "desc": "删除",
+            "id": 4,
+            "value": "DELETED"
         }
     ],
     "EmployeeType": [
         {
             "desc": "创始人",
+            "id": 101,
             "value": "FOUNDER"
         },
         {
             "desc": "联合创始人",
+            "id": 102,
             "value": "CO_FOUNDER"
         },
         {
             "desc": "技术",
+            "id": 103,
             "value": "TECH"
         },
         {
             "desc": "设计",
+            "id": 104,
             "value": "DESIGN"
         },
         {
             "desc": "产品",
+            "id": 105,
             "value": "PRODUCT"
         },
         {
             "desc": "运营",
+            "id": 106,
             "value": "OPERATOR"
         },
         {
             "desc": "市场与销售",
+            "id": 107,
             "value": "SALE"
         },
         {
             "desc": "行政、人事及财务",
+            "id": 108,
             "value": "HR"
         },
         {
             "desc": "投资和并购",
+            "id": 109,
             "value": "INVEST"
-        }
-    ],
-    "StartupPositionType": [
-        {
-            "desc": "创始人",
-            "value": "FOUNDER"
-        },
-        {
-            "desc": "联合创始人",
-            "value": "CO_FOUNDER"
-        }
-    ],
-    "WorkPositionType": [
-        {
-            "desc": "技术",
-            "value": "TECH"
-        },
-        {
-            "desc": "设计",
-            "value": "DESIGN"
-        },
-        {
-            "desc": "产品",
-            "value": "PRODUCT"
-        },
-        {
-            "desc": "运营",
-            "value": "OPERATOR"
-        },
-        {
-            "desc": "市场与销售",
-            "value": "SALE"
-        },
-        {
-            "desc": "行政、人事及财务",
-            "value": "HR"
-        },
-        {
-            "desc": "投资和并购",
-            "value": "INVEST"
-        }
-    ],
-    "OrgPositionType": [
-        {
-            "desc": "创始合伙人",
-            "value": "FOUNDER_PARTNER"
-        },
-        {
-            "desc": "管理合伙人",
-            "value": "MANAGE_PARTNER"
-        },
-        {
-            "desc": "资深合伙人",
-            "value": "SENIOR_PARTNER"
-        },
-        {
-            "desc": "合伙人",
-            "value": "PARTNER"
-        },
-        {
-            "desc": "董事",
-            "value": "DIRECTOR"
-        },
-        {
-            "desc": "董事总经理",
-            "value": "MANAGING_DIRECTOR"
-        },
-        {
-            "desc": "高级副总裁",
-            "value": "SENIOR_VP"
-        },
-        {
-            "desc": "副总裁",
-            "value": "VP"
-        },
-        {
-            "desc": "投资总监",
-            "value": "CIO"
-        },
-        {
-            "desc": "高级投资经理",
-            "value": "SENIOR_INVEST_MANAGER"
-        },
-        {
-            "desc": "投资经理",
-            "value": "INVEST_MANAGER"
-        },
-        {
-            "desc": "高级分析师",
-            "value": "SENIOR_ANALYST"
-        },
-        {
-            "desc": "分析师",
-            "value": "ANALYST"
-        },
-        {
-            "desc": "风险合伙人",
-            "value": "VENTURE_PARTNER"
-        },
-        {
-            "desc": "董事长",
-            "value": "CHAIRMAN"
-        },
-        {
-            "desc": "CEO",
-            "value": "CEO"
-        },
-        {
-            "desc": "总经理",
-            "value": "GM"
-        },
-        {
-            "desc": "副总经理",
-            "value": "VICE_GM"
-        }
-    ],
-    "Source": [
-        {
-            "desc": "投资方",
-            "value": "INVESTOR"
-        },
-        {
-            "desc": "融资方",
-            "value": "FINANCIER"
-        }
-    ],
-    "InvestorFollowedIndustry": [
-        {
-            "desc": "电子商务",
-            "value": "E_COMMERCE"
-        },
-        {
-            "desc": "社交网络",
-            "value": "SOCIAL_NETWORK"
-        },
-        {
-            "desc": "广告营销",
-            "value": "ADVERTISING_MARKETING"
-        },
-        {
-            "desc": "游戏动漫",
-            "value": "GAME_ANIMATION"
-        },
-        {
-            "desc": "智能硬件",
-            "value": "INTELLIGENT_HARDWARE"
-        },
-        {
-            "desc": "媒体",
-            "value": "MEDIA"
-        },
-        {
-            "desc": "软件",
-            "value": "SOFTWARE"
-        },
-        {
-            "desc": "消费生活",
-            "value": "CONSUMER_LIFESTYLE"
-        },
-        {
-            "desc": "金融",
-            "value": "FINANCE"
-        },
-        {
-            "desc": "医疗健康",
-            "value": "MEDICAL_HEALTH"
-        },
-        {
-            "desc": "服务行业",
-            "value": "SERVICE_INDUSTRIES"
-        },
-        {
-            "desc": "旅游户外",
-            "value": "TRAVEL_OUTDOORS"
-        },
-        {
-            "desc": "房产家居",
-            "value": "PROPERTY_AND_HOME_FURNISHINGS"
-        },
-        {
-            "desc": "文体艺术",
-            "value": "CULTURE_SPORTS_ART"
-        },
-        {
-            "desc": "教育培训",
-            "value": "EDUCATION_TRAINING"
-        },
-        {
-            "desc": "汽车交通",
-            "value": "AUTO"
-        },
-        {
-            "desc": "移动互联网",
-            "value": "MOBILE_INTERNET"
-        },
-        {
-            "desc": "O2O",
-            "value": "O2O"
         },
         {
             "desc": "其他",
+            "id": 110,
             "value": "OTHER"
         }
     ],
-    "CurrencyUnit": [
+    "FundsType": [
         {
-            "desc": "人民币",
-            "value": "CNY"
+            "desc": "普通融资",
+            "id": 0,
+            "value": "ORDINARY"
         },
         {
-            "desc": "美元",
-            "value": "USD"
+            "desc": "极速融资",
+            "id": 1,
+            "value": "SPEED"
         }
     ],
-    "FundsStatus": [
+    "CompanyOperationStatus": [
         {
-            "desc": "申请融资",
-            "value": "SUBMITTED"
+            "desc": "运营中",
+            "id": 0,
+            "value": "OPEN"
         },
         {
-            "desc": "挂牌成功",
-            "value": "PASSED"
+            "desc": "停止运营",
+            "id": 1,
+            "value": "CLOSED"
+        }
+    ],
+    "OrgSource": [
+        {
+            "desc": "默认",
+            "id": 0,
+            "value": "DEFAULT"
         },
         {
-            "desc": "已被推荐",
-            "value": "RECOMMENDED"
+            "desc": "个人投资经历",
+            "id": 1,
+            "value": "USER_INVEST"
+        },
+        {
+            "desc": "个人工作经历",
+            "id": 2,
+            "value": "USER_WORK_EXP"
+        },
+        {
+            "desc": "公司融资经历",
+            "id": 3,
+            "value": "COM_FINANCE"
+        },
+        {
+            "desc": "公司过往投资方",
+            "id": 4,
+            "value": "COM_HISTORY_INVESTOR"
         },
         {
             "desc": "完成融资",
-            "value": "COMPLETED"
-        },
-        {
-            "desc": "挂牌失败",
-            "value": "REJECTED"
-        }
-    ],
-    "FundsPhase": [
-        {
-            "desc": "天使轮",
-            "value": "ANGEL"
-        },
-        {
-            "desc": "Pre-A轮",
-            "value": "PRE_A"
-        },
-        {
-            "desc": "A轮",
-            "value": "A"
-        },
-        {
-            "desc": "B轮",
-            "value": "B"
-        },
-        {
-            "desc": "C轮",
-            "value": "C"
-        },
-        {
-            "desc": "D轮",
-            "value": "D"
-        },
-        {
-            "desc": "E轮及以后",
-            "value": "E"
-        }
-    ],
-    "FinancePhase": [
-        {
-            "desc": "未知轮次",
-            "value": "UNKNOWN"
-        },
-        {
-            "desc": "非正式轮次",
-            "value": "INFORMAL"
-        },
-        {
-            "desc": "天使轮",
-            "value": "ANGEL"
-        },
-        {
-            "desc": "Pre-A轮",
-            "value": "PRE_A"
-        },
-        {
-            "desc": "A轮",
-            "value": "A"
-        },
-        {
-            "desc": "B轮",
-            "value": "B"
-        },
-        {
-            "desc": "C轮",
-            "value": "C"
-        },
-        {
-            "desc": "D轮",
-            "value": "D"
-        },
-        {
-            "desc": "E轮及以后",
-            "value": "E"
+            "id": 5,
+            "value": "FUND_COMPLETE"
         }
     ],
     "OrgType": [
         {
             "desc": "一般投资机构",
+            "id": 1,
             "value": "COMMON"
         },
         {
             "desc": "顶级投资机构",
+            "id": 2,
             "value": "VIP"
+        }
+    ],
+    "ConfirmStatus": [
+        {
+            "desc": "待确认",
+            "id": 0,
+            "value": "PENDING"
+        },
+        {
+            "desc": "已确认",
+            "id": 1,
+            "value": "CONFIRMED"
+        }
+    ],
+    "StartupPositionType": [
+        {
+            "desc": "创始人",
+            "id": 101,
+            "value": "FOUNDER"
+        },
+        {
+            "desc": "联合创始人",
+            "id": 102,
+            "value": "CO_FOUNDER"
+        }
+    ],
+    "InternalEmailTypeEnum": [
+        {
+            "desc": "跟投人完成付款",
+            "id": 0,
+            "value": "CO_INVESTOR_PAYMENT_COMPLETE"
+        },
+        {
+            "desc": "跟头人选择线下付款",
+            "id": 1,
+            "value": "UNDER_LINE_PAYMENT_1"
+        }
+    ],
+    "CoinvestorType": [
+        {
+            "desc": "非跟投人",
+            "id": 0,
+            "value": 0
+        },
+        {
+            "desc": "正在实名认证跟投人",
+            "id": 1,
+            "value": 1
+        },
+        {
+            "desc": "跟投人",
+            "id": 2,
+            "value": 2
+        }
+    ],
+    "CompanyStatus": [
+        {
+            "desc": "初始",
+            "id": 0,
+            "value": "INIT"
+        },
+        {
+            "desc": "审核中",
+            "id": 1,
+            "value": "AUDITING"
+        },
+        {
+            "desc": "已创建",
+            "id": 2,
+            "value": "CREATED"
+        },
+        {
+            "desc": "认领中",
+            "id": 3,
+            "value": "CLAIMING"
+        },
+        {
+            "desc": "已认领",
+            "id": 4,
+            "value": "CLAIMED"
+        }
+    ],
+    "FundsStatus": [
+        {
+            "desc": "申请融资",
+            "id": 2,
+            "value": "SUBMITTED"
+        },
+        {
+            "desc": "挂牌成功",
+            "id": 3,
+            "value": "PASSED"
+        },
+        {
+            "desc": "已被推荐",
+            "id": 4,
+            "value": "RECOMMENDED"
+        },
+        {
+            "desc": "完成融资",
+            "id": 5,
+            "value": "COMPLETED"
+        },
+        {
+            "desc": "挂牌失败",
+            "id": 6,
+            "value": "REJECTED"
+        },
+        {
+            "desc": "融资已关闭",
+            "id": 7,
+            "value": "CLOSED"
+        }
+    ],
+    "CompanyFinancePhase": [
+        {
+            "desc": "未知轮次",
+            "id": -10,
+            "value": "UNKNOWN"
+        },
+        {
+            "desc": "非正式轮次",
+            "id": -5,
+            "value": "INFORMAL"
+        },
+        {
+            "desc": "未融资",
+            "id": 0,
+            "value": "NONE"
+        },
+        {
+            "desc": "天使轮",
+            "id": 1,
+            "value": "ANGEL"
+        },
+        {
+            "desc": "Pre-A轮",
+            "id": 2,
+            "value": "PRE_A"
+        },
+        {
+            "desc": "A轮",
+            "id": 3,
+            "value": "A"
+        },
+        {
+            "desc": "B轮",
+            "id": 4,
+            "value": "B"
+        },
+        {
+            "desc": "C轮",
+            "id": 5,
+            "value": "C"
+        },
+        {
+            "desc": "D轮",
+            "id": 6,
+            "value": "D"
+        },
+        {
+            "desc": "E轮及以后",
+            "id": 7,
+            "value": "E"
+        },
+        {
+            "desc": "已被收购",
+            "id": 10,
+            "value": "ACQUIRED"
+        },
+        {
+            "desc": "已上市",
+            "id": 11,
+            "value": "LISTED"
+        }
+    ],
+    "OrgPositionType": [
+        {
+            "desc": "创始合伙人",
+            "id": 201,
+            "value": "FOUNDER_PARTNER"
+        },
+        {
+            "desc": "董事长",
+            "id": 202,
+            "value": "CHAIRMAN"
+        },
+        {
+            "desc": "CEO",
+            "id": 203,
+            "value": "CEO"
+        },
+        {
+            "desc": "管理合伙人",
+            "id": 204,
+            "value": "MANAGE_PARTNER"
+        },
+        {
+            "desc": "资深合伙人",
+            "id": 205,
+            "value": "SENIOR_PARTNER"
+        },
+        {
+            "desc": "合伙人",
+            "id": 206,
+            "value": "PARTNER"
+        },
+        {
+            "desc": "风险合伙人",
+            "id": 207,
+            "value": "VENTURE_PARTNER"
+        },
+        {
+            "desc": "董事",
+            "id": 208,
+            "value": "DIRECTOR"
+        },
+        {
+            "desc": "总经理",
+            "id": 209,
+            "value": "GM"
+        },
+        {
+            "desc": "副总经理",
+            "id": 2010,
+            "value": "VICE_GM"
+        },
+        {
+            "desc": "董事总经理",
+            "id": 2011,
+            "value": "MANAGING_DIRECTOR"
+        },
+        {
+            "desc": "高级副总裁",
+            "id": 2012,
+            "value": "SENIOR_VP"
+        },
+        {
+            "desc": "副总裁",
+            "id": 2013,
+            "value": "VP"
+        },
+        {
+            "desc": "投资总监",
+            "id": 2014,
+            "value": "CIO"
+        },
+        {
+            "desc": "高级投资经理",
+            "id": 2015,
+            "value": "SENIOR_INVEST_MANAGER"
+        },
+        {
+            "desc": "投资经理",
+            "id": 2016,
+            "value": "INVEST_MANAGER"
+        },
+        {
+            "desc": "高级分析师",
+            "id": 2017,
+            "value": "SENIOR_ANALYST"
+        },
+        {
+            "desc": "分析师",
+            "id": 2018,
+            "value": "ANALYST"
+        }
+    ],
+    "RnvInvestorInfo": [
+        {
+            "desc": "我的金融资产超过100万元",
+            "id": 1,
+            "value": "V1_1"
+        },
+        {
+            "desc": "我的年收入超过30万元",
+            "id": 2,
+            "value": "V1_2"
+        },
+        {
+            "desc": "我是专业的风险投资人",
+            "id": 3,
+            "value": "V1_3"
+        }
+    ],
+    "LeadInvestorType": [
+        {
+            "desc": "不是领投人",
+            "id": 0,
+            "value": 0
+        },
+        {
+            "desc": "领投人",
+            "id": 1,
+            "value": 1
+        }
+    ],
+    "IdentityCardType": [
+        {
+            "desc": "身份证",
+            "id": 1,
+            "value": "IDCARD"
+        },
+        {
+            "desc": "护照",
+            "id": 2,
+            "value": "PASSPORT"
+        }
+    ],
+    "InvestorFollowedIndustry": [
+        {
+            "desc": "电子商务",
+            "id": 1,
+            "value": "E_COMMERCE"
+        },
+        {
+            "desc": "社交网络",
+            "id": 2,
+            "value": "SOCIAL_NETWORK"
+        },
+        {
+            "desc": "广告营销",
+            "id": 3,
+            "value": "ADVERTISING_MARKETING"
+        },
+        {
+            "desc": "游戏动漫",
+            "id": 4,
+            "value": "GAME_ANIMATION"
+        },
+        {
+            "desc": "智能硬件",
+            "id": 5,
+            "value": "INTELLIGENT_HARDWARE"
+        },
+        {
+            "desc": "媒体",
+            "id": 6,
+            "value": "MEDIA"
+        },
+        {
+            "desc": "工具软件",
+            "id": 7,
+            "value": "SOFTWARE"
+        },
+        {
+            "desc": "消费生活",
+            "id": 8,
+            "value": "CONSUMER_LIFESTYLE"
+        },
+        {
+            "desc": "金融",
+            "id": 9,
+            "value": "FINANCE"
+        },
+        {
+            "desc": "医疗健康",
+            "id": 10,
+            "value": "MEDICAL_HEALTH"
+        },
+        {
+            "desc": "企业服务",
+            "id": 11,
+            "value": "SERVICE_INDUSTRIES"
+        },
+        {
+            "desc": "旅游户外",
+            "id": 12,
+            "value": "TRAVEL_OUTDOORS"
+        },
+        {
+            "desc": "房产家居",
+            "id": 13,
+            "value": "PROPERTY_AND_HOME_FURNISHINGS"
+        },
+        {
+            "desc": "文体艺术",
+            "id": 14,
+            "value": "CULTURE_SPORTS_ART"
+        },
+        {
+            "desc": "教育培训",
+            "id": 15,
+            "value": "EDUCATION_TRAINING"
+        },
+        {
+            "desc": "汽车交通",
+            "id": 16,
+            "value": "AUTO"
+        },
+        {
+            "desc": "移动互联网",
+            "id": 17,
+            "value": "MOBILE_INTERNET"
+        },
+        {
+            "desc": "O2O",
+            "id": 18,
+            "value": "O2O"
+        },
+        {
+            "desc": "其他",
+            "id": 0,
+            "value": "OTHER"
+        }
+    ],
+    "CompanyIndustry": [
+        {
+            "desc": "电子商务",
+            "id": 1,
+            "value": "E_COMMERCE"
+        },
+        {
+            "desc": "社交网络",
+            "id": 2,
+            "value": "SOCIAL_NETWORK"
+        },
+        {
+            "desc": "广告营销",
+            "id": 3,
+            "value": "ADVERTISING_MARKETING"
+        },
+        {
+            "desc": "游戏动漫",
+            "id": 4,
+            "value": "GAME_ANIMATION"
+        },
+        {
+            "desc": "智能硬件",
+            "id": 5,
+            "value": "INTELLIGENT_HARDWARE"
+        },
+        {
+            "desc": "媒体",
+            "id": 6,
+            "value": "MEDIA"
+        },
+        {
+            "desc": "工具软件",
+            "id": 7,
+            "value": "SOFTWARE"
+        },
+        {
+            "desc": "消费生活",
+            "id": 8,
+            "value": "CONSUMER_LIFESTYLE"
+        },
+        {
+            "desc": "金融",
+            "id": 9,
+            "value": "FINANCE"
+        },
+        {
+            "desc": "医疗健康",
+            "id": 10,
+            "value": "MEDICAL_HEALTH"
+        },
+        {
+            "desc": "企业服务",
+            "id": 11,
+            "value": "SERVICE_INDUSTRIES"
+        },
+        {
+            "desc": "旅游户外",
+            "id": 12,
+            "value": "TRAVEL_OUTDOORS"
+        },
+        {
+            "desc": "房产家居",
+            "id": 13,
+            "value": "PROPERTY_AND_HOME_FURNISHINGS"
+        },
+        {
+            "desc": "文体艺术",
+            "id": 14,
+            "value": "CULTURE_SPORTS_ART"
+        },
+        {
+            "desc": "教育培训",
+            "id": 15,
+            "value": "EDUCATION_TRAINING"
+        },
+        {
+            "desc": "汽车交通",
+            "id": 16,
+            "value": "AUTO"
+        },
+        {
+            "desc": "其他",
+            "id": 0,
+            "value": "OTHER"
+        }
+    ],
+    "FinancePhase": [
+        {
+            "desc": "未知轮次",
+            "id": -10,
+            "value": "UNKNOWN"
+        },
+        {
+            "desc": "非正式轮次",
+            "id": -5,
+            "value": "INFORMAL"
+        },
+        {
+            "desc": "天使轮",
+            "id": 1,
+            "value": "ANGEL"
+        },
+        {
+            "desc": "Pre-A轮",
+            "id": 2,
+            "value": "PRE_A"
+        },
+        {
+            "desc": "A轮",
+            "id": 3,
+            "value": "A"
+        },
+        {
+            "desc": "B轮",
+            "id": 4,
+            "value": "B"
+        },
+        {
+            "desc": "C轮",
+            "id": 5,
+            "value": "C"
+        },
+        {
+            "desc": "D轮",
+            "id": 6,
+            "value": "D"
+        },
+        {
+            "desc": "E轮及以后",
+            "id": 7,
+            "value": "E"
+        }
+    ],
+    "ComPositionType": [
+        {
+            "desc": "创始人",
+            "id": 101,
+            "value": "FOUNDER"
+        },
+        {
+            "desc": "联合创始人",
+            "id": 102,
+            "value": "CO_FOUNDER"
+        },
+        {
+            "desc": "技术",
+            "id": 103,
+            "value": "TECH"
+        },
+        {
+            "desc": "设计",
+            "id": 104,
+            "value": "DESIGN"
+        },
+        {
+            "desc": "产品",
+            "id": 105,
+            "value": "PRODUCT"
+        },
+        {
+            "desc": "运营",
+            "id": 106,
+            "value": "OPERATOR"
+        },
+        {
+            "desc": "市场与销售",
+            "id": 107,
+            "value": "SALE"
+        },
+        {
+            "desc": "行政、人事及财务",
+            "id": 108,
+            "value": "HR"
+        },
+        {
+            "desc": "投资和并购",
+            "id": 109,
+            "value": "INVEST"
+        },
+        {
+            "desc": "其他",
+            "id": 110,
+            "value": "OTHER"
+        }
+    ],
+    "SPOther": [
+        {
+            "desc": "团队需要进一步加强",
+            "id": 1,
+            "value": 1
+        },
+        {
+            "desc": "与我们现阶段投资方向不匹配",
+            "id": 2,
+            "value": 2
+        }
+    ],
+    "CompanySource": [
+        {
+            "desc": "创建公司",
+            "id": 1,
+            "value": 1
+        },
+        {
+            "desc": "快速创建公司",
+            "id": 2,
+            "value": 2
+        },
+        {
+            "desc": "个人工作经历创建",
+            "id": 3,
+            "value": 3
+        },
+        {
+            "desc": "个人投资经历创建",
+            "id": 4,
+            "value": 4
+        },
+        {
+            "desc": "公司融资经历创建",
+            "id": 5,
+            "value": 5
+        },
+        {
+            "desc": "个人创业经历创建",
+            "id": 6,
+            "value": 6
+        },
+        {
+            "desc": "运营创建",
+            "id": 7,
+            "value": 7
+        },
+        {
+            "desc": "批量导入",
+            "id": 8,
+            "value": 8
+        },
+        {
+            "desc": "过往投资方创建",
+            "id": 9,
+            "value": 9
+        },
+        {
+            "desc": "完成融资时创建",
+            "id": 10,
+            "value": 10
+        }
+    ],
+    "CurrencyUnit": [
+        {
+            "desc": "人民币",
+            "id": 1,
+            "value": "CNY"
+        },
+        {
+            "desc": "美元",
+            "id": 2,
+            "value": "USD"
         }
     ],
     "UserStatus": [
         {
-            "desc": "默认用户",
+            "desc": "默认状态",
+            "id": 0,
             "value": 0
         },
         {
-            "desc": "未激活的用户",
+            "desc": "已邀请",
+            "id": 1,
             "value": 1
         },
         {
-            "desc": "审核中",
+            "desc": "已激活",
+            "id": 2,
             "value": 2
         }
+    ],
+    "SPBpAdvice": [
+        {
+            "desc": "商业模式表述及逻辑需更清晰",
+            "id": 1,
+            "value": 1
+        },
+        {
+            "desc": "考虑项目阶段， 需要运营数据支持",
+            "id": 2,
+            "value": 2
+        }
+    ],
+    "PermissionLevel": [
+        {
+            "desc": "申请后可见",
+            "id": 5,
+            "value": 5
+        },
+        {
+            "desc": "优质投资人可见",
+            "id": 10,
+            "value": 10
+        },
+        {
+            "desc": "普通投资人可见",
+            "id": 20,
+            "value": 20
+        },
+        {
+            "desc": "任何人可见",
+            "id": 100,
+            "value": 100
+        }
+    ],
+    "SPModel": [
+        {
+            "desc": "切入点与用户痛点存在疑问",
+            "id": 1,
+            "value": 1
+        },
+        {
+            "desc": "产品迭代路径需要进一步考虑",
+            "id": 2,
+            "value": 2
+        },
+        {
+            "desc": "核心竞争力优势不明显",
+            "id": 3,
+            "value": 3
+        },
+        {
+            "desc": "市场规模和潜在变现能力存疑",
+            "id": 4,
+            "value": 4
+        }
+    ],
+    "WorkPositionType": [
+        {
+            "desc": "技术",
+            "id": 103,
+            "value": "TECH"
+        },
+        {
+            "desc": "设计",
+            "id": 104,
+            "value": "DESIGN"
+        },
+        {
+            "desc": "产品",
+            "id": 105,
+            "value": "PRODUCT"
+        },
+        {
+            "desc": "运营",
+            "id": 106,
+            "value": "OPERATOR"
+        },
+        {
+            "desc": "市场与销售",
+            "id": 107,
+            "value": "SALE"
+        },
+        {
+            "desc": "行政、人事及财务",
+            "id": 108,
+            "value": "HR"
+        },
+        {
+            "desc": "投资和并购",
+            "id": 109,
+            "value": "INVEST"
+        }
+    ],
+    "Source": [
+        {
+            "desc": "投资方",
+            "id": 2,
+            "value": "INVESTOR"
+        },
+        {
+            "desc": "融资方",
+            "id": 4,
+            "value": "FINANCIER"
+        }
+    ],
+    "FundsPhase": [
+        {
+            "desc": "天使轮",
+            "id": 1,
+            "value": "ANGEL"
+        },
+        {
+            "desc": "Pre-A轮",
+            "id": 2,
+            "value": "PRE_A"
+        },
+        {
+            "desc": "A轮",
+            "id": 3,
+            "value": "A"
+        },
+        {
+            "desc": "B轮",
+            "id": 4,
+            "value": "B"
+        },
+        {
+            "desc": "C轮",
+            "id": 5,
+            "value": "C"
+        },
+        {
+            "desc": "D轮",
+            "id": 6,
+            "value": "D"
+        },
+        {
+            "desc": "E轮及以后",
+            "id": 7,
+            "value": "E"
+        }
+    ],
+    "EntityType": [
+        {
+            "desc": "个人",
+            "id": 1,
+            "value": "INDIVIDUAL"
+        },
+        {
+            "desc": "投资机构",
+            "id": 2,
+            "value": "ORGANIZATION"
+        },
+        {
+            "desc": "公司",
+            "id": 3,
+            "value": "COMPANY"
+        }
+    ],
+    "SPOption": [
+        {
+            "desc": "BP建议",
+            "id": 1,
+            "value": 1
+        },
+        {
+            "desc": "模式",
+            "id": 2,
+            "value": 2
+        },
+        {
+            "desc": "其他",
+            "id": 3,
+            "value": 3
+        }
     ]
-}
+};
