@@ -34,7 +34,8 @@ angular.module('defaultApp.service').service('UserService', [
                 "company",
                 "finacing",
                 "work",
-                "send-sms"
+                "send-sms",
+                "check"
                 // "finance_sort",
                 // "company_sort",
 

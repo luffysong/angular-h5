@@ -95,8 +95,6 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             })
         };
 
-
-
         $scope.getCode = function(e){
             e && e.preventDefault();
             if(!$scope.user.phone){
@@ -138,6 +136,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             pictures:"http://krplus.b0.upaiyun.com/default_avatar.png!70"
         };
 
+        // 上传头像
         $scope.imgFileSelected  = function(files, e){
             var upyun = window.kr.upyun;
             if(files[0].size > 5 * 1024 * 1024){
