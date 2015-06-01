@@ -6,36 +6,24 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('GuideWelcomeController',
     function($scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope, $timeout, $upload) {
-        $scope.user = {
-            avatar:""
-        };
 
-        $scope.formData = {
-            isInvestFirstPhase: false,
-            isInvestSecondPhase: false,
-            isInvestThirdPhase: false,
-            investMoneyUnit:"CNY",
-            idCardNumber:"",
-            reIdCardNumber:"",
-            identityCardType:"IDCARD",
-            rnvInvestorInfo:"V1_1"
-        };
+        // $scope.formData = {
+        //     isInvestFirstPhase: false,
+        //     isInvestSecondPhase: false,
+        //     isInvestThirdPhase: false,
+        //     investMoneyUnit:"CNY",
+        //     idCardNumber:"",
+        //     reIdCardNumber:"",
+        //     identityCardType:"IDCARD",
+        //     rnvInvestorInfo:"V1_1"
+        // };
 
         $scope.userId = UserService.getUID();
-        $scope.changeAvatar = function(){
-            AvatarEdit.open().result.then(function (data) {
-                $scope.user.avatar = window.kr.upyun.bucket.url + data.url;
-            }, function (err) {
-                ErrorService.alert(err);
-            });
-        };
-
         UserService.basic.get({
             id: $scope.userId
         }, function(data){
             delete data.$promise;
             delete data.$resolved;
-            //data.avatar = ""
             angular.extend($scope.user, angular.copy(data));
             if(data.phone){
                 $scope.user.hasPhone = true;
@@ -98,7 +86,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             UserService.basic.update({
                 id: $scope.userId
             }, {
-                avatar: $scope.user.avatar,
+                avatar: $scope.intro.value.pictures,
                 name: $scope.user.name,
                 email: $scope.user.email,
                 phone: $scope.user.phone,
@@ -149,13 +137,6 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             });
         }
 
-        // function mShowError(obj) {
-        //     $(obj).stop().animate({top: 0}, 600,function() {
-        //         $(this).stop().delay(2000).animate({top: -30}, 600);
-        //     });
-        // }
-        // 错误信息
-
         $scope.passport = {};
         $scope.intro = {};
         $scope.passport.value = {
@@ -164,14 +145,14 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
         };
         $scope.intro.value = {
             intro:"",
-            pictures:""
+            pictures:"http://krplus.b0.upaiyun.com/default_avatar.png!70"
         };
 
         $scope.imgFileSelected  = function(files, e){
             var upyun = window.kr.upyun;
-            if(files[0].size > 2 * 1024 * 1024){
+            if(files[0].size > 5 * 1024 * 1024){
                 ErrorService.alert({
-                    msg:"附件大于2M"
+                    msg:"附件大于5M"
                 });
                 return;
             }
@@ -206,11 +187,11 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                     }).success(function (data, status, headers, config) {
                         var filename = data.url.toLowerCase();
                         if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
-                            if($scope.formData.identityCardType == "PASSPORT"){
-                                $scope.passport.value.pictures = window.kr.upyun.bucket.url + data.url;
-                            }else{
+                            // if($scope.formData.identityCardType == "PASSPORT"){
+                                // $scope.passport.value.pictures = window.kr.upyun.bucket.url + data.url;
+                            // }else{
                                 $scope.intro.value.pictures = window.kr.upyun.bucket.url + data.url;
-                            }
+                            // }
                         } else {
                             ErrorService.alert({
                                 msg: '格式不支持，请重新上传！'

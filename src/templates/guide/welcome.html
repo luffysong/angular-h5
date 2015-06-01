@@ -10,9 +10,6 @@
 					<ul class="intro-pic-list no-p">
                         <li class="pic-list" style="background-image: url({{intro.value.pictures | image:70: 'avatar'}});">
                         </li>
-                        <!-- <li class="progress pic-progress" ng-show="intro.uploading">
-                            <div class="stick pic-stick" style="height:{{intro.progress}}%;"></div>
-                        </li> -->
                         <li ng-show='!intro.uploading'>
                             <span class="upload-b" ng-click="uploadCard()">
                                 <input type="file" name="addPic" class="input-file" ng-file-select
@@ -20,15 +17,8 @@
                                        ng-multiple="false"
                                        resetOnClick="true" accept="image/*">
                             </span>
-
-                            <!-- <small>仅提供认证使用，平台不会暴露您的个人信息</small> -->
-                            <!-- <p class="c-gray">格式为JPG、JPEG、PNG，小于2MB</p> -->
                         </li>
                     </ul>
-					<!-- <div class="file-upload {{guideForm.avatar.$invalid && guideForm.avatar.$dirty?'invalid-pic':''}}"  ng-click="changeAvatar()" >
-						<img ng-src="{{user.avatar | image:70:'avatar'}}" width="70" height="70" alt=""/>
-						<input type="hidden" ng-model="user.avatar" name="avatar" required/>
-					</div> -->
 					<label class="label-control avatar-label">真实头像</label>
 				</div>
 				<div class="form-group">
@@ -37,7 +27,6 @@
 						<input class="form-control" type="text" ng-model="user.name" name="name" maxlength="15" ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" required/>
 					</div>
 	                <div class="error-alert error user-name-error" ng-show="guideForm.name.$invalid && guideForm.name.$dirty">
-	                	<!-- <span>请输入真实姓名</span> -->
 	                    <span ng-show="guideForm.name.$error.required || guideForm.name.$error.pattern">请输入真实姓名</span>
 	                </div>
 				</div>
