@@ -28,6 +28,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
         var checkTimeout;
         $scope.$watch('user.phone', function(phone){
             if(!phone || !$rootScope.REGEXP.phone.test(phone)){
+                // showErrors('input[name="phone"]','.user-phone-error');
                 return;
             }
             $scope.guideForm.phone.$setValidity("checked", true);
@@ -43,11 +44,24 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                     $scope.guideForm.phone.$setValidity("checked", false);
                 });
             },800);
-
         });
 
+        function showErrors(obj,ele) {
+            if($(obj).is(':focus')) {
+                $(ele).animate({top: 0, opacity: 1},500,function(){
+                    $(this).delay(2000).animate({top: -30, opacity: 0},500);
+                });
+            }
+        }
         $scope.$watch('user.email', function(email){
             if(!email || $scope.guideForm.email.$error.email){
+                // showErrors('input[name="email"]','.user-email-error');
+                // if($('input[name="email"]').is(':focus')) {
+                //     $('.user-email-error').animate({top: 0, opacity: 1},500,function(){
+                //         $(this).delay(2000).animate({top: -30, opacity: 0},500);
+                //     });
+                // }
+                
                 return;
             }
             $scope.guideForm.email.$setValidity("checked", true);
@@ -91,7 +105,11 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                     location.reload();
                 },0);
             }, function(err){
-                ErrorService.alert(err);
+                $('<div class="error-alert error error-code">' + err.msg + '</div>').appendTo('body');
+                $timeout(function(){
+                    $('.error-code').fadeOut();
+                },2000);
+                // ErrorService.alert(err);
             })
         };
 
@@ -119,9 +137,13 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 phone: $scope.user.phone
             }, function(data){
             }, function(err){
-                ErrorService.alert({
-                    msg:'发送失败!'
-                });
+                $('<div class="error-alert error error-sms">' + err.msg + '</div>').appendTo('body');
+                $timeout(function(){
+                    $('.error-sms').fadeOut();
+                },2000);
+                // ErrorService.alert({
+                //     msg:'发送失败!'
+                // });
             });
         }
 
