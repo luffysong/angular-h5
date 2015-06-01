@@ -61,7 +61,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 //         $(this).delay(2000).animate({top: -30, opacity: 0},500);
                 //     });
                 // }
-                
+
                 return;
             }
             $scope.guideForm.email.$setValidity("checked", true);
@@ -201,7 +201,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                             // if($scope.formData.identityCardType == "PASSPORT"){
                                 // $scope.passport.value.pictures = window.kr.upyun.bucket.url + data.url;
                             // }else{
-                                $scope.intro.value.pictures = window.kr.upyun.bucket.url + data.url;
+                                $scope.user.avatar = window.kr.upyun.bucket.url + data.url;
                             // }
                         } else {
                             ErrorService.alert({

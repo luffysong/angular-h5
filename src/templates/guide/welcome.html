@@ -8,7 +8,7 @@
 			<div class="form-horizontal welcome-form">
 				<div class="form-group upload-avatar">
 					<ul class="intro-pic-list no-p">
-                        <li class="pic-list" style="background-image: url({{intro.value.pictures | image:70: 'avatar'}});">
+                        <li class="pic-list" style="background-image: url({{user.avatar | image:70: 'avatar'}});">
                         </li>
                         <li ng-show='!intro.uploading'>
                             <span class="upload-b" ng-click="uploadCard()">
