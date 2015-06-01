@@ -34,6 +34,7 @@ var depModules = [
     'defaultApp.controller',
     'templates',
     'monospaced.qrcode',
+    'angularFileUpload',
     'cgNotify'
 ];
 
