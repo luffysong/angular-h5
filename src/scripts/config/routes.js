@@ -64,11 +64,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url: '/welcome',
         templateUrl: 'templates/guide/welcome.html',
         controller: 'GuideWelcomeController'
-        // data: {
-        //     permissions: {
-        //         only: ['login']
-        //     }
-        // }
+    });
+
+
+    /*众筹首页*/
+    $stateProvider.state('syndicates', {
+        url: '/zhongchou',
+        templateUrl: 'templates/syndicates/index.html',
+        controller: 'syndicatesController'
     });
 
 });

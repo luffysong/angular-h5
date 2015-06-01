@@ -321,7 +321,7 @@ gulp.task('connect:remote', function () {
     $.connect.server({
         root: ['.tmp', 'src'],
         port: 9001,
-        //livereload: true,
+        livereload: true,
         middleware: function (connect, opt) {
             var url = require('url');
             var proxy = require('./tasks/proxy.js');

@@ -1,1 +1,2 @@
 require('./ClampDirective');
+require('./LoadingBarDirective');
