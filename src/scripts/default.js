@@ -3,6 +3,8 @@ var angular = require('angular');
 
 require('./config/setting');
 require('./config/dictionary');
+require('./config/dictionary_cf');
+
 require('./config/city');
 
 angular.module('ui.carousel', ['ui.bootstrap.carousel', 'ui.bootstrap.tpls']);

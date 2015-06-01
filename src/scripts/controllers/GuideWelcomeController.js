@@ -6,18 +6,8 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('GuideWelcomeController',
     function($scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope, $timeout, $upload) {
-
-        // $scope.formData = {
-        //     isInvestFirstPhase: false,
-        //     isInvestSecondPhase: false,
-        //     isInvestThirdPhase: false,
-        //     investMoneyUnit:"CNY",
-        //     idCardNumber:"",
-        //     reIdCardNumber:"",
-        //     identityCardType:"IDCARD",
-        //     rnvInvestorInfo:"V1_1"
-        // };
-
+        $scope.user = {
+        };
         $scope.userId = UserService.getUID();
         UserService.basic.get({
             id: $scope.userId

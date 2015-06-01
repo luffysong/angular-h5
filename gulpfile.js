@@ -7,7 +7,7 @@ var karma = require('karma');
 var $ = require('gulp-load-plugins')();
 var gzip = require('connect-gzip')
 var es = require("event-stream");
-
+var loadDictionary = require('./tasks/loadDictionary.js');
 var urlAdjuster = require('gulp-css-url-adjuster');
 
 var config = require('./config.json');
@@ -571,6 +571,12 @@ gulp.task('header', function(){
     return gulp.src(['src/*.html'])
         .pipe($.replace('%%%headerSrc%%%', headers[buildMode]))
         .pipe(gulp.dest('.tmp'));
+});
+/*字典task*/
+gulp.task('dict', function(){
+    loadDictionary.loadCityData();
+    loadDictionary.loadDictData();
+    loadDictionary.loadCFDictData();
 });
 // 默认任务
 gulp.task('default', ['serve']);
