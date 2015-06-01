@@ -7,11 +7,28 @@
 		<form ng-submit="$event.preventDefault()"  action="" name="guideForm" >
 			<div class="form-horizontal welcome-form">
 				<div class="form-group upload-avatar">
-					
-					<div class="file-upload {{guideForm.avatar.$invalid && guideForm.avatar.$dirty?'invalid-pic':''}}"  ng-click="changeAvatar()" >
+					<ul class="intro-pic-list no-p">
+                        <li class="pic-list" style="background-image: url({{intro.value.pictures | image:70: 'avatar'}});">
+                        </li>
+                        <!-- <li class="progress pic-progress" ng-show="intro.uploading">
+                            <div class="stick pic-stick" style="height:{{intro.progress}}%;"></div>
+                        </li> -->
+                        <li ng-show='!intro.uploading'>
+                            <span class="upload-b" ng-click="uploadCard()">
+                                <input type="file" name="addPic" class="input-file" ng-file-select
+                                       ng-file-change="imgFileSelected($files, $event)"
+                                       ng-multiple="false"
+                                       resetOnClick="true" accept="image/*">
+                            </span>
+
+                            <!-- <small>仅提供认证使用，平台不会暴露您的个人信息</small> -->
+                            <!-- <p class="c-gray">格式为JPG、JPEG、PNG，小于2MB</p> -->
+                        </li>
+                    </ul>
+					<!-- <div class="file-upload {{guideForm.avatar.$invalid && guideForm.avatar.$dirty?'invalid-pic':''}}"  ng-click="changeAvatar()" >
 						<img ng-src="{{user.avatar | image:70:'avatar'}}" width="70" height="70" alt=""/>
 						<input type="hidden" ng-model="user.avatar" name="avatar" required/>
-					</div>
+					</div> -->
 					<label class="label-control avatar-label">真实头像</label>
 				</div>
 				<div class="form-group">
@@ -19,7 +36,7 @@
 					<div class="col col-4">
 						<input class="form-control" type="text" ng-model="user.name" name="name" maxlength="15" ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" required/>
 					</div>
-	                <div class="error-alert error" ng-show="guideForm.name.$invalid && guideForm.name.$dirty">
+	                <div class="error-alert error user-name-error" ng-show="guideForm.name.$invalid && guideForm.name.$dirty">
 	                	<!-- <span>请输入真实姓名</span> -->
 	                    <span ng-show="guideForm.name.$error.required || guideForm.name.$error.pattern">请输入真实姓名</span>
 	                </div>
@@ -30,7 +47,7 @@
 					<div class="col col-4">
 						<input class="form-control" type="email" ng-model="user.email" name="email" required/>
 					</div>
-		                <div class="error-alert error" ng-show="guideForm.email.$invalid && guideForm.email.$dirty">
+		                <div class="error-alert error user-email-error" ng-show="guideForm.email.$invalid && guideForm.email.$dirty">
 		                    <span ng-show="guideForm.email.$error.required">请输入邮箱地址</span>
 		                    <span ng-show="guideForm.email.$error.email">请输入合法邮箱地址</span>
 		                    <span ng-show="user.email && guideForm.email.$error.checked && !guideForm.email.$error.email">你输入的邮箱已被占用</span>
@@ -41,7 +58,7 @@
 	                <div class="col col-4">
 	                    <input class="form-control" type="text" ng-model="user.phone" name="phone" required ng-pattern="REGEXP.phone"/>
 	                </div>
-	                <div class="error-alert error" ng-show="guideForm.phone.$invalid && guideForm.phone.$dirty">
+	                <div class="error-alert error user-phone-error" ng-show="guideForm.phone.$invalid && guideForm.phone.$dirty">
 	                    <span ng-show="guideForm.phone.$error.required">请输入手机号码</span>
 	                    <span ng-show="guideForm.phone.$error.pattern">请输入合法手机号码</span>
 	                    <span ng-show="user.phone && guideForm.phone.$error.checked && !guideForm.phone.$error.pattern">你输入的手机号已被占用</span>

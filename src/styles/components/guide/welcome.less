@@ -53,8 +53,7 @@
 		input {
 			border: none;
 			padding: 0;
-
-
+			width: 160px;
 		}
 	}
 
@@ -86,6 +85,7 @@
 			position: absolute;
 			right: 0;
 			bottom: 0;
+			z-index: 100;
 		}
 		> img {
 			.img-circle;
@@ -94,7 +94,7 @@
 
 	.avatar-label {
 		display: block;
-		margin-top: 12px;
+		margin: 12px 0 0;
 		float: none;
 		width: auto;
 		text-align: center;
@@ -106,19 +106,63 @@
 	line-height: 30px;
 	width: 100%;
 	left: 0;
-	top: 0;
 	color: @base-white;
 	text-align: center;
 	background-color: #f28d00;
 	z-index: 1000;
+	top: 0;
+	opacity: lescent;
+	transition: top ease .5s, opacity ease .3s;
+
 	// transform: translateY(0);
 	// animation: show ease 4s;
-	
+
 
 	&.ng-hide {
+		top: -30px;
+		display: block!important;
+		opacity: 0;
 		// animation: hide ease 10s;
 	}
 }
+
+.intro-pic-list {
+	position: relative;
+}
+
+.pic-list {
+    width: 70px;
+    height: 70px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: inline-block;
+    position: relative;
+    border-radius: 100%;
+    &:before {
+		content: url('images/update-avatar.png');
+		position: absolute;
+		right: 0;
+		bottom: 0;
+	}
+}
+
+.input-file {
+	width: 70px;
+	height: 70px;
+	position: absolute;
+	left: 50%;
+	top: 0;
+	opacity: 0;
+	margin-left: -35px;
+}
+
+
+.no-p {
+    padding: 0;
+    list-style: none;
+}
+
+
 
 // @keyframes show {
 // 	0% {
