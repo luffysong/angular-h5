@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
-    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService) {
+    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location) {
         $scope.stageList = [];
         $scope.areaList = [];
         $scope.user = {
@@ -13,12 +13,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             identityCardType:"IDCARD"
         };
         $scope.intro = {};
-        $scope.basic = {};
+        $scope.basic = {
+            value:{}
+        };
         $scope.intro.value = {
             intro:"",
             pictures:""
         };
-        $scope.valStatus = "validating";
+        $scope.valStatus = "normal";
         /*投资阶段*/
         $scope.investStage = [
             {
@@ -44,21 +46,84 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.addr2Options = [];
         $scope.tempList = $scope.fieldsOptions.concat();
         $scope.fieldsOptions = $scope.fieldsOptions.slice(0,8);
+        /*跟投人认证信息回写*/
+        UserService.get({
+            id:'identity',
+            sub: 'cert',
+            subid: 'coinvestor-info'
+        },{},function(data){
+            console.log(data);
+            if(data.userCoinvestorCertInfo){
+                $scope.user.reIdCardNumber = data.userCoinvestorCertInfo.idCardNumber;
+                if(data.userCoinvestorCertInfo.businessCardUrl){
+                    $scope.intro.value.pictures = data.userCoinvestorCertInfo.businessCardUrl;
+                }
+            }
+            angular.extend($scope.user,data.userCoinvestorCertInfo);
+        },function(err){
+            if(err.code == 1001){
+                /*多次跟投人认证失败*/
+                $scope.valStatus = "fail";
+            }else if(err.code == 1002){
+                /*正在审核中*/
+                $scope.valStatus = "validating";
+            }else if(err.code == 1003){
+                /*已经是跟投人*/
+                /*$location.url("syndicates");*/
+            }
+        });
+        /*获取用户信息填充表单*/
+        UserService.basic.get({
+            id:UserService.getUID()
+        },function(data){
+            angular.extend($scope.user, data);
+            /*关注领域数据处理*/
+            if(data.industry.length){
+                angular.forEach(data.industry,function(o,i){
+                    angular.forEach($scope.fieldsOptions,function(key,index){
+                        if(key.value == o){
+                            key.active = true;
+                        }
+                    });
+                    angular.forEach($scope.tempList,function(obj,i){
+                        if(obj.value == o){
+                            obj.active = true;
+                        }
+                    });
+                });
+            }
+            /*投资阶段数据处理*/
+            angular.forEach(data,function(val,key){
+                if(key == "isInvestFirstPhase" || key == "isInvestSecondPhase" || key == "isInvestThirdPhase"){
+                    if(data[key]){
+                        angular.forEach($scope.investStage,function(obj,index){
+                            if(obj.engName == key){
+                                obj.active = true;
+                            }
+                        });
+                    }
+                }
+            });
+            $scope.basic.value.address1 = data.country;
+            $scope.basic.value.address2 = data.city;
+
+        },function(err){
+            ErrorService.alert(err);
+        });
         /*选择所在地事件*/
         $scope.addr1Change = function() {
             if ($scope.basic.value) {
                 $scope.basic.value.address2 = "";
+                $scope.basic.value.address3 = "";
             }
         };
         $scope.$watch('basic.value.address1', function(value) {
             $scope.addr2Options = [];
-            $scope.addr3Options = [];
             if (!value) {
                 return;
             }
             $scope.addr2Options = DictionaryService.getLocation(value);
         });
-
         $scope.selectStage = function(index){
             angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",true);
             angular.forEach($scope.investStage,function(obj){

@@ -77,11 +77,11 @@
                         <label class="label-control"><span class="c-orange">*</span>所在地</label>
                         <div class="col col-4">
                                 <!--<input class="form-control" type="text" ng-model="user.city" name="address" placeholder="点击填写"  required />-->
-                                <select class="form-control" name="address1" ng-model="basic.value.address1"
+                                <select class="form-control place" name="address1" ng-model="basic.value.address1"
                                         ng-options="c.id as c.name for c in addr1Options" required ng-change="addr1Change()">
                                     <option value="">请选择</option>
                                 </select>
-                                <select class="form-control" name="address2" ng-model="basic.value.address2" ng-show="addr2Options.length"
+                                <select class="form-control place" name="address2" ng-model="basic.value.address2" ng-show="addr2Options.length"
                                         ng-options="c.id as c.name for c in addr2Options">
                                     <option value="">请选择</option>
                                 </select>
@@ -211,12 +211,12 @@
         <!--认证审核中-->
         <div ng-if="valStatus == 'validating'" class="welcome-form">
             <div class="validating-info text-center">
-                <div class="icon-add validating-logo"></div>
+                <div class="validating-logo"></div>
                 <p class="c-orange fs-15">你的实名认证申请已收到</p>
                 <p class="fs-12">我们核对信息后，在3小时内为你开通众筹的投资权限</p>
             </div>
 
         </div>
-        <a href="" class="btn btn-default btn-cancel">返回众筹公司页</a>
+        <a ng-if="valStatus == 'validating'" href="" class="btn btn-default btn-cancel">返回众筹公司页</a>
     </div>
 </div>
