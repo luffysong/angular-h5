@@ -217,6 +217,16 @@
             </div>
 
         </div>
-        <a ng-if="valStatus == 'validating'" href="" class="btn btn-default btn-cancel">返回众筹公司页</a>
+        <!--认证审核失败-->
+        <div ng-if="valStatus == 'fail'" class="welcome-form">
+            <div class="validating-info text-center">
+                <div class="validating-logo fail"></div>
+                <p class="c-orange fs-15">您多次身份证验证未通过</p>
+                <p class="fs-12">导致无法继续申请参与众筹</p>
+                <p class="fs-12">如有疑问请联系我们：<a href="">service@36kr.com</a></p>
+            </div>
+
+        </div>
+        <a ng-if="valStatus == 'validating' || valStatus == 'fail'" href="" class="btn btn-default btn-cancel">返回众筹公司页</a>
     </div>
 </div>

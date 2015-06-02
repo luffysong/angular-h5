@@ -78,7 +78,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         },function(data){
             angular.extend($scope.user, data);
             /*关注领域数据处理*/
-            if(data.industry.length){
+            if(data.industry && data.industry.length){
                 angular.forEach(data.industry,function(o,i){
                     angular.forEach($scope.fieldsOptions,function(key,index){
                         if(key.value == o){
