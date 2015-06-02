@@ -42,7 +42,7 @@
     "gulp-insert": "^0.4.0",
     "gulp-istanbul": "^0.5.0",
     "gulp-karma": "0.0.4",
-    "gulp-less": "^2.0.1",
+    "gulp-less": "*",
     "gulp-load-plugins": "^0.8.0",
     "gulp-mocha": "^2.0.0",
     "gulp-modulizr": "0.0.2",
