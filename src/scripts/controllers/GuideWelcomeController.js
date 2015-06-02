@@ -10,25 +10,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             avatar:""
         };
 
-        $scope.formData = {
-            isInvestFirstPhase: false,
-            isInvestSecondPhase: false,
-            isInvestThirdPhase: false,
-            investMoneyUnit:"CNY",
-            idCardNumber:"",
-            reIdCardNumber:"",
-            identityCardType:"IDCARD",
-            rnvInvestorInfo:"V1_1"
-        };
-
         $scope.userId = UserService.getUID();
-        $scope.changeAvatar = function(){
-            AvatarEdit.open().result.then(function (data) {
-                $scope.user.avatar = window.kr.upyun.bucket.url + data.url;
-            }, function (err) {
-                ErrorService.alert(err);
-            });
-        };
 
         UserService.basic.get({
             id: $scope.userId
@@ -107,13 +89,19 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 if($scope.applySpaceEnter){
                     $state.go('krspace.judge');
                 }else{
-                    $state.go('guide.success-enter');
+                    // $state.go('guide.success-enter');
+                    $state.go('investorValidate');
                 }
                 setTimeout(function(){
                     location.reload();
                 },0);
             }, function(err){
-                ErrorService.alert(err);
+                $('<div class="error-alert error error-code">' + err.msg + '</div>').appendTo('body');
+                $timeout(function(){
+                    $('.error-code').fadeOut();
+                },2000);
+
+                // ErrorService.alert(err);
             })
         };
 
@@ -143,25 +131,18 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 phone: $scope.user.phone
             }, function(data){
             }, function(err){
-                ErrorService.alert({
-                    msg:'发送失败!'
-                });
+                $('<div class="error-alert error error-sms">发送失败</div>').appendTo('body');
+                $timeout(function(){
+                    $('.error-sms').fadeOut();
+                },2000);
+                // ErrorService.alert({
+                //     msg:'发送失败!'
+                // });
             });
         }
 
-        // function mShowError(obj) {
-        //     $(obj).stop().animate({top: 0}, 600,function() {
-        //         $(this).stop().delay(2000).animate({top: -30}, 600);
-        //     });
-        // }
-        // 错误信息
-
-        $scope.passport = {};
+        // 头像上传
         $scope.intro = {};
-        $scope.passport.value = {
-            intro:"",
-            pictures:""
-        };
         $scope.intro.value = {
             intro:"",
             pictures:""
@@ -169,27 +150,19 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
 
         $scope.imgFileSelected  = function(files, e){
             var upyun = window.kr.upyun;
-            if(files[0].size > 2 * 1024 * 1024){
-                ErrorService.alert({
-                    msg:"附件大于2M"
-                });
+            if(files[0].size > 5 * 1024 * 1024){
+                $('<div class="error-alert error error-avatar">附件大于5M</div>').appendTo('body');
+                $timeout(function(){
+                    $('.error-avatar').fadeOut();
+                },2000);
+                // ErrorService.alert({
+                //     msg:"附件大于5M"
+                // });
                 return;
-            }
-            if($scope.target == "passport"){
-                if($scope.btnText == $scope.text["re-upload"]){
-                    $scope.passport.value.pictures = "";
-                }
-            }else {
-                if($scope.passport.btnText == $scope.text["re-upload"]){
-                    $scope.intro.value.pictures = "";
-                }
             }
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 $scope.intro.uploading = true;
-                $scope.intro.progress = 0;
-                $scope.passport.uploading = true;
-                $scope.passport.progress = 0;
                 DefaultService.getUpToken({
                     'x-gmkerl-type': 'fix_width', //限定宽度,高度自适应
                     'x-gmkerl-value': '900',      //限定的宽度的值
@@ -201,47 +174,41 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                         file: file,
                         withCredentials: false
                     }).progress(function (evt) {
-                        $scope.intro.progress = evt.loaded * 100 / evt.total;
-                        $scope.passport.progress = evt.loaded * 100 / evt.total;
+
                     }).success(function (data, status, headers, config) {
                         var filename = data.url.toLowerCase();
                         if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
-                            if($scope.formData.identityCardType == "PASSPORT"){
-                                $scope.passport.value.pictures = window.kr.upyun.bucket.url + data.url;
-                            }else{
-                                $scope.intro.value.pictures = window.kr.upyun.bucket.url + data.url;
-                            }
+                            $scope.user.avatar = window.kr.upyun.bucket.url + data.url;
                         } else {
-                            ErrorService.alert({
-                                msg: '格式不支持，请重新上传！'
-                            });
+                            $('<div class="error-alert error error-photo">格式不支持，请重新上传！</div>').appendTo('body');
+                            $timeout(function(){
+                                $('.error-photo').fadeOut();
+                            },2000);
+                            // ErrorService.alert({
+                            //     msg: '格式不支持，请重新上传！'
+                            // });
                         }
                         $scope.intro.uploading = false;
-                        $scope.passport.uploading = false;
-                        $scope.btnText = $scope.text["re-upload"];
-                        $scope.passport.btnText = $scope.text["re-upload"];
                     }).error(function(){
-                        ErrorService.alert({
-                            msg: '格式不支持，请重新上传！'
-                        });
+                        $('<div class="error-alert error error-pic">格式不支持，请重新上传！</div>').appendTo('body');
+                        $timeout(function(){
+                            $('.error-pic').fadeOut();
+                        },2000);
+                        // ErrorService.alert({
+                        //     msg: '格式不支持，请重新上传！'
+                        // });
                         $scope.intro.uploading = false;
-                        $scope.passport.uploading = false;
                     });
                 }, function (err) {
                     $scope.intro.uploading = false;
-                    ErrorService.alert(err);
+                    $('<div class="error-alert error error-msg">' + err.msg + '</div>').appendTo('body');
+                    $timeout(function(){
+                        $('.error-msg').fadeOut();
+                    },2000);
+                    // ErrorService.alert(err);
                 });
             }
         };
-        $scope.text = {
-            "un-upload":"本地上传",
-            "re-upload":"重新上传"
-        };
-        $scope.btnText = $scope.text["un-upload"];
-        $scope.passport.btnText = $scope.text["un-upload"];
-        $scope.uploadCard = function(target){
-            $scope.target = target;
-        }
     }
 );
 
