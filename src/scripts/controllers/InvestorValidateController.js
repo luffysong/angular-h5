@@ -20,7 +20,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.areaList = [];
         $scope.user = {
             investMoneyUnit:"CNY",
-            identityCardType:"IDCARD"
+            identityCardType:"IDCARD",
+            rnvInvestorInfo:"V1_1"
         };
         $scope.intro = {};
         $scope.basic = {
