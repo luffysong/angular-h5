@@ -23,7 +23,38 @@
 		margin: 0 10px;
 		border-bottom: 1px solid #ddd;
 		.clearfix;
-
+        .focus-area {
+            height: 40px;
+            .tip {
+                margin-left: 20px;
+                font-size: 13px;
+                color: #B6B6B6;
+            }
+        }
+        .account-num {
+            width: 80px;
+            outline: 0;
+            border: 0;
+        }
+        .bottom-tip {
+            margin-top: 10px;
+            color: #B3B3B3;
+        }
+        &.brief {
+            height: 100px;
+            border: 0;
+            .col {
+                height: 100%;
+                width: 200px;
+                textarea {
+                    width: 100%;
+                    height: 100%;
+                    outline: 0;
+                    border: 0;
+                    resize: none;
+                }
+            }
+        }
 		&:last-child {
 			background-color: #f7f7f7;
 			margin: 0;
@@ -35,12 +66,112 @@
 
 	.label-control {
 		float: left;
-		width: 70px;
+		width: 75px;
 		color: @title-color;
 		text-align: right;
 		margin-right: 16px;
+        white-space: nowrap;
 	}
+    .col-flex {
+        float: left;
+        margin-left: 10px;
+        .stage {
+            float: left;
+            width: auto;
+            height: 40px;
+            border: 1px solid #ddd;
+            margin: 0 10px 10px 0;
+            padding: 0 10px;
+            line-height: 40px;
+            &.active {
+                border: 1px solid #008df2;
+            }
+        }
+        .item {
+            margin-top: 15px;
+        }
+        .intro-pic-list {
+            list-style: none;
+            .clearfix;
+            padding: 0;
+            margin: 0 -15px 25px 0;
+            &.no-p {
+                padding: 0;
+            }
+            .pic-list {
+                width: 140px;
+                height: 90px;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+            .input-file {
+                opacity: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+            li {
+                float: left;
+                width: 150px;
+                height: 90px;
+                overflow: hidden;
+                position: relative;
+                text-align: center;
+                margin-right: 10px;
+                background: no-repeat center center;
+                background-size: cover;
 
+                &:last-child {
+                    position: relative;
+                    border: 1px solid #008df2;
+                    border-radius: 5px;
+                    color: #008df2;
+                    font-size: 35px;
+                    line-height: 90px;
+                    text-align: center;
+                    .tip {
+                        position: absolute;
+                        display: block;
+                        width: 100%;
+                        text-align: center;
+                        left: 0;
+                        bottom: 0;
+                        height: 30px;
+                        line-height: 30px;
+                        color: #CCCCCC;
+                        font-size: 14px;
+                    }
+                    a {
+                        color: #A3BEED;
+                        font-size: 38px;
+                        line-height: 90px;
+                        position: absolute;
+                        top: 24px;
+                        width: 100%;
+                        height: 100%;
+                        left: 0;
+                        top: 0;
+                    }
+                }
+                .stick {
+                    width:100%;
+                    height:100%;
+                    background: #53aeed;
+                    position: absolute;
+                    bottom:0;
+                    left:0;
+                    .transition(all 0.8s);
+                }
+                &.progress {
+                    border:solid 1px #eee;
+                    box-sizing: border-box;
+                    background: #f3f3f3;
+                }
+            }
+        }
+    }
 	.col {
 		float: left;
 		width: 160px;
@@ -53,7 +184,7 @@
 		input {
 			border: none;
 			padding: 0;
-			width: 160px;
+            outline: 0;
 		}
 	}
 
@@ -85,7 +216,6 @@
 			position: absolute;
 			right: 0;
 			bottom: 0;
-			z-index: 100;
 		}
 		> img {
 			.img-circle;
@@ -94,7 +224,7 @@
 
 	.avatar-label {
 		display: block;
-		margin: 12px 0 0;
+		margin-top: 12px;
 		float: none;
 		width: auto;
 		text-align: center;
@@ -106,63 +236,19 @@
 	line-height: 30px;
 	width: 100%;
 	left: 0;
+	top: 0;
 	color: @base-white;
 	text-align: center;
 	background-color: #f28d00;
 	z-index: 1000;
-	top: 0;
-	opacity: lescent;
-	transition: top ease .5s, opacity ease .3s;
-
 	// transform: translateY(0);
 	// animation: show ease 4s;
 
 
 	&.ng-hide {
-		top: -30px;
-		display: block!important;
-		opacity: 0;
 		// animation: hide ease 10s;
 	}
 }
-
-.intro-pic-list {
-	position: relative;
-}
-
-.pic-list {
-    width: 70px;
-    height: 70px;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    display: inline-block;
-    position: relative;
-    border-radius: 100%;
-    &:before {
-		content: url('images/update-avatar.png');
-		position: absolute;
-		right: 0;
-		bottom: 0;
-	}
-}
-
-.input-file {
-	width: 70px;
-	height: 70px;
-	position: absolute;
-	left: 50%;
-	top: 0;
-	opacity: 0;
-	margin-left: -35px;
-}
-
-
-.no-p {
-    padding: 0;
-    list-style: none;
-}
-
-
 
 // @keyframes show {
 // 	0% {
