@@ -76,4 +76,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/investorValidate/index.html',
         controller: 'InvestorValidateController'
     });
+    /*协议路由，用户服务协议*/
+    $stateProvider.state('serviceProtocol', {
+        url: '/serviceProtocol',
+        templateUrl: 'templates/protocol/serviceProtocol.html'
+    });
 });

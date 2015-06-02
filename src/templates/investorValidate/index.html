@@ -1,8 +1,5 @@
 <div class="container">
     <div class="investor-validate">
-        <div class="common-problem">
-            跟投人认证常见问题
-        </div>
         <!--跟投人未提交验证-->
         <div ng-if="valStatus == 'normal'">
             <div class="intro text-center">
@@ -135,7 +132,7 @@
                             <input class="form-control account-num" type="text" ng-model="user.investMoneyEnd" name="investTo" placeholder="填写金额"  required maxlength="6" />
                             万元
                         </div>
-
+                        <span class="currency-kind">(人民币金额)</span>
                     </div>
 
                     <!--投资条件-->
@@ -176,13 +173,15 @@
                         <div class="col-flex">
                             <p>上传名片有助于提升审核速度</p>
 
-                            <p>建议尺寸255*153px</p>
-
                             <p>小于2M的图片格式文件</p>
 
                             <div class="item">
                                 <ul class="intro-pic-list no-p">
                                     <li class="pic-list" ng-show="intro.value.pictures" style="background-image: url({{intro.value.pictures | image:150}});">
+                                        <input type="file" name="addPic" class="input-file" ng-file-select
+                                               ng-file-change="imgFileSelected($files, $event)"
+                                               ng-multiple="false"
+                                               resetOnClick="true">
                                     </li>
                                     <li class="progress pic-progress" ng-show="intro.uploading">
                                         <div class="stick pic-stick" style="height:{{intro.progress}}%;"></div>
@@ -201,7 +200,7 @@
                     <div class="form-group">
                         <a href="" class="btn btn-default btn-auth" ng-click="submitForm($event)">提交资料</a>
                         <p class="text-center bottom-tip">
-                            点击-提交资料，即表示你同意 <a href="">《用户服务协议》</a>
+                            点击-提交资料，即表示你同意 <a href="#/serviceProtocol" target="_blank">《用户服务协议》</a>
                         </p>
                     </div>
 
@@ -227,6 +226,15 @@
             </div>
 
         </div>
-        <a ng-if="valStatus == 'validating' || valStatus == 'fail'" href="" class="btn btn-default btn-cancel">返回众筹公司页</a>
+        <!--已经是跟投人-->
+        <div ng-if="valStatus == 'withoutVal'" class="welcome-form">
+            <div class="validating-info text-center">
+                <div class="validating-logo"></div>
+                <p class="c-orange fs-15">恭喜！你已成为跟投人</p>
+                <p class="fs-12">第一批众筹的公司，将于6月8日全面上线，敬请期待</p>
+            </div>
+
+        </div>
+        <!--<a ng-if="valStatus == 'validating' || valStatus == 'fail' || valStatus == 'withoutVal'" href="" class="btn btn-default btn-cancel">返回众筹公司页</a>-->
     </div>
 </div>

@@ -6,6 +6,9 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
     function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location) {
+        if(!UserService.getUID()){
+            location.href = "/user/login?from=" + encodeURIComponent(location.href);
+        }
         $scope.stageList = [];
         $scope.areaList = [];
         $scope.user = {
@@ -69,7 +72,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.valStatus = "validating";
             }else if(err.code == 1003){
                 /*已经是跟投人*/
-                /*$location.url("syndicates");*/
+                /*$scope.valStatus  = "withoutVal";*/
             }
         });
         /*获取用户信息填充表单*/
@@ -126,15 +129,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         });
         $scope.selectStage = function(index){
             angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",true);
-            angular.forEach($scope.investStage,function(obj){
-                obj.active = false;
-            });
-            $scope.stageList = [];
-            $scope.investStage[index].active = true;
-            $scope.stageList.push($scope.investStage[index]);
+            $scope.investStage[index].active = !$scope.investStage[index].active;
         }
         $scope.selectArea = function(index){
-            if($scope.areaList.length >= 3){
+            if($scope.areaList.length == 3 && $scope.areaList.indexOf($scope.fieldsOptions[index].value) < 0){
                 return;
             }else{
                 $scope.areaList = [];
@@ -166,6 +164,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 });
                 return;
             }
+            $scope.intro.value.pictures = "";
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 $scope.intro.uploading = true;
@@ -184,7 +183,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                         $scope.intro.progress = evt.loaded * 100 / evt.total;
                     }).success(function (data, status, headers, config) {
                         var filename = data.url.toLowerCase();
-                        if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
+                        if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1 || filename.indexOf('.jpeg') != -1) {
                             $scope.intro.value.pictures = window.kr.upyun.bucket.url + data.url;
                         } else {
                             ErrorService.alert({
