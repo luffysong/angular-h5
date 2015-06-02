@@ -216,6 +216,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         },500);
         /*表单提交*/
         $scope.submitForm = function(){
+            angular.forEach($scope.investStage,function(key,index){
+                $scope.user[key.engName] = key.active;
+                if(key.active){
+                    $scope.stageList.push(key);
+                }
+            });
             if(!$scope.areaList.length){
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",false);
             }else{
@@ -227,9 +233,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",true);
             }
             if(!checkForm("investorValidateForm"))return;
-            angular.forEach($scope.investStage,function(key,index){
-                $scope.user[key.engName] = key.active;
-            });
             $scope.user.focusIndustry = $scope.areaList;
             $scope.user.businessCardUrl = $scope.intro.value.pictures;
             if($scope.basic.value){
