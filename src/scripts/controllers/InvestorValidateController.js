@@ -13,12 +13,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             identityCardType:"IDCARD"
         };
         $scope.intro = {};
-        $scope.basic = {};
+        $scope.basic = {
+            value:""
+        };
         $scope.intro.value = {
             intro:"",
             pictures:""
         };
-        $scope.valStatus = "validating";
+        $scope.valStatus = "normal";
         /*投资阶段*/
         $scope.investStage = [
             {
@@ -44,6 +46,25 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.addr2Options = [];
         $scope.tempList = $scope.fieldsOptions.concat();
         $scope.fieldsOptions = $scope.fieldsOptions.slice(0,8);
+        /*跟投人认证信息回写*/
+        UserService.basic.get({
+            id:UserService.getUID()
+        },function(data){
+            console.log(data);
+            angular.extend($scope.user, data);
+            angular.extend($scope.areaList, data);
+            angular.forEach(data,function(val,key){
+                if(key == "isInvestFirstPhase" || key == "isInvestSecondPhase" || key == "isInvestThirdPhase"){
+                    if(data[key]){
+                        $scope.stageList.push(key);
+                    }
+                }
+            });
+            $scope.basic.value.address1 = data.country;
+            $scope.basic.value.address2 = data.city;
+        },function(err){
+            ErrorService.alert(err);
+        });
         /*选择所在地事件*/
         $scope.addr1Change = function() {
             if ($scope.basic.value) {
