@@ -140,8 +140,8 @@
                         <label class="label-control"><span class="c-orange">*</span>投资条件</label>
                         <div class="col-flex">
                             <div ng-repeat="item in condition">
-                                <input type="radio" name="permit" ng-model="user.rnvInvestorInfo" value="{{item.value}}" ng-checked="$index == 0" />
-                                <label for="">{{item.desc}}</label>
+                                <input type="radio" name="permit" id="condition{{$index}}" ng-model="user.rnvInvestorInfo" value="{{item.value}}" ng-checked="$index == 0" />
+                                <label for="condition{{$index}}">{{item.desc}}</label>
                             </div>
                         </div>
                     </div>
