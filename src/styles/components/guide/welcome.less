@@ -241,39 +241,46 @@
 	text-align: center;
 	background-color: #f28d00;
 	z-index: 1000;
-	// transform: translateY(0);
-	// animation: show ease 4s;
-
-
+	top: 0;
+	opacity: 1;
+	transition: top ease .5s, opacity ease .3s;
 	&.ng-hide {
 		// animation: hide ease 10s;
 	}
 }
 
-// @keyframes show {
-// 	0% {
-// 		display: block;
-// 		transform: translateY(-30px);
-// 	}
+.intro-pic-list {
+	position: relative;
+}
 
-// 	30% {
-// 		transform: translateY(0px);
-// 	}
-// 	60% {
-// 		transform: translateY(0px);
-// 	}
-// 	100% {
-// 		transform: translateY(-30px);
-// 	}
-// }
+.pic-list {
+    width: 70px;
+    height: 70px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    position: relative;
+    border-radius: 100%;
+    &:before {
+		content: url('images/update-avatar.png');
+		position: absolute;
+		right: 0;
+		bottom: 0;
+	}
+}
 
-// @keyframes hide {
-// 	0% {
-// 		transform: translateY(0);
-// 	}
+.input-file {
+	width: 70px;
+	height: 70px;
+	position: absolute;
+	left: 50%;
+	top: 0;
+	opacity: 0;
+	margin-left: -35px;
+}
 
-// 	100% {
-// 		transform: translateY(-30px);
 
-// 	}
-// }
+.no-p {
+    padding: 0;
+    list-style: none;
+}
