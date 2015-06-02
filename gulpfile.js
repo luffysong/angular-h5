@@ -433,7 +433,7 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
         searchPath: ['.tmp', 'src']
     });
 
-    return gulp.src(['src/*.html'])
+    return gulp.src(['.tmp/*.html'])
         .pipe($.replace("styles/images/","images/"))
         .pipe(assets)
         .pipe($['if']('*.css', $.csso()))
@@ -474,21 +474,21 @@ gulp.task('build:rev:replace', ['build:rev'], function () {
 });
 
 // 编译
-gulp.task('build', ['clean', 'header'], function () {
+gulp.task('build', ['header'], function () {
     gulp.start('build:rev:replace');
 });
 
-gulp.task('build:test',function(){
+gulp.task('build:test', ['clean'],function(){
     buildMode = 'test';
     CDNPrefix = '/m';
     gulp.start('build');
 });
-gulp.task('build:dev',function(){
+gulp.task('build:dev', ['clean'],function(){
     buildMode = 'dev';
     CDNPrefix = '/m';
     gulp.start('build');
 });
-gulp.task('build:prod',function(){
+gulp.task('build:prod', ['clean'],function(){
     buildMode = 'prod';
     CDNPrefix = '//krplus-cdn.b0.upaiyun.com/m';
     gulp.start('build');

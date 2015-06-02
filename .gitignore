@@ -45,3 +45,4 @@ karma_html
 # Base
 coverage
 apidoc
+templates.js
