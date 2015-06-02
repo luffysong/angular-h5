@@ -72,7 +72,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.valStatus = "validating";
             }else if(err.code == 1003){
                 /*已经是跟投人*/
-                /*$scope.valStatus  = "withoutVal";*/
+                $scope.valStatus  = "withoutVal";
             }
         });
         /*获取用户信息填充表单*/
@@ -82,6 +82,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             angular.extend($scope.user, data);
             /*关注领域数据处理*/
             if(data.industry && data.industry.length){
+                angular.extend($scope.areaList,data.industry);
                 angular.forEach(data.industry,function(o,i){
                     angular.forEach($scope.fieldsOptions,function(key,index){
                         if(key.value == o){
