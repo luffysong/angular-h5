@@ -9,6 +9,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         if(!UserService.getUID()){
             location.href = "/user/login?from=" + encodeURIComponent(location.href);
         }
+        document.title="36氪股权众筹";
+        WEIXINSHARE = {
+            shareTitle: "36氪股权众筹",
+            shareDesc: "成为跟投人",
+            shareImg: 'http://img.36tr.com/logo/20140520/537aecb26e02d'
+        };
+        InitWeixin();
         $scope.stageList = [];
         $scope.areaList = [];
         $scope.user = {
