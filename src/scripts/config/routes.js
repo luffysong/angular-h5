@@ -73,6 +73,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/syndicates/index.html',
         controller: 'syndicatesController'
     });
+    /*众筹详情*/
+    $stateProvider.state('syndicatesDetail', {
+        url: '/zhongchouDetail?companyId&fundingId',
+        templateUrl: 'templates/syndicates/detail.html',
+        controller: 'syndicatesDetailController'
+    });
     /*跟投人认证*/
     $stateProvider.state('investorValidate', {
         url: '/investorValidate',
