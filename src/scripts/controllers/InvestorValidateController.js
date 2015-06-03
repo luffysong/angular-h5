@@ -20,7 +20,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.areaList = [];
         $scope.user = {
             investMoneyUnit:"CNY",
-            identityCardType:"IDCARD",
             rnvInvestorInfo:"V1_1"
         };
         $scope.intro = {};
@@ -89,6 +88,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             id:UserService.getUID()
         },function(data){
             angular.extend($scope.user, data);
+            /*cardType强制定义为身份证类型*/
+            $scope.user.identityCardType = "IDCARD";
             $scope.user.investMoneyBegin = parseInt(data.investMoneyBegin);
             $scope.user.investMoneyEnd = parseInt(data.investMoneyEnd);
             /*关注领域数据处理*/
@@ -245,7 +246,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",true);
             }
             if(!checkForm("investorValidateForm"))return;
-            $scope.hasClick = true;
+            /*$scope.hasClick = true;*/
             $scope.user.focusIndustry = $scope.areaList;
             $scope.user.businessCardUrl = $scope.intro.value.pictures;
             if($scope.basic.value){
