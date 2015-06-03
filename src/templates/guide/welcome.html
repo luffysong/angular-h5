@@ -22,7 +22,7 @@
 					<label class="label-control avatar-label">真实头像</label>
 				</div>
 				<div class="form-group">
-					<label class="label-control">真实姓名2</label>
+					<label class="label-control">真实姓名</label>
 					<div class="control">
 						<input class="form-control" type="text" ng-model="user.name" name="name" maxlength="15" ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" required/>
 					</div>
@@ -32,7 +32,8 @@
 	                </div>
 				</div>
 
-				<div class="form-group" ng-if="!user.hasEmail">
+				<!-- <div class="form-group" ng-if="!user.hasEmail"> -->
+				<div class="form-group">
 					<label class="label-control">常用邮箱</label>
 					<div class="control">
 						<input class="form-control" type="email" ng-model="user.email" name="email" required/>
@@ -43,7 +44,8 @@
 		                    <span ng-show="user.email && guideForm.email.$error.checked && !guideForm.email.$error.email">你输入的邮箱已被占用</span>
 		                </div>
 				</div>
-	            <div class="form-group" ng-if="!user.hasPhone">
+	            <!-- <div class="form-group" ng-if="!user.hasPhone"> -->
+	            <div class="form-group">
 	                <label class="label-control">手机号码</label>
 	                <div class="control">
 	                    <input class="form-control" type="text" ng-model="user.phone" name="phone" required ng-pattern="REGEXP.phone"/>
@@ -57,7 +59,8 @@
 	                    <!--<a href="#" class="update-phone">修改手机号码</a>-->
 	                <!--</div>-->
 	            </div>
-				<div class="form-group" ng-if="!user.hasPhone">
+				<!-- <div class="form-group" ng-if="!user.hasPhone"> -->
+				<div class="form-group">
 					<label class="label-control">验证码</label>
 					<div class="control validate-code">
 						<input class="form-control" type="text" ng-model="user.smscode" name="smscode" required/>
