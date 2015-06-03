@@ -88,6 +88,11 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     /*协议路由，用户服务协议*/
     $stateProvider.state('serviceProtocol', {
         url: '/serviceProtocol',
-        templateUrl: 'templates/protocol/serviceProtocol.html'
+        templateUrl: 'templates/protocol/serviceProtocol.html',
+        controller:function(){
+            setTimeout(function(){
+                window.scroll(0,0);
+            },0);
+        }
     });
 });

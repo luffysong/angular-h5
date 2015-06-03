@@ -22,6 +22,11 @@
 		padding: 16px 0;
 		margin: 0 10px;
 		border-bottom: 1px solid #ddd;
+        white-space: nowrap;
+        &.normal {
+            white-space: normal;
+        }
+        position: relative;
 		.clearfix;
         .focus-area {
             height: 40px;
@@ -74,6 +79,18 @@
 		margin-right: 16px;
         white-space: nowrap;
 	}
+    .col-max {
+        float: left;
+        margin-left: 10px;
+        width: 65%;
+        input,textarea {
+            width: 100%;
+            border: 0;
+            outline: 0;
+            resize: none;
+        }
+    }
+
     .col-flex {
         float: left;
         margin-left: 10px;
@@ -88,6 +105,15 @@
             &.active {
                 border: 1px solid #008df2;
             }
+        }
+
+    }
+	.col {
+		float: left;
+		width: 160px;
+        input,textarea {
+            border: 0;
+            outline: 0;
         }
         .item {
             margin-top: 15px;
@@ -174,27 +200,34 @@
                 }
             }
         }
-    }
-	.col {
-		float: left;
-		width: 160px;
-		&.validate-code {
-			&, & > input {
-				width: 110px;
-			}
-		}
+		// &.validate-code {
+		// 	&, & > input {
+		// 		width: 110px;
+		// 	}
+		// }
 
-		input {
-			border: none;
-			padding: 0;
-            outline: 0;
-		}
+
 	}
 
+    .control {
+        margin-left: 91px;
+        input {
+            border: none;
+            padding: 0;
+            outline: 0;
+            width: 100%;
+        }
+        &.validate-code {
+            margin-right: 110px;
+        }
+    }
+
 	.get-code {
-		float: right;
 		color: @light-color;
 		padding: 0 10px;
+        position: absolute;
+        right: 10px;
+        top: 18px;
 	}
 
 	.btn-auth {

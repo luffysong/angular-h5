@@ -1,3 +1,85 @@
-<div class="chart">
-    <highchart id="stock-structure-chart" config="chartConfig"></highchart>
+<div class="container">
+    <div class="investor-validate syndicate-detail">
+        <div class="form-horizontal">
+                <!--领投人-->
+                <div ng-if="syndicatesInfo.base.investorData.name || syndicatesInfo.detail.lead_reason" class="welcome-form">
+                    <div class="basic-info">
+                        领投人
+                    </div>
+                    <div class="led-avatar">
+                        <div class="avatar" style="background-image: url({{syndicatesInfo.base.investorData.logo || ''}})"></div>
+                        <p>{{syndicatesInfo.base.investorData.name}}</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">一句话简介</label>
+                        <div class="col col-4">
+                            {{syndicatesInfo.base.investorData.intro}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">背景介绍</label>
+                        <div class="col col-4">
+                            {{syndicatesInfo.detail.lead_desc}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control">领投理由</label>
+                        <div class="col col-4">
+                            <div class="business-desc">{{syndicatesInfo.detail.lead_business_desc}}</div>
+                            <br/>
+                            <div class="business-desc">{{syndicatesInfo.detail.lead_reason}}</div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="false">
+                    </div>
+                    <!--过往融资-->
+                    <div class="basic-info">
+                        过往融资
+                    </div>
+                    <div class="past-invest">
+                        <div class="past-node" ng-repeat="item in [1,2]">
+                            <span class="node"></span>
+                            <span class="past-time">2015.02</span>
+                            <div class="past-content">
+                                <!--投资阶段-->
+                                <div class="round">A轮</div>
+                                <!--融资金额及融资估值-->
+                                <div class="detail clearfix">
+                                    <div class="num text-center">
+                                        <p class="c-orange">￥100万</p>
+                                        <p>融资金额</p>
+                                    </div>
+                                    <div class="line"></div>
+                                    <div class="num text-center">
+                                        <p class="c-orange">￥100万</p>
+                                        <p>融资估值</p>
+                                    </div>
+                                </div>
+                                <!--过往投资方-->
+                                <div class="past-investor clearfix">
+                                    <span class="investor clearfix">
+                                        <span class="logo" style="background-image: url(http://qzapp.qlogo.cn/qzapp/209656/9836750575E7B0A439C26CEA6F24F5F4/50)"></span>
+                                        <span class="investor-name">北极光投资</span>
+                                    </span>
+                                    <span class="investor clearfix">
+                                        <span class="logo" style="background-image: url(http://qzapp.qlogo.cn/qzapp/209656/9836750575E7B0A439C26CEA6F24F5F4/50)"></span>
+                                        <span class="investor-name">北极光投资</span>
+                                    </span>
+                                    <span class="investor clearfix">
+                                        <span class="logo" style="background-image: url(http://qzapp.qlogo.cn/qzapp/209656/9836750575E7B0A439C26CEA6F24F5F4/50)"></span>
+                                        <span class="investor-name">北极光投资</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+    <div class="chart">
+        <highchart id="stock-structure-chart" config="chartConfig"></highchart>
+    </div>
+
 </div>
+

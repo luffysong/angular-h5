@@ -1,5 +1,125 @@
 /*众筹详情页样式*/
-.chart {
-    width: 100%;
-    height: 300px;
+.syndicate-detail {
+    .welcome-form {
+        .form-group {
+            &:last-child {
+            }
+        }
+    }
+    .led-avatar {
+        width: 100%;
+        height: 105px;
+        background-color: #fff;
+        padding: 15px 0;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            margin: 0 auto 10px;
+        }
+    }
+    .past-invest {
+        width: 100%;
+        height: auto;
+        min-height: 200px;
+        background: #fff;
+        padding: 15px;
+        .past-node {
+            position: relative;
+            width: 100%;
+            height: auto;
+            min-height: 150px;
+            border-left: 1px solid #eee;
+            padding: 20px 0;
+            &:last-of-type {
+                padding-bottom: 0;
+            }
+            .node {
+                position: absolute;
+                display: inline-block;
+                width: 12px;
+                height: 12px;
+                background-color: #fff;
+                border-radius: 50%;
+                border: 3px solid #F28D00;
+                left: -6px;
+                top: -6px;
+            }
+            .past-time {
+                position: absolute;
+                font-size: 14px;
+                top:-12px;
+                left: 25px;
+            }
+            .past-content {
+                position: relative;
+                width: 90%;
+                height: auto;
+                min-height: 100px;
+                border-radius: 3px;
+                left: 12px;
+                border: 1px solid #eee;
+                .round {
+                    width: 100%;
+                    height: 34px;
+                    line-height: 34px;
+                    color: #F28D00;
+                    text-align: center;
+                    font-weight: bold;
+                    background-color: #f7f7f7;
+                }
+                .detail {
+                    width: 100%;
+                    padding: 0 10px;
+                    position: relative;
+                    .num {
+                        float: left;
+                        width: 50%;
+                        height: 100%;
+                        border-bottom: 1px solid #eee;
+                        padding: 5px;
+                    }
+                    .line {
+                        position: absolute;
+                        width: 1px;
+                        height: 90%;
+                        left: 50%;
+                        top: 5%;
+                        background-color: #eee;
+                    }
+                    .c-orange {
+                        color: #F28D00;
+                    }
+                }
+                .past-investor {
+                    width: 100%;
+                    padding: 10px 5% 0;
+                    .investor {
+                        display: inline-block;
+                        margin: 0 10px 10px 0;
+                        &:nth-of-type(even) {
+                            float: right;
+                        }
+                        .logo {
+                            display: inline-block;
+                            width: 25px;
+                            height: 25px;
+                            border-radius: 50%;
+                            background-size: 100% 100%;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .chart {
+        width: 100%;
+        height: 300px;
+    }
 }
+

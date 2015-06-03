@@ -88,7 +88,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             id:UserService.getUID()
         },function(data){
             angular.extend($scope.user, data);
+            /*cardType强制定义为身份证类型*/
             $scope.user.identityCardType = "IDCARD";
+            $scope.user.investMoneyBegin = parseInt(data.investMoneyBegin);
+            $scope.user.investMoneyEnd = parseInt(data.investMoneyEnd);
             /*关注领域数据处理*/
             if(data.industry && data.industry.length){
                 angular.extend($scope.areaList,data.industry);
@@ -193,7 +196,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                         $scope.intro.progress = evt.loaded * 100 / evt.total;
                     }).success(function (data, status, headers, config) {
                         var filename = data.url.toLowerCase();
-                        if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1 || filename.indexOf('.jpeg') != -1) {
+                        if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
                             $scope.intro.value.pictures = window.kr.upyun.bucket.url + data.url;
                         } else {
                             ErrorService.alert({
@@ -243,6 +246,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",true);
             }
             if(!checkForm("investorValidateForm"))return;
+            $scope.hasClick = true;
             $scope.user.focusIndustry = $scope.areaList;
             $scope.user.businessCardUrl = $scope.intro.value.pictures;
             if($scope.basic.value){
@@ -250,7 +254,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.user.country = $scope.basic.value.address1;
             }
             console.log($scope.user);
-            $scope.hasClick = true;
             UserService.save({
                 id:'identity',
                 sub: 'cert',
@@ -259,13 +262,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 console.log(data);
                 $scope.valStatus = "validating";
             },function(err){
-                console.log(err);
                 if(err.code == 1001){
                     $scope.valStatus = "fail";
                 }else if(err.code == 1002){
                     $scope.valStatus = "validating";
                 }
                 ErrorService.alert(err);
+                $scope.hasClick = false;
             });
         };
     }

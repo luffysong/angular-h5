@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>真实姓名</label>
-                        <div class="col col-4">
+                        <div class="col-max">
                             <input class="form-control" type="text" ng-model="user.name" name="name" placeholder="点击填写" maxlength="15"  required/>
                         </div>
 
@@ -58,21 +58,21 @@
 
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>公司</label>
-                        <div class="col col-4">
+                        <div class="col-max">
                             <input class="form-control" type="text" ng-model="user.companyName" name="company" placeholder="点击填写"  required/>
                         </div>
 
                     </div>
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>职位</label>
-                        <div class="col col-4">
+                        <div class="col-max">
                             <input class="form-control" type="text" ng-model="user.positionName" name="position" placeholder="点击填写"  required />
                         </div>
 
                     </div>
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>所在地</label>
-                        <div class="col col-4">
+                        <div class="col-max">
                                 <!--<input class="form-control" type="text" ng-model="user.city" name="address" placeholder="点击填写"  required />-->
                                 <select class="form-control place" name="address1" ng-model="basic.value.address1"
                                         ng-options="c.id as c.name for c in addr1Options" required ng-change="addr1Change()">
@@ -88,7 +88,7 @@
                     </div>
                     <div class="form-group brief">
                         <label class="label-control"><span class="c-orange">*</span>一句话简介</label>
-                        <div class="col col-4">
+                        <div class="col-max">
                             <textarea ng-model="user.intro" name="intro" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
                         </div>
 
@@ -110,7 +110,7 @@
                     </div>
 
                     <!--关注领域-->
-                    <div class="form-group">
+                    <div class="form-group normal">
                         <div class="focus-area">
                             <label class="label-control"><span class="c-orange">*</span>关注领域 <span class="tip">(最多可选3个)</span></label>
                         </div>
@@ -124,12 +124,12 @@
                     </div>
 
                     <!--个人单笔可投-->
-                    <div class="form-group">
+                    <div class="form-group normal">
                         <label class="label-control"><span class="c-orange">*</span>个人单笔可投 </label>
                         <div class="col-flex clearfix ml-10">
-                            <input class="form-control account-num" type="number" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
+                            <input class="form-control account-num" type="tel" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
                             至
-                            <input class="form-control account-num" type="number" ng-model="user.investMoneyEnd" name="investTo" placeholder="填写金额"  required maxlength="6" />
+                            <input class="form-control account-num" type="tel" ng-model="user.investMoneyEnd" name="investTo" placeholder="填写金额"  required maxlength="6" />
                             万元
                         </div>
                         <span class="currency-kind">(人民币金额)</span>
@@ -153,14 +153,14 @@
                     </div>
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>身份证号码</label>
-                        <div class="col col-4">
+                        <div class="col-max">
                             <input class="form-control" type="text" ng-model="user.idCardNumber" name="idCardNumber" placeholder="点击填写"  required />
                         </div>
 
                     </div>
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>确认证件号码</label>
-                        <div class="col col-4">
+                        <div class="col-max">
                             <input class="form-control" type="text" ng-model="user.reIdCardNumber" name="reIdCardNumber" placeholder="再次填写" ng-blur="enterId()"  required />
                         </div>
 
@@ -168,12 +168,12 @@
                     </div>
 
                     <!--上传名片-->
-                    <div class="form-group">
+                    <div class="form-group normal">
                         <label class="label-control">上传名片</label>
-                        <div class="col-flex">
-                            <p>上传名片有助于提升审核速度</p>
+                        <div class="col col-4">
+                            <p>名片有助于提升审核速度</p>
 
-                            <p>小于2M的图片格式文件</p>
+                            <p>支持小于2M的JGP、JPEG和PNG格式，仅供认证使用</p>
 
                             <div class="item">
                                 <ul class="intro-pic-list no-p">
@@ -198,7 +198,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <a href="" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="!hasClick">提交资料</a>
+                        <a href="" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="hasClick">提交资料</a>
                         <p class="text-center bottom-tip">
                             点击-提交资料，即表示你同意 <a ui-sref="serviceProtocol" target="_blank">《用户服务协议》</a>
                         </p>
