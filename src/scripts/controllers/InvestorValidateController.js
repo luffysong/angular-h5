@@ -32,6 +32,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             pictures:""
         };
         $scope.valStatus = "normal";
+        $scope.hasClick = false;
         /*投资阶段*/
         $scope.investStage = [
             {
@@ -249,6 +250,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.user.country = $scope.basic.value.address1;
             }
             console.log($scope.user);
+            $scope.hasClick = true;
             UserService.save({
                 id:'identity',
                 sub: 'cert',
