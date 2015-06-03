@@ -89,6 +89,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             id:UserService.getUID()
         },function(data){
             angular.extend($scope.user, data);
+            $scope.user.investMoneyBegin = parseInt(data.investMoneyBegin);
+            $scope.user.investMoneyEnd = parseInt(data.investMoneyEnd);
             /*关注领域数据处理*/
             if(data.industry && data.industry.length){
                 angular.extend($scope.areaList,data.industry);
@@ -243,6 +245,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",true);
             }
             if(!checkForm("investorValidateForm"))return;
+            $scope.hasClick = true;
             $scope.user.focusIndustry = $scope.areaList;
             $scope.user.businessCardUrl = $scope.intro.value.pictures;
             if($scope.basic.value){
@@ -250,7 +253,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.user.country = $scope.basic.value.address1;
             }
             console.log($scope.user);
-            $scope.hasClick = true;
             UserService.save({
                 id:'identity',
                 sub: 'cert',

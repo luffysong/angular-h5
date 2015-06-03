@@ -127,9 +127,9 @@
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>个人单笔可投 </label>
                         <div class="col-flex clearfix ml-10">
-                            <input class="form-control account-num" type="number" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
+                            <input class="form-control account-num" type="tel" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
                             至
-                            <input class="form-control account-num" type="number" ng-model="user.investMoneyEnd" name="investTo" placeholder="填写金额"  required maxlength="6" />
+                            <input class="form-control account-num" type="tel" ng-model="user.investMoneyEnd" name="investTo" placeholder="填写金额"  required maxlength="6" />
                             万元
                         </div>
                         <span class="currency-kind">(人民币金额)</span>
@@ -171,9 +171,9 @@
                     <div class="form-group">
                         <label class="label-control">上传名片</label>
                         <div class="col-flex">
-                            <p>上传名片有助于提升审核速度</p>
+                            <p>名片有助于提升审核速度</p>
 
-                            <p>小于2M的图片格式文件</p>
+                            <p>支持小于2M的JGP、JPEG和PNG格式，仅供认证使用</p>
 
                             <div class="item">
                                 <ul class="intro-pic-list no-p">
@@ -198,7 +198,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <a href="" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="!hasClick">提交资料</a>
+                        <a href="" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="hasClick">提交资料</a>
                         <p class="text-center bottom-tip">
                             点击-提交资料，即表示你同意 <a href="#/serviceProtocol" target="_blank">《用户服务协议》</a>
                         </p>
