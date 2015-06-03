@@ -4,122 +4,81 @@
 
 var angular = require('angular');
 
-angular.module('defaultApp.controller').controller('syndicatesController',
+angular.module('defaultApp.controller').controller('syndicatesDetailController',
     function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify) {
-        var statusList = DictionaryService.getDict("crowd_funding_status");
-        /*每页几条数据*/
-        var pageSize = 30;
-        $scope.pageNo = 1;
-        $scope.noMore = true;
-        $scope.UID = UserService.getUID();
-        /*前端处理，包括融资进度百分比的计算，以及众筹状态*/
-        $scope.handleData = function(){
-            angular.forEach($scope.investorList,function(key,index){
-                key.percent = parseInt(key.cf_success_raising) * 100 / parseInt(key.cf_raising) ;
-                angular.forEach(statusList,function(obj,i){
-                    if(key.status == obj.value){
-                        key.name = obj.desc;
-                        key.color = obj.value;
-                        /*status为众筹中*/
-                        if(key.status == 30){
-                            /*众筹未开始*/
-                            var startTime = new Date(key.start_time);
-                            if(new Date() < startTime){
-                                var minute = startTime.getMinutes() > 9 ? startTime.getMinutes() : "0"+startTime.getMinutes();
-                                key.name = parseInt(startTime.getMonth())+1+"月"+startTime.getDate()+"日  "+startTime.getHours()+":"+minute+"  开始众筹";
-                                key.color = 60;
+        console.log($stateParams);
+
+
+        //股权结构
+        $scope.stockStructure = {};
+        $scope.chartConfig = {
+
+            options: {
+                //This is the Main Highcharts chart config. Any Highchart options are valid here.
+                //will be overriden by values specified below.
+                /*chart: {
+                    width:540
+                },*/
+                tooltip: {
+                    style: {
+                        padding: 10,
+                        fontWeight: 'bold'
+                    },
+                    formatter: function () {
+                        return this.key + "　" + this.y+"%";
+                    }
+                },
+
+                colors: ['#01af94','#ff7777', '#ffb24f'],
+
+                plotOptions: {
+                    pie: {
+                        size:"75%",
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true,
+                        point: {
+                            events: {
+                                legendItemClick: function () {
+                                    return false; // <== returning false will cancel the default action
+                                }
                             }
                         }
                     }
-                });
-            });
-            console.log($scope.investorList);
-        }
-        CrowdFundingService["crowd-funding"].query({
-            "page":$scope.pageNo,
-            "per_page":pageSize
-        },function(data){
-            console.log(data);
-            if(!data.total || !data.per_page)return;
-            $scope.noMore = data.current_page == data.last_page ? true : false;
-            $scope.investorList = data.data;
-            $scope.handleData();
-            console.log($scope.investorList);
-        },function(err){
-            ErrorService.alert(err);
-        });
+                },
 
-        /*众筹列表加载更多*/
-        $scope.loadMore = function(){
-            $scope.pageNo++;
-            CrowdFundingService["crowd-funding"].query({
-                "page":$scope.pageNo,
-                "per_page":pageSize
-            },function(data){
-                console.log(data);
-                if(data.data.length){
-                    angular.forEach(data.data,function(o){
-                        $scope.investorList.push(o);
-                    });
-                    $scope.handleData();
-                    $scope.noMore = data.current_page == data.last_page ? true : false;
-                }else{
-                    ErrorService.alert({"msg":"已无更多数据"});
-                    $scope.noMore = true;
+                legend: {
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    layout: 'vertical',
+                    itemMarginBottom: 10,
+                    labelFormatter: function () {
+                        return this.name + "　" + this.y+"%";
+                    }
                 }
-            },function(err){
-                ErrorService.alert(err);
-            });
-        }
+            },
+            //The below properties are watched separately for changes.
 
-        /*开投提醒*/
-        $scope.startRemind = function($event,hasRemind,fundingId){
-            $event.stopPropagation();
-            if(!UserService.getUID())return;
-            if(hasRemind){
-                ErrorService.alert({
-                    msg:"你已设置过提醒"
-                });
-                return;
+            //Series object (optional) - a list of series using normal highcharts series options.
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                borderWidth: 0,
+                data: [
+                    ['投资人',56],
+                    ['创始团队',12],
+                    ['员工持股',32]
+                ]
+            }],
+
+
+            //Title configuration (optional)
+            title: {
+                text: ''
             }
-            $modal.open({
-                templateUrl: 'templates/company/pop-set-remind.html',
-                windowClass: 'remind-modal-window',
-                controller: [
-                    '$scope', '$modalInstance','scope','UserService','CrowdFundingService',
-                    function ($scope, $modalInstance, scope,UserService,CrowdFundingService) {
-                        UserService.getPhone(function(data){
-                            if(!data)return;
-                            $scope.phone = data.slice(0,3)+"****"+data.slice(data.length-4,data.length);
-                        });
-                        $scope.ok = function(){
-                            CrowdFundingService.save({
-                                model:"crowd-funding",
-                                id:fundingId,
-                                submodel:"opening-remind"
-                            },{
-
-                            },function(data){
-                                notify({
-                                    message:"设置成功",
-                                    classes:'alert-success'
-                                });
-                                $modalInstance.dismiss();
-                            },function(err){
-                                ErrorService.alert(err);
-                            });
-                        }
-                        $scope.cancel = function() {
-                            $modalInstance.dismiss();
-                        }
-                    }
-                ],
-                resolve: {
-                    scope: function(){
-                        return $scope;
-                    }
-                }
-            });
-        }
+        };
     });
 

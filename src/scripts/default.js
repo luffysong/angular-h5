@@ -37,7 +37,8 @@ var depModules = [
     'templates',
     'monospaced.qrcode',
     'angularFileUpload',
-    'cgNotify'
+    'cgNotify',
+    'highcharts-ng'
 ];
 
 if(window.MOCKMODE_ON){
