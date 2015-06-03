@@ -1,0 +1,240 @@
+<div class="container">
+    <div class="investor-validate">
+        <!--跟投人未提交验证-->
+        <div ng-if="valStatus == 'normal'">
+            <div class="intro text-center">
+                <p class="c-orange fs-16">完成跟投人认证</p>
+                <p>查看更多公司众筹详情，参与跟投</p>
+            </div>
+            <form ng-submit="$event.preventDefault()"  action="" name="investorValidateForm" >
+                <!--所有报错信息-->
+                <div class="error-alert error" ng-show="investorValidateForm.reIdCardNumber.$invalid && investorValidateForm.reIdCardNumber.$dirty">
+                    <span ng-show="investorValidateForm.reIdCardNumber.$error.required">请再次输入身份证号码</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.$error.idcardInvalid && enterCard">
+                    <span>两次输入身份证号码不一致</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.idCardNumber.$invalid && investorValidateForm.idCardNumber.$dirty">
+                    <span ng-show="investorValidateForm.idCardNumber.$error.required">请输入身份证号码</span>
+                </div>
+                <div class="error-alert error" ng-show="(investorValidateForm.investFrom.$invalid && investorValidateForm.investFrom.$dirty) || (investorValidateForm.investTo.$invalid && investorValidateForm.investTo.$dirty)">
+                    <span ng-show="investorValidateForm.investFrom.$error.required || investorValidateForm.investTo.$error.required">请输入投资金额</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.$error.industyEmpty">
+                    <span>请选择关注领域</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.$error.stageEmpty">
+                    <span>请选择投资阶段</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.intro.$invalid && investorValidateForm.intro.$dirty">
+                    <span ng-show="investorValidateForm.intro.$error.required">请输入一句话简介</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.address1.$invalid && investorValidateForm.address1.$dirty">
+                    <span ng-show="investorValidateForm.address1.$error.required">请选择所在地</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.position.$invalid && investorValidateForm.position.$dirty">
+                    <span ng-show="investorValidateForm.position.$error.required">请输入职位</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.company.$invalid && investorValidateForm.company.$dirty">
+                    <span ng-show="investorValidateForm.company.$error.required">请输入公司</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.name.$invalid && investorValidateForm.name.$dirty">
+                    <span ng-show="investorValidateForm.name.$error.required">请输入真实姓名</span>
+                </div>
+
+                <div class="form-horizontal welcome-form">
+
+                    <!--基本信息-->
+                    <div class="basic-info">
+                        基本信息
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control"><span class="c-orange">*</span>真实姓名</label>
+                        <div class="col col-4">
+                            <input class="form-control" type="text" ng-model="user.name" name="name" placeholder="点击填写" maxlength="15"  required/>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-control"><span class="c-orange">*</span>公司</label>
+                        <div class="col col-4">
+                            <input class="form-control" type="text" ng-model="user.companyName" name="company" placeholder="点击填写"  required/>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control"><span class="c-orange">*</span>职位</label>
+                        <div class="col col-4">
+                            <input class="form-control" type="text" ng-model="user.positionName" name="position" placeholder="点击填写"  required />
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control"><span class="c-orange">*</span>所在地</label>
+                        <div class="col col-4">
+                                <!--<input class="form-control" type="text" ng-model="user.city" name="address" placeholder="点击填写"  required />-->
+                                <select class="form-control place" name="address1" ng-model="basic.value.address1"
+                                        ng-options="c.id as c.name for c in addr1Options" required ng-change="addr1Change()">
+                                    <option value="">请选择</option>
+                                </select>
+                                <select class="form-control place" name="address2" ng-model="basic.value.address2" ng-show="addr2Options.length"
+                                        ng-options="c.id as c.name for c in addr2Options">
+                                    <option value="">请选择</option>
+                                </select>
+
+                        </div>
+
+                    </div>
+                    <div class="form-group brief">
+                        <label class="label-control"><span class="c-orange">*</span>一句话简介</label>
+                        <div class="col col-4">
+                            <textarea ng-model="user.intro" name="intro" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
+                        </div>
+
+                    </div>
+
+                    <!--投资信息-->
+                    <div class="basic-info">
+                        投资信息
+                    </div>
+
+                    <!--投资阶段-->
+                    <div class="form-group">
+                        <label class="label-control"><span class="c-orange">*</span>投资阶段</label>
+                        <div class="col-flex">
+                            <div class="stage" ng-repeat="stage in investStage" ng-click="selectStage($index)" ng-class="{'active':stage.active}" name="investStage">{{stage.name}}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--关注领域-->
+                    <div class="form-group">
+                        <div class="focus-area">
+                            <label class="label-control"><span class="c-orange">*</span>关注领域 <span class="tip">(最多可选3个)</span></label>
+                        </div>
+                        <div class="col-flex clearfix">
+                            <div class="stage" ng-repeat="area in fieldsOptions" ng-click="selectArea($index)" ng-class="{'active':area.active}" name="focusArea">{{area.desc}}</div>
+                        </div>
+                        <div class="text-right" ng-if="!noMore">
+                            <a href="" ng-click="loadArea()" class="moreArea">更多...</a>
+                        </div>
+
+                    </div>
+
+                    <!--个人单笔可投-->
+                    <div class="form-group">
+                        <label class="label-control"><span class="c-orange">*</span>个人单笔可投 </label>
+                        <div class="col-flex clearfix ml-10">
+                            <input class="form-control account-num" type="number" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
+                            至
+                            <input class="form-control account-num" type="number" ng-model="user.investMoneyEnd" name="investTo" placeholder="填写金额"  required maxlength="6" />
+                            万元
+                        </div>
+                        <span class="currency-kind">(人民币金额)</span>
+                    </div>
+
+                    <!--投资条件-->
+                    <div class="form-group">
+                        <label class="label-control"><span class="c-orange">*</span>投资条件</label>
+                        <div class="col-flex">
+                            <div ng-repeat="item in condition">
+                                <input type="radio" name="permit" id="condition{{$index}}" ng-model="user.rnvInvestorInfo" value="{{item.value}}" />
+                                <label for="condition{{$index}}">{{item.desc}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--投资信息-->
+                    <div class="basic-info">
+                        证件信息
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control"><span class="c-orange">*</span>身份证号码</label>
+                        <div class="col col-4">
+                            <input class="form-control" type="text" ng-model="user.idCardNumber" name="idCardNumber" placeholder="点击填写"  required />
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control"><span class="c-orange">*</span>确认证件号码</label>
+                        <div class="col col-4">
+                            <input class="form-control" type="text" ng-model="user.reIdCardNumber" name="reIdCardNumber" placeholder="再次填写" ng-blur="enterId()"  required />
+                        </div>
+
+
+                    </div>
+
+                    <!--上传名片-->
+                    <div class="form-group">
+                        <label class="label-control">上传名片</label>
+                        <div class="col-flex">
+                            <p>上传名片有助于提升审核速度</p>
+
+                            <p>小于2M的图片格式文件</p>
+
+                            <div class="item">
+                                <ul class="intro-pic-list no-p">
+                                    <li class="pic-list" ng-show="intro.value.pictures" style="background-image: url({{intro.value.pictures | image:150}});">
+                                        <input type="file" name="addPic" class="input-file" ng-file-select
+                                               ng-file-change="imgFileSelected($files, $event)"
+                                               ng-multiple="false"
+                                               resetOnClick="true">
+                                    </li>
+                                    <li class="progress pic-progress" ng-show="intro.uploading">
+                                        <div class="stick pic-stick" style="height:{{intro.progress}}%;"></div>
+                                    </li>
+                                    <li ng-show='!intro.uploading && !intro.value.pictures' class="icon-big-add">
+                                        <input type="file" name="addPic" class="input-file" ng-file-select
+                                               ng-file-change="imgFileSelected($files, $event)"
+                                               ng-multiple="false"
+                                               resetOnClick="true" accept="image/*">
+                                        <span class="tip">仅供认证使用</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <a href="" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="!hasClick">提交资料</a>
+                        <p class="text-center bottom-tip">
+                            点击-提交资料，即表示你同意 <a href="#/serviceProtocol" target="_blank">《用户服务协议》</a>
+                        </p>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <!--认证审核中-->
+        <div ng-if="valStatus == 'validating'" class="welcome-form">
+            <div class="validating-info text-center">
+                <div class="validating-logo"></div>
+                <p class="c-orange fs-15">你的实名认证申请已收到</p>
+                <p class="fs-12">我们核对信息后，在3小时内为你开通众筹的投资权限</p>
+            </div>
+
+        </div>
+        <!--认证审核失败-->
+        <div ng-if="valStatus == 'fail'" class="welcome-form">
+            <div class="validating-info text-center">
+                <div class="validating-logo fail"></div>
+                <p class="c-orange fs-15">您多次身份证验证未通过</p>
+                <p class="fs-12">导致无法继续申请参与众筹</p>
+                <p class="fs-12">如有疑问请联系我们：<a href="">service@36kr.com</a></p>
+            </div>
+
+        </div>
+        <!--已经是跟投人-->
+        <div ng-if="valStatus == 'withoutVal'" class="welcome-form">
+            <div class="validating-info text-center">
+                <div class="validating-logo"></div>
+                <p class="c-orange fs-15">恭喜！你已成为跟投人</p>
+                <p class="fs-12">第一批众筹的公司，将于6月8日全面上线，敬请期待</p>
+            </div>
+
+        </div>
+        <!--<a ng-if="valStatus == 'validating' || valStatus == 'fail' || valStatus == 'withoutVal'" href="" class="btn btn-default btn-cancel">返回众筹公司页</a>-->
+    </div>
+</div>

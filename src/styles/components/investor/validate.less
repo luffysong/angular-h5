@@ -1,0 +1,88 @@
+.investor-validate {
+    @title-color:#f7f7f7;
+    @default-font:14px;
+    width: 100%;
+    height: auto;
+    min-height: 500px;
+    .c-orange {
+        color: #f28d00;
+    }
+    .place {
+        width: 47%;
+        height: 35px;
+    }
+    .c-red {
+        color: red;
+    }
+    .fs-12 {
+        font-size:12px;
+    }
+    .fs-15 {
+        font-size: 15px;
+    }
+    .fs-16 {
+        font-size: 16px;
+    }
+    p {
+        margin: 0;
+        padding: 0;
+    }
+    .currency-kind {
+        display: inline-block;
+        width: 91px;
+        text-align: right;
+    }
+    .common-problem {
+        width: 100%;
+        height: 40px;
+        background-color: @title-color;
+        color: #008df2;
+        text-align: right;
+        line-height: 40px;
+        padding-right: 20px;
+        font-size: @default-font;
+
+    }
+    .intro {
+        width: 100%;
+        height: 75px;
+        padding: 10px 0;
+        background: #fff;
+        border-bottom: 1px solid #dfdfdf;
+        border-top: 1px solid #dfdfdf;
+    }
+    .basic-info {
+        width: 100%;
+        height: 37px;
+        background-color: @title-color;
+        padding-left: 20px;
+        line-height: 37px;
+        border-bottom: 1px solid #dfdfdf;
+    }
+    .validating-info {
+        width: 100%;
+        background-color: #fff;
+        padding: 30px 0;
+        .validating-logo {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            margin: 0 auto 20px;
+            background: url("images/icon-idcard.png") no-repeat;
+            background-size: 100% 100%;
+            &.fail {
+                background: url("images/icon-idcard-fail.png") no-repeat;
+                background-size: 100% 100%;
+            }
+        }
+
+    }
+    .btn-cancel {
+        display: block;
+        margin: 45px 30px 0;
+        background-color: @light-color;
+        line-height: 40px;
+        font-size: 16px;
+        color: @base-white;
+    }
+}

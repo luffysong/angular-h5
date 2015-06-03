@@ -8,27 +8,17 @@
 			<div class="form-horizontal welcome-form">
 				<div class="form-group upload-avatar">
 					<ul class="intro-pic-list no-p">
-                        <li class="pic-list" style="background-image: url({{intro.value.pictures | image:70: 'avatar'}});">
+                        <li class="pic-list" style="background-image: url({{user.avatar | image:70: 'avatar'}});">
                         </li>
-                        <!-- <li class="progress pic-progress" ng-show="intro.uploading">
-                            <div class="stick pic-stick" style="height:{{intro.progress}}%;"></div>
-                        </li> -->
                         <li ng-show='!intro.uploading'>
-                            <span class="upload-b" ng-click="uploadCard()">
+                            <span class="upload-b">
                                 <input type="file" name="addPic" class="input-file" ng-file-select
                                        ng-file-change="imgFileSelected($files, $event)"
                                        ng-multiple="false"
                                        resetOnClick="true" accept="image/*">
                             </span>
-
-                            <!-- <small>仅提供认证使用，平台不会暴露您的个人信息</small> -->
-                            <!-- <p class="c-gray">格式为JPG、JPEG、PNG，小于2MB</p> -->
                         </li>
                     </ul>
-					<!-- <div class="file-upload {{guideForm.avatar.$invalid && guideForm.avatar.$dirty?'invalid-pic':''}}"  ng-click="changeAvatar()" >
-						<img ng-src="{{user.avatar | image:70:'avatar'}}" width="70" height="70" alt=""/>
-						<input type="hidden" ng-model="user.avatar" name="avatar" required/>
-					</div> -->
 					<label class="label-control avatar-label">真实头像</label>
 				</div>
 				<div class="form-group">
@@ -75,7 +65,7 @@
 					<a class="btn btn-linear get-code" href="javascript:void(0)" ng-click="getCode($event)" ng-disabled="wait || guideForm.phone.$invalid">{{wait?wait+'秒':'获取验证码'}}</a>
 				</div>
 				<div class="form-group">
-					<a href="#" class="btn btn-default btn-auth" ng-click="submitForm($event)">继续跟投人认证</a>
+					<a href="#" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="guideForm.$invalid">继续跟投人认证</a>
 				</div>
 			</div>
 		</form>
