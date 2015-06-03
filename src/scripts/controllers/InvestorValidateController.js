@@ -246,7 +246,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",true);
             }
             if(!checkForm("investorValidateForm"))return;
-            /*$scope.hasClick = true;*/
+            $scope.hasClick = true;
             $scope.user.focusIndustry = $scope.areaList;
             $scope.user.businessCardUrl = $scope.intro.value.pictures;
             if($scope.basic.value){
@@ -262,13 +262,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 console.log(data);
                 $scope.valStatus = "validating";
             },function(err){
-                console.log(err);
                 if(err.code == 1001){
                     $scope.valStatus = "fail";
                 }else if(err.code == 1002){
                     $scope.valStatus = "validating";
                 }
                 ErrorService.alert(err);
+                $scope.hasClick = false;
             });
         };
     }
