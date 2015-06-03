@@ -20,7 +20,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.areaList = [];
         $scope.user = {
             investMoneyUnit:"CNY",
-            identityCardType:"IDCARD",
             rnvInvestorInfo:"V1_1"
         };
         $scope.intro = {};
@@ -89,6 +88,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             id:UserService.getUID()
         },function(data){
             angular.extend($scope.user, data);
+            $scope.user.identityCardType = "IDCARD";
             /*关注领域数据处理*/
             if(data.industry && data.industry.length){
                 angular.extend($scope.areaList,data.industry);
