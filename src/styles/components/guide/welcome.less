@@ -23,6 +23,9 @@
 		margin: 0 10px;
 		border-bottom: 1px solid #ddd;
         white-space: nowrap;
+        &.normal {
+            white-space: normal;
+        }
         position: relative;
 		.clearfix;
         .focus-area {
@@ -180,13 +183,17 @@
 	.col {
 		float: left;
 		width: 160px;
+        input,textarea {
+            border: 0;
+            outline: 0;
+        }
 		// &.validate-code {
 		// 	&, & > input {
 		// 		width: 110px;
 		// 	}
 		// }
 
-		
+
 	}
 
     .control {
