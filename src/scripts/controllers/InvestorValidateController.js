@@ -196,7 +196,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                         $scope.intro.progress = evt.loaded * 100 / evt.total;
                     }).success(function (data, status, headers, config) {
                         var filename = data.url.toLowerCase();
-                        if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1 || filename.indexOf('.jpeg') != -1) {
+                        if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
                             $scope.intro.value.pictures = window.kr.upyun.bucket.url + data.url;
                         } else {
                             ErrorService.alert({
