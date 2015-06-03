@@ -23,6 +23,7 @@
 		margin: 0 10px;
 		border-bottom: 1px solid #ddd;
         white-space: nowrap;
+        position: relative;
 		.clearfix;
         .focus-area {
             height: 40px;
@@ -189,19 +190,24 @@
 	}
 
     .control {
-        margin-left: 75px;
+        margin-left: 91px;
         input {
             border: none;
             padding: 0;
             outline: 0;
             width: 100%;
         }
+        &.validate-code {
+            margin-right: 110px;
+        }
     }
 
 	.get-code {
-		float: right;
 		color: @light-color;
 		padding: 0 10px;
+        position: absolute;
+        right: 10px;
+        top: 0;
 	}
 
 	.btn-auth {
