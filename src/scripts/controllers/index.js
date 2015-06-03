@@ -5,3 +5,4 @@ require('./OrganizationDetailController');
 require('./SearchController');
 require('./UserDetailController');
 require('./syndicatesController');
+require('./syndicatesDetailController');

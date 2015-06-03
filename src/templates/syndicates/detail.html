@@ -1,0 +1,85 @@
+<div class="home-wrap">
+    <div class="slider-container">
+        <div class="top-slide-arrow syndicates">
+            <!--<a href="javascript:void(0)" class="top-slide-arrow-left"></a>
+            <a href="javascript:void(0)" class="top-slide-arrow-right"></a>-->
+        </div>
+        <slick infinite=true autoplay=true pauseOnHover=false speed=1000 prev-arrow=".top-slide-arrow-left"
+               next-arrow=".top-slide-arrow-right">
+            <div class="slider syndicates">
+                <div class="slider-image">
+                    <a href="" class="banner-btn">我要投资</a>
+                </div>
+            </div>
+            <!--<div class="slider syndicates">
+                <div class="slider-image" >
+                    <a href="http://www.bosszhipin.com/activity/bang?sid=act_bang" target="_blank" style="display:block; position: relative;width: 100%;height: 100%"></a>
+                    &lt;!&ndash; <img ng-src="styles/images/home-slider-01.png" /> &ndash;&gt;
+                </div>
+            </div>
+            <div class="slider syndicates">
+                <div class="slider-image">
+                    <a href="#/company/131668/overview?fromIndexSlider=3" style="display:block; position: relative;width: 100%;height: 100%"></a>
+                    &lt;!&ndash; <img ng-src="styles/images/home-slider-01.png" /> &ndash;&gt;
+                </div>
+            </div>-->
+        </slick>
+    </div>
+</div>
+<div class="container">
+    <div class="syndicates-index" ng-repeat="item in investorList track by $index" ng-class="{'mt-30': $index == 0,'mb-50': $index == investorList.length-1 && noMore}">
+
+        <a href="#/company/{{item.company.id}}/finance?fundingId={{item.id}}">
+            <div class="syndicates-pic" style="background-image: url({{item.desc.file_list_img+'!800' || ''}})">
+                <div class="syndicates-status bg-{{item.color}}" ng-class="{'pd-19':item.color == '60'}">
+                    {{item.name}}
+                </div>
+                <span class="hot-icon" ng-if="item.hot == 1"></span>
+            </div>
+
+        </a>
+        <div class="syndicates-brief-info">
+            <div class="investor-led-title">
+                <a ui-sref="{{item.investorData | investorLink:'id':'type'}}" title="{{item.investorData.name}}" class="led-name">
+                    {{item.investorData.name}}
+                </a>
+                <span class="text">领投</span>
+            </div>
+            <div class="investor-detail">
+                <a href="#/company/{{item.company.id}}/finance?fundingId={{item.id}}" class="syndicates-logo" style="background-image: url({{item.company.logo || ''}});"></a>
+                <a href="#/company/{{item.company.id}}/finance?fundingId={{item.id}}">{{item.company.name}}</a>
+                <div class="brief">{{item.company.brief}}</div>
+                <div class="props">
+                    <div class="syndicates-detail" ng-repeat="key in item.desc.cf_advantage | limitTo : 3">
+                        <div class="syndicates-attr">
+                            <p>{{key.label}}</p>
+                        </div>
+                        <div class="syndicates-intro">
+                            <p>{{key.value}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!--融资进度条-->
+                <loading-bar percent="item.percent" loading-tip="item.cf_success_raising">
+                </loading-bar>
+
+                <div class="goal">
+                    <span>众筹目标</span>
+                    <span class="goal-num"><b class="currency">{{item.cf_raising | unitConversion}}</b></span>
+                </div>
+                <div class="actions">
+                    <a href="#/company/{{item.company.id}}/finance?fundingId={{item.id}}"
+                                         class="btn btn-default">查看详情</a>
+
+                    <a href="" class="btn btn-default" login-btn ng-show="item.color == '60'"
+                       ng-click="startRemind($event,item.has_reminder,item.id)">
+                        开投提醒
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="syndicates-index loadMore" ng-click="loadMore()" ng-show="!noMore">
+        查看更多
+    </div>
+</div>
