@@ -69,33 +69,6 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             },800);
         });
 
-        $scope.submitForm = function(e){
-            e && e.preventDefault();
-            if(!checkForm('guideForm'))return;
-            UserService.basic.update({
-                id: $scope.userId
-            }, {
-                avatar: $scope.user.avatar,
-                name: $scope.user.name,
-                email: $scope.user.email,
-                phone: $scope.user.phone,
-                smscode: $scope.user.smscode
-            }, function(data){
-                $state.go('investorValidate');
-                setTimeout(function(){
-                    location.reload();
-                },0);
-            }, function(err){
-                $('<div class="error-alert error error-code">' + err.msg + '</div>').appendTo('body');
-                $timeout(function(){
-                    $('.error-code').fadeOut();
-                },2000);
-
-                // ErrorService.alert(err);
-            })
-        };
-
-
 
         $scope.getCode = function(e){
             e && e.preventDefault();
@@ -199,6 +172,46 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 });
             }
         };
+
+        $scope.submitForm = function(e){
+            e && e.preventDefault();
+            if(!$scope.user.avatar) {
+                $('<div class="error-alert error error-code">请上传真实头像</div>').appendTo('body');
+                $timeout(function(){
+                    $('.error-code').fadeOut();
+                },2000);
+                return;
+            }
+
+            if(!checkForm('guideForm'))return;
+            UserService.basic.update({
+                id: $scope.userId
+            }, {
+                avatar: $scope.user.avatar,
+                name: $scope.user.name,
+                email: $scope.user.email,
+                phone: $scope.user.phone,
+                smscode: $scope.user.smscode
+            }, function(data){
+                if($scope.applySpaceEnter){
+                    $state.go('krspace.judge');
+                }else{
+                    // $state.go('guide.success-enter');
+                    $state.go('investorValidate');
+                }
+                setTimeout(function(){
+                    location.reload();
+                },0);
+            }, function(err){
+                $('<div class="error-alert error error-code">' + err.msg + '</div>').appendTo('body');
+                $timeout(function(){
+                    $('.error-code').fadeOut();
+                },2000);
+
+                // ErrorService.alert(err);
+            })
+        };
+
     }
 );
 
