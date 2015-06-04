@@ -68,11 +68,6 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 });
             },800);
         });
-        if(window.sessionStorage.applySpaceStatus) {
-            $scope.applySpaceEnter = true;
-        } else {
-            $scope.applySpaceEnter = false;
-        }
 
         $scope.submitForm = function(e){
             e && e.preventDefault();
@@ -86,12 +81,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 phone: $scope.user.phone,
                 smscode: $scope.user.smscode
             }, function(data){
-                if($scope.applySpaceEnter){
-                    $state.go('krspace.judge');
-                }else{
-                    // $state.go('guide.success-enter');
-                    $state.go('investorValidate');
-                }
+                $state.go('investorValidate');
                 setTimeout(function(){
                     location.reload();
                 },0);

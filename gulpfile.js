@@ -493,6 +493,11 @@ gulp.task('build:prod', ['clean'],function(){
     CDNPrefix = '//krplus-cdn.b0.upaiyun.com/m';
     gulp.start('build');
 });
+gulp.task('build:prod:m1', ['clean'],function(){
+    buildMode = 'prod';
+    CDNPrefix = '//krplus-cdn.b0.upaiyun.com/m1';
+    gulp.start('build');
+});
 
 gulp.task('local:build', ['build'], function(){
     $.connect.server({
