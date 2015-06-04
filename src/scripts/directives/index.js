@@ -1,1 +1,2 @@
+require('./BaiduBtnDirective');
 require('./ClampDirective');
