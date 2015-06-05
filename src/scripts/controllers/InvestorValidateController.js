@@ -13,7 +13,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         WEIXINSHARE = {
             shareTitle: "36氪股权众筹",
             shareDesc: "成为跟投人",
-            shareImg: 'http://img.36tr.com/logo/20140520/537aecb26e02d'
+            shareImg: 'http://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg'
         };
         InitWeixin();
         $scope.stageList = [];
@@ -173,7 +173,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             var upyun = window.kr.upyun;
             if(files[0].size > 2 * 1024 * 1024){
                 ErrorService.alert({
-                    msg:"附件大于2M"
+                    msg:"图片大于2M"
                 });
                 return;
             }
