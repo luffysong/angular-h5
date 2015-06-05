@@ -58,8 +58,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         /*地区*/
         $scope.addr1Options = DictionaryService.getLocation();
         $scope.addr2Options = [];
-        $scope.tempList = $scope.fieldsOptions.concat();
-        $scope.fieldsOptions = $scope.fieldsOptions.slice(0,8);
         /*跟投人认证信息回写*/
         UserService.get({
             id:'identity',
@@ -74,6 +72,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 }
             }
             angular.extend($scope.user,data.userCoinvestorCertInfo);
+            /*真实姓名不回写*/
+            $scope.user.name = "";
+
         },function(err){
             if(err.code == 1001){
                 /*多次跟投人认证失败*/
@@ -81,6 +82,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }else if(err.code == 1002){
                 /*正在审核中*/
                 $scope.valStatus = "validating";
+                $scope.valStatus = "normal";
             }else if(err.code == 1003){
                 /*已经是跟投人*/
                 $scope.valStatus  = "withoutVal";
@@ -102,11 +104,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     angular.forEach($scope.fieldsOptions,function(key,index){
                         if(key.value == o){
                             key.active = true;
-                        }
-                    });
-                    angular.forEach($scope.tempList,function(obj,i){
-                        if(obj.value == o){
-                            obj.active = true;
                         }
                     });
                 });
@@ -160,11 +157,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 });
 
             }
-        }
-        /*点击更多加载关注领域*/
-        $scope.loadArea = function(){
-            $scope.noMore = true;
-            $scope.fieldsOptions = $scope.tempList;
         }
         /*确认身份证号失去焦点事件*/
         $scope.enterId = function(){
