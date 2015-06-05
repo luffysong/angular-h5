@@ -51,8 +51,25 @@
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>真实姓名</label>
                         <div class="col-max">
-                            <input class="form-control" type="text" ng-model="user.name" name="name" placeholder="点击填写" maxlength="15"  required/>
+                            <input class="form-control" type="text" ng-model="user.name" placeholder="须与身份证姓名保持一致" maxlength="15"  required/>
                         </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="label-control"><span class="c-orange">*</span>身份证号码</label>
+                        <div class="col-max">
+                            <input class="form-control" type="text" ng-model="user.idCardNumber" name="idCardNumber" placeholder="点击填写"  required />
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="label-control"><span class="c-orange">*</span>确认证件号码</label>
+                        <div class="col-max">
+                            <input class="form-control" type="text" ng-model="user.reIdCardNumber" name="reIdCardNumber" placeholder="再次填写" ng-blur="enterId()"  required />
+                        </div>
+
 
                     </div>
 
@@ -117,10 +134,6 @@
                         <div class="col-flex clearfix">
                             <div class="stage" ng-repeat="area in fieldsOptions" ng-click="selectArea($index)" ng-class="{'active':area.active}" name="focusArea">{{area.desc}}</div>
                         </div>
-                        <div class="text-right" ng-if="!noMore">
-                            <a href="" ng-click="loadArea()" class="moreArea">更多...</a>
-                        </div>
-
                     </div>
 
                     <!--个人单笔可投-->
@@ -147,30 +160,15 @@
                     </div>
 
 
-                    <!--投资信息-->
+
+
+                    <!--上传名片-->
                     <div class="basic-info">
                         证件信息
                     </div>
-                    <div class="form-group">
-                        <label class="label-control"><span class="c-orange">*</span>身份证号码</label>
-                        <div class="col-max">
-                            <input class="form-control" type="text" ng-model="user.idCardNumber" name="idCardNumber" placeholder="点击填写"  required />
-                        </div>
-
-                    </div>
-                    <div class="form-group">
-                        <label class="label-control"><span class="c-orange">*</span>确认证件号码</label>
-                        <div class="col-max">
-                            <input class="form-control" type="text" ng-model="user.reIdCardNumber" name="reIdCardNumber" placeholder="再次填写" ng-blur="enterId()"  required />
-                        </div>
-
-
-                    </div>
-
-                    <!--上传名片-->
                     <div class="form-group normal">
                         <label class="label-control">上传名片</label>
-                        <div class="col col-4">
+                        <div class="col-max">
                             <p>名片有助于提升审核速度</p>
 
                             <p>支持小于2M的JGP、JPEG和PNG格式，仅供认证使用</p>
@@ -212,7 +210,7 @@
             <div class="validating-info text-center">
                 <div class="validating-logo"></div>
                 <p class="c-orange fs-15">你的实名认证申请已收到</p>
-                <p class="fs-12">我们核对信息后，在3小时内为你开通众筹的投资权限</p>
+                <p class="fs-12">我们核对信息后，在1个工作日内为你开通众筹的投资权限</p>
             </div>
 
         </div>
@@ -231,7 +229,7 @@
             <div class="validating-info text-center">
                 <div class="validating-logo"></div>
                 <p class="c-orange fs-15">恭喜！你已成为跟投人</p>
-                <p class="fs-12">第一批众筹的公司，将于6月8日全面上线，敬请期待</p>
+                <p class="fs-12">第一批众筹的公司，将于6月9日全面上线，敬请期待</p>
             </div>
 
         </div>

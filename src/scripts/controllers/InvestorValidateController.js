@@ -55,8 +55,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         /*地区*/
         $scope.addr1Options = DictionaryService.getLocation();
         $scope.addr2Options = [];
-        $scope.tempList = $scope.fieldsOptions.concat();
-        $scope.fieldsOptions = $scope.fieldsOptions.slice(0,8);
         /*跟投人认证信息回写*/
         UserService.get({
             id:'identity',
@@ -88,6 +86,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             id:UserService.getUID()
         },function(data){
             angular.extend($scope.user, data);
+            $scope.user.name = "";
             /*cardType强制定义为身份证类型*/
             $scope.user.identityCardType = "IDCARD";
             $scope.user.investMoneyBegin = parseInt(data.investMoneyBegin);
@@ -99,11 +98,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     angular.forEach($scope.fieldsOptions,function(key,index){
                         if(key.value == o){
                             key.active = true;
-                        }
-                    });
-                    angular.forEach($scope.tempList,function(obj,i){
-                        if(obj.value == o){
-                            obj.active = true;
                         }
                     });
                 });
@@ -157,11 +151,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 });
 
             }
-        }
-        /*点击更多加载关注领域*/
-        $scope.loadArea = function(){
-            $scope.noMore = true;
-            $scope.fieldsOptions = $scope.tempList;
         }
         /*确认身份证号失去焦点事件*/
         $scope.enterId = function(){
