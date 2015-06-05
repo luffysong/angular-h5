@@ -160,9 +160,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         /*上传名片*/
         $scope.imgFileSelected  = function(files, e){
             var upyun = window.kr.upyun;
-            if(files[0].size > 2 * 1024 * 1024){
+            if(files[0].size > 5 * 1024 * 1024){
                 ErrorService.alert({
-                    msg:"图片大于2M"
+                    msg:"图片大于5M"
                 });
                 return;
             }
