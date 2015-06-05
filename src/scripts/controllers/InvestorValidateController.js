@@ -9,6 +9,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         if(!UserService.getUID()){
             location.href = "/user/login?from=" + encodeURIComponent(location.href);
         }
+        $timeout(function(){
+            window.scroll(0,0);
+        },0);
         document.title="36氪股权众筹";
         WEIXINSHARE = {
             shareTitle: "36氪股权众筹",

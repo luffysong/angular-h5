@@ -1,9 +1,70 @@
 /*众筹详情页样式*/
 .syndicate-detail {
+    .c-black {
+        color: #000;
+    }
+    .c-white {
+        color: #fff;
+    }
+    .pb-20 {
+        padding-bottom: 20px;
+    }
+    .mb-20 {
+        margin-bottom: 20px;
+    }
+    .detail-desc {
+        padding: 20px;
+        background-color: #fff;
+    }
     .welcome-form {
-        .form-group {
-            &:last-child {
+        >.form-group {
+            &:last-child{
+                background-color: #fff;
+                padding: 16px 0;
+                border-bottom: 0;
+                margin: -1px 10px 0;
             }
+        }
+    }
+    .all-co {
+        width: 100%;
+        height: 44px;
+        text-align: center;
+        line-height: 44px;
+        border: 1px solid #eee;
+    }
+    .syndicatesInfo-banner {
+        position: relative;
+        width: 100%;
+        background: linear-gradient(top,#1D2C56,#7B6C54) rgba(0,0,0,.5);
+        padding: 25px 0;
+        &.c-white {
+            color: #fff;
+        }
+        .dark-white {
+            color: #999999;
+        }
+        .syndicatesInfo-status {
+            display: inline-block;
+            position: absolute;
+            width: auto;
+            height: 23px;
+            background-color: #F28D00;
+            color: #fff;
+            text-align: center;
+            line-height: 23px;
+            padding: 0 18px;
+            top: 0;
+            left: 0;
+        }
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background-color: #F78000;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            border-radius: 50%;
         }
     }
     .led-avatar {
@@ -32,7 +93,6 @@
             position: relative;
             width: 100%;
             height: auto;
-            min-height: 150px;
             border-left: 1px solid #eee;
             padding: 20px 0;
             &:last-of-type {
@@ -117,9 +177,164 @@
             }
         }
     }
+    .foreign-company {
+        width: 100%;
+        background-color: #fff;
+        padding: 10px;
+        .foreign-logo {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-size: 100% 100%;
+            float: left;
+            margin-right: 10px;
+        }
+    }
+    .high-point-img {
+        width: 100%;
+        height: auto;
+    }
+    .co-investor {
+        width: 100%;
+        padding: 10px 5px;
+        .co-investor-logo {
+            width: 25%;
+            float: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .co-logo {
+            display: block;
+            margin: auto;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-size: 100% 100%;
+        }
+    }
+    .syndicate-goal {
+        width: 100%;
+        padding: 15px 0 20px;
+        background-color: #fff;
+        &.fund-info {
+            padding-bottom: 0;
+        }
+        .account {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .mt-15 {
+            margin-top: 15px;
+        }
+        .fl-right {
+            float: right;
+        }
+        .syndicate-detail-num {
+            width: 100%;
+            padding: 20px 0 0;
+            &.fund-info {
+                padding: 0;
+                .detail{
+                    width: 33%;
+                    margin-bottom: 10px;
+                    border-right: 1px solid #eee;
+                    .logo {
+                        display: block;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        background-size: 100% 100%;
+                        margin: auto;
+                    }
+                }
+                .has-attend {
+                    width: 100%;
+                    padding: 0 20px;
+                    text-align: left;
+                    background-color: #fff;
+                    border-top: 1px solid #eee;
+                    .entity {
+                        padding: 20px 0 10px;
+                        text-align: center;
+                        .detail {
+                            border: 0;
+                        }
+                    }
+                    .has-title {
+                        border-bottom: 1px solid #eee;
+                        padding: 10px 0;
+                    }
+                }
+            }
+            .detail {
+                width: 25%;
+                float: left;
+                border-right: 1px solid #eee;
+            }
+        }
+    }
+    .market-analysis,.detail-desc {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        background-color: #fff;
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li {
+                margin-bottom: 15px;
+                color: #F28D00;
+                &.other {
+                    color: #888888;
+                    border-bottom: 1px solid #eee;
+                    .content {
+                        color: #000;
+                        margin-bottom: 15px;
+                    }
+                }
+                .desc-title {
+                    color: #888888;
+                }
+                .li-point {
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    background-color: #F28D00;
+                    border-radius: 50%;
+                    vertical-align: middle;
+                }
+                .content {
+                    padding-left: 10px;
+                    color: #888888;
+                }
+            }
+        }
+    }
+    .more-tip {
+        width: 100%;
+        height: 45px;
+        line-height: 45px;
+        background-color: #fff;
+        border: 1px solid #eee;
+        text-align: center;
+    }
+    .toggle-more {
+        display: block;
+        width:80%;
+        margin: 15px auto;
+        border: 1px solid #67AEF5;
+        color: #67AEF5;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        padding: 0;
+    }
     .chart {
         width: 100%;
-        height: 300px;
+        height: 160px;
     }
 }
 

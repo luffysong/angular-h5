@@ -149,7 +149,6 @@ angular.module('defaultApp.service').service('CompanyService', [
             }
         }, {
             sub: [
-                "basic",
                 "finance",
                 "employee",
                 "founder",
@@ -159,26 +158,6 @@ angular.module('defaultApp.service').service('CompanyService', [
                 "other"
             ]
         }, {
-            'basic': {
-                update: {
-                    method: 'PUT',
-                    params: {
-                        sub: undefined
-                    },
-                    transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
-                        data.mode = $stateParams.mode;
-                        data.startDate = data.startDate?([data.startDate, '01', '01'].join('-') + ' 00:00:00'):"";
-
-                        data.tags = data.tags.map(function (v) {
-                            return v.id;
-                        }).join(',');
-
-                        delete data.managerId;
-
-                        return data;
-                    })
-                }
-            },
             'other': {
                 update: {
                     method: 'PUT',
