@@ -86,4 +86,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             },0);
         }
     });
+    /*协议路由，风险揭示书协议*/
+    $stateProvider.state('riskTip', {
+        url: '/riskTip',
+        templateUrl: 'templates/protocol/riskTip.html',
+        controller:function(){
+            setTimeout(function(){
+                window.scroll(0,0);
+            },0);
+        }
+    });
 });
