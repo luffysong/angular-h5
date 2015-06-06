@@ -104,6 +104,10 @@
 			$('.download').hide();
 			$('body').removeClass('download-show');
 		});
+
+        $('body').delegate('textarea, input', 'focus', function(){
+            $('.download').hide();
+        });
 	}
 
 </script>
