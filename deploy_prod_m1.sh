@@ -10,4 +10,5 @@ scp ./dist/index.html dev06:/data/work/tomcat_servers/krplus_index/m1
 
 
 rsync -rvltOD ./dist/* dev06:/data/work/frontend/prod/36kr/krplus/dist/m1
+rsync -rvltOD ./dist/* dev05:/data/work/frontend/prod/36kr/krplus/dist/m1
 
