@@ -9,6 +9,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         if(!UserService.getUID()){
             location.href = "/user/login?from=" + encodeURIComponent(location.href);
         }
+        $timeout(function(){
+            window.scroll(0,0);
+        },0);
         document.title="36氪股权众筹";
         WEIXINSHARE = {
             shareTitle: "36氪股权众筹",
@@ -69,6 +72,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 }
             }
             angular.extend($scope.user,data.userCoinvestorCertInfo);
+            /*真实姓名不回写*/
+            $scope.user.name = "";
+
         },function(err){
             if(err.code == 1001){
                 /*多次跟投人认证失败*/
@@ -76,6 +82,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }else if(err.code == 1002){
                 /*正在审核中*/
                 $scope.valStatus = "validating";
+                $scope.valStatus = "normal";
             }else if(err.code == 1003){
                 /*已经是跟投人*/
                 $scope.valStatus  = "withoutVal";

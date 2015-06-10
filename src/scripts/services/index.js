@@ -1,6 +1,7 @@
 require('./BasicService');
 require('./CheckFormService');
 require('./CompanyService');
+require('./CrowdFundingService');
 require('./DefaultService');
 require('./DictionaryService');
 require('./ErrorService');

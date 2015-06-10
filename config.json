@@ -41,12 +41,12 @@
         "src/components/angular-qrcode/qrcode.js",
         "src/components/clamp.js/clamp.min.js",
         "src/components/ng-file-upload/angular-file-upload-all.js",
-        "src/components/angular-notify/dist/angular-notify.min.js"
-
+        "src/components/angular-notify/dist/angular-notify.min.js",
+        "src/components/angular-bootstrap/ui-bootstrap-tpls.min.js",
+        "src/components/highcharts/highcharts.js",
+        "src/components/highcharts-ng/dist/highcharts-ng.min.js"
     ],
     "angularUiTpls": [
-        "src/components/angular-ui-bootstrap/template/carousel/carousel.html",
-        "src/components/angular-ui-bootstrap/template/carousel/slide.html"
     ],
     "mocks": [
         "src/components/angular-mocks/angular-mocks.js",
