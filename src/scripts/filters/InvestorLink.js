@@ -23,8 +23,6 @@ angular.module('defaultApp.filter').filter('investorLink', function () {
             };
         }
 
-        if(types[input[typeKey]]==orgLink)return '.';
-
-        return types[input[typeKey]].replace('{{id}}',input[idKey]);
+        return input[typeKey]?types[input[typeKey]].replace('{{id}}',input[idKey]):"index";
     };
 });
