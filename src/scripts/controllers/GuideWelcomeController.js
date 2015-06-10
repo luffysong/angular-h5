@@ -19,6 +19,9 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             delete data.$resolved;
             //data.avatar = ""
             angular.extend($scope.user, angular.copy(data));
+            if(data.email && data.phone && data.avatar && data.name){
+                $state.go('investorValidate');
+            }
             if(data.phone){
                 $scope.user.hasPhone = true;
                 delete $scope.user.phone;

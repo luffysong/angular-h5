@@ -342,24 +342,18 @@ angular.module('defaultApp.service').service('UserService', [
             //return 115;
         };
         service.isProfileValid = function(callback) {
-            if(!window.localStorage || !service.getUID()){
+            if(!service.getUID()){
                 callback(false);
-                return;
-            }
-            var email = localStorage.getItem('uemail');
-            var phone = localStorage.getItem('uphone');
-            if(email || phone){
-                callback(email&&phone);
                 return;
             }
             service.basic.get({
                 id: service.getUID()
             }, function(data){
-                if(!data.email && !data.phone){
+                if(data.email && data.phone && data.avatar && data.name){
+                    callback(true);
+                }else{
                     callback(false);
-                    return;
                 }
-                service.isProfileValid(callback);
             });
         };
 
