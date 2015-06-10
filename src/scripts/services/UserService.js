@@ -417,7 +417,13 @@ angular.module('defaultApp.service').service('UserService', [
                 service.getMyEmail(callback);
             });
         }
-
+        service.getIdentity = function(callback){
+            $http.get('/api/user/identity').success(function(data){
+                callback && callback(data);
+            }).catch(function(){
+                callback && callback(null);
+            });
+        }
 
         return service;
     }
