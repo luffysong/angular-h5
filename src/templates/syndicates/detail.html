@@ -102,19 +102,19 @@
                 <div class="avatar" style="background-image: url({{syndicatesInfo.base.investorData.logo || ''}})"></div>
                 <p class="c-black">{{syndicatesInfo.base.investorData.name}}</p>
             </div>
-            <div class="form-group">
+            <div class="form-group normal">
                 <label class="label-control">一句话简介</label>
                 <div class="col col-4">
                     {{syndicatesInfo.base.investorData.intro}}
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group normal">
                 <label class="label-control">背景介绍</label>
                 <div class="col col-4">
                     {{syndicatesInfo.detail.lead_desc}}
                 </div>
             </div>
-            <div class="form-group no-b">
+            <div class="form-group normal no-b">
                 <label class="label-control">领投理由</label>
                 <div class="col col-4">
                     {{syndicatesInfo.detail.lead_business_desc}}
@@ -162,15 +162,6 @@
             </div>
         </div>
 
-
-
-
-        <div ng-if="!isCoInvestor">
-            <div class="more-tip" >
-                更多众筹详情仅对跟投人开放
-            </div>
-            <a href="#/investorValidate" class="btn btn-default toggle-more">认证跟投人</a>
-        </div>
         <!--国外同类型公司-->
         <div ng-show="syndicatesInfo.detail.foreign_com_name">
             <div class="basic-info">
@@ -193,6 +184,12 @@
             <img class="high-point-img" ng-src="{{pic | image:770:'logo'}}" ng-repeat="pic in syndicatesInfo.detail.com_feature_pic track by $index"></img>
         </div>
 
+        <div ng-if="!isCoInvestor">
+            <div class="more-tip" >
+                更多众筹详情仅对跟投人开放
+            </div>
+            <a href="#/investorValidate" class="btn btn-default toggle-more">认证跟投人</a>
+        </div>
         <!--参与的跟投人-->
         <div ng-if="fundingId && coInvestorData.length && coInvestor.hasPermisson">
             <div class="basic-info">
@@ -327,13 +324,13 @@
                             <span ng-show="item.position_detail">| {{item.position_detail}}</span>
                         </p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group normal">
                         <label class="label-control">一句话简介</label>
                         <div class="col col-4">
                             {{item.intro}}
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group normal">
                         <label class="label-control">背景介绍</label>
                         <div class="col col-4">
                             {{item.desc}}
@@ -357,37 +354,37 @@
                 <div class="basic-info">
                     工商信息
                 </div>
-                <div class="form-group">
+                <div class="form-group normal">
                     <label class="label-control">公司名称</label>
                     <div class="col col-4">
                         {{syndicatesInfo.detail.ic_com_name}}
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group normal">
                     <label class="label-control">法定代表人</label>
                     <div class="col col-4">
                         {{syndicatesInfo.detail.ic_corporation}}
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group normal">
                     <label class="label-control">注册资本</label>
                     <div class="col col-4">
                         {{syndicatesInfo.detail.ic_registered_capital}}
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group normal">
                     <label class="label-control">注册地点</label>
                     <div class="col col-4">
                         {{syndicatesInfo.detail.ic_registered_location}}
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group normal">
                     <label class="label-control">成立日期</label>
                     <div class="col col-4">
                         {{syndicatesInfo.detail.ic_establishing_date}}
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group normal">
                     <label class="label-control">所属行业</label>
                     <div class="col col-4">
                         {{syndicatesInfo.detail.ic_category}}

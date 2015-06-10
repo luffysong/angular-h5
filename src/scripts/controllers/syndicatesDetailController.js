@@ -6,6 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
     function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService) {
+
         /*获取用户是否为跟投人*/
         UserService.getIdentity(function(data){
             console.log(data);
