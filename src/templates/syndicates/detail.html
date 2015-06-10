@@ -1,13 +1,15 @@
 <div class="container">
     <div class="investor-validate syndicate-detail">
         <div class="syndicatesInfo-banner text-center c-white">
-            <span class="syndicatesInfo-status">{{status}}</span>
+            <span class="syndicatesInfo-status bg-{{color}}">{{status}}</span>
             <a ui-sref="company_detail({id:companyData.company.id})">
                 <div class="company-logo" style="background-image: url({{companyData.basic.logo}})"></div>
                 <p class="c-white">{{companyData.basic.name}}</p>
             </a>
-            <a href="{{companyData.basic.website}}" target="_blank"><p class="dark-white">{{companyData.basic.website}}</p></a>
-            <p>{{companyData.basic.brief}}</p>
+            <a href="{{companyData.basic.website}}" target="_blank">
+                <p class="dark-white">{{companyData.basic.website}}</p>
+            </a>
+            <p class="company-brief">{{companyData.basic.brief}}</p>
             <p class="dark-white">
                 <span ng-if="companyData.basic.startDate" class="year"><i class="icon-h5-time"></i>{{companyData.basic.startDate}}</span>
                 <span class="location" ng-if="companyData.basic.address1"><i class="icon-h5-location"></i>{{companyData.basic.address1 | city}}</span>
@@ -49,8 +51,8 @@
                         <p>剩余天数</p>
                     </div>
                     <div class="detail">
-                        <p class="c-orange">{{syndicatesInfo.funding.sell_shares ? syndicatesInfo.funding.sell_shares : 0}}</p>
-                        <p>让出股份</p>
+                        <p class="c-orange">{{syndicatesInfo.funding.sell_shares ? syndicatesInfo.funding.sell_shares : "暂不公开"}}</p>
+                        <p>出让股份</p>
                     </div>
                 </div>
             </div>
@@ -73,11 +75,11 @@
                             <p>融资金额</p>
                         </div>
                         <div class="detail">
-                            <p class="c-orange">{{syndicatesInfo.funding.total_sell_shares}}</p>
-                            <p>让出股权</p>
+                            <p class="c-orange">{{syndicatesInfo.funding.valuation | unitConversion}}</p>
+                            <p>投前估值</p>
                         </div>
                     </div>
-                    <div class="has-attend">
+                    <div class="has-attend" ng-if="syndicatesInfo.funding.investors.length">
                         <p class="has-title">已参与投资方</p>
                         <div class="entity clearfix">
                             <div class="detail" ng-repeat="item in syndicatesInfo.funding.investors">
@@ -99,22 +101,24 @@
                 领投人
             </div>
             <div class="led-avatar">
-                <div class="avatar" style="background-image: url({{syndicatesInfo.base.investorData.logo || ''}})"></div>
-                <p class="c-black">{{syndicatesInfo.base.investorData.name}}</p>
+                <a ui-sref="{{syndicatesInfo.base.investorData | investorLink:'id':'type'}}">
+                    <div class="avatar" style="background-image: url({{syndicatesInfo.base.investorData.logo || ''}})"></div>
+                    <p class="c-black">{{syndicatesInfo.base.investorData.name}}</p>
+                </a>
             </div>
-            <div class="form-group normal">
+            <div class="form-group normal" ng-if="syndicatesInfo.base.investorData.intro">
                 <label class="label-control">一句话简介</label>
                 <div class="col col-4">
                     {{syndicatesInfo.base.investorData.intro}}
                 </div>
             </div>
-            <div class="form-group normal">
+            <div class="form-group normal" ng-show="syndicatesInfo.detail.lead_desc">
                 <label class="label-control">背景介绍</label>
                 <div class="col col-4">
                     {{syndicatesInfo.detail.lead_desc}}
                 </div>
             </div>
-            <div class="form-group normal no-b">
+            <div class="form-group normal no-b" ng-if="syndicatesInfo.detail.lead_business_desc || syndicatesInfo.detail.lead_reason">
                 <label class="label-control">领投理由</label>
                 <div class="col col-4">
                     {{syndicatesInfo.detail.lead_business_desc}}
@@ -138,13 +142,13 @@
                         <div class="detail clearfix">
                             <div class="num text-center">
                                 <p class="c-orange" ng-show="past.financeValue">{{past.financeValueUnit | moneyUnit}}{{past.financeValue | wanText}}</p>
-                                <p class="c-orange" ng-show="!past.financeValue">0</p>
+                                <p class="c-orange" ng-show="!past.financeValue">{{parseInt(past.financeValue) === 0 ? 0 : "未知"}}</p>
                                 <p>融资金额</p>
                             </div>
                             <div class="line"></div>
                             <div class="num text-center">
                                 <p class="c-orange" ng-show="past.estimateValue">{{past.estimateValueUnit | moneyUnit}}{{past.estimateValue | wanText}}</p>
-                                <p class="c-orange" ng-show="!past.estimateValue">0</p>
+                                <p class="c-orange" ng-show="!past.estimateValue">{{parseInt(past.estimateValue) === 0 ? 0 : "未知"}}</p>
                                 <p>融资估值</p>
                             </div>
                         </div>
@@ -162,22 +166,26 @@
             </div>
         </div>
 
-        <!--国外同类型公司-->
-        <div ng-show="syndicatesInfo.detail.foreign_com_name">
+        <!--国内外同类型公司-->
+        <div ng-if="syndicatesInfo.detail.foreign_com_name && isCoInvestor">
             <div class="basic-info">
-                国外同类型公司
+                国内外同类型公司
             </div>
-            <div class="foreign-company clear-fix">
+            <div class="foreign-company clearfix">
                 <a href="{{syndicatesInfo.detail.foreign_com_link}}">
                     <span class="foreign-logo" style="background-image: url({{syndicatesInfo.detail.foreign_com_logo || ''}})"></span>
-                    <p class="c-blue">{{syndicatesInfo.detail.foreign_com_name}}</p>
                 </a>
-                <p>{{syndicatesInfo.detail.foreign_com_desc}}</p>
+                <div class="foreign-intro">
+                    <a href="{{syndicatesInfo.detail.foreign_com_link}}">
+                        <span>{{syndicatesInfo.detail.foreign_com_name}}</span>
+                    </a>
+                    <p>{{syndicatesInfo.detail.foreign_com_desc}}</p>
+                </div>
             </div>
         </div>
 
         <!--公司亮点-->
-        <div ng-if="syndicatesInfo.detail.com_feature_pic.length">
+        <div ng-if="syndicatesInfo.detail.com_feature_pic.length && isCoInvestor">
             <div class="basic-info">
                 公司亮点
             </div>
@@ -188,7 +196,7 @@
             <div class="more-tip" >
                 更多众筹详情仅对跟投人开放
             </div>
-            <a href="#/investorValidate" class="btn btn-default toggle-more">认证跟投人</a>
+            <a ui-sref="investorValidate" class="btn btn-default toggle-more">认证跟投人</a>
         </div>
         <!--参与的跟投人-->
         <div ng-if="fundingId && coInvestorData.length && coInvestor.hasPermisson">
@@ -232,7 +240,7 @@
                             <p>发展愿景</p>
                             <p class="content">{{syndicatesInfo.detail.com_vision}}</p>
                         </li>
-                        <li class="other" ng-if="syndicatesInfo.detail.bm_pain_point || syndicatesInfo.detail.bm_solution || syndicatesInfo.detail.core_resources || syndicatesInfo.detail.bm_profit_model">
+                        <li class="other" ng-if="(syndicatesInfo.detail.bm_pain_point || syndicatesInfo.detail.bm_solution || syndicatesInfo.detail.core_resources || syndicatesInfo.detail.bm_profit_model) && isCoInvestor">
                             <p>业务介绍</p>
                             <ul>
                                 <li ng-show="syndicatesInfo.detail.bm_pain_point">
@@ -268,7 +276,7 @@
                         <li ng-if="syndicatesInfo.detail.market_situation || syndicatesInfo.detail.market_share || syndicatesInfo.detail.competitor_analyze || syndicatesInfo.detail.advantage_analysis || syndicatesInfo.detail.market_other">
                             <p class="desc-title">市场分析</p>
                             <ul>
-                                <li ng-show="syndicatesInfo.detail.market_situation">
+                                <li ng-show="syndicatesInfo.detail.market_situation && isCoInvestor">
                                     <div>
                                         <span class="li-point"></span>
                                         市场现状
@@ -282,7 +290,7 @@
                                         <p class="content">{{syndicatesInfo.detail.market_share}}</p>
                                     </div>
                                 </li>
-                                <li ng-show="syndicatesInfo.detail.competitor_analyze">
+                                <li ng-show="syndicatesInfo.detail.competitor_analyze && isCoInvestor">
                                     <div>
                                         <span class="li-point"></span>
                                         竞品分析
@@ -296,7 +304,7 @@
                                         <p class="content" transform-html="syndicatesInfo.detail.advantage_analysis"></p>
                                     </div>
                                 </li>
-                                <li ng-show="syndicatesInfo.detail.market_other">
+                                <li ng-show="syndicatesInfo.detail.market_other && isCoInvestor">
                                     <div>
                                         <span class="li-point"></span>
                                         其他
@@ -340,7 +348,7 @@
             </div>
 
             <!--股权结构-->
-            <div ng-if="syndicatesInfo.detail && !shareError" class="pb-20">
+            <div ng-if="syndicatesInfo.detail && !shareError && isCoInvestor" class="pb-20">
                 <div class="basic-info">
                     股权结构
                 </div>
@@ -350,7 +358,7 @@
             </div>
 
             <!--工商信息-->
-            <div ng-if="syndicatesInfo.detail.ic_com_name || syndicatesInfo.detail.ic_corporation" class="welcome-form">
+            <div ng-if="syndicatesInfo.detail.ic_com_name || syndicatesInfo.detail.ic_corporation && isCoInvestor" class="welcome-form">
                 <div class="basic-info">
                     工商信息
                 </div>
@@ -393,7 +401,7 @@
             </div>
 
             <!--孵化经历-->
-            <div ng-if="syndicatesInfo.detail.incubator_experience">
+            <div ng-if="syndicatesInfo.detail.incubator_experience && isCoInvestor">
                 <div class="basic-info">
                     孵化经历
                 </div>
@@ -403,12 +411,11 @@
             </div>
 
             <!--项目经历-->
-            <div ng-if="syndicatesInfo.detail.project_experience">
+            <div ng-if="syndicatesInfo.detail.project_experience && isCoInvestor">
                 <div class="basic-info">
                     项目经历
                 </div>
-                <div class="exp-content">
-                    {{syndicatesInfo.detail.project_experience}}
+                <div class="exp-content" transform-html="syndicatesInfo.detail.project_experience">
                 </div>
             </div>
         </div>

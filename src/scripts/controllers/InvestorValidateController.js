@@ -8,6 +8,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
     function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location) {
         if(!UserService.getUID()){
             location.href = "/user/login?from=" + encodeURIComponent(location.href);
+            return;
         }
         $timeout(function(){
             window.scroll(0,0);

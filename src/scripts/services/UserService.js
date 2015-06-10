@@ -416,14 +416,34 @@ angular.module('defaultApp.service').service('UserService', [
                 }
                 service.getMyEmail(callback);
             });
-        }
+        };
+        service.getPhone = function(callback){
+            if(!window.localStorage || !service.getUID()){
+                callback(null);
+                return;
+            }
+            var phone = localStorage.getItem('uphone');
+            if(phone){
+                callback(phone);
+                return;
+            }
+            service.basic.get({
+                id: service.getUID()
+            }, function(data){
+                if(!data.phone){
+                    callback(null);
+                    return;
+                }
+                service.getPhone(callback);
+            });
+        };
         service.getIdentity = function(callback){
             $http.get('/api/user/identity').success(function(data){
                 callback && callback(data);
             }).catch(function(){
                 callback && callback(null);
             });
-        }
+        };
 
         return service;
     }

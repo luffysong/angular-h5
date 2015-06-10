@@ -12,6 +12,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
         $scope.pageNo = 1;
         $scope.noMore = true;
         $scope.UID = UserService.getUID();
+        document.title="36氪众筹";
         /*前端处理，包括融资进度百分比的计算，以及众筹状态*/
         $scope.handleData = function(){
             angular.forEach($scope.investorList,function(key,index){
@@ -73,53 +74,60 @@ angular.module('defaultApp.controller').controller('syndicatesController',
         }
 
         /*开投提醒*/
-        $scope.startRemind = function($event,hasRemind,fundingId){
+        $scope.startRemind = function($event,hasRemind,fundingId,index){
             $event.stopPropagation();
-            if(!UserService.getUID())return;
-            if(hasRemind){
-                ErrorService.alert({
-                    msg:"你已设置过提醒"
-                });
+            if(!UserService.getUID()){
+                location.href = "/user/login?from=" + encodeURIComponent(location.href);
                 return;
             }
-            $modal.open({
-                templateUrl: 'templates/company/pop-set-remind.html',
-                windowClass: 'remind-modal-window',
-                controller: [
-                    '$scope', '$modalInstance','scope','UserService','CrowdFundingService',
-                    function ($scope, $modalInstance, scope,UserService,CrowdFundingService) {
-                        UserService.getPhone(function(data){
-                            if(!data)return;
-                            $scope.phone = data.slice(0,3)+"****"+data.slice(data.length-4,data.length);
-                        });
-                        $scope.ok = function(){
-                            CrowdFundingService.save({
-                                model:"crowd-funding",
-                                id:fundingId,
-                                submodel:"opening-remind"
-                            },{
-
-                            },function(data){
-                                notify({
-                                    message:"设置成功",
-                                    classes:'alert-success'
-                                });
-                                $modalInstance.dismiss();
-                            },function(err){
-                                ErrorService.alert(err);
+            if(hasRemind) {
+                ErrorService.alert({
+                    msg: "你已设置过提醒"
+                });
+                return;
+            }else{
+                $modal.open({
+                    templateUrl: 'templates/company/pop-set-remind.html',
+                    windowClass: 'remind-modal-window',
+                    controller: [
+                        '$scope', '$modalInstance','scope','UserService','CrowdFundingService',
+                        function ($scope, $modalInstance, scope,UserService,CrowdFundingService) {
+                            UserService.getPhone(function(data){
+                                if(!data)return;
+                                $scope.phone = data.slice(0,3)+"****"+data.slice(data.length-4,data.length);
                             });
+                            $scope.ok = function(){
+                                CrowdFundingService.save({
+                                    model:"crowd-funding",
+                                    id:fundingId,
+                                    submodel:"opening-remind"
+                                },{
+
+                                },function(data){
+                                    notify({
+                                        message:"设置成功",
+                                        classes:'alert-success'
+                                    });
+                                    scope.investorList[index].has_reminder = true;
+                                    $modalInstance.dismiss();
+                                },function(err){
+                                    ErrorService.alert(err);
+                                    $modalInstance.dismiss();
+                                });
+                            }
+                            $scope.cancel = function() {
+                                $modalInstance.dismiss();
+                            }
                         }
-                        $scope.cancel = function() {
-                            $modalInstance.dismiss();
+                    ],
+                    resolve: {
+                        scope: function(){
+                            return $scope;
                         }
                     }
-                ],
-                resolve: {
-                    scope: function(){
-                        return $scope;
-                    }
-                }
-            });
+                });
+            }
+
         }
     });
 

@@ -6,7 +6,9 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('CompanyDetailController',
     function($scope, $location, $stateParams, $state, CompanyService, $timeout, UserService, ErrorService, $rootScope) {
-
+        $timeout(function(){
+            window.scroll(0,0);
+        },0);
         $scope.companyId = $stateParams.id || 12;
 
 

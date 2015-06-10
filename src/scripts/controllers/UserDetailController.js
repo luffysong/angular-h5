@@ -7,6 +7,9 @@ var angular = require('angular');
 angular.module('defaultApp.controller').controller('UserDetailController', [
     '$scope', '$location', '$stateParams', '$state', 'UserService',
     function($scope, $location, $stateParams, $state, UserService) {
+        $timeout(function(){
+            window.scroll(0,0);
+        },0);
     	// 获取用户详情信息
         $scope.user = {
             // investCasesLimit: 3

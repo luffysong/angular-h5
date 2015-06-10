@@ -6,16 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
     function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService) {
-
-        /*获取用户是否为跟投人*/
-        UserService.getIdentity(function(data){
-            console.log(data);
-            if(data){
-                $scope.isCoInvestor = data.coInvestor ? true : false;
-            }else{
-                $scope.isCoInvestor = false;
-            }
-        });
+        var statusList = DictionaryService.getDict("crowd_funding_status");
         /*股权结构是否出错*/
         $scope.shareError = false;
         /*众筹信息是否全部展开*/
@@ -27,6 +18,19 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         $scope.showAll = false;
         /*公司众筹状态*/
         $scope.status = $stateParams.status;
+        document.title="36氪众筹";
+        /*获取用户是否为跟投人*/
+        UserService.getIdentity(function(data){
+            console.log(data);
+            if(data){
+                $scope.isCoInvestor = data.coInvestor ? true : false;
+            }else{
+                $scope.isCoInvestor = false;
+            }
+        });
+        angular.forEach(statusList,function(obj,index){
+            if(obj.desc == $scope.status)$scope.color = obj.value;
+        });
         /*获取公司基本信息*/
         CompanyService.get({
             id:$scope.companyId
