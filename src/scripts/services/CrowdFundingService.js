@@ -36,7 +36,7 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
 
 
                         var fundingData = res.data.funding;
-                        fundingData && fundingData.investors.forEach(function(item){
+                        fundingData && fundingData.investors && fundingData.investors.forEach(function(item){
                             setInvestor(item);
                         });
 
