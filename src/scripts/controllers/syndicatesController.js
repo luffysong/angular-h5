@@ -129,5 +129,69 @@ angular.module('defaultApp.controller').controller('syndicatesController',
             }
 
         }
+        /*已登录且已完善资料用户才能查看众筹详情*/
+        $scope.UID && UserService.isProfileValid(function(data){
+            if(data){
+                /*获取用户是否为跟投人*/
+                UserService.getIdentity(function(data){
+                    if(data){
+                        $scope.isCoInvestor = data.coInvestor ? true : false;
+                    }else{
+                        $scope.isCoInvestor = false;
+                        //ErrorService.alert({msg:"获取用户角色失败"});
+                    }
+                });
+            }
+        });
+        /*大图banner按钮点击事件*/
+        $scope.gotoInvest = function(){
+            /*判断用户是否为跟投人*/
+            if($scope.isCoInvestor){
+                var ele = $(".syndicates-index:eq(0)");
+                console.log(ele);
+                $('html,body').stop().animate({scrollTop: ele.offset().top-ele.height()*0.2},400, function(){
+                    console.log("Scroll");
+                });
+            }else{
+                $modal.open({
+                    templateUrl: 'templates/company/pop-investor-validate.html',
+                    windowClass: 'krCode-modal-window',
+                    controller: [
+                        '$scope', '$modalInstance','scope','UserService','CrowdFundingService',
+                        function ($scope, $modalInstance, scope,UserService,CrowdFundingService) {
+                            UserService.getPhone(function(data){
+                                if(!data)return;
+                                $scope.phone = data.slice(0,3)+"****"+data.slice(data.length-4,data.length);
+                            });
+                            $scope.ok = function(){
+                                CrowdFundingService.save({
+                                    model:"crowd-funding",
+                                    id:fundingId,
+                                    submodel:"opening-remind"
+                                },{
+
+                                },function(data){
+                                    notify({
+                                        message:"设置成功",
+                                        classes:'alert-success'
+                                    });
+                                    $modalInstance.dismiss();
+                                },function(err){
+                                    ErrorService.alert(err);
+                                });
+                            }
+                            $scope.cancel = function() {
+                                $modalInstance.dismiss();
+                            }
+                        }
+                    ],
+                    resolve: {
+                        scope: function(){
+                            return $scope;
+                        }
+                    }
+                });
+            }
+        }
     });
 

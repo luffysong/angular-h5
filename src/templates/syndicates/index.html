@@ -1,22 +1,24 @@
-<!--<div class="home-wrap">
+<div class="home-wrap">
     <div class="slider-container">
         <div class="top-slide-arrow syndicates">
-            <a href="javascript:void(0)" class="top-slide-arrow-left"></a>
-            <a href="javascript:void(0)" class="top-slide-arrow-right"></a>
+            <!--<a href="javascript:void(0)" class="top-slide-arrow-left"></a>
+            <a href="javascript:void(0)" class="top-slide-arrow-right"></a>-->
         </div>
-        <slick infinite=true autoplay=true pauseOnHover=false speed=1000 prev-arrow=".top-slide-arrow-left"
+        <slick infinite=true autoplay=false pauseOnHover=false speed=1000 prev-arrow=".top-slide-arrow-left"
                next-arrow=".top-slide-arrow-right">
             <div class="slider syndicates">
                 <div class="slider-image">
+                    <a href="" class="banner-btn" ng-click="gotoInvest()">我要投资</a>
                 </div>
             </div>
             <div class="slider syndicates">
                 <div class="slider-image next">
+                    <a href="http://help.test.36kr.com/q-m-zc.html" class="banner-btn">查看详情</a>
                 </div>
             </div>
         </slick>
     </div>
-</div>-->
+</div>
 <div class="container">
     <div class="syndicates-index" ng-repeat="item in investorList track by $index" ng-class="{'mt-30': $index == 0,'mb-50': $index == investorList.length-1 && noMore}">
 
@@ -55,8 +57,9 @@
                 </loading-bar>
 
                 <div class="goal">
-                    <span>已筹集{{item.cf_success_raising | unitConversion}}</span>
-                    <span class="goal-num">众筹目标<b class="currency">{{item.cf_raising | unitConversion}}</b></span>
+                    已筹集<span class="ml-10">{{item.cf_success_raising | unitConversion}}</span>
+                    <span class="goal-num">众筹目标<b class="currency ml-10">{{item.cf_raising | unitConversion}}</b>
+                    </span>
                 </div>
                 <div class="actions clearfix">
                     <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id,status:item.name})" class="btn btn-default" ng-if="item.color != '60'">查看详情</a>

@@ -5,8 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('UserDetailController', [
-    '$scope', '$location', '$stateParams', '$state', 'UserService',
-    function($scope, $location, $stateParams, $state, UserService) {
+    '$scope', '$location', '$stateParams', '$state', 'UserService','$timeout',
+    function($scope, $location, $stateParams, $state, UserService,$timeout) {
         $timeout(function(){
             window.scroll(0,0);
         },0);

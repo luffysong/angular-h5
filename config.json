@@ -39,6 +39,8 @@
         "src/components/qrcode-generator/js/qrcode.js",
         "src/components/qrcode-generator/js/qrcode_UTF8.js",
         "src/components/angular-qrcode/qrcode.js",
+        "src/components/slick-carousel/slick/slick.js",
+        "src/components/angular-slick/dist/slick.js",
         "src/components/clamp.js/clamp.min.js",
         "src/components/ng-file-upload/angular-file-upload-all.js",
         "src/components/angular-notify/dist/angular-notify.min.js",

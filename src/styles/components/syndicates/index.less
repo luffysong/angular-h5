@@ -28,6 +28,9 @@
     &.mb-50 {
         margin-bottom: 50px;
     }
+    .ml-10 {
+        margin-left: 10px;
+    }
     &.loadMore {
         width: 100%;
         height: 40px;
@@ -162,6 +165,7 @@
                         color: #FF9900;
                     }
                 }
+
             }
             .actions {
                 margin-top: 15px;
@@ -190,6 +194,30 @@
 
     }
 
+}
+/*跟投人验证弹窗*/
+.pop-validate {
+    height: auto;
+    padding: 20px 64px;
+    background: #fff;
+    text-align: center;
+    .val-tip {
+        display: block;
+        margin: 33px 0 40px;
+        font-size: 15px;
+    }
+    .validate-btn {
+        display: inline-block;
+        background-color: #178fe6;
+        padding: 0;
+        width: 110px;
+        height: 30px;
+        font-size: 15px;
+        color: #fff;
+        text-align: center;
+        line-height: 30px;
+        border-radius: 3px;
+    }
 }
 /*首页轮播图*/
 .c-scale(@x, @y){
@@ -335,18 +363,25 @@
             width: 100%;
             height: 160px;
             .slider-image {
-                background: #0d2849 url("images/syndicates-banner.jpg") no-repeat center;
+                background: #052d54 url("images/syndicates-banner.jpg") no-repeat center;
                 background-size: auto 100%;
                 &.next {
-                    background: #008DF2 url("images/syndicates-banner-1.png") no-repeat center;
+                    background: #008DF2 url("images/syndicates-banner-1.jpg") no-repeat center;
                     background-size: auto 100%;
                     .banner-btn {
-                        background: #4BB6FF;
+                        display: inline-block;
+                        position: absolute;
                         left: 50%;
-                        margin-left: 180px;
-                        box-shadow: 0 4px 0px #005EE9;
-                        font-weight: 600;
-                        font-size: 22px;
+                        margin-left: 40px;
+                        bottom: 15px;
+                        width: 110px;
+                        height: 30px;
+                        line-height: 30px;
+                        text-align: center;
+                        background-color: #4BB6FF;
+                        color: #fff;
+                        font-size: 14px;
+                        border-radius: 3px;
                         &:hover {
                             background-color: #4BB6FF * 0.95;
                         }
@@ -367,22 +402,21 @@
             background-image: url(images/home-slider-01.png);
             background-size: cover;
             .banner-btn {
-                @btn-color: #F4A100;
                 display: inline-block;
                 position: absolute;
                 left: 50%;
-                margin-left: -95px;
-                bottom: 70px;
-                width: 190px;
-                height: 50px;
-                line-height: 50px;
+                margin-left: -55px;
+                bottom: 15px;
+                width: 110px;
+                height: 30px;
+                line-height: 30px;
                 text-align: center;
-                background-color: @btn-color;
+                background-color: #f4a100;
                 color: #fff;
-                font-size: 20px;
+                font-size: 14px;
                 border-radius: 3px;
                 &:hover {
-                    background-color: @btn-color * 0.95;
+                    background-color: #f4a100 * 0.95;
                 }
             }
             img {

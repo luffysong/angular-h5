@@ -38,6 +38,7 @@ var depModules = [
     'monospaced.qrcode',
     'angularFileUpload',
     'cgNotify',
+    'slick',
     'highcharts-ng'
 ];
 
