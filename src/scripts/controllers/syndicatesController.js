@@ -192,6 +192,12 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                     }
                 });
             }
-        }
+        };
+        WEIXINSHARE = {
+            shareTitle: "36氪",
+            shareDesc: "让创业更简单",
+            shareImg: 'http://img.36tr.com/logo/20140520/537aecb26e02d'
+        };
+        InitWeixin();
     });
 

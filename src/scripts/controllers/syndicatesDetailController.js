@@ -21,7 +21,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         document.title="36氪众筹";
         /*获取用户是否为跟投人*/
         UserService.getIdentity(function(data){
-            console.log(data);
             if(data){
                 $scope.isCoInvestor = data.coInvestor ? true : false;
             }else{
@@ -36,7 +35,13 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             id:$scope.companyId
         },function(data){
             $scope.companyData = data;
-            console.log(data);
+            document.title=data.basic.name + " | 36氪";
+            WEIXINSHARE = {
+                shareTitle: data.basic.name + " | 36氪",
+                shareDesc: data.basic.brief || data.basic.name,
+                shareImg: data.basic.logo || 'http://img.36tr.com/logo/20140520/537aecb26e02d'
+            };
+            InitWeixin();
         },function(err){
             ErrorService.alert(err);
         });
@@ -44,7 +49,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         CrowdFundingService["crowd-funding"].get({
             id:$scope.fundingId
         },function(data){
-            console.log(data);
             $scope.syndicatesInfo = data;
             if($scope.syndicatesInfo.base){
                 $scope.syndicatesInfo.base.percent = parseInt($scope.syndicatesInfo.base.cf_success_raising) * 100 / parseInt($scope.syndicatesInfo.base.cf_raising);
@@ -65,7 +69,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         CompanyService.finance.query({
             id:$stateParams.companyId
         },{},function(data){
-            console.log(data);
             if(data.data && data.data.length){
                 $scope.pastInvestor = data.data;
                 angular.forEach($scope.pastInvestor,function(obj){
@@ -84,7 +87,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             "id":$scope.fundingId,
             "submodel":"co-investors"
         },function(data){
-            console.log(data);
             $scope.coInvestorData = data.data;
             if($scope.coInvestorData.length > 8){
                 $scope.tempList = $scope.coInvestorData.concat().slice(0,8);
@@ -93,7 +95,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             }
             $scope.coInvestor.hasPermisson = true;
         },function(err){
-            console.log(err);
             if(err.code == 401){
                 $scope.coInvestor.hasPermisson = false;
             }else{
