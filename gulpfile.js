@@ -44,7 +44,9 @@ gulp.task('clean', function (callback) {
 });
 
 gulp.task('html', function () {
-    gulp.src(['src/*.html', 'src/templates/**/*.html']).pipe(reloadPage());
+    gulp.src(['src/*.html', 'src/templates/**/*.html'])
+        .pipe(gulp.dest('.tmp'))
+        .pipe(reloadPage());
 });
 
 // 样式
