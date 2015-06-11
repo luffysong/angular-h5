@@ -34,7 +34,6 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                     }
                 });
             });
-            console.log($scope.investorList);
         }
         CrowdFundingService["crowd-funding"].query({
             "page":$scope.pageNo,
@@ -45,7 +44,6 @@ angular.module('defaultApp.controller').controller('syndicatesController',
             $scope.noMore = data.current_page == data.last_page ? true : false;
             $scope.investorList = data.data;
             $scope.handleData();
-            console.log($scope.investorList);
         },function(err){
             ErrorService.alert(err);
         });
@@ -57,7 +55,6 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                 "page":$scope.pageNo,
                 "per_page":pageSize
             },function(data){
-                console.log(data);
                 if(data.data.length){
                     angular.forEach(data.data,function(o){
                         $scope.investorList.push(o);
@@ -148,7 +145,6 @@ angular.module('defaultApp.controller').controller('syndicatesController',
             /*判断用户是否为跟投人*/
             if($scope.isCoInvestor){
                 var ele = $(".syndicates-index:eq(0)");
-                console.log(ele);
                 $('html,body').stop().animate({scrollTop: ele.offset().top-ele.height()*0.2},400, function(){
                     console.log("Scroll");
                 });
@@ -194,7 +190,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
             }
         };
         WEIXINSHARE = {
-            shareTitle: "36氪",
+            shareTitle: "36氪众筹",
             shareDesc: "让创业更简单",
             shareImg: 'http://img.36tr.com/logo/20140520/537aecb26e02d'
         };

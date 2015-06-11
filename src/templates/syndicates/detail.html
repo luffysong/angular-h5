@@ -198,27 +198,20 @@
             <a ui-sref="investorValidate" class="btn btn-default toggle-more">认证跟投人</a>
         </div>
         <!--参与的跟投人-->
-        <div ng-if="fundingId && coInvestorData.length && coInvestor.hasPermisson">
+        <div ng-if="fundingId && syndicatesInfo.co_investors.length">
             <div class="basic-info">
-                参与的跟投人（{{coInvestorData.length}}）
+                参与的跟投人（{{syndicatesInfo.co_investors.length}}）
             </div>
             <div class="co-investor clearfix">
-                <div ng-repeat="co in tempList track by $index" title="{{co.user.name}}" class="co-investor-logo text-center" ng-show="!showAll">
-                    <a class="co-logo" ui-sref="users.overview({id: co.user.id})" style="background-image:url({{co.user.avatar | image:50:'logo'}})"></a>
-                    <a ui-sref="users.overview({id: co.user.id})">
-                        {{co.user.name}}
-                    </a>
-                </div>
-                <div ng-repeat="co in coInvestorData track by $index" title="{{co.user.name}}" class="co-investor-logo text-center" ng-show="showAll">
-                    <a class="co-logo" ui-sref="users.overview({id: co.user.id})" style="background-image:url({{co.user.avatar | image:50:'logo'}})"></a>
-                    <a ui-sref="users.overview({id: co.user.id})">
+                <div ng-repeat="co in syndicatesInfo.co_investors track by $index" title="{{co.user.name}}" class="co-investor-logo text-center">
+                    <a class="co-logo" ui-sref="user_detail({id: co.user.id})" style="background-image:url({{co.user.avatar | image:50:'logo'}})"></a>
+                    <a ui-sref="user_detail({id: co.user.id})">
                         {{co.user.name}}
                     </a>
                 </div>
             </div>
-            <div class="all-co" ng-click="loadInvestor()" ng-if="!showAll">查看全部跟投人（{{coInvestorData.length}}个）</div>
+            <!--<div class="all-co" ng-click="loadInvestor()" ng-if="!showAll">查看全部跟投人（{{coInvestorData.length}}个）</div>-->
         </div>
-
         <!--默认隐藏点击展开-->
         <div ng-if="isCoInvestor && !isToggle">
             <a href="" class="btn btn-default toggle-more" ng-click="toggleMore()">点击展开更多众筹信息</a>

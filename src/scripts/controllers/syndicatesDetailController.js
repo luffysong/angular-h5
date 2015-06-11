@@ -14,8 +14,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         $scope.coInvestor = {};
         $scope.fundingId = $stateParams.fundingId;
         $scope.companyId = $stateParams.companyId;
-        /*是否展示全部跟投人*/
-        $scope.showAll = false;
         /*公司众筹状态*/
         $scope.status = $stateParams.status;
         document.title="36氪众筹";
@@ -49,6 +47,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         CrowdFundingService["crowd-funding"].get({
             id:$scope.fundingId
         },function(data){
+            console.log(data);
             $scope.syndicatesInfo = data;
             if($scope.syndicatesInfo.base){
                 $scope.syndicatesInfo.base.percent = parseInt($scope.syndicatesInfo.base.cf_success_raising) * 100 / parseInt($scope.syndicatesInfo.base.cf_raising);
@@ -81,30 +80,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             ErrorService.alert(err);
         });
 
-        /*获取跟投人列表*/
-        CrowdFundingService.query({
-            "model":"crowd-funding",
-            "id":$scope.fundingId,
-            "submodel":"co-investors"
-        },function(data){
-            $scope.coInvestorData = data.data;
-            if($scope.coInvestorData.length > 8){
-                $scope.tempList = $scope.coInvestorData.concat().slice(0,8);
-            }else{
-                $scope.showAll = true;
-            }
-            $scope.coInvestor.hasPermisson = true;
-        },function(err){
-            if(err.code == 401){
-                $scope.coInvestor.hasPermisson = false;
-            }else{
-                ErrorService.alert(err);
-            }
-        });
-        /*查看全部跟投人*/
-        $scope.loadInvestor = function(){
-            $scope.showAll = true;
-        };
         /*展开更多众筹信息*/
         $scope.toggleMore = function(){
             $scope.isToggle = true;
