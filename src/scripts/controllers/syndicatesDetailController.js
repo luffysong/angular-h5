@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout) {
         var statusList = DictionaryService.getDict("crowd_funding_status");
 
         /*股权结构是否出错*/
@@ -19,21 +19,20 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         /*获取用户是否为跟投人*/
         UserService.getIdentity(function(data){
             console.log(data);
-            if(data){
-                $scope.isCoInvestor = data.coInvestor ? true : false;
-            }else{
-                $scope.isCoInvestor = false;
-            }
-        },function(err){
-            console.log(err);
-            if(err.code == 4031){
+            if(data.code == 4031){
                 ErrorService.alert({
                     msg:"请先完善资料"
                 });
                 $timeout(function(){
                     location.hash="#/guide/welcome";
                 },5000);
+            }else if(data){
+                $scope.isCoInvestor = data.coInvestor ? true : false;
+            }else{
+                $scope.isCoInvestor = false;
             }
+        },function(err){
+            ErrorService.alert(err);
         });
 
         /*获取公司基本信息*/

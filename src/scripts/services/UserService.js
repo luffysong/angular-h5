@@ -440,8 +440,8 @@ angular.module('defaultApp.service').service('UserService', [
         service.getIdentity = function(callback){
             $http.get('/api/user/identity').success(function(data){
                 callback && callback(data);
-            }).catch(function(){
-                callback && callback(null);
+            }).catch(function(err){
+                callback && callback(err);
             });
         };
 

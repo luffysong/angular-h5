@@ -20,12 +20,12 @@ angular.module('defaultApp.service').config([
                     }
 
                     if (response.data.code != 0) {
-                        /*if(response.data.code == 4031){
-                            /!*setTimeout(function(){
+                        if(response.data.code == 4031){
+                            /*setTimeout(function(){
                                 location.hash="#/guide/welcome";
-                            },5000);*!/
-                            return $q.reject(null);
-                        }*/
+                            },5000);*/
+                            /*return $q.reject(nul);*/
+                        }
                         return $q.reject(response.data);
                     }
                     // do something on success
