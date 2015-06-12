@@ -65,7 +65,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             sub: 'cert',
             subid: 'coinvestor-info'
         },{},function(data){
-            console.log(data);
             if(data.userCoinvestorCertInfo){
                 $scope.user.reIdCardNumber = data.userCoinvestorCertInfo.idCardNumber;
                 if(data.userCoinvestorCertInfo.businessCardUrl){
@@ -83,7 +82,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }else if(err.code == 1002){
                 /*正在审核中*/
                 $scope.valStatus = "validating";
-                $scope.valStatus = "normal";
             }else if(err.code == 1003){
                 /*已经是跟投人*/
                 $scope.valStatus  = "withoutVal";
