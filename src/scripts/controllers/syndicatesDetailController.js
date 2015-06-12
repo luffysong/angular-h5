@@ -54,7 +54,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         CrowdFundingService["crowd-funding"].get({
             id:$scope.fundingId
         },function(data){
-            console.log(data);
             $scope.color = data.base.status;
             angular.forEach(statusList,function(obj,index){
                 if(obj.value == data.base.status){
@@ -112,7 +111,9 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 controller: [
                     '$scope', '$modalInstance','scope',
                     function ($scope, $modalInstance, scope) {
-
+                        $scope.cancel = function(){
+                            $modalInstance.dismiss();
+                        }
                     }
                 ],
                 resolve: {

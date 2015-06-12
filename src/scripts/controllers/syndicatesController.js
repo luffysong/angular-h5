@@ -152,29 +152,8 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                     templateUrl: 'templates/company/pop-investor-validate.html',
                     windowClass: 'krCode-modal-window',
                     controller: [
-                        '$scope', '$modalInstance','scope','UserService','CrowdFundingService',
-                        function ($scope, $modalInstance, scope,UserService,CrowdFundingService) {
-                            UserService.getPhone(function(data){
-                                if(!data)return;
-                                $scope.phone = data.slice(0,3)+"****"+data.slice(data.length-4,data.length);
-                            });
-                            $scope.ok = function(){
-                                CrowdFundingService.save({
-                                    model:"crowd-funding",
-                                    id:fundingId,
-                                    submodel:"opening-remind"
-                                },{
-
-                                },function(data){
-                                    notify({
-                                        message:"设置成功",
-                                        classes:'alert-success'
-                                    });
-                                    $modalInstance.dismiss();
-                                },function(err){
-                                    ErrorService.alert(err);
-                                });
-                            }
+                        '$scope', '$modalInstance','scope',
+                        function ($scope, $modalInstance, scope) {
                             $scope.cancel = function() {
                                 $modalInstance.dismiss();
                             }
