@@ -39,7 +39,6 @@ angular.module('defaultApp.controller').controller('syndicatesController',
             "page":$scope.pageNo,
             "per_page":pageSize
         },function(data){
-            console.log(data);
             if(!data.total || !data.per_page)return;
             $scope.noMore = data.current_page == data.last_page ? true : false;
             $scope.investorList = data.data;

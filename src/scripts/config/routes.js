@@ -75,8 +75,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*众筹详情*/
     $stateProvider.state('syndicatesDetail', {
-        url: '/zhongchouDetail?companyId&fundingId&status' +
-        '',
+        url: '/zhongchouDetail?companyId&fundingId',
         templateUrl: 'templates/syndicates/detail.html',
         controller: 'syndicatesDetailController'
     });

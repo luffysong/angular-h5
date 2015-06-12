@@ -191,12 +191,8 @@
             <img class="high-point-img" ng-src="{{pic | image:770:'logo'}}" ng-repeat="pic in syndicatesInfo.detail.com_feature_pic track by $index"></img>
         </div>
 
-        <div ng-if="!isCoInvestor">
-            <div class="more-tip" >
-                更多众筹详情仅对跟投人开放
-            </div>
-            <a ui-sref="investorValidate" class="btn btn-default toggle-more">认证跟投人</a>
-        </div>
+
+
         <!--参与的跟投人-->
         <div ng-if="fundingId && syndicatesInfo.co_investors.length">
             <div class="basic-info">
@@ -213,8 +209,15 @@
             <!--<div class="all-co" ng-click="loadInvestor()" ng-if="!showAll">查看全部跟投人（{{coInvestorData.length}}个）</div>-->
         </div>
         <!--默认隐藏点击展开-->
-        <div ng-if="isCoInvestor && !isToggle">
+        <div ng-if="!isToggle">
             <a href="" class="btn btn-default toggle-more" ng-click="toggleMore()">点击展开更多众筹信息</a>
+        </div>
+        <div ng-if="!isToggle" class="bottom-col">
+            <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">查看更多公司信息</a>
+            <a href="" class="invest-btn" ng-click="toInvest()" ng-if="color == 30">我要投资</a>
+            <a href="" class="set-remind" ng-click="setRemind($event)" ng-if="color == 60">
+                {{status}}<br/>开投提醒
+            </a>
         </div>
         <div ng-if="isToggle">
             <!--公司详情-->
@@ -411,8 +414,18 @@
                 </div>
             </div>
 
-            <div>
-
+            <div ng-if="!isCoInvestor">
+                <div class="more-tip" >
+                    更多众筹详情仅对跟投人开放
+                </div>
+                <a ui-sref="investorValidate" class="btn btn-default toggle-more">认证跟投人</a>
+            </div>
+            <div ng-if="isToggle" class="bottom-col">
+                <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">查看更多公司信息</a>
+                <a href="" class="invest-btn" ng-click="toInvest()" ng-if="color == 30">我要投资</a>
+                <a href="" class="set-remind" ng-click="setRemind($event)" ng-if="color == 60">
+                    {{status}}<br/>开投提醒
+                </a>
             </div>
         </div>
     </div>

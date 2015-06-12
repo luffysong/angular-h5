@@ -7,6 +7,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
     function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService) {
         var statusList = DictionaryService.getDict("crowd_funding_status");
+
         /*股权结构是否出错*/
         $scope.shareError = false;
         /*众筹信息是否全部展开*/
@@ -14,20 +15,27 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         $scope.coInvestor = {};
         $scope.fundingId = $stateParams.fundingId;
         $scope.companyId = $stateParams.companyId;
-        /*公司众筹状态*/
-        $scope.status = $stateParams.status;
         document.title="36氪众筹";
         /*获取用户是否为跟投人*/
         UserService.getIdentity(function(data){
+            console.log(data);
             if(data){
                 $scope.isCoInvestor = data.coInvestor ? true : false;
             }else{
                 $scope.isCoInvestor = false;
             }
+        },function(err){
+            console.log(err);
+            if(err.code == 4031){
+                ErrorService.alert({
+                    msg:"请先完善资料"
+                });
+                $timeout(function(){
+                    location.hash="#/guide/welcome";
+                },5000);
+            }
         });
-        angular.forEach(statusList,function(obj,index){
-            if(obj.desc == $scope.status)$scope.color = obj.value;
-        });
+
         /*获取公司基本信息*/
         CompanyService.get({
             id:$scope.companyId
@@ -48,6 +56,19 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             id:$scope.fundingId
         },function(data){
             console.log(data);
+            $scope.color = data.base.status;
+            angular.forEach(statusList,function(obj,index){
+                if(obj.value == data.base.status){
+                    $scope.status = obj.desc;
+                    var date = new Date(data.base.start_time);
+                    /*预热中*/
+                    if(new Date() < date){
+                        var minute = date.getMinutes() > 9 ? date.getMinutes() : "0"+date.getMinutes();
+                        $scope.status = (parseInt(date.getMonth())+1)+"月"+date.getDate()+"日  "+date.getHours()+":"+minute+" 开始众筹";
+                        $scope.color = 60;
+                    }
+                }
+            });
             $scope.syndicatesInfo = data;
             if($scope.syndicatesInfo.base){
                 $scope.syndicatesInfo.base.percent = parseInt($scope.syndicatesInfo.base.cf_success_raising) * 100 / parseInt($scope.syndicatesInfo.base.cf_raising);
@@ -83,6 +104,80 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         /*展开更多众筹信息*/
         $scope.toggleMore = function(){
             $scope.isToggle = true;
+        }
+        /*底部栏点击我要投资*/
+        $scope.toInvest = function(){
+            $modal.open({
+                templateUrl: 'templates/company/pop-to-invest.html',
+                windowClass: 'to-invest-window',
+                controller: [
+                    '$scope', '$modalInstance','scope',
+                    function ($scope, $modalInstance, scope) {
+
+                    }
+                ],
+                resolve: {
+                    scope: function(){
+                        return $scope;
+                    }
+                }
+            });
+        }
+        /*开投提醒*/
+        $scope.setRemind = function(event){
+            event.stopPropagation();
+            if(!UserService.getUID()){
+                location.href = "/user/login?from=" + encodeURIComponent(location.href);
+                return;
+            }
+            if($scope.syndicatesInfo.base.has_reminder) {
+                ErrorService.alert({
+                    msg: "你已设置过提醒"
+                });
+                return;
+            }else{
+                $modal.open({
+                    templateUrl: 'templates/company/pop-set-remind.html',
+                    windowClass: 'remind-modal-window',
+                    controller: [
+                        '$scope', '$modalInstance','scope','UserService','CrowdFundingService',
+                        function ($scope, $modalInstance, scope,UserService,CrowdFundingService) {
+                            UserService.getPhone(function(data){
+                                if(!data)return;
+                                $scope.phone = data.slice(0,3)+"****"+data.slice(data.length-4,data.length);
+                            });
+                            $scope.ok = function(){
+                                CrowdFundingService.save({
+                                    model:"crowd-funding",
+                                    id:scope.fundingId,
+                                    submodel:"opening-remind"
+                                },{
+
+                                },function(data){
+                                    notify({
+                                        message:"设置成功",
+                                        classes:'alert-success'
+                                    });
+                                    scope.syndicatesInfo.base.has_reminder = true;
+                                    $modalInstance.dismiss();
+                                },function(err){
+                                    ErrorService.alert(err);
+                                    $modalInstance.dismiss();
+                                });
+                            }
+                            $scope.cancel = function() {
+                                $modalInstance.dismiss();
+                            }
+                        }
+                    ],
+                    resolve: {
+                        scope: function(){
+                            return $scope;
+                        }
+                    }
+                });
+            }
+
         }
         //股权结构
         $scope.stockStructure = {};

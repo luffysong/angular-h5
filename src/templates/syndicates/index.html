@@ -62,8 +62,8 @@
                     </span>
                 </div>
                 <div class="actions clearfix">
-                    <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id,status:item.name})" class="btn btn-default" ng-if="item.color != '60'">查看详情</a>
-                    <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id,status:item.name})" class="btn btn-default preheat-detail" ng-if="item.color == '60'">查看详情</a>
+                    <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default" ng-if="item.color != '60'">查看详情</a>
+                    <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default preheat-detail" ng-if="item.color == '60'">查看详情</a>
                     <a href="" class="btn btn-default preheat-remind" login-btn ng-if="item.color == '60'"
                        ng-click="startRemind($event,item.has_reminder,item.id,$index)">
                         开投提醒
