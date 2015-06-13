@@ -1,0 +1,14 @@
+{
+  "name": "swiper-master",
+  "homepage": "https://github.com/powerfinger/swiper-master",
+  "_release": "03ea37389a",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "03ea37389ae4457129dd0d3b12bb1550d0ebbdd1"
+  },
+  "_source": "git://github.com/powerfinger/swiper-master.git",
+  "_target": "*",
+  "_originalSource": "powerfinger/swiper-master",
+  "_direct": true
+}
