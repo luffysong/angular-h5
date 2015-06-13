@@ -7,6 +7,25 @@ angular.module('defaultApp')
     	notify.config({
             templateUrl: 'templates/angular-notify.html'
         });
+    }).run(function($modal){
+        var originOpen = $modal.open;
+        var openedWindow = [];
+        $modal.open = function(){
+            var instance = originOpen.apply($modal, arguments);
+            openedWindow.push(instance);
+            return instance;
+        };
+        $modal.closeAll = function(){
+            openedWindow.forEach(function(pop){
+                if(pop.dismiss){
+                    pop.dismiss();
+                }
+            });
+        }
+    }).run(function($modal,$rootScope){
+        $rootScope.$on('$locationChangeStart', function () {
+            $modal.closeAll();
+        });
     });
 
 
