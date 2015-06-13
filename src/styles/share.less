@@ -1,15 +1,148 @@
-@import 'angular-notify.min.less';
-@import 'components/bootstrap';
-@import 'components/global/customized-var';
-@import 'components/global/icon';
-@import 'components/global/global';
-@import 'components/user/basic';
-@import 'components/user/detail';
-@import 'components/company/basic';
-@import 'components/company/detail';
-@import 'components/org/basic';
-@import 'components/org/detail';
-@import 'components/guide/welcome';
-@import 'components/syndicates/index';
-@import 'components/syndicates/detail';
-@import "components/investor/validate";
+body {
+    /*背景*/
+    .share-bg {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        background: #0096FF url(images/share/share-bg.png) no-repeat center bottom;
+        background-size: contain;
+        text-align: center;
+        color: #fff;
+        /*第一页*/
+        header {
+            width: 100%;
+            height: auto;
+            background-color: #fff;
+            text-align: center;
+            hgroup {
+                margin: 0 30px;
+                padding: 5% 0;
+                h1 {
+                    font: 25px normal;
+                    color: #0096FF;
+                    margin: 0 0 10px;
+                }
+                h2 {
+                    margin: 0;
+                    font-size: 20px;
+                    font-weight: 600;
+                    color: #0096FF;
+                    background-color: #fff;
+                    strong {
+                        color: #FFB400;
+                    }
+                }
+
+            }
+        }
+        section {
+            padding: 0 15px;
+            .bg-last {
+                position: relative;
+                width: 100%;
+                height: 170px;
+                margin: 35% auto 25%;
+                background-color: #149EFF;
+                border-radius: 5px;
+                .bg-next {
+                    position: absolute;
+                    width: 90%;
+                    height: 230px;
+                    background-color: #33ABFF;
+                    left: 50%;
+                    margin-left: -45%;
+                    top: -30px;
+                    border-radius: 5px;
+                    .bg-first {
+                        position: absolute;
+                        width: 90%;
+                        height: 290px;
+                        background-color: #fff;
+                        left: 50%;
+                        margin-left: -45%;
+                        top: -30px;
+                        border-radius: 5px;
+                        display: -webkit-box;
+                        -webkit-box-align: center;
+                        -webkit-box-pack: center;
+                        .company-logo {
+                            width: 140px;
+                            height: 140px;
+                            background: #0096FF no-repeat center;
+                            background-size: contain;
+                            border-radius: 50%;
+
+                        }
+                        strong {
+                            display: block;
+                            font-weight: 600;
+                            font-size: 20px;
+                            margin-top: 26px;
+                            text-align: center;;
+                        }
+                    }
+                }
+            }
+        }
+        footer {
+            &.share-footer {
+                text-align: center;
+                color: #fff;
+                section {
+                    aside:first-child {
+                        margin-bottom: 13px;
+                    }
+                }
+            }
+        }
+        /*第三页*/
+        &.company {
+            h3 {
+                margin-top: 20%;
+                font-size: 30px;
+                font-weight: 600;
+                animation-duration: 1.5s;
+                animation-fill-mode: both;
+            }
+            section {
+                margin: 10% 0;
+                font-size: 20px;
+                &.section-1 {
+                    animation-duration: 1.5s;
+                    animation-delay: .5s;
+                    animation-fill-mode: both;
+                }
+                &.section-2 {
+                    animation-duration: 1.5s;
+                    animation-delay: 1s;
+                    animation-fill-mode: both;
+                }
+                &.section-3 {
+                    animation-duration: 1.5s;
+                    animation-delay: 1.5s;
+                    animation-fill-mode: both;
+                }
+            }
+            .view-btn {
+                display: block;
+                width: 180px;
+                height: 53px;
+                background-color: #fff;
+                margin: 50px auto 0;
+                text-align: center;
+                line-height: 53px;
+                color: #0096FF;
+                border-radius: 5px;
+                font-size: 20px;
+                font-weight: 600;
+                box-shadow: 0 5px 0 #0080D9;
+                animation-duration: 1s;
+                animation-delay: 2s;
+                animation-fill-mode: both;
+            }
+        }
+    }
+}
+
