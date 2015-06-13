@@ -59,6 +59,10 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 if(obj.value == data.base.status){
                     $scope.status = obj.desc;
                     var date = new Date(data.base.start_time);
+                    /*超募中*/
+                    if(data.base.cf_success_raising >= data.base.cf_raising && data.base.cf_raising > 0){
+                        $scope.status = "超募中";
+                    }
                     /*预热中*/
                     if(new Date() < date){
                         var minute = date.getMinutes() > 9 ? date.getMinutes() : "0"+date.getMinutes();
