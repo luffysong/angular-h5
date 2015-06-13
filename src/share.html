@@ -73,9 +73,8 @@
                                     <div class="container">
                                         <div class="company-logo">
                                         </div>
-                                        <strong>公司名称位置</strong>
+                                        <strong class="company-name"></strong>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -92,17 +91,14 @@
             <div class="swiper-slide slide1">
                 <div class="share-bg detail">
                     <div class="company-info first">
-                        <p class="name"></p>
+                        <p class="company-name"></p>
                     </div>
-                    <div class="company-info"></div>
-                    <div class="company-info"></div>
-                    <div class="company-info last"></div>
                 </div>
             </div>
             <!--第三页-->
             <div class="swiper-slide slide1">
                 <div class="share-bg company">
-                    <h3 >公司名称</h3>
+                    <h3 class="company-name">公司名称</h3>
                     <section class="section-1">
                         正在36氪众筹
                     </section>
@@ -119,6 +115,28 @@
     </div>
 
 <script>
+    var data = {};
+    $.ajax({
+        type: "GET",
+        url: "/api/p/crowd-funding/44/brief",
+        data: "",
+        success: function(msg){
+            if(msg.code == 0){
+                data = msg.data;
+                $(".company-logo").css("background-image","url("+data.company_logo+")");
+                $(".company-name").text(data.company_name);
+                var str = "http://rong.test.36kr.com/m/#/zhongchouDetail?companyId="+data.cf_id+"&fundingId="+data.company_id;
+                $(".view-btn").attr("href",str);
+                $.each(data.brief,function(index,obj){
+                    var child = $("<div class='company-info'><div class='info-logo'></div><p class='info-detail'></p></div>");
+                    $(".share-bg.detail").append(child);
+                    $(".info-logo").eq(index).css("backgroundImage","url("+obj.icon+")");
+                    $(".info-detail").eq(index).text(obj.text);
+                });
+            }
+            console.log(msg);
+        }
+    });
     var data = {
         logo:"",
         companyName:"金蛋理财",
@@ -127,9 +145,9 @@
         character:"高收益、低风险、即存即取"
     };
     $(".company-info.first .name").text(data.companyName);
-    $(".company-info:eq(1)").text(data.intro);
-    $(".company-info:eq(2)").text(data.benefit);
-    $(".company-info.last").text(data.character);
+    $(".info-detail:eq(0)").text(data.intro);
+    $(".info-detail:eq(1)").text(data.benefit);
+    $(".company-info.last .info-detail").text(data.character);
     var mainSwiper = new Swiper('.swiper-container',{
         mode: 'vertical',
         //wandaScroll: {
@@ -140,7 +158,6 @@
 
         },
         onSlideChangeEnd: function(swiper){
-            console.log(swiper);
             if(swiper.activeIndex == 1){
                 $(".company-info").addClass("bounceInDown");
             }
@@ -148,24 +165,6 @@
                 $("h3,section[class*='section-']").addClass("bounceInDown");
                 $(".view-btn").addClass("fadeInLeft");
             }
-            /*var tl = Anims['stage'+swiper.activeIndex+'Tl'];
-            for(k in Anims){
-                Anims[k].pause();
-                Anims[k].progress(0);
-            }
-            if(swiper.activeIndex==4){
-                $('.slide5 .swipe').css('visibility','visible');
-            }else{
-                $('.slide5 .swipe').css('visibility','hidden');
-            }
-            if(swiper.activeIndex!=6){
-                $('.arrow-global').css('visibility','visible');
-            }else{
-                $('.arrow-global').css('visibility','hidden');
-            }
-            _hmt.push(['_trackPageview', "/jisu2/page"+(mainSwiper.activeIndex+1)]);
-            krtracker('trackPageView', "/jisu2/page"+(mainSwiper.activeIndex+1));
-            tl.play();*/
         }
     })
 </script>

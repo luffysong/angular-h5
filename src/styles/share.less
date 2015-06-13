@@ -120,30 +120,44 @@
             .company-info {
                 position: relative;
                 opacity: 0;
-                width: 80%;
-                margin: auto;
+                margin: 0 10px;
+                padding: 0 20px;
                 height: 100px;
                 border-radius: 5px;
                 background: url(/styles/images/share/col-bg-normal.png) no-repeat center;
                 background-size: 100% 100%;
                 color: #000;
-                line-height: 110px;
+                text-align: left;
                 animation-duration: 1.5s;
                 animation-fill-mode: forwards;
+                .info-detail {
+                    float: left;
+                    margin-top: 35px;
+                    height: 50px;
+                    width: 180px;
+                }
+                .info-logo {
+                    display: inline-block;
+                    width: 63px;
+                    height: 63px;
+                    border-radius: 50%;
+                    background: url(http://qzapp.qlogo.cn/qzapp/209656/78B2934697F86A1D9284C2A9BA04B78F/50) no-repeat center;
+                    background-size: contain;
+                    margin: 25px 10px 0 5px;
+                    float: left;
+                }
                 &.first {
+                    margin-top: -25px;
                     background-image: url(/styles/images/share/col-bg-first.png);
-                    line-height: normal;
-                    .name {
-                        position: absolute;
+                    line-height: 140px;
+                    text-align: center;
+                    .company-name {
                         color: #0096FF;
                         font-size: 25px;
-                        top: 28px;
-                        left: 50%;
-                        margin-left: -50px;
                         font-weight: 600;
                     }
                 }
-                &.last {
+                &:last-child {
                     background-image: url(/styles/images/share/col-bg-last.png);
                 }
             }
@@ -192,6 +206,7 @@
                 font-size: 20px;
                 font-weight: 600;
                 box-shadow: 0 5px 0 #0080D9;
+                text-decoration: none;
                 animation-duration: 1s;
                 animation-delay: 2s;
                 animation-fill-mode: forwards;
