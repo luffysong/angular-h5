@@ -23,7 +23,7 @@
     <div class="syndicates-index" ng-repeat="item in investorList track by $index" ng-class="{'mt-30': $index == 0,'mb-50': $index == investorList.length-1 && noMore}">
 
         <a href="#/company/{{item.company.id}}/finance?fundingId={{item.id}}">
-            <div class="syndicates-pic" style="background-image: url({{item.desc.file_list_img+'!800' || ''}})">
+            <div class="syndicates-pic" style="background-image: url({{item.desc.file_list_img}})">
                 <div class="syndicates-status bg-{{item.color}}" ng-class="{'pd-19':item.color == '60'}">
                     {{item.name}}
                 </div>
