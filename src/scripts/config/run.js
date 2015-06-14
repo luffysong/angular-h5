@@ -26,6 +26,15 @@ angular.module('defaultApp')
         $rootScope.$on('$locationChangeStart', function () {
             $modal.closeAll();
         });
+    })
+    .run(function($rootScope, $location){
+        $rootScope.$on('$locationChangeStart', function() {
+            var path = $location.path();
+            var type = path.match(/company/) ? 'company' :
+                path.match(/user|organization|search/) ? 'investor' :
+                    path.match(/zhongchou|investorValidate/) ? 'zhong' : "rong";
+            CommonHeader.setNavActive(type);
+        });
     });
 
 
