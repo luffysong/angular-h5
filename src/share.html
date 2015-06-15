@@ -30,6 +30,7 @@
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//stat.36kr.com/stat.js','krtracker');
+        krtracker('trackPageView', location.pathname);
     </script>
 
     <!-- build:css /styles/share.css -->
@@ -81,7 +82,7 @@
                     </section>
                     <footer class="share-footer">
                         <section>
-                            <aside class="rubberBand">可能是下一个阿里巴巴的顶级公司</aside>
+                            <aside class="rubberBand">可能是下一个BAT的顶级公司</aside>
                             <aside class="rubberBand">股权众筹了</aside>
                         </section>
                     </footer>
@@ -116,8 +117,14 @@
 
 <script>
     var data = {};
-    var search = window.location.search.replace(/\?/,"");
-    var fundingId = search.split("=")[1];
+    var paramsArr = location.search.replace('?','').split('&');
+    var params = {};
+    paramsArr.forEach(function(str){
+        var arr = str.split('=');
+        params[arr[0]] = arr[1];
+    });
+    var fundingId = params.fundingId;
+
     var posturl = "/api/p/crowd-funding/"+fundingId+"/brief"
     $.ajax({
         type: "GET",
@@ -126,6 +133,14 @@
         success: function(msg){
             if(msg.code == 0){
                 data = msg.data;
+                WEIXINSHARE.shareTitle = data.company_name + '正在36氪众筹';
+                WEIXINSHARE.shareDesc = '用更少的资金，角逐更大的财富';
+                WEIXINSHARE.shareImg = data.company_logo;
+                WEIXINSHARE.cid = data.company_id;
+
+                initWeixin();
+
+
                 $(".company-logo").css("background-image","url("+data.company_logo+")");
                 $(".company-name").text(data.company_name);
                 var str = "http://rong.36kr.com/m/#/zhongchouDetail?companyId="+data.company_id+"&fundingId="+data.cf_id;
@@ -140,6 +155,77 @@
             console.log(msg);
         }
     });
+
+    var WEIXINSHARE = {
+        shareTitle: '拥有一家公司是怎样的体验',
+        shareDesc: '投资未来，氪不融缓',
+        shareImg: 'http://krplus-pic.b0.upaiyun.com/share_icon.png'
+    };
+
+    var initWeixin = function(){
+        var signature = '';
+        var nonceStr = 'xcvdsjlk$klsc';
+        var timestamp = parseInt(new Date().getTime()/1000);
+
+
+        $.get('/api/weixin/token?_='+ $.now(), {
+            url: location.href.replace(/#.*$/, ''),
+            timestamp: timestamp,
+            noncestr: nonceStr
+        }, function(data){
+            document.title = WEIXINSHARE.shareTitle;
+            wx.config({
+                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: 'wxd3ea1a9a22815a8c', // 必填，公众号的唯一标识
+                timestamp: timestamp, // 必填，生成签名的时间戳
+                nonceStr: nonceStr, // 必填，生成签名的随机串
+                signature: data.data.token,// 必填，签名，见附录1
+                jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+
+            wx.ready(function(){
+
+                wx.onMenuShareTimeline({
+                    title: WEIXINSHARE.shareTitle, // 分享标题
+                    link: location.href, // 分享链接
+                    imgUrl: WEIXINSHARE.shareImg || 'http://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg', // 分享图标
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                        krtracker('trackEvent', 'ShareTimelineZhongH5', WEIXINSHARE.cid);
+                        services.addCount(uid);
+                    },
+                    cancel: function () {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+                wx.onMenuShareAppMessage({
+                    title: WEIXINSHARE.shareTitle, // 分享标题
+                    desc: WEIXINSHARE.shareDesc, // 分享描述
+                    link: location.href, // 分享链接
+                    imgUrl: WEIXINSHARE.shareImg || 'http://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg', // 分享图标
+                    type: 'link', // 分享类型,music、video或link，不填默认为link
+                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                        krtracker('trackEvent', 'ShareAppMessageZhongH5', WEIXINSHARE.cid);
+                        services.addCount(uid);
+                    },
+                    cancel: function () {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+            });
+            wx.error(function(res){
+
+                // alert(JSON.stringify(res, null, 4));
+                // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+
+            });
+
+        }, 'jsonp')
+    };
+
+
     var mainSwiper = new Swiper('.swiper-container',{
         mode: 'vertical',
         //wandaScroll: {
