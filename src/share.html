@@ -116,16 +116,19 @@
 
 <script>
     var data = {};
+    var search = window.location.search.replace(/\?/,"");
+    var fundingId = search.split("=")[1];
+    var posturl = "/api/p/crowd-funding/"+fundingId+"/brief"
     $.ajax({
         type: "GET",
-        url: "/api/p/crowd-funding/44/brief",
+        url: posturl,
         data: "",
         success: function(msg){
             if(msg.code == 0){
                 data = msg.data;
                 $(".company-logo").css("background-image","url("+data.company_logo+")");
                 $(".company-name").text(data.company_name);
-                var str = "http://rong.test.36kr.com/m/#/zhongchouDetail?companyId="+data.cf_id+"&fundingId="+data.company_id;
+                var str = "http://rong.36kr.com/m/#/zhongchouDetail?companyId="+data.company_id+"&fundingId="+data.cf_id;
                 $(".view-btn").attr("href",str);
                 $.each(data.brief,function(index,obj){
                     var child = $("<div class='company-info'><div class='info-logo'></div><p class='info-detail'></p></div>");
@@ -137,17 +140,6 @@
             console.log(msg);
         }
     });
-    var data = {
-        logo:"",
-        companyName:"金蛋理财",
-        intro:"113天累计成交额10亿",
-        benefit:"发展最快的互联网公司",
-        character:"高收益、低风险、即存即取"
-    };
-    $(".company-info.first .name").text(data.companyName);
-    $(".info-detail:eq(0)").text(data.intro);
-    $(".info-detail:eq(1)").text(data.benefit);
-    $(".company-info.last .info-detail").text(data.character);
     var mainSwiper = new Swiper('.swiper-container',{
         mode: 'vertical',
         //wandaScroll: {
