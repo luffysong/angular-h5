@@ -155,7 +155,7 @@
                         <div class="past-investor clearfix">
                             <span class="investor clearfix" ng-repeat="item in past.entitys">
                                 <a ui-sref="{{item | investorLink:'entityId':'entityType'}}">
-                                    <span class="logo" style="background-image: url({{item.logo | image:30:'avatar'}})"></span>
+                                    <span class="logo" style="background-image: url({{item.logo | image:'avatar'}})"></span>
                                     <span class="investor-name c-black">{{item.name}}</span>
                                 </a>
                             </span>
