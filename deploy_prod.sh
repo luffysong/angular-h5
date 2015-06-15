@@ -11,3 +11,4 @@ rsync -rvltOD ./dist/* dev06:/data/work/asset/m
 #
 #rsync -rvltOD ./dist/* dev06:/data/work/frontend/prod/36kr/krplus/dist/m
 rsync -rvltOD ./dist/* dev05:/data/work/frontend/prod/36kr/krplus/dist/m
+rsync -rvltOD ./dist/* dev06:/data/work/frontend/prod/36kr/krplus/dist/m
