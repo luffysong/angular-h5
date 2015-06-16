@@ -153,7 +153,7 @@
                         </div>
                         <!--过往投资方-->
                         <div class="past-investor clearfix">
-                            <span class="investor clearfix" ng-repeat="item in past.entitys">
+                            <span class="investor clearfix" ng-repeat="item in past.entitys" ng-if="item.status!='PENDING'">
                                 <a ui-sref="{{item | investorLink:'entityId':'entityType'}}">
                                     <span class="logo" style="background-image: url({{item.logo | image:'avatar'}})"></span>
                                     <span class="investor-name c-black">{{item.name}}</span>
@@ -214,8 +214,8 @@
         </div>
         <div ng-if="!isToggle" class="bottom-col">
             <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">查看更多公司信息</a>
-            <a href="" class="invest-btn" ng-click="toInvest()" ng-if="color != 60 && color != 50">我要投资</a>
-            <a href="" class="invest-btn disabled" ng-if="color == 50">停止投资</a>
+            <a href="" class="invest-btn" ng-click="toInvest()" ng-if="color != 60 && color != 50 && !timeout">我要投资</a>
+            <a href="" class="invest-btn disabled" ng-if="color == 50 || timeout">停止投资</a>
             <a href="" class="set-remind" ng-click="setRemind($event)" ng-if="color == 60">
                 {{status}}<br/>开投提醒
             </a>
