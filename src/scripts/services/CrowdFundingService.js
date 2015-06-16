@@ -18,7 +18,7 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
                 query: {
                     method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
-
+                        if(!res.data)return;
                         var listData = res.data.data;
                         listData.forEach(function(item){
                             setInvestor(item);
@@ -30,7 +30,7 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
                 get: {
                     method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
-
+                        if(!res.data)return;
                         var baseData = res.data.base;
                         baseData && setInvestor(baseData);
 

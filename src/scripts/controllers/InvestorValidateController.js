@@ -93,8 +93,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         },function(data){
             angular.extend($scope.user, data);
             $scope.user.name = "";
-            /*cardType强制定义为身份证类型*/
-            $scope.user.identityCardType = "IDCARD";
             $scope.user.investMoneyBegin = parseInt(data.investMoneyBegin);
             $scope.user.investMoneyEnd = parseInt(data.investMoneyEnd);
             /*关注领域数据处理*/

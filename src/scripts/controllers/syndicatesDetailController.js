@@ -55,6 +55,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             id:$scope.fundingId
         },function(data){
             $scope.color = data.base.status;
+            $scope.syndicatesInfo = data;
             angular.forEach(statusList,function(obj,index){
                 if(obj.value == data.base.status){
                     $scope.status = obj.desc;
@@ -62,6 +63,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     /*超募中*/
                     if(data.base.cf_success_raising >= data.base.cf_raising && data.base.cf_raising > 0){
                         $scope.status = "超募中";
+                        $scope.timeout = true;
                     }
                     /*预热中*/
                     if(new Date() < date){
@@ -71,9 +73,24 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     }
                 }
             });
-            $scope.syndicatesInfo = data;
+
             if($scope.syndicatesInfo.base){
                 $scope.syndicatesInfo.base.percent = parseInt($scope.syndicatesInfo.base.cf_success_raising) * 100 / parseInt($scope.syndicatesInfo.base.cf_raising);
+                /*
+                 停止投资三种情况：
+                 1.众筹超时
+                 2.剩余投资金额不足
+                 3.跟投人达到最多跟投人数
+                 * */
+                if(new Date($scope.syndicatesInfo.base.end_time) < new Date()){
+                    $scope.timeout = true;
+                }
+                if($scope.syndicatesInfo.base.min_investment && $scope.syndicatesInfo.base.min_investment > $scope.syndicatesInfo.base.cf_max_raising - $scope.syndicatesInfo.base.cf_success_raising){
+                    $scope.timeout = true;
+                }
+            }
+            if($scope.syndicatesInfo.co_investors && $scope.syndicatesInfo.base.max_coinvestor_number <= $scope.syndicatesInfo.co_investors.length){
+                $scope.timeout = true;
             }
             if(!$scope.syndicatesInfo.detail)return;
             $scope.shareError = parseInt($scope.syndicatesInfo.detail.es_funding_team) + parseInt($scope.syndicatesInfo.detail.es_investor) + parseInt($scope.syndicatesInfo.detail.es_staff) == 100 ? false : true;
