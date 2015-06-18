@@ -7,6 +7,10 @@ angular.module('defaultApp')
     	notify.config({
             templateUrl: 'templates/angular-notify.html'
         });
+        //全局外部host地址
+        $rootScope.ucHost = '//'+projectEnvConfig['ucHost'];
+        $rootScope.helpHost = '//'+projectEnvConfig['helpHost'];
+        $rootScope.rongHost = '//'+location.host;
     }).run(function($modal){
         var originOpen = $modal.open;
         var openedWindow = [];
