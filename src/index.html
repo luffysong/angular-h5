@@ -47,10 +47,10 @@
     <!-- endbuild -->
 </head>
 <body class="download-show">
-    <script src="%%%headerSrc%%%" name="rong"></script>
+    <script src="%%%headerSrc%%%" name="rong" ng-if="!isInApp"></script>
 	<ui-view></ui-view>
 
-	<footer class="download" style="display: none">
+	<footer class="download" style="display: none" ng-if="!isInApp">
 		<div class="download-kr">打开“36氪”，查看更多</div>
 		<a href="#" class="closed">&times;</a>
 	</footer>
