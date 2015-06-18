@@ -6,6 +6,16 @@
     <title>36氪融资</title>
 
     <script>
+        (function(){
+            //强制https
+            var url = location.href;
+            if(url.match(/(^http:\/\/rong\.36kr|^http:\/\/rongtest\.36kr)/)){
+                location.href=url.replace(/^http:/,'https:');
+            }
+        })();
+    </script>
+
+    <script>
         var _hmt = _hmt || [];
         (function() {
 //            if(location.host.indexOf('test')>-1){return}
