@@ -20,7 +20,10 @@
     </div>
 </div>
 <div class="container">
-    <div class="syndicates-index" ng-repeat="item in investorList track by $index" ng-class="{'mt-30': $index == 0,'mb-50': $index == investorList.length-1 && noMore}">
+    <div class="syndicates-index"
+         ng-style="{marginTop:isInApp?0:''}"
+         ng-repeat="item in investorList track by $index"
+         ng-class="{'mt-30': $index == 0,'mb-50': $index == investorList.length-1 && noMore}">
 
         <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
             <div class="syndicates-pic" style="">
