@@ -27,8 +27,11 @@ angular.module('defaultApp')
                 }
             });
         }
-    }).run(function($modal,$rootScope){
+    }).run(function($modal,$rootScope,$location){
         $rootScope.$on('$locationChangeStart', function () {
+            if(!!navigator.userAgent.match(/36kr/)){
+                window.location = 'kr36://hashchange';
+            }
             $modal.closeAll();
         });
     })
