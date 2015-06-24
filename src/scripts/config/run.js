@@ -29,7 +29,7 @@ angular.module('defaultApp')
         }
     }).run(function($modal,$rootScope,$location){
         $rootScope.$on('$locationChangeStart', function () {
-            if(!!navigator.userAgent.match(/36kr/)){
+            if(!!navigator.userAgent.match(/36kr/ && !navigator.userAgent.match(/android/)){
                 window.location = 'kr36://hashchange';
             }
             $modal.closeAll();
