@@ -29,6 +29,11 @@ angular.module('defaultApp')
     }).run(function($modal,$rootScope){
         $rootScope.$on('$locationChangeStart', function () {
             $modal.closeAll();
+            window.scrollTo(0, 0);
+
+            window.ga && ga('send', 'pageview', $location.url());
+            window._hmt && _hmt.push(['_trackPageview', $location.url()]);
+            window.krtracker && krtracker('trackPageView', $location.url());
         });
     })
     .run(function($rootScope, $location){
