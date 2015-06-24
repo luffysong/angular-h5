@@ -26,7 +26,7 @@ angular.module('defaultApp')
                 }
             });
         }
-    }).run(function($modal,$rootScope){
+    }).run(function($modal,$rootScope, $location){
         $rootScope.$on('$locationChangeStart', function () {
             $modal.closeAll();
             window.scrollTo(0, 0);
