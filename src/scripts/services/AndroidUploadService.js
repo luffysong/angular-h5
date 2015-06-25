@@ -17,7 +17,7 @@ angular.module('defaultApp.service').service('AndroidUploadService',
                         return function(){};
                     }
 
-                    window.kr36.uploadFileCallback = callback;
+                    window.androidUploadFileCallback = callback;
                     e.preventDefault();
                     window.kr36.chooseFile();
                 }
