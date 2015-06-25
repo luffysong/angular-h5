@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
-    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location) {
+    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService) {
         if(!UserService.getUID()){
             location.href = "/user/login?from=" + encodeURIComponent(location.href);
             return;
@@ -163,6 +163,21 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             if(!$scope.user.reIdCardNumber)return;
             $scope.enterCard = true;
         }
+
+
+        //android客户端
+        $scope.androidUpload = AndroidUploadService.setClick(function(filename){
+            if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
+                $scope.intro.value.pictures = filename;
+            } else {
+                ErrorService.alert({
+                    msg: '格式不支持，请重新上传！'
+                });
+            }
+        });
+
+
+
         /*上传名片*/
         $scope.imgFileSelected  = function(files, e){
             var upyun = window.kr.upyun;

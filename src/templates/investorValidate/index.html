@@ -191,7 +191,9 @@
                                         <input type="file" name="addPic" class="input-file" ng-file-select
                                                ng-file-change="imgFileSelected($files, $event)"
                                                ng-multiple="false"
-                                               resetOnClick="true" accept="image/*">
+                                               resetOnClick="true" accept="image/*"
+                                               ng-click="androidUpload($event)"
+                                            >
                                         <span class="tip">仅供认证使用</span>
                                     </li>
                                 </ul>
