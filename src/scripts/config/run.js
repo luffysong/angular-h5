@@ -27,12 +27,19 @@ angular.module('defaultApp')
                 }
             });
         }
-    }).run(function($modal,$rootScope,$location){
+
+    }).run(function($modal,$rootScope, $location){
+        var iframe = $('<iframe src="about:blank" style="display: none"></iframe>').appendTo('body');
         $rootScope.$on('$locationChangeStart', function () {
             if(!!navigator.userAgent.match(/36kr/) && !navigator.userAgent.match(/android/)){
-                window.location = 'kr36://hashchange';
+                iframe[0].src='kr36://hashchange?_='+ $.now();
             }
             $modal.closeAll();
+            window.scrollTo(0, 0);
+
+            window.ga && ga('send', 'pageview', $location.url());
+            window._hmt && _hmt.push(['_trackPageview', $location.url()]);
+            window.krtracker && krtracker('trackPageView', $location.url());
         });
     })
     .run(function($rootScope, $location){
@@ -41,7 +48,7 @@ angular.module('defaultApp')
             var type = path.match(/company/) ? 'company' :
                 path.match(/user|organization|search/) ? 'investor' :
                     path.match(/zhongchou|investorValidate/) ? 'zhong' : "rong";
-            CommonHeader.setNavActive(type);
+            window.CommonHeader && CommonHeader.setNavActive(type);
         });
     });
 
