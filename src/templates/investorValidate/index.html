@@ -182,6 +182,7 @@
                                         <input type="file" name="addPic" class="input-file" ng-file-select
                                                ng-file-change="imgFileSelected($files, $event)"
                                                ng-multiple="false"
+                                               ng-click="androidUpload($event)"
                                                resetOnClick="true">
                                     </li>
                                     <li class="progress pic-progress" ng-show="intro.uploading">

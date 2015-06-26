@@ -167,13 +167,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
 
         //android客户端
         $scope.androidUpload = AndroidUploadService.setClick(function(filename){
-            if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
+
+            $scope.$apply(function(){
                 $scope.intro.value.pictures = filename;
-            } else {
-                ErrorService.alert({
-                    msg: '格式不支持，请重新上传！'
-                });
-            }
+            })
+
         });
 
 
