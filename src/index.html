@@ -6,6 +6,16 @@
     <title>36氪融资</title>
 
     <script>
+        (function(){
+            //强制https
+            var url = location.href;
+            if(url.match(/(^http:\/\/rong\.36kr|^http:\/\/rongtest\.36kr)/)){
+                location.href=url.replace(/^http:/,'https:');
+            }
+        })();
+    </script>
+
+    <script>
         var _hmt = _hmt || [];
         (function() {
 //            if(location.host.indexOf('test')>-1){return}
@@ -37,10 +47,10 @@
     <!-- endbuild -->
 </head>
 <body class="download-show">
-    <script src="%%%headerSrc%%%" name="rong"></script>
+    <script src="%%%headerSrc%%%" name="rong" ng-if="!isInApp"></script>
 	<ui-view></ui-view>
 
-	<footer class="download" style="display: none">
+	<footer class="download" style="display: none" ng-if="!isInApp">
 		<div class="download-kr">打开“36氪”，查看更多</div>
 		<a href="#" class="closed">&times;</a>
 	</footer>
@@ -51,7 +61,7 @@
             shareImg: 'http://img.36tr.com/logo/20140520/537aecb26e02d'
         };
     </script>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <!-- build:js /scripts/scripts.js -->
     <script src="/scripts/vendor.js"></script>
     <script src="/scripts/template.js"></script>
@@ -65,6 +75,8 @@
 	window.onload = function(){
         if(!navigator.userAgent.match(/36kr/)){
             $(".download").show();
+        }else{
+            $('body.download-show').removeClass('download-show')
         }
 		$('.download-kr').click(function(e) {
 			e.stopPropagation();

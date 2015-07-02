@@ -1,7 +1,7 @@
 <div class="container">
     <div class="investor-validate">
         <div class="basic-info common-problem">
-            <a href="http://help.36kr.com/#tab1-5" target="_blank">跟投人认证常见问题</a>
+            <a href="{{helpHost}}/#tab1-5" target="_blank">跟投人认证常见问题</a>
         </div>
         <!--跟投人未提交验证-->
         <div ng-if="valStatus == 'normal'">
@@ -182,6 +182,7 @@
                                         <input type="file" name="addPic" class="input-file" ng-file-select
                                                ng-file-change="imgFileSelected($files, $event)"
                                                ng-multiple="false"
+                                               ng-click="androidUpload($event)"
                                                resetOnClick="true">
                                     </li>
                                     <li class="progress pic-progress" ng-show="intro.uploading">
@@ -191,7 +192,9 @@
                                         <input type="file" name="addPic" class="input-file" ng-file-select
                                                ng-file-change="imgFileSelected($files, $event)"
                                                ng-multiple="false"
-                                               resetOnClick="true" accept="image/*">
+                                               resetOnClick="true" accept="image/*"
+                                               ng-click="androidUpload($event)"
+                                            >
                                         <span class="tip">仅供认证使用</span>
                                     </li>
                                 </ul>

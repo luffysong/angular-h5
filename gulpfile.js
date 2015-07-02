@@ -556,7 +556,7 @@ gulp.task('remote:prod', function(){
 
 gulp.task('remote:dev', function(){
     buildMode = 'dev';
-    apiHost = 'http://rong.dev.36kr.com';
+    apiHost = 'http://rongdev.36kr.com';
     gulp.start('remote');
 });
 
@@ -570,9 +570,9 @@ gulp.task('remote:test', function(){
 //编译页头
 gulp.task('header', function(){
     var headers = {
-        test: 'http://krplus-cdn.b0.upaiyun.com/common-module/common-header-test/script.js',
-        dev: 'http://krplus-cdn.b0.upaiyun.com/common-module/common-header-dev/script.js',
-        prod: 'http://krplus-cdn.b0.upaiyun.com/common-module/common-header/script.js'
+        test: '//krplus-cdn.b0.upaiyun.com/common-module/common-header-test/script.js',
+        dev: '//krplus-cdn.b0.upaiyun.com/common-module/common-header-dev/script.js',
+        prod: '//krplus-cdn.b0.upaiyun.com/common-module/common-header/script.js'
     };
 
     return gulp.src(['src/*.html'])

@@ -50,7 +50,7 @@
                         <p>剩余天数</p>
                     </div>
                     <div class="detail">
-                        <p class="c-orange">{{syndicatesInfo.funding.sell_shares ? syndicatesInfo.funding.sell_shares : "暂不公开"}}</p>
+                        <p class="c-orange">{{syndicatesInfo.funding.sell_shares ? syndicatesInfo.funding.sell_shares : "即将开启"}}</p>
                         <p>出让股份</p>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                         </div>
                         <!--过往投资方-->
                         <div class="past-investor clearfix">
-                            <span class="investor clearfix" ng-repeat="item in past.entitys">
+                            <span class="investor clearfix" ng-repeat="item in past.entitys" ng-if="item.status!='PENDING'">
                                 <a ui-sref="{{item | investorLink:'entityId':'entityType'}}">
                                     <span class="logo" style="background-image: url({{item.logo | image:'avatar'}})"></span>
                                     <span class="investor-name c-black">{{item.name}}</span>
@@ -420,7 +420,7 @@
                 <div class="more-tip" >
                     更多众筹详情仅对跟投人开放
                 </div>
-                <a ui-sref="investorValidate" class="btn btn-default toggle-more">认证跟投人</a>
+                <a ui-sref="investorValidate" class="btn btn-default toggle-more" login-btn="{{rongHost}}/m/#/investorValidate">认证跟投人</a>
             </div>
             <div ng-if="isToggle" class="bottom-col">
                 <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">查看更多公司信息</a>

@@ -15,7 +15,9 @@
                                 <input type="file" name="addPic" class="input-file" ng-file-select
                                        ng-file-change="imgFileSelected($files, $event)"
                                        ng-multiple="false"
-                                       resetOnClick="true" accept="image/*">
+                                       resetOnClick="true" accept="image/*"
+                                       ng-click="androidUpload($event)"
+                                    >
                             </span>
                         </li>
                     </ul>
