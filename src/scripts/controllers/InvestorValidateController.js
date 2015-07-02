@@ -24,7 +24,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.areaList = [];
         $scope.user = {
             investMoneyUnit:"CNY",
-            rnvInvestorInfo:"V1_1"
+            rnvInvestorInfo:"V1_1",
+            investPhases:[]
         };
         $scope.intro = {};
         $scope.basic = {
@@ -37,21 +38,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.valStatus = "normal";
         $scope.hasClick = false;
         /*投资阶段*/
-        $scope.investStage = [
-            {
-                name:"早期",
-                engName:"isInvestFirstPhase",
-                active:false
-            },{
-                name:"成长期",
-                engName:"isInvestSecondPhase",
-                active:false
-            },{
-                name:"成熟期",
-                engName:"isInvestThirdPhase",
-                active:false
-            }
-        ];
+        $scope.investStage = DictionaryService.getDict('FundsPhase').filter(function(item) {
+            return item.value != "UNKNOWN";
+        });
         /*关注领域*/
         $scope.fieldsOptions = DictionaryService.getDict('InvestorFollowedIndustry');
         /*自然人投资条件*/
@@ -107,16 +96,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 });
             }
             /*投资阶段数据处理*/
-            angular.forEach(data,function(val,key){
-                if(key == "isInvestFirstPhase" || key == "isInvestSecondPhase" || key == "isInvestThirdPhase"){
-                    if(data[key]){
-                        angular.forEach($scope.investStage,function(obj,index){
-                            if(obj.engName == key){
-                                obj.active = true;
-                            }
-                        });
+            angular.forEach($scope.user.investPhases,function(val,key){
+                angular.forEach($scope.investStage,function(obj,index){
+                    if(obj.value == val){
+                        obj.active = true;
                     }
-                }
+                });
             });
             $scope.basic.value.address1 = data.country;
             $scope.basic.value.address2 = data.city;
@@ -223,9 +208,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         /*表单提交*/
         $scope.submitForm = function(){
             angular.forEach($scope.investStage,function(key,index){
-                $scope.user[key.engName] = key.active;
                 if(key.active){
-                    $scope.stageList.push(key);
+                    $scope.user.investPhases.push(key.value);
                 }
             });
             if(!$scope.areaList.length){
@@ -233,7 +217,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }else{
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
             }
-            if(!$scope.stageList.length){
+            if(!$scope.user.investPhases.length){
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",false);
             }else{
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",true);

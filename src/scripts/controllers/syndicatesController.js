@@ -104,6 +104,9 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                                         message:"设置成功",
                                         classes:'alert-success'
                                     });
+                                    $timeout(function(){
+                                        notify.closeAll();
+                                    },3000);
                                     scope.investorList[index].has_reminder = true;
                                     $modalInstance.dismiss();
                                 },function(err){

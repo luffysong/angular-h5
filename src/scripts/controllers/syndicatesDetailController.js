@@ -162,7 +162,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     windowClass: 'remind-modal-window',
                     controller: [
                         '$scope', '$modalInstance','scope','UserService','CrowdFundingService',
-                        function ($scope, $modalInstance, scope,UserService,CrowdFundingService) {
+                        function ($scope, $modalInstance, scope,UserService,CrowdFundingService,$timeout) {
                             UserService.getPhone(function(data){
                                 if(!data)return;
                                 $scope.phone = data.slice(0,3)+"****"+data.slice(data.length-4,data.length);
