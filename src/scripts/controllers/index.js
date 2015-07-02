@@ -4,5 +4,6 @@ require('./InvestorValidateController');
 require('./OrganizationDetailController');
 require('./SearchController');
 require('./UserDetailController');
+require('./syndicatesConfirmController');
 require('./syndicatesController');
 require('./syndicatesDetailController');
