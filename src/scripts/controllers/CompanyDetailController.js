@@ -44,13 +44,17 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 $scope.intro.value = {
                     intro: data.company.intro
                 }
-                if($scope.company.value.funds.privilege) {
-                    $stateParams.type = 1;
-                } else {
-                    $stateParams.type = 4;
-                }
 
-                $location.search('type=' + $stateParams.type);
+                /**
+                 * 解决打开两次问题，先注释掉
+                 */
+                //if($scope.company.value.funds.privilege) {
+                //    $stateParams.type = 1;
+                //} else {
+                //    $stateParams.type = 4;
+                //}
+                //
+                //$location.search('type=' + $stateParams.type);
 
                 callback && callback(data);
             }, function(err) {

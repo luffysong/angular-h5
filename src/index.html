@@ -75,6 +75,8 @@
 	window.onload = function(){
         if(!navigator.userAgent.match(/36kr/)){
             $(".download").show();
+        }else{
+            $('body.download-show').removeClass('download-show')
         }
 		$('.download-kr').click(function(e) {
 			e.stopPropagation();

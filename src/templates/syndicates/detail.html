@@ -420,7 +420,7 @@
                 <div class="more-tip" >
                     更多众筹详情仅对跟投人开放
                 </div>
-                <a ui-sref="investorValidate" class="btn btn-default toggle-more">认证跟投人</a>
+                <a ui-sref="investorValidate" class="btn btn-default toggle-more" login-btn="{{rongHost}}/m/#/investorValidate">认证跟投人</a>
             </div>
             <div ng-if="isToggle" class="bottom-col">
                 <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">查看更多公司信息</a>
