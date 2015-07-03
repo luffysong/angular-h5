@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
-    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService) {
+    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService, $interval) {
         if(!UserService.getUID()){
             location.href = "/user/login?from=" + encodeURIComponent(location.href);
             return;
@@ -81,13 +81,49 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             id:UserService.getUID()
         },function(data){
             angular.extend($scope.user, data);
+
             $scope.user.name = "";
             $scope.user.investMoneyBegin = parseInt(data.investMoneyBegin);
             $scope.user.investMoneyEnd = parseInt(data.investMoneyEnd);
+
+            //把数据存到本地存储中
+            if(localStorage.getItem('investorValidateFormData')){
+                var cacheData = JSON.parse(localStorage.getItem('investorValidateFormData'));
+                if(cacheData.id==data.id){
+                    angular.extend($scope.user, cacheData);
+                    $scope.user.industry = $scope.user.focusIndustry;
+                }
+            }
+            var interval = $interval(function(){
+
+                try{
+                    var form = $('form[name="investorValidateForm"]');
+                    var formCtrl = angular.element(form).scope()["investorValidateForm"];
+                    if(formCtrl.$dirty){
+                        angular.forEach($scope.investStage,function(key,index){
+
+                            if(key.active){
+                                $scope.user.investPhases.push(key.value);
+                            }
+                        });
+                        $scope.user.focusIndustry = $scope.areaList;
+                        $scope.user.businessCardUrl = $scope.intro.value.pictures;
+                        if($scope.basic.value){
+                            $scope.user.city = $scope.basic.value.address2;
+                            $scope.user.country = $scope.basic.value.address1;
+                        }
+                        localStorage.setItem('investorValidateFormData', JSON.stringify(angular.copy($scope.user)));
+                    }
+                }catch(e){
+                    $interval.cancel(interval);
+                }
+
+            },1000)
+
             /*关注领域数据处理*/
-            if(data.industry && data.industry.length){
-                angular.extend($scope.areaList,data.industry);
-                angular.forEach(data.industry,function(o,i){
+            if($scope.user.industry && $scope.user.industry.length){
+                angular.extend($scope.areaList,$scope.user.industry);
+                angular.forEach($scope.user.industry,function(o,i){
                     angular.forEach($scope.fieldsOptions,function(key,index){
                         if(key.value == o){
                             key.active = true;
@@ -103,8 +139,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     }
                 });
             });
-            $scope.basic.value.address1 = data.country;
-            $scope.basic.value.address2 = data.city;
+
+
+
+            $scope.basic.value.address1 = $scope.user.country;
+            $scope.basic.value.address2 = $scope.user.city;
+
+
 
         },function(err){
             ErrorService.alert(err);
@@ -218,6 +259,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 }
             });
         },500);
+
+
+
+
         /*表单提交*/
         $scope.submitForm = function(){
             angular.forEach($scope.investStage,function(key,index){
