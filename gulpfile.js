@@ -556,14 +556,14 @@ gulp.task('remote:prod', function(){
 
 gulp.task('remote:dev', function(){
     buildMode = 'dev';
-    apiHost = 'http://rong.dev.36kr.com';
+    apiHost = 'http://rongdev.36kr.com';
     gulp.start('remote');
 });
 
 
 gulp.task('remote:test', function(){
     buildMode = 'test';
-    apiHost = 'http://rong.test.36kr.com';
+    apiHost = 'http://rongtest.36kr.com';
     gulp.start('remote');
 });
 
