@@ -43,9 +43,8 @@ gulp.task('clean', function (callback) {
     del(['.tmp', 'dist'], callback);
 });
 
-gulp.task('html', function () {
+gulp.task('html', ['header'],function () {
     gulp.src(['src/*.html', 'src/templates/**/*.html'])
-        .pipe(gulp.dest('.tmp'))
         .pipe(reloadPage());
 });
 
