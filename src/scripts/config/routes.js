@@ -85,6 +85,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/investorValidate/index.html',
         controller: 'InvestorValidateController'
     });
+    /*投资人认证申请*/
+    $stateProvider.state('investorValidateApply', {
+        url: '/investor/apply',
+        templateUrl: 'templates/investor/apply.html',
+        controller: 'InvestorValidateApplyController'
+    });
     /*协议路由，用户服务协议*/
     $stateProvider.state('serviceProtocol', {
         url: '/serviceProtocol',
