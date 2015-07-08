@@ -25,6 +25,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.user = {
             investMoneyUnit:"CNY",
             rnvInvestorInfo:"V1_1",
+            identityCardType:"IDCARD",
             investPhases:[]
         };
         $scope.intro = {};
