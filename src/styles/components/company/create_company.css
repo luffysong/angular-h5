@@ -84,19 +84,19 @@
   left: -72px;
   position: absolute;
   width: 210px;
-  height: 30px;
-  bottom: 0;
+  height: 60px;
+  top: -47px;
 }
 .create_company .list table .logo .upload-b .filewrap .input-file:focus {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.create_company .list table .logo .pic,
-.create_company .list table .logo p {
-  display: inline-block;
+.create_company .list table .logo .pic {
+  float: left;
+  margin-right: 10px;
 }
 .create_company .list table .logo p {
-  max-width: 120px;
+  overflow: hidden;
   margin: 0 0 0 10px;
   color: #999999;
 }
@@ -120,6 +120,7 @@
   width: 330px;
   height: 66px;
   left: -111px;
+  top: -47px;
 }
 .create_company .list table .job .split {
   border-top: 1px solid #dddddd;
@@ -128,4 +129,19 @@
 }
 .create_company .list table .job td:last-child {
   padding-right: 0;
+}
+.create_company .submit {
+  padding: 1px;
+}
+.create_company .submit button {
+  display: block;
+  margin: 10px auto;
+  width: 250px;
+  height: 40px;
+  background-color: #008df2;
+  padding: 0;
+  border: none 0 ;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px;
 }

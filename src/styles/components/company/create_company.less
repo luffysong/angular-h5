@@ -100,24 +100,23 @@
               left: -72px;
               position: absolute;
               width: 210px;
-              height: 30px;
-              bottom: 0;
+              height: 60px;
+              top: -47px;
 
               &:focus{
                 -webkit-tap-highlight-color:rgba(0,0,0,0);
                 tap-highlight-color:rgba(0,0,0,0);
               }
 
-
-
             }
           }
         }
-        .pic, p {
-          display: inline-block;
+        .pic {
+          float: left;
+          margin-right: 10px;
         }
         p {
-          max-width: 120px;
+          overflow: hidden;
           margin: 0 0 0 10px;
           color: @color_gray;
         }
@@ -144,7 +143,7 @@
                 width: 330px;
                 height: 66px;
                 left: -111px;
-
+                top: -47px;
               }
             }
           }
@@ -162,6 +161,22 @@
         }
       }
 
+    }
+  }
+
+  .submit{
+    padding: 1px;
+    button{
+      display: block;
+      margin: 10px auto;
+      width: 250px;
+      height: 40px;
+      background-color: @color_blue;
+      padding: 0;
+      border: none 0 ;
+      color: #fff;
+      font-size: 14px;
+      border-radius: 4px;
     }
   }
 }
