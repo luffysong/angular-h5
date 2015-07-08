@@ -105,4 +105,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             },0);
         }
     });
+
+
+    /*创建公司*/
+    $stateProvider.state('createCompany', {
+        url: '/company_/create',
+        templateUrl: 'templates/company/create.html',  // todo : 文件路径
+        controller: 'CreateCompanyController' // todo : controller
+    });
 });

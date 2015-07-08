@@ -1,0 +1,167 @@
+@color_blue: #008df2;
+@color_gray: #999999;
+@color_tip: #cccccc;
+@color_important: #f4a654;
+@color_white: #fff;
+@bg_gray: #f7f7f7;
+@border-gray: #ddd;
+@transparent: transparent;
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.create_company {
+  background-color: #fff;
+
+  b.important {
+    color: @color_important;
+  }
+  h2 {
+
+    padding: 14px 15px;
+    border-bottom: 1px solid @border-gray;
+    background-color: @bg_gray;
+    font-size: 12px;
+    b {
+      color: @color_blue;
+      float: right;
+    }
+  }
+
+  .list {
+    padding: 0 0 0 15px;
+
+    table {
+      table-layout: fixed;
+      border-collapse: collapse;
+      width: 100%;
+      td {
+        font-size: 12px;
+        border-bottom: 1px solid @border-gray;
+        padding: 15px;
+        line-height: 1.5;
+        &:first-child {
+          width: 72px;
+          text-align: right;
+          padding: 15px 0;
+          span{
+            display: inline-block;
+          }
+        }
+      }
+
+      textarea {
+        resize: none;
+        width: 90%;
+        border: none 0;
+        line-height: 2;
+        margin: -3px 0 0 0;
+        background-color: @transparent;
+      }
+      input {
+        width: 85%;
+        border: 0 none;
+        background-color: @transparent;
+
+      }
+
+      select {
+        background-color: transparent;
+        width: 80px;
+      }
+      .vtop {
+        vertical-align: top;
+      }
+
+      .logo {
+        .upload-b{
+          overflow: hidden;
+          display: block;
+          width: 70px;
+          height: 70px;
+          overflow: hidden;
+          border-radius: 50%;
+          position: relative;
+          .filewrap{
+            display: block;
+            position: absolute;
+            bottom: 0;
+            height: 20px;
+            background-color: rgba(0,0,0,0.4);
+            text-align: center;
+            color: #ddd;
+            width: 70px;
+
+            .input-file{
+              outline: none;
+              opacity: 0;
+              left: -72px;
+              position: absolute;
+              width: 210px;
+              height: 30px;
+              bottom: 0;
+
+              &:focus{
+                -webkit-tap-highlight-color:rgba(0,0,0,0);
+                tap-highlight-color:rgba(0,0,0,0);
+              }
+
+
+
+            }
+          }
+        }
+        .pic, p {
+          display: inline-block;
+        }
+        p {
+          max-width: 120px;
+          margin: 0 0 0 10px;
+          color: @color_gray;
+        }
+      }
+
+      .card{
+        p{
+          max-width: 100%;
+          margin: 0 0 10px 0;
+        }
+        .pic{
+          display: block;
+
+          .upload-b{
+            overflow: hidden;
+            width: 110px;
+            border-radius: 4px;
+            border: 1px solid #008df2;
+
+            .filewrap{
+              width: 110px;
+
+              .input-file{
+                width: 330px;
+                height: 66px;
+                left: -111px;
+
+              }
+            }
+          }
+        }
+      }
+
+      .job {
+        .split{
+          border-top: 1px solid @border-gray;
+          padding: 10px 0 0 0;
+          margin: 16px 0 0 0;
+        }
+        td:last-child{
+          padding-right: 0;
+        }
+      }
+
+    }
+  }
+}

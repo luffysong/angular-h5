@@ -1,0 +1,131 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.create_company {
+  background-color: #fff;
+}
+.create_company b.important {
+  color: #f4a654;
+}
+.create_company h2 {
+  padding: 14px 15px;
+  border-bottom: 1px solid #dddddd;
+  background-color: #f7f7f7;
+  font-size: 12px;
+}
+.create_company h2 b {
+  color: #008df2;
+  float: right;
+}
+.create_company .list {
+  padding: 0 0 0 15px;
+}
+.create_company .list table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 100%;
+}
+.create_company .list table td {
+  font-size: 12px;
+  border-bottom: 1px solid #dddddd;
+  padding: 15px;
+  line-height: 1.5;
+}
+.create_company .list table td:first-child {
+  width: 72px;
+  text-align: right;
+  padding: 15px 0;
+}
+.create_company .list table td:first-child span {
+  display: inline-block;
+}
+.create_company .list table textarea {
+  resize: none;
+  width: 90%;
+  border: none 0;
+  line-height: 2;
+  margin: -3px 0 0 0;
+  background-color: transparent;
+}
+.create_company .list table input {
+  width: 85%;
+  border: 0 none;
+  background-color: transparent;
+}
+.create_company .list table select {
+  background-color: transparent;
+  width: 80px;
+}
+.create_company .list table .vtop {
+  vertical-align: top;
+}
+.create_company .list table .logo .upload-b {
+  display: block;
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  border-radius: 50%;
+  position: relative;
+}
+.create_company .list table .logo .upload-b .filewrap {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  color: #ddd;
+  width: 70px;
+}
+.create_company .list table .logo .upload-b .filewrap .input-file {
+  outline: none;
+  opacity: 0;
+  left: -72px;
+  position: absolute;
+  width: 210px;
+  height: 30px;
+  bottom: 0;
+}
+.create_company .list table .logo .upload-b .filewrap .input-file:focus {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.create_company .list table .logo .pic,
+.create_company .list table .logo p {
+  display: inline-block;
+}
+.create_company .list table .logo p {
+  max-width: 120px;
+  margin: 0 0 0 10px;
+  color: #999999;
+}
+.create_company .list table .card p {
+  max-width: 100%;
+  margin: 0 0 10px 0;
+}
+.create_company .list table .card .pic {
+  display: block;
+}
+.create_company .list table .card .pic .upload-b {
+  overflow: hidden;
+  width: 110px;
+  border-radius: 4px;
+  border: 1px solid #008df2;
+}
+.create_company .list table .card .pic .upload-b .filewrap {
+  width: 110px;
+}
+.create_company .list table .card .pic .upload-b .filewrap .input-file {
+  width: 330px;
+  height: 66px;
+  left: -111px;
+}
+.create_company .list table .job .split {
+  border-top: 1px solid #dddddd;
+  padding: 10px 0 0 0;
+  margin: 16px 0 0 0;
+}
+.create_company .list table .job td:last-child {
+  padding-right: 0;
+}

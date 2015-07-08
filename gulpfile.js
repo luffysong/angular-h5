@@ -43,9 +43,9 @@ gulp.task('clean', function (callback) {
     del(['.tmp', 'dist'], callback);
 });
 
-gulp.task('html', function () {
+gulp.task('html', ['header'], function () {
     gulp.src(['src/*.html', 'src/templates/**/*.html'])
-        .pipe(gulp.dest('.tmp'))
+        //.pipe(gulp.dest('.tmp'))
         .pipe(reloadPage());
 });
 
@@ -556,14 +556,14 @@ gulp.task('remote:prod', function(){
 
 gulp.task('remote:dev', function(){
     buildMode = 'dev';
-    apiHost = 'http://rong.dev.36kr.com';
+    apiHost = 'http://rongdev.36kr.com';
     gulp.start('remote');
 });
 
 
 gulp.task('remote:test', function(){
     buildMode = 'test';
-    apiHost = 'http://rong.test.36kr.com';
+    apiHost = 'http://rongtest.36kr.com';
     gulp.start('remote');
 });
 
