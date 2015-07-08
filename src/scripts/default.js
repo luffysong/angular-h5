@@ -14,7 +14,7 @@ angular.module('ui.carousel', ['ui.bootstrap']);
 angular.module('defaultApp.filter', []);
 angular.module('defaultApp.directive', []);
 angular.module('defaultApp.service', ['ngResource']);
-angular.module('defaultApp.controller', []);
+angular.module('defaultApp.controller', ['ngTouch']);
 angular.module('templates', []);
 
 require('./filters');
