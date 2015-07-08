@@ -25,6 +25,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.user = {
             investMoneyUnit:"CNY",
             rnvInvestorInfo:"V1_1",
+            identityCardType: 'IDCARD',
             investPhases:[]
         };
         $scope.intro = {};
@@ -92,6 +93,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 if(cacheData.id==data.id){
                     angular.extend($scope.user, cacheData);
                     $scope.user.industry = $scope.user.focusIndustry;
+                    $scope.intro.value.pictures = $scope.user.businessCardUrl?$scope.user.businessCardUrl:"";
                 }
             }
             var interval = $interval(function(){
@@ -100,6 +102,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     var form = $('form[name="investorValidateForm"]');
                     var formCtrl = angular.element(form).scope()["investorValidateForm"];
                     if(formCtrl.$dirty){
+                        $scope.user.investPhases = [];
                         angular.forEach($scope.investStage,function(key,index){
 
                             if(key.active){
