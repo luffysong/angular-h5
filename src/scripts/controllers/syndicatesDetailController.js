@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state) {
         var statusList = DictionaryService.getDict("crowd_funding_status");
 
         /*股权结构是否出错*/
@@ -126,7 +126,8 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         }
         /*底部栏点击我要投资*/
         $scope.toInvest = function(){
-            $modal.open({
+            $state.go("syndicatesConfirm");
+            /*$modal.open({
                 templateUrl: 'templates/company/pop-to-invest.html',
                 windowClass: 'to-invest-window',
                 controller: [
@@ -142,7 +143,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                         return $scope;
                     }
                 }
-            });
+            });*/
         }
         /*开投提醒*/
         $scope.setRemind = function(event){

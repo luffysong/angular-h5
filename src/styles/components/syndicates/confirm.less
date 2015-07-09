@@ -19,13 +19,52 @@
 }
 .syndicates-confirm {
     @default-color:#F7F7F7;
-    padding: 0 15px;
     background-color: @default-color;
+    .kr-code-way {
+        width: 100%;
+        height: 35px;
+        line-height: 35px;
+        padding: 0 15px;
+        text-align: right;
+        .clearfix;
+    }
+    .kr-code-enter {
+        background-color: #fff;
+        border: 1px solid #DFDFDF;
+        height: 50px;
+        padding: 0 15px;
+        .kr-code-input {
+            display: inline-block;
+            width: 70%;
+            height: 100%;
+            border: 0;
+            margin-left: 15px;
+            font-weight: 600;
+            color: #008DF2;
+        }
+        .validate-kr-code {
+            display: inline-block;
+            width: 65px;
+            height: 35px;
+            line-height: 35px;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #DEDEDE;
+            &.suc {
+                background-color: #008DF2;
+            }
+        }
+    }
     .confirm-title {
         width: 100%;
-        height: 37px;
-        line-height: 37px;
+        padding: 10px 15px;
+        height: auto;
         background-color: @default-color;
+        .validate-suc {
+            color: #22AC38;
+        }
         .risk-tip {
             float: right;
         }
@@ -35,10 +74,46 @@
         height: 145px;
         background-color: #fff;
         padding-left: 15px;
+        border: 1px solid #DFDFDF;
         .content-count {
             width: 100%;
             height: 50px;
+            line-height: 50px;
             border-bottom: 1px solid #DFDFDF;
+            .invest-val {
+                width: 70%;
+                height: 100%;
+                border: 0;
+                margin-left: 15px;
+            }
+        }
+        .content-info {
+            p {
+                .info-attr {
+                    display: inline-block;
+                    width: 70px;
+                }
+                span {
+                    margin-left: 15px;
+                }
+                .red {
+                    color: #F22800;
+                }
+            }
+        }
+        .content-bottom {
+            padding-top: 20px;
+            .ensure-pay {
+                display: block;
+                width: 75%;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                color: #fff;
+                background-color: #F28E00;
+                border-radius: 3px;
+                margin: 30px auto 0;
+            }
         }
     }
 }
