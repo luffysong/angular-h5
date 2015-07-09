@@ -40,7 +40,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             id:'',/*用户id*/
             name:'',/*真实姓名*/
             intro:'',/*一句话简介*/
-            investorRole:'',/*投资身份*/
+            investorRole:'ORG_INVESTOR',/*投资身份*/
             businessCard:'',/*名片*/
             fundsPhases:'',/*投资阶段*/
             investorFocusIndustrys:'',/*关注领域*/
@@ -92,18 +92,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         /*关注领域*/
         $scope.invest.investorFocusIndustrys = DictionaryService.getDict('InvestorFollowedIndustry');
 
-        $scope.addr2Options = [];
-        /*跟投人认证信息回写*/
-        UserService.get({
-            id:'identity',
-            sub: 'cert',
-            subid: 'coinvestor-info'
-        },{},function(data){
 
-
-        },function(err){
-
-        });
         /*获取用户默认的关注领域和投资阶段的数据*/
         UserService.basic.get({
             id:UserService.getUID()
@@ -152,8 +141,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         $scope.areaList.push($scope.invest.investorFocusIndustrys[i].value);
                     }
                 });
-
-                console.log('$scope.areaList===>>>',$scope.areaList);
 
             }
         }
@@ -218,14 +205,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         },500);
         /*表单提交*/
         $scope.submitForm = function(){
-/*
-            //测试一下
-            InvestorauditService.get({},function(response){
-                console.log('====response===',response);
-            },function(err){
-                ErrorService.alert(err);
-            });*/
-
             console.log('====invest====',$scope.invest);
             /*检查表单填写是否正确*/
             if(!checkForm("investorValidateForm"))return;
@@ -268,6 +247,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
 
                 console.log('提交表单放回的数据:',response);
+                $state.go('investorValidateApplyAlert');
+
+
 
             },function(err){
                 console.log('===err===',err);

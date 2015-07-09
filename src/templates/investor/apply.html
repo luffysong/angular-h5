@@ -4,18 +4,20 @@
         <div ng-if="valStatus == 'normal'">
             <form ng-submit="$event.preventDefault()"  name="investorValidateForm" >
                 <!--所有报错信息-->
-                <div class="error-alert error" ng-show="investorValidateForm.reIdCardNumber.$invalid && investorValidateForm.reIdCardNumber.$dirty">
-                    <span ng-show="investorValidateForm.reIdCardNumber.$error.required">请再次输入身份证号码</span>
-                </div>
-                <div class="error-alert error" ng-show="investorValidateForm.$error.idcardInvalid && enterCard">
-                    <span>两次输入身份证号码不一致</span>
-                </div>
-                <div class="error-alert error" ng-show="investorValidateForm.idCardNumber.$invalid && investorValidateForm.idCardNumber.$dirty">
-                    <span ng-show="investorValidateForm.idCardNumber.$error.required">请输入身份证号码</span>
+                <div class="error-alert error" ng-show="investorValidateForm.name.$invalid && investorValidateForm.name.$dirty">
+                    <span ng-show="investorValidateForm.name.$error.required">请输入您的真实姓名</span>
                 </div>
                 <div class="error-alert error" ng-show="(investorValidateForm.investFrom.$invalid && investorValidateForm.investFrom.$dirty) || (investorValidateForm.investTo.$invalid && investorValidateForm.investTo.$dirty)">
                     <span ng-show="investorValidateForm.investFrom.$error.required || investorValidateForm.investTo.$error.required">请输入投资金额</span>
                 </div>
+
+                <div class="error-alert error" ng-show="investorValidateForm.investIdentity.$invalid">
+                    <span>请选择投资身份</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.addPic.$invalid">
+                    <span>请上传您的名片</span>
+                </div>
+
                 <div class="error-alert error" ng-show="investorValidateForm.$error.industyEmpty">
                     <span>请选择关注领域</span>
                 </div>
@@ -47,7 +49,7 @@
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>真实姓名</label>
                         <div class="col-max">
-                            <input class="form-control" type="text" ng-model="invest.name" placeholder="须与身份证姓名保持一致" maxlength="15"  required/>
+                            <input class="form-control" name="name" type="text" ng-model="invest.name" placeholder="须与身份证姓名保持一致" maxlength="15"  required/>
                         </div>
 
                     </div>
@@ -63,20 +65,20 @@
                         <div class="col-max">
                             <div class="radio">
                               <label>
-                                <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="ORG_INVESTOR">
-                                    <span>任职投资机构</span>
+                                <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="ORG_INVESTOR" checked required>
+                                    <span> &nbsp;任职投资机构</span>
                               </label>
                             </div>
                             <div class="radio">
                               <label>
                                 <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="COMPANY_INVEST_DEPT">
-                                <span>任职公司投资并购部</span>
+                                <span>&nbsp;任职公司投资并购部</span>
                               </label>
                             </div>
                             <div class="radio">
                               <label>
                                 <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="PERSONAL_INVESTOR">
-                                <span>个人投资人</span>
+                                <span>&nbsp;个人投资人</span>
                               </label>
                             </div>
 
@@ -84,7 +86,9 @@
 
                     </div>
                     <div class="form-group normal">
-                        <label class="label-control">上传名片</label>
+                        <label class="label-control">
+                            <span class="c-orange">*</span>上传名片
+                        </label>
                         <div class="col-max">
                             <p>名片有助于提升审核速度</p>
 
@@ -105,7 +109,7 @@
                                         <input type="file" name="addPic" class="input-file" ng-file-select
                                                ng-file-change="imgFileSelected($files, $event)"
                                                ng-multiple="false"
-                                               resetOnClick="true" accept="image/*">
+                                               resetOnClick="true" accept="image/*" required>
                                         <span class="tip">仅供认证使用</span>
                                     </li>
                                 </ul>
@@ -139,49 +143,54 @@
                     </div>
 
                     <!--个人单笔可投-->
-                    <div class="form-group normal">
+                    <div class="form-group normal invest-money">
                         <label class="label-control"><span class="c-orange">*</span>单笔可投额度(单位：万)</label>
 
-                        <div class="col-flex clearfix ml-10">
+                        <div class="col-flex clearfix money-box">
                         <!-- 个人 -->
                                 <div class="form-group">
                                     <label for="" class="label-control">个人</label>
-                                    <!-- 人民币 -->
-                                    <div class="col-flex clearfix ml-10">
-                                        <input class="form-control account-num " type="tel" ng-model="invest.cnyInvestMin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
-                                        至
-                                        <input class="form-control account-num" type="tel" ng-model="invest.cnyInvestMax" name="investTo" placeholder="填写金额"  required maxlength="6" />
-                                        人民币
+                                    <div class="row-1">
+                                        <!-- 人民币 -->
+                                        <div class="col-flex clearfix ml-10">
+                                            <input class="form-control account-num " type="tel" ng-model="invest.cnyInvestMin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
+                                            至
+                                            <input class="form-control account-num" type="tel" ng-model="invest.cnyInvestMax" name="investTo" placeholder="填写金额"  required maxlength="6" />
+                                            人民币
+                                        </div>
+                                        <!-- 美元 -->
+                                        <div class="col-flex clearfix ml-10">
+                                            <input class="form-control account-num" type="tel" ng-model="invest.usdInvestMin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
+                                            至
+                                            <input class="form-control account-num" type="tel" ng-model="invest.usdInvestMax" name="investTo" placeholder="填写金额"  required maxlength="6" />
+                                            美元
+                                        </div>
+
                                     </div>
-                                    <!-- 美元 -->
-                                    <div class="col-flex clearfix ml-10">
-                                        <input class="form-control account-num" type="tel" ng-model="invest.usdInvestMin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
-                                        至
-                                        <input class="form-control account-num" type="tel" ng-model="invest.usdInvestMax" name="investTo" placeholder="填写金额"  required maxlength="6" />
-                                        美元
-                                    </div>
+
                             </div>
                             <div class="clearfix"></div>
                             <!-- 基金 -->
                                 <div class="form-group">
                                     <label for="" class="label-control">基金</label>
-                                    <!-- 人民币 -->
-                                    <div class="col-flex clearfix ml-10">
-                                        <input class="form-control account-num" type="tel" ng-model="invest.fundCnyInvestMin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
-                                        至
-                                        <input class="form-control account-num" type="tel" ng-model="invest.fundCnyInvestMax" name="investTo" placeholder="填写金额"  required maxlength="6" />
-                                        美元
-                                    </div>
-                                    <!-- 美元 -->
-                                    <div class="col-flex clearfix ml-10">
-                                        <input class="form-control account-num" type="tel" ng-model="invest.fundUsdInvestMin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
-                                        至
-                                        <input class="form-control account-num" type="tel" ng-model="invest.fundUsdInvestMax" name="investTo" placeholder="填写金额"  required maxlength="6" />
-                                        人民币
+                                    <div class="row-1">
+                                        <!-- 人民币 -->
+                                        <div class=" col-flex clearfix ml-10">
+                                            <input class="form-control account-num" type="tel" ng-model="invest.fundCnyInvestMin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
+                                            至
+                                            <input class="form-control account-num" type="tel" ng-model="invest.fundCnyInvestMax" name="investTo" placeholder="填写金额"  required maxlength="6" />
+                                            美元
+                                        </div>
+                                        <!-- 美元 -->
+                                        <div class="col-flex clearfix ml-10">
+                                            <input class="form-control account-num" type="tel" ng-model="invest.fundUsdInvestMin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
+                                            至
+                                            <input class="form-control account-num" type="tel" ng-model="invest.fundUsdInvestMax" name="investTo" placeholder="填写金额"  required maxlength="6" />
+                                            人民币
+                                        </div>
                                     </div>
                                 </div>
                         </div>
-
                     </div>
                     <!-- 主投币种 -->
                     <div class="form-group">
