@@ -5,7 +5,7 @@
 
         <h2>创建公司 <b ng-click="createTip()">特别提醒</b></h2>
 
-        <form action="">
+        <form action="" name="createForm" ng-submit="$event.preventDefault()">
             <div class="list">
 
                 <table>
@@ -16,8 +16,9 @@
                         </td>
                         <td>
                             <div class="suggest_wrap">
-                                <input type="text" placeholder="请填写大众熟知的项目名称"/>
-                                <d-suggest></d-suggest>
+                                <d-suggest>
+                                    <input type="text" placeholder="请填写大众熟知的项目名称" required/>
+                                </d-suggest>
                             </div>
                         </td>
 
@@ -28,10 +29,8 @@
                             <span>产品状态</span>
                         </td>
                         <td>
-                            <select name="">
-                                <option value="1">请选择</option>
-                                <option value="1">请选择11</option>
-
+                            <select class="form-control" name="operationStatus" ng-model="formData.operationStatus"
+                                    ng-options="y.value as y.desc for y in operationStatus" required>
                             </select>
                         </td>
                     </tr>
@@ -41,7 +40,8 @@
                             <span>公司网址</span>
                         </td>
                         <td>
-                            <input type="text" placeholder="如：http://www.36kr.com"/>
+                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" required
+                                   name="website" ng-model="formData.website"/>
                         </td>
                     </tr>
                     <tr>
@@ -50,7 +50,8 @@
                             <span>一句话简介</span>
                         </td>
                         <td>
-                            <textarea name="" id="" placeholder="请简要介绍下项目，30字以内"></textarea>
+                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，30字以内" required
+                                      ng-model="formData.brief"></textarea>
                         </td>
                     </tr>
 
@@ -61,14 +62,15 @@
                         </td>
                         <td>
                             <div class="pic">
-                                <span class="upload-b ng-binding" ng-click="uploadCard()">
+                                <span class="upload-b ng-binding">
                                     <img ng-src="//krplus-pic.b0.upaiyun.com/default_logo.png!70" width="70" height="70"
-                                         alt="" src="//krplus-pic.b0.upaiyun.com/default_logo.png!70">
+                                         alt=""
+                                         src="{{formData.logo || '//krplus-pic.b0.upaiyun.com/default_logo.png!70'}}">
                                     <span class="filewrap">
                                         上传
-                                        <input type="file" name="bizCardLink"
+                                        <input type="file" name="logo"
                                                class="input-file" ng-file-select=""
-                                               ng-file-change="imgFileSelected($files, $event)"
+                                               ng-file-change="logoFileSelected($files, $event)"
                                                ng-multiple="false"
                                                resetonclick="true" accept="image/*">
                                     </span>
@@ -84,27 +86,38 @@
                             <span>职位</span>
                         </td>
                         <td>
-                            <select name="">
-                                <option value="1">请选择</option>
+                            <select ng-options="c.value as c.desc for c in founderRoles" ng-model="formData.level"
+                                    class="form-control"
+                                    name="level" required>
                             </select>
 
                             <div class="split">
-                                <input type="text" placeholder="具体任职或负责方向"/>
+                                <input type="text" name="position" class="form-control" placeholder="具体任职或负责方向"
+                                       ng-model="formData.position" required/>
                             </div>
 
                         </td>
                     </tr>
-                    <tr>
+                    <tr class="time">
                         <td>
                             <b class="important">*</b>
                             <span>任职时间段</span>
                         </td>
                         <td>
-                            <span>请选择</span>
-                            年
-                            <span>请选择</span>
-                            月
-                            —— 至今
+
+                            <select class="form-control" ng-model="formData.startYear" class="form-control"
+                                    ng-options="y for y in yearOptions" name="startYear" required>
+                                <option value="">年</option>
+                            </select>
+                            &nbsp;
+                            <select class="form-control" ng-model="formData.startMonth" class="form-control"
+                                    ng-options="m+'月' for m in monthOptions" name="startMonth" required>
+                                <option value="">月</option>
+                            </select>
+                            — 至今
+
+                            <p class="error" ng-show="(createForm.startYear.$invalid && createForm.startYear.$dirty) || (createForm.startMonth.$invalid && createForm.startMonth.$dirty)">请选择时间段</p>
+
                         </td>
                     </tr>
                     <tr>
@@ -116,14 +129,15 @@
                             <p>上传名片有助于提升审核速度 <br/> 支持小于5M的JPG、JPEG和PNG格式</p>
 
                             <div class="pic">
-                                <span class="upload-b ng-binding" ng-click="uploadCard()">
-                                    <img  width="110" height="70"
-                                          alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAACJBAMAAABN17ABAAAAG1BMVEX///8AjfIZmPO23vv1+f3I4PaVxe1nq+VPnuGS0jTRAAAAeklEQVRo3u3YwQmDQBBA0YmmgGwqSFKBJaQLrzbh3dLFiwcXwYurC+818GFZGGZi/EcZz36KgoYAAAAAANhof10U06RPFPNIr9gjJiYmJpYTu1Ws/aatdxcnaVJmHdl1x44+Y30fRExMTExMLFfxAr+cJgAAAAAALjTMqvgNecQF9eAAAAAASUVORK5CYII=">
+                                <span class="upload-b ng-binding">
+                                    <img width="110" height="70"
+                                         alt=""
+                                         src="{{formData.bizCardLink || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAACJBAMAAABN17ABAAAAG1BMVEX///8AjfIZmPO23vv1+f3I4PaVxe1nq+VPnuGS0jTRAAAAeklEQVRo3u3YwQmDQBBA0YmmgGwqSFKBJaQLrzbh3dLFiwcXwYurC+818GFZGGZi/EcZz36KgoYAAAAAANhof10U06RPFPNIr9gjJiYmJpYTu1Ws/aatdxcnaVJmHdl1x44+Y30fRExMTExMLFfxAr+cJgAAAAAALjTMqvgNecQF9eAAAAAASUVORK5CYII='}}">
                                     <span class="filewrap">
                                         仅供审核使用
                                         <input type="file" name="bizCardLink"
                                                class="input-file" ng-file-select=""
-                                               ng-file-change="imgFileSelected($files, $event)"
+                                               ng-file-change="cardFileSelected($files, $event)"
                                                ng-multiple="false"
                                                resetonclick="true" accept="image/*">
                                     </span>
@@ -137,7 +151,7 @@
             </div>
 
             <div class="submit">
-                <button type="button">提交审核</button>
+                <button type="button" ng-click="submitForm($event)">提交审核</button>
             </div>
         </form>
 

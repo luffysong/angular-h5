@@ -4542,6 +4542,13 @@ textarea:focus {
   padding: 0;
   margin: 0;
 }
+.form-control.ng-dirty.ng-invalid {
+  border: 1px solid #ff0000;
+}
+.error {
+  padding: 5px 0 0 0;
+  color: #FF0000;
+}
 .create_company {
   background-color: #fff;
 }
@@ -4662,6 +4669,9 @@ textarea:focus {
   height: 66px;
   left: -111px;
   top: -47px;
+}
+.create_company .list table .time select {
+  width: 60px;
 }
 .create_company .list table .job .split {
   border-top: 1px solid #dddddd;

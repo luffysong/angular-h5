@@ -8,21 +8,17 @@ window.DICTIONARY_CF_DATA =  {
         "01040000",
         "03030000",
         "03050000",
-        "03090000",
         "03020000",
         "03060000",
         "03100000",
         "03070000",
         "03040000",
         "04083320",
-        "03200000",
         "04012900",
         "01000000",
         "04243010",
         "03170000",
-        "04031000",
-        "65012900",
-        "64296510"
+        "04031000"
     ],
     "bank_limit_lianlianpay": {
         "64296510": [
@@ -54,6 +50,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "U盾客户",
                 "limit_once": "100万",
                 "limit_everyday": "100万"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "50万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
             }
         ],
         "01050000": [
@@ -66,6 +68,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "二代网银盾",
                 "limit_once": "50万",
                 "limit_everyday": "50万"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "50万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
             }
         ],
         "01030000": [
@@ -73,6 +81,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "客户网银唯一盾",
                 "limit_once": "10万",
                 "limit_everyday": "10万"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "50万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
             }
         ],
         "03080000": [
@@ -85,6 +99,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "专业版",
                 "limit_once": "无限额",
                 "limit_everyday": "无限额"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "50万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
             }
         ],
         "03010000": [
@@ -109,6 +129,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "网银盾",
                 "limit_once": "5万",
                 "limit_everyday": "50万"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "50万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
             }
         ],
         "03030000": [
@@ -121,6 +147,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "令牌动态密码",
                 "limit_once": "50万",
                 "limit_everyday": "50万"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "50万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
             }
         ],
         "03050000": [
@@ -133,6 +165,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "U宝/动态令牌",
                 "limit_once": "50万",
                 "limit_everyday": "50万"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "50万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
             }
         ],
         "03090000": [
@@ -140,6 +178,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "证书保护",
                 "limit_once": "100万",
                 "limit_everyday": "100万"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "50万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
             }
         ],
         "03020000": [
@@ -164,6 +208,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "Key盾",
                 "limit_once": "30万",
                 "limit_everyday": "30万"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "50万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
             }
         ],
         "03100000": [
@@ -176,6 +226,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "数字证书版",
                 "limit_once": "无限额",
                 "limit_everyday": "无限额"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "5万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
             }
         ],
         "03070000": [
@@ -183,6 +239,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "手机动态密码",
                 "limit_once": "5万",
                 "limit_everyday": "5万"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "20万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
             }
         ],
         "03040000": [
@@ -195,6 +257,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "电子钱包",
                 "limit_once": "无限额",
                 "limit_everyday": "无限额"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "50万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
             }
         ],
         "04083320": [
@@ -219,6 +287,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "USB-KEY",
                 "limit_once": "200万",
                 "limit_everyday": "200万"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "1万",
+                "limit_everyday": "无限额",
+                "limit_everymonth": "无限额"
             }
         ],
         "04243010": [
@@ -262,6 +336,12 @@ window.DICTIONARY_CF_DATA =  {
                 "auth_type": "USB-KEY",
                 "limit_once": "100万",
                 "limit_everyday": "100万"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "50万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
             }
         ],
         "04012900": [
@@ -278,8 +358,6 @@ window.DICTIONARY_CF_DATA =  {
         ]
     },
     "bank_name_lianlianpay": {
-        "64296510": "成都银行",
-        "65012900": "上海农商行",
         "01020000": "工商银行",
         "01050000": "建设银行",
         "01030000": "农业银行",
@@ -288,14 +366,12 @@ window.DICTIONARY_CF_DATA =  {
         "01040000": "中国银行",
         "03030000": "光大银行",
         "03050000": "民生银行",
-        "03090000": "兴业银行",
         "03020000": "中信银行",
         "03060000": "广发银行",
         "03100000": "浦发银行",
         "03070000": "平安银行",
         "03040000": "华夏银行",
         "04083320": "宁波银行",
-        "03200000": "东亚银行",
         "04012900": "上海银行",
         "01000000": "中国邮储银行",
         "04243010": "南京银行",
@@ -305,6 +381,7 @@ window.DICTIONARY_CF_DATA =  {
     "crowd_funding_status": {
         "10": "草稿",
         "20": "待发布",
+        "25": "保密预热",
         "30": "众筹中",
         "35": "超募中",
         "40": "众筹失败",
@@ -322,11 +399,14 @@ window.DICTIONARY_CF_DATA =  {
         "5": "订单已修改",
         "6": "众筹剩余额度不足",
         "7": "跟投人名额不足",
-        "8": "实际付款金额与订单金额不符"
+        "8": "实际付款金额与订单金额不符",
+        "9": "用户申请退款"
     },
     "trade_platform_type": {
         "1": "线下汇款",
-        "2": "连连支付"
+        "2": "连连网银支付",
+        "3": "连连认证支付",
+        "4": "支付宝"
     },
     "trade_status": {
         "1": "待付款",
@@ -336,6 +416,6 @@ window.DICTIONARY_CF_DATA =  {
         "5": "退款中",
         "6": "已退款",
         "7": "退款失败",
-        "8": "已关闭"
+        "8": "已失效"
     }
 };

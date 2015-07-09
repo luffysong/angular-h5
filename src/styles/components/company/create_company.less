@@ -12,6 +12,14 @@
   margin: 0;
 }
 
+.form-control.ng-dirty.ng-invalid{
+  border:1px solid #ff0000;
+}
+.error{
+  padding: 5px 0 0 0;
+  color: #FF0000;
+}
+
 .create_company {
   background-color: #fff;
 
@@ -149,7 +157,11 @@
           }
         }
       }
-
+      .time{
+        select{
+          width: 60px;
+        }
+      }
       .job {
         .split{
           border-top: 1px solid @border-gray;
