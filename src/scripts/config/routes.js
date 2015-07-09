@@ -81,7 +81,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*众筹确定金额页面*/
     $stateProvider.state('syndicatesConfirm', {
-        url: '/zhongchouConfirm',
+        url: '/zhongchouConfirm/{cid}/{fundingId}',
         templateUrl: 'templates/syndicates/confirm.html',
         controller: 'syndicatesConfirmController'
     });
