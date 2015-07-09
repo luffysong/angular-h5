@@ -54,6 +54,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         CrowdFundingService["crowd-funding"].get({
             id:$scope.fundingId
         },function(data){
+            console.log(data);
             $scope.color = data.base.status;
             $scope.syndicatesInfo = data;
             angular.forEach(statusList,function(obj,index){
@@ -63,7 +64,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     /*超募中*/
                     if(data.base.cf_success_raising >= data.base.cf_raising && data.base.cf_raising > 0){
                         $scope.status = "超募中";
-                        $scope.timeout = true;
                     }
                     /*预热中*/
                     if(new Date() < date){
