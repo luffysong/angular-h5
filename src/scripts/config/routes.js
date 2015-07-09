@@ -91,6 +91,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/investor/apply.html',
         controller: 'InvestorValidateApplyController'
     });
+    /*投资人认证申请提交成功页面*/
+    $stateProvider.state('investorValidateApplyAlert', {
+        url: '/investor/apply-alert',
+        templateUrl: 'templates/investor/apply-alert.html',
+        controller: ''
+    });
     /*协议路由，用户服务协议*/
     $stateProvider.state('serviceProtocol', {
         url: '/serviceProtocol',
