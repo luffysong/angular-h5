@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateApplyController',
-    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location) {
+    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService) {
         if(!UserService.getUID()){
             location.href = "/user/login?from=" + encodeURIComponent(location.href);
             return;
@@ -104,8 +104,37 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         },function(err){
 
         });
-
-
+        /*获取用户默认的关注领域和投资阶段的数据*/
+        UserService.basic.get({
+            id:UserService.getUID()
+        },function(data){
+            console.log(data);
+            /*关注领域数据处理*/
+            if(data.industry && data.industry.length){
+                angular.extend($scope.areaList,data.industry);
+                angular.forEach(data.industry,function(o,i){
+                    angular.forEach($scope.invest.investorFocusIndustrys,function(key,index){
+                        if(key.value == o){
+                            key.active = true;
+                        }
+                    });
+                });
+            }
+            /*投资阶段数据处理*/
+            angular.forEach(data,function(val,key){
+                if(key == "isInvestFirstPhase" || key == "isInvestSecondPhase" || key == "isInvestThirdPhase"){
+                    if(data[key]){
+                        angular.forEach($scope.invest.fundsPhases,function(obj,index){
+                            if(obj.engName == key){
+                                obj.active = true;
+                            }
+                        });
+                    }
+                }
+            });
+        },function(err){
+            ErrorService.alert(err);
+        });
         /*更改投资阶段被选中状态*/
         $scope.selectStage = function(index){
             angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",true);
@@ -189,9 +218,20 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         },500);
         /*表单提交*/
         $scope.submitForm = function(){
+/*
+            //测试一下
+            InvestorauditService.get({},function(response){
+                console.log('====response===',response);
+            },function(err){
+                ErrorService.alert(err);
+            });*/
+
             console.log('====invest====',$scope.invest);
+            /*检查表单填写是否正确*/
+            if(!checkForm("investorValidateForm"))return;
+
             var investoraudit = {};
-                investoraudit['id'] = $scope.invest.id;
+                investoraudit['id'] = UserService.getUID();
                 investoraudit['name']   = $scope.invest.name;
                 investoraudit['investorRole']   = $scope.invest.investorRole;
                 investoraudit['intro']   = $scope.invest.intro;
@@ -208,14 +248,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 investoraudit['mainCurrency'] = $scope.invest.mainCurrency;
                 /*个人*/
                 investoraudit['cnyInvestMin']   = $scope.invest.cnyInvestMin;
-                investoraudit['cnyInvestMan']   = $scope.invest.cnyInvestMan;
+                investoraudit['cnyInvestMax']   = $scope.invest.cnyInvestMax;
                 /*基金*/
                 investoraudit['fundCnyInvestMin']   = $scope.invest.fundCnyInvestMin;
                 investoraudit['fundCnyInvestMax']   = $scope.invest.fundCnyInvestMax;
 
                 /*个人*/
                 investoraudit['usdInvestMin']   = $scope.invest.usdInvestMin;
-                investoraudit['usdInvestMan']   = $scope.invest.usdInvestMan;
+                investoraudit['usdInvestMax']   = $scope.invest.usdInvestMax;
                 /*基金*/
                 investoraudit['fundUsdInvestMin']   = $scope.invest.fundUsdInvestMin;
                 investoraudit['fundUsdInvestMax']   = $scope.invest.fundUsdInvestMax;
@@ -224,6 +264,43 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 investoraudit['businessCardLink']   = $scope.intro.value.pictures;
 
                 console.log('======request===',investoraudit);
+            InvestorauditService.save(investoraudit,function(response){
+
+
+                console.log('提交表单放回的数据:',response);
+
+            },function(err){
+                console.log('===err===',err);
+                ErrorService.alert(err);
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         };
     }
