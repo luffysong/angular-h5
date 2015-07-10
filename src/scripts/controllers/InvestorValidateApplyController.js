@@ -123,7 +123,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 });
             });
             /*单笔可投额度*/
-            angular.forEach();
+            $scope.invest.cnyInvestMax      =   data.investorSettings.cnyInvestMax;
+            $scope.invest.cnyInvestMin      =   data.investorSettings.cnyInvestMin;
+            $scope.invest.fundCnyInvestMax  =   data.investorSettings.fundCnyInvestMax;
+            $scope.invest.fundCnyInvestMin  =   data.investorSettings.fundCnyInvestMin;
+            $scope.invest.fundUsdInvestMax  =   data.investorSettings.fundUsdInvestMax;
+            $scope.invest.fundUsdInvestMin  =   data.investorSettings.fundUsdInvestMin;
+            $scope.invest.usdInvestMax      =   data.investorSettings.usdInvestMax;
+            $scope.invest.usdInvestMin      =   data.investorSettings.usdInvestMin;
         },function(err){
             ErrorService.alert(err);
         });
