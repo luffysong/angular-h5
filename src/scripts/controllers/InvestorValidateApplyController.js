@@ -97,6 +97,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         UserService.basic.get({
             id:UserService.getUID()
         },function(data){
+            console.log('====data===',data);
+
+            /*基本信息*/
+            $scope.invest.name = data.name;
+            $scope.invest.intro = data.intro;
+
             /*关注领域数据处理*/
             if(data.industry && data.industry.length){
                 angular.extend($scope.areaList,data.industry);
@@ -109,17 +115,15 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 });
             }
             /*投资阶段数据处理*/
-            angular.forEach(data,function(val,key){
-                if(key == "isInvestFirstPhase" || key == "isInvestSecondPhase" || key == "isInvestThirdPhase"){
-                    if(data[key]){
-                        angular.forEach($scope.invest.fundsPhases,function(obj,index){
-                            if(obj.engName == key){
-                                obj.active = true;
-                            }
-                        });
+            angular.forEach(data.investPhases,function(val){
+                angular.forEach($scope.invest.fundsPhases,function(item){
+                    if(val == item.engName){
+                        item.active = true;
                     }
-                }
+                });
             });
+            /*单笔可投额度*/
+            angular.forEach();
         },function(err){
             ErrorService.alert(err);
         });
@@ -193,8 +197,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
         /*表单提交*/
         $scope.submitForm = function(){
-            /*检查表单填写是否正确*/
-            if(!checkForm("investorValidateForm"))return;
+
             /*上传名片检查*/
             console.log('=====>>>',$scope.intro.value.pictures);
             if($scope.intro.value.pictures){
@@ -234,6 +237,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }else{
                 angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('fundInvestMoneyEmpty',false);
             }*/
+
+            /*检查表单填写是否正确*/
+            if(!checkForm("investorValidateForm"))return;
+
             var investoraudit = {};
                 investoraudit['id'] = UserService.getUID();
                 investoraudit['name']   = $scope.invest.name;
@@ -265,17 +272,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 investoraudit['fundUsdInvestMax']   = $scope.invest.fundUsdInvestMax;
                 /*名片*/
                 investoraudit['businessCardLink']   = $scope.intro.value.pictures;
-
-                return false;
             InvestorauditService.save(investoraudit,function(response){
                 $state.go('investorValidateApplyAlert');
             },function(err){
                 ErrorService.alert(err);
             });
-
-
-
-
         };
     }
 );
