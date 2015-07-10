@@ -1,4 +1,5 @@
 require('./CompanyDetailController');
+require('./CreateCompanyController');
 require('./GuideWelcomeController');
 require('./InvestorValidateController');
 require('./OrganizationDetailController');
