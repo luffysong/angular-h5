@@ -91,12 +91,19 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/investor/apply.html',
         controller: 'InvestorValidateApplyController'
     });
-    /*投资人认证申请提交成功页面*/
+    /*投资人认证申请提交审核页面*/
     $stateProvider.state('investorValidateApplyAlert', {
         url: '/investor/apply-alert',
         templateUrl: 'templates/investor/apply-alert.html',
         controller: ''
     });
+    /*投资人认证申请提交审核成功页面*/
+    $stateProvider.state('investorValidateApplySuccess', {
+        url: '/investor/apply-success',
+        templateUrl: 'templates/investor/apply-success.html',
+        controller: ''
+    });
+
     /*协议路由，用户服务协议*/
     $stateProvider.state('serviceProtocol', {
         url: '/serviceProtocol',
