@@ -4,42 +4,35 @@
         <div ng-if="valStatus == 'normal'">
             <form ng-submit="$event.preventDefault()"  name="investorValidateForm" >
                 <!--所有报错信息-->
-                <div class="error-alert error" ng-show="investorValidateForm.name.$invalid && investorValidateForm.name.$dirty">
-                    <span ng-show="investorValidateForm.name.$error.required">请输入您的真实姓名</span>
-                </div>
-                <div class="error-alert error" ng-show="(investorValidateForm.investFrom.$invalid && investorValidateForm.investFrom.$dirty) || (investorValidateForm.investTo.$invalid && investorValidateForm.investTo.$dirty)">
-                    <span ng-show="investorValidateForm.investFrom.$error.required || investorValidateForm.investTo.$error.required">请输入投资金额</span>
-                </div>
 
-                <div class="error-alert error" ng-show="investorValidateForm.investIdentity.$invalid">
+
+                <!-- <div class="error-alert error" ng-show="(investorValidateForm.investFrom.$invalid && investorValidateForm.investFrom.$dirty) || (investorValidateForm.investTo.$invalid && investorValidateForm.investTo.$dirty)">
+                    <span ng-show="investorValidateForm.investFrom.$error.required || investorValidateForm.investTo.$error.required">请输入投资金额</span>
+                </div> -->
+                <div class="error-alert error" ng-show="investorValidateForm.investIdentity.$invalid && investorValidateForm.investIdentity.$dirty">
                     <span>请选择投资身份</span>
                 </div>
-                <div class="error-alert error" ng-show="investorValidateForm.addPic.$invalid">
+                <div class="error-alert error" ng-show="investorValidateForm.$error.picEmpty">
                     <span>请上传您的名片</span>
                 </div>
-
                 <div class="error-alert error" ng-show="investorValidateForm.$error.industyEmpty">
                     <span>请选择关注领域</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.$error.stageEmpty">
                     <span>请选择投资阶段</span>
                 </div>
+                <div class="error-alert error" ng-show="investorValidateForm.$error.investMoneyEmpty">
+                    <span>请填写单笔可投额度中的个人金额</span>
+                </div>
                 <div class="error-alert error" ng-show="investorValidateForm.intro.$invalid && investorValidateForm.intro.$dirty">
                     <span ng-show="investorValidateForm.intro.$error.required">请输入一句话简介</span>
                 </div>
-                <div class="error-alert error" ng-show="investorValidateForm.address1.$invalid && investorValidateForm.address1.$dirty">
-                    <span ng-show="investorValidateForm.address1.$error.required">请选择所在地</span>
+                <div class="error-alert error" ng-show="investorValidateForm.$error.fundInvestMoneyEmpty">
+                    <span>请填写单笔可投额度中的基金金额</span>
                 </div>
-                <div class="error-alert error" ng-show="investorValidateForm.position.$invalid && investorValidateForm.position.$dirty">
-                    <span ng-show="investorValidateForm.position.$error.required">请输入职位</span>
+                <div class="error-alert error" ng-show="investorValidateForm.realName.$invalid && investorValidateForm.realName.$dirty">
+                    <span ng-show="investorValidateForm.realName.$error.required">请输入真实姓名</span>
                 </div>
-                <div class="error-alert error" ng-show="investorValidateForm.company.$invalid && investorValidateForm.company.$dirty">
-                    <span ng-show="investorValidateForm.company.$error.required">请输入公司</span>
-                </div>
-                <div class="error-alert error" ng-show="investorValidateForm.name.$invalid && investorValidateForm.name.$dirty">
-                    <span ng-show="investorValidateForm.name.$error.required">请输入真实姓名</span>
-                </div>
-
                 <div class="form-horizontal welcome-form">
                     <h4 class="title">投资人认证</h4>
                     <!--基本信息-->
@@ -49,7 +42,7 @@
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>真实姓名</label>
                         <div class="col-max">
-                            <input class="form-control" name="name" type="text" ng-model="invest.name" placeholder="须与身份证姓名保持一致" maxlength="15"  required/>
+                            <input class="form-control" name="realName" type="text" ng-model="invest.name" placeholder="须与身份证姓名保持一致" maxlength="15"  required />
                         </div>
 
                     </div>
@@ -109,7 +102,7 @@
                                         <input type="file" name="addPic" class="input-file" ng-file-select
                                                ng-file-change="imgFileSelected($files, $event)"
                                                ng-multiple="false"
-                                               resetOnClick="true" accept="image/*" required>
+                                               resetOnClick="true" accept="image/*">
                                         <span class="tip">仅供认证使用</span>
                                     </li>
                                 </ul>
@@ -153,16 +146,16 @@
                                     <div class="row-1">
                                         <!-- 人民币 -->
                                         <div class="col-flex clearfix ml-10">
-                                            <input class="form-control account-num " type="tel" ng-model="invest.cnyInvestMin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
+                                            <input class="form-control account-num " type="tel" ng-model="invest.cnyInvestMin" name="investFrom" placeholder="填写金额"   maxlength="6" />
                                             至
-                                            <input class="form-control account-num" type="tel" ng-model="invest.cnyInvestMax" name="investTo" placeholder="填写金额"  required maxlength="6" />
+                                            <input class="form-control account-num" type="tel" ng-model="invest.cnyInvestMax" name="investTo" placeholder="填写金额" maxlength="6" />
                                             人民币
                                         </div>
                                         <!-- 美元 -->
                                         <div class="col-flex clearfix ml-10">
-                                            <input class="form-control account-num" type="tel" ng-model="invest.usdInvestMin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
+                                            <input class="form-control account-num" type="tel" ng-model="invest.usdInvestMin" name="investFrom" placeholder="填写金额"  maxlength="6" />
                                             至
-                                            <input class="form-control account-num" type="tel" ng-model="invest.usdInvestMax" name="investTo" placeholder="填写金额"  required maxlength="6" />
+                                            <input class="form-control account-num" type="tel" ng-model="invest.usdInvestMax" name="investTo" placeholder="填写金额" maxlength="6" />
                                             美元
                                         </div>
 
@@ -176,16 +169,16 @@
                                     <div class="row-1">
                                         <!-- 人民币 -->
                                         <div class=" col-flex clearfix ml-10">
-                                            <input class="form-control account-num" type="tel" ng-model="invest.fundCnyInvestMin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
+                                            <input class="form-control account-num" type="tel" ng-model="invest.fundCnyInvestMin" name="investFrom" placeholder="填写金额"  maxlength="6" />
                                             至
-                                            <input class="form-control account-num" type="tel" ng-model="invest.fundCnyInvestMax" name="investTo" placeholder="填写金额"  required maxlength="6" />
+                                            <input class="form-control account-num" type="tel" ng-model="invest.fundCnyInvestMax" name="investTo" placeholder="填写金额" maxlength="6" />
                                             美元
                                         </div>
                                         <!-- 美元 -->
                                         <div class="col-flex clearfix ml-10">
-                                            <input class="form-control account-num" type="tel" ng-model="invest.fundUsdInvestMin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
+                                            <input class="form-control account-num" type="tel" ng-model="invest.fundUsdInvestMin" name="investFrom" placeholder="填写金额"  maxlength="6" />
                                             至
-                                            <input class="form-control account-num" type="tel" ng-model="invest.fundUsdInvestMax" name="investTo" placeholder="填写金额"  required maxlength="6" />
+                                            <input class="form-control account-num" type="tel" ng-model="invest.fundUsdInvestMax" name="investTo" placeholder="填写金额"  maxlength="6" />
                                             人民币
                                         </div>
                                     </div>
@@ -203,12 +196,10 @@
                                 <input type="radio" name="moneyUnit" ng-model="invest.mainCurrency" value="CNY"> 人民币
                             </label>
                         </div>
-
-
                     </div>
 
                     <div class="form-group">
-                        <a href="" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="hasClick" baidu-btn="跟投人认证提交资料">提交资料</a>
+                        <a href="" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="hasClick">提交资料</a>
                         <p class="text-center bottom-tip">
                             点击-提交资料，即表示你同意
                         </p>
@@ -221,34 +212,7 @@
                 </div>
             </form>
         </div>
-        <!--认证审核中-->
-        <div ng-if="valStatus == 'validating'" class="welcome-form">
-            <div class="validating-info text-center">
-                <div class="validating-logo"></div>
-                <p class="c-orange fs-15">恭喜你迈出参与股权众筹的第一步</p>
-                <p class="fs-12">我们核对信息后，会在1个工作日内为你开通参与众筹的直通车。</p>
-            </div>
-
-        </div>
-        <!--认证审核失败-->
-        <div ng-if="valStatus == 'fail'" class="welcome-form">
-            <div class="validating-info text-center">
-                <div class="validating-logo fail"></div>
-                <p class="c-orange fs-15">您多次身份证验证未通过</p>
-                <p class="fs-12">导致无法继续申请参与众筹</p>
-                <p class="fs-12">如有疑问请联系我们：<a href="">service@36kr.com</a></p>
-            </div>
-
-        </div>
-        <!--已经是跟投人-->
-        <div ng-if="valStatus == 'withoutVal'" class="welcome-form">
-            <div class="validating-info text-center">
-                <div class="validating-logo"></div>
-                <p class="c-orange fs-15">恭喜！你已成为跟投人</p>
-                <p class="fs-12">第一批众筹的公司，将于6月9日全面上线，敬请期待。</p>
-            </div>
-
-        </div>
-        <a ng-if="valStatus == 'withoutVal' || valStatus == 'validating'" ui-sref="syndicates" class="btn btn-default btn-cancel">查看众筹列表</a>
     </div>
+
+
 </div>
