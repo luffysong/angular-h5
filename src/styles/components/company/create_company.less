@@ -23,6 +23,31 @@
 .create_company {
   background-color: #fff;
 
+  .gray_color{
+    color: #ccc;
+  }
+
+  .ac-container{
+    overflow: hidden;
+    .img{
+      width: 25px;
+      height: 25px;
+      line-height: 24px;
+      border-radius: 3px;
+      margin: 3px 5px 0;
+      overflow: hidden;
+      float: left;
+      img{
+        width: 100%;
+        border-radius: 3px;
+      }
+    }
+    span{
+      overflow: hidden;
+      display: block;
+    }
+  }
+
   b.important {
     color: @color_important;
   }
@@ -92,6 +117,7 @@
           overflow: hidden;
           border-radius: 50%;
           position: relative;
+          border: 1px solid #f5f5f5;
           .filewrap{
             display: block;
             position: absolute;
@@ -158,6 +184,7 @@
         }
       }
       .time{
+        color: #888;
         select{
           width: 60px;
         }
@@ -178,10 +205,11 @@
 
   .submit{
     padding: 1px;
+    background-color: #f6f6f6;
     button{
       display: block;
       margin: 10px auto;
-      width: 250px;
+      width: 70%;
       height: 40px;
       background-color: @color_blue;
       padding: 0;
@@ -189,6 +217,18 @@
       color: #fff;
       font-size: 14px;
       border-radius: 4px;
+    }
+    b{
+      display: block;
+      margin: 0 auto;
+      width: 70%;
+      font-weight: normal;
+      color: #999;
+      font-size: 12px;
+      i{
+        font-style: normal;
+        color: @color_blue;
+      }
     }
   }
 }

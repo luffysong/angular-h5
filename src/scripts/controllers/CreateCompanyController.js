@@ -1,6 +1,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('CreateCompanyController', [
+    '$q',
     '$modal',
     '$scope',
     'DictionaryService',
@@ -15,7 +16,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
     'ErrorService',
     'AvatarEdit',
     '$upload',
-    function ($modal, $scope, DictionaryService, dateFilter, DefaultService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
+    function ($q,$modal, $scope, DictionaryService, dateFilter, DefaultService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
 
         // 职位
         $scope.founderRoles = DictionaryService.getDict('StartupPositionType');
@@ -57,6 +58,107 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             });
         }
         // 重要提示 end
+
+
+        // suggest start
+
+        function suggest_state(data) {
+            //var q = term.toLowerCase().trim();
+            var results = data.map(function (item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
+                //var label = item.logo ? '<div class="img"><img src="'+item.logo+'"></div>' + '<span>'+item.name+'</span>' : item.name
+                var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30',
+                    label = '<div class="img"><img src="'+logo+'"></div>' + '<span>'+item.name+'</span>';
+
+                return {
+                    label: label,
+                    value: item.name,
+                    obj: item,
+                    logo: item.logo
+                }
+            });
+
+            return results;
+        }
+
+        $scope.suggest = {
+            add : []
+        }
+        function suggest_state_remote(term) {
+            var deferred = $q.defer();
+            var q = term.toLowerCase().trim();
+
+            SuggestService.query({
+                wd: q
+            }, function (data) {
+                var exist = data.data.filter(function(item){
+                    return item.name==q
+                });
+                if(!exist.length){
+                    data.data.push({
+                        name : "创建公司: " + q,
+                        status : 'add',
+                        value : q
+                    })
+                }
+
+                deferred.resolve(suggest_state(data.data));
+            }, function () {
+
+            });
+            return deferred.promise;
+        }
+
+
+        // 判断
+        $scope.opNext = 0;
+        // 获取已存在公司信息
+        function checkName(selected){
+            CompanyService.checkName({
+                name : selected.obj.name
+            }, function(data){
+                data.company.logo = selected.obj.logo;
+                var company = data.company;
+
+
+                if(data.manager) {
+                    $scope.opNext = 2;
+                    $scope.founder = data.manager.name;
+                } else {
+                    $scope.opNext = 1;
+                }
+                if(data.creatable){
+                    $scope.opNext = 0;
+                }
+
+
+                $scope.formData.cid = company.id;
+                $scope.formData.name = company.name;
+                $scope.formData.website = company.website;
+                $scope.formData.brief = company.brief;
+                $scope.formData.logo = company.logo;
+                $scope.formData.operationStatus = company.operationStatus;
+                $scope.formData.creatable = data.creatable;
+                $scope.formData.inputLength = $scope.formData.brief.length || 0;
+            })
+        }
+
+
+        $scope.autocomplete_options = {
+            suggest: suggest_state_remote,
+            on_error: console.log,
+            on_select: function (selected) {
+                console.log(selected)
+                if(selected.obj.status != 'add'){
+                    checkName(selected);
+                }else{
+                    $scope.name = selected.obj.value;
+                }
+                $scope.selectedCompany = selected;
+            }
+        };
+
+        // suggest end
+
 
 
 
@@ -165,10 +267,81 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         // 上传名片 end
 
 
+        // add new company
 
-        //提交表单 start
+        $scope.addCompany = function(name) {
+            $scope.opNext = 0;
+            $scope.formData.name = name;
+            $scope.formData.website = '';
+            $scope.formData.brief = '';
+            $scope.formData.logo = '';
+            $scope.formData.operationStatus = 'OPEN';
+            $scope.formData.bizCardLink = '';
+            $scope.formData.cid = null;
+        }
+
+
+        // add new company  end
+
+        //新建公司 start
         $scope.submitting = false;
-        $scope.submitForm = function(e,callback ){
+        $scope.submitForm = function (e, callback) {
+            e && e.preventDefault();
+            if (!$scope.formData.bizCardLink ) {
+                ErrorService.alert({
+                    msg: "请上传名片！"
+                });
+                return;
+            }
+            if (!$scope.formData.logo && !$scope.formData.cid) {
+                ErrorService.alert({
+                    msg: "请上传公司LOGO！"
+                });
+                return;
+            }
+
+
+            Object.keys($scope.createForm).forEach(function (key) {
+                if ($scope.createForm[key] && $scope.createForm[key].$setDirty) {
+                    $scope.createForm[key].$setDirty();
+                }
+            });
+            if ($scope.submitting || $scope.createForm.$invalid) {
+                return;
+            }
+            $scope.submitting = true;
+
+            if($scope.formData.cid){
+                $scope.formData.companySource = 'H5_CREATION';
+                // todo : 时间修复
+                $scope.formData.startDate = new Date
+                $scope.formData.endDate = new Date
+                if(!$scope.formData.logo) $scope.formData.logo = '//krplus-pic.b0.upaiyun.com/default_logo.png!30'
+                CompanyService.save({
+                    'mode':'direct'
+                }, angular.copy($scope.formData), function (data) {
+                    location.hash = "/company_create_apply"
+                    //if (callback) {
+                    //    callback(data.id);
+                    //    return;
+                    //}
+                    //$state.go('companys.detail.overview', {
+                    //    id: data.id
+                    //});
+                }, function (err) {
+                    ErrorService.alert(err);
+                    $scope.submitting = false;
+                });
+            }else{
+
+            }
+
+        };
+        // 新建公司 end
+
+        // 申请认领 start
+        //$scope.applyStatus = true;
+        $scope.applyUnclaimed = function(e) {
             e && e.preventDefault();
             if(!$scope.formData.bizCardLink) {
                 ErrorService.alert({
@@ -176,21 +349,6 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 });
                 return;
             }
-            if(!$scope.formData.logo) {
-                ErrorService.alert({
-                    msg:"请上传公司LOGO！"
-                });
-                return;
-            }
-
-            // if($scope.formData.productStatusName == 'OPEN') {
-            //     $scope.formData.productStatus = 0;
-            // } else if($scope.formData.productStatusName == 'CLOSED') {
-            //     $scope.formData.productStatus = 1;
-            // } else if($scope.formData.productStatusName == 'UNSTART') {
-            //     $scope.formData.productStatus = -1;
-            // }
-
             Object.keys($scope.createForm).forEach(function(key){
                 if($scope.createForm[key]&&$scope.createForm[key].$setDirty){
                     $scope.createForm[key].$setDirty();
@@ -200,25 +358,92 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 return;
             }
             $scope.submitting = true;
+            var cid = $scope.formData.cid;
+            // delete未知原因的添加
+            // delete $scope.formData.cid;
+            $scope.claimedCid = cid;
+            CompanyService.claim({
+                id: cid
+            }, angular.copy($scope.formData), function(data){
 
-            CompanyService.save(angular.copy($scope.formData),function(data){
-                if(callback){
-                    callback(data.id);
-                    return;
-                }
-                $state.go('companys.detail.overview', {
-                    id: data.id
-                });
-            }, function(err){
-                ErrorService.alert(err);
                 $scope.submitting = false;
-            });
+                $scope.applyStatus = false;
+
+                location.hash = "/company_create_apply"
+
+            }, function(err){
+                $scope.submitting = false;
+                $scope.applyStatus = true;
+                if(err.msg){
+                    ErrorService.alert(err);
+                }
+            })
         };
-        // 提交表单 end
+
+        // 申请认领 end
+
+        // 添加为我的创业经历 start
+        $scope.addStatus = true;
+        $scope.addEntrepreneurialExp = function(e){
+            e && e.preventDefault();
+            if(!$scope.formData.bizCardLink) {
+                ErrorService.alert({
+                    msg:"请上传名片！"
+                });
+                return;
+            }
+            Object.keys($scope.createForm).forEach(function(key){
+                if($scope.createForm[key]&&$scope.createForm[key].$setDirty){
+                    $scope.createForm[key].$setDirty();
+                }
+            });
+            if($scope.submitting || $scope.createForm.$invalid){
+                return;
+            }
+            $scope.submitting = true;
+            var cid = $scope.formData.cid;
+            delete $scope.formData.cid;
+
+            UserService.company.save({
+                id: UserService.getUID()
+            },{
+                groupIdType: 3,
+                groupId: cid,
+                position: $scope.formData.level,
+                positionDetail: $scope.formData.position,
+                startYear: $scope.formData.startYear,
+                startMonth: $scope.formData.startMonth,
+                endYear: $scope.formData.endYear,
+                endMonth: $scope.formData.endMonth,
+                isCurrent: $scope.formData.isCurrent,
+                operationStatus: $scope.formData.operationStatus,
+                bizCardLink: $scope.formData.bizCardLink
+            }, function(data){
+                $scope.submitting = false;
+                $scope.addStatus = false;
+
+                location.hash = "/company_create_apply";
+
+            }, function(err){
+                $scope.submitting = false;
+                $scope.addStatus = true;
+                if(err.msg){
+                    alert(err.msg);
+                }
+            })
+
+        }
+        // 添加为我的创业经历 end
 
 
+    }]).service('SuggestService', [
+    '$http',
+    'BasicService',
+    function ($http, BasicService) {
+        var service = BasicService("/api/suggest/company", {
 
-    }]).service('SuggestService', [function () {
-    this.aaa = 1
-}])
+        })
+
+        return service;
+    }])
 

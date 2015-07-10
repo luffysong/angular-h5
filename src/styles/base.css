@@ -1,3 +1,4 @@
+@import "../components/angular-mass-autocomplete/massautocomplete.theme.css";
 .cg-notify-message {
   position: fixed;
   left: 50%;
@@ -4552,6 +4553,29 @@ textarea:focus {
 .create_company {
   background-color: #fff;
 }
+.create_company .gray_color {
+  color: #ccc;
+}
+.create_company .ac-container {
+  overflow: hidden;
+}
+.create_company .ac-container .img {
+  width: 25px;
+  height: 25px;
+  line-height: 24px;
+  border-radius: 3px;
+  margin: 3px 5px 0;
+  overflow: hidden;
+  float: left;
+}
+.create_company .ac-container .img img {
+  width: 100%;
+  border-radius: 3px;
+}
+.create_company .ac-container span {
+  overflow: hidden;
+  display: block;
+}
 .create_company b.important {
   color: #f4a654;
 }
@@ -4615,6 +4639,7 @@ textarea:focus {
   overflow: hidden;
   border-radius: 50%;
   position: relative;
+  border: 1px solid #f5f5f5;
 }
 .create_company .list table .logo .upload-b .filewrap {
   display: block;
@@ -4670,6 +4695,9 @@ textarea:focus {
   left: -111px;
   top: -47px;
 }
+.create_company .list table .time {
+  color: #888;
+}
 .create_company .list table .time select {
   width: 60px;
 }
@@ -4683,11 +4711,12 @@ textarea:focus {
 }
 .create_company .submit {
   padding: 1px;
+  background-color: #f6f6f6;
 }
 .create_company .submit button {
   display: block;
   margin: 10px auto;
-  width: 250px;
+  width: 70%;
   height: 40px;
   background-color: #008df2;
   padding: 0;
@@ -4695,6 +4724,18 @@ textarea:focus {
   color: #fff;
   font-size: 14px;
   border-radius: 4px;
+}
+.create_company .submit b {
+  display: block;
+  margin: 0 auto;
+  width: 70%;
+  font-weight: normal;
+  color: #999;
+  font-size: 12px;
+}
+.create_company .submit b i {
+  font-style: normal;
+  color: #008df2;
 }
 .pop_create_tip_wrap {
   background-color: rgba(0, 0, 0, 0.5);
@@ -4736,6 +4777,65 @@ textarea:focus {
   border-top: 1px solid #d6d6d6;
   color: #008df2;
   background-color: transparent;
+}
+.investor-apply-alter .title {
+  padding: 0 20px 5px 20px;
+  font-size: 17px;
+  color: #3b3b3b;
+}
+.investor-apply-alter .jumbotron {
+  background-color: #fff;
+  padding: 20px 20px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  font-size: 12px;
+  overflow: hidden;
+  height: auto;
+  color: #bfbfbf;
+  line-height: 1.4;
+}
+.investor-apply-alter .jumbotron img {
+  height: 50px;
+  width: 50px;
+  margin-top: 20px;
+}
+.investor-apply-alter .jumbotron .btn-link {
+  color: #bfbfbf;
+  font-size: 12px;
+  text-decoration: underline;
+  padding: 0;
+}
+.investor-apply-alter .jumbotron .btn-link:hover {
+  text-decoration: underline;
+}
+.investor-apply-alter .jumbotron label {
+  color: #f49f35;
+  font-size: 17px;
+  display: block;
+  margin: 20px 0 5px 0;
+}
+.investor-apply-alter .jumbotron label .icon-tou {
+  height: 25px;
+  width: 25px;
+  border-radius: 25px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+  line-height: 25px;
+  background-color: #e5a162;
+  color: #fcf1e7;
+  display: inline-block;
+}
+.investor-apply-alter .btn.btn-primary {
+  background-color: #008df2;
+  text-align: center;
+  font-size: 17px;
+  width: 80%;
+  border: none;
+  color: #ddebfc;
+  border-radius: 4px;
+  margin: 20px auto;
 }
 .welcome-words {
   text-align: center;

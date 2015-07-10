@@ -113,4 +113,11 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/company/create.html',  // todo : 文件路径
         controller: 'CreateCompanyController' // todo : controller
     });
+    /*创建公司审核页*/
+    $stateProvider.state('createCompanyApply', {
+        url: '/company_create_apply',
+        templateUrl: 'templates/company/create-apply-alert.html' // todo : 文件路径
+        //controller: 'CreateCompanyController' // todo : controller
+    });
+
 });

@@ -8,7 +8,7 @@
         <form action="" name="createForm" ng-submit="$event.preventDefault()">
             <div class="list">
 
-                <table>
+                <table mass-autocomplete>
                     <tr>
                         <td>
                             <b class="important">*</b>
@@ -16,48 +16,55 @@
                         </td>
                         <td>
                             <div class="suggest_wrap">
-                                <d-suggest>
-                                    <input type="text" placeholder="请填写大众熟知的项目名称" required/>
-                                </d-suggest>
+                                <input type="text" ng-model="name"
+                                       name="name"
+                                       placeholder="请填写大众熟知的项目名称"
+                                       required
+                                       class="form-control"
+                                        mass-autocomplete-item="autocomplete_options"/>
                             </div>
                         </td>
 
                     </tr>
-                    <tr>
+                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]">
                         <td>
-                            <b class="important">*</b>
+                            <b class="important" ng-if="!formData.cid">*</b>
                             <span>产品状态</span>
                         </td>
                         <td>
-                            <select class="form-control" name="operationStatus" ng-model="formData.operationStatus"
+                            <select class="form-control" name="operationStatus" ng-model="formData.operationStatus" ng-disabled="formData.cid"
                                     ng-options="y.value as y.desc for y in operationStatus" required>
                             </select>
                         </td>
                     </tr>
-                    <tr>
+                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]">
                         <td>
-                            <b class="important">*</b>
+                            <b class="important" ng-if="!formData.cid">*</b>
                             <span>公司网址</span>
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" required
-                                   name="website" ng-model="formData.website"/>
+                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" ng-disabled="formData.cid"
+                                   name="website" ng-model="formData.website" ng-if="formData.cid"/>
+                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" required ng-disabled="formData.cid"
+                                   name="website" ng-model="formData.website" ng-if="!formData.cid"/>
                         </td>
                     </tr>
-                    <tr>
+                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]">
                         <td class="vtop">
-                            <b class="important">*</b>
+                            <b class="important" ng-if="!formData.cid">*</b>
                             <span>一句话简介</span>
                         </td>
                         <td>
-                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，30字以内" required
-                                      ng-model="formData.brief"></textarea>
+                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，30字以内" ng-disabled="formData.cid"
+                                      ng-model="formData.brief" ng-if="formData.cid"></textarea>
+                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，30字以内" required ng-disabled="formData.cid"
+                                      ng-model="formData.brief" ng-if="!formData.cid"></textarea>
                         </td>
                     </tr>
 
-                    <tr class="logo">
+                    <tr class="logo" ng-class="{true:'gray_color', false:''}[!!formData.cid]">
                         <td>
-                            <b class="important">*</b>
+                            <b class="important" ng-if="!formData.cid">*</b>
                             <span>公司LOGO</span>
                         </td>
                         <td>
@@ -66,7 +73,7 @@
                                     <img ng-src="//krplus-pic.b0.upaiyun.com/default_logo.png!70" width="70" height="70"
                                          alt=""
                                          src="{{formData.logo || '//krplus-pic.b0.upaiyun.com/default_logo.png!70'}}">
-                                    <span class="filewrap">
+                                    <span class="filewrap" ng-if="!formData.cid">
                                         上传
                                         <input type="file" name="logo"
                                                class="input-file" ng-file-select=""
@@ -77,7 +84,7 @@
                                 </span>
 
                             </div>
-                            <p>支持小于5M的JPG、JPEG和PNG格式，为保证最佳显示，建议尺寸120*120px</p>
+                            <p ng-if="!formData.cid">支持小于5M的JPG、JPEG和PNG格式，为保证最佳显示，建议尺寸120*120px</p>
                         </td>
                     </tr>
                     <tr class="job">
@@ -150,8 +157,19 @@
 
             </div>
 
-            <div class="submit">
+            <!-- 创建公司-->
+            <div class="submit" ng-show="opNext==0">
                 <button type="button" ng-click="submitForm($event)">提交审核</button>
+            </div>
+            <!-- 申请认领-->
+            <div class="submit" ng-show="opNext==1">
+                <button type="button" ng-click="applyUnclaimed($event)">申请认领</button>
+                <b>该公司已被创建，如你是公司创始团队成员，可申请认领。</b>
+            </div>
+            <!-- 添加创业经历-->
+            <div class="submit" ng-show="opNext==2">
+                <button type="button" ng-click="addEntrepreneurialExp($event)">添加为我的创业经历</button>
+                <b>该公司已经被 <i>{{founder}}</i> 创建，如你是公司创始团队成员，可添加该公司为你的创业经历</b>
             </div>
         </form>
 
