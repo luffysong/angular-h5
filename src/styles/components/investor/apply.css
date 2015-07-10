@@ -1,0 +1,40 @@
+.investor-validate-apply .title {
+  background-color: #f7f7f7;
+  height: 40px;
+  line-height: 50px;
+  color: #686868;
+  margin: 0;
+  padding: 0 20px;
+  border: none;
+}
+.investor-validate-apply .radio label {
+  text-align: left;
+}
+.investor-validate-apply .radio label input {
+  width: auto;
+}
+.investor-validate-apply .form-group .label-control {
+  width: auto;
+  padding: 0 5px;
+}
+.investor-validate-apply .invest-money .label-control,
+.investor-validate-apply .invest-money .money-box {
+  float: left;
+}
+.investor-validate-apply .invest-money .money-box .form-group {
+  padding: 10px 0 10px 30px;
+  overflow: hidden;
+  height: auto;
+  display: table;
+  border-bottom: 1px solid #ddd;
+}
+.investor-validate-apply .invest-money .money-box .form-group .label-control,
+.investor-validate-apply .invest-money .money-box .form-group .row-1 {
+  display: table-cell;
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+.investor-validate-apply .invest-money .money-box .form-group:last-of-type {
+  border-bottom: none;
+}
