@@ -22,6 +22,7 @@
                 </div>
                 <div class="error-alert error" ng-show="(investorValidateForm.investFrom.$invalid && investorValidateForm.investFrom.$dirty) || (investorValidateForm.investTo.$invalid && investorValidateForm.investTo.$dirty)">
                     <span ng-show="investorValidateForm.investFrom.$error.required || investorValidateForm.investTo.$error.required">请输入投资金额</span>
+                    <span ng-show="investorValidateForm.investFrom.$error.pattern || investorValidateForm.investTo.$error.pattern">投资金额只能是整数</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.$error.industyEmpty">
                     <span>请选择关注领域</span>
@@ -143,9 +144,9 @@
                     <div class="form-group normal">
                         <label class="label-control"><span class="c-orange">*</span>个人单笔可投 </label>
                         <div class="col-flex clearfix ml-10">
-                            <input class="form-control account-num" type="tel" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
+                            <input class="form-control account-num" type="tel" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额" ng-pattern="/^\d*$/"  required maxlength="6" />
                             至
-                            <input class="form-control account-num" type="tel" ng-model="user.investMoneyEnd" name="investTo" placeholder="填写金额"  required maxlength="6" />
+                            <input class="form-control account-num" type="tel" ng-model="user.investMoneyEnd" name="investTo" placeholder="填写金额" ng-pattern="/^\d*$/" required maxlength="6" />
                             万元
                         </div>
                         <span class="currency-kind">(人民币金额)</span>
