@@ -269,7 +269,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         /*表单提交*/
         $scope.submitForm = function(){
             angular.forEach($scope.investStage,function(key,index){
-                if(key.active){
+                if(key.active && $scope.user.investPhases.indexOf(key.value) < 0){
                     $scope.user.investPhases.push(key.value);
                 }
             });
