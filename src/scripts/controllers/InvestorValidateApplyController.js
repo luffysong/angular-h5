@@ -10,12 +10,31 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             location.href = "/user/login?from=" + encodeURIComponent(location.href);
             return;
         }
+        /*查询投资人认证申请状态*/
+        InvestorauditService.queryStatus({},function(response){
+            switch(response.status){
+                /*审核中*/
+                case 0:
+                     $state.go('investorValidateApplyAlert');
+                    break;
+                /*审核通过*/
+                case 1 :
+                    $state.go('investorValidateApplySuccess');
+                    break;
+                default:
+                    break;
+            }
+        },function(err){
+            ErrorService(err);
+        });
+
         $timeout(function(){
             window.scroll(0,0);
         },0);
-        document.title="36氪股权众筹";
+
+        document.title="36氪投资人认证申请";
         WEIXINSHARE = {
-            shareTitle: "36氪股权众筹",
+            shareTitle: "36氪投资人认证申请",
             shareDesc: "投资人认证申请",
             shareImg: 'http://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg'
         };
