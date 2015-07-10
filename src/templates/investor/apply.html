@@ -12,9 +12,7 @@
                 <div class="error-alert error" ng-show="investorValidateForm.investIdentity.$invalid && investorValidateForm.investIdentity.$dirty">
                     <span>请选择投资身份</span>
                 </div>
-                <div class="error-alert error" ng-show="investorValidateForm.$error.picEmpty">
-                    <span>请上传您的名片</span>
-                </div>
+
                 <div class="error-alert error" ng-show="investorValidateForm.$error.industyEmpty">
                     <span>请选择关注领域</span>
                 </div>
@@ -23,6 +21,9 @@
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.$error.investMoneyEmpty">
                     <span>请填写单笔可投额度中的个人金额</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.$error.picEmpty">
+                    <span>请上传您的名片</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.intro.$invalid && investorValidateForm.intro.$dirty">
                     <span ng-show="investorValidateForm.intro.$error.required">请输入一句话简介</span>
@@ -93,7 +94,7 @@
                                         <input type="file" name="addPic" class="input-file" ng-file-select
                                                ng-file-change="imgFileSelected($files, $event)"
                                                ng-multiple="false"
-                                               resetOnClick="true">
+                                               resetOnClick="true" requried>
                                     </li>
                                     <li class="progress pic-progress" ng-show="intro.uploading">
                                         <div class="stick pic-stick" style="height:{{intro.progress}}%;"></div>
@@ -102,7 +103,7 @@
                                         <input type="file" name="addPic" class="input-file" ng-file-select
                                                ng-file-change="imgFileSelected($files, $event)"
                                                ng-multiple="false"
-                                               resetOnClick="true" accept="image/*">
+                                               resetOnClick="true" accept="image/*" requried>
                                         <span class="tip">仅供认证使用</span>
                                     </li>
                                 </ul>
