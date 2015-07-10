@@ -54,7 +54,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         CrowdFundingService["crowd-funding"].get({
             id:$scope.fundingId
         },function(data){
-            console.log(data);
+            //console.log(data);
             $scope.color = data.base.status;
             $scope.syndicatesInfo = data;
             angular.forEach(statusList,function(obj,index){
