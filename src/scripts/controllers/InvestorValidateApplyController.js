@@ -223,14 +223,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
         /*表单提交*/
         $scope.submitForm = function(){
-
-            /*上传名片检查*/
-            console.log('=====>>>',$scope.intro.value.pictures);
             if($scope.intro.value.pictures){
-                console.log('jinlaila====>>>');
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("picEmpty",true);
             }else{
-                console.log('-----');
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("picEmpty",false);
             }
             /*检查投资阶段是否选择，给出相应提示*/
@@ -252,20 +247,21 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
             /*检查单笔可投额度*/
             /*个人*/
-            /*if(($scope.invest.cnyInvestMin && $scope.invest.cnyInvestMax) || ($scope.invest.usdInvestMin && $scope.invest.usdInvestMax )){
+            if(($scope.invest.cnyInvestMin && $scope.invest.cnyInvestMax) || ($scope.invest.usdInvestMin && $scope.invest.usdInvestMax )){
                 angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('investMoneyEmpty',true);
             }else{
                 angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('investMoneyEmpty',false);
-            }*/
+            }
             /*基金*/
-            /*if(($scope.invest.fundCnyInvestMin && $scope.invest.fundCnyInvestMax) || ($scope.invest.fundUsdInvestMin && $scope.invest.fundUsdInvestMax )){
+            if(($scope.invest.fundCnyInvestMin && $scope.invest.fundCnyInvestMax) || ($scope.invest.fundUsdInvestMin && $scope.invest.fundUsdInvestMax )){
                 angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('fundInvestMoneyEmpty',true);
             }else{
                 angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('fundInvestMoneyEmpty',false);
-            }*/
+            }
 
             /*检查表单填写是否正确*/
             if(!checkForm("investorValidateForm"))return;
+            $scope.hasClick = true;
 
             var investoraudit = {};
                 investoraudit['id'] = UserService.getUID();
@@ -301,6 +297,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             InvestorauditService.save(investoraudit,function(response){
                 $state.go('investorValidateApplyAlert');
             },function(err){
+                $scope.hasClick = false;
                 ErrorService.alert(err);
             });
         };
