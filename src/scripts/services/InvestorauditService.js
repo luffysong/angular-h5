@@ -19,7 +19,15 @@ angular.module('defaultApp.service').service('InvestorauditService', [
             },
             save:function(data,callback,error){
                 $http.post('/api/investoraudit/',$.param(data,true)).success(function(response){
-                    callback && callback(data);
+                    callback && callback(response);
+                }).catch(function(err){
+                    error && error(err);
+                });
+            },
+            //查询投资人认证状态
+            queryStatus:function(data,callback,error){
+                $http.get('/api/investoraudit?action=check').success(function(response){
+                    callback && callback(response);
                 }).catch(function(err){
                     error && error(err);
                 });
