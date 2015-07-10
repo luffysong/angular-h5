@@ -7,18 +7,19 @@ var angular = require('angular');
 angular.module('defaultApp.service').service('CrowdFundingService', [
     '$location', 'BasicService', 'dateFilter', 'appendTransform', '$http', '$stateParams',
     function ($location, BasicService, dateFilter, appendTransform, $http, $stateParams) {
-        var service = BasicService('/api/p/:model/:id/:submodel/:subid', {
+        var service = BasicService('/api/p/:model/:id/:submodel/:subid/:childmodel', {
         }, {
             'model':[
                 'crowd-funding',
-                'cf-trade'
+                'cf-trade',
+                'payment'
             ]
         }, {
             'crowd-funding': {
                 query: {
                     method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
-                        if(!res.data)return;
+
                         var listData = res.data.data;
                         listData.forEach(function(item){
                             setInvestor(item);
@@ -30,7 +31,7 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
                 get: {
                     method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
-                        if(!res.data)return;
+
                         var baseData = res.data.base;
                         baseData && setInvestor(baseData);
 
@@ -55,6 +56,20 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
 
                         res.data.created_at = new Date(res.data.created_at);
 
+                        return res;
+                    })
+                }
+            },
+            'payment':{
+                get: {
+                    method: 'GET',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
+                        return res;
+                    })
+                },
+                put:{
+                    method: 'PUT',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
                         return res;
                     })
                 }

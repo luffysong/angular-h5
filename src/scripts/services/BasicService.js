@@ -18,7 +18,6 @@ angular.module('defaultApp.service').config([
                         response.config.url.indexOf(kr.upyun.api) > -1) {
                         return response;
                     }
-
                     if (response.data.code != 0) {
                         if(response.data.code == 4031){
                             /*setTimeout(function(){

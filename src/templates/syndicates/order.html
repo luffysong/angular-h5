@@ -1,0 +1,20 @@
+<div class="syndicate-order">
+    <div class="order-title">
+        你有  <span class="error">{{listData.length}}</span>个{{listData.company.name}}待付款订单
+    </div>
+    <div class="order-content">
+        <div class="order-detail" ng-repeat="item in tempData">
+            <div class="order-info">
+                <div>{{item.company.name}}</div>
+                <div>总支付金额: <span class="error">￥{{item.payment.amount}}</span></div>
+            </div>
+            <div class="order-handle">
+                <a href="" ng-click="goPay(item.trade_id,item.payment.amount)">去付款></a>
+            </div>
+        </div>
+    </div>
+    <div class="viewAll" ng-click="viewAll()" ng-if="!showAll && listData.length > 3">
+        查看全部({{listData.length - tempData.length}})
+    </div>
+    <a ui-sref="syndicatesConfirm({cid:companyId,fundingId:fundingId})" class="re-buy">重新购买</a>
+</div>

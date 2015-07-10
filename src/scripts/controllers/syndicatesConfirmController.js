@@ -5,9 +5,10 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesConfirmController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state) {
         $scope.companyId = $stateParams.cid;
         $scope.fundingId = $stateParams.fundingId;
+        $scope.uid = UserService.getUID();
         $scope.formData = {};
         $scope.isRead = false;
         $scope.krCode = "";
@@ -38,6 +39,15 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             });
             /*输入框默认为最低投资金额*/
             $scope.formData.investVal = $scope.baseData.base.min_investment;
+            var obj = {
+                link:"#/riskTipAll",
+                name:"风险揭示书"
+            };
+            if(!$scope.baseData.detail.agreements){
+                $scope.baseData.detail.agreements = [];
+            }
+            $scope.baseData.detail.agreements.push(obj);
+            console.log($scope.baseData.detail.agreements);
         });
         $scope.$watch("krCode",function(from){
             if(from.length == 8){
@@ -83,8 +93,8 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 templateUrl: 'templates/company/pop-risk-tip.html',
                 windowClass: 'remind-modal-window',
                 controller: [
-                    '$scope', '$modalInstance','scope','UserService','CrowdFundingService',
-                    function ($scope, $modalInstance, scope,UserService,CrowdFundingService,$timeout) {
+                    '$scope', '$modalInstance','scope',
+                    function ($scope, $modalInstance, scope) {
                         $scope.risk = scope.baseData.detail.lead_risk_html;
                         $scope.ok = function(){
                             $modalInstance.dismiss();
@@ -101,5 +111,130 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 }
             });
         }
+        /*如何获得Kr码*/
+        $scope.getKrCode = function(){
+            $modal.open({
+                templateUrl: 'templates/company/pop-apply-code.html',
+                windowClass: 'remind-modal-window',
+                controller: [
+                    '$scope', '$modalInstance','scope','CrowdFundingService',
+                    function ($scope, $modalInstance, scope,CrowdFundingService) {
+                        $scope.ok = function(){
+                            $scope.$watch("wishNum",function(from){
+                                if(from < scope.baseData.base.min_investment){
+                                    $scope.minError = true;
+                                }else{
+                                    $scope.minError = false;
+                                }
+                            });
+                            if($scope.krCodeForm.$invalid)return;
+                            CrowdFundingService.save({
+                                model:"crowd-funding",
+                                id:scope.fundingId,
+                                submodel:"invite-code-apply"
+                            },{
+                                investment:$scope.wishNum
+                            },function(data){
+                                notify({
+                                    message:"申请成功",
+                                    classes:'alert-success'
+                                });
+                                $modalInstance.dismiss();
+                            },function(err){
+                                ErrorService.alert(err);
+                            });
+                        }
+                        $scope.cancel = function() {
+                            $modalInstance.dismiss();
+                        }
+                    }
+                ],
+                resolve: {
+                    scope: function(){
+                        return $scope;
+                    }
+                }
+            });
+        }
+        /*校验Kr码*/
+        $scope.checkCode = function(){
+            /*输入达到8位时，调用check*/
+            if($scope.krCode.length == 8){
+                CrowdFundingService.get({
+                    model:"crowd-funding",
+                    id:$scope.fundingId,
+                    submodel:"invite-code-check",
+                    subid:$scope.krCode
+                },function(data){
+                    $scope.validateSuc = true;
+                },function(err){
+                    $scope.validateSuc = false;
+                });
+
+            }else{
+                return;
+            }
+        }
+        /*打开ActionSheet*/
+        $scope.seeAgreement = function(){
+            $scope.actionSheet = true;
+        }
+        $scope.cancel = function(event){
+            $scope.actionSheet = false;
+        }
+        $scope.ensurePay = function(){
+            $scope.remainAmount = $scope.baseData.base.cf_max_raising - $scope.baseData.base.cf_success_raising;
+            $scope.remainAmount = Math.max($scope.remainAmount,0);
+            function goToPay(){
+                    CrowdFundingService['cf-trade'].save({},{
+                        user_id: $scope.uid,
+                        goods_id: $scope.fundingId,
+                        goods_name: '众筹跟投', //TODO:这两个字段得产品确认一下写啥
+                        goods_desc: '众筹跟投',
+                        investment: Math.min($scope.formData.investVal,$scope.remainAmount),
+                        invite_code:$scope.krCode
+                    }, function(data){
+                        $state.go('syndicatesOrder', {
+                            tid: data.trade_id,
+                            cid:$scope.companyId
+                        });
+                    },function(err){
+                        $state.go('syndicatesOrder', {
+                            tid: err.trade_id,
+                            cid:$scope.companyId
+                        });
+                        ErrorService.alert(err);
+                    });
+                }
+
+                /*剩余金额不足，小于用户投资金额*/
+                if($scope.formData.investVal > $scope.remainAmount){
+                    $modal.open({
+                        templateUrl: 'templates/company/pop-amount-notEnough.html',
+                        controller: [
+                            '$scope', '$modalInstance','scope',
+                            function ($scope, $modalInstance, scope) {
+                                $scope.remainAmount =  scope.remainAmount;
+                                $scope.notEnougn = $scope.remainAmount < scope.baseData.base.min_investment ? true : false;
+                                $scope.remainAmount = $scope.remainAmount >= 10000 ? $scope.remainAmount / 10000 + "万" : $scope.remainAmount;
+                                $scope.ok = function(){
+                                    goToPay();
+                                }
+                                /*$scope为弹出层中scope*/
+                                $scope.cancel = function () {
+                                    $modalInstance.dismiss();
+                                }
+                            }
+                        ],
+                        resolve: {
+                            scope: function(){
+                                return $scope;
+                            }
+                        }
+                    });
+                }else{
+                    goToPay();
+                }
+            }
     });
 

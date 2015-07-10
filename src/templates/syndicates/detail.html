@@ -214,10 +214,11 @@
         </div>
         <div ng-if="!isToggle" class="bottom-col">
             <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">查看更多公司信息</a>
-            <a ui-sref="syndicatesConfirm({cid:companyData.company.id,fundingId:fundingId})" class="invest-btn"  ng-if="color != 60 && color != 50 && !timeout">我要投资</a>
+            <a ui-sref="syndicatesOrder({cid:companyData.company.id,fundingId:fundingId})" class="invest-btn"  ng-if="color != 60 && color != 50 && !timeout">我要投资</a>
             <a href="" class="invest-btn disabled" ng-if="color == 50 || timeout">停止投资</a>
-            <a href="" class="set-remind" ng-click="setRemind($event)" ng-if="color == 60">
-                {{status}}<br/>开投提醒
+            <a  class="set-remind" ng-click="krCode($event)" ng-if="color == 60">
+                Kr码优先购买
+                <!--{{status}}<br/>开投提醒-->
             </a>
         </div>
         <div ng-if="isToggle">
@@ -424,10 +425,11 @@
             </div>
             <div ng-if="isToggle" class="bottom-col">
                 <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">查看更多公司信息</a>
-                <a ui-href="syndicatesConfirm({cid:companyData.company.id,fundingId:fundingId})" class="invest-btn" ng-if="color != 60 && color != 50 && !timeout">我要投资</a>
+                <a ui-sref="syndicatesOrder({cid:companyData.company.id,fundingId:fundingId})" class="invest-btn" ng-if="color != 60 && color != 50 && !timeout">我要投资</a>
                 <a href="" class="invest-btn disabled" ng-if="color == 50 || timeout">停止投资</a>
-                <a href="" class="set-remind" ng-click="setRemind($event)" ng-if="color == 60">
-                    {{status}}<br/>开投提醒
+                <a  class="set-remind" ng-click="krCode($event)" ng-if="color == 60">
+                    Kr码优先购买
+                    <!--{{status}}<br/>开投提醒-->
                 </a>
             </div>
         </div>

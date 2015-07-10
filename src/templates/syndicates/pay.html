@@ -1,0 +1,17 @@
+<div class="syndicate-pay">
+    <div class="pay-title">
+        总支付金额  <span class="error amount">￥{{amount}}</span>
+    </div>
+    <div class="pay-content">
+        <div class="pay-detail" ng-repeat="bank in bankData.agreement_list">
+            <div class="pay-info">
+                <div>**** **** ****{{bank.card_no}}</div>
+                <div>单笔限额{{bank.limit_once}},每日限额{{bank.limit_everyday}}</div>
+            </div>
+            <div class="pay-handle">
+                <a href="" ng-click="">去付款></a>
+            </div>
+        </div>
+    </div>
+    <a href="" class="go-pay btn" ng-click="gotoPay()">立即支付</a>
+</div>

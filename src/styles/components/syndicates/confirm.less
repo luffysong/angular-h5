@@ -1,4 +1,7 @@
 /*众筹确认金额页样式*/
+.error {
+    color: red;
+}
 .pop-risk-tip {
     .risk-content {
         padding: 20px;
@@ -15,6 +18,34 @@
         line-height: 44px;
         border-top: 1px solid #DDDDDD;
         text-align: center;
+    }
+}
+/*获得Kr码弹窗样式*/
+.pop-apply-code {
+    .apply-content {
+        padding: 40px 20px 20px;
+        .apply-title {
+            text-align: center;
+            color: #666666;
+            font-weight: 600;
+        }
+        .wish-count {
+            display: block;
+            width: 100%;
+            height: 40px;
+            border-radius: 3px;
+            border: 1px solid #B2B2B2;
+            margin: 20px 0 10px;
+        }
+    }
+    .ensure-btn {
+        display: block;
+        width: 100%;
+        height: 44px;
+        line-height: 44px;
+        border-top: 1px solid #DDDDDD;
+        text-align: center;
+        margin-bottom: -10px;
     }
 }
 .syndicates-confirm {
@@ -106,8 +137,6 @@
             .ensure-pay {
                 display: block;
                 width: 75%;
-                height: 40px;
-                line-height: 40px;
                 text-align: center;
                 color: #fff;
                 background-color: #F28E00;
@@ -115,5 +144,44 @@
                 margin: 30px auto 0;
             }
         }
+    }
+}
+/*ActionSheet样式*/
+.shade-layer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.3);
+    z-index: 100;
+    visibility: hidden;
+    &.normal {
+        visibility: visible;
+
+    }
+}
+.layer-bottom {
+    position: fixed;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    left: 0;
+    transition: all .3s;
+    opacity: 0;
+    transform: translate3d(0,100%,0);
+    z-index: 101;
+    &.normal {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+    .options {
+        display: block;
+        width: 100%;
+        height: 43px;
+        line-height: 43px;
+        text-align: center;
+        background-color: #fff;
+        border-bottom: 1px solid #DFDFDF;
     }
 }

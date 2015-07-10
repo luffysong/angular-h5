@@ -85,6 +85,18 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/syndicates/confirm.html',
         controller: 'syndicatesConfirmController'
     });
+    /*众筹订单页面*/
+    $stateProvider.state('syndicatesOrder', {
+        url: '/zhongchouOrder/{cid}/{fundingId}',
+        templateUrl: 'templates/syndicates/order.html',
+        controller: 'syndicatesOrderController'
+    });
+    /*众筹支付页面*/
+    $stateProvider.state('syndicatesPay', {
+        url: '/zhongchouPay/{tid}/{amount}',
+        templateUrl: 'templates/syndicates/pay.html',
+        controller: 'syndicatesPayController'
+    });
     /*跟投人认证*/
     $stateProvider.state('investorValidate', {
         url: '/investorValidate',
@@ -110,5 +122,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
                 window.scroll(0,0);
             },0);
         }
+    });
+    $stateProvider.state('riskTipAll', {
+        url: '/riskTipAll',
+        templateUrl: 'templates/protocol/riskTip_all.html'
     });
 });

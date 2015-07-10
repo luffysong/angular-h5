@@ -1,6 +1,7 @@
 require('./AndroidUploadService');
 require('./BasicService');
 require('./CheckFormService');
+require('./CoInvestorService');
 require('./CompanyService');
 require('./CrowdFundingService');
 require('./DefaultService');

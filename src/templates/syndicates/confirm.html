@@ -1,42 +1,59 @@
-<div class="syndicates-confirm">
-    <div class="kr-code-way">
-        <a href="">如何获得Kr码</a>
-    </div>
-    <div class="kr-code-enter">
-        <input type="text" maxlength="8" class="kr-code-input" placeholder="请输入优先购买Kr码" ng-model="krCode" />
-        <a href="" class="validate-kr-code" ng-class="{'suc':validateValid}">验证</a>
-    </div>
-    <div class="confirm-title">
-        <p class="validate-suc" ng-if="validateSuc">Kr码验证成功</p>
-        确认投资{{companyData.name}}
-        <a href="" class="risk-tip" ng-click="seeRisk()">风险点</a>
-    </div>
-    <div class="confirm-content">
-        <div class="content-count">
-            <b>人民币(￥)</b>
-            <input type="text" class="invest-val" placeholder="请输入投资金额" ng-model="formData.investVal" />
-        </div>
-        <div class="content-info">
-            <p>
-                <span class="info-attr">股份占比</span>
-
-                <span>{{sharePercent}}</span>
-            </p>
-            <p>
-                <span class="info-attr">管理费</span>
-                <span>￥{{manager_fee}}</span>
-            </p>
-            <p>
-                <span class="info-attr">支付总额</span>
-                <span class="red">￥{{total_fee}}</span>
-            </p>
-        </div>
-        <div class="content-bottom">
-            <div class="agreement">
-                <input type="checkbox" ng-model="isRead" ng-click="isRead!=isRead"  />
-                 同意  <a href="">服务协议及风险提示</a>
+<form name="confirmForm">
+    <div class="syndicates-confirm">
+        <!--预热中，Kr码购买-->
+        <div ng-if="isPreHeat">
+            <div class="kr-code-way">
+                <a href="" ng-click="getKrCode()">如何获得Kr码</a>
             </div>
-            <a class="ensure-pay" ng-disabled="!isRead">确认支付</a>
+            <div class="kr-code-enter">
+                <input type="text" maxlength="8" class="kr-code-input" placeholder="请输入优先购买Kr码" ng-model="krCode" />
+                <a href="" class="validate-kr-code" ng-class="{'suc':validateValid}" ng-click="checkCode()">验证</a>
+            </div>
+        </div>
+        <div class="confirm-title">
+            <p class="validate-suc" ng-if="validateSuc && isPreHeat">Kr码验证成功</p>
+            确认投资{{companyData.name}}
+            <a href="" class="risk-tip" ng-click="seeRisk()">风险点</a>
+        </div>
+        <div class="confirm-content">
+            <div class="content-count">
+                <b>人民币(￥)</b>
+                    <input type="text" class="invest-val" name="investVal" placeholder="请输入投资金额" ng-model="formData.investVal" required num-validate />
+            </div>
+            <div class="content-info">
+                <p>
+                    <span class="info-attr">股份占比</span>
+
+                    <span>{{sharePercent}}</span>
+                </p>
+                <p>
+                    <span class="info-attr">管理费</span>
+                    <span>￥{{manager_fee}}</span>
+                </p>
+                <p>
+                    <span class="info-attr">支付总额</span>
+                    <span class="red">￥{{total_fee}}</span>
+                </p>
+            </div>
+            <div class="content-bottom">
+                <div class="agreement">
+                    <input type="checkbox" ng-model="isRead" ng-click="isRead!=isRead"  />
+                     同意  <a href="" ng-click="seeAgreement()">服务协议及风险提示</a>
+                </div>
+                <a class="ensure-pay btn" ng-disabled="!isRead || confirmForm.$invalid" ng-click="ensurePay()">确认支付</a>
+            </div>
+
         </div>
     </div>
+</form>
+<!--ActionSheet-->
+<div class="shade-layer" ng-class="{'normal':actionSheet}" ng-click="cancel($event)">
 </div>
+<div class="layer-bottom" ng-class="{'normal':actionSheet}">
+    <a href="{{item.link}}" class="options" ng-repeat="item in baseData.detail.agreements">{{item.name}}</a>
+    <!--<a class="options">投资协议</a>
+    <a class="options">有限合伙协议</a>
+    <a class="options">风险揭示书</a>-->
+    <a class="options" ng-click="cancel()">取消</a>
+</div>
+<!--ActionSheet-->

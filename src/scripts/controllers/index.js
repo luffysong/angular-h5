@@ -7,3 +7,5 @@ require('./UserDetailController');
 require('./syndicatesConfirmController');
 require('./syndicatesController');
 require('./syndicatesDetailController');
+require('./syndicatesOrderController');
+require('./syndicatesPayController');
