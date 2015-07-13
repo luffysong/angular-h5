@@ -117,7 +117,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             id:UserService.getUID()
         },function(data){
             console.log('====data===',data);
-
             /*基本信息*/
             $scope.invest.name = data.name;
             $scope.invest.intro = data.intro;
@@ -203,6 +202,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         var filename = data.url.toLowerCase();
                         if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
                             $scope.intro.value.pictures = window.kr.upyun.bucket.url + data.url;
+                            //隐藏提示信息
+                            angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("picEmpty",true);
+
                         } else {
                             ErrorService.alert({
                                 msg: '格式不支持，请重新上传！'
