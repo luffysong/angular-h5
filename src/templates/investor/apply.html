@@ -43,16 +43,14 @@
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>真实姓名</label>
                         <div class="col-max">
-                            <input class="form-control" name="realName" type="text" ng-model="invest.name" placeholder="须与身份证姓名保持一致" maxlength="15"  required />
+                            <input class="form-control" name="realName" type="text" ng-model="invest.name" placeholder="" maxlength="15"  required />
                         </div>
-
                     </div>
                     <div class="form-group brief">
                         <label class="label-control"><span class="c-orange">*</span>一句话简介</label>
                         <div class="col-max">
                             <textarea ng-model="invest.intro" name="intro" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
                         </div>
-
                     </div>
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>投资身份</label>
@@ -84,7 +82,7 @@
                             <span class="c-orange">*</span>上传名片
                         </label>
                         <div class="col-max">
-                            <p>名片有助于提升审核速度</p>
+                            <p>上传名片有助于提升审核速度</p>
 
                             <p>支持小于5M的JGP、JPEG和PNG格式，仅供认证使用</p>
 
@@ -104,7 +102,7 @@
                                                ng-file-change="imgFileSelected($files, $event)"
                                                ng-multiple="false"
                                                resetOnClick="true" accept="image/*" requried>
-                                        <span class="tip">仅供认证使用</span>
+                                        <span class="tip">仅供审核使用</span>
                                     </li>
                                 </ul>
                             </div>
