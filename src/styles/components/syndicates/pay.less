@@ -1,5 +1,8 @@
 /*众筹订单页样式*/
 .syndicate-pay {
+    .orange {
+        color: #F28E00;
+    }
     .pay-title {
         width: 100%;
         height: 35px;
@@ -13,17 +16,25 @@
     .pay-content {
         width: 100%;
         height: auto;
-        bpay: 1px solid #DDDDDD;
+        border: 1px solid #DDDDDD;
         padding-left: 15px;
         background-color: #fff;
         .pay-detail {
             width: 100%;
             height: 70px;
             padding: 10px 0;
-            bpay-bottom: 1px solid #DFDFDF;
+            border-bottom: 1px solid #DFDFDF;
             .clearfix;
             &:last-of-type{
+                height: 50px;
+                padding: 0;
                 border: 0;
+                .pay-info {
+                    height: 100%;
+                    line-height: 45px;
+                    color: #666666;
+                }
+
             }
             .pay-info {
                 float: left;

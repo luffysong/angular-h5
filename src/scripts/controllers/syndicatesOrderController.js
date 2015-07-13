@@ -35,6 +35,7 @@ angular.module('defaultApp.controller').controller('syndicatesOrderController',
             subid:$scope.uid,
             pay_type:"D"
         },function(data){
+            console.log(data);
             if(data.agreement_list.length){
                 $scope.hasRecord = true;
             }else{

@@ -10,6 +10,8 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
         $scope.tid = $stateParams.tid;
         $scope.amount = $stateParams.amount;
         $scope.bankDetails = DictionaryService.getDict('bank_limit_lianlianpay');
+        /*选择支付卡号Index*/
+        $scope.cardIndex = "";
         /*用户签约信息查询*/
         CrowdFundingService["payment"].get({
             id:3,
@@ -26,14 +28,35 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
             console.log(err);
             $scope.hasRecord = false;
         });
-        $scope.goPay = function(tid,amount){
-            if(!$scope.hasRecord){
-                window.open('//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+tid,'url_order='+encodeURIComponent(location.href),'back_url='+encodeURIComponent(location.href)]).join('&'));
+        /*选择卡号事件*/
+        $scope.selectCard = function(index){
+            $scope.cardIndex = index;
+        }
+        /*更新PlatfromType*/
+        $scope.updatePlatType = function(){
+            CrowdFundingService['cf-trade'].update({
+                id:$scope.tid
+            }, {
+                platform_type:3
+            }, function(){
+
+            }, function(err){
+                ErrorService.alert(err);
+            });
+        }
+        /*选择其他银行卡事件*/
+        $scope.addCard = function(){
+            $scope.updatePlatType();
+            window.open('//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order='+encodeURIComponent(location.href),'back_url='+encodeURIComponent(location.href)]).join('&'));
+        }
+
+        $scope.goPay = function(){
+            if($scope.cardIndex === ""){
+                $scope.noCard = true;
+                return;
             }else{
-                $state.go("syndicatesPay",{
-                    tid:tid,
-                    amount:amount
-                });
+                $scope.updatePlatType();
+                window.open('//'+location.host+'/p/payment/3/send-payment-request?'+(['no_agree='+$scope.bankData.agreement_list[$scope.cardIndex].no_agree,'pay_type=D','trade_id='+$scope.tid,'url_order='+encodeURIComponent(location.href),'back_url='+encodeURIComponent(location.href)]).join('&'));
             }
         }
     });
