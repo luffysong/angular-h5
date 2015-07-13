@@ -1,0 +1,180 @@
+<div class="create_company">
+
+
+    <div class="content_wrap">
+
+        <h2>创建公司 <b ng-click="createTip()">特别提醒</b></h2>
+
+        <form action="" name="createForm" ng-submit="$event.preventDefault()">
+            <div class="list">
+
+                <table mass-autocomplete>
+                    <tr>
+                        <td>
+                            <b class="important">*</b>
+                            <span>公司简称</span>
+                        </td>
+                        <td>
+                            <div class="suggest_wrap">
+                                <input type="text" ng-model="name"
+                                       name="name"
+                                       placeholder="请填写大众熟知的项目名称"
+                                       required
+                                       class="form-control"
+                                        mass-autocomplete-item="autocomplete_options"/>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]">
+                        <td>
+                            <b class="important" ng-if="!formData.cid">*</b>
+                            <span>产品状态</span>
+                        </td>
+                        <td>
+                            <select class="form-control" name="operationStatus" ng-model="formData.operationStatus" ng-disabled="formData.cid"
+                                    ng-options="y.value as y.desc for y in operationStatus" required>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]">
+                        <td>
+                            <b class="important" ng-if="!formData.cid">*</b>
+                            <span>公司网址</span>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" ng-disabled="formData.cid"
+                                   name="website" ng-model="formData.website" ng-if="formData.cid"/>
+                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" required ng-disabled="formData.cid"
+                                   name="website" ng-model="formData.website" ng-if="!formData.cid"/>
+                        </td>
+                    </tr>
+                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]">
+                        <td class="vtop">
+                            <b class="important" ng-if="!formData.cid">*</b>
+                            <span>一句话简介</span>
+                        </td>
+                        <td>
+                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，30字以内" ng-disabled="formData.cid"
+                                      ng-model="formData.brief" ng-if="formData.cid"></textarea>
+                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，30字以内" required ng-disabled="formData.cid"
+                                      ng-model="formData.brief" ng-if="!formData.cid"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr class="logo" ng-class="{true:'gray_color', false:''}[!!formData.cid]">
+                        <td>
+                            <b class="important" ng-if="!formData.cid">*</b>
+                            <span>公司LOGO</span>
+                        </td>
+                        <td>
+                            <div class="pic">
+                                <span class="upload-b ng-binding">
+                                    <img ng-src="//krplus-pic.b0.upaiyun.com/default_logo.png!70" width="70" height="70"
+                                         alt=""
+                                         src="{{formData.logo || '//krplus-pic.b0.upaiyun.com/default_logo.png!70'}}">
+                                    <span class="filewrap" ng-if="!formData.cid">
+                                        上传
+                                        <input type="file" name="logo"
+                                               class="input-file" ng-file-select=""
+                                               ng-file-change="logoFileSelected($files, $event)"
+                                               ng-multiple="false"
+                                               resetonclick="true" accept="image/*">
+                                    </span>
+                                </span>
+
+                            </div>
+                            <p ng-if="!formData.cid">支持小于5M的JPG、JPEG和PNG格式，为保证最佳显示，建议尺寸120*120px</p>
+                        </td>
+                    </tr>
+                    <tr class="job">
+                        <td class="vtop">
+                            <b class="important">*</b>
+                            <span>职位</span>
+                        </td>
+                        <td>
+                            <select ng-options="c.value as c.desc for c in founderRoles" ng-model="formData.level"
+                                    class="form-control"
+                                    name="level" required>
+                            </select>
+
+                            <div class="split">
+                                <input type="text" name="position" class="form-control" placeholder="具体任职或负责方向"
+                                       ng-model="formData.position" required/>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr class="time">
+                        <td>
+                            <b class="important">*</b>
+                            <span>任职时间段</span>
+                        </td>
+                        <td>
+
+                            <select class="form-control" ng-model="formData.startYear" class="form-control"
+                                    ng-options="y for y in yearOptions" name="startYear" required>
+                                <option value="">年</option>
+                            </select>
+                            &nbsp;
+                            <select class="form-control" ng-model="formData.startMonth" class="form-control"
+                                    ng-options="m+'月' for m in monthOptions" name="startMonth" required>
+                                <option value="">月</option>
+                            </select>
+                            — 至今
+
+                            <p class="error" ng-show="(createForm.startYear.$invalid && createForm.startYear.$dirty) || (createForm.startMonth.$invalid && createForm.startMonth.$dirty)">请选择时间段</p>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b class="important">＊</b>
+                            <span>上传名片</span>
+                        </td>
+                        <td class="logo card">
+                            <p>上传名片有助于提升审核速度 <br/> 支持小于5M的JPG、JPEG和PNG格式</p>
+
+                            <div class="pic">
+                                <span class="upload-b ng-binding">
+                                    <img width="110" height="70"
+                                         alt=""
+                                         src="{{formData.bizCardLink || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAACJBAMAAABN17ABAAAAG1BMVEX///8AjfIZmPO23vv1+f3I4PaVxe1nq+VPnuGS0jTRAAAAeklEQVRo3u3YwQmDQBBA0YmmgGwqSFKBJaQLrzbh3dLFiwcXwYurC+818GFZGGZi/EcZz36KgoYAAAAAANhof10U06RPFPNIr9gjJiYmJpYTu1Ws/aatdxcnaVJmHdl1x44+Y30fRExMTExMLFfxAr+cJgAAAAAALjTMqvgNecQF9eAAAAAASUVORK5CYII='}}">
+                                    <span class="filewrap">
+                                        仅供审核使用
+                                        <input type="file" name="bizCardLink"
+                                               class="input-file" ng-file-select=""
+                                               ng-file-change="cardFileSelected($files, $event)"
+                                               ng-multiple="false"
+                                               resetonclick="true" accept="image/*">
+                                    </span>
+                                </span>
+
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <!-- 创建公司-->
+            <div class="submit" ng-show="opNext==0">
+                <button type="button" ng-click="submitForm($event)">提交审核</button>
+            </div>
+            <!-- 申请认领-->
+            <div class="submit" ng-show="opNext==1">
+                <button type="button" ng-click="applyUnclaimed($event)">申请认领</button>
+                <b>该公司已被创建，如你是公司创始团队成员，可申请认领。</b>
+            </div>
+            <!-- 添加创业经历-->
+            <div class="submit" ng-show="opNext==2">
+                <button type="button" ng-click="addEntrepreneurialExp($event)">添加为我的创业经历</button>
+                <b>该公司已经被 <i>{{founder}}</i> 创建，如你是公司创始团队成员，可添加该公司为你的创业经历</b>
+            </div>
+        </form>
+
+
+    </div>
+
+
+</div>

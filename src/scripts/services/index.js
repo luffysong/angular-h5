@@ -1,3 +1,4 @@
+require('./AndroidUploadService');
 require('./BasicService');
 require('./CheckFormService');
 require('./CompanyService');

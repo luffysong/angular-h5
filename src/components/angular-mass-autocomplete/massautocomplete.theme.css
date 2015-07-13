@@ -1,25 +1,3 @@
-@import 'angular-notify.min.less';
-@import 'components/bootstrap';
-@import 'components/global/customized-var';
-@import 'components/global/icon';
-@import 'components/global/global';
-@import 'components/user/basic';
-@import 'components/user/detail';
-@import 'components/company/basic';
-@import 'components/company/detail';
-@import 'components/company/create_company';
-@import 'components/company/create-apply-alert';
-@import 'components/org/basic';
-@import 'components/org/detail';
-@import 'components/guide/welcome';
-@import 'components/syndicates/index';
-@import 'components/syndicates/detail';
-@import "components/investor/validate";
-@import "components/investor/apply";
-@import "components/investor/apply-alert";
-@import "components/investor/apply-success";
-
-
 .ac-container {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
@@ -62,4 +40,3 @@
   outline: none;
   background-color: #e0eaff;
 }
-

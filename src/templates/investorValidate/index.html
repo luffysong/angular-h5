@@ -22,6 +22,7 @@
                 </div>
                 <div class="error-alert error" ng-show="(investorValidateForm.investFrom.$invalid && investorValidateForm.investFrom.$dirty) || (investorValidateForm.investTo.$invalid && investorValidateForm.investTo.$dirty)">
                     <span ng-show="investorValidateForm.investFrom.$error.required || investorValidateForm.investTo.$error.required">请输入投资金额</span>
+                    <span ng-show="investorValidateForm.investFrom.$error.pattern || investorValidateForm.investTo.$error.pattern">投资金额只能是整数</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.$error.industyEmpty">
                     <span>请选择关注领域</span>
@@ -123,7 +124,7 @@
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>投资阶段</label>
                         <div class="col-flex">
-                            <div class="stage" ng-repeat="stage in investStage" ng-click="selectStage($index)" ng-class="{'active':stage.active}" name="investStage">{{stage.name}}
+                            <div class="stage" ng-repeat="stage in investStage" ng-click="selectStage($index)" ng-class="{'active':stage.active}" name="investStage">{{stage.desc}}
                             </div>
                         </div>
 
@@ -143,9 +144,9 @@
                     <div class="form-group normal">
                         <label class="label-control"><span class="c-orange">*</span>个人单笔可投 </label>
                         <div class="col-flex clearfix ml-10">
-                            <input class="form-control account-num" type="tel" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额"  required maxlength="6" />
+                            <input class="form-control account-num" type="tel" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额" ng-pattern="/^\d*$/"  required maxlength="6" />
                             至
-                            <input class="form-control account-num" type="tel" ng-model="user.investMoneyEnd" name="investTo" placeholder="填写金额"  required maxlength="6" />
+                            <input class="form-control account-num" type="tel" ng-model="user.investMoneyEnd" name="investTo" placeholder="填写金额" ng-pattern="/^\d*$/" required maxlength="6" />
                             万元
                         </div>
                         <span class="currency-kind">(人民币金额)</span>
@@ -182,6 +183,7 @@
                                         <input type="file" name="addPic" class="input-file" ng-file-select
                                                ng-file-change="imgFileSelected($files, $event)"
                                                ng-multiple="false"
+                                               ng-click="androidUpload($event)"
                                                resetOnClick="true">
                                     </li>
                                     <li class="progress pic-progress" ng-show="intro.uploading">
@@ -191,7 +193,9 @@
                                         <input type="file" name="addPic" class="input-file" ng-file-select
                                                ng-file-change="imgFileSelected($files, $event)"
                                                ng-multiple="false"
-                                               resetOnClick="true" accept="image/*">
+                                               resetOnClick="true" accept="image/*"
+                                               ng-click="androidUpload($event)"
+                                            >
                                         <span class="tip">仅供认证使用</span>
                                     </li>
                                 </ul>
@@ -236,7 +240,6 @@
             <div class="validating-info text-center">
                 <div class="validating-logo"></div>
                 <p class="c-orange fs-15">恭喜！你已成为跟投人</p>
-                <p class="fs-12">第一批众筹的公司，将于6月9日全面上线，敬请期待。</p>
             </div>
 
         </div>

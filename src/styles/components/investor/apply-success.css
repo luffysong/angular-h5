@@ -1,0 +1,59 @@
+.investor-apply-success .title {
+  padding: 0 20px 5px 20px;
+  font-size: 17px;
+  color: #3b3b3b;
+}
+.investor-apply-success .jumbotron {
+  background-color: #fff;
+  padding: 20px 20px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  font-size: 12px;
+  overflow: hidden;
+  height: auto;
+  color: #bfbfbf;
+  line-height: 1.4;
+}
+.investor-apply-success .jumbotron img {
+  height: 50px;
+  width: 50px;
+  margin-top: 20px;
+}
+.investor-apply-success .jumbotron .btn-link {
+  color: #bfbfbf;
+  font-size: 12px;
+  text-decoration: underline;
+  padding: 0;
+}
+.investor-apply-success .jumbotron .btn-link:hover {
+  text-decoration: underline;
+}
+.investor-apply-success .jumbotron label {
+  color: #f49f35;
+  font-size: 17px;
+  display: block;
+  margin: 20px 0 5px 0;
+}
+.investor-apply-success .jumbotron label .icon-tou {
+  height: 25px;
+  width: 25px;
+  border-radius: 25px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+  line-height: 25px;
+  background-color: #e5a162;
+  color: #fcf1e7;
+  display: inline-block;
+}
+.investor-apply-success .btn.btn-primary {
+  background-color: #008df2;
+  text-align: center;
+  font-size: 17px;
+  width: 80%;
+  border: none;
+  color: #ddebfc;
+  border-radius: 4px;
+  margin: 20px auto;
+}

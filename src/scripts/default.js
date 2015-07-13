@@ -14,7 +14,7 @@ angular.module('ui.carousel', ['ui.bootstrap']);
 angular.module('defaultApp.filter', []);
 angular.module('defaultApp.directive', []);
 angular.module('defaultApp.service', ['ngResource']);
-angular.module('defaultApp.controller', []);
+angular.module('defaultApp.controller', ['ngTouch', 'MassAutoComplete']);
 angular.module('templates', []);
 
 require('./filters');
@@ -39,7 +39,8 @@ var depModules = [
     'angularFileUpload',
     'cgNotify',
     'slick',
-    'highcharts-ng'
+    'highcharts-ng',
+    'MassAutoComplete'
 ];
 
 if(window.MOCKMODE_ON){
@@ -52,7 +53,15 @@ require('./config/routes');
 require('./config/run');
 
 
+
+
 // 启动
 $(document).ready(function () {
+    console.log("test1");
+    if(navigator.userAgent.match(/36kr/) && location.hash.indexOf('zhongchou')>-1){
+        console.log("test");
+        location.href = 'http://'+projectEnvConfig.helpHost+'/q-zc-helper.html';
+        return;
+    }
   angular.bootstrap(document, ['defaultApp']);
 });

@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('GuideWelcomeController',
-    function($scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope, $timeout, $upload) {
+    function($scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope, $timeout, $upload, AndroidUploadService) {
         $scope.user = {
             avatar:""
         };
@@ -113,6 +113,13 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             intro:"",
             pictures:""
         };
+
+        //android客户端
+        $scope.androidUpload = AndroidUploadService.setClick(function(filename){
+                $scope.$apply(function() {
+                    $scope.user.avatar = filename;
+                });
+        });
 
         $scope.imgFileSelected  = function(files, e){
             var upyun = window.kr.upyun;

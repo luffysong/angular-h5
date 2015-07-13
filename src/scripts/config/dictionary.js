@@ -92,6 +92,11 @@ window.DICTIONARY_DATA =  {
     ],
     "CompanyOperationStatus": [
         {
+            "desc": "未上线",
+            "id": -1,
+            "value": "UNSTART"
+        },
+        {
             "desc": "运营中",
             "id": 0,
             "value": "OPEN"
@@ -158,6 +163,23 @@ window.DICTIONARY_DATA =  {
             "value": "CONFIRMED"
         }
     ],
+    "InvestorRoleEnum": [
+        {
+            "desc": "机构投资人",
+            "id": 0,
+            "value": "ORG_INVESTOR"
+        },
+        {
+            "desc": "公司投资并购部",
+            "id": 1,
+            "value": "COMPANY_INVEST_DEPT"
+        },
+        {
+            "desc": "个人投资人",
+            "id": 2,
+            "value": "PERSONAL_INVESTOR"
+        }
+    ],
     "StartupPositionType": [
         {
             "desc": "创始人",
@@ -170,6 +192,40 @@ window.DICTIONARY_DATA =  {
             "value": "CO_FOUNDER"
         }
     ],
+    "NewsReportAngle": [
+        {
+            "desc": "我们上线了一个新产品",
+            "id": 0,
+            "value": "PRODUCT"
+        },
+        {
+            "desc": "我们希望公布融资消息",
+            "id": 1,
+            "value": "FINANCING"
+        },
+        {
+            "desc": "我有其他消息希望报道",
+            "id": 2,
+            "value": "OTHER"
+        }
+    ],
+    "InvestorType": [
+        {
+            "desc": "非投资人",
+            "id": 100,
+            "value": 100
+        },
+        {
+            "desc": "投资人",
+            "id": 20,
+            "value": 20
+        },
+        {
+            "desc": "优质投资人",
+            "id": 10,
+            "value": 10
+        }
+    ],
     "InternalEmailTypeEnum": [
         {
             "desc": "跟投人完成付款",
@@ -180,6 +236,26 @@ window.DICTIONARY_DATA =  {
             "desc": "跟头人选择线下付款",
             "id": 1,
             "value": "UNDER_LINE_PAYMENT_1"
+        },
+        {
+            "desc": "跟投人下订单提醒",
+            "id": 2,
+            "value": "CO_INVESTOR_ORDER_REMIND"
+        },
+        {
+            "desc": "跟投人因款项不足退款提醒",
+            "id": 3,
+            "value": "CO_INVESTOR_RETURN_PAYMENT"
+        },
+        {
+            "desc": "后台订单修改后确认",
+            "id": 4,
+            "value": "MODIFIED_ORDER_CONFIRMED"
+        },
+        {
+            "desc": "基金募集预约成功通知",
+            "id": 5,
+            "value": "FUND_PRE_ORDER_SUCCESS"
         }
     ],
     "CoinvestorType": [
@@ -261,12 +337,12 @@ window.DICTIONARY_DATA =  {
     "CompanyFinancePhase": [
         {
             "desc": "未知轮次",
-            "id": -10,
+            "id": -100,
             "value": "UNKNOWN"
         },
         {
             "desc": "非正式轮次",
-            "id": -5,
+            "id": -50,
             "value": "INFORMAL"
         },
         {
@@ -276,48 +352,58 @@ window.DICTIONARY_DATA =  {
         },
         {
             "desc": "天使轮",
-            "id": 1,
+            "id": 10,
             "value": "ANGEL"
         },
         {
             "desc": "Pre-A轮",
-            "id": 2,
+            "id": 20,
             "value": "PRE_A"
         },
         {
             "desc": "A轮",
-            "id": 3,
+            "id": 30,
             "value": "A"
         },
         {
+            "desc": "A+轮",
+            "id": 35,
+            "value": "A_PLUS"
+        },
+        {
             "desc": "B轮",
-            "id": 4,
+            "id": 40,
             "value": "B"
         },
         {
+            "desc": "B+轮",
+            "id": 45,
+            "value": "B_PLUS"
+        },
+        {
             "desc": "C轮",
-            "id": 5,
+            "id": 50,
             "value": "C"
         },
         {
             "desc": "D轮",
-            "id": 6,
+            "id": 60,
             "value": "D"
         },
         {
             "desc": "E轮及以后",
-            "id": 7,
+            "id": 70,
             "value": "E"
         },
         {
-            "desc": "已被收购",
-            "id": 10,
+            "desc": "并购",
+            "id": 100,
             "value": "ACQUIRED"
         },
         {
-            "desc": "已上市",
-            "id": 11,
-            "value": "LISTED"
+            "desc": "上市",
+            "id": 110,
+            "value": "IPO"
         }
     ],
     "OrgPositionType": [
@@ -545,6 +631,11 @@ window.DICTIONARY_DATA =  {
             "value": "O2O"
         },
         {
+            "desc": "物流",
+            "id": 19,
+            "value": "LOGISTICS"
+        },
+        {
             "desc": "其他",
             "id": 0,
             "value": "OTHER"
@@ -635,53 +726,73 @@ window.DICTIONARY_DATA =  {
             "desc": "其他",
             "id": 0,
             "value": "OTHER"
+        },
+        {
+            "desc": "物流",
+            "id": 19,
+            "value": "LOGISTICS"
+        },
+        {
+            "desc": "非TMT",
+            "id": 20,
+            "value": "NON_TMT"
         }
     ],
     "FinancePhase": [
         {
-            "desc": "未知轮次",
-            "id": -10,
-            "value": "UNKNOWN"
-        },
-        {
-            "desc": "非正式轮次",
-            "id": -5,
-            "value": "INFORMAL"
-        },
-        {
             "desc": "天使轮",
-            "id": 1,
+            "id": 10,
             "value": "ANGEL"
         },
         {
             "desc": "Pre-A轮",
-            "id": 2,
+            "id": 20,
             "value": "PRE_A"
         },
         {
             "desc": "A轮",
-            "id": 3,
+            "id": 30,
             "value": "A"
         },
         {
+            "desc": "A+轮",
+            "id": 35,
+            "value": "A_PLUS"
+        },
+        {
             "desc": "B轮",
-            "id": 4,
+            "id": 40,
             "value": "B"
         },
         {
+            "desc": "B+轮",
+            "id": 45,
+            "value": "B_PLUS"
+        },
+        {
             "desc": "C轮",
-            "id": 5,
+            "id": 50,
             "value": "C"
         },
         {
             "desc": "D轮",
-            "id": 6,
+            "id": 60,
             "value": "D"
         },
         {
             "desc": "E轮及以后",
-            "id": 7,
+            "id": 70,
             "value": "E"
+        },
+        {
+            "desc": "并购",
+            "id": 100,
+            "value": "ACQUIRED"
+        },
+        {
+            "desc": "上市",
+            "id": 110,
+            "value": "IPO"
         }
     ],
     "ComPositionType": [
@@ -752,52 +863,67 @@ window.DICTIONARY_DATA =  {
         {
             "desc": "创建公司",
             "id": 1,
-            "value": 1
+            "value": "CREATION"
         },
         {
             "desc": "快速创建公司",
             "id": 2,
-            "value": 2
+            "value": "FAST_CREATION"
         },
         {
             "desc": "个人工作经历创建",
             "id": 3,
-            "value": 3
+            "value": "INDIVIDUAL_WORK_EXPERIENCE_CREATION"
         },
         {
             "desc": "个人投资经历创建",
             "id": 4,
-            "value": 4
+            "value": "INDIVIDUAL_INVEST_EXPERIENCE_CREATION"
         },
         {
             "desc": "公司融资经历创建",
             "id": 5,
-            "value": 5
+            "value": "COMPANY_FINANCE_EXPERIENCE_CREATION"
         },
         {
             "desc": "个人创业经历创建",
             "id": 6,
-            "value": 6
+            "value": "INDIVIDUAL_STARTUP_EXPERIENCE_CREATION"
         },
         {
             "desc": "运营创建",
             "id": 7,
-            "value": 7
+            "value": "BUSINESS_CREATION"
         },
         {
             "desc": "批量导入",
             "id": 8,
-            "value": 8
+            "value": "BULK_IMPORT_CREATION"
         },
         {
             "desc": "过往投资方创建",
             "id": 9,
-            "value": 9
+            "value": "PREVIOUS_INVEST_CREATION"
         },
         {
             "desc": "完成融资时创建",
             "id": 10,
-            "value": 10
+            "value": "FINISHED_FINANCE_CREATION"
+        },
+        {
+            "desc": "寻求报道时创建",
+            "id": 11,
+            "value": "NEWS_REPORT_APPLICATION_CREATION"
+        },
+        {
+            "desc": "活动报名",
+            "id": 12,
+            "value": "ACTIVITY_CREATION"
+        },
+        {
+            "desc": "h5创建",
+            "id": 13,
+            "value": "H5_CREATION"
         }
     ],
     "CurrencyUnit": [
@@ -920,6 +1046,11 @@ window.DICTIONARY_DATA =  {
             "desc": "投资和并购",
             "id": 109,
             "value": "INVEST"
+        },
+        {
+            "desc": "其他",
+            "id": 110,
+            "value": "OTHER"
         }
     ],
     "Source": [
@@ -937,37 +1068,37 @@ window.DICTIONARY_DATA =  {
     "FundsPhase": [
         {
             "desc": "天使轮",
-            "id": 1,
+            "id": 10,
             "value": "ANGEL"
         },
         {
             "desc": "Pre-A轮",
-            "id": 2,
+            "id": 20,
             "value": "PRE_A"
         },
         {
             "desc": "A轮",
-            "id": 3,
+            "id": 30,
             "value": "A"
         },
         {
             "desc": "B轮",
-            "id": 4,
+            "id": 40,
             "value": "B"
         },
         {
             "desc": "C轮",
-            "id": 5,
+            "id": 50,
             "value": "C"
         },
         {
             "desc": "D轮",
-            "id": 6,
+            "id": 60,
             "value": "D"
         },
         {
             "desc": "E轮及以后",
-            "id": 7,
+            "id": 70,
             "value": "E"
         }
     ],
