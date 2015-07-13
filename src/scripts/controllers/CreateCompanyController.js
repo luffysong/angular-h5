@@ -1,6 +1,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('CreateCompanyController', [
+    '$timeout',
     '$q',
     '$modal',
     '$scope',
@@ -16,7 +17,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
     'ErrorService',
     'AvatarEdit',
     '$upload',
-    function ($q,$modal, $scope, DictionaryService, dateFilter, DefaultService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
+    function ($timeout, $q,$modal, $scope, DictionaryService, dateFilter, DefaultService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
 
         // 职位
         $scope.founderRoles = DictionaryService.getDict('StartupPositionType');
@@ -29,9 +30,22 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         $scope.formData = {
             level: $scope.founderRoles[0].value,
-            logo: "",
+            logo: "//krplus-pic.b0.upaiyun.com/default_logo.png!70",
             operationStatus: $scope.operationStatus[1].value
         };
+
+
+        UserService.isProfileValid(function(cs){
+
+            if(!cs) {
+                if(UserService.uid){
+                    location.hash = '/welcome';
+                }else{
+                    location.href = '/user/login?from=' + encodeURIComponent(location.href);
+                }
+
+            }
+        });
 
 
         // 重要提示 start
@@ -108,6 +122,22 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             return deferred.promise;
         }
 
+        // add new company
+
+        $scope.addCompany = function(name) {
+            $scope.opNext = 0;
+            $scope.formData.name = name;
+            $scope.formData.website = '';
+            $scope.formData.brief = '';
+            $scope.formData.logo = '';
+            $scope.formData.operationStatus = 'OPEN';
+            $scope.formData.bizCardLink = '';
+            $scope.formData.cid = null;
+        }
+
+
+        // add new company  end
+
 
         // 判断
         $scope.opNext = 0;
@@ -143,17 +173,25 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         }
 
 
+        var cache_name = '';
         $scope.autocomplete_options = {
             suggest: suggest_state_remote,
             on_error: console.log,
+            on_detach:function(cs){
+
+                $timeout(function(){
+                    console.log(cache_name)
+                    $scope.formData.name = cache_name;
+                }, 0)
+            },
             on_select: function (selected) {
-                console.log(selected)
                 if(selected.obj.status != 'add'){
                     checkName(selected);
                 }else{
-                    $scope.name = selected.obj.value;
+                    $scope.addCompany(selected.obj.value)
                 }
-                $scope.selectedCompany = selected;
+                cache_name = selected.obj.value;
+                //$scope.selectedCompany = selected;
             }
         };
 
@@ -192,7 +230,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                         $scope.logo.progress = evt.loaded * 100 / evt.total;
                     }).success(function (data, status, headers, config) {
                         var filename = data.url.toLowerCase();
-                        if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
+                        if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
                             $scope.formData.logo = window.kr.upyun.bucket.url + data.url;
                         } else {
                             ErrorService.alert({
@@ -244,7 +282,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                         $scope.card.progress = evt.loaded * 100 / evt.total;
                     }).success(function (data, status, headers, config) {
                         var filename = data.url.toLowerCase();
-                        if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
+                        if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
                             $scope.formData.bizCardLink = window.kr.upyun.bucket.url + data.url;
                         } else {
                             ErrorService.alert({
@@ -267,21 +305,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         // 上传名片 end
 
 
-        // add new company
 
-        $scope.addCompany = function(name) {
-            $scope.opNext = 0;
-            $scope.formData.name = name;
-            $scope.formData.website = '';
-            $scope.formData.brief = '';
-            $scope.formData.logo = '';
-            $scope.formData.operationStatus = 'OPEN';
-            $scope.formData.bizCardLink = '';
-            $scope.formData.cid = null;
-        }
-
-
-        // add new company  end
 
         //新建公司 start
         $scope.submitting = false;
@@ -310,12 +334,13 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 return;
             }
             $scope.submitting = true;
+            $scope.formData.companySource = 'H5_CREATION';
+            $scope.formData.endDate = true;
 
-            if($scope.formData.cid){
-                $scope.formData.companySource = 'H5_CREATION';
+            //if($scope.formData.cid){
+
                 // todo : 时间修复
                 $scope.formData.startDate = new Date;
-                $scope.formData.endDate = true;
                 if(!$scope.formData.logo) $scope.formData.logo = '//krplus-pic.b0.upaiyun.com/default_logo.png!30'
                 CompanyService.save({
                     'mode':'direct'
@@ -332,9 +357,9 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     ErrorService.alert(err);
                     $scope.submitting = false;
                 });
-            }else{
+            //}else{
 
-            }
+            //}
 
         };
         // 新建公司 end
