@@ -9,6 +9,9 @@
                 <!-- <div class="error-alert error" ng-show="(investorValidateForm.investFrom.$invalid && investorValidateForm.investFrom.$dirty) || (investorValidateForm.investTo.$invalid && investorValidateForm.investTo.$dirty)">
                     <span ng-show="investorValidateForm.investFrom.$error.required || investorValidateForm.investTo.$error.required">请输入投资金额</span>
                 </div> -->
+                <div class="error-alert error" ng-show="investorValidateForm.$error.moneyEmpty">
+                    <span>单笔可投额度个人和基金必须要填写一项</span>
+                </div>
                 <div class="error-alert error" ng-show="investorValidateForm.investIdentity.$invalid && investorValidateForm.investIdentity.$dirty">
                     <span>请选择投资身份</span>
                 </div>

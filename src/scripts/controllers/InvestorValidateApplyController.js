@@ -255,19 +255,34 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }else{
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
             }
+            var isPersonal = ($scope.invest.cnyInvestMin || $scope.invest.cnyInvestMax || $scope.invest.usdInvestMin || $scope.invest.usdInvestMax),
+                isFund     = ($scope.invest.fundCnyInvestMin || $scope.invest.fundCnyInvestMax || $scope.invest.fundUsdInvestMin || $scope.invest.fundUsdInvestMax);
             /*检查单笔可投额度*/
-            /*个人*/
-            if(($scope.invest.cnyInvestMin && $scope.invest.cnyInvestMax) || ($scope.invest.usdInvestMin && $scope.invest.usdInvestMax )){
-                angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('investMoneyEmpty',true);
-            }else{
-                angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('investMoneyEmpty',false);
+            if(isPersonal){
+                /*个人*/
+                if(($scope.invest.cnyInvestMin && $scope.invest.cnyInvestMax) || ($scope.invest.usdInvestMin && $scope.invest.usdInvestMax )){
+                    angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('investMoneyEmpty',true);
+                }else{
+                    angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('investMoneyEmpty',false);
+                }
             }
-            /*基金*/
-            if(($scope.invest.fundCnyInvestMin && $scope.invest.fundCnyInvestMax) || ($scope.invest.fundUsdInvestMin && $scope.invest.fundUsdInvestMax )){
-                angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('fundInvestMoneyEmpty',true);
-            }else{
-                angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('fundInvestMoneyEmpty',false);
+            if (isFund){
+                /*基金*/
+                if(($scope.invest.fundCnyInvestMin && $scope.invest.fundCnyInvestMax) || ($scope.invest.fundUsdInvestMin && $scope.invest.fundUsdInvestMax )){
+                    angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('fundInvestMoneyEmpty',true);
+                }else{
+                    angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('fundInvestMoneyEmpty',false);
+                }
             }
+
+            if(!isPersonal && !isFund){
+                angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('moneyEmpty',false);
+            }else{
+                 angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('moneyEmpty',true);
+            }
+
+
+
 
             /*检查表单填写是否正确*/
             if(!checkForm("investorValidateForm"))return;
