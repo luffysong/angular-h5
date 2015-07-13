@@ -173,24 +173,37 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         }
 
 
-        var cache_name = '';
+        var cache_name = '',
+            selectedCompany = false;
         $scope.autocomplete_options = {
             suggest: suggest_state_remote,
             on_error: console.log,
             on_detach:function(cs){
-
+                if(selectedCompany) {
+                    selectedCompany = false;
+                    return;
+                }
                 $timeout(function(){
-                    console.log(cache_name)
+                    console.log(cache_name, 'dea')
                     $scope.formData.name = cache_name;
                 }, 0)
             },
             on_select: function (selected) {
+                selectedCompany = true;
                 if(selected.obj.status != 'add'){
                     checkName(selected);
                 }else{
                     $scope.addCompany(selected.obj.value)
                 }
-                cache_name = selected.obj.value;
+
+                console.log(selected)
+                if(selected.obj.id){
+                    cache_name = selected.value;
+                }else{
+                    cache_name = selected.obj.value;
+                }
+
+                console.log(cache_name, 'select');
                 //$scope.selectedCompany = selected;
             }
         };
@@ -335,13 +348,17 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             }
             $scope.submitting = true;
             $scope.formData.companySource = 'H5_CREATION';
-            $scope.formData.endDate = true;
+
 
             //if($scope.formData.cid){
 
                 // todo : 时间修复
                 $scope.formData.startDate = new Date;
-                if(!$scope.formData.logo) $scope.formData.logo = '//krplus-pic.b0.upaiyun.com/default_logo.png!30'
+                $scope.formData.endDate = new Date;
+            console.log($scope.formData)
+                if(!$scope.formData.logo) $scope.formData.logo = '//krplus-pic.b0.upaiyun.com/default_logo.png!30';
+
+
                 CompanyService.save({
                     'mode':'direct'
                 }, angular.copy($scope.formData), function (data) {
