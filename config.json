@@ -11,6 +11,10 @@
         {
             "path": "/oauth",
             "source": "http://rong.dev.36kr.com/oauth"
+        },
+        {
+            "path": "/p",
+            "source": "http://rong.test.36kr.com/p"
         }
     ],
     "upyun": {

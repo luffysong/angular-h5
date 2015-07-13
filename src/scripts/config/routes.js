@@ -97,6 +97,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/syndicates/pay.html',
         controller: 'syndicatesPayController'
     });
+    /*众筹支付成功页面*/
+    $stateProvider.state('syndicatesPSuc', {
+        url: '/zhongchouSuc?cid&fundingId',
+        templateUrl: 'templates/syndicates/suc.html',
+        controller: 'syndicatesSucController'
+    });
     /*跟投人认证*/
     $stateProvider.state('investorValidate', {
         url: '/investorValidate',

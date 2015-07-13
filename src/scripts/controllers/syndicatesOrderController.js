@@ -51,7 +51,7 @@ angular.module('defaultApp.controller').controller('syndicatesOrderController',
         }
         $scope.goPay = function(tid,amount){
             if(!$scope.hasRecord){
-                window.open('//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+tid,'url_order='+encodeURIComponent(location.href),'back_url='+encodeURIComponent(location.href)]).join('&'));
+                location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+tid,'url_order='+encodeURIComponent(location.href),'back_url='+encodeURIComponent(location.href)]).join('&');
             }else{
                 $state.go("syndicatesPay",{
                     tid:tid,

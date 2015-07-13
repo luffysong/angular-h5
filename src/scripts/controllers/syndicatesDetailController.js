@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope) {
         var statusList = DictionaryService.getDict("crowd_funding_status");
 
         /*股权结构是否出错*/
@@ -13,8 +13,9 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         /*众筹信息是否全部展开*/
         $scope.isToggle = false;
         $scope.coInvestor = {};
-        $scope.fundingId = $stateParams.fundingId;
-        $scope.companyId = $stateParams.companyId;
+        $scope.fundingId = $rootScope.fundingId = $stateParams.fundingId;
+
+        $scope.companyId = $rootScope.companyId = $stateParams.companyId;
         document.title="36氪众筹";
         /*获取用户是否为跟投人*/
         UserService.getIdentity(function(data){

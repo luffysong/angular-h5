@@ -9,3 +9,4 @@ require('./syndicatesController');
 require('./syndicatesDetailController');
 require('./syndicatesOrderController');
 require('./syndicatesPayController');
+require('./syndicatesSucController');

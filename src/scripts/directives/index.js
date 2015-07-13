@@ -1,4 +1,5 @@
 require('./BaiduBtnDirective');
+require('./BaiduShareDirective');
 require('./ClampDirective');
 require('./DynamicHtmlDirective');
 require('./LoadingBarDirective');
