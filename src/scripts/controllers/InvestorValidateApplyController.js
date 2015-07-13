@@ -6,10 +6,18 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateApplyController',
     function($state,$scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService) {
+        //用户是否登录
         if(!UserService.getUID()){
             location.href = "/user/login?from=" + encodeURIComponent(location.href);
             return;
         }
+        //用户个人信息是否满足条件
+        UserService.isProfileValid(function(response){
+            if(!response){
+                $state.go('guide.welcome');
+                return false;
+            }
+        });
         /*查询投资人认证申请状态*/
         InvestorauditService.queryStatus({},function(response){
             switch(response.status){
@@ -117,7 +125,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             id:UserService.getUID()
         },function(data){
             console.log('====data===',data);
-
             /*基本信息*/
             $scope.invest.name = data.name;
             $scope.invest.intro = data.intro;
@@ -203,6 +210,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         var filename = data.url.toLowerCase();
                         if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
                             $scope.intro.value.pictures = window.kr.upyun.bucket.url + data.url;
+                            //隐藏提示信息
+                            angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("picEmpty",true);
+
                         } else {
                             ErrorService.alert({
                                 msg: '格式不支持，请重新上传！'
