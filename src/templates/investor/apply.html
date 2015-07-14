@@ -164,59 +164,64 @@
                     </div>
 
                     <!--个人单笔可投-->
-                    <div class="form-group normal invest-money">
+                    <div class="form-group invest-money normal">
                         <label class="label-control">
                             <span class="box-content">
                                 <span class="c-orange">*</span>单笔可投额度
                             </span>
                             <span>&nbsp;&nbsp;(单位：万)</span>
                         </label>
-                    </div>
-                    <!-- 个人 -->
-                    <div class="form-group invest-money">
-                        <label for="" class="label-control">
-                            <span class="box-content">个人</span>
-                        </label>
-                        <div class="row-1">
-                            <!-- 人民币 -->
-                            <div class="col-flex clearfix ml-10">
-                                <input class="form-control account-num " type="tel" ng-model="invest.cnyInvestMin" name="investFrom" placeholder="填写金额"   maxlength="6" />
-                                 <span class="icon-zhi">至</span>
-                                <input class="form-control account-num" type="tel" ng-model="invest.cnyInvestMax" name="investTo" placeholder="填写金额" maxlength="6" />
-                                人民币
-                            </div>
-                            <!-- 美元 -->
-                            <div class="col-flex clearfix ml-10">
-                                <input class="form-control account-num" type="tel" ng-model="invest.usdInvestMin" name="investFrom" placeholder="填写金额"  maxlength="6" />
-                                 <span class="icon-zhi">至</span>
-                                <input class="form-control account-num" type="tel" ng-model="invest.usdInvestMax" name="investTo" placeholder="填写金额" maxlength="6" />
-                                美元
-                            </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group-box">
+                            <!-- 个人 -->
+                            <div class="form-group item">
+                                <label for="" class="label-control">
+                                    <span class="box-content">个人</span>
+                                </label>
+                                <div class="row-1">
+                                    <!-- 人民币 -->
+                                    <div class="col-flex clearfix ml-10">
+                                        <input class="form-control account-num " type="tel" ng-model="invest.cnyInvestMin" name="investFrom" placeholder="填写金额"   maxlength="6" />
+                                         <span class="icon-zhi">至</span>
+                                        <input class="form-control account-num" type="tel" ng-model="invest.cnyInvestMax" name="investTo" placeholder="填写金额" maxlength="6" />
+                                        人民币
+                                    </div>
+                                    <!-- 美元 -->
+                                    <div class="col-flex clearfix ml-10">
+                                        <input class="form-control account-num" type="tel" ng-model="invest.usdInvestMin" name="investFrom" placeholder="填写金额"  maxlength="6" />
+                                         <span class="icon-zhi">至</span>
+                                        <input class="form-control account-num" type="tel" ng-model="invest.usdInvestMax" name="investTo" placeholder="填写金额" maxlength="6" />
+                                        美元
+                                    </div>
 
-                        </div>
-                </div>
-                <!-- 基金 -->
-                <div class="form-group invest-money fund-money">
-                    <label for="" class="label-control">
-                        <span class="box-content">基金</span>
-                    </label>
-                    <div class="row-1">
-                        <!-- 人民币 -->
-                        <div class=" col-flex clearfix ml-10">
-                            <input class="form-control account-num" type="tel" ng-model="invest.fundCnyInvestMin" name="investFrom" placeholder="填写金额"  maxlength="6" />
-                            <span class="icon-zhi">至</span>
-                            <input class="form-control account-num" type="tel" ng-model="invest.fundCnyInvestMax" name="investTo" placeholder="填写金额" maxlength="6" />
-                            美元
-                        </div>
-                        <!-- 美元 -->
-                        <div class="col-flex clearfix ml-10">
-                            <input class="form-control account-num" type="tel" ng-model="invest.fundUsdInvestMin" name="investFrom" placeholder="填写金额"  maxlength="6" />
-                            <span class="icon-zhi">至</span>
-                            <input class="form-control account-num" type="tel" ng-model="invest.fundUsdInvestMax" name="investTo" placeholder="填写金额"  maxlength="6" />
-                            人民币
+                                </div>
+                            </div>
+                            <!-- 基金 -->
+                            <div class="form-group item">
+                                <label for="" class="label-control">
+                                    <span class="box-content">基金</span>
+                                </label>
+                                <div class="row-1">
+                                    <!-- 人民币 -->
+                                    <div class=" col-flex clearfix ml-10">
+                                        <input class="form-control account-num" type="tel" ng-model="invest.fundCnyInvestMin" name="investFrom" placeholder="填写金额"  maxlength="6" />
+                                        <span class="icon-zhi">至</span>
+                                        <input class="form-control account-num" type="tel" ng-model="invest.fundCnyInvestMax" name="investTo" placeholder="填写金额" maxlength="6" />
+                                        美元
+                                    </div>
+                                    <!-- 美元 -->
+                                    <div class="col-flex clearfix ml-10">
+                                        <input class="form-control account-num" type="tel" ng-model="invest.fundUsdInvestMin" name="investFrom" placeholder="填写金额"  maxlength="6" />
+                                        <span class="icon-zhi">至</span>
+                                        <input class="form-control account-num" type="tel" ng-model="invest.fundUsdInvestMax" name="investTo" placeholder="填写金额"  maxlength="6" />
+                                        人民币
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+
 
 
                     <!-- 主投币种 -->

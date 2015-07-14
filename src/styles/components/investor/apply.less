@@ -35,32 +35,48 @@
         border-collapse: collapse;
 
     }
-    .form-group {
-        &.invest-money{
-            border-bottom:none;
-            .row-1 {
-                overflow: hidden;
-                height:auto;
-                .ml-10 {
-                    margin-left:0;
+
+    .form-group.invest-money{
+        padding-bottom:0;
+        .form-group-box {
+            padding:5px 0;
+            .item {
+                padding:8px 0;
+                border-bottom:1px solid #ddd;
+                margin-left:56px;
+                &:last-of-type {
+                    border-bottom:none;
+                }
+                .label-control{
+                    .box-content{
+                        min-width:30px;
+                        text-align: right;
+                        padding-right:0;
+                        padding-right:10px;
+                    }
+                }
+                .row-1 {
                     overflow: hidden;
                     height:auto;
-                    margin-top:10px;
-                    &:first-of-type {
-                        margin-top:0;
+                    .ml-10 {
+                        clear:both;
+                        margin-left:0;
+                        overflow: hidden;
+                        height:auto;
+                        margin-top:10px;
+                        &:first-of-type {
+                            margin-top:0;
+                        }
+                        .icon-zhi {
+                            display: inline-block;
+                            padding:0 10px;
+                        }
                     }
-                    .icon-zhi {
-                        display: inline-block;
-                        padding:0 10px;
+                    input{
+                        text-align: left;
                     }
-                }
-                input{
-                    text-align: left;
                 }
             }
-        }
-        &.fund-money {
-            border-bottom:1px solid #ddd;
         }
         .label-control{
             width:auto;
