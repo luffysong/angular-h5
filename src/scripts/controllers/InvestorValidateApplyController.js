@@ -6,11 +6,15 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateApplyController',
     function($state,$scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService) {
+        $scope.investorValidateApply = {
+            status:''
+        }
         //用户是否登录
         if(!UserService.getUID()){
             location.href = "/user/login?from=" + encodeURIComponent(location.href);
             return;
         }
+
         //用户个人信息是否满足条件
         UserService.isProfileValid(function(response){
             if(!response){
@@ -27,7 +31,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     break;
                 /*审核通过*/
                 case 1 :
-                    $state.go('investorValidateApplySuccess');
+                    $scope.investorValidateApply.status = 'success';
                     break;
                 default:
                     break;
