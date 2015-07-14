@@ -35,10 +35,62 @@
         border-collapse: collapse;
 
     }
-    .form-group {
+
+    .form-group.invest-money{
+        padding-bottom:0;
+        .form-group-box {
+            padding:5px 0;
+            .item {
+                padding:8px 0;
+                border-bottom:1px solid #ddd;
+                margin-left:56px;
+                &:last-of-type {
+                    border-bottom:none;
+                }
+                .label-control{
+                    .box-content{
+                        min-width:30px;
+                        text-align: right;
+                        padding-right:0;
+                        padding-right:10px;
+                    }
+                }
+                .row-1 {
+                    overflow: hidden;
+                    height:auto;
+                    .ml-10 {
+                        clear:both;
+                        margin-left:0;
+                        overflow: hidden;
+                        height:auto;
+                        margin-top:10px;
+                        &:first-of-type {
+                            margin-top:0;
+                        }
+                        .icon-zhi {
+                            display: inline-block;
+                            padding:0 10px;
+                        }
+                    }
+                    input{
+                        text-align: left;
+                    }
+                }
+            }
+        }
         .label-control{
-            min-width:75px;
+            width:auto;
             text-align: right;
+            .box-content {
+                min-width:100px;
+                text-align: right;
+                display:inline-block;
+                padding-right:15px;
+
+                *{
+                    display:inline-block;
+                }
+            }
         }
         &.upload-pictures {
             border-bottom: none;
@@ -50,34 +102,94 @@
     .brief {
         border-bottom:1px solid #ddd !important;
     }
-    .invest-money {
-        .label-control,
-        .money-box {
-            float:left;
-        }
-        .money-box {
-            .form-group {
-                padding:10px 0 10px 30px;
-                overflow: hidden;
-                height:auto;
-                display:table;
-                border-bottom:1px solid #ddd;
-                .label-control ,
-                .row-1 {
-                    display:table-cell;
-                    margin:0;
-                    padding:0;
-                    vertical-align: top;
-                }
-                &:last-of-type {
-                    border-bottom: none;
-                }
-            }
-        }
-    }
     .pic-list {
         input {
             margin:0;
         }
     }
 }
+
+
+/*审核中  审核成功*/
+.investor-apply-alter,
+.investor-apply-success {
+    .title {
+        padding:0 20px 5px 20px;
+        font-size:17px;
+        color:rgb(59, 59, 59);
+    }
+    .jumbotron {
+        background-color:#fff;
+        padding:20px 20px;
+        border-top:1px solid #ddd;
+        border-bottom:1px solid #ddd;
+        font-size:12px;
+        overflow: hidden;
+        height:auto;
+        color:rgb(191, 191, 191);
+        line-height: 1.4;
+        .icon-apply {
+            height:50px;
+            width:50px;
+            margin:0 auto;
+            margin-top:20px;
+            display:block;
+            background:transparent url('images/investorValidate/icon-1.png') no-repeat 0 0 ;
+            background-size:contain;
+        }
+
+        label{
+            color:rgb(244, 159, 53);
+            font-size:17px;
+            display: block;
+            margin:20px 0 5px 0;
+        }
+    }
+    .btn.btn-primary {
+        background-color:rgb(0, 141, 242);
+        text-align: center;
+        font-size:17px;
+        width:80%;
+        border:none;
+        color:rgb(221, 235, 252);
+        border-radius:4px;
+        margin:20px auto;
+
+    }
+}
+
+/*申请成功*/
+.investor-apply-success {
+    .jumbotron {
+        .btn-link {
+            color:rgb(191, 191, 191);
+            font-size:12px;
+            text-decoration:underline;
+            padding:0;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        label{
+            color:rgb(244, 159, 53);
+            font-size:17px;
+            display: block;
+            margin:20px 0 5px 0;
+            .icon-tou {
+                height:25px;
+                width:25px;
+                border-radius: 25px;
+                font-size:14px;
+                text-align: center;
+                font-weight: bold;
+                vertical-align: middle;
+                line-height: 25px;
+                background-color:rgb(229, 161, 98);
+                color:rgb(252, 241, 231);
+                display:inline-block;
+            }
+        }
+    }
+}
+
+
