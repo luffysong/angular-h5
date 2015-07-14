@@ -52,6 +52,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             intro:"",
             pictures:""
         };
+        /*错误信息提示*/
+        $scope.error = {
+            code:0, //0为不显示，非0显示错误信息
+            msg:''
+        };
         /*选中的投资阶段*/
         $scope.stageList = [];
         /*选中的领域*/
@@ -170,6 +175,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             if($scope.areaList.length == 3 && $scope.areaList.indexOf($scope.invest.investorFocusIndustrys[index].value) < 0){
                 return;
             }else{
+                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
                 $scope.areaList = [];
                 $scope.invest.investorFocusIndustrys[index].active = !$scope.invest.investorFocusIndustrys[index].active;
                 angular.forEach($scope.invest.investorFocusIndustrys,function(obj,i){
@@ -233,6 +239,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
         /*表单提交*/
         $scope.submitForm = function(){
+            //隐藏自定义错误信息
+            $scope.error.code = 0;
+
             if($scope.intro.value.pictures){
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("picEmpty",true);
             }else{
@@ -281,13 +290,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                  angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('moneyEmpty',true);
             }
 
-
-
-
             /*检查表单填写是否正确*/
             if(!checkForm("investorValidateForm"))return;
-            $scope.hasClick = true;
-
             var investoraudit = {};
                 investoraudit['id'] = UserService.getUID();
                 investoraudit['name']   = $scope.invest.name;
@@ -307,18 +311,41 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 /*个人*/
                 investoraudit['cnyInvestMin']   = $scope.invest.cnyInvestMin;
                 investoraudit['cnyInvestMax']   = $scope.invest.cnyInvestMax;
+                console.log(investoraudit);
+                if(parseFloat(investoraudit['cnyInvestMin']) > parseFloat(investoraudit['cnyInvestMax'])){
+                    $scope.error.code = 1;
+                    $scope.error.msg = "单笔可投资额度输入的个人人民币要小于等于最大值";
+                    return false;
+                }
                 /*基金*/
                 investoraudit['fundCnyInvestMin']   = $scope.invest.fundCnyInvestMin;
                 investoraudit['fundCnyInvestMax']   = $scope.invest.fundCnyInvestMax;
+                if(investoraudit['fundCnyInvestMin'] > investoraudit['fundCnyInvestMax']){
+                    $scope.error.code = 1;
+                    $scope.error.msg = "单笔可投资额度输入的基金人民币要小于或等于最大值";
+                    return false;
+                }
 
                 /*个人*/
                 investoraudit['usdInvestMin']   = $scope.invest.usdInvestMin;
                 investoraudit['usdInvestMax']   = $scope.invest.usdInvestMax;
+
+                if(parseFloat(investoraudit['usdInvestMin'])  > parseFloat(investoraudit['usdInvestMax'])){
+                    $scope.error.code = 1;
+                    $scope.error.msg = "单笔可投资额度输入的个人美元要小于等于最大值";
+                    return false;
+                }
                 /*基金*/
                 investoraudit['fundUsdInvestMin']   = $scope.invest.fundUsdInvestMin;
                 investoraudit['fundUsdInvestMax']   = $scope.invest.fundUsdInvestMax;
+                if(parseFloat(investoraudit['fundUsdInvestMin'])  > parseFloat(investoraudit['fundUsdInvestMax'])){
+                    $scope.error.code = 1;
+                    $scope.error.msg = "单笔可投资额度输入的基金美元要小于等于最大值";
+                    return false;
+                }
                 /*名片*/
                 investoraudit['businessCardLink']   = $scope.intro.value.pictures;
+                $scope.hasClick = true;
             InvestorauditService.save(investoraudit,function(response){
                 $state.go('investorValidateApplyAlert');
             },function(err){
