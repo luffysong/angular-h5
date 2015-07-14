@@ -7,7 +7,6 @@
          margin:0;
          padding:0 20px;
          border:none;
-
     }
     .radio {
         label {
@@ -21,13 +20,31 @@
         }
 
     }
+    .welcome-form {
+        .basic-info {
+            &:first-of-type {
+                border-top:none;
+            }
+        }
+    }
     .welcome-form .col-flex .stage.active {
         color:#67aef5;
+    }
+    .basic-info {
+        border-top:1px solid #ddd;
+        border-collapse: collapse;
+
     }
     .form-group {
         .label-control{
             min-width:75px;
             text-align: right;
+        }
+        &.upload-pictures {
+            border-bottom: none;
+        }
+        .btn-auth {
+            border:none;
         }
     }
     .brief {
