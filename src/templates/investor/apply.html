@@ -9,6 +9,11 @@
                 <!-- <div class="error-alert error" ng-show="(investorValidateForm.investFrom.$invalid && investorValidateForm.investFrom.$dirty) || (investorValidateForm.investTo.$invalid && investorValidateForm.investTo.$dirty)">
                     <span ng-show="investorValidateForm.investFrom.$error.required || investorValidateForm.investTo.$error.required">请输入投资金额</span>
                 </div> -->
+                <!-- 自定义错误信息 -->
+                <div class="error-alert error" ng-if="error.code">
+                    <span>{{error.msg}}</span>
+                </div>
+
                 <div class="error-alert error" ng-show="investorValidateForm.$error.moneyEmpty">
                     <span>单笔可投额度个人和基金必须要填写一项</span>
                 </div>
@@ -61,19 +66,19 @@
                             <div class="radio">
                               <label>
                                 <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="ORG_INVESTOR" checked required>
-                                    <span> &nbsp;任职投资机构</span>
+                                    <span ng-class="{true:'active'}[invest.investorRole=='ORG_INVESTOR']"> &nbsp;任职投资机构</span>
                               </label>
                             </div>
                             <div class="radio">
                               <label>
                                 <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="COMPANY_INVEST_DEPT">
-                                <span>&nbsp;任职公司投资并购部</span>
+                                <span ng-class="{true:'active'}[invest.investorRole=='COMPANY_INVEST_DEPT']">&nbsp;任职公司投资并购部</span>
                               </label>
                             </div>
                             <div class="radio">
                               <label>
                                 <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="PERSONAL_INVESTOR">
-                                <span>&nbsp;个人投资人</span>
+                                <span ng-class="{true:'active'}[invest.investorRole=='PERSONAL_INVESTOR']">&nbsp;个人投资人</span>
                               </label>
                             </div>
 
@@ -119,7 +124,9 @@
 
                     <!--投资阶段-->
                     <div class="form-group">
-                        <label class="label-control"><span class="c-orange">*</span>投资阶段</label>
+                        <div class="focus-area">
+                            <label class="label-control"><span class="c-orange">*</span>投资阶段</label>
+                        </div>
                         <div class="col-flex">
                             <div class="stage" ng-repeat="stage in invest.fundsPhases" ng-click="selectStage($index)" ng-class="{'active':stage.active}" name="investStage">{{stage.name}}
                             </div>
@@ -130,7 +137,7 @@
                     <!--关注领域-->
                     <div class="form-group normal">
                         <div class="focus-area">
-                            <label class="label-control"><span class="c-orange">*</span>关注领域 <span class="tip">(最多可选3个)</span></label>
+                            <label class="label-control">&nbsp;&nbsp;<span class="c-orange">*</span>关注领域 <span class="tip">(最多可选3个)</span></label>
                         </div>
                         <div class="col-flex clearfix">
                             <div class="stage" ng-repeat="area in invest.investorFocusIndustrys" ng-click="selectArea($index)" ng-class="{'active':area.active}" name="focusArea">{{area.desc}}</div>
