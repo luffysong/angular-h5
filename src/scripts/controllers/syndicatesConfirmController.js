@@ -11,7 +11,9 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         $scope.uid = UserService.getUID();
         $scope.formData = {};
         $scope.isRead = false;
-        $scope.krCode = "";
+        $scope.krCode = {
+            number:""
+        };
         var statusList = DictionaryService.getDict("crowd_funding_status");
         CompanyService.get({
             id:$scope.companyId
@@ -49,7 +51,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             $scope.baseData.detail.agreements.push(obj);
             console.log($scope.baseData.detail.agreements);
         });
-        $scope.$watch("krCode",function(from){
+        $scope.$watch("krCode.number",function(from){
             if(from.length == 8){
                 $scope.validateValid = true;
             }else{
@@ -159,12 +161,12 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         /*校验Kr码*/
         $scope.checkCode = function(){
             /*输入达到8位时，调用check*/
-            if($scope.krCode.length == 8){
+            if($scope.krCode.number.length == 8){
                 CrowdFundingService.get({
                     model:"crowd-funding",
                     id:$scope.fundingId,
                     submodel:"invite-code-check",
-                    subid:$scope.krCode
+                    subid:$scope.krCode.number
                 },function(data){
                     $scope.validateSuc = true;
                 },function(err){
@@ -192,7 +194,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                         goods_name: '众筹跟投', //TODO:这两个字段得产品确认一下写啥
                         goods_desc: '众筹跟投',
                         investment: Math.min($scope.formData.investVal,$scope.remainAmount),
-                        invite_code:$scope.krCode
+                        invite_code:$scope.krCode.number
                     }, function(data){
                         $state.go('syndicatesOrder', {
                             tid: data.trade_id,
