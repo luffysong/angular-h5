@@ -49,6 +49,28 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             }
         });
 
+        // 公司网址
+        $scope.webSiteFocus = function(){
+            if(!$scope.formData.website) $scope.formData.website = 'http://'
+        }
+        $scope.webSiteBlur = function(){
+            if($scope.formData.website == 'http://') $scope.formData.website = '';
+        }
+
+        // 定位
+        $scope.positionSet = function(){
+            var wrap = $('.suggest_wrap');
+            var top = wrap.offset().top;
+
+            window.scrollTo(0, top - 30)
+
+            //$('input', wrap)[0].removeAttribute('disabled')
+
+            //setTimeout(function(){
+            //    $('input', wrap).focus();
+            //
+            //}, 500)
+        }
 
         // 重要提示 start
         $scope.createTip = function () {
@@ -107,7 +129,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 wd: q
             }, function (data) {
                 var exist = data.data.filter(function (item) {
-                    return item.name == q
+                    return item.name.toLowerCase() == q.toLowerCase();
                 });
                 if (!exist.length) {
                     data.data.push({
@@ -150,11 +172,11 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             }, function (data) {
                 data.company.logo = selected.obj.logo;
                 var company = data.company;
-
-
+                console.log(data)
                 if (data.manager) {
                     $scope.opNext = 2;
                     $scope.founder = data.manager.name;
+                    $scope.founderid = data.manager.id;
                 } else {
                     $scope.opNext = 1;
                 }

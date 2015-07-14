@@ -58,7 +58,7 @@
                             <span>公司简称</span>
                         </td>
                         <td>
-                            <div class="suggest_wrap">
+                            <div class="suggest_wrap" ng-click="positionSet();">
                                 <input type="text" ng-model="formData.name"
                                        name="name"
                                        placeholder="请填写大众熟知的项目名称"
@@ -86,9 +86,9 @@
                             <span>公司网址</span>
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" ng-disabled="formData.cid"
+                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" ng-disabled="formData.cid" ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
                                    name="website" ng-model="formData.website" ng-if="formData.cid || formData.operationStatus == 'UNSTART'"/>
-                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" required ng-disabled="formData.cid"
+                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" required ng-disabled="formData.cid" ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
                                    name="website" ng-model="formData.website" ng-if="!formData.cid && formData.operationStatus != 'UNSTART'"/>
                         </td>
                     </tr>
@@ -212,7 +212,7 @@
             <!-- 添加创业经历-->
             <div class="submit" ng-show="opNext==2">
                 <button type="button" ng-click="addEntrepreneurialExp($event)">添加为我的创业经历</button>
-                <b>该公司已经被 <a href="#/user/{{uid}}"><i>{{founder}}</i></a> 创建，如你是公司创始团队成员，可添加该公司为你的创业经历</b>
+                <b>该公司已经被 <a href="#/user/{{founderid}}"><i>{{founder}}</i></a> 创建，如你是公司创始团队成员，可添加该公司为你的创业经历</b>
             </div>
         </form>
 
