@@ -49,6 +49,28 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             }
         });
 
+        // 公司网址
+        $scope.webSiteFocus = function(){
+            if(!$scope.formData.website) $scope.formData.website = 'http://'
+        }
+        $scope.webSiteBlur = function(){
+            if($scope.formData.website == 'http://') $scope.formData.website = '';
+        }
+
+        // 定位
+        $scope.positionSet = function(){
+            var wrap = $('.suggest_wrap');
+            var top = wrap.offset().top;
+
+            window.scrollTo(0, top - 30)
+
+            //$('input', wrap)[0].removeAttribute('disabled')
+
+            //setTimeout(function(){
+            //    $('input', wrap).focus();
+            //
+            //}, 500)
+        }
 
         // 重要提示 start
         $scope.createTip = function () {
