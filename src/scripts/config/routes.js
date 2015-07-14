@@ -85,9 +85,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/syndicates/confirm.html',
         controller: 'syndicatesConfirmController'
     });
+    /*众筹订单页面*/
     $stateProvider.state('syndicatesOrder', {
-        url: '/zhongchouOrder/{cid
-    /*众筹订单页面*/}/{fundingId}',
+        url: '/zhongchouOrder/{cid}/{fundingId}',
         templateUrl: 'templates/syndicates/order.html',
         controller: 'syndicatesOrderController'
     });
