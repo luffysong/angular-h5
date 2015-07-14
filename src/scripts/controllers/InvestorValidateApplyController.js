@@ -27,7 +27,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             switch(response.status){
                 /*审核中*/
                 case 0:
-                     $state.go('investorValidateApplyAlert');
+                 $scope.investorValidateApply.status = 'checking';
                     break;
                 /*审核通过*/
                 case 1 :
@@ -351,7 +351,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 investoraudit['businessCardLink']   = $scope.intro.value.pictures;
                 $scope.hasClick = true;
             InvestorauditService.save(investoraudit,function(response){
-                $state.go('investorValidateApplyAlert');
+                $scope.investorValidateApply.status = 'checking';
             },function(err){
                 $scope.hasClick = false;
                 ErrorService.alert(err);
