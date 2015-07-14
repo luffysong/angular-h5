@@ -6,6 +6,7 @@ require('./CrowdFundingService');
 require('./DefaultService');
 require('./DictionaryService');
 require('./ErrorService');
+require('./InvestorauditService');
 require('./OrganizationService');
 require('./SearchService');
 require('./UIAvatarEdit');

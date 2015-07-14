@@ -91,6 +91,25 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/investorValidate/index.html',
         controller: 'InvestorValidateController'
     });
+    /*投资人认证申请*/
+    $stateProvider.state('investorValidateApply', {
+        url: '/investor/apply',
+        templateUrl: 'templates/investor/apply.html',
+        controller: 'InvestorValidateApplyController'
+    });
+    /*投资人认证申请提交审核页面*/
+    $stateProvider.state('investorValidateApplyAlert', {
+        url: '/investor/apply-alert',
+        templateUrl: 'templates/investor/apply-alert.html',
+        controller: ''
+    });
+    /*投资人认证申请提交审核成功页面*/
+    $stateProvider.state('investorValidateApplySuccess', {
+        url: '/investor/apply-success',
+        templateUrl: 'templates/investor/apply-success.html',
+        controller: ''
+    });
+
     /*协议路由，用户服务协议*/
     $stateProvider.state('serviceProtocol', {
         url: '/serviceProtocol',
@@ -111,4 +130,19 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             },0);
         }
     });
+
+
+    /*创建公司*/
+    $stateProvider.state('createCompany', {
+        url: '/company_create',
+        templateUrl: 'templates/company/create.html',  // todo : 文件路径
+        controller: 'CreateCompanyController' // todo : controller
+    });
+    /*创建公司审核页*/
+    $stateProvider.state('createCompanyApply', {
+        url: '/company_create_apply',
+        templateUrl: 'templates/company/create-apply-alert.html' // todo : 文件路径
+        //controller: 'CreateCompanyController' // todo : controller
+    });
+
 });
