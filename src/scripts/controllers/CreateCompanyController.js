@@ -177,6 +177,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 if (data.manager) {
                     $scope.opNext = 2;
                     $scope.founder = data.manager.name;
+                    $scope.founderid = data.manager.id;
                 } else {
                     $scope.opNext = 1;
                 }
