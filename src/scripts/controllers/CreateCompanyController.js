@@ -17,7 +17,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
     'ErrorService',
     'AvatarEdit',
     '$upload',
-    function ($timeout, $q,$modal, $scope, DictionaryService, dateFilter, DefaultService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
+    function ($timeout, $q, $modal, $scope, DictionaryService, dateFilter, DefaultService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
 
         // 职位
         $scope.founderRoles = DictionaryService.getDict('StartupPositionType');
@@ -35,12 +35,14 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         };
 
 
-        UserService.isProfileValid(function(cs){
+        $scope.uid = UserService.getUID();
+        console.log($scope.uid)
+        UserService.isProfileValid(function (cs) {
 
-            if(!cs) {
-                if(UserService.uid){
+            if (!cs) {
+                if ($scope.uid) {
                     location.hash = '/welcome';
-                }else{
+                } else {
                     location.href = '/user/login?from=' + encodeURIComponent(location.href);
                 }
 
@@ -81,7 +83,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             var results = data.map(function (item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
                 //var label = item.logo ? '<div class="img"><img src="'+item.logo+'"></div>' + '<span>'+item.name+'</span>' : item.name
                 var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30',
-                    label = '<div class="img"><img src="'+logo+'"></div>' + '<span>'+item.name+'</span>';
+                    label = '<div class="img"><img src="' + logo + '"></div>' + '<span>' + item.name + '</span>';
 
                 return {
                     label: label,
@@ -95,7 +97,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         }
 
         $scope.suggest = {
-            add : []
+            add: []
         }
         function suggest_state_remote(term) {
             var deferred = $q.defer();
@@ -104,14 +106,14 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             SuggestService.query({
                 wd: q
             }, function (data) {
-                var exist = data.data.filter(function(item){
-                    return item.name==q
+                var exist = data.data.filter(function (item) {
+                    return item.name == q
                 });
-                if(!exist.length){
+                if (!exist.length) {
                     data.data.push({
-                        name : "创建公司: " + q,
-                        status : 'add',
-                        value : q
+                        name: "创建公司: " + q,
+                        status: 'add',
+                        value: q
                     })
                 }
 
@@ -124,7 +126,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         // add new company
 
-        $scope.addCompany = function(name) {
+        $scope.addCompany = function (name) {
             $scope.opNext = 0;
             $scope.formData.name = name;
             $scope.formData.website = '';
@@ -142,21 +144,21 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         // 判断
         $scope.opNext = 0;
         // 获取已存在公司信息
-        function checkName(selected){
+        function checkName(selected) {
             CompanyService.checkName({
-                name : selected.obj.name
-            }, function(data){
+                name: selected.obj.name
+            }, function (data) {
                 data.company.logo = selected.obj.logo;
                 var company = data.company;
 
 
-                if(data.manager) {
+                if (data.manager) {
                     $scope.opNext = 2;
                     $scope.founder = data.manager.name;
                 } else {
                     $scope.opNext = 1;
                 }
-                if(data.creatable){
+                if (data.creatable) {
                     $scope.opNext = 0;
                 }
 
@@ -173,45 +175,23 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         }
 
 
-        var cache_name = '',
-            selectedCompany = false;
         $scope.autocomplete_options = {
             suggest: suggest_state_remote,
             on_error: console.log,
-            on_detach:function(cs){
-                if(selectedCompany) {
-                    selectedCompany = false;
-                    return;
-                }
-                $timeout(function(){
-                    console.log(cache_name, 'dea')
-                    $scope.formData.name = cache_name;
-                }, 0)
+            on_detach: function (cs) {
+                console.log(cs, 'detach')
             },
             on_select: function (selected) {
-                selectedCompany = true;
-                if(selected.obj.status != 'add'){
+                if (selected.obj.status != 'add') {
                     checkName(selected);
-                }else{
+                } else {
                     $scope.addCompany(selected.obj.value)
-                }
 
-                console.log(selected)
-                if(selected.obj.id){
-                    cache_name = selected.value;
-                }else{
-                    cache_name = selected.obj.value;
-                }
 
-                console.log(cache_name, 'select');
-                //$scope.selectedCompany = selected;
+                }
             }
-        };
-
+        }
         // suggest end
-
-
-
 
 
         // 上传logo start
@@ -245,6 +225,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                         var filename = data.url.toLowerCase();
                         if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
                             $scope.formData.logo = window.kr.upyun.bucket.url + data.url;
+                            angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoEmpty", true);
                         } else {
                             ErrorService.alert({
                                 msg: '格式不支持，请重新上传！'
@@ -297,6 +278,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                         var filename = data.url.toLowerCase();
                         if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
                             $scope.formData.bizCardLink = window.kr.upyun.bucket.url + data.url;
+                            angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("cardEmpty", true);
                         } else {
                             ErrorService.alert({
                                 msg: '格式不支持，请重新上传！'
@@ -318,22 +300,22 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         // 上传名片 end
 
 
-
-
         //新建公司 start
         $scope.submitting = false;
         $scope.submitForm = function (e, callback) {
             e && e.preventDefault();
-            if (!$scope.formData.bizCardLink ) {
-                ErrorService.alert({
-                    msg: "请上传名片！"
-                });
+            if (!$scope.formData.bizCardLink) {
+                //ErrorService.alert({
+                //    msg: "请上传名片！"
+                //});
+                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("cardEmpty", false);
                 return;
             }
             if (!$scope.formData.logo && !$scope.formData.cid) {
-                ErrorService.alert({
-                    msg: "请上传公司LOGO！"
-                });
+                //ErrorService.alert({
+                //    msg: "请上传公司LOGO！"
+                //});
+                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoEmpty", false);
                 return;
             }
 
@@ -352,28 +334,27 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
             //if($scope.formData.cid){
 
-                // todo : 时间修复
-                $scope.formData.startDate = new Date;
-                $scope.formData.endDate = new Date;
-            console.log($scope.formData)
-                if(!$scope.formData.logo) $scope.formData.logo = '//krplus-pic.b0.upaiyun.com/default_logo.png!30';
+            // todo : 时间修复
+            $scope.formData.startDate = new Date;
+            $scope.formData.endDate = new Date;
+            if (!$scope.formData.logo) $scope.formData.logo = '//krplus-pic.b0.upaiyun.com/default_logo.png!30';
 
 
-                CompanyService.save({
-                    'mode':'direct'
-                }, angular.copy($scope.formData), function (data) {
-                    location.hash = "/company_create_apply"
-                    //if (callback) {
-                    //    callback(data.id);
-                    //    return;
-                    //}
-                    //$state.go('companys.detail.overview', {
-                    //    id: data.id
-                    //});
-                }, function (err) {
-                    ErrorService.alert(err);
-                    $scope.submitting = false;
-                });
+            CompanyService.save({
+                'mode': 'direct'
+            }, angular.copy($scope.formData), function (data) {
+                location.hash = "/company_create_apply"
+                //if (callback) {
+                //    callback(data.id);
+                //    return;
+                //}
+                //$state.go('companys.detail.overview', {
+                //    id: data.id
+                //});
+            }, function (err) {
+                ErrorService.alert(err);
+                $scope.submitting = false;
+            });
             //}else{
 
             //}
@@ -383,20 +364,20 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         // 申请认领 start
         //$scope.applyStatus = true;
-        $scope.applyUnclaimed = function(e) {
+        $scope.applyUnclaimed = function (e) {
             e && e.preventDefault();
-            if(!$scope.formData.bizCardLink) {
+            if (!$scope.formData.bizCardLink) {
                 ErrorService.alert({
-                    msg:"请上传名片！"
+                    msg: "请上传名片！"
                 });
                 return;
             }
-            Object.keys($scope.createForm).forEach(function(key){
-                if($scope.createForm[key]&&$scope.createForm[key].$setDirty){
+            Object.keys($scope.createForm).forEach(function (key) {
+                if ($scope.createForm[key] && $scope.createForm[key].$setDirty) {
                     $scope.createForm[key].$setDirty();
                 }
             });
-            if($scope.submitting || $scope.createForm.$invalid){
+            if ($scope.submitting || $scope.createForm.$invalid) {
                 return;
             }
             $scope.submitting = true;
@@ -406,17 +387,17 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             $scope.claimedCid = cid;
             CompanyService.claim({
                 id: cid
-            }, angular.copy($scope.formData), function(data){
+            }, angular.copy($scope.formData), function (data) {
 
                 $scope.submitting = false;
                 $scope.applyStatus = false;
 
                 location.hash = "/company_create_apply"
 
-            }, function(err){
+            }, function (err) {
                 $scope.submitting = false;
                 $scope.applyStatus = true;
-                if(err.msg){
+                if (err.msg) {
                     ErrorService.alert(err);
                 }
             })
@@ -426,20 +407,20 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         // 添加为我的创业经历 start
         $scope.addStatus = true;
-        $scope.addEntrepreneurialExp = function(e){
+        $scope.addEntrepreneurialExp = function (e) {
             e && e.preventDefault();
-            if(!$scope.formData.bizCardLink) {
+            if (!$scope.formData.bizCardLink) {
                 ErrorService.alert({
-                    msg:"请上传名片！"
+                    msg: "请上传名片！"
                 });
                 return;
             }
-            Object.keys($scope.createForm).forEach(function(key){
-                if($scope.createForm[key]&&$scope.createForm[key].$setDirty){
+            Object.keys($scope.createForm).forEach(function (key) {
+                if ($scope.createForm[key] && $scope.createForm[key].$setDirty) {
                     $scope.createForm[key].$setDirty();
                 }
             });
-            if($scope.submitting || $scope.createForm.$invalid){
+            if ($scope.submitting || $scope.createForm.$invalid) {
                 return;
             }
             $scope.submitting = true;
@@ -448,7 +429,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
             UserService.company.save({
                 id: UserService.getUID()
-            },{
+            }, {
                 groupIdType: 3,
                 groupId: cid,
                 position: $scope.formData.level,
@@ -460,16 +441,16 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 isCurrent: $scope.formData.isCurrent,
                 operationStatus: $scope.formData.operationStatus,
                 bizCardLink: $scope.formData.bizCardLink
-            }, function(data){
+            }, function (data) {
                 $scope.submitting = false;
                 $scope.addStatus = false;
 
                 location.hash = "/company_create_apply";
 
-            }, function(err){
+            }, function (err) {
                 $scope.submitting = false;
                 $scope.addStatus = true;
-                if(err.msg){
+                if (err.msg) {
                     alert(err.msg);
                 }
             })
@@ -482,9 +463,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
     '$http',
     'BasicService',
     function ($http, BasicService) {
-        var service = BasicService("/api/suggest/company", {
-
-        })
+        var service = BasicService("/api/suggest/company", {})
 
         return service;
     }])
