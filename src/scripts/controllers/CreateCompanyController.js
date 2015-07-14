@@ -133,7 +133,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 });
                 if (!exist.length) {
                     data.data.push({
-                        name: "创建公司: " + q,
+                        name: "创建  " + q,
                         status: 'add',
                         value: q
                     })
