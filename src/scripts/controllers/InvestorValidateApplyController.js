@@ -318,7 +318,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 console.log(investoraudit);
                 if(parseFloat(investoraudit['cnyInvestMin']) > parseFloat(investoraudit['cnyInvestMax'])){
                     $scope.error.code = 1;
-                    $scope.error.msg = "单笔可投资额度输入的个人人民币要小于等于最大值";
+                    $scope.error.msg = "投资额上限不能⼩于下限值";
                     return false;
                 }
                 /*基金*/
@@ -326,7 +326,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 investoraudit['fundCnyInvestMax']   = $scope.invest.fundCnyInvestMax;
                 if(investoraudit['fundCnyInvestMin'] > investoraudit['fundCnyInvestMax']){
                     $scope.error.code = 1;
-                    $scope.error.msg = "单笔可投资额度输入的基金人民币要小于或等于最大值";
+                    $scope.error.msg = "投资额上限不能⼩于下限值";
                     return false;
                 }
 
@@ -336,7 +336,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
                 if(parseFloat(investoraudit['usdInvestMin'])  > parseFloat(investoraudit['usdInvestMax'])){
                     $scope.error.code = 1;
-                    $scope.error.msg = "单笔可投资额度输入的个人美元要小于等于最大值";
+                    $scope.error.msg = "投资额上限不能⼩于下限值";
                     return false;
                 }
                 /*基金*/
@@ -344,7 +344,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 investoraudit['fundUsdInvestMax']   = $scope.invest.fundUsdInvestMax;
                 if(parseFloat(investoraudit['fundUsdInvestMin'])  > parseFloat(investoraudit['fundUsdInvestMax'])){
                     $scope.error.code = 1;
-                    $scope.error.msg = "单笔可投资额度输入的基金美元要小于等于最大值";
+                    $scope.error.msg = "投资额上限不能⼩于下限值";
                     return false;
                 }
                 /*名片*/
