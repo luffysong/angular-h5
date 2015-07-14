@@ -36,9 +36,45 @@
 
     }
     .form-group {
+        &.invest-money{
+            border-bottom:none;
+            .row-1 {
+                overflow: hidden;
+                height:auto;
+                .ml-10 {
+                    margin-left:0;
+                    overflow: hidden;
+                    height:auto;
+                    margin-top:10px;
+                    &:first-of-type {
+                        margin-top:0;
+                    }
+                    .icon-zhi {
+                        display: inline-block;
+                        padding:0 10px;
+                    }
+                }
+                input{
+                    text-align: left;
+                }
+            }
+        }
+        &.fund-money {
+            border-bottom:1px solid #ddd;
+        }
         .label-control{
-            min-width:75px;
+            width:auto;
             text-align: right;
+            .box-content {
+                min-width:100px;
+                text-align: right;
+                display:inline-block;
+                padding-right:15px;
+
+                *{
+                    display:inline-block;
+                }
+            }
         }
         &.upload-pictures {
             border-bottom: none;
@@ -49,31 +85,6 @@
     }
     .brief {
         border-bottom:1px solid #ddd !important;
-    }
-    .invest-money {
-        .label-control,
-        .money-box {
-            float:left;
-        }
-        .money-box {
-            .form-group {
-                padding:10px 0 10px 30px;
-                overflow: hidden;
-                height:auto;
-                display:table;
-                border-bottom:1px solid #ddd;
-                .label-control ,
-                .row-1 {
-                    display:table-cell;
-                    margin:0;
-                    padding:0;
-                    vertical-align: top;
-                }
-                &:last-of-type {
-                    border-bottom: none;
-                }
-            }
-        }
     }
     .pic-list {
         input {
