@@ -13,16 +13,55 @@
 }
 
 .form-control.ng-dirty.ng-invalid{
-  border:1px solid #ff0000;
+  //border:1px solid #ff0000;
 }
 .error{
-  padding: 5px 0 0 0;
-  color: #FF0000;
+  //padding: 5px 0 0 0;
+  //color: #FF0000;
 }
 
 .create_company {
   background-color: #fff;
 
+
+  .ac-container{
+    background-color: #f7f7f7 !important;
+    border: 1px solid #d9d9d9;
+    font-size: 10px;
+    left: 18px !important;
+    width: 90% !important;
+
+    a{
+      margin: 0 0 0 25px;
+      padding: 0;
+    }
+    &::before{
+      display: block;
+      width: 100%;
+      padding: 0 0 0 35px;
+      line-height: 35px;
+      content: '请选择已收录公司或创建新公司';
+      font-size: 10px;
+      background-color: #f7f7f7;
+    }
+    .ac-menu{
+      background-color: #f7f7f7;
+      border: none 0;
+      box-shadow: none;
+
+      li{
+        border: none 0;
+        border-top: 1px solid #ccc;
+
+      }
+
+      li:last-child{
+        background-color: #bfbfbf;
+        color: #fff;
+      }
+    }
+  }
+  
   .gray_color{
     color: #ccc;
   }
@@ -75,10 +114,12 @@
         border-bottom: 1px solid @border-gray;
         padding: 15px;
         line-height: 1.5;
+        width: 100%;
         &:first-child {
           width: 72px;
           text-align: right;
           padding: 15px 0;
+          white-space: nowrap;
           span{
             display: inline-block;
           }
@@ -101,7 +142,6 @@
       }
 
       select {
-        background-color: transparent;
         width: 80px;
       }
       .vtop {

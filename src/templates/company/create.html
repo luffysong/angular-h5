@@ -5,8 +5,51 @@
 
         <h2>创建公司 <b ng-click="createTip()">特别提醒</b></h2>
 
-        <form action="" name="createForm" ng-submit="$event.preventDefault()">
+        <form action="" name="createForm" compare-time-valid="formData" nowdate-valid="formData" ng-submit="$event.preventDefault()">
             <div class="list">
+
+                <div class="error-alert error" ng-show="createForm.$error.cardEmpty">
+                    <span>请上传您的名片</span>
+                </div>
+
+                <div class="error-alert error"
+                     ng-show="createForm.startYear.$invalid && createForm.startYear.$dirty ">
+                    <span>请选择时间段</span>
+                </div>
+                <div class="error-alert error"
+                     ng-show="createForm.startMonth.$invalid && createForm.startMonth.$dirty">
+                    <span>请选择时间段</span>
+                </div>
+                <!--<div class="error-alert error" ng-show="createForm.$invalid && createForm.$dirty">-->
+                    <!--<span ng-show="createForm.$error.nowdate">不能大于现在的时间！</span>-->
+                <!--</div>-->
+                <div class="error-alert error"
+                     ng-show="createForm.position.$invalid && createForm.position.$dirty">
+                    <span>请填写职务</span>
+                </div>
+
+                <div class="error-alert error" ng-show="createForm.$error.logoEmpty">
+                    <span>请上传公司LOGO</span>
+                </div>
+
+                <div class="error-alert error"
+                     ng-show="createForm.brief.$invalid && createForm.brief.$dirty">
+                    <span>请填写公司简介</span>
+                </div>
+
+
+                <div class="error-alert error"
+                     ng-show="createForm.website.$invalid && createForm.website.$dirty">
+                    <span>请填写公司网址</span>
+                </div>
+                <div class="error-alert error"
+                     ng-show="createForm.name.$invalid && createForm.name.$dirty">
+                    <span>请填写公司简称</span>
+                </div>
+
+
+
+
 
                 <table mass-autocomplete>
                     <tr>
@@ -16,7 +59,7 @@
                         </td>
                         <td>
                             <div class="suggest_wrap">
-                                <input type="text" ng-model="name"
+                                <input type="text" ng-model="formData.name"
                                        name="name"
                                        placeholder="请填写大众熟知的项目名称"
                                        required
@@ -44,9 +87,9 @@
                         </td>
                         <td>
                             <input type="text" class="form-control" placeholder="如：http://www.36kr.com" ng-disabled="formData.cid"
-                                   name="website" ng-model="formData.website" ng-if="formData.cid"/>
+                                   name="website" ng-model="formData.website" ng-if="formData.cid || formData.operationStatus == 'UNSTART'"/>
                             <input type="text" class="form-control" placeholder="如：http://www.36kr.com" required ng-disabled="formData.cid"
-                                   name="website" ng-model="formData.website" ng-if="!formData.cid"/>
+                                   name="website" ng-model="formData.website" ng-if="!formData.cid && formData.operationStatus != 'UNSTART'"/>
                         </td>
                     </tr>
                     <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]">
@@ -123,7 +166,7 @@
                             </select>
                             — 至今
 
-                            <p class="error" ng-show="(createForm.startYear.$invalid && createForm.startYear.$dirty) || (createForm.startMonth.$invalid && createForm.startMonth.$dirty)">请选择时间段</p>
+                            <!--<p class="error" ng-show="(createForm.startYear.$invalid && createForm.startYear.$dirty) || (createForm.startMonth.$invalid && createForm.startMonth.$dirty)">请选择时间段</p>-->
 
                         </td>
                     </tr>
@@ -169,7 +212,7 @@
             <!-- 添加创业经历-->
             <div class="submit" ng-show="opNext==2">
                 <button type="button" ng-click="addEntrepreneurialExp($event)">添加为我的创业经历</button>
-                <b>该公司已经被 <i>{{founder}}</i> 创建，如你是公司创始团队成员，可添加该公司为你的创业经历</b>
+                <b>该公司已经被 <a href="#/user/{{uid}}"><i>{{founder}}</i></a> 创建，如你是公司创始团队成员，可添加该公司为你的创业经历</b>
             </div>
         </form>
 
