@@ -1,0 +1,187 @@
+/*众筹确认金额页样式*/
+.error {
+    color: red;
+}
+.pop-risk-tip {
+    .risk-content {
+        padding: 20px;
+        .risk-title {
+            text-align: center;
+            color: #000;
+            font-weight: 600;
+        }
+    }
+    .ensure-btn {
+        display: block;
+        width: 100%;
+        height: 44px;
+        line-height: 54px;
+        border-top: 1px solid #DDDDDD;
+        text-align: center;
+    }
+}
+/*获得Kr码弹窗样式*/
+.pop-apply-code {
+    .apply-content {
+        padding: 40px 20px 20px;
+        .apply-title {
+            text-align: center;
+            color: #666666;
+            font-weight: 600;
+        }
+        .wish-count {
+            display: block;
+            width: 100%;
+            height: 40px;
+            border-radius: 3px;
+            border: 1px solid #B2B2B2;
+            margin: 20px 0 10px;
+        }
+    }
+    .ensure-btn {
+        display: block;
+        width: 100%;
+        height: 44px;
+        line-height: 44px;
+        border-top: 1px solid #DDDDDD;
+        text-align: center;
+        margin-bottom: -10px;
+    }
+}
+.syndicates-confirm {
+    @default-color:#F7F7F7;
+    background-color: @default-color;
+    .kr-code-way {
+        width: 100%;
+        height: 35px;
+        line-height: 35px;
+        padding: 0 15px;
+        text-align: right;
+        .clearfix;
+    }
+    .kr-code-enter {
+        background-color: #fff;
+        border: 1px solid #DFDFDF;
+        height: 50px;
+        padding: 0 15px;
+        .kr-code-input {
+            display: inline-block;
+            width: 70%;
+            height: 100%;
+            border: 0;
+            margin-left: 15px;
+            font-weight: 600;
+            color: #008DF2;
+        }
+        .validate-kr-code {
+            display: inline-block;
+            width: 65px;
+            height: 35px;
+            line-height: 35px;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #DEDEDE;
+            &.suc {
+                background-color: #008DF2;
+            }
+        }
+    }
+    .confirm-title {
+        width: 100%;
+        padding: 10px 15px;
+        height: auto;
+        background-color: @default-color;
+        .validate-suc {
+            color: #22AC38;
+        }
+        .risk-tip {
+            float: right;
+        }
+    }
+    .confirm-content {
+        width: 100%;
+        height: 145px;
+        background-color: #fff;
+        padding-left: 15px;
+        border: 1px solid #DFDFDF;
+        .content-count {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px solid #DFDFDF;
+            .invest-val {
+                width: 70%;
+                height: 100%;
+                border: 0;
+                margin-left: 15px;
+            }
+        }
+        .content-info {
+            p {
+                .info-attr {
+                    display: inline-block;
+                    width: 70px;
+                }
+                span {
+                    margin-left: 15px;
+                }
+                .red {
+                    color: #F22800;
+                }
+            }
+        }
+        .content-bottom {
+            padding-top: 20px;
+            .ensure-pay {
+                display: block;
+                width: 75%;
+                text-align: center;
+                color: #fff;
+                background-color: #F28E00;
+                border-radius: 3px;
+                margin: 30px auto 0;
+            }
+        }
+    }
+}
+/*ActionSheet样式*/
+.shade-layer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.3);
+    z-index: 100;
+    visibility: hidden;
+    &.normal {
+        visibility: visible;
+
+    }
+}
+.layer-bottom {
+    position: fixed;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    left: 0;
+    transition: all .3s;
+    opacity: 0;
+    transform: translate3d(0,100%,0);
+    z-index: 101;
+    &.normal {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+    .options {
+        display: block;
+        width: 100%;
+        height: 43px;
+        line-height: 43px;
+        text-align: center;
+        background-color: #fff;
+        border-bottom: 1px solid #DFDFDF;
+    }
+}

@@ -1,0 +1,18 @@
+<form name="krCodeForm">
+    <div class="pop-apply-code">
+        <div class="apply-content">
+            <section class="apply-title">Kr码是36氪发放给平台资深用户的</section>
+            <section class="apply-title">投资优先的特权服务</section>
+            <input class="wish-count" type="text" placeholder="请输入意愿跟投金额(元)" ng-model="wishNum" num-validate name="wishNum" required />
+            <div class="error" ng-show="krCodeForm.wishNum.$error.notNumber">金额只能为纯数字</div>
+            <div class="error" ng-show="krCodeForm.wishNum.required">金额不能为空</div>
+            <div class="error" ng-show="minError">不能小于最低跟投金额</div>
+            <p>
+                请保证所填意愿真实有效，工作人员会根据你的真实意愿
+                及特权Kr码的发放计划，为你提供特权服务。
+            </p>
+        </div>
+        <a class="ensure-btn" ng-click="ok()">申请Kr码</a>
+    </div>
+</form>
+

@@ -81,9 +81,27 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*众筹确定金额页面*/
     $stateProvider.state('syndicatesConfirm', {
-        url: '/zhongchouConfirm',
+        url: '/zhongchouConfirm/{cid}/{fundingId}',
         templateUrl: 'templates/syndicates/confirm.html',
         controller: 'syndicatesConfirmController'
+    });
+    $stateProvider.state('syndicatesOrder', {
+        url: '/zhongchouOrder/{cid
+    /*众筹订单页面*/}/{fundingId}',
+        templateUrl: 'templates/syndicates/order.html',
+        controller: 'syndicatesOrderController'
+    });
+    /*众筹支付页面*/
+    $stateProvider.state('syndicatesPay', {
+        url: '/zhongchouPay/{tid}/{amount}',
+        templateUrl: 'templates/syndicates/pay.html',
+        controller: 'syndicatesPayController'
+    });
+    /*众筹支付成功页面*/
+    $stateProvider.state('syndicatesPSuc', {
+        url: '/zhongchouSuc?cid&fundingId',
+        templateUrl: 'templates/syndicates/suc.html',
+        controller: 'syndicatesSucController'
     });
     /*跟投人认证*/
     $stateProvider.state('investorValidate', {
@@ -131,7 +149,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
-
     /*创建公司*/
     $stateProvider.state('createCompany', {
         url: '/company_create',
@@ -145,4 +162,8 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         //controller: 'CreateCompanyController' // todo : controller
     });
 
+    $stateProvider.state('riskTipAll', {
+        url: '/riskTipAll',
+        templateUrl: 'templates/protocol/riskTip_all.html'
+    });
 });
