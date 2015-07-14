@@ -129,7 +129,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 wd: q
             }, function (data) {
                 var exist = data.data.filter(function (item) {
-                    return item.name == q
+                    return item.name.toLowerCase() == q.toLowerCase();
                 });
                 if (!exist.length) {
                     data.data.push({
@@ -172,8 +172,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             }, function (data) {
                 data.company.logo = selected.obj.logo;
                 var company = data.company;
-
-
+                console.log(data)
                 if (data.manager) {
                     $scope.opNext = 2;
                     $scope.founder = data.manager.name;
