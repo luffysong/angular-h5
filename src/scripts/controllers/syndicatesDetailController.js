@@ -151,11 +151,19 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             if(!UserService.getUID()){
                 location.href = "/user/login?from=" + encodeURIComponent(location.href);
                 return;
+            }else if(!$scope.isCoInvestor){
+                $state.go("investorValidate");
             }else{
                 $state.go("syndicatesConfirm",{
                     cid:$scope.companyData.company.id,
                     fundingId:$scope.fundingId
                 });
+            }
+        }
+        $scope.wantInvest = function(event){
+            if(!$scope.isCoInvestor){
+                event.preventDefault();
+                $state.go("investorValidate");
             }
         }
         //股权结构
