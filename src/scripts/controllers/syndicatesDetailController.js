@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService) {
         var statusList = DictionaryService.getDict("crowd_funding_status");
 
         /*股权结构是否出错*/
@@ -15,12 +15,31 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         $scope.showAll = false;
         $scope.coInvestor = {};
         $scope.fundingId = $rootScope.fundingId = $stateParams.fundingId;
-
         $scope.companyId = $rootScope.companyId = $stateParams.companyId;
+        $scope.uid = UserService.getUID();
         document.title="36氪众筹";
-        $scope.skip = {
-            url:""
-        };
+        $scope.wantInvest = function(event){
+            if(!$scope.uid)return;
+            if(!$scope.isCoInvestor){
+                if(event){
+                    event.preventDefault();
+                }
+                $state.go("investorValidate");
+            }else if($scope.noOrder){
+                $state.go("syndicatesConfirm",{
+                    cid:$scope.companyId,
+                    fundingId:$scope.fundingId
+                });
+            }else{
+                $state.go("syndicatesOrder",{
+                    cid:$scope.companyId,
+                    fundingId:$scope.fundingId
+                });
+            }
+        }
+        if($stateParams.login){
+            $scope.wantInvest();
+        }
         /*获取用户是否为跟投人*/
         UserService.getIdentity(function(data){
             console.log(data);
@@ -36,11 +55,9 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     $scope.isCoInvestor = true;
                 }else{
                     $scope.isCoInvestor = false;
-                    $scope.skip.url = $scope.rongHost+"/m/#/investorValidate";
                 }
             }else{
                 $scope.isCoInvestor = false;
-                $scope.skip.url = $scope.rongHost+"/m/#/investorValidate";
             }
         },function(err){
             ErrorService.alert(err);
@@ -183,12 +200,18 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 });
             }
         }
-        $scope.wantInvest = function(event){
-            if(!$scope.isCoInvestor){
-                event.preventDefault();
-                $state.go("investorValidate");
+        CoInvestorService['my-financing'].query({
+            company_id:$scope.companyId,
+            status:  0,
+            per_page:100,
+            page: 1
+        },function(data){
+            if(!data.data.length){
+                $scope.noOrder = true;
             }
-        }
+        }, function(){
+        });
+
         //股权结构
         $scope.stockStructure = {};
         $scope.chartConfig = {

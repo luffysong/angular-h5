@@ -21,9 +21,10 @@ angular.module('defaultApp.directive').directive('loginBtn', [
                     }
 
                     e.preventDefault();
-
+                    if(attrs.loginBtn == "triggerLogin"){
+                        attrs.loginBtn = location.href +"&login=true";
+                    }
                     setTimeout(function(){
-                        console.log(attrs.loginBtn);
                         location.href = '/user/login?from=' + encodeURIComponent(attrs.loginBtn || location.href);
                     }, 300);
                 });
