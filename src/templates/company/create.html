@@ -80,26 +80,25 @@
                             </select>
                         </td>
                     </tr>
-                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]">
+                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]" class="website">
                         <td>
                             <b class="important" ng-if="!formData.cid">*</b>
                             <span>公司网址</span>
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" ng-disabled="formData.cid" ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
-                                   name="website" ng-model="formData.website" ng-if="formData.cid || formData.operationStatus == 'UNSTART'"/>
+                            <p ng-if="formData.cid || formData.operationStatus == 'UNSTART'">{{formData.website}}</p>
+
                             <input type="text" class="form-control" placeholder="如：http://www.36kr.com" required ng-disabled="formData.cid" ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
                                    name="website" ng-model="formData.website" ng-if="!formData.cid && formData.operationStatus != 'UNSTART'"/>
                         </td>
                     </tr>
-                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]">
+                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]" class="brief">
                         <td class="vtop">
                             <b class="important" ng-if="!formData.cid">*</b>
                             <span>一句话简介</span>
                         </td>
                         <td>
-                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，30字以内" ng-disabled="formData.cid"
-                                      ng-model="formData.brief" ng-if="formData.cid"></textarea>
+                            <p ng-if="formData.cid">{{formData.brief}}</p>
                             <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，30字以内" required ng-disabled="formData.cid"
                                       ng-model="formData.brief" ng-if="!formData.cid"></textarea>
                         </td>
