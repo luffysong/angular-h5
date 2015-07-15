@@ -16,6 +16,9 @@
     .mb-20 {
         margin-bottom: 20px;
     }
+    .mb-15 {
+        margin-bottom: 15px;
+    }
     .ml-10 {
         margin-left: 10px;
     }
@@ -31,7 +34,7 @@
             }
             &:last-child{
                 background-color: #fff;
-                padding: 16px 0;
+                padding: 15px 0;
                 border-bottom: 0;
                 margin: -1px 10px 0;
             }
@@ -259,13 +262,13 @@
     }
     .syndicate-goal {
         width: 100%;
-        padding: 15px 0 20px;
+        padding: 15px 0 15px;
         background-color: #fff;
         &.fund-info {
             padding-bottom: 0;
         }
         .account {
-            padding: 0 20px 20px;
+            padding: 0 20px 10px;
             border-bottom: 1px solid #eee;
             .has-syndicate {
                 font-size: 13px;
@@ -280,7 +283,7 @@
         }
         .syndicate-detail-num {
             width: 100%;
-            padding: 20px 0 0;
+            padding: 15px 0 0;
             &.fund-info {
                 padding: 0;
                 .detail{
@@ -293,12 +296,13 @@
                         height: 40px;
                         border-radius: 50%;
                         background-size: 100% 100%;
+                        border: 1px solid #ddd;
                         margin: auto;
                     }
                 }
                 .has-attend {
                     width: 100%;
-                    padding: 0 20px;
+                    padding: 0 10px;
                     text-align: left;
                     background-color: #fff;
                     border-top: 1px solid #eee;
@@ -311,7 +315,9 @@
                     }
                     .has-title {
                         border-bottom: 1px solid #eee;
-                        padding: 10px 0;
+                        height: 40px;
+                        line-height: 40px;
+                        color: #999;
                     }
                 }
             }
@@ -322,6 +328,9 @@
                 p {
                     font-size: 12px;
                     color: #999;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
                 .c-orange {
                     font-size: 15px;
@@ -333,7 +342,7 @@
     .market-analysis,.detail-desc {
         width: 100%;
         height: auto;
-        padding: 20px;
+        padding: 20px 10px;
         background-color: #fff;
         ul {
             margin: 0;
@@ -354,16 +363,18 @@
                     color: #888888;
                 }
                 .li-point {
+                    position: relative;
                     display: inline-block;
-                    width: 10px;
-                    height: 10px;
+                    width: 6px;
+                    height: 6px;
                     background-color: #F28D00;
                     border-radius: 50%;
                     vertical-align: middle;
+                    top: -2px;
                 }
                 .content {
-                    padding-left: 10px;
-                    color: #888888;
+                    color: #666;
+                    line-height: 1.4;
                 }
             }
         }

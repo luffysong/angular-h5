@@ -64,7 +64,7 @@
             </div>
             <div class="syndicate-goal fund-info">
                 <div class="syndicate-detail-num clearfix text-center fund-info">
-                    <div class="clearfix mb-20">
+                    <div class="clearfix">
                         <div class="detail">
                             <p class="c-orange">{{syndicatesInfo.funding.round | dict_FinancePhase}}</p>
                             <p>融资轮次</p>
@@ -230,16 +230,27 @@
                 </div>
                 <div class="detail-desc">
                     <ul>
-                        <li class="other" ng-show="syndicatesInfo.detail.com_desc">
-                            <p>公司概况</p>
+                        <li ng-show="syndicatesInfo.detail.com_desc">
                             <p class="content">{{syndicatesInfo.detail.com_desc}}</p>
                         </li>
-                        <li class="other" ng-show="syndicatesInfo.detail.com_vision">
-                            <p>发展愿景</p>
-                            <p class="content">{{syndicatesInfo.detail.com_vision}}</p>
-                        </li>
-                        <li class="other" ng-if="(syndicatesInfo.detail.bm_pain_point || syndicatesInfo.detail.bm_solution || syndicatesInfo.detail.core_resources || syndicatesInfo.detail.bm_profit_model) && isCoInvestor">
-                            <p>业务介绍</p>
+                    </ul>
+                </div>
+            </div>
+            <div ng-if="syndicatesInfo.detail.com_vision">
+                <div class="basic-info">
+                    发展愿景
+                </div>
+                <div class="detail-desc">
+                    {{syndicatesInfo.detail.com_vision}}
+                </div>
+            </div>
+            <div ng-if="(syndicatesInfo.detail.bm_pain_point || syndicatesInfo.detail.bm_solution || syndicatesInfo.detail.core_resources || syndicatesInfo.detail.bm_profit_model) && isCoInvestor">
+                <div class="basic-info">
+                    业务介绍
+                </div>
+                <div class="detail-desc">
+                    <ul>
+                        <li>
                             <ul>
                                 <li ng-show="syndicatesInfo.detail.bm_pain_point">
                                     <div>
@@ -271,8 +282,16 @@
                                 </li>
                             </ul>
                         </li>
-                        <li ng-if="syndicatesInfo.detail.market_situation || syndicatesInfo.detail.market_share || syndicatesInfo.detail.competitor_analyze || syndicatesInfo.detail.advantage_analysis || syndicatesInfo.detail.market_other">
-                            <p class="desc-title">市场分析</p>
+                    </ul>
+                </div>
+            </div>
+            <div ng-if="syndicatesInfo.detail.market_situation || syndicatesInfo.detail.market_share || syndicatesInfo.detail.competitor_analyze || syndicatesInfo.detail.advantage_analysis || syndicatesInfo.detail.market_other">
+                <div class="basic-info">
+                    市场分析
+                </div>
+                <div class="detail-desc">
+                    <ul>
+                        <li>
                             <ul>
                                 <li ng-show="syndicatesInfo.detail.market_situation && isCoInvestor">
                                     <div>
@@ -314,6 +333,7 @@
                     </ul>
                 </div>
             </div>
+
 
             <!--创始团队-->
             <div ng-if="syndicatesInfo.detail.teams.length">
