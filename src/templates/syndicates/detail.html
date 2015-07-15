@@ -215,9 +215,9 @@
         </div>
         <div ng-if="!isToggle" class="bottom-col">
             <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">查看更多公司信息</a>
-            <a ui-sref="syndicatesOrder({cid:companyData.company.id,fundingId:fundingId})" login-btn class="invest-btn" ng-click="wantInvest($event)" ng-if="color != 60 && color != 50 && !timeout">我要投资</a>
+            <a ui-sref="syndicatesOrder({cid:companyData.company.id,fundingId:fundingId})" login-btn="{{rongHost}}/m/#/investorValidate" class="invest-btn" ng-click="wantInvest($event)" ng-if="color != 60 && color != 50 && !timeout">我要投资</a>
             <a href="" class="invest-btn disabled" ng-if="color == 50 || timeout">停止投资</a>
-            <a  class="set-remind" ng-click="krCode()" login-btn ng-if="color == 60">
+            <a  class="set-remind" ng-click="krCode()" login-btn="{{rongHost}}/m/#/investorValidate" ng-if="color == 60">
                 Kr码优先购买
                 <!--{{status}}<br/>开投提醒-->
             </a>
@@ -450,9 +450,9 @@
             </div>
             <div ng-if="isToggle" class="bottom-col">
                 <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">查看更多公司信息</a>
-                <a ui-sref="syndicatesOrder({cid:companyData.company.id,fundingId:fundingId})" login-btn class="invest-btn" ng-click="wantInvest($event)"  ng-if="color != 60 && color != 50 && !timeout">我要投资</a>
+                <a ui-sref="syndicatesOrder({cid:companyData.company.id,fundingId:fundingId})" login-btn="{{rongHost}}/m/#/investorValidate" class="invest-btn" ng-click="wantInvest($event)"  ng-if="color != 60 && color != 50 && !timeout">我要投资</a>
                 <a href="" class="invest-btn disabled" ng-if="color == 50 || timeout">停止投资</a>
-                <a  class="set-remind" login-btn ng-click="krCode()" ng-if="color == 60">
+                <a  class="set-remind" login-btn="{{rongHost}}/m/#/investorValidate" ng-click="krCode()" ng-if="color == 60">
                     Kr码优先购买
                     <!--{{status}}<br/>开投提醒-->
                 </a>
