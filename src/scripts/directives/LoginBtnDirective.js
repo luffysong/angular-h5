@@ -23,6 +23,7 @@ angular.module('defaultApp.directive').directive('loginBtn', [
                     e.preventDefault();
 
                     setTimeout(function(){
+                        console.log(attrs.loginBtn);
                         location.href = '/user/login?from=' + encodeURIComponent(attrs.loginBtn || location.href);
                     }, 300);
                 });

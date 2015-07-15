@@ -18,6 +18,9 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
 
         $scope.companyId = $rootScope.companyId = $stateParams.companyId;
         document.title="36氪众筹";
+        $scope.skip = {
+            url:""
+        };
         /*获取用户是否为跟投人*/
         UserService.getIdentity(function(data){
             console.log(data);
@@ -29,9 +32,15 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     location.hash="#/guide/welcome";
                 },5000);
             }else if(data){
-                $scope.isCoInvestor = data.coInvestor ? true : false;
+                if(data.coInvestor){
+                    $scope.isCoInvestor = true;
+                }else{
+                    $scope.isCoInvestor = false;
+                    $scope.skip.url = $scope.rongHost+"/m/#/investorValidate";
+                }
             }else{
                 $scope.isCoInvestor = false;
+                $scope.skip.url = $scope.rongHost+"/m/#/investorValidate";
             }
         },function(err){
             ErrorService.alert(err);
