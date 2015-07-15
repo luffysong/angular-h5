@@ -526,6 +526,17 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         // 添加为我的创业经历 end
 
 
+        $scope.checkDate = function(){
+            if($scope.formData.startYear && $scope.formData.startMonth){
+                var selectTime = $scope.formData.startYear + '-' + $scope.formData.startMonth;
+                if(new Date(selectTime)-0 > (new Date() - 0)){
+                    angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("timeLimit", false);
+                }else{
+                    angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("timeLimit", true);
+                }
+            }
+        }
+
     }]).service('SuggestService', [
     '$http',
     'BasicService',
