@@ -114,7 +114,8 @@
                                 <span class="upload-b ng-binding">
                                     <img ng-src="//krplus-pic.b0.upaiyun.com/default_logo.png!70" width="70" height="70"
                                          alt=""
-                                         src="{{formData.logo || '//krplus-pic.b0.upaiyun.com/default_logo.png!70'}}">
+                                         src="{{formData.logo || temp_logo || '//krplus-pic.b0.upaiyun.com/default_logo.png!70'}}">
+                                    <div class="progress" ng-show="logo.uploading" style="height:{{logo.progress}}%"></div>
                                     <span class="filewrap" ng-if="!formData.cid">
                                         上传
                                         <input type="file" name="logo"
@@ -176,12 +177,13 @@
                         </td>
                         <td class="logo card">
                             <p>上传名片有助于提升审核速度 <br/> 支持小于5M的JPG、JPEG和PNG格式</p>
-
                             <div class="pic">
                                 <span class="upload-b ng-binding">
+
                                     <img width="110" height="70"
                                          alt=""
-                                         src="{{formData.bizCardLink || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAACJBAMAAABN17ABAAAAG1BMVEX///8AjfIZmPO23vv1+f3I4PaVxe1nq+VPnuGS0jTRAAAAeklEQVRo3u3YwQmDQBBA0YmmgGwqSFKBJaQLrzbh3dLFiwcXwYurC+818GFZGGZi/EcZz36KgoYAAAAAANhof10U06RPFPNIr9gjJiYmJpYTu1Ws/aatdxcnaVJmHdl1x44+Y30fRExMTExMLFfxAr+cJgAAAAAALjTMqvgNecQF9eAAAAAASUVORK5CYII='}}">
+                                         src="{{formData.bizCardLink || temp_bizCardLink  || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAACJBAMAAABN17ABAAAAG1BMVEX///8AjfIZmPO23vv1+f3I4PaVxe1nq+VPnuGS0jTRAAAAeklEQVRo3u3YwQmDQBBA0YmmgGwqSFKBJaQLrzbh3dLFiwcXwYurC+818GFZGGZi/EcZz36KgoYAAAAAANhof10U06RPFPNIr9gjJiYmJpYTu1Ws/aatdxcnaVJmHdl1x44+Y30fRExMTExMLFfxAr+cJgAAAAAALjTMqvgNecQF9eAAAAAASUVORK5CYII='}}">
+                                    <div class="progress" ng-show="card.uploading" style="height:{{card.progress}}%"></div>
                                     <span class="filewrap">
                                         仅供审核使用
                                         <input type="file" name="bizCardLink"

@@ -237,6 +237,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 });
                 return;
             }
+            $scope.temp_logo = '';
             $scope.formData.logo = '';
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
@@ -255,9 +256,22 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     }).progress(function (evt) {
                         $scope.logo.progress = evt.loaded * 100 / evt.total;
                     }).success(function (data, status, headers, config) {
+
+                        var reader = new FileReader();
+                        reader.onload = function(){
+
+                            //$('.J_aa')[0].src = reader.result
+
+                            $scope.temp_logo = reader.result;
+
+                        }
+
                         var filename = data.url.toLowerCase();
                         if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
+
+                            reader.readAsDataURL(file)
                             $scope.formData.logo = window.kr.upyun.bucket.url + data.url;
+
                             angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoEmpty", true);
                         } else {
                             ErrorService.alert({
@@ -290,6 +304,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 });
                 return;
             }
+            $scope.temp_bizCardLink = '';
             $scope.formData.bizCardLink = '';
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
@@ -308,8 +323,23 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     }).progress(function (evt) {
                         $scope.card.progress = evt.loaded * 100 / evt.total;
                     }).success(function (data, status, headers, config) {
+
+                        var reader = new FileReader();
+                        reader.onload = function(){
+
+                            //$('.J_aa')[0].src = reader.result
+
+                            $scope.temp_bizCardLink = reader.result;
+
+                        }
+
+
+
                         var filename = data.url.toLowerCase();
                         if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
+
+                            reader.readAsDataURL(file)
+
                             $scope.formData.bizCardLink = window.kr.upyun.bucket.url + data.url;
                             angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("cardEmpty", true);
                         } else {
