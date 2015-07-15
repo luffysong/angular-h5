@@ -166,6 +166,8 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             $scope.formData.operationStatus = 'OPEN';
             $scope.formData.bizCardLink = '';
             $scope.formData.cid = null;
+            $scope.temp_logo = '';
+            $scope.temp_bizCardLink = '';
         }
 
 
@@ -281,6 +283,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                             angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoType", true);
                         }
                         $scope.logo.uploading = false;
+                        $scope.temp_logo = ''
                     }).error(function () {
                         //ErrorService.alert({
                         //    msg: '格式不支持，请重新上传！'
@@ -361,9 +364,11 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                             //ErrorService.alert({
                             //    msg: '格式不支持，请重新上传！'
                             //});
-                            angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoType", true);
+                            angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("cardType", true);
                         }
                         $scope.card.uploading = false;
+
+                        $scope.temp_bizCardLink = ''
                     }).error(function () {
                         //ErrorService.alert({
                         //    msg: '格式不支持，请重新上传！'
@@ -464,9 +469,10 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         $scope.applyUnclaimed = function (e) {
             e && e.preventDefault();
             if (!$scope.formData.bizCardLink) {
-                ErrorService.alert({
-                    msg: "请上传名片！"
-                });
+                //ErrorService.alert({
+                //    msg: "请上传名片！"
+                //});
+                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("cardEmpty", false);
                 return;
             }
             Object.keys($scope.createForm).forEach(function (key) {
@@ -513,9 +519,10 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         $scope.addEntrepreneurialExp = function (e) {
             e && e.preventDefault();
             if (!$scope.formData.bizCardLink) {
-                ErrorService.alert({
-                    msg: "请上传名片！"
-                });
+                //ErrorService.alert({
+                //    msg: "请上传名片！"
+                //});
+                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("cardEmpty", false);
                 return;
             }
             Object.keys($scope.createForm).forEach(function (key) {
