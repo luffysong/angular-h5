@@ -35,7 +35,7 @@
         border-collapse: collapse;
 
     }
-    .form-group{
+    .form-group {
         .label-control{
             .box-content {
                 width:100px;
@@ -49,6 +49,24 @@
         }
         .btn-auth {
             border:none;
+        }
+        .form-control,
+        textarea {
+            color:#333;
+            &::-webkit-input-placeholder
+            {
+                color:#999;
+            }
+            &:-moz-placeholder{
+                 color:#999;
+            }
+            &::-moz-placeholder{
+                 color:#999;
+            }
+            &:-ms-input-placeholder{
+                 color:#999;
+            }
+
         }
     }
 
