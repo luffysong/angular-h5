@@ -108,9 +108,9 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     label
 
                 if(item.status!='add'){
-                    label = '<img src="' + logo + '">' + item.name;
+                    label = '<div class="coList"><img src="' + logo + '">' + item.name + '</div>';
                 }else{
-                    label = '<span>创建 </span> '+ item.name;
+                    label = '<div class="newCo">'+'<span>创建 </span> “'+ item.name + '”</div>';
                 }
 
                 return {
