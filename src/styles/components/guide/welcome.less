@@ -1,3 +1,6 @@
+a {
+    color: #008DF2;
+}
 .welcome-words {
 	text-align: center;
 	padding: 20px 10px;
@@ -21,8 +24,11 @@
 	> .form-group {
 		padding: 16px 0;
 		margin: 0 0 0 10px;
-		border-bottom: 1px solid #ddd;
+		border-bottom: 1px solid #DFDFDF;
         white-space: nowrap;
+        &.no-b {
+            border-bottom: 0;
+        }
         &.normal {
             white-space: normal;
             .led-title {
@@ -91,6 +97,7 @@
         float: left;
         margin-left: 10px;
         width: 65%;
+        color: #333;
         input,textarea {
             width: 100%;
             border: 0;
@@ -197,6 +204,7 @@
             line-height: 40px;
             &.active {
                 border: 1px solid #008df2;
+                color: #008df2;
             }
         }
 
@@ -241,10 +249,13 @@
 
 	.btn-auth {
 		display: block;
+        padding: 0;
+        height: 40px;
+        line-height: 40px;
+        border: 0;
 		margin: 0 30px;
 		background-color: @light-color;
-		line-height: 40px;
-		font-size: 16px;
+		font-size: 15px;
 		color: @base-white;
 	}
 }

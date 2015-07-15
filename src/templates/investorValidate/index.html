@@ -123,7 +123,7 @@
                     <!--投资阶段-->
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>投资阶段</label>
-                        <div class="col-flex">
+                        <div class="col-flex mt-16">
                             <div class="stage" ng-repeat="stage in investStage" ng-click="selectStage($index)" ng-class="{'active':stage.active}" name="investStage">{{stage.desc}}
                             </div>
                         </div>
@@ -131,17 +131,15 @@
                     </div>
 
                     <!--关注领域-->
-                    <div class="form-group normal">
-                        <div class="focus-area">
-                            <label class="label-control"><span class="c-orange">*</span>关注领域 <span class="tip">(最多可选3个)</span></label>
-                        </div>
-                        <div class="col-flex clearfix">
+                    <div class="form-group">
+                        <label class="label-control"><span class="c-orange">*</span>关注领域 </label><span class="tip">(最多可选3个)</span>
+                        <div class="col-flex clearfix mt-16">
                             <div class="stage" ng-repeat="area in fieldsOptions" ng-click="selectArea($index)" ng-class="{'active':area.active}" name="focusArea">{{area.desc}}</div>
                         </div>
                     </div>
 
                     <!--个人单笔可投-->
-                    <div class="form-group normal">
+                    <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>个人单笔可投 </label>
                         <div class="col-flex clearfix ml-10">
                             <input class="form-control account-num" type="tel" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额" ng-pattern="/^\d*$/"  required maxlength="6" />
@@ -153,7 +151,7 @@
                     </div>
 
                     <!--投资条件-->
-                    <div class="form-group">
+                    <div class="form-group no-b">
                         <label class="label-control"><span class="c-orange">*</span>投资条件</label>
                         <div class="col-flex">
                             <div ng-repeat="item in condition">
