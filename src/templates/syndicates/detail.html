@@ -30,7 +30,7 @@
                     <!--融资进度条-->
                     <loading-bar percent="syndicatesInfo.base.percent" loading-tip="syndicatesInfo.base.cf_success_raising" ng-show="syndicatesInfo.base.cf_raising">
                     </loading-bar>
-                    <p class="clearfix mt-15">
+                    <p class="clearfix mt-15 has-syndicate">
                         已筹集<span class="ml-10">{{syndicatesInfo.base.cf_success_raising | unitConversion}}</span>
                         <span class="fl-right">融资目标<span class="c-orange ml-10">{{syndicatesInfo.base.cf_raising | unitConversion}}</span>
                         </span>
@@ -106,23 +106,23 @@
                 </a>
             </div>
             <div class="form-group normal" ng-if="syndicatesInfo.base.investorData.intro">
-                <label class="label-control">一句话简介</label>
-                <div class="col col-4">
-                    {{syndicatesInfo.base.investorData.intro}}
-                </div>
+                <p class="led-title">一句话简介</p>
+                <p class="led-content">{{syndicatesInfo.base.investorData.intro}}</p>
             </div>
             <div class="form-group normal" ng-show="syndicatesInfo.detail.lead_desc">
-                <label class="label-control">背景介绍</label>
-                <div class="col col-4">
+                <p class="led-title">背景介绍</p>
+                <p class="led-content">
                     {{syndicatesInfo.detail.lead_desc}}
-                </div>
+                </p>
             </div>
             <div class="form-group normal no-b" ng-if="syndicatesInfo.detail.lead_business_desc || syndicatesInfo.detail.lead_reason">
-                <label class="label-control">领投理由</label>
-                <div class="col col-4">
-                    {{syndicatesInfo.detail.lead_business_desc}}
-                    <p>{{syndicatesInfo.detail.lead_reason}}</p>
-                </div>
+                <p class="led-title">领投理由</p>
+                <p class="led-content">
+                    {{syndicatesInfo.detail.lead_desc}}
+                </p>
+                <p class="led-content">
+                    {{syndicatesInfo.detail.lead_reason}}
+                </p>
             </div>
         </div>
         <!--过往融资-->
@@ -194,7 +194,7 @@
 
 
         <!--参与的跟投人-->
-        <div ng-if="fundingId && syndicatesInfo.co_investors.length">
+        <div ng-if="fundingId && tempData.length">
             <div class="basic-info">
                 参与的跟投人（{{syndicatesInfo.co_investors.length}}）
             </div>
@@ -206,7 +206,8 @@
                     </a>
                 </div>
             </div>
-            <!--<div class="all-co" ng-click="loadInvestor()" ng-if="!showAll">查看全部跟投人（{{coInvestorData.length}}个）</div>-->
+            <div class="view-all" ng-click="loadInvestor()" ng-if="!showAll">查看全部跟投人({{tempData.length}}个)</div>
+            <!--<div class="all-co" ng-click="loadInvestor()" >查看全部跟投人（{{coInvestorData.length}}个）</div>-->
         </div>
         <!--默认隐藏点击展开-->
         <div ng-if="!isToggle">
@@ -330,16 +331,20 @@
                         </p>
                     </div>
                     <div class="form-group normal" ng-if="item.intro">
-                        <label class="label-control">一句话简介</label>
-                        <div class="col col-4">
+                        <p class="led-title">
+                            一句话简介
+                        </p>
+                        <p class="led-content">
                             {{item.intro}}
-                        </div>
+                        </p>
                     </div>
                     <div class="form-group normal" ng-if="item.desc">
-                        <label class="label-control">背景介绍</label>
-                        <div class="col col-4">
+                        <p class="led-title">
+                            背景介绍
+                        </p>
+                        <p class="led-content">
                             {{item.desc}}
-                        </div>
+                        </p>
                     </div>
                 </div>
             </div>

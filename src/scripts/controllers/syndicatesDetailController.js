@@ -12,6 +12,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         $scope.shareError = false;
         /*众筹信息是否全部展开*/
         $scope.isToggle = false;
+        $scope.showAll = false;
         $scope.coInvestor = {};
         $scope.fundingId = $rootScope.fundingId = $stateParams.fundingId;
 
@@ -58,6 +59,15 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             //console.log(data);
             $scope.color = data.base.status;
             $scope.syndicatesInfo = data;
+            if($scope.syndicatesInfo.co_investors){
+                if($scope.syndicatesInfo.co_investors.length > 8){
+                    $scope.tempData = angular.copy($scope.syndicatesInfo.co_investors);
+                    $scope.syndicatesInfo.co_investors = $scope.syndicatesInfo.co_investors.slice(0,8);
+                }else{
+                    $scope.tempData = angular.copy($scope.syndicatesInfo.co_investors);
+                    $scope.showAll = true;
+                }
+            }
             angular.forEach(statusList,function(obj,index){
                 if(obj.value == data.base.status){
                     $scope.status = obj.desc;
@@ -121,6 +131,10 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             ErrorService.alert(err);
         });
 
+        $scope.loadInvestor = function(){
+            $scope.syndicatesInfo.co_investors = $scope.tempData;
+            $scope.showAll = true;
+        }
         /*展开更多众筹信息*/
         $scope.toggleMore = function(){
             $scope.isToggle = true;
