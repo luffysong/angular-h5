@@ -27,6 +27,10 @@
                      ng-show="createForm.startMonth.$invalid && createForm.startMonth.$dirty">
                     <span>请选择时间段</span>
                 </div>
+                <div class="error-alert error"
+                     ng-show="createForm.$error.timeLimit">
+                    <span>时间不能大于当前时间</span>
+                </div>
                 <!--<div class="error-alert error" ng-show="createForm.$invalid && createForm.$dirty">-->
                     <!--<span ng-show="createForm.$error.nowdate">不能大于现在的时间！</span>-->
                 <!--</div>-->
@@ -61,6 +65,10 @@
                 </div>
 
 
+                <div class="error-alert error"
+                     ng-show="createForm.$error.serverError">
+                    <span>{{serverErrorMsg}}</span>
+                </div>
 
 
 
@@ -169,12 +177,12 @@
                         <td>
 
                             <select class="form-control" ng-model="formData.startYear" class="form-control"
-                                    ng-options="y for y in yearOptions" name="startYear" required>
+                                    ng-options="y for y in yearOptions" name="startYear" required ng-change="checkDate()">
                                 <option value="">年</option>
                             </select>
                             &nbsp;
                             <select class="form-control" ng-model="formData.startMonth" class="form-control"
-                                    ng-options="m+'月' for m in monthOptions" name="startMonth" required>
+                                    ng-options="m+'月' for m in monthOptions" name="startMonth" required ng-change="checkDate()">
                                 <option value="">月</option>
                             </select>
                             — 至今

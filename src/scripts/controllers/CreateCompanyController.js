@@ -108,9 +108,9 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     label
 
                 if(item.status!='add'){
-                    label = '<img src="' + logo + '">' + item.name;
+                    label = '<div class="coList"><img src="' + logo + '">' + item.name + '</div>';
                 }else{
-                    label = '<span>创建 </span> '+ item.name;
+                    label = '<div class="newCo">'+'<span>创建 </span> “'+ item.name + '”</div>';
                 }
 
                 return {
@@ -137,7 +137,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 var exist = data.data.filter(function (item) {
                     return item.name.toLowerCase() == q.toLowerCase();
                 });
-                console.log(exist)
+                //console.log(exist)
                 if (!exist.length) {
                     data.data.push({
                         name: q,
@@ -282,14 +282,26 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                         }
                         $scope.logo.uploading = false;
                     }).error(function () {
-                        ErrorService.alert({
-                            msg: '格式不支持，请重新上传！'
-                        });
+                        //ErrorService.alert({
+                        //    msg: '格式不支持，请重新上传！'
+                        //});
+                        angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", false);
+                        $scope.serverErrorMsg = err.msg;
+
+                        $timeout(function(){
+                            angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", true);
+                        }, 4000)
                         $scope.logo.uploading = false;
                     });
                 }, function (err) {
                     $scope.logo.uploading = false;
-                    ErrorService.alert(err);
+                    //ErrorService.alert(err);
+                    angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", false);
+                    $scope.serverErrorMsg = err.msg;
+
+                    $timeout(function(){
+                        angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", true);
+                    }, 4000)
                 });
             }
         };
@@ -353,14 +365,26 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                         }
                         $scope.card.uploading = false;
                     }).error(function () {
-                        ErrorService.alert({
-                            msg: '格式不支持，请重新上传！'
-                        });
+                        //ErrorService.alert({
+                        //    msg: '格式不支持，请重新上传！'
+                        //});
+                        angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", false);
+                        $scope.serverErrorMsg = err.msg;
+
+                        $timeout(function(){
+                            angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", true);
+                        }, 4000)
                         $scope.card.uploading = false;
                     });
                 }, function (err) {
                     $scope.card.uploading = false;
-                    ErrorService.alert(err);
+                    //ErrorService.alert(err);
+                    angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", false);
+                    $scope.serverErrorMsg = err.msg;
+
+                    $timeout(function(){
+                        angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", true);
+                    }, 4000)
                 });
             }
         };
@@ -419,7 +443,13 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 //    id: data.id
                 //});
             }, function (err) {
-                ErrorService.alert(err);
+                //ErrorService.alert(err);
+                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", false);
+                $scope.serverErrorMsg = err.msg;
+
+                $timeout(function(){
+                    angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", true);
+                }, 4000)
                 $scope.submitting = false;
             });
             //}else{
@@ -464,9 +494,15 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             }, function (err) {
                 $scope.submitting = false;
                 $scope.applyStatus = true;
-                if (err.msg) {
-                    ErrorService.alert(err);
-                }
+                //if (err.msg) {
+                //    ErrorService.alert(err);
+                //}
+                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", false);
+                $scope.serverErrorMsg = err.msg;
+
+                $timeout(function(){
+                    angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", true);
+                }, 4000)
             })
         };
 
@@ -517,14 +553,31 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             }, function (err) {
                 $scope.submitting = false;
                 $scope.addStatus = true;
-                if (err.msg) {
-                    alert(err.msg);
-                }
+                //if (err.msg) {
+                //    alert(err.msg);
+                //}
+                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", false);
+                $scope.serverErrorMsg = err.msg;
+
+                $timeout(function(){
+                    angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("serverError", true);
+                }, 4000)
             })
 
         }
         // 添加为我的创业经历 end
 
+
+        $scope.checkDate = function(){
+            if($scope.formData.startYear && $scope.formData.startMonth){
+                var selectTime = $scope.formData.startYear + '/' + $scope.formData.startMonth + '/1';
+                if(new Date(selectTime)-0 > (new Date() - 0)){
+                    angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("timeLimit", false);
+                }else{
+                    angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("timeLimit", true);
+                }
+            }
+        }
 
     }]).service('SuggestService', [
     '$http',
