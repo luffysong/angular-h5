@@ -205,24 +205,23 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             })
         }
 
-
+        var name_cache = '';
         $scope.autocomplete_options = {
             suggest: suggest_state_remote,
             on_error: console.log,
             on_detach: function (cs) {
+                $scope.formData.name = name_cache
                 console.log(cs, 'detach')
             },
             on_select: function (selected) {
                 if (selected.obj.status != 'add') {
                     checkName(selected);
                 } else {
-                    $timeout(function(){
-                        $scope.addCompany(selected.obj.value)
-                    }, 0)
-
-
+                    $scope.addCompany(selected.obj.value)
 
                 }
+                name_cache = selected.obj.name;
+
             }
         }
         // suggest end
