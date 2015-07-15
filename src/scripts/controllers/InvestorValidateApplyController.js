@@ -51,6 +51,15 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             shareImg: 'http://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg'
         };
         InitWeixin();
+        var Error = {
+            show:function(msg){
+                $scope.error.msg = msg;
+                $scope.error.code = 1;
+            },
+            hide:function(){
+                $scope.error.code = 0;
+            }
+        }
         $scope.intro = {};
         $scope.intro.value = {
             intro:"",
@@ -133,11 +142,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         UserService.basic.get({
             id:UserService.getUID()
         },function(data){
-            console.log('====data===',data);
             /*基本信息*/
             $scope.invest.name = data.name;
             $scope.invest.intro = data.intro;
-
             /*关注领域数据处理*/
             if(data.industry && data.industry.length){
                 angular.extend($scope.areaList,data.industry);
@@ -244,7 +251,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         /*表单提交*/
         $scope.submitForm = function(){
             //隐藏自定义错误信息
-            $scope.error.code = 0;
+            Error.hide();
 
             if($scope.intro.value.pictures){
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("picEmpty",true);
@@ -273,20 +280,37 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             /*检查单笔可投额度*/
             if(isPersonal){
                 /*个人*/
-                if(($scope.invest.cnyInvestMin && $scope.invest.cnyInvestMax) || ($scope.invest.usdInvestMin && $scope.invest.usdInvestMax )){
-                    angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('moneyEmpty',true);
+                if(($scope.invest.cnyInvestMin && $scope.invest.cnyInvestMax) || (!$scope.invest.cnyInvestMin && !$scope.invest.cnyInvestMax)){
+                    Error.hide();
                 }else{
-                    angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('moneyEmpty',false);
+                    Error.show("请填写单笔可投额");
+                    return false;
                 }
-            }else if (isFund){
+                if(($scope.invest.usdInvestMin && $scope.invest.usdInvestMax) || (!$scope.invest.usdInvestMin && !$scope.invest.usdInvestMax)){
+                    Error.hide();
+                }else{
+                    Error.show("请填写单笔可投额");
+                    return false;
+                }
+            }
+            if (isFund){
                 /*基金*/
-                if(($scope.invest.fundCnyInvestMin && $scope.invest.fundCnyInvestMax) || ($scope.invest.fundUsdInvestMin && $scope.invest.fundUsdInvestMax )){
-                    angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('moneyEmpty',true);
+                if(($scope.invest.fundCnyInvestMin && $scope.invest.fundCnyInvestMax) || (!$scope.invest.fundCnyInvestMin && !$scope.invest.fundCnyInvestMax)){
+                    Error.hide();
                 }else{
-                    angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('moneyEmpty',false);
+                    Error.show("请填写单笔可投额");
+                    return false;
                 }
-            }else{
-                angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('moneyEmpty',false);
+                if(($scope.invest.fundUsdInvestMin && $scope.invest.fundUsdInvestMax) || (!$scope.invest.fundUsdInvestMin && !$scope.invest.fundUsdInvestMax)){
+                    Error.hide();
+                }else{
+                    Error.show("请填写单笔可投额");
+                    return false;
+                }
+            }
+            if(!isPersonal && !isFund){
+                 Error.show("请填写单笔可投额");
+                 return false;
             }
             /*检查表单填写是否正确*/
             if(!checkForm("investorValidateForm")) return;
@@ -310,16 +334,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 investoraudit['cnyInvestMin']   = $scope.invest.cnyInvestMin;
                 investoraudit['cnyInvestMax']   = $scope.invest.cnyInvestMax;
                 if(parseFloat(investoraudit['cnyInvestMin']) > parseFloat(investoraudit['cnyInvestMax'])){
-                    $scope.error.code = 1;
-                    $scope.error.msg = "投资额上限不能⼩于下限值";
+                    Error.show("投资额上限不能⼩于下限值");
                     return false;
                 }
                 /*基金*/
                 investoraudit['fundCnyInvestMin']   = $scope.invest.fundCnyInvestMin;
                 investoraudit['fundCnyInvestMax']   = $scope.invest.fundCnyInvestMax;
                 if(parseFloat(investoraudit['fundCnyInvestMin']) > parseFloat(investoraudit['fundCnyInvestMax'])){
-                    $scope.error.code = 1;
-                    $scope.error.msg = "投资额上限不能⼩于下限值";
+                    Error.show("投资额上限不能⼩于下限值");
                     return false;
                 }
 
@@ -328,16 +350,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 investoraudit['usdInvestMax']   = $scope.invest.usdInvestMax;
 
                 if(parseFloat(investoraudit['usdInvestMin'])  > parseFloat(investoraudit['usdInvestMax'])){
-                    $scope.error.code = 1;
-                    $scope.error.msg = "投资额上限不能⼩于下限值";
+                     Error.show("投资额上限不能⼩于下限值");
                     return false;
                 }
                 /*基金*/
                 investoraudit['fundUsdInvestMin']   = $scope.invest.fundUsdInvestMin;
                 investoraudit['fundUsdInvestMax']   = $scope.invest.fundUsdInvestMax;
                 if(parseFloat(investoraudit['fundUsdInvestMin'])  > parseFloat(investoraudit['fundUsdInvestMax'])){
-                    $scope.error.code = 1;
-                    $scope.error.msg = "投资额上限不能⼩于下限值";
+                     Error.show("投资额上限不能⼩于下限值");
                     return false;
                 }
                 /*名片*/
@@ -352,35 +372,33 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
         /*监听事件*/
         $scope.changeMoney = function(fieldName){
-            angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('moneyEmpty',ture);
+            console.log(fieldName);
+             Error.hide();
             if(fieldName == 'cnyInvestMin' ||  fieldName == 'cnyInvestMax'){
                 if(parseFloat($scope.invest.cnyInvestMin) > parseFloat($scope.invest.cnyInvestMax)){
-                    $scope.error.code = 1;
-                    $scope.error.msg = "投资额上限不能⼩于下限值";
+                    Error.show("投资额上限不能⼩于下限值");
                 }else{
-                    $scope.error.code = 0;
+                    Error.hide();
                 }
             }else if(fieldName =='fundCnyInvestMin' || fieldName ==  'fundCnyInvestMax' ){
                 if(parseFloat($scope.invest.fundCnyInvestMin) > parseFloat($scope.invest.fundCnyInvestMax)){
-                    $scope.error.code = 1;
-                    $scope.error.msg = "投资额上限不能⼩于下限值";
+                     Error.show("投资额上限不能⼩于下限值");
                 }else{
-                    $scope.error.code = 0;
+                    Error.hide();
                 }
             }else if (fieldName == 'usdInvestMin' || fieldName == 'usdInvestMax'){
                 if(parseFloat($scope.invest.usdInvestMin)  > parseFloat($scope.invest.usdInvestMax)){
-                    $scope.error.code = 1;
-                    $scope.error.msg = "投资额上限不能⼩于下限值";
+                    Error.show("投资额上限不能⼩于下限值");
                 }else{
-                    $scope.error.code = 0;
+                     Error.hide();
                 }
 
             }else if(fieldName == 'fundUsdInvestMin' || fieldName == 'fundUsdInvestMax'){
+                console.log('----');
                 if(parseFloat($scope.invest.fundUsdInvestMin)  > parseFloat($scope.invest.fundUsdInvestMax)){
-                    $scope.error.code = 1;
-                    $scope.error.msg = "投资额上限不能⼩于下限值";
+                     Error.show("投资额上限不能⼩于下限值");
                 }else{
-                    $scope.error.code = 0;
+                    Error.hide();
                 }
             }
         }
