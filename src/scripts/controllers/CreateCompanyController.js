@@ -232,9 +232,10 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         $scope.logoFileSelected = function (files, e) {
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
-                ErrorService.alert({
-                    msg: "附件大于5M"
-                });
+                //ErrorService.alert({
+                //    msg: "附件大于5M"
+                //});
+                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoSize", true);
                 return;
             }
             $scope.temp_logo = '';
@@ -274,9 +275,10 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
                             angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoEmpty", true);
                         } else {
-                            ErrorService.alert({
-                                msg: '格式不支持，请重新上传！'
-                            });
+                            //ErrorService.alert({
+                            //    msg: '格式不支持，请重新上传！'
+                            //});
+                            angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoType", true);
                         }
                         $scope.logo.uploading = false;
                     }).error(function () {
@@ -299,9 +301,10 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         $scope.cardFileSelected = function (files, e) {
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
-                ErrorService.alert({
-                    msg: "附件大于5M"
-                });
+                //ErrorService.alert({
+                //    msg: "附件大于5M"
+                //});
+                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoSize", true);
                 return;
             }
             $scope.temp_bizCardLink = '';
@@ -343,9 +346,10 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                             $scope.formData.bizCardLink = window.kr.upyun.bucket.url + data.url;
                             angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("cardEmpty", true);
                         } else {
-                            ErrorService.alert({
-                                msg: '格式不支持，请重新上传！'
-                            });
+                            //ErrorService.alert({
+                            //    msg: '格式不支持，请重新上传！'
+                            //});
+                            angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoType", true);
                         }
                         $scope.card.uploading = false;
                     }).error(function () {

@@ -11,6 +11,13 @@
                 <div class="error-alert error" ng-show="createForm.$error.cardEmpty">
                     <span>请上传您的名片</span>
                 </div>
+                <div class="error-alert error" ng-show="createForm.$error.cardType">
+                    <span>请上传目前支持的图片格式</span>
+                </div>
+                <div class="error-alert error" ng-show="createForm.$error.cardSize">
+                    <span>图片过大</span>
+                </div>
+
 
                 <div class="error-alert error"
                      ng-show="createForm.startYear.$invalid && createForm.startYear.$dirty ">
@@ -31,16 +38,22 @@
                 <div class="error-alert error" ng-show="createForm.$error.logoEmpty">
                     <span>请上传公司LOGO</span>
                 </div>
+                <div class="error-alert error" ng-show="createForm.$error.logoType">
+                    <span>请上传目前支持的图片格式</span>
+                </div>
+                <div class="error-alert error" ng-show="createForm.$error.logoSize">
+                    <span>图片过大</span>
+                </div>
 
                 <div class="error-alert error"
                      ng-show="createForm.brief.$invalid && createForm.brief.$dirty">
-                    <span>请填写公司简介</span>
+                    <span>请填写公司简介，不要少于5个字</span>
                 </div>
 
 
                 <div class="error-alert error"
                      ng-show="createForm.website.$invalid && createForm.website.$dirty">
-                    <span>请填写公司网址</span>
+                    <span>请填写公司网址，http://开头</span>
                 </div>
                 <div class="error-alert error"
                      ng-show="createForm.name.$invalid && createForm.name.$dirty">
@@ -88,7 +101,7 @@
                         <td>
                             <p ng-if="formData.cid || formData.operationStatus == 'UNSTART'">{{formData.website}}</p>
 
-                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" required ng-disabled="formData.cid" ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
+                            <input type="url" class="form-control" placeholder="如：http://www.36kr.com" required ng-disabled="formData.cid" ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
                                    name="website" ng-model="formData.website" ng-if="!formData.cid && formData.operationStatus != 'UNSTART'"/>
                         </td>
                     </tr>
@@ -99,8 +112,8 @@
                         </td>
                         <td>
                             <p ng-if="formData.cid">{{formData.brief}}</p>
-                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，30字以内" required ng-disabled="formData.cid"
-                                      ng-model="formData.brief" ng-if="!formData.cid"></textarea>
+                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，5-30字以内" required ng-disabled="formData.cid"
+                                      ng-model="formData.brief" ng-if="!formData.cid" ng-pattern="/^.{5,30}/" maxlength="30"></textarea>
                         </td>
                     </tr>
 
