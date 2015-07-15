@@ -196,7 +196,7 @@
         <!--参与的跟投人-->
         <div ng-if="fundingId && tempData.length">
             <div class="basic-info">
-                参与的跟投人（{{syndicatesInfo.co_investors.length}}）
+                参与的跟投人（{{tempData.length}}）
             </div>
             <div class="co-investor clearfix">
                 <div ng-repeat="co in syndicatesInfo.co_investors track by $index" title="{{co.user.name}}" class="co-investor-logo text-center">
@@ -340,7 +340,7 @@
                 <div class="basic-info">
                     创始团队
                 </div>
-                <div ng-repeat="item in syndicatesInfo.detail.teams" class="welcome-form">
+                <div ng-repeat="item in syndicatesInfo.detail.teams" class="welcome-form team">
                     <div class="led-avatar">
                         <a ui-sref="user_detail({id:item.id})">
                             <div class="avatar" style="background-image: url({{item.avatar || ''}})"></div>
