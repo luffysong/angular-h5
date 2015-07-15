@@ -232,11 +232,13 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         $scope.logoFileSelected = function (files, e) {
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
-                ErrorService.alert({
-                    msg: "附件大于5M"
-                });
+                //ErrorService.alert({
+                //    msg: "附件大于5M"
+                //});
+                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoSize", true);
                 return;
             }
+            $scope.temp_logo = '';
             $scope.formData.logo = '';
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
@@ -255,14 +257,28 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     }).progress(function (evt) {
                         $scope.logo.progress = evt.loaded * 100 / evt.total;
                     }).success(function (data, status, headers, config) {
+
+                        var reader = new FileReader();
+                        reader.onload = function(){
+
+                            //$('.J_aa')[0].src = reader.result
+
+                            $scope.temp_logo = reader.result;
+
+                        }
+
                         var filename = data.url.toLowerCase();
                         if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
+
+                            reader.readAsDataURL(file)
                             $scope.formData.logo = window.kr.upyun.bucket.url + data.url;
+
                             angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoEmpty", true);
                         } else {
-                            ErrorService.alert({
-                                msg: '格式不支持，请重新上传！'
-                            });
+                            //ErrorService.alert({
+                            //    msg: '格式不支持，请重新上传！'
+                            //});
+                            angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoType", true);
                         }
                         $scope.logo.uploading = false;
                     }).error(function () {
@@ -285,11 +301,13 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         $scope.cardFileSelected = function (files, e) {
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
-                ErrorService.alert({
-                    msg: "附件大于5M"
-                });
+                //ErrorService.alert({
+                //    msg: "附件大于5M"
+                //});
+                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoSize", true);
                 return;
             }
+            $scope.temp_bizCardLink = '';
             $scope.formData.bizCardLink = '';
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
@@ -308,14 +326,30 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     }).progress(function (evt) {
                         $scope.card.progress = evt.loaded * 100 / evt.total;
                     }).success(function (data, status, headers, config) {
+
+                        var reader = new FileReader();
+                        reader.onload = function(){
+
+                            //$('.J_aa')[0].src = reader.result
+
+                            $scope.temp_bizCardLink = reader.result;
+
+                        }
+
+
+
                         var filename = data.url.toLowerCase();
                         if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
+
+                            reader.readAsDataURL(file)
+
                             $scope.formData.bizCardLink = window.kr.upyun.bucket.url + data.url;
                             angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("cardEmpty", true);
                         } else {
-                            ErrorService.alert({
-                                msg: '格式不支持，请重新上传！'
-                            });
+                            //ErrorService.alert({
+                            //    msg: '格式不支持，请重新上传！'
+                            //});
+                            angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoType", true);
                         }
                         $scope.card.uploading = false;
                     }).error(function () {

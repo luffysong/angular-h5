@@ -11,6 +11,13 @@
                 <div class="error-alert error" ng-show="createForm.$error.cardEmpty">
                     <span>请上传您的名片</span>
                 </div>
+                <div class="error-alert error" ng-show="createForm.$error.cardType">
+                    <span>请上传目前支持的图片格式</span>
+                </div>
+                <div class="error-alert error" ng-show="createForm.$error.cardSize">
+                    <span>图片过大</span>
+                </div>
+
 
                 <div class="error-alert error"
                      ng-show="createForm.startYear.$invalid && createForm.startYear.$dirty ">
@@ -31,16 +38,22 @@
                 <div class="error-alert error" ng-show="createForm.$error.logoEmpty">
                     <span>请上传公司LOGO</span>
                 </div>
+                <div class="error-alert error" ng-show="createForm.$error.logoType">
+                    <span>请上传目前支持的图片格式</span>
+                </div>
+                <div class="error-alert error" ng-show="createForm.$error.logoSize">
+                    <span>图片过大</span>
+                </div>
 
                 <div class="error-alert error"
                      ng-show="createForm.brief.$invalid && createForm.brief.$dirty">
-                    <span>请填写公司简介</span>
+                    <span>请填写公司简介，不要少于5个字</span>
                 </div>
 
 
                 <div class="error-alert error"
                      ng-show="createForm.website.$invalid && createForm.website.$dirty">
-                    <span>请填写公司网址</span>
+                    <span>请填写公司网址，http://开头</span>
                 </div>
                 <div class="error-alert error"
                      ng-show="createForm.name.$invalid && createForm.name.$dirty">
@@ -80,28 +93,27 @@
                             </select>
                         </td>
                     </tr>
-                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]">
+                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]" class="website">
                         <td>
                             <b class="important" ng-if="!formData.cid">*</b>
                             <span>公司网址</span>
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" ng-disabled="formData.cid" ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
-                                   name="website" ng-model="formData.website" ng-if="formData.cid || formData.operationStatus == 'UNSTART'"/>
-                            <input type="text" class="form-control" placeholder="如：http://www.36kr.com" required ng-disabled="formData.cid" ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
+                            <p ng-if="formData.cid || formData.operationStatus == 'UNSTART'">{{formData.website}}</p>
+
+                            <input type="url" class="form-control" placeholder="如：http://www.36kr.com" required ng-disabled="formData.cid" ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
                                    name="website" ng-model="formData.website" ng-if="!formData.cid && formData.operationStatus != 'UNSTART'"/>
                         </td>
                     </tr>
-                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]">
+                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]" class="brief">
                         <td class="vtop">
                             <b class="important" ng-if="!formData.cid">*</b>
                             <span>一句话简介</span>
                         </td>
                         <td>
-                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，30字以内" ng-disabled="formData.cid"
-                                      ng-model="formData.brief" ng-if="formData.cid"></textarea>
-                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，30字以内" required ng-disabled="formData.cid"
-                                      ng-model="formData.brief" ng-if="!formData.cid"></textarea>
+                            <p ng-if="formData.cid">{{formData.brief}}</p>
+                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，5-30字以内" required ng-disabled="formData.cid"
+                                      ng-model="formData.brief" ng-if="!formData.cid" ng-pattern="/^.{5,30}/" maxlength="30"></textarea>
                         </td>
                     </tr>
 
@@ -115,7 +127,8 @@
                                 <span class="upload-b ng-binding">
                                     <img ng-src="//krplus-pic.b0.upaiyun.com/default_logo.png!70" width="70" height="70"
                                          alt=""
-                                         src="{{formData.logo || '//krplus-pic.b0.upaiyun.com/default_logo.png!70'}}">
+                                         src="{{formData.logo || temp_logo || '//krplus-pic.b0.upaiyun.com/default_logo.png!70'}}">
+                                    <div class="progress" ng-show="logo.uploading" style="height:{{logo.progress}}%"></div>
                                     <span class="filewrap" ng-if="!formData.cid">
                                         上传
                                         <input type="file" name="logo"
@@ -177,12 +190,13 @@
                         </td>
                         <td class="logo card">
                             <p>上传名片有助于提升审核速度 <br/> 支持小于5M的JPG、JPEG和PNG格式</p>
-
                             <div class="pic">
                                 <span class="upload-b ng-binding">
+
                                     <img width="110" height="70"
                                          alt=""
-                                         src="{{formData.bizCardLink || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAACJBAMAAABN17ABAAAAG1BMVEX///8AjfIZmPO23vv1+f3I4PaVxe1nq+VPnuGS0jTRAAAAeklEQVRo3u3YwQmDQBBA0YmmgGwqSFKBJaQLrzbh3dLFiwcXwYurC+818GFZGGZi/EcZz36KgoYAAAAAANhof10U06RPFPNIr9gjJiYmJpYTu1Ws/aatdxcnaVJmHdl1x44+Y30fRExMTExMLFfxAr+cJgAAAAAALjTMqvgNecQF9eAAAAAASUVORK5CYII='}}">
+                                         src="{{formData.bizCardLink || temp_bizCardLink  || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAACJBAMAAABN17ABAAAAG1BMVEX///8AjfIZmPO23vv1+f3I4PaVxe1nq+VPnuGS0jTRAAAAeklEQVRo3u3YwQmDQBBA0YmmgGwqSFKBJaQLrzbh3dLFiwcXwYurC+818GFZGGZi/EcZz36KgoYAAAAAANhof10U06RPFPNIr9gjJiYmJpYTu1Ws/aatdxcnaVJmHdl1x44+Y30fRExMTExMLFfxAr+cJgAAAAAALjTMqvgNecQF9eAAAAAASUVORK5CYII='}}">
+                                    <div class="progress" ng-show="card.uploading" style="height:{{card.progress}}%"></div>
                                     <span class="filewrap">
                                         仅供审核使用
                                         <input type="file" name="bizCardLink"
