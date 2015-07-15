@@ -35,7 +35,7 @@
         border-collapse: collapse;
 
     }
-    .form-group{
+    .form-group {
         .label-control{
             .box-content {
                 width:100px;
@@ -50,10 +50,35 @@
         .btn-auth {
             border:none;
         }
+        .form-control,
+        textarea {
+            color:#333;
+            &::-webkit-input-placeholder
+            {
+                color:#999;
+            }
+            &:-moz-placeholder{
+                 color:#999;
+            }
+            &::-moz-placeholder{
+                 color:#999;
+            }
+            &:-ms-input-placeholder{
+                 color:#999;
+            }
+
+        }
     }
 
     .form-group.invest-money{
         padding-bottom:0;
+        .label-control{
+            .tip {
+                    margin-left: 20px;
+                    font-size: 13px;
+                    color: #B6B6B6;
+            }
+        }
         .form-group-box {
             padding:5px 0;
             .item {
@@ -64,13 +89,14 @@
                     border-bottom:none;
                 }
                 .label-control{
-                    .box-content{
+                    .box-content {
                         width:35px;
                         text-align: right;
                         padding-right:10px;
                         min-width:35px;
                         display:inline-block;
                     }
+
                 }
                 .row-1 {
                     overflow: hidden;
