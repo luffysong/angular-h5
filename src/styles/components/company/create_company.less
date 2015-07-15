@@ -12,10 +12,11 @@
   margin: 0;
 }
 
-.form-control.ng-dirty.ng-invalid{
+.form-control.ng-dirty.ng-invalid {
   //border:1px solid #ff0000;
 }
-.error{
+
+.error {
   //padding: 5px 0 0 0;
   //color: #FF0000;
 }
@@ -23,19 +24,37 @@
 .create_company {
   background-color: #fff;
 
-
-  .ac-container{
+  .ac-container {
     background-color: #f7f7f7 !important;
     border: 1px solid #d9d9d9;
     font-size: 12px;
     left: 18px !important;
     width: 90% !important;
+    overflow: hidden;
 
-    a{
+    img {
+      width: 25px;
+      height: 25px;
+      line-height: 24px;
+      border-radius: 3px;
+      margin: 3px 5px 0;
+      overflow: hidden;
+      float: left;
+    }
+
+
+    a {
       margin: 0 0 0 25px;
       padding: 0;
+      background-color: #f7f7f7;
+      position: relative;
+      z-index: 100;
+      &:hover {
+        background-color: #bfbfbf;
+      }
     }
-    &::before{
+
+    &::before {
       display: block;
       width: 100%;
       padding: 0 0 0 35px;
@@ -44,19 +63,19 @@
       font-size: 12px;
       background-color: #f7f7f7;
     }
-    .ac-menu{
+    .ac-menu {
       background-color: #f7f7f7;
       border: none 0;
       box-shadow: none;
 
-      li{
+      li {
         border: none 0;
         border-top: 1px solid #ccc;
-        &:hover{
+        &:hover {
           background-color: #bfbfbf;
           color: #fff;
         }
-        &:active{
+        &:active {
           background-color: #bfbfbf;
           color: #fff;
         }
@@ -69,30 +88,9 @@
       //}
     }
   }
-  
-  .gray_color{
-    color: #ccc;
-  }
 
-  .ac-container{
-    overflow: hidden;
-    .img{
-      width: 25px;
-      height: 25px;
-      line-height: 24px;
-      border-radius: 3px;
-      margin: 3px 5px 0;
-      overflow: hidden;
-      float: left;
-      img{
-        width: 100%;
-        border-radius: 3px;
-      }
-    }
-    span{
-      overflow: hidden;
-      display: block;
-    }
+  .gray_color {
+    color: #ccc;
   }
 
   b.important {
@@ -128,7 +126,7 @@
           text-align: right;
           padding: 15px 0;
           white-space: nowrap;
-          span{
+          span {
             display: inline-block;
           }
         }
@@ -157,7 +155,7 @@
       }
 
       .logo {
-        .upload-b{
+        .upload-b {
           overflow: hidden;
           display: block;
           width: 70px;
@@ -166,17 +164,17 @@
           border-radius: 50%;
           position: relative;
           border: 1px solid #f5f5f5;
-          .filewrap{
+          .filewrap {
             display: block;
             position: absolute;
             bottom: 0;
             height: 20px;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0, 0, 0, 0.4);
             text-align: center;
             color: #ddd;
             width: 70px;
 
-            .input-file{
+            .input-file {
               outline: none;
               opacity: 0;
               left: -72px;
@@ -185,9 +183,9 @@
               height: 60px;
               top: -47px;
 
-              &:focus{
-                -webkit-tap-highlight-color:rgba(0,0,0,0);
-                tap-highlight-color:rgba(0,0,0,0);
+              &:focus {
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                tap-highlight-color: rgba(0, 0, 0, 0);
               }
 
             }
@@ -204,24 +202,24 @@
         }
       }
 
-      .card{
-        p{
+      .card {
+        p {
           max-width: 100%;
           margin: 0 0 10px 0;
         }
-        .pic{
+        .pic {
           display: block;
 
-          .upload-b{
+          .upload-b {
             overflow: hidden;
             width: 110px;
             border-radius: 4px;
             border: 1px solid #008df2;
 
-            .filewrap{
+            .filewrap {
               width: 110px;
 
-              .input-file{
+              .input-file {
                 width: 330px;
                 height: 66px;
                 left: -111px;
@@ -231,19 +229,19 @@
           }
         }
       }
-      .time{
+      .time {
         color: #888;
-        select{
+        select {
           width: 60px;
         }
       }
       .job {
-        .split{
+        .split {
           border-top: 1px solid @border-gray;
           padding: 10px 0 0 0;
           margin: 16px 0 0 0;
         }
-        td:last-child{
+        td:last-child {
           padding-right: 0;
         }
       }
@@ -251,29 +249,29 @@
     }
   }
 
-  .submit{
+  .submit {
     padding: 1px;
     background-color: #f6f6f6;
-    button{
+    button {
       display: block;
       margin: 10px auto;
       width: 70%;
       height: 40px;
       background-color: @color_blue;
       padding: 0;
-      border: none 0 ;
+      border: none 0;
       color: #fff;
       font-size: 14px;
       border-radius: 4px;
     }
-    b{
+    b {
       display: block;
       margin: 0 auto;
       width: 70%;
       font-weight: normal;
       color: #999;
       font-size: 12px;
-      i{
+      i {
         font-style: normal;
         color: @color_blue;
       }
@@ -281,22 +279,21 @@
   }
 }
 
+.pop_create_tip_wrap {
+  background-color: rgba(0, 0, 0, 0.5);
 
-.pop_create_tip_wrap{
-  background-color: rgba(0, 0,0,0.5);
-
-  .modal-dialog{
+  .modal-dialog {
     margin: 15px 20px;
   }
-  .modal-content{
+  .modal-content {
     padding-bottom: 0;
   }
-  .modal-content{
+  .modal-content {
     border: none 0;
   }
-  .pop_create_tip{
+  .pop_create_tip {
 
-    h4{
+    h4 {
       font-size: 14px;
       text-align: center;
       color: #333;
@@ -305,19 +302,19 @@
       height: 45px;
       line-height: 45px;
     }
-    ol{
+    ol {
       padding: 10px 10px 0;
     }
-    li{
+    li {
       list-style: inside decimal;
       font-size: 12px;
       color: #6b6b6b;
-      b{
+      b {
         font-weight: bold;
         color: #3d3d3d;
       }
     }
-    button{
+    button {
       width: 100%;
       height: 40px;
       border: none 0;

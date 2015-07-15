@@ -103,9 +103,15 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         function suggest_state(data) {
             //var q = term.toLowerCase().trim();
             var results = data.map(function (item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
-                //var label = item.logo ? '<div class="img"><img src="'+item.logo+'"></div>' + '<span>'+item.name+'</span>' : item.name
                 var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30',
-                    label = '<div class="img"><img src="' + logo + '"></div>' + '<span>' + item.name + '</span>';
+                    //label = '<img src="' + logo + '">' + '<span>' + item.name + '</span>';
+                    label
+
+                if(item.status!='add'){
+                    label = '<img src="' + logo + '">' + item.name;
+                }else{
+                    label = '<span>创建 </span> '+ item.name;
+                }
 
                 return {
                     label: label,
@@ -131,9 +137,12 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 var exist = data.data.filter(function (item) {
                     return item.name.toLowerCase() == q.toLowerCase();
                 });
+                console.log(exist)
                 if (!exist.length) {
                     data.data.push({
-                        name: "创建  " + q,
+                        name: q,
+                        id:'',
+                        type:'',
                         status: 'add',
                         value: q
                     })
@@ -207,7 +216,10 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 if (selected.obj.status != 'add') {
                     checkName(selected);
                 } else {
-                    $scope.addCompany(selected.obj.value)
+                    $timeout(function(){
+                        $scope.addCompany(selected.obj.value)
+                    }, 0)
+
 
 
                 }
