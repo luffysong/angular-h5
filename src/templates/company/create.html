@@ -103,14 +103,17 @@
                     </tr>
                     <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]" class="website">
                         <td>
-                            <b class="important" ng-if="!formData.cid">*</b>
+                            <b class="important" ng-if="!formData.cid && formData.operationStatus != 'UNSTART'">*</b>
                             <span>公司网址</span>
                         </td>
                         <td>
-                            <p ng-if="formData.cid || formData.operationStatus == 'UNSTART'">{{formData.website}}</p>
+                            <p ng-if="formData.cid">{{formData.website}}</p>
 
                             <input type="url" class="form-control" placeholder="如：http://www.36kr.com" required ng-disabled="formData.cid" ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
                                    name="website" ng-model="formData.website" ng-if="!formData.cid && formData.operationStatus != 'UNSTART'"/>
+
+                            <input type="url" class="form-control" placeholder="如：http://www.36kr.com"  ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
+                                   name="website" ng-model="formData.website" ng-if="!formData.cid && formData.operationStatus == 'UNSTART'"/>
                         </td>
                     </tr>
                     <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]" class="brief">
