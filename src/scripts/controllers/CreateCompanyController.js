@@ -36,14 +36,14 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
 
         $scope.uid = UserService.getUID();
-        console.log($scope.uid)
-        UserService.isProfileValid(function (cs) {
-            if(!cs){
-                $state.go('guide.welcome');
-                return false;
-            }
-
-        });
+        //console.log($scope.uid)
+        //UserService.isProfileValid(function (cs) {
+        //    if(!cs){
+        //        $state.go('guide.welcome');
+        //        return false;
+        //    }
+        //
+        //});
 
         // 公司网址
         $scope.webSiteFocus = function(){
