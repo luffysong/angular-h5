@@ -18,28 +18,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         $scope.companyId = $rootScope.companyId = $stateParams.companyId;
         $scope.uid = UserService.getUID();
         document.title="36氪众筹";
-        $scope.wantInvest = function(event){
-            if(!$scope.uid)return;
-            if(!$scope.isCoInvestor){
-                if(event){
-                    event.preventDefault();
-                }
-                $state.go("investorValidate");
-            }else if($scope.noOrder){
-                $state.go("syndicatesConfirm",{
-                    cid:$scope.companyId,
-                    fundingId:$scope.fundingId
-                });
-            }else{
-                $state.go("syndicatesOrder",{
-                    cid:$scope.companyId,
-                    fundingId:$scope.fundingId
-                });
-            }
-        }
-        if($stateParams.login){
-            $scope.wantInvest();
-        }
         /*获取用户是否为跟投人*/
         UserService.getIdentity(function(data){
             console.log(data);
@@ -62,6 +40,51 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         },function(err){
             ErrorService.alert(err);
         });
+        $scope.wantInvest = function(event){
+            if(!$scope.uid)return;
+            if(!$scope.isCoInvestor){
+                if(event){
+                    event.preventDefault();
+                }
+                $state.go("investorValidate");
+            }else if($scope.noOrder){
+                $state.go("syndicatesConfirm",{
+                    cid:$scope.companyId,
+                    fundingId:$scope.fundingId
+                });
+            }else{
+                $state.go("syndicatesOrder",{
+                    cid:$scope.companyId,
+                    fundingId:$scope.fundingId
+                });
+            }
+        }
+        /*未登录点击我要投资进入登录界面跳转回操作*/
+        if($stateParams.login){
+            UserService.getIdentity(function(data){
+                if(data.code == 4031){
+                    ErrorService.alert({
+                        msg:"请先完善资料"
+                    });
+                    $timeout(function(){
+                        location.hash="#/guide/welcome";
+                    },5000);
+                }else if(data){
+                    if(data.coInvestor){
+                        $scope.isCoInvestor = true;
+                    }else{
+                        $scope.isCoInvestor = false;
+                        $scope.wantInvest();
+                    }
+                }else{
+                    $scope.isCoInvestor = false;
+                    $scope.wantInvest();
+                }
+            },function(err){
+                ErrorService.alert(err);
+            });
+        }
+
 
         /*获取公司基本信息*/
         CompanyService.get({
