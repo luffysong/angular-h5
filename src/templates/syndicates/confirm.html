@@ -6,7 +6,7 @@
                 <a class="href-tip" href="" ng-click="getKrCode()">如何获得Kr码</a>
             </div>
             <div class="kr-code-enter">
-                <input type="text" maxlength="8" class="kr-code-input" placeholder="请输入优先购买Kr码" ng-model="krCode.number" />
+                <input type="text" maxlength="8" class="kr-code-input" ng-disabled="validateSuc" placeholder="请输入优先购买Kr码" ng-model="krCode.number" />
                 <a href="" class="validate-kr-code" ng-class="{'suc':validateValid}" ng-click="checkCode()">验证</a>
             </div>
         </div>
