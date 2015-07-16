@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesConfirmController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope) {
         $scope.companyId = $stateParams.cid;
         $scope.fundingId = $stateParams.fundingId;
         $scope.uid = UserService.getUID();
@@ -158,6 +158,22 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 }
             });
         }
+        /*用户签约信息查询*/
+        CrowdFundingService["payment"].get({
+            id:3,
+            submodel:"user-bankcard",
+            subid:$scope.uid,
+            pay_type:"D"
+        },function(data){
+            console.log(data);
+            if(data.agreement_list.length){
+                $scope.hasRecord = true;
+            }else{
+                $scope.hasRecord = false;
+            }
+        },function(err){
+            $scope.hasRecord = false;
+        });
         /*校验Kr码*/
         $scope.checkCode = function(){
             /*输入达到8位时，调用check*/
@@ -197,15 +213,15 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                         investment: Math.min($scope.formData.investVal,$scope.remainAmount),
                         invite_code:$scope.krCode.number
                     }, function(data){
-                        $state.go('syndicatesOrder', {
-                            tid: data.trade_id,
-                            cid:$scope.companyId
-                        });
+                        if(!$scope.hasRecord){
+                            location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_id,'url_order='+encodeURIComponent(location.href),'back_url='+$scope.ucHost+'/#/zhongchouOrder/'+$rootScope.companyId+"/"+$rootScope.fundingId]).join('&');
+                        }else{
+                            $state.go('syndicatesPay', {
+                                tid: data.trade_id,
+                                amount:Math.min($scope.formData.investVal,$scope.remainAmount)
+                            });
+                        }
                     },function(err){
-                        $state.go('syndicatesOrder', {
-                            tid: err.trade_id,
-                            cid:$scope.companyId
-                        });
                         ErrorService.alert(err);
                     });
                 }
