@@ -49,3 +49,6 @@ templates.js
 
 # luxinyue fils
 xb_server
+src/scripts/controllers/index.js
+src/scripts/directives/index.js
+src/scripts/services/index.js
