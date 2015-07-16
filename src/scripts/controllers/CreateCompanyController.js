@@ -58,7 +58,9 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         }
 
         // 定位
-        $scope.positionSet = function(){
+        $scope.positionSet = function(e){
+            //console.log(e)
+            e.preventDefault();
             var wrap = $('.suggest_wrap');
             var top = wrap.offset().top;
 
@@ -183,7 +185,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             }, function (data) {
                 data.company.logo = selected.obj.logo;
                 var company = data.company;
-                console.log(data)
+                //console.log(data)
                 if (data.manager) {
                     $scope.opNext = 2;
                     $scope.founder = data.manager.name;

@@ -79,7 +79,7 @@
                             <span>公司简称</span>
                         </td>
                         <td>
-                            <div class="suggest_wrap" ng-click="positionSet();">
+                            <div class="suggest_wrap" ng-click="positionSet($event);">
                                 <input type="text" ng-model="formData.name"
                                        name="name"
                                        placeholder="请填写大众熟知的项目名称"
@@ -126,7 +126,7 @@
                     </tr>
 
                     <tr class="logo" ng-class="{true:'gray_color', false:''}[!!formData.cid]">
-                        <td>
+                        <td class="vtop">
                             <b class="important" ng-if="!formData.cid">*</b>
                             <span>公司LOGO</span>
                         </td>
@@ -192,7 +192,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td class="vtop">
                             <b class="important">＊</b>
                             <span>上传名片</span>
                         </td>
@@ -206,7 +206,7 @@
                                          src="{{formData.bizCardLink || temp_bizCardLink  || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAACJBAMAAABN17ABAAAAG1BMVEX///8AjfIZmPO23vv1+f3I4PaVxe1nq+VPnuGS0jTRAAAAeklEQVRo3u3YwQmDQBBA0YmmgGwqSFKBJaQLrzbh3dLFiwcXwYurC+818GFZGGZi/EcZz36KgoYAAAAAANhof10U06RPFPNIr9gjJiYmJpYTu1Ws/aatdxcnaVJmHdl1x44+Y30fRExMTExMLFfxAr+cJgAAAAAALjTMqvgNecQF9eAAAAAASUVORK5CYII='}}">
                                     <div class="progress" ng-show="card.uploading" style="height:{{card.progress}}%"></div>
                                     <span class="filewrap">
-                                        仅供审核使用
+                                        <!--仅供审核使用-->
                                         <input type="file" name="bizCardLink"
                                                class="input-file" ng-file-select=""
                                                ng-file-change="cardFileSelected($files, $event)"
