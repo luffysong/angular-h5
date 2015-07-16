@@ -266,6 +266,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("picEmpty",false);
             }
             /*检查投资阶段是否选择，给出相应提示*/
+            $scope.stageList = [];
             angular.forEach($scope.invest.fundsPhases,function(key,index){
                 if(key.active){
                     $scope.stageList.push(key);
