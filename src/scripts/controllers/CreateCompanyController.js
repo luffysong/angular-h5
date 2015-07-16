@@ -38,15 +38,11 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         $scope.uid = UserService.getUID();
         console.log($scope.uid)
         UserService.isProfileValid(function (cs) {
-
-            if (!cs) {
-                if ($scope.uid) {
-                    location.hash = '/welcome';
-                } else {
-                    location.href = '/user/login?from=' + encodeURIComponent(location.href);
-                }
-
+            if(!cs){
+                $state.go('guide.welcome');
+                return false;
             }
+       
         });
 
         // 公司网址
