@@ -6,7 +6,6 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesSucController',
     function($scope, UserService, ErrorService, $stateParams,DictionaryService,CrowdFundingService,CompanyService,$state,$rootScope) {
-        console.log($stateParams);
         $scope.companyId = $stateParams.cid ||  $rootScope.companyId ;
         $scope.fundingId = $stateParams.fundingId ||  $rootScope.fundingId;
         $scope.share = {};
@@ -30,7 +29,7 @@ angular.module('defaultApp.controller').controller('syndicatesSucController',
             $scope.config.desc  = encodeURIComponent("【"+data.base.investorData.name+"】"+"正在领投"+$scope.companyName + "，"+$scope.companyBrief+ " | " + "36氪让创业更简单");
         });
         $scope.shareSyndicate = function(){
-            $scope.config.url = encodeURIComponent(location.href);
+            $scope.config.url = encodeURIComponent($scope.ucHost+'/#/zhongchouDetail?'+$scope.companyId+"&"+$scope.fundingId);
         }
     });
 
