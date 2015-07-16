@@ -25,8 +25,8 @@ angular.module('defaultApp.controller').controller('syndicatesSucController',
             id:$scope.fundingId
         },function(data){
             if(!data.base)return;
-            $scope.config.title = encodeURIComponent("【"+data.base.investorData.name+"】"+"正在领投"+$scope.companyName + " | " + "36氪让创业更简单");
-            $scope.config.desc  = encodeURIComponent("【"+data.base.investorData.name+"】"+"正在领投"+$scope.companyName + "，"+$scope.companyBrief+ " | " + "36氪让创业更简单");
+            $scope.config.title = encodeURIComponent("我刚跟投了"+$scope.companyName+"，正在36氪众筹");
+            $scope.config.desc  = encodeURIComponent("我刚跟投了"+$scope.companyName+","+$scope.companyBrief+"。"+"领投人是【"+data.base.investorData.name+"】"+ "值得一看的公司 | " + "36氪让创业更简单");
         });
         $scope.shareSyndicate = function(){
             $scope.config.url = encodeURIComponent($scope.ucHost+'/#/zhongchouDetail?'+$scope.companyId+"&"+$scope.fundingId);
