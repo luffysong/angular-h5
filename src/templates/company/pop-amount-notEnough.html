@@ -1,8 +1,9 @@
-<div class="syndicates-pay pop text-center">
-    <p class="mt-25">现在剩余融资额仅剩{{remainAmount}}，是否确认投资此金额</p>
-    <div class="btn-layer mt-20">
-        <span class="btn btn-default payBtn" ng-click="ok()" ng-disabled="notEnougn">确认提交</span>
-        <span class="btn btn-white payBtn problem" ng-click="cancel()">重新编辑</span>
+<div class="syndicates-pay text-center set-remind">
+    <div class="fs-15 mt-26">现在剩余融资额仅剩{{remainAmount}}，</div>
+    <div>是否确认投资此金额</div>
+    <div class="btn-layer mt-26">
+        <a href="javascript:void(0)" class="ensure-btn" ng-click="ok()" ng-disabled="notEnougn">确认提交</a>
+        <a href="javascript:void(0)" class="cancel-btn ml-10" ng-click="cancel()">重新编辑</a>
     </div>
 </div>
 

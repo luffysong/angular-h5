@@ -1,15 +1,15 @@
-<div class="syndicate-order">
+r<div class="syndicate-order">
     <div class="order-title">
         你有  <span class="error">{{listData.length}}</span>个{{listData.company.name}}待付款订单
     </div>
     <div class="order-content">
         <div class="order-detail" ng-repeat="item in tempData">
             <div class="order-info">
-                <div>{{item.company.name}}</div>
-                <div>总支付金额: <span class="error">￥{{item.payment.amount}}</span></div>
+                <div class="company-name">{{item.company.name}}</div>
+                <div class="pay-tip">总支付金额: <span class="error">￥{{item.payment.amount}}</span></div>
             </div>
             <div class="order-handle">
-                <a href="" ng-click="goPay(item.trade_id,item.payment.amount)">去付款></a>
+                <a class="go-pay-btn" href="" ng-click="goPay(item.trade_id,item.payment.amount)">去付款></a>
             </div>
         </div>
     </div>

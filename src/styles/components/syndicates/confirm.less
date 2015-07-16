@@ -15,19 +15,32 @@
         display: block;
         width: 100%;
         height: 44px;
-        line-height: 54px;
+        line-height: 44px;
+        font-size: 15px;
         border-top: 1px solid #DDDDDD;
         text-align: center;
     }
 }
 /*获得Kr码弹窗样式*/
 .pop-apply-code {
+    position: relative;
+    .icon-del {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 15px;
+    }
     .apply-content {
         padding: 40px 20px 20px;
         .apply-title {
             text-align: center;
             color: #666666;
             font-weight: 600;
+        }
+        .code-content {
+            font-size: 11px;
+            color: #999;
+            line-height: 1.5;
         }
         .wish-count {
             display: block;
@@ -36,6 +49,8 @@
             border-radius: 3px;
             border: 1px solid #B2B2B2;
             margin: 20px 0 10px;
+            padding-left: 10px;
+            font-size: 14px;
         }
     }
     .ensure-btn {
@@ -45,12 +60,23 @@
         line-height: 44px;
         border-top: 1px solid #DDDDDD;
         text-align: center;
-        margin-bottom: -10px;
     }
+}
+.confirmForm {
+    height: 310px;
 }
 .syndicates-confirm {
     @default-color:#F7F7F7;
     background-color: @default-color;
+    .href-tip {
+        font-size: 11px;
+    }
+    .error-tip {
+        padding: 5px 0 0 15px;
+        font-size: 11px;
+        background-color: #f0f0f0;
+        color: #e66565;
+    }
     .kr-code-way {
         width: 100%;
         height: 35px;
@@ -64,23 +90,24 @@
         border: 1px solid #DFDFDF;
         height: 50px;
         padding: 0 15px;
+        overflow: hidden;
         .kr-code-input {
             display: inline-block;
-            width: 70%;
+            width: 75%;
             height: 100%;
             border: 0;
-            margin-left: 15px;
-            font-weight: 600;
+            font-size: 14px;
             color: #008DF2;
         }
         .validate-kr-code {
             display: inline-block;
+            float: right;
             width: 65px;
             height: 35px;
             line-height: 35px;
-            color: #fff;
+            margin-top: 7px;
             text-align: center;
-            border-radius: 5px;
+            border-radius: 2px;
             color: #fff;
             background-color: #DEDEDE;
             &.suc {
@@ -90,19 +117,21 @@
     }
     .confirm-title {
         width: 100%;
-        padding: 10px 15px;
+        padding: 5px 15px;
         height: auto;
         background-color: @default-color;
         .validate-suc {
+            font-size: 11px;
             color: #22AC38;
         }
         .risk-tip {
             float: right;
+            font-size: 11px;
         }
     }
     .confirm-content {
         width: 100%;
-        height: 145px;
+        height: 150px;
         background-color: #fff;
         padding-left: 15px;
         border: 1px solid #DFDFDF;
@@ -110,6 +139,8 @@
             width: 100%;
             height: 50px;
             line-height: 50px;
+            font-size: 14px;
+            color: #333;
             border-bottom: 1px solid #DFDFDF;
             .invest-val {
                 width: 70%;
@@ -119,13 +150,17 @@
             }
         }
         .content-info {
+            .mt-12 {
+                margin-top: 12px;
+            }
             p {
+                margin: 0;
+                padding: 0;
                 .info-attr {
                     display: inline-block;
                     width: 70px;
                 }
                 span {
-                    margin-left: 15px;
                 }
                 .red {
                     color: #F22800;
@@ -137,6 +172,10 @@
             .ensure-pay {
                 display: block;
                 width: 75%;
+                height: 40px;
+                line-height: 40px;
+                padding: 0;
+                font-size: 15px;
                 text-align: center;
                 color: #fff;
                 background-color: #F28E00;
@@ -181,7 +220,14 @@
         height: 43px;
         line-height: 43px;
         text-align: center;
+        font-size: 14px;
+        color: #333;
         background-color: #fff;
         border-bottom: 1px solid #DFDFDF;
+        &:last-of-type {
+            background-color: #7a8085;
+            color: #fff;
+            border-bottom: 0;
+        }
     }
 }

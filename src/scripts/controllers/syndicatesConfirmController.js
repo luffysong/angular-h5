@@ -171,6 +171,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                     $scope.validateSuc = true;
                 },function(err){
                     $scope.validateSuc = false;
+                    $scope.hasCheck = true;
                 });
 
             }else{
