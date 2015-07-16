@@ -11,9 +11,9 @@
             </div>
         </div>
         <p class="error-tip" ng-if="!validateSuc && hasCheck">Kr码无效，请重新输入!</p>
-        <div ng-hide="validateSuc">
+        <div ng-if="validateSuc">
             <div class="confirm-title">
-                <p class="validate-suc" ng-hide="validateSuc && isPreHeat">Kr码验证成功</p>
+                <p class="validate-suc" ng-if="validateSuc && isPreHeat">Kr码验证成功</p>
                 确认投资{{companyData.name}}
                 <a href="" class="risk-tip" ng-click="seeRisk()">风险点</a>
             </div>
