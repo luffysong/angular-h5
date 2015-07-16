@@ -119,17 +119,19 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 templateUrl: 'templates/company/pop-apply-code.html',
                 windowClass: 'remind-modal-window',
                 controller: [
-                    '$scope', '$modalInstance','scope','CrowdFundingService',
-                    function ($scope, $modalInstance, scope,CrowdFundingService) {
+                    '$scope', '$modalInstance','scope','CrowdFundingService','checkForm',
+                    function ($scope, $modalInstance, scope,CrowdFundingService,checkForm) {
+                        $scope.$watch("wishNum",function(from){
+                            if(from < scope.baseData.base.min_investment){
+                                $scope.minError = true;
+                            }else{
+                                $scope.minError = false;
+                            }
+                        });
                         $scope.ok = function(){
-                            $scope.$watch("wishNum",function(from){
-                                if(from < scope.baseData.base.min_investment){
-                                    $scope.minError = true;
-                                }else{
-                                    $scope.minError = false;
-                                }
-                            });
-                            if($scope.krCodeForm.$invalid)return;
+                            if(!checkForm("krCodeForm")){
+                                return;
+                            }
                             CrowdFundingService.save({
                                 model:"crowd-funding",
                                 id:scope.fundingId,
