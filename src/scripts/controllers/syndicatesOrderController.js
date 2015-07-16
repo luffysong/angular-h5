@@ -42,7 +42,6 @@ angular.module('defaultApp.controller').controller('syndicatesOrderController',
                 $scope.hasRecord = false;
             }
         },function(err){
-            ErrorService.alert(err);
             $scope.hasRecord = false;
         });
         $scope.viewAll = function(){
