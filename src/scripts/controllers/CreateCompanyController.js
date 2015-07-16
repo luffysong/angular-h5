@@ -42,7 +42,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 $state.go('guide.welcome');
                 return false;
             }
-       
+
         });
 
         // 公司网址
