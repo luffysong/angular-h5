@@ -19,13 +19,15 @@ angular.module('defaultApp.controller').controller('syndicatesOrderController',
         },function(data){
             console.log(data);
             $scope.listData =data.data;
+            $scope.tempData = [];
             /*过滤数据，去除线下汇款订单*/
             angular.forEach($scope.listData,function(obj,index){
-                if(obj.payment.platform_type == 1){
-                    $scope.listData.splice(index,1);
+                if(obj.payment.platform_type != 1 && obj.payment.status == 1){
+                    $scope.tempData.push(obj);
                 }
             });
-            $scope.tempData = angular.copy($scope.listData).slice(0,3);
+            $scope.tempList = $scope.tempData.concat("");
+            $scope.tempData = $scope.tempData.slice(0,3);
         }, function(){
         });
         /*用户签约信息查询*/
@@ -45,7 +47,7 @@ angular.module('defaultApp.controller').controller('syndicatesOrderController',
             $scope.hasRecord = false;
         });
         $scope.viewAll = function(){
-            $scope.tempData = $scope.listData;
+            $scope.tempData = $scope.tempList;
             $scope.showAll = true;
         }
         $scope.goPay = function(tid,amount){

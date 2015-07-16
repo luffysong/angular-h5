@@ -1,6 +1,6 @@
 <div class="syndicate-order">
     <div class="order-title">
-        你有  <span class="error">{{listData.length}}</span>个{{listData.company.name}}待付款订单
+        你有  <span class="error">{{tempData.length}}</span>个{{tempData.company.name}}待付款订单
     </div>
     <div class="order-content">
         <div class="order-detail" ng-repeat="item in tempData">
@@ -13,8 +13,8 @@
             </div>
         </div>
     </div>
-    <div class="viewAll" ng-click="viewAll()" ng-if="!showAll && listData.length > 3">
-        查看全部({{listData.length - tempData.length}})
+    <div class="viewAll" ng-click="viewAll()" ng-if="!showAll && tempList.length > 3">
+        查看全部({{tempList.length - tempData.length}})
     </div>
     <a ui-sref="syndicatesConfirm({cid:companyId,fundingId:fundingId})" class="re-buy">重新购买</a>
 </div>

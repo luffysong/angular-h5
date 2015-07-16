@@ -16,6 +16,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         $scope.coInvestor = {};
         $scope.fundingId = $rootScope.fundingId = $stateParams.fundingId;
         $scope.companyId = $rootScope.companyId = $stateParams.companyId;
+        $scope.orderData = [];
         $scope.uid = UserService.getUID();
         document.title="36氪众筹";
         /*获取用户是否为跟投人*/
@@ -229,7 +230,14 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             per_page:100,
             page: 1
         },function(data){
-            if(!data.data.length){
+            console.log(data);
+            /*过滤数据，去除线下汇款订单*/
+            angular.forEach(data.data,function(obj,index){
+                if(obj.payment.platform_type != 1 && obj.payment.status == 1){
+                    $scope.orderData.push(obj);
+                }
+            });
+            if(!$scope.orderData.length){
                 $scope.noOrder = true;
             }
         }, function(){
