@@ -207,6 +207,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             $scope.remainAmount = $scope.baseData.base.cf_max_raising - $scope.baseData.base.cf_success_raising;
             $scope.remainAmount = Math.max($scope.remainAmount,0);
             function goToPay(){
+                    alert($scope.krCode.number);
                     CrowdFundingService['cf-trade'].save({},{
                         user_id: $scope.uid,
                         goods_id: $scope.fundingId,
