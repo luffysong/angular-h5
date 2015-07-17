@@ -63,7 +63,7 @@ angular.module('defaultApp')
             krtracker('trackPageView', '/user/login');
 
             setTimeout(function(){
-
+console.log(location.href)
                 location.href = '/user/login?from=' + encodeURIComponent(location.href);
             }, 300);
             return false;
@@ -76,8 +76,8 @@ angular.module('defaultApp')
                 if (valid) {
                     deferred.resolve();
                 } else {
-                    console.log(location.href)
-                    $state.go('guide.welcome', {from:encodeURIComponent(location.href)});
+                    //$state.go('guide.welcome', {from:encodeURIComponent(location.href), type:'1213'});
+                    location.hash = '/guide/welcome/agfdslg'
                     deferred.reject();
                 }
             });

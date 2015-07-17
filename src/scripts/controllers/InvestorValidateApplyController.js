@@ -10,18 +10,18 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             status:''
         }
         //用户是否登录
-        if(!UserService.getUID()){
-            location.href = "/user/login?from=" + encodeURIComponent(location.href);
-            return;
-        }
+        //if(!UserService.getUID()){
+        //    location.href = "/user/login?from=" + encodeURIComponent(location.href);
+        //    return;
+        //}
 
         //用户个人信息是否满足条件
-        UserService.isProfileValid(function(response){
-            if(!response){
-                $state.go('guide.welcome');
-                return false;
-            }
-        });
+        //UserService.isProfileValid(function(response){
+        //    if(!response){
+        //        $state.go('guide.welcome');
+        //        return false;
+        //    }
+        //});
         /*查询投资人认证申请状态*/
         InvestorauditService.queryStatus({},function(response){
             switch(response.status){
