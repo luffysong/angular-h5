@@ -63,7 +63,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('guide.welcome', {
         url: '/welcome',
         templateUrl: 'templates/guide/welcome.html',
-        controller: 'GuideWelcomeController'
+        controller: 'GuideWelcomeController',
+        data:{
+            permissions : {
+                only : ['login']
+            }
+        }
     });
 
 
@@ -123,7 +128,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('createCompany', {
         url: '/company_create',
         templateUrl: 'templates/company/create.html',  // todo : 文件路径
-        controller: 'CreateCompanyController' // todo : controller
+        controller: 'CreateCompanyController', // todo : controller
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
     });
     /*创建公司审核页*/
     $stateProvider.state('createCompanyApply', {

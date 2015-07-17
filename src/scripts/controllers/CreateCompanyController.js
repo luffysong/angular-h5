@@ -1,6 +1,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('CreateCompanyController', [
+    '$stateParams',
     '$timeout',
     '$q',
     '$modal',
@@ -17,8 +18,8 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
     'ErrorService',
     'AvatarEdit',
     '$upload',
-    function ($timeout, $q, $modal, $scope, DictionaryService, dateFilter, DefaultService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
-
+    function ($stateParams,$timeout, $q, $modal, $scope, DictionaryService, dateFilter, DefaultService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
+        console.log($stateParams)
         // 职位
         $scope.founderRoles = DictionaryService.getDict('StartupPositionType');
         // 产品状态
@@ -36,18 +37,14 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
 
         $scope.uid = UserService.getUID();
-        console.log($scope.uid)
-        UserService.isProfileValid(function (cs) {
-
-            if (!cs) {
-                if ($scope.uid) {
-                    location.hash = '/welcome';
-                } else {
-                    location.href = '/user/login?from=' + encodeURIComponent(location.href);
-                }
-
-            }
-        });
+        //console.log($scope.uid)
+        //UserService.isProfileValid(function (cs) {
+        //    if(!cs){
+        //        $state.go('guide.welcome');
+        //        return false;
+        //    }
+        //
+        //});
 
         // 公司网址
         $scope.webSiteFocus = function(){
