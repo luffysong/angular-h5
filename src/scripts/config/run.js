@@ -78,17 +78,21 @@ console.log(location.href)
                 } else {
 
                     var href = location.href,
-                        type;
+                        type,
+                        from;
                     if(href.indexOf('#/company_create')!=-1){
-                        type = 'company_create'
+                        type = 'company_create';
+                        from = '#/company_create'
                     }else if(href.indexOf('#/investor/apply')!=-1){
-                        type = 'investor_apply'
+                        type = 'investor_apply';
+                        from = '#/investor/apply'
                     }else{
                         type = 'other'
+                        from = href;
                     }
 
 
-                    $state.go('guide.welcome', {from:encodeURIComponent(href), type:type});
+                    $state.go('guide.welcome', {from:encodeURIComponent(from), type:type});
 
                     deferred.reject();
                 }

@@ -214,9 +214,9 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                     console.log($stateParams.from)
                     location.href = decodeURIComponent($stateParams.from)
                 }
-                setTimeout(function(){
-                    location.reload();
-                },0);
+                //setTimeout(function(){
+                //    location.reload();
+                //},0);
             }, function(err){
                 $('<div class="error-alert error error-code">' + err.msg + '</div>').appendTo('body');
                 $timeout(function(){
