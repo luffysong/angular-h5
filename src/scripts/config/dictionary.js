@@ -738,7 +738,6 @@ window.DICTIONARY_DATA =  {
             "value": "NON_TMT"
         }
     ],
-
     "FinancePhase": [
         {
             "desc": "天使轮",
@@ -813,19 +812,9 @@ window.DICTIONARY_DATA =  {
             "value": "A"
         },
         {
-            "desc": "A+轮",
-            "id": 35,
-            "value": "A_PLUS"
-        },
-        {
             "desc": "B轮",
             "id": 40,
             "value": "B"
-        },
-        {
-            "desc": "B+轮",
-            "id": 45,
-            "value": "B_PLUS"
         },
         {
             "desc": "C轮",
@@ -851,7 +840,6 @@ window.DICTIONARY_DATA =  {
             "desc": "上市",
             "id": 110,
             "value": "IPO"
-
         }
     ],
     "SearchSortEnum": [
@@ -864,7 +852,6 @@ window.DICTIONARY_DATA =  {
             "desc": "按爆发力排序",
             "id": 1,
             "value": "INCREASE"
-
         }
     ],
     "ComPositionType": [
