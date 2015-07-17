@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-show="showForm">
     <div class="investor-validate">
         <div class="basic-info common-problem">
             <a href="{{helpHost}}/#tab1-5" target="_blank">跟投人认证常见问题</a>
@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>真实姓名</label>
                         <div class="col-max">
-                            <input class="form-control" type="text" ng-model="user.name" placeholder="须与身份证姓名保持一致" maxlength="15"  required/>
+                            <input class="form-control" type="text" ng-model="user.name" name="name" placeholder="须与身份证姓名保持一致" maxlength="15"  required/>
                         </div>
 
                     </div>

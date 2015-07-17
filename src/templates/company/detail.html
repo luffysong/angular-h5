@@ -106,11 +106,11 @@
 							融资金额&nbsp;&nbsp;<i class="money-unit" ng-if="item.financeValue">{{item.financeValueUnit | moneyUnit}} </i><span class="money" ng-if="item.financeValue">{{item.financeValue | wanText}}</span>
 							<span class="money" ng-if="!item.financeValue">未知</span>
 						</span>
-						<span class="dividing">|</span>	
+						<span class="dividing">|</span>
 						<span>
 							融资估值&nbsp;&nbsp;<i class="money-unit" ng-if="item.estimateValue">{{item.estimateValueUnit | moneyUnit}} </i><span class="money-value" ng-if="item.estimateValue">{{item.estimateValue | wanText}}</span>
 							<span class="money-value" ng-if="!item.estimateValue">未知</span>
-						</span>	
+						</span>
 					</div>
 				</div>
 				<ul class="list-item">
@@ -119,7 +119,7 @@
 							<img class="img-rounded" ng-src="{{obj.logo | image:60:'logo'}}" alt="" width="60">
 						</a>
 						<div class="info">
-							<a ui-sref="{{obj | investorLink:'entityId':'entityType'}}">{{obj.name}}</a> 
+							<a ui-sref="{{obj | investorLink:'entityId':'entityType'}}">{{obj.name}}</a>
 							<!-- <span class="bage" ng-show="item.status!='CONFIRMED'">待确认</span> -->
 							<p>{{obj.brief | substr: 26}}</p>
 						</div>
