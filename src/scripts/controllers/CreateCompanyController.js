@@ -430,8 +430,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             //if($scope.formData.cid){
 
             // todo : 时间修复
-            $scope.formData.startDate = new Date;
-            $scope.formData.endDate = new Date;
+            $scope.formData.startDate = $scope.formData.startYear + '-' + $scope.formData.startMonth + '-01' ;
             if (!$scope.formData.logo) $scope.formData.logo = '//krplus-pic.b0.upaiyun.com/default_logo.png!30';
 
 
