@@ -61,10 +61,9 @@ angular.module('defaultApp')
             }
             _hmt.push(['_trackPageview', "/user/login##fromUser=0"]);
             krtracker('trackPageView', '/user/login');
-            console.log(location.href)
 
             setTimeout(function(){
-                console.log(location.href)
+
                 location.href = '/user/login?from=' + encodeURIComponent(location.href);
             }, 300);
             return false;
@@ -78,7 +77,7 @@ angular.module('defaultApp')
                     deferred.resolve();
                 } else {
                     console.log(location.href)
-                    $state.go('guide.welcome');
+                    $state.go('guide.welcome', {from:encodeURIComponent(location.href)});
                     deferred.reject();
                 }
             });
