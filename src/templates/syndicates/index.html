@@ -36,7 +36,7 @@
 
         </a>
         <div class="syndicates-brief-info">
-            <div class="investor-led-title">
+            <div class="investor-led-title" ng-if="item.investorData.name">
                 <a ui-sref="{{item.investorData | investorLink:'id':'type'}}" title="{{item.investorData.name}}" class="led-name">
                     {{item.investorData.name}}
                 </a>
