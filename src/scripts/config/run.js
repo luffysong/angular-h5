@@ -76,10 +76,20 @@ console.log(location.href)
                 if (valid) {
                     deferred.resolve();
                 } else {
-                    //$state.go('guide.welcome', {from:encodeURIComponent(location.href), type:'1213'});
 
-                    //location.hash = '/guide/welcome?'+encodeURIComponent(location.href)
-                    location.hash = '/guide/welcome'
+                    var href = location.href,
+                        type;
+                    if(href.indexOf('#/company_create')!=-1){
+                        type = 'company_create'
+                    }else if(href.indexOf('#/investor/apply')!=-1){
+                        type = 'investor_apply'
+                    }else{
+                        type = 'other'
+                    }
+
+
+                    $state.go('guide.welcome', {from:encodeURIComponent(href), type:type});
+
                     deferred.reject();
                 }
             });
