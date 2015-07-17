@@ -48,7 +48,7 @@
                         <p class="c-orange">{{syndicatesInfo.base.max_coinvestor_number}}人</p>
                         <p>目标人数</p>
                     </div>
-                    <div class="detail" ng-hide="secret || !syndicatesInfo.base.time_left">
+                    <div class="detail" ng-hide="secret && !syndicatesInfo.base.time_left">
                         <p class="c-orange">{{syndicatesInfo.base.time_left ? syndicatesInfo.base.time_left : "已结束"}}</p>
                         <p>剩余天数</p>
                     </div>
