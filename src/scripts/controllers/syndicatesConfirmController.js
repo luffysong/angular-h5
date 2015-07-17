@@ -216,7 +216,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                         invite_code:$scope.krCode.number
                     }, function(data){
                         if(!$scope.hasRecord){
-                            location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_id,'url_order='+encodeURIComponent(location.href),'back_url='+$scope.ucHost+'/#/zhongchouOrder/'+$rootScope.companyId+"/"+$rootScope.fundingId]).join('&');
+                            location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_id,'url_order='+encodeURIComponent(location.href),'back_url='+$scope.rongHost+'/#/zhongchouOrder/'+$rootScope.companyId+"/"+$rootScope.fundingId]).join('&');
                         }else{
                             $state.go('syndicatesPay', {
                                 tid: data.trade_id,
