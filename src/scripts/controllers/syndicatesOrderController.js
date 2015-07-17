@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesOrderController',
-    function($scope, UserService, ErrorService, $stateParams,DictionaryService,CrowdFundingService,CoInvestorService,$state) {
+    function($scope, UserService, $stateParams,DictionaryService,CrowdFundingService,CoInvestorService,$state) {
         $scope.companyId = $stateParams.cid;
         $scope.fundingId = $stateParams.fundingId;
         $scope.showAll = false;

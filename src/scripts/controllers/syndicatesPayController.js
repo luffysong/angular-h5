@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesPayController',
-    function($scope, UserService, ErrorService, $stateParams,DictionaryService,CrowdFundingService,CoInvestorService,$state,$rootScope) {
+    function($scope, UserService , $stateParams,DictionaryService,CrowdFundingService,CoInvestorService,$state,$rootScope) {
         $scope.uid = UserService.getUID();
         $scope.tid = $stateParams.tid;
         $scope.amount = $stateParams.amount;
@@ -41,7 +41,6 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
             }, function(){
 
             }, function(err){
-                ErrorService.alert(err);
             });
         }
         /*选择其他银行卡事件*/
