@@ -210,7 +210,9 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                     $state.go('krspace.judge');
                 }else{
                     // $state.go('guide.success-enter');
-                    $state.go('investorValidate');
+                    //$state.go('investorValidate');
+                    console.log($stateParams.from)
+                    location.href = decodeURIComponent($stateParams.from)
                 }
                 setTimeout(function(){
                     location.reload();
