@@ -37,7 +37,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     break;
             }
         },function(err){
-            ErrorService(err);
+            ErrorService.alert(err);
         });
 
         $timeout(function(){
@@ -252,7 +252,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.submitForm = function(){
             //隐藏自定义错误信息
             Error.hide();
-            var pattern = /^[^u4e00-u9fa5]+$/g;
+            var pattern = /^[\u4E00-\u9FA5]+$/;
             if(pattern.test($scope.invest.name)){
                  Error.hide();
             }else{
@@ -402,7 +402,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }
 
             }else if(fieldName == 'fundUsdInvestMin' || fieldName == 'fundUsdInvestMax'){
-                console.log('----');
                 if(parseFloat($scope.invest.fundUsdInvestMin)  > parseFloat($scope.invest.fundUsdInvestMax)){
                      Error.show("投资额上限不能⼩于下限值");
                 }else{
