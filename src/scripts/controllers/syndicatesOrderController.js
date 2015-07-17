@@ -17,7 +17,6 @@ angular.module('defaultApp.controller').controller('syndicatesOrderController',
             per_page:100,
             page: 1
         },function(data){
-            console.log(data);
             $scope.listData =data.data;
             $scope.tempData = [];
             /*过滤数据，去除线下汇款订单*/
@@ -26,7 +25,7 @@ angular.module('defaultApp.controller').controller('syndicatesOrderController',
                     $scope.tempData.push(obj);
                 }
             });
-            $scope.tempList = $scope.tempData.concat("");
+            $scope.tempList = $scope.tempData.slice(0);
             $scope.tempData = $scope.tempData.slice(0,3);
         }, function(){
         });
@@ -37,7 +36,6 @@ angular.module('defaultApp.controller').controller('syndicatesOrderController',
             subid:$scope.uid,
             pay_type:"D"
         },function(data){
-            console.log(data);
             if(data.agreement_list.length){
                 $scope.hasRecord = true;
             }else{
