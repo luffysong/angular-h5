@@ -37,7 +37,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     break;
             }
         },function(err){
-            ErrorService(err);
+            ErrorService.alert(err);
         });
 
         $timeout(function(){
@@ -402,7 +402,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }
 
             }else if(fieldName == 'fundUsdInvestMin' || fieldName == 'fundUsdInvestMax'){
-                console.log('----');
                 if(parseFloat($scope.invest.fundUsdInvestMin)  > parseFloat($scope.invest.fundUsdInvestMax)){
                      Error.show("投资额上限不能⼩于下限值");
                 }else{
