@@ -61,7 +61,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('guide.welcome', {
-        url: '/welcome/:from',
+        url: '/welcome',
         templateUrl: 'templates/guide/welcome.html',
         controller: 'GuideWelcomeController',
         data:{

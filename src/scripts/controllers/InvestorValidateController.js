@@ -6,10 +6,10 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
     function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService, $interval) {
-        if(!UserService.getUID()){
-            location.href = "/user/login?from=" + encodeURIComponent(location.href);
-            return;
-        }
+        //if(!UserService.getUID()){
+        //    location.href = "/user/login?from=" + encodeURIComponent(location.href);
+        //    return;
+        //}
         $timeout(function(){
             window.scroll(0,0);
         },0);

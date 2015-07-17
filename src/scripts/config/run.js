@@ -77,7 +77,9 @@ console.log(location.href)
                     deferred.resolve();
                 } else {
                     //$state.go('guide.welcome', {from:encodeURIComponent(location.href), type:'1213'});
-                    location.hash = '/guide/welcome/agfdslg'
+
+                    //location.hash = '/guide/welcome?'+encodeURIComponent(location.href)
+                    location.hash = '/guide/welcome'
                     deferred.reject();
                 }
             });
