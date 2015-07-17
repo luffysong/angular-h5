@@ -134,7 +134,11 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     }
                 }
             });
-
+            /*保密预热状态发布*/
+            if($scope.color == 25){
+                $scope.secret = true;
+                $scope.status = "预热中";
+            }
             if($scope.syndicatesInfo.base){
                 $scope.syndicatesInfo.base.percent = parseInt($scope.syndicatesInfo.base.cf_success_raising) * 100 / parseInt($scope.syndicatesInfo.base.cf_raising);
                 /*
@@ -192,23 +196,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         /*底部栏点击我要投资*/
         $scope.toInvest = function(){
             $state.go("syndicatesConfirm");
-            /*$modal.open({
-                templateUrl: 'templates/company/pop-to-invest.html',
-                windowClass: 'to-invest-window',
-                controller: [
-                    '$scope', '$modalInstance','scope',
-                    function ($scope, $modalInstance, scope) {
-                        $scope.cancel = function(){
-                            $modalInstance.dismiss();
-                        }
-                    }
-                ],
-                resolve: {
-                    scope: function(){
-                        return $scope;
-                    }
-                }
-            });*/
         }
         /*开投提醒*/
         $scope.krCode = function(){

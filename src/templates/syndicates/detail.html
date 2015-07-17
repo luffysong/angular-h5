@@ -28,28 +28,31 @@
             <div class="syndicate-goal">
                 <div class="account">
                     <!--融资进度条-->
-                    <loading-bar percent="syndicatesInfo.base.percent" loading-tip="syndicatesInfo.base.cf_success_raising" ng-show="syndicatesInfo.base.cf_raising">
+                    <loading-bar percent="syndicatesInfo.base.percent" loading-tip="syndicatesInfo.base.cf_success_raising">
                     </loading-bar>
                     <p class="clearfix mt-15 has-syndicate">
-                        已筹集<span class="ml-10">{{syndicatesInfo.base.cf_success_raising | unitConversion}}</span>
-                        <span class="fl-right">融资目标<span class="c-orange ml-10">{{syndicatesInfo.base.cf_raising | unitConversion}}</span>
+                        <span ng-hide="secret && !syndicatesInfo.base.cf_success_raising">
+                            已筹集<span class="ml-10">{{syndicatesInfo.base.cf_success_raising | unitConversion}}</span>
+                        </span>
+                        <span class="fl-right">
+                            目标金额<span class="c-orange ml-10">{{syndicatesInfo.base.cf_raising | unitConversion}}</span>
                         </span>
                     </p>
                 </div>
-                <div class="syndicate-detail-num clearfix text-center">
-                    <div class="detail">
+                <div class="syndicate-detail-num clearfix text-center" ng-hide="!syndicatesInfo.base.min_investment && !syndicatesInfo.base.max_coinvestor_number && !syndicatesInfo.base.time_left && secret && !syndicatesInfo.funding.sell_shares">
+                    <div class="detail" ng-hide="secret && !syndicatesInfo.base.min_investment">
                         <p class="c-orange">{{syndicatesInfo.base.min_investment | unitConversion}}</p>
                         <p>最低跟投额</p>
                     </div>
-                    <div class="detail">
+                    <div class="detail" ng-hide="secret && !syndicatesInfo.base.max_coinvestor_number">
                         <p class="c-orange">{{syndicatesInfo.base.max_coinvestor_number}}人</p>
                         <p>目标人数</p>
                     </div>
-                    <div class="detail">
+                    <div class="detail" ng-hide="secret && !syndicatesInfo.base.time_left">
                         <p class="c-orange">{{syndicatesInfo.base.time_left ? syndicatesInfo.base.time_left : "已结束"}}</p>
                         <p>剩余天数</p>
                     </div>
-                    <div class="detail">
+                    <div class="detail" ng-hide="secret && !syndicatesInfo.funding.sell_shares">
                         <p class="c-orange">{{syndicatesInfo.funding.sell_shares ? syndicatesInfo.funding.sell_shares : "即将开启"}}</p>
                         <p>出让股份</p>
                     </div>
@@ -65,15 +68,15 @@
             <div class="syndicate-goal fund-info">
                 <div class="syndicate-detail-num clearfix text-center fund-info">
                     <div class="clearfix">
-                        <div class="detail">
+                        <div class="detail" ng-hide="secret && !syndicatesInfo.funding.round">
                             <p class="c-orange">{{syndicatesInfo.funding.round | dict_FinancePhase}}</p>
                             <p>融资轮次</p>
                         </div>
-                        <div class="detail">
+                        <div class="detail" ng-hide="secret && !syndicatesInfo.funding.fund_raising">
                             <p class="c-orange">{{syndicatesInfo.funding.fund_raising | unitConversion}}</p>
                             <p>融资金额</p>
                         </div>
-                        <div class="detail">
+                        <div class="detail" ng-hide="secret && !syndicatesInfo.funding.valuation">
                             <p class="c-orange">{{syndicatesInfo.funding.valuation | unitConversion}}</p>
                             <p>投前估值</p>
                         </div>
@@ -95,7 +98,7 @@
         </div>
 
         <!--领投人-->
-        <div ng-if="syndicatesInfo.base.investorData.name || syndicatesInfo.detail.lead_reason" class="welcome-form">
+        <div ng-if="syndicatesInfo.base.investorData.logo && syndicatesInfo.base.investorData.name" class="welcome-form">
             <div class="basic-info">
                 领投人
             </div>

@@ -28,6 +28,13 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
             console.log(err);
             $scope.hasRecord = false;
         });
+        /*获取订单detail*/
+        CrowdFundingService['cf-trade'].get({
+            id: $scope.tid
+        }, function(data){
+            $scope.tradeData = data;
+        }, function(err){
+        });
         /*选择卡号事件*/
         $scope.selectCard = function(index){
             $scope.cardIndex = index;

@@ -21,8 +21,9 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                     if(key.status == obj.value){
                         key.name = obj.desc;
                         key.color = obj.value;
-                        /*status为众筹中*/
-                        if(key.status == 30){
+                        if(key.status == 25){
+                            key.name = "预热中";
+                        }else if(key.status == 30){
                             /*众筹未开始*/
                             var startTime = new Date(key.start_time);
                             if(new Date() < startTime){
