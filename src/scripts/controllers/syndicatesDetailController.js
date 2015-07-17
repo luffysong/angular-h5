@@ -27,7 +27,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     msg:"请先完善资料"
                 });
                 $timeout(function(){
-                    location.hash="#/guide/welcome";
+                    $state.go("investorValidate");
                 },5000);
             }else if(data){
                 if(data.coInvestor){
@@ -68,7 +68,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                         msg:"请先完善资料"
                     });
                     $timeout(function(){
-                        location.hash="#/guide/welcome";
+                        $state.go('investorValidate');
                     },5000);
                 }else if(data){
                     if(data.coInvestor){

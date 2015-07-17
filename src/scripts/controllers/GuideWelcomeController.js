@@ -7,7 +7,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller').controller('GuideWelcomeController',
     function($stateParams, $scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope, $timeout, $upload, AndroidUploadService) {
         console.log($stateParams, 'welcome')
-        $scope.sourceType = $stateParams.type;
+        $scope.sourceType = $stateParams.type || 'other';
 
         $scope.user = {
             avatar:""
@@ -208,7 +208,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             }, function(data){
                 if($scope.applySpaceEnter){
                     $state.go('krspace.judge');
-                }else{
+                }else if($stateParams.from){
                     // $state.go('guide.success-enter');
                     //$state.go('investorValidate');
                     console.log($stateParams.from)

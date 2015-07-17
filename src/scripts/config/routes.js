@@ -88,25 +88,45 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('syndicatesConfirm', {
         url: '/zhongchouConfirm/{cid}/{fundingId}',
         templateUrl: 'templates/syndicates/confirm.html',
-        controller: 'syndicatesConfirmController'
+        controller: 'syndicatesConfirmController',
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
     });
     /*众筹订单页面*/
     $stateProvider.state('syndicatesOrder', {
         url: '/zhongchouOrder/{cid}/{fundingId}',
         templateUrl: 'templates/syndicates/order.html',
-        controller: 'syndicatesOrderController'
+        controller: 'syndicatesOrderController',
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
     });
     /*众筹支付页面*/
     $stateProvider.state('syndicatesPay', {
         url: '/zhongchouPay/{tid}/{amount}',
         templateUrl: 'templates/syndicates/pay.html',
-        controller: 'syndicatesPayController'
+        controller: 'syndicatesPayController',
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
     });
     /*众筹支付成功页面*/
     $stateProvider.state('syndicatesSuc', {
         url: '/zhongchouSuc?cid&fundingId',
         templateUrl: 'templates/syndicates/suc.html',
-        controller: 'syndicatesSucController'
+        controller: 'syndicatesSucController',
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
     });
     /*跟投人认证*/
     $stateProvider.state('investorValidate', {
