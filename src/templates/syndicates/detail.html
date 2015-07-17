@@ -61,7 +61,7 @@
         </div>
 
         <!--融资信息-->
-        <div ng-show="fundingId && syndicatesInfo.funding && syndicatesInfo.funding.fund_raising && isCoInvestor">
+        <div ng-show="fundingId && syndicatesInfo.funding  && isCoInvestor">
             <div class="basic-info">
                 融资信息
             </div>
@@ -89,7 +89,7 @@
                                 <a ui-sref="{{item.investorData | investorLink:'id':'type'}}">
                                     <p>{{item.investorData.name}}</p>
                                 </a>
-                                <p>{{item.money | unitConversion}}</p>
+                                <p ng-if="item.money != 0">{{item.money | unitConversion}}</p>
                             </div>
                         </div>
                     </div>
