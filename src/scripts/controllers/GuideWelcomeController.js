@@ -5,7 +5,10 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('GuideWelcomeController',
-    function($scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope, $timeout, $upload, AndroidUploadService) {
+    function($stateParams, $scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope, $timeout, $upload, AndroidUploadService) {
+        console.log($stateParams, 'welcome')
+        $scope.sourceType = $stateParams.type;
+
         $scope.user = {
             avatar:""
         };
@@ -207,11 +210,13 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                     $state.go('krspace.judge');
                 }else{
                     // $state.go('guide.success-enter');
-                    $state.go('investorValidate');
+                    //$state.go('investorValidate');
+                    console.log($stateParams.from)
+                    location.href = decodeURIComponent($stateParams.from)
                 }
-                setTimeout(function(){
-                    location.reload();
-                },0);
+                //setTimeout(function(){
+                //    location.reload();
+                //},0);
             }, function(err){
                 $('<div class="error-alert error error-code">' + err.msg + '</div>').appendTo('body');
                 $timeout(function(){

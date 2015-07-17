@@ -50,6 +50,57 @@ angular.module('defaultApp')
                     path.match(/zhongchou|investorValidate/) ? 'zhong' : "rong";
             window.CommonHeader && CommonHeader.setNavActive(type);
         });
-    });
+    })
+    .run(function($http, $rootScope, $location, $state, notify, Permission, UserService, $q, $state, $modal){
+        //Define Roles
+        var login, valid;
+
+        Permission.defineRole('login', login = function () {
+            if (UserService.getUID()) {
+                return true; // Is anonymous
+            }
+            _hmt.push(['_trackPageview', "/user/login##fromUser=0"]);
+            krtracker('trackPageView', '/user/login');
+
+            setTimeout(function(){
+console.log(location.href)
+                location.href = '/user/login?from=' + encodeURIComponent(location.href);
+            }, 300);
+            return false;
+        });
+        Permission.defineRole('valid', valid = function () {
+            var deferred = $q.defer();
+            if(!login())return;
+
+            UserService.isProfileValid(function (valid) {
+                if (valid) {
+                    deferred.resolve();
+                } else {
+
+                    var href = location.href,
+                        type,
+                        from;
+                    if(href.indexOf('#/company_create')!=-1){
+                        type = 'company_create';
+                        from = '#/company_create'
+                    }else if(href.indexOf('#/investor/apply')!=-1){
+                        type = 'investor_apply';
+                        from = '#/investor/apply'
+                    }else{
+                        type = 'other'
+                        from = href;
+                    }
+
+
+                    $state.go('guide.welcome', {from:encodeURIComponent(from), type:type});
+
+                    deferred.reject();
+                }
+            });
+
+            return deferred.promise;
+        });
+
+    })
 
 

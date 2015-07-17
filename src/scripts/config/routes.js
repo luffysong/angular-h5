@@ -61,9 +61,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('guide.welcome', {
-        url: '/welcome',
+        url: '/welcome?{from}&{type}',
         templateUrl: 'templates/guide/welcome.html',
-        controller: 'GuideWelcomeController'
+        controller: 'GuideWelcomeController',
+        data:{
+            permissions : {
+                only : ['login']
+            }
+        }
     });
 
 
@@ -107,27 +112,24 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('investorValidate', {
         url: '/investorValidate',
         templateUrl: 'templates/investorValidate/index.html',
-        controller: 'InvestorValidateController'
+        controller: 'InvestorValidateController',
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
     });
     /*投资人认证申请*/
     $stateProvider.state('investorValidateApply', {
         url: '/investor/apply',
         templateUrl: 'templates/investor/apply.html',
-        controller: 'InvestorValidateApplyController'
+        controller: 'InvestorValidateApplyController',
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
     });
-    /*投资人认证申请提交审核页面*/
-    $stateProvider.state('investorValidateApplyAlert', {
-        url: '/investor/apply-alert',
-        templateUrl: 'templates/investor/apply-alert.html',
-        controller: ''
-    });
-    /*投资人认证申请提交审核成功页面*/
-    $stateProvider.state('investorValidateApplySuccess', {
-        url: '/investor/apply-success',
-        templateUrl: 'templates/investor/apply-success.html',
-        controller: ''
-    });
-
     /*协议路由，用户服务协议*/
     $stateProvider.state('serviceProtocol', {
         url: '/serviceProtocol',
@@ -153,7 +155,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('createCompany', {
         url: '/company_create',
         templateUrl: 'templates/company/create.html',  // todo : 文件路径
-        controller: 'CreateCompanyController' // todo : controller
+        controller: 'CreateCompanyController', // todo : controller
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
     });
     /*创建公司审核页*/
     $stateProvider.state('createCompanyApply', {

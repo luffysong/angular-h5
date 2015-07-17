@@ -81,7 +81,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                 method: 'POST',
                 transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
                     if(data.companySource){
-                        console.log(data)
+                        //console.log(data)
                         data.startDate = data.startYear + '-'+(data.startMonth.length>1?data.startMonth:('0'+data.startMonth))+'-'+'01 '+ '00:00:00';
                         data.endDate = dateFilter( data.endDate, 'yyyy-MM-dd hh:mm:ss');
                         if(!data.endDate) data.current=true;
@@ -140,8 +140,10 @@ angular.module('defaultApp.service').service('CompanyService', [
                     action: 'claim'
                 },
                 transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
-                    data.startDate = dateFilter( data.startDate, 'yyyy-MM-dd hh:mm:ss');
-                    data.endDate = data.endYear?(dateFilter(data.endDate, 'yyyy-MM-dd hh:mm:ss')):"";
+                    //data.startDate = dateFilter( data.startDate, 'yyyy-MM-dd hh:mm:ss');
+                    //data.endDate = data.endYear?(dateFilter(data.endDate, 'yyyy-MM-dd hh:mm:ss')):"";
+                    data.startDate = data.startYear + '-'+(data.startMonth.length>1?data.startMonth:('0'+data.startMonth))+'-'+'01 '+ '00:00:00';
+                    data.endDate = dateFilter( data.endDate, 'yyyy-MM-dd hh:mm:ss');
                     if(!data.endDate)data.current=true;
                     data.type = data.level;
                     return data;

@@ -12,10 +12,11 @@
   margin: 0;
 }
 
-.form-control.ng-dirty.ng-invalid{
+.form-control.ng-dirty.ng-invalid {
   //border:1px solid #ff0000;
 }
-.error{
+
+.error {
   //padding: 5px 0 0 0;
   //color: #FF0000;
 }
@@ -23,52 +24,29 @@
 .create_company {
   background-color: #fff;
 
+  ::-webkit-input-placeholder {
+    color: #999;
+  }
 
-  .ac-container{
+  :-moz-placeholder {
+    color: #999;
+  }
+  ::-moz-placeholder {
+    color: #999;
+  }
+  :-ms-input-placeholder {
+    color: #999;
+  }
+
+  .ac-container {
     background-color: #f7f7f7 !important;
     border: 1px solid #d9d9d9;
-    font-size: 10px;
+    font-size: 14px;
     left: 18px !important;
     width: 90% !important;
-
-    a{
-      margin: 0 0 0 25px;
-      padding: 0;
-    }
-    &::before{
-      display: block;
-      width: 100%;
-      padding: 0 0 0 35px;
-      line-height: 35px;
-      content: '请选择已收录公司或创建新公司';
-      font-size: 10px;
-      background-color: #f7f7f7;
-    }
-    .ac-menu{
-      background-color: #f7f7f7;
-      border: none 0;
-      box-shadow: none;
-
-      li{
-        border: none 0;
-        border-top: 1px solid #ccc;
-
-      }
-
-      li:last-child{
-        background-color: #bfbfbf;
-        color: #fff;
-      }
-    }
-  }
-  
-  .gray_color{
-    color: #ccc;
-  }
-
-  .ac-container{
     overflow: hidden;
-    .img{
+
+    img {
       width: 25px;
       height: 25px;
       line-height: 24px;
@@ -76,15 +54,61 @@
       margin: 3px 5px 0;
       overflow: hidden;
       float: left;
-      img{
-        width: 100%;
-        border-radius: 3px;
+    }
+
+    a {
+      padding: 0 !important;
+      background-color: #f7f7f7;
+      position: relative;
+      z-index: 100;
+      &:hover {
+        background-color: #bfbfbf;
+      }
+
+      .newCo {
+        padding: 0 0 0 25px;
+        background-color: #ccc;
+        color: #f7f7f7;
       }
     }
-    span{
-      overflow: hidden;
+
+    &::before {
       display: block;
+      width: 100%;
+      padding: 0 0 0 35px;
+      line-height: 35px;
+      content: '已出现公司直接选中，没有则选择创建';
+      color: #a0a0a0;
+      background-color: #f7f7f7;
     }
+    .ac-menu {
+      background-color: #f7f7f7;
+      border: none 0;
+      box-shadow: none;
+
+      li {
+        border: none 0;
+        &:hover {
+          background-color: #bfbfbf;
+          color: #fff;
+        }
+        &:active {
+          background-color: #bfbfbf;
+          color: #fff;
+        }
+
+        .coList {
+          margin: 0 0 0 25px;
+          border-top: 1px solid #dedede;
+        }
+
+      }
+
+    }
+  }
+
+  .gray_color {
+    color: #ccc;
   }
 
   b.important {
@@ -95,7 +119,7 @@
     padding: 14px 15px;
     border-bottom: 1px solid @border-gray;
     background-color: @bg_gray;
-    font-size: 12px;
+    font-size: 14px;
     b {
       color: @color_blue;
       float: right;
@@ -110,7 +134,7 @@
       border-collapse: collapse;
       width: 100%;
       td {
-        font-size: 12px;
+        font-size: 14px;
         border-bottom: 1px solid @border-gray;
         padding: 15px;
         line-height: 1.5;
@@ -120,7 +144,7 @@
           text-align: right;
           padding: 15px 0;
           white-space: nowrap;
-          span{
+          span {
             display: inline-block;
           }
         }
@@ -133,12 +157,14 @@
         line-height: 2;
         margin: -3px 0 0 0;
         background-color: @transparent;
+        color:#333;
       }
       input {
-        width: 85%;
+        width: 90%;
         border: 0 none;
         background-color: @transparent;
-
+        margin-top: 1px;
+        color:#333;
       }
 
       select {
@@ -147,9 +173,23 @@
       .vtop {
         vertical-align: top;
       }
+      .website {
+        p {
+          margin: 0;
+        }
+      }
+
+      .progress {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        background-color: @color_blue;
+        height: 0;
+        opacity: 0.4;
+      }
 
       .logo {
-        .upload-b{
+        .upload-b {
           overflow: hidden;
           display: block;
           width: 70px;
@@ -158,17 +198,18 @@
           border-radius: 50%;
           position: relative;
           border: 1px solid #f5f5f5;
-          .filewrap{
+
+          .filewrap {
             display: block;
             position: absolute;
             bottom: 0;
             height: 20px;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0, 0, 0, 0.4);
             text-align: center;
             color: #ddd;
             width: 70px;
 
-            .input-file{
+            .input-file {
               outline: none;
               opacity: 0;
               left: -72px;
@@ -177,9 +218,9 @@
               height: 60px;
               top: -47px;
 
-              &:focus{
-                -webkit-tap-highlight-color:rgba(0,0,0,0);
-                tap-highlight-color:rgba(0,0,0,0);
+              &:focus {
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                tap-highlight-color: rgba(0, 0, 0, 0);
               }
 
             }
@@ -196,24 +237,25 @@
         }
       }
 
-      .card{
-        p{
+      .card {
+        p {
           max-width: 100%;
           margin: 0 0 10px 0;
         }
-        .pic{
+        .pic {
           display: block;
 
-          .upload-b{
+          .upload-b {
             overflow: hidden;
             width: 110px;
             border-radius: 4px;
             border: 1px solid #008df2;
 
-            .filewrap{
+            .filewrap {
               width: 110px;
+              background-color: transparent;
 
-              .input-file{
+              .input-file {
                 width: 330px;
                 height: 66px;
                 left: -111px;
@@ -223,49 +265,60 @@
           }
         }
       }
-      .time{
-        color: #888;
+      .pro_status{
         select{
+          width: 120px;
+        }
+      }
+      .time {
+        color: #888;
+        select {
           width: 60px;
+        }
+        select{
+          font-size: 12px;
         }
       }
       .job {
-        .split{
+        .split {
           border-top: 1px solid @border-gray;
           padding: 10px 0 0 0;
           margin: 16px 0 0 0;
         }
-        td:last-child{
+        td:last-child {
           padding-right: 0;
+        }
+        select{
+          width: 120px;
         }
       }
 
     }
   }
 
-  .submit{
+  .submit {
     padding: 1px;
     background-color: #f6f6f6;
-    button{
+    button {
       display: block;
       margin: 10px auto;
       width: 70%;
       height: 40px;
       background-color: @color_blue;
       padding: 0;
-      border: none 0 ;
+      border: none 0;
       color: #fff;
       font-size: 14px;
       border-radius: 4px;
     }
-    b{
+    b {
       display: block;
       margin: 0 auto;
       width: 70%;
       font-weight: normal;
       color: #999;
       font-size: 12px;
-      i{
+      i {
         font-style: normal;
         color: @color_blue;
       }
@@ -273,22 +326,21 @@
   }
 }
 
+.pop_create_tip_wrap {
+  background-color: rgba(0, 0, 0, 0.5);
 
-.pop_create_tip_wrap{
-  background-color: rgba(0, 0,0,0.5);
-
-  .modal-dialog{
+  .modal-dialog {
     margin: 15px 20px;
   }
-  .modal-content{
+  .modal-content {
     padding-bottom: 0;
   }
-  .modal-content{
+  .modal-content {
     border: none 0;
   }
-  .pop_create_tip{
+  .pop_create_tip {
 
-    h4{
+    h4 {
       font-size: 14px;
       text-align: center;
       color: #333;
@@ -297,19 +349,19 @@
       height: 45px;
       line-height: 45px;
     }
-    ol{
+    ol {
       padding: 10px 10px 0;
     }
-    li{
+    li {
       list-style: inside decimal;
       font-size: 12px;
       color: #6b6b6b;
-      b{
+      b {
         font-weight: bold;
         color: #3d3d3d;
       }
     }
-    button{
+    button {
       width: 100%;
       height: 40px;
       border: none 0;

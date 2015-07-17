@@ -40,7 +40,8 @@ var depModules = [
     'cgNotify',
     'slick',
     'highcharts-ng',
-    'MassAutoComplete'
+    'MassAutoComplete',
+    'permission'
 ];
 
 if(window.MOCKMODE_ON){

@@ -6,34 +6,38 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateApplyController',
     function($state,$scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService) {
-        //用户是否登录
-        if(!UserService.getUID()){
-            location.href = "/user/login?from=" + encodeURIComponent(location.href);
-            return;
+        $scope.investorValidateApply = {
+            status:''
         }
+        //用户是否登录
+        //if(!UserService.getUID()){
+        //    location.href = "/user/login?from=" + encodeURIComponent(location.href);
+        //    return;
+        //}
+
         //用户个人信息是否满足条件
-        UserService.isProfileValid(function(response){
-            if(!response){
-                $state.go('guide.welcome');
-                return false;
-            }
-        });
+        //UserService.isProfileValid(function(response){
+        //    if(!response){
+        //        $state.go('guide.welcome');
+        //        return false;
+        //    }
+        //});
         /*查询投资人认证申请状态*/
         InvestorauditService.queryStatus({},function(response){
             switch(response.status){
                 /*审核中*/
                 case 0:
-                     $state.go('investorValidateApplyAlert');
+                 $scope.investorValidateApply.status = 'checking';
                     break;
                 /*审核通过*/
                 case 1 :
-                    $state.go('investorValidateApplySuccess');
+                    $scope.investorValidateApply.status = 'success';
                     break;
                 default:
                     break;
             }
         },function(err){
-            ErrorService(err);
+            ErrorService.alert(err);
         });
 
         $timeout(function(){
@@ -47,10 +51,24 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             shareImg: 'http://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg'
         };
         InitWeixin();
+        var Error = {
+            show:function(msg){
+                $scope.error.msg = msg;
+                $scope.error.code = 1;
+            },
+            hide:function(){
+                $scope.error.code = 0;
+            }
+        }
         $scope.intro = {};
         $scope.intro.value = {
             intro:"",
             pictures:""
+        };
+        /*错误信息提示*/
+        $scope.error = {
+            code:0, //0为不显示，非0显示错误信息
+            msg:''
         };
         /*选中的投资阶段*/
         $scope.stageList = [];
@@ -124,11 +142,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         UserService.basic.get({
             id:UserService.getUID()
         },function(data){
-            console.log('====data===',data);
             /*基本信息*/
             $scope.invest.name = data.name;
             $scope.invest.intro = data.intro;
-
             /*关注领域数据处理*/
             if(data.industry && data.industry.length){
                 angular.extend($scope.areaList,data.industry);
@@ -170,6 +186,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             if($scope.areaList.length == 3 && $scope.areaList.indexOf($scope.invest.investorFocusIndustrys[index].value) < 0){
                 return;
             }else{
+                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
                 $scope.areaList = [];
                 $scope.invest.investorFocusIndustrys[index].active = !$scope.invest.investorFocusIndustrys[index].active;
                 angular.forEach($scope.invest.investorFocusIndustrys,function(obj,i){
@@ -233,12 +250,23 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
         /*表单提交*/
         $scope.submitForm = function(){
+            //隐藏自定义错误信息
+            Error.hide();
+           /* var pattern = /^[\u4E00-\u9FA5a-zA-Z]+$/;
+            if(pattern.test($scope.invest.name)){
+                 Error.hide();
+            }else{
+                Error.show("请输入真实姓名");
+                return false;
+            }*/
+
             if($scope.intro.value.pictures){
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("picEmpty",true);
             }else{
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("picEmpty",false);
             }
             /*检查投资阶段是否选择，给出相应提示*/
+            $scope.stageList = [];
             angular.forEach($scope.invest.fundsPhases,function(key,index){
                 if(key.active){
                     $scope.stageList.push(key);
@@ -260,34 +288,40 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             /*检查单笔可投额度*/
             if(isPersonal){
                 /*个人*/
-                if(($scope.invest.cnyInvestMin && $scope.invest.cnyInvestMax) || ($scope.invest.usdInvestMin && $scope.invest.usdInvestMax )){
-                    angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('investMoneyEmpty',true);
+                if(($scope.invest.cnyInvestMin && $scope.invest.cnyInvestMax) || (!$scope.invest.cnyInvestMin && !$scope.invest.cnyInvestMax)){
+                    Error.hide();
                 }else{
-                    angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('investMoneyEmpty',false);
+                    Error.show("请填写单笔可投额");
+                    return false;
+                }
+                if(($scope.invest.usdInvestMin && $scope.invest.usdInvestMax) || (!$scope.invest.usdInvestMin && !$scope.invest.usdInvestMax)){
+                    Error.hide();
+                }else{
+                    Error.show("请填写单笔可投额");
+                    return false;
                 }
             }
             if (isFund){
                 /*基金*/
-                if(($scope.invest.fundCnyInvestMin && $scope.invest.fundCnyInvestMax) || ($scope.invest.fundUsdInvestMin && $scope.invest.fundUsdInvestMax )){
-                    angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('fundInvestMoneyEmpty',true);
+                if(($scope.invest.fundCnyInvestMin && $scope.invest.fundCnyInvestMax) || (!$scope.invest.fundCnyInvestMin && !$scope.invest.fundCnyInvestMax)){
+                    Error.hide();
                 }else{
-                    angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('fundInvestMoneyEmpty',false);
+                    Error.show("请填写单笔可投额");
+                    return false;
+                }
+                if(($scope.invest.fundUsdInvestMin && $scope.invest.fundUsdInvestMax) || (!$scope.invest.fundUsdInvestMin && !$scope.invest.fundUsdInvestMax)){
+                    Error.hide();
+                }else{
+                    Error.show("请填写单笔可投额");
+                    return false;
                 }
             }
-
             if(!isPersonal && !isFund){
-                angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('moneyEmpty',false);
-            }else{
-                 angular.element($("form[name='investorValidateForm']")).scope()['investorValidateForm'].$setValidity('moneyEmpty',true);
+                 Error.show("请填写单笔可投额");
+                 return false;
             }
-
-
-
-
             /*检查表单填写是否正确*/
-            if(!checkForm("investorValidateForm"))return;
-            $scope.hasClick = true;
-
+            if(!checkForm("investorValidateForm")) return;
             var investoraudit = {};
                 investoraudit['id'] = UserService.getUID();
                 investoraudit['name']   = $scope.invest.name;
@@ -307,24 +341,74 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 /*个人*/
                 investoraudit['cnyInvestMin']   = $scope.invest.cnyInvestMin;
                 investoraudit['cnyInvestMax']   = $scope.invest.cnyInvestMax;
+                if(parseFloat(investoraudit['cnyInvestMin']) > parseFloat(investoraudit['cnyInvestMax'])){
+                    Error.show("投资额下限不能大于上限值");
+                    return false;
+                }
                 /*基金*/
                 investoraudit['fundCnyInvestMin']   = $scope.invest.fundCnyInvestMin;
                 investoraudit['fundCnyInvestMax']   = $scope.invest.fundCnyInvestMax;
+                if(parseFloat(investoraudit['fundCnyInvestMin']) > parseFloat(investoraudit['fundCnyInvestMax'])){
+                    Error.show("投资额下限不能大于上限值");
+                    return false;
+                }
 
                 /*个人*/
                 investoraudit['usdInvestMin']   = $scope.invest.usdInvestMin;
                 investoraudit['usdInvestMax']   = $scope.invest.usdInvestMax;
+
+                if(parseFloat(investoraudit['usdInvestMin'])  > parseFloat(investoraudit['usdInvestMax'])){
+                     Error.show("投资额下限不能大于上限值");
+                    return false;
+                }
                 /*基金*/
                 investoraudit['fundUsdInvestMin']   = $scope.invest.fundUsdInvestMin;
                 investoraudit['fundUsdInvestMax']   = $scope.invest.fundUsdInvestMax;
+                if(parseFloat(investoraudit['fundUsdInvestMin'])  > parseFloat(investoraudit['fundUsdInvestMax'])){
+                     Error.show("投资额下限不能大于上限值");
+                    return false;
+                }
                 /*名片*/
                 investoraudit['businessCardLink']   = $scope.intro.value.pictures;
+                $scope.hasClick = true;
             InvestorauditService.save(investoraudit,function(response){
-                $state.go('investorValidateApplyAlert');
+                $scope.investorValidateApply.status = 'checking';
             },function(err){
                 $scope.hasClick = false;
                 ErrorService.alert(err);
             });
         };
+        /*监听事件*/
+        $scope.changeMoney = function(fieldName){
+            console.log(fieldName);
+             Error.hide();
+            if(fieldName == 'cnyInvestMin' ||  fieldName == 'cnyInvestMax'){
+                if(parseFloat($scope.invest.cnyInvestMin) > parseFloat($scope.invest.cnyInvestMax)){
+                    Error.show("投资额下限不能大于上限值");
+                }else{
+                    Error.hide();
+                }
+            }else if(fieldName =='fundCnyInvestMin' || fieldName ==  'fundCnyInvestMax' ){
+                if(parseFloat($scope.invest.fundCnyInvestMin) > parseFloat($scope.invest.fundCnyInvestMax)){
+                     Error.show("投资额下限不能大于上限值");
+                }else{
+                    Error.hide();
+                }
+            }else if (fieldName == 'usdInvestMin' || fieldName == 'usdInvestMax'){
+                if(parseFloat($scope.invest.usdInvestMin)  > parseFloat($scope.invest.usdInvestMax)){
+                    Error.show("投资额下限不能大于上限值");
+                }else{
+                     Error.hide();
+                }
+
+            }else if(fieldName == 'fundUsdInvestMin' || fieldName == 'fundUsdInvestMax'){
+                if(parseFloat($scope.invest.fundUsdInvestMin)  > parseFloat($scope.invest.fundUsdInvestMax)){
+                     Error.show("投资额下限不能大于上限值");
+                }else{
+                    Error.hide();
+                }
+            }
+        }
+
     }
 );
