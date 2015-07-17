@@ -100,7 +100,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('investorValidateApply', {
         url: '/investor/apply',
         templateUrl: 'templates/investor/apply.html',
-        controller: 'InvestorValidateApplyController'
+        controller: 'InvestorValidateApplyController',
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
     });
     /*协议路由，用户服务协议*/
     $stateProvider.state('serviceProtocol', {
