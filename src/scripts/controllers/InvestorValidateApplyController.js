@@ -252,13 +252,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.submitForm = function(){
             //隐藏自定义错误信息
             Error.hide();
-            var pattern = /^[\u4E00-\u9FA5a-zA-Z]+$/;
+           /* var pattern = /^[\u4E00-\u9FA5a-zA-Z]+$/;
             if(pattern.test($scope.invest.name)){
                  Error.hide();
             }else{
                 Error.show("请输入真实姓名");
                 return false;
-            }
+            }*/
 
             if($scope.intro.value.pictures){
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("picEmpty",true);
