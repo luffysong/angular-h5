@@ -204,6 +204,12 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             $scope.actionSheet = false;
         }
         $scope.ensurePay = function(){
+            if($scope.formData.investVal < $scope.baseData.base.min_investment){
+                ErrorService.alert({
+                    msg:"投资金额不能小于最低跟投金额"
+                });
+                return;
+            }
             $scope.remainAmount = $scope.baseData.base.cf_max_raising - $scope.baseData.base.cf_success_raising;
             $scope.remainAmount = Math.max($scope.remainAmount,0);
             function goToPay(){

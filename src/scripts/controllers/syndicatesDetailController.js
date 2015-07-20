@@ -204,9 +204,14 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 return;
             }else if(!$scope.isCoInvestor){
                 $state.go("investorValidate");
-            }else{
+            }else if($scope.noOrder){
                 $state.go("syndicatesConfirm",{
                     cid:$scope.companyData.company.id,
+                    fundingId:$scope.fundingId
+                });
+            }else{
+                $state.go("syndicatesOrder",{
+                    cid:$scope.companyId,
                     fundingId:$scope.fundingId
                 });
             }
