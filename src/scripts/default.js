@@ -58,10 +58,10 @@ require('./config/run');
 
 // 启动
 $(document).ready(function () {
-    if(navigator.userAgent.match(/36kr/) && location.hash.indexOf('zhongchou')>-1){
-        console.log("test");
-        location.href = 'http://'+projectEnvConfig.helpHost+'/q-zc-helper.html';
-        return;
-    }
+    //if(navigator.userAgent.match(/36kr/) && location.hash.indexOf('zhongchou')>-1){
+    //    console.log("test");
+    //    location.href = 'http://'+projectEnvConfig.helpHost+'/q-zc-helper.html';
+    //    return;
+    //}
   angular.bootstrap(document, ['defaultApp']);
 });
