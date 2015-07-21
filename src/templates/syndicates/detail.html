@@ -120,7 +120,7 @@
             </div>
             <div class="form-group normal no-b" ng-if="syndicatesInfo.detail.lead_business_desc || syndicatesInfo.detail.lead_reason">
                 <p class="led-title">领投理由</p>
-                <p class="led-content">
+                <p class="led-content" ng-if="isCoInvestor">
                     {{syndicatesInfo.detail.lead_business_desc}}
                 </p>
                 <p class="led-content">
