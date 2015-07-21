@@ -270,11 +270,18 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
 
         /*表单提交*/
         $scope.submitForm = function(){
+            if($scope.user.idCardNumbe != $scope.user.reIdCardNumber){
+                $scope.enterCard = true;
+                $('html,body').stop().animate({scrollTop: $("input[name='reIdCardNumber']").offset().top-100}, 400, function () {
+                });
+                return;
+            }
             angular.forEach($scope.investStage,function(key,index){
                 if(key.active && $scope.user.investPhases.indexOf(key.value) < 0){
                     $scope.user.investPhases.push(key.value);
                 }
             });
+            if(!checkForm("investorValidateForm"))return;
             if(!$scope.user.investPhases.length){
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",false);
                 $('html,body').stop().animate({scrollTop: $(".stage").offset().top-100}, 400, function () {
@@ -291,7 +298,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }else{
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
             }
-            if(!checkForm("investorValidateForm"))return;
             $scope.hasClick = true;
             $scope.user.focusIndustry = $scope.areaList;
             $scope.user.businessCardUrl = $scope.intro.value.pictures;
