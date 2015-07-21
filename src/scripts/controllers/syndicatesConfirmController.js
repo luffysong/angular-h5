@@ -38,6 +38,8 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                     $scope.baseData.base.status = obj.desc;
                     if(obj.value == 30 && new Date() < new Date($scope.baseData.base.start_time)){
                         $scope.isPreHeat = true;
+                    }else{
+                        $scope.isPreHeat = false;
                     }
                 }
             });
