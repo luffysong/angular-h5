@@ -89,6 +89,29 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 }
             }
         });
+        $scope.seeProtocol = function(event,link){
+            if(link == "#/riskTipAll"){
+                event.preventDefault();
+                $modal.open({
+                    templateUrl: 'templates/company/pop-risk-tip-all.html',
+                    windowClass: 'remind-modal-window',
+                    controller: [
+                        '$scope', '$modalInstance','scope',
+                        function ($scope, $modalInstance, scope) {
+                            $scope.ok = function(){
+                                $modalInstance.dismiss();
+                            }
+                        }
+                    ],
+                    resolve: {
+                        scope: function(){
+                            return $scope;
+                        }
+                    }
+                });
+            }
+
+        }
         /*查看风险点*/
         $scope.seeRisk = function(){
             $modal.open({
