@@ -275,15 +275,21 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     $scope.user.investPhases.push(key.value);
                 }
             });
-            if(!$scope.areaList.length){
-                angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",false);
-            }else{
-                angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
-            }
             if(!$scope.user.investPhases.length){
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",false);
+                $('html,body').stop().animate({scrollTop: $(".stage").offset().top-100}, 400, function () {
+                });
+                return;
             }else{
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",true);
+            }
+            if(!$scope.areaList.length){
+                angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",false);
+                $('html,body').stop().animate({scrollTop: $(".stage").offset().top-100}, 400, function () {
+                });
+                return;
+            }else{
+                angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
             }
             if(!checkForm("investorValidateForm"))return;
             $scope.hasClick = true;
@@ -293,7 +299,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.user.city = $scope.basic.value.address2;
                 $scope.user.country = $scope.basic.value.address1;
             }
-            console.log($scope.user);
             UserService.save({
                 id:'identity',
                 sub: 'cert',
