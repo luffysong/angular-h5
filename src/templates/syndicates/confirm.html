@@ -6,12 +6,12 @@
                 <a class="href-tip" href="" ng-click="getKrCode()">如何获得Kr码</a>
             </div>
             <div class="kr-code-enter">
-                <input type="text" maxlength="8" class="kr-code-input" ng-disabled="validateSuc" placeholder="请输入优先购买Kr码" ng-model="krCode.number" />
+                <input type="text" maxlength="8" class="kr-code-input" ng-disabled="validateSuc" placeholder="请输入优先购买Kr码" ng-model="krCode.number" name="krCode" />
                 <a href="" class="validate-kr-code" ng-class="{'suc':validateValid}" ng-click="checkCode()">验证</a>
             </div>
         </div>
-        <p class="error-tip" ng-if="!validateSuc && hasCheck">Kr码无效，请重新输入!</p>
-        <div ng-if="validateSuc || (!validateSuc && !isPreHeat)">
+        <p class="error-tip" ng-if="errMsg && hasCheck && !validateSuc">{{errMsg}}</p>
+        <div ng-if="validateSuc || !isPreHeat">
             <div class="confirm-title">
                 <p class="validate-suc" ng-if="validateSuc && isPreHeat">Kr码验证成功</p>
                 确认投资{{companyData.name}}

@@ -11,6 +11,8 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         $scope.uid = UserService.getUID();
         $scope.formData = {};
         $scope.isRead = false;
+        $scope.isPreHeat = true;
+        $scope.validateSuc = false;
         $scope.krCode = {
             number:""
         };
@@ -211,6 +213,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 },function(data){
                     $scope.validateSuc = true;
                 },function(err){
+                    $scope.errMsg = err.msg;
                     $scope.validateSuc = false;
                     $scope.hasCheck = true;
                 });
