@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
 
-    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService, $interval) {
+    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService, $interval,$modal) {
         //if(!UserService.getUID()){
         //    location.href = "/user/login?from=" + encodeURIComponent(location.href);
         //    return;
@@ -89,7 +89,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             $scope.user.investMoneyBegin = parseInt(data.investMoneyBegin);
             $scope.user.investMoneyEnd = parseInt(data.investMoneyEnd);
 
-            //把数据存到本地存储中
+            /*//把数据存到本地存储中
             if(localStorage.getItem('investorValidateFormData')){
                 var cacheData = JSON.parse(localStorage.getItem('investorValidateFormData'));
                 if(cacheData.id==data.id){
@@ -123,7 +123,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     $interval.cancel(interval);
                 }
 
-            },1000)
+            },1000)*/
 
             /*关注领域数据处理*/
             if($scope.user.industry && $scope.user.industry.length){
@@ -265,9 +265,46 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             });
         },500);
 
-
-
-
+        /*查看风险揭示书*/
+        $scope.seeRisk = function(){
+            $modal.open({
+                templateUrl: 'templates/company/pop-risk-tip-all.html',
+                windowClass: 'remind-modal-window',
+                controller: [
+                    '$scope', '$modalInstance','scope',
+                    function ($scope, $modalInstance, scope) {
+                        $scope.ok = function(){
+                            $modalInstance.dismiss();
+                        }
+                    }
+                ],
+                resolve: {
+                    scope: function(){
+                        return $scope;
+                    }
+                }
+            });
+        }
+        /*查看用户服务协议*/
+        $scope.seeProtocol = function () {
+            $modal.open({
+                templateUrl: 'templates/company/pop-service-protocol.html',
+                windowClass: 'remind-modal-window',
+                controller: [
+                    '$scope', '$modalInstance','scope',
+                    function ($scope, $modalInstance, scope) {
+                        $scope.ok = function(){
+                            $modalInstance.dismiss();
+                        }
+                    }
+                ],
+                resolve: {
+                    scope: function(){
+                        return $scope;
+                    }
+                }
+            });
+        }
         /*表单提交*/
         $scope.submitForm = function(){
             if($scope.user.idCardNumber != $scope.user.reIdCardNumber){
