@@ -270,7 +270,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
 
         /*表单提交*/
         $scope.submitForm = function(){
-            if($scope.user.idCardNumbe != $scope.user.reIdCardNumber){
+            if($scope.user.idCardNumber != $scope.user.reIdCardNumber){
                 $scope.enterCard = true;
                 $('html,body').stop().animate({scrollTop: $("input[name='reIdCardNumber']").offset().top-100}, 400, function () {
                 });
