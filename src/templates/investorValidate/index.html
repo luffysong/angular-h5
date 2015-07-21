@@ -11,15 +11,6 @@
             </div>
             <form ng-submit="$event.preventDefault()"  action="" name="investorValidateForm" >
                 <!--所有报错信息-->
-                <div class="error-alert error" ng-show="investorValidateForm.reIdCardNumber.$invalid && investorValidateForm.reIdCardNumber.$dirty">
-                    <span ng-show="investorValidateForm.reIdCardNumber.$error.required">请再次输入身份证号码</span>
-                </div>
-                <div class="error-alert error" ng-show="investorValidateForm.$error.idcardInvalid && enterCard">
-                    <span>两次输入身份证号码不一致</span>
-                </div>
-                <div class="error-alert error" ng-show="investorValidateForm.idCardNumber.$invalid && investorValidateForm.idCardNumber.$dirty">
-                    <span ng-show="investorValidateForm.idCardNumber.$error.required">请输入身份证号码</span>
-                </div>
                 <div class="error-alert error" ng-show="(investorValidateForm.investFrom.$invalid && investorValidateForm.investFrom.$dirty) || (investorValidateForm.investTo.$invalid && investorValidateForm.investTo.$dirty)">
                     <span ng-show="investorValidateForm.investFrom.$error.required || investorValidateForm.investTo.$error.required">请输入投资金额</span>
                     <span ng-show="investorValidateForm.investFrom.$error.pattern || investorValidateForm.investTo.$error.pattern">投资金额只能是整数</span>
@@ -41,6 +32,15 @@
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.company.$invalid && investorValidateForm.company.$dirty">
                     <span ng-show="investorValidateForm.company.$error.required">请输入公司</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.reIdCardNumber.$invalid && investorValidateForm.reIdCardNumber.$dirty">
+                    <span ng-show="investorValidateForm.reIdCardNumber.$error.required">请再次输入身份证号码</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.$error.idcardInvalid && enterCard">
+                    <span>两次输入身份证号码不一致</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.idCardNumber.$invalid && investorValidateForm.idCardNumber.$dirty">
+                    <span ng-show="investorValidateForm.idCardNumber.$error.required">请输入身份证号码</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.name.$invalid && investorValidateForm.name.$dirty">
                     <span ng-show="investorValidateForm.name.$error.required">请输入真实姓名</span>
