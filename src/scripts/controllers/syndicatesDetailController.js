@@ -106,7 +106,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         CrowdFundingService["crowd-funding"].get({
             id:$scope.fundingId
         },function(data){
-            //console.log(data);
             $scope.color = data.base.status;
             $scope.syndicatesInfo = data;
             if($scope.syndicatesInfo.co_investors){
@@ -127,7 +126,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                         $scope.status = "超募中";
                     }
                     /*预热中*/
-                    if(new Date() < date){
+                    if(new Date() < date && $scope.color != 25){
                         var minute = date.getMinutes() > 9 ? date.getMinutes() : "0"+date.getMinutes();
                         $scope.status = (parseInt(date.getMonth())+1)+"月"+date.getDate()+"日  "+date.getHours()+":"+minute+" 开始众筹";
                         $scope.color = 60;
