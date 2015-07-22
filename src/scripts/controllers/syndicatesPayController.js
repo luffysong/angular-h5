@@ -20,13 +20,17 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
             pay_type:"D"
         },function(data){
             console.log(data);
+            if(!data.agreement_list.length){
+                location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order='+encodeURIComponent(location.href),'back_url=http:'+$scope.rongHost+'/#/zhongchouOrder/'+$rootScope.companyId+"/"+$rootScope.fundingId]).join('&');
+                return;
+            }
             $scope.bankData = data;
             angular.forEach($scope.bankData.agreement_list,function(obj,index){
                 angular.extend(obj,$scope.bankDetails[obj.bank_code][$scope.bankDetails[obj.bank_code].length-1]);
             });
         },function(err){
             console.log(err);
-            $scope.hasRecord = false;
+            location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order='+encodeURIComponent(location.href),'back_url=http:'+$scope.rongHost+'/#/zhongchouOrder/'+$rootScope.companyId+"/"+$rootScope.fundingId]).join('&');
         });
         /*获取订单detail*/
         CrowdFundingService['cf-trade'].get({
