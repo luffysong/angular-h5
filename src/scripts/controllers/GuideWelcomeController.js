@@ -184,6 +184,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 });
             }
         };
+        $scope.hasClick = false;
 
         $scope.submitForm = function(e){
             e && e.preventDefault();
@@ -196,6 +197,10 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             }
 
             if(!checkForm('guideForm'))return;
+            if($scope.hasClick){
+                return false;
+            }
+            $scope.hasClick = true;
             UserService.basic.update({
                 id: $scope.userId
             }, {
@@ -221,6 +226,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 //    location.reload();
                 //},0);
             }, function(err){
+                $scope.hasClick = false;
                 $('<div class="error-alert error error-code">' + err.msg + '</div>').appendTo('body');
                 $timeout(function(){
                     $('.error-code').fadeOut();
