@@ -347,7 +347,7 @@
                 <div ng-repeat="item in syndicatesInfo.detail.teams" class="welcome-form team">
                     <div class="led-avatar">
                         <a ui-sref="user_detail({id:item.id})">
-                            <div class="avatar" style="background-image: url({{item.avatar || ''}})"></div>
+                            <div class="avatar" style="background-image: url({{item.avatar |image:50:'avatar'}})"></div>
                         </a>
                         <p class="c-black">
                             {{item.name}}
