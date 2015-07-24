@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,$timeout) {
         var statusList = DictionaryService.getDict("crowd_funding_status");
         /*每页几条数据*/
         var pageSize = 30;
@@ -23,7 +23,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                         key.color = obj.value;
                         if(key.status == 25){
                             key.name = "预热中";
-                        }else if(key.status == 30){
+                        }else if(key.status == 30 || key.status == 35){
                             /*众筹未开始*/
                             var startTime = new Date(key.start_time);
                             if(new Date() < startTime){
