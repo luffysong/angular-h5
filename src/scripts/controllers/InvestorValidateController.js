@@ -268,6 +268,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     $scope.user.investPhases.push(key.value);
                 }
             });
+            if(!checkForm("investorValidateForm"))return;
             if(!$scope.user.investPhases.length){
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",false);
                 $('html,body').stop().animate({scrollTop: $(".stage").offset().top-100}, 400, function () {
@@ -284,7 +285,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }else{
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
             }
-            if(!checkForm("investorValidateForm"))return;
             $scope.hasClick = true;
             $scope.user.focusIndustry = $scope.areaList;
             $scope.user.businessCardUrl = $scope.intro.value.pictures;
