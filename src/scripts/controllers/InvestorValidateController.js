@@ -137,6 +137,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 });
 
             }
+            if($scope.areaList.length)angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
         }
         /*确认身份证号失去焦点事件*/
         $scope.enterId = function(){
