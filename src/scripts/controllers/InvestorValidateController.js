@@ -7,11 +7,6 @@ var angular = require('angular');
 angular.module('defaultApp.controller').controller('InvestorValidateController',
 
     function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService, $interval,$modal) {
-        //if(!UserService.getUID()){
-        //    location.href = "/user/login?from=" + encodeURIComponent(location.href);
-        //    return;
-        //}
-
         $timeout(function(){
             window.scroll(0,0);
         },0);
@@ -84,47 +79,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             id:UserService.getUID()
         },function(data){
             angular.extend($scope.user, data);
-
             $scope.user.name = "";
             $scope.user.investMoneyBegin = parseInt(data.investMoneyBegin);
             $scope.user.investMoneyEnd = parseInt(data.investMoneyEnd);
-
-            /*//把数据存到本地存储中
-            if(localStorage.getItem('investorValidateFormData')){
-                var cacheData = JSON.parse(localStorage.getItem('investorValidateFormData'));
-                if(cacheData.id==data.id){
-                    angular.extend($scope.user, cacheData);
-                    $scope.user.industry = $scope.user.focusIndustry;
-                    $scope.intro.value.pictures = $scope.user.businessCardUrl?$scope.user.businessCardUrl:"";
-                }
-            }
-            var interval = $interval(function(){
-
-                try{
-                    var form = $('form[name="investorValidateForm"]');
-                    var formCtrl = angular.element(form).scope()["investorValidateForm"];
-                    if(formCtrl.$dirty){
-                        $scope.user.investPhases = [];
-                        angular.forEach($scope.investStage,function(key,index){
-
-                            if(key.active){
-                                $scope.user.investPhases.push(key.value);
-                            }
-                        });
-                        $scope.user.focusIndustry = $scope.areaList;
-                        $scope.user.businessCardUrl = $scope.intro.value.pictures;
-                        if($scope.basic.value){
-                            $scope.user.city = $scope.basic.value.address2;
-                            $scope.user.country = $scope.basic.value.address1;
-                        }
-                        localStorage.setItem('investorValidateFormData', JSON.stringify(angular.copy($scope.user)));
-                    }
-                }catch(e){
-                    $interval.cancel(interval);
-                }
-
-            },1000)*/
-
             /*关注领域数据处理*/
             if($scope.user.industry && $scope.user.industry.length){
                 angular.extend($scope.areaList,$scope.user.industry);
@@ -144,14 +101,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     }
                 });
             });
-
-
-
             $scope.basic.value.address1 = $scope.user.country;
             $scope.basic.value.address2 = $scope.user.city;
-
-
-
         },function(err){
             ErrorService.alert(err);
         });
@@ -186,6 +137,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 });
 
             }
+            if($scope.areaList.length)angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
         }
         /*确认身份证号失去焦点事件*/
         $scope.enterId = function(){
@@ -196,14 +148,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
 
         //android客户端
         $scope.androidUpload = AndroidUploadService.setClick(function(filename){
-
             $scope.$apply(function(){
                 $scope.intro.value.pictures = filename;
             })
 
         });
-
-
 
         /*上传名片*/
         $scope.imgFileSelected  = function(files, e){
@@ -313,6 +262,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 });
                 return;
             }
+            /*初始化*/
+            $scope.user.investPhases = [];
             angular.forEach($scope.investStage,function(key,index){
                 if(key.active && $scope.user.investPhases.indexOf(key.value) < 0){
                     $scope.user.investPhases.push(key.value);

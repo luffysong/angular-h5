@@ -99,23 +99,23 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('syndicatesOrder', {
         url: '/zhongchouOrder/{cid}/{fundingId}',
         templateUrl: 'templates/syndicates/order.html',
-        controller: 'syndicatesOrderController',
+        controller: 'syndicatesOrderController'/*,
         data:{
             permissions : {
                 only : ['valid']
             }
-        }
+        }*/
     });
     /*众筹支付页面*/
     $stateProvider.state('syndicatesPay', {
         url: '/zhongchouPay/{tid}/{amount}',
         templateUrl: 'templates/syndicates/pay.html',
-        controller: 'syndicatesPayController',
+        controller: 'syndicatesPayController'/*,
         data:{
             permissions : {
                 only : ['valid']
             }
-        }
+        }*/
     });
     /*众筹支付成功页面*/
     $stateProvider.state('syndicatesSuc', {
