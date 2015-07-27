@@ -9,6 +9,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
     'DictionaryService',
     'dateFilter',
     'DefaultService',
+    'AndroidUploadService',
     'CompanyService',
     'SuggestService',
     'monthOptions',
