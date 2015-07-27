@@ -57,13 +57,13 @@ angular.module('defaultApp')
 
         Permission.defineRole('login', login = function () {
             if (UserService.getUID()) {
+                console.log('is login')
                 return true; // Is anonymous
             }
             _hmt.push(['_trackPageview', "/user/login##fromUser=0"]);
             krtracker('trackPageView', '/user/login');
 
             setTimeout(function(){
-console.log(location.href)
                 location.href = '/user/login?from=' + encodeURIComponent(location.href);
             }, 300);
             return false;
@@ -80,14 +80,14 @@ console.log(location.href)
                     var href = location.href,
                         type,
                         from;
-                    if(href.indexOf('#/company_create')!=-1){
-                        type = 'company_create';
-                        from = '#/company_create'
+                    if(href.indexOf('#/investorValidate')!=-1){
+                        type = 'investorValidate';
+                        from = href;
                     }else if(href.indexOf('#/investor/apply')!=-1){
                         type = 'investor_apply';
                         from = '#/investor/apply'
                     }else{
-                        type = 'other'
+                        type = 'other';
                         from = href;
                     }
 

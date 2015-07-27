@@ -67,8 +67,8 @@
 					<a class="btn btn-linear get-code" href="javascript:void(0)" ng-click="getCode($event)" ng-disabled="wait || guideForm.phone.$invalid">{{wait?wait+'秒':'获取验证码'}}</a>
 				</div>
 				<div class="form-group">
-					<a href="#" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="guideForm.$invalid" ng-if="sourceType=='other'" baidu-btn="继续跟投人认证">继续跟投人认证</a>
-					<a href="#" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="guideForm.$invalid" ng-if="sourceType=='company_create'" baidu-btn="完成">完成</a>
+					<a href="#" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="guideForm.$invalid" ng-if="sourceType=='investorValidate'" baidu-btn="继续跟投人认证">继续跟投人认证</a>
+					<a href="#" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="guideForm.$invalid" ng-if="sourceType=='other'" baidu-btn="完成">完成</a>
 					<a href="#" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="guideForm.$invalid" ng-if="sourceType=='investor_apply'" baidu-btn="继续投资人认证">继续投资人认证</a>
 				</div>
 			</div>
