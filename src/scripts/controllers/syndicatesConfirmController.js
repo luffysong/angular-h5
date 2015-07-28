@@ -16,6 +16,11 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         $scope.krCode = {
             number:""
         };
+        $scope.payType = "card";
+        /*选择支付方式*/
+        $scope.selectWay = function(target){
+            $scope.payType = target;
+        }
         var statusList = DictionaryService.getDict("crowd_funding_status");
         CompanyService.get({
             id:$scope.companyId
@@ -27,7 +32,6 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         CrowdFundingService["crowd-funding"].get({
             "id":$scope.fundingId
         },function(data){
-            console.log(data);
             $scope.baseData = data;
             if(!$scope.baseData.base)return;
             if($scope.baseData.detail.lead_risk){
@@ -240,25 +244,30 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             $scope.remainAmount = $scope.baseData.base.cf_max_raising - $scope.baseData.base.cf_success_raising;
             $scope.remainAmount = Math.max($scope.remainAmount,0);
             function goToPay(){
-                    CrowdFundingService['cf-trade'].save({},{
-                        user_id: $scope.uid,
-                        goods_id: $scope.fundingId,
-                        goods_name: '众筹跟投', //TODO:这两个字段得产品确认一下写啥
-                        goods_desc: '众筹跟投',
-                        investment: Math.min($scope.formData.investVal,$scope.remainAmount),
-                        invite_code:$scope.krCode.number
-                    }, function(data){
-                        if(!$scope.hasRecord){
-                            location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_id,'url_order='+encodeURIComponent(location.href),'back_url=http:'+$scope.rongHost+'/#/zhongchouOrder/'+$rootScope.companyId+"/"+$rootScope.fundingId]).join('&');
-                        }else{
-                            $state.go('syndicatesPay', {
-                                tid: data.trade_id,
-                                amount:Math.min($scope.formData.investVal,$scope.remainAmount)
-                            });
-                        }
-                    },function(err){
-                        ErrorService.alert(err);
-                    });
+                    /*支付宝*/
+                    if($scope.payType == 'alipay'){
+                        return;
+                    }else{
+                        CrowdFundingService['cf-trade'].save({},{
+                            user_id: $scope.uid,
+                            goods_id: $scope.fundingId,
+                            goods_name: '众筹跟投', //TODO:这两个字段得产品确认一下写啥
+                            goods_desc: '众筹跟投',
+                            investment: Math.min($scope.formData.investVal,$scope.remainAmount),
+                            invite_code:$scope.krCode.number
+                        }, function(data){
+                            if(!$scope.hasRecord){
+                                location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_id,'url_order='+encodeURIComponent(location.href),'back_url=http:'+$scope.rongHost+'/#/zhongchouOrder/'+$rootScope.companyId+"/"+$rootScope.fundingId]).join('&');
+                            }else{
+                                $state.go('syndicatesPay', {
+                                    tid: data.trade_id,
+                                    amount:Math.min($scope.formData.investVal,$scope.remainAmount)
+                                });
+                            }
+                        },function(err){
+                            ErrorService.alert(err);
+                        });
+                    }
                 }
 
                 /*剩余金额不足，小于用户投资金额*/

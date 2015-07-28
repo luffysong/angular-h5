@@ -216,16 +216,7 @@
         <div ng-if="!isToggle">
             <a href="" class="btn btn-default toggle-more" ng-click="toggleMore()">点击展开更多众筹信息</a>
         </div>
-        <div ng-if="!isToggle" class="bottom-col">
-            <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">查看更多公司信息</a>
-            <a href="" class="invest-btn disabled" ng-if="color == 25">即将开启</a>
-            <a login-btn="triggerLogin" class="invest-btn" ng-click="wantInvest($event)" ng-if="color != 60 && color != 50 && !timeout && color != 25">我要投资</a>
-            <a href="" class="invest-btn disabled" ng-if="(color == 50 || timeout) && color != 25">停止投资</a>
-            <a  class="set-remind" ng-click="krCode()" login-btn="triggerLogin" ng-if="color == 60 && color != 25 && !timeout">
-                Kr码优先购买
-                <!--{{status}}<br/>开投提醒-->
-            </a>
-        </div>
+
         <div ng-if="isToggle">
             <!--公司详情-->
             <div ng-if="syndicatesInfo.detail">
@@ -452,17 +443,29 @@
                 </div>
                 <a ui-sref="investorValidate" class="btn btn-default toggle-more" login-btn="{{rongHost}}/m/#/investorValidate">认证跟投人</a>
             </div>
-            <div ng-if="isToggle" class="bottom-col">
+            <!--<div ng-if="isToggle" class="bottom-col">
                 <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">查看更多公司信息</a>
                 <a href="" class="invest-btn disabled" ng-if="color == 25">即将开启</a>
                 <a login-btn="triggerLogin" class="invest-btn" ng-click="wantInvest($event)" ng-if="color != 60 && color != 50 && !timeout && color != 25">我要投资</a>
                 <a href="" class="invest-btn disabled" ng-if="(color == 50 || timeout) && color != 25">停止投资</a>
                 <a  class="set-remind" ng-click="krCode()" login-btn="triggerLogin" ng-if="color == 60 && color != 25 && !timeout">
                     Kr码优先购买
-                    <!--{{status}}<br/>开投提醒-->
+                    &lt;!&ndash;{{status}}<br/>开投提醒&ndash;&gt;
                 </a>
-            </div>
+            </div>-->
         </div>
     </div>
+</div>
+<div class="bottom-col">
+    <a ui-sref="syndicatesAllOrder()" class="order-btn icon-file-text">
+        <p class="order-text">订单</p>
+    </a>
+    <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">更多信息</a>
+    <a href="" class="invest-btn disabled" ng-if="color == 25">即将开启</a>
+    <a login-btn="triggerLogin" class="invest-btn" ng-click="wantInvest($event)" ng-if="color != 60 && color != 50 && !timeout && color != 25">我要投资</a>
+    <a href="" class="invest-btn disabled" ng-if="(color == 50 || timeout) && color != 25">停止投资</a>
+    <a  class="set-remind" ng-click="krCode()" login-btn="triggerLogin" ng-if="color == 60 && color != 25 && !timeout">
+        Kr码优先购买
+    </a>
 </div>
 

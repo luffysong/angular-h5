@@ -37,15 +37,44 @@
                         <span class="red">￥{{total_fee}}</span>
                     </p>
                 </div>
-                <div class="content-bottom">
-                    <div class="agreement">
-                        <input type="checkbox" ng-model="isRead" ng-click="isRead!=isRead"  />
-                         同意  <a href="" ng-click="seeAgreement()">服务协议及风险提示</a>
-                    </div>
-                    <a class="ensure-pay btn" ng-disabled="!isRead || confirmForm.$invalid" ng-click="ensurePay()">确认支付</a>
-                </div>
-
             </div>
+            <div class="content-bottom">
+                <div class="agreement">
+                    <input type="checkbox" ng-model="isRead" ng-click="isRead!=isRead"  />
+                    同意  <a href="" ng-click="seeAgreement()">服务协议及风险提示</a>
+                    <p class="select-way">选择支付方式</p>
+                </div>
+            </div>
+            <div class="pay-way">
+                <div class="way-detail" ng-click="selectWay('card')">
+                    <div class="way-image">
+                        <span class="icon-uniE620">
+                            <span class="path1"></span><span class="path2"></span>
+                        </span>
+                    </div>
+                    <div class="way-info">
+                        <div class="way-intro">银行卡支付</div>
+                        <div class="intro-detail">支持借记卡，无需开通网银</div>
+                    </div>
+                    <div class="way-handle" ng-if="payType == 'card'">
+                        <a href="" class="glyphicon glyphicon-ok"></a>
+                    </div>
+                </div>
+                <div class="way-detail" ng-click="selectWay('alipay')">
+                    <div class="way-image">
+                        <span class="ali-pay">
+                        </span>
+                    </div>
+                    <div class="way-info">
+                        <div class="way-intro">支付宝</div>
+                        <div class="intro-detail">推荐有支付宝账号的用户使用</div>
+                    </div>
+                    <div class="way-handle" ng-if="payType == 'alipay'">
+                        <a href="" class="glyphicon glyphicon-ok"></a>
+                    </div>
+                </div>
+            </div>
+            <a class="ensure-pay btn" ng-disabled="!isRead || confirmForm.$invalid" ng-click="ensurePay()">确认支付</a>
         </div>
     </div>
 </form>

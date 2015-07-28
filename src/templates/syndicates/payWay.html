@@ -1,0 +1,35 @@
+<div class="syndicate-pay syndicates-confirm">
+    <div class="pay-title">
+        总支付金额  <span class="error amount">￥{{amount}}</span>
+    </div>
+    <div class="pay-way">
+        <div class="way-detail" ng-click="selectWay('card')">
+            <div class="way-image">
+                <span class="icon-uniE620">
+                    <span class="path1"></span><span class="path2"></span>
+                </span>
+            </div>
+            <div class="way-info">
+                <div class="way-intro">银行卡支付</div>
+                <div class="intro-detail">支持借记卡，无需开通网银</div>
+            </div>
+            <div class="way-handle" ng-if="payType == 'card'">
+                <a href="" class="glyphicon glyphicon-ok"></a>
+            </div>
+        </div>
+        <div class="way-detail" ng-click="selectWay('alipay')">
+            <div class="way-image">
+                        <span class="ali-pay">
+                        </span>
+            </div>
+            <div class="way-info">
+                <div class="way-intro">支付宝</div>
+                <div class="intro-detail">推荐有支付宝账号的用户使用</div>
+            </div>
+            <div class="way-handle" ng-if="payType == 'alipay'">
+                <a href="" class="glyphicon glyphicon-ok"></a>
+            </div>
+        </div>
+    </div>
+    <a href="" class="go-pay btn" ng-click="goPay()" tooltip="{{cardIndex === '' ? '请选择银行卡' : ''}}">立即支付</a>
+</div>

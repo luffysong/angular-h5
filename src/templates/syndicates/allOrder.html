@@ -1,0 +1,12 @@
+<div class="syndicate-order-all">
+    <div class="order-head">众筹订单</div>
+    <div class="order-nav">
+        <div class="nav-type" ng-repeat="item in orderStatus" ng-click="selectStatus($index)" ng-class="{active:item.active}">
+            {{item.name}}
+            <div class="under-line" ng-if="item.active"></div>
+        </div>
+    </div>
+    <div class="order-content">
+        <div class="empty-image icon-file-text"></div>
+    </div>
+</div>
