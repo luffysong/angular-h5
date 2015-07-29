@@ -347,7 +347,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 }
             });
 
-            if (!$scope.isLogin && !$scope.isCoInvestor) {
+            if ($scope.isLogin && !$scope.isCoInvestor) {
                 $modal.open({
                     templateUrl: 'templates/company/pop-investor-validate.html'
                 });
