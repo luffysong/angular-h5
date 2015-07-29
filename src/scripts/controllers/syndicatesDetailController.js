@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService, $cookies) {
         var statusList = DictionaryService.getDict("crowd_funding_status");
 
         /*股权结构是否出错*/
@@ -325,7 +325,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
          *
          * @conditions: fundingId 为金蛋理财对应的 fundingID
          */
-        if ($scope.fundingId == 63) {
+        if ($scope.fundingId == 63 && (!$cookies || $cookies.goldEggClear != 'clear')) {
             // 获取用户 id
             $scope.userId = UserService.getUID();
             // 获取用户是否登录
@@ -395,6 +395,9 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                                         break;
                                 }
                                 $scope.resultView = true;
+                                var expires = new Date();
+                                expires.setYear(expires.getFullYear() + 1);
+                                document.cookie = 'goldEggClear=clear; expires=' + expires.toGMTString();
                             };
                             // 关闭弹框操作
                             $scope.cancel = function () {
