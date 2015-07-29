@@ -325,13 +325,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                                     $scope.user.phone = phone.slice(0,3) + "****" + phone.slice(phone.length - 4, phone.length);
                                 });
                                 // 获取用户是否为跟投人
-                                UserService.getIdentity(function(result) {
-                                    if(result){
-                                        $scope.isCoInvestor = result.coInvestor ? true : false;
-                                    } else {
-                                        $scope.isCoInvestor = false;
-                                    }
-                                });
+                                $scope.isCoInvestor = true;
                                 $scope.showForm = false;
                                 $scope.showFormAction = function() {
                                     $scope.showForm = true;
