@@ -14,7 +14,7 @@
         <div class="company-data">
             <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="syndicates-logo" style="background-image: url({{item.company.logo || ''}});"></a>
             <div class="company-name"><a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">{{item.company.name}}</a></div>
-            <div class="status"><span class="order-status">{{item.status | dict_trade_crowd_funding_status}}</span></div>
+            <div class="status"><span class="order-status">{{item.payment.status | dict_trade_status}}</span></div>
         </div>
         <!--融资进度条-->
         <loading-bar percent="item.percent">
@@ -39,12 +39,15 @@
             <div class="info-attr">投资金额</div>
             <div class="info-val">￥{{item.investment}}</div>
         </div>
-        <div class="syndicate-info border">
+        <div class="syndicate-info" ng-class="{'border':item.payment.status==1 && item.status==1 && item.payment.platform_type!=1}">
             <div class="info-attr">订单金额</div>
             <div class="info-val">￥{{item.payment.amount}}</div>
         </div>
-        <div class="pay-layer">
-            <a href="" class="pay-btn">去付款</a>
+        <div class="pay-layer" ng-if="item.payment.status==1 && item.status==1 && item.payment.platform_type!=1">
+            <a ui-sref="syndicatesPayWay({tid:item.trade_id,amount:item.payment.amount})" class="pay-btn">去付款</a>
         </div>
+    </div>
+    <div class="syndicates-index loadMore" ng-click="loadMore()" ng-show="!noMore">
+        查看更多
     </div>
 </div>

@@ -10,6 +10,10 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
         $scope.fundingId = $stateParams.fundingId;
         $scope.uid = UserService.getUID();
         $scope.activeIndex = 0;
+        $scope.noMore = true;
+        /*每页几条数据*/
+        var pageSize = 30;
+        $scope.pageNo = 1;
         $scope.orderStatus = [
             {
                 name:"全部",
@@ -34,11 +38,13 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
             CoInvestorService['my-financing'].query(params,function(data){
                 console.log(data);
                 $scope.orderData = data.data;
-
+                $scope.noMore = data.current_page == data.last_page ? true : false;
             }, function(err){
                 ErrorService.alert(err);
             });
         }
+        /*首次加载默认查询全部数据*/
+        $scope.queryData();
         /*选择不同条件查询订单*/
         $scope.selectStatus = function(index){
             if(index == $scope.activeIndex){
@@ -63,7 +69,17 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                 $scope.queryData(params);
             }
         }
-        /*首次加载默认查询全部数据*/
-        $scope.queryData();
+        /*众筹列表加载更多*/
+        /*$scope.loadMore = function(){
+            $scope.pageNo++;
+            CoInvestorService['my-financing'].query({
+            },function(data){
+                console.log(data);
+                $scope.orderData = data.data;
+                $scope.noMore = data.current_page == data.last_page ? true : false;
+            }, function(err){
+                ErrorService.alert(err);
+            });
+        }*/
     });
 
