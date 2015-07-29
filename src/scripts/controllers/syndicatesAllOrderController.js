@@ -28,6 +28,17 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                 status:2
             }
         ];
+
+        /*获取订单数据*/
+        $scope.queryData = function(params){
+            CoInvestorService['my-financing'].query(params,function(data){
+                console.log(data);
+                $scope.orderData = data.data;
+
+            }, function(err){
+                ErrorService.alert(err);
+            });
+        }
         /*选择不同条件查询订单*/
         $scope.selectStatus = function(index){
             if(index == $scope.activeIndex){
@@ -49,15 +60,10 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                 }else{
                     delete params.status;
                 }
-                CoInvestorService['my-financing'].query(params,function(data){
-                    console.log(data);
-                    $scope.orderData = data.data;
-                }, function(err){
-                    ErrorService.alert(err);
-                });
-
+                $scope.queryData(params);
             }
         }
-
+        /*首次加载默认查询全部数据*/
+        $scope.queryData();
     });
 

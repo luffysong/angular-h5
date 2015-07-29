@@ -21,9 +21,8 @@ angular.module('defaultApp.service').service('CoInvestorService',
                             var list = res.data.data;
                             list.forEach(function(item){
                                 if(!item || !item.financing)return;
-                                item.percent = Math.min(100, parseInt(
-                                    (parseInt(item.financing.cf_success_raising)/parseInt(item.financing.cf_raising))*100)
-                                ) + "%";
+                                item.percent = parseInt(
+                                        (parseInt(item.financing.cf_success_raising)/parseInt(item.financing.cf_raising))*100);
 
                                 item.financing.close_time = item.financing.close_time.indexOf('0000-00-00')>-1?"":new Date(item.financing.close_time);
 
