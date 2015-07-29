@@ -307,5 +307,38 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 text: ''
             }
         };
+
+        if ($scope.fundingId == 63) {
+            $modal.open({
+                templateUrl: 'templates/syndicates/pop-gold-egg.html',
+                windowClass: 'gold-egg-modal',
+                controller: [
+                    '$scope', '$modalInstance', 'scope', 'UserService',
+                    function ($scope, $modalInstance, scope) {
+                        $scope.userId = UserService.getUID();
+                        $scope.isLogin = !!$scope.userId;
+                        $scope.user = {
+                            phone: ""
+                        };
+                        UserService.getPhone(function (phone) {
+                            if (!phone) return;
+                            $scope.user.phone = phone.slice(0, 3) + "****" + phone.slice(phone.length - 4, phone.length);
+                        });
+                        $scope.earn = function () {
+                            console.log($scope.user.phone);
+                            $scope.resultView = true;
+                        };
+                        $scope.cancel = function () {
+                            $modalInstance.dismiss();
+                        };
+                    }
+                ],
+                resolve: {
+                    scope: function () {
+                        return $scope;
+                    }
+                }
+            });
+        }
     });
 

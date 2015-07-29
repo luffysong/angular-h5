@@ -1,0 +1,51 @@
+<!-- 金蛋活动 h5 模板 -->
+<div class="gold-egg text-center">
+    <a class="btn-close" href="javascript:;" ng-click="cancel()">
+        <img ng-src="styles/images/gold-egg/icon-close.png" alt="close"/>
+    </a>
+
+    <div class="pop-header" ng-hide="resultView">
+        <img ng-src="styles/images/gold-egg/gold-egg-logo.png" alt="金蛋理财+36Kr"/>
+    </div>
+
+    <div class="pop-body" ng-hide="resultView">
+        <h4 class="pop-title">恭喜您获得36Kr跟投人专享红包</h4>
+        <div class="gifts text-left clearfix">
+            <div class="gift-greenhand">
+                <div class="content-left">
+                    <div class="icon-gift"></div>
+                </div>
+                <div class="content-right">
+                    <p class="gift-title">2万元新手礼包</p>
+                    <p class="gift-sub-title">金蛋理财新用户专享</p>
+                </div>
+            </div>
+            <div class="gift-thank">
+                <div class="content-left">
+                    <div class="icon-gift"></div>
+                </div>
+                <div class="content-right">
+                    <p class="gift-title">3千元感恩礼包</p>
+                    <p class="gift-sub-title">金蛋理财老用户专享</p>
+                </div>
+            </div>
+        </div>
+        <div class="phone-area" ng-if="isLogin">
+            <input type="text" name="phone" ng-model="user.phone"/>
+            <a class="btn btn-earn-gift" href="javascript:;" ng-click="earn()">领取金蛋礼包</a>
+        </div>
+        <div class="phone-area" ng-if="!isLogin">
+            <a class="btn btn-get-gift" login-btn>我要领取</a>
+        </div>
+        <p class="info-text">*本活动限金蛋理财注册用户及2015年8月1日0点前36Kr注册用户参与</p>
+    </div>
+
+    <div class="pop-body result" ng-show="resultView">
+        <p class="welcome-text">恭喜您：</p>
+        <p class="prize-title">领取3000元金蛋理财特权本金</p>
+        <p class="login-text">立马登录金蛋理财App查看吧！</p>
+        <img ng-src="styles/images/gold-egg/gold-egg-qrcode.png" alt="金蛋理财二维码"/>
+        <p class="qrcode-text">扫一扫下载金蛋理财App</p>
+        <p class="info-text">注：本礼包每位用户仅限领取一次。</p>
+    </div>
+</div>
