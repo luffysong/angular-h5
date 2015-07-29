@@ -30,12 +30,14 @@
                 </div>
             </div>
         </div>
-        <div class="phone-area" ng-if="isLogin">
-            <input type="text" name="phone" ng-model="user.phone"/>
-            <a class="btn btn-earn-gift" href="javascript:;" ng-click="earn()">领取金蛋礼包</a>
-        </div>
-        <div class="phone-area" ng-if="!isLogin">
-            <a class="btn btn-get-gift" login-btn>我要领取</a>
+        <div class="phone-area">
+            <a class="btn btn-get-gift" login-btn ng-if="!isLogin">我要领取</a>
+            <a class="btn btn-get-gift" href="#/investorValidate?type=goldEgg" ng-if="isLogin && !isCoInvestor">成为跟投人</a>
+            <a class="btn btn-get-gift" ng-if="isLogin && isCoInvestor && !showForm" ng-click="showFormAction()">我要领取</a>
+            <form role="form" ng-if="isLogin && isCoInvestor && showForm" ng-submit="$event.preventDefault()" >
+                <input type="text" name="phone" ng-model="user.phone"/>
+                <a class="btn btn-earn-gift" href="javascript:;" ng-click="earn()">领取金蛋礼包</a>
+            </form>
         </div>
         <p class="info-text">*本活动限金蛋理财注册用户及2015年8月1日0点前36Kr注册用户参与</p>
     </div>
