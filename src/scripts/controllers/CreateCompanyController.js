@@ -399,13 +399,13 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         $scope.submitting = false;
         $scope.submitForm = function (e, callback) {
             e && e.preventDefault();
-            if (!$scope.formData.bizCardLink) {
-                //ErrorService.alert({
-                //    msg: "请上传名片！"
-                //});
-                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("cardEmpty", false);
-                return;
-            }
+            // if (!$scope.formData.bizCardLink) {
+            //     //ErrorService.alert({
+            //     //    msg: "请上传名片！"
+            //     //});
+            //     angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("cardEmpty", false);
+            //     return;
+            // }
             if (!$scope.formData.logo && !$scope.formData.cid) {
                 //ErrorService.alert({
                 //    msg: "请上传公司LOGO！"
