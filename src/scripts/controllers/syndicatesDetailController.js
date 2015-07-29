@@ -308,37 +308,107 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             }
         };
 
+        /**
+         * 金蛋理财活动
+         *
+         * 产品逻辑：
+         *
+         * 1. 金蛋活动页面，只要进入金蛋理财公司详情页立即显示弹框；
+         * 2. 判断用户是否登录，未登录用户显示 “我要领取”，登录用户显示对应手机号码及“立即领取”；
+         * 3. 用户登录后判断是否为跟投人，不是跟投人弹框进行跟投人认证，跟投人直接显示“立即领取”；
+         * 4. 用户点击填写手机号码，点击“立即领取”显示结果。
+         *
+         * TODO:
+         * 1. 弹框显示逻辑和不显示逻辑，尤其是后者，可能需要对应的接口
+         * 2. 后端接口限位虚拟接口
+         * 3. 金蛋理财识别现在依靠 fundingId，但是还不明确线上数据库中得 fundingId
+         *
+         * @conditions: fundingId 为金蛋理财对应的 fundingID
+         */
         if ($scope.fundingId == 63) {
-            $modal.open({
-                templateUrl: 'templates/syndicates/pop-gold-egg.html',
-                windowClass: 'gold-egg-modal',
-                controller: [
-                    '$scope', '$modalInstance', 'scope', 'UserService',
-                    function ($scope, $modalInstance, scope) {
-                        $scope.userId = UserService.getUID();
-                        $scope.isLogin = !!$scope.userId;
-                        $scope.user = {
-                            phone: ""
-                        };
-                        UserService.getPhone(function (phone) {
-                            if (!phone) return;
-                            $scope.user.phone = phone.slice(0, 3) + "****" + phone.slice(phone.length - 4, phone.length);
-                        });
-                        $scope.earn = function () {
-                            console.log($scope.user.phone);
-                            $scope.resultView = true;
-                        };
-                        $scope.cancel = function () {
-                            $modalInstance.dismiss();
-                        };
-                    }
-                ],
-                resolve: {
-                    scope: function () {
-                        return $scope;
-                    }
+            // 获取用户 id
+            $scope.userId = UserService.getUID();
+            // 获取用户是否登录
+            $scope.isLogin = !!$scope.userId;
+            // 获取用户手机号码
+            $scope.user = {
+                phone: ""
+            };
+            UserService.getPhone(function(phone){
+                if(!phone) return;
+                $scope.user.phone = phone;
+            });
+            // 获取用户是否为跟投人
+            UserService.getIdentity(function(result) {
+                if(result){
+                    $scope.isCoInvestor = result.coInvestor ? true : false;
+                } else {
+                    $scope.isCoInvestor = false;
                 }
             });
+
+            if (!$scope.isLogin && !$scope.isCoInvestor) {
+                $modal.open({
+                    templateUrl: 'templates/company/pop-investor-validate.html'
+                });
+            } else {
+                $modal.open({
+                    templateUrl: 'templates/syndicates/pop-gold-egg.html',
+                    windowClass: 'gold-egg-modal',
+                    controller: [
+                        '$scope', '$modalInstance', 'scope', 'UserService', 'CrowdFundingService',
+                        function ($scope, $modalInstance, scope) {
+                            // 用户是否登录
+                            $scope.isLogin = scope.isLogin;
+                            // 用户手机号码 mask
+                            $scope.user = {
+                                phone: ""
+                            };
+                            UserService.getPhone(function(phone){
+                                if(!phone) return;
+                                $scope.user.phone = phone.slice(0,3) + "****" + phone.slice(phone.length - 4, phone.length);
+                            });
+                            // 领取奖品操作
+                            $scope.earn = function(){
+                                console.log($scope.user.phone);
+                                var data = {
+                                    code: 0,
+                                    type: 3
+                                };
+                                if (!data) return;
+                                switch(data.type) {
+                                    case 1:
+                                        $scope.welcomeText = '恭喜您：';
+                                        $scope.prizeTitle = '领取2万元金蛋理财特权本金';
+                                        $scope.nextText = '立马登录金蛋理财App查看吧！';
+                                        break;
+                                    case 2:
+                                        $scope.welcomeText = '恭喜您：';
+                                        $scope.prizeTitle = '领取3000元金蛋理财特权本金';
+                                        $scope.nextText = '立马登录金蛋理财App查看吧！';
+                                        break;
+                                    case 3:
+                                        $scope.welcomeText = '很抱歉，本活动礼包仅限：';
+                                        $scope.prizeTitle = '2015年8月1日0点前36Kr注册用户领取';
+                                        $scope.nextText = '您可以下载金蛋理财App，完成新手任务，即得最高1万元特权本金哦！';
+                                        $scope.titleSmaller = 'smaller';
+                                        break;
+                                }
+                                $scope.resultView = true;
+                            };
+                            // 关闭弹框操作
+                            $scope.cancel = function () {
+                                $modalInstance.dismiss();
+                            };
+                        }
+                    ],
+                    resolve: {
+                        scope: function(){
+                            return $scope;
+                        }
+                    }
+                });
+            }
         }
     });
 

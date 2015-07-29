@@ -41,9 +41,9 @@
     </div>
 
     <div class="pop-body result" ng-show="resultView">
-        <p class="welcome-text">恭喜您：</p>
-        <p class="prize-title">领取3000元金蛋理财特权本金</p>
-        <p class="login-text">立马登录金蛋理财App查看吧！</p>
+        <p class="welcome-text">{{welcomeText}}</p>
+        <p class="prize-title" ng-class="titleSmaller">{{prizeTitle}}</p>
+        <p class="next-text">{{nextText}}</p>
         <img ng-src="styles/images/gold-egg/gold-egg-qrcode.png" alt="金蛋理财二维码"/>
         <p class="qrcode-text">扫一扫下载金蛋理财App</p>
         <p class="info-text">注：本礼包每位用户仅限领取一次。</p>
