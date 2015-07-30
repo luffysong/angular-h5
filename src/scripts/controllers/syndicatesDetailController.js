@@ -352,13 +352,23 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                             $scope.user.phoneMask = phone.slice(0,3) + "****" + phone.slice(phone.length - 4, phone.length);
                         });
                         // 获取用户是否为跟投人
-                        UserService.getIdentity(function(result) {
-                            if(result){
-                                $scope.isCoInvestor = result.coInvestor ? true : false;
-                            } else {
+                        UserService.get({
+                            id: 'identity',
+                            sub: 'cert',
+                            subid: 'coinvestor-info'
+                        },{},function(data) {
+                            if(!data) return;
+                            $scope.isCoInvestor = true;
+                        },function(err) {
+                            if(err.code == 1001) {
                                 $scope.isCoInvestor = false;
+                            } else if(err.code == 1002) {
+                                $scope.isCoInvestor = true;
+                            } else if(err.code == 1003) {
+                                $scope.isCoInvestor  = false;
                             }
                         });
+
                         $scope.showForm = false;
                         $scope.showFormAction = function() {
                             $scope.showForm = true;
