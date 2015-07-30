@@ -11,8 +11,9 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
         $scope.uid = UserService.getUID();
         $scope.activeIndex = 0;
         $scope.noMore = true;
+        $scope.noData = false;
         /*每页几条数据*/
-        var pageSize = 30;
+        var pageSize = 10;
         $scope.pageNo = 1;
         $scope.orderStatus = [
             {
@@ -36,9 +37,15 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
         /*获取订单数据*/
         $scope.queryData = function(params){
             CoInvestorService['my-financing'].query(params,function(data){
-                console.log(data);
-                $scope.orderData = data.data;
-                $scope.noMore = data.current_page == data.last_page ? true : false;
+                if(!data.data.length){
+                    $scope.noData = true;
+                    $scope.orderData = data.data;
+                    return;
+                }else{
+                    $scope.noData = false;
+                    $scope.orderData = data.data;
+                    $scope.noMore = data.data.length < pageSize ? true : false;
+                }
             }, function(err){
                 ErrorService.alert(err);
             });
@@ -50,36 +57,43 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
             if(index == $scope.activeIndex){
                 return;
             }else{
+                $scope.activeIndex = index;
                 angular.forEach($scope.orderStatus,function(obj,index){
                     obj.active = false;
                 })
                 $scope.orderStatus[index].active = true;
                 var params = {};
-                if($scope.orderStatus[index].payment_status){
-                    params.payment_status = $scope.orderStatus[index].payment_status;
-                }else{
-                    delete params.payment_status;
-                }
-                $scope.activeIndex = index;
-                if($scope.orderStatus[index].status){
-                    params.status = $scope.orderStatus[index].status;
-                }else{
-                    delete params.status;
-                }
-                $scope.queryData(params);
+                $scope.queryData($scope.buildParams(params));
             }
         }
+        /*组装参数*/
+        $scope.buildParams = function(params){
+            if($scope.orderStatus[$scope.activeIndex].payment_status){
+                params.payment_status = $scope.orderStatus[$scope.activeIndex].payment_status;
+            }else{
+                delete params.payment_status;
+            }
+            if($scope.orderStatus[$scope.activeIndex].status){
+                params.status = $scope.orderStatus[$scope.activeIndex].status;
+            }else{
+                delete params.status;
+            }
+            return params;
+        }
         /*众筹列表加载更多*/
-        /*$scope.loadMore = function(){
-            $scope.pageNo++;
-            CoInvestorService['my-financing'].query({
-            },function(data){
-                console.log(data);
-                $scope.orderData = data.data;
-                $scope.noMore = data.current_page == data.last_page ? true : false;
+        $scope.loadMore = function(){
+            var params = {
+                page:1,
+                per_page:100
+            };
+            CoInvestorService['my-financing'].query($scope.buildParams(params),function(data){
+                if(data.data.length){
+                    $scope.orderData = $scope.orderData.concat(data.data.slice(10,data.data.length));
+                }
+                $scope.noMore = true;
             }, function(err){
                 ErrorService.alert(err);
             });
-        }*/
+        }
     });
 

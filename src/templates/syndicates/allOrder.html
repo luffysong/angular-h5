@@ -6,10 +6,7 @@
             <div class="under-line" ng-if="order.active"></div>
         </div>
     </div>
-    <div class="order-content" ng-hide="orderData.length">
-        <div class="empty-image icon-file-text"></div>
-        <p class="text-center">您还没有线上订单，快去开启投资之旅</p>
-    </div>
+
     <div class="order-detail" ng-repeat="item in orderData">
         <div class="company-data">
             <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="syndicates-logo" style="background-image: url({{item.company.logo || ''}});"></a>
@@ -47,7 +44,12 @@
             <a ui-sref="syndicatesPayWay({tid:item.trade_id,amount:item.payment.amount})" class="pay-btn">去付款</a>
         </div>
     </div>
-    <div class="syndicates-index loadMore" ng-click="loadMore()" ng-show="!noMore">
+    <div class="syndicates-index loadMore" ng-click="loadMore()" ng-if="!noMore && orderData.length">
         查看更多
     </div>
+    <div class="order-content" ng-if="noData">
+        <div class="empty-image icon-file-text"></div>
+        <p class="text-center">您还没有线上订单，快去开启投资之旅</p>
+    </div>
+    <a href="" class="invest-btn" ng-if="noData">开启投资</a>
 </div>
