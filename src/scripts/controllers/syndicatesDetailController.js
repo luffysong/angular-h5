@@ -331,93 +331,95 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
          * @conditions: fundingId 为金蛋理财对应的 fundingID
          */
         if ($scope.fundingId == 63 && (!$cookies || $cookies.goldEggClear != 'clear')) {
-            $modal.open({
-                templateUrl: 'templates/syndicates/pop-gold-egg.html',
-                windowClass: 'gold-egg-modal',
-                controller: [
-                    '$scope', '$modalInstance', 'scope', 'UserService', 'CrowdFundingService',
-                    function ($scope, $modalInstance, scope, UserService, CrowdFundingService) {
-                        // 获取用户 id
-                        $scope.userId = UserService.getUID();
-                        // 获取用户是否登录
-                        $scope.isLogin = !!$scope.userId;
-                        // 用户手机号码 & mask
-                        $scope.user = {
-                            phone: "",
-                            phoneMask: ""
-                        };
-                        UserService.getPhone(function(phone) {
-                            if(!phone) return;
-                            $scope.user.phone = phone;
-                            $scope.user.phoneMask = phone.slice(0,3) + "****" + phone.slice(phone.length - 4, phone.length);
-                        });
-                        // 获取用户是否为跟投人
-                        UserService.get({
-                            id: 'identity',
-                            sub: 'cert',
-                            subid: 'coinvestor-info'
-                        },{},function(data) {
-                            if(!data) return;
-                            $scope.isCoInvestor = true;
-                        },function(err) {
-                            if(err.code == 1001) {
-                                $scope.isCoInvestor = false;
-                            } else if(err.code == 1002) {
-                                $scope.isCoInvestor = true;
-                            } else if(err.code == 1003) {
-                                $scope.isCoInvestor  = true;
-                            } else {
-                                $scope.isCoInvestor = false;
-                            }
-                        });
-
-                        $scope.showForm = false;
-                        $scope.showFormAction = function() {
-                            $scope.showForm = true;
-                        };
-                        // 领取奖品操作
-                        $scope.earn = function() {
-                            console.log($scope.user.phone);
-                            var data = {
-                                code: 0,
-                                type: 1
+            $timeout(function() {
+                $modal.open({
+                    templateUrl: 'templates/syndicates/pop-gold-egg.html',
+                    windowClass: 'gold-egg-modal',
+                    controller: [
+                        '$scope', '$modalInstance', 'scope', 'UserService', 'CrowdFundingService',
+                        function ($scope, $modalInstance, scope, UserService, CrowdFundingService) {
+                            // 获取用户 id
+                            $scope.userId = UserService.getUID();
+                            // 获取用户是否登录
+                            $scope.isLogin = !!$scope.userId;
+                            // 用户手机号码 & mask
+                            $scope.user = {
+                                phone: "",
+                                phoneMask: ""
                             };
-                            if (!data) return;
-                            switch(data.type) {
-                                case 1:
-                                    $scope.welcomeText = '恭喜您：';
-                                    $scope.prizeTitle = '领取2万元金蛋理财特权本金';
-                                    $scope.nextText = '立马登录金蛋理财App查看吧！';
-                                    break;
-                                case 2:
-                                    $scope.welcomeText = '恭喜您：';
-                                    $scope.prizeTitle = '领取3000元金蛋理财特权本金';
-                                    $scope.nextText = '立马登录金蛋理财App查看吧！';
-                                    break;
-                                case 3:
-                                    $scope.welcomeText = '很抱歉，本活动礼包仅限：';
-                                    $scope.prizeTitle = '2015年8月1日0点前36Kr注册用户领取';
-                                    $scope.nextText = '您可以下载金蛋理财App，完成新手任务，即得最高1万元特权本金哦！';
-                                    $scope.titleSmaller = 'smaller';
-                                    break;
-                            }
-                            $scope.resultView = true;
-                            var expires = new Date();
-                            expires.setYear(expires.getFullYear() + 1);
-                            document.cookie = 'goldEggClear=clear; expires=' + expires.toGMTString();
-                        };
-                        // 关闭弹框操作
-                        $scope.cancel = function() {
-                            $modalInstance.dismiss();
-                        };
+                            UserService.getPhone(function(phone) {
+                                if(!phone) return;
+                                $scope.user.phone = phone;
+                                $scope.user.phoneMask = phone.slice(0,3) + "****" + phone.slice(phone.length - 4, phone.length);
+                            });
+                            // 获取用户是否为跟投人
+                            UserService.get({
+                                id: 'identity',
+                                sub: 'cert',
+                                subid: 'coinvestor-info'
+                            },{},function(data) {
+                                if(!data) return;
+                                $scope.isCoInvestor = true;
+                            },function(err) {
+                                if(err.code == 1001) {
+                                    $scope.isCoInvestor = false;
+                                } else if(err.code == 1002) {
+                                    $scope.isCoInvestor = true;
+                                } else if(err.code == 1003) {
+                                    $scope.isCoInvestor  = true;
+                                } else {
+                                    $scope.isCoInvestor = false;
+                                }
+                            });
+
+                            $scope.showForm = false;
+                            $scope.showFormAction = function() {
+                                $scope.showForm = true;
+                            };
+                            // 领取奖品操作
+                            $scope.earn = function() {
+                                console.log($scope.user.phone);
+                                var data = {
+                                    code: 0,
+                                    type: 1
+                                };
+                                if (!data) return;
+                                switch(data.type) {
+                                    case 1:
+                                        $scope.welcomeText = '恭喜您：';
+                                        $scope.prizeTitle = '领取2万元金蛋理财特权本金';
+                                        $scope.nextText = '立马登录金蛋理财App查看吧！';
+                                        break;
+                                    case 2:
+                                        $scope.welcomeText = '恭喜您：';
+                                        $scope.prizeTitle = '领取3000元金蛋理财特权本金';
+                                        $scope.nextText = '立马登录金蛋理财App查看吧！';
+                                        break;
+                                    case 3:
+                                        $scope.welcomeText = '很抱歉，本活动礼包仅限：';
+                                        $scope.prizeTitle = '2015年8月1日0点前36Kr注册用户领取';
+                                        $scope.nextText = '您可以下载金蛋理财App，完成新手任务，即得最高1万元特权本金哦！';
+                                        $scope.titleSmaller = 'smaller';
+                                        break;
+                                }
+                                $scope.resultView = true;
+                                var expires = new Date();
+                                expires.setYear(expires.getFullYear() + 1);
+                                document.cookie = 'goldEggClear=clear; expires=' + expires.toGMTString();
+                            };
+                            // 关闭弹框操作
+                            $scope.cancel = function() {
+                                $modalInstance.dismiss();
+                            };
+                        }
+                    ],
+                    resolve: {
+                        scope: function() {
+                            return $scope;
+                        }
                     }
-                ],
-                resolve: {
-                    scope: function() {
-                        return $scope;
-                    }
-                }
-            });
+                });
+            }, 500);
         }
     });
 
