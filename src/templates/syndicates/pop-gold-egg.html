@@ -32,9 +32,10 @@
         </div>
         <div class="phone-area">
             <a class="btn btn-get-gift" login-btn ng-if="!isLogin">我要领取</a>
+            <a class="btn btn-get-gift" href="#/guide/welcome" ng-if="isLogin && !isProfileValided && isCoInvestor">我要领取</a>
             <a class="btn btn-get-gift" href="#/investorValidate?type=goldEgg" ng-if="isLogin && !isCoInvestor">成为跟投人</a>
-            <a class="btn btn-get-gift" ng-if="isLogin && isCoInvestor && !showForm" ng-click="showFormAction()">我要领取</a>
-            <form role="form" ng-if="isLogin && isCoInvestor && showForm" ng-submit="$event.preventDefault()" >
+            <a class="btn btn-get-gift" ng-if="isLogin && isProfileValided && isCoInvestor && !showForm" ng-click="showFormAction()">我要领取</a>
+            <form role="form" ng-if="isLogin && isProfileValided && isCoInvestor && showForm" ng-submit="$event.preventDefault()" >
                 <input type="text" name="phone" value="{{user.phoneMask}}" ng-disabled="!!user.phone"/>
                 <a class="btn btn-earn-gift" href="javascript:;" ng-click="earn()">领取金蛋礼包</a>
             </form>

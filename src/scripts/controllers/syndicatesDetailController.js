@@ -358,18 +358,18 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                                 sub: 'cert',
                                 subid: 'coinvestor-info'
                             },{},function(data) {
-                                if(!data) return;
-                                $scope.isCoInvestor = true;
                             },function(err) {
                                 if(err.code == 1001) {
                                     $scope.isCoInvestor = false;
-                                } else if(err.code == 1002) {
+                                } else if(err.code == 1002 || err.code == 1003) {
                                     $scope.isCoInvestor = true;
-                                } else if(err.code == 1003) {
-                                    $scope.isCoInvestor  = true;
                                 } else {
                                     $scope.isCoInvestor = false;
                                 }
+                            });
+                            // 获取用户是否完善资料
+                            UserService.isProfileValid(function(data) {
+                                $scope.isProfileValided = data;
                             });
 
                             $scope.showForm = false;
