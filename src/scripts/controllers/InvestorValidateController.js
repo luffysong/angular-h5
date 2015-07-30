@@ -321,7 +321,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                                     phone: "",
                                     phoneMask: ""
                                 };
-                                UserService.getPhone(function(phone){
+                                UserService.getPhone(function(phone) {
                                     if(!phone) return;
                                     $scope.user.phone = phone;
                                     $scope.user.phoneMask = phone.slice(0,3) + "****" + phone.slice(phone.length - 4, phone.length);
@@ -333,7 +333,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                                     $scope.showForm = true;
                                 };
                                 // 领取奖品操作
-                                $scope.earn = function(){
+                                $scope.earn = function() {
                                     console.log($scope.user.phone);
                                     var data = {
                                         code: 0,
@@ -364,13 +364,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                                     document.cookie = 'goldEggClear=clear; expires=' + expires.toGMTString();
                                 };
                                 // 关闭弹框操作
-                                $scope.cancel = function () {
+                                $scope.cancel = function() {
                                     $modalInstance.dismiss();
                                 };
                             }
                         ],
                         resolve: {
-                            scope: function(){
+                            scope: function() {
                                 return $scope;
                             }
                         }
