@@ -378,34 +378,38 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                             };
                             // 领取奖品操作
                             $scope.earn = function() {
-                                console.log($scope.user.phone);
-                                var data = {
-                                    code: 0,
-                                    type: 1
-                                };
-                                if (!data) return;
-                                switch(data.type) {
-                                    case 1:
-                                        $scope.welcomeText = '恭喜您：';
-                                        $scope.prizeTitle = '领取2万元金蛋理财特权本金';
-                                        $scope.nextText = '立马登录金蛋理财App查看吧！';
-                                        break;
-                                    case 2:
-                                        $scope.welcomeText = '恭喜您：';
-                                        $scope.prizeTitle = '领取3000元金蛋理财特权本金';
-                                        $scope.nextText = '立马登录金蛋理财App查看吧！';
-                                        break;
-                                    case 3:
-                                        $scope.welcomeText = '很抱歉，本活动礼包仅限：';
-                                        $scope.prizeTitle = '2015年8月1日0点前36Kr注册用户领取';
-                                        $scope.nextText = '您可以下载金蛋理财App，完成新手任务，即得最高1万元特权本金哦！';
-                                        $scope.titleSmaller = 'smaller';
-                                        break;
-                                }
-                                $scope.resultView = true;
-                                var expires = new Date();
-                                expires.setYear(expires.getFullYear() + 1);
-                                document.cookie = 'goldEggClear=clear; expires=' + expires.toGMTString();
+                                CrowdFundingService.save({
+                                    model:"crowd-funding",
+                                    submodel:"jindan-gift"
+                                }, {
+                                    "phone": $scope.user.phone
+                                }, function(data) {
+                                    if (!data) return;
+                                    switch(data.type) {
+                                        case 1:
+                                            $scope.welcomeText = '恭喜您：';
+                                            $scope.prizeTitle = '领取2万元金蛋理财特权本金';
+                                            $scope.nextText = '立马登录金蛋理财App查看吧！';
+                                            break;
+                                        case 2:
+                                            $scope.welcomeText = '恭喜您：';
+                                            $scope.prizeTitle = '领取3000元金蛋理财特权本金';
+                                            $scope.nextText = '立马登录金蛋理财App查看吧！';
+                                            break;
+                                        case 3:
+                                            $scope.welcomeText = '很抱歉，本活动礼包仅限：';
+                                            $scope.prizeTitle = '2015年8月1日0点前36Kr注册用户领取';
+                                            $scope.nextText = '您可以下载金蛋理财App，完成新手任务，即得最高1万元特权本金哦！';
+                                            $scope.titleSmaller = 'smaller';
+                                            break;
+                                    }
+                                    $scope.resultView = true;
+                                    var expires = new Date();
+                                    expires.setYear(expires.getFullYear() + 1);
+                                    document.cookie = 'goldEggClear=clear; expires=' + expires.toGMTString();
+                                }, function(err) {
+                                    ErrorService.alert(err);
+                                });
                             };
                             // 关闭弹框操作
                             $scope.cancel = function() {
