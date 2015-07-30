@@ -1,6 +1,6 @@
 <!-- 金蛋理财活动 h5 模板 -->
 <div class="gold-egg text-center">
-    <a class="btn-close" href="javascript:;" ng-click="cancel()">
+    <a class="btn-close" href="javascript:;" ng-click="close()">
         <img ng-src="styles/images/gold-egg/icon-close.png" alt="close"/>
     </a>
 
@@ -31,9 +31,9 @@
             </div>
         </div>
         <div class="phone-area">
-            <a class="btn btn-get-gift" login-btn ng-if="!isLogin">我要领取</a>
-            <a class="btn btn-get-gift" href="#/guide/welcome" ng-if="isLogin && !isProfileValided && isCoInvestor">我要领取</a>
-            <a class="btn btn-get-gift" href="#/investorValidate?type=goldEgg" ng-if="isLogin && !isCoInvestor">成为跟投人</a>
+            <a class="btn btn-get-gift" login-btn ng-if="!isLogin" ng-click="uaStatistics('点击弹框 - 进行登录')">我要领取</a>
+            <a class="btn btn-get-gift" href="#/guide/welcome" ng-if="isLogin && !isProfileValided && isCoInvestor"  ng-click="uaStatistics('点击弹框 - 进行完善资料')">我要领取</a>
+            <a class="btn btn-get-gift" href="#/investorValidate?type=goldEgg&source={{source}}" ng-if="isLogin && !isCoInvestor"  ng-click="uaStatistics('点击弹框 - 进行跟投人认证')">成为跟投人</a>
             <a class="btn btn-get-gift" ng-if="isLogin && isProfileValided && isCoInvestor && !showForm" ng-click="showFormAction()">我要领取</a>
             <form role="form" ng-if="isLogin && isProfileValided && isCoInvestor && showForm" ng-submit="$event.preventDefault()" >
                 <input type="text" name="phone" value="{{user.phoneMask}}" ng-disabled="!!user.phone"/>
