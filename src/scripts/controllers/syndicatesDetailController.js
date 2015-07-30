@@ -365,7 +365,9 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                             } else if(err.code == 1002) {
                                 $scope.isCoInvestor = true;
                             } else if(err.code == 1003) {
-                                $scope.isCoInvestor  = false;
+                                $scope.isCoInvestor  = true;
+                            } else {
+                                $scope.isCoInvestor = false;
                             }
                         });
 
