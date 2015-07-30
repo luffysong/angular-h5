@@ -341,13 +341,15 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                         $scope.userId = UserService.getUID();
                         // 获取用户是否登录
                         $scope.isLogin = !!$scope.userId;
-                        // 用户手机号码 mask
+                        // 用户手机号码 & mask
                         $scope.user = {
-                            phone: ""
+                            phone: "",
+                            phoneMask: ""
                         };
                         UserService.getPhone(function(phone){
                             if(!phone) return;
-                            $scope.user.phone = phone.slice(0,3) + "****" + phone.slice(phone.length - 4, phone.length);
+                            $scope.user.phone = phone;
+                            $scope.user.phoneMask = phone.slice(0,3) + "****" + phone.slice(phone.length - 4, phone.length);
                         });
                         // 获取用户是否为跟投人
                         UserService.getIdentity(function(result) {
