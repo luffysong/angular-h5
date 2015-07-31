@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
 
-    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService, $interval,$modal) {
+    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService, $interval,$modal, $stateParams) {
         $timeout(function(){
             window.scroll(0,0);
         },0);
