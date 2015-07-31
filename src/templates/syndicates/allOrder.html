@@ -13,10 +13,15 @@
             <div class="company-name"><a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">{{item.company.name}}</a></div>
             <div class="status"><span class="order-status">{{item.payment.status | dict_trade_status}}</span></div>
         </div>
-        <!--融资进度条-->
-        <loading-bar percent="item.percent">
-        </loading-bar>
-        <div class="syndicate-info first">
+        <div class="syndicate-info first progress">
+            <div class="info-attr progress">
+                <!--融资进度条-->
+                <loading-bar percent="item.percent">
+                </loading-bar>
+            </div>
+            <div class="info-val progress">{{item.percent}}%</div>
+        </div>
+        <div class="syndicate-info">
             <div class="info-attr">众筹目标</div>
             <div class="info-val">￥{{item.financing.cf_raising | WanNum}}</div>
         </div>

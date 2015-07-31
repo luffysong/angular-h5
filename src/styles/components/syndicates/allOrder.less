@@ -167,12 +167,22 @@
             margin-bottom: 10px;
             .info-attr {
                 float: left;
+                &.progress {
+                    width: 85%;
+                }
             }
             .info-val {
                 float: right;
+                &.progress {
+                    position: relative;
+                    top: -7px;
+                }
             }
             &.first {
                 margin-top: 10px;
+            }
+            &.progress {
+                margin-bottom: 0;
             }
             &.border {
                 border-bottom: 1px solid #DFDFDF;
