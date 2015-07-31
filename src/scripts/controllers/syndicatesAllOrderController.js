@@ -72,7 +72,8 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                     obj.active = false;
                 })
                 $scope.orderStatus[index].active = true;
-                var params = {};
+                var params = {
+                };
                 $scope.queryData($scope.buildParams(params));
             }
         }
@@ -88,11 +89,14 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
             }else{
                 delete params.status;
             }
+            params.page = 1;
+            params.per_page = 100;
             return params;
         }
         /*众筹列表加载更多*/
         $scope.loadMore = function(){
             $scope.orderData = tempData;
+            $scope.noMore = true;
         }
     });
 
