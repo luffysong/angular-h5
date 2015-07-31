@@ -303,7 +303,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 /**
                  * 金蛋理财活动
                  *
-                 * @condition: $stateParams == 'goldEgg'
+                 * @condition: $stateParams.type == 'goldEgg'
                  */
                 if ($stateParams.type == 'goldEgg') {
                     krtracker("trackPageView", '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "提交跟投人认证申请");
