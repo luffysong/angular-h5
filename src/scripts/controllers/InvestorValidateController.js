@@ -380,7 +380,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                                     });
                                 };
                                 // 关闭弹框操作
-                                $scope.cancel = function() {
+                                $scope.close = function() {
                                     $modalInstance.dismiss();
                                 };
                                 // 统计来源
