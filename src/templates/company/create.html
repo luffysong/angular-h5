@@ -56,7 +56,7 @@
 
 
                 <div class="error-alert error"
-                     ng-show="createForm.website.$invalid && createForm.website.$dirty">
+                     ng-show="createForm.website.$invalid && createForm.website.$dirty" ng-if="!formData.cid && !(formData.operationStatus == 'ONLINE_IN_6MONTH' || formData.operationStatus == 'ONLINE_IN_3MONTH')">
                     <span>请填写公司网址，http://开头</span>
                 </div>
                 <div class="error-alert error"
@@ -114,10 +114,10 @@
                             <p ng-if="formData.cid">{{formData.website}}</p>
 
                             <input type="url" class="form-control" placeholder="如：http://www.36kr.com" required ng-disabled="formData.cid" ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
-                                   name="website" ng-model="formData.website" ng-if="!formData.cid && formData.operationStatus != 'UNSTART'"/>
+                                   name="website" ng-model="formData.website" ng-if="!formData.cid&& !(formData.operationStatus == 'ONLINE_IN_6MONTH' || formData.operationStatus == 'ONLINE_IN_3MONTH')"/>
 
-                            <input type="url" class="form-control" placeholder="如：http://www.36kr.com"  ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
-                                   name="website" ng-model="formData.website" ng-if="!formData.cid && formData.operationStatus == 'UNSTART'"/>
+                           <!--  <input type="url" class="form-control" placeholder="如：http://www.36kr.com"  ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
+                                   name="website" ng-model="formData.website" ng-if="!formData.cid && formData.operationStatus == 'UNSTART'"/> -->
                         </td>
                     </tr>
                     
