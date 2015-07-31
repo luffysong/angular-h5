@@ -36,9 +36,12 @@
             <div class="info-attr">投资金额</div>
             <div class="info-val">￥{{item.investment}}</div>
         </div>
-        <div class="syndicate-info" ng-class="{'border':item.payment.status==1 && item.status==1 && item.payment.platform_type!=1}">
+        <div class="syndicate-info" ng-class="{'border':(item.payment.status==1 && item.status==1 && item.payment.platform_type!=1) || (item.payment.status != 1 && item.payment.status != 3)}">
             <div class="info-attr">订单金额</div>
             <div class="info-val">￥{{item.payment.amount}}</div>
+        </div>
+        <div class="pay-layer" ng-if="item.payment.status != 1 && item.payment.status != 3">
+            <div>{{item.status | dict_trade_crowd_funding_status}}</div>
         </div>
         <div class="pay-layer" ng-if="item.payment.status==1 && item.status==1 && item.payment.platform_type!=1">
             <a ui-sref="syndicatesPayWay({tid:item.trade_id,amount:item.payment.amount})" class="pay-btn">去付款</a>
