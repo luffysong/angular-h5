@@ -354,13 +354,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                                             case 1:
                                                 $scope.welcomeText = '恭喜您：';
                                                 $scope.prizeTitle = '领取2万元金蛋理财特权本金';
-                                                $scope.nextText = '立马登录金蛋理财App查看吧！';
+                                                $scope.nextText = '登录金蛋理财App完成投资即可领取';
                                                 krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 2万元金蛋理财特权本金");
                                                 break;
                                             case 2:
                                                 $scope.welcomeText = '恭喜您：';
                                                 $scope.prizeTitle = '领取3000元金蛋理财特权本金';
-                                                $scope.nextText = '立马登录金蛋理财App查看吧！';
+                                                $scope.nextText = '登录金蛋理财App完成投资即可领取';
                                                 krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 3000元金蛋理财特权本金");
                                                 break;
                                             case 3:
