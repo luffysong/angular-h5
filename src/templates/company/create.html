@@ -103,9 +103,13 @@
                     </tr>
                     <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]" class="website">
                         <td>
-                            <b class="important" ng-if="!formData.cid && formData.operationStatus != 'UNSTART'">*</b>
+                            <b class="important" ng-if="!formData.cid && !(formData.operationStatus == 'ONLINE_IN_6MONTH' || formData.operationStatus == 'ONLINE_IN_3MONTH')">*</b>
                             <span>公司网址</span>
                         </td>
+                        <!-- <td>
+                            <b class="important" ng-if="!formData.cid && (formData.operationStatus == 'ONLINE_IN_3MONTH' || formData.operationStatus == 'ONLINE_IN_6MONTH')">*</b>
+                            <span>公司网址</span>
+                        </td> -->
                         <td>
                             <p ng-if="formData.cid">{{formData.website}}</p>
 
@@ -116,6 +120,7 @@
                                    name="website" ng-model="formData.website" ng-if="!formData.cid && formData.operationStatus == 'UNSTART'"/>
                         </td>
                     </tr>
+                    
                     <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]" class="brief">
                         <td class="vtop">
                             <b class="important" ng-if="!formData.cid">*</b>
@@ -194,9 +199,9 @@
 
                         </td>
                     </tr>
-                    <tr>
-                        <td class="vtop">
-                            <b class="important">＊</b>
+                    <tr >
+                        <td class="vtop" >
+                            <b class="important" ng-if="formData.cid && opNext == 1">＊</b>
                             <span>上传名片</span>
                         </td>
                         <td class="logo card">
