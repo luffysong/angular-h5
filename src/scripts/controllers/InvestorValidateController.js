@@ -374,7 +374,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                                         $scope.resultView = true;
                                         var expires = new Date();
                                         expires.setYear(expires.getFullYear() + 1);
-                                        document.cookie = 'goldEggClear=clear; expires=' + expires.toGMTString();
+                                        document.cookie = 'goldEggClear=clear.' + $scope.userId + '; expires=' + expires.toGMTString();
                                     }, function(err) {
                                         ErrorService.alert(err);
                                     });

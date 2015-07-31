@@ -330,7 +330,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
          *
          * @conditions: fundingId 为金蛋理财对应的 fundingID
          */
-        if ($scope.fundingId == 140 && (!$cookies || $cookies.goldEggClear != 'clear')) {
+        if ($scope.fundingId == 140 && (!$cookies.goldEggClear || $cookies.goldEggClear != 'clear.' + UserService.getUID())) {
 
             krtracker("trackPageView", '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "进入金蛋理财详情页面");
 
@@ -418,7 +418,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                                     $scope.resultView = true;
                                     var expires = new Date();
                                     expires.setYear(expires.getFullYear() + 1);
-                                    document.cookie = 'goldEggClear=clear; expires=' + expires.toGMTString();
+                                    document.cookie = 'goldEggClear=clear.' + $scope.userId + '; expires=' + expires.toGMTString();
                                 }, function(err) {
                                     ErrorService.alert(err);
                                     krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 获取奖励失败");
