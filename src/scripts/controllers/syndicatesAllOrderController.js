@@ -33,7 +33,7 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                 status:2
             }
         ];
-
+        var tempData = [];
         /*获取订单数据*/
         $scope.queryData = function(params){
             CoInvestorService['my-financing'].query(params,function(data){
@@ -43,15 +43,25 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                     return;
                 }else{
                     $scope.noData = false;
-                    $scope.orderData = data.data;
-                    $scope.noMore = data.data.length < pageSize ? true : false;
+                    tempData = data.data.slice(0);
+                    /*过滤数据，去除线下付款订单*/
+                    angular.forEach(data.data,function(obj,index){
+                        if(obj.payment && obj.payment.platform_type == 1){
+                            tempData.splice(index,1);
+                        }
+                    });
+                    $scope.noMore = tempData.length <= pageSize ? true : false;
+                    $scope.orderData = tempData.slice(0,10);
                 }
             }, function(err){
                 ErrorService.alert(err);
             });
         }
         /*首次加载默认查询全部数据*/
-        $scope.queryData();
+        $scope.queryData({
+            page:1,
+            per_page:100
+        });
         /*选择不同条件查询订单*/
         $scope.selectStatus = function(index){
             if(index == $scope.activeIndex){
@@ -82,18 +92,7 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
         }
         /*众筹列表加载更多*/
         $scope.loadMore = function(){
-            var params = {
-                page:1,
-                per_page:100
-            };
-            CoInvestorService['my-financing'].query($scope.buildParams(params),function(data){
-                if(data.data.length){
-                    $scope.orderData = $scope.orderData.concat(data.data.slice(10,data.data.length));
-                }
-                $scope.noMore = true;
-            }, function(err){
-                ErrorService.alert(err);
-            });
+            $scope.orderData = tempData;
         }
     });
 
