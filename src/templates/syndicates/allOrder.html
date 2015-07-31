@@ -9,8 +9,8 @@
 
     <div class="order-detail" ng-repeat="item in orderData">
         <div class="company-data">
-            <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="syndicates-logo" style="background-image: url({{item.company.logo || ''}});"></a>
-            <div class="company-name"><a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">{{item.company.name}}</a></div>
+            <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.cf_id})" class="syndicates-logo" style="background-image: url({{item.company.logo || ''}});"></a>
+            <div class="company-name"><a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.cf_id})">{{item.company.name}}</a></div>
             <div class="status"><span class="order-status">{{item.payment.status | dict_trade_status}}</span></div>
         </div>
         <div class="syndicate-info first progress">
