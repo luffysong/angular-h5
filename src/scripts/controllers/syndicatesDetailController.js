@@ -41,6 +41,15 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         },function(err){
             ErrorService.alert(err);
         });
+        /*订单按钮*/
+        $scope.myOrder = function(event){
+            if(!$scope.isCoInvestor){
+                if(event){
+                    event.preventDefault();
+                }
+                $state.go("investorValidate");
+            }
+        }
         $scope.wantInvest = function(event){
             if(!$scope.uid)return;
             if(!$scope.isCoInvestor){
