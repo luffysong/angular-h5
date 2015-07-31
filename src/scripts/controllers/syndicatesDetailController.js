@@ -363,6 +363,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                                 subid: 'coinvestor-info'
                             },{},function(data) {
                             },function(err) {
+                                if(!err) return;
                                 if(err.code == 1001) {
                                     $scope.isCoInvestor = false;
                                 } else if(err.code == 1002 || err.code == 1003) {
