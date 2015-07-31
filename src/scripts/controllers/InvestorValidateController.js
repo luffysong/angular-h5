@@ -331,6 +331,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                                 // 获取用户是否为跟投人
                                 $scope.isCoInvestor = true;
                                 $scope.showForm = false;
+                                $scope.isValidateAction = true;
                                 $scope.showFormAction = function() {
                                     $scope.showForm = true;
                                     krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "点击弹框 - 进行奖品领取");

@@ -34,8 +34,8 @@
             <a class="btn btn-get-gift" login-btn ng-if="!isLogin" ng-click="uaStatistics('点击弹框 - 进行登录')">我要领取</a>
             <a class="btn btn-get-gift" href="#/guide/welcome" ng-if="isLogin && !isProfileValided && isCoInvestor"  ng-click="uaStatistics('点击弹框 - 进行完善资料')">我要领取</a>
             <a class="btn btn-get-gift" href="#/investorValidate?type=goldEgg&source={{source}}" ng-if="isLogin && !isCoInvestor"  ng-click="uaStatistics('点击弹框 - 进行跟投人认证')">成为跟投人</a>
-            <a class="btn btn-get-gift" ng-if="isLogin && isProfileValided && isCoInvestor && !showForm" ng-click="showFormAction()">我要领取</a>
-            <form role="form" ng-if="isLogin && isProfileValided && isCoInvestor && showForm" ng-submit="$event.preventDefault()" >
+            <a class="btn btn-get-gift" ng-if="isLogin && isProfileValided && isCoInvestor && !showForm && !isValidateAction" ng-click="showFormAction()">我要领取</a>
+            <form role="form" ng-if="isLogin && isProfileValided && isCoInvestor && showForm || isValidateAction" ng-submit="$event.preventDefault()" >
                 <input type="text" name="phone" value="{{user.phoneMask}}" ng-disabled="!!user.phone"/>
                 <a class="btn btn-earn-gift" href="javascript:;" ng-click="earn()">领取金蛋礼包</a>
             </form>

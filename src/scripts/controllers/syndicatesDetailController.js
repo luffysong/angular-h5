@@ -378,6 +378,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                             });
 
                             $scope.showForm = false;
+                            $scope.isValidateAction = false;
                             $scope.showFormAction = function() {
                                 $scope.showForm = true;
                                 krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "点击弹框 - 进行奖品领取");
