@@ -332,6 +332,10 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
          */
         if ($scope.fundingId == 63 && (!$cookies.goldEggClear || $cookies.goldEggClear != 'clear.' + UserService.getUID())) {
 
+            var expires = new Date();
+            expires.setDate(expires.getDate() + 10);
+            document.cookie = 'regist_src=' + $stateParams.source + '; expires=' + expires.toGMTString();
+            document.cookie = 'suid=' + $stateParams.suid + '; expires=' + expires.toGMTString();
             krtracker("trackPageView", '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "进入金蛋理财详情页面");
 
             $timeout(function() {
