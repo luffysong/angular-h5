@@ -92,9 +92,14 @@ window.DICTIONARY_DATA =  {
     ],
     "CompanyOperationStatus": [
         {
-            "desc": "未上线",
+            "desc": "3个月内上线",
             "id": -1,
-            "value": "UNSTART"
+            "value": "ONLINE_IN_3MONTH"
+        },
+        {
+            "desc": "6个月内上线",
+            "id": -5,
+            "value": "ONLINE_IN_6MONTH"
         },
         {
             "desc": "运营中",
@@ -256,6 +261,23 @@ window.DICTIONARY_DATA =  {
             "desc": "基金募集预约成功通知",
             "id": 5,
             "value": "FUND_PRE_ORDER_SUCCESS"
+        },
+        {
+            "desc": "kr码发放",
+            "id": 6,
+            "value": "KR_CODE"
+        }
+    ],
+    "InternalNotificationEnum": [
+        {
+            "desc": "基金募集预约成功通知",
+            "id": 5,
+            "value": "FUND_PRE_ORDER_SUCCESS"
+        },
+        {
+            "desc": "kr码发放",
+            "id": 6,
+            "value": "KR_CODE"
         }
     ],
     "CoinvestorType": [

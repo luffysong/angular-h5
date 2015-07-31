@@ -155,14 +155,15 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         }
 
         // add new company
-
+        $scope.formData.operationStatus = 'OPEN';
+        
         $scope.addCompany = function (name) {
             $scope.opNext = 0;
             $scope.formData.name = name;
             $scope.formData.website = '';
             $scope.formData.brief = '';
             $scope.formData.logo = '';
-            $scope.formData.operationStatus = 'OPEN';
+            
             $scope.formData.bizCardLink = '';
             $scope.formData.cid = null;
             $scope.temp_logo = '';
