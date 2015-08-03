@@ -9,12 +9,12 @@
                 <div class="pay-tip">总支付金额: <span class="error">￥{{item.payment.amount}}</span></div>
             </div>
             <div class="order-handle">
-                <a class="go-pay-btn" href="" ng-click="goPay(item.trade_id,item.payment.amount)">去付款></a>
+                <a class="go-pay-btn" href="" ng-click="goPay(item.trade_id,item.payment.amount)" baidu-btn="待付款订单页-去付款按钮点击">去付款></a>
             </div>
         </div>
     </div>
     <div class="viewAll" ng-click="viewAll()" ng-if="!showAll && tempList.length > 3">
         查看全部({{tempList.length - tempData.length}})
     </div>
-    <a ui-sref="syndicatesConfirm({cid:companyId,fundingId:fundingId})" class="re-buy">重新购买</a>
+    <a ui-sref="syndicatesConfirm({cid:companyId,fundingId:fundingId})" class="re-buy" baidu-btn="待付款订单页-重新购买按钮点击">重新购买</a>
 </div>

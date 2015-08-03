@@ -14,9 +14,9 @@
         </div>
         <div class="pay-detail">
             <div class="pay-info icon-big-add" ng-click="addCard()">
-                <span class="add-card">选择其他银行</span>
+                <span class="add-card" baidu-btn="选择其他银行卡按钮点击">选择其他银行</span>
             </div>
         </div>
     </div>
-    <a href="" class="go-pay btn" ng-click="goPay()" tooltip="{{cardIndex === '' ? '请选择银行卡' : ''}}">立即支付</a>
+    <a href="" class="go-pay btn" ng-click="goPay()" tooltip="{{cardIndex === '' ? '请选择银行卡' : ''}}" baidu-btn="立即支付按钮点击">立即支付</a>
 </div>

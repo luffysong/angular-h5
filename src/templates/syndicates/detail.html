@@ -103,7 +103,7 @@
                 领投人
             </div>
             <div class="led-avatar">
-                <a ui-sref="{{syndicatesInfo.base.investorData | investorLink:'id':'type'}}">
+                <a ui-sref="{{syndicatesInfo.base.investorData | investorLink:'id':'type'}}" baidu-btn="众筹项目页-{{companyData.basic.name}}-领投人点击">
                     <div class="avatar" style="background-image: url({{syndicatesInfo.base.investorData.logo || ''}})"></div>
                     <p class="c-black">{{syndicatesInfo.base.investorData.name}}</p>
                 </a>
@@ -174,7 +174,7 @@
                 国内外同类型公司
             </div>
             <div class="foreign-company clearfix">
-                <a href="{{syndicatesInfo.detail.foreign_com_link}}">
+                <a href="{{syndicatesInfo.detail.foreign_com_link}}" baidu-btn="众筹项目页-{{companyData.basic.name}}-可比公司名称点击">
                     <span class="foreign-logo" style="background-image: url({{syndicatesInfo.detail.foreign_com_logo || ''}})"></span>
                 </a>
                 <div class="foreign-intro">
@@ -214,8 +214,10 @@
         </div>
         <!--默认隐藏点击展开-->
         <div ng-if="!isToggle">
-            <a href="" class="btn btn-default toggle-more" ng-click="toggleMore()">点击展开更多众筹信息</a>
+            <a href="" class="btn btn-default toggle-more" ng-click="toggleMore()" baidu-btn="众筹项目页-{{companyData.basic.name}}-展开更多众筹信息按钮点击">点击展开更多众筹信息</a>
         </div>
+
+
 
         <div ng-if="isToggle">
             <!--公司详情-->
@@ -337,7 +339,7 @@
                 </div>
                 <div ng-repeat="item in syndicatesInfo.detail.teams" class="welcome-form team">
                     <div class="led-avatar">
-                        <a ui-sref="user_detail({id:item.id})">
+                        <a ui-sref="user_detail({id:item.id})" baidu-btn="众筹项目页-{{companyData.basic.name}}-创始人点击">
                             <div class="avatar" style="background-image: url({{item.avatar |image:50:'avatar'}})"></div>
                         </a>
                         <p class="c-black">
@@ -441,30 +443,24 @@
                 <div class="more-tip" >
                     更多众筹详情仅对跟投人开放
                 </div>
-                <a ui-sref="investorValidate" class="btn btn-default toggle-more" login-btn="{{rongHost}}/m/#/investorValidate">认证跟投人</a>
+                <a ui-sref="investorValidate" class="btn btn-default toggle-more" login-btn="{{rongHost}}/m/#/investorValidate" baidu-btn="众筹项目页-认证跟投人按钮点击">认证跟投人</a>
             </div>
-            <!--<div ng-if="isToggle" class="bottom-col">
-                <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">查看更多公司信息</a>
-                <a href="" class="invest-btn disabled" ng-if="color == 25">即将开启</a>
-                <a login-btn="triggerLogin" class="invest-btn" ng-click="wantInvest($event)" ng-if="color != 60 && color != 50 && !timeout && color != 25">我要投资</a>
-                <a href="" class="invest-btn disabled" ng-if="(color == 50 || timeout) && color != 25">停止投资</a>
-                <a  class="set-remind" ng-click="krCode()" login-btn="triggerLogin" ng-if="color == 60 && color != 25 && !timeout">
-                    Kr码优先购买
-                    &lt;!&ndash;{{status}}<br/>开投提醒&ndash;&gt;
-                </a>
-            </div>-->
+
         </div>
     </div>
 </div>
 <div class="bottom-col">
-    <a ui-sref="syndicatesAllOrder()" class="order-btn icon-file-text" ng-click="myOrder($event)" login-btn>
-        <p class="order-text">订单</p>
+    <a ui-sref="syndicatesAllOrder()" class="order-btn icon-file-text" ng-class="{'no-remind-btn': color !== 60}" ng-click="myOrder($event)" login-btn="{{rongHost}}/m/#/zhongchouDetail?companyId={{companyId}}&fundingId={{fundingId}}&checkValid=1" baidu-btn="众筹项目页-{{companyData.basic.name}}-订单按钮点击">
+        <p class="btn-text order-text">订单</p>
     </a>
-    <a ui-sref="company_detail({id:companyData.company.id})" class="more-info">更多信息</a>
-    <a href="" class="invest-btn disabled" ng-if="color == 25">即将开启</a>
-    <a login-btn="triggerLogin" class="invest-btn" ng-click="wantInvest($event)" ng-if="color != 60 && color != 50 && !timeout && color != 25">我要投资</a>
-    <a href="" class="invest-btn disabled" ng-if="(color == 50 || timeout) && color != 25">停止投资</a>
-    <a  class="set-remind" ng-click="krCode()" login-btn="triggerLogin" ng-if="color == 60 && color != 25 && !timeout">
+    <a href="" class="remind-btn icon-h5-time" ng-if="color == 60" ng-click="setRemind($event)" baidu-btn="众筹项目页-{{companyData.basic.name}}-提醒按钮点击">
+        <p class="btn-text remind-text">提醒</p>
+    </a>
+    <a ui-sref="company_detail({id:companyData.company.id})" class="more-info" ng-class="{'no-remind-btn': color !== 60}" baidu-btn="众筹项目页-{{companyData.basic.name}}-查看更多公司信息按钮点击">更多信息</a>
+    <a href="" class="invest-btn disabled" ng-if="color == 25" ng-class="{'no-remind-btn': color !== 60}">即将开启</a>
+    <a login-btn="triggerLogin" class="invest-btn" ng-click="wantInvest($event)" ng-if="color != 60 && color != 50 && !timeout && color != 25" ng-class="{'no-remind-btn': color !== 60}" baidu-btn="众筹项目页-{{companyData.basic.name}}-我要投资按钮点击">我要投资</a>
+    <a href="" class="invest-btn disabled" ng-if="(color == 50 || timeout) && color != 25" ng-class="{'no-remind-btn': color !== 60}">停止投资</a>
+    <a class="set-remind" ng-click="krCode()" login-btn="triggerLogin" ng-if="color == 60 && color != 25 && !timeout" ng-class="{'no-remind-btn': color !== 60}" baidu-btn="众筹项目页-{{companyData.basic.name}}-Kr码优先购买按钮点击">
         Kr码优先购买
     </a>
 </div>

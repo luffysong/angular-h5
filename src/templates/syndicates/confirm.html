@@ -3,7 +3,7 @@
         <!--预热中，Kr码购买-->
         <div ng-if="isPreHeat">
             <div class="kr-code-way">
-                <a class="href-tip" href="" ng-click="getKrCode()">申请Kr码</a>
+                <a class="href-tip" href="" ng-click="getKrCode()" baidu-btn="申请Kr码点击">申请Kr码</a>
             </div>
             <div class="kr-code-enter">
                 <input type="text" maxlength="8" class="kr-code-input" ng-disabled="validateSuc" placeholder="请输入优先购买Kr码" ng-model="krCode.number" name="krCode" />
@@ -72,9 +72,10 @@
                     <div class="way-handle" ng-if="payType == 'alipay'">
                         <a href="" class="glyphicon glyphicon-ok"></a>
                     </div>
+
                 </div>
             </div>
-            <a class="ensure-pay btn" ng-disabled="!isRead || confirmForm.$invalid" ng-click="ensurePay()">确认支付</a>
+            <a class="ensure-pay btn" ng-disabled="!isRead || confirmForm.$invalid" ng-click="ensurePay()" baidu-btn="确认支付按钮点击">确认支付</a>
         </div>
     </div>
 </form>
