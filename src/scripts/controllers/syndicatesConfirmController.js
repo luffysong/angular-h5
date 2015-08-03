@@ -9,6 +9,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         $scope.companyId = $stateParams.cid;
         $scope.fundingId = $stateParams.fundingId;
         $scope.uid = UserService.getUID();
+        $scope.tid = $stateParams.cid;
         $scope.formData = {};
         $scope.isRead = false;
         $scope.isPreHeat = true;
@@ -246,7 +247,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             function goToPay(){
                     /*支付宝*/
                     if($scope.payType == 'alipay'){
-                        return;
+                        location.href = '//'+location.host+'/p/payment/4/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order='+encodeURIComponent(location.href),'back_url='+encodeURIComponent(location.href)]).join('&');
                     }else{
                         CrowdFundingService['cf-trade'].save({},{
                             user_id: $scope.uid,
