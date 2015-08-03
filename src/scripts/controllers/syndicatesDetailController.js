@@ -344,8 +344,9 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             var expires = new Date();
             expires.setDate(expires.getDate() + 10);
             var registSrc = /^egg-(web|app)$/.test($stateParams.source) ? 'egg' : '';
-            document.cookie = 'regist_src=' + registSrc + '; expires=' + expires.toGMTString();
-            document.cookie = 'suid=' + $stateParams.suid + '; expires=' + expires.toGMTString();
+            if (registSrc == 'egg') {
+                document.cookie = 'regist_src=' + registSrc + '; expires=' + expires.toGMTString();
+            }
             krtracker("trackPageView", '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "进入金蛋理财详情页面");
 
             $timeout(function() {
