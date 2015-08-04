@@ -218,8 +218,8 @@
         </div>
 
 
+        <div ng-if="isToggle" ng-class="{'pb-50':isInApp}">
 
-        <div ng-if="isToggle">
             <!--公司详情-->
             <div ng-if="syndicatesInfo.detail">
                 <div class="basic-info">
@@ -439,7 +439,7 @@
                 </div>
             </div>
 
-            <div ng-if="!isCoInvestor">
+            <div ng-if="!isCoInvestor" ng-class="{'pb-50':isInApp}">
                 <div class="more-tip" >
                     更多众筹详情仅对跟投人开放
                 </div>
