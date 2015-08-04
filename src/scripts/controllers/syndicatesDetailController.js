@@ -196,16 +196,71 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         $scope.loadInvestor = function(){
             $scope.syndicatesInfo.co_investors = $scope.tempData;
             $scope.showAll = true;
-        }
+        };
         /*展开更多众筹信息*/
         $scope.toggleMore = function(){
             $scope.isToggle = true;
-        }
+        };
         /*底部栏点击我要投资*/
         $scope.toInvest = function(){
             $state.go("syndicatesConfirm");
-        }
+        };
         /*开投提醒*/
+        $scope.setRemind = function(event) {
+            event.stopPropagation();
+            if(!UserService.getUID()) {
+                location.href = "/user/login?from=" + encodeURIComponent(location.href);
+                return;
+            }
+            if($scope.syndicatesInfo.base.has_reminder) {
+                ErrorService.alert({
+                    msg: "你已设置过提醒"
+                });
+                return;
+            } else {
+                $modal.open({
+                    templateUrl: 'templates/company/pop-set-remind.html',
+                    windowClass: 'remind-modal-window',
+                    controller: [
+                        '$scope', '$modalInstance','scope','UserService','CrowdFundingService',
+                        function ($scope, $modalInstance, scope, UserService, CrowdFundingService, $timeout) {
+                            UserService.getPhone(function(data) {
+                                if(!data) return;
+                                $scope.phone = data.slice(0,3)+"****"+data.slice(data.length-4,data.length);
+                            });
+                            $scope.ok = function() {
+                                CrowdFundingService.save({
+                                    model:"crowd-funding",
+                                    id:scope.fundingId,
+                                    submodel:"opening-remind"
+                                }, {
+
+                                }, function(data) {
+                                    notify({
+                                        message:"设置成功",
+                                        classes:'alert-success'
+                                    });
+                                    scope.syndicatesInfo.base.has_reminder = true;
+                                    $modalInstance.dismiss();
+                                },function(err) {
+                                    ErrorService.alert(err);
+                                    $modalInstance.dismiss();
+                                });
+                            };
+                            $scope.cancel = function() {
+                                $modalInstance.dismiss();
+                            }
+                        }
+                    ],
+                    resolve: {
+                        scope: function() {
+                            return $scope;
+                        }
+                    }
+                });
+            }
+        };
+
         $scope.krCode = function(){
             if(!UserService.getUID()){
                 location.href = "/user/login?from=" + encodeURIComponent(location.href);

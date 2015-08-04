@@ -433,25 +433,46 @@
     left: 0;
     height: 50px;
     border: 1px solid #eee;
-    .order-btn {
+
+    .order-btn,
+    .remind-btn {
         display: inline-block;
-        width: 20%;
+        float: left;
+        width: 15%;
         height: 50px;
         background: #f7f7f7;
-        color: #008DF2;
-        padding-top: 5px;
-        float: left;
-        font-size: 20px;
         text-align: center;
-        .order-text {
+        border-right: 1px solid #dddede;
+
+        .btn-text {
             color: #929292;
             font-size: 14px;
+        }
+    }
+
+    .order-btn {
+        padding-top: 5px;
+        font-size: 20px;
+        color: #008DF2;
+
+        .order-text {
             margin-top: 5px;
         }
     }
+
+    .remind-btn {
+        font-size: 30px;
+        font-weight: bold;
+        color: #929292;
+
+        .remind-text {
+            color: #929292;
+        }
+    }
+
     .more-info {
         display: inline-block;
-        width: 40%;
+        width: 35%;
         height: 50px;
         line-height: 50px;
         color: #929292;
