@@ -155,14 +155,15 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         }
 
         // add new company
-
+        $scope.formData.operationStatus = 'OPEN';
+        
         $scope.addCompany = function (name) {
             $scope.opNext = 0;
             $scope.formData.name = name;
             $scope.formData.website = '';
             $scope.formData.brief = '';
             $scope.formData.logo = '';
-            $scope.formData.operationStatus = 'OPEN';
+            
             $scope.formData.bizCardLink = '';
             $scope.formData.cid = null;
             $scope.temp_logo = '';
@@ -399,13 +400,13 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         $scope.submitting = false;
         $scope.submitForm = function (e, callback) {
             e && e.preventDefault();
-            if (!$scope.formData.bizCardLink) {
-                //ErrorService.alert({
-                //    msg: "请上传名片！"
-                //});
-                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("cardEmpty", false);
-                return;
-            }
+            // if (!$scope.formData.bizCardLink) {
+            //     //ErrorService.alert({
+            //     //    msg: "请上传名片！"
+            //     //});
+            //     angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("cardEmpty", false);
+            //     return;
+            // }
             if (!$scope.formData.logo && !$scope.formData.cid) {
                 //ErrorService.alert({
                 //    msg: "请上传公司LOGO！"

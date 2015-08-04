@@ -391,6 +391,9 @@ window.DICTIONARY_CF_DATA =  {
     "goods_type": [
         "众筹"
     ],
+    "mobile_template": {
+        "paymentAnnouncements": "<!DOCTYPE html>\n                    <html lang=\"en\">\n                    <head>\n                        <meta charset=\"UTF-8\">\n                        <title>注意事项</title>\n                    </head>\n                    <body>\n                    <ul>\n                        <li>1.请选择最快到账的方式，跟投人队列以<span style=\"color:#FE9800\">到款时间</span>为准。</li>\n                        <li>2.请确保到款金额<span style=\"color:#FE9800\">准确等于订单总额</span>，多余或少于订单总额的情况都会导致无法完成交易。</li>\n                        <li>3.汇款手续费请自行支付，订单总额不包括汇款手续费。</li>\n                        <li>4.如果由于汇款信息输入错误导致无法完成情况，产生的费用由汇款方承担。</li>\n                        <li>5.特殊汇款情况，请在汇款时备注里注明情况。</li>\n                        <li>6.为防止汇款信息意外丢失，建议自行记录汇款信息一份，例如：拍照、记事本。</li>\n                        </ul>\n                    </body>\n                </html>"
+    },
     "trade_crowd_funding_status": {
         "1": "待处理",
         "2": "投资成功",
@@ -407,6 +410,14 @@ window.DICTIONARY_CF_DATA =  {
         "2": "连连网银支付",
         "3": "连连认证支付",
         "4": "支付宝"
+    },
+    "trade_refund_status": {
+        "1": "已申请",
+        "2": "处理中",
+        "3": "已退款",
+        "4": "退款失败",
+        "5": "已关闭",
+        "6": "已删除"
     },
     "trade_status": {
         "1": "待付款",

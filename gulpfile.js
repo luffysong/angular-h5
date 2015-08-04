@@ -567,12 +567,20 @@ gulp.task('remote:test', function(){
     gulp.start('remote');
 });
 
+gulp.task('remote:test3', function(){
+    buildMode = 'test3';
+    apiHost = 'http://rongtest3.36kr.com';
+    gulp.start('remote');
+});
+
 //编译页头
 gulp.task('header', function(){
     var headers = {
+
         test: '//huodong.36kr.com/common-module/common-header-test/script.js',
         test3: '//huodong.36kr.com/common-module/common-header-test3/script.js',
         dev: '//huodong.36kr.com/common-module/common-header-dev/script.js',
+
         prod: '//krplus-cdn.b0.upaiyun.com/common-module/common-header/script.js'
     };
 
@@ -588,4 +596,3 @@ gulp.task('dict', function(){
 });
 // 默认任务
 gulp.task('default', ['serve']);
-
