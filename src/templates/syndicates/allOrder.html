@@ -35,7 +35,7 @@
         </div>
         <div class="syndicate-info">
             <div class="info-attr">融资状态</div>
-            <div class="info-val">{{item.financing.status | dict_crowd_funding_status}}</div>
+            <div class="info-val">{{item.financing.round | dict_CompanyFinancePhase}} {{item.financing.status | dict_crowd_funding_status}}</div>
         </div>
         <div class="syndicate-info">
             <div class="info-attr">投资金额</div>
@@ -49,7 +49,7 @@
             <div>{{item.status | dict_trade_crowd_funding_status}}</div>
         </div>
         <div class="pay-layer" ng-if="item.payment.status==1 && item.status==1 && item.payment.platform_type!=1">
-            <a ui-sref="syndicatesPayWay({tid:item.trade_id,amount:item.payment.amount})" class="pay-btn">去付款</a>
+            <a ui-sref="syndicatesPayWay({tid:item.trade_id,amount:item.payment.amount})" class="pay-btn" baidu-btn="去付款按钮点击">去付款</a>
         </div>
     </div>
     <div class="syndicates-index loadMore" ng-click="loadMore()" ng-if="!noMore && orderData.length">
