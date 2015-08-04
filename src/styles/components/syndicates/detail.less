@@ -434,42 +434,38 @@
     height: 50px;
     border: 1px solid #eee;
 
-    .order-btn,
-    .remind-btn {
+    .order-btn {
         display: inline-block;
         float: left;
         width: 15%;
         height: 50px;
-        background: #f7f7f7;
-        text-align: center;
-        border-right: 1px solid #dddede;
-
-        .btn-text {
-            color: #929292;
-            font-size: 14px;
-        }
-    }
-
-    .order-btn {
         padding-top: 5px;
+        background: #f7f7f7;
         font-size: 20px;
         color: #008DF2;
+        text-align: center;
+        border-right: 1px solid #dddede;
 
         &.no-remind-btn {
             width: 20%;
         }
 
-        .order-text {
+        .btn-text {
+            color: #929292;
+            font-size: 14px;
             margin-top: 5px;
         }
     }
 
     .remind-btn {
+        .order-btn;
+        padding-top: 0;
         font-size: 30px;
         font-weight: bold;
         color: #929292;
 
         .remind-text {
+            margin-top: 0;
             color: #929292;
         }
     }
