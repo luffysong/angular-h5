@@ -394,6 +394,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
          *
          * @conditions: fundingId 为金蛋理财对应的 fundingID
          */
+        /*
         if ($scope.fundingId == 105 && (!$cookies.goldEggClear || $cookies.goldEggClear != 'clear.' + UserService.getUID())) {
 
             var expires = new Date();
@@ -514,5 +515,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 });
             }, 500);
         }
+        */
     });
 

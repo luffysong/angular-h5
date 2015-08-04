@@ -305,6 +305,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                  *
                  * @condition: $stateParams.type == 'goldEgg'
                  */
+                /*
                 if ($stateParams.type == 'goldEgg') {
                     krtracker("trackPageView", '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "提交跟投人认证申请");
 
@@ -396,6 +397,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                         }
                     });
                 }
+                */
             },function(err){
                 if(err.code == 1001){
                     $scope.valStatus = "fail";
