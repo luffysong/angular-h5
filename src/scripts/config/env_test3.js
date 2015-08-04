@@ -1,7 +1,7 @@
 window.projectEnvConfig = {
-    passportHost: 'passport.36kr.com',
-    krHost: 'staging.36kr.com',
-    rongHost: 'rongtest.36kr.com',
-    ucHost: 'uctest.36kr.com',
-    helpHost: 'helptest.36kr.com'
+    passportHost: 'passport3.36kr.com',
+    krHost: 'staging3.36kr.com',
+    rongHost: 'rongtest3.36kr.com',
+    ucHost: 'uctest3.36kr.com',
+    helpHost: 'helptest3.36kr.com'
 };
