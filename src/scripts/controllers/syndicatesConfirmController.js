@@ -98,6 +98,8 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             }
         });
         $scope.seeProtocol = function(event,link){
+            $scope.actionSheet = false;
+            
             if(link == "#/riskTipAll"){
                 event.preventDefault();
                 $modal.open({
