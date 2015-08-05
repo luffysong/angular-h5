@@ -17,7 +17,8 @@ angular.module('defaultApp.directive').directive('loadingBar', [
             link: function (scope, element, attrs) {
                 scope.$watch('percent', function(percent){
                     if(percent){
-                        scope.percent = Math.min(scope.percent, 100);
+                        var per = scope.percent;
+                        per = Math.min(per, 100);
                         if(element.find(".loading-bar")){
                             if(scope.loadingTip){
                                 var i = parseInt(scope.loadingTip) >= 10000 ? parseInt(scope.loadingTip) / 10000 +"万" : parseInt(scope.loadingTip);
@@ -25,7 +26,7 @@ angular.module('defaultApp.directive').directive('loadingBar', [
                                 element.find(".loading-shade").append("<div class='loading-tip'>已筹集："+i+"<i class='bubble'></i><i class='pop'></i></div>");
                             }
                             element.find(".loading-bar").each(function(){
-                                $(this).width(scope.percent + "%");
+                                $(this).width(per + "%");
                             });
                         }else {
                             console.log("loading-bar not found");
