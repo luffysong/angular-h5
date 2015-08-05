@@ -35,28 +35,27 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
         ];
         var tempData = [];
         /*获取订单数据*/
-        $scope.queryData = function(params){
-            CoInvestorService['my-financing'].query(params,function(data){
-                if(!data.data.length){
+        $scope.queryData = function(params) {
+            CoInvestorService['my-financing'].query(params, function(data){
+                if(!data.data || !data.data.length) {
                     $scope.noData = true;
                     $scope.orderData = data.data;
-                    return;
-                }else{
+                } else {
                     $scope.noData = false;
                     tempData = data.data.slice(0);
                     /*过滤数据，去除线下付款订单*/
-                    angular.forEach(data.data,function(obj,index){
-                        if(obj.payment && obj.payment.platform_type == 1){
-                            tempData.splice(index,1);
+                    angular.forEach(data.data, function(obj, index) {
+                        if(obj.payment && obj.payment.platform_type == 1) {
+                            tempData.splice(index, 1);
                         }
                     });
-                    $scope.noMore = tempData.length <= pageSize ? true : false;
-                    $scope.orderData = tempData.slice(0,10);
+                    $scope.noMore = tempData.length <= pageSize;
+                    $scope.orderData = tempData.slice(0, 10);
                 }
-            }, function(err){
+            }, function(err) {
                 ErrorService.alert(err);
             });
-        }
+        };
         /*首次加载默认查询全部数据*/
         $scope.queryData({
             page:1,
