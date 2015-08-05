@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService, $cookies) {
         var statusList = DictionaryService.getDict("crowd_funding_status");
 
         /*股权结构是否出错*/
@@ -21,7 +21,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         document.title="36氪众筹";
         /*获取用户是否为跟投人*/
         UserService.getIdentity(function(data){
-            console.log(data);
             if(data.code == 4031){
                 ErrorService.alert({
                     msg:"请先完善资料"
@@ -41,6 +40,15 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         },function(err){
             ErrorService.alert(err);
         });
+        /*订单按钮*/
+        $scope.myOrder = function(event){
+            if(!$scope.isCoInvestor){
+                if(event){
+                    event.preventDefault();
+                }
+                $state.go("investorValidate");
+            }
+        }
         $scope.wantInvest = function(event){
             if(!$scope.uid)return;
             if(!$scope.isCoInvestor){
@@ -187,16 +195,71 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         $scope.loadInvestor = function(){
             $scope.syndicatesInfo.co_investors = $scope.tempData;
             $scope.showAll = true;
-        }
+        };
         /*展开更多众筹信息*/
         $scope.toggleMore = function(){
             $scope.isToggle = true;
-        }
+        };
         /*底部栏点击我要投资*/
         $scope.toInvest = function(){
             $state.go("syndicatesConfirm");
-        }
+        };
         /*开投提醒*/
+        $scope.setRemind = function(event) {
+            event.stopPropagation();
+            if(!UserService.getUID()) {
+                location.href = "/user/login?from=" + encodeURIComponent(location.href);
+                return;
+            }
+            if($scope.syndicatesInfo.base.has_reminder) {
+                ErrorService.alert({
+                    msg: "你已设置过提醒"
+                });
+                return;
+            } else {
+                $modal.open({
+                    templateUrl: 'templates/company/pop-set-remind.html',
+                    windowClass: 'remind-modal-window',
+                    controller: [
+                        '$scope', '$modalInstance','scope','UserService','CrowdFundingService',
+                        function ($scope, $modalInstance, scope, UserService, CrowdFundingService, $timeout) {
+                            UserService.getPhone(function(data) {
+                                if(!data) return;
+                                $scope.phone = data.slice(0,3)+"****"+data.slice(data.length-4,data.length);
+                            });
+                            $scope.ok = function() {
+                                CrowdFundingService.save({
+                                    model:"crowd-funding",
+                                    id:scope.fundingId,
+                                    submodel:"opening-remind"
+                                }, {
+
+                                }, function(data) {
+                                    notify({
+                                        message:"设置成功",
+                                        classes:'alert-success'
+                                    });
+                                    scope.syndicatesInfo.base.has_reminder = true;
+                                    $modalInstance.dismiss();
+                                },function(err) {
+                                    ErrorService.alert(err);
+                                    $modalInstance.dismiss();
+                                });
+                            };
+                            $scope.cancel = function() {
+                                $modalInstance.dismiss();
+                            }
+                        }
+                    ],
+                    resolve: {
+                        scope: function() {
+                            return $scope;
+                        }
+                    }
+                });
+            }
+        };
+
         $scope.krCode = function(){
             if(!UserService.getUID()){
                 location.href = "/user/login?from=" + encodeURIComponent(location.href);
@@ -221,7 +284,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             per_page:100,
             page: 1
         },function(data){
-            console.log(data);
             /*过滤数据，去除线下汇款订单*/
             angular.forEach(data.data,function(obj,index){
                 if(obj.payment.platform_type != 1 && obj.payment.status == 1){
@@ -307,5 +369,164 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 text: ''
             }
         };
+
+        /**
+         * 未登录用户点击<认证跟投人>，如果已经认证成功现在跳转到<跟投人认证成功>页面
+         *
+         * 应该跳转到<众筹详情>页面，所以这里做一个判断，看用户跳转回来的时候是否已认证，决定是否跳转到<跟投人认证>页面
+         */
+        if(!!$stateParams.checkValid) {
+            UserService.getIdentity(function(data){
+                $scope.isCoInvestor = !!data.coInvestor;
+                if(!$scope.isCoInvestor) {
+                    $state.go("investorValidate");
+                }
+            });
+        }
+
+        /**
+         * 金蛋理财活动
+         *
+         * 产品逻辑：
+         *
+         * 几种状态： 登录/未登录 完善资料/未完善资料 跟投人/非跟投人
+         *
+         * 流程：
+         *
+         * 1. 未登录情况：进入活动页面 -> 弹框显示“我要领取” -> 按钮导航“登录/注册” -> 跳转活动页或者完善资料页 -> 跳回活动页面
+         * 2. 已登录情况：进入活动页面 -> 弹框显示“我要领取” -> <是否跟投人？> 是 -> 按钮点击后显示手机号输入 -> 点击“立即领取”领奖 -> 显示领奖结果
+         *                                                   |                                                          +
+         *                                                   +                                                          |
+         *                                                   否 --------> 按钮点击后显示认证页面 -> 弹框显示“我要领取” -> 点击“立即领取”领奖
+         *
+         * TODO:
+         * 1. 弹框显示逻辑和不显示逻辑，尤其是后者，可能需要对应的接口 :-) 与后端同学商定使用 cookie
+         * 2. 后端接口现在为虚拟接口
+         * 3. 金蛋理财识别现在依靠 fundingId，但是还不明确线上数据库中得 fundingId
+         *
+         * @conditions: fundingId 为金蛋理财对应的 fundingID
+         */
+        /*
+        if ($scope.fundingId == 105 && (!$cookies.goldEggClear || $cookies.goldEggClear != 'clear.' + UserService.getUID())) {
+
+            var expires = new Date();
+            expires.setDate(expires.getDate() + 10);
+            var registSrc = /^egg-(web|app)$/.test($stateParams.source) ? 'egg' : '';
+            if (registSrc == 'egg') {
+                document.cookie = 'regist_src=' + registSrc + '; expires=' + expires.toGMTString();
+            }
+            krtracker("trackPageView", '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "进入金蛋理财详情页面");
+
+            $timeout(function() {
+                $modal.open({
+                    templateUrl: 'templates/syndicates/pop-gold-egg.html',
+                    windowClass: 'gold-egg-modal',
+                    controller: [
+                        '$scope', '$modalInstance', 'scope', 'UserService', 'CrowdFundingService', '$stateParams',
+                        function ($scope, $modalInstance, scope, UserService, CrowdFundingService, $stateParams) {
+                            $scope.source = $stateParams.source;
+                            // 获取用户 id
+                            $scope.userId = UserService.getUID();
+                            // 获取用户是否登录
+                            $scope.isLogin = !!$scope.userId;
+                            // 用户手机号码 & mask
+                            $scope.user = {
+                                phone: "",
+                                phoneMask: ""
+                            };
+                            UserService.getPhone(function(phone) {
+                                if(!phone) return;
+                                $scope.user.phone = phone;
+                                $scope.user.phoneMask = phone.slice(0,3) + "****" + phone.slice(phone.length - 4, phone.length);
+                            });
+                            // 获取用户是否为跟投人
+                            UserService.get({
+                                id: 'identity',
+                                sub: 'cert',
+                                subid: 'coinvestor-info'
+                            },{},function(data) {
+                            },function(err) {
+                                if(!err) return;
+                                if(err.code == 1001) {
+                                    $scope.isCoInvestor = false;
+                                } else if(err.code == 1002 || err.code == 1003) {
+                                    $scope.isCoInvestor = true;
+                                    krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "用户已经是跟投人");
+                                } else {
+                                    $scope.isCoInvestor = false;
+                                }
+                            });
+                            // 获取用户是否完善资料
+                            UserService.isProfileValid(function(data) {
+                                $scope.isProfileValided = data;
+                            });
+
+                            $scope.showForm = false;
+                            $scope.isValidateAction = false;
+                            $scope.showFormAction = function() {
+                                $scope.showForm = true;
+                                krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "点击弹框 - 进行奖品领取");
+                            };
+                            // 领取奖品操作
+                            $scope.earn = function() {
+                                krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "领取奖励 - 提交手机号");
+                                CrowdFundingService.save({
+                                    model:"crowd-funding",
+                                    submodel:"jindan-gift"
+                                }, {
+                                    "phone": $scope.user.phone
+                                }, function(data) {
+                                    if (!data) return;
+                                    switch(data.type) {
+                                        case 1:
+                                            $scope.welcomeText = '恭喜您：';
+                                            $scope.prizeTitle = '领取2万元金蛋理财特权本金';
+                                            $scope.nextText = '登录金蛋理财App完成投资即可领取';
+                                            krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 2万元金蛋理财特权本金");
+                                            break;
+                                        case 2:
+                                            $scope.welcomeText = '恭喜您：';
+                                            $scope.prizeTitle = '领取3000元金蛋理财特权本金';
+                                            $scope.nextText = '登录金蛋理财App完成投资即可领取';
+                                            krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 3000元金蛋理财特权本金");
+                                            break;
+                                        case 3:
+                                            $scope.welcomeText = '很抱歉，本活动礼包仅限：';
+                                            $scope.prizeTitle = '2015年8月1日0点前36Kr注册用户领取';
+                                            $scope.nextText = '您可以下载金蛋理财App，完成新手任务，即得最高1万元特权本金哦！';
+                                            $scope.titleSmaller = 'smaller';
+                                            krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 获取奖励失败");
+                                            break;
+                                    }
+                                    $scope.resultView = true;
+                                    var expires = new Date();
+                                    expires.setYear(expires.getFullYear() + 1);
+                                    document.cookie = 'goldEggClear=clear.' + $scope.userId + '; expires=' + expires.toGMTString();
+                                }, function(err) {
+                                    ErrorService.alert(err);
+                                    krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 获取奖励失败");
+                                });
+                            };
+
+                            // 关闭弹框操作
+                            $scope.close = function() {
+                                $modalInstance.dismiss();
+                            };
+
+                            // 统计来源
+                            $scope.uaStatistics = function(str) {
+                                krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + str);
+                            };
+                        }
+                    ],
+                    resolve: {
+                        scope: function() {
+                            return $scope;
+                        }
+                    }
+                });
+            }, 500);
+        }
+        */
     });
 

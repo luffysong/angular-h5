@@ -17,20 +17,17 @@ angular.module('defaultApp.service').service('CoInvestorService',
                     method: 'GET',
                     transformResponse:appendTransform($http.defaults.transformResponse, function (data) {
                         var res = data;
-                        try{
+                        try {
                             var list = res.data.data;
-                            list.forEach(function(item){
-                                if(!item || !item.financing)return;
-                                item.percent = Math.min(100, parseInt(
-                                    (parseInt(item.financing.cf_success_raising)/parseInt(item.financing.cf_raising))*100)
-                                ) + "%";
+                            list.forEach(function(item) {
+                                if(!item || !item.financing) return;
+                                item.percent = (parseInt(item.financing.cf_success_raising) * 100 / parseInt(item.financing.cf_raising)).toFixed(0);
 
-                                item.financing.close_time = item.financing.close_time.indexOf('0000-00-00')>-1?"":new Date(item.financing.close_time);
+                                item.financing.close_time = item.financing.close_time.indexOf('0000-00-00') > -1 ? "" : new Date(item.financing.close_time);
 
                                 setInvestor(item.financing);
-
                             });
-                        }catch(e){
+                        } catch(e) {
 
                         }
                         return res;

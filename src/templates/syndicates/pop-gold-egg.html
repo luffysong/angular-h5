@@ -1,0 +1,53 @@
+<!-- 金蛋理财活动 h5 模板 -->
+<div class="gold-egg text-center">
+    <a class="btn-close" href="javascript:;" ng-click="close()">
+        <img ng-src="styles/images/gold-egg/icon-close.png" alt="close"/>
+    </a>
+
+    <div class="pop-header" ng-hide="resultView">
+        <img ng-src="styles/images/gold-egg/gold-egg-logo.png" alt="金蛋理财+36Kr"/>
+    </div>
+
+    <div class="pop-body" ng-hide="resultView">
+        <h4 class="pop-title">恭喜您获得36Kr跟投人专享红包</h4>
+        <div class="gifts clearfix">
+            <div class="gift-greenhand">
+                <div class="content-left">
+                    <div class="icon-gift"></div>
+                </div>
+                <div class="content-right text-left">
+                    <p class="gift-title">2万元新手礼包</p>
+                    <p class="gift-sub-title">金蛋理财新用户专享</p>
+                </div>
+            </div>
+            <div class="gift-thank">
+                <div class="content-left">
+                    <div class="icon-gift"></div>
+                </div>
+                <div class="content-right text-left">
+                    <p class="gift-title">3千元感恩礼包</p>
+                    <p class="gift-sub-title">金蛋理财老用户专享</p>
+                </div>
+            </div>
+        </div>
+        <div class="phone-area">
+            <a class="btn btn-get-gift" login-btn ng-if="!isLogin" ng-click="uaStatistics('点击弹框 - 进行登录')">我要领取</a>
+            <a class="btn btn-get-gift" href="#/guide/welcome" ng-if="isLogin && !isProfileValided && isCoInvestor"  ng-click="uaStatistics('点击弹框 - 进行完善资料')">我要领取</a>
+            <a class="btn btn-get-gift" href="#/investorValidate?type=goldEgg&source={{source}}" ng-if="isLogin && !isCoInvestor"  ng-click="uaStatistics('点击弹框 - 进行跟投人认证')">成为跟投人</a>
+            <a class="btn btn-get-gift" ng-if="isLogin && isProfileValided && isCoInvestor && !showForm && !isValidateAction" ng-click="showFormAction()">我要领取</a>
+            <form role="form" ng-if="isLogin && isProfileValided && isCoInvestor && showForm || isValidateAction" ng-submit="$event.preventDefault()" >
+                <input type="text" name="phone" value="{{user.phoneMask}}" ng-disabled="!!user.phone"/>
+                <a class="btn btn-earn-gift" href="javascript:;" ng-click="earn()">领取金蛋礼包</a>
+            </form>
+        </div>
+        <p class="info-text">*本活动限金蛋理财注册用户及2015年8月1日0点前36Kr注册用户参与</p>
+    </div>
+
+    <div class="pop-body result" ng-show="resultView">
+        <p class="welcome-text">{{welcomeText}}</p>
+        <p class="prize-title" ng-class="titleSmaller">{{prizeTitle}}</p>
+        <p class="next-text">{{nextText}}</p>
+        <a class="btn btn-download" href="http://t.cn/RZOyeju">下载金蛋理财</a>
+        <p class="info-text">注：本礼包每位用户仅限领取一次。</p>
+    </div>
+</div>

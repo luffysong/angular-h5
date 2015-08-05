@@ -8,12 +8,12 @@
                next-arrow=".top-slide-arrow-right">
             <div class="slider syndicates">
                 <div class="slider-image">
-                    <a href="" class="banner-btn" ng-click="gotoInvest()">我要投资</a>
+                    <a href="" class="banner-btn" ng-click="gotoInvest()" baidu-btn="众筹列表页-banner点击">我要投资</a>
                 </div>
             </div>
             <div class="slider syndicates">
                 <div class="slider-image next">
-                    <a href="{{helpHost}}/q-m-zc.html" class="banner-btn">查看详情</a>
+                    <a href="{{helpHost}}/q-m-zc.html" class="banner-btn" baidu-btn="众筹列表页-banner点击">查看详情</a>
                 </div>
             </div>
         </slick>
@@ -66,10 +66,10 @@
                     </span>
                 </div>
                 <div class="actions clearfix">
-                    <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default" ng-if="item.color != '60'">查看详情</a>
-                    <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default preheat-detail" ng-if="item.color == '60'">查看详情</a>
+                    <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default" ng-if="item.color != '60'" baidu-btn="众筹列表页-{{item.company.name}}-详情按钮点击">查看详情</a>
+                    <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default preheat-detail" ng-if="item.color == '60'" baidu-btn="众筹列表页-{{item.company.name}}-详情按钮点击">查看详情</a>
                     <a href="" class="btn btn-default preheat-remind" login-btn ng-if="item.color == '60'"
-                       ng-click="startRemind($event,item.has_reminder,item.id,$index)">
+                       ng-click="startRemind($event,item.has_reminder,item.id,$index)" baidu-btn="众筹列表页-{{item.company.name}}-开投提醒按钮点击">
                         开投提醒
                     </a>
                 </div>

@@ -80,7 +80,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*众筹详情*/
     $stateProvider.state('syndicatesDetail', {
-        url: '/zhongchouDetail?companyId&fundingId&login',
+        url: '/zhongchouDetail?companyId&fundingId&login&source&checkValid',
         templateUrl: 'templates/syndicates/detail.html',
         controller: 'syndicatesDetailController'
     });
@@ -106,6 +106,28 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             }
         }*/
     });
+    /*众筹个人所有订单页面*/
+    $stateProvider.state('syndicatesAllOrder', {
+        url: '/zhongchouAllOrder',
+        templateUrl: 'templates/syndicates/allOrder.html',
+        controller: 'syndicatesAllOrderController'/*,
+         data:{
+         permissions : {
+         only : ['valid']
+         }
+         }*/
+    });
+    /*众筹选择支付方式页面*/
+    $stateProvider.state('syndicatesPayWay', {
+        url: '/zhongchouPayWay/{tid}/{amount}',
+        templateUrl: 'templates/syndicates/payWay.html',
+        controller: 'syndicatesPayWayController'/*,
+         data:{
+         permissions : {
+         only : ['valid']
+         }
+         }*/
+    });
     /*众筹支付页面*/
     $stateProvider.state('syndicatesPay', {
         url: '/zhongchouPay/{tid}/{amount}',
@@ -130,7 +152,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*跟投人认证*/
     $stateProvider.state('investorValidate', {
-        url: '/investorValidate',
+        url: '/investorValidate?type',
         templateUrl: 'templates/investorValidate/index.html',
         controller: 'InvestorValidateController',
         data:{

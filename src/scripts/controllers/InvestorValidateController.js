@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
 
-    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService, $interval,$modal) {
+    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService, $interval,$modal, $stateParams) {
         $timeout(function(){
             window.scroll(0,0);
         },0);
@@ -300,6 +300,104 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             },$scope.user,function(data){
                 console.log(data);
                 $scope.valStatus = "validating";
+                /**
+                 * 金蛋理财活动
+                 *
+                 * @condition: $stateParams.type == 'goldEgg'
+                 */
+                /*
+                if ($stateParams.type == 'goldEgg') {
+                    krtracker("trackPageView", '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "提交跟投人认证申请");
+
+                    $modal.open({
+                        templateUrl: 'templates/syndicates/pop-gold-egg.html',
+                        windowClass: 'gold-egg-modal',
+                        controller: [
+                            '$scope', '$modalInstance', 'scope', 'UserService', 'CrowdFundingService', '$stateParams',
+                            function ($scope, $modalInstance, scope, UserService, CrowdFundingService, $stateParams) {
+                                // 获取用户 id
+                                $scope.userId = UserService.getUID();
+                                // 获取用户是否登录
+                                $scope.isLogin = !!$scope.userId;
+                                // 用户手机号码 & mask
+                                $scope.user = {
+                                    phone: "",
+                                    phoneMask: ""
+                                };
+                                UserService.getPhone(function(phone) {
+                                    if(!phone) return;
+                                    $scope.user.phone = phone;
+                                    $scope.user.phoneMask = phone.slice(0,3) + "****" + phone.slice(phone.length - 4, phone.length);
+                                });
+                                // 获取用户是否为跟投人
+                                $scope.isCoInvestor = true;
+                                $scope.showForm = false;
+                                $scope.isValidateAction = true;
+                                $scope.showFormAction = function() {
+                                    $scope.showForm = true;
+                                    krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "点击弹框 - 进行奖品领取");
+                                };
+                                // 获取用户是否完善资料
+                                UserService.isProfileValid(function(data) {
+                                    $scope.isProfileValided = data;
+                                });
+                                // 领取奖品操作
+                                $scope.earn = function() {
+                                    krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "领取奖励 - 提交手机号");
+                                    CrowdFundingService.save({
+                                        model:"crowd-funding",
+                                        submodel:"jindan-gift"
+                                    }, {
+                                        "phone": $scope.user.phone
+                                    }, function(data) {
+                                        if (!data) return;
+                                        switch(data.type) {
+                                            case 1:
+                                                $scope.welcomeText = '恭喜您：';
+                                                $scope.prizeTitle = '领取2万元金蛋理财特权本金';
+                                                $scope.nextText = '登录金蛋理财App完成投资即可领取';
+                                                krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 2万元金蛋理财特权本金");
+                                                break;
+                                            case 2:
+                                                $scope.welcomeText = '恭喜您：';
+                                                $scope.prizeTitle = '领取3000元金蛋理财特权本金';
+                                                $scope.nextText = '登录金蛋理财App完成投资即可领取';
+                                                krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 3000元金蛋理财特权本金");
+                                                break;
+                                            case 3:
+                                                $scope.welcomeText = '很抱歉，本活动礼包仅限：';
+                                                $scope.prizeTitle = '2015年8月1日0点前36Kr注册用户领取';
+                                                $scope.nextText = '您可以下载金蛋理财App，完成新手任务，即得最高1万元特权本金哦！';
+                                                $scope.titleSmaller = 'smaller';
+                                                krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 获取奖励失败");
+                                                break;
+                                        }
+                                        $scope.resultView = true;
+                                        var expires = new Date();
+                                        expires.setYear(expires.getFullYear() + 1);
+                                        document.cookie = 'goldEggClear=clear.' + $scope.userId + '; expires=' + expires.toGMTString();
+                                    }, function(err) {
+                                        ErrorService.alert(err);
+                                    });
+                                };
+                                // 关闭弹框操作
+                                $scope.close = function() {
+                                    $modalInstance.dismiss();
+                                };
+                                // 统计来源
+                                $scope.uaStatistics = function(str) {
+                                    krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + str);
+                                };
+                            }
+                        ],
+                        resolve: {
+                            scope: function() {
+                                return $scope;
+                            }
+                        }
+                    });
+                }
+                */
             },function(err){
                 if(err.code == 1001){
                     $scope.valStatus = "fail";
