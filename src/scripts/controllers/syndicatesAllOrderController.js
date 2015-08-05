@@ -41,7 +41,6 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                     $scope.noData = true;
                     $scope.orderData = data.data;
                 } else {
-                    $scope.noData = false;
                     tempData = data.data.slice(0);
                     /*过滤数据，去除线下付款订单*/
                     angular.forEach(data.data, function(obj, index) {
@@ -51,6 +50,8 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                     });
                     $scope.noMore = tempData.length <= pageSize;
                     $scope.orderData = tempData.slice(0, 10);
+
+                    $scope.noData = $scope.orderData.length ? false : true;
                 }
             }, function(err) {
                 ErrorService.alert(err);
