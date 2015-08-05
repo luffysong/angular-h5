@@ -99,7 +99,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         });
         $scope.seeProtocol = function(event,link){
             $scope.actionSheet = false;
-            
+
             if(link == "#/riskTipAll"){
                 event.preventDefault();
                 $modal.open({
@@ -247,18 +247,20 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             $scope.remainAmount = Math.max($scope.remainAmount,0);
             function goToPay(){
                     /*支付宝*/
-                    if($scope.payType == 'alipay'){
-                        CrowdFundingService['cf-trade'].save({},{
+                    if($scope.payType == 'alipay') {
+                        CrowdFundingService['cf-trade'].save({}, {
                             user_id: $scope.uid,
                             goods_id: $scope.fundingId,
                             goods_name: '众筹跟投', //TODO:这两个字段得产品确认一下写啥
                             goods_desc: '众筹跟投',
-                            investment: Math.min($scope.formData.investVal,$scope.remainAmount),
-                            invite_code:$scope.krCode.number
-                        },function(data){
+                            investment: Math.min($scope.formData.investVal, $scope.remainAmount),
+                            invite_code: $scope.krCode.number
+                        }, function(data) {
                             location.href = '//'+location.host+'/p/payment/4/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_id,'url_order='+encodeURIComponent(location.href),'back_url='+encodeURIComponent(location.href)]).join('&');
+                        }, function(err) {
+                            ErrorService.alert(err);
                         });
-                    }else{
+                    } else {
                         CrowdFundingService['cf-trade'].save({},{
                             user_id: $scope.uid,
                             goods_id: $scope.fundingId,
