@@ -21,7 +21,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         document.title="36氪众筹";
         /*获取用户是否为跟投人*/
         UserService.getIdentity(function(data){
-            console.log(data);
             if(data.code == 4031){
                 ErrorService.alert({
                     msg:"请先完善资料"
@@ -285,7 +284,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             per_page:100,
             page: 1
         },function(data){
-            console.log(data);
             /*过滤数据，去除线下汇款订单*/
             angular.forEach(data.data,function(obj,index){
                 if(obj.payment.platform_type != 1 && obj.payment.status == 1){
@@ -371,6 +369,20 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 text: ''
             }
         };
+
+        /**
+         * 未登录用户点击<认证跟投人>，如果已经认证成功现在跳转到<跟投人认证成功>页面
+         *
+         * 应该跳转到<众筹详情>页面，所以这里做一个判断，看用户跳转回来的时候是否已认证，决定是否跳转到<跟投人认证>页面
+         */
+        if(!!$stateParams.checkValid) {
+            UserService.getIdentity(function(data){
+                $scope.isCoInvestor = !!data.coInvestor;
+                if(!$scope.isCoInvestor) {
+                    $state.go("investorValidate");
+                }
+            });
+        }
 
         /**
          * 金蛋理财活动
