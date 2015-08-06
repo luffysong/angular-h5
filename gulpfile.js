@@ -572,6 +572,11 @@ gulp.task('remote:test3', function(){
     apiHost = 'http://rongtest3.36kr.com';
     gulp.start('remote');
 });
+gulp.task('remote:test4', function(){
+    buildMode = 'test4';
+    apiHost = 'http://rongtest4.36kr.com';
+    gulp.start('remote');
+});
 
 //编译页头
 gulp.task('header', function(){
