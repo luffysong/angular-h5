@@ -21,7 +21,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
         },function(data){
             console.log(data);
             if(!data.agreement_list.length){
-                location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order='+encodeURIComponent(location.href),'back_url=http:'+$scope.rongHost+'/#/zhongchouOrder/'+$rootScope.companyId+"/"+$rootScope.fundingId]).join('&');
+                location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order=http:'+$scope.rongHost+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
                 return;
             }
             $scope.bankData = data;
@@ -30,7 +30,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
             });
         },function(err){
             console.log(err);
-            location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order='+encodeURIComponent(location.href),'back_url=http:'+$scope.rongHost+'/#/zhongchouOrder/'+$rootScope.companyId+"/"+$rootScope.fundingId]).join('&');
+            location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
         });
         /*获取订单detail*/
         CrowdFundingService['cf-trade'].get({
@@ -57,7 +57,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
         /*选择其他银行卡事件*/
         $scope.addCard = function(){
             $scope.updatePlatType();
-            location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order='+encodeURIComponent(location.href),'back_url=http:'+$scope.rongHost+'/#/zhongchouOrder/'+$rootScope.companyId+"/"+$rootScope.fundingId]).join('&');
+            location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
         }
 
         $scope.goPay = function(){
@@ -66,7 +66,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
                 return;
             }else{
                 $scope.updatePlatType();
-                location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['no_agree='+$scope.bankData.agreement_list[$scope.cardIndex].no_agree,'pay_type=D','trade_id='+$scope.tid,'url_order='+encodeURIComponent(location.href),'back_url=http:'+$scope.rongHost+'/#/zhongchouOrder/'+$rootScope.companyId+"/"+$rootScope.fundingId]).join('&');
+                location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['no_agree='+$scope.bankData.agreement_list[$scope.cardIndex].no_agree,'pay_type=D','trade_id='+$scope.tid,'url_order=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
             }
         }
     });
