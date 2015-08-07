@@ -256,7 +256,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                             investment: Math.min($scope.formData.investVal, $scope.remainAmount),
                             invite_code: $scope.krCode.number
                         }, function(data) {
-                            location.href = '//'+location.host+'/p/payment/4/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_id,'url_order='+encodeURIComponent(location.href),'back_url='+encodeURIComponent(location.href)]).join('&');
+                            location.href = '//'+location.host+'/p/payment/4/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_id,'url_order=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
                         }, function(err) {
                             ErrorService.alert(err);
                         });
@@ -270,7 +270,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                             invite_code:$scope.krCode.number
                         }, function(data){
                             if(!$scope.hasRecord){
-                                location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_id,'url_order='+encodeURIComponent(location.href),'back_url=http:'+$scope.rongHost+'/#/zhongchouOrder/'+$rootScope.companyId+"/"+$rootScope.fundingId]).join('&');
+                                location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_id,'url_order=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
                             }else{
                                 $state.go('syndicatesPay', {
                                     tid: data.trade_id,
