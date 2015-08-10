@@ -53,11 +53,10 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 link:"#/riskTipAll",
                 name:"风险揭示书"
             };
-            if(!$scope.baseData.detail.agreements){
-                $scope.baseData.detail.agreements = [];
+            if(!$scope.baseData.detail.agreements_img){
+                $scope.baseData.detail.agreements_img = [];
             }
-            $scope.baseData.detail.agreements.push(obj);
-            console.log($scope.baseData.detail.agreements);
+            $scope.baseData.detail.agreements_img.push(obj);
         });
         $scope.$watch("krCode.number",function(from){
             if(from.length == 8){
@@ -97,31 +96,49 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 }
             }
         });
-        $scope.seeProtocol = function(event,link){
+        $scope.seeProtocol = function(event,link) {
             $scope.actionSheet = false;
-
-            if(link == "#/riskTipAll"){
+            if (link == "#/riskTipAll") {
                 event.preventDefault();
                 $modal.open({
                     templateUrl: 'templates/company/pop-risk-tip-all.html',
                     windowClass: 'remind-modal-window',
                     controller: [
-                        '$scope', '$modalInstance','scope',
+                        '$scope', '$modalInstance', 'scope',
                         function ($scope, $modalInstance, scope) {
-                            $scope.ok = function(){
+                            $scope.ok = function () {
                                 $modalInstance.dismiss();
                             }
                         }
                     ],
                     resolve: {
-                        scope: function(){
+                        scope: function () {
+                            return $scope;
+                        }
+                    }
+                });
+            } else {
+                event.preventDefault();
+                $modal.open({
+                    templateUrl: 'templates/company/pop-all-protocol.html',
+                    windowClass: 'remind-modal-window',
+                    controller: [
+                        '$scope', '$modalInstance', 'scope',
+                        function ($scope, $modalInstance, scope) {
+                            $scope.modalBg = link;
+                            $scope.ok = function () {
+                                $modalInstance.dismiss();
+                            }
+                        }
+                    ],
+                    resolve: {
+                        scope: function () {
                             return $scope;
                         }
                     }
                 });
             }
-
-        }
+        };
         /*查看风险点*/
         $scope.seeRisk = function(){
             $modal.open({
