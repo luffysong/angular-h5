@@ -260,6 +260,27 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             }
         };
 
+        /*查看BP*/
+        $scope.openBp = function(){
+            $modal.open({
+                templateUrl: 'templates/company/pop-all-protocol.html',
+                windowClass: 'remind-modal-window',
+                controller: [
+                    '$scope', '$modalInstance','scope',
+                    function ($scope, $modalInstance, scope) {
+                        $scope.modalBg = scope.syndicatesInfo.detail.file_business_plan_img;
+                        $scope.ok = function(){
+                            $modalInstance.dismiss();
+                        }
+                    }
+                ],
+                resolve: {
+                    scope: function(){
+                        return $scope;
+                    }
+                }
+            });
+        }
         $scope.krCode = function(){
             if(!UserService.getUID()){
                 location.href = "/user/login?from=" + encodeURIComponent(location.href);
