@@ -97,16 +97,6 @@
             </div>
         </div>
 
-        <!--商业计划书-->
-        <div ng-if="syndicatesInfo.detail.file_business_plan_img">
-            <div class="basic-info">
-                商业计划书
-            </div>
-            <div class="business-plan">
-                <div class="plan-logo"></div>
-                <div class="view-bp" ng-click="openBp()">查看BP</div>
-            </div>
-        </div>
         <!--领投人-->
         <div ng-if="syndicatesInfo.base.investorData.logo && syndicatesInfo.base.investorData.name" class="welcome-form">
             <div class="basic-info">
@@ -449,12 +439,15 @@
                 </div>
             </div>
 
+
             <!--商业计划书-->
-            <div ng-if="true">
+            <div ng-if="syndicatesInfo.detail.file_business_plan_img">
                 <div class="basic-info">
                     商业计划书
                 </div>
-                <div class="exp-content" transform-html="syndicatesInfo.detail.project_experience">
+                <div class="business-plan">
+                    <div class="plan-logo"></div>
+                    <div class="view-bp" ng-click="openBp()">查看BP</div>
                 </div>
             </div>
             <div ng-if="!isCoInvestor" ng-class="{'pb-50':isInApp}">
