@@ -37,7 +37,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         } else {
             /*获取用户是否为跟投人*/
             UserService.getIdentity(function(data) {
-                if(data.code == 4031){
+                if(data.code == 4031 && !$stateParams.checkValid){
                     ErrorService.alert({
                         msg:"请先完善资料"
                     });
