@@ -1,6 +1,251 @@
 body{
-	background: url('images/j3rank/0.png');
+	margin:0;
+	padding: 0;	
+	background: url('images/j3rank/0.png') center center;
+	background-size:cover;
 }
 .container{
-		background-color: red;
+	margin: 0;
+	padding: 0;
+
+	.nav{
+		z-index: 200;
+		position: relative;
+		display: block;
+		background-color: rgb(24, 12, 26);
+		position: fixed;
+		width: 100%;
+		.logo{
+			display: block;
+			height: 33px;
+			margin:10px 20px 0;
+			.kr{
+				width: 70px;
+				float:left;
+			}
+			.music{
+				width: 8%;
+				float:right;
+				margin-right: 10px;
+		}
+		}
+		.title{
+			position: relative;
+			text-align: center;
+			margin:10px 0;
+			margin-left: -10%;
+			img{
+				width: 57%;
+			}
+			.s{
+				display: inline-block;
+				padding: 0 0;
+				margin:0; 
+				margin-right: -15%;
+				img{
+					width:25%;
+					margin-bottom: 50%;
+				}
+			}
+			.s1{
+				margin-left:-10%;
+				display: inline-block;
+				padding: 0 0;
+				margin:0; 
+				width: 10%;
+				img{
+					width:40%;
+				}
+			}
+		}
+		
+	}
+	.footer{
+		width: 100%;
+		position: fixed;
+		bottom: 0;
+		.rule,.active{
+			padding:0 0;
+			margin:0 0;
+			height: 30px;
+			color: white;
+			font-weight: 600;
+		}
+		.rule{
+			width: 49%;
+			padding: 2%;
+			padding-bottom: 6%;
+			background-color: rgb(255, 139, 82);
+			border:	rgb(255, 139, 82) solid 2px;
+		}
+		.active{
+			width:48%;
+			text-align: center;
+			line-height: 170%;
+			display: inline-block;
+			background-color: rgb(235, 86, 62);
+			border:	rgb(235, 86, 62) solid 2px;
+		}
+	}
+	.rank{
+		margin:2px 17px;
+		position: absolute;
+		top: 20%;
+		ul{
+			margin-bottom: 40px;
+			padding: 0 0;
+			li{
+				border:rgb(59, 48, 59) solid 2px;
+				display: inline-block;
+				padding: 5px; 
+				background-color:rgb(35, 30, 37);
+			}
+			.num20{
+				position: relative;
+				width: 38%;
+				height: 20%;
+				display: inline-block;
+				margin:2% 2%;
+				padding: 3%;
+				.img{
+					display: inline-block;
+					width: 19%;
+					float: left;
+					margin-top: 4%;
+					img{
+						width: 100%;
+					}
+				}
+				.num{
+					font-size: 10px;
+					position: absolute;
+					color:white;
+					height: 50%;
+					width: 13%;
+					top:0;
+					left:0;
+					background: url('images/j3rank/top4.png') no-repeat;
+					background-size: contain;
+					padding: 3px 3px;
+				}
+				.info{
+					width: 80%;
+					display: inline-block;
+					float: right;
+					h3{
+						font-size: 13px;
+						display: inline-block;
+						margin:0;
+					}
+					a{
+						font-size: 15px;
+						display: inline-block;
+						float: right;
+					}
+				}
+			}
+			.top{
+				position: relative;
+				margin:2% 2%;
+				.num1{
+					background: url('images/j3rank/top1.png') no-repeat;
+				}
+				.num2{
+					background: url('images/j3rank/top2.png') no-repeat;
+				}
+				.num3{
+					background: url('images/j3rank/top3.png') no-repeat;
+				}
+				.num4{
+					background: url('images/j3rank/top4.png') no-repeat;
+				}
+				.num{
+					position: absolute;
+					color:white;
+					height: 40%;
+					width: 9%;
+					top:0;
+					left:0;
+					// background: url('images/j3rank/top4.png') no-repeat;
+					background-size: contain;
+					padding: 9px 7px;
+				}
+				position: relative;
+				.img{
+					margin: 7% 2%;
+					display: inline-block;
+					width: 17%;
+					float: left;
+					img{
+						width: 100%;
+					}
+				}
+
+			}
+			.info{
+				margin-top: 4px;
+				display: inline-block;
+				color: white;
+				width: 75%;
+				h4{
+					display: inline-block;
+					font-weight: 700; 
+					margin: 4px;
+					em{
+						color:rgb(251, 98, 63);
+					}
+				}
+				span{
+					font-size: 10px;
+					color:#666;
+					font-weight: 500;
+				}
+				a{
+					color:rgb(251, 98, 63);
+					display: inline-block;
+					float: right;
+					margin-right: 5%;
+					margin-top: 1%;
+				}
+			}
+
+		}
+	}
+	.warn{
+		z-index: 400;
+		position: absolute;
+		top:5%;
+		border-top: rgb(251, 102, 52) solid 3px;
+		color: white;
+		margin:4%;
+		background-color: rgb(34, 29, 36);
+		line-height: 140%;
+		h3{
+			color:rgb(251, 102, 52);
+			margin:4% auto;
+			text-align: center;
+		}
+		
+		ul{
+			margin:13% 5%;
+			padding:0;
+			li{
+			display: block;
+
+			}
+			h4{
+			color:rgb(251, 102, 52);
+			margin: 0;
+			}
+			em{
+				color: rgb(251, 102, 52);
+			}
+		}
+		input{
+			width: 100%;
+			color: white;
+			background-color:rgb(251, 102, 52) ;
+			border: rgb(251, 102, 52) solid 4px;
+		}
+	}
 }
