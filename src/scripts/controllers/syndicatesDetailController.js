@@ -6,8 +6,12 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
     function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService, $cookies) {
+        if(navigator.userAgent.match(/mac/i)){
+            $scope.system = "ios";
+        }else{
+            $scope.system = "android";
+        }
         var statusList = DictionaryService.getDict("crowd_funding_status");
-
         /*股权结构是否出错*/
         $scope.shareError = false;
         /*众筹信息是否全部展开*/

@@ -447,7 +447,8 @@
                 </div>
                 <div class="business-plan">
                     <div class="plan-logo"></div>
-                    <div class="view-bp" ng-click="openBp()">查看BP</div>
+                    <div class="view-bp" ng-click="openBp()" ng-show="system == 'android'">查看BP</div>
+                    <a class="view-bp" href="{{syndicatesInfo.detail.file_business_plan}}" ng-show="system == 'ios'">查看BP</a>
                 </div>
             </div>
             <div ng-if="!isCoInvestor" ng-class="{'pb-50':isInApp}">
