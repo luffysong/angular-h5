@@ -37,13 +37,17 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         } else {
             /*获取用户是否为跟投人*/
             UserService.getIdentity(function(data) {
-                if(data.code == 4031 && !$stateParams.checkValid){
-                    ErrorService.alert({
+                if(data.code == 4031){
+                    $scope.invalid = true;
+                    if(!$stateParams.checkValid){
+
+                    }
+                    /*ErrorService.alert({
                         msg:"请先完善资料"
                     });
                     $timeout(function(){
                         $state.go("investorValidate");
-                    },5000);
+                    },5000);*/
                 }else if(data) {
                     if(data.coInvestor) {
                         $scope.isCoInvestor = true;
@@ -69,7 +73,13 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         }
         $scope.wantInvest = function(event){
             if(!$scope.uid)return;
-            if(!$scope.isCoInvestor){
+            if($scope.invalid){
+                event.preventDefault();
+                $state.go('guide.welcome', {
+                    type: 'investorValidate'
+                });
+            }
+            else if(!$scope.isCoInvestor){
                 if(event){
                     event.preventDefault();
                 }
@@ -276,7 +286,15 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 });
             }
         };
-
+        /*认证跟投人*/
+        $scope.investorVal = function(event){
+            if($scope.invalid){
+                event.preventDefault();
+                $state.go('guide.welcome', {
+                    type: 'investorValidate'
+                });
+            }
+        }
         /*查看BP*/
         $scope.openBp = function(){
             $modal.open({
