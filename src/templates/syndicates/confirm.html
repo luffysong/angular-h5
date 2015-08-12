@@ -83,7 +83,8 @@
 <div class="shade-layer" ng-class="{'normal':actionSheet}" ng-click="cancel($event)">
 </div>
 <div class="layer-bottom" ng-class="{'normal':actionSheet}">
-    <a href="{{item.link}}" class="options" target="_blank" ng-repeat="item in baseData.detail.agreements_img" ng-click="seeProtocol($event,item.link)">{{item.name}}</a>
+    <a href="{{item.link}}" class="options" target="_blank" ng-repeat="item in baseData.detail.agreements" ng-click="seeProtocol($event,item.link,'pdf')" ng-if="system == 'ios'">{{item.name}}</a>
+    <a href="{{item.link}}" class="options" target="_blank" ng-repeat="item in baseData.detail.agreements_img" ng-click="seeProtocol($event,item.link,'img')" ng-if="system == 'android'">{{item.name}}</a>
     <!--<a class="options">投资协议</a>
     <a class="options">有限合伙协议</a>
     <a class="options">风险揭示书</a>-->

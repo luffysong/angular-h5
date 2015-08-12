@@ -6,6 +6,11 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesConfirmController',
     function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope) {
+        if(navigator.userAgent.match(/mac/i)){
+            $scope.system = "ios";
+        }else{
+            $scope.system = "android";
+        }
         $scope.companyId = $stateParams.cid;
         $scope.fundingId = $stateParams.fundingId;
         $scope.uid = UserService.getUID();
@@ -96,7 +101,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 }
             }
         });
-        $scope.seeProtocol = function(event,link) {
+        $scope.seeProtocol = function(event,link,type) {
             $scope.actionSheet = false;
             if (link == "#/riskTipAll") {
                 event.preventDefault();
@@ -118,25 +123,27 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                     }
                 });
             } else {
-                event.preventDefault();
-                $modal.open({
-                    templateUrl: 'templates/company/pop-all-protocol.html',
-                    windowClass: 'remind-modal-window',
-                    controller: [
-                        '$scope', '$modalInstance', 'scope',
-                        function ($scope, $modalInstance, scope) {
-                            $scope.modalBg = link;
-                            $scope.ok = function () {
-                                $modalInstance.dismiss();
+                if(type == "img"){
+                    event.preventDefault();
+                    $modal.open({
+                        templateUrl: 'templates/company/pop-all-protocol.html',
+                        windowClass: 'remind-modal-window',
+                        controller: [
+                            '$scope', '$modalInstance', 'scope',
+                            function ($scope, $modalInstance, scope) {
+                                $scope.modalBg = link;
+                                $scope.ok = function () {
+                                    $modalInstance.dismiss();
+                                }
+                            }
+                        ],
+                        resolve: {
+                            scope: function () {
+                                return $scope;
                             }
                         }
-                    ],
-                    resolve: {
-                        scope: function () {
-                            return $scope;
-                        }
-                    }
-                });
+                    });
+                }
             }
         };
         /*查看风险点*/
