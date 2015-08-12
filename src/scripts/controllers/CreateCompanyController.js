@@ -19,7 +19,9 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
     'AvatarEdit',
     '$upload',
     function ($stateParams,$timeout, $q, $modal, $scope, DictionaryService, dateFilter, DefaultService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
-        console.log($stateParams)
+        if($stateParams.from && decodeURIComponent($stateParams.from).indexOf('speed3')>-1){
+            $scope.jisu = true;
+        }
         // 职位
         $scope.founderRoles = DictionaryService.getDict('StartupPositionType');
         // 产品状态
@@ -438,7 +440,12 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             CompanyService.save({
                 'mode': 'direct'
             }, angular.copy($scope.formData), function (data) {
-                location.hash = "/company_create_apply"
+                if($scope.jisu){
+                    location.href = '/j3companycreate.html'
+                }else{
+                    location.hash = "/company_create_apply"
+                }
+
                 //if (callback) {
                 //    callback(data.id);
                 //    return;
