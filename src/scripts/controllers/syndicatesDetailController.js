@@ -6,8 +6,12 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
     function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService, $cookies) {
+        if(navigator.userAgent.match(/mac/i)){
+            $scope.system = "ios";
+        }else{
+            $scope.system = "android";
+        }
         var statusList = DictionaryService.getDict("crowd_funding_status");
-
         /*股权结构是否出错*/
         $scope.shareError = false;
         /*众筹信息是否全部展开*/
@@ -19,27 +23,49 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         $scope.orderData = [];
         $scope.uid = UserService.getUID();
         document.title="36氪众筹";
-        /*获取用户是否为跟投人*/
-        UserService.getIdentity(function(data){
-            if(data.code == 4031){
-                ErrorService.alert({
-                    msg:"请先完善资料"
-                });
-                $timeout(function(){
-                    $state.go("investorValidate");
-                },5000);
-            }else if(data){
-                if(data.coInvestor){
-                    $scope.isCoInvestor = true;
-                }else{
+        /**
+         * 用户跳转回来的是否已认证，决定是否跳转到<跟投人认证>页面
+         */
+        if($scope.uid && !!$stateParams.checkValid) {
+            UserService.isProfileValid(function(data) {
+                if(!data) {
+                    $state.go('guide.welcome', {from:encodeURIComponent(location.href), type: 'investorValidate'});
+                } else {
+                    UserService.getIdentity(function(data){
+                        if(!data.coInvestor) {
+                            $state.go("investorValidate");
+                        }
+                    });
+                }
+            });
+        } else {
+            /*获取用户是否为跟投人*/
+            UserService.getIdentity(function(data) {
+                if(data.code == 4031){
+                    $scope.invalid = true;
+                    if(!$stateParams.checkValid){
+
+                    }
+                    /*ErrorService.alert({
+                        msg:"请先完善资料"
+                    });
+                    $timeout(function(){
+                        $state.go("investorValidate");
+                    },5000);*/
+                }else if(data) {
+                    if(data.coInvestor) {
+                        $scope.isCoInvestor = true;
+                    } else {
+                        $scope.isCoInvestor = false;
+                    }
+                } else {
                     $scope.isCoInvestor = false;
                 }
-            }else{
-                $scope.isCoInvestor = false;
-            }
-        },function(err){
-            ErrorService.alert(err);
-        });
+            },function(err) {
+                ErrorService.alert(err);
+            });
+        }
+
         /*订单按钮*/
         $scope.myOrder = function(event){
             if(!$scope.isCoInvestor){
@@ -51,7 +77,13 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         }
         $scope.wantInvest = function(event){
             if(!$scope.uid)return;
-            if(!$scope.isCoInvestor){
+            if($scope.invalid){
+                event.preventDefault();
+                $state.go('guide.welcome', {
+                    type: 'investorValidate'
+                });
+            }
+            else if(!$scope.isCoInvestor){
                 if(event){
                     event.preventDefault();
                 }
@@ -94,7 +126,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             });
         }
 
-
         /*获取公司基本信息*/
         CompanyService.get({
             id:$scope.companyId
@@ -129,10 +160,10 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 if(obj.value == data.base.status){
                     $scope.status = obj.desc;
                     var date = new Date(data.base.start_time);
-                    /*超募中*/
+                    /*/!*超募中*!/
                     if(data.base.cf_success_raising > data.base.cf_raising && data.base.cf_raising > 0){
                         $scope.status = "超募中";
-                    }
+                    }*/
                     /*预热中*/
                     if(new Date() < date && $scope.color != 25){
                         var minute = date.getMinutes() > 9 ? date.getMinutes() : "0"+date.getMinutes();
@@ -259,7 +290,36 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 });
             }
         };
-
+        /*认证跟投人*/
+        $scope.investorVal = function(event){
+            if($scope.invalid){
+                event.preventDefault();
+                $state.go('guide.welcome', {
+                    type: 'investorValidate'
+                });
+            }
+        }
+        /*查看BP*/
+        $scope.openBp = function(){
+            $modal.open({
+                templateUrl: 'templates/company/pop-all-protocol.html',
+                windowClass: 'remind-modal-window',
+                controller: [
+                    '$scope', '$modalInstance','scope',
+                    function ($scope, $modalInstance, scope) {
+                        $scope.modalBg = scope.syndicatesInfo.detail.file_business_plan_img;
+                        $scope.ok = function(){
+                            $modalInstance.dismiss();
+                        }
+                    }
+                ],
+                resolve: {
+                    scope: function(){
+                        return $scope;
+                    }
+                }
+            });
+        }
         $scope.krCode = function(){
             if(!UserService.getUID()){
                 location.href = "/user/login?from=" + encodeURIComponent(location.href);
@@ -369,20 +429,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 text: ''
             }
         };
-
-        /**
-         * 未登录用户点击<认证跟投人>，如果已经认证成功现在跳转到<跟投人认证成功>页面
-         *
-         * 应该跳转到<众筹详情>页面，所以这里做一个判断，看用户跳转回来的时候是否已认证，决定是否跳转到<跟投人认证>页面
-         */
-        if(!!$stateParams.checkValid) {
-            UserService.getIdentity(function(data){
-                $scope.isCoInvestor = !!data.coInvestor;
-                if(!$scope.isCoInvestor) {
-                    $state.go("investorValidate");
-                }
-            });
-        }
 
         /**
          * 金蛋理财活动
