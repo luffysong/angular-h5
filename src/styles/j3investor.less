@@ -9,8 +9,10 @@ ul,ol{list-style: none;}
 }
 html,body{
   height: 100%;
+  font-size: 12px;
 }
 .j3investor{
+  padding: 1px 0 0 0;
   width: 100%;
   height: 100%;
   background: url("images/j3rank/investor_bg.jpg");
@@ -22,5 +24,149 @@ html,body{
     background: url("images/j3rank/1.png") no-repeat;
     background-size: 100% auto;
     height: 40px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+  .bgm-icon {
+    z-index: 101;
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    background: url(images/j3rank/2.png) no-repeat;
+    background-size: contain;
+    top: 20px;
+    right: 20px;
+  }
+
+  img{
+    width: 100%;
+  }
+  .title{
+    width: 68%;
+    margin: 50px auto 20px;
+    position: absolute;
+    top: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .sign{
+    position: absolute;
+    top: 92%;
+    width: 60%;
+    z-index: 10;
+    text-decoration: none;
+    display: inline-block;
+    height: 26px;
+    line-height: 25px;
+    color: #fff;
+    border-radius: 5px;
+    background-color: #be4735;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .swiper-container{
+    height: 100%;
+
+
+  }
+
+  .pre, .next{
+    position: absolute;
+    width: 12px;
+    height: 21px;
+    top: 50%;
+    z-index: 10;
+    img{
+      width: 100%;
+    }
+  }
+  .pre{
+    left: 10px;
+  }
+  .next{
+    right: 10px;
+  }
+
+  .swiper-wrapper{
+    width: 100%;
+
+    position: absolute;
+    top: 30%;
+
+
+
+    li{
+      width: 80%;
+      margin: 22px auto;
+      .imgwrap{
+        float: left;
+        border-radius: 50%;
+        border: 4px solid #ea563d;
+        width: 65px;
+        height: 65px;
+        overflow: hidden;
+        img{
+          width: 100%;
+        }
+      }
+
+      .info{
+        float: left;
+        width: 70%;
+      }
+      .border{
+        width: 15px;
+        height: 71px;
+        background: url("images/j3rank/investor_border_l.png") no-repeat;
+        background-size: 100% auto;
+        float: left;
+      }
+      .text{
+        width: 80%;
+        float: left;
+        height: 65px;
+        padding: 2px 4px 2px 12px;
+        border: 1px solid #a8402f;
+        border-left: none;
+        background-color: rgba(234, 86, 61, 0.5);
+
+
+        h4{
+          color: #ea6345;
+          font-weight: normal;
+          padding: 2px 0;
+          font-size: 14px;
+        }
+        p{
+          color: #fff;
+          margin: 2px 0;
+          line-height: 1.2;
+        }
+      }
+    }
+    li:nth-child(even){
+      .imgwrap{
+        float: right;
+      }
+      .info{
+        float: right;
+      }
+      .border{
+        float: right;
+        background: url("images/j3rank/investor_border_r.png") no-repeat;
+        background-size: 100% auto;
+      }
+      .text{
+        float: right;
+        border: 1px solid #a8402f;
+        border-right: none;
+      }
+    }
+
+
+
   }
 }

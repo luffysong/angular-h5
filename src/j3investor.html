@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>人气榜</title>
+    <title>投资人阵容</title>
     <!-- build:css /styles/j3investor.css -->
+    <link rel="stylesheet" href="/components/swiper/dist/css/swiper.min.css"/>
     <link rel="stylesheet" href="/styles/j3investor.css">
     <!-- endbuild -->
 </head>
@@ -17,49 +18,133 @@
         <audio src="" id="bgm"></audio>
 
         <div class="title">
-            <img src="" alt=""/>
+            <img src="styles/images/j3rank/investor_title.png" alt=""/>
+        </div>
+
+        <div class="pre">
+            <img src="styles/images/j3rank/arr_pre.png" alt=""/>
+        </div>
+        <div class="next">
+            <img src="styles/images/j3rank/arr_next.png" alt=""/>
         </div>
 
         <div class="swiper-wrapper">
-            <div class="pre"></div>
-            <div class="next"></div>
-            <div class="swiper-slide slide1">
-                <ul>
-                    <li>
-                        <div class="clearfix">
-                            <div class="imgwrap">
-                                <img src="http://www.touxiang.cn/uploads/20131114/14-065802_226.jpg" alt=""/>
-                            </div>
-                            <div class="info">
-                                <div class="border"></div>
-                                <div class="text">
-                                    <h4>Gray 各个基金</h4>
 
-                                    <p class="phase">A轮</p>
 
-                                    <p class="des">
-                                        医疗、智能硬件方向，想把一起做好
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <!--<div class="swiper-slide slide2">-->
-
-            <!--</div>-->
-            <!--<div class="swiper-slide slide3">-->
 
         </div>
 
-        <a href="">活动报名</a>
+        <a href="/#/company_create?from=speed3" class="sign">活动报名</a>
     </div>
 
 
 </div>
 
 </div>
+
+<script type="tml" id="tml">
+
+<%for(var i = 0; i < newArr.length; i++){%>
+<div class="swiper-slide slide<%=i%>">
+    <ul>
+        <%for(var j = 0; j < newArr[i].length; j++){%>
+        <li>
+            <div class="clearfix">
+                <div class="imgwrap">
+                    <img src="<%=newArr[i][j].avator%>" alt=""/>
+                </div>
+                <div class="info">
+                    <div class="border"></div>
+                    <div class="text">
+                        <h4><%=newArr[i][j].name%></h4>
+
+                        <p class="phase">???</p>
+
+                        <p class="des">
+                            <%=newArr[i][j].intro%>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <%}%>
+    </ul>
+</div>
+<%}%>
+
+
+
+</script>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+
+<script src="/components/jquery/dist/jquery.min.js"></script>
+<script src="/components/gsap/src/minified/TweenMax.min.js"></script>
+<script src="/components/swiper/dist/js/swiper.min.js"></script>
+<script src="/components/ejs/ejs.min.js"></script>
+
+
+<script>
+    var bgmTL = new TimelineMax().add([
+        TweenMax.from($('.bgm-icon'), 5, {
+            rotation: -360,
+            repeat: -1,
+            ease: Linear.easeNone
+        })
+    ]);
+
+
+    $(".bgm-icon").on('click touch', function(){
+        var bgm = document.getElementById('bgm');
+        if(bgm){
+            if(bgm.paused){
+                bgm.play();
+                bgmTL.play();
+            }else{
+                bgm.pause();
+                bgmTL.pause();
+            }
+        }
+    });
+
+    $.ajax('/api/speed/index', {
+        dataType: 'json',
+        success: function (data) {
+            console.log(data.data)
+            var arr = data.data.investors,
+                    newArr = [];
+            while (arr.length > 3) {
+                newArr.push(arr.splice(0, 3));
+            }
+            var str = ejs.render($('#tml')[0].innerHTML, {newArr:newArr})
+            $(str).appendTo('.swiper-wrapper')
+
+            var mySwiper = new Swiper('.swiper-container',{
+                autoplay : 5000,
+                loop:true
+            })
+
+            $('.next').on('click', function(){
+                console.log(111)
+                mySwiper.slideNext();
+            })
+            $('.pre').on('click', function(){
+                mySwiper.slidePrev();
+            })
+
+        }
+    })
+</script>
+
+<!--<script src="/components/PxLoader/dist/pxloader-all.min.js"></script>-->
+<!--<script src="/components/PxLoader/dist/pxloader-images.min.js"></script>-->
+<!--<script src="/scripts/loadImg.js"></script>-->
+<!--<script src="/scripts/flip-card.js"></script>-->
+<!--<script src="/scripts/timeline.js"></script>-->
+<!--<script src="/scripts/weixin.js"></script>-->
+<!--<script src="/scripts/investor_data.js"></script>-->
+<!--<script src="/scripts/main.js"></script>-->
 
 </body>
 </html>
