@@ -26,75 +26,7 @@
 
 		<div class="swiper-wrapper">
 
-			<div class="page swiper-slide">
 
-				<div class="content">
-					<ul >
-						<li class="head">
-							<img src="styles/images/j3rank/17.jpg" alt="">
-							<img src="styles/images/j3rank/7.png" alt="" class="hot">
-						</li>
-						<li class="word">
-							<p>我是<span>38克</span>创始人 <span>五花肉</span>，<em>＃我为什么要创业？＃</em></p>
-						</li>
-						<li class="word">
-							<em>“因为有一天我和cassie逛超市，因为有一天我和cassie逛超市，因为有一天我和cassie逛超市，”</em>
-						</li>
-						<li>
-							<div>
-								<h3>支持<h4>10086人</h4></h3><br/>
-								<h3>排名<h4>第二名</h4></h3>
-							</div>
-
-						</li>
-						<li class="word">
-							<a href=""><img src="styles/images/j3rank/8.png" alt=""></a>
-						</li>
-					</ul>
-				</div>
-				<div class="footer">
-					<img src="styles/images/j3rank/9.png" alt="">
-					<div>
-						<a class="support" href="">支持TA</a>
-						<a class="join" href="">我是创业者，我要参加</a>
-					</div>
-				</div>
-			</div>
-			<div class="page swiper-slide">
-				<div class="content">
-					<ul>
-						<li class="head">
-							<img src="styles/images/j3rank/17.jpg" alt="">
-						</li>
-						<li class="word">
-							<p>36氪</p>
-						</li>
-						<li class="word">
-							<p>所属领域：<span>电子商务</span></p>
-						</li>
-						<li class="word">
-							<p>让创业更简单</p>
-						</li>
-						<li>
-							<div>
-								<h3>支持<h4>10086人</h4></h3><br/>
-								<h3>排名<h4>第二名</h4></h3>
-							</div>
-
-						</li>
-						<li class="word">
-							<a href=""><img src="styles/images/j3rank/8.png" alt=""></a>
-						</li>
-					</ul>
-				</div>
-				<div class="footer">
-					<img src="styles/images/j3rank/9.png" alt="">
-					<div>
-						<a class="support" href="">支持TA</a>
-						<a class="join" href="">我是创业者，我要参加</a>
-					</div>
-				</div>
-			</div>
 
 		</div>
 
@@ -113,6 +45,79 @@
 
 
 </div>
+
+<script type="tml" id="tml">
+<div class="page swiper-slide">
+
+    <div class="content">
+        <ul >
+            <li class="head">
+                <img src="<%=user.avatar%>" alt="">
+                <img src="styles/images/j3rank/7.png" alt="" class="hot">
+            </li>
+            <li class="word">
+                <p>我是<span><%=company.name%></span>创始人 <span><%=user.name%></span>，<em>＃我为什么要创业？＃</em></p>
+            </li>
+            <li class="word">
+                <em>“<%=startupFeeling%>”</em>
+            </li>
+            <li>
+                <div>
+                    <h3>支持<h4><%=supportedCount%>人</h4></h3><br/>
+                    <h3>排名<h4>第 <%=order%> 名</h4></h3>
+                </div>
+
+            </li>
+            <li class="word">
+                <a href=""><img src="styles/images/j3rank/8.png" alt=""></a>
+            </li>
+        </ul>
+    </div>
+    <div class="footer">
+        <img src="styles/images/j3rank/9.png" alt="">
+        <div>
+            <a class="support" href="javascript:void(0)">支持TA</a>
+            <a class="join" href="/#/company_create?speed=3">我是创业者，我要参加</a>
+        </div>
+    </div>
+</div>
+<div class="page swiper-slide">
+    <div class="content">
+        <ul>
+            <li class="head">
+                <img src="<%=company.logo%>" alt="">
+            </li>
+            <li class="word">
+                <p><%=company.name%></p>
+            </li>
+            <li class="word">
+                <p>所属领域：<span><%=company.industry%></span></p>
+            </li>
+            <li class="word">
+                <p><%=company.brief%></p>
+            </li>
+            <li>
+                <div>
+                    <h3>支持<h4><%=supportedCount%>人</h4></h3><br/>
+                    <h3>排名<h4>第 <%=order%> 名</h4></h3>
+                </div>
+
+            </li>
+            <li class="word">
+                <a href=""><img src="styles/images/j3rank/8.png" alt=""></a>
+            </li>
+        </ul>
+    </div>
+    <div class="footer">
+        <img src="styles/images/j3rank/9.png" alt="">
+        <div>
+            <a class="support" href="javascript:void(0)">支持TA</a>
+            <a class="join" href="/#/company_create?speed=3">我是创业者，我要参加</a>
+        </div>
+    </div>
+</div>
+</script>
+
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 
@@ -121,50 +126,47 @@
 <script src="/components/swiper/dist/js/swiper.min.js"></script>
 <script src="/components/ejs/ejs.min.js"></script>
 <script>
-//	var bgmTL = new TimelineMax().add([
-//		TweenMax.from($('.bgm-icon'), 5, {
-//			rotation: -360,
-//			repeat: -1,
-//			ease: Linear.easeNone
-//		})
-//	]);
-//
-//
-//	$(".bgm-icon").on('click touch', function(){
-//		var bgm = document.getElementById('bgm');
-//		if(bgm){
-//			if(bgm.paused){
-//				bgm.play();
-//				bgmTL.play();
-//			}else{
-//				bgm.pause();
-//				bgmTL.pause();
-//			}
-//		}
-//	});
+	var bgmTL = new TimelineMax().add([
+		TweenMax.from($('.bgm-icon'), 5, {
+			rotation: -360,
+			repeat: -1,
+			ease: Linear.easeNone
+		})
+	]);
+
+
+	$(".bgm-icon").on('click touch', function(){
+		var bgm = document.getElementById('bgm');
+		if(bgm){
+			if(bgm.paused){
+				bgm.play();
+				bgmTL.play();
+			}else{
+				bgm.pause();
+				bgmTL.pause();
+			}
+		}
+	});
 
 
 
-	$.ajax('/api/speed/funds/startup-feeling', {
+	$.ajax('/api/speed/funds/startup-feeling-h5', {
+		data:{
+			cid : location.search.slice(1)
+		},
 		dataType: 'json',
 		success: function (data) {
-			console.log(data.data)
-//			var arr = data.data.investors,
-//					newArr = [];
-//			while (arr.length > 3) {
-//				newArr.push(arr.splice(0, 3));
-//			}
-//			var str = ejs.render($('#tml')[0].innerHTML, {newArr:newArr})
-//			$(str).appendTo('.swiper-wrapper')
-//
-//			var dirindex = 0;
-//			var mySwiper = new Swiper('.swiper-container',{
-//				onSlideChangeEnd:function(swiper){
-//					$('.dir li').eq(dirindex).removeClass('active');
-//					$('.dir li').eq(swiper.activeIndex).addClass('active');
-//					dirindex = swiper.activeIndex;
-//				}
-//			})
+			var str = ejs.render($('#tml')[0].innerHTML, data.data)
+			$(str).appendTo('.swiper-wrapper')
+
+			var dirindex = 0;
+			var mySwiper = new Swiper('.swiper-container',{
+				onSlideChangeEnd:function(swiper){
+					$('.dir li').eq(dirindex).removeClass('active');
+					$('.dir li').eq(swiper.activeIndex).addClass('active');
+					dirindex = swiper.activeIndex;
+				}
+			})
 
 		}
 	})
