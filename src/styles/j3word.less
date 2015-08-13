@@ -1,133 +1,183 @@
-body{
-	margin:0;
-	padding: 0;
-	background: url('images/j3rank/0.png') center center;
-	background-size:cover;
-}
-.container{
-	.page{
-		margin-bottom: 20px;
-		.logo{
-			width: 25%;
-			margin-top:20px;
-			margin-left: 30px;
-			max-width: 150px;
-		}
-		.footer{
-			text-align: center;
-			div{
-				max-width: 440px;
-				width: 80%;
-				margin: auto auto;
-				margin-top:10px;
-				a{
-					display: inline-block;
-					text-decoration: none;
-					color: white;
-					font-weight: 600;
-					height: 35px;
-					line-height: 35px;
-					border-radius: 3px;
-					font-size: 1px;
-				}
-				.support{
-					width: 45%;
-					border:rgb(229, 96, 68) solid 2px;
-					background:rgb(229, 96, 68);
-				}
-				.join{
-					border:rgb(229, 96, 68) solid 2px;
-					width: 48%;
-				}
-			}
-			img{
-				width: 80%;
-				max-width: 400px;
-			}
-		}
-		.content{
-			color: white;			
-			// text-align: center;
-			font-weight: 100;
-			ul{
-				padding: 0;
-				font-size: 90%
-			}
-			li{
-				display: block;
-				margin:0 4%;
-				div{
-					margin:auto auto;
-					margin-top: 20px;
-					width: 150px;
-				}
-			}
-			.word{
-				text-align: center;
-			}
-			.head{
-				text-align: center;
-				position: relative;
-				width: 150px;
-				margin: auto auto;
-				padding: 0;
-				.hot{
-					width: 35px;
-					position: absolute;
-					right:17px;
-					border: transparent;
-					top:120px;
-				}
-				img{
-					width: 150px;
-					border:rgb(229, 96, 68) solid 3px;
-					border-radius: 75px;
-					overflow: hidden;
-				}
-			}
-			em{
-				font-style: normal;
-				color:rgb(229, 96, 68);
-			}
-			h3,h4,span,em{
-				display: inline-block;
-			}
-			span{
-				line-height: 200%;
-			}
-			h3{
-				color: rgb(229, 96, 68);
-				margin:0;
-			}
-			h4{
-				font-size: 130%;
-				margin:0;
-				margin-top: 20px;
-				margin-left: 3%
-			}
-			a{
-				margin-top: 10px;
-				img{
-					width: 200px;
-					margin-top: 10px;
-				}
-			}
-		}
-	}
-	.dir{
-		width: 165px;
-		height: 50px;
-		margin: auto auto;
-		ul{
-			margin-left: 45px;
-		}
-		li{
-			text-align: center;
-			color: rgb(229, 96, 68);
-			float: left;
-			margin-right: 20px;
-			font-size: 40px;
+* {
+  margin: 0;
+  padding: 0;
 
-		}
-	}
+}
+html, body{
+  height: 100%;
+}
+ul,li{list-style: none}
+
+.j3word {
+  padding: 1px 0 0 0;
+  width: 100%;
+  height: 100%;
+  background: url('images/j3rank/0.png') center center;
+  background-size: cover;
+  .logo {
+    width: 17%;
+    max-width: 100px;
+    background: url("images/j3rank/1.png") no-repeat;
+    background-size: 100% auto;
+    height: 40px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+  .bgm-icon {
+    z-index: 101;
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    background: url(images/j3rank/2.png) no-repeat;
+    background-size: contain;
+    top: 20px;
+    right: 20px;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .swiper-wrapper {
+    width: 100%;
+
+    position: absolute;
+    top: 11%;
+  }
+  .swiper-container {
+    height: 100%;
+
+  }
+  .page {
+    margin-bottom: 20px;
+    .logo {
+      width: 25%;
+      margin-top: 20px;
+      margin-left: 30px;
+      max-width: 150px;
+    }
+    .footer {
+      text-align: center;
+      div {
+        max-width: 440px;
+        width: 80%;
+        margin: auto auto;
+        margin-top: 10px;
+        a {
+          display: inline-block;
+          text-decoration: none;
+          color: white;
+          font-weight: 600;
+          height: 35px;
+          line-height: 35px;
+          border-radius: 3px;
+          font-size: 1px;
+        }
+        .support {
+          width: 45%;
+          border: rgb(229, 96, 68) solid 2px;
+          background: rgb(229, 96, 68);
+        }
+        .join {
+          border: rgb(229, 96, 68) solid 2px;
+          width: 48%;
+        }
+      }
+      img {
+        width: 80%;
+        max-width: 400px;
+      }
+    }
+    .content {
+      color: white;
+      // text-align: center;
+      font-weight: 100;
+      ul {
+        padding: 0;
+        font-size: 90%
+      }
+      li {
+        display: block;
+        margin: 0 4%;
+        div {
+          margin: auto auto;
+          margin-top: 20px;
+          width: 150px;
+        }
+      }
+      .word {
+        text-align: center;
+      }
+      .head {
+        text-align: center;
+        position: relative;
+        width: 150px;
+        margin: auto auto;
+        padding: 0;
+        .hot {
+          width: 35px;
+          position: absolute;
+          right: 17px;
+          border: transparent;
+          top: 120px;
+        }
+        img {
+          width: 150px;
+          border: rgb(229, 96, 68) solid 3px;
+          border-radius: 75px;
+          overflow: hidden;
+        }
+      }
+      em {
+        font-style: normal;
+        color: rgb(229, 96, 68);
+      }
+      h3, h4, span, em {
+        display: inline-block;
+      }
+      span {
+        line-height: 200%;
+      }
+      h3 {
+        color: rgb(229, 96, 68);
+        margin: 0;
+      }
+      h4 {
+        font-size: 130%;
+        margin: 0;
+        margin-top: 20px;
+        margin-left: 3%
+      }
+      a {
+        margin-top: 10px;
+        img {
+          width: 200px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+  .dir {
+    position: absolute;
+    top: 94%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    li {
+      background-color: rgb(229, 96, 68);
+      float: left;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+    li:first-child{
+      margin-right: 20px;
+    }
+    li.active{
+      opacity: 1;
+    }
+  }
 }
