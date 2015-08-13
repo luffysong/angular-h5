@@ -1,257 +1,261 @@
-body{
-	margin:0;
-	padding: 0;	
-	background: url('images/j3rank/0.png') center center;
-	background-size:cover;
+* {
+  padding: 0;
+  margin: 0
 }
-.container{
-	margin: 0;
-	padding: 0;
-	.nav{
-		z-index: 200;
-		position: relative;
-		display: block;
-		background-color: rgb(24, 12, 26);
-		position: fixed;
-		width: 100%;
-		.logo{
-			display: block;
-			height: 33px;
-			margin:10px 20px 0;
-			.kr{
-				width: 70px;
-				float:left;
-			}
-			.music{
-				width: 8%;
-				float:right;
-				margin-right: 10px;
-		}
-		}
-		.title{
-			position: relative;
-			text-align: center;
-			margin:10px 0;
-			margin-left: -10%;
-			img{
-				width: 57%;
-			}
-			.s{
-				display: inline-block;
-				padding: 0 0;
-				margin:0; 
-				margin-right: -15%;
-				img{
-					width:25%;
-					margin-bottom: 50%;
-				}
-			}
-			.s1{
-				margin-left:-10%;
-				display: inline-block;
-				padding: 0 0;
-				margin:0; 
-				width: 10%;
-				img{
-					width:40%;
-				}
-			}
-		}
-		
-	}
-	.footer{
-		width: 100%;
-		height: 40px;
-		// border:white solid 3px;
-		position: fixed;
-		bottom: 0;
-		.rule,.active{
-			padding:0 0;
-			margin:0 0;
-			height: 100%;
-			color: white;
-			font-weight: 600;
-		}
-		.rule{
-			width: 49.5%;
-			background-color: rgb(255, 139, 82);
-			border:	rgb(255, 139, 82) solid 5px;
-			font-size: 88%;
-			float: left;
-		}
-		.active{
-			width:49.5%;
-			text-align: center;
-			line-height: 2.5;
-			margin:0;
-			display: inline-block;
-			background-color: rgb(235, 86, 62);
-			text-decoration: none;
-		}
-	}
-	.rank{
-		margin:2% 2%;
-		position: absolute;
-		top: 20%;
-		ul{
-			margin-bottom: 10%;
-			padding: 0 0;
-			li{
-				border:rgb(59, 48, 59) solid 2px;
-				display: inline-block;
-				padding: 5px; 
-				background-color:rgb(35, 30, 37);
-			}
-			.num20{
-				position: relative;
-				width: 38%;
-				height: 20%;
-				display: inline-block;
-				margin:2% 2%;
-				padding: 3%;
-				.img{
-					display: inline-block;
-					width: 19%;
-					float: left;
-					margin-top: 4%;
-					img{
-						width: 100%;
-					}
-				}
-				.num{
-					font-size: 10px;
-					position: absolute;
-					color:white;
-					height: 50%;
-					width: 13%;
-					top:0;
-					left:0;
-					background: url('images/j3rank/top4.png') no-repeat;
-					background-size: contain;
-					padding: 3px 3px;
-				}
-				.info{
-					width: 80%;
-					display: inline-block;
-					float: right;
-					h3{
-						font-size: 13px;
-						display: inline-block;
-						margin:0;
-						width:80%;
-						a{
-						font-size: 19%;
-						display: inline-block;
-						float: right;
-					}
-					}
-					
-				}
-			}
-			.top{
-				position: relative;
-				margin:2% 2%;
-				width: 92%;
-				.num1{
-					background: url('images/j3rank/top1.png') no-repeat;
-				}
-				.num2{
-					background: url('images/j3rank/top2.png') no-repeat;
-				}
-				.num3{
-					background: url('images/j3rank/top3.png') no-repeat;
-				}
-				.num4{
-					background: url('images/j3rank/top4.png') no-repeat;
-				}
-				.num{
-					position: absolute;
-					color:white;
-					height: 40%;
-					width: 9%;
-					top:0;
-					left:0;
-					// background: url('images/j3rank/top4.png') no-repeat;
-					background-size: contain;
-					padding: 9px 7px;
-				}
-				position: relative;
-				.img{
-					margin: 7% 2%;
-					display: inline-block;
-					width: 17%;
-					float: left;
-					img{
-						width: 100%;
-					}
-				}
 
-			}
-			.info{
-				margin: 8% auto;
-				display: inline-block;
-				color: white;
-				width: 75%;
-				h4{
-					display: inline-block;
-					font-weight: 700; 
-					margin: 4px;
-					em{
-						color:rgb(251, 98, 63);
-					}
-				}
-				span{
-					font-size: 10px;
-					color:#666;
-					font-weight: 500;
-				}
-				a{
-					color:rgb(251, 98, 63);
-					display: inline-block;
-					float: right;
-					margin-right: 5%;
-					margin-top: 1%;
-				}
-			}
+ul, ol {
+  list-style: none;
+}
 
-		}
-	}
-	.warn{
+html, body {
+  height: 100%;
+}
 
-		z-index: 400;
-		position: absolute;
-		top:5%;
-		border-top: rgb(251, 102, 52) solid 3px;
-		color: white;
-		margin:4%;
-		background-color: rgb(34, 29, 36);
-		line-height: 140%;
-		h3{
-			color:rgb(251, 102, 52);
-			margin:4% auto;
-			text-align: center;
-		}
-		
-		ul{
-			margin:13% 5%;
-			padding:0;
-			li{
-			display: block;
+::-webkit-input-placeholder {
+  color: #999;
+}
 
-			}
-			h4{
-			color:rgb(251, 102, 52);
-			margin: 0;
-			}
-			em{
-				color: rgb(251, 102, 52);
-			}
-		}
-		input{
-			width: 100%;
-			color: white;
-			background-color:rgb(251, 102, 52) ;
-			border: rgb(251, 102, 52) solid 4px;
-		}
-	}
+:-moz-placeholder {
+  color: #999;
+}
+::-moz-placeholder {
+  color: #999;
+}
+:-ms-input-placeholder {
+  color: #999;
+}
+
+.j3rank {
+  width: 100%;
+  background: url('images/j3rank/0.png') repeat-y;
+  background-size: 100% auto;
+
+  .logo {
+    width: 17%;
+    max-width: 100px;
+    background: url("images/j3rank/1.png") no-repeat;
+    background-size: 100% auto;
+    height: 40px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+  .bgm-icon {
+    z-index: 101;
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    background: url(images/j3rank/2.png) no-repeat;
+    background-size: contain;
+    top: 20px;
+    right: 20px;
+  }
+}
+
+.container {
+  .nav {
+    z-index: 200;
+    position: relative;
+    display: block;
+    background-color: rgb(24, 12, 26);
+    position: fixed;
+    width: 100%;
+
+    .title {
+      width: 78%;
+      margin: 58px auto 10px;
+      img {
+        width: 100%;
+      }
+
+    }
+
+  }
+  .footer {
+    width: 100%;
+    height: 40px;
+    position: fixed;
+    bottom: 0;
+    .rule, .active {
+      width: 50%;
+      padding: 0 0;
+      margin: 0 0;
+      height: 100%;
+      color: white;
+      text-decoration: none;
+      line-height: 2.5;
+      text-align: center;
+      float: left;
+    }
+    .rule {
+      background-color: rgb(255, 139, 82);
+    }
+    .active {
+      background-color: rgb(235, 86, 62);
+    }
+  }
+  .rank {
+    padding: 128px 0 20px 0;
+    ul {
+      margin-bottom: 10%;
+      padding: 0 0;
+      li {
+        border: rgb(59, 48, 59) solid 2px;
+        display: inline-block;
+        padding: 5px;
+        background-color: rgb(35, 30, 37);
+      }
+      .num20 {
+        position: relative;
+        width: 38%;
+        height: 20%;
+        display: inline-block;
+        margin: 2% 2%;
+        padding: 3%;
+        .img {
+          display: inline-block;
+          width: 19%;
+          float: left;
+          margin-top: 4%;
+          img {
+            width: 100%;
+          }
+        }
+        .num {
+          font-size: 10px;
+          position: absolute;
+          color: white;
+          height: 50%;
+          width: 13%;
+          top: 0;
+          left: 0;
+          background: url('images/j3rank/top4.png') no-repeat;
+          background-size: contain;
+          padding: 3px 3px;
+        }
+        .info {
+          width: 80%;
+          display: inline-block;
+          float: right;
+          h3 {
+            font-size: 13px;
+            display: inline-block;
+            margin: 0;
+            width: 80%;
+            a {
+              font-size: 19%;
+              display: inline-block;
+              float: right;
+            }
+          }
+
+        }
+      }
+      .top {
+        position: relative;
+        margin: 2% 2%;
+        width: 92%;
+        .num1 {
+          background: url('images/j3rank/top1.png') no-repeat;
+        }
+        .num2 {
+          background: url('images/j3rank/top2.png') no-repeat;
+        }
+        .num3 {
+          background: url('images/j3rank/top3.png') no-repeat;
+        }
+        .num4 {
+          background: url('images/j3rank/top4.png') no-repeat;
+        }
+        .num {
+          position: absolute;
+          color: white;
+          height: 40%;
+          width: 9%;
+          top: 0;
+          left: 0;
+          // background: url('images/j3rank/top4.png') no-repeat;
+          background-size: contain;
+          padding: 9px 7px;
+        }
+        position: relative;
+        .img {
+          margin: 7% 2%;
+          display: inline-block;
+          width: 17%;
+          float: left;
+          img {
+            width: 100%;
+          }
+        }
+
+      }
+      .info {
+        margin: 8% auto;
+        display: inline-block;
+        color: white;
+        width: 75%;
+        h4 {
+          display: inline-block;
+          font-weight: 700;
+          margin: 4px;
+          em {
+            color: rgb(251, 98, 63);
+          }
+        }
+        span {
+          font-size: 10px;
+          color: #666;
+          font-weight: 500;
+        }
+        a {
+          color: rgb(251, 98, 63);
+          display: inline-block;
+          float: right;
+          margin-right: 5%;
+          margin-top: 1%;
+        }
+      }
+
+    }
+  }
+  .warn {
+
+    z-index: 400;
+    position: absolute;
+    top: 5%;
+    border-top: rgb(251, 102, 52) solid 3px;
+    color: white;
+    margin: 4%;
+    background-color: rgb(34, 29, 36);
+    line-height: 140%;
+    h3 {
+      color: rgb(251, 102, 52);
+      margin: 4% auto;
+      text-align: center;
+    }
+
+    ul {
+      margin: 13% 5%;
+      padding: 0;
+      li {
+        display: block;
+
+      }
+      h4 {
+        color: rgb(251, 102, 52);
+        margin: 0;
+      }
+      em {
+        color: rgb(251, 102, 52);
+      }
+    }
+    input {
+      width: 100%;
+      color: white;
+      background-color: rgb(251, 102, 52);
+      border: rgb(251, 102, 52) solid 4px;
+    }
+  }
 }
