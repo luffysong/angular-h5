@@ -2,65 +2,73 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>人气榜</title>
     <!-- build:css /styles/j3rank.css -->
     <link rel="stylesheet" href="/styles/j3rank.css">
     <!-- endbuild -->
 </head>
 <body>
-    <div class="j3rank">
+<div class="j3rank">
 
-        <div class="container">
+    <div class="container">
 
 
-            <div class="nav">
-                <div class="logo"></div>
-                <div class="bgm-icon"></div>
-                <audio src="" id="bgm"></audio>
+        <div class="nav">
+            <div class="logo"></div>
+            <div class="bgm-icon"></div>
+            <audio src="" id="bgm"></audio>
 
-                <div class="title">
-                    <img class="head" src="styles/images/j3rank/title2_03.png" alt="">
-                </div>
-            </div>
-
-            <div class="rank">
-
-            </div>
-            
-            <div class="footer">
-                <a href="javascript:void(0)" class="rule">榜单规则</a>
-                <a class="active" href="">报名活动</a>
-            </div>
-            
-            
-            <div style="display:none" class="warn" >
-                <h3>创业公司人气榜</h3>
-                <div>
-                    <ul>
-                        <h4>上榜规则：</h4>
-                        <li>1、报名活动后,使用电脑访问<em>rong.36kr.com</em>,提交极速融资信息，即可获得你的公司专属页面。</li>
-                        <li>2、将公司页面分享到朋友圈，邀请你的员工、亲友团转发，即可获得支持。</li>
-                        <li>3、榜单按支持人数实时更新，只显示Top200创业公司。</li>
-                    </ul>
-                    <ul>
-                        <h4>奖励说明：</h4>
-                        <li>1、二次投递奖励: <br/>
-                            Top200强创企将在8月28日获得第二次投递机会。Top20强创企可再投递给三位投资人，21-100强创企可再投递给两位投资人，101-200强创企可再投递给一位投资人。</li>
-                        <li>2、Boss直聘置顶推荐: </li>
-                    </ul>
-                </div>
-                <input type="button" value="知道了">
+            <div class="title">
+                <img class="head" src="styles/images/j3rank/title2_03.png" alt="">
             </div>
         </div>
+
+        <div class="rank">
+
+        </div>
+
+        <div class="footer">
+            <a href="javascript:void(0)" class="rule">榜单规则</a>
+            <a class="active" href="">报名活动</a>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="mask" style="display: none">
+
+    <div class="warn">
+        <h3>创业公司人气榜</h3>
+
+        <div>
+            <h4>上榜规则：</h4>
+            <ul>
+                <li>1、报名活动后,使用电脑访问<em>rong.36kr.com</em>,提交极速融资信息，即可获得你的公司专属页面。</li>
+                <li>2、将公司页面分享到朋友圈，邀请你的员工、亲友团转发，即可获得支持。</li>
+                <li>3、榜单按支持人数实时更新，只显示Top200创业公司。</li>
+            </ul>
+            <h4>奖励说明：</h4>
+            <ul>
+                <li>1、二次投递奖励: <br/>
+                    Top200强创企将在8月28日获得第二次投递机会。Top20强创企可再投递给三位投资人，21-100强创企可再投递给两位投资人，101-200强创企可再投递给一位投资人。
+                </li>
+                <li>2、Boss直聘置顶推荐:</li>
+            </ul>
+        </div>
+        <input class="J_closepop" type="button" value="知道了">
     </div>
 
+</div>
 
-    <script type="tml" id="tml">
+
+<script type="tml" id="tml">
 <ul class="clearfix">
     <% for(var i = 0; i < data.length; i++){ %>
     <% if(i < 20){ %>
-    <li class="top clearfix" data-cid="<%= data[i].cid %>">
+    <li class="top clearfix J_company" data-cid="<%= data[i].cid %>">
         <div>
             <div class="num" data-num="<%= i+1 %>">
                 <% if(i == 0){ %>
@@ -87,7 +95,7 @@
         </div>
     </li>
     <% }else{ %>
-    <li class="num20 clearfix">
+    <li class="num20 clearfix J_company">
         <div>
             <div class="num" data-num="<%=i%>" <%= data[i].cid %>>
                 <img src="styles/images/j3rank/top4.png" alt=""/>
@@ -106,31 +114,41 @@
     <% } %>
 
 </ul>
-    </script>
 
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</script>
 
-
-    <script src="/components/jquery/dist/jquery.min.js"></script>
-    <script src="/components/gsap/src/minified/TweenMax.min.js"></script>
-    <script src="/components/swiper/dist/js/swiper.min.js"></script>
-    <script src="/components/ejs/ejs.min.js"></script>
-    <script>
-        $.ajax('/api/speed/rank', {
-            dataType: 'json',
-            success: function (data) {
-                console.log(data.data)
-                data.data[0].logo = 'styles/images/j3rank/0.png'
-                var str = ejs.render($('#tml')[0].innerHTML, data)
-                $(str).appendTo('.rank')
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 
-                $('li').on('click', function(e){
-                    var cid = $(e.currentTarget).attr('data-cid');
-                    location.href = '/j3word.html?'+cid
-                })
-            }
-        })
-    </script>
+<script src="/components/jquery/dist/jquery.min.js"></script>
+<script src="/components/gsap/src/minified/TweenMax.min.js"></script>
+<script src="/components/swiper/dist/js/swiper.min.js"></script>
+<script src="/components/ejs/ejs.min.js"></script>
+<script>
+    $.ajax('/api/speed/rank', {
+        dataType: 'json',
+        success: function (data) {
+            console.log(data.data)
+            data.data[0].logo = 'styles/images/j3rank/0.png'
+            var str = ejs.render($('#tml')[0].innerHTML, data)
+            $(str).appendTo('.rank')
+
+
+            $('.J_company').on('click', function (e) {
+                var cid = $(e.currentTarget).attr('data-cid');
+                location.href = '/j3word.html?' + cid
+            })
+        }
+    })
+    $('.rule').on('click', function () {
+        $('.mask').css({'display': 'block'});
+        $('html').css({'overflow':'hidden'})
+    });
+    $('.J_closepop').on('click', function(){
+        $('.mask').css({'display': 'none'});
+        $('html').css({'overflow':'auto'})
+    })
+
+</script>
 </body>
 </html>
