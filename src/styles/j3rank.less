@@ -6,7 +6,16 @@
 ul, ol {
   list-style: none;
 }
-
+em{
+  font-style: normal;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
 html, body {
   height: 100%;
 }
@@ -96,52 +105,71 @@ html, body {
     }
   }
   .rank {
-    padding: 128px 0 20px 0;
+    padding: 140px 0 20px 0;
     ul {
       margin-bottom: 10%;
-      padding: 0 0;
       li {
-        border: rgb(59, 48, 59) solid 2px;
-        display: inline-block;
-        padding: 5px;
+        border: rgb(59, 48, 59) solid 1px;
         background-color: rgb(35, 30, 37);
+        margin: 0 auto 10px;
+        box-sizing: border-box;
+        width: 90.6%;
+        padding: 15px 25px;
       }
       .num20 {
+        float: left;
+        margin: 0 0 10px 4.7%;
+        width: 43.8%;
         position: relative;
-        width: 38%;
-        height: 20%;
-        display: inline-block;
-        margin: 2% 2%;
-        padding: 3%;
-        .img {
-          display: inline-block;
-          width: 19%;
-          float: left;
-          margin-top: 4%;
-          img {
-            width: 100%;
-          }
+        padding: 15px 5px;
+        img{
+          width: 100%;
         }
         .num {
-          font-size: 10px;
           position: absolute;
           color: white;
-          height: 50%;
-          width: 13%;
+          width: 22%;
           top: 0;
           left: 0;
-          background: url('images/j3rank/top4.png') no-repeat;
           background-size: contain;
-          padding: 3px 3px;
+
+          &::after{
+            display: block;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 10%;
+            content: attr(data-num);
+            font-size: 16px;
+            left: -5px;
+            font-size: 10px;
+          }
+        }
+        .img {
+          display: inline-block;
+          width: 22%;
+          border-radius: 50%;
+          overflow: hidden;
+          vertical-align: top;
+          margin: 0 2px 0 10% ;
+          border: 1px solid #dadde4;
+          width: 29px;
+          height: 29px;
         }
         .info {
-          width: 80%;
+          width: 61%;
           display: inline-block;
-          float: right;
+          h4{
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+          }
           h3 {
             font-size: 13px;
             display: inline-block;
-            margin: 0;
+            margin: 10px 0 0 0;
             width: 80%;
             a {
               font-size: 19%;
@@ -152,54 +180,56 @@ html, body {
 
         }
       }
+      .num20:nth-child(odd){
+        float: right;
+        margin: 0 4.7% 10px 0;
+      }
       .top {
         position: relative;
-        margin: 2% 2%;
-        width: 92%;
-        .num1 {
-          background: url('images/j3rank/top1.png') no-repeat;
-        }
-        .num2 {
-          background: url('images/j3rank/top2.png') no-repeat;
-        }
-        .num3 {
-          background: url('images/j3rank/top3.png') no-repeat;
-        }
-        .num4 {
-          background: url('images/j3rank/top4.png') no-repeat;
+        img{
+          width: 100%;
         }
         .num {
           position: absolute;
           color: white;
-          height: 40%;
-          width: 9%;
+          width: 9.1%;
           top: 0;
           left: 0;
-          // background: url('images/j3rank/top4.png') no-repeat;
           background-size: contain;
-          padding: 9px 7px;
-        }
-        position: relative;
-        .img {
-          margin: 7% 2%;
-          display: inline-block;
-          width: 17%;
-          float: left;
-          img {
+
+          &::after{
+            display: block;
             width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 10%;
+            content: attr(data-num);
+            font-size: 14px;
+            left: -7px;
           }
+
+        }
+        .img {
+          display: inline-block;
+          //width: 17%;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin:0 3%ß 0 4%;
+          margin-left: 4px;
+          vertical-align: top;
+          border: 1px solid #dadde4;
         }
 
       }
       .info {
-        margin: 8% auto;
         display: inline-block;
         color: white;
         width: 75%;
         h4 {
+          font-weight: normal;
           display: inline-block;
-          font-weight: 700;
-          margin: 4px;
           em {
             color: rgb(251, 98, 63);
           }
@@ -207,14 +237,14 @@ html, body {
         span {
           font-size: 10px;
           color: #666;
-          font-weight: 500;
+          margin: 5px 0;
+          display: inline-block;
+          line-height: 1.5;
         }
         a {
           color: rgb(251, 98, 63);
           display: inline-block;
           float: right;
-          margin-right: 5%;
-          margin-top: 1%;
         }
       }
 
