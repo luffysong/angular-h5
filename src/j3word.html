@@ -31,6 +31,13 @@
 		</div>
 
 
+        <div class="footer">
+            <img src="styles/images/j3rank/9.png" alt="">
+            <div>
+                <a class="support" href="javascript:void(0)">支持TA</a>
+                <a class="join" href="/#/company_create?speed=3">我是创业者，我要参加</a>
+            </div>
+        </div>
 
 		<div class="dir">
 			<ul>
@@ -57,29 +64,22 @@
             </li>
             <li class="word">
                 <p>我是<span><%=company.name%></span>创始人 <span><%=user.name%></span>，<em>＃我为什么要创业？＃</em></p>
-            </li>
-            <li class="word">
                 <em>“<%=startupFeeling%>”</em>
             </li>
-            <li>
+
+            <li  class="support_li">
                 <div>
                     <h3>支持<h4><%=supportedCount%>人</h4></h3><br/>
                     <h3>排名<h4>第 <%=order%> 名</h4></h3>
                 </div>
 
             </li>
-            <li class="word">
-                <a href=""><img src="styles/images/j3rank/8.png" alt=""></a>
+            <li class="rank">
+                <a href="/j3rank.html"><img src="styles/images/j3rank/8.png" alt=""></a>
             </li>
         </ul>
     </div>
-    <div class="footer">
-        <img src="styles/images/j3rank/9.png" alt="">
-        <div>
-            <a class="support" href="javascript:void(0)">支持TA</a>
-            <a class="join" href="/#/company_create?speed=3">我是创业者，我要参加</a>
-        </div>
-    </div>
+
 </div>
 <div class="page swiper-slide company">
     <div class="content">
@@ -96,24 +96,17 @@
             <li class="word">
                 <p><%=company.brief%></p>
             </li>
-            <li>
+            <li class="support_li">
                 <div>
                     <h3>支持<h4><%=supportedCount%>人</h4></h3><br/>
                     <h3>排名<h4>第 <%=order%> 名</h4></h3>
                 </div>
 
             </li>
-            <li class="word">
-                <a href=""><img src="styles/images/j3rank/8.png" alt=""></a>
+            <li class="rank">
+                <a href="/j3rank.html"><img src="styles/images/j3rank/8.png" alt=""></a>
             </li>
         </ul>
-    </div>
-    <div class="footer">
-        <img src="styles/images/j3rank/9.png" alt="">
-        <div>
-            <a class="support" href="javascript:void(0)">支持TA</a>
-            <a class="join" href="/#/company_create?speed=3">我是创业者，我要参加</a>
-        </div>
     </div>
 </div>
 </script>
@@ -171,6 +164,8 @@
 					dirindex = swiper.activeIndex;
 				}
 			})
+
+            $('.support')
 
 		}
 	})
