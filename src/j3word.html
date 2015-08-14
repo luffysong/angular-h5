@@ -47,6 +47,9 @@
 		</div>
 	</div>
 
+    <div class="share" style="display: none">
+        <img src="styles/images/j3rank/share.png" alt=""/>
+    </div>
 
 
 
@@ -112,7 +115,7 @@
 </script>
 
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-
+<script src="/scripts/weixin.js"></script>
 
 <script src="/components/jquery/dist/jquery.min.js"></script>
 <script src="/components/gsap/src/minified/TweenMax.min.js"></script>
@@ -143,13 +146,24 @@
 
 
 
+
+
+
 	$.ajax('/api/speed/funds/startup-feeling-h5', {
 		data:{
 			cid : location.search.slice(1)
 		},
 		dataType: 'json',
 		success: function (data) {
-			data.data.user.avatar = ''
+
+            window.WEIXINSHARE = {
+                shareTitle: "创业感言 | 36氪",
+                shareDesc: "#为什么要创业？#网易云音乐创始人刘捷在36氪“极速融资”给了你答案",
+                shareImg: data.data.company.logo
+            };
+
+            InitWeixin();
+
 			if(!data.data.user.avatar){
 				data.data.user.avatar = '//krplus-pic.b0.upaiyun.com/default_avatar.png!70'
 			}
@@ -165,7 +179,12 @@
 				}
 			})
 
-            $('.support')
+            $('.support').on('click', function(){
+                $('.share').css({'display':'block'})
+            })
+            $('.share').on('click', function(e){
+                $(e.currentTarget).css({'display':'none'})
+            })
 
 		}
 	})

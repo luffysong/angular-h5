@@ -118,7 +118,7 @@
 </script>
 
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-
+<script src="/scripts/weixin.js"></script>
 
 <script src="/components/jquery/dist/jquery.min.js"></script>
 <script src="/components/gsap/src/minified/TweenMax.min.js"></script>
@@ -128,7 +128,13 @@
     $.ajax('/api/speed/rank', {
         dataType: 'json',
         success: function (data) {
-            console.log(data.data)
+            window.WEIXINSHARE = {
+                shareTitle: "创业公司人气榜200强，你入围了！| 36氪 ",
+                shareDesc: "创业公司人气榜200强，你入围了！| 36氪 ",
+                shareImg:""
+            };
+
+            InitWeixin();
             data.data[0].logo = 'styles/images/j3rank/0.png'
             var str = ejs.render($('#tml')[0].innerHTML, data)
             $(str).appendTo('.rank')

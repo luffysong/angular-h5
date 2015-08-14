@@ -77,7 +77,7 @@
 </script>
 
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-
+<script src="/scripts/weixin.js"></script>
 
 <script src="/components/jquery/dist/jquery.min.js"></script>
 <script src="/components/gsap/src/minified/TweenMax.min.js"></script>
@@ -111,7 +111,13 @@
     $.ajax('/api/speed/index', {
         dataType: 'json',
         success: function (data) {
-            console.log(data.data)
+            window.WEIXINSHARE = {
+                shareTitle: "30位投资人正在36氪“极速融资”| 36氪 ",
+                shareDesc: "30位投资人正在36氪“极速融资”回复创业者BP，点击查看。",
+                shareImg:""
+            };
+
+            InitWeixin();
             var arr = data.data.investors,
                     newArr = [];
             while (arr.length > 3) {
