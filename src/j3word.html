@@ -35,7 +35,7 @@
             <img src="styles/images/jisu3/9.png" alt="">
             <div>
                 <a class="support" href="javascript:void(0)">支持TA</a>
-                <a class="join" href="/#/company_create?speed=3">我是创业者，我要参加</a>
+                <a class="join" href="/m/#/company_create?speed=3">我是创业者，我要参加</a>
             </div>
         </div>
 
@@ -149,11 +149,15 @@
 
 
 
-
+    var cid;
+    location.search.replace(/cid=([\d]+)/ig, function($1, $2){
+        cid = $2
+    })
 
 	$.ajax('/api/speed/funds/startup-feeling-h5', {
+
 		data:{
-			cid : location.search.slice(1)
+			cid : cid
 		},
 		dataType: 'json',
 		success: function (data) {

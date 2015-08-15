@@ -15,7 +15,7 @@
     <div class="swiper-container">
         <div class="logo"></div>
         <div class="bgm-icon"></div>
-        <audio src="" id="bgm"></audio>
+        <audio src="styles/images/jisu3/investor.mp3" id="bgm" loop=1 autoplay=1></audio>
 
         <div class="title">
             <img src="styles/images/jisu3/investor_title.png" alt=""/>
@@ -34,7 +34,7 @@
 
         </div>
 
-        <a href="/#/company_create?from=speed3" class="sign">活动报名</a>
+        <a href="/m/#/company_create?from=speed3" class="sign">活动报名</a>
     </div>
 
 
@@ -58,7 +58,11 @@
                     <div class="text">
                         <h4><%=newArr[i][j].name%></h4>
 
-                        <p class="phase">???</p>
+                        <p class="phase">
+                        <%for(var k in newArr[i][j].phases){%>
+                        <%=k%> &nbsp;
+                        <%}%>
+                        </p>
 
                         <p class="des">
                             <%=newArr[i][j].intro%>
@@ -134,7 +138,6 @@
             })
 
             $('.next').on('click', function(){
-                console.log(111)
                 mySwiper.slideNext();
             })
             $('.pre').on('click', function(){
