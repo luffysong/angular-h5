@@ -114,7 +114,7 @@
             <div class="info">
                 <h4><%= data[i].companyName %></h4><br/>
 
-                <h3><%= data[i].supportCount %>人<a href="">支持TA</a></h3>
+                <h3><%= data[i].supportCount %>人<a href="javascript:void(0)">支持TA</a></h3>
             </div>
         </div>
     </li>
@@ -153,7 +153,7 @@
 
             $('.J_company').on('click', function (e) {
                 var cid = $(e.currentTarget).attr('data-cid');
-                location.href = '/j3word.html?cid=' + cid
+                location.href = '/m/j3word.html?cid=' + cid
             })
         }
     })
