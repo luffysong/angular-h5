@@ -9,7 +9,9 @@
 
         <form action="" name="createForm" compare-time-valid="formData" nowdate-valid="formData" ng-submit="$event.preventDefault()">
             <div class="list">
-
+                <div class="error-alert error" ng-show="createForm.userWeixin.$invalid && createForm.userWeixin.$dirty">
+                    <span>请填写可联系微信号</span>
+                </div>
                 <div class="error-alert error" ng-show="createForm.$error.cardEmpty">
                     <span>请上传您的名片</span>
                 </div>
