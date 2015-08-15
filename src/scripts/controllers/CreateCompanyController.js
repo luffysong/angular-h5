@@ -441,7 +441,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 'mode': 'direct'
             }, angular.copy($scope.formData), function (data) {
                 if($scope.jisu){
-                    location.href = '/j3companycreate.html'
+                    location.href = '/m/j3companycreate.html'
                 }else{
                     location.hash = "/company_create_apply"
                 }
