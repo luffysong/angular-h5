@@ -215,4 +215,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url: '/riskTipAll',
         templateUrl: 'templates/protocol/riskTip_all.html'
     });
+
+    /**
+     * 创业节
+     */
+    $stateProvider.state('startup', {
+        'url': '/startup',
+        'templateUrl': 'templates/startup/index.html',
+        'controller': 'startupController'
+    });
 });
