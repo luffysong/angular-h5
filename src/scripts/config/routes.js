@@ -234,4 +234,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         'url': '/startup/company',
         'templateUrl': 'templates/startup/company.html'
     });
+
+    $stateProvider.state('startupShare', {
+        'url': '/startup/share',
+        'templateUrl': 'templates/startup/share.html'
+    });
 });
