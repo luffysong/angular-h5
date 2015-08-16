@@ -1,8 +1,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('startupController', [
-    '$scope', 'StartupService', 'ErrorService', 'UserService', 'CompanyService', '$modal',
-    function($scope, StartupService, ErrorService, UserService, CompanyService, $modal) {
+    '$scope', 'StartupService', 'ErrorService', 'UserService', 'CompanyService', '$modal', '$state',
+    function($scope, StartupService, ErrorService, UserService, CompanyService, $modal, $state) {
         $scope.floors = ['招聘专区', '推广专区', '注册、法务专区', '云服务专区', '创业课专区'];
 
         /**
@@ -47,7 +47,7 @@ angular.module('defaultApp.controller').controller('startupController', [
         var endTime = (new Date('2015-08-25 17:00')).valueOf();
 
         if(now < startTime) {
-            $scope.status = 'before';
+            $scope.status = 'during';
         } else if(now > endTime) {
             $scope.status = 'after';
         } else {
@@ -105,23 +105,7 @@ angular.module('defaultApp.controller').controller('startupController', [
          */
         $scope.getCode = function(id, type) {
             if(!$scope.user.uid) {
-                $modal.open({
-                    templateUrl: 'templates/startup/pop-startup-login.html',
-                    windowClass: 'startup-modal',
-                    controller: [
-                        '$scope', '$modalInstance',
-                        function($scope, $modalInstance) {
-                            $scope.close = function () {
-                                $modalInstance.dismiss();
-                            }
-                        }
-                    ],
-                    resolve: {
-                        scope: function(){
-                            return $scope;
-                        }
-                    }
-                });
+                $state.go('startupLogin');
             } else {
                 CompanyService.getManaged({
 

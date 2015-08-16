@@ -224,4 +224,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         'templateUrl': 'templates/startup/index.html',
         'controller': 'startupController'
     });
+
+    $stateProvider.state('startupLogin', {
+        'url': '/startup/login',
+        'templateUrl': 'templates/startup/login.html'
+    });
 });
