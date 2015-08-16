@@ -229,4 +229,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         'url': '/startup/login',
         'templateUrl': 'templates/startup/login.html'
     });
+
+    $stateProvider.state('startupCompany', {
+        'url': '/startup/company',
+        'templateUrl': 'templates/startup/company.html'
+    });
 });

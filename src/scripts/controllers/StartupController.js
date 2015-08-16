@@ -116,25 +116,7 @@ angular.module('defaultApp.controller').controller('startupController', [
                 });
 
                 if (true) {
-                    $modal.open({
-                        templateUrl: 'templates/startup/pop-startup-company.html',
-                        windowClass: 'startup-modal',
-                        controller: [
-                            '$scope', 'scope', '$modalInstance',
-                            function($scope, scope, $modalInstance) {
-                                $scope.createUrl = scope.createUrl;
-
-                                $scope.close = function () {
-                                    $modalInstance.dismiss();
-                                }
-                            }
-                        ],
-                        resolve: {
-                            scope: function(){
-                                return $scope;
-                            }
-                        }
-                    });
+                    $state.go('startupCompany');
                 }
             }
         };
