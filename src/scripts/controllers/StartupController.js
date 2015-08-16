@@ -6,6 +6,29 @@ angular.module('defaultApp.controller').controller('startupController', [
         $scope.floors = ['招聘专区', '推广专区', '注册、法务专区', '云服务专区', '创业课专区'];
 
         /**
+         * 查看活动规则
+         */
+        $scope.seeRules = function() {
+            $modal.open({
+                templateUrl: 'templates/startup/pop-startup-rules.html',
+                windowClass: 'startup-rules',
+                controller: [
+                    '$scope', '$modalInstance',
+                    function($scope, $modalInstance) {
+                        $scope.close = function () {
+                            $modalInstance.dismiss();
+                        }
+                    }
+                ],
+                resolve: {
+                    scope: function(){
+                        return $scope;
+                    }
+                }
+            });
+        };
+
+        /**
          * 用户信息
          */
         $scope.user = {};
