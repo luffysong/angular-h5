@@ -27,8 +27,9 @@
                     <div class="item-title">{{ item.title }}</div>
                     <div class="item-des">{{ item.desc }}</div>
                     <div class="item-opt">
-                        <a href="javascript:void(0);" class="btn opt-btn">立即抢</a>
-                        <span>剩余888份</span>
+                        <a class="btn opt-btn" href="javascript:void(0);" ng-if="status == 'before'">8月20号10点开抢</a>
+                        <a class="btn opt-btn" href="javascript:void(0);" ng-if="status == 'during'" ng-click="getCode(item.id, item.type);">立即抢</a>
+                        <span>剩余{{ item.balance }}份</span>
                     </div>
                 </div>
             </div>
