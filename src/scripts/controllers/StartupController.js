@@ -76,7 +76,7 @@ angular.module('defaultApp.controller').controller('startupController', [
          * 开抢提醒
          */
         $scope.startRemind = function() {
-            StartupService['start-remind'].get({
+            StartupService['start-remind'].post({
 
             }, {
                 'product_id': 1
