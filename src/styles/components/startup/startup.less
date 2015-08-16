@@ -236,6 +236,7 @@
     }
 }
 
+.startup-code,
 .startup-share,
 .startup-company,
 .startup-login {
@@ -264,5 +265,38 @@
 .startup-company {
     .icon {
         background-image: url(images/startup/icon-building.png);
+    }
+}
+
+.startup-code {
+    padding-top: 0;
+
+    .code-area {
+        background: #fff;
+        border-bottom: 1px solid #ddd;
+        padding-top: 40px;
+        padding-bottom: 20px;
+
+        p:first-child {
+            color: #f69053;
+            font-size: 2rem;
+        }
+
+        p:nth-child(2) {
+            padding: 0 10%;
+        }
+    }
+
+    >p {
+        margin-top: 10px;
+    }
+
+    .btn-join {
+        height: 50px;
+        width: 40%;
+        margin: auto 30%;
+        background-color: #188fef;
+        padding: 0;
+        line-height: 50px;
     }
 }

@@ -239,4 +239,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         'url': '/startup/share',
         'templateUrl': 'templates/startup/share.html'
     });
+
+    $stateProvider.state('startupCode', {
+        'url': '/startup/code',
+        'templateUrl': 'templates/startup/code.html'
+    });
 });
