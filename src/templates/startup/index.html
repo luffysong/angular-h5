@@ -10,8 +10,28 @@
     </div>
 
     <div class="sections">
-        <div class="section-1">
-
+        <div class="section-{{ $index + 1 }}" ng-repeat="data in listData | orderBy: id">
+            <div class="section-header">
+                <span class="line"></span>
+                <h4 class="title">{{ data.title }}</h4>
+                <span class="line"></span>
+            </div>
+            <div class="section-item" ng-repeat="item in data.list" ng-class="{ during: status == 'during' }">
+                <div class="item-left">
+                    <div class="logo">
+                        <img src="{{ item.img }}" alt="{{ item.title }}"/>
+                    </div>
+                    <div class="banner"></div>
+                </div>
+                <div class="item-right">
+                    <div class="item-title">{{ item.title }}</div>
+                    <div class="item-des">{{ item.desc }}</div>
+                    <div class="item-opt">
+                        <a href="javascript:void(0);" class="btn opt-btn">立即抢</a>
+                        <span>剩余888份</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="section-2">
@@ -23,7 +43,7 @@
         </div>
 
         <div class="section-4">
-            
+
         </div>
     </div>
 </div>
