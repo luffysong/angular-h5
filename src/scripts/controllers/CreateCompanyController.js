@@ -21,6 +21,9 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
     function ($stateParams,$timeout, $q, $modal, $scope, DictionaryService, dateFilter, DefaultService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
         if($stateParams.from && decodeURIComponent($stateParams.from).indexOf('speed3')>-1){
             $scope.jisu = true;
+            $.ajax('/api/speed/count/click-create-hook', {
+                type:"GET"
+            })
         }
         // 职位
         $scope.founderRoles = DictionaryService.getDict('StartupPositionType');
@@ -441,7 +444,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 'mode': 'direct'
             }, angular.copy($scope.formData), function (data) {
                 if($scope.jisu){
-                    location.href = '/m/j3companycreate.html'
+                    location.href = '/m/j3companycreate.html?cid='+data.id
                 }else{
                     location.hash = "/company_create_apply"
                 }

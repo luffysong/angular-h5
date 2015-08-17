@@ -20,6 +20,14 @@
 <div class="j3companycreate">
     <img src="styles/images/companycreate.png" alt=""/>
 </div>
-
+<script>
+    var cid;
+    location.search.replace(/cid=(\d+)/ig, function($1, $2){
+        cid = $2
+        $.ajax('/api/speed/count/'+cid+'/create-succ-hook', {
+            type : "GET"
+        })
+    })
+</script>
 </body>
 </html>
