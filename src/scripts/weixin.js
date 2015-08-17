@@ -26,10 +26,18 @@
                 //alert(WEIXINSHARE.shareTitle);
                 wx.onMenuShareTimeline({
                     title: WEIXINSHARE.shareTitle, // 分享标题
-                    link: location.href, // 分享链接
+                    link: WEIXINSHARE.shareHref || location.href, // 分享链接
                     imgUrl: WEIXINSHARE.shareImg || 'http://d.36kr.com/assets/36kr.png', // 分享图标
                     success: function () {
                         // 用户确认分享后执行的回调函数
+                        if(obj && obj.cid){
+                            $.ajax('/api/speed/rank/'+obj.cid, {
+                                data:{
+                                    source:obj.source
+                                },
+                                type : 'PUT'
+                            })
+                        }
                     },
                     cancel: function () {
                         // 用户取消分享后执行的回调函数
@@ -46,6 +54,9 @@
                         // 用户确认分享后执行的回调函数
                         if(obj && obj.cid){
                             $.ajax('/api/speed/rank/'+obj.cid, {
+                                data:{
+                                    source:obj.source
+                                },
                                 type : 'PUT'
                             })
                         }
@@ -53,11 +64,7 @@
                     },
                     cancel: function () {
                         // 用户取消分享后执行的回调函数
-                        if(obj && obj.cid){
-                            $.ajax('/api/speed/rank/'+obj.cid, {
-                                type : 'PUT'
-                            })
-                        }
+
                     }
                 });
             });

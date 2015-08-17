@@ -166,15 +166,22 @@
 		},
 		dataType: 'json',
 		success: function (data) {
+            var source;
+            var link = location.href.replace(/source=web/gi, function(){
+                source = 'web'
+                return 's=s'
+            })
 
             window.WEIXINSHARE = {
                 shareTitle: "#为什么要创业？#"+data.data.company.logo+"创始人"+data.data.user.name+"在36氪“极速融资”给了你答案",
                 shareDesc: "极速融资: 30位靠谱投资人，24小时回复你BP。",
+                shareLink:link,
                 shareImg: data.data.company.logo
             };
 
             InitWeixin({
-                cid : cid
+                cid : cid,
+                source : source
             });
 
 			if(!data.data.user.avatar){
