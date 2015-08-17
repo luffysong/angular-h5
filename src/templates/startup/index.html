@@ -3,7 +3,7 @@
         <div class="time"></div>
         <div class="logo"></div>
         <div class="desc">
-            <em>56</em> 家创业服务商 <em>10</em> 项创业福利 <em>“抢”</em> 不停！
+            <em>10</em> 家创业服务商 <em>28</em> 项创业福利 <em>“抢”</em> 不停！
         </div>
         <a class="remind-btn" href="javascript:void(0);" ng-click="startRemind();" login-btn>开抢提醒</a>
         <a class="rules" href="javascript:void(0);" ng-click="seeRules();">活动规则</a>
@@ -21,15 +21,19 @@
                     <div class="logo">
                         <img src="{{ item.img }}" alt="{{ item.title }}"/>
                     </div>
-                    <div class="banner"></div>
+                    <div class="banner" ng-if="status == 'before' || (item.balance > 0 && status != 'after')"></div>
+                    <div class="banner null" ng-if="status == 'during' && item.balance <= 0 && !ending"></div>
                 </div>
                 <div class="item-right">
                     <div class="item-title">{{ item.title }}</div>
                     <div class="item-des">{{ item.desc }}</div>
                     <div class="item-opt">
                         <a class="btn opt-btn" href="javascript:void(0);" ng-if="status == 'before'">8月20号10点开抢</a>
-                        <a class="btn opt-btn" href="javascript:void(0);" ng-if="status == 'during'" ng-click="getCode(item.id, item.type);">立即抢</a>
-                        <span>剩余{{ item.balance }}份</span>
+                        <a class="btn opt-btn" href="javascript:void(0);" ng-if="status == 'during' && item.balance > 0" ng-click="getCode(item.id);">立即抢</a>
+                        <a class="btn opt-btn null" href="javascript:void(0);" ng-if="status == 'during' && item.balance <= 0 && !ending">明日上午10点开抢</a>
+                        <a class="btn opt-btn all-null" href="javascript:void(0);" ng-if="(status == 'during' && item.balance <= 0 && ending) || status == 'after'">已全部抢光</a>
+                        <span ng-if="status == 'during' && item.balance > 0">剩余{{ item.balance }}份</span>
+                        <span class="null" ng-if="status == 'during' && item.balance <= 0 && !ending">今日已抢光</span>
                     </div>
                 </div>
             </div>

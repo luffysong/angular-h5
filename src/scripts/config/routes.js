@@ -227,21 +227,25 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     $stateProvider.state('startupLogin', {
         'url': '/startup/login',
-        'templateUrl': 'templates/startup/login.html'
+        'templateUrl': 'templates/startup/login.html',
+        'controller': 'startupController'
     });
 
     $stateProvider.state('startupCompany', {
         'url': '/startup/company',
-        'templateUrl': 'templates/startup/company.html'
+        'templateUrl': 'templates/startup/company.html',
+        'controller': 'startupController'
     });
 
     $stateProvider.state('startupShare', {
         'url': '/startup/share',
-        'templateUrl': 'templates/startup/share.html'
+        'templateUrl': 'templates/startup/share.html',
+        'controller': 'startupController'
     });
 
     $stateProvider.state('startupCode', {
         'url': '/startup/code',
-        'templateUrl': 'templates/startup/code.html'
+        'templateUrl': 'templates/startup/code.html',
+        'controller': 'startupController'
     });
 });

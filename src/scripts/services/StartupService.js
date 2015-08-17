@@ -26,8 +26,8 @@ angular.module('defaultApp.service').service('StartupService', [
                 }
             },
             'qr-code-token': {
-                get: {
-                    method: 'GET',
+                post: {
+                    method: 'POST',
                     transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
                         return data;
                     })
