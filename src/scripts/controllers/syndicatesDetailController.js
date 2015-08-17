@@ -141,12 +141,12 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         $scope.handleVideo = function(link){
             var vid = "";
             link = link.split("?")[0];
-            var arr = link.split(".");
-            arr.forEach(function(obj,index){
-                if(obj.indexOf("id") >= 0){
-                    vid = obj.split("_")[obj.split("_").length-1];
-                }
-            });
+            var arr = link.split("/");
+            var text = arr[arr.length-1].split(".")[0];
+            if(text.indexOf("id") >= 0){
+                vid = text.split("_")[1];
+            }
+            console.log(vid);
             Object.keys(player).forEach(function(key){
                 if(link.indexOf(key) >= 0){
                     link = player[key].url+vid;
