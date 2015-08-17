@@ -18,9 +18,7 @@
             </div>
             <div class="section-item" ng-repeat="item in data.list" ng-class="{ during: status == 'during' }">
                 <div class="item-left">
-                    <div class="logo">
-                        <img src="{{ item.img }}" alt="{{ item.title }}"/>
-                    </div>
+                    <div class="logo" style="background-image: url({{ item.img }})"></div>
                     <div class="banner" ng-if="status == 'before' || (item.balance > 0 && status != 'after')"></div>
                     <div class="banner null" ng-if="status == 'during' && item.balance <= 0 && !ending"></div>
                 </div>
