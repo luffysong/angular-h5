@@ -220,7 +220,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
      * 创业节
      */
     $stateProvider.state('startup', {
-        'url': '/startup',
+        'url': '/startup?token',
         'templateUrl': 'templates/startup/index.html',
         'controller': 'startupController'
     });

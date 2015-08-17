@@ -1,8 +1,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('startupController', [
-    '$scope', 'StartupService', 'ErrorService', 'UserService', 'CompanyService', '$modal', '$state', 'notify',
-    function($scope, StartupService, ErrorService, UserService, CompanyService, $modal, $state, notify) {
+    '$scope', 'StartupService', 'ErrorService', 'UserService', 'CompanyService', '$modal', '$state', 'notify', '$stateParams',
+    function($scope, StartupService, ErrorService, UserService, CompanyService, $modal, $state, notify, $stateParams) {
         $scope.floors = ['招聘专区', '推广专区', '注册、法务专区', '云服务专区', '创业课专区'];
 
         /**
@@ -154,7 +154,7 @@ angular.module('defaultApp.controller').controller('startupController', [
                 if(!$scope.companyStatus) {
                     $state.go('startupCompany');
                 } else {
-
+                    $state.go('startupShare');
                 }
             }
         };
