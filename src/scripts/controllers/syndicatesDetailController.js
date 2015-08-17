@@ -154,68 +154,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             });
             return $sce.trustAsResourceUrl(link);
         }
-        var videoLink = "http://v.youku.com/v_show/id_XMTMwOTA3NDc2MA==.html?f=25994531#paction";
-        $scope.videoLink = $scope.handleVideo(videoLink);
-        /*项目问答模拟数据*/
-        $scope.problemData = [
-            {
-                question:"什么是领投人？",
-                answer:"领投人就是一群有钱土豪的头子",
-                isHide:true
-            },{
-                question:"领投人的权利和义务是什么？",
-                answer:"砸钱，砸钱，砸钱。。",
-                isHide:true
-            },{
-                question:"股权众筹的流程是什么？",
-                answer:"先付钱",
-                isHide:true
-            },{
-                question:"我怎么获得优先购买权？",
-                answer:"抢抢抢",
-                isHide:true
-            },{
-                question:"领投人的权利和义务是什么？",
-                answer:"砸钱，砸钱，砸钱。。",
-                isHide:true
-            },{
-                question:"股权众筹的流程是什么？",
-                answer:"先付钱",
-                isHide:true
-            },{
-                question:"我怎么获得优先购买权？",
-                answer:"抢抢抢",
-                isHide:true
-            },{
-                question:"领投人的权利和义务是什么？",
-                answer:"砸钱，砸钱，砸钱。。",
-                isHide:true
-            },{
-                question:"股权众筹的流程是什么？",
-                answer:"先付钱",
-                isHide:true
-            },{
-                question:"我怎么获得优先购买权？",
-                answer:"抢抢抢",
-                isHide:true
-            },{
-                question:"领投人的权利和义务是什么？",
-                answer:"砸钱，砸钱，砸钱。。",
-                isHide:true
-            },{
-                question:"股权众筹的流程是什么？",
-                answer:"先付钱",
-                isHide:true
-            },{
-                question:"我怎么获得优先购买权？",
-                answer:"抢抢抢",
-                isHide:true
-            },{
-                question:"领投人的权利和义务是什么？",
-                answer:"砸钱，砸钱，砸钱。。",
-                isHide:true
-            }
-        ];
         /*项目问答点击展开收起*/
         $scope.toggleQuestion = function(index){
             $scope.problemData[index].isHide = !$scope.problemData[index].isHide;
@@ -242,6 +180,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         },function(data){
             $scope.color = data.base.status;
             $scope.syndicatesInfo = data;
+
             if($scope.syndicatesInfo.co_investors){
                 if($scope.syndicatesInfo.co_investors.length > 8){
                     $scope.tempData = angular.copy($scope.syndicatesInfo.co_investors);
@@ -291,6 +230,17 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 $scope.timeout = true;
             }
             if(!$scope.syndicatesInfo.detail)return;
+            /*视频链接处理*/
+            if($scope.syndicatesInfo.detail.com_video_link){
+                $scope.videoLink = $scope.handleVideo($scope.syndicatesInfo.detail.com_video_link);
+            }
+            /*项目问答数据*/
+            $scope.problemData = $scope.syndicatesInfo.detail.project_qa;
+            if($scope.problemData.length){
+                angular.forEach($scope.problemData,function(obj,index){
+                    obj.isHide = true;
+                });
+            }
             $scope.shareError = parseInt($scope.syndicatesInfo.detail.es_funding_team) + parseInt($scope.syndicatesInfo.detail.es_investor) + parseInt($scope.syndicatesInfo.detail.es_staff) == 100 ? false : true;
             var chartData = [$scope.syndicatesInfo.detail.es_investor,$scope.syndicatesInfo.detail.es_funding_team,$scope.syndicatesInfo.detail.es_staff];
             angular.forEach($scope.chartConfig.series[0].data,function(obj,index){
