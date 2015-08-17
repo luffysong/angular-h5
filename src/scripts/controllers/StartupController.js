@@ -64,7 +64,7 @@ angular.module('defaultApp.controller').controller('startupController', [
 
             }, function(res) {
                 console.log(res);
-                $scope.listData = res;
+                $scope.listData = res.list;
             }, function(err) {
                 ErrorService.alert(err.msg);
             });
