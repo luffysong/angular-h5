@@ -191,6 +191,7 @@
             <div class="basic-info">
                 公司亮点
             </div>
+            <iframe class="point-video" ng-src="{{videoLink}}" width="100%" height="250" frameborder=0 allowfullscreen ng-if="videoLink"></iframe>
             <img class="high-point-img" ng-src="{{pic | image:770:'logo'}}" ng-repeat="pic in syndicatesInfo.detail.com_feature_pic track by $index"></img>
         </div>
 
@@ -375,6 +376,26 @@
                     <highchart id="stock-structure-chart" config="chartConfig"></highchart>
                 </div>
                 <p class="employ-share" ng-if="syndicatesInfo.detail.es_share">目前员工期权计划{{syndicatesInfo.detail.es_share}}%</p>
+            </div>
+
+            <!--项目问答-->
+            <div ng-if="problemData.length && isCoInvestor" class="pb-20">
+                <div class="basic-info">
+                    项目问答( {{problemData.length}} )
+                </div>
+                <div class="problem-content">
+                    <ul class="common-problem-list">
+                        <li ng-repeat="item in problemData">
+                            <span class="point"></span>
+                            <span ng-class="{'active':!item.isHide}" ng-click="toggleQuestion($index)" >{{item.question}}</span>
+                            <div class="answer-detail" ng-show="!item.isHide">
+                                <i class="bubble"></i>
+                                <i class="bubble2"></i>
+                                {{item.answer}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <!--工商信息-->

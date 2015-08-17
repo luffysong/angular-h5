@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService, $cookies) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService, $cookies,$sce) {
         if(navigator.userAgent.match(/mac/i)){
             $scope.system = "ios";
         }else{
@@ -68,7 +68,13 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
 
         /*订单按钮*/
         $scope.myOrder = function(event){
-            if(!$scope.isCoInvestor){
+            if($scope.invalid){
+                event.preventDefault();
+                $state.go('guide.welcome', {
+                    type: 'investorValidate'
+                });
+            }
+            else if(!$scope.isCoInvestor){
                 if(event){
                     event.preventDefault();
                 }
@@ -124,6 +130,95 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             },function(err){
                 ErrorService.alert(err);
             });
+        }
+        /*播放器种类及固定url*/
+        var player = {
+            "youku":{
+                "url":"http://player.youku.com/embed/"
+            }
+        };
+        /*视频链接处理*/
+        $scope.handleVideo = function(link){
+            var vid = "";
+            link = link.split("?")[0];
+            var arr = link.split(".");
+            arr.forEach(function(obj,index){
+                if(obj.indexOf("id") >= 0){
+                    vid = obj.split("_")[obj.split("_").length-1];
+                }
+            });
+            Object.keys(player).forEach(function(key){
+                if(link.indexOf(key) >= 0){
+                    link = player[key].url+vid;
+                }
+            });
+            return $sce.trustAsResourceUrl(link);
+        }
+        var videoLink = "http://v.youku.com/v_show/id_XMTMwOTA3NDc2MA==.html?f=25994531#paction";
+        $scope.videoLink = $scope.handleVideo(videoLink);
+        /*项目问答模拟数据*/
+        $scope.problemData = [
+            {
+                question:"什么是领投人？",
+                answer:"领投人就是一群有钱土豪的头子",
+                isHide:true
+            },{
+                question:"领投人的权利和义务是什么？",
+                answer:"砸钱，砸钱，砸钱。。",
+                isHide:true
+            },{
+                question:"股权众筹的流程是什么？",
+                answer:"先付钱",
+                isHide:true
+            },{
+                question:"我怎么获得优先购买权？",
+                answer:"抢抢抢",
+                isHide:true
+            },{
+                question:"领投人的权利和义务是什么？",
+                answer:"砸钱，砸钱，砸钱。。",
+                isHide:true
+            },{
+                question:"股权众筹的流程是什么？",
+                answer:"先付钱",
+                isHide:true
+            },{
+                question:"我怎么获得优先购买权？",
+                answer:"抢抢抢",
+                isHide:true
+            },{
+                question:"领投人的权利和义务是什么？",
+                answer:"砸钱，砸钱，砸钱。。",
+                isHide:true
+            },{
+                question:"股权众筹的流程是什么？",
+                answer:"先付钱",
+                isHide:true
+            },{
+                question:"我怎么获得优先购买权？",
+                answer:"抢抢抢",
+                isHide:true
+            },{
+                question:"领投人的权利和义务是什么？",
+                answer:"砸钱，砸钱，砸钱。。",
+                isHide:true
+            },{
+                question:"股权众筹的流程是什么？",
+                answer:"先付钱",
+                isHide:true
+            },{
+                question:"我怎么获得优先购买权？",
+                answer:"抢抢抢",
+                isHide:true
+            },{
+                question:"领投人的权利和义务是什么？",
+                answer:"砸钱，砸钱，砸钱。。",
+                isHide:true
+            }
+        ];
+        /*项目问答点击展开收起*/
+        $scope.toggleQuestion = function(index){
+            $scope.problemData[index].isHide = !$scope.problemData[index].isHide;
         }
 
         /*获取公司基本信息*/
