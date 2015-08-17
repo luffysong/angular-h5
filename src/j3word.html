@@ -168,12 +168,14 @@
 		success: function (data) {
 
             window.WEIXINSHARE = {
-                shareTitle: "创业感言 | 36氪",
-                shareDesc: "#为什么要创业？#网易云音乐创始人刘捷在36氪“极速融资”给了你答案",
+                shareTitle: "#为什么要创业？#"+data.data.company.logo+"创始人"+data.data.user.name+"在36氪“极速融资”给了你答案",
+                shareDesc: "极速融资: 30位靠谱投资人，24小时回复你BP。",
                 shareImg: data.data.company.logo
             };
 
-            InitWeixin();
+            InitWeixin({
+                cid : cid
+            });
 
 			if(!data.data.user.avatar){
 				data.data.user.avatar = '//krplus-pic.b0.upaiyun.com/default_avatar.png!70'
