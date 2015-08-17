@@ -35,7 +35,7 @@ angular.module('defaultApp.controller').controller('startupController', [
         $scope.user.uid = UserService.getUID();
 
         /**
-         * 创建公司
+         * 创建公司 Url
          */
         $scope.createUrl = '/user/login?from=' + encodeURIComponent(location.protocol + '//' + location.host + '/#/company/create');
 
@@ -81,7 +81,11 @@ angular.module('defaultApp.controller').controller('startupController', [
             }, {
                 'product_id': 1
             }, function(res) {
-                console.log(res);
+                if(res.code == 0) {
+                    console.log(res);
+                } else {
+                    ErrorService.alert(res.msg);
+                }
             }, function(err) {
                 ErrorService.alert(err.msg);
             });
