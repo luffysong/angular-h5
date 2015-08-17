@@ -7,7 +7,7 @@ var angular = require('angular');
 angular.module('defaultApp.service').service('StartupService', [
     '$location', '$http', 'BasicService', 'appendTransform',
     function ($location, $http, BasicService, appendTransform) {
-        var service = BasicService('api/p/activity/enterprise-fest/:activity', {
+        var service = BasicService('/api/p/activity/enterprise-fest/:activity', {
 
         }, {
             activity: [
