@@ -33,6 +33,10 @@ angular.module('defaultApp.controller').controller('startupController', [
          */
         $scope.user = {};
         $scope.user.uid = UserService.getUID();
+        // 获取用户是否完善资料
+        UserService.isProfileValid(function(data) {
+            $scope.isProfileValided = data;
+        });
 
         /**
          * 创建公司 Url
@@ -77,14 +81,30 @@ angular.module('defaultApp.controller').controller('startupController', [
         $scope.startRemind = function() {
             if(!$scope.user.uid) {
                 $state.go('startupLogin');
+            } else if(!$scope.isProfileValided) {
+                 $modal.open({
+                    templateUrl: 'templates/startup/pop-startup-phone.html',
+                    windowClass: 'startup-modal',
+                    controller: [
+                        '$scope', '$modalInstance',
+                        function($scope, $modalInstance) {
+                            $scope.startRemindAgain = true;
+
+                            $scope.close = function () {
+                                $modalInstance.dismiss();
+                            }
+                        }
+                    ],
+                    resolve: {
+                        scope: function(){
+                            return $scope;
+                        }
+                    }
+                });
             } else {
                 StartupService['start-remind'].post({
 
                 }, function(res) {
-                    notify({
-                        message: res.msg,
-                        classes: 'alert-success'
-                    });
                     $modal.open({
                         templateUrl: 'templates/startup/pop-startup-remind.html',
                         windowClass: 'startup-modal',
