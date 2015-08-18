@@ -5,6 +5,15 @@ angular.module('defaultApp.controller').controller('startupController', [
     function($scope, StartupService, ErrorService, UserService, CompanyService, $modal, $state, notify, $stateParams) {
         $scope.floors = ['招聘专区', '推广专区', '注册、法务专区', '云服务专区', '创业课专区'];
 
+        if(!!$stateParams.token) {
+            $scope.hasToken = true;
+            $scope.token = $stateParams.token;
+            $modal.open({
+                templateUrl: 'templates/startup/pop-startup-share.html',
+                windowClass: 'startup-share-modal'
+            });
+        }
+
         /**
          * 查看活动规则
          */
@@ -176,7 +185,12 @@ angular.module('defaultApp.controller').controller('startupController', [
                 if(!$scope.companyStatus) {
                     $state.go('startupCompany');
                 } else {
-                    $state.go('startupShare');
+                    $scope.hasToken = true;
+                    $scope.token = $stateParams.token;
+                    $modal.open({
+                        templateUrl: 'templates/startup/pop-startup-share.html',
+                        windowClass: 'startup-share-modal'
+                    });
                 }
             }
         };
@@ -185,11 +199,80 @@ angular.module('defaultApp.controller').controller('startupController', [
          * 微信分享
          */
         document.title = "创业狂欢节";
-        WEIXINSHARE = {
-            shareTitle: "“创业狂欢节”是个什么Gui？28项创业福利，来36氪抢不停！",
-            shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
-            shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg'
+
+        $scope.$watch('hasToken', function(has) {
+            if(has) {
+                 WEIXINSHARE = {
+                    shareTitle: "我在“创业狂欢节”抢到“青云”的创业福利。来36氪抢不停！",
+                    shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
+                    shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg'
+                };
+            } else {
+                WEIXINSHARE = {
+                    shareTitle: "“创业狂欢节”是个什么Gui？28项创业福利，来36氪抢不停！",
+                    shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
+                    shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg'
+                };
+            }
+        });
+
+        $scope.InitWeixin = function() {
+            var signature = '';
+            var nonceStr = 'xcvdsjlk$klsc';
+            var timestamp = parseInt(new Date().getTime()/1000);
+
+            $.get('/api/weixin/token', {
+                url: location.href.replace(/#.*$/, ''),
+                timestamp: timestamp,
+                noncestr: nonceStr
+            }, function(data) {
+                if(data.code!=0)return;
+                if(!data.data)return;
+                if(!data.data.token)return;
+
+                wx.config({
+                    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: 'wxd3ea1a9a22815a8c', // 必填，公众号的唯一标识
+                    timestamp: timestamp, // 必填，生成签名的时间戳
+                    nonceStr: nonceStr, // 必填，生成签名的随机串
+                    signature: data.data.token,// 必填，签名，见附录1
+                    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                });
+
+                wx.ready(function() {
+                    wx.onMenuShareTimeline({
+                        title: WEIXINSHARE.shareTitle, // 分享标题
+                        link: location.href, // 分享链接
+                        imgUrl: WEIXINSHARE.shareImg || 'http://d.36kr.com/assets/36kr.png', // 分享图标
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                        }
+                    });
+
+                    wx.onMenuShareAppMessage({
+                        title: WEIXINSHARE.shareTitle, // 分享标题
+                        desc: WEIXINSHARE.shareDesc, // 分享描述
+                        link: location.href, // 分享链接
+                        imgUrl: WEIXINSHARE.shareImg || 'http://d.36kr.com/assets/36kr.png', // 分享图标
+                        type: 'link', // 分享类型,music、video或link，不填默认为link
+                        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                        success: function () {
+                            // 用户确认分享后执行的回调函数
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                        }
+                    });
+
+                    wx.error(function(res) {
+
+                    });
+                });
+            }, 'jsonp');
         };
-        InitWeixin();
+        $scope.InitWeixin();
     }
 ]);

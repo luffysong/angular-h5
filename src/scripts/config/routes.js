@@ -237,12 +237,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         'controller': 'startupController'
     });
 
-    $stateProvider.state('startupShare', {
-        'url': '/startup/share',
-        'templateUrl': 'templates/startup/share.html',
-        'controller': 'startupController'
-    });
-
     $stateProvider.state('startupCode', {
         'url': '/startup/code',
         'templateUrl': 'templates/startup/code.html',
