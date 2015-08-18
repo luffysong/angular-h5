@@ -12,7 +12,7 @@
     <link rel="apple-touch-icon-precomposed" href="/images/wanda-icon.png"/>
     <link rel="apple-touch-startup-image" href="/images/wanda-icon.png"/>
     <!-- build:css /styles/j3word.css -->
-	<link rel="stylesheet" href="/components/swiper/dist/css/swiper.min.css"/>
+    <link rel="stylesheet" href="/components/swiper/dist/css/swiper.min.css"/>
     <link rel="stylesheet" href="/styles/j3word.css">
     <!-- endbuild -->
     <script>
@@ -41,29 +41,28 @@
         })(window, document, 'script', '//stat.36kr.com/stat.js', 'krtracker');
         krtracker('trackPageView', location.pathname);
     </script>
-	<title>创业感言</title>
+    <title>创业感言</title>
 </head>
 <body>
 
 <div class="j3word">
 
 
-
-	<div class="swiper-container">
-		<div class="logo"></div>
-		<div class="bgm-icon"></div>
-		<audio src="styles/images/jisu3/speech.mp3" loop="1" autoplay="autoplay" id="bgm"></audio>
-
-
-		<div class="swiper-wrapper">
+    <div class="swiper-container">
+        <div class="logo"></div>
+        <div class="bgm-icon"></div>
+        <audio src="styles/images/jisu3/speech.mp3" loop="1" autoplay="autoplay" id="bgm"></audio>
 
 
+        <div class="swiper-wrapper">
 
-		</div>
+
+        </div>
 
 
         <div class="footer">
             <img src="styles/images/jisu3/9.png" alt="">
+
             <div>
                 <a class="support" href="javascript:void(0)">
                     <img src="styles/images/jisu3/jword_btn_support.jpg" alt=""/>
@@ -74,19 +73,17 @@
             </div>
         </div>
 
-		<div class="dir">
-			<ul>
-				<li class="active">&nbsp;</li>
-				<li>&nbsp;</li>
-			</ul>
-		</div>
-	</div>
+        <div class="dir">
+            <ul>
+                <li class="active">&nbsp;</li>
+                <li>&nbsp;</li>
+            </ul>
+        </div>
+    </div>
 
     <div class="share" style="display: none">
         <img src="styles/images/jisu3/share.png" alt=""/>
     </div>
-
-
 
 
 </div>
@@ -147,6 +144,7 @@
         </ul>
     </div>
 </div>
+
 </script>
 
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
@@ -154,90 +152,114 @@
 <!-- build:js /scripts/j3word.js -->
 <script src="/scripts/weixin.js"></script>
 <script src="/components/jquery/dist/jquery.min.js"></script>
+<script src="/components/jquery-cookie/jquery.cookie.js"></script>
 <script src="/components/gsap/src/minified/TweenMax.min.js"></script>
 <script src="/components/swiper/dist/js/swiper.min.js"></script>
 <script src="/components/ejs/ejs.min.js"></script>
 <!-- endbuild -->
 <script>
-	var bgmTL = new TimelineMax().add([
-		TweenMax.from($('.bgm-icon'), 5, {
-			rotation: -360,
-			repeat: -1,
-			ease: Linear.easeNone
-		})
-	]);
+    var bgmTL = new TimelineMax().add([
+        TweenMax.from($('.bgm-icon'), 5, {
+            rotation: -360,
+            repeat: -1,
+            ease: Linear.easeNone
+        })
+    ]);
 
 
-	$(".bgm-icon").on('click touch', function(){
-		var bgm = document.getElementById('bgm');
-		if(bgm){
-			if(bgm.paused){
-				bgm.play();
-				bgmTL.play();
-			}else{
-				bgm.pause();
-				bgmTL.pause();
-			}
-		}
-	});
-
-
+    $(".bgm-icon").on('click touch', function () {
+        var bgm = document.getElementById('bgm');
+        if (bgm) {
+            if (bgm.paused) {
+                bgm.play();
+                bgmTL.play();
+            } else {
+                bgm.pause();
+                bgmTL.pause();
+            }
+        }
+    });
 
 
     var cid;
-    location.search.replace(/cid=([\d]+)/ig, function($1, $2){
+    location.search.replace(/cid=([\d]+)/ig, function ($1, $2) {
         cid = $2
     })
 
-	$.ajax('/api/speed/funds/startup-feeling-h5', {
+    $.ajax('/api/speed/funds/startup-feeling-h5', {
 
-		data:{
-			cid : cid
-		},
-		dataType: 'json',
-		success: function (data) {
+        data: {
+            cid: cid
+        },
+        dataType: 'json',
+        success: function (data) {
             var source;
-            var link = location.href.replace(/source=web/gi, function(){
+            var link = location.href.replace(/source=web/gi, function () {
                 source = 'web'
                 return 's=s'
             })
 
             window.WEIXINSHARE = {
-                shareTitle: "#为什么要创业？#"+data.data.company.logo+"创始人"+data.data.user.name+"在36氪“极速融资”给了你答案",
+                shareTitle: "#为什么要创业？#" + data.data.company.logo + "创始人" + data.data.user.name + "在36氪“极速融资”给了你答案",
                 shareDesc: "极速融资: 30位靠谱投资人，24小时回复你BP。",
-                shareLink:link,
+                shareLink: link,
                 shareImg: data.data.company.logo
             };
 
-            InitWeixin({
-                cid : cid,
-                source : source
-            });
 
-			if(!data.data.user.avatar){
-				data.data.user.avatar = '//krplus-pic.b0.upaiyun.com/default_avatar.png!70'
-			}
-			var str = ejs.render($('#tml')[0].innerHTML, data.data)
-			$(str).appendTo('.swiper-wrapper')
+            function checkcookie(cid) {
+                var cookies = $.cookie('j3word');
+                if (!cookies) {
+                    $.cookie('j3word', ('&'+cid))
+                    return false;
+                }
 
-			var dirindex = 0;
-			var mySwiper = new Swiper('.swiper-container',{
-				onSlideChangeEnd:function(swiper){
-					$('.dir li').eq(dirindex).removeClass('active');
-					$('.dir li').eq(swiper.activeIndex).addClass('active');
-					dirindex = swiper.activeIndex;
-				}
-			})
 
-            $('.support').on('click', function(){
-                $('.share').css({'display':'block'})
+                if (cookies.indexOf("&" + cid + "&") > -1) {
+                    return true;
+                } else {
+                    $.cookie('j3word', ($.cookie('j3word') + cid + '&'))
+                    return false;
+                }
+
+            }
+
+            var weixinObj;
+            if(checkcookie(cid)){
+                weixinObj = {}
+            }else{
+                weixinObj = {
+                    cid: cid,
+                    source: source
+                }
+            }
+
+            InitWeixin(weixinObj);
+
+            if (!data.data.user.avatar) {
+                data.data.user.avatar = '//krplus-pic.b0.upaiyun.com/default_avatar.png!70'
+            }
+            var str = ejs.render($('#tml')[0].innerHTML, data.data)
+            $(str).appendTo('.swiper-wrapper')
+
+            var dirindex = 0;
+            var mySwiper = new Swiper('.swiper-container', {
+                onSlideChangeEnd: function (swiper) {
+                    $('.dir li').eq(dirindex).removeClass('active');
+                    $('.dir li').eq(swiper.activeIndex).addClass('active');
+                    dirindex = swiper.activeIndex;
+                }
             })
-            $('.share').on('click', function(e){
-                $(e.currentTarget).css({'display':'none'})
+
+            $('.support').on('click', function () {
+                $('.share').css({'display': 'block'})
+            })
+            $('.share').on('click', function (e) {
+                $(e.currentTarget).css({'display': 'none'})
             })
 
-		}
-	})
+        }
+    })
 
     _hmt.push(['_trackPageview', "/speed3/word/page1"]);
     krtracker('trackPageView', "/speed3/word/page1");
