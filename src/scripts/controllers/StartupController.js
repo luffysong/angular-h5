@@ -33,9 +33,9 @@ angular.module('defaultApp.controller').controller('startupController', [
          */
         $scope.user = {};
         $scope.user.uid = UserService.getUID();
-        // 获取用户是否完善资料
-        UserService.isProfileValid(function(data) {
-            $scope.isProfileValided = data;
+        // 获取用户是否有手机号
+        UserService.getPhone(function(data) {
+            $scope.hasPhone = !!data;
         });
 
         /**
@@ -81,7 +81,7 @@ angular.module('defaultApp.controller').controller('startupController', [
         $scope.startRemind = function() {
             if(!$scope.user.uid) {
                 $state.go('startupLogin');
-            } else if(!$scope.isProfileValided) {
+            } else if(!$scope.hasPhone) {
                  $modal.open({
                     templateUrl: 'templates/startup/pop-startup-phone.html',
                     windowClass: 'startup-modal',
@@ -178,5 +178,16 @@ angular.module('defaultApp.controller').controller('startupController', [
                 }
             }
         };
+
+        /**
+         * 微信分享
+         */
+        document.title = "创业狂欢节";
+        WEIXINSHARE = {
+            shareTitle: "“创业狂欢节”是个什么Gui?28项创业服福利,来36氪抢不停!",
+            shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
+            shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg'
+        };
+        InitWeixin();
     }
 ]);
