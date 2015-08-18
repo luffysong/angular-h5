@@ -58,6 +58,7 @@ angular.module('defaultApp.controller').controller('startupController', [
                     $scope.status = 'during';
                 }
 
+                    $scope.status = 'during';
                 /* 活动是否即将结束 */
                 if(now.getDate() == endTime.getDate()) {
                     $scope.ending = true;
