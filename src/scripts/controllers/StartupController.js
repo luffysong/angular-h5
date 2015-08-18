@@ -33,9 +33,9 @@ angular.module('defaultApp.controller').controller('startupController', [
          */
         $scope.user = {};
         $scope.user.uid = UserService.getUID();
-        // 获取用户是否完善资料
-        UserService.isProfileValid(function(data) {
-            $scope.isProfileValided = data;
+        // 获取用户是否有手机号
+        UserService.getPhone(function(data) {
+            $scope.hasPhone = !!data;
         });
 
         /**
@@ -81,7 +81,7 @@ angular.module('defaultApp.controller').controller('startupController', [
         $scope.startRemind = function() {
             if(!$scope.user.uid) {
                 $state.go('startupLogin');
-            } else if(!$scope.isProfileValided) {
+            } else if(!$scope.hasPhone) {
                  $modal.open({
                     templateUrl: 'templates/startup/pop-startup-phone.html',
                     windowClass: 'startup-modal',
