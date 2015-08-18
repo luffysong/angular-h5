@@ -73,6 +73,8 @@ angular.module('defaultApp.controller').controller('startupController', [
                     $scope.status = 'during';
                 }
 
+                $scope.status = 'during';
+
                 /* 活动是否即将结束 */
                 if(now.getDate() == endTime.getDate()) {
                     $scope.ending = true;
@@ -182,14 +184,22 @@ angular.module('defaultApp.controller').controller('startupController', [
                     ErrorService.alert(err);
                 });
 
-                if(!$scope.companyStatus) {
+                //TODO: fix this
+                if($scope.companyStatus) {
                     $state.go('startupCompany');
                 } else {
-                    $scope.hasToken = true;
-                    $scope.token = $stateParams.token;
-                    $modal.open({
-                        templateUrl: 'templates/startup/pop-startup-share.html',
-                        windowClass: 'startup-share-modal'
+                    /* 获取token */
+                    StartupService['qr-code-token'].post({
+                        'product_id': id
+                    }, function(res) {
+                        $scope.hasToken = true;
+                        $scope.token = res.token;
+                        $modal.open({
+                            templateUrl: 'templates/startup/pop-startup-share.html',
+                            windowClass: 'startup-share-modal'
+                        });
+                    }, function(err) {
+                        ErrorService.alert(err);
                     });
                 }
             }
@@ -205,13 +215,15 @@ angular.module('defaultApp.controller').controller('startupController', [
                  WEIXINSHARE = {
                     shareTitle: "我在“创业狂欢节”抢到“青云”的创业福利。来36氪抢不停！",
                     shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
-                    shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg'
+                    shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg',
+                    shareLink: 'https://rong.36kr.com/#/startup'
                 };
             } else {
                 WEIXINSHARE = {
                     shareTitle: "“创业狂欢节”是个什么Gui？28项创业福利，来36氪抢不停！",
                     shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
-                    shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg'
+                    shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg',
+                    shareLink: 'https://rong.36kr.com/#/startup'
                 };
             }
         });
@@ -242,10 +254,17 @@ angular.module('defaultApp.controller').controller('startupController', [
                 wx.ready(function() {
                     wx.onMenuShareTimeline({
                         title: WEIXINSHARE.shareTitle, // 分享标题
-                        link: location.href, // 分享链接
+                        link: WEIXINSHARE.shareLink || location.href, // 分享链接
                         imgUrl: WEIXINSHARE.shareImg || 'http://d.36kr.com/assets/36kr.png', // 分享图标
                         success: function () {
                             // 用户确认分享后执行的回调函数
+                            StartupService['code'].post({
+                                'token': $scope.token
+                            }, function(res) {
+                                console.log(res);
+                            }, function(err) {
+                                console.log(err);
+                            });
                         },
                         cancel: function () {
                             // 用户取消分享后执行的回调函数
