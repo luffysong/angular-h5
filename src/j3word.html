@@ -41,7 +41,7 @@
         })(window, document, 'script', '//stat.36kr.com/stat.js', 'krtracker');
         krtracker('trackPageView', location.pathname);
     </script>
-    <title>创业感言</title>
+    <title>36氪极速融资</title>
 </head>
 <body>
 
@@ -94,7 +94,10 @@
     <div class="content">
         <ul >
             <li class="head">
-                <img src="<%=user.avatar%>" alt="">
+                <div class="imgwrap">
+                    <img src="<%=user.avatar%>" alt="">
+                </div>
+                
                 <img src="styles/images/jisu3/7.png" alt="" class="hot">
             </li>
             <li class="word">
@@ -120,7 +123,9 @@
     <div class="content">
         <ul>
             <li class="head">
-                <img src="<%=company.logo%>" alt="">
+                <div class="imgwrap">
+                    <img src="<%=company.logo%>" alt="">
+                </div>
             </li>
             <li class="word">
                 <p><%=company.name%></p>
@@ -200,7 +205,7 @@
             })
 
             window.WEIXINSHARE = {
-                shareTitle: "#为什么要创业？#" + data.data.company.logo + "创始人" + data.data.user.name + "在36氪“极速融资”给了你答案",
+                shareTitle: "#为什么要创业？#" + data.data.company.name + "创始人" + data.data.user.name + "在36氪“极速融资”给了你答案",
                 shareDesc: "极速融资: 30位靠谱投资人，24小时回复你BP。",
                 shareLink: link,
                 shareImg: data.data.company.logo
