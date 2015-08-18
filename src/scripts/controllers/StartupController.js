@@ -47,9 +47,9 @@ angular.module('defaultApp.controller').controller('startupController', [
 
             }, function(res) {
                 /* 获取活动时间状态 */
-                var startTime = new Date(res.start_time);
+                var startTime = new Date(res.start_time.replace(/-/g, '/'));
                 var now = new Date();
-                var endTime   = new Date(res.end_time);
+                var endTime   = new Date(res.end_time.replace(/-/g, '/'));
                 if(now.valueOf() < startTime.valueOf()) {
                     $scope.status = 'before';
                 } else if(now.valueOf() > endTime.valueOf()) {
