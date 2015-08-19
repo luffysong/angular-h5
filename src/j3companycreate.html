@@ -44,6 +44,7 @@
 </head>
 <body>
 <div class="j3companycreate">
+    <a href="//huodong.36kr.com/h5/speed3/" class="goto">返回活动页</a>
     <img src="styles/images/companycreate.png" alt=""/>
 </div>
 
@@ -64,7 +65,15 @@
     _hmt.push(['_trackPageview', "/speed3/companycreate/page1"]);
     krtracker('trackPageView', "/speed3/companycreate/page1");
 
-//    $('.J_goto')
+    $('.goto').on('click', function(e){
+        e.preventDefault()
+        _hmt.push(['_trackEvent', '按钮', "创建公司成功页，返回按钮"]);
+        krtracker('trackEvent', '按钮', '创建公司成功页，返回按钮');
+        setTimeout(function(){
+            location.href = $(e.currentTarget).attr('url')
+        }, 400)
+
+    })
 </script>
 </body>
 </html>
