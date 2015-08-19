@@ -4,6 +4,61 @@
     height: 200px;
 }
 .syndicate-detail {
+    .problem-content {
+        .common-problem-list {
+            margin: 0;
+            padding: 20px;
+            list-style: none;
+            .active {
+                color: #008DF2;
+            }
+            li {
+                position: relative;
+                padding-left: 15px;
+                margin-bottom: 10px;
+                &:last-of-type {
+                    margin-bottom: 0;
+                }
+                .answer-detail {
+                    position: relative;
+                    height: auto;
+                    background-color: #f6f6f6;
+                    padding: 15px 10px;
+                    border: 1px solid #e6e6e6;
+                    margin: 10px -5px 0 -20px;
+                    border-radius: 2px;
+                    .bubble {
+                        position: absolute;
+                        display: inline-block;
+                        border-width: 5px;
+                        border-style: solid;
+                        border-color: transparent transparent #e6e6e6;
+                        top: -11px;
+                        left: 20px;
+                    }
+                    .bubble2 {
+                        .bubble;
+                        top: -10px;
+                        border-color: transparent transparent #f6f6f6;
+                    }
+                }
+            }
+            .mb-10 {
+                margin-bottom:10px;
+            }
+            .point {
+                display: inline-block;
+                position: absolute;
+                left: 0;
+                top: 8px;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background-color: #e0e0e0;
+                margin-right: 10px;
+            }
+        }
+    }
     .c-black {
         color: #000;
     }
@@ -257,6 +312,8 @@
                 line-height: 1.5;
             }
         }
+    }
+    .point-video {
     }
     .high-point-img {
         width: 100%;

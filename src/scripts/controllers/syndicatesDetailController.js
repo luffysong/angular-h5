@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService, $cookies) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService, $cookies,$sce) {
         if(navigator.userAgent.match(/mac/i)){
             $scope.system = "ios";
         }else{
@@ -68,7 +68,13 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
 
         /*订单按钮*/
         $scope.myOrder = function(event){
-            if(!$scope.isCoInvestor){
+            if($scope.invalid){
+                event.preventDefault();
+                $state.go('guide.welcome', {
+                    type: 'investorValidate'
+                });
+            }
+            else if(!$scope.isCoInvestor){
                 if(event){
                     event.preventDefault();
                 }
@@ -125,6 +131,34 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 ErrorService.alert(err);
             });
         }
+        /*播放器种类及固定url*/
+        var player = {
+            "qq":{
+                "url":"//v.qq.com/iframe/player.html?vid="
+            }
+        };
+        /*视频链接处理*/
+        $scope.handleVideo = function(link){
+            var vid = "";
+            link = link.split("?")[0];
+            var arr = link.split("/");
+            vid = arr[arr.length-1].split(".")[0];
+            Object.keys(player).forEach(function(key){
+                if(link.indexOf(key) >= 0){
+                    link = player[key].url+vid;
+                }
+            });
+            return $sce.trustAsResourceUrl(link);
+        }
+        /*项目问答点击展开收起*/
+        $scope.toggleQuestion = function(index){
+            angular.forEach($scope.problemData,function(obj,i){
+                if(i != index){
+                    obj.isHide = true;
+                }
+            });
+            $scope.problemData[index].isHide = !$scope.problemData[index].isHide;
+        }
 
         /*获取公司基本信息*/
         CompanyService.get({
@@ -147,6 +181,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         },function(data){
             $scope.color = data.base.status;
             $scope.syndicatesInfo = data;
+
             if($scope.syndicatesInfo.co_investors){
                 if($scope.syndicatesInfo.co_investors.length > 8){
                     $scope.tempData = angular.copy($scope.syndicatesInfo.co_investors);
@@ -196,6 +231,17 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 $scope.timeout = true;
             }
             if(!$scope.syndicatesInfo.detail)return;
+            /*视频链接处理*/
+            if($scope.syndicatesInfo.detail.com_video_link){
+                $scope.videoLink = $scope.handleVideo($scope.syndicatesInfo.detail.com_video_link);
+            }
+            /*项目问答数据*/
+            $scope.problemData = $scope.syndicatesInfo.detail.project_qa;
+            if($scope.problemData.length){
+                angular.forEach($scope.problemData,function(obj,index){
+                    obj.isHide = true;
+                });
+            }
             $scope.shareError = parseInt($scope.syndicatesInfo.detail.es_funding_team) + parseInt($scope.syndicatesInfo.detail.es_investor) + parseInt($scope.syndicatesInfo.detail.es_staff) == 100 ? false : true;
             var chartData = [$scope.syndicatesInfo.detail.es_investor,$scope.syndicatesInfo.detail.es_funding_team,$scope.syndicatesInfo.detail.es_staff];
             angular.forEach($scope.chartConfig.series[0].data,function(obj,index){
