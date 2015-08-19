@@ -150,6 +150,14 @@ ul,li{list-style: none}
           word-wrap: break-word;
           word-break: break-all;
         }
+        p{
+          -webkit-line-clamp: 3;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          width: 100%;
+          display: -webkit-box;
+          -webkit-box-orient: block-axis;
+        }
       }
       .rank{
         position: absolute;
@@ -201,11 +209,11 @@ ul,li{list-style: none}
         font-style: normal;
         color: rgb(229, 96, 68);
       }
-      h3, h4, span {
+      h3, h4 {
         display: inline-block;
       }
       span {
-        line-height: 200%;
+        line-height: 1.5;
       }
       h3 {
         color: rgb(229, 96, 68);
@@ -256,6 +264,9 @@ ul,li{list-style: none}
       img{
         border-color: #fff !important;
       }
+    }
+    .word p{
+      -webkit-line-clamp: 1 !important;
     }
   }
 }
