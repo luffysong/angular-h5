@@ -236,6 +236,7 @@
             $('.support').on('click', function () {
                 _hmt.push(['_trackEvent', '按钮', '创业感言支持TA']);
                 krtracker('trackEvent', '按钮', "创业感言支持TA");
+
                 $('.share').css({'display': 'block'})
                 setTimeout(function(){
                     $('.share').css({'display': 'none'})
@@ -244,6 +245,7 @@
             $('.share').on('click', function (e) {
                 $(e.currentTarget).css({'display': 'none'})
             })
+
             $('.rank a').on('click', function(e){
                 e.preventDefault()
                 _hmt.push(['_trackEvent', '按钮', '创业感言排行榜']);
@@ -260,6 +262,7 @@
                     location.href = $(e.currentTarget).attr('href')
                 }, 400)
             })
+
         }
     })
 
