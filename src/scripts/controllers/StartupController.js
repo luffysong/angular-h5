@@ -73,6 +73,7 @@ angular.module('defaultApp.controller').controller('startupController', [
                     $scope.status = 'during';
                 }
 
+                // TODO: fix this
                 $scope.status = 'during';
 
                 /* 活动是否即将结束 */
@@ -166,8 +167,9 @@ angular.module('defaultApp.controller').controller('startupController', [
         /**
          * 点击抢码
          */
-        $scope.getCode = function(id) {
+        $scope.getCode = function(id, provider) {
             if(!id) return;
+            $scope.provider = provider;
             if(!$scope.user.uid) {
                 $state.go('startupLogin');
             } else {
@@ -178,10 +180,10 @@ angular.module('defaultApp.controller').controller('startupController', [
 
                 }, function(res) {
                     if(res.code == 0 && res.data) {
-                        $scope.companyStatus = !!(res.data.length > 0);
+                        $scope.companyStatus = (res.data.length > 0);
                     }
                 }, function(err) {
-                    ErrorService.alert(err);
+                    console.log(err);
                 });
 
                 //TODO: fix this
@@ -189,6 +191,8 @@ angular.module('defaultApp.controller').controller('startupController', [
                     $state.go('startupCompany');
                 } else {
                     /* 获取token */
+                    // TODO: recover this
+                    /*
                     StartupService['qr-code-token'].post({
                         'product_id': id
                     }, function(res) {
@@ -201,6 +205,19 @@ angular.module('defaultApp.controller').controller('startupController', [
                     }, function(err) {
                         ErrorService.alert(err);
                     });
+                    */
+
+                    // TODO: delete this
+                    StartupService['code'].post({
+                        'token': $scope.token
+                    }, function(res) {
+                        console.log(res);
+                    }, function(err) {
+                        console.log(err);
+                        ErrorService.alert(err);
+                    });
+
+                    $scope.InitWeixin();
                 }
             }
         };
@@ -213,7 +230,7 @@ angular.module('defaultApp.controller').controller('startupController', [
         $scope.$watch('hasToken', function(has) {
             if(has) {
                  WEIXINSHARE = {
-                    shareTitle: "我在“创业狂欢节”抢到“青云”的创业福利。来36氪抢不停！",
+                    shareTitle: "我在“创业狂欢节”抢到“" + $scope.provider + "”的创业福利。来36氪抢不停！",
                     shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
                     shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg',
                     shareLink: 'https://rong.36kr.com/#/startup'
@@ -274,7 +291,7 @@ angular.module('defaultApp.controller').controller('startupController', [
                     wx.onMenuShareAppMessage({
                         title: WEIXINSHARE.shareTitle, // 分享标题
                         desc: WEIXINSHARE.shareDesc, // 分享描述
-                        link: location.href, // 分享链接
+                        link: WEIXINSHARE.shareLink || location.href, // 分享链接
                         imgUrl: WEIXINSHARE.shareImg || 'http://d.36kr.com/assets/36kr.png', // 分享图标
                         type: 'link', // 分享类型,music、video或link，不填默认为link
                         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
@@ -292,6 +309,5 @@ angular.module('defaultApp.controller').controller('startupController', [
                 });
             }, 'jsonp');
         };
-        $scope.InitWeixin();
     }
 ]);
