@@ -215,15 +215,15 @@
             function checkcookie(cid) {
                 var cookies = $.cookie('j3word');
                 if (!cookies) {
-                    $.cookie('j3word', ('&'+cid))
+                    $.cookie('j3word', encodeURIComponent('&'+cid))
                     return false;
                 }
 
-
+                cookies = decodeURIComponent(cookies);
                 if (cookies.indexOf("&" + cid + "&") > -1) {
                     return true;
                 } else {
-                    $.cookie('j3word', ($.cookie('j3word') + cid + '&'))
+                    $.cookie('j3word', encodeURIComponent(cookies + cid + '&'))
                     return false;
                 }
 
