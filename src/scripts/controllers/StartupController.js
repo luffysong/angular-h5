@@ -365,10 +365,10 @@ angular.module('defaultApp.controller').controller('startupController', [
             }, 'jsonp');
         };
 
-        $scope.$watch('provider', function() {
-            if($scope.provider) {
+        $scope.$watch('provider', function(from) {
+            if(from) {
                  WEIXINSHARE = {
-                    shareTitle: "我在“创业狂欢节”抢到“" + $scope.product.provider + "”的创业福利。来36氪抢不停！",
+                    shareTitle: "我在“创业狂欢节”抢到“" + from + "”的创业福利。来36氪抢不停！",
                     shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
                     shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg',
                     shareLink: 'https://rong.36kr.com/#/startup'
