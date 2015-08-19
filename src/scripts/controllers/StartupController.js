@@ -173,39 +173,30 @@ angular.module('defaultApp.controller').controller('startupController', [
             if(!$scope.user.uid) {
                 $state.go('startupLogin');
             } else {
-                $scope.companyStatus = false;
-
-                /* 判断创建公司状态 */
-                CompanyService.getManaged({
-
+                /* 获取token */
+                StartupService['qr-code-token'].post({
+                    'product_id': id
                 }, function(res) {
-                    if(res.data.length <= 0) {
-                        $state.go('startupCompany');
-                    } else {
-                        /* 获取token */
-                        StartupService['qr-code-token'].post({
-                            'product_id': id
-                        }, function(res) {
-                            $scope.hasToken = true;
-                            $scope.token = res.token;
+                    $scope.hasToken = true;
+                    $scope.token = res.token;
 
-                            StartupService['code'].post({
-                                'token': $scope.token
-                            }, function(res) {
-                                if(res.code) {
-                                    $state.go('startupCode', {
-                                        code: res.code
-                                    });
-                                }
-                            }, function(err) {
-                                ErrorService.alert(err);
+                    StartupService['code'].post({
+                        'token': $scope.token
+                    }, function(res) {
+                        if(res.code) {
+                            $state.go('startupCode', {
+                                code: res.code
                             });
-                        }, function(err) {
-                            ErrorService.alert(err);
-                        });
-                    }
+                        }
+                    }, function(err) {
+                        if(err.code == 2002) {
+                            $state.go('startupCompany');
+                        } else {
+                            ErrorService.alert(err); 
+                        }
+                    });
                 }, function(err) {
-                    console.log(err);
+                    ErrorService.alert(err);
                 });
             }
         };
@@ -214,23 +205,6 @@ angular.module('defaultApp.controller').controller('startupController', [
          * 微信分享
          */
         document.title = "创业狂欢节";
-        $scope.$watch('hasToken', function(has) {
-            if(has) {
-                 WEIXINSHARE = {
-                    shareTitle: "我在“创业狂欢节”抢到“" + $scope.provider + "”的创业福利。来36氪抢不停！",
-                    shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
-                    shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg',
-                    shareLink: 'https://rong.36kr.com/#/startup'
-                };
-            } else {
-                WEIXINSHARE = {
-                    shareTitle: "“创业狂欢节”是个什么Gui？28项创业福利，来36氪抢不停！",
-                    shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
-                    shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg',
-                    shareLink: 'https://rong.36kr.com/#/startup'
-                };
-            }
-        });
 
         $scope.InitWeixin = function() {
             var signature = '';
@@ -313,6 +287,24 @@ angular.module('defaultApp.controller').controller('startupController', [
             }, 'jsonp');
         };
 
-        $scope.InitWeixin();
+        $scope.$watch('hasToken', function(has) {
+            if(has) {
+                 WEIXINSHARE = {
+                    shareTitle: "我在“创业狂欢节”抢到“" + $scope.provider + "”的创业福利。来36氪抢不停！",
+                    shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
+                    shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg',
+                    shareLink: 'https://rong.36kr.com/#/startup'
+                };
+            } else {
+                WEIXINSHARE = {
+                    shareTitle: "“创业狂欢节”是个什么Gui？28项创业福利，来36氪抢不停！",
+                    shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
+                    shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg',
+                    shareLink: 'https://rong.36kr.com/#/startup'
+                };
+            }
+
+            $scope.InitWeixin();
+        });
     }
 ]);
