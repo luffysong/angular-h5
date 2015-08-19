@@ -4,7 +4,6 @@ angular.module('defaultApp.controller').controller('startupController', [
     '$scope', 'StartupService', 'ErrorService', 'UserService', 'CompanyService', '$modal', '$state', 'notify', '$stateParams',
     function($scope, StartupService, ErrorService, UserService, CompanyService, $modal, $state, notify, $stateParams) {
         if(!!$stateParams.token) {
-            $scope.hasToken = true;
             $scope.token = $stateParams.token;
             $modal.open({
                 templateUrl: 'templates/startup/pop-startup-share.html',
@@ -170,7 +169,6 @@ angular.module('defaultApp.controller').controller('startupController', [
         $scope.getCode = function(id, provider) {
             if(!id) return;
             $scope.provider = provider;
-            $scope.InitWeixin();
             if(!$scope.user.uid) {
                 $state.go('startupLogin');
             } else {
@@ -178,26 +176,32 @@ angular.module('defaultApp.controller').controller('startupController', [
                 StartupService['qr-code-token'].post({
                     'product_id': id
                 }, function(res) {
-                    $scope.hasToken = true;
                     $scope.token = res.token;
-
-                    StartupService['code'].post({
-                        'token': $scope.token
-                    }, function(res) {
-                        if(res.code) {
-                            $state.go('startupCode', {
-                                code: res.code
-                            });
-                        }
-                    }, function(err) {
-                        if(err.code == 2002) {
-                            $state.go('startupCompany');
-                        } else {
-                            ErrorService.alert(err);
-                        }
+                    $scope.InitWeixin();
+                    $modal.open({
+                        templateUrl: 'templates/startup/pop-startup-share.html',
+                        windowClass: 'startup-share-modal'
                     });
+
+                    /*
+                        StartupService['code'].post({
+                            'token': $scope.token
+                        }, function(res) {
+                            if(res.code) {
+                                $state.go('startupCode', {
+                                    code: res.code
+                                });
+                            }
+                        }, function(err) {
+                            ErrorService.alert(err);
+                        });
+                    */
                 }, function(err) {
-                    ErrorService.alert(err);
+                    if(err.code == 2002) {
+                        $state.go('startupCompany');
+                    } else {
+                        ErrorService.alert(err);
+                    }
                 });
             }
         };
@@ -288,7 +292,7 @@ angular.module('defaultApp.controller').controller('startupController', [
             }, 'jsonp');
         };
 
-        $scope.$watch('hasToken', function(has) {
+        $scope.$watch('token', function(has) {
             if(has) {
                  WEIXINSHARE = {
                     shareTitle: "我在“创业狂欢节”抢到“" + $scope.provider + "”的创业福利。来36氪抢不停！",
