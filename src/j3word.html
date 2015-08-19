@@ -237,6 +237,9 @@
                 _hmt.push(['_trackEvent', '按钮', '创业感言支持TA']);
                 krtracker('trackEvent', '按钮', "创业感言支持TA");
                 $('.share').css({'display': 'block'})
+                setTimeout(function(){
+                    $('.share').css({'display': 'none'})
+                }, 4000)
             })
             $('.share').on('click', function (e) {
                 $(e.currentTarget).css({'display': 'none'})
