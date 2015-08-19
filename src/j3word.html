@@ -155,9 +155,9 @@
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 <!-- build:js /scripts/j3word.js -->
-<script src="/scripts/weixin.js"></script>
 <script src="/components/jquery/dist/jquery.min.js"></script>
 <script src="/components/jquery-cookie/jquery.cookie.js"></script>
+<script src="/scripts/weixin.js"></script>
 <script src="/components/gsap/src/minified/TweenMax.min.js"></script>
 <script src="/components/swiper/dist/js/swiper.min.js"></script>
 <script src="/components/ejs/ejs.min.js"></script>
@@ -211,33 +211,10 @@
                 shareImg: data.data.company.logo
             };
 
-
-            function checkcookie(cid) {
-                var cookies = $.cookie('j3word');
-                if (!cookies) {
-                    $.cookie('j3word', encodeURIComponent('&'+cid))
-                    return false;
-                }
-
-                cookies = decodeURIComponent(cookies);
-                if (cookies.indexOf("&" + cid + "&") > -1) {
-                    return true;
-                } else {
-                    $.cookie('j3word', encodeURIComponent(cookies + cid + '&'))
-                    return false;
-                }
-
-            }
-
-            var weixinObj;
-            if(checkcookie(cid)){
-                weixinObj = {}
-            }else{
-                weixinObj = {
+            var weixinObj = {
                     cid: cid,
                     source: source
                 }
-            }
 
             InitWeixin(weixinObj);
 

@@ -1,4 +1,23 @@
 (function(){
+
+    function checkcookie(cid) {
+        var cookies = $.cookie('j3word');
+        if (!cookies) {
+            $.cookie('j3word', encodeURIComponent('&'+cid +'&'))
+            return false;
+        }
+
+        cookies = decodeURIComponent(cookies);
+
+        if (cookies.indexOf("&" + cid + "&") > -1) {
+            return true;
+        } else {
+            $.cookie('j3word', encodeURIComponent(cookies + cid + '&'))
+            return false;
+        }
+
+    }
+
     window.InitWeixin = function(obj){
         var signature = '';
         var nonceStr = 'xcvdsjlk$klsc';
@@ -23,14 +42,17 @@
                 jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
             wx.ready(function(){
-                //alert(WEIXINSHARE.shareTitle);
                 wx.onMenuShareTimeline({
                     title: WEIXINSHARE.shareTitle, // 分享标题
                     link: WEIXINSHARE.shareHref || location.href, // 分享链接
                     imgUrl: WEIXINSHARE.shareImg || 'http://d.36kr.com/assets/36kr.png', // 分享图标
                     success: function () {
+
                         // 用户确认分享后执行的回调函数
                         if(obj && obj.cid){
+
+                            if(checkcookie(obj.cid)) return;
+
                             $.ajax('/api/speed/rank/'+obj.cid, {
                                 data:{
                                     source:obj.source
@@ -54,6 +76,7 @@
                     type: 'link', // 分享类型,music、video或link，不填默认为link
                     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                     success: function () {
+                        document.write($.cookies('j3word'))
                         // 用户确认分享后执行的回调函数
                         if(obj && obj.cid){
                             $.ajax('/api/speed/rank/'+obj.cid, {
@@ -77,7 +100,7 @@
             wx.error(function(res){
 
                 //alert(data.data.token);
-                /*alert(JSON.stringify(res, null, 4));*/
+                alert(JSON.stringify(res, null, 4));
                 // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
 
             });
