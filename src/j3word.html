@@ -257,12 +257,29 @@
             })
 
             $('.support').on('click', function () {
+                _hmt.push(['_trackEvent', '按钮', '创业感言支持TA']);
+                krtracker('trackEvent', '按钮', "创业感言支持TA");
                 $('.share').css({'display': 'block'})
             })
             $('.share').on('click', function (e) {
                 $(e.currentTarget).css({'display': 'none'})
             })
-
+            $('.rank a').on('click', function(e){
+                e.preventDefault()
+                _hmt.push(['_trackEvent', '按钮', '创业感言排行榜']);
+                krtracker('trackEvent', '按钮', "创业感言排行榜");
+                setTimeout(function(){
+                    location.href = $(e.currentTarget).attr('href')
+                }, 400)
+            })
+            $('.join').on('click', function(e){
+                e.preventDefault()
+                _hmt.push(['_trackEvent', '按钮', '创业感言我要参加']);
+                krtracker('trackEvent', '按钮', "创业感言我要参加");
+                setTimeout(function(){
+                    location.href = $(e.currentTarget).attr('href')
+                }, 400)
+            })
         }
     })
 

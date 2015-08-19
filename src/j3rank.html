@@ -198,12 +198,22 @@
         }
     })
     $('.rule').on('click', function () {
+        _hmt.push(['_trackEvent', '按钮', '人气榜榜单规则']);
+        krtracker('trackEvent', '按钮', "人气榜榜单规则");
         $('.mask').css({'display': 'block'});
         $('html').css({'overflow':'hidden'})
     });
     $('.J_closepop').on('click', function(){
         $('.mask').css({'display': 'none'});
         $('html').css({'overflow':'auto'})
+    })
+    $('.footer .active').on('click', function(e){
+        e.preventDefault()
+        _hmt.push(['_trackEvent', '按钮', '人气榜报名']);
+        krtracker('trackEvent', '按钮', "人气榜报名");
+        setTimeout(function(){
+            location.href = $(e.currentTarget).attr('url')
+        }, 400)
     })
 
     _hmt.push(['_trackPageview', "/speed3/rank/page1"]);

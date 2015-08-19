@@ -188,6 +188,14 @@
                 mySwiper.slidePrev();
             })
 
+            $('.sign').on('click', function(e){
+                e.preventDefault()
+                _hmt.push(['_trackEvent', '按钮', '投资人阵容报名']);
+                krtracker('trackEvent', '按钮', "投资人阵容报名");
+                setTimeout(function(){
+                    location.href = $(e.currentTarget).attr('href')
+                }, 400)
+            })
         }
     })
 </script>
