@@ -237,7 +237,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             }
             /*项目问答数据*/
             $scope.problemData = $scope.syndicatesInfo.detail.project_qa;
-            if($scope.problemData.length){
+            if($scope.problemData && $scope.problemData.length){
                 angular.forEach($scope.problemData,function(obj,index){
                     obj.isHide = true;
                 });
