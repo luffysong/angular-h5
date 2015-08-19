@@ -201,8 +201,48 @@ angular.module('defaultApp.controller').controller('startupController', [
                         });
                     */
                 }, function(err) {
-                    if(err.code == 2002) {
+                    if(err.code == 2001) {
+                        $modal.open({
+                            templateUrl: 'templates/startup/pop-startup-error.html',
+                            windowClass: 'startup-modal',
+                            controller: [
+                                '$scope', '$modalInstance',
+                                function($scope, $modalInstance) {
+                                    $scope.errorMsg = '你已经抢过该专区内的福利啦';
+
+                                    $scope.close = function () {
+                                        $modalInstance.dismiss();
+                                    }
+                                }
+                            ],
+                            resolve: {
+                                scope: function(){
+                                    return $scope;
+                                }
+                            }
+                        });
+                    } else if(err.code == 2002) {
                         $state.go('startupCompany');
+                    } else if(err.code == 2003) {
+                        $modal.open({
+                            templateUrl: 'templates/startup/pop-startup-error.html',
+                            windowClass: 'startup-modal',
+                            controller: [
+                                '$scope', '$modalInstance',
+                                function($scope, $modalInstance) {
+                                    $scope.errorMsg = '你已经抢过3项服务啦，把机会留给更多的创业者吧！';
+
+                                    $scope.close = function () {
+                                        $modalInstance.dismiss();
+                                    }
+                                }
+                            ],
+                            resolve: {
+                                scope: function(){
+                                    return $scope;
+                                }
+                            }
+                        });
                     } else {
                         ErrorService.alert(err);
                     }
