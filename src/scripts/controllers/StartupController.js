@@ -58,7 +58,7 @@ angular.module('defaultApp.controller').controller('startupController', [
         /**
          * 创建公司 Url
          */
-        $scope.createUrl = '/#/company_create';
+        $scope.createUrl = '/m/#/company_create';
 
         /**
          * 获取服务供应商商品列表
