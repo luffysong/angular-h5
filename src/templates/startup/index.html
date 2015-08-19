@@ -3,9 +3,9 @@
         <div class="time"></div>
         <div class="logo"></div>
         <div class="desc">
-            <em>10</em> 家创业服务商 <em>28</em> 项创业福利 <em>“抢”</em> 不停！
+            <em>11</em> 家创业服务商 <em>30</em> 项创业福利 <em>“抢”</em> 不停！
         </div>
-        <a class="remind-btn" href="javascript:void(0);" ng-click="startRemind();">开抢提醒</a>
+        <a class="remind-btn" href="javascript:void(0);" ng-click="startRemind();" ng-if="status == 'before'">开抢提醒</a>
         <a class="rules" href="javascript:void(0);" ng-click="seeRules();">活动规则</a>
     </div>
 
@@ -25,11 +25,13 @@
                     <div class="item-des">{{ item.desc }}</div>
                     <div class="item-opt">
                         <a class="btn opt-btn" href="javascript:void(0);" ng-if="status == 'before'">8月20号10点开抢</a>
-                        <a class="btn opt-btn" href="javascript:void(0);" ng-if="status == 'during' && item.balance > 0" ng-click="getCode(item.id);">立即抢</a>
+                        <a class="btn opt-btn" href="javascript:void(0);" ng-if="status == 'during' && item.balance > 0" ng-click="getCode(item.id, item.server_name);">立即抢</a>
                         <a class="btn opt-btn null" href="javascript:void(0);" ng-if="status == 'during' && item.balance <= 0 && !ending">明日上午10点开抢</a>
-                        <a class="btn opt-btn all-null" href="javascript:void(0);" ng-if="(status == 'during' && item.balance <= 0 && ending) || status == 'after'">已全部抢光</a>
+                        <a class="btn opt-btn all-null" href="javascript:void(0);" ng-if="status == 'during' && item.balance <= 0 && ending">已全部抢光</a>
+                        <a class="btn opt-btn all-null" href="javascript:void(0);" ng-if="status == 'after'">活动已结束</a>
                         <span ng-if="status == 'during' && item.balance > 0">剩余{{ item.balance }}份</span>
                         <span class="null" ng-if="status == 'during' && item.balance <= 0 && !ending">今日已抢光</span>
+                        <span class="null" ng-if="status == 'during' && item.balance <= 0 && ending">已全部抢光</span>
                     </div>
                 </div>
             </div>

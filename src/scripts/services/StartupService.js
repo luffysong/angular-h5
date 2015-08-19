@@ -34,8 +34,8 @@ angular.module('defaultApp.service').service('StartupService', [
                 }
             },
             code: {
-                get: {
-                    method: 'GET',
+                post: {
+                    method: 'POST',
                     transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
                         return data;
                     })

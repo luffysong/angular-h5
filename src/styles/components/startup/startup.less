@@ -4,7 +4,7 @@
     margin: 0 auto;
 
     .section-intro {
-        height: 250px;
+        max-height: 250px;
         background-color: #1b0a3e;
         background-image: url(images/startup/bg.png);
         background-repeat: no-repeat;
@@ -158,7 +158,6 @@
             margin: 5px auto;
             color: #fff;
             font-size: 1.6rem;
-            white-space: nowrap;
         }
 
         .item-des {
@@ -256,7 +255,6 @@
 }
 
 .startup-code,
-.startup-share,
 .startup-company,
 .startup-login {
     color: #333;
@@ -339,4 +337,16 @@
      &:focus, &:active {
          color: #008df2;
      }
+}
+
+.startup-share-modal {
+    background-color: rgba(0,0,0,.7);
+
+    .modal-content {
+        margin-top: 280px;
+        border-radius: 0;
+        background-color: transparent;
+        color: #fff;
+        font-size: 1.6rem;
+    }
 }

@@ -220,7 +220,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
      * 创业节
      */
     $stateProvider.state('startup', {
-        'url': '/startup?token',
+        'url': '/startup',
         'templateUrl': 'templates/startup/index.html',
         'controller': 'startupController'
     });
@@ -237,15 +237,15 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         'controller': 'startupController'
     });
 
-    $stateProvider.state('startupShare', {
-        'url': '/startup/share',
-        'templateUrl': 'templates/startup/share.html',
+    $stateProvider.state('startupCode', {
+        'url': '/startup/code?code',
+        'templateUrl': 'templates/startup/code.html',
         'controller': 'startupController'
     });
 
-    $stateProvider.state('startupCode', {
-        'url': '/startup/code',
-        'templateUrl': 'templates/startup/code.html',
+    $stateProvider.state('startupWithToken', {
+        'url': '/startup/{token}?type&id',
+        'templateUrl': 'templates/startup/index.html',
         'controller': 'startupController'
     });
 });
