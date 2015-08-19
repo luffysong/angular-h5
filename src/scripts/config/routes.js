@@ -244,7 +244,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('startupWithToken', {
-        'url': '/startup/{token}?provider',
+        'url': '/startup/{token}?type&id',
         'templateUrl': 'templates/startup/index.html',
         'controller': 'startupController'
     });

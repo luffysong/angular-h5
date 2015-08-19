@@ -15,8 +15,13 @@ angular.module('defaultApp.controller').controller('startupController', [
             $scope.code = $stateParams.code;
         }
 
-        if(!!$stateParams.provider) {
-            $scope.provider = $stateParams.provider;
+        $scope.product = {};
+        if(!!$stateParams.type) {
+            $scope.product.type = $stateParams.type;
+        }
+
+        if(!!$stateParams.id) {
+            $scope.product.id = $stateParams.id;
         }
 
         /**
@@ -85,12 +90,18 @@ angular.module('defaultApp.controller').controller('startupController', [
                 }
 
                 $scope.listData = res.list;
+
+                if($stateParams.type && $stateParams.id) {
+                    $scope.product.provider = $scope.listData[$scope.product.type]['list'][$scope.product.id - 1].server_name;
+                    console.log($scope.product.provider);
+                }
             }, function(err) {
                 ErrorService.alert(err);
             });
         };
 
         $scope.getList();
+
 
         /**
          * 开抢提醒
@@ -172,7 +183,7 @@ angular.module('defaultApp.controller').controller('startupController', [
          */
         $scope.getCode = function(id, provider) {
             if(!id) return;
-            $scope.provider = provider;
+            $scope.product.provider = provider;
             if(!$scope.user.uid) {
                 $state.go('startupLogin');
             } else {
@@ -339,7 +350,7 @@ angular.module('defaultApp.controller').controller('startupController', [
         $scope.$watch('provider', function(has) {
             if(has) {
                  WEIXINSHARE = {
-                    shareTitle: "我在“创业狂欢节”抢到“" + $scope.provider + "”的创业福利。来36氪抢不停！",
+                    shareTitle: "我在“创业狂欢节”抢到“" + $scope.product.provider + "”的创业福利。来36氪抢不停！",
                     shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
                     shareImg: 'http://krplus-pic.b0.upaiyun.com/201508/18/362db0f78c03d5575030a684f390f1ad.jpg',
                     shareLink: 'https://rong.36kr.com/#/startup'
