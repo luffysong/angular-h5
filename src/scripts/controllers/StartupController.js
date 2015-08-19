@@ -13,8 +13,10 @@ angular.module('defaultApp.controller').controller('startupController', [
                 templateUrl: 'templates/startup/pop-startup-rules.html',
                 windowClass: 'startup-modal',
                 controller: [
-                    '$scope', '$modalInstance',
-                    function($scope, $modalInstance) {
+                    '$scope', '$modalInstance', 'scope',
+                    function($scope, $modalInstance, scope) {
+                        $scope.createUrl = scope.createUrl;
+
                         $scope.close = function () {
                             $modalInstance.dismiss();
                         }
