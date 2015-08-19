@@ -93,7 +93,6 @@ angular.module('defaultApp.controller').controller('startupController', [
 
                 if($stateParams.type && $stateParams.id) {
                     $scope.product.provider = $scope.listData[$scope.product.type]['list'][$scope.product.id - 1].server_name;
-                    console.log($scope.product.provider);
                 }
             }, function(err) {
                 ErrorService.alert(err);
@@ -192,7 +191,6 @@ angular.module('defaultApp.controller').controller('startupController', [
                     'product_id': id
                 }, function(res) {
                     $scope.token = res.token;
-                    $scope.InitWeixin();
                     $modal.open({
                         templateUrl: 'templates/startup/pop-startup-share.html',
                         windowClass: 'startup-share-modal'
