@@ -92,7 +92,14 @@ angular.module('defaultApp.controller').controller('startupController', [
                 $scope.listData = res.list;
 
                 if($stateParams.type && $stateParams.id) {
-                    $scope.product.provider = $scope.listData[$scope.product.type]['list'][$scope.product.id - 1].server_name;
+                    /*
+                     */
+                    var typedList = $scope.listData[$scope.product.type]['list'];
+                    for(i in typedList) {
+                        if(typedList[i].id == $stateParams.id) {
+                            $scope.product.provider = typedList[i].server_name;
+                        }
+                    }
                 }
             }, function(err) {
                 ErrorService.alert(err);
@@ -310,6 +317,7 @@ angular.module('defaultApp.controller').controller('startupController', [
                 wx.ready(function() {
                     wx.onMenuShareTimeline({
                         title: WEIXINSHARE.shareTitle, // 分享标题
+                        desc: WEIXINSHARE.shareDesc, // 分享描述
                         link: WEIXINSHARE.shareLink || location.href, // 分享链接
                         imgUrl: WEIXINSHARE.shareImg || 'http://d.36kr.com/assets/36kr.png', // 分享图标
                         success: function () {
