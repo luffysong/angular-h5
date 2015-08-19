@@ -27,9 +27,11 @@
                         <a class="btn opt-btn" href="javascript:void(0);" ng-if="status == 'before'">8月20号10点开抢</a>
                         <a class="btn opt-btn" href="javascript:void(0);" ng-if="status == 'during' && item.balance > 0" ng-click="getCode(item.id, item.server_name);">立即抢</a>
                         <a class="btn opt-btn null" href="javascript:void(0);" ng-if="status == 'during' && item.balance <= 0 && !ending">明日上午10点开抢</a>
-                        <a class="btn opt-btn all-null" href="javascript:void(0);" ng-if="(status == 'during' && item.balance <= 0 && ending) || status == 'after'">已全部抢光</a>
+                        <a class="btn opt-btn all-null" href="javascript:void(0);" ng-if="status == 'during' && item.balance <= 0 && ending">已全部抢光</a>
+                        <a class="btn opt-btn all-null" href="javascript:void(0);" ng-if="status == 'after'">活动已结束</a>
                         <span ng-if="status == 'during' && item.balance > 0">剩余{{ item.balance }}份</span>
                         <span class="null" ng-if="status == 'during' && item.balance <= 0 && !ending">今日已抢光</span>
+                        <span class="null" ng-if="status == 'during' && item.balance <= 0 && ending">已全部抢光</span>
                     </div>
                 </div>
             </div>
