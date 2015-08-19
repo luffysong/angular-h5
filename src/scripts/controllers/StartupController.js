@@ -203,8 +203,6 @@ angular.module('defaultApp.controller').controller('startupController', [
                         }, function(err) {
                             ErrorService.alert(err);
                         });
-
-                        $scope.InitWeixin();
                     }
                 }, function(err) {
                     console.log(err);
@@ -216,7 +214,7 @@ angular.module('defaultApp.controller').controller('startupController', [
          * 微信分享
          */
         document.title = "创业狂欢节";
-
+        $scope.InitWeixin();
         $scope.$watch('hasToken', function(has) {
             if(has) {
                  WEIXINSHARE = {
