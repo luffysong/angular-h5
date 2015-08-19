@@ -3,8 +3,6 @@ var angular = require('angular');
 angular.module('defaultApp.controller').controller('startupController', [
     '$scope', 'StartupService', 'ErrorService', 'UserService', 'CompanyService', '$modal', '$state', 'notify', '$stateParams',
     function($scope, StartupService, ErrorService, UserService, CompanyService, $modal, $state, notify, $stateParams) {
-        $scope.floors = ['招聘专区', '推广专区', '注册、法务专区', '云服务专区', '创业课专区'];
-
         if(!!$stateParams.token) {
             $scope.hasToken = true;
             $scope.token = $stateParams.token;
@@ -12,6 +10,10 @@ angular.module('defaultApp.controller').controller('startupController', [
                 templateUrl: 'templates/startup/pop-startup-share.html',
                 windowClass: 'startup-share-modal'
             });
+        }
+
+        if(!!$stateParams.code) {
+            $scope.code = $stateParams.code;
         }
 
         /**
@@ -43,6 +45,7 @@ angular.module('defaultApp.controller').controller('startupController', [
          * 用户信息
          */
         $scope.user = {};
+        // 获取 UID
         $scope.user.uid = UserService.getUID();
         // 获取用户是否有手机号
         UserService.getPhone(function(data) {
@@ -72,9 +75,6 @@ angular.module('defaultApp.controller').controller('startupController', [
                 } else {
                     $scope.status = 'during';
                 }
-
-                // TODO: fix this
-                $scope.status = 'during';
 
                 /* 活动是否即将结束 */
                 if(now.getDate() == endTime.getDate()) {
@@ -186,34 +186,28 @@ angular.module('defaultApp.controller').controller('startupController', [
                     console.log(err);
                 });
 
-                //TODO: fix this
-                if($scope.companyStatus) {
+                if(!$scope.companyStatus) {
                     $state.go('startupCompany');
                 } else {
                     /* 获取token */
-                    // TODO: recover this
-                    /*
                     StartupService['qr-code-token'].post({
                         'product_id': id
                     }, function(res) {
                         $scope.hasToken = true;
                         $scope.token = res.token;
-                        $modal.open({
-                            templateUrl: 'templates/startup/pop-startup-share.html',
-                            windowClass: 'startup-share-modal'
+
+                        StartupService['code'].post({
+                            'token': $scope.token
+                        }, function(res) {
+                            if(res.code) {
+                                $state.go('startupCode', {
+                                    code: res.code
+                                });
+                            }
+                        }, function(err) {
+                            ErrorService.alert(err);
                         });
                     }, function(err) {
-                        ErrorService.alert(err);
-                    });
-                    */
-
-                    // TODO: delete this
-                    StartupService['code'].post({
-                        'token': $scope.token
-                    }, function(res) {
-                        console.log(res);
-                    }, function(err) {
-                        console.log(err);
                         ErrorService.alert(err);
                     });
 
@@ -278,9 +272,13 @@ angular.module('defaultApp.controller').controller('startupController', [
                             StartupService['code'].post({
                                 'token': $scope.token
                             }, function(res) {
-                                console.log(res);
+                                if(res.code) {
+                                    $state.go('startupCode', {
+                                        code: res.code
+                                    });
+                                }
                             }, function(err) {
-                                console.log(err);
+                                ErrorService.alert(err);
                             });
                         },
                         cancel: function () {
@@ -297,6 +295,18 @@ angular.module('defaultApp.controller').controller('startupController', [
                         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                         success: function () {
                             // 用户确认分享后执行的回调函数
+                            StartupService['code'].post({
+                                'token': $scope.token
+                            }, function(res) {
+                                if(res.code) {
+                                    $state.go('startupCode', {
+                                        code: res.code
+                                    });
+                                }
+                            }, function(err) {
+                                ErrorService.alert(err);
+                            });
+
                         },
                         cancel: function () {
                             // 用户取消分享后执行的回调函数
