@@ -152,6 +152,11 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         }
         /*项目问答点击展开收起*/
         $scope.toggleQuestion = function(index){
+            angular.forEach($scope.problemData,function(obj,i){
+                if(i != index){
+                    obj.isHide = true;
+                }
+            });
             $scope.problemData[index].isHide = !$scope.problemData[index].isHide;
         }
 
