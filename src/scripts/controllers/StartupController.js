@@ -365,8 +365,8 @@ angular.module('defaultApp.controller').controller('startupController', [
             }, 'jsonp');
         };
 
-        $scope.$watch('provider', function(has) {
-            if(has) {
+        $scope.$watch('provider', function() {
+            if($scope.provider) {
                  WEIXINSHARE = {
                     shareTitle: "我在“创业狂欢节”抢到“" + $scope.product.provider + "”的创业福利。来36氪抢不停！",
                     shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
