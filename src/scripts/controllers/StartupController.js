@@ -179,40 +179,36 @@ angular.module('defaultApp.controller').controller('startupController', [
                 CompanyService.getManaged({
 
                 }, function(res) {
-                    if(res.code == 0 && res.data) {
-                        $scope.companyStatus = (res.data.length > 0);
+                    if(res.data.length <= 0) {
+                        $state.go('startupCompany');
+                    } else {
+                        /* 获取token */
+                        StartupService['qr-code-token'].post({
+                            'product_id': id
+                        }, function(res) {
+                            $scope.hasToken = true;
+                            $scope.token = res.token;
+
+                            StartupService['code'].post({
+                                'token': $scope.token
+                            }, function(res) {
+                                if(res.code) {
+                                    $state.go('startupCode', {
+                                        code: res.code
+                                    });
+                                }
+                            }, function(err) {
+                                ErrorService.alert(err);
+                            });
+                        }, function(err) {
+                            ErrorService.alert(err);
+                        });
+
+                        $scope.InitWeixin();
                     }
                 }, function(err) {
                     console.log(err);
                 });
-
-                if(!$scope.companyStatus) {
-                    $state.go('startupCompany');
-                } else {
-                    /* 获取token */
-                    StartupService['qr-code-token'].post({
-                        'product_id': id
-                    }, function(res) {
-                        $scope.hasToken = true;
-                        $scope.token = res.token;
-
-                        StartupService['code'].post({
-                            'token': $scope.token
-                        }, function(res) {
-                            if(res.code) {
-                                $state.go('startupCode', {
-                                    code: res.code
-                                });
-                            }
-                        }, function(err) {
-                            ErrorService.alert(err);
-                        });
-                    }, function(err) {
-                        ErrorService.alert(err);
-                    });
-
-                    $scope.InitWeixin();
-                }
             }
         };
 
