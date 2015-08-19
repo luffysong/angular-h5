@@ -133,8 +133,8 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         }
         /*播放器种类及固定url*/
         var player = {
-            "youku":{
-                "url":"http://player.youku.com/embed/"
+            "qq":{
+                "url":"//v.qq.com/iframe/player.html?vid="
             }
         };
         /*视频链接处理*/
@@ -142,11 +142,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             var vid = "";
             link = link.split("?")[0];
             var arr = link.split("/");
-            var text = arr[arr.length-1].split(".")[0];
-            if(text.indexOf("id") >= 0){
-                vid = text.split("_")[1];
-            }
-            console.log(vid);
+            vid = arr[arr.length-1].split(".")[0];
             Object.keys(player).forEach(function(key){
                 if(link.indexOf(key) >= 0){
                     link = player[key].url+vid;
