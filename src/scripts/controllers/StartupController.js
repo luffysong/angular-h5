@@ -214,7 +214,6 @@ angular.module('defaultApp.controller').controller('startupController', [
          * 微信分享
          */
         document.title = "创业狂欢节";
-        $scope.InitWeixin();
         $scope.$watch('hasToken', function(has) {
             if(has) {
                  WEIXINSHARE = {
@@ -313,5 +312,7 @@ angular.module('defaultApp.controller').controller('startupController', [
                 });
             }, 'jsonp');
         };
+
+        $scope.InitWeixin();
     }
 ]);
