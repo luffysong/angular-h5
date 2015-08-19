@@ -292,7 +292,7 @@ angular.module('defaultApp.controller').controller('startupController', [
             }, 'jsonp');
         };
 
-        $scope.$watch('token', function(has) {
+        $scope.$watch('token', function() {
             if(!!$scope.provider) {
                  WEIXINSHARE = {
                     shareTitle: "我在“创业狂欢节”抢到“" + $scope.provider + "”的创业福利。来36氪抢不停！",
