@@ -15,6 +15,10 @@ angular.module('defaultApp.controller').controller('startupController', [
             $scope.code = $stateParams.code;
         }
 
+        if(!!$stateParams.provider) {
+            $scope.provider = $stateParams.provider;
+        }
+
         /**
          * 查看活动规则
          */
@@ -292,8 +296,8 @@ angular.module('defaultApp.controller').controller('startupController', [
             }, 'jsonp');
         };
 
-        $scope.$watch('token', function() {
-            if(!!$scope.provider) {
+        $scope.$watch('provider', function(has) {
+            if(has) {
                  WEIXINSHARE = {
                     shareTitle: "我在“创业狂欢节”抢到“" + $scope.provider + "”的创业福利。来36氪抢不停！",
                     shareDesc: "8.18-8.25创业狂欢节，来36氪抢不停。",
