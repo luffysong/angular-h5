@@ -43,7 +43,7 @@ angular.module('defaultApp.controller').controller('startupController', [
         /**
          * 创建公司 Url
          */
-        $scope.createUrl = '/user/login?from=' + encodeURIComponent(location.protocol + '//' + location.host + '/#/company/create');
+        $scope.createUrl = '/user/login?from=' + encodeURIComponent(location.protocol + '//' + location.host + '/#/company_create');
 
         /**
          * 获取服务供应商商品列表
