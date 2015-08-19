@@ -148,6 +148,13 @@
         }
     });
 
+    // 随机数组
+    function randomArr(arr) {
+        return arr.sort(function () {
+            return 0.5 - Math.random()
+        })
+    }
+
     _hmt.push(['_trackPageview', "/speed3/investor/page1"]);
     krtracker('trackPageView', "/speed3/investor/page1");
 
@@ -161,7 +168,7 @@
             };
 
             InitWeixin();
-            var arr = data.data.investors,
+            var arr = randomArr(data.data.investors),
                     newArr = [];
             while (arr.length > 3) {
                 newArr.push(arr.splice(0, 3));
