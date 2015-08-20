@@ -321,18 +321,20 @@ angular.module('defaultApp.controller').controller('startupController', [
                         link: WEIXINSHARE.shareLink || location.href, // 分享链接
                         imgUrl: WEIXINSHARE.shareImg || 'http://d.36kr.com/assets/36kr.png', // 分享图标
                         success: function () {
-                            // 用户确认分享后执行的回调函数
-                            StartupService['code'].post({
-                                'token': $scope.token
-                            }, function(res) {
-                                if(res.code) {
-                                    $state.go('startupCode', {
-                                        code: res.code
-                                    });
-                                }
-                            }, function(err) {
-                                ErrorService.alert(err);
-                            });
+                            if($scope.status == 'during' && $scope.token) {
+                                // 用户确认分享后执行的回调函数
+                                StartupService['code'].post({
+                                    'token': $scope.token
+                                }, function(res) {
+                                    if(res.code) {
+                                        $state.go('startupCode', {
+                                            code: res.code
+                                        });
+                                    }
+                                }, function(err) {
+                                    ErrorService.alert(err);
+                                });
+                            }
                         },
                         cancel: function () {
                             // 用户取消分享后执行的回调函数
@@ -347,19 +349,20 @@ angular.module('defaultApp.controller').controller('startupController', [
                         type: 'link', // 分享类型,music、video或link，不填默认为link
                         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                         success: function () {
-                            // 用户确认分享后执行的回调函数
-                            StartupService['code'].post({
-                                'token': $scope.token
-                            }, function(res) {
-                                if(res.code) {
-                                    $state.go('startupCode', {
-                                        code: res.code
-                                    });
-                                }
-                            }, function(err) {
-                                ErrorService.alert(err);
-                            });
-
+                            if($scope.status == 'during' && $scope.token) {
+                                // 用户确认分享后执行的回调函数
+                                StartupService['code'].post({
+                                    'token': $scope.token
+                                }, function(res) {
+                                    if(res.code) {
+                                        $state.go('startupCode', {
+                                            code: res.code
+                                        });
+                                    }
+                                }, function(err) {
+                                    ErrorService.alert(err);
+                                });
+                            }
                         },
                         cancel: function () {
                             // 用户取消分享后执行的回调函数
