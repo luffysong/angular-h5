@@ -1,0 +1,45 @@
+<div class="syndicates-desire">
+    <div class="desire-rule"></div>
+    <div class="desire-nav">
+        <div class="nav-content">
+            <select class="company-type left" ng-options="c.id as c.desc for c in industryData" ng-change="industryChange()" ng-model="focusIndustry">
+                <i class="triangle"></i>
+                <option value="">全部公司</option>
+            </select>
+            <div class="company-type center" ng-click="sort('time')">
+                按时间排序
+            </div>
+            <div class="company-type right" ng-click="sort('hot')">
+                按热度排序
+            </div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="搜索所属的行业" ng-model="keyword" ng-keydown="enterWord($event)">
+        </div>
+    </div>
+    <div class="desire-content">
+        <div class="desire-company" ui-sref="syndicatesDesireDetail({id:item.id})" ng-repeat="item in companyData" ng-class="{'normal':$index % 3 == 0 && $index != 0}">
+                <span class="company-logo" ng-style="{'background-image':'url(\'{{item.company.logo}}\')'}"></span>
+                <!--<span class="praise-add" ng-class="{'showPraise':item.isPraise}">+{{point}}</span>-->
+                <div class="center">
+                    <section class="company-name">{{item.company_name}}</section>
+                    <section class="company-intro">{{item.company.brief}}</section>
+                </div>
+                <div class="right">
+                    <section class="company-num">
+                        <span class="icon-fire"></span>
+                        {{item.counter}}
+                    </section>
+                    <a href="" class="praise-btn" ng-click="$event.stopPropagation();praise($index,item.id)">
+                        <span class="icon-like"></span>
+                        赞
+                    </a>
+                </div>
+        </div>
+        <div ng-include="'templates/syndicates/desire/null.html'" ng-if="!companyData.length"></div>
+    </div>
+    <div class="load-more" ng-click="loadMore()" ng-show="totalCount > pageSize">加载更多</div>
+    <!--没有数据-->
+
+</div>
+

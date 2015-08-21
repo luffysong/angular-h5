@@ -12,7 +12,8 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
             'model':[
                 'crowd-funding',
                 'cf-trade',
-                'payment'
+                'payment',
+                'activity'
             ]
         }, {
             'crowd-funding': {
@@ -61,6 +62,20 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
                 }
             },
             'payment':{
+                get: {
+                    method: 'GET',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
+                        return res;
+                    })
+                },
+                put:{
+                    method: 'PUT',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
+                        return res;
+                    })
+                }
+            },
+            'activity':{
                 get: {
                     method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
