@@ -266,6 +266,12 @@
                     type : 'GET',
                     success : function(data){
                         alert(data)
+                    },
+                    error : function(){
+                        alert('err')
+                    },
+                    complete : function(){
+                        alert('complete')
                     }
                 })
 
