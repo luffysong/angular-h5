@@ -261,24 +261,33 @@
                 _hmt.push(['_trackEvent', '按钮', '创业感言支持TA']);
                 krtracker('trackEvent', '按钮', "创业感言支持TA");
 
-                if(checkcookie(weixinObj.cid)) {
-                    $('.share').css({'display': 'block'})
-                    setTimeout(function(){
-                        $('.share').css({'display': 'none'})
-                    }, 4000)
 
-                    return;
-                };
-
-                $.ajax('/api/speed/rank/'+weixinObj.cid, {
-                    data:{
-                        source:weixinObj.source
-                    },
-                    type : 'PUT',
-                    success:function(){
-                        location.reload();
+                $.ajax('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&redirect_uri=http%3A%2F%2Frongtest3.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&response_type=code&scope=snsapi_base&state='+weixinObj.cid+'#wechat_redirect', {
+                    type : 'GET',
+                    success : function(data){
+                        alert(data)
                     }
                 })
+
+
+//                if(checkcookie(weixinObj.cid)) {
+//                    $('.share').css({'display': 'block'})
+//                    setTimeout(function(){
+//                        $('.share').css({'display': 'none'})
+//                    }, 4000)
+//
+//                    return;
+//                };
+//
+//                $.ajax('/api/speed/rank/'+weixinObj.cid, {
+//                    data:{
+//                        source:weixinObj.source
+//                    },
+//                    type : 'PUT',
+//                    success:function(){
+//                        location.reload();
+//                    }
+//                })
 
 
 
