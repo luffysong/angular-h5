@@ -226,10 +226,14 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
             });
         }
         /*按回车键查询*/
-        $scope.enterWord = function(event){
+        /*$scope.enterWord = function(event){
+            alert(event.keyCode);
             if(event.keyCode == 13){
                 $scope.searchData();
             }
+        }*/
+        $scope.submit = function(){
+            $scope.searchData();
         }
         /*根据url匹配查询条件*/
         $scope.urlLoad = function(){

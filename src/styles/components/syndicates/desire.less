@@ -96,12 +96,22 @@
             }
         }
         .search-bar {
+            position: relative;
             height: 41px;
             overflow: hidden;
             white-space: nowrap;
             word-spacing: 0;
             padding: 8px;
             background-color: #f3f5f7;
+            .icon-search2 {
+                position: absolute;
+                top: 50%;
+                transform: translate(0,-50%);
+                left: 50%;
+                margin-left: -65px;
+                color: #ccc;
+                font-size: 18px;
+            }
             input {
                 width: 100%;
                 height: 25px;
@@ -116,6 +126,9 @@
                 font-size: 13px;
                 outline: 0;
                 text-align: center;
+                &::-webkit-input-placeholder {
+                    color: #ccc;
+                }
             }
         }
     }
