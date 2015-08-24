@@ -9,6 +9,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
         document.title = "我要上众筹";
         $scope.cityData = DictionaryService.getLocation();
         $scope.industryData = DictionaryService.getDict("CompanyIndustry");
+        $scope.isWeiXin = /MicroMessenger/gi.test(navigator.userAgent) ? true : false;
         /*处理地区数据*/
         $scope.handleCity = function(data){
             angular.forEach($scope.cityData,function(obj,index){
@@ -64,6 +65,11 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
                             controller: [
                                 '$scope', '$modalInstance','scope',
                                 function ($scope, $modalInstance, scope) {
+                                    $scope.isWeiXin = scope.isWeiXin;
+                                    $scope.wxShare = function(){
+                                        scope.showShade = true;
+                                        $("body").css("overflow","hidden");
+                                    }
                                     $scope.cancel =  function(){
                                         $modalInstance.dismiss();
                                     }
@@ -109,6 +115,11 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
                                 controller: [
                                     '$scope', '$modalInstance','scope',
                                     function ($scope, $modalInstance, scope) {
+                                        $scope.isWeiXin = scope.isWeiXin;
+                                        $scope.wxShare = function(){
+                                            scope.showShade = true;
+                                            $("body").css("overflow","hidden");
+                                        }
                                         $scope.cancel =  function(){
                                             $modalInstance.dismiss();
                                         }
@@ -165,6 +176,12 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
             console.log($scope.companyDetail);
             ErrorService.alert(err);
         });
-
+        window.WEIXINSHARE = {
+            shareTitle: "我要上众筹",
+            shareDesc: "我要上众筹",
+            shareImg: "http://krplus-pic.b0.upaiyun.com/201508/04182621/1c55d99b971a6c0c.jpg",
+            shareLink: location.href
+        };
+        InitWeixin();
 
     });

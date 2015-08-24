@@ -2,7 +2,7 @@
     <span class="icon-del" ng-click="cancel()"></span>
     <section class="modal-title orange">恭喜你为心仪公司热力值+30！</section>
     <section class="modal-content thirty-point">这么好的公司，不怕别人知道，分享我让更多人送我上众筹！</section>
-    <a class="share-icon icon-wechat" href="" ></a>
+    <a class="share-icon icon-wechat" href="" ng-show="isWeiXin" ng-click="wxShare()"></a>
     <a class="share-icon icon-qq" href="" ></a>
     <a class="share-icon icon-weibo" href=""></a>
 </div>

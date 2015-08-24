@@ -15,18 +15,26 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         $scope.industryData = DictionaryService.getDict("CompanyIndustry");
         $scope.qrcodeUrl = encodeURIComponent("http://" + location.hostname + "/m/#/zhongchouDesire");
         $scope.sort = function(way){
+            var params = {};
+            angular.forEach($stateParams,function(val,key){
+                if(val){
+                    params[key] = val;
+                }
+            });
             /*按时间排序*/
             if(way == "time"){
-                $scope.loadData({
+                params = angular.extend(params,{
                     orderby:"apply_time"
                 });
+                $scope.loadData(params);
             }
             /*按热度排序*/
             else{
-                $scope.loadData({
+                params = angular.extend(params,{
                     orderby:"counter"
                 });
             }
+            $scope.loadData(params);
         };
         /*打开分享*/
         $scope.showShare = function(index){
@@ -35,7 +43,8 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         /*根据公司所在领域查询*/
         $scope.industryChange = function(){
             $scope.loadData({
-                "industry":$scope.focusIndustry
+                "industry":$scope.focusIndustry,
+                company_name:""
             });
             //console.log($scope.focusIndustry);
             //$state.go("syndicatesDesire",{
@@ -215,14 +224,14 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                 }
 
             },function(err){
-                alert(JSON.stringify(err));
                 ErrorService.alert(err);
             });
         }
         /*按公司名查询*/
         $scope.searchData = function(){
             $state.go("syndicatesDesire",{
-                company_name:$scope.keyword
+                company_name:$scope.keyword,
+                industry:""
             });
         }
         /*按回车键查询*/
