@@ -1,0 +1,41 @@
+<div class="syndicates-desire">
+    <div class="desire-detail">
+        <div>
+            <img class="company-logo" ng-src="{{companyDetail.company.logo}}" />
+            <section class="company-name">{{companyDetail.company_name}}</section>
+        </div>
+    </div>
+    <div class="detail-info">
+        <section class="company-intro">{{companyDetail.company.brief}}</section>
+        <div class="address">
+            <span class="icons icon-h5-location"></span>
+            {{companyDetail.company.location}}
+        </div>
+        <a class="website" target="_blank" href="{{companyDetail.company.website}}">
+            <span class="icons icon-link"></span>
+            {{companyDetail.company.website}}
+        </a>
+        <div class="industry">
+            <span class="icons icon-tag"></span>
+            {{companyDetail.industry | dict_CompanyIndustry}}
+        </div>
+        <a href="" class="praise-btn" ng-click="praise()">
+            <span class="icon-like"></span>
+            赞 （{{companyDetail.counter}}）
+        </a>
+        <p class="text-center">
+            分享：
+            <a class="share-icon icon-wechat" href="" ng-click="wxShare()"></a><a class="share-icon icon-qq" href=""></a><a class="share-icon icon-weibo" href=""></a>
+        </p>
+        <section class="cancel-list">
+            <a href="" ui-sref="syndicatesDesire()">＜返回我要上众筹</a>
+        </section>
+    </div>
+</div>
+<div class="share-layer" ng-show="showShade" ng-click="closeShade()">
+    <div class="guide-arrow"></div>
+    <div class="guide-tip">
+        点击右上角
+        “<span class="point"></span><span class="point"></span><span class="point"></span>”的分享
+    </div>
+</div>
