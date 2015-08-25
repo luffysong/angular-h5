@@ -11,6 +11,27 @@
         background-color: #fff;
         .nav-content {
             .clearfix();
+            .select-industry {
+                position: relative;
+                width: 33.33%;
+                float: left;
+                height: 45px;
+                line-height: 45px;
+                text-align: left;
+                outline: 0;
+                border: 0;
+                background: #fff;
+                color: #888888;
+                padding-left: 15px;
+                .icon-gototop {
+                    position: absolute;
+                    font-size: 20px;
+                    left: 75px;
+                    top: 50%;
+                    margin-top: -10px;
+                    transform: rotate(180deg);
+                }
+            }
             .company-type {
                 position: relative;
                 width: 33.33%;
@@ -23,6 +44,10 @@
                 background: #fff;
                 &.left {
                     padding-left: 15px;
+                    position: absolute;
+                    left: 0;
+                    width: 100%;
+                    opacity: 0;
                 }
                 &.right {
                     text-align: right;
@@ -216,6 +241,7 @@
         height: 230px;
         -webkit-box-align: center;
         -webkit-box-pack: center;
+        background: #f0f0f0;
         .no-data-icon {
             position: relative;
             top: -5px;

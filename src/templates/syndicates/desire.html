@@ -2,10 +2,15 @@
     <div class="desire-rule"></div>
     <div class="desire-nav">
         <div class="nav-content">
-            <select class="company-type left" ng-options="c.id as c.desc for c in industryData" ng-change="industryChange()" ng-model="focusIndustry">
-                <i class="triangle"></i>
-                <option value="">全部公司</option>
-            </select>
+            <a class="select-industry"  href="">
+                <span class="icon-gototop"></span>
+                {{focusIndustry ? focusIndustry : "全部公司"}}
+                <select class="company-type left" ng-options="c.id as c.desc for c in industryData" ng-change="industryChange()" ng-model="focusIndustry">
+                    <i class="triangle"></i>
+                    <option value="">全部公司</option>
+                </select>
+            </a>
+
             <div class="company-type center" ng-click="sort('time')">
                 按时间排序
             </div>
