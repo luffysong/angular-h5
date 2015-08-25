@@ -80,7 +80,7 @@
             <h4>上榜规则：</h4>
             <ul>
                 <li>1、报名活动后，使用电脑访问 <em>rong.36kr.com</em>，提交极速融资信息，即可获得你的公司专属页面。</li>
-                <li>2、将公司页面分享到朋友圈，邀请你的员工、亲友团转发，即可获得支持。每个公司只能被一个用户支持一次，多次分享支持人数不会累加。</li>
+                <li>2、打开页面，点击支持TA即可获得支持。每个公司只能被同一个用户支持一次。</li>
                 <li>3、榜单按支持人数实时更新，只显示Top200创业公司。支持人数相同时，时间先达到支持人数的公司排名靠前。</li>
             </ul>
             <h4>奖励说明：</h4>
@@ -144,9 +144,9 @@
         </div>
     </li>
     <% }else{ %>
-    <li class="num20 clearfix J_company">
+    <li class="num20 clearfix J_company" data-cid="<%= data[i].cid %>">
         <div>
-            <div class="num" data-num="<%=i+1%>" <%= data[i].cid %>>
+            <div class="num" data-num="<%=i+1%>">
                 <img src="styles/images/jisu3/top4.png" alt=""/>
             </div>
             <div class="img">

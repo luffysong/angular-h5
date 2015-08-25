@@ -71,7 +71,18 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
-
+    /*我要上众筹活动*/
+    $stateProvider.state('syndicatesDesire', {
+        url: '/zhongchouDesire',
+        templateUrl: 'templates/syndicates/desire.html',
+        controller: 'syndicatesDesireController'
+    });
+    /*我要上众筹活动公司详情*/
+    $stateProvider.state('syndicatesDesireDetail', {
+        url: '/zhongchouDesireDetail?id=',
+        templateUrl: 'templates/syndicates/desire/detail.html',
+        controller: 'syndicatesDesireDetailController'
+    });
     /*众筹首页*/
     $stateProvider.state('syndicates', {
         url: '/zhongchou',

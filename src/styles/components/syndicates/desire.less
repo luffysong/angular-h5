@@ -1,0 +1,496 @@
+.syndicates-desire {
+    background-color: #f3f5f7;
+    .desire-rule {
+        height: 135px;
+        background: url(images/zc-rule.jpg) no-repeat center;
+        background-size: 100% auto;
+    }
+    .desire-nav {
+        width: 100%;
+        height: auto;
+        background-color: #fff;
+        .nav-content {
+            .clearfix();
+            .company-type {
+                position: relative;
+                width: 33.33%;
+                float: left;
+                height: 45px;
+                line-height: 45px;
+                text-align: left;
+                outline: 0;
+                border: 0;
+                background: #fff;
+                &.left {
+                    padding-left: 15px;
+                }
+                &.right {
+                    text-align: right;
+                    padding-right: 15px;
+                }
+                &.center {
+                    text-align: center;
+                }
+                .triangle {
+                    position: absolute;
+                    display: inline-block;
+                    width: 0;
+                    height: 0;
+                    border-width: 6px;
+                    border-style: solid;
+                    border-color: #999999 transparent transparent;
+                    top: 50%;
+                    margin-top: -3px;
+                    left: 75px;
+                }
+                &:hover .type-detail{
+                    transform: scale(1);
+                    visibility: visible;
+                    z-index: 9;
+                }
+                .type-detail {
+                    position: absolute;
+                    width: 150px;
+                    top: 60px;
+                    left: -10px;
+                    background: #ffffff;
+                    border: solid 1px #ddd;
+                    padding: 20px;
+                    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+                    transform: scale(0);
+                    visibility: hidden;
+                    transition: all .2s;
+                    transform-origin: 40% 0;
+                    &:before {
+                        width: 10px;
+                        height: 10px;
+                        transform: rotate(-45deg);
+                        background: #ffffff;
+                        border: solid 1px #ddd;
+                        border-width: 1px 1px 0 0;
+                        position: absolute;
+                        top: -6px;
+                        right: 86px;
+                        content: " ";
+                    }
+                    .menu {
+                        a {
+                            cursor: pointer;
+                            &:hover {
+                                color: #178fe6;
+                            }
+                            &:first-of-type {
+                                border-top: 0;
+                            }
+                            display: block;
+                            height: 36px;
+                            line-height: 36px;
+                            border-top: solid 1px #eee;
+                            padding: 0 6px;
+                            font-size: 13px;
+                            color: #333333;
+                            margin: 0 5px;
+                        }
+                    }
+                }
+            }
+        }
+        .search-bar {
+            position: relative;
+            height: 41px;
+            overflow: hidden;
+            white-space: nowrap;
+            word-spacing: 0;
+            padding: 8px;
+            background-color: #f3f5f7;
+            .icon-search2 {
+                position: absolute;
+                top: 50%;
+                transform: translate(0,-9px);
+                left: 50%;
+                margin-left: -65px;
+                color: #ccc;
+                font-size: 18px;
+            }
+            input {
+                width: 100%;
+                height: 25px;
+                border: solid 1px #dfdfdf;
+                border-radius: 3px;
+                background: #ffffff;
+                box-sizing: border-box;
+                overflow: hidden;
+                padding: 2px 10px;
+                line-height: 25px;
+                vertical-align: middle;
+                font-size: 13px;
+                outline: 0;
+                text-align: center;
+                &::-webkit-input-placeholder {
+                    color: #ccc;
+                }
+            }
+        }
+    }
+    .desire-content {
+        height: auto;
+        .desire-company {
+            display: -webkit-box;
+            width: 100%;
+            height: 72px;
+            -webkit-box-align: center;
+            background-color: #fff;
+            padding: 10px 0;
+            margin-bottom: 10px;
+            border: 1px solid #e5e5e5;
+                & > div {
+                    height: 72px;
+                    &.center {
+                        -webkit-box-flex: 1;
+                        height: 52px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        padding-right: 10px;
+                    }
+                    &.right {
+                        margin-right: 15px;
+                    }
+                }
+                .company-num {
+                    color: #ff5b54;
+                    font-size: 15px;
+                }
+                .praise-add {
+                    position: absolute;
+                    top: 50px;
+                    left: 220px;
+                    color: #ccc;
+                    font-size: 20px;
+                    opacity: 0;
+                    &.showPraise {
+                        animation-name: praise;
+                        animation-duration: 1s;
+                        animation-fill-mode: both;
+                        animation-timing-function: ease;
+                    }
+                }
+                .company-logo {
+                    display: block;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    margin-left: 15px;
+                    margin-right: 10px;
+                }
+                .company-name {
+                    font-size: 14px;
+                    color: #000;
+                }
+                .company-intro {
+                    font-size: 12px;
+                    line-height: 15px;
+                }
+                .praise-btn {
+                    display: block;
+                    width: 55px;
+                    height: 25px;
+                    line-height: 25px;
+                    border-radius: 2px;
+                    color: #fff;
+                    float: right;
+                    font-size: 15px;
+                    text-align: center;
+                    background-color: #ff7f0e;
+                    &:hover {
+                        background-color: #ff7f0e * 0.9;
+                    }
+
+                }
+        }
+    }
+    .desire-no-data {
+        display: -webkit-box;
+        width: 100%;
+        height: 230px;
+        -webkit-box-align: center;
+        -webkit-box-pack: center;
+        .no-data-icon {
+            position: relative;
+            top: -5px;
+            background: url("images/zc-no-data.png") no-repeat center;
+            background-size: contain;
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+    }
+    .more-data {
+        height: 40px;
+        margin: 0 auto 25px;
+        line-height: 40px;
+        background-color: #cdd8e4;
+        color: #91a4ba;
+        text-align: center;
+    }
+    .desire-detail {
+        display: -webkit-box;
+        width: 100%;
+        height: 178px;
+        background: url("images/zc-detail-banner.jpg") no-repeat center;
+        background-size: 100% auto;
+        text-align: center;
+        -webkit-box-align: center;
+        -webkit-box-pack: center;
+        .company-logo {
+            display: block;
+            width: 61px;
+            height: 61px;
+            border-radius: 50%;
+            background-size: contain;
+            margin-bottom: 12px;
+        }
+        .company-name {
+            color: #fff;
+        }
+
+    }
+    .detail-info {
+        padding: 20px 15px;
+        color: #666666;
+        background-color: #f0f0f0;
+        .company-intro {
+            margin-bottom: 15px;
+            background: #f0f0f0;
+            color: #666;
+        }
+        .address {
+            color: #999;
+        }
+        .website {
+            color: #999;
+        }
+        .industry {
+            margin-bottom: 35px;
+            color: #999;
+        }
+        .share-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 50%;
+            text-align: center;
+            color: #fff;
+            font-size: 13px;
+            &.icon-wechat {
+                background-color: #7BD172;
+            }
+            &.icon-qq {
+                background-color: #5CA3E1;
+                font-size: 12px;
+                margin: 0 6px;
+            }
+            &.icon-weibo {
+                background-color: #D04340;
+            }
+        }
+        .cancel-list {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .praise-btn {
+            display: block;
+            height: 38px;
+            line-height: 38px;
+            border-radius: 3px;
+            color: #fff;
+            text-align: center;
+            background: #ff7f0e;
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+
+    }
+}
+/*我要上众筹弹窗*/
+.desire-modal-window .modal-dialog{
+    height: 230px;
+    padding: 0;
+    background: #fff;
+    border: 0;
+    border-radius: 0;
+}
+.desire-modal-window .modal-content {
+    border: 0;
+    border-radius: 0;
+}
+.desire-modal {
+    position: relative;
+    height: 230px;
+    padding: 0 20px;
+    text-align: center;
+    .icon-del {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 15px;
+        color: #808080;
+        cursor: pointer;
+    }
+    .share-icon {
+        position: relative;
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        border-radius: 50%;
+        text-align: center;
+        color: #fff;
+        font-size: 20px;
+        &.icon-wechat {
+            background-color: #7BD172;
+            .qr-code {
+                display: none;
+                position: absolute;
+                width: 140px;
+                height: 140px;
+                padding:14px;
+                background: #fff;
+                bottom: 30px;
+                left: 50%;
+                margin-left: -70px;
+                z-index: 10;
+                border:solid 1px #eee;
+                -webkit-filter:drop-shadow(0px 3px 5px rgba(0,0,0,0.2));
+                border-radius: 4px;
+                &:before {
+                    position: absolute;
+                    content:" ";
+                    bottom: -6px;
+                    left: 50%;
+                    margin-left: -8px;
+                    margin-top: -7px;
+                    border:solid 1px transparent;
+                    border-width: 1px 1px 0px 0px;
+                    .rotate(-45deg);
+                    background: #fff;
+                    width: 15px;
+                    height: 15px;
+                }
+            }
+            &:hover .qr-code {
+                display: block;
+            }
+        }
+        &.icon-qq {
+            position: relative;
+            background-color: #5CA3E1;
+            font-size: 12px;
+            bottom: 4px;
+            margin: 0 10px;
+        }
+        &.icon-weibo {
+            background-color: #D04340;
+        }
+    }
+    .modal-title {
+        padding-top: 30px;
+        margin-bottom: 20px;
+        font-size: 18px;
+        color: #000;
+        &.orange {
+            color: #ff9400;
+        }
+        &.red {
+            color: #ff524f;
+        }
+    }
+    .modal-content {
+        height: 42px;
+        margin-bottom: 35px;
+        font-size: 15px;
+        &.thirty-point {
+            padding: 0 35px;
+            margin-bottom: 20px;
+        }
+    }
+    .modal-btn {
+        display: block;
+        width: 120px;
+        height: 40px;
+        font-size: 18px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        margin: auto;
+        background-color: #008df5;
+        border-radius: 2px;
+    }
+}
+/*微信分享遮罩层*/
+.share-layer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 9;
+    background: rgba(0,0,0,.7);
+    .guide-arrow {
+        position: absolute;
+        width: 100px;
+        height: 50px;
+        top: 120px;
+        right: 0;
+        background: url("images/guide-arrow.png") no-repeat center;
+        background-size: auto 100%;
+    }
+    .guide-tip {
+        position: absolute;
+        top: 150px;
+        left: 50%;
+        transform: translate(-50%,0);
+        color: #fff;
+        .point {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+    }
+}
+@-webkit-keyframes praise {
+    0% {
+        opacity: 0;
+        transform: translate3d(0,30px,0);
+    }
+    80% {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(0,0,0);
+    }
+}
+
+@keyframes praise {
+    0% {
+        opacity: 0;
+        transform: translate3d(0,30px,0);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(0,0,0);
+    }
+}
