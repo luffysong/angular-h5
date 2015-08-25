@@ -14,6 +14,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         $scope.cityData = DictionaryService.getLocation();
         $scope.industryData = DictionaryService.getDict("CompanyIndustry");
         $scope.qrcodeUrl = encodeURIComponent("http://" + location.hostname + "/m/#/zhongchouDesire");
+        $scope.activePage = 1;
         $scope.sort = function(way){
             var params = {};
             var obj = {
@@ -185,8 +186,11 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
 
         }
         /*加载更多*/
+        /*加载更多*/
         $scope.loadMore = function(){
-            $scope.companyData = $scope.totalData;
+            if($scope.activePage == $scope.totalPage)return;
+            $scope.activePage++;
+            $scope.companyData = $scope.companyData.concat($scope.totalData.slice($scope.activePage*10,$scope.activePage*20));
         }
         /*处理地区数据*/
         $scope.handleCity = function(data){
@@ -203,7 +207,6 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         $scope.handleData = function(data){
             if(!data.length)return;
             angular.forEach(data,function(obj){
-                obj.isShowShare = false;
                 obj.isPraise = false;
             });
         }
@@ -211,7 +214,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         $scope.loadData = function(params){
             var options = {
                 id:"cf-seed",
-                per_page:300
+                per_page:400
             };
             params = angular.extend(options,params);
             CrowdFundingService["activity"].get(params,function(data){
@@ -220,6 +223,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                 $scope.handleData(data.data);
                 /* 少于或等于20条*/
                 $scope.totalCount = data.total;
+                $scope.totalPage = Math.ceil($scope.totalCount / $scope.pageSize);
                 if(data.data.length <= $scope.pageSize){
                     $scope.companyData = data.data;
                     $scope.handleCity($scope.companyData);

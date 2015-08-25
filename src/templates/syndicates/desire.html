@@ -41,7 +41,7 @@
         </div>
         <div ng-include="'templates/syndicates/desire/null.html'" ng-if="!companyData.length"></div>
     </div>
-    <div class="load-more" ng-click="loadMore()" ng-show="totalCount > pageSize">加载更多</div>
+    <div class="more-data" ng-click="loadMore()" ng-show="totalCount > pageSize && companyData.length && activePage != totalPage">加载更多</div>
     <!--没有数据-->
 
 </div>

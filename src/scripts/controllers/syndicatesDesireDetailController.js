@@ -57,7 +57,6 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
                     submodel:$scope.companyDetail.id,
                     subid:"like"
                 },{},function(data){
-                    console.log(data);
                     if($scope.isCoInvestor){
                         $modal.open({
                             templateUrl: 'templates/syndicates/desire/thirty-point.html',
@@ -168,12 +167,9 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
             "id":"cf-seed",
             "submodel":$stateParams.id
         },function(data){
-            console.log(data);
             $scope.handleCity(data);
             $scope.companyDetail = data;
-            console.log($scope.companyDetail);
         },function(err){
-            console.log($scope.companyDetail);
             ErrorService.alert(err);
         });
         window.WEIXINSHARE = {
