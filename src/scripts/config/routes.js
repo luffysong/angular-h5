@@ -73,7 +73,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     /*我要上众筹活动*/
     $stateProvider.state('syndicatesDesire', {
-        url: '/zhongchouDesire?company_name=&industry=',
+        url: '/zhongchouDesire',
         templateUrl: 'templates/syndicates/desire.html',
         controller: 'syndicatesDesireController'
     });

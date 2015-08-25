@@ -16,11 +16,16 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         $scope.qrcodeUrl = encodeURIComponent("http://" + location.hostname + "/m/#/zhongchouDesire");
         $scope.sort = function(way){
             var params = {};
-            angular.forEach($stateParams,function(val,key){
+            var obj = {
+                industry:$scope.focusIndustry,
+                company_name:$scope.keyword
+            };
+            angular.forEach(obj,function(val,key){
                 if(val){
                     params[key] = val;
                 }
             });
+            console.log(params);
             /*按时间排序*/
             if(way == "time"){
                 params = angular.extend(params,{
@@ -43,8 +48,8 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         /*根据公司所在领域查询*/
         $scope.industryChange = function(){
             $scope.loadData({
-                "industry":$scope.focusIndustry,
-                company_name:""
+                industry:$scope.focusIndustry,
+                company_name:$scope.keyword
             });
             //console.log($scope.focusIndustry);
             //$state.go("syndicatesDesire",{
@@ -229,9 +234,9 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         }
         /*按公司名查询*/
         $scope.searchData = function(){
-            $state.go("syndicatesDesire",{
+            $scope.loadData({
                 company_name:$scope.keyword,
-                industry:""
+                industry:$scope.focusIndustry
             });
         }
         /*按回车键查询*/
