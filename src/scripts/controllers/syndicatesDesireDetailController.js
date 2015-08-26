@@ -7,6 +7,11 @@ var angular = require('angular');
 angular.module('defaultApp.controller').controller('syndicatesDesireDetailController',
     function($scope, $modal, ErrorService, $stateParams,DictionaryService,$timeout,CrowdFundingService,UserService,$state) {
         document.title = "我要上众筹";
+        /*百度分享config*/
+        $scope.config = {};
+        $scope.config.url = encodeURIComponent(window.location.href);
+        $scope.config.title = "36氪让创业更简单";
+        $scope.config.desc = "36氪让创业更简单";
         $scope.cityData = DictionaryService.getLocation();
         $scope.industryData = DictionaryService.getDict("CompanyIndustry");
         $scope.isWeiXin = /MicroMessenger/gi.test(navigator.userAgent) ? true : false;
