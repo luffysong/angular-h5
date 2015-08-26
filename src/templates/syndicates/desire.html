@@ -4,7 +4,7 @@
         <div class="nav-content">
             <a class="select-industry"  href="">
                 <span class="icon-gototop"></span>
-                {{focusIndustry ? focusIndustry : "全部公司"}}
+                {{focusIndustry ? focusIndustry : "全部公司" | dict_CompanyIndustry}}
                 <select class="company-type left" ng-options="c.id as c.desc for c in industryData" ng-change="industryChange()" ng-model="focusIndustry">
                     <i class="triangle"></i>
                     <option value="">全部公司</option>
