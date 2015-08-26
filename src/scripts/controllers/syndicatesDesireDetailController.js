@@ -9,7 +9,9 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
         document.title = "我要上众筹";
         /*百度分享config*/
         $scope.config = {};
-        $scope.config.url = encodeURIComponent(window.location.href);
+        $scope.shareSyndicate = function(){
+            $scope.config.url = encodeURIComponent(location.href);
+        }
         $scope.config.title = "36氪让创业更简单";
         $scope.config.desc = "36氪让创业更简单";
         $scope.cityData = DictionaryService.getLocation();
