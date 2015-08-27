@@ -82,7 +82,7 @@
     </div>
 
     <div class="share" style="display: none">
-        <img src="styles/images/jisu3/share_.png" alt=""/>
+        <img src="styles/images/jisu3/share_block.png" alt=""/>
     </div>
 
 
@@ -277,7 +277,7 @@
 //                    }
 //                })
 
-                location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&redirect_uri=http%3A%2F%2Frong.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&response_type=code&scope=snsapi_base&state='+weixinObj.cid+'#wechat_redirect'
+//                location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&redirect_uri=http%3A%2F%2Frong.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&response_type=code&scope=snsapi_base&state='+weixinObj.cid+'#wechat_redirect'
 
 
 //                if(checkcookie(weixinObj.cid)) {
@@ -298,6 +298,12 @@
 //                        location.reload();
 //                    }
 //                })
+
+
+                $('.share').css({'display': 'block'})
+                    setTimeout(function(){
+                        $('.share').css({'display': 'none'})
+                    }, 2500)
 
 
 
