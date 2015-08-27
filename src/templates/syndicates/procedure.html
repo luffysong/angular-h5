@@ -1,0 +1,152 @@
+<div class="procedure-wrapper">
+    <div class="project-section">
+        <div class="section-header">
+            <p>投资的项目</p>
+        </div>
+        <div class="project-info clearfix">
+            <div class="project-logo">
+                <img ng-src="{{ item.logo | image:40:'logo' }}" width="40" height="40" alt="整容中国">
+            </div>
+            <div class="project-des">
+                <h4 class="project-title">
+                    金元宝理财
+                </h4>
+                <p class="project-sub-title">
+                    一站式社交化理财平台，艾瑞咨询2015年度最佳创新奖！
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="procedure-section">
+        <div class="section-header">
+            <p>手续进度</p>
+            <span>完成时间以实际进度为准</span>
+        </div>
+        <div class="procedure-area clearfix">
+            <ul class="procedures">
+                <li class="procedure passed">
+                    <div class="dot"></div>
+                    <div class="line"></div>
+                    <p class="status">身份证扫描件收集中</p>
+                </li>
+                <li class="procedure active">
+                    <div class="dot"></div>
+                    <div class="line"></div>
+                    <p class="status">合同签署并回寄中（请在8月15号前完成）</p>
+                </li>
+                <li class="procedure">
+                    <div class="dot"></div>
+                    <div class="line"></div>
+                    <p class="status">有限合作企业成立中</p>
+                </li>
+                <li class="procedure">
+                    <div class="dot"></div>
+                    <div class="line"></div>
+                    <p class="status">入资中</p>
+                </li>
+                <li class="procedure">
+                    <div class="dot"></div>
+                    <p class="status">众筹成功</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="task-section">
+        <div class="section-header">
+            <p>需要完成的任务</p>
+        </div>
+        <div class="task-area">
+            <!--身份证扫描并收集中 - 未上传状态-->
+            <div class="upload-area" ng-hide="true">
+                <div class="icon-folder"></div>
+                <p class="tip text-center">越早上传身份证，越快到下一步</p>
+                <button type="submit" class="btn btn-primary btn-upload">上传身份证扫描件</button>
+            </div>
+
+            <!--身份证扫描并收集中 - 已上传状态-->
+
+            <!--合同签署并回资中-->
+            <div class="sign-area">
+                <div class="icon-writing"></div>
+                <p class="tip text-center">赶紧打印签字吧！</p>
+                <p class="text-center">然后把文件寄给我们，剩下就等着做股东吧！</p>
+                <a href="javascript:void(0);" class="btn btn-primary btn-download">下载文件</a>
+
+                <ul class="steps">
+                    <li class="step">
+                        <span>第一步</span>
+                        <div class="content">
+                            <p>下载并解压文件</p>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <span>第二步</span>
+                        <div class="content">
+                            <p>打印文件</p>
+                            <p>XXXX合同（打印6份）</p>
+                            <p>XXXX合同</p>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <span>第三步</span>
+                        <div class="content">
+                            <p>打印文件</p>
+                            <p>XX个地方需要签字</p>
+                        </div>
+                    </li>
+                    <li class="step">
+                        <span>第四步</span>
+                        <div class="content">
+                            <p>回寄地址</p>
+                            <p>邮寄地址：北京市海淀区善缘街1号立方庭2段1层126室 叶苑芳收</p>
+                            <p>座机：010-82624624</p>
+                            <p>移动电话：15116997463 18910786528</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!--有限合伙企业成立中-->
+            <div class="found-area" ng-hide="true">
+                <div class="icon-smile"></div>
+                <p class="tip text-center">你已经完成了所有的任务</p>
+                <p class="text-center">只需静静地等待正式成为 <a href="#">XX公司</a> 的投资人，如果有进度更新，我们会及时通知您</p>
+            </div>
+
+            <!--众筹成功-->
+            <div class="success-area" ng-hide="true">
+                <div class="icon-people"></div>
+                <p class="tip text-center">祝贺你</p>
+                <p class="text-center">你已经正式成为 <a href="#">XX公司</a> 的投资人！</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="rules-section">
+        <div class="section-header">
+            <p>身份证扫描件规范</p>
+        </div>
+        <div class="rules-area">
+            <ol>
+                <li>1、在一张A4大小页面同时将 <strong>身份证</strong> 正反面扫描；</li>
+                <li>2、注意不要添加任何 <strong>水印</strong> 标记；</li>
+                <li>3、保持 <strong>原尺寸扫描</strong>，务必清晰；</li>
+                <li>4、请务必于 <strong>2个工作日</strong> 内上传完。</li>
+            </ol>
+            <p>股权的交割手续需要各位股东实名制在工商部门完成注册登记手续，因此我们需要您提供本人的身份证扫描件电子版（请您仔细阅读注意事项），以便我们协助各位投资人办理后续的工商注册登记事项。</p>
+        </div>
+    </div>
+
+    <div class="service-section">
+        <div class="item">
+            <span class="icon phone"></span>
+            <p>客服电话：<span>010-57499061</span></p>
+        </div>
+        <div class="item">
+            <span class="icon email"></span>
+            <p>客服邮箱：<span>zc_service@36kr.com</span></p>
+        </div>
+    </div>
+</div>

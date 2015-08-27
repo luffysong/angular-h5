@@ -248,4 +248,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         'templateUrl': 'templates/startup/index.html',
         'controller': 'startupController'
     });
+
+    /**
+     * 手续进度管理
+     */
+    $stateProvider.state('procedure', {
+        url: '/procedure?fid',
+        templateUrl: 'templates/syndicates/procedure.html',
+        controller: 'SyndicatesProcedureController'
+    });
 });
