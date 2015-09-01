@@ -124,7 +124,7 @@
         </div>
     </div>
 
-    <div class="rules-section">
+    <div class="rules-section" ng-if="formality.status == 2">
         <div class="section-header">
             <p>身份证扫描件规范</p>
         </div>
@@ -136,6 +136,21 @@
                 <li>4、请务必于 <strong>2个工作日</strong> 内上传完。</li>
             </ol>
             <p>股权的交割手续需要各位股东实名制在工商部门完成注册登记手续，因此我们需要您提供本人的身份证扫描件电子版（请您仔细阅读注意事项），以便我们协助各位投资人办理后续的工商注册登记事项。</p>
+        </div>
+    </div>
+
+    <div class="rules-section" ng-if="formality.status == 3">
+        <div class="section-header">
+            <p>请您阅读</p>
+        </div>
+        <div class="rules-area">
+            <ol>
+                <li>1、<strong>不要</strong> 填写日期；</li>
+                <li>2、务必本人用 <strong>黑色碳素笔签名</strong>，签名尽量规范整齐，切勿潦草签、艺术签、人名章；</li>
+                <li>3、务必在指定位置签字且 <strong>必须与股东名单名字相符</strong>；</li>
+                <li>4、请务必于 <strong>3天</strong> 内将签署好的签字页寄到指定地点。</li>
+            </ol>
+            <p>如您对签字环节有任何疑问，请联系我们。</p>
         </div>
     </div>
 
