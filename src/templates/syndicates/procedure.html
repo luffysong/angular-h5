@@ -110,14 +110,14 @@
             <div class="found-area" ng-if="formality.status == 4 || formality.status == 5">
                 <div class="icon-smile"></div>
                 <p class="tip text-center">你已经完成了所有的任务</p>
-                <p class="text-center">只需静静地等待正式成为 <a href="#">XX公司</a> 的投资人，如果有进度更新，我们会及时通知您</p>
+                <p class="text-center">只需静静地等待正式成为 <a ui-sref="syndicatesDetail({ companyId: formality.financing.company.id, fundingId: formality.cf_id })">{{ formality.financing.company.name  }}</a> 的投资人，如果有进度更新，我们会及时通知您</p>
             </div>
 
             <!--众筹成功-->
             <div class="success-area" ng-if="formality.status == 6">
                 <div class="icon-people"></div>
                 <p class="tip text-center">祝贺你</p>
-                <p class="text-center">你已经正式成为 <a href="#">XX公司</a> 的投资人！</p>
+                <p class="text-center">你已经正式成为 <a ui-sref="syndicatesDetail({ companyId: formality.financing.company.id, fundingId: formality.cf_id })">{{ formality.financing.company.name  }}</a> 的投资人！</p>
             </div>
         </div>
     </div>
