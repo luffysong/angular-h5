@@ -1,8 +1,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('SyndicatesProcedureController', [
-    '$scope', '$state', 'notify', '$stateParams', 'CrowdFundingService', 'ErrorService', 'AuditService',
-    function($scope,  $state, notify, $stateParams, CrowdFundingService, ErrorService, AuditService) {
+    '$scope', '$state', 'notify', '$stateParams', 'CrowdFundingService', 'ErrorService', 'AuditService', 'checkForm', '$upload', 'notify', 'DefaultService',
+    function($scope,  $state, notify, $stateParams, CrowdFundingService, ErrorService, AuditService, checkForm, $upload, notify, DefaultService) {
         //处理参数
         $scope.params = {};
         $scope.params.cfid = $stateParams.cfid || 0;
@@ -26,6 +26,7 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
                  $scope.formality.forecast_complete_time = updateDate.add(data.capital_type == 1 ? durationArr[data.status - 2] : durationForeignArr[data.status - 2], 'days').format('YYYY年MM月DD日');
             }
         }, function(err) {
+            notify.closeAll();
             ErrorService.alert(err);
         });
 
@@ -40,10 +41,90 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
                 if(err.code == 404) {
                     $scope.audit.exist = false;
                 } else {
+                    notify.closeAll();
                     ErrorService.alert(err);
                 }
             });
         };
         $scope.loadAuditInfo();
+
+        // 提交身份证信息
+        $scope.submitForm = function(e) {
+            e.preventDefault();
+            if(!checkForm('AuditForm')) return;
+            AuditService['user-identity-card'].post({
+                copies: $scope.audit.auditPic
+            }, function(data) {
+                $scope.previewMode = false;
+                $scope.loadAuditInfo();
+                notify.closeAll();
+                notify({
+                    message: '提交身份证信息成功',
+                    classes: 'alert-success'
+                });
+            }, function(err) {
+                notify.closeAll();
+                ErrorService.alert(err);
+            });
+        };
+
+        // 上传扫描件
+        $scope.previewMode = false;
+        $scope.imgFileSelected = function(files, e) {
+            var upyun = window.kr.upyun;
+            $scope.previewMode = true;
+
+            if($scope.audit && $scope.audit.status == 3) {
+                $scope.audit.reaudit = true;
+            }
+
+            for(var i = 0; i < files.length; i++) {
+                var file = files[i];
+                $scope.progress = 1;
+
+                DefaultService.getUpToken({
+                    'x-gmkerl-unsharp': true
+                }).then(function(data) {
+                    $scope.upload = $upload.upload({
+                        url: upyun.api + '/' + upyun.bucket.name,
+                        data: data,
+                        file: file,
+                        withCredentials: false
+                    }).progress(function(evt) {
+                        $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+                        console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total) + '% file :' + evt.config.file.name);
+                    }).success(function(data, status, headers, config) {
+                        $scope.progress = 0;
+                        $scope.previewMode = true;
+                        $scope.audit.auditPic = window.kr.upyun.bucket.url + data.url;
+                        $scope.audit.exist = true;
+                        notify.closeAll();
+                        notify({
+                            message: '上传身份证扫描件成功',
+                            classes: 'alert-success'
+                        });
+                    }).error(function(err) {
+                        $scope.progress = 0;
+                        if($scope.audit.status !== 3) {
+                            $scope.audit.exist = false;
+                        }
+                        $scope.previewMode = false;
+                        $scope.loadAuditInfo();
+                        notify.closeAll();
+                        notify({
+                            message: err,
+                            classes: 'alert-danger'
+                        });
+                    });
+                }, function(err) {
+                    if($scope.audit.status !== 3) {
+                        $scope.audit.exist = false;
+                    }
+                    $scope.previewMode = false;
+                    notify.closeAll();
+                    ErrorService.alert(err);
+                });
+            }
+        };
     }
 ]);

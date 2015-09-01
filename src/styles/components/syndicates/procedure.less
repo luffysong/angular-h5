@@ -124,7 +124,7 @@
             .icon-folder {
                 width: 55px;
                 height: 60px;
-                margin: 0 auto;
+                margin: 0 auto 8px;
                 background: url(images/procedure/icon-folder.png) no-repeat center;
                 background-size: cover;
             }
@@ -132,7 +132,7 @@
             .icon-timer {
                 width: 50px;
                 height: 60px;
-                margin: 0 auto;
+                margin: 0 auto 8px;
                 background: url(images/procedure/icon-timer.png) no-repeat center;
                 background-size: cover;
             }
@@ -140,18 +140,26 @@
             .icon-success {
                 width: 75px;
                 height: 75px;
-                margin: 0 auto;
+                margin: 0 auto 8px;
                 background: url(images/procedure/icon-success.png) no-repeat center;
                 background-size: cover;
             }
 
             .tip {
-                margin: 8px 0 25px;
+                &.success {
+                    color: #90cd2e;
+                    font-size: 16px;
+                }
+
+                &.fail {
+                    color: #e89900;
+                    font-size: 16px;
+                }
             }
 
             .btn-upload {
+                position: relative;
                 background-color: #008df2;
-                padding: 8px 54px;
                 border: 0;
 
                 input {
@@ -162,6 +170,49 @@
                     left: 0;
                     top: 0;
                     cursor: pointer;
+                }
+
+                &.btn-default {
+                    background-color: #ebebeb;
+                    color: #919191;
+                    border-color: #ebebeb;
+                }
+            }
+
+            .btn-submit {
+                background-color: #008df2;
+                border: 0;
+            }
+
+            .preview {
+                width: 222px;
+                height: 142px;
+                margin: 0 auto;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background: no-repeat center center;
+                background-size: contain;
+
+                .progress-num {
+                    appearance: none;
+                    position: relative;
+                    overflow: hidden;
+                    width: 100%;
+                    height: 100%;
+                    font-size: 80px;
+                    line-height: 140px;
+
+                    &:after {
+                        content: attr(data-percent) '%';
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
+                        text-align: center;
+                        color: hsla(0,0%,100%,.2);
+                        background-color: rgba(0,0,0,.2);
+                    }
                 }
             }
         }
@@ -212,6 +263,7 @@
 
                 p {
                     margin: 0;
+                    white-space: pre-wrap;
                 }
 
                 span {

@@ -78,7 +78,7 @@
                     <p class="tip text-center success" ng-if="audit.exist && audit.status == 2">审核已通过</p>
                     <p class="tip text-center" ng-if="audit.exist && audit.status == 2">待其他跟投人都完成后，进入下一步如果需要更新扫描件请联系客服</p>
 
-                    <p class="tip text-center fail" ng-if="audit.exist && audit.status == 3 && !audit.reaudit">审核未通过</p>
+                    <p class="tip text-center fail" ng-if="audit.exist && audit.status == 3 && !audit.reaudit">你的审核未通过</p>
                     <p class="tip text-center" ng-if="audit.exist && audit.status == 3 && !audit.reaudit">更改建议：{{ audit.reason }}</p>
 
                     <button type="submit" class="btn btn-primary btn-submit" ng-if="audit.exist && (!audit.status || audit.status == 3 && audit.reaudit)">提交审核</button>
