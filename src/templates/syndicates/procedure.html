@@ -60,9 +60,46 @@
         <div class="task-area">
             <!--身份证扫描并收集中-->
             <div class="upload-area" ng-if="formality.status == 2">
-                <div class="icon-folder"></div>
-                <p class="tip text-center">越早上传身份证，越快到下一步</p>
-                <button type="submit" class="btn btn-primary btn-upload">上传身份证扫描件</button>
+                <form action="" method="post" role="form" name="AuditForm" ng-submit="submitForm($event)">
+                    <div class="icon-folder" ng-if="!audit.exist && !previewMode"></div>
+                    <div class="icon-timer" ng-if="audit.exist && audit.status == 1 && !previewMode"></div>
+                    <div class="icon-success" ng-if="audit.exist && audit.status == 2 && !previewMode"></div>
+                    <div class="icon-fail" ng-if="audit.exist && audit.status == 3 && !previewMode"></div>
+
+                    <div class="preview" style="background-image: url({{ audit.auditPic }})" ng-if="audit.exist && audit.status == 3 && audit.reaudit || previewMode">
+                        <div class="progress-num" data-percent="{{ progress }}" ng-if="progress > 0"></div>
+                    </div>
+
+                    <p class="tip text-center" ng-if="!audit.exist && !previewMode && !audit.status">越早上传身份证，越快到下一步</p>
+                    <p class="tip text-center" ng-if="audit.exist && audit.status == 3 && audit.reaudit || previewMode">上传前，请阅读下方身份证扫描件规范</p>
+
+                    <p class="tip text-center" ng-if="audit.exist && audit.status == 1">身份证扫描件审核中...</p>
+
+                    <p class="tip text-center success" ng-if="audit.exist && audit.status == 2">审核已通过</p>
+                    <p class="tip text-center" ng-if="audit.exist && audit.status == 2">待其他跟投人都完成后，进入下一步如果需要更新扫描件请联系客服</p>
+
+                    <p class="tip text-center fail" ng-if="audit.exist && audit.status == 3 && !audit.reaudit">审核未通过</p>
+                    <p class="tip text-center" ng-if="audit.exist && audit.status == 3 && !audit.reaudit">更改建议：{{ audit.reason }}</p>
+
+                    <button type="submit" class="btn btn-primary btn-submit" ng-if="audit.exist && (!audit.status || audit.status == 3 && audit.reaudit)">提交审核</button>
+                    <a class="btn btn-upload" href="javascript:void(0);" ng-class="{ 'btn-primary': !audit.exist , 'btn-default': audit.exist }" ng-if="!audit.status || audit.status == 3 && audit.reaudit">
+                        <span ng-if="!audit.exist">上传身份证扫描件</span>
+                        <span ng-if="audit.exist">重新上传</span>
+                        <input type="file" name="auditPic" ng-file-select
+                               ng-file-change="imgFileSelected($files, $event)"
+                               ng-multiple="false"
+                               accept=".jpg, .gif, .png"
+                               resetOnClick="true">
+                    </a>
+                    <a class="btn btn-upload btn-primary" href="javascript:void(0);" ng-if="audit.status == 3 && !audit.reaudit">
+                        <span ng-if="audit.exist">重新上传</span>
+                        <input type="file" name="auditPic" ng-file-select
+                               ng-file-change="imgFileSelected($files, $event)"
+                               ng-multiple="false"
+                               accept=".jpg, .gif, .png"
+                               resetOnClick="true">
+                    </a>
+                </form>
             </div>
 
             <!--合同签署并回资中-->
