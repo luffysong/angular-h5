@@ -1,8 +1,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('SyndicatesProcedureController', [
-    '$scope', '$state', 'notify', '$stateParams', 'CrowdFundingService', 'ErrorService',
-    function($scope,  $state, notify, $stateParams, CrowdFundingService, ErrorService) {
+    '$scope', '$state', 'notify', '$stateParams', 'CrowdFundingService', 'ErrorService', 'AuditService',
+    function($scope,  $state, notify, $stateParams, CrowdFundingService, ErrorService, AuditService) {
         //处理参数
         $scope.params = {};
         $scope.params.cfid = $stateParams.cfid || 0;
@@ -28,5 +28,22 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
         }, function(err) {
             ErrorService.alert(err);
         });
+
+        // 身份证审核信息
+        $scope.audit = {};
+        $scope.loadAuditInfo = function() {
+            AuditService['user-identity-card-result'].get(function(data) {
+                $scope.audit = data;
+                $scope.audit.exist = true;
+                $scope.audit.auditPic = data.copies;
+            }, function(err) {
+                if(err.code == 404) {
+                    $scope.audit.exist = false;
+                } else {
+                    ErrorService.alert(err);
+                }
+            });
+        };
+        $scope.loadAuditInfo();
     }
 ]);
