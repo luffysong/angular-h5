@@ -253,7 +253,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
      * 手续进度管理
      */
     $stateProvider.state('procedure', {
-        url: '/procedure?fid',
+        url: '/procedure?cfid',
         templateUrl: 'templates/syndicates/procedure.html',
         controller: 'SyndicatesProcedureController'
     });

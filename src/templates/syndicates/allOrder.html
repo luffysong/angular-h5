@@ -48,8 +48,9 @@
         <div class="pay-layer" ng-if="item.payment.status != 1 && item.payment.status != 3">
             <div>{{item.status | dict_trade_crowd_funding_status}}</div>
         </div>
-        <div class="pay-layer" ng-if="item.payment.status==1 && item.status==1 && item.payment.platform_type!=1">
-            <a ui-sref="syndicatesPayWay({tid:item.trade_id,amount:item.payment.amount})" class="pay-btn" baidu-btn="去付款按钮点击">去付款</a>
+        <div class="pay-layer">
+            <a ng-if="item.payment.status==1 && item.status==1 && item.payment.platform_type!=1" ui-sref="syndicatesPayWay({tid:item.trade_id,amount:item.payment.amount})" class="pay-btn" baidu-btn="去付款按钮点击">去付款</a>
+            <a ng-if="item.payment.status == 3 && item.financing.formality && item.financing.formality.status > 1" ui-sref="procedure({ cfid: item.financing.formality.cf_id })" class="pay-btn" baidu-btn="查看手续进度按钮点击">手续进度</a>
         </div>
     </div>
     <div class="syndicates-index loadMore" ng-click="loadMore()" ng-if="!noMore && orderData.length">

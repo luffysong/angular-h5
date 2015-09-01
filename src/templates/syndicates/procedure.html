@@ -5,14 +5,14 @@
         </div>
         <div class="project-info clearfix">
             <div class="project-logo">
-                <img ng-src="{{ item.logo | image:40:'logo' }}" width="40" height="40" alt="整容中国">
+                <img ng-src="{{ formality.financing.company.logo | image:40:'logo' }}" width="40" height="40" alt="{{ formality.financing.company.name }}">
             </div>
             <div class="project-des">
                 <h4 class="project-title">
-                    金元宝理财
+                    {{ formality.financing.company.name }}
                 </h4>
                 <p class="project-sub-title">
-                    一站式社交化理财平台，艾瑞咨询2015年度最佳创新奖！
+                    {{ formality.financing.company.brief }}
                 </p>
             </div>
         </div>
