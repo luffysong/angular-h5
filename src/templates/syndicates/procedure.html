@@ -1,3 +1,44 @@
+<div class="m-dropdown-menu">
+    <ul class="top-menu">
+        <li>
+            <a href="#">全部</a>
+        </li>
+        <li>
+            <a href="#">我的账号</a>
+        </li>
+        <li>
+            <a href="#">我的消息</a>
+        </li>
+        <li>
+            <a href="#">我的收藏</a>
+        </li>
+        <li>
+            <label class="animated" for="toggle" ng-class="{'active': isActive}" ng-click="activeButton()"></label>
+        </li>
+    </ul>
+    <input id="toggle" name="toggle" type="checkbox">
+    <ul class="animate down-menu">
+        <li class="animate">
+            <a href="#">我的账号</a>
+        </li>
+        <li class="animate">
+            <a href="#">我的消息</a>
+        </li>
+        <li class="animate">
+            <a href="#">我的收藏</a>
+        </li>
+        <li class="animate">
+            <a href="#">众筹订单</a>
+        </li>
+        <li class="animate">
+            <a href="#">我管理的公司</a>
+        </li>
+        <li class="animate">
+            <a href="#">我关注的公司</a>
+        </li>
+    </ul>
+</div>
+
 <div class="procedure-wrapper">
     <div class="project-section">
         <div class="section-header">
@@ -9,7 +50,7 @@
             </div>
             <div class="project-des">
                 <h4 class="project-title">
-                    {{ formality.financing.company.name }}
+                    <a ui-sref="syndicatesDetail({ companyId: formality.financing.company.id, fundingId: formality.cf_id })">{{ formality.financing.company.name  }}</a>
                 </h4>
                 <p class="project-sub-title">
                     {{ formality.financing.company.brief }}

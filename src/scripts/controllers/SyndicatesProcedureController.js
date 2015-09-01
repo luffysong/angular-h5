@@ -126,5 +126,11 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
                 });
             }
         };
+
+        // Toggle class
+        $scope.isActive = false;
+        $scope.activeButton = function() {
+            $scope.isActive = !$scope.isActive;
+        }
     }
 ]);
