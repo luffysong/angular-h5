@@ -70,7 +70,7 @@
                 <div class="icon-writing"></div>
                 <p class="tip text-center">赶紧打印签字吧！</p>
                 <p class="text-center">然后把文件寄给我们，剩下就等着做股东吧！</p>
-                <a href="javascript:void(0);" class="btn btn-primary btn-download">下载文件</a>
+                <a href="{{ formality.file_contract  }}" class="btn btn-primary btn-download" target="_blank">下载文件</a>
 
                 <ul class="steps">
                     <li class="step">
@@ -83,24 +83,21 @@
                         <span>第二步</span>
                         <div class="content">
                             <p>打印文件</p>
-                            <p>XXXX合同（打印6份）</p>
-                            <p>XXXX合同</p>
+                            <p ng-bind-html="formality.desc_print"></p>
                         </div>
                     </li>
                     <li class="step">
                         <span>第三步</span>
                         <div class="content">
                             <p>打印文件</p>
-                            <p>XX个地方需要签字</p>
+                            <p ng-bind-html="formality.desc_sign"></p>
                         </div>
                     </li>
                     <li class="step">
                         <span>第四步</span>
                         <div class="content">
                             <p>回寄地址</p>
-                            <p>邮寄地址：北京市海淀区善缘街1号立方庭2段1层126室 叶苑芳收</p>
-                            <p>座机：010-82624624</p>
-                            <p>移动电话：15116997463 18910786528</p>
+                            <p ng-bind-html="formality.address_post"></p>
                         </div>
                     </li>
                 </ul>
