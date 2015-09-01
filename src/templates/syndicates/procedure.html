@@ -28,26 +28,26 @@
                 <li class="procedure" ng-class="{ 'active': formality.status == 2, 'passed': formality.status > 2  }">
                     <div class="dot"></div>
                     <div class="line"></div>
-                    <p class="status">身份证扫描件收集中</p>
+                    <p class="status">身份证扫描件收集中<span ng-if="formality.status == 2">（请在{{ formality.forecast_complete_time }}前完成）</span></p>
                 </li>
                 <li class="procedure" ng-class="{ 'active': formality.status == 3, 'passed': formality.status > 3  }">
                     <div class="dot"></div>
                     <div class="line"></div>
-                    <p class="status">合同签署并回寄中（请在8月15号前完成）</p>
+                    <p class="status">合同签署并回寄中<span ng-if="formality.status == 3">（请在{{ formality.forecast_complete_time }}前完成）</span></p>
                 </li>
                 <li class="procedure"  ng-class="{ 'active': formality.status == 4, 'passed': formality.status > 4  }">
                     <div class="dot"></div>
                     <div class="line"></div>
-                    <p class="status">有限合作企业成立中</p>
+                    <p class="status">有限合作企业成立中<span ng-if="formality.status == 4">（请在{{ formality.forecast_complete_time }}前完成）</span></p>
                 </li>
                 <li class="procedure"  ng-class="{ 'active': formality.status == 5, 'passed': formality.status > 5  }">
                     <div class="dot"></div>
                     <div class="line"></div>
-                    <p class="status">入资中</p>
+                    <p class="status">入资中<span ng-if="formality.status == 5">（请在{{ formality.forecast_complete_time }}前完成）</span></p>
                 </li>
                 <li class="procedure" ng-class="{ 'active': formality.status == 6  }">
                     <div class="dot"></div>
-                    <p class="status">众筹成功</p>
+                    <p class="status">众筹成功<span ng-if="formality.status == 6">（请在{{ formality.forecast_complete_time }}前完成）</span></p>
                 </li>
             </ul>
         </div>
@@ -58,17 +58,15 @@
             <p>需要完成的任务</p>
         </div>
         <div class="task-area">
-            <!--身份证扫描并收集中 - 未上传状态-->
-            <div class="upload-area" ng-hide="true">
+            <!--身份证扫描并收集中-->
+            <div class="upload-area" ng-if="formality.status == 2">
                 <div class="icon-folder"></div>
                 <p class="tip text-center">越早上传身份证，越快到下一步</p>
                 <button type="submit" class="btn btn-primary btn-upload">上传身份证扫描件</button>
             </div>
 
-            <!--身份证扫描并收集中 - 已上传状态-->
-
             <!--合同签署并回资中-->
-            <div class="sign-area">
+            <div class="sign-area" ng-if="formality.status == 3">
                 <div class="icon-writing"></div>
                 <p class="tip text-center">赶紧打印签字吧！</p>
                 <p class="text-center">然后把文件寄给我们，剩下就等着做股东吧！</p>
@@ -109,14 +107,14 @@
             </div>
 
             <!--有限合伙企业成立中-->
-            <div class="found-area" ng-hide="true">
+            <div class="found-area" ng-if="formality.status == 4 || formality.status == 5">
                 <div class="icon-smile"></div>
                 <p class="tip text-center">你已经完成了所有的任务</p>
                 <p class="text-center">只需静静地等待正式成为 <a href="#">XX公司</a> 的投资人，如果有进度更新，我们会及时通知您</p>
             </div>
 
             <!--众筹成功-->
-            <div class="success-area" ng-hide="true">
+            <div class="success-area" ng-if="formality.status == 6">
                 <div class="icon-people"></div>
                 <p class="tip text-center">祝贺你</p>
                 <p class="text-center">你已经正式成为 <a href="#">XX公司</a> 的投资人！</p>
