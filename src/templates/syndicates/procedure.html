@@ -25,27 +25,27 @@
         </div>
         <div class="procedure-area clearfix">
             <ul class="procedures">
-                <li class="procedure passed">
+                <li class="procedure" ng-class="{ 'active': formality.status == 2, 'passed': formality.status > 2  }">
                     <div class="dot"></div>
                     <div class="line"></div>
                     <p class="status">身份证扫描件收集中</p>
                 </li>
-                <li class="procedure active">
+                <li class="procedure" ng-class="{ 'active': formality.status == 3, 'passed': formality.status > 3  }">
                     <div class="dot"></div>
                     <div class="line"></div>
                     <p class="status">合同签署并回寄中（请在8月15号前完成）</p>
                 </li>
-                <li class="procedure">
+                <li class="procedure"  ng-class="{ 'active': formality.status == 4, 'passed': formality.status > 4  }">
                     <div class="dot"></div>
                     <div class="line"></div>
                     <p class="status">有限合作企业成立中</p>
                 </li>
-                <li class="procedure">
+                <li class="procedure"  ng-class="{ 'active': formality.status == 5, 'passed': formality.status > 5  }">
                     <div class="dot"></div>
                     <div class="line"></div>
                     <p class="status">入资中</p>
                 </li>
-                <li class="procedure">
+                <li class="procedure" ng-class="{ 'active': formality.status == 6  }">
                     <div class="dot"></div>
                     <p class="status">众筹成功</p>
                 </li>
