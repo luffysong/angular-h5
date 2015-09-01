@@ -40,9 +40,6 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
             }, function(err) {
                 if(err.code == 404) {
                     $scope.audit.exist = false;
-                } else {
-                    notify.closeAll();
-                    ErrorService.alert(err);
                 }
             });
         };
