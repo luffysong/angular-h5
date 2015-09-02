@@ -91,15 +91,22 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
                         $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
                         console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total) + '% file :' + evt.config.file.name);
                     }).success(function(data, status, headers, config) {
+                        var filename = data.url.toLowerCase();
+                        if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
+                            $scope.previewMode = true;
+                            $scope.audit.auditPic = window.kr.upyun.bucket.url + data.url;
+                            $scope.audit.exist = true;
+                            notify.closeAll();
+                            notify({
+                                message: '上传身份证扫描件成功',
+                                classes: 'alert-success'
+                            });
+                        } else {
+                            ErrorService.alert({
+                                msg: '格式不支持，请重新上传！'
+                            });
+                        }
                         $scope.progress = 0;
-                        $scope.previewMode = true;
-                        $scope.audit.auditPic = window.kr.upyun.bucket.url + data.url;
-                        $scope.audit.exist = true;
-                        notify.closeAll();
-                        notify({
-                            message: '上传身份证扫描件成功',
-                            classes: 'alert-success'
-                        });
                     }).error(function(err) {
                         $scope.progress = 0;
                         if($scope.audit.status !== 3) {
