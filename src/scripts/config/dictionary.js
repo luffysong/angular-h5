@@ -156,6 +156,38 @@ window.DICTIONARY_DATA =  {
             "value": "VIP"
         }
     ],
+    "ChartCategoryEnum": [
+        {
+            "desc": "氪指数",
+            "id": 0,
+            "value": "KR_INDEX"
+        },
+        {
+            "desc": "alexa排名",
+            "id": 1,
+            "value": "ALEXA"
+        },
+        {
+            "desc": "app综合排名",
+            "id": 2,
+            "value": "APP"
+        },
+        {
+            "desc": "搜索指数",
+            "id": 3,
+            "value": "SEARCH"
+        },
+        {
+            "desc": "微博指数",
+            "id": 4,
+            "value": "WEIBO"
+        },
+        {
+            "desc": "媒体指数",
+            "id": 5,
+            "value": "MEDIA"
+        }
+    ],
     "ConfirmStatus": [
         {
             "desc": "待确认",
@@ -278,6 +310,11 @@ window.DICTIONARY_DATA =  {
             "desc": "kr码发放",
             "id": 6,
             "value": "KR_CODE"
+        },
+        {
+            "desc": "创业活动通知",
+            "id": 7,
+            "value": "CHUANG_HUODONG"
         }
     ],
     "CoinvestorType": [

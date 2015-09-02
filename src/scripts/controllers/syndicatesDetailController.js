@@ -22,7 +22,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         $scope.companyId = $rootScope.companyId = $stateParams.companyId;
         $scope.orderData = [];
         $scope.uid = UserService.getUID();
-        document.title="36氪众筹";
+        document.title="36氪股权投资";
         /**
          * 用户跳转回来的是否已认证，决定是否跳转到<跟投人认证>页面
          */
@@ -202,7 +202,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     /*预热中*/
                     if(new Date() < date && $scope.color != 25){
                         var minute = date.getMinutes() > 9 ? date.getMinutes() : "0"+date.getMinutes();
-                        $scope.status = (parseInt(date.getMonth())+1)+"月"+date.getDate()+"日  "+date.getHours()+":"+minute+" 开始众筹";
+                        $scope.status = (parseInt(date.getMonth())+1)+"月"+date.getDate()+"日  "+date.getHours()+":"+minute+" 开始融资";
                         $scope.color = 60;
                     }
                 }
