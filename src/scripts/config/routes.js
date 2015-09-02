@@ -212,9 +212,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*创建公司审核页*/
     $stateProvider.state('createCompanyApply', {
-        url: '/company_create_apply',
-        templateUrl: 'templates/company/create-apply-alert.html' // todo : 文件路径
-        //controller: 'CreateCompanyController' // todo : controller
+        url: '/company_create_apply?{type}&{cid}',
+        templateUrl: 'templates/company/create-apply-alert.html', // todo : 文件路径
+        controller: 'CreateApplyController' // todo : controller
     });
 
     $stateProvider.state('riskTipAll', {
@@ -230,4 +230,23 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/syndicates/procedure.html',
         controller: 'SyndicatesProcedureController'
     });
+    // 我管理的公司
+    $stateProvider.state('myCompany', {
+        url: '/my_company?{type}',
+        templateUrl: 'templates/company/my-company.html', // todo : 文件路径
+        controller: 'MyCompanyController', // todo : controller
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
+    });
+
+    // 我要融资-提交成功
+    $stateProvider.state('finacingSuccess', {
+        url: '/finacing_success?{type}&{cid}',
+        templateUrl: 'templates/company/finacing-success.html', // todo : 文件路径
+        controller: 'FinacingSuccessController' // todo : controller
+    });
+
 });

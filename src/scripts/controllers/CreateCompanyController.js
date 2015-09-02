@@ -459,6 +459,12 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     location.hash = "/company_create_apply"
                 }
 
+                if($stateParams.from) {
+                    location.hash = "/company_create_apply?from=" + $stateParams.from + '&cid=' + data.id;
+                } else {
+                    location.hash = "/company_create_apply";
+                }
+                
                 //if (callback) {
                 //    callback(data.id);
                 //    return;

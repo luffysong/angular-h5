@@ -9,7 +9,7 @@ body {
     -webkit-font-smoothing: antialiased;
 
 	&.download-show {
-		/*padding-bottom: 40px;*/
+		padding-bottom: 40px;
 	}
 }
 
@@ -552,3 +552,64 @@ textarea {
            }
     }
 }
+.h5-wrapper {
+    padding: 0 @wrapper-padding;    
+
+    .btn-normal {
+        width: 250px;
+        height: 40px;
+        color: @base-white;
+        font-size: 15px;
+        line-height: 20px;
+        padding: 10px;
+        background-color: @light-color;
+        border-radius: 2px;
+        margin: 30px auto 20px;
+        display: block;
+    }
+}
+.tools-panel {
+    background-color: @base-white;
+    border-bottom: 1px solid @base-border-color;
+    h2 {
+        margin: 0;
+        position: relative;
+        font-size: 18px;
+        line-height: 20px;
+        color: @title-color;
+        padding: 15px 18px;
+        font-weight: normal;
+        text-align: center;
+    }
+
+    a {
+        position: absolute;
+        font-size: 18px;
+        line-height: 20px;
+        top: 15px;
+    }
+    .glyphicon-menu-left {
+        color: @title-color;
+        left: 0;
+    }
+    .icon-big-add {
+        color: @light-color;
+        right: 0;
+        font-size: 24px;
+    }
+}
+
+.icon-status {
+    padding: 4px 22px 6px 12px;
+    font-size: 12px;
+    color: @base-white;
+    border-radius: 30px;
+
+    &.checking {
+        background-color: #25b964;
+    }
+    &.assigned {
+        background-color: #188fef;
+    }
+}
+

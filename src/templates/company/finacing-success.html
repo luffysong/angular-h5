@@ -1,0 +1,57 @@
+<div class="tools-panel">
+	<div class="h5-wrapper">
+		<h2>
+			<span ng-if="stateParams.type == 'funds'">我要融资</span>
+			<span ng-if="stateParams.type == 'krspace'">氪空间报名</span>
+			<a href="#" class="glyphicon glyphicon-menu-left"></a>
+		</h2>
+	</div>
+</div>
+
+<!-- 已收到融资意愿 -->
+<div class="page-main finacing-success finacing-tips" ng-if="!stateParams.cid">
+	<div class="h5-wrapper">
+		<i class="icon-app-checked"></i>
+		<p>工作人员已收到你的融资意愿！</p>
+		<div class="inner">
+			<strong>接下来，你需要：</strong>
+			<ul class="tips-list">
+				<li>登录PC端<a href="">rong.36kr.com</a>，进入我管理的公司页</li>
+				<li>继续申请融资，准备一下材料</li>
+				<ol>
+					<li>商业计划书</li>
+					<li>五个投资人最关注的核心问题</li>
+				</ol>	
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!-- 已有公司 -->
+<div class="page-main finacing-success" ng-if="stateParams.cid">
+	<h3 class="tit-desc">确认申请的公司<small>（仅显示你是管理员或你创建的公司）</small></h3>
+	<ul class="my-company-list">
+		<li ng-repeat="item in [1,2,3,4,5]">
+			<header>
+				<a href="#" class="logo">
+					<img class="img-circle" src="" alt="" width="40" height="40" />
+				</a>
+				<div class="company-info">
+					<a href="#">oxcoder猿圈</a>
+					<div>
+						<i class="icon-app-tag"></i>
+						<span>医疗健康</span>
+					</div>
+					<p ng-if="stateParams.type == 'funds'">融资目标：A轮 ￥2000万</p>
+					<p ng-if="stateParams.type == 'krspace'">氪空间第4期</p>
+				</div>
+				<span class="icon-status checking">审核中</span>
+				<!-- <span class="icon-status assigned">已入驻</span> -->
+			</header>
+			<div class="panel-main">
+				<p>面向企事业单位的蔬菜、生鲜、水果等农副产品配送服务公司</p>
+			</div>
+		</li>
+	</ul>
+	<p class="tips-text">如遇到问题，联系我们：<a href="mailTo:service@36kr.com">service@36kr.com</a></p>
+</div>
