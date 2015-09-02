@@ -215,37 +215,4 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url: '/riskTipAll',
         templateUrl: 'templates/protocol/riskTip_all.html'
     });
-
-    /**
-     * 创业节
-     */
-    $stateProvider.state('startup', {
-        'url': '/startup',
-        'templateUrl': 'templates/startup/index.html',
-        'controller': 'startupController'
-    });
-
-    $stateProvider.state('startupLogin', {
-        'url': '/startup/login',
-        'templateUrl': 'templates/startup/login.html',
-        'controller': 'startupController'
-    });
-
-    $stateProvider.state('startupCompany', {
-        'url': '/startup/company',
-        'templateUrl': 'templates/startup/company.html',
-        'controller': 'startupController'
-    });
-
-    $stateProvider.state('startupCode', {
-        'url': '/startup/code?code',
-        'templateUrl': 'templates/startup/code.html',
-        'controller': 'startupController'
-    });
-
-    $stateProvider.state('startupWithToken', {
-        'url': '/startup/{token}?type&id',
-        'templateUrl': 'templates/startup/index.html',
-        'controller': 'startupController'
-    });
 });
