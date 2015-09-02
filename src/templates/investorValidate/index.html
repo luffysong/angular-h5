@@ -7,7 +7,7 @@
         <div ng-if="valStatus == 'normal'">
             <div class="intro text-center">
                 <p class="c-orange fs-16">完成跟投人认证</p>
-                <p>查看更多公司众筹详情，参与跟投</p>
+                <p>查看更多项目详情，参与跟投</p>
             </div>
             <form ng-submit="$event.preventDefault()"  action="" name="investorValidateForm" >
                 <!--所有报错信息-->
@@ -218,8 +218,8 @@
         <div ng-if="valStatus == 'validating'" class="welcome-form">
             <div class="validating-info text-center">
                 <div class="validating-logo"></div>
-                <p class="c-orange fs-15">恭喜你迈出参与股权众筹的第一步</p>
-                <p class="fs-12">我们核对信息后，会在1个工作日内为你开通参与众筹的直通车。</p>
+                <p class="c-orange fs-15">恭喜你迈出参与股权投资的第一步</p>
+                <p class="fs-12">我们核对信息后，会在1个工作日内为你开通参与股权投资的直通车。</p>
             </div>
 
         </div>
@@ -228,7 +228,7 @@
             <div class="validating-info text-center">
                 <div class="validating-logo fail"></div>
                 <p class="c-orange fs-15">您多次身份证验证未通过</p>
-                <p class="fs-12">导致无法继续申请参与众筹</p>
+                <p class="fs-12">导致无法继续申请参与股权投资</p>
                 <p class="fs-12">如有疑问请联系我们：<a href="">service@36kr.com</a></p>
             </div>
 
@@ -241,6 +241,6 @@
             </div>
 
         </div>
-        <a ng-if="valStatus == 'withoutVal' || valStatus == 'validating'" ui-sref="syndicates" class="btn btn-default btn-cancel">查看众筹列表</a>
+        <a ng-if="valStatus == 'withoutVal' || valStatus == 'validating'" ui-sref="syndicates" class="btn btn-default btn-cancel">查看股权投资列表</a>
     </div>
 </div>

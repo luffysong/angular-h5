@@ -6,13 +6,22 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
 
-    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService, $interval,$modal, $stateParams) {
+    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService, $interval,$modal, $stateParams,$state) {
         $timeout(function(){
             window.scroll(0,0);
         },0);
-        document.title="36氪股权众筹";
+        /*先判断用户是否完善资料*/
+        UserService.isProfileValid(function (valid) {
+            if(!valid){
+                $state.go('guide.welcome', {
+                    type: "investorValidate"
+                });
+                return;
+            }
+        });
+        document.title="36氪股权投资";
         WEIXINSHARE = {
-            shareTitle: "36氪股权众筹",
+            shareTitle: "36氪股权投资",
             shareDesc: "成为跟投人",
             shareImg: 'http://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg'
         };

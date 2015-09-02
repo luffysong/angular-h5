@@ -154,12 +154,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('investorValidate', {
         url: '/investorValidate?type',
         templateUrl: 'templates/investorValidate/index.html',
-        controller: 'InvestorValidateController',
-        data:{
-            permissions : {
-                only : ['valid']
-            }
-        }
+        controller: 'InvestorValidateController'
     });
     /*投资人认证申请*/
     $stateProvider.state('investorValidateApply', {

@@ -12,7 +12,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
         $scope.pageNo = 1;
         $scope.noMore = true;
         $scope.UID = UserService.getUID();
-        document.title="36氪众筹";
+        document.title="36氪股权投资";
         /*前端处理，包括融资进度百分比的计算，以及众筹状态*/
         $scope.handleData = function(){
             angular.forEach($scope.investorList,function(key,index){
@@ -28,7 +28,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                             var startTime = new Date(key.start_time);
                             if(new Date() < startTime){
                                 var minute = startTime.getMinutes() > 9 ? startTime.getMinutes() : "0"+startTime.getMinutes();
-                                key.name = parseInt(startTime.getMonth())+1+"月"+startTime.getDate()+"日  "+startTime.getHours()+":"+minute+"  开始众筹";
+                                key.name = parseInt(startTime.getMonth())+1+"月"+startTime.getDate()+"日  "+startTime.getHours()+":"+minute+"  开始融资";
                                 key.color = 60;
                             }
                         }
@@ -172,7 +172,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
             }
         };
         WEIXINSHARE = {
-            shareTitle: "36氪众筹",
+            shareTitle: "36氪股权投资",
             shareDesc: "让创业更简单",
             shareImg: 'http://img.36tr.com/logo/20140520/537aecb26e02d'
         };

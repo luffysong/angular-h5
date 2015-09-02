@@ -6,7 +6,6 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('GuideWelcomeController',
     function($stateParams, $scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope, $timeout, $upload, AndroidUploadService) {
-        console.log($stateParams, 'welcome')
         $scope.sourceType = $stateParams.type || 'other';
 
         $scope.user = {
@@ -206,6 +205,10 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 phone: $scope.user.phone,
                 smscode: $scope.user.smscode
             }, function(data){
+                if($scope.sourceType == "investorValidate"){
+                    $state.go("investorValidate");
+                    return;
+                }
                 if($scope.applySpaceEnter){
                     $state.go('krspace.judge');
                 }else if($stateParams.from){
