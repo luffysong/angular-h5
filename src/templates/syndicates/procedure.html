@@ -25,7 +25,7 @@
             <a href="{{rongHost}}/#/uc/favorite">我的收藏</a>
         </li>
         <li class="animate">
-            <a ui-sref="syndicatesAllOrder">众筹订单</a>
+            <a ui-sref="syndicatesAllOrder">我的订单</a>
         </li>
         <li class="animate">
             <a href="{{rongHost}}/#/uc/mycompany">我管理的公司</a>
@@ -85,7 +85,7 @@
                 </li>
                 <li class="procedure" ng-class="{ 'active': formality.status == 6  }">
                     <div class="dot"></div>
-                    <p class="status">众筹成功<span ng-if="formality.status == 6">（预计{{ formality.forecast_complete_time }}前完成）</span></p>
+                    <p class="status">入资成功<span ng-if="formality.status == 6">（{{ formality.forecast_complete_time }}）</span></p>
                 </li>
             </ul>
         </div>
@@ -164,7 +164,7 @@
                     <li class="step">
                         <span>第三步</span>
                         <div class="content">
-                            <p>打印文件</p>
+                            <p>签署文件</p>
                             <p ng-bind-html="formality.desc_sign"></p>
                         </div>
                     </li>
@@ -185,7 +185,7 @@
                 <p class="text-center">只需静静地等待正式成为 <a ui-sref="syndicatesDetail({ companyId: formality.financing.company.id, fundingId: formality.cf_id })">{{ formality.financing.company.name  }}</a> 的投资人，如果有进度更新，我们会及时通知您</p>
             </div>
 
-            <!--众筹成功-->
+            <!--入资成功-->
             <div class="success-area" ng-if="formality.status == 6">
                 <div class="icon-people"></div>
                 <p class="tip text-center">祝贺你</p>
