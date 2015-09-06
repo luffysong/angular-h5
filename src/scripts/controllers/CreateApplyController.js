@@ -9,14 +9,14 @@ angular.module('defaultApp.controller').controller('CreateApplyController',
         $scope.stateParams = $stateParams;
         $scope.goOnApply = function(e) {
         	e && e.preventDefault();
-        	if($stateParams.type) {
+        	if($stateParams.from) {
         		CompanyService.ventureApply($stateParams.cid, {
-	                type: $stateParams.type
+	                from: $stateParams.from
 	            }, function(data) {
 	                if(data.company) {
-                        $state.go('finacingSuccess', {type: $stateParams.type, cid: $scope.myCompanyList.selectedCompanyId});
+                        $state.go('finacingSuccess', {from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId});
                     } else {
-                        $state.go('finacingSuccess', {type: $stateParams.type});
+                        $state.go('finacingSuccess', {from: $stateParams.from});
                     }
 	            })
         	}

@@ -12,14 +12,14 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
             data: [],
             selectedCompanyId: ''
         }
-        myCompanyListShow = true;
+        loading.show('myCompanyListShow');
         $scope.loadUserBasicData = function() {
             CompanyService.getManaged({}, function(data) {
                 $scope.myCompanyList.data = data.data;
-                myCompanyListShow = false;
+                loading.hide('myCompanyListShow');
             }, function(err) {
                 ErrorService.alert(err);
-                myCompanyListShow = false;
+                loading.hide('myCompanyListShow');
             });
         }
         $scope.loadUserBasicData();
@@ -41,14 +41,14 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
             $scope.submiting = true;
 
             CompanyService.ventureApply($scope.myCompanyList.selectedCompanyId, {
-                type: $stateParams.type
+                from: $stateParams.from
             }, function(data) {
                 if(data.company) {
                     // $state.go(finacingSuccess({type: 'list', cid: $scope.myCompanyList.selectedCompanyId}));
-                    $state.go('finacingSuccess', {type: $stateParams.type, cid: $scope.myCompanyList.selectedCompanyId});
+                    $state.go('finacingSuccess', {from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId});
                 } else {
                     // $state.go(finacingSuccess({type: 'accept', cid: $scope.myCompanyList.selectedCompanyId}));
-                    $state.go('finacingSuccess', {type: $stateParams.type});
+                    $state.go('finacingSuccess', {from: $stateParams.from});
                 }
                 
             })

@@ -12,7 +12,7 @@ angular.module('defaultApp.controller').controller('FinacingSuccessController',
         if(!$stateParams.cid) return;
         $scope.finacingList = {};
         CompanyService.ventureApply($scope.stateParams.cid, {
-            type: $stateParams.type
+            from: $stateParams.from
         }, function(data) {
             $scope.finacingList = data;
         })

@@ -10,7 +10,7 @@
 </div>
 
 <div loading="myCompanyListShow"></div>
-<div loading="myCompanyListShow">
+<div ng-show="loadingInst.myCompanyListShow">
 	<!-- 没有公司时的状态 -->
 	<div class="page-main my-company-page" ng-if="!myCompanyList.data.length">
 		<div class="tips-box">

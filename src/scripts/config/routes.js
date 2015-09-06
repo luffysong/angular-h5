@@ -212,7 +212,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*创建公司审核页*/
     $stateProvider.state('createCompanyApply', {
-        url: '/company_create_apply?{type}&{cid}',
+        url: '/company_create_apply?{from}&{cid}',
         templateUrl: 'templates/company/create-apply-alert.html', // todo : 文件路径
         controller: 'CreateApplyController' // todo : controller
     });
@@ -232,7 +232,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     // 我管理的公司
     $stateProvider.state('myCompany', {
-        url: '/my_company?{type}',
+        url: '/my_company?{from}',
         templateUrl: 'templates/company/my-company.html', // todo : 文件路径
         controller: 'MyCompanyController', // todo : controller
         data:{
@@ -244,7 +244,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     // 我要融资-提交成功
     $stateProvider.state('finacingSuccess', {
-        url: '/finacing_success?{type}&{cid}',
+        url: '/finacing_success?{from}&{cid}',
         templateUrl: 'templates/company/finacing-success.html', // todo : 文件路径
         controller: 'FinacingSuccessController' // todo : controller
     });
