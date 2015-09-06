@@ -115,9 +115,8 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
                         $scope.previewMode = false;
                         $scope.loadAuditInfo();
                         notify.closeAll();
-                        notify({
-                            message: err,
-                            classes: 'alert-danger'
+                        ErrorService.alert({
+                            msg: '格式不支持，请重新上传！'
                         });
                     });
                 }, function(err) {
