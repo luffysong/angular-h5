@@ -485,6 +485,21 @@ gulp.task('build:test', ['clean'],function(){
     CDNPrefix = '/m';
     gulp.start('build');
 });
+gulp.task('build:test2', ['clean'],function(){
+    buildMode = 'test2';
+    CDNPrefix = '/m';
+    gulp.start('build');
+});
+gulp.task('build:test3', ['clean'],function(){
+    buildMode = 'test3';
+    CDNPrefix = '/m';
+    gulp.start('build');
+});
+gulp.task('build:test4', ['clean'],function(){
+    buildMode = 'test4';
+    CDNPrefix = '/m';
+    gulp.start('build');
+});
 gulp.task('build:dev', ['clean'],function(){
     buildMode = 'dev';
     CDNPrefix = '/m';
@@ -566,7 +581,11 @@ gulp.task('remote:test', function(){
     apiHost = 'http://rongtest.36kr.com';
     gulp.start('remote');
 });
-
+gulp.task('remote:test2', function(){
+    buildMode = 'test2';
+    apiHost = 'http://rongtest2.36kr.com';
+    gulp.start('remote');
+});
 gulp.task('remote:test3', function(){
     buildMode = 'test3';
     apiHost = 'http://rongtest3.36kr.com';
@@ -581,11 +600,11 @@ gulp.task('remote:test4', function(){
 //编译页头
 gulp.task('header', function(){
     var headers = {
-
         test: '//huodong.36kr.com/common-module/common-header-test/script.js',
+        test2: '//huodong.36kr.com/common-module/common-header-test/script.js',
         test3: '//huodong.36kr.com/common-module/common-header-test3/script.js',
+        test4: '//huodong.36kr.com/common-module/common-header-test3/script.js',
         dev: '//huodong.36kr.com/common-module/common-header-dev/script.js',
-
         prod: '//krplus-cdn.b0.upaiyun.com/common-module/common-header/script.js'
     };
 
