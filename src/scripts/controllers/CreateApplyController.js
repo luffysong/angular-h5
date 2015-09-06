@@ -11,7 +11,7 @@ angular.module('defaultApp.controller').controller('CreateApplyController',
         	e && e.preventDefault();
         	if($stateParams.from) {
         		CompanyService.ventureApply($stateParams.cid, {
-	                from: $stateParams.from
+	                type: $stateParams.from
 	            }, function(data) {
 	                if(data.company) {
                         $state.go('finacingSuccess', {from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId});

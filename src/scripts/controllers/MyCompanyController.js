@@ -41,7 +41,7 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
             $scope.submiting = true;
 
             CompanyService.ventureApply($scope.myCompanyList.selectedCompanyId, {
-                from: $stateParams.from
+                type: $stateParams.from
             }, function(data) {
                 if(data.company) {
                     // $state.go(finacingSuccess({type: 'list', cid: $scope.myCompanyList.selectedCompanyId}));

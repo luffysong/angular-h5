@@ -40,24 +40,24 @@
 					</a>
 					<div class="company-info">
 						<a href="#">{{finacingList.company.name}}</a>
-						<div>
-							<i class="icon-app-tag"></i>
+						<div ng-if="finacingList.company.industry">
+							<span class="icon-app-tag"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></span>
 							<span>{{finacingList.company.industry}}</span>
 						</div>
-						<p ng-if="stateParams.type == 'funds'">
+						<p ng-if="stateParams.from == 'funds' && (finacingList.funds.phase || finacingList.funds.fundValue)">
 							融资目标：{{finacingList.funds.phase |dict_FinancePhase}} 
 							<span ng-if="finacingList.funds.fundValueUnit == 'CNY'">¥</span>
 	                        <span ng-if="finacingList.funds.fundValueUnit == 'USD'">$</span>
 	                        {{finacingList.funds.fundValue | wanText}}
 						</p>
-						<p ng-if="stateParams.type == 'krspace'">氪空间{{finacingList.term}}</p>
+						<p ng-if="stateParams.from == 'krspace'">氪空间{{finacingList.term}}</p>
 					</div>
 					<span class="icon-status checking" ng-if="finacingList.funds.status == 'SUBMITTED'">审核中</span>
-					<span class="icon-status checking" ng-if="finacingList.funds.status == 'PASSED'">融资中</span>
-					<span class="icon-status checking" ng-if="finacingList.funds.status == 'RECOMMENDED'">融资中</span>
-					<span class="icon-status checking" ng-if="finacingList.status == 0">已入驻</span>
+					<span class="icon-status finacing" ng-if="finacingList.funds.status == 'PASSED'">融资中</span>
+					<span class="icon-status finacing" ng-if="finacingList.funds.status == 'RECOMMENDED'">被推荐</span>
+					<span class="icon-status assigned" ng-if="finacingList.status == 0">已入驻</span>
 					<span class="icon-status checking" ng-if="finacingList.status == 1">审核中</span>
-					<span class="icon-status checking" ng-if="finacingList.status == 2">审核不通过</span>
+					<span class="icon-status reject" ng-if="finacingList.status == 2">被驳回</span>
 					<!-- <span class="icon-status assigned">已入驻</span> -->
 				</header>
 				<div class="panel-main">
