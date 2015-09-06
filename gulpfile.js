@@ -601,7 +601,7 @@ gulp.task('remote:test4', function(){
 gulp.task('header', function(){
     var headers = {
         test: '//huodong.36kr.com/common-module/common-header-test/script.js',
-        test2: '//huodong.36kr.com/common-module/common-header-test/script.js',
+        test2: '//huodong.36kr.com/common-module/common-header-test2/script.js',
         test3: '//huodong.36kr.com/common-module/common-header-test3/script.js',
         test4: '//huodong.36kr.com/common-module/common-header-test3/script.js',
         dev: '//huodong.36kr.com/common-module/common-header-dev/script.js',
