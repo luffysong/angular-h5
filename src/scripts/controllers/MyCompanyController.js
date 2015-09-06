@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('MyCompanyController',
-    function($scope, $rootScope, $state, $stateParams, $location, $modal, CompanyService, UserService, DictionaryService, $http, ErrorService, $timeout) {
+    function($scope, $rootScope, $state, $stateParams, loading, $location, $modal, CompanyService, UserService, DictionaryService, $http, ErrorService, $timeout) {
         $scope.uid = UserService.getUID();
         $scope.stateParams = $stateParams;
         $scope.myCompanyList = {
