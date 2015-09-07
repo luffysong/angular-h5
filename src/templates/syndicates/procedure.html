@@ -43,7 +43,9 @@
         </div>
         <div class="project-info clearfix">
             <div class="project-logo">
-                <img ng-src="{{ formality.financing.company.logo | image:40:'logo' }}" width="40" height="40" alt="{{ formality.financing.company.name }}">
+                <a ui-sref="syndicatesDetail({ companyId: formality.financing.company.id, fundingId: formality.cf_id })">
+                    <img ng-src="{{ formality.financing.company.logo | image:40:'logo' }}" width="40" height="40" alt="{{ formality.financing.company.name }}">
+                </a>
             </div>
             <div class="project-des">
                 <h4 class="project-title">
@@ -114,7 +116,7 @@
                     <p class="tip text-center" ng-if="audit.exist && audit.status == 1">身份证扫描件审核中...</p>
 
                     <p class="tip text-center success" ng-if="audit.exist && audit.status == 2">审核已通过</p>
-                    <p class="tip text-center" ng-if="audit.exist && audit.status == 2">待其他跟投人都完成后，进入下一步如果需要更新扫描件请联系客服</p>
+                    <p class="tip text-center" ng-if="audit.exist && audit.status == 2">待其他跟投人都完成后，进入下一步。如果需要更新扫描件请联系客服</p>
 
                     <p class="tip text-center fail" ng-if="audit.exist && audit.status == 3 && !audit.reaudit">你的审核未通过</p>
                     <p class="tip text-center" ng-if="audit.exist && audit.status == 3 && !audit.reaudit">更改建议：{{ audit.reason }}</p>
