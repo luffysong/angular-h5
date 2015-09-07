@@ -1,5 +1,7 @@
 <div class="syndicates-desire">
-    <div class="desire-rule"></div>
+    <div class="desire-rule">
+        <a class="activity-detail" href="" ng-click="activityDetail()">活动详情</a>
+    </div>
     <div class="desire-nav">
         <div class="nav-content">
             <a class="select-industry"  href="">
@@ -27,6 +29,9 @@
     </div>
     <div class="desire-content">
         <div class="desire-company" ui-sref="syndicatesDesireDetail({id:item.id})" ng-repeat="item in companyData" ng-class="{'normal':$index % 3 == 0 && $index != 0}">
+                <span class="border-radius sort{{item.sort}}" ng-show="item.sort">
+                    <span class="border-numer">{{item.sort}}</span>
+                </span>
                 <span class="company-logo" ng-style="{'background-image':'url(\'{{item.company.logo}}\')'}"></span>
                 <!--<span class="praise-add" ng-class="{'showPraise':item.isPraise}">+{{point}}</span>-->
                 <div class="center">

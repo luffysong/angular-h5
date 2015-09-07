@@ -1,9 +1,60 @@
 .syndicates-desire {
     background-color: #f3f5f7;
+    &.activity-detail {
+        background: #011e30;
+        color: #cccccc;
+        padding: 0 10px;
+        text-align: justify;
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            li {
+                margin-bottom: 25px;
+                &:nth-of-type(3) {
+                    margin-bottom: 46px;
+                }
+            }
+            section {
+                line-height: 25px;
+            }
+            .detail-title {
+                color: #fcd20e;
+                margin-bottom: 10px;
+            }
+        }
+
+        .top-title {
+            color: #fcd20e;
+            margin: 15px 0 10px;
+            text-align: center;
+        }
+        .close-btn {
+            width: 100%;
+            height: 26px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            line-height: 26px;
+            text-align: center;
+            color: #fff;
+            background-color: #203550;
+        }
+    }
     .desire-rule {
-        height: 135px;
+        position: relative;
+        height: 255px;
         background: url(images/zc-rule.jpg) no-repeat center;
         background-size: 100% auto;
+        .activity-detail {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            left: 0;
+            bottom: 10px;
+            color: #769ccd;
+            text-decoration: underline;
+        }
     }
     .desire-nav {
         width: 100%;
@@ -161,6 +212,7 @@
     .desire-content {
         height: auto;
         .desire-company {
+            position: relative;
             display: -webkit-box;
             width: 100%;
             height: 72px;
@@ -169,6 +221,30 @@
             padding: 10px 0;
             margin-bottom: 10px;
             border: 1px solid #e5e5e5;
+            overflow: hidden;
+            .border-radius {
+                position: absolute;
+                display: inline-block;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-color: #f5ae20 transparent transparent #f5ae20;
+                border-width: 20px;
+                left: 0;
+                top: 0;
+                &.sort2 {
+                    border-color: #909495 transparent transparent #909495;
+                }
+                &.sort3 {
+                    border-color: #906a39 transparent transparent #906a39;
+                }
+                .border-numer {
+                    position: absolute;
+                    color: #fff;
+                    left: -13px;
+                    top: -18px;
+                }
+            }
                 & > div {
                     height: 72px;
                     &.center {
@@ -347,13 +423,35 @@
 .desire-modal-window .modal-dialog{
     position: absolute;
     width: 96%;
-    height: 230px;
+    height: 400px;
     top: 50%;
-    margin: -115px 2% 0 2%;
-    padding: 0;
-    background: #fff;
+    margin: -200px 2% 0 2%;
+    background: #011e30;
+    overflow: auto;
     border: 0;
     border-radius: 0;
+}
+.activity-detail-window .modal-dialog {
+    .modal-content {
+        background: #011e30;
+        border: 0;
+        border-radius: 0;
+        .top-line {
+            width: 100%;
+            height: 2px;
+            background-color: #fcd20e;
+        }
+
+    }
+    position: absolute;
+    width: 96%;
+    height: 400px;
+    top: 50%;
+    margin: -200px 2% 0 2%;
+    background: #011e30;
+    border: 0;
+    border-radius: 0;
+    overflow: auto;
 }
 .desire-modal-window .modal-content {
     border: 0;

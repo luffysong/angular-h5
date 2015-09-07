@@ -27,7 +27,6 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                     params[key] = val;
                 }
             });
-            console.log(params);
             /*按时间排序*/
             if(way == "time"){
                 $scope.activeDesc = "apply_time";
@@ -42,8 +41,8 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                 params = angular.extend(params,{
                     orderby:"counter"
                 });
+                $scope.loadData(params,"hot");
             }
-            $scope.loadData(params);
         };
         /*打开分享*/
         $scope.showShare = function(index){
@@ -215,7 +214,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
             });
         }
         /*加载数据*/
-        $scope.loadData = function(params){
+        $scope.loadData = function(params,way){
             var options = {
                 id:"cf-seed",
                 per_page:400
@@ -225,6 +224,14 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                 /*if(!data.data.length)return;*/
                 $scope.handleCity(data.data);
                 $scope.handleData(data.data);
+                angular.forEach(data.data,function(obj){
+                    obj.sort = false;
+                });
+                if(way == "hot"){
+                    data.data[0].sort = 1;
+                    data.data[1].sort = 2;
+                    data.data[2].sort = 3;
+                }
                 /* 少于或等于20条*/
                 $scope.totalCount = data.total;
                 $scope.totalPage = Math.ceil($scope.totalCount / $scope.pageSize);
@@ -258,6 +265,27 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         $scope.submit = function(){
             $scope.searchData();
         }
+        /*点击活动详情*/
+        $scope.activityDetail = function(){
+            $modal.open({
+                templateUrl: 'templates/syndicates/desire/activity-detail.html',
+                windowClass:"activity-detail-window",
+                controller: [
+                    '$scope', '$modalInstance','scope',
+                    function ($scope, $modalInstance, scope) {
+
+                        $scope.cancel =  function(){
+                            $modalInstance.dismiss();
+                        }
+                    }
+                ],
+                resolve: {
+                    scope: function(){
+                        return $scope;
+                    }
+                }
+            });
+        }
         /*根据url匹配查询条件*/
         $scope.urlLoad = function(){
             var params = {};
@@ -266,7 +294,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                     params[key] = val;
                 }
             });
-            $scope.loadData(params);
+            $scope.loadData(params,"hot");
         }
         $scope.urlLoad();
     });
