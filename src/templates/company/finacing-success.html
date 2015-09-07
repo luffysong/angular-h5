@@ -63,7 +63,7 @@
 						<span>{{finacingList.company.industry | dict_CompanyIndustry}}</span>
 					</div>
 					<p ng-if="stateParams.from == 'funds' && (finacingList.funds.phase || finacingList.funds.fundValue)">
-						融资目标：{{finacingList.funds.phase |dict_FinancePhase}} 
+						融资目标：{{finacingList.funds.phase |dict_FinancePhase}} &nbsp;&nbsp;
 						<span ng-if="finacingList.funds.fundValueUnit == 'CNY'">¥</span>
                         <span ng-if="finacingList.funds.fundValueUnit == 'USD'">$</span>
                         {{finacingList.funds.fundValue | wanText}}
