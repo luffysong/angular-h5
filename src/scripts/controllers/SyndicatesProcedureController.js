@@ -20,8 +20,8 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
         }, function(data) {
             $scope.formality = data;
             var updateDate = moment(data.updated_at);
-            var durationArr = [2, 7, 27, 29];
-            var durationForeignArr = [2, 7, 107, 109];
+            var durationArr = [2, 3, 20, 2];
+            var durationForeignArr = [2, 3, 80, 2];
             if(data.status >= 2 && data.status <= 6) {
                  $scope.formality.forecast_complete_time = updateDate.add(data.capital_type == 1 ? durationArr[data.status - 2] : durationForeignArr[data.status - 2], 'days').format('YYYY年MM月DD日');
             }
