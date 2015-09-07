@@ -3,7 +3,7 @@
 	<div class="h5-wrapper">
 		<h2>
 			我管理的公司
-			<a href="#" class="glyphicon glyphicon-menu-left"></a>
+			<a href="#" class="glyphicon glyphicon-menu-left" ng-click="goBack($event)"></a>
 			<a  ui-sref="createCompany({from: stateParams.from})" class="icon-big-add"></a>
 		</h2>
 	</div>
@@ -48,8 +48,9 @@
 							</div>
 							<span class="btn-radio">
 								<!-- <input type="radio" name="myCompany" value="{{item.id}}" ng-model="myCompanyList.selectedCompanyId" required/> -->
-								<input type="radio" name="myCompany" id="" value="{{item.id}}" ng-model="myCompanyList.selectedCompanyId" required/> 
-								<a href="#" class="icon-app-checked"></a>
+								<!-- <input type="radio" name="myCompany" id="" value="{{item.id}}" ng-model="myCompanyList.selectedCompanyId" required/> --> 
+								<a href="#" class="icon-app-checked" ng-class="{'ac': !item.checkStatus}" ng-click="btnRadio($event, $index, item.id)"></a>
+								<a href="#" class="icon-app-selected" ng-class="{'ac': item.checkStatus}" ng-click="btnRadio($event, $index)"></a>
 							</span>
 						</header>
 						<div class="panel-main" ng-if="item.brief">

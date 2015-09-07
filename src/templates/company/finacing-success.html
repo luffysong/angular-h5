@@ -3,7 +3,7 @@
 		<h2>
 			<span ng-if="stateParams.from == 'funds'">我要融资</span>
 			<span ng-if="stateParams.from == 'krspace'">氪空间报名</span>
-			<a href="#" class="glyphicon glyphicon-menu-left"></a>
+			<a href="#" class="glyphicon glyphicon-menu-left" ng-click="goBack($event)"></a>
 		</h2>
 	</div>
 </div>
@@ -11,7 +11,7 @@
 
 
 <!-- 已收到融资意愿 -->
-<div class="page-main finacing-success finacing-tips" ng-if="!stateParams.cid">
+<div class="page-main finacing-success finacing-tips" ng-if="!stateParams.cid && (stateParams.from == 'funds')")>
 	<div class="h5-wrapper">
 		<i class="icon-app-checked"></i>
 		<p>工作人员已收到你的融资意愿！</p>
@@ -19,10 +19,27 @@
 			<strong>接下来，你需要：</strong>
 			<ul class="tips-list">
 				<li>登录PC端<a href="">rong.36kr.com</a>，进入我管理的公司页</li>
-				<li>继续申请融资，准备一下材料</li>
+				<li>继续申请融资，准备以下材料</li>
 				<ol>
 					<li>商业计划书</li>
-					<li>五个投资人最关注的核心问题</li>
+					<li>5个投资人最关注的核心问题</li>
+				</ol>	
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="page-main finacing-success finacing-tips" ng-if="!stateParams.cid && (stateParams.from == 'krspace')">
+	<div class="h5-wrapper">
+		<i class="icon-app-checked"></i>
+		<p>工作人员已收到你的入驻意愿！</p>
+		<div class="inner">
+			<strong>接下来，你需要：</strong>
+			<ul class="tips-list">
+				<li>登录PC端<a href="">rong.36kr.com</a>，进入我管理的公司页</li>
+				<li>继续申请氪空间，准备以下材料</li>
+				<ol>
+					<li>入驻氪空间5大核心问题</li>
+					<li>最好准备一份商业计划书</li>
 				</ol>	
 			</ul>
 		</div>

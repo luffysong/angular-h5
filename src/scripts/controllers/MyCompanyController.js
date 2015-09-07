@@ -12,10 +12,20 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
             data: [],
             selectedCompanyId: ''
         }
+
+        // 返回上一页
+        $scope.goBack = function(e) {
+            e && e.preventDefault();
+            history.go(-1);
+        }
+
         loading.show('myCompanyListShow');
         $scope.loadUserBasicData = function() {
             CompanyService.getManaged({}, function(data) {
                 $scope.myCompanyList.data = data.data;
+                $.each(data.data, function(i, val) {
+                    data.data[i].checkStatus = false;
+                });
                 loading.hide('myCompanyListShow');
             }, function(err) {
                 ErrorService.alert(err);
@@ -23,6 +33,18 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
             });
         }
         $scope.loadUserBasicData();
+
+        $scope.btnRadio = function(e, index, id) {
+            e && e.preventDefault();
+            $.each($scope.myCompanyList.data, function(i, val) {
+                val.checkStatus = false;
+            })
+
+            if(id) {
+                $scope.myCompanyList.data[index].checkStatus = true;
+                $scope.myCompanyList.selectedCompanyId = id;
+            }
+        }
 
         $scope.submitForm = function(e) {
             e && e.preventDefault();

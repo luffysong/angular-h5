@@ -32,6 +32,7 @@
 
 .my-company-list {
 	margin: 0;
+	overflow: hidden;
 	li {
 		background-color: @base-white;
 		padding: 10px @wrapper-padding;
@@ -57,21 +58,21 @@
 			height: 26px;
 			text-align: center;
 			line-height: 26px;
-			input {
-				opacity: 0;
-				width: 100%;
-				height: 100%;
-				position: relative;
-				z-index: 10;
-				&:checked {
-					& + a {
-						background: url(images/apply/icon-checked.png) center center no-repeat;
-						&:before {
-							content: "";
-						}
-					}
-				}
-			}
+			// input {
+			// 	opacity: 0;
+			// 	width: 100%;
+			// 	height: 100%;
+			// 	position: relative;
+			// 	z-index: 10;
+			// 	&:checked {
+			// 		& + a {
+			// 			background: url(images/apply/icon-checked.png) center center no-repeat;
+			// 			&:before {
+			// 				content: "";
+			// 			}
+			// 		}
+			// 	}
+			// }
 			a {
 				position: absolute;
 				font-size: 22px;
@@ -81,6 +82,13 @@
 				width: 100%;
 				height: 100%;
 				padding-top: 2px;
+				display: none;
+				&.ac {
+					display: block;
+				}
+			}
+			.icon-app-selected {
+				color: @light-color;
 			}
 		}
 		.icon-status {

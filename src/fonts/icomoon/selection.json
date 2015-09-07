@@ -4,15 +4,39 @@
 		{
 			"icon": {
 				"paths": [
-					"M411.462 723.316v0c9.309 0 13.964-4.655 19.549-9.309l350.953-365.847c9.309-9.309 9.309-28.858 0-38.167s-28.858-9.309-38.167 0l-327.68 341.644-134.982-158.255c-9.309-9.309-28.858-13.964-38.167-4.655s-13.964 28.858-4.655 38.167l153.6 182.458c4.655 9.309 13.964 13.964 19.549 13.964z",
-					"M512 1024c-282.065 0-512-229.935-512-512s229.935-512 512-512c282.065 0 512 229.935 512 512s-229.935 512-512 512zM512 53.062c-253.207 0-458.938 205.731-458.938 458.938s205.731 458.938 458.938 458.938c253.207 0 458.938-205.731 458.938-458.938s-205.731-458.938-458.938-458.938z"
+					"M512 0c-282.065 0-512 229.935-512 512s229.935 512 512 512 512-229.935 512-512-229.935-512-512-512zM781.964 348.16l-350.953 365.847c-5.585 4.655-10.24 9.309-19.549 9.309-5.585 0-14.895-4.655-19.549-13.964l-153.6-182.458c-9.309-9.309-4.655-28.858 4.655-38.167s28.858-4.655 38.167 4.655l134.982 158.255 327.68-341.644c9.309-9.309 28.858-9.309 38.167 0s9.309 28.858 0 38.167z"
 				],
 				"attrs": [],
 				"isMulticolor": false,
 				"grid": 0,
 				"tags": [
-					"对号"
+					"选中对号"
 				]
+			},
+			"attrs": [],
+			"properties": {
+				"order": 5,
+				"id": 0,
+				"prevSize": 32,
+				"code": 58917,
+				"name": "app-selected"
+			},
+			"setIdx": 0,
+			"setId": 4,
+			"iconIdx": 0
+		},
+		{
+			"icon": {
+				"paths": [
+					"M411.462 723.316v0c9.309 0 13.964-4.655 19.549-9.309l350.953-365.847c9.309-9.309 9.309-28.858 0-38.167s-28.858-9.309-38.167 0l-327.68 341.644-134.982-158.255c-9.309-9.309-28.858-13.964-38.167-4.655s-13.964 28.858-4.655 38.167l153.6 182.458c4.655 9.309 13.964 13.964 19.549 13.964z",
+					"M512 1024c-282.065 0-512-229.935-512-512s229.935-512 512-512c282.065 0 512 229.935 512 512s-229.935 512-512 512zM512 53.062c-253.207 0-458.938 205.731-458.938 458.938s205.731 458.938 458.938 458.938c253.207 0 458.938-205.731 458.938-458.938s-205.731-458.938-458.938-458.938z"
+				],
+				"attrs": [],
+				"isMulticolor": false,
+				"tags": [
+					"对号"
+				],
+				"grid": 0
 			},
 			"attrs": [],
 			"properties": {
@@ -22,8 +46,8 @@
 				"code": 58911,
 				"name": "app-checked"
 			},
-			"setIdx": 0,
-			"setId": 5,
+			"setIdx": 1,
+			"setId": 3,
 			"iconIdx": 0
 		},
 		{
@@ -53,10 +77,6 @@
 					}
 				],
 				"isMulticolor": true,
-				"grid": 0,
-				"tags": [
-					"标签icon"
-				],
 				"colorPermutations": {
 					"15315215312552552551": [
 						0,
@@ -65,7 +85,11 @@
 						0,
 						0
 					]
-				}
+				},
+				"tags": [
+					"标签icon"
+				],
+				"grid": 0
 			},
 			"attrs": [
 				{
@@ -99,8 +123,8 @@
 				"name": "app-tag"
 			},
 			"setIdx": 1,
-			"setId": 4,
-			"iconIdx": 0
+			"setId": 3,
+			"iconIdx": 1
 		},
 		{
 			"icon": {
@@ -126,9 +150,9 @@
 				"code": 58900,
 				"name": "star"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 0
+			"iconIdx": 2
 		},
 		{
 			"icon": {
@@ -157,9 +181,9 @@
 				"code": 58880,
 				"name": "h5-location"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 1
+			"iconIdx": 3
 		},
 		{
 			"icon": {
@@ -185,9 +209,9 @@
 				"code": 58881,
 				"name": "h5-school"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 2
+			"iconIdx": 4
 		},
 		{
 			"icon": {
@@ -216,9 +240,9 @@
 				"code": 58882,
 				"name": "h5-time"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 3
+			"iconIdx": 5
 		},
 		{
 			"icon": {
@@ -250,9 +274,9 @@
 				"code": 58883,
 				"name": "linkedin"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 4
+			"iconIdx": 6
 		},
 		{
 			"icon": {
@@ -281,9 +305,9 @@
 				"code": 58884,
 				"name": "wechat"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 5
+			"iconIdx": 7
 		},
 		{
 			"icon": {
@@ -318,9 +342,9 @@
 				"code": 58885,
 				"name": "weibo"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 6
+			"iconIdx": 8
 		},
 		{
 			"icon": {
@@ -346,9 +370,9 @@
 				"code": 58886,
 				"name": "tip"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 7
+			"iconIdx": 9
 		},
 		{
 			"icon": {
@@ -377,9 +401,9 @@
 				"code": 58887,
 				"name": "add"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 8
+			"iconIdx": 10
 		},
 		{
 			"icon": {
@@ -408,9 +432,9 @@
 				"code": 58889,
 				"name": "display"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 9
+			"iconIdx": 11
 		},
 		{
 			"icon": {
@@ -436,9 +460,9 @@
 				"code": 58890,
 				"name": "edit"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 10
+			"iconIdx": 12
 		},
 		{
 			"icon": {
@@ -467,9 +491,9 @@
 				"code": 58892,
 				"name": "tag"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 11
+			"iconIdx": 13
 		},
 		{
 			"icon": {
@@ -501,9 +525,9 @@
 				"code": 58893,
 				"name": "link"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 12
+			"iconIdx": 14
 		},
 		{
 			"icon": {
@@ -529,9 +553,9 @@
 				"code": 58895,
 				"name": "user"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 13
+			"iconIdx": 15
 		},
 		{
 			"icon": {
@@ -557,9 +581,9 @@
 				"code": 58897,
 				"name": "del"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 14
+			"iconIdx": 16
 		},
 		{
 			"icon": {
@@ -594,9 +618,9 @@
 				"code": 58909,
 				"name": "eye"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 15
+			"iconIdx": 17
 		},
 		{
 			"icon": {
@@ -627,9 +651,9 @@
 				"code": 58904,
 				"name": "big-add"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 16
+			"iconIdx": 18
 		},
 		{
 			"icon": {
@@ -676,9 +700,9 @@
 				"code": 58906,
 				"name": "feedback"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 17
+			"iconIdx": 19
 		},
 		{
 			"icon": {
@@ -713,9 +737,9 @@
 				"code": 58905,
 				"name": "gototop"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 18
+			"iconIdx": 20
 		},
 		{
 			"icon": {
@@ -750,9 +774,9 @@
 				"code": 58907,
 				"name": "turn-left"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 19
+			"iconIdx": 21
 		},
 		{
 			"icon": {
@@ -787,9 +811,9 @@
 				"code": 58908,
 				"name": "turn-right"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 20
+			"iconIdx": 22
 		},
 		{
 			"icon": {
@@ -821,9 +845,9 @@
 				"code": 58888,
 				"name": "hexinziyuan"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 21
+			"iconIdx": 23
 		},
 		{
 			"icon": {
@@ -852,9 +876,9 @@
 				"code": 58894,
 				"name": "jiejuefangan"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 22
+			"iconIdx": 24
 		},
 		{
 			"icon": {
@@ -880,9 +904,9 @@
 				"code": 58891,
 				"name": "jingpinfenxi"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 23
+			"iconIdx": 25
 		},
 		{
 			"icon": {
@@ -911,9 +935,9 @@
 				"code": 58896,
 				"name": "qita"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 24
+			"iconIdx": 26
 		},
 		{
 			"icon": {
@@ -939,9 +963,9 @@
 				"code": 58898,
 				"name": "shichangxianzhuang"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 25
+			"iconIdx": 27
 		},
 		{
 			"icon": {
@@ -973,9 +997,9 @@
 				"code": 58903,
 				"name": "shichangzhanbi"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 26
+			"iconIdx": 28
 		},
 		{
 			"icon": {
@@ -1010,9 +1034,9 @@
 				"code": 58902,
 				"name": "yinglimoshi"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 27
+			"iconIdx": 29
 		},
 		{
 			"icon": {
@@ -1041,9 +1065,9 @@
 				"code": 58901,
 				"name": "yonghutongdian"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 28
+			"iconIdx": 30
 		},
 		{
 			"icon": {
@@ -1069,9 +1093,9 @@
 				"code": 58899,
 				"name": "youshifenxi"
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 29
+			"iconIdx": 31
 		},
 		{
 			"icon": {
@@ -1097,9 +1121,9 @@
 				"prevSize": 32,
 				"code": 58910
 			},
-			"setIdx": 2,
+			"setIdx": 1,
 			"setId": 3,
-			"iconIdx": 30
+			"iconIdx": 32
 		},
 		{
 			"icon": {
@@ -1122,7 +1146,7 @@
 				"prevSize": 28,
 				"code": 61910
 			},
-			"setIdx": 3,
+			"setIdx": 2,
 			"setId": 2,
 			"iconIdx": 0
 		}
