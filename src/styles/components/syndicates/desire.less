@@ -102,6 +102,9 @@
                 outline: 0;
                 border: 0;
                 background: #fff;
+                &.active {
+                    color: #e6720d;
+                }
                 &.left {
                     padding-left: 15px;
                     position: absolute;
@@ -200,7 +203,7 @@
             input {
                 width: 100%;
                 height: 25px;
-                border: solid 1px #dfdfdf;
+                border: solid 1px #efefef;
                 border-radius: 3px;
                 background: #ffffff;
                 box-sizing: border-box;
@@ -229,7 +232,7 @@
             background-color: #fff;
             padding: 10px 0;
             margin-bottom: 10px;
-            border: 1px solid #e5e5e5;
+            border: 1px solid #efefef;
             overflow: hidden;
             .border-radius {
                 position: absolute;
@@ -354,7 +357,7 @@
         background: url("images/zc-detail-banner.jpg") no-repeat center;
         background-size: 100% auto;
         text-align: center;
-        -webkit-box-align: center;
+        padding-top: 36px;
         -webkit-box-pack: center;
         .company-logo {
             display: block;
@@ -365,6 +368,7 @@
             margin-bottom: 12px;
         }
         .company-name {
+            font-size: 16px;
             color: #fff;
         }
 
@@ -378,6 +382,7 @@
             background: #f0f0f0;
             color: #666;
             font-size: 16px;
+            margin-top: 5px;
         }
         .address {
             color: #999;
@@ -399,6 +404,9 @@
             color: #fff;
             font-size: 13px;
             &.icon-wechat {
+                position: relative;
+                top: 4px;
+                font-size: 20px;
                 background-color: #7BD172;
             }
             &.icon-qq {
@@ -416,6 +424,9 @@
         .cancel-list {
             margin-top: 40px;
             text-align: center;
+            a:active {
+                color: #008DF2;
+            }
             img {
                 position: relative;
                 bottom: 1px;

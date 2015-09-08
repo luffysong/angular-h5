@@ -37,7 +37,10 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         $scope.qrcodeUrl = encodeURIComponent("http://" + location.hostname + "/m/#/zhongchouDesire");
         $scope.activePage = 1;
         $scope.activeDesc = "";
+        $scope.activeSort = "hot";
+        $scope.isWeiXin = /MicroMessenger/gi.test(navigator.userAgent) ? true : false;
         $scope.sort = function(way){
+            $scope.activeSort = way;
             var params = {};
             var obj = {
                 industry:$scope.focusIndustry,
@@ -127,6 +130,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                             controller: [
                                 '$scope', '$modalInstance','scope',
                                 function ($scope, $modalInstance, scope) {
+                                    $scope.isWeiXin = scope.isWeiXin;
                                     $scope.cancel =  function(){
                                         $modalInstance.dismiss();
                                     }
@@ -174,6 +178,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                                 controller: [
                                     '$scope', '$modalInstance','scope',
                                     function ($scope, $modalInstance, scope) {
+                                        $scope.isWeiXin = scope.isWeiXin;
                                         $scope.cancel =  function(){
                                             $modalInstance.dismiss();
                                         }
