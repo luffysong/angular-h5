@@ -12,7 +12,28 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         /*默认一页展示条数*/
         $scope.pageSize = 20;
         $scope.cityData = DictionaryService.getLocation();
-        $scope.industryData = DictionaryService.getDict("CompanyIndustry");
+        /*行业数据过滤*/
+        var industryData = [
+            "电子商务",
+            "房产家居",
+            "工具软件",
+            "广告营销",
+            "教育培训",
+            "金融",
+            "旅游户外",
+            "媒体",
+            "企业服务",
+            "汽车交通",
+            "社交网络",
+            "文体艺术",
+            "消费生活",
+            "医疗健康",
+            "游戏动漫",
+            "智能硬件"
+        ];
+        $scope.industryData = DictionaryService.getDict("CompanyIndustry").filter(function(item){
+            return industryData.indexOf(item.desc) >= 0;
+        });
         $scope.qrcodeUrl = encodeURIComponent("http://" + location.hostname + "/m/#/zhongchouDesire");
         $scope.activePage = 1;
         $scope.activeDesc = "";
