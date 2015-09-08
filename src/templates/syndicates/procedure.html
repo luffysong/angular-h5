@@ -43,12 +43,12 @@
         </div>
         <div class="project-info clearfix">
             <div class="project-logo">
-                <a ui-sref="syndicatesDetail({ companyId: formality.financing.company.id, fundingId: formality.cf_id })">
+                <a ui-sref="syndicatesDetail({ companyId: formality.financing.company.id, fundingId: formality.cf_id })" data-stat-click="comInfo.comLogo">
                     <img ng-src="{{ formality.financing.company.logo | image:40:'logo' }}" width="40" height="40" alt="{{ formality.financing.company.name }}">
                 </a>
             </div>
             <div class="project-des">
-                <h4 class="project-title">
+                <h4 class="project-title" data-stat-click="comInfo.comName">
                     <a ui-sref="syndicatesDetail({ companyId: formality.financing.company.id, fundingId: formality.cf_id })">{{ formality.financing.company.name  }}</a>
                 </h4>
                 <p class="project-sub-title">
@@ -121,10 +121,10 @@
                     <p class="tip text-center fail" ng-if="audit.exist && audit.status == 3 && !audit.reaudit">你的审核未通过</p>
                     <p class="tip text-center" ng-if="audit.exist && audit.status == 3 && !audit.reaudit">更改建议：{{ audit.reason }}</p>
 
-                    <button type="submit" class="btn btn-primary btn-submit" ng-if="audit.exist && (!audit.status || audit.status == 3 && audit.reaudit)">提交审核</button>
+                    <button type="submit" class="btn btn-primary btn-submit" ng-if="audit.exist && (!audit.status || audit.status == 3 && audit.reaudit)" data-stat-click="task.submit">提交审核</button>
                     <a class="btn btn-upload" href="javascript:void(0);" ng-class="{ 'btn-primary': !audit.exist , 'btn-default': audit.exist }" ng-if="!audit.status || audit.status == 3 && audit.reaudit">
-                        <span ng-if="!audit.exist">上传身份证扫描件</span>
-                        <span ng-if="audit.exist">重新上传</span>
+                        <span ng-if="!audit.exist" data-stat-click="task.uploadPic">上传身份证扫描件</span>
+                        <span ng-if="audit.exist" data-stat-click="task.uploadAgain">重新上传</span>
                         <input type="file" name="auditPic" ng-file-select
                                ng-file-change="imgFileSelected($files, $event)"
                                ng-multiple="false"
@@ -132,7 +132,7 @@
                                resetOnClick="true">
                     </a>
                     <a class="btn btn-upload btn-primary" href="javascript:void(0);" ng-if="audit.status == 3 && !audit.reaudit">
-                        <span ng-if="audit.exist">重新上传</span>
+                        <span ng-if="audit.exist" data-stat-click="task.uploadAgain">重新上传</span>
                         <input type="file" name="auditPic" ng-file-select
                                ng-file-change="imgFileSelected($files, $event)"
                                ng-multiple="false"
@@ -147,7 +147,7 @@
                 <div class="icon-writing"></div>
                 <p class="tip text-center">赶紧打印签字吧！</p>
                 <p class="text-center">然后把文件寄给我们，剩下就等着做股东吧！</p>
-                <a href="{{ formality.file_contract  }}" class="btn btn-primary btn-download" target="_blank">下载文件</a>
+                <a href="{{ formality.file_contract  }}" class="btn btn-primary btn-download" target="_blank" data-stat-click="task.download">下载文件</a>
 
                 <ul class="steps">
                     <li class="step">
