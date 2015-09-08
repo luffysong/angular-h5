@@ -6,14 +6,14 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDesireDetailController',
     function($scope, $modal, ErrorService, $stateParams,DictionaryService,$timeout,CrowdFundingService,UserService,$state) {
-        document.title = "我要上众筹";
+        document.title = "创客筹赞";
         /*百度分享config*/
         $scope.config = {};
         $scope.shareSyndicate = function(){
             $scope.config.url = encodeURIComponent(location.href);
         }
-        $scope.config.title = "36氪让创业更简单";
-        $scope.config.desc = "36氪让创业更简单";
+        $scope.config.title = "创客筹赞 | 想融资，没人比我更赞";
+        $scope.config.desc = "9月10日，一次战役解决PR与融资双重难题，群雄逐鹿，只有最棒的你才能傲视群雄！";
         $scope.cityData = DictionaryService.getLocation();
         $scope.industryData = DictionaryService.getDict("CompanyIndustry");
         $scope.isWeiXin = /MicroMessenger/gi.test(navigator.userAgent) ? true : false;
@@ -76,6 +76,13 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
                                         scope.showShade = true;
                                         $("body").css("overflow","hidden");
                                     }
+                                    /*百度分享config*/
+                                    $scope.config = {};
+                                    $scope.shareSyndicate = function(){
+                                        $scope.config.url = encodeURIComponent(location.href);
+                                    }
+                                    $scope.config.title = scope.config.title;
+                                    $scope.config.desc = scope.config.desc;
                                     $scope.cancel =  function(){
                                         $modalInstance.dismiss();
                                     }
@@ -126,6 +133,13 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
                                             scope.showShade = true;
                                             $("body").css("overflow","hidden");
                                         }
+                                        /*百度分享config*/
+                                        $scope.config = {};
+                                        $scope.shareSyndicate = function(){
+                                            $scope.config.url = encodeURIComponent(location.href);
+                                        }
+                                        $scope.config.title = scope.config.title;
+                                        $scope.config.desc = scope.config.desc;
                                         $scope.cancel =  function(){
                                             $modalInstance.dismiss();
                                         }
@@ -176,13 +190,15 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
         },function(data){
             $scope.handleCity(data);
             $scope.companyDetail = data;
+            window.WEIXINSHARE.shareImg = $scope.companyDetail.company.logo;
+            InitWeixin();
         },function(err){
             ErrorService.alert(err);
         });
         window.WEIXINSHARE = {
-            shareTitle: "我要上众筹",
-            shareDesc: "我要上众筹",
-            shareImg: "http://krplus-pic.b0.upaiyun.com/201508/04182621/1c55d99b971a6c0c.jpg",
+            shareTitle: "创客筹赞 | 想融资，没人比我更赞",
+            shareDesc: "9月10日，一次战役解决PR与融资双重难题，群雄逐鹿，只有最棒的你才能傲视群雄！",
+            shareImg: "http://krplus-pic.b0.upaiyun.com/201509/08153430/df86c04afbd4c8a7.jpg",
             shareLink: location.href
         };
         InitWeixin();

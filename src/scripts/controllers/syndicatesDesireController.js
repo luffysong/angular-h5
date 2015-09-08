@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDesireController',
     function($scope, $modal, ErrorService, $stateParams,DictionaryService,$timeout,CrowdFundingService,UserService,$state) {
-        document.title = "我要上众筹";
+        document.title = "创客筹赞";
         /*保存查询条件*/
         $scope.queryParams = {};
         /*默认一页展示条数*/
@@ -248,7 +248,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                 angular.forEach(data.data,function(obj){
                     obj.sort = false;
                 });
-                if(way == "hot"){
+                if(way == "hot" && !$scope.focusIndustry){
                     data.data[0].sort = 1;
                     data.data[1].sort = 2;
                     data.data[2].sort = 3;
@@ -318,4 +318,11 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
             $scope.loadData(params,"hot");
         }
         $scope.urlLoad();
+        window.WEIXINSHARE = {
+            shareTitle: "创客筹赞 | 想融资，没人比我更赞",
+            shareDesc: "9月10日，一次战役解决PR与融资双重难题，群雄逐鹿，只有最棒的你才能傲视群雄！",
+            shareImg: "http://krplus-pic.b0.upaiyun.com/201509/08153430/df86c04afbd4c8a7.jpg",
+            shareLink: location.href
+        };
+        InitWeixin();
     });
