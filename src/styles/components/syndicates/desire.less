@@ -301,6 +301,9 @@
                 .company-name {
                     font-size: 14px;
                     color: #000;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
                 .company-intro {
                     font-size: 12px;
@@ -351,23 +354,22 @@
         text-align: center;
     }
     .desire-detail {
-        display: -webkit-box;
         width: 100%;
         height: 178px;
         background: url("images/zc-detail-banner.jpg") no-repeat center;
         background-size: 100% auto;
         text-align: center;
         padding-top: 36px;
-        -webkit-box-pack: center;
         .company-logo {
             display: block;
             width: 80px;
             height: 80px;
             border-radius: 50%;
             background-size: contain;
-            margin-bottom: 12px;
+            margin: 0 auto 12px;
         }
         .company-name {
+            text-align: center;
             font-size: 16px;
             color: #fff;
         }
@@ -597,7 +599,7 @@
     left: 0;
     bottom: 0;
     z-index: 9;
-    background: rgba(0,0,0,.7);
+    background: rgba(0,0,0,.85);
     .guide-arrow {
         position: absolute;
         width: 100px;

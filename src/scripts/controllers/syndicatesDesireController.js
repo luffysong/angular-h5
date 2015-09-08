@@ -9,6 +9,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         document.title = "创客筹赞";
         /*保存查询条件*/
         $scope.queryParams = {};
+        $scope.showShade = false;
         /*默认一页展示条数*/
         $scope.pageSize = 20;
         $scope.cityData = DictionaryService.getLocation();
@@ -131,6 +132,11 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                                 '$scope', '$modalInstance','scope',
                                 function ($scope, $modalInstance, scope) {
                                     $scope.isWeiXin = scope.isWeiXin;
+                                    $scope.wxShare = function(){
+                                        $modalInstance.dismiss();
+                                        scope.showShade = true;
+                                        $("body").css("overflow","hidden");
+                                    }
                                     $scope.cancel =  function(){
                                         $modalInstance.dismiss();
                                     }
@@ -179,6 +185,11 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                                     '$scope', '$modalInstance','scope',
                                     function ($scope, $modalInstance, scope) {
                                         $scope.isWeiXin = scope.isWeiXin;
+                                        $scope.wxShare = function(){
+                                            $modalInstance.dismiss();
+                                            scope.showShade = true;
+                                            $("body").css("overflow","hidden");
+                                        }
                                         $scope.cancel =  function(){
                                             $modalInstance.dismiss();
                                         }

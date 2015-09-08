@@ -9,6 +9,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
         document.title = "创客筹赞";
         /*百度分享config*/
         $scope.config = {};
+        $scope.showShade = false;
         $scope.shareSyndicate = function(){
             $scope.config.url = encodeURIComponent(location.href);
         }
@@ -73,6 +74,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
                                 function ($scope, $modalInstance, scope) {
                                     $scope.isWeiXin = scope.isWeiXin;
                                     $scope.wxShare = function(){
+                                        $modalInstance.dismiss();
                                         scope.showShade = true;
                                         $("body").css("overflow","hidden");
                                     }
@@ -130,6 +132,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
                                     function ($scope, $modalInstance, scope) {
                                         $scope.isWeiXin = scope.isWeiXin;
                                         $scope.wxShare = function(){
+                                            $modalInstance.dismiss();
                                             scope.showShade = true;
                                             $("body").css("overflow","hidden");
                                         }

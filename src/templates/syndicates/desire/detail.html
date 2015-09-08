@@ -1,9 +1,7 @@
 <div class="syndicates-desire">
     <div class="desire-detail">
-        <div>
-            <img class="company-logo" ng-src="{{companyDetail.company.logo | image}}" />
-            <section class="company-name">{{companyDetail.company_name}}</section>
-        </div>
+        <img class="company-logo" ng-src="{{companyDetail.company.logo | image}}" ui-sref="company_detail({id:companyDetail.company.id})" />
+        <section class="company-name">{{companyDetail.company_name}}</section>
     </div>
     <div class="detail-info">
         <section class="company-intro">{{companyDetail.company.brief}}</section>
