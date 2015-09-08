@@ -5,7 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDesireDetailController',
-    function($scope, $modal, ErrorService, $stateParams,DictionaryService,$timeout,CrowdFundingService,UserService,$state) {
+    function($scope, $modal, ErrorService, $stateParams,DictionaryService,$timeout,CrowdFundingService,UserService,$state,loading) {
+        loading.show("desireDetail");
         document.title = "创客筹赞";
         /*百度分享config*/
         $scope.config = {};
@@ -195,6 +196,9 @@ angular.module('defaultApp.controller').controller('syndicatesDesireDetailContro
             $scope.companyDetail = data;
             window.WEIXINSHARE.shareImg = $scope.companyDetail.company.logo;
             InitWeixin();
+            $timeout(function(){
+                loading.hide('desireDetail');
+            },100);
         },function(err){
             ErrorService.alert(err);
         });

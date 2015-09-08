@@ -5,7 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDesireController',
-    function($scope, $modal, ErrorService, $stateParams,DictionaryService,$timeout,CrowdFundingService,UserService,$state) {
+    function($scope, $modal, ErrorService, $stateParams,DictionaryService,$timeout,CrowdFundingService,UserService,$state,loading) {
+        loading.show("desireList");
         document.title = "创客筹赞";
         /*保存查询条件*/
         $scope.queryParams = {};
@@ -279,7 +280,9 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                     $scope.totalData = data.data;
                     $scope.companyData = $scope.totalData.slice(0,20);
                 }
-
+                $timeout(function(){
+                    loading.hide('desireList');
+                },100);
             },function(err){
                 ErrorService.alert(err);
             });
