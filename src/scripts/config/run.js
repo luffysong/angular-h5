@@ -45,6 +45,14 @@ angular.module('defaultApp')
     .run(function($rootScope, $location){
         $rootScope.$on('$locationChangeStart', function() {
             var path = $location.path();
+            /*我要上众筹route特殊处理*/
+            if(/zhongchouDesire/.test(path)){
+                $(".common-header.J_commonHeaderWrapper").hide();
+            }else{
+                if($(".common-header.J_commonHeaderWrapper").css("display") == "none"){
+                    $(".common-header.J_commonHeaderWrapper").show();
+                }
+            }
             var type = path.match(/company/) ? 'company' :
                 path.match(/user|organization|search/) ? 'investor' :
                     path.match(/zhongchou|investorValidate/) ? 'zhong' : "rong";

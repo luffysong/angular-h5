@@ -1,0 +1,66 @@
+<div ng-hide="loadingInst.desireList">
+    <div class="syndicates-desire">
+        <img src="styles/images/zc-rule.jpg" width="100%" alt=""/>
+        <a class="activity-detail" href="" ng-click="activityDetail()">活动详情</a>
+        <div class="desire-nav">
+            <div class="nav-content">
+                <a class="select-industry"  href="">
+                    <span class="icon-gototop"></span>
+                    {{focusIndustry ? focusIndustry : "全部公司" | dict_CompanyIndustry}}
+                    <select class="company-type left" ng-options="c.id as c.desc for c in industryData" ng-change="industryChange()" ng-model="focusIndustry">
+                        <i class="triangle"></i>
+                        <option value="">全部公司</option>
+                    </select>
+                </a>
+
+                <div class="company-type center" ng-click="sort('time')" ng-class="{'active':activeSort == 'time'}">
+                    按时间排序
+                </div>
+                <div class="company-type right" ng-click="sort('hot')" ng-class="{'active':activeSort == 'hot'}">
+                    按热度排序
+                </div>
+            </div>
+            <div class="search-bar">
+                <span class="icon-search2" ng-show="!keyword"></span>
+                <form name="searchForm" ng-submit="submit()">
+                    <input type="text" placeholder="搜索创业公司" ng-model="keyword">
+                </form>
+            </div>
+        </div>
+        <div class="desire-content">
+            <div class="desire-company" ui-sref="syndicatesDesireDetail({id:item.id})" ng-repeat="item in companyData track by $index" ng-class="{'normal':$index % 3 == 0 && $index != 0}">
+                    <span class="border-radius sort{{item.sort}}" ng-show="item.sort">
+                        <span class="border-numer">{{item.sort}}</span>
+                    </span>
+                    <span class="company-logo" ng-style="{'background-image':'url(\'{{item.company.logo | image}}\')'}"></span>
+                    <!--<span class="praise-add" ng-class="{'showPraise':item.isPraise}">+{{point}}</span>-->
+                    <div class="center">
+                        <section class="company-name">{{item.company_name}}</section>
+                        <section class="company-intro">{{item.company.brief}}</section>
+                    </div>
+                    <div class="right">
+                        <section class="company-num">
+                            <span class="icon-fire"></span>
+                            {{item.counter}}
+                        </section>
+                        <a href="" class="praise-btn" ng-click="$event.stopPropagation();praise($index,item.id)">
+                            <span class="icon-like"></span>
+                            赞
+                        </a>
+                    </div>
+            </div>
+            <div ng-include="'templates/syndicates/desire/null.html'" ng-if="!companyData.length"></div>
+        </div>
+        <div class="more-data" ng-click="loadMore()" ng-show="totalCount > pageSize && companyData.length && activePage != totalPage">加载更多</div>
+        <!--没有数据-->
+    </div>
+    <div class="share-layer" ng-show="showShade" ng-click="closeShade()">
+        <div class="guide-arrow"></div>
+        <div class="guide-tip">
+            点击右上角
+            “<span class="point"></span><span class="point"></span><span class="point"></span>”的分享
+        </div>
+    </div>
+</div>
+<div loading="desireList"></div>
+
