@@ -23,7 +23,7 @@
         <!--众筹目标-->
         <div ng-show="syndicatesInfo">
             <div class="basic-info">
-                众筹目标
+                融资目标
             </div>
             <div class="syndicate-goal">
                 <div class="account">
@@ -217,7 +217,7 @@
         </div>
         <!--默认隐藏点击展开-->
         <div ng-if="!isToggle" ng-class="{'pb-50':isInApp}">
-            <a href="" class="btn btn-default toggle-more" ng-click="toggleMore()" baidu-btn="众筹项目页-{{companyData.basic.name}}-展开更多众筹信息按钮点击">点击展开更多众筹信息</a>
+            <a href="" class="btn btn-default toggle-more" ng-click="toggleMore()" baidu-btn="众筹项目页-{{companyData.basic.name}}-展开更多众筹信息按钮点击">点击展开更多股权投资信息</a>
         </div>
 
 
@@ -476,7 +476,7 @@
             </div>
             <div ng-if="!isCoInvestor" ng-class="{'pb-50':isInApp}">
                 <div class="more-tip" >
-                    更多众筹详情仅对跟投人开放
+                    更多项目详情仅对跟投人开放
                 </div>
                 <a ui-sref="investorValidate" class="btn btn-default toggle-more" login-btn="{{rongHost}}/m/#/zhongchouDetail?companyId={{companyId}}&fundingId={{fundingId}}&checkValid=1" baidu-btn="众筹项目页-认证跟投人按钮点击" ng-click="investorVal($event)">认证跟投人</a>
             </div>

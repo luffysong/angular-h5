@@ -25,7 +25,7 @@ angular.module('defaultApp.controller').controller('syndicatesSucController',
             id:$scope.fundingId
         },function(data){
             if(!data.base)return;
-            $scope.config.title = encodeURIComponent("我刚跟投了"+$scope.companyName+"，正在36氪众筹");
+            $scope.config.title = encodeURIComponent("我刚跟投了"+$scope.companyName+"，正在36氪股权融资");
             $scope.config.desc  = encodeURIComponent("我刚跟投了"+$scope.companyName+","+$scope.companyBrief+"。"+"领投人是【"+data.base.investorData.name+"】"+ "值得一看的公司 | " + "36氪让创业更简单");
         });
         $scope.shareSyndicate = function(event){

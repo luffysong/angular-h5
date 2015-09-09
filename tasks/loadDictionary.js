@@ -3,7 +3,7 @@ var request = require('request');
 var path = require('path');
 var folderPath = path.resolve(__dirname, '../src/scripts/config');
 var config = require('../config.json');
-var baseUrl = 'http://rongtest3.36kr.com';
+var baseUrl = 'http://rong.36kr.com';
 function loadCityData(callback){
     var cityFile = path.resolve(folderPath, 'city.js');
     request(baseUrl+'/api/dict/area', function (error, response, body) {

@@ -1,5 +1,5 @@
 <div class="syndicate-order-all">
-    <div class="order-head">众筹订单</div>
+    <div class="order-head">我的订单</div>
     <div class="order-nav">
         <div class="nav-type" ng-repeat="order in orderStatus" ng-click="selectStatus($index)" ng-class="{active:order.active}">
             {{order.name}}
@@ -22,7 +22,7 @@
             <div class="info-val progress">{{item.percent}}%</div>
         </div>
         <div class="syndicate-info">
-            <div class="info-attr">众筹目标</div>
+            <div class="info-attr">融资目标</div>
             <div class="info-val">￥{{item.financing.cf_raising | WanNum}}</div>
         </div>
         <div class="syndicate-info border">
