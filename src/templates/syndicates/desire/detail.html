@@ -6,15 +6,15 @@
         </div>
         <div class="detail-info">
             <section class="company-intro">{{companyDetail.company.brief}}</section>
-            <div class="address">
+            <div class="address" ng-show="companyDetail.company.location">
                 <span class="icons icon-h5-location"></span>
                 {{companyDetail.company.location}}
             </div>
-            <a class="website" target="_blank" href="{{companyDetail.company.website}}">
+            <a class="website" target="_blank" href="{{companyDetail.company.website}}" ng-show="companyDetail.company.website">
                 <span class="icons icon-link"></span>
                 {{companyDetail.company.website}}
             </a>
-            <div class="industry">
+            <div class="industry" ng-show="companyDetail.industry">
                 <span class="icons icon-tag"></span>
                 {{companyDetail.industry | dict_CompanyIndustry}}
             </div>
