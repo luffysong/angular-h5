@@ -1,0 +1,45 @@
+<div ng-hide="loadingInst.desireDetail">
+    <div class="syndicates-desire">
+        <div class="desire-detail">
+            <img class="company-logo" ng-src="{{companyDetail.company.logo | image}}" ui-sref="company_detail({id:companyDetail.company.id})" />
+            <section class="company-name">{{companyDetail.company_name}}</section>
+        </div>
+        <div class="detail-info">
+            <section class="company-intro">{{companyDetail.company.brief}}</section>
+            <div class="address">
+                <span class="icons icon-h5-location"></span>
+                {{companyDetail.company.location}}
+            </div>
+            <a class="website" target="_blank" href="{{companyDetail.company.website}}">
+                <span class="icons icon-link"></span>
+                {{companyDetail.company.website}}
+            </a>
+            <div class="industry">
+                <span class="icons icon-tag"></span>
+                {{companyDetail.industry | dict_CompanyIndustry}}
+            </div>
+            <a href="" class="praise-btn" ng-click="praise()">
+                <span class="icon-like"></span>
+                赞  <span style="opacity: .7">（{{companyDetail.counter}}）</span>
+            </a>
+            <p class="text-center">
+                分享：
+                <!--<a href="" class="icon-qq" ></a>
+                <a href="" class="icon-weibo" target="_blank" ></a>
+                <a href="" class="icon-mail" target="_blank" share-way="mail" baidu-share="mailConfig" ng-click="shareSyndicate()"></a>-->
+                <a class="share-icon icon-wechat" href="" ng-click="wxShare()" ng-show="isWeiXin"></a><a class="share-icon icon-qq" href="" target="_blank" share-way="sqq" baidu-share="config" ng-click="shareSyndicate()"></a><a class="share-icon icon-weibo" href="" share-way="tsina" baidu-share="config" ng-click="shareSyndicate()"></a>
+            </p>
+            <section class="cancel-list">
+                <a href="" ui-sref="syndicatesDesire()"><img src="styles/images/cancel-arrow.png" width="7" height="13" alt=""/>返回“创客筹赞”</a>
+            </section>
+        </div>
+    </div>
+    <div class="share-layer" ng-show="showShade" ng-click="closeShade()">
+        <div class="guide-arrow"></div>
+        <div class="guide-tip">
+            点击右上角
+            “<span class="point"></span><span class="point"></span><span class="point"></span>”的分享
+        </div>
+    </div>
+</div>
+<div loading="desireDetail"></div>
