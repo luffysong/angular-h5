@@ -265,7 +265,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                 angular.forEach(data.data,function(obj){
                     obj.sort = false;
                 });
-                if(way == "hot" && !$scope.focusIndustry){
+                if(way == "hot" && !$scope.focusIndustry && !$scope.keyword){
                     data.data[0].sort = 1;
                     data.data[1].sort = 2;
                     data.data[2].sort = 3;
