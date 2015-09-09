@@ -221,4 +221,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url: '/riskTipAll',
         templateUrl: 'templates/protocol/riskTip_all.html'
     });
+
+    /**
+     * 手续进度管理
+     */
+    $stateProvider.state('procedure', {
+        url: '/procedure?cfid',
+        templateUrl: 'templates/syndicates/procedure.html',
+        controller: 'SyndicatesProcedureController'
+    });
 });
