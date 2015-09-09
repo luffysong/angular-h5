@@ -32,7 +32,7 @@
                     <span class="border-radius sort{{item.sort}}" ng-show="item.sort">
                         <span class="border-numer">{{item.sort}}</span>
                     </span>
-                    <span class="company-logo" ng-style="{'background-image':'url(\'{{item.company.logo | image}}\')'}"></span>
+                    <span class="company-logo" style="background-image:url({{item.company.logo | image}})"></span>
                     <!--<span class="praise-add" ng-class="{'showPraise':item.isPraise}">+{{point}}</span>-->
                     <div class="center">
                         <section class="company-name">{{item.company_name}}</section>
