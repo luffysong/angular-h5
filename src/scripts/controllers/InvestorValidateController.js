@@ -80,7 +80,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.valStatus = "validating";
             }else if(err.code == 1003){
                 /*已经是跟投人*/
-                $scope.valStatus  = "normal";
+                $scope.valStatus  = "withoutVal";
             }
         });
         /*获取用户信息填充表单*/
