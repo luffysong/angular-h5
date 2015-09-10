@@ -25,13 +25,13 @@ angular.module('defaultApp.service').service('AndroidUploadService',
 
                 return function(e){
                     if(!window.kr36 || !window.kr36.chooseFile){
-                        logdiv('没有注入方法')
+                        //logdiv('没有注入方法')
                         return function(){};
                     }
 
                     e.preventDefault();
                     setTimeout(function(){
-                        logdiv('有注入方法，立刻调用')
+                        //logdiv('有注入方法，立刻调用')
                         window.kr36.chooseFile();
                     },100)
                 }
