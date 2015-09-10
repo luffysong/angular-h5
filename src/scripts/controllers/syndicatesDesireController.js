@@ -126,6 +126,8 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                 },{},function(data){
                     console.log(data);
                     if($scope.isCoInvestor){
+                        _hmt.push(['_trackEvent', '按钮', "我要上众筹点赞-H5"]);
+                        krtracker('trackEvent', '按钮', "我要上众筹点赞-H5");
                         $modal.open({
                             templateUrl: 'templates/syndicates/desire/thirty-point.html',
                             windowClass:"desire-modal-window",
@@ -221,12 +223,32 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                                 }
                             });
                         }
+                    }else if(err.code == 403){
+                        $modal.open({
+                            templateUrl: 'templates/syndicates/desire/un-login.html',
+                            windowClass:"desire-modal-window",
+                            controller: [
+                                '$scope', '$modalInstance','scope',
+                                function ($scope, $modalInstance, scope) {
+                                    $scope.login = function(){
+                                        location.href = '/user/login?from=' + encodeURIComponent(location.href);
+                                    }
+                                    $scope.cancel =  function(){
+                                        $modalInstance.dismiss();
+                                    }
+                                }
+                            ],
+                            resolve: {
+                                scope: function(){
+                                    return $scope;
+                                }
+                            }
+                        });
                     }
                 });
             }
 
         }
-        /*加载更多*/
         /*加载更多*/
         $scope.loadMore = function(){
             if($scope.activePage == $scope.totalPage)return;
