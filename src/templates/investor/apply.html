@@ -106,7 +106,9 @@
                                         <input type="file" name="addPic" class="input-file" ng-file-select
                                                ng-file-change="imgFileSelected($files, $event)"
                                                ng-multiple="false"
-                                               resetOnClick="true" requried>
+                                               resetOnClick="true"
+                                               ng-click="androidUpload($event)"
+                                               requried>
                                     </li>
                                     <li class="progress pic-progress" ng-show="intro.uploading">
                                         <div class="stick pic-stick" style="height:{{intro.progress}}%;"></div>
@@ -115,7 +117,9 @@
                                         <input type="file" name="addPic" class="input-file" ng-file-select
                                                ng-file-change="imgFileSelected($files, $event)"
                                                ng-multiple="false"
-                                               resetOnClick="true" accept="image/*" requried>
+                                               resetOnClick="true" accept="image/*"
+                                               ng-click="androidUpload($event)"
+                                               requried>
                                         <span class="tip">仅供审核使用</span>
                                     </li>
                                 </ul>

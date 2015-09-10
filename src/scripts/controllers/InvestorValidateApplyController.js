@@ -22,6 +22,15 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         //        return false;
         //    }
         //});
+
+        //android客户端
+        $scope.androidUpload = AndroidUploadService.setClick(function(filename){
+            $scope.$apply(function(){
+                $scope.intro.value.pictures = filename;
+            })
+
+        });
+
         /*查询投资人认证申请状态*/
         InvestorauditService.queryStatus({},function(response){
             switch(response.status){
