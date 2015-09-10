@@ -271,7 +271,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         $scope.loadMore = function(){
             if($scope.activePage == $scope.totalPage)return;
             $scope.activePage++;
-            $scope.companyData = $scope.companyData.concat($scope.totalData.slice($scope.activePage*10,$scope.activePage*20));
+            $scope.companyData = $scope.companyData.concat($scope.totalData.slice(($scope.activePage-1) * $scope.pageSize,$scope.activePage * $scope.pageSize));
         }
         /*处理地区数据*/
         $scope.handleCity = function(data){
