@@ -42,36 +42,38 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         });
         $scope.qrcodeUrl = encodeURIComponent("http://" + location.hostname + "/m/#/zhongchouDesire");
         $scope.activePage = 1;
-        $scope.activeDesc = "";
-        $scope.activeSort = "hot";
+        $scope.activeSort = "counter";
         $scope.isWeiXin = /MicroMessenger/gi.test(navigator.userAgent) ? true : false;
         $scope.sort = function(way){
-            $scope.activeSort = way;
-            var params = {};
-            var obj = {
-                industry:$scope.focusIndustry,
-                company_name:$scope.keyword
-            };
-            angular.forEach(obj,function(val,key){
-                if(val){
-                    params[key] = val;
+            if($scope.activeSort == way){
+                return;
+            }else{
+                $scope.activePage = 1;
+                var params = {};
+                var obj = {
+                    industry:$scope.focusIndustry,
+                    company_name:$scope.keyword
+                };
+                angular.forEach(obj,function(val,key){
+                    if(val){
+                        params[key] = val;
+                    }
+                });
+                $scope.activeSort = way;
+                /*按时间排序*/
+                if(way == "apply_time"){
+                    params = angular.extend(params,{
+                        orderby:"apply_time"
+                    });
+                    $scope.loadData(params);
                 }
-            });
-            /*按时间排序*/
-            if(way == "time"){
-                $scope.activeDesc = "apply_time";
-                params = angular.extend(params,{
-                    orderby:"apply_time"
-                });
-                $scope.loadData(params);
-            }
-            /*按热度排序*/
-            else{
-                $scope.activeDesc = "counter";
-                params = angular.extend(params,{
-                    orderby:"counter"
-                });
-                $scope.loadData(params,"hot");
+                /*按热度排序*/
+                else{
+                    params = angular.extend(params,{
+                        orderby:"counter"
+                    });
+                    $scope.loadData(params,"counter");
+                }
             }
         };
         /*打开分享*/
@@ -83,8 +85,9 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
             $scope.loadData({
                 industry:$scope.focusIndustry,
                 company_name:$scope.keyword,
-                orderby:$scope.activeDesc
+                orderby:$scope.activeSort
             });
+            $scope.activePage = 1;
             //console.log($scope.focusIndustry);
             //$state.go("syndicatesDesire",{
             //    "industry":$scope.focusIndustry
@@ -305,7 +308,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                 angular.forEach(data.data,function(obj){
                     obj.sort = false;
                 });
-                if(way == "hot" && !$scope.focusIndustry && !$scope.keyword){
+                if(way == "counter" && !$scope.focusIndustry && !$scope.keyword){
                     data.data[0].sort = 1;
                     data.data[1].sort = 2;
                     data.data[2].sort = 3;
@@ -332,8 +335,9 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
             $scope.loadData({
                 company_name:$scope.keyword,
                 industry:$scope.focusIndustry,
-                orderby:$scope.activeDesc
+                orderby:$scope.activeSort
             });
+            $scope.activePage = 1;
         }
         /*按回车键查询*/
         /*$scope.enterWord = function(event){
@@ -374,7 +378,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                     params[key] = val;
                 }
             });
-            $scope.loadData(params,"hot");
+            $scope.loadData(params,"counter");
         }
         $scope.urlLoad();
         window.WEIXINSHARE = {

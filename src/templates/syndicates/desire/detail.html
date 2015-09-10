@@ -1,8 +1,9 @@
 <div ng-hide="loadingInst.desireDetail">
     <div class="syndicates-desire">
-        <div class="desire-detail">
-            <img class="company-logo" ng-src="{{companyDetail.company.logo | image}}" ui-sref="company_detail({id:companyDetail.company.id})" />
+        <div class="desire-detail" ui-sref="company_detail({id:companyDetail.company.id})">
+            <img class="company-logo" ng-src="{{companyDetail.company.logo | image}}"  />
             <section class="company-name">{{companyDetail.company_name}}</section>
+            <a ui-sref="company_detail({id:companyDetail.company.id})" class="see-detail">查看详情</a>
         </div>
         <div class="detail-info">
             <section class="company-intro">{{companyDetail.company.brief}}</section>
