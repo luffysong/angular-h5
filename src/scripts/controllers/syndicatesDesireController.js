@@ -87,6 +87,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                 company_name:$scope.keyword,
                 orderby:$scope.activeSort
             });
+            $scope.activePage = 1;
             //console.log($scope.focusIndustry);
             //$state.go("syndicatesDesire",{
             //    "industry":$scope.focusIndustry
