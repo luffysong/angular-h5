@@ -11,7 +11,7 @@
             </div>
             <form ng-submit="$event.preventDefault()"  action="" name="investorValidateForm" >
                 <!--所有报错信息-->
-                <div class="error-alert error" ng-show="(investorValidateForm.investFrom.$invalid && investorValidateForm.investFrom.$dirty) || (investorValidateForm.investTo.$invalid && investorValidateForm.investTo.$dirty)">
+                <!--<div class="error-alert error" ng-show="(investorValidateForm.investFrom.$invalid && investorValidateForm.investFrom.$dirty) || (investorValidateForm.investTo.$invalid && investorValidateForm.investTo.$dirty)">
                     <span ng-show="investorValidateForm.investFrom.$error.required || investorValidateForm.investTo.$error.required">请输入投资金额</span>
                     <span ng-show="investorValidateForm.investFrom.$error.pattern || investorValidateForm.investTo.$error.pattern">投资金额只能是整数</span>
                 </div>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.intro.$invalid && investorValidateForm.intro.$dirty">
                     <span ng-show="investorValidateForm.intro.$error.required">请输入一句话简介</span>
-                </div>
+                </div>-->
                 <div class="error-alert error" ng-show="investorValidateForm.address1.$invalid && investorValidateForm.address1.$dirty">
                     <span ng-show="investorValidateForm.address1.$error.required">请选择所在地</span>
                 </div>
@@ -64,7 +64,7 @@
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>身份证号码</label>
                         <div class="col-max">
-                            <input class="form-control" type="text" ng-model="user.idCardNumber" name="idCardNumber" placeholder="点击填写"  required />
+                            <input class="form-control" type="text" ng-model="user.id_card_number" name="idCardNumber" placeholder="点击填写"  required />
                         </div>
 
                     </div>
@@ -80,14 +80,14 @@
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>公司</label>
                         <div class="col-max">
-                            <input class="form-control" type="text" ng-model="user.companyName" name="company" placeholder="点击填写"  required/>
+                            <input class="form-control" type="text" ng-model="user.company_name" name="company" placeholder="点击填写"  required/>
                         </div>
 
                     </div>
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>职位</label>
                         <div class="col-max">
-                            <input class="form-control" type="text" ng-model="user.positionName" name="position" placeholder="点击填写"  required />
+                            <input class="form-control" type="text" ng-model="user.position_name" name="position" placeholder="点击填写"  required />
                         </div>
 
                     </div>
@@ -107,7 +107,7 @@
                         </div>
 
                     </div>
-                    <div class="form-group brief">
+                    <!--<div class="form-group brief">
                         <label class="label-control"><span class="c-orange">*</span>一句话简介</label>
                         <div class="col-max">
                             <textarea ng-model="user.intro" name="intro" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
@@ -115,12 +115,12 @@
 
                     </div>
 
-                    <!--投资信息-->
+                    &lt;!&ndash;投资信息&ndash;&gt;
                     <div class="basic-info">
                         投资信息
                     </div>
 
-                    <!--投资阶段-->
+                    &lt;!&ndash;投资阶段&ndash;&gt;
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>投资阶段</label>
                         <div class="col-flex mt-16">
@@ -130,7 +130,7 @@
 
                     </div>
 
-                    <!--关注领域-->
+                    &lt;!&ndash;关注领域&ndash;&gt;
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>关注领域 </label><span class="tip">(最多可选3个)</span>
                         <div class="col-flex clearfix mt-16">
@@ -138,7 +138,7 @@
                         </div>
                     </div>
 
-                    <!--个人单笔可投-->
+                    &lt;!&ndash;个人单笔可投&ndash;&gt;
                     <div class="form-group normal">
                         <label class="label-control"><span class="c-orange">*</span>个人单笔可投 </label>
                         <div class="col-flex clearfix ml-10">
@@ -148,14 +148,14 @@
                             万元
                         </div>
                         <span class="currency-kind">(人民币金额)</span>
-                    </div>
+                    </div>-->
 
                     <!--投资条件-->
                     <div class="form-group no-b">
                         <label class="label-control"><span class="c-orange">*</span>投资条件</label>
                         <div class="col-flex">
                             <div ng-repeat="item in condition">
-                                <input type="radio" name="permit" id="condition{{$index}}" ng-model="user.rnvInvestorInfo" value="{{item.value}}" />
+                                <input type="radio" name="permit" id="condition{{$index}}" ng-model="user.rnv_investor_info" value="{{item.value}}" />
                                 <label for="condition{{$index}}">{{item.desc}}</label>
                             </div>
                         </div>
@@ -165,7 +165,7 @@
 
 
                     <!--上传名片-->
-                    <div class="basic-info">
+                    <!--<div class="basic-info">
                         证件信息
                     </div>
                     <div class="form-group normal">
@@ -199,7 +199,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="form-group">
                         <a href="" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="hasClick" baidu-btn="跟投人认证提交资料">提交资料</a>
                         <p class="text-center bottom-tip">

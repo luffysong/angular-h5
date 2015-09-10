@@ -5,8 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
-
-    function($scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,AndroidUploadService, $interval,$modal, $stateParams,$state) {
+    function($scope,DictionaryService,ErrorService,checkForm,$timeout,UserService,$modal, $stateParams,$state,CrowdFundingService) {
+        document.title="36氪股权投资";
         $timeout(function(){
             window.scroll(0,0);
         },0);
@@ -19,28 +19,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 return;
             }
         });
-        document.title="36氪股权投资";
-        WEIXINSHARE = {
-            shareTitle: "36氪股权投资",
-            shareDesc: "成为跟投人",
-            shareImg: 'http://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg'
-        };
-        InitWeixin();
-        $scope.stageList = [];
-        $scope.areaList = [];
         $scope.user = {
             investMoneyUnit:"CNY",
-            rnvInvestorInfo:"V1_1",
-            identityCardType: 'IDCARD',
+            rnv_investor_info:"V1_1",
+            id_card_number: 'IDCARD',
             investPhases:[]
         };
-        $scope.intro = {};
         $scope.basic = {
             value:{}
-        };
-        $scope.intro.value = {
-            intro:"",
-            pictures:""
         };
         $scope.valStatus = "normal";
         $scope.hasClick = false;
@@ -56,64 +42,26 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.addr1Options = DictionaryService.getLocation();
         $scope.addr2Options = [];
         /*跟投人认证信息回写*/
-        UserService.get({
-            id:'identity',
-            sub: 'cert',
-            subid: 'coinvestor-info'
-        },{},function(data){
-            if(data.userCoinvestorCertInfo){
-                $scope.user.reIdCardNumber = data.userCoinvestorCertInfo.idCardNumber;
-                if(data.userCoinvestorCertInfo.businessCardUrl){
-                    $scope.intro.value.pictures = data.userCoinvestorCertInfo.businessCardUrl;
-                }
+        CrowdFundingService["co-investor"].get({
+            id:"info"
+        },function(data){
+            console.log(data);
+            delete data.name;
+            if(data.cert_info){
+                $scope.user.reIdCardNumber = data.cert_info.id_card_number;
+                $scope.basic.value.address1 = data.cert_info.country;
+                $scope.basic.value.address2 = data.cert_info.city;
             }
-            angular.extend($scope.user,data.userCoinvestorCertInfo);
-            /*真实姓名不回写*/
-            $scope.user.name = "";
-
+            angular.extend($scope.user,data.cert_info);
         },function(err){
+            console.log(err);
             if(err.code == 1001){
-                /*多次跟投人认证失败*/
                 $scope.valStatus = "fail";
             }else if(err.code == 1002){
-                /*正在审核中*/
                 $scope.valStatus = "validating";
             }else if(err.code == 1003){
-                /*已经是跟投人*/
-                $scope.valStatus  = "normal";
+                $scope.valStatus = "suc";
             }
-        });
-        /*获取用户信息填充表单*/
-        UserService.basic.get({
-            id:UserService.getUID()
-        },function(data){
-            angular.extend($scope.user, data);
-            $scope.user.name = "";
-            $scope.user.investMoneyBegin = parseInt(data.investMoneyBegin);
-            $scope.user.investMoneyEnd = parseInt(data.investMoneyEnd);
-            /*关注领域数据处理*/
-            if($scope.user.industry && $scope.user.industry.length){
-                angular.extend($scope.areaList,$scope.user.industry);
-                angular.forEach($scope.user.industry,function(o,i){
-                    angular.forEach($scope.fieldsOptions,function(key,index){
-                        if(key.value == o){
-                            key.active = true;
-                        }
-                    });
-                });
-            }
-            /*投资阶段数据处理*/
-            angular.forEach($scope.user.investPhases,function(val,key){
-                angular.forEach($scope.investStage,function(obj,index){
-                    if(obj.value == val){
-                        obj.active = true;
-                    }
-                });
-            });
-            $scope.basic.value.address1 = $scope.user.country;
-            $scope.basic.value.address2 = $scope.user.city;
-        },function(err){
-            ErrorService.alert(err);
         });
         /*选择所在地事件*/
         $scope.addr1Change = function() {
@@ -129,7 +77,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }
             $scope.addr2Options = DictionaryService.getLocation(value);
         });
-        $scope.selectStage = function(index){
+        /*$scope.selectStage = function(index){
             angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",true);
             $scope.investStage[index].active = !$scope.investStage[index].active;
         }
@@ -147,7 +95,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
 
             }
             if($scope.areaList.length)angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
-        }
+        }*/
         /*确认身份证号失去焦点事件*/
         $scope.enterId = function(){
             if(!$scope.user.reIdCardNumber)return;
@@ -156,15 +104,15 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
 
 
         //android客户端
-        $scope.androidUpload = AndroidUploadService.setClick(function(filename){
+        /*$scope.androidUpload = AndroidUploadService.setClick(function(filename){
             $scope.$apply(function(){
                 $scope.intro.value.pictures = filename;
             })
 
-        });
+        });*/
 
         /*上传名片*/
-        $scope.imgFileSelected  = function(files, e){
+        /*$scope.imgFileSelected  = function(files, e){
             var upyun = window.kr.upyun;
             if(files[0].size > 5 * 1024 * 1024){
                 ErrorService.alert({
@@ -210,9 +158,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     ErrorService.alert(err);
                 });
             }
-        };
+        };*/
         $timeout(function(){
-            $scope.$watch("[user.reIdCardNumber,user.idCardNumber]",function(from){
+            $scope.$watch("[user.reIdCardNumber,user.id_card_number]",function(from){
                 if(angular.element($("form[name='investorValidateForm']")).length > 0){
                     if(from[0] != from[1]){
                         angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("idcardInvalid",false);
@@ -265,21 +213,16 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         }
         /*表单提交*/
         $scope.submitForm = function(){
-            if($scope.user.idCardNumber != $scope.user.reIdCardNumber){
-                $scope.enterCard = true;
-                $('html,body').stop().animate({scrollTop: $("input[name='reIdCardNumber']").offset().top-100}, 400, function () {
-                });
-                return;
-            }
-            /*初始化*/
+            $scope.enterCard = true;
+            /*/!*初始化*!/
             $scope.user.investPhases = [];
             angular.forEach($scope.investStage,function(key,index){
                 if(key.active && $scope.user.investPhases.indexOf(key.value) < 0){
                     $scope.user.investPhases.push(key.value);
                 }
-            });
+            });*/
             if(!checkForm("investorValidateForm"))return;
-            if(!$scope.user.investPhases.length){
+            /*if(!$scope.user.investPhases.length){
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",false);
                 $('html,body').stop().animate({scrollTop: $(".stage").offset().top-100}, 400, function () {
                 });
@@ -294,18 +237,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 return;
             }else{
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
-            }
+            }*/
             $scope.hasClick = true;
-            $scope.user.focusIndustry = $scope.areaList;
-            $scope.user.businessCardUrl = $scope.intro.value.pictures;
             if($scope.basic.value){
                 $scope.user.city = $scope.basic.value.address2;
                 $scope.user.country = $scope.basic.value.address1;
             }
-            UserService.save({
-                id:'identity',
-                sub: 'cert',
-                subid: 'coinvestor'
+            CrowdFundingService["co-investor"].save({
+                id:'identity-cert'
             },$scope.user,function(data){
                 console.log(data);
                 $scope.valStatus = "validating";
@@ -412,10 +351,18 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     $scope.valStatus = "fail";
                 }else if(err.code == 1002){
                     $scope.valStatus = "validating";
+                }else {
+                    ErrorService.alert(err);
                 }
-                ErrorService.alert(err);
                 $scope.hasClick = false;
             });
         };
+
+        WEIXINSHARE = {
+            shareTitle: "36氪股权投资",
+            shareDesc: "成为跟投人",
+            shareImg: 'http://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg'
+        };
+        InitWeixin();
     }
 );
