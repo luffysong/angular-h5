@@ -126,6 +126,8 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                 },{},function(data){
                     console.log(data);
                     if($scope.isCoInvestor){
+                        _hmt.push(['_trackEvent', '按钮', "我要上众筹点赞-H5"]);
+                        krtracker('trackEvent', '按钮', "我要上众筹点赞-H5");
                         $modal.open({
                             templateUrl: 'templates/syndicates/desire/thirty-point.html',
                             windowClass:"desire-modal-window",
