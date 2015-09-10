@@ -223,12 +223,32 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                                 }
                             });
                         }
+                    }else if(err.code == 403){
+                        $modal.open({
+                            templateUrl: 'templates/syndicates/desire/un-login.html',
+                            windowClass:"desire-modal-window",
+                            controller: [
+                                '$scope', '$modalInstance','scope',
+                                function ($scope, $modalInstance, scope) {
+                                    $scope.login = function(){
+                                        location.href = '/user/login?from=' + encodeURIComponent(location.href);
+                                    }
+                                    $scope.cancel =  function(){
+                                        $modalInstance.dismiss();
+                                    }
+                                }
+                            ],
+                            resolve: {
+                                scope: function(){
+                                    return $scope;
+                                }
+                            }
+                        });
                     }
                 });
             }
 
         }
-        /*加载更多*/
         /*加载更多*/
         $scope.loadMore = function(){
             if($scope.activePage == $scope.totalPage)return;
