@@ -8,6 +8,10 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
     function($scope, $modal, ErrorService, $stateParams,DictionaryService,$timeout,CrowdFundingService,UserService,$state,loading) {
         loading.show("desireList");
         document.title = "创客筹赞";
+        /*百度分享config*/
+        $scope.config = {};
+        $scope.config.title = "创客筹赞 | 想融资，没人比我更赞";
+        $scope.config.desc = "9月10日，一次战役解决PR与融资双重难题，群雄逐鹿，只有最棒的你才能傲视群雄！";
         /*保存查询条件*/
         $scope.queryParams = {};
         $scope.showShade = false;
@@ -135,6 +139,13 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                                 '$scope', '$modalInstance','scope',
                                 function ($scope, $modalInstance, scope) {
                                     $scope.isWeiXin = scope.isWeiXin;
+                                    /*百度分享config*/
+                                    $scope.config = {};
+                                    $scope.shareSyndicate = function(){
+                                        $scope.config.url = encodeURIComponent(location.href);
+                                    }
+                                    $scope.config.title = scope.config.title;
+                                    $scope.config.desc = scope.config.desc;
                                     $scope.wxShare = function(){
                                         $modalInstance.dismiss();
                                         scope.showShade = true;
@@ -188,6 +199,13 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
                                     '$scope', '$modalInstance','scope',
                                     function ($scope, $modalInstance, scope) {
                                         $scope.isWeiXin = scope.isWeiXin;
+                                        /*百度分享config*/
+                                        $scope.config = {};
+                                        $scope.shareSyndicate = function(){
+                                            $scope.config.url = encodeURIComponent(location.href);
+                                        }
+                                        $scope.config.title = scope.config.title;
+                                        $scope.config.desc = scope.config.desc;
                                         $scope.wxShare = function(){
                                             $modalInstance.dismiss();
                                             scope.showShade = true;
@@ -253,7 +271,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         $scope.loadMore = function(){
             if($scope.activePage == $scope.totalPage)return;
             $scope.activePage++;
-            $scope.companyData = $scope.companyData.concat($scope.totalData.slice($scope.activePage*10,$scope.activePage*20));
+            $scope.companyData = $scope.companyData.concat($scope.totalData.slice(($scope.activePage-1) * $scope.pageSize,$scope.activePage * $scope.pageSize));
         }
         /*处理地区数据*/
         $scope.handleCity = function(data){
