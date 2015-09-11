@@ -94,7 +94,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             id:'',/*用户id*/
             name:'',/*真实姓名*/
             intro:'',/*一句话简介*/
-            investorRole:'ORG_INVESTOR',/*投资身份*/
+            investorRole:'PERSONAL_INVESTOR',/*投资身份*/
             businessCard:'',/*名片*/
             fundsPhases:'',/*投资阶段*/
             investorFocusIndustrys:'',/*关注领域*/

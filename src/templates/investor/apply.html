@@ -60,35 +60,159 @@
                             <textarea ng-model="invest.intro" name="intro" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!--投资身份-->
+                    <div class="form-group m-options">
                         <label class="label-control">
                             <span class="box-content">
                                 <span class="c-orange">*</span>投资身份
                             </span>
                         </label>
-                        <div class="col-max">
-                            <div class="radio">
-                              <label>
-                                <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="ORG_INVESTOR" checked required>
-                                    <span ng-class="{true:'active'}[invest.investorRole=='ORG_INVESTOR']"> &nbsp;任职投资机构</span>
-                              </label>
-                            </div>
-                            <div class="radio">
-                              <label>
-                                <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="COMPANY_INVEST_DEPT">
-                                <span ng-class="{true:'active'}[invest.investorRole=='COMPANY_INVEST_DEPT']">&nbsp;任职公司投资并购部</span>
-                              </label>
-                            </div>
-                            <div class="radio">
-                              <label>
-                                <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="PERSONAL_INVESTOR">
-                                <span ng-class="{true:'active'}[invest.investorRole=='PERSONAL_INVESTOR']">&nbsp;个人投资人</span>
-                              </label>
-                            </div>
-
-                        </div>
-
+                        <ul class="s-list">
+                            <!--个人投资人-->
+                            <li class="s-i">
+                                <div class="i-header">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="PERSONAL_INVESTOR">
+                                            <span ng-class="{true:'active'}[invest.investorRole=='PERSONAL_INVESTOR']">&nbsp;个人投资人</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--任职投资机构-->
+                            <li class="s-i">
+                                <div class="i-header">
+                                    <div class="radio">
+                                        <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="ORG_INVESTOR" checked required>
+                                        <span ng-class="{true:'active'}[invest.investorRole=='ORG_INVESTOR']"> &nbsp;任职投资机构</span>
+                                    </div>
+                                </div>
+                                <div class="i-body" ng-show="(invest.investorRole=='ORG_INVESTOR')">
+                                    <ul class="content-list">
+                                        <!--任职机构-->
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>任职机构</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select name="" >
+                                                        <option value="">新增</option>
+                                                    </select>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <label class="title"><span class="c-orange"></span></label>
+                                            <ul class="main">
+                                                <li>
+                                                    <input type="text" placeholder="请输入公司简称">
+                                                    <input type="hidden">
+                                                    <input type="hidden">
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!--职位-->
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>职位</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select name="" >
+                                                        <option value="">请选择</option>
+                                                    </select>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!--任职时间-->
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>任职时间</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select name="" >
+                                                        <option value="">年</option>
+                                                    </select>
+                                                </li>
+                                                <li>
+                                                    <select name="" >
+                                                        <option value="">月</option>
+                                                    </select>
+                                                </li>
+                                                <li>
+                                                    －至今
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!--任职公司投资并购部-->
+                            <li class="s-i">
+                                <div class="i-header">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="COMPANY_INVEST_DEPT">
+                                            <span ng-class="{true:'active'}[invest.investorRole=='COMPANY_INVEST_DEPT']">&nbsp;任职公司投资并购部</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="i-body" ng-show="(invest.investorRole=='COMPANY_INVEST_DEPT')">
+                                    <ul class="content-list">
+                                        <!--任职机构-->
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>任职机构</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select name="" >
+                                                        <option value="">新增</option>
+                                                    </select>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <label class="title"><span class="c-orange"></span></label>
+                                            <ul class="main">
+                                                <li>
+                                                    <input type="text" placeholder="请输入公司简称">
+                                                    <input type="hidden">
+                                                    <input type="hidden">
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!--职位-->
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>职位</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select name="" >
+                                                        <option value="">请选择</option>
+                                                    </select>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!--任职时间-->
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>任职时间</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select name="" >
+                                                        <option value="">年</option>
+                                                    </select>
+                                                </li>
+                                                <li>
+                                                    <select name="" >
+                                                        <option value="">月</option>
+                                                    </select>
+                                                </li>
+                                                <li>
+                                                    －至今
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
+
+                    <!--上传名片-->
                     <div class="form-group normal upload-pictures">
                         <label class="label-control">
                             <span class="box-content">
