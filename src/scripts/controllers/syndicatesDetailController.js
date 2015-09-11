@@ -245,9 +245,11 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             $scope.shareError = parseInt($scope.syndicatesInfo.detail.es_funding_team) + parseInt($scope.syndicatesInfo.detail.es_investor) + parseInt($scope.syndicatesInfo.detail.es_staff) == 100 ? false : true;
             var chartData = [$scope.syndicatesInfo.detail.es_investor,$scope.syndicatesInfo.detail.es_funding_team,$scope.syndicatesInfo.detail.es_staff];
             angular.forEach($scope.chartConfig.series[0].data,function(obj,index){
-                /*当百分比为0时，默认为30*/
-                obj[1] = chartData[index] == 0 ? 30 : chartData[index];
-                /*obj[1] = chartData[index];*/
+                if(chartData[index] == 0){
+                    $scope.chartConfig.series[0].data.splice(index,1);
+                }else{
+                    obj[1] = chartData[index];
+                }
             });
 
         },function(err){
