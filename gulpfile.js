@@ -597,7 +597,7 @@ gulp.task('remote:test4', function(){
     gulp.start('remote');
 });
 gulp.task('remote:test6', function(){
-    buildMode = 'test6';
+    buildMode = 'test';
     apiHost = 'http://rongtest6.36kr.com';
     gulp.start('remote');
 });
