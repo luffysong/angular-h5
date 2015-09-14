@@ -142,11 +142,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
 
         ];
-
         /*关注领域*/
         $scope.invest.investorFocusIndustrys = DictionaryService.getDict('InvestorFollowedIndustry');
-
-
         /*获取用户默认的关注领域和投资阶段的数据*/
         UserService.basic.get({
             id:UserService.getUID()
@@ -182,6 +179,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             $scope.invest.fundUsdInvestMin  =   data.investorSettings.fundUsdInvestMin;
             $scope.invest.usdInvestMax      =   data.investorSettings.usdInvestMax;
             $scope.invest.usdInvestMin      =   data.investorSettings.usdInvestMin;
+
         },function(err){
             ErrorService.alert(err);
         });
@@ -203,7 +201,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         $scope.areaList.push($scope.invest.investorFocusIndustrys[i].value);
                     }
                 });
-
             }
         }
         /*上传名片*/
@@ -261,14 +258,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.submitForm = function(){
             //隐藏自定义错误信息
             Error.hide();
-           /* var pattern = /^[\u4E00-\u9FA5a-zA-Z]+$/;
-            if(pattern.test($scope.invest.name)){
-                 Error.hide();
-            }else{
-                Error.show("请输入真实姓名");
-                return false;
-            }*/
-
             if($scope.intro.value.pictures){
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("picEmpty",true);
             }else{
@@ -361,7 +350,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     Error.show("投资额下限不能大于上限值");
                     return false;
                 }
-
                 /*个人*/
                 investoraudit['usdInvestMin']   = $scope.invest.usdInvestMin;
                 investoraudit['usdInvestMax']   = $scope.invest.usdInvestMax;
@@ -389,7 +377,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
         /*监听事件*/
         $scope.changeMoney = function(fieldName){
-            console.log(fieldName);
              Error.hide();
             if(fieldName == 'cnyInvestMin' ||  fieldName == 'cnyInvestMax'){
                 if(parseFloat($scope.invest.cnyInvestMin) > parseFloat($scope.invest.cnyInvestMax)){

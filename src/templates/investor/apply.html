@@ -100,16 +100,45 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li>
+                                    </ul>
+                                    <!--新增机构-->
+                                    <ul class="content-list">
+                                        <!--机构名称-->
+                                        <li ng-show="true">
                                             <label class="title"><span class="c-orange"></span></label>
                                             <ul class="main">
                                                 <li>
-                                                    <input type="text" placeholder="请输入公司简称">
-                                                    <input type="hidden">
-                                                    <input type="hidden">
+                                                    <input type="text" placeholder="请输入机构名">
                                                 </li>
                                             </ul>
                                         </li>
+                                        <li ng-show="true">
+                                            <label class="title"><span class="c-orange">*</span>机构英文名称</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <input type="text" placeholder="请输入机构英文名称">
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li ng-show="true">
+                                            <label class="title"><span class="c-orange">*</span>机构网址</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <input type="text" full-url placeholder="如：http://www.36kr.com">
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li ng-show="true">
+                                            <label class="title"><span class="c-orange">*</span>机构简介</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <textarea  name="" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <!--/新增机构-->
+                                    <ul class="content-list">
                                         <!--职位-->
                                         <li>
                                             <label class="title"><span class="c-orange">*</span>职位</label>
@@ -155,9 +184,9 @@
                                 </div>
                                 <div class="i-body" ng-show="(invest.investorRole=='COMPANY_INVEST_DEPT')">
                                     <ul class="content-list">
-                                        <!--任职机构-->
+                                        <!--任职公司-->
                                         <li>
-                                            <label class="title"><span class="c-orange">*</span>任职机构</label>
+                                            <label class="title"><span class="c-orange">*</span>任职公司</label>
                                             <ul class="main">
                                                 <li>
                                                     <select name="" >
@@ -166,16 +195,48 @@
                                                 </li>
                                             </ul>
                                         </li>
+                                    </ul>
+                                    <!--新增公司-->
+                                    <ul class="content-list">
                                         <li>
                                             <label class="title"><span class="c-orange"></span></label>
                                             <ul class="main">
                                                 <li>
                                                     <input type="text" placeholder="请输入公司简称">
-                                                    <input type="hidden">
-                                                    <input type="hidden">
                                                 </li>
                                             </ul>
                                         </li>
+
+                                        <!--产品状态-->
+                                        <li ng-show="true">
+                                            <label class="title"><span class="c-orange">*</span>产品状态</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select id="" name="">
+                                                        <option value=""></option>
+                                                    </select>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li ng-show="true">
+                                            <label class="title"><span class="c-orange">*</span>公司网址</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <input type="text" full-url placeholder="如：http://www.36kr.com">
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li ng-show="true">
+                                            <label class="title"><span class="c-orange">*</span>公司简介</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <textarea  name="" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <!--/新增公司-->
+                                    <ul class="content-list">
                                         <!--职位-->
                                         <li>
                                             <label class="title"><span class="c-orange">*</span>职位</label>
