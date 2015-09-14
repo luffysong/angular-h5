@@ -22,8 +22,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.user = {
             investMoneyUnit:"CNY",
             rnv_investor_info:"V1_1",
-            id_card_number: 'IDCARD',
-            investPhases:[]
+            id_card_number: "",
+            reIdCardNumber:"",
+            identity_card_type:"IDCARD",
+            investPhases:[],
+            passport_number:"",
+            passport_url:""
         };
         $scope.basic = {
             value:{}
