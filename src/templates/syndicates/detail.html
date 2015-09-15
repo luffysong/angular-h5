@@ -216,12 +216,12 @@
             <!--<div class="all-co" ng-click="loadInvestor()" >查看全部跟投人（{{coInvestorData.length}}个）</div>-->
         </div>
         <!--默认隐藏点击展开-->
-        <div ng-if="!isToggle" ng-class="{'pb-50':isInApp}">
+        <div class="pb-50" ng-if="!isToggle">
             <a href="" class="btn btn-default toggle-more" ng-click="toggleMore()" baidu-btn="众筹项目页-{{companyData.basic.name}}-展开更多众筹信息按钮点击">点击展开更多股权投资信息</a>
         </div>
 
 
-        <div ng-if="isToggle" ng-class="{'pb-50':isInApp}">
+        <div class="pb-50" ng-if="isToggle">
 
             <!--公司详情-->
             <div ng-if="syndicatesInfo.detail">

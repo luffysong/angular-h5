@@ -5,14 +5,15 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,$timeout) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,$timeout,loading) {
+        document.title="36氪股权投资";
+        loading.show("syndicatesList");
         var statusList = DictionaryService.getDict("crowd_funding_status");
         /*每页几条数据*/
         var pageSize = 30;
         $scope.pageNo = 1;
         $scope.noMore = true;
         $scope.UID = UserService.getUID();
-        document.title="36氪股权投资";
         /*前端处理，包括融资进度百分比的计算，以及众筹状态*/
         $scope.handleData = function(){
             angular.forEach($scope.investorList,function(key,index){
@@ -44,6 +45,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
             $scope.noMore = data.current_page == data.last_page ? true : false;
             $scope.investorList = data.data;
             $scope.handleData();
+            loading.hide("syndicatesList");
         },function(err){
             ErrorService.alert(err);
         });

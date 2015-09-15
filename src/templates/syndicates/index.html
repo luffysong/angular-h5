@@ -19,7 +19,7 @@
         </slick>
     </div>
 </div>
-<div class="container">
+<div class="container" ng-hide="loadingInst.syndicatesList">
     <div class="syndicates-index"
          ng-style="{marginTop:isInApp?0:''}"
          ng-repeat="item in investorList track by $index"
@@ -80,3 +80,4 @@
         查看更多
     </div>
 </div>
+<div loading="syndicatesList"></div>
