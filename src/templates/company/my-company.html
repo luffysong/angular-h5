@@ -60,11 +60,11 @@
 					</li>
 				</ul>
 				<div class="h5-wrapper">
-					<div class="error" ng-show="applyForm.myCompany.$invalid && applyForm.myCompany.$dirty">
+					<!-- <div class="error" ng-show="applyForm.myCompany.$invalid && applyForm.myCompany.$dirty">
                         <span ng-show="applyForm.myCompany.$error.required">请选择公司</span>
-                    </div>
+                    </div> -->
 					<!-- <button class="btn btn-normal" type="button" ng-click="submitForm($event)">{{applyForm.myCompany.$error.required}}确认{{applyForm.myCompany.$invalid}}{{applyForm.myCompany.$dirty}}</button> -->
-					<button type="submit" class="btn btn-normal" ng-click="submitForm()">提交</button>
+					<button type="submit" class="btn btn-normal" ng-click="submitForm()" ng-disabled="!myCompanyList.selectedCompanyId">提交</button>
 				</div>
 			</div>
 		</form>

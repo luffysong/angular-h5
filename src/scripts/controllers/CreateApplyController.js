@@ -9,16 +9,19 @@ angular.module('defaultApp.controller').controller('CreateApplyController',
         $scope.stateParams = $stateParams;
         $scope.goOnApply = function(e) {
         	e && e.preventDefault();
+
         	if($stateParams.from) {
-        		CompanyService.ventureApply($stateParams.cid, {
-	                type: $stateParams.from
-	            }, function(data) {
-	                if(data.company) {
-                        $state.go('finacingSuccess', {from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId});
-                    } else {
-                        $state.go('finacingSuccess', {from: $stateParams.from});
-                    }
-	            })
+                $state.go('finacingSuccess', {from: $stateParams.from, cid: $stateParams.cid});
+        		// CompanyService.ventureApply($stateParams.cid, {
+	         //        type: $stateParams.from
+	         //    }, function(data) {
+          //           $state.go('finacingSuccess', {from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId});
+	         //        if(data.company) {
+          //               $state.go('finacingSuccess', {from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId});
+          //           } else {
+          //               $state.go('finacingSuccess', {from: $stateParams.from});
+          //           }
+	         //    })
         	}
         }
     }

@@ -11,7 +11,7 @@
 
 
 <!-- 已收到融资意愿 -->
-<div class="page-main finacing-success finacing-tips" ng-if="!stateParams.cid && (stateParams.from == 'funds')")>
+<div class="page-main finacing-success finacing-tips" ng-if="successfulTips && (stateParams.from == 'funds')")>
 	<div class="h5-wrapper">
 		<i class="icon-app-checked"></i>
 		<p>工作人员已收到你的融资意愿！</p>
@@ -28,7 +28,7 @@
 		</div>
 	</div>
 </div>
-<div class="page-main finacing-success finacing-tips" ng-if="!stateParams.cid && (stateParams.from == 'krspace')">
+<div class="page-main finacing-success finacing-tips" ng-if="successfulTips && (stateParams.from == 'krspace')">
 	<div class="h5-wrapper">
 		<i class="icon-app-checked"></i>
 		<p>工作人员已收到你的入驻意愿！</p>
@@ -48,7 +48,7 @@
 
 <!-- 已有公司 -->
 <div loading="finacingSuccess" ng-show="stateParams.cid"></div>
-<div class="page-main finacing-success" ng-show="stateParams.cid && !loadingInst.finacingSuccess">
+<div class="page-main finacing-success" ng-show="!successfulTips && !loadingInst.finacingSuccess">
 	<h3 class="tit-desc">确认申请的公司<small>（仅显示你是管理员或你创建的公司）</small></h3>
 	<ul class="my-company-list">
 		<li>
@@ -83,5 +83,5 @@
 			</div>
 		</li>
 	</ul>
-	<p class="tips-text">如遇到问题，联系我们：<a href="mailTo:service@36kr.com">service@36kr.com</a></p>
+	<p class="tips-text">如遇到问题，联系我们：service@36kr.com</p>
 </div>

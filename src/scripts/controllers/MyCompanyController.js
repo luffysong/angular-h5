@@ -43,6 +43,9 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
             if(id) {
                 $scope.myCompanyList.data[index].checkStatus = true;
                 $scope.myCompanyList.selectedCompanyId = id;
+            } else {
+                $scope.myCompanyList.data[index].checkStatus = false;
+                $scope.myCompanyList.selectedCompanyId = '';
             }
         }
 
@@ -65,13 +68,14 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
             CompanyService.ventureApply($scope.myCompanyList.selectedCompanyId, {
                 type: $stateParams.from
             }, function(data) {
-                if(data.company) {
-                    // $state.go(finacingSuccess({type: 'list', cid: $scope.myCompanyList.selectedCompanyId}));
-                    $state.go('finacingSuccess', {from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId});
-                } else {
-                    // $state.go(finacingSuccess({type: 'accept', cid: $scope.myCompanyList.selectedCompanyId}));
-                    $state.go('finacingSuccess', {from: $stateParams.from});
-                }
+                $state.go('finacingSuccess', {from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId});
+                // if(data.company) {
+                //     // $state.go(finacingSuccess({type: 'list', cid: $scope.myCompanyList.selectedCompanyId}));
+                //     $state.go('finacingSuccess', {from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId});
+                // } else {
+                //     // $state.go(finacingSuccess({type: 'accept', cid: $scope.myCompanyList.selectedCompanyId}));
+                //     $state.go('finacingSuccess', {from: $stateParams.from});
+                // }
                 
             })
         }
