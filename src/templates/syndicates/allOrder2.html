@@ -1,6 +1,6 @@
 <div class="syndicate-all-order">
     <div class="order-head">众筹订单</div>
-    <div class="order-item" ng-repeat="item in orderData">
+    <div class="order-item" ng-repeat="item in orderData" ng-if="!noData">
         <div class="sup-header">
             <span class="order-status">{{ item.payment.status | dict_trade_status }}</span>
             <a class="order-procedure" ng-if="item.payment.status == 3 && item.financing.formality && item.financing.formality.status > 1" ui-sref="procedure({ cfid: item.financing.formality.cf_id })" data-stat-click="orderlist.ViewProcess">查看手续进度</a>
@@ -36,7 +36,7 @@
                 <div class="btn btn-default stage-btn">付款</div>
             </div>
             <div class="stage stage-two">
-                <div class="stage-item">阶段二<span class="status has">待付款</span></div>
+                <div class="stage-item">阶段二<span class="status not">待付款</span></div>
                 <div class="stage-item">
                     <div class="item-left">支付保证金</div>
                     <div class="item-right">￥30,0300万</div>
@@ -53,9 +53,10 @@
     <div class="syndicates-index loadMore" ng-click="loadMore()" ng-if="!noMore && orderData.length">
         查看更多
     </div>
-    <div class="order-content" ng-if="noData">
-        <div class="empty-image icon-file-text"></div>
-        <p class="text-center">您还没有线上订单，快去开启投资之旅</p>
+
+    <div class="no-order-data">
+        <div class="icon-file-text text-center"></div>
+        <p class="remind-info text-center">还没有投资过任何项目，看看有喜欢的么？</p>
+        <a class="invest-btn btn btn-default" ui-sref="syndicates()">查看全部项目</a>
     </div>
-    <a ui-sref="syndicates()" class="invest-btn" ng-if="noData">开启投资</a>
 </div>
