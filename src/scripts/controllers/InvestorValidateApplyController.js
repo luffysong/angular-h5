@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateApplyController',
 
-    function($state,$scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService,monthOptions,yearOptions) {
+    function($state,$scope,SuggestService,$q, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService,monthOptions,yearOptions) {
 
         $scope.investorValidateApply = {
             status:''
@@ -90,12 +90,109 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.yearOptions = yearOptions;
         $scope.monthOptions = monthOptions;
         console.log('---yearOptions',$scope.yearOptions);
+        //公司suggest
+        $scope.autocomplete_options = {
+            suggest: suggest_state_remote,
+            on_error: console.log,
+            on_detach: function (cs) {
+            },
+            on_select: function (selected) {
+                if (selected.obj.status != 'add') {
+                    $scope.company.isAdd = false;
+                    var company = selected.obj;
+                    $scope.company.addForm.name = company.name;
+                    $scope.company.addForm.id = company.id;
+                    console.log(selected);
+                } else {
+                    $scope.company.isAdd = true;
+                    $scope.company.addForm.name = selected.obj.value;
+                    $scope.company.addForm.id = 0;
+                }
+
+            }
+        }
+        function suggest_state(data) {
+            //var q = term.toLowerCase().trim();
+            var results = data.map(function (item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
+                var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30',
+                    //label = '<img src="' + logo + '">' + '<span>' + item.name + '</span>';
+                    label
+
+                if(item.status!='add'){
+                    label = '<div class="coList"><img src="' + logo + '">' + item.name + '</div>';
+                }else{
+                    label = '<div class="newCo">'+'<span>创建 </span> “'+ item.name + '”</div>';
+                }
+
+                return {
+                    label: label,
+                    value: item.name,
+                    obj: item,
+                    logo: item.logo
+                }
+            });
+
+            return results;
+        }
+        $scope.suggest = {
+            add: []
+        }
+        function suggest_state_remote(term) {
+            var deferred = $q.defer();
+            var q = term.toLowerCase().trim();
+
+            SuggestService.query({
+                wd: q
+            }, function (data) {
+                var exist = data.data.filter(function (item) {
+                    return item.name.toLowerCase() == q.toLowerCase();
+                });
+                //console.log(exist)
+                if (!exist.length) {
+                    data.data.push({
+                        name: q,
+                        id:'',
+                        type:'',
+                        status: 'add',
+                        value: q
+                    })
+                }
+
+                deferred.resolve(suggest_state(data.data));
+            }, function () {
+
+            });
+            return deferred.promise;
+        }
+        // 定位
+        $scope.positionSet = function(e){
+            //console.log(e)
+            e.preventDefault();
+            var wrap = $('.suggest_wrap');
+            var top = wrap.offset().top;
+
+            window.scrollTo(0, top - 30)
+
+            //$('input', wrap)[0].removeAttribute('disabled')
+
+            //setTimeout(function(){
+            //    $('input', wrap).focus();
+            //
+            //}, 500)
+        }
         //任职公司
         $scope.company = {
+            isAddExperience:false,
+            isAdd:false,
             form:{
                 startYear:'2015',
                 startMonth:'',
-                position:'',
+                position:''
+            },
+            addForm:{
+                id:'',
+                name:'',
+                brief:'',
                 operationStatus:'OPEN'
             },
             response:{
@@ -108,8 +205,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
                 console.log('---选择的公司id--',companyId);
                 if(!companyId){
+                    $scope.company.isAddExperience = true;
                     return false;
                 }
+                $scope.company.isAddExperience = false;
 
                 angular.forEach(companyData,function(item){
                     if(companyId == item.id){
