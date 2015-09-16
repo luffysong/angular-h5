@@ -117,6 +117,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             }
         }*/
     });
+
     /*众筹个人所有订单页面*/
     $stateProvider.state('syndicatesAllOrder', {
         url: '/zhongchouAllOrder',
@@ -128,6 +129,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
          }
          }*/
     });
+
+    /*众筹个人所有订单页面*/
+    $stateProvider.state('syndicatesAllOrder2', {
+        url: '/zhongchouAllOrder2',
+        templateUrl: 'templates/syndicates/allOrder2.html',
+        controller: 'syndicatesAllOrderController2'
+    });
+
     /*众筹选择支付方式页面*/
     $stateProvider.state('syndicatesPayWay', {
         url: '/zhongchouPayWay/{tid}/{amount}',
