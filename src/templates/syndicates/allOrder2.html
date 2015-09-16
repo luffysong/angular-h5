@@ -1,58 +1,55 @@
-<div class="syndicate-order-all">
-    <div class="order-head">我的订单</div>
-    <div class="order-nav">
-        <div class="nav-type" ng-repeat="order in orderStatus" ng-click="selectStatus($index)" ng-class="{active:order.active}">
-            {{order.name}}
-            <div class="under-line" ng-if="order.active"></div>
+<div class="syndicate-all-order">
+    <div class="order-head">众筹订单</div>
+    <div class="order-item" ng-repeat="item in orderData">
+        <div class="sup-header">
+            <span class="order-status">{{ item.payment.status | dict_trade_status }}</span>
+            <a class="order-procedure" ng-if="item.payment.status == 3 && item.financing.formality && item.financing.formality.status > 1" ui-sref="procedure({ cfid: item.financing.formality.cf_id })" data-stat-click="orderlist.ViewProcess">查看手续进度</a>
+        </div>
+        <div class="company-info">
+            <a class="company-logo" ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.cf_id })">
+                <img src="{{ item.company.logo }}" alt="{{ item.company.name }}">
+            </a>
+            <a class="company-name" ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.cf_id })">{{item.company.name}}</a>
+            <div class="banner">Kr码认购</div>
+        </div>
+        <div class="money-info">
+            <div class="money-buy">
+                <p class="money">{{ item.investment }}<sup>￥</sup></p>
+                <p class="text">认购金额</p>
+            </div>
+            <div class="money-manage">
+                <p class="money">{{ item.lead_fee }}<sup>￥</sup></p>
+                <p class="text">认购金额</p>
+            </div>
+        </div>
+        <div class="stage-info">
+            <div class="stage stage-one">
+                <div class="stage-item">阶段一<span class="status">已付款</span></div>
+                <div class="stage-item">
+                    <div class="item-left">支付保证金</div>
+                    <div class="item-right">￥300万</div>
+                </div>
+                <div class="stage-item">
+                    <div class="item-left">付款时间</div>
+                    <div class="item-right">2015-08-12 12:30</div>
+                </div>
+                <div class="btn btn-default stage-btn">付款</div>
+            </div>
+            <div class="stage stage-two">
+                <div class="stage-item">阶段二<span class="status has">待付款</span></div>
+                <div class="stage-item">
+                    <div class="item-left">支付保证金</div>
+                    <div class="item-right">￥30,0300万</div>
+                </div>
+                <div class="stage-item">
+                    <div class="item-left">付款时间</div>
+                    <div class="item-right">2015-08-12 12:30</div>
+                </div>
+                <div class="btn btn-default stage-btn">付款</div>
+            </div>
         </div>
     </div>
 
-    <div class="order-detail" ng-repeat="item in orderData">
-        <div class="company-data">
-            <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.cf_id})" class="syndicates-logo" style="background-image: url({{item.company.logo || ''}});"></a>
-            <div class="company-name"><a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.cf_id})">{{item.company.name}}</a></div>
-            <div class="status"><span class="order-status">{{item.payment.status | dict_trade_status}}</span></div>
-        </div>
-        <div class="syndicate-info first progress">
-            <div class="info-attr progress">
-                <!--融资进度条-->
-                <loading-bar percent="item.percent">
-                </loading-bar>
-            </div>
-            <div class="info-val progress">{{item.percent}}%</div>
-        </div>
-        <div class="syndicate-info">
-            <div class="info-attr">融资目标</div>
-            <div class="info-val">￥{{item.financing.cf_raising | WanNum}}</div>
-        </div>
-        <div class="syndicate-info border">
-            <div class="info-attr">筹集金额</div>
-            <div class="info-val">￥{{item.financing.cf_success_raising | WanNum}}</div>
-        </div>
-        <div class="syndicate-info first">
-            <div class="info-attr">领投人</div>
-            <div class="info-val">{{item.financing.investorData.name}} <span ng-if="item.financing.investorData.type=='ORGANIZATION'">{{item.financing.manager.name}}</span></div>
-        </div>
-        <div class="syndicate-info">
-            <div class="info-attr">融资状态</div>
-            <div class="info-val">{{item.financing.round | dict_CompanyFinancePhase}} {{item.financing.status | dict_crowd_funding_status}}</div>
-        </div>
-        <div class="syndicate-info">
-            <div class="info-attr">投资金额</div>
-            <div class="info-val">￥{{item.investment}}</div>
-        </div>
-        <div class="syndicate-info" ng-class="{'border':(item.payment.status==1 && item.status==1 && item.payment.platform_type!=1) || (item.payment.status != 1 && item.payment.status != 3)}">
-            <div class="info-attr">订单金额</div>
-            <div class="info-val">￥{{item.payment.amount}}</div>
-        </div>
-        <div class="pay-layer" ng-if="item.payment.status != 1 && item.payment.status != 3">
-            <div>{{item.status | dict_trade_crowd_funding_status}}</div>
-        </div>
-        <div class="pay-layer">
-            <a ng-if="item.payment.status==1 && item.status==1 && item.payment.platform_type!=1" ui-sref="syndicatesPayWay({tid:item.trade_id,amount:item.payment.amount})" class="pay-btn" baidu-btn="去付款按钮点击">去付款</a>
-            <a ng-if="item.payment.status == 3 && item.financing.formality && item.financing.formality.status > 1" ui-sref="procedure({ cfid: item.financing.formality.cf_id })" class="pay-btn" data-stat-click="orderlist.ViewProcess">手续进度</a>
-        </div>
-    </div>
     <div class="syndicates-index loadMore" ng-click="loadMore()" ng-if="!noMore && orderData.length">
         查看更多
     </div>
