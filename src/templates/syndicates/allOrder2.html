@@ -54,83 +54,35 @@
         查看更多
     </div>
 
-    <div class="no-order-data">
+    <div class="no-order-data" ng-if="noData">
         <div class="icon-file-text text-center"></div>
         <p class="remind-info text-center">还没有投资过任何项目，看看有喜欢的么？</p>
         <a class="invest-btn btn btn-default" ui-sref="syndicates()">查看全部项目</a>
 
-        <div class="recommend-item">
+        <div class="recommend-item" ng-repeat="item in recommendList | limitTo: 3">
             <div class="item-top">
-                <div class="company-logo">
-                    <img src="{{ '' | image }}" alt="北京小米有限公司" />
+                <div class="company-logo" ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.cf_id })">
+                    <img src="{{ item.company.logo | image }}" alt="{{ item.company.name }}" />
                 </div>
                 <div class="company-name">
-                    <a href="#">北京小米有限公司</a>
-                    <span class="status">募资中</span>
-                </div>
-                <div class="company-brief">美国发明家、企业家、美国苹果公司联合创办人</div>
-            </div>
-            <div class="item-bottom">
-                <div class="bottom-left">
-                    <p>创始人</p>
-                    <p>团队成员</p>
-                    <p>产品数据</p>
-                </div>
-                <div class="bottom-right">
-                    <p>沃兹</p>
-                    <p>多家企业核心技术支持</p>
-                    <p>销售月复合增速</p>
-                </div>
-            </div>
-        </div>
-        <div class="recommend-item">
-            <div class="item-top">
-                <div class="company-logo">
-                    <img src="{{ '' | image }}" alt="北京小米有限公司" />
-                </div>
-                <div class="company-name">
-                    <a href="#">北京小米有限公司</a>
-                    <span class="status">募资中</span>
-                </div>
-                <div class="company-brief">美国发明家、企业家、美国苹果公司联合创办人</div>
-            </div>
-            <div class="item-bottom">
-                <div class="bottom-left">
-                    <p>创始人</p>
-                    <p>团队成员</p>
-                    <p>产品数据</p>
-                </div>
-                <div class="bottom-right">
-                    <p>沃兹</p>
-                    <p>多家企业核心技术支持</p>
-                    <p>销售月复合增速</p>
-                </div>
-            </div>
-        </div>
-        <div class="recommend-item">
-            <div class="item-top">
-                <div class="company-logo">
-                    <img src="{{ '' | image }}" alt="北京小米有限公司" />
-                </div>
-                <div class="company-name">
-                    <a href="#">北京小米有限公司</a>
-                    <span class="status">募资中</span>
-                </div>
-                <div class="company-brief">美国发明家、企业家、美国苹果公司联合创办人</div>
-            </div>
-            <div class="item-bottom">
-                <div class="bottom-left">
-                    <p>创始人</p>
-                    <p>团队成员</p>
-                    <p>产品数据</p>
-                </div>
-                <div class="bottom-right">
-                    <p>沃兹</p>
-                    <p>多家企业核心技术支持</p>
-                    <p>销售月复合增速</p>
-                </div>
-            </div>
-        </div>
+                    <a ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.cf_id })">{{ item.company.name }}</a>
 
+                    <span class="status bg-{{item.timeout && item.fundingStatus != 'preheat'  ? 50 : item.color}}">
+                        {{ item.timeout && item.name != '融资成功' && item.fundingStatus != 'preheat' ? "筹集成功" : item.name }}
+                    </span>
+                </div>
+                <div class="company-brief">{{ item.company.brief }}</div>
+            </div>
+            <div class="item-bottom">
+                <div ng-repeat="key in item.desc.cf_advantage | limitTo : 3">
+                    <div class="bottom-left">
+                        <p>{{ key.label }}</p>
+                    </div>
+                    <div class="bottom-right">
+                        <p>{{ key.value }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
