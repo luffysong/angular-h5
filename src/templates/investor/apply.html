@@ -189,15 +189,14 @@
                                             <label class="title"><span class="c-orange">*</span>任职公司</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select name="" >
-                                                        <option value="">新增</option>
+                                                    <select name="companyName" ng-change="company.choose()" ng-options="y.id as y.groupName for y in company.response.data" ng-model="company.form.id">
                                                     </select>
                                                 </li>
                                             </ul>
                                         </li>
                                     </ul>
                                     <!--新增公司-->
-                                    <ul class="content-list">
+                                    <ul class="content-list" ng-show="!company.form.id">
                                         <li>
                                             <label class="title"><span class="c-orange"></span></label>
                                             <ul class="main">
@@ -212,8 +211,7 @@
                                             <label class="title"><span class="c-orange">*</span>产品状态</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select id="" name="">
-                                                        <option value=""></option>
+                                                    <select id="" name="" ng-model="company.form.operationStatus" ng-options="y.value as y.desc for y in operationStatus">
                                                     </select>
                                                 </li>
                                             </ul>
@@ -222,7 +220,7 @@
                                             <label class="title"><span class="c-orange">*</span>公司网址</label>
                                             <ul class="main">
                                                 <li>
-                                                    <input type="text" full-url placeholder="如：http://www.36kr.com">
+                                                    <input type="text" fill-url ng-model="company.form.website" name="companyWebsite" placeholder="如：http://www.36kr.com">
                                                 </li>
                                             </ul>
                                         </li>
@@ -230,7 +228,7 @@
                                             <label class="title"><span class="c-orange">*</span>公司简介</label>
                                             <ul class="main">
                                                 <li>
-                                                    <textarea  name="" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
+                                                    <textarea  name="brief" ng-model="companyBrief" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
                                                 </li>
                                             </ul>
                                         </li>
@@ -242,23 +240,22 @@
                                             <label class="title"><span class="c-orange">*</span>职位</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select name="" >
-                                                        <option value="">请选择</option>
+                                                    <select name="" ng-options="c.value as c.desc for c in workPositionType" ng-model="company.form.position">
                                                     </select>
                                                 </li>
                                             </ul>
                                         </li>
                                         <!--任职时间-->
                                         <li>
-                                            <label class="title"><span class="c-orange">*</span>任职时间</label>
+                                            <label class="title"><span class="c-orange">*</span>任职时间{{company.form.startYear}}</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select name="" >
+                                                    <select name="comanyStartYear" ng-options="y for y in yearOptions" ng-model="company.form.startYear">
                                                         <option value="">年</option>
                                                     </select>
                                                 </li>
                                                 <li>
-                                                    <select name="" >
+                                                    <select name="companyStartMonth"  ng-model="company.form.startMonth" ng-options="m for m in monthOptions">
                                                         <option value="">月</option>
                                                     </select>
                                                 </li>

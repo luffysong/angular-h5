@@ -444,6 +444,15 @@ angular.module('defaultApp.service').service('UserService', [
                 callback && callback(err);
             });
         };
+        //获取用户的在职公司工作经历
+        service.getCurrentWorkCompanys = function(uid,callback,error){
+            $http.get('/api/user/'+uid+'/cur_work?type=com').success(function(data){
+                callback && callback(data);
+            }).catch(function(err){
+                error && error(err);
+            });
+        };
+
 
         return service;
     }

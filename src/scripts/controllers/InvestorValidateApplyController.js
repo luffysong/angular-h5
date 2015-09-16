@@ -5,7 +5,9 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateApplyController',
-    function($state,$scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService,AndroidUploadService) {
+
+    function($state,$scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService,monthOptions,yearOptions) {
+
         $scope.investorValidateApply = {
             status:''
         }
@@ -69,6 +71,89 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 $scope.error.code = 0;
             }
         }
+        //任职机构
+        $scope.organization = {
+            form:{
+
+            },
+            response:{
+
+            },
+        };
+         //产品状态字典
+        $scope.operationStatus = DictionaryService.getDict('CompanyOperationStatus');
+        //获取工作职位
+        $scope.workPositionType = DictionaryService.getDict('WorkPositionType');
+        $scope.orgPositionType = DictionaryService.getDict('OrgPositionType');
+
+        //获取年月份
+        $scope.yearOptions = yearOptions;
+        $scope.monthOptions = monthOptions;
+        console.log('---yearOptions',$scope.yearOptions);
+        //任职公司
+        $scope.company = {
+            form:{
+                startYear:'2015',
+                startMonth:'',
+                position:'',
+                operationStatus:'OPEN'
+            },
+            response:{
+                data:[]
+            },
+            choose:function(){
+                var companyId = $scope.company.form.id,
+                    companyData = $scope.company.response.data,
+                    company = {};
+
+                console.log('---选择的公司id--',companyId);
+                if(!companyId){
+                    return false;
+                }
+
+                angular.forEach(companyData,function(item){
+                    if(companyId == item.id){
+                        company = item;
+                        return true;
+                    }
+
+                });
+                var startDate = new Date(company.startDate);
+                $scope.company.form.position = company.position;
+                $scope.company.form.startYear = startDate.getFullYear();
+                $scope.company.form.startMonth = startDate.getMonth();
+
+            },
+            loadData:function(){
+                //获取当前用户在职公司工作经历
+                UserService.getCurrentWorkCompanys(UserService.getUID(),function(response){
+                    console.log('--用户在职公司工作经历--',response);
+                    $scope.company.response.data = angular.copy(response.expList);
+                    $scope.company.response.data.push({
+                         id:0,
+                         groupName:'新增'
+                    });
+                    if($scope.company.response.data.length){
+                        var company = response.expList[0];
+                        $scope.company.form.id = company.id;
+                        $scope.company.form.position = company.position;
+                        var startDate = new Date(company.startDate);
+                        $scope.company.form.position = company.position;
+                        $scope.company.form.startYear = startDate.getFullYear();
+                        $scope.company.form.startMonth = startDate.getMonth();
+                console.log('---<<<>>>',$scope.company.form);
+                    }
+                },function(err){
+                    ErrorService.alert(err);
+                });
+            }
+
+        };
+        $scope.$watch('company.form.startYear',function(){
+            console.log('---year-value--',$scope.company.form.startYear) ;
+        })
+        $scope.company.loadData();
+        //投资人认证表单
         $scope.intro = {};
         $scope.intro.value = {
             intro:"",
