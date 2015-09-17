@@ -101,7 +101,7 @@
                                         </li>
                                     </ul>
                                     <!--新增机构-->
-                                    <ul class="content-list">
+                                    <ul class="content-list" ng-if="organization.isAddExperience">
                                         <!--机构名称-->
                                         <li mass-autocomplete="{debounce_blur:700}">
                                             <label class="title"><span class="c-orange"></span></label>
@@ -150,7 +150,7 @@
                                             <label class="title"><span class="c-orange">*</span>职位</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select name=""  ng-options="c.value as c.desc for c in orgPositionType" ng-model="organization.addForm.position" >
+                                                    <select name="organizationPosition"  ng-options="c.value as c.desc for c in orgPositionType" ng-model="organization.form.position" >
                                                         <option value="">请选择</option>
                                                     </select>
                                                 </li>
