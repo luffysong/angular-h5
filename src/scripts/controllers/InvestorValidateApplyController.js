@@ -210,7 +210,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             var q = term.toLowerCase().trim();
 
             SuggestService.query({
-                wd: q
+                wd: q,
+                sub: 'company'
             }, function (data) {
                 var exist = data.data.filter(function (item) {
                     return item.name.toLowerCase() == q.toLowerCase();
@@ -258,6 +259,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 console.log('---选择的公司id--',companyId);
                 if(!companyId){
                     $scope.company.isAddExperience = true;
+                    $scope.company.form.position = '';
+                    $scope.company.form.startYear = '';
+                    $scope.company.form.startMonth = '';
                     return false;
                 }
                 $scope.company.isAddExperience = false;
@@ -271,8 +275,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 });
                 var startDate = new Date(company.startDate);
                 $scope.company.form.position = company.position;
-                $scope.company.form.startYear = startDate.getFullYear();
-                $scope.company.form.startMonth = startDate.getMonth();
+                $scope.company.form.startYear = startDate.getFullYear() +'';
+                $scope.company.form.startMonth = startDate.getMonth()+'';
 
             },
             loadData:function(){
@@ -290,8 +294,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         $scope.company.form.position = company.position;
                         var startDate = new Date(company.startDate);
                         $scope.company.form.position = company.position;
-                        $scope.company.form.startYear = startDate.getFullYear();
-                        $scope.company.form.startMonth = startDate.getMonth();
+                        $scope.company.form.startYear = startDate.getFullYear()+'';
+                        $scope.company.form.startMonth = startDate.getMonth()+'';
                 console.log('---<<<>>>',$scope.company.form);
                     }
                 },function(err){
@@ -325,8 +329,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     organization = {};
 
                 console.log('---选择的机构id--',orId);
+                //新增机构工作经历
                 if(!orId){
                     $scope.organization.isAddExperience = true;
+                    $scope.organization.form.position = '';
+                    $scope.organization.form.startYear = '';
+                    $scope.organization.form.startMonth = '';
+
                     return false;
                 }
                 $scope.organization.isAddExperience = false;
@@ -340,8 +349,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 });
                 var startDate = new Date(organization.startDate);
                 $scope.organization.form.position = organization.position;
-                $scope.organization.form.startYear = startDate.getFullYear();
-                $scope.organization.form.startMonth = startDate.getMonth();
+                $scope.organization.form.startYear = startDate.getFullYear()+'';
+                $scope.organization.form.startMonth = startDate.getMonth()+'';
+                console.log('---organization--',$scope.organization);
 
             },
             loadData:function(){
@@ -354,13 +364,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                          groupName:'新增'
                     });
                     if($scope.organization.response.data.length){
-                        var organization = $scope.organization.response.data[0];
+                        var organization = angular.copy($scope.organization.response.data[0]);
                         $scope.organization.form.id = organization.id;
                         $scope.organization.form.position = organization.position;
+                        console.log('--organizationDate--',organization.startDate);
                         var startDate = new Date(organization.startDate);
                         $scope.organization.form.position = organization.position;
-                        $scope.organization.form.startYear = startDate.getFullYear();
-                        $scope.organization.form.startMonth = startDate.getMonth();
+                        $scope.organization.form.startYear = startDate.getFullYear()+'';
+                        $scope.organization.form.startMonth = startDate.getMonth()+'';
                 console.log('---<<<organization>>>---',$scope.organization.form);
                     }
                 },function(err){
@@ -558,8 +569,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
         /*表单提交*/
         $scope.submitForm = function(){
-            console.log('-----',$scope.company);
-            return false;
             //隐藏自定义错误信息
             Error.hide();
             if($scope.intro.value.pictures){
