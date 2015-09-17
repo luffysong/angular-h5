@@ -71,16 +71,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 $scope.error.code = 0;
             }
         }
-        //任职机构
-        $scope.organization = {
-            form:{
-
-            },
-            response:{
-
-            },
-        };
-         //产品状态字典
+        //产品状态字典
         $scope.operationStatus = DictionaryService.getDict('CompanyOperationStatus');
         //获取工作职位
         $scope.workPositionType = DictionaryService.getDict('WorkPositionType');
@@ -90,7 +81,87 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.yearOptions = yearOptions;
         $scope.monthOptions = monthOptions;
         console.log('---yearOptions',$scope.yearOptions);
+
+        //机构suggest
+
+        $scope.suggestOrganization = {
+            add: []
+        }
+
+        $scope.autocomplete_options_organization = {
+            suggest: suggest_state_remote_organization,
+            on_error: console.log,
+            on_detach: function (cs) {
+            },
+            on_select: function (selected) {
+                if (selected.obj.status != 'add') {
+                    $scope.organization.isAdd = false;
+                    var organization = selected.obj;
+                    $scope.organization.addForm.name = organization.name;
+                    $scope.organization.addForm.id = organization.id;
+                    console.log(selected);
+                } else {
+                    $scope.organization.isAdd = true;
+                    $scope.organization.addForm.name = selected.obj.value;
+                    $scope.organization.addForm.id = 0;
+                }
+            }
+        }
+        function suggest_state_organization(data) {
+            //var q = term.toLowerCase().trim();
+            var results = data.map(function (item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
+                var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30',
+                    //label = '<img src="' + logo + '">' + '<span>' + item.name + '</span>';
+                    label
+
+                if(item.status!='add'){
+                    label = '<div class="coList"><img src="' + logo + '">' + item.name + '</div>';
+                }else{
+                    label = '<div class="newCo">'+'<span>创建 </span> “'+ item.name + '”</div>';
+                }
+
+                return {
+                    label: label,
+                    value: item.name,
+                    obj: item,
+                    logo: item.logo
+                }
+            });
+
+            return results;
+        }
+        function suggest_state_remote_organization(term) {
+            var deferred = $q.defer();
+            var q = term.toLowerCase().trim();
+
+            SuggestService.query({
+                wd: q,
+                sub: 'institution'
+            }, function (data) {
+                console.log('---机构数据--',data);
+                var exist = data.data.filter(function (item) {
+                    return item.name.toLowerCase() == q.toLowerCase();
+                });
+                if (!exist.length) {
+                    data.data.push({
+                        name: q,
+                        id:'',
+                        type:'',
+                        status: 'add',
+                        value: q
+                    })
+                }
+                deferred.resolve(suggest_state_organization(data.data));
+            }, function () {
+
+            });
+            return deferred.promise;
+        }
+
         //公司suggest
+        $scope.suggest = {
+            add: []
+        }
         $scope.autocomplete_options = {
             suggest: suggest_state_remote,
             on_error: console.log,
@@ -134,9 +205,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
             return results;
         }
-        $scope.suggest = {
-            add: []
-        }
         function suggest_state_remote(term) {
             var deferred = $q.defer();
             var q = term.toLowerCase().trim();
@@ -163,22 +231,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
             });
             return deferred.promise;
-        }
-        // 定位
-        $scope.positionSet = function(e){
-            //console.log(e)
-            e.preventDefault();
-            var wrap = $('.suggest_wrap');
-            var top = wrap.offset().top;
-
-            window.scrollTo(0, top - 30)
-
-            //$('input', wrap)[0].removeAttribute('disabled')
-
-            //setTimeout(function(){
-            //    $('input', wrap).focus();
-            //
-            //}, 500)
         }
         //任职公司
         $scope.company = {
@@ -248,10 +300,76 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
 
         };
-        $scope.$watch('company.form.startYear',function(){
-            console.log('---year-value--',$scope.company.form.startYear) ;
-        })
         $scope.company.loadData();
+        //任职机构
+        $scope.organization = {
+            isAddExperience:false,
+            isAdd:false,
+            form:{
+                startYear:'2015',
+                startMonth:'',
+                position:''
+            },
+            addForm:{
+                id:'',
+                name:'',
+                brief:'',
+                operationStatus:'OPEN'
+            },
+            response:{
+                data:[]
+            },
+            choose:function(){
+                var orId = $scope.organization.form.id,
+                    organizationData = $scope.organization.response.data,
+                    organization = {};
+
+                console.log('---选择的机构id--',orId);
+                if(!orId){
+                    $scope.organization.isAddExperience = true;
+                    return false;
+                }
+                $scope.organization.isAddExperience = false;
+
+                angular.forEach(organizationData,function(item){
+                    if(orId == item.id){
+                        organization = item;
+                        return true;
+                    }
+
+                });
+                var startDate = new Date(organization.startDate);
+                $scope.organization.form.position = organization.position;
+                $scope.organization.form.startYear = startDate.getFullYear();
+                $scope.organization.form.startMonth = startDate.getMonth();
+
+            },
+            loadData:function(){
+                //获取当前用户在职机构工作经历
+                UserService.getCurrentWorkOrganizations(UserService.getUID(),function(response){
+                    console.log('--用户在职机构工作经历--',response);
+                    $scope.organization.response.data = angular.copy(response.expList);
+                    $scope.organization.response.data.push({
+                         id:0,
+                         groupName:'新增'
+                    });
+                    if($scope.organization.response.data.length){
+                        var organization = $scope.organization.response.data[0];
+                        $scope.organization.form.id = organization.id;
+                        $scope.organization.form.position = organization.position;
+                        var startDate = new Date(organization.startDate);
+                        $scope.organization.form.position = organization.position;
+                        $scope.organization.form.startYear = startDate.getFullYear();
+                        $scope.organization.form.startMonth = startDate.getMonth();
+                console.log('---<<<organization>>>---',$scope.organization.form);
+                    }
+                },function(err){
+                    ErrorService.alert(err);
+                });
+            }
+
+        };
+        $scope.organization.loadData();
         //投资人认证表单
         $scope.intro = {};
         $scope.intro.value = {
@@ -440,6 +558,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
         /*表单提交*/
         $scope.submitForm = function(){
+            console.log('-----',$scope.company);
+            return false;
             //隐藏自定义错误信息
             Error.hide();
             if($scope.intro.value.pictures){

@@ -94,8 +94,7 @@
                                             <label class="title"><span class="c-orange">*</span>任职机构</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select name="" >
-                                                        <option value="">新增</option>
+                                                    <select name="organizationName" ng-change="organization.choose()" ng-options="y.id as y.groupName for y in organization.response.data" ng-model="organization.form.id">
                                                     </select>
                                                 </li>
                                             </ul>
@@ -104,35 +103,42 @@
                                     <!--新增机构-->
                                     <ul class="content-list">
                                         <!--机构名称-->
-                                        <li ng-show="true">
+                                        <li mass-autocomplete="{debounce_blur:700}">
                                             <label class="title"><span class="c-orange"></span></label>
                                             <ul class="main">
-                                                <li>
-                                                    <input type="text" placeholder="请输入机构名">
+                                                <li class="suggest_wrap">
+                                                    <input type="text" ng-model="organization.addForm.name"
+                                                    name="organizationName"
+                                                    placeholder="请输入机构名"
+                                                    required
+                                                    class="form-control"
+                                                    mass-autocomplete-item="autocomplete_options_organization"/>
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li ng-show="true">
+                                    </ul>
+                                    <ul class="content-list" ng-if="organization.isAdd">
+                                        <li>
                                             <label class="title"><span class="c-orange">*</span>机构英文名称</label>
                                             <ul class="main">
                                                 <li>
-                                                    <input type="text" placeholder="请输入机构英文名称">
+                                                    <input type="text" ng-model="organization.addForm.enName" placeholder="请输入机构英文名称">
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li ng-show="true">
+                                        <li>
                                             <label class="title"><span class="c-orange">*</span>机构网址</label>
                                             <ul class="main">
                                                 <li>
-                                                    <input type="text" full-url placeholder="如：http://www.36kr.com">
+                                                    <input type="text" fill-url name="organizationWebsite" ng-model="organization.addForm.website" full-url placeholder="如：http://www.36kr.com">
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li ng-show="true">
+                                        <li>
                                             <label class="title"><span class="c-orange">*</span>机构简介</label>
                                             <ul class="main">
                                                 <li>
-                                                    <textarea  name="" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
+                                                    <textarea  name="organizationBrief" ng-model="organization.addForm.brief" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
                                                 </li>
                                             </ul>
                                         </li>
@@ -144,7 +150,7 @@
                                             <label class="title"><span class="c-orange">*</span>职位</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select name="" >
+                                                    <select name=""  ng-options="c.value as c.desc for c in orgPositionType" ng-model="organization.addForm.position" >
                                                         <option value="">请选择</option>
                                                     </select>
                                                 </li>
@@ -155,12 +161,12 @@
                                             <label class="title"><span class="c-orange">*</span>任职时间</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select name="" >
+                                                    <select name="organizationStartYear" ng-options="y for y in yearOptions" ng-model="organization.form.startYear">
                                                         <option value="">年</option>
                                                     </select>
                                                 </li>
                                                 <li>
-                                                    <select name="" >
+                                                    <select name="organizationStartMonth"  ng-model="organization.form.startMonth" ng-options="m for m in monthOptions">
                                                         <option value="">月</option>
                                                     </select>
                                                 </li>
