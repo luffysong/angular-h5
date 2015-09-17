@@ -452,6 +452,16 @@ angular.module('defaultApp.service').service('UserService', [
                 error && error(err);
             });
         };
+        //获取用户的在职机构工作经历
+        service.getCurrentWorkOrganizations = function(uid,callback,error){
+            $http.get('/api/user/'+uid+'/cur_work?type=org').success(function(data){
+                callback && callback(data);
+            }).catch(function(err){
+                error && error(err);
+            });
+        };
+
+
 
 
         return service;
