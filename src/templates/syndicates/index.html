@@ -28,7 +28,8 @@
         <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
             <div class="syndicates-pic" style="">
                 <div class="syndicates-status bg-{{item.color}}" ng-class="{'pd-19':item.color == '60'}">
-                    <i class="icon-h5-time"></i> {{item.name}}
+                    <i class="icon-h5-time"></i>
+                    {{item.timeout && item.name != '融资成功' && item.fundingStatus != 'preheat' ? "募资完成" : item.name}}
                 </div>
                 <img ng-src="{{item.desc.file_list_img}}" alt=""/>
                 <span class="hot-icon" ng-if="item.hot == 1"></span>
@@ -57,11 +58,11 @@
                     </div>
                 </div>
                 <!--融资进度条-->
-                <loading-bar percent="item.percent" loading-tip="item.cf_success_raising">
+                <loading-bar percent="item.percent">
                 </loading-bar>
 
                 <div class="goal">
-                    已筹集<span class="ml-10">{{item.cf_success_raising | unitConversion}}</span>
+                    已筹集<span class="ml-10">{{item.cf_success_raising_offer | unitConversion}}</span>
                     <span class="goal-num">融资目标<b class="currency ml-10">{{item.cf_raising | unitConversion}}</b>
                     </span>
                 </div>

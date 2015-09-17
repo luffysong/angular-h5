@@ -17,7 +17,16 @@ angular.module('defaultApp.controller').controller('syndicatesController',
         /*前端处理，包括融资进度百分比的计算，以及众筹状态*/
         $scope.handleData = function(){
             angular.forEach($scope.investorList,function(key,index){
-                key.percent = parseInt(key.cf_success_raising) * 100 / parseInt(key.cf_raising) ;
+                /*
+                 停止投资三种情况：
+                 1.众筹超时
+                 2.剩余投资金额不足
+                 3.跟投人达到最多跟投人数
+                 * */
+                if(key.status != 25 && (key.status == 50 || new Date(key.end_time) < new Date() || (key.min_investment && key.min_investment > key.cf_max_raising - key.cf_success_raising) || key.investor_count >= key.max_coinvestor_number)){
+                    key.timeout = true;
+                }
+                key.percent = parseInt(key.cf_success_raising_offer) * 100 / parseInt(key.cf_raising) ;
                 angular.forEach(statusList,function(obj,i){
                     if(key.status == obj.value){
                         key.name = obj.desc;
@@ -28,8 +37,10 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                             /*众筹未开始*/
                             var startTime = new Date(key.start_time);
                             if(new Date() < startTime){
-                                var minute = startTime.getMinutes() > 9 ? startTime.getMinutes() : "0"+startTime.getMinutes();
-                                key.name = parseInt(startTime.getMonth())+1+"月"+startTime.getDate()+"日  "+startTime.getHours()+":"+minute+"  开始融资";
+                                key.fundingStatus = "preheat";
+                                /*var minute = startTime.getMinutes() > 9 ? startTime.getMinutes() : "0"+startTime.getMinutes();*/
+                                /*key.name = parseInt(startTime.getMonth())+1+"月"+startTime.getDate()+"日  "+startTime.getHours()+":"+minute+"  开始融资";*/
+                                key.name = "锚定中";
                                 key.color = 60;
                             }
                         }
