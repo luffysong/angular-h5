@@ -68,7 +68,10 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
 
         /*订单按钮*/
         $scope.myOrder = function(event){
-            if($scope.invalid){
+            if(!$scope.uid){
+                event.preventDefault();
+            }
+            else if($scope.invalid){
                 event.preventDefault();
                 $state.go('guide.welcome', {
                     type: 'investorValidate'
