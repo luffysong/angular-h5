@@ -50,6 +50,24 @@
                 <div class="error-alert error" ng-show="investorValidateForm.companyBrief.$invalid && investorValidateForm.companyBrief.$dirty">
                     <span>请输入公司的一句话简介</span>
                 </div>
+                <!--机构-->
+                <div class="error-alert error" ng-show="investorValidateForm.organizationName.$invalid && investorValidateForm.organizationName.$dirty">
+                    <span>请输入机构名称</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationPosition.$invalid && investorValidateForm.organizationPosition.$dirty">
+                    <span>请选择任职机构职位</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationStartYear.$invalid && investorValidateForm.organizationStartYear.$dirty">
+                    <span>请选择任职机构任职时间的年份</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationStartMonth.$invalid && investorValidateForm.organizationStartMonth.$dirty">
+                    <span>请选择机构任职时间的月份</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationBrief.$invalid && investorValidateForm.organizationBrief.$dirty">
+                    <span ng-show="investorValidateForm.organizationBrief.$error.require">请输入机构简介</span>
+                    <span ng-show="investorValidateForm.organizationBrief.$error.minlength">机构简介最少10个字，最多1000个字</span>
+                </div>
+
                 <div class="form-horizontal welcome-form">
                     <h4 class="title">投资人认证</h4>
                     <!--基本信息-->
@@ -135,18 +153,18 @@
                                     </ul>
                                     <ul class="content-list" ng-if="organization.isAdd">
                                         <li>
-                                            <label class="title"><span class="c-orange">*</span>机构英文名称</label>
+                                            <label class="title"><span class="c-orange"></span>机构英文名称</label>
                                             <ul class="main">
                                                 <li>
-                                                    <input type="text" required ng-model="organization.addForm.enName" placeholder="请输入机构英文名称">
+                                                    <input type="text" ng-model="organization.addForm.enName" placeholder="请输入机构英文名称">
                                                 </li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <label class="title"><span class="c-orange">*</span>机构网址</label>
+                                            <label class="title"><span class="c-orange"></span>机构网址</label>
                                             <ul class="main">
                                                 <li>
-                                                    <input type="text" fill-url required name="organizationWebsite" ng-model="organization.addForm.website" full-url placeholder="如：http://www.36kr.com">
+                                                    <input type="text" fill-url  name="organizationWebsite" ng-model="organization.addForm.website" full-url placeholder="如：http://www.36kr.com">
                                                 </li>
                                             </ul>
                                         </li>
@@ -154,7 +172,7 @@
                                             <label class="title"><span class="c-orange">*</span>机构简介</label>
                                             <ul class="main">
                                                 <li>
-                                                    <textarea  name="organizationBrief" required  ng-model="organization.addForm.brief" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
+                                                    <textarea  name="organizationBrief" required  ng-model="organization.addForm.brief" placeholder="简单介绍你的个人经历，30字" ng-minlength="10" ng-maxlength="30" required></textarea>
                                                 </li>
                                             </ul>
                                         </li>

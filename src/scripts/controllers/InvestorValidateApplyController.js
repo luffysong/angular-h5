@@ -898,13 +898,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }
 
 
-
-
-
                 //发送投资人认证数据
                 function send(workExpId){
-                        console.log('dianjile');
-                    return false;
                     if(workExpId){
                         investoraudit['workExpId'] = workExpId;
                     }
