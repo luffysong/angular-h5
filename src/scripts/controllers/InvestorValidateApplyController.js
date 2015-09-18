@@ -254,6 +254,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 if(!companyId){
                     $scope.company.isAddExperience = true;
                     $scope.company.form.position = '';
+                    $scope.company.form.positionDetail = '';
                     $scope.company.form.startYear = '';
                     $scope.company.form.startMonth = '';
                     return false;
@@ -603,180 +604,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     return deferred.promise;
                 }
 
-                //判断投资身份
-                var investorRole  = $scope.invest.investorRole;
-                switch(investorRole){
-                    //任职机构
-                    case 'ORG_INVESTOR':{
-                        console.log('---任职机构');
-                        if($scope.organization.isAddExperience){
-                            if($scope.organization.isAdd){
-                                //快速创建机构
-                                var data = {};
-                                    data['name'] = $scope.organization.addForm['name'];
-                                    data['enName'] = $scope.organization.addForm['enName'];
-                                    data['brief'] = $scope.organization.addForm['brief'];
-                                    data['website'] = $scope.organization.addForm['website'];
-                                    data['source'] = 'INVESTOR_AUDIT';
-
-                                var createOrganizationPromise = createOrganization(data);
-                                createOrganizationPromise.then(function(response){
-                                    console.log('---公司返回数据--',response);
-                                    //创建经历
-                                    var expData = {};
-                                        expData['uid'] = UserService.getUID();
-                                        expData['groupIdType'] = 2;
-                                        expData['current'] = true;
-                                        expData['groupId'] = response.id;
-                                        expData['position'] = $scope.organization.form.position;
-                                        expData['startDate'] = $scope.organization.form.startYear +'-'+$scope.organization.form.startMonth+'-01 01:01:01';
-                                        console.log('---要提交的创建经历数据--',expData);
-
-                                    var createExperiencePromise = createExperience(expData);
-                                    createExperiencePromise.then(function(response){
-                                        console.log('--创建经历成功--');
-                                    },function(err){
-                                        console.log('--创建经历失败--');
-                                    });
-                                },function(err){
-                                    console.log('---创建公司失败--');
-                                });
-                            }else{
-                                //创建经历
-                                    var expData = {};
-                                        expData['uid'] = UserService.getUID();
-                                        expData['groupIdType'] = 2;
-                                        expData['current'] = true;
-                                        expData['groupId'] = $scope.organization.addForm.id;
-                                        expData['position'] = $scope.organization.form.position;
-                                        expData['startDate'] = $scope.organization.form.startYear +'-'+$scope.organization.form.startMonth+'-01 01:01:01';
-
-                                console.log('---要提交的创建经历数据--',expData);
-
-                                var createExperiencePromise = createExperience(expData);
-                                createExperiencePromise.then(function(response){
-                                    console.log('--创建经历成功--');
-                                },function(err){
-                                    console.log('--创建经历失败--');
-                                });
-                            }
-                        }else{
-                            //更新任职经历
-                            var expData = {};
-                                expData['uid'] = UserService.getUID();
-                                expData['groupIdType'] = 2;
-                                expData['current'] = true;
-                                expData['id'] = $scope.organization.form.id;
-                                expData['groupId'] = $scope.organization.form.groupId;
-                                expData['position'] = $scope.organization.form.position;
-                                expData['startDate'] = $scope.organization.form.startYear +'-'+$scope.organization.form.startMonth+'-01 01:01:01';
-
-                                console.log('---提交更新任职经历数据--',expData);
-
-                                var updateExperiencePromise = updateExperience(expData);
-                                updateExperiencePromise.then(function(response){
-                                    console.log('--更新经历成功--');
-                                },function(err){
-                                    console.log('--更新经历失败--');
-                                });
-                        }
-
-
-
-
-
-
-                    }
-                    break;
-                    //任职公司
-                    case 'COMPANY_INVEST_DEPT':{
-                        console.log('---任职公司');
-                        if($scope.company.isAddExperience){
-                            if($scope.company.isAdd){
-                                //快速创建公司
-                                var data = {};
-                                    data['mode'] = 'fast';
-                                    data['name'] = $scope.company.addForm['name'];
-                                    data['brief'] = $scope.company.addForm['brief'];
-                                    data['website'] = $scope.company.addForm['website'];
-                                    data['operationStatus'] = $scope.company.addForm['operationStatus'];
-
-                                var createCompanyPromise = createCompany(data);
-                                createCompanyPromise.then(function(response){
-                                    console.log('---公司返回数据--',response);
-                                    //创建经历
-                                    var expData = {};
-                                        expData['uid'] = UserService.getUID();
-                                        expData['groupIdType'] = 3;
-                                        expData['current'] = true;
-                                        expData['groupId'] = response.id;
-                                        expData['position'] = $scope.company.form.position;
-                                        expData['positionDetail'] = $scope.company.form.positionDetail;
-                                        expData['startDate'] = $scope.company.form.startYear +'-'+$scope.company.form.startMonth+'-01 01:01:01';
-                                        console.log('---要提交的创建经历数据--',expData);
-
-                                    var createExperiencePromise = createExperience(expData);
-                                    createExperiencePromise.then(function(response){
-                                        console.log('--创建经历成功--');
-                                    },function(err){
-                                        console.log('--创建经历失败--');
-                                    });
-                                },function(err){
-                                    console.log('---创建公司失败--');
-                                });
-                            }else{
-                                console.log('---company---',$scope.company);
-                                //创建经历
-                                    var expData = {};
-                                        expData['uid'] = UserService.getUID();
-                                        expData['groupIdType'] = 3;
-                                        expData['current'] = true;
-                                        expData['groupId'] = $scope.company.addForm.id;
-                                        expData['position'] = $scope.company.form.position;
-                                        expData['positionDetail'] = $scope.company.form.positionDetail;
-                                        expData['startDate'] = $scope.company.form.startYear +'-'+$scope.company.form.startMonth+'-01 01:01:01';
-
-                                console.log('---要提交的创建经历数据--',expData);
-
-                                var createExperiencePromise = createExperience(expData);
-                                createExperiencePromise.then(function(response){
-                                    console.log('--创建经历成功--');
-                                },function(err){
-                                    console.log('--创建经历失败--');
-                                });
-                            }
-                        }else{
-                            //更新任职经历
-                            var expData = {};
-                                expData['uid'] = UserService.getUID();
-                                expData['groupIdType'] = 3;
-                                expData['current'] = true;
-                                expData['id'] = $scope.company.form.id;
-                                expData['groupId'] = $scope.company.form.groupId;
-                                expData['position'] = $scope.company.form.position;
-                                expData['positionDetail'] = $scope.company.form.positionDetail;
-                                expData['startDate'] = $scope.company.form.startYear +'-'+$scope.company.form.startMonth+'-01 01:01:01';
-
-                                console.log('---提交更新任职经历数据--',expData);
-
-                                var updateExperiencePromise = updateExperience(expData);
-                                updateExperiencePromise.then(function(response){
-                                    console.log('--更新经历成功--');
-                                },function(err){
-                                    console.log('--更新经历失败--');
-                                });
-                        }
-
-                    }
-                    break;
-                    default:{
-
-                        console.log('--个人投资人--');
-                    }
-                }
-
-            return false;
-
             //隐藏自定义错误信息
             Error.hide();
             if($scope.intro.value.pictures){
@@ -889,17 +716,198 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }
                 /*名片*/
                 investoraudit['businessCardLink']   = $scope.intro.value.pictures;
-                $scope.hasClick = true;
+                //$scope.hasClick = true;
 
-                var done = function(){
-                    if(count){
-                        return false;
+                //判断投资身份
+                var investorRole  = $scope.invest.investorRole;
+                switch(investorRole){
+                    //任职机构
+                    case 'ORG_INVESTOR':{
+                        console.log('---任职机构');
+                        if($scope.organization.isAddExperience){
+                            if($scope.organization.isAdd){
+                                //快速创建机构
+                                var data = {};
+                                    data['name'] = $scope.organization.addForm['name'];
+                                    data['enName'] = $scope.organization.addForm['enName'];
+                                    data['brief'] = $scope.organization.addForm['brief'];
+                                    data['website'] = $scope.organization.addForm['website'];
+                                    data['source'] = 'INVESTOR_AUDIT';
+
+                                var createOrganizationPromise = createOrganization(data);
+                                createOrganizationPromise.then(function(response){
+                                    console.log('---公司返回数据--',response);
+                                    //创建经历
+                                    var expData = {};
+                                        expData['uid'] = UserService.getUID();
+                                        expData['groupIdType'] = 2;
+                                        expData['current'] = true;
+                                        expData['groupId'] = response.id;
+                                        expData['position'] = $scope.organization.form.position;
+                                        expData['startDate'] = $scope.organization.form.startYear +'-'+$scope.organization.form.startMonth+'-01 01:01:01';
+                                        console.log('---要提交的创建经历数据--',expData);
+
+                                    var createExperiencePromise = createExperience(expData);
+                                    createExperiencePromise.then(function(response){
+                                        console.log('--创建经历成功--');
+                                        //提交总数据
+                                        send(response.id);
+                                    },function(err){
+                                        console.log('--创建经历失败--');
+                                    });
+                                },function(err){
+                                    console.log('---创建公司失败--');
+                                });
+                            }else{
+                                //创建经历
+                                    var expData = {};
+                                        expData['uid'] = UserService.getUID();
+                                        expData['groupIdType'] = 2;
+                                        expData['current'] = true;
+                                        expData['groupId'] = $scope.organization.addForm.id;
+                                        expData['position'] = $scope.organization.form.position;
+                                        expData['startDate'] = $scope.organization.form.startYear +'-'+$scope.organization.form.startMonth+'-01 01:01:01';
+
+                                console.log('---要提交的创建经历数据--',expData);
+
+                                var createExperiencePromise = createExperience(expData);
+                                createExperiencePromise.then(function(response){
+                                    console.log('--创建经历成功--');
+                                    //提交总数据
+                                    send(response.id);
+                                },function(err){
+                                    console.log('--创建经历失败--');
+                                });
+                            }
+                        }else{
+                            //更新任职经历
+                            var expData = {};
+                                expData['uid'] = UserService.getUID();
+                                expData['groupIdType'] = 2;
+                                expData['current'] = true;
+                                expData['id'] = $scope.organization.form.id;
+                                expData['groupId'] = $scope.organization.form.groupId;
+                                expData['position'] = $scope.organization.form.position;
+                                expData['startDate'] = $scope.organization.form.startYear +'-'+$scope.organization.form.startMonth+'-01 01:01:01';
+
+                                console.log('---提交更新任职经历数据--',expData);
+
+                                var updateExperiencePromise = updateExperience(expData);
+                                updateExperiencePromise.then(function(response){
+                                    console.log('--更新经历成功--');
+                                    //提交总数据
+                                    send(response.id);
+                                },function(err){
+                                    console.log('--更新经历失败--');
+                                });
+                        }
+
                     }
-                    //发送投资人认证数据
-                    send();
+                    break;
+                    //任职公司
+                    case 'COMPANY_INVEST_DEPT':{
+                        console.log('---任职公司');
+                        if($scope.company.isAddExperience){
+                            if($scope.company.isAdd){
+                                //快速创建公司
+                                var data = {};
+                                    data['mode'] = 'fast';
+                                    data['name'] = $scope.company.addForm['name'];
+                                    data['brief'] = $scope.company.addForm['brief'];
+                                    data['website'] = $scope.company.addForm['website'];
+                                    data['operationStatus'] = $scope.company.addForm['operationStatus'];
+
+                                var createCompanyPromise = createCompany(data);
+                                createCompanyPromise.then(function(response){
+                                    console.log('---公司返回数据--',response);
+                                    //创建经历
+                                    var expData = {};
+                                        expData['uid'] = UserService.getUID();
+                                        expData['groupIdType'] = 3;
+                                        expData['current'] = true;
+                                        expData['groupId'] = response.id;
+                                        expData['position'] = $scope.company.form.position;
+                                        expData['positionDetail'] = $scope.company.form.positionDetail;
+                                        expData['startDate'] = $scope.company.form.startYear +'-'+$scope.company.form.startMonth+'-01 01:01:01';
+                                        console.log('---要提交的创建经历数据--',expData);
+
+                                    var createExperiencePromise = createExperience(expData);
+                                    createExperiencePromise.then(function(response){
+                                        console.log('--创建经历成功--');
+                                        //提交总数据
+                                        send(response.id);
+                                    },function(err){
+                                        console.log('--创建经历失败--');
+                                    });
+                                },function(err){
+                                    console.log('---创建公司失败--');
+                                });
+                            }else{
+                                console.log('---company---',$scope.company);
+                                //创建经历
+                                    var expData = {};
+                                        expData['uid'] = UserService.getUID();
+                                        expData['groupIdType'] = 3;
+                                        expData['current'] = true;
+                                        expData['groupId'] = $scope.company.addForm.id;
+                                        expData['position'] = $scope.company.form.position;
+                                        expData['positionDetail'] = $scope.company.form.positionDetail;
+                                        expData['startDate'] = $scope.company.form.startYear +'-'+$scope.company.form.startMonth+'-01 01:01:01';
+
+                                console.log('---要提交的创建经历数据--',expData);
+
+                                var createExperiencePromise = createExperience(expData);
+                                createExperiencePromise.then(function(response){
+                                    console.log('--创建经历成功--');
+                                    //提交总数据
+                                    send(response.id);
+                                },function(err){
+                                    console.log('--创建经历失败--');
+                                });
+                            }
+                        }else{
+                            //更新任职经历
+                            var expData = {};
+                                expData['uid'] = UserService.getUID();
+                                expData['groupIdType'] = 3;
+                                expData['current'] = true;
+                                expData['id'] = $scope.company.form.id;
+                                expData['groupId'] = $scope.company.form.groupId;
+                                expData['position'] = $scope.company.form.position;
+                                expData['positionDetail'] = $scope.company.form.positionDetail;
+                                expData['startDate'] = $scope.company.form.startYear +'-'+$scope.company.form.startMonth+'-01 01:01:01';
+
+                                console.log('---提交更新任职经历数据--',expData);
+
+                                var updateExperiencePromise = updateExperience(expData);
+                                updateExperiencePromise.then(function(response){
+                                    console.log('--更新经历成功--');
+                                    //提交总数据
+                                    send(response.id);
+                                },function(err){
+                                    console.log('--更新经历失败--');
+                                });
+                        }
+
+                    }
+                    break;
+                    default:{
+                        console.log('--个人投资人--');
+                        send();
+                    }
                 }
+
+
+
+
+
                 //发送投资人认证数据
-                function send(){
+                function send(workExpId){
+                        console.log('dianjile');
+                    return false;
+                    if(workExpId){
+                        investoraudit['workExpId'] = workExpId;
+                    }
                     InvestorauditService.save(investoraudit,function(response){
                         $scope.investorValidateApply.status = 'checking';
                     },function(err){
