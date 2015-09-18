@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateApplyController',
 
-    function(CompanyService,$state,$scope,SuggestService,$q, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService,monthOptions,yearOptions) {
+    function(OrganizationService,CompanyService,$state,$scope,SuggestService,$q, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService,monthOptions,yearOptions) {
         $scope.investorValidateApply = {
             status:''
         }
@@ -272,7 +272,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 $scope.company.form.position = company.position;
                 $scope.company.form.positionDetail = company.positionDetail;
                 $scope.company.form.startYear = startDate.getFullYear() +'';
-                $scope.company.form.startMonth = startDate.getMonth()+'';
+                $scope.company.form.startMonth = 1 + startDate.getMonth()+'';
 
             },
             loadData:function(){
@@ -292,7 +292,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         $scope.company.form.positionDetail = company.positionDetail;
                         var startDate = new Date(company.startDate);
                         $scope.company.form.startYear = startDate.getFullYear()+'';
-                        $scope.company.form.startMonth = startDate.getMonth()+'';
+                        $scope.company.form.startMonth = 1 + startDate.getMonth()+'';
                     }
                 },function(err){
                     ErrorService.alert(err);
@@ -346,7 +346,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 $scope.organization.form.groupId = organization.groupId;
                 $scope.organization.form.position = organization.position;
                 $scope.organization.form.startYear = startDate.getFullYear()+'';
-                $scope.organization.form.startMonth = startDate.getMonth()+'';
+                $scope.organization.form.startMonth =  1 + startDate.getMonth()+'';
 
             },
             loadData:function(){
@@ -364,7 +364,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         $scope.organization.form.position = organization.position;
                         $scope.organization.form.groupId = organization.groupId;
                         $scope.organization.form.startYear = startDate.getFullYear()+'';
-                        $scope.organization.form.startMonth = startDate.getMonth()+'';
+                        $scope.organization.form.startMonth = 1 + startDate.getMonth()+'';
                     }
                 },function(err){
                     ErrorService.alert(err);
@@ -609,11 +609,83 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     //任职机构
                     case 'ORG_INVESTOR':{
                         console.log('---任职机构');
-                        var organization = angular.copy($scope.organization);
-                        if(organization.isAddExperience){
+                        if($scope.organization.isAddExperience){
+                            if($scope.organization.isAdd){
+                                //快速创建机构
+                                var data = {};
+                                    data['name'] = $scope.organization.addForm['name'];
+                                    data['enName'] = $scope.organization.addForm['enName'];
+                                    data['brief'] = $scope.organization.addForm['brief'];
+                                    data['website'] = $scope.organization.addForm['website'];
+                                    data['source'] = 'INVESTOR_AUDIT';
+
+                                var createOrganizationPromise = createOrganization(data);
+                                createOrganizationPromise.then(function(response){
+                                    console.log('---公司返回数据--',response);
+                                    //创建经历
+                                    var expData = {};
+                                        expData['uid'] = UserService.getUID();
+                                        expData['groupIdType'] = 2;
+                                        expData['current'] = true;
+                                        expData['groupId'] = response.id;
+                                        expData['position'] = $scope.organization.form.position;
+                                        expData['startDate'] = $scope.organization.form.startYear +'-'+$scope.organization.form.startMonth+'-01 01:01:01';
+                                        console.log('---要提交的创建经历数据--',expData);
+
+                                    var createExperiencePromise = createExperience(expData);
+                                    createExperiencePromise.then(function(response){
+                                        console.log('--创建经历成功--');
+                                    },function(err){
+                                        console.log('--创建经历失败--');
+                                    });
+                                },function(err){
+                                    console.log('---创建公司失败--');
+                                });
+                            }else{
+                                //创建经历
+                                    var expData = {};
+                                        expData['uid'] = UserService.getUID();
+                                        expData['groupIdType'] = 2;
+                                        expData['current'] = true;
+                                        expData['groupId'] = $scope.organization.addForm.id;
+                                        expData['position'] = $scope.organization.form.position;
+                                        expData['startDate'] = $scope.organization.form.startYear +'-'+$scope.organization.form.startMonth+'-01 01:01:01';
+
+                                console.log('---要提交的创建经历数据--',expData);
+
+                                var createExperiencePromise = createExperience(expData);
+                                createExperiencePromise.then(function(response){
+                                    console.log('--创建经历成功--');
+                                },function(err){
+                                    console.log('--创建经历失败--');
+                                });
+                            }
+                        }else{
+                            //更新任职经历
+                            var expData = {};
+                                expData['uid'] = UserService.getUID();
+                                expData['groupIdType'] = 2;
+                                expData['current'] = true;
+                                expData['id'] = $scope.organization.form.id;
+                                expData['groupId'] = $scope.organization.form.groupId;
+                                expData['position'] = $scope.organization.form.position;
+                                expData['startDate'] = $scope.organization.form.startYear +'-'+$scope.organization.form.startMonth+'-01 01:01:01';
+
+                                console.log('---提交更新任职经历数据--',expData);
+
+                                var updateExperiencePromise = updateExperience(expData);
+                                updateExperiencePromise.then(function(response){
+                                    console.log('--更新经历成功--');
+                                },function(err){
+                                    console.log('--更新经历失败--');
+                                });
                         }
-                        if(organization.isAdd){
-                        }
+
+
+
+
+
+
                     }
                     break;
                     //任职公司
@@ -693,8 +765,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                                 },function(err){
                                     console.log('--更新经历失败--');
                                 });
-
-
                         }
 
                     }
