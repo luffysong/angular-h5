@@ -256,11 +256,14 @@
                                                         <option value="">请选择</option>
                                                     </select>
                                                 </li>
+                                                <li>
+                                                    <input type=""  ng-model="company.form.positionDetail" placeholder="如iOS开发/UI设计师">
+                                                </li>
                                             </ul>
                                         </li>
                                         <!--任职时间-->
                                         <li>
-                                            <label class="title"><span class="c-orange">*</span>任职时间{{company.form.startYear}}</label>
+                                            <label class="title"><span class="c-orange">*</span>任职时间</label>
                                             <ul class="main">
                                                 <li>
                                                     <select name="comanyStartYear" ng-options="y for y in yearOptions" ng-model="company.form.startYear">
