@@ -20,6 +20,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 return;
             }
         });
+        /*本周六（0919）20点至本周日（0920）8点跟投人验证功能暂时关闭*/
+        var fromDate = new Date(2015,8,19,20,00,00);
+        var toDate = new Date(2015,8,20,8,00,00);
+        if(new Date() > fromDate && new Date() < toDate){
+            $scope.nowClose = true;
+        }
         $scope.user = {
             investMoneyUnit:"CNY",
             rnv_investor_info:"V1_1",

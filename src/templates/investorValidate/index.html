@@ -8,7 +8,13 @@
             <div class="intro text-center">
                 <p class="c-orange fs-16">完成跟投人认证</p>
                 <p>查看更多项目详情，参与跟投</p>
+                <div class="temp-notice" ng-show="nowClose">
+                    <p>本周六（09-19）20:00</p>
+                    <p>本周日（09-20）08:00</p>
+                    <p>将会暂停跟投人申请服务，带来的不便请谅解</p>
+                </div>
             </div>
+
             <form ng-submit="$event.preventDefault()"  action="" name="investorValidateForm" >
                 <!--所有报错信息-->
                 <!--<div class="error-alert error" ng-show="(investorValidateForm.investFrom.$invalid && investorValidateForm.investFrom.$dirty) || (investorValidateForm.investTo.$invalid && investorValidateForm.investTo.$dirty)">
