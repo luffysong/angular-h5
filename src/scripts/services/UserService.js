@@ -461,6 +461,24 @@ angular.module('defaultApp.service').service('UserService', [
             });
         };
 
+        //新增用户任职经历
+        service.addWorkExperience = function(data,callback,error){
+            $http.post('api/user/'+data.uid+'/work',data).success(function(response){
+                callback && callback(response);
+            }).catch(function(err){
+                error && error(err);
+            });
+        };
+
+        //更新用户任职经历
+        service.updateWorkExperience = function(data,callback,error){
+            $http.put('/api/user/'+data.uid+'/work/'+data.id,data).success(function(response){
+                callback && callback(response);
+            }).catch(function(err){
+                error && error(err);
+            });
+        }
+
 
 
 
