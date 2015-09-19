@@ -24,6 +24,11 @@
 .create_company {
   background-color: #fff;
 
+  select{
+    border: none 0;
+    height: 30px;
+  }
+
 
   .jisuTip{
     padding: 10px 15px;
@@ -137,7 +142,7 @@
   }
 
   .list {
-    padding: 0 0 0 15px;
+    padding: 0 0 0 20px;
 
     table {
       table-layout: fixed;
@@ -151,12 +156,15 @@
         width: 100%;
         &:first-child {
           width: 72px;
-          text-align: right;
-          padding: 15px 0;
+          //text-align: right;
+          padding-bottom: 0;
           white-space: nowrap;
           span {
             display: inline-block;
           }
+        }
+        &:last-child{
+          padding: 0 0 0 15px;
         }
       }
 
@@ -282,16 +290,16 @@
       }
       .pro_status{
         select{
-          width: 120px;
+          width: 140px;
         }
       }
       .time {
         color: #888;
         select {
-          width: 60px;
+          width: 100px;
         }
         select{
-          font-size: 12px;
+          font-size: 14px;
         }
       }
       .job {
@@ -304,7 +312,7 @@
           padding-right: 0;
         }
         select{
-          width: 120px;
+          width: 150px;
         }
       }
 
