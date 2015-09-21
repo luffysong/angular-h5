@@ -195,12 +195,12 @@
                                             <label class="title"><span class="c-orange">*</span>任职时间</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select name="organizationStartYear" required ng-options="y for y in yearOptions" ng-model="organization.form.startYear">
+                                                    <select class="w70" name="organizationStartYear" required ng-options="y for y in yearOptions" ng-model="organization.form.startYear">
                                                         <option value="">年</option>
                                                     </select>
                                                 </li>
                                                 <li>
-                                                    <select name="organizationStartMonth" required  ng-model="organization.form.startMonth" ng-options="m for m in monthOptions">
+                                                    <select class="w70" name="organizationStartMonth" required  ng-model="organization.form.startMonth" ng-options="m for m in monthOptions">
                                                         <option value="">月</option>
                                                     </select>
                                                 </li>
@@ -283,6 +283,7 @@
                                     <ul class="content-list">
                                         <!--职位-->
                                         <li>
+
                                             <label class="title"><span class="c-orange">*</span>职位</label>
                                             <ul class="main">
                                                 <li>
@@ -290,22 +291,32 @@
                                                         <option value="">请选择</option>
                                                     </select>
                                                 </li>
+                                            </ul>
+
+                                            <ul class="main">
+                                                <li>
+                                                </li>
+                                            </ul>
+                                        </li>
+										<li>
+                                            <label class="title"><span class="c-orange"></span></label>
+                                            <ul class="main">
                                                 <li>
                                                     <input type=""  ng-model="company.form.positionDetail" placeholder="如iOS开发/UI设计师">
                                                 </li>
                                             </ul>
-                                        </li>
+										</li>
                                         <!--任职时间-->
                                         <li>
                                             <label class="title"><span class="c-orange">*</span>任职时间</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select name="comanyStartYear" required ng-options="y for y in yearOptions" ng-model="company.form.startYear">
+                                                    <select class="w70" name="comanyStartYear" required ng-options="y for y in yearOptions" ng-model="company.form.startYear">
                                                         <option value="">年</option>
                                                     </select>
                                                 </li>
                                                 <li>
-                                                    <select name="companyStartMonth" required ng-model="company.form.startMonth" ng-options="m for m in monthOptions">
+                                                    <select class="w70" name="companyStartMonth" required ng-model="company.form.startMonth" ng-options="m for m in monthOptions">
                                                         <option value="">月</option>
                                                     </select>
                                                 </li>
