@@ -463,7 +463,7 @@ angular.module('defaultApp.service').service('UserService', [
 
         //新增用户任职经历
         service.addWorkExperience = function(data,callback,error){
-            $http.post('api/user/'+data.uid+'/work',data).success(function(response){
+            $http.post('/api/user/'+data.uid+'/work',data).success(function(response){
                 callback && callback(response);
             }).catch(function(err){
                 error && error(err);
