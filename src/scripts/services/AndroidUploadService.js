@@ -40,6 +40,8 @@ angular.module('defaultApp.service').service('AndroidUploadService',
                     //    window.kr36.tempCache.imgsource = 'bizCardLink';
                     //}
 
+                    logdiv(e.currentTarget.name)
+
                     setTimeout(function () {
                         logdiv('有注入方法，立刻调用')
                         window.kr36.chooseFile();
