@@ -34,14 +34,14 @@ angular.module('defaultApp.service').service('AndroidUploadService',
                         };
                     }
                     e.preventDefault();
-                    if (e.currentTarget.name == 'logo') {
-                        window.kr36.tempCache.imgsource = 'logo';
-                    } else if (e.currentTarget.name == 'bizCardLink') {
-                        window.kr36.tempCache.imgsource = 'bizCardLink';
-                    }
+                    //if (e.currentTarget.name == 'logo') {
+                    //    window.kr36.tempCache.imgsource = 'logo';
+                    //} else if (e.currentTarget.name == 'bizCardLink') {
+                    //    window.kr36.tempCache.imgsource = 'bizCardLink';
+                    //}
 
                     setTimeout(function () {
-                        //logdiv('有注入方法，立刻调用')
+                        logdiv('有注入方法，立刻调用')
                         window.kr36.chooseFile();
 
                     }, 100)

@@ -38,6 +38,8 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             });
         })
 
+        console.log($scope.androidUpload)
+
         // 职位
         $scope.founderRoles = DictionaryService.getDict('StartupPositionType');
         // 产品状态
