@@ -285,7 +285,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                          id:0,
                          groupName:'新增经历'
                     });
-                    if($scope.company.response.data.length){
+
+                    /*if($scope.company.response.data.length){
                         var company = response.expList[0];
                         $scope.company.form.id = company.id;
                         $scope.company.form.groupId = company.groupId;
@@ -294,7 +295,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         var startDate = new Date(company.startDate);
                         $scope.company.form.startYear = startDate.getFullYear()+'';
                         $scope.company.form.startMonth = 1 + startDate.getMonth()+'';
-                    }
+                    }*/
                 },function(err){
                     ErrorService.alert(err);
                 });
@@ -307,7 +308,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             isAddExperience:false,
             isAdd:false,
             form:{
-                startYear:'2015',
+                startYear:'',
                 startMonth:'',
                 position:''
             },
@@ -324,6 +325,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 var orId = $scope.organization.form.id,
                     organizationData = $scope.organization.response.data,
                     organization = {};
+
 
                 //新增机构工作经历
                 if(!orId){
@@ -346,9 +348,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 var startDate = new Date(organization.startDate);
                 $scope.organization.form.groupId = organization.groupId;
                 $scope.organization.form.position = organization.position;
-                $scope.organization.form.startYear = startDate.getFullYear()+'';
                 $scope.organization.form.startMonth =  1 + startDate.getMonth()+'';
-
+                $scope.organization.form.startYear = startDate.getFullYear() +'';
             },
             loadData:function(){
                 //获取当前用户在职机构工作经历
@@ -358,7 +359,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                          id:0,
                          groupName:'新增经历'
                     });
-                    if($scope.organization.response.data.length){
+
+                    /*if($scope.organization.response.data.length){
                         var organization = angular.copy($scope.organization.response.data[0]);
                         $scope.organization.form.id = organization.id;
                         var startDate = new Date(organization.startDate);
@@ -366,7 +368,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         $scope.organization.form.groupId = organization.groupId;
                         $scope.organization.form.startYear = startDate.getFullYear()+'';
                         $scope.organization.form.startMonth = 1 + startDate.getMonth()+'';
-                    }
+                    }*/
+
                 },function(err){
                     ErrorService.alert(err);
                 });

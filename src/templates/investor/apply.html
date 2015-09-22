@@ -129,6 +129,7 @@
                                             <ul class="main">
                                                 <li>
                                                     <select name="organizationName" ng-change="organization.choose()" ng-options="y.id as y.groupName for y in organization.response.data" ng-model="organization.form.id">
+                                                        <option value="">请选择</option>
                                                     </select>
                                                 </li>
                                             </ul>
@@ -230,6 +231,7 @@
                                             <ul class="main">
                                                 <li>
                                                     <select name="companySelectName" ng-change="company.choose()" ng-options="y.id as y.groupName for y in company.response.data" ng-model="company.form.id">
+                                                        <option value="">请选择</option>
                                                     </select>
                                                 </li>
                                             </ul>
@@ -258,6 +260,7 @@
                                             <ul class="main">
                                                 <li>
                                                     <select id="" name="" ng-model="company.addForm.operationStatus" ng-options="y.value as y.desc for y in operationStatus">
+                                                        <option value="">请选择</option>
                                                     </select>
                                                 </li>
                                             </ul>
@@ -311,7 +314,7 @@
                                             <label class="title"><span class="c-orange">*</span>任职时间</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select class="w70" name="comanyStartYear" required ng-options="y for y in yearOptions" ng-model="company.form.startYear">
+                                                    <select class="w70" name="companyStartYear" required ng-options="y for y in yearOptions" ng-model="company.form.startYear">
                                                         <option value="">年</option>
                                                     </select>
                                                 </li>
