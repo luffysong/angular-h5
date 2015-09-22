@@ -283,7 +283,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     $scope.company.response.data = angular.copy(response.expList);
                     $scope.company.response.data.push({
                          id:0,
-                         groupName:'新增'
+                         groupName:'新增经历'
                     });
                     if($scope.company.response.data.length){
                         var company = response.expList[0];
@@ -356,7 +356,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     $scope.organization.response.data = angular.copy(response.expList);
                     $scope.organization.response.data.push({
                          id:0,
-                         groupName:'新增'
+                         groupName:'新增经历'
                     });
                     if($scope.organization.response.data.length){
                         var organization = angular.copy($scope.organization.response.data[0]);
