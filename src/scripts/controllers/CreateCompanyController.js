@@ -31,8 +31,8 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         //android客户端
         $scope.androidUpload = AndroidUploadService.setClick(function(filename){
             $scope.$apply(function() {
-                if(window.kr36 && window.kr36.imgsource){
-                    $scope.formData[window.kr36.imgsource] = filename;
+                if(window.kr36 && window.kr36.tempCache && window.kr36.tempCache.imgsource){
+                    $scope.formData[window.kr36.tempCache.imgsource] = filename;
                 }
 
             });

@@ -34,15 +34,8 @@ angular.module('defaultApp.service').service('AndroidUploadService',
                         };
                     }
                     e.preventDefault();
-                    //if (e.currentTarget.name == 'logo') {
-                    //    window.kr36.tempCache.imgsource = 'logo';
-                    //} else if (e.currentTarget.name == 'bizCardLink') {
-                    //    window.kr36.tempCache.imgsource = 'bizCardLink';
-                    //}
-
-
                     setTimeout(function () {
-                        logdiv($(e.currentTarget).attr('name'))
+                        window.kr36.tempCache.imgsource = $(e.currentTarget).attr('name')
                         window.kr36.chooseFile();
 
                     }, 100)
