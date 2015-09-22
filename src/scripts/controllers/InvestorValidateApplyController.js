@@ -260,6 +260,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     return false;
                 }
                 $scope.company.isAddExperience = false;
+                $scope.company.isAdd = false;
 
                 angular.forEach(companyData,function(item){
                     if(companyId == item.id){
@@ -343,6 +344,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     return false;
                 }
                 $scope.organization.isAddExperience = false;
+                $scope.organization.isAdd = false;
 
                 angular.forEach(organizationData,function(item){
                     if(orId == item.id){
