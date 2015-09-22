@@ -281,6 +281,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 UserService.getCurrentWorkCompanys(UserService.getUID(),function(response){
                     console.log('获取当前用户在职公司工作经历',response);
                     $scope.company.response.data = angular.copy(response.expList);
+
+					if(!response.expList.length){
+                        $scope.company.form.id = 0;
+						$scope.company.isAddExperience = true;
+					}
+
                     $scope.company.response.data.push({
                          id:0,
                          groupName:'新增经历'
@@ -355,6 +361,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 //获取当前用户在职机构工作经历
                 UserService.getCurrentWorkOrganizations(UserService.getUID(),function(response){
                     $scope.organization.response.data = angular.copy(response.expList);
+
+					if(!response.expList.length){
+                        $scope.organization.form.id = 0;
+						$scope.organization.isAddExperience = true;
+					}
+
                     $scope.organization.response.data.push({
                          id:0,
                          groupName:'新增经历'
