@@ -35,6 +35,7 @@ angular.module('defaultApp.service').service('AndroidUploadService',
                     }
                     e.preventDefault();
                     setTimeout(function () {
+                        window.kr36.tempCache = {};
                         window.kr36.tempCache.imgsource = $(e.currentTarget).attr('name')
                         window.kr36.chooseFile();
 
