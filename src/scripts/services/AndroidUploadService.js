@@ -8,6 +8,10 @@ androidUploadFileCallback = function(){
 
 }
 
+//window.kr36 = {
+//    chooseFile : function(){}
+//}
+
 function logdiv(msg){
     if($('.logdiv').length == 0){
         $('<div class="logdiv" style="position: fixed; top: 0;left: 0;width: 100px;height: 100px;background-color: #cccc99;z-index: 999;"></div>').appendTo('body')
@@ -33,6 +37,7 @@ angular.module('defaultApp.service').service('AndroidUploadService',
                     setTimeout(function(){
                         //logdiv('有注入方法，立刻调用')
                         window.kr36.chooseFile();
+
                     },100)
                 }
 

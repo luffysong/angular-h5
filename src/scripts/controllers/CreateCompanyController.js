@@ -29,11 +29,18 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             })
         }
         //android客户端
-        $scope.androidUpload = AndroidUploadService.setClick(function(filename){
-            $scope.$apply(function() {
-                $scope.user.avatar = filename;
-            });
-        });
+        $scope.androidUpload = function(e){
+            AndroidUploadService.setClick(function(filename){
+                $scope.$apply(function() {
+                    if(e.currentTarget.name == 'logo'){
+                        $scope.formData.logo = filename;
+                    }else if(e.currentTarget.name == 'bizCardLink'){
+                        $scope.formData.bizCardLink = filename;
+                    }
+
+                });
+            })()
+        };
 
         // 职位
         $scope.founderRoles = DictionaryService.getDict('StartupPositionType');
