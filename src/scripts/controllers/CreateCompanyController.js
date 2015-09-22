@@ -31,28 +31,12 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         //android客户端
         $scope.androidUpload = AndroidUploadService.setClick(function(filename){
             $scope.$apply(function() {
-                //if(e.currentTarget.name == 'logo'){
-                    $scope.formData.logo = filename;
-                //}else if(e.currentTarget.name == 'bizCardLink'){
-                //    $scope.formData.bizCardLink = filename;
-                //}
+                if(window.kr36 && window.kr36.imgsource){
+                    $scope.formData[window.kr36.imgsource] = filename;
+                }
 
             });
         })
-
-        //$scope.androidUpload = function(e){
-        //
-        //    AndroidUploadService.setClick(function(filename){
-        //        $scope.$apply(function() {
-        //            if(e.currentTarget.name == 'logo'){
-        //                $scope.formData.logo = filename;
-        //            }else if(e.currentTarget.name == 'bizCardLink'){
-        //                $scope.formData.bizCardLink = filename;
-        //            }
-        //
-        //        });
-        //    })()
-        //};
 
         // 职位
         $scope.founderRoles = DictionaryService.getDict('StartupPositionType');
