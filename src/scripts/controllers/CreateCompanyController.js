@@ -9,6 +9,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
     'DictionaryService',
     'dateFilter',
     'DefaultService',
+    'AndroidUploadService',
     'CompanyService',
     'SuggestService',
     'monthOptions',
@@ -18,13 +19,27 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
     'ErrorService',
     'AvatarEdit',
     '$upload',
-    function ($stateParams,$timeout, $q, $modal, $scope, DictionaryService, dateFilter, DefaultService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
+
+    function ($stateParams,$timeout, $q, $modal, $scope, DictionaryService, dateFilter, DefaultService, AndroidUploadService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
+        //console.log($stateParams)
         if($stateParams.from && decodeURIComponent($stateParams.from).indexOf('speed3')>-1){
             $scope.jisu = true;
             $.ajax('/api/speed/count/click-create-hook', {
                 type:"GET"
             })
         }
+        //android客户端
+        $scope.androidUpload = AndroidUploadService.setClick(function(filename){
+            $scope.$apply(function() {
+                if(window.kr36 && window.kr36.tempCache && window.kr36.tempCache.imgsource){
+                    $scope.formData[window.kr36.tempCache.imgsource] = filename;
+                }
+
+            });
+        })
+
+        console.log($scope.androidUpload)
+
         // 职位
         $scope.founderRoles = DictionaryService.getDict('StartupPositionType');
         // 产品状态
@@ -449,6 +464,12 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     location.hash = "/company_create_apply"
                 }
 
+                if($stateParams.from) {
+                    location.hash = "/company_create_apply?from=" + $stateParams.from + '&cid=' + data.id;
+                } else {
+                    location.hash = "/company_create_apply";
+                }
+                
                 //if (callback) {
                 //    callback(data.id);
                 //    return;

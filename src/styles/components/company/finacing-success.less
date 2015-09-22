@@ -1,0 +1,59 @@
+.finacing-success {
+	font-size: 15px;
+	color: @title-color / 2 * 3;
+	line-height: 20px;
+	.icon-app-checked {
+		font-size: 50px;
+		color: #36c16a;
+
+		& + p {
+			margin: 30px 0 20px;
+			color: @title-color / 2;
+		}
+	}
+
+	.inner {
+		border-top: 1px solid #f7f7f7;
+		padding-top: 20px;
+		margin: 0 auto;
+	}
+
+	strong {
+		font-weight: 600;
+		display: block;
+		font-size: 12px;
+	}
+
+	.tips-list {
+		text-align: left;
+		font-size: 12px;
+		margin-top: 10px;
+		display: inline-block;
+		&, & ol {
+			margin-left: 20px;
+		}
+
+		a {
+			color: #f28d00;
+		}
+	}
+
+	&.finacing-tips {
+		padding: 25px 0;
+		background-color: @base-white;
+		margin-top: 10px;
+		border: 1px solid @base-border-color;
+		text-align: center;
+		color: @title-color;
+	}
+
+	.tips-text {
+		text-align: center;
+		padding: 10px @wrapper-padding;
+		margin: 0;
+		font-size: 12px;
+		a {
+			color: @title-color / 2 * 3;
+		}
+	}
+}

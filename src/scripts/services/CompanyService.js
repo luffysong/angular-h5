@@ -349,83 +349,93 @@ angular.module('defaultApp.service').service('CompanyService', [
                     }
                 }
             }
+    });
+
+
+    function financeAdaptor(item){
+        if(!item.financeDate)return;
+        if(item.phase=="UNKNOWN"){
+            item.phase==""
+        }
+        var time = new Date(item.financeDate);
+        item.startYear = time.getFullYear() + "";
+        item.startMonth = time.getMonth() + 1 + "";
+        if(!item.entitys && item.details){
+            item.entitys = item.details;
+            item.showNotifyTip = false;
+            item.showInviteTip = false;
+            item.entitys.forEach(function(entity){
+                if(entity.status=='PENDING' && entity.source=='INVESTOR'){
+                    item.showNotifyTip = true;
+                }
+                if(entity.status=='PENDING' && entity.source=='FINANCIER'){
+                    item.showInviteTip = true;
+                }
+            });
+            delete item.details;
+        }
+
+    }
+
+    service.getCompanyListForHome = function(callback){
+
+        $http.get('/api/organization/finished-com').success(function(data){
+            var list = [];
+            if(data.data){
+                data.data.forEach(function(item, i){
+                    var company = {
+                        'company_logo': item.company.logo,
+                        'company_bg': 'http://krplus-pic.b0.upaiyun.com/home/company-bg-'+(i%3)+'.jpg',
+                        'company_name': item.company.name,
+                        'finance_start': {
+                            'date': dateFilter(new Date(item.startDateStr), 'yyyy.MM'),
+                            'user_id': item.user.id,
+                            'user_name': item.user.name,
+                            'user_desc': item.user.intro,
+                            'user_image': item.user.avatar
+                        },
+                        'finance_rounds': []
+                    };
+                    item.financeExpList.forEach(function(exp, i){
+                        var round = {
+                            'date': dateFilter(new Date(exp.fundDateStr), 'yyyy.MM'),
+                            'round': exp.phase,
+                            'money': exp.fundValue,
+                            'investor_count': 0,
+                            'investor_type': '',
+                            'investor_name': '',
+                            'investor_id': 0,
+                            'show': false
+                        };
+                        if(exp.financeEntityList.length>0){
+                            round.investor_count = exp.financeEntityList.length;
+                            round.investor_type = exp.financeEntityList[0].entityType;
+                            round.investor_name = exp.financeEntityList[0].entityName;
+                            round.investor_id = exp.financeEntityList[0].entityId;
+                            round.show = exp.financeEntityList[0].show;
+                        }
+                        company.finance_rounds.push(round);
+                    });
+                    list.push(company);
+                });
+            }
+            callback && callback(list);
+        }).error(function(err){
+            console.log(err);
         });
 
+    }
 
-        function financeAdaptor(item){
-            if(!item.financeDate)return;
-            if(item.phase=="UNKNOWN"){
-                item.phase==""
-            }
-            var time = new Date(item.financeDate);
-            item.startYear = time.getFullYear() + "";
-            item.startMonth = time.getMonth() + 1 + "";
-            if(!item.entitys && item.details){
-                item.entitys = item.details;
-                item.showNotifyTip = false;
-                item.showInviteTip = false;
-                item.entitys.forEach(function(entity){
-                    if(entity.status=='PENDING' && entity.source=='INVESTOR'){
-                        item.showNotifyTip = true;
-                    }
-                    if(entity.status=='PENDING' && entity.source=='FINANCIER'){
-                        item.showInviteTip = true;
-                    }
-                });
-                delete item.details;
-            }
+    service.ventureApply = function(cid, type, callback) {
+        $http.get('/api/company/intention/' + cid, {
+            params: type
+        }).success(function(data) {
+            callback && callback(data);
+        }).error(function(err) {
+            console.log(err);
+        })
+    }
 
-        }
-
-        service.getCompanyListForHome = function(callback){
-
-            $http.get('/api/organization/finished-com').success(function(data){
-                var list = [];
-                if(data.data){
-                    data.data.forEach(function(item, i){
-                        var company = {
-                            'company_logo': item.company.logo,
-                            'company_bg': 'http://krplus-pic.b0.upaiyun.com/home/company-bg-'+(i%3)+'.jpg',
-                            'company_name': item.company.name,
-                            'finance_start': {
-                                'date': dateFilter(new Date(item.startDateStr), 'yyyy.MM'),
-                                'user_id': item.user.id,
-                                'user_name': item.user.name,
-                                'user_desc': item.user.intro,
-                                'user_image': item.user.avatar
-                            },
-                            'finance_rounds': []
-                        };
-                        item.financeExpList.forEach(function(exp, i){
-                            var round = {
-                                'date': dateFilter(new Date(exp.fundDateStr), 'yyyy.MM'),
-                                'round': exp.phase,
-                                'money': exp.fundValue,
-                                'investor_count': 0,
-                                'investor_type': '',
-                                'investor_name': '',
-                                'investor_id': 0,
-                                'show': false
-                            };
-                            if(exp.financeEntityList.length>0){
-                                round.investor_count = exp.financeEntityList.length;
-                                round.investor_type = exp.financeEntityList[0].entityType;
-                                round.investor_name = exp.financeEntityList[0].entityName;
-                                round.investor_id = exp.financeEntityList[0].entityId;
-                                round.show = exp.financeEntityList[0].show;
-                            }
-                            company.finance_rounds.push(round);
-                        });
-                        list.push(company);
-                    });
-                }
-                callback && callback(list);
-            }).error(function(err){
-                console.log(err);
-            });
-
-        }
-
-        return service;
+    return service;
     }
 ]);
