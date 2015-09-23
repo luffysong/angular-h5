@@ -4,6 +4,7 @@
         <div class="sup-header">
             <span class="order-status">{{ item.status | dict_trade_crowd_funding_status }}</span>
             <a class="order-procedure" ng-if="item.payment.status == 3 && item.financing.formality && item.financing.formality.status > 1" ui-sref="procedure({ cfid: item.financing.formality.cf_id })" data-stat-click="orderlist.ViewProcess">查看手续进度</a>
+            <a class="order-cancel" ng-if="item.status != 14 && item.trade_c_f_deposit.payment.status == 1" ng-click="cancelOrder(item.trade_id);">取消订单</a>
         </div>
         <div class="company-info">
             <a class="company-logo" ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.cf_id })">

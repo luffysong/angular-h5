@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesAllOrderController',
-    function($scope, $stateParams, DictionaryService, CrowdFundingService, CoInvestorService, $state, ErrorService) {
+    function($scope, $stateParams, DictionaryService, CrowdFundingService, CoInvestorService, $state, ErrorService, $modal) {
         $scope.activeIndex = 0;
         $scope.noMore = true;
         $scope.noData = false;
@@ -91,6 +91,47 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                         }
                     }
                 });
+            });
+        };
+
+        $scope.cancelOrder = function(orderId) {
+            $modal.open({
+                templateUrl: 'templates/syndicates/pop-order.html',
+                windowClass: 'remind-modal-window',
+                controller: [
+                    '$scope', 'scope', '$modalInstance', '$state', 'ErrorService', 'notify',
+                    function($scope, scope, $modalInstance, $state, ErrorService, notify) {
+                        $scope.isCancelOrder = 1;
+
+                        $scope.ok = function() {
+                            CrowdFundingService['cf-trade'].put({
+                                id: orderId
+                            }, {
+                                status: 8
+                            }, function(res) {
+                                notify({
+                                    message: '取消订单成功',
+                                    classes: 'alert-success'
+                                });
+
+                                scope.queryData();
+                                $modalInstance.dismiss();
+                            }, function(err) {
+                                ErrorService.alert(err);
+                                $modalInstance.dismiss();
+                            });
+                        };
+
+                        $scope.cancel = function() {
+                            $modalInstance.dismiss();
+                        }
+                    }
+                ],
+                resolve: {
+                    scope: function() {
+                        return $scope;
+                    }
+                }
             });
         };
     });
