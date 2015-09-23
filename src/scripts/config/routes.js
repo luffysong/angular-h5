@@ -122,19 +122,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('syndicatesAllOrder', {
         url: '/zhongchouAllOrder',
         templateUrl: 'templates/syndicates/allOrder.html',
-        controller: 'syndicatesAllOrderController'/*,
-         data:{
-         permissions : {
-         only : ['valid']
-         }
-         }*/
-    });
-
-    /*众筹个人所有订单页面*/
-    $stateProvider.state('syndicatesAllOrder2', {
-        url: '/zhongchouAllOrder2',
-        templateUrl: 'templates/syndicates/allOrder2.html',
-        controller: 'syndicatesAllOrderController2'
+        controller: 'syndicatesAllOrderController'
     });
 
     /*众筹选择支付方式页面*/
