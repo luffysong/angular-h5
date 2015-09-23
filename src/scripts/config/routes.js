@@ -106,6 +106,17 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             }
         }
     });
+    /*众筹确定金额页面*/
+    $stateProvider.state('syndicatesKrCode', {
+        url: '/zhongchouCode/{fundingId}',
+        templateUrl: 'templates/syndicates/kr-code.html',
+        controller: 'syndicatesCodeController',
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
+    });
     /*众筹订单页面*/
     $stateProvider.state('syndicatesOrder', {
         url: '/zhongchouOrder/{cid}/{fundingId}',

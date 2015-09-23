@@ -5,7 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService, $cookies,$sce) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService, $cookies,$sce,loading) {
+        loading.show("syndicatesDetail");
         if(navigator.userAgent.match(/mac/i)){
             $scope.system = "ios";
         }else{
@@ -204,8 +205,10 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     }*/
                     /*预热中*/
                     if(new Date() < date && $scope.color != 25){
-                        var minute = date.getMinutes() > 9 ? date.getMinutes() : "0"+date.getMinutes();
-                        $scope.status = (parseInt(date.getMonth())+1)+"月"+date.getDate()+"日  "+date.getHours()+":"+minute+" 开始融资";
+                        $scope.fundingStatus = "preheat";
+                        //var minute = date.getMinutes() > 9 ? date.getMinutes() : "0"+date.getMinutes();
+                        /*$scope.status = (parseInt(date.getMonth())+1)+"月"+date.getDate()+"日  "+date.getHours()+":"+minute+" 开始融资";*/
+                        $scope.status = "锚定中";
                         $scope.color = 60;
                     }
                 }
@@ -216,7 +219,11 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 $scope.status = "预热中";
             }
             if($scope.syndicatesInfo.base){
-                $scope.syndicatesInfo.base.percent = parseInt($scope.syndicatesInfo.base.cf_success_raising) * 100 / parseInt($scope.syndicatesInfo.base.cf_raising);
+                if(parseInt($scope.syndicatesInfo.base.cf_success_raising_offer) === 0 || !$scope.syndicatesInfo.base.cf_success_raising_offer){
+                    $scope.syndicatesInfo.base.percent = 0;
+                }else{
+                    $scope.syndicatesInfo.base.percent = (parseInt($scope.syndicatesInfo.base.cf_success_raising_offer) * 100 / parseInt($scope.syndicatesInfo.base.cf_raising)).toFixed(0);
+                }
                 /*
                  停止投资三种情况：
                  1.众筹超时
@@ -254,7 +261,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     obj[1] = chartData[index];
                 }
             });
-
+            loading.hide("syndicatesDetail");
         },function(err){
             ErrorService.alert(err);
         });

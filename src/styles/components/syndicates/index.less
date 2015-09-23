@@ -2,6 +2,37 @@
 /*众筹首页样式*/
 .syndicates-index {
     padding:15px;
+    .actions {
+        overflow: hidden;
+        .btn {
+            display: block;
+            padding: 0;
+            height: 40px;
+            line-height: 40px;
+            font-size: 15px;
+            border-radius: 0;
+            border: 0;
+            background: #fff;
+            border-top: 1px solid #DFDFDF;
+            color: #008df2;
+            &.preheat-detail {
+                width: 50%;
+                float: left;
+            }
+            &.preheat-remind {
+                .preheat-detail;
+                color: #F28D00;
+                border-left: 1px solid #DFDFDF;
+                i {
+                    position: relative;
+                    font-size: 20px;
+                    font-weight: 600;
+                    top: 3px;
+                }
+            }
+        }
+
+    }
     .hot-icon {
         position: absolute;
         width: 0;
@@ -42,11 +73,74 @@
         margin-bottom: 30px;
         cursor: pointer;
     }
+    .title-info {
+        width: 100%;
+        .clearfix;
+        height: 70px;
+        padding: 15px 15px 0;
+        background: #fff;
+        .syndicates-logo {
+            display: block;
+            width: 40px;
+            height: 40px;
+            float: left;
+            margin-right: 15px;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            box-shadow: 0 0 1px rgba(0,0,0,0.2);
+        }
+        .syndicates-intro {
+            margin-left: 55px;
+            a {
+                color: #000;
+                font-weight: 600;
+            }
+            .brief {
+                color: #999;
+                font-size: 12px;
+                line-height: 1.25;
+                word-break: break-all;
+            }
+        }
+    }
     .syndicates-pic {
         position: relative;
-        height: auto;
+        height: 160px;
         background-repeat: no-repeat;
         background-size: 100%;
+        .syndicates-container {
+            position: relative;
+            width: 100%;
+            display: inline-block;
+            .investor-led-title {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                padding-left: 10px;
+                font-size: 15px;
+                font-weight: 600;
+                .led-name {
+                    overflow: hidden;
+                    max-width: 200px;
+                    text-overflow: ellipsis;
+                    display: inline-block;
+                    white-space: nowrap;
+                    color:#fff;
+                    vertical-align: middle;
+                }
+                span.text {
+                    display: inline-block;
+                    color:#fff;
+                    vertical-align: middle;
+                }
+                .mr-10 {
+                    margin-right: 10px;
+                }
+            }
+        }
         img {
             position: relative;
             display: block;
@@ -57,7 +151,9 @@
             }
         }
         .syndicates-status {
-            position: relative;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
             min-width: 80px;
             height: 30px;
             padding: 0 10px;
@@ -72,14 +168,20 @@
                 padding: 0 19px;
 
             }
+            &.bg-25 {
+                background-color: #ef9311;
+            }
             &.bg-30 {
-                background-color: #178fe6;
+                background-color: #1192ee;
             }
             &.bg-35 {
-                background-color: #178fe6;
+                background-color: #1192ee;
             }
-            &.bg-25 {
-                background-color: #F28D00;
+            &.bg-40 {
+                background-color: #ec4f50;
+            }
+            &.bg-50 {
+                background-color: #6fbc37;
             }
             &.bg-60 {
                 background-color: #F28D00;
@@ -91,13 +193,6 @@
                     top:2px;
                 }
             }
-            &.bg-50 {
-                background-color: #25B964;
-            }
-            &.bg-40 {
-                background-color: red;
-            }
-
         }
     }
     .syndicates-brief-info {
@@ -107,34 +202,7 @@
                 font-size: 15px;
             }
         }
-        .investor-led-title {
-            .gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));
-            position: relative;
-            margin-top:-60px;
-            height: 60px;
-            padding-top:10px;
-            line-height: 60px;
-            padding-left:10px;
-            font-size:15px;
 
-            .led-name {
-                overflow: hidden;
-                max-width: 200px;
-                text-overflow: ellipsis;
-                display: inline-block;
-                white-space: nowrap;
-                color:#fff;
-                vertical-align: middle;
-            }
-            span.text {
-                display: inline-block;
-                color:#fff;
-                vertical-align: middle;
-            }
-            .mr-10 {
-                margin-right: 10px;
-            }
-        }
         .investor-detail {
             padding: 15px;
             background-color: #ffffff;
@@ -159,15 +227,14 @@
             }
             .syndicates-detail {
                 .clearfix;
-                padding:10px 0;
-                border-top:solid 1px #ddd;
+                padding:3px 0;
                 p {
                     margin:0;
                 }
             }
             .props {
                 border-bottom: solid 1px #DFDFDF;
-                margin:20px 0;
+                padding-bottom: 10px;
             }
             .syndicates-attr {
                 float: left;
@@ -194,32 +261,7 @@
                 }
 
             }
-            .actions {
-                margin-top: 15px;
-                overflow: hidden;
-                .btn {
-                    display: block;
-                    padding: 0;
-                    height: 40px;
-                    line-height: 40px;
-                    font-size: 15px;
-                    margin-top: 10px;
-                    border-color: #71a8e9;
-                    color: #008df2;
-                    &.preheat-detail {
-                        display: inline-block;
-                        width: 46%;
-                        float: left;
-                    }
-                    &.preheat-remind {
-                        .preheat-detail;
-                        border: 1px solid #F28D00;
-                        float: right;
-                        color: #F28D00;
-                    }
-                }
 
-            }
         }
 
 
@@ -585,5 +627,143 @@
             .c-translate(0, 0);
         }
 
+    }
+}
+.loading-in {
+    height: 85px;
+    padding: 20px 15px;
+    background: #fff;
+}
+/*众筹2.0改版进度条Directive样式*/
+.loading-progress {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: #ececec;
+    border-radius: 15px;
+    padding: 3px;
+    /*含领投*/
+    &.lead-investor {
+        .loading-bar {
+            padding: 4px;
+        }
+        .loading-point {
+            background-color: #ffde59;
+        }
+        .loading-container {
+            .myCanvas {
+                vertical-align: bottom;
+            }
+        }
+    }
+    .loading-container {
+        position: absolute;
+        width: auto;
+        top: -30px;
+        padding-left: 5px;
+        color: #73c8ff;
+        &.syndicate-achieve {
+            top: 35px;
+            left: 10px;
+            .loading-point {
+                background-color: #73c8ff;
+            }
+            .myCanvas {
+                top: -8px;
+            }
+        }
+        &.syndicate-goal {
+            top: 26px;
+            right: 10px;
+            text-align: right;
+            padding: 0;
+            .loading-point {
+                background-color: #dddddd;
+            }
+            .myCanvas {
+                top: -8px;
+            }
+        }
+        .loading-detail {
+            color: #000;
+        }
+        .loading-point {
+            margin: 0 5px;
+        }
+        .myCanvas {
+            position: relative;
+            top: 5px;
+            vertical-align: middle;
+        }
+    }
+    .loading-point {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #73c8ff;
+        &.max {
+            background-color: #fe7a65;
+        }
+    }
+    .loading-bar {
+        position: relative ;
+        width: auto;
+        height: 100%;
+        line-height: 14px;
+        color: #fff;
+        border-radius: 15px;
+        background-color: #73c8ff;
+        text-align: center;
+        transition: all 2s;
+        cursor: pointer;
+        .lead-bar {
+            position: relative ;
+            width: auto;
+            height: 100%;
+            background-color: #ffde59;
+            border-radius: 15px;
+        }
+        &.max {
+            width: 100%;
+            background-color: #fe7a65;
+        }
+    }
+    .loading-tip {
+        position: absolute;
+        width: auto;
+        padding: 0 5px;
+        height: 30px;
+        border:1px solid #F3DDC9;
+        left: 50%;
+        margin-left: -66px;
+        bottom: 15px;
+        text-align: center;
+        line-height: 30px;
+        background-color: #fff;
+        transform: translate3d(0,-10px,0);
+        transition:all .3s;
+        .bubble {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-width: 6px;
+            border-style: solid;
+            border-color: #F3DDC9 transparent transparent;
+            bottom: -13px;
+            left: 50%;
+            margin-left: -3px;
+        }
+        .pop {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-width: 6px;
+            border-style: solid;
+            border-color: #fff transparent transparent;
+            bottom: -12px;
+            left: 50%;
+            margin-left: -3px;
+        }
     }
 }

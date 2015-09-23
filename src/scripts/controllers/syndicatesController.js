@@ -26,7 +26,11 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                 if(key.status != 25 && (key.status == 50 || new Date(key.end_time) < new Date() || (key.min_investment && key.min_investment > key.cf_max_raising - key.cf_success_raising) || key.investor_count >= key.max_coinvestor_number)){
                     key.timeout = true;
                 }
-                key.percent = parseInt(key.cf_success_raising_offer) * 100 / parseInt(key.cf_raising) ;
+                if(parseInt(key.cf_success_raising_offer) === 0 || !key.cf_success_raising_offer){
+                    key.percent = 0;
+                }else{
+                    key.percent = (parseInt(key.cf_success_raising_offer) * 100 / parseInt(key.cf_raising)).toFixed(0);
+                }
                 angular.forEach(statusList,function(obj,i){
                     if(key.status == obj.value){
                         key.name = obj.desc;

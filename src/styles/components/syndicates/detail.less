@@ -132,20 +132,30 @@
             padding: 0 18px;
             top: 0;
             left: 0;
+            &.bg-25 {
+                background-color: #ef9311;
+            }
             &.bg-30 {
-                background-color: #178fe6;
+                background-color: #1192ee;
             }
             &.bg-35 {
-                background-color: #178fe6;
+                background-color: #1192ee;
+            }
+            &.bg-40 {
+                background-color: #ec4f50;
+            }
+            &.bg-50 {
+                background-color: #6fbc37;
             }
             &.bg-60 {
                 background-color: #F28D00;
-            }
-            &.bg-50 {
-                background-color: #25B964;
-            }
-            &.bg-40 {
-                background-color: red;
+                i {
+                    display: inline-block;
+                    color:#fff;
+                    font-size:16px;
+                    position: relative;
+                    top:2px;
+                }
             }
         }
         .company-logo {
@@ -348,19 +358,21 @@
             background-size: 100% 100%;
         }
     }
-    .syndicate-goal {
+    .syndicate-achieve {
         width: 100%;
         padding: 15px 0 15px;
         background-color: #fff;
+        &.new-syndicates {
+            padding: 0;
+        }
         &.fund-info {
             padding-bottom: 0;
         }
         .account {
-            padding: 0 20px 10px;
-            .has-syndicate {
-                font-size: 13px;
-                color: #666;
-            }
+            height: 85px;
+            padding: 30px 15px;
+            background: #fff;
+            overflow: hidden;
         }
         .mt-15 {
             margin-top: 15px;
@@ -370,7 +382,7 @@
         }
         .syndicate-detail-num {
             width: 100%;
-            padding: 15px 0 0;
+            padding: 15px 0;
             &.line {
                 border-top: 1px solid #eee;
             }

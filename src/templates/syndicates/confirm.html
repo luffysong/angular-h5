@@ -2,12 +2,15 @@
     <div class="syndicates-confirm">
         <!--预热中，Kr码购买-->
         <div ng-if="isPreHeat">
-            <div class="kr-code-way">
-                <a class="href-tip" href="" ng-click="getKrCode()" baidu-btn="申请Kr码点击">申请Kr码</a>
-            </div>
+            <div class="kr-code-title">Kr码优先购买</div>
+            <div class="kr-code-tip">输入Kr码</div>
             <div class="kr-code-enter">
-                <input type="text" maxlength="8" class="kr-code-input" ng-disabled="validateSuc" placeholder="请输入优先购买Kr码" ng-model="krCode.number" name="krCode" />
-                <a href="" class="validate-kr-code" ng-class="{'suc':validateValid}" ng-click="checkCode()">验证</a>
+                <input type="text" maxlength="8" class="kr-code-input" ng-disabled="validateSuc" placeholder="Kr码为8位数字和字母组合" ng-model="krCode.number" name="krCode" />
+                <!---->
+            </div>
+            <div class="kr-code-btn">
+                <a href="" class="btn validate-kr-code" ng-disabled="krCode.number.length != 8" ng-click="checkCode()">使用</a>
+                <a href="" class="href-tip" ui-sref="syndicatesKrCode({fundingId:fundingId})" baidu-btn="申请Kr码点击">申请Kr码</a>
             </div>
         </div>
         <p class="error-tip" ng-if="errMsg && hasCheck && !validateSuc">{{errMsg}}</p>

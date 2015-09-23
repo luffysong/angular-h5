@@ -63,13 +63,6 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             }
             $scope.baseData.detail.agreements_img.push(obj);
         });
-        $scope.$watch("krCode.number",function(from){
-            if(from.length == 8){
-                $scope.validateValid = true;
-            }else{
-                $scope.validateValid = false;
-            }
-        })
         /*金额四舍五入取小数点后四位*/
         $scope.handleData = function (data) {
             return data.toFixed(4) + "%";

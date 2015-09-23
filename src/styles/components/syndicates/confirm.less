@@ -95,8 +95,69 @@
 }
 .syndicates-confirm {
     @default-color:#F7F7F7;
-    .href-tip {
-        font-size: 11px;
+    .kr-code-title {
+        height: 45px;
+        line-height: 45px;
+        color: #000;
+        text-align: center;
+        background-color: #fff;
+        font-size: 16px;
+    }
+    .kr-code-tip {
+        height: 38px;
+        line-height: 36px;
+        color: #000;
+        border-top: 1px solid #DFDFDF;
+        text-align: left;
+        font-size: 16px;
+        padding-left: 12px;
+        background-color: #f7f7f7;
+    }
+    .kr-code-apply {
+        height: 190px;
+        padding-top: 37px;
+        border-top: 1px solid #DFDFDF;
+        background-color: #f7f7f7;
+        text-align: center;
+        .apply-icon {
+            display: block;
+            font-size: 25px;
+            color: #e5a642;
+            margin-bottom: 15px;
+        }
+        .apply-tip {
+            font-size: 18px;
+            color: #e5a642;
+        }
+        .enter-tip {
+            color: #000;
+            padding-left: 10px;
+            text-align: left;
+        }
+    }
+    .kr-code-btn {
+        height: auto;
+        padding: 15px;
+        .validate-kr-code {
+            display: block;
+            padding: 0;
+            height: 40px;
+            line-height: 40px;
+            margin-bottom: 15px;
+            text-align: center;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #008DF2;
+            &.suc {
+                background-color: #008DF2;
+            }
+        }
+        .href-tip {
+            .validate-kr-code;
+            border: 1px solid #DFDFDF;
+            color: #888888;
+            background-color: #f7f7f7;
+        }
     }
     .error-tip {
         padding: 5px 0 0 15px;
@@ -104,14 +165,6 @@
         background-color: #f0f0f0;
         color: #e66565;
         margin: 0;
-    }
-    .kr-code-way {
-        width: 100%;
-        height: 35px;
-        line-height: 35px;
-        padding: 0 15px;
-        text-align: right;
-        .clearfix;
     }
     .kr-code-enter {
         background-color: #fff;
@@ -127,21 +180,19 @@
             font-size: 14px;
             color: #008DF2;
         }
-        .validate-kr-code {
-            display: inline-block;
-            float: right;
-            width: 65px;
-            height: 35px;
-            line-height: 35px;
-            margin-top: 7px;
-            text-align: center;
-            border-radius: 2px;
-            color: #fff;
-            background-color: #DEDEDE;
-            &.suc {
-                background-color: #008DF2;
-            }
-        }
+
+    }
+    .apply-reason {
+        height: 40px;
+        line-height: 40px;
+        padding-left: 10px;
+        background-color: #f7f7f7;
+        color: #000;
+    }
+    .invest-reason {
+        width: 100%;
+        height: 110px;
+        background-color: #fff;
     }
     .confirm-title {
         width: 100%;
