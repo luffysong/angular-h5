@@ -35,20 +35,23 @@
                     <span ng-show="investorValidateForm.realName.$error.required">请输入真实姓名</span>
                 </div>
                 <!--公司-->
-                <div class="error-alert error" ng-show="investorValidateForm.companyName.$invalid && investorValidateForm.companyName.$dirty">
-                    <span>请输入公司简称</span>
-                </div>
-                <div class="error-alert error" ng-show="investorValidateForm.companyPosition.$invalid && investorValidateForm.companyPosition.$dirty">
-                    <span>请选择任职公司并购部职位</span>
+                <div class="error-alert error" ng-show="investorValidateForm.companyStartMonth.$invalid && investorValidateForm.companyStartMonth.$dirty">
+                    <span>请选择任职公司并购部任职时间的月份</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.companyStartYear.$invalid && investorValidateForm.companyStartYear.$dirty">
                     <span>请选择任职公司并购部任职时间的年份</span>
                 </div>
-                <div class="error-alert error" ng-show="investorValidateForm.companyStartMonth.$invalid && investorValidateForm.companyStartMonth.$dirty">
-                    <span>请选择任职公司并购部任职时间的月份</span>
+                <div class="error-alert error" ng-show="investorValidateForm.companyPosition.$invalid && investorValidateForm.companyPosition.$dirty">
+                    <span>请选择任职公司并购部职位</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.companyBrief.$invalid && investorValidateForm.companyBrief.$dirty">
                     <span>请输入公司的一句话简介</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.companyName.$invalid && investorValidateForm.companyName.$dirty">
+                    <span>请输入公司简称</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.companySelectName.$invalid && investorValidateForm.companySelectName.$dirty">
+                    <span>请选择任职公司</span>
                 </div>
                 <!--机构-->
                 <div class="error-alert error" ng-show="investorValidateForm.organizationStartMonth.$invalid && investorValidateForm.organizationStartMonth.$dirty">
@@ -62,6 +65,9 @@
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.organizationName.$invalid && investorValidateForm.organizationName.$dirty">
                     <span>请输入机构名称</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationSelectName.$invalid && investorValidateForm.organizationSelectName.$dirty">
+                    <span>请选择任职机构</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.organizationBrief.$invalid && investorValidateForm.organizationBrief.$dirty">
                     <span "investorValidateForm.organizationBrief.$error.required">请输入机构简介</span>
@@ -127,7 +133,7 @@
                                             <label class="title"><span class="c-orange">*</span>任职机构</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select name="organizationName" ng-change="organization.choose()" ng-options="y.id as y.groupName for y in organization.response.data" ng-model="organization.form.id">
+                                                    <select name="organizationSelectName" ng-change="organization.choose()" ng-options="y.id as y.groupName for y in organization.response.data" ng-model="organization.form.id" required>
                                                         <option value="">请选择</option>
                                                     </select>
                                                 </li>
@@ -229,7 +235,7 @@
                                             <label class="title"><span class="c-orange">*</span>任职公司</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select name="companySelectName" ng-change="company.choose()" ng-options="y.id as y.groupName for y in company.response.data" ng-model="company.form.id">
+                                                    <select name="companySelectName" ng-change="company.choose()" ng-options="y.id as y.groupName for y in company.response.data" ng-model="company.form.id" required>
                                                         <option value="">请选择</option>
                                                     </select>
                                                 </li>
