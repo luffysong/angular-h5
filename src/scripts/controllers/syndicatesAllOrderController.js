@@ -24,6 +24,7 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                     for(var i = 0, length = data.data.length; i < length; i++) {
                         $scope.orderData.push(data.data[i]);
                     }
+                    $scope.loadingMore = false;
                 } else {
                     $scope.orderData = data.data;
                 }
@@ -45,6 +46,8 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
 
         /*众筹列表加载更多*/
         $scope.loadMore = function(){
+            if($scope.loadingMore) return;
+            $scope.loadingMore = true;
             $scope.pageNo += 1;
             $scope.queryData();
         };
