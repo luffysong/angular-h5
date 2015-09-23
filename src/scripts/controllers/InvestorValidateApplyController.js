@@ -251,12 +251,18 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     companyData = $scope.company.response.data,
                     company = {};
 
-                if(!companyId){
+                if(companyId == 0){
                     $scope.company.isAddExperience = true;
                     $scope.company.form.position = '';
                     $scope.company.form.positionDetail = '';
                     $scope.company.form.startYear = '';
                     $scope.company.form.startMonth = '';
+
+					$scope.company.addForm.id = '';
+					$scope.company.addForm.name = '';
+					$scope.company.addForm.website = '';
+					$scope.company.addForm.brief = '';
+					$scope.company.addForm.operationStatus = 'OPEN';
                     return false;
                 }
                 $scope.company.isAddExperience = false;
@@ -323,7 +329,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 id:'',
                 name:'',
                 brief:'',
-                operationStatus:'OPEN'
+				enName:'',
+				website:''
             },
             response:{
                 data:[]
@@ -335,12 +342,17 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
 
                 //新增机构工作经历
-                if(!orId){
+                if(orId == 0){
                     $scope.organization.isAddExperience = true;
                     $scope.organization.form.position = '';
                     $scope.organization.form.startYear = '';
                     $scope.organization.form.startMonth = '';
 
+					$scope.organization.addForm.id = '';
+					$scope.organization.addForm.enName = '';
+					$scope.organization.addForm.name = '';
+					$scope.organization.addForm.website = '';
+					$scope.organization.addForm.brief = '';
                     return false;
                 }
                 $scope.organization.isAddExperience = false;
