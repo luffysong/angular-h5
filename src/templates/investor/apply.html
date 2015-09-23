@@ -122,8 +122,10 @@
                             <li class="s-i">
                                 <div class="i-header">
                                     <div class="radio">
-                                        <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="ORG_INVESTOR" checked required>
-                                        <span ng-class="{true:'active'}[invest.investorRole=='ORG_INVESTOR']"> &nbsp;任职投资机构</span>
+										<label>
+											<input type="radio" name="investIdentity" ng-model="invest.investorRole" value="ORG_INVESTOR" checked required>
+											<span ng-class="{true:'active'}[invest.investorRole=='ORG_INVESTOR']"> &nbsp;任职投资机构</span>
+										</label>
                                     </div>
                                 </div>
                                 <div class="i-body" ng-if="(invest.investorRole=='ORG_INVESTOR')">
