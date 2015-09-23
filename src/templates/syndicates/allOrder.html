@@ -2,7 +2,7 @@
     <div class="order-head">众筹订单</div>
     <div class="order-item" ng-repeat="item in orderData" ng-if="!noData">
         <div class="sup-header">
-            <span class="order-status">{{ item.payment.status | dict_trade_status }}</span>
+            <span class="order-status">{{ item.status | dict_trade_crowd_funding_status }}</span>
             <a class="order-procedure" ng-if="item.payment.status == 3 && item.financing.formality && item.financing.formality.status > 1" ui-sref="procedure({ cfid: item.financing.formality.cf_id })" data-stat-click="orderlist.ViewProcess">查看手续进度</a>
         </div>
         <div class="company-info">
@@ -10,15 +10,15 @@
                 <img src="{{ item.company.logo }}" alt="{{ item.company.name }}">
             </a>
             <a class="company-name" ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.cf_id })">{{item.company.name}}</a>
-            <div class="banner">Kr码认购</div>
+            <div class="banner" ng-if="!!item.invite_code">Kr码认购</div>
         </div>
         <div class="money-info">
             <div class="money-buy">
-                <p class="money">{{ item.investment }}<sup>￥</sup></p>
+                <p class="money">{{ item.investment }}元<sup>￥</sup></p>
                 <p class="text">认购金额</p>
             </div>
             <div class="money-manage">
-                <p class="money">{{ item.lead_fee }}<sup>￥</sup></p>
+                <p class="money">{{ item.lead_fee }}元<sup>￥</sup></p>
                 <p class="text">认购金额</p>
             </div>
         </div>
