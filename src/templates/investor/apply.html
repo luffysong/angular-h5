@@ -51,21 +51,20 @@
                     <span>请输入公司的一句话简介</span>
                 </div>
                 <!--机构-->
-                <div class="error-alert error" ng-show="investorValidateForm.organizationName.$invalid && investorValidateForm.organizationName.$dirty">
-                    <span>请输入机构名称</span>
-                </div>
-                <div class="error-alert error" ng-show="investorValidateForm.organizationPosition.$invalid && investorValidateForm.organizationPosition.$dirty">
-                    <span>请选择任职机构职位</span>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationStartMonth.$invalid && investorValidateForm.organizationStartMonth.$dirty">
+                    <span>请选择机构任职时间的月份</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.organizationStartYear.$invalid && investorValidateForm.organizationStartYear.$dirty">
                     <span>请选择任职机构任职时间的年份</span>
                 </div>
-                <div class="error-alert error" ng-show="investorValidateForm.organizationStartMonth.$invalid && investorValidateForm.organizationStartMonth.$dirty">
-                    <span>请选择机构任职时间的月份</span>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationPosition.$invalid && investorValidateForm.organizationPosition.$dirty">
+                    <span>请选择任职机构职位</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationName.$invalid && investorValidateForm.organizationName.$dirty">
+                    <span>请输入机构名称</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.organizationBrief.$invalid && investorValidateForm.organizationBrief.$dirty">
-                    <span ng-show="investorValidateForm.organizationBrief.$error.require">请输入机构简介</span>
-                    <span ng-show="investorValidateForm.organizationBrief.$error.minlength">机构简介最少10个字，最多1000个字</span>
+                    <span "investorValidateForm.organizationBrief.$error.required">请输入机构简介</span>
                 </div>
 
                 <div class="form-horizontal welcome-form">
@@ -173,7 +172,7 @@
                                             <label class="title"><span class="c-orange">*</span>机构简介</label>
                                             <ul class="main">
                                                 <li>
-                                                    <textarea  name="organizationBrief" required  ng-model="organization.addForm.brief" placeholder="简单介绍你的个人经历，30字" ng-minlength="10" ng-maxlength="30" required></textarea>
+													<textarea  name="organizationBrief"   ng-model="organization.addForm.brief"  ng-required="true" ng-pattern="/^.{10,1000}$/" placeholder="简单介绍你的个人经历，30字"></textarea>
                                                 </li>
                                             </ul>
                                         </li>
