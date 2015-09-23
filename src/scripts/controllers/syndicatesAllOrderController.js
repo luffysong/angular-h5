@@ -5,41 +5,48 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesAllOrderController',
-    function($scope, $stateParams,DictionaryService,CrowdFundingService,CoInvestorService,$state,ErrorService) {
+    function($scope, $stateParams, DictionaryService, CrowdFundingService, CoInvestorService, $state, ErrorService) {
         $scope.activeIndex = 0;
         $scope.noMore = true;
         $scope.noData = false;
-        /*每页几条数据*/
+
+        /*条目数量和页码*/
         var pageSize = 10;
         $scope.pageNo = 1;
-        var tempData = [];
+
         /*获取订单数据*/
-        $scope.queryData = function(params) {
-            CoInvestorService['my-financing'].query(params, function(data){
-                if(!data.data || !data.data.length) {
-                    $scope.noData = true;
-                    $scope.orderData = data.data;
-                } else {
-                    tempData = data.data.slice(0);
-                    /*过滤数据，去除线下付款订单*/
-                    angular.forEach(data.data, function(obj, index) {
-                        if(obj.payment && obj.payment.platform_type == 1) {
-                            tempData.splice(index, 1);
-                        }
-                    });
-                    $scope.noMore = tempData.length <= pageSize;
-                    $scope.orderData = tempData.slice(0, 10);
-
-                    $scope.noData = $scope.orderData.length ? false : true;
-
-                    if($scope.noData) {
-                        $scope.queryRecommend();
+        $scope.queryData = function() {
+            CoInvestorService['my-financing'].query({
+                'page' : $scope.pageNo,
+                'per_page': pageSize
+            }, function(data){
+                if($scope.orderData && $scope.pageNo > 1) {
+                    for(var i = 0, length = data.data.length; i < length; i++) {
+                        $scope.orderData.push(data.data[i]);
                     }
+                } else {
+                    $scope.orderData = data.data;
+                }
+
+                if(!$scope.orderData || !$scope.orderData.length) {
+                    $scope.noData = true;
+                    $scope.queryRecommend();
+                } else {
+                    $scope.noMore = data.total <= pageSize * $scope.pageNo;
                 }
             }, function(err) {
                 $scope.noData = true;
                 $scope.queryRecommend();
             });
+        };
+
+        /*首次加载第一页10条订单数据*/
+        $scope.queryData();
+
+        /*众筹列表加载更多*/
+        $scope.loadMore = function(){
+            $scope.pageNo += 1;
+            $scope.queryData();
         };
 
         /*查询推荐众筹列表*/
@@ -83,17 +90,5 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                 });
             });
         };
-
-        /*首次加载默认查询全部数据*/
-        $scope.queryData({
-            page:1,
-            per_page:100
-        });
-
-        /*众筹列表加载更多*/
-        $scope.loadMore = function(){
-            $scope.orderData = tempData;
-            $scope.noMore = true;
-        }
     });
 
