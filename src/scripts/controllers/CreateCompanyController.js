@@ -151,7 +151,8 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             var q = term.toLowerCase().trim();
 
             SuggestService.query({
-                wd: q
+                wd: q,
+                sub: 'company'
             }, function (data) {
                 var exist = data.data.filter(function (item) {
                     return item.name.toLowerCase() == q.toLowerCase();
