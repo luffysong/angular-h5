@@ -434,6 +434,8 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 //});
                 angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoEmpty", false);
                 return;
+            }else{
+                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoEmpty", true);
             }
 
 
