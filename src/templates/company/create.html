@@ -127,7 +127,7 @@
                                    name="website" ng-model="formData.website" ng-if="!formData.cid && (formData.operationStatus == 'ONLINE_IN_6MONTH' || formData.operationStatus == 'ONLINE_IN_3MONTH')"/>
                         </td>
                     </tr>
-                    
+
                     <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]" class="brief">
                         <td class="vtop">
                             <b class="important" ng-if="!formData.cid">*</b>
@@ -189,6 +189,7 @@
                             <select ng-options="c.value as c.desc for c in founderRoles" ng-model="formData.level"
                                     class="form-control"
                                     name="level" required>
+								<option value="">请选择</option>
                             </select>
 
                             <div class="split">
