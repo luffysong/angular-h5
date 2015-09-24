@@ -114,16 +114,40 @@
         background-color: #f7f7f7;
     }
     .kr-code-apply {
-        height: 190px;
-        padding-top: 37px;
+        position: relative;
+        height: auto;
+        min-height: 190px;
+        padding-top: 30px;
         border-top: 1px solid #DFDFDF;
         background-color: #f7f7f7;
         text-align: center;
+        &.apply-suc {
+            .apply-icon,.apply-tip{
+                color: #94d663;
+            }
+            .href-tip {
+                display: block;
+                padding: 0;
+                height: 40px;
+                line-height: 40px;
+                margin: 40px 15px 0;
+                text-align: center;
+                border-radius: 4px;
+                color: #fff;
+                background-color: #008DF2;
+                border: 1px solid #DFDFDF;
+            }
+        }
+        p {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+        }
         .apply-icon {
             display: block;
-            font-size: 25px;
+            font-size: 45px;
             color: #e5a642;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         .apply-tip {
             font-size: 18px;
@@ -131,9 +155,15 @@
         }
         .enter-tip {
             color: #000;
+            position: absolute;
             padding-left: 10px;
             text-align: left;
+            bottom: 10px;
         }
+    }
+    .empty-error {
+        color: red;
+        padding-left: 10px;
     }
     .kr-code-btn {
         height: auto;
@@ -157,6 +187,10 @@
             border: 1px solid #DFDFDF;
             color: #888888;
             background-color: #f7f7f7;
+            &.apply-suc {
+                background-color: #008DF2;
+                color: #fff;
+            }
         }
     }
     .error-tip {
@@ -167,32 +201,62 @@
         margin: 0;
     }
     .kr-code-enter {
+        position: relative;
         background-color: #fff;
         border: 1px solid #DFDFDF;
         height: 50px;
         padding: 0 15px;
         overflow: hidden;
+        text-align: left;
+        &.apply-code {
+            text-align: right;
+            &:before {
+                content: "￥";
+                color: #888888;
+                position: absolute;
+                left: 15px;
+                top: 50%;
+                transform: translate(0,-50%);
+            }
+        }
         .kr-code-input {
-            display: inline-block;
-            width: 75%;
+            display: block;
+            width: 100%;
             height: 100%;
             border: 0;
             font-size: 14px;
-            color: #008DF2;
+            color: #000;
+            text-align: right;
         }
 
     }
     .apply-reason {
-        height: 40px;
-        line-height: 40px;
-        padding-left: 10px;
+        padding: 10px;
         background-color: #f7f7f7;
         color: #000;
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
     }
     .invest-reason {
         width: 100%;
         height: 110px;
         background-color: #fff;
+        border: 1px solid #dfdfdf;
+        outline: none;
+        -webkit-appearance: none;
+        resize: none;
+        padding-left: 15px;
+    }
+    .pay-title {
+        height: 50px;
+        line-height: 50px;
+        background-color: #fff;
+        text-align: center;
+        color: #000;
+        font-size: 16px;
+        border-bottom: 1px solid #DFDFDF;
     }
     .confirm-title {
         width: 100%;
@@ -201,11 +265,22 @@
         background-color: @default-color;
         .validate-suc {
             font-size: 14px;
-            color: #22AC38;
+            color: #000;
         }
         .risk-tip {
             float: right;
             font-size: 14px;
+        }
+    }
+    .confirm-project {
+        display: -webkit-box;
+        height: 60px;
+        background-color: #fff;
+        color: #000;
+        -webkit-box-align: center;
+        img {
+            display: block;
+            margin: 0 10px 0 15px;
         }
     }
     .confirm-content {

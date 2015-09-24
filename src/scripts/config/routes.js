@@ -108,7 +108,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*众筹确定金额页面*/
     $stateProvider.state('syndicatesKrCode', {
-        url: '/zhongchouCode/{fundingId}',
+        url: '/zhongchouCode/{fundingId}/{cid}',
         templateUrl: 'templates/syndicates/kr-code.html',
         controller: 'syndicatesCodeController',
         data:{
@@ -138,7 +138,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     /*众筹选择支付方式页面*/
     $stateProvider.state('syndicatesPayWay', {
-        url: '/zhongchouPayWay/{tid}/{amount}',
+        url: '/zhongchouPayWay/{tid}/{amount}?type',
         templateUrl: 'templates/syndicates/payWay.html',
         controller: 'syndicatesPayWayController'/*,
          data:{
@@ -149,7 +149,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*众筹支付页面*/
     $stateProvider.state('syndicatesPay', {
-        url: '/zhongchouPay/{tid}/{amount}',
+        url: '/zhongchouPay/{tid}/{amount}?type',
         templateUrl: 'templates/syndicates/pay.html',
         controller: 'syndicatesPayController'/*,
         data:{

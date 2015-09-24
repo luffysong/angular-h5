@@ -8,17 +8,22 @@
                 <input type="text" maxlength="8" class="kr-code-input" ng-disabled="validateSuc" placeholder="Kr码为8位数字和字母组合" ng-model="krCode.number" name="krCode" />
                 <!---->
             </div>
+            <p class="error-tip" ng-if="errMsg && hasCheck && !validateSuc">{{errMsg}}</p>
             <div class="kr-code-btn">
                 <a href="" class="btn validate-kr-code" ng-disabled="krCode.number.length != 8" ng-click="checkCode()">使用</a>
-                <a href="" class="href-tip" ui-sref="syndicatesKrCode({fundingId:fundingId})" baidu-btn="申请Kr码点击">申请Kr码</a>
+                <a href="" class="href-tip" ui-sref="syndicatesKrCode({fundingId:fundingId,cid:companyId})">申请Kr码</a>
             </div>
         </div>
-        <p class="error-tip" ng-if="errMsg && hasCheck && !validateSuc">{{errMsg}}</p>
         <div ng-if="validateSuc || !isPreHeat">
+            <div class="pay-title">支付保证金</div>
             <div class="confirm-title">
                 <p class="validate-suc" ng-if="validateSuc && isPreHeat">Kr码验证成功</p>
-                确认投资{{companyData.name}}
-                <a href="" class="risk-tip" ng-click="seeRisk()">风险点</a>
+                认购的项目
+               <!-- <a href="" class="risk-tip" ng-click="seeRisk()">风险点</a>-->
+            </div>
+            <div class="confirm-project">
+                <img ng-src="{{companyData.logo}}" width="40" alt=""/>
+                <p>{{companyData.name}}</p>
             </div>
             <div class="confirm-content">
                 <div class="content-count">

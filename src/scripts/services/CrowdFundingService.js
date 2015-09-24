@@ -15,7 +15,9 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
                 'payment',
                 'activity',
                 'co-investor',
-                'audit'
+                'audit',
+                'cf-trade-deposit',
+                'cf-trade-balance'
             ]
         }, {
             'crowd-funding': {
@@ -120,6 +122,46 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
                 },
                 get: {
                     method: 'GET',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
+                        return res;
+                    })
+                }
+            },
+            'cf-trade-deposit': {
+                save: {
+                    method: "POST",
+                    transformRequest: appendTransform($http.defaults.transformRequest, function(res) {
+                        return res;
+                    })
+                },
+                get: {
+                    method: 'GET',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
+                        return res;
+                    })
+                },
+                put:{
+                    method: 'PUT',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
+                        return res;
+                    })
+                }
+            },
+            'cf-trade-balance': {
+                save: {
+                    method: "POST",
+                    transformRequest: appendTransform($http.defaults.transformRequest, function(res) {
+                        return res;
+                    })
+                },
+                get: {
+                    method: 'GET',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
+                        return res;
+                    })
+                },
+                put:{
+                    method: 'PUT',
                     transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
                         return res;
                     })

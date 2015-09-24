@@ -6,10 +6,20 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesPayController',
     function($scope, UserService , $stateParams,DictionaryService,CrowdFundingService,CoInvestorService,$state,$rootScope) {
+        var text = {
+            deposit:"支付保证金",
+            balance:"支付剩余款"
+        };
+        $scope.orderType = $stateParams.type;
+        $scope.typeText = text[$scope.type];
         $scope.uid = UserService.getUID();
         $scope.tid = $stateParams.tid;
         $scope.amount = $stateParams.amount;
         $scope.bankDetails = DictionaryService.getDict('bank_limit_lianlianpay');
+        $scope.interFace = {
+            deposit:"cf-trade-deposit",
+            balance:"cf-trade-balance"
+        };
         /*选择支付卡号Index*/
         $scope.cardIndex = "";
         /*用户签约信息查询*/
@@ -19,7 +29,6 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
             subid:$scope.uid,
             pay_type:"D"
         },function(data){
-            console.log(data);
             if(!data.agreement_list.length){
                 location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order=http:'+$scope.rongHost+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
                 return;
@@ -29,15 +38,14 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
                 angular.extend(obj,$scope.bankDetails[obj.bank_code][$scope.bankDetails[obj.bank_code].length-1]);
             });
         },function(err){
-            console.log(err);
             location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
         });
-        /*获取订单detail*/
-        CrowdFundingService['cf-trade'].get({
-            id: $scope.tid
-        }, function(data){
+        /*根据订单类型调相应接口*/
+        CrowdFundingService[$scope.interFace[$scope.orderType]].get({
+            id:$scope.tid
+        },function(data){
             $scope.tradeData = data;
-        }, function(err){
+        },function(err){
         });
         /*选择卡号事件*/
         $scope.selectCard = function(index){
@@ -45,7 +53,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
         }
         /*更新PlatfromType*/
         $scope.updatePlatType = function(){
-            CrowdFundingService['cf-trade'].update({
+            CrowdFundingService[$scope.interFace[$scope.orderType]].update({
                 id:$scope.tid
             }, {
                 platform_type:3

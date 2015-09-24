@@ -30,6 +30,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         CompanyService.get({
             id:$scope.companyId
         },function(data){
+            console.log(data);
             $scope.companyData = data.basic;
         },function(err){
             ErrorService.alert(err);
