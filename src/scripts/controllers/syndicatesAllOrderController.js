@@ -29,6 +29,17 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                     $scope.orderData = data.data;
                 }
 
+                angular.forEach($scope.orderData, function(obj, index){
+                    obj.created_at = moment(obj.created_at).format('YYYY-MM-DD');
+                    if (obj.trade_c_f_deposit.payment.status == 3) {
+                        obj.trade_c_f_deposit.refund_timeout = !(moment(obj.trade_c_f_deposit.payment.notify_time).add(3, 'days') - moment());
+                    }
+
+                    if (obj.trade_c_f_balance.payment.status == 3) {
+                        obj.trade_c_f_balance.refund_timeout = !(moment(obj.trade_c_f_balance.payment.close_time) - moment());
+                    }
+                });
+
                 if(!$scope.orderData || !$scope.orderData.length) {
                     $scope.noData = true;
                     $scope.queryRecommend();
@@ -137,6 +148,46 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                         return $scope;
                     }
                 }
+            });
+        };
+
+        /*申请退款*/
+        $scope.askForRefund = function(tradeId) {
+            $modal.open({
+                 templateUrl: 'templates/syndicates/pop-order.html',
+                 windowClass: 'remind-modal-window',
+                 controller: [
+                     '$scope', 'scope', '$modalInstance', '$state', 'RefundService', 'ErrorService',
+                     function($scope, scope, $modalInstance, $state, RefundService, ErrorService) {
+                        $scope.isRefundModal = 1;
+
+                        $scope.ok = function() {
+                            RefundService.post({
+                                'trade_id': tradeId
+                            }, function(res) {
+                                scope.queryData({
+                                    'pageNo': 1,
+                                    'pageSize': scope.orderData.length,
+                                    'refresh': true
+                                });
+
+                                $modalInstance.dismiss();
+                            }, function(err) {
+                                ErrorService.alert(err);
+                                $modalInstance.dismiss();
+                            });
+                        };
+
+                        $scope.cancel = function() {
+                            $modalInstance.dismiss();
+                        }
+                     }
+                 ],
+                 resolve: {
+                     scope: function() {
+                         return $scope;
+                     }
+                 }
             });
         };
     });
