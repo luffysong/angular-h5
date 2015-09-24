@@ -15,12 +15,12 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
         $scope.pageNo = 1;
 
         /*获取订单数据*/
-        $scope.queryData = function() {
+        $scope.queryData = function(params) {
             CoInvestorService['my-financing'].query({
-                'page' : $scope.pageNo,
-                'per_page': pageSize
+                'page' : params.pageNo ? params.pageNo : $scope.pageNo,
+                'per_page': params.pageSize ? params.pageSize : pageSize
             }, function(data){
-                if($scope.orderData && $scope.pageNo > 1) {
+                if($scope.orderData && $scope.pageNo > 1 && !params.refresh) {
                     for(var i = 0, length = data.data.length; i < length; i++) {
                         $scope.orderData.push(data.data[i]);
                     }
@@ -42,14 +42,14 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
         };
 
         /*首次加载第一页10条订单数据*/
-        $scope.queryData();
+        $scope.queryData({});
 
         /*众筹列表加载更多*/
         $scope.loadMore = function(){
             if($scope.loadingMore) return;
             $scope.loadingMore = true;
             $scope.pageNo += 1;
-            $scope.queryData();
+            $scope.queryData({});
         };
 
         /*查询推荐众筹列表*/
@@ -94,6 +94,7 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
             });
         };
 
+        /*取消订单*/
         $scope.cancelOrder = function(orderId) {
             $modal.open({
                 templateUrl: 'templates/syndicates/pop-order.html',
@@ -114,7 +115,11 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                                     classes: 'alert-success'
                                 });
 
-                                scope.queryData();
+                                scope.queryData({
+                                    'pageNo': 1,
+                                    'pageSize': scope.orderData.length,
+                                    'refresh': true
+                                });
                                 $modalInstance.dismiss();
                             }, function(err) {
                                 ErrorService.alert(err);
