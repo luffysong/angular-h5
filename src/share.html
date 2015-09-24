@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>36氪众筹</title>
+    <title>36氪股权融资</title>
 
     <script>
         var _hmt = _hmt || [];
@@ -64,7 +64,7 @@
                     <header>
                         <hgroup>
                             <h1 class="">错过了牛市</h1>
-                            <h2>不能再错过 <strong>股权众筹</strong></h2>
+                            <h2>不能再错过 <strong>股权融资</strong></h2>
                         </hgroup>
                     </header>
                     <section>
@@ -83,7 +83,7 @@
                     <footer class="share-footer">
                         <section>
                             <aside class="rubberBand">可能是下一个BAT的顶级公司</aside>
-                            <aside class="rubberBand">股权众筹了</aside>
+                            <aside class="rubberBand">股权融资了</aside>
                         </section>
                     </footer>
                 </div>
@@ -101,7 +101,7 @@
                 <div class="share-bg company">
                     <h3 class="company-name">公司名称</h3>
                     <section class="section-1">
-                        正在36氪众筹
+                        正在36氪股权融资
                     </section>
                     <section class="section-2">
                         现在，你有一个机会
@@ -133,7 +133,7 @@
         success: function(msg){
             if(msg.code == 0){
                 data = msg.data;
-                WEIXINSHARE.shareTitle = data.company_name + '正在36氪众筹';
+                WEIXINSHARE.shareTitle = data.company_name + '正在36氪股权融资';
                 WEIXINSHARE.shareDesc = '用更少的资金，角逐更大的财富';
                 WEIXINSHARE.shareImg = data.company_logo;
                 WEIXINSHARE.cid = data.company_id;
