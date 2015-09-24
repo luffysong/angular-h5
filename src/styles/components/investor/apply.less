@@ -77,6 +77,7 @@
          margin:0;
          padding:0 10px;
          border:none;
+		 font-size:16px;
     }
 
     .welcome-form {
@@ -88,6 +89,7 @@
 			}
 		}
         .basic-info {
+			font-size:14px;
             &:first-of-type {
                 border-top:none;
                 padding:0 10px;
@@ -125,6 +127,12 @@
     }
     .form-group {
         clear:both;
+		&.brief{
+			height:80px;
+			textarea{
+				height:40px;
+			}
+		}
         &.m-options {
             .s-list{
                 clear:both;
@@ -159,16 +167,16 @@
                                 position:relative;
                                 .title,
                                 .main{
-                                    display:inline-block;
+                                    display:block;
                                 }
                                 .title{
                                     height:30px;
-                                    width:90px;
-                                    text-align:right;
+                                    width:70px;
                                     padding:0;
                                     line-height:30px;
                                     background-color:transparent;
                                     vertical-align:top;
+									font-size:14px;
                                 }
                                 .main{
                                     margin-left:10px;
@@ -206,7 +214,6 @@
         }
         .label-control{
             .box-content {
-                width:100px;
                 text-align:left;
                 padding-right:10px;
                 display:inline-block;
@@ -219,6 +226,12 @@
         }
         &.upload-pictures {
             border-bottom: none;
+			.intro-pic-list{
+				margin-bottom:7px;
+			}
+			.col-max {
+				width:100%;
+			}
         }
         .btn-auth {
             border:none;

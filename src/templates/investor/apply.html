@@ -146,7 +146,6 @@
                                     <ul class="content-list" ng-if="organization.isAddExperience">
                                         <!--机构名称-->
                                         <li mass-autocomplete="{debounce_blur:700}">
-                                            <label class="title"><span class="c-orange"></span></label>
                                             <ul class="main">
                                                 <li class="suggest_wrap">
                                                     <input type="text" ng-model="organization.addForm.name"
@@ -247,7 +246,6 @@
                                     <!--新增公司-->
                                     <ul class="content-list" ng-if="company.isAddExperience">
                                         <li mass-autocomplete="{debounce_blur:700}">
-                                            <label class="title"><span class="c-orange"></span></label>
                                             <ul class="main">
                                                 <li class="suggest_wrap">
                                                     <input type="text" ng-model="company.addForm.name"
@@ -302,16 +300,11 @@
                                                 </li>
                                             </ul>
 
-                                            <ul class="main">
-                                                <li>
-                                                </li>
-                                            </ul>
                                         </li>
 										<li>
-                                            <label class="title"><span class="c-orange"></span></label>
                                             <ul class="main">
                                                 <li>
-                                                    <input type=""  ng-model="company.form.positionDetail" placeholder="如iOS开发/UI设计师">
+                                                    <input type="text"  ng-model="company.form.positionDetail" placeholder="如iOS开发/UI设计师">
                                                 </li>
                                             </ul>
 										</li>
@@ -348,7 +341,7 @@
                             </span>
                         </label>
                         <div class="col-max">
-                            <p>上传名片有助于提升审核速度</p>
+                            <p>上传名片有助于提升审核速度，</p>
                             <p>支持小于5M的JGP、JPEG和PNG格式，仅供认证使用</p>
 
                             <div class="item">
