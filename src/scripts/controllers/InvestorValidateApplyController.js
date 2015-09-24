@@ -5,7 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateApplyController',
-    function($state,$scope, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService,AndroidUploadService) {
+
+    function(OrganizationService,CompanyService,$state,$scope,SuggestService,$q, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService,monthOptions,yearOptions) {
         $scope.investorValidateApply = {
             status:''
         }
@@ -69,6 +70,340 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 $scope.error.code = 0;
             }
         }
+        //产品状态字典
+        $scope.operationStatus = DictionaryService.getDict('CompanyOperationStatus');
+        //获取工作职位
+        $scope.workPositionType = DictionaryService.getDict('WorkPositionType');
+        $scope.orgPositionType = DictionaryService.getDict('OrgPositionType');
+
+        //获取年月份
+        $scope.yearOptions = yearOptions;
+        $scope.monthOptions = monthOptions;
+
+        //机构suggest
+
+        $scope.suggestOrganization = {
+            add: []
+        }
+
+        $scope.autocomplete_options_organization = {
+            suggest: suggest_state_remote_organization,
+            on_error: console.log,
+            on_detach: function (cs) {
+            },
+            on_select: function (selected) {
+                if (selected.obj.status != 'add') {
+                    $scope.organization.isAdd = false;
+                    var organization = selected.obj;
+                    $scope.organization.addForm.name = organization.name;
+                    $scope.organization.addForm.id = organization.id;
+                } else {
+                    $scope.organization.isAdd = true;
+                    $scope.organization.addForm.name = selected.obj.value;
+                    $scope.organization.addForm.id = 0;
+                }
+            }
+        }
+        function suggest_state_organization(data) {
+            //var q = term.toLowerCase().trim();
+            var results = data.map(function (item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
+                var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30',
+                    //label = '<img src="' + logo + '">' + '<span>' + item.name + '</span>';
+                    label
+
+                if(item.status!='add'){
+                    label = '<div class="coList"><img src="' + logo + '">' + item.name + '</div>';
+                }else{
+                    label = '<div class="newCo">'+'<span>创建 </span> “'+ item.name + '”</div>';
+                }
+
+                return {
+                    label: label,
+                    value: item.name,
+                    obj: item,
+                    logo: item.logo
+                }
+            });
+
+            return results;
+        }
+        function suggest_state_remote_organization(term) {
+            var deferred = $q.defer();
+            var q = term.toLowerCase().trim();
+
+            SuggestService.query({
+                wd: q,
+                sub: 'institution'
+            }, function (data) {
+                var exist = data.data.filter(function (item) {
+                    return item.name.toLowerCase() == q.toLowerCase();
+                });
+                if (!exist.length) {
+                    data.data.push({
+                        name: q,
+                        id:'',
+                        type:'',
+                        status: 'add',
+                        value: q
+                    })
+                }
+                deferred.resolve(suggest_state_organization(data.data));
+            }, function () {
+
+            });
+            return deferred.promise;
+        }
+
+        //公司suggest
+        $scope.suggest = {
+            add: []
+        }
+        $scope.autocomplete_options = {
+            suggest: suggest_state_remote,
+            on_error: console.log,
+            on_detach: function (cs) {
+            },
+            on_select: function (selected) {
+                if (selected.obj.status != 'add') {
+                    $scope.company.isAdd = false;
+                    var company = selected.obj;
+                    $scope.company.addForm.name = company.name;
+                    $scope.company.addForm.id = company.id;
+                } else {
+                    $scope.company.isAdd = true;
+                    $scope.company.addForm.name = selected.obj.value;
+                    $scope.company.addForm.id = 0;
+                }
+
+            }
+        }
+        function suggest_state(data) {
+            //var q = term.toLowerCase().trim();
+            var results = data.map(function (item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
+                var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30',
+                    //label = '<img src="' + logo + '">' + '<span>' + item.name + '</span>';
+                    label
+
+                if(item.status!='add'){
+                    label = '<div class="coList"><img src="' + logo + '">' + item.name + '</div>';
+                }else{
+                    label = '<div class="newCo">'+'<span>创建 </span> “'+ item.name + '”</div>';
+                }
+
+                return {
+                    label: label,
+                    value: item.name,
+                    obj: item,
+                    logo: item.logo
+                }
+            });
+
+            return results;
+        }
+        function suggest_state_remote(term) {
+            var deferred = $q.defer();
+            var q = term.toLowerCase().trim();
+
+            SuggestService.query({
+                wd: q,
+                sub: 'company'
+            }, function (data) {
+                var exist = data.data.filter(function (item) {
+                    return item.name.toLowerCase() == q.toLowerCase();
+                });
+                if (!exist.length) {
+                    data.data.push({
+                        name: q,
+                        id:'',
+                        type:'',
+                        status: 'add',
+                        value: q
+                    })
+                }
+
+                deferred.resolve(suggest_state(data.data));
+            }, function () {
+
+            });
+            return deferred.promise;
+        }
+        //任职公司
+        $scope.company = {
+            isAddExperience:false,
+            isAdd:false,
+            form:{
+                startYear:'',
+                startMonth:'',
+                position:'',
+                positionDetail:''
+            },
+            addForm:{
+                id:'',
+                name:'',
+                brief:'',
+                operationStatus:'OPEN'
+            },
+            response:{
+                data:[]
+            },
+            choose:function(){
+                var companyId = $scope.company.form.id,
+                    companyData = $scope.company.response.data,
+                    company = {};
+
+                if(companyId == 0){
+                    $scope.company.isAddExperience = true;
+                    $scope.company.form.position = '';
+                    $scope.company.form.positionDetail = '';
+                    $scope.company.form.startYear = '';
+                    $scope.company.form.startMonth = '';
+
+					$scope.company.addForm.id = '';
+					$scope.company.addForm.name = '';
+					$scope.company.addForm.website = '';
+					$scope.company.addForm.brief = '';
+					$scope.company.addForm.operationStatus = 'OPEN';
+                    return false;
+                }
+                $scope.company.isAddExperience = false;
+                $scope.company.isAdd = false;
+
+                angular.forEach(companyData,function(item){
+                    if(companyId == item.id){
+                        company = item;
+                        return true;
+                    }
+
+                });
+                var startDate = new Date(company.startDate);
+                $scope.company.form.groupId = company.groupId;
+                $scope.company.form.position = company.position;
+                $scope.company.form.positionDetail = company.positionDetail;
+                $scope.company.form.startYear = startDate.getFullYear() +'';
+                $scope.company.form.startMonth = 1 + startDate.getMonth()+'';
+
+            },
+            loadData:function(){
+                //获取当前用户在职公司工作经历
+                UserService.getCurrentWorkCompanys(UserService.getUID(),function(response){
+                    console.log('获取当前用户在职公司工作经历',response);
+                    $scope.company.response.data = angular.copy(response.expList);
+
+					if(!response.expList.length){
+                        $scope.company.form.id = 0;
+						$scope.company.isAddExperience = true;
+					}
+
+                    $scope.company.response.data.push({
+                         id:0,
+                         groupName:'新增经历'
+                    });
+
+                    /*if($scope.company.response.data.length){
+                        var company = response.expList[0];
+                        $scope.company.form.id = company.id;
+                        $scope.company.form.groupId = company.groupId;
+                        $scope.company.form.position = company.position;
+                        $scope.company.form.positionDetail = company.positionDetail;
+                        var startDate = new Date(company.startDate);
+                        $scope.company.form.startYear = startDate.getFullYear()+'';
+                        $scope.company.form.startMonth = 1 + startDate.getMonth()+'';
+                    }*/
+                },function(err){
+                    ErrorService.alert(err);
+                });
+            }
+
+        };
+        $scope.company.loadData();
+        //任职机构
+        $scope.organization = {
+            isAddExperience:false,
+            isAdd:false,
+            form:{
+                startYear:'',
+                startMonth:'',
+                position:''
+            },
+            addForm:{
+                id:'',
+                name:'',
+                brief:'',
+				enName:'',
+				website:''
+            },
+            response:{
+                data:[]
+            },
+            choose:function(){
+                var orId = $scope.organization.form.id,
+                    organizationData = $scope.organization.response.data,
+                    organization = {};
+
+
+                //新增机构工作经历
+                if(orId == 0){
+                    $scope.organization.isAddExperience = true;
+                    $scope.organization.form.position = '';
+                    $scope.organization.form.startYear = '';
+                    $scope.organization.form.startMonth = '';
+
+					$scope.organization.addForm.id = '';
+					$scope.organization.addForm.enName = '';
+					$scope.organization.addForm.name = '';
+					$scope.organization.addForm.website = '';
+					$scope.organization.addForm.brief = '';
+                    return false;
+                }
+                $scope.organization.isAddExperience = false;
+                $scope.organization.isAdd = false;
+
+                angular.forEach(organizationData,function(item){
+                    if(orId == item.id){
+                        organization = item;
+                        return true;
+                    }
+
+                });
+                var startDate = new Date(organization.startDate);
+                $scope.organization.form.groupId = organization.groupId;
+                $scope.organization.form.position = organization.position;
+                $scope.organization.form.startMonth =  1 + startDate.getMonth()+'';
+                $scope.organization.form.startYear = startDate.getFullYear() +'';
+            },
+            loadData:function(){
+                //获取当前用户在职机构工作经历
+                UserService.getCurrentWorkOrganizations(UserService.getUID(),function(response){
+                    $scope.organization.response.data = angular.copy(response.expList);
+
+					if(!response.expList.length){
+                        $scope.organization.form.id = 0;
+						$scope.organization.isAddExperience = true;
+					}
+
+                    $scope.organization.response.data.push({
+                         id:0,
+                         groupName:'新增经历'
+                    });
+
+                    /*if($scope.organization.response.data.length){
+                        var organization = angular.copy($scope.organization.response.data[0]);
+                        $scope.organization.form.id = organization.id;
+                        var startDate = new Date(organization.startDate);
+                        $scope.organization.form.position = organization.position;
+                        $scope.organization.form.groupId = organization.groupId;
+                        $scope.organization.form.startYear = startDate.getFullYear()+'';
+                        $scope.organization.form.startMonth = 1 + startDate.getMonth()+'';
+                    }*/
+
+                },function(err){
+                    ErrorService.alert(err);
+                });
+            }
+
+        };
+        $scope.organization.loadData();
+        //投资人认证表单
         $scope.intro = {};
         $scope.intro.value = {
             intro:"",
@@ -94,7 +429,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             id:'',/*用户id*/
             name:'',/*真实姓名*/
             intro:'',/*一句话简介*/
-            investorRole:'ORG_INVESTOR',/*投资身份*/
+            investorRole:'PERSONAL_INVESTOR',/*投资身份*/
             businessCard:'',/*名片*/
             fundsPhases:'',/*投资阶段*/
             investorFocusIndustrys:'',/*关注领域*/
@@ -142,11 +477,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
 
         ];
-
         /*关注领域*/
         $scope.invest.investorFocusIndustrys = DictionaryService.getDict('InvestorFollowedIndustry');
-
-
         /*获取用户默认的关注领域和投资阶段的数据*/
         UserService.basic.get({
             id:UserService.getUID()
@@ -182,6 +514,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             $scope.invest.fundUsdInvestMin  =   data.investorSettings.fundUsdInvestMin;
             $scope.invest.usdInvestMax      =   data.investorSettings.usdInvestMax;
             $scope.invest.usdInvestMin      =   data.investorSettings.usdInvestMin;
+
         },function(err){
             ErrorService.alert(err);
         });
@@ -203,7 +536,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         $scope.areaList.push($scope.invest.investorFocusIndustrys[i].value);
                     }
                 });
-
             }
         }
         /*上传名片*/
@@ -259,16 +591,50 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
         /*表单提交*/
         $scope.submitForm = function(){
+                //创建公司
+                function createCompany(data){
+                    var deferred = $q.defer();
+                    CompanyService.save(data,function(response){
+                        deferred.resolve(response);
+                    },function(error){
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                }
+                //创建机构
+                function createOrganization(data){
+                    var deferred = $q.defer();
+                    OrganizationService.save(data,function(response){
+                        deferred.resolve(response);
+                    },function(err){
+                        deferred.reject(err);
+                    });
+                    return deferred.promise;
+                }
+
+                //创建任职经历
+                function createExperience(data){
+                    var deferred = $q.defer();
+                    UserService.addWorkExperience(data,function(response){
+                        deferred.resolve(response);
+                    },function(err){
+                        deferred.reject(err);
+                    });
+                    return deferred.promise;
+                }
+                //更新任职经历
+                function updateExperience(data){
+                    var deferred = $q.defer();
+                    UserService.updateWorkExperience(data,function(response){
+                        deferred.resolve(response);
+                    },function(err){
+                        deferred.reject(err);
+                    });
+                    return deferred.promise;
+                }
+
             //隐藏自定义错误信息
             Error.hide();
-           /* var pattern = /^[\u4E00-\u9FA5a-zA-Z]+$/;
-            if(pattern.test($scope.invest.name)){
-                 Error.hide();
-            }else{
-                Error.show("请输入真实姓名");
-                return false;
-            }*/
-
             if($scope.intro.value.pictures){
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("picEmpty",true);
             }else{
@@ -331,6 +697,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
             /*检查表单填写是否正确*/
             if(!checkForm("investorValidateForm")) return;
+
             var investoraudit = {};
                 investoraudit['id'] = UserService.getUID();
                 investoraudit['name']   = $scope.invest.name;
@@ -361,7 +728,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     Error.show("投资额下限不能大于上限值");
                     return false;
                 }
-
                 /*个人*/
                 investoraudit['usdInvestMin']   = $scope.invest.usdInvestMin;
                 investoraudit['usdInvestMax']   = $scope.invest.usdInvestMax;
@@ -379,17 +745,204 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }
                 /*名片*/
                 investoraudit['businessCardLink']   = $scope.intro.value.pictures;
-                $scope.hasClick = true;
-            InvestorauditService.save(investoraudit,function(response){
-                $scope.investorValidateApply.status = 'checking';
-            },function(err){
-                $scope.hasClick = false;
-                ErrorService.alert(err);
-            });
+                //$scope.hasClick = true;
+
+                //判断投资身份
+                var investorRole  = $scope.invest.investorRole;
+                switch(investorRole){
+                    //任职机构
+                    case 'ORG_INVESTOR':{
+                        console.log('---任职机构');
+                        if($scope.organization.isAddExperience){
+                            if($scope.organization.isAdd){
+                                //快速创建机构
+                                var data = {};
+                                    data['name'] = $scope.organization.addForm['name'];
+                                    data['enName'] = $scope.organization.addForm['enName'];
+                                    data['brief'] = $scope.organization.addForm['brief'];
+                                    data['website'] = $scope.organization.addForm['website'];
+                                    data['source'] = 'INVESTOR_AUDIT';
+
+                                var createOrganizationPromise = createOrganization(data);
+                                createOrganizationPromise.then(function(response){
+                                    console.log('---公司返回数据--',response);
+                                    //创建经历
+                                    var expData = {};
+                                        expData['uid'] = UserService.getUID();
+                                        expData['groupIdType'] = 2;
+                                        expData['current'] = true;
+                                        expData['groupId'] = response.id;
+                                        expData['position'] = $scope.organization.form.position;
+                                        expData['startDate'] = $scope.organization.form.startYear +'-'+$scope.organization.form.startMonth+'-01 01:01:01';
+                                        console.log('---要提交的创建经历数据--',expData);
+
+                                    var createExperiencePromise = createExperience(expData);
+                                    createExperiencePromise.then(function(response){
+                                        console.log('--创建经历成功--');
+                                        //提交总数据
+                                        send(response.id);
+                                    },function(err){
+                                        console.log('--创建经历失败--');
+                                    });
+                                },function(err){
+                                    console.log('---创建公司失败--');
+                                });
+                            }else{
+                                //创建经历
+                                    var expData = {};
+                                        expData['uid'] = UserService.getUID();
+                                        expData['groupIdType'] = 2;
+                                        expData['current'] = true;
+                                        expData['groupId'] = $scope.organization.addForm.id;
+                                        expData['position'] = $scope.organization.form.position;
+                                        expData['startDate'] = $scope.organization.form.startYear +'-'+$scope.organization.form.startMonth+'-01 01:01:01';
+
+                                console.log('---要提交的创建经历数据--',expData);
+
+                                var createExperiencePromise = createExperience(expData);
+                                createExperiencePromise.then(function(response){
+                                    console.log('--创建经历成功--');
+                                    //提交总数据
+                                    send(response.id);
+                                },function(err){
+                                    console.log('--创建经历失败--');
+                                });
+                            }
+                        }else{
+                            //更新任职经历
+                            var expData = {};
+                                expData['uid'] = UserService.getUID();
+                                expData['groupIdType'] = 2;
+                                expData['current'] = true;
+                                expData['id'] = $scope.organization.form.id;
+                                expData['groupId'] = $scope.organization.form.groupId;
+                                expData['position'] = $scope.organization.form.position;
+                                expData['startDate'] = $scope.organization.form.startYear +'-'+$scope.organization.form.startMonth+'-01 01:01:01';
+
+                                console.log('---提交更新任职经历数据--',expData);
+
+                                var updateExperiencePromise = updateExperience(expData);
+                                updateExperiencePromise.then(function(response){
+                                    console.log('--更新经历成功--');
+                                    //提交总数据
+                                    send(response.id);
+                                },function(err){
+                                    console.log('--更新经历失败--');
+                                });
+                        }
+
+                    }
+                    break;
+                    //任职公司
+                    case 'COMPANY_INVEST_DEPT':{
+                        console.log('---任职公司');
+                        if($scope.company.isAddExperience){
+                            if($scope.company.isAdd){
+                                //快速创建公司
+                                var data = {};
+                                    data['mode'] = 'fast';
+                                    data['name'] = $scope.company.addForm['name'];
+                                    data['brief'] = $scope.company.addForm['brief'];
+                                    data['website'] = $scope.company.addForm['website'];
+                                    data['operationStatus'] = $scope.company.addForm['operationStatus'];
+
+                                var createCompanyPromise = createCompany(data);
+                                createCompanyPromise.then(function(response){
+                                    console.log('---公司返回数据--',response);
+                                    //创建经历
+                                    var expData = {};
+                                        expData['uid'] = UserService.getUID();
+                                        expData['groupIdType'] = 3;
+                                        expData['current'] = true;
+                                        expData['groupId'] = response.id;
+                                        expData['position'] = $scope.company.form.position;
+                                        expData['positionDetail'] = $scope.company.form.positionDetail;
+                                        expData['startDate'] = $scope.company.form.startYear +'-'+$scope.company.form.startMonth+'-01 01:01:01';
+                                        console.log('---要提交的创建经历数据--',expData);
+
+                                    var createExperiencePromise = createExperience(expData);
+                                    createExperiencePromise.then(function(response){
+                                        console.log('--创建经历成功--');
+                                        //提交总数据
+                                        send(response.id);
+                                    },function(err){
+                                        console.log('--创建经历失败--');
+                                    });
+                                },function(err){
+                                    console.log('---创建公司失败--');
+                                });
+                            }else{
+                                console.log('---company---',$scope.company);
+                                //创建经历
+                                    var expData = {};
+                                        expData['uid'] = UserService.getUID();
+                                        expData['groupIdType'] = 3;
+                                        expData['current'] = true;
+                                        expData['groupId'] = $scope.company.addForm.id;
+                                        expData['position'] = $scope.company.form.position;
+                                        expData['positionDetail'] = $scope.company.form.positionDetail;
+                                        expData['startDate'] = $scope.company.form.startYear +'-'+$scope.company.form.startMonth+'-01 01:01:01';
+
+                                console.log('---要提交的创建经历数据--',expData);
+
+                                var createExperiencePromise = createExperience(expData);
+                                createExperiencePromise.then(function(response){
+                                    console.log('--创建经历成功--');
+                                    //提交总数据
+                                    send(response.id);
+                                },function(err){
+                                    console.log('--创建经历失败--');
+                                });
+                            }
+                        }else{
+                            //更新任职经历
+                            var expData = {};
+                                expData['uid'] = UserService.getUID();
+                                expData['groupIdType'] = 3;
+                                expData['current'] = true;
+                                expData['id'] = $scope.company.form.id;
+                                expData['groupId'] = $scope.company.form.groupId;
+                                expData['position'] = $scope.company.form.position;
+                                expData['positionDetail'] = $scope.company.form.positionDetail;
+                                expData['startDate'] = $scope.company.form.startYear +'-'+$scope.company.form.startMonth+'-01 01:01:01';
+
+                                console.log('---提交更新任职经历数据--',expData);
+
+                                var updateExperiencePromise = updateExperience(expData);
+                                updateExperiencePromise.then(function(response){
+                                    console.log('--更新经历成功--');
+                                    //提交总数据
+                                    send(response.id);
+                                },function(err){
+                                    console.log('--更新经历失败--');
+                                });
+                        }
+
+                    }
+                    break;
+                    default:{
+                        console.log('--个人投资人--');
+                        send();
+                    }
+                }
+
+
+                //发送投资人认证数据
+                function send(workExpId){
+                    if(workExpId){
+                        investoraudit['workExpId'] = workExpId;
+                    }
+                    InvestorauditService.save(investoraudit,function(response){
+                        $scope.investorValidateApply.status = 'checking';
+                    },function(err){
+                        $scope.hasClick = false;
+                        ErrorService.alert(err);
+                    });
+                }
+
         };
         /*监听事件*/
         $scope.changeMoney = function(fieldName){
-            console.log(fieldName);
              Error.hide();
             if(fieldName == 'cnyInvestMin' ||  fieldName == 'cnyInvestMax'){
                 if(parseFloat($scope.invest.cnyInvestMin) > parseFloat($scope.invest.cnyInvestMax)){

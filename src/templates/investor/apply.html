@@ -34,6 +34,45 @@
                 <div class="error-alert error" ng-show="investorValidateForm.realName.$invalid && investorValidateForm.realName.$dirty">
                     <span ng-show="investorValidateForm.realName.$error.required">请输入真实姓名</span>
                 </div>
+                <!--公司-->
+                <div class="error-alert error" ng-show="investorValidateForm.companyStartMonth.$invalid && investorValidateForm.companyStartMonth.$dirty">
+                    <span>请选择任职公司并购部任职时间的月份</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.companyStartYear.$invalid && investorValidateForm.companyStartYear.$dirty">
+                    <span>请选择任职公司并购部任职时间的年份</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.companyPosition.$invalid && investorValidateForm.companyPosition.$dirty">
+                    <span>请选择任职公司并购部职位</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.companyBrief.$invalid && investorValidateForm.companyBrief.$dirty">
+                    <span>请输入公司的一句话简介</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.companyName.$invalid && investorValidateForm.companyName.$dirty">
+                    <span>请输入公司简称</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.companySelectName.$invalid && investorValidateForm.companySelectName.$dirty">
+                    <span>请选择任职公司</span>
+                </div>
+                <!--机构-->
+                <div class="error-alert error" ng-show="investorValidateForm.organizationStartMonth.$invalid && investorValidateForm.organizationStartMonth.$dirty">
+                    <span>请选择机构任职时间的月份</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationStartYear.$invalid && investorValidateForm.organizationStartYear.$dirty">
+                    <span>请选择任职机构任职时间的年份</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationPosition.$invalid && investorValidateForm.organizationPosition.$dirty">
+                    <span>请选择任职机构职位</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationName.$invalid && investorValidateForm.organizationName.$dirty">
+                    <span>请输入机构名称</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationSelectName.$invalid && investorValidateForm.organizationSelectName.$dirty">
+                    <span>请选择任职机构</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationBrief.$invalid && investorValidateForm.organizationBrief.$dirty">
+                    <span "investorValidateForm.organizationBrief.$error.required">请输入机构简介</span>
+                </div>
+
                 <div class="form-horizontal welcome-form">
                     <h4 class="title">投资人认证</h4>
                     <!--基本信息-->
@@ -60,35 +99,241 @@
                             <textarea ng-model="invest.intro" name="intro" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!--投资身份-->
+                    <div class="form-group m-options">
                         <label class="label-control">
                             <span class="box-content">
                                 <span class="c-orange">*</span>投资身份
                             </span>
                         </label>
-                        <div class="col-max">
-                            <div class="radio">
-                              <label>
-                                <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="ORG_INVESTOR" checked required>
-                                    <span ng-class="{true:'active'}[invest.investorRole=='ORG_INVESTOR']"> &nbsp;任职投资机构</span>
-                              </label>
-                            </div>
-                            <div class="radio">
-                              <label>
-                                <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="COMPANY_INVEST_DEPT">
-                                <span ng-class="{true:'active'}[invest.investorRole=='COMPANY_INVEST_DEPT']">&nbsp;任职公司投资并购部</span>
-                              </label>
-                            </div>
-                            <div class="radio">
-                              <label>
-                                <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="PERSONAL_INVESTOR">
-                                <span ng-class="{true:'active'}[invest.investorRole=='PERSONAL_INVESTOR']">&nbsp;个人投资人</span>
-                              </label>
-                            </div>
+                        <ul class="s-list">
+                            <!--个人投资人-->
+                            <li class="s-i">
+                                <div class="i-header">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="PERSONAL_INVESTOR">
+                                            <span ng-class="{true:'active'}[invest.investorRole=='PERSONAL_INVESTOR']">&nbsp;个人投资人</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </li>
+                            <!--任职投资机构-->
+                            <li class="s-i">
+                                <div class="i-header">
+                                    <div class="radio">
+										<label>
+											<input type="radio" name="investIdentity" ng-model="invest.investorRole" value="ORG_INVESTOR" checked required>
+											<span ng-class="{true:'active'}[invest.investorRole=='ORG_INVESTOR']"> &nbsp;任职投资机构</span>
+										</label>
+                                    </div>
+                                </div>
+                                <div class="i-body" ng-if="(invest.investorRole=='ORG_INVESTOR')">
+                                    <ul class="content-list">
+                                        <!--任职机构-->
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>任职机构</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select name="organizationSelectName" ng-change="organization.choose()" ng-options="y.id as y.groupName for y in organization.response.data" ng-model="organization.form.id" required>
+                                                        <option value="">请选择</option>
+                                                    </select>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <!--新增机构-->
+                                    <ul class="content-list" ng-if="organization.isAddExperience">
+                                        <!--机构名称-->
+                                        <li mass-autocomplete="{debounce_blur:700}">
+                                            <ul class="main">
+                                                <li class="suggest_wrap">
+                                                    <input type="text" ng-model="organization.addForm.name"
+                                                    name="organizationName"
+                                                    placeholder="请输入机构名"
+                                                    required
+                                                    class="form-control"
+                                                    mass-autocomplete-item="autocomplete_options_organization"/>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="content-list" ng-if="organization.isAddExperience && organization.isAdd">
+                                        <li>
+                                            <label class="title"><span class="c-orange"></span>机构英文名称</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <input type="text" ng-model="organization.addForm.enName" placeholder="请输入机构英文名称">
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <label class="title"><span class="c-orange"></span>机构网址</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <input type="text" fill-url  name="organizationWebsite" ng-model="organization.addForm.website" full-url placeholder="如：http://www.36kr.com">
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>机构简介</label>
+                                            <ul class="main">
+                                                <li>
+													<textarea  name="organizationBrief"   ng-model="organization.addForm.brief"  ng-required="true" ng-pattern="/^.{10,1000}$/" placeholder="简单介绍你的个人经历，30字"></textarea>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <!--/新增机构-->
+                                    <ul class="content-list">
+                                        <!--职位-->
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>职位</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select name="organizationPosition" required ng-options="c.value as c.desc for c in orgPositionType" ng-model="organization.form.position" >
+                                                        <option value="">请选择</option>
+                                                    </select>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!--任职时间-->
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>任职时间</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select class="w70" name="organizationStartYear" required ng-options="y for y in yearOptions" ng-model="organization.form.startYear">
+                                                        <option value="">年</option>
+                                                    </select>
+                                                </li>
+                                                <li>
+                                                    <select class="w70" name="organizationStartMonth" required  ng-model="organization.form.startMonth" ng-options="m for m in monthOptions">
+                                                        <option value="">月</option>
+                                                    </select>
+                                                </li>
+                                                <li>
+                                                    －至今
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <!--任职公司投资并购部-->
+                            <li class="s-i">
+                                <div class="i-header">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="COMPANY_INVEST_DEPT">
+                                            <span ng-class="{true:'active'}[invest.investorRole=='COMPANY_INVEST_DEPT']">&nbsp;任职公司投资并购部</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="i-body" ng-if="(invest.investorRole=='COMPANY_INVEST_DEPT')">
+                                    <ul class="content-list">
+                                        <!--任职公司-->
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>任职公司</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select name="companySelectName" ng-change="company.choose()" ng-options="y.id as y.groupName for y in company.response.data" ng-model="company.form.id" required>
+                                                        <option value="">请选择</option>
+                                                    </select>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <!--新增公司-->
+                                    <ul class="content-list" ng-if="company.isAddExperience">
+                                        <li mass-autocomplete="{debounce_blur:700}">
+                                            <ul class="main">
+                                                <li class="suggest_wrap">
+                                                    <input type="text" ng-model="company.addForm.name"
+                                                    name="companyName"
+                                                    placeholder="请输入公司简称"
+                                                    required
+                                                    class="form-control"
+                                                    mass-autocomplete-item="autocomplete_options"/>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="content-list" ng-if="company.isAddExperience && company.isAdd">
+                                        <!--产品状态-->
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>产品状态</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select id="" name="" ng-model="company.addForm.operationStatus" ng-options="y.value as y.desc for y in operationStatus">
+                                                        <option value="">请选择</option>
+                                                    </select>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <label class="title"><span class="c-orange"  ng-hide="(company.addForm.operationStatus == 'ONLINE_IN_3MONTH' || company.addForm.operationStatus == 'ONLINE_IN_6MONTH')">*</span>公司网址</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <input type="text" fill-url ng-model="company.addForm.website" ng-required="!(company.addForm.operationStatus == 'ONLINE_IN_3MONTH' || company.addForm.operationStatus == 'ONLINE_IN_6MONTH')" name="companyWebsite" placeholder="如：http://www.36kr.com">
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>公司简介</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <textarea  name="companyBrief" required ng-model="company.addForm.brief" placeholder="简单介绍你的个人经历，30字" maxlength="30"></textarea>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <!--/新增公司-->
+                                    <ul class="content-list">
+                                        <!--职位-->
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>职位</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select name="companyPosition" required  ng-options="c.value as c.desc for c in workPositionType" ng-model="company.form.position">
+                                                        <option value="">请选择</option>
+                                                    </select>
+                                                </li>
+                                            </ul>
 
-                        </div>
-
+                                        </li>
+										<li>
+                                            <ul class="main">
+                                                <li>
+                                                    <input type="text"  ng-model="company.form.positionDetail" placeholder="如iOS开发/UI设计师">
+                                                </li>
+                                            </ul>
+										</li>
+                                        <!--任职时间-->
+                                        <li>
+                                            <label class="title"><span class="c-orange">*</span>任职时间</label>
+                                            <ul class="main">
+                                                <li>
+                                                    <select class="w70" name="companyStartYear" required ng-options="y for y in yearOptions" ng-model="company.form.startYear">
+                                                        <option value="">年</option>
+                                                    </select>
+                                                </li>
+                                                <li>
+                                                    <select class="w70" name="companyStartMonth" required ng-model="company.form.startMonth" ng-options="m for m in monthOptions">
+                                                        <option value="">月</option>
+                                                    </select>
+                                                </li>
+                                                <li>
+                                                    －至今
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
+
+                    <!--上传名片-->
                     <div class="form-group normal upload-pictures">
                         <label class="label-control">
                             <span class="box-content">
@@ -96,9 +341,7 @@
                             </span>
                         </label>
                         <div class="col-max">
-                            <p>上传名片有助于提升审核速度</p>
-
-                            <p>支持小于5M的JGP、JPEG和PNG格式，仅供认证使用</p>
+                            <p>上传名片有助于提升审核速度，支持小于5M的JGP、JPEG和PNG格式，仅供认证使用</p>
 
                             <div class="item">
                                 <ul class="intro-pic-list no-p">
@@ -219,14 +462,11 @@
                         </div>
                     </div>
 
-
-
-
                     <!-- 主投币种 -->
                     <div class="form-group">
                         <label for="" class="label-control">
                             <span class="box-content">
-                                主投币种
+								<span class="c-orange">*</span>主投币种
                             </span>
                         </label>
                         <div class="col-flex clearfix ml-10">

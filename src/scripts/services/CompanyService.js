@@ -436,6 +436,7 @@ angular.module('defaultApp.service').service('CompanyService', [
         })
     }
 
+
     return service;
     }
 ]);

@@ -1,30 +1,99 @@
 .investor-validate-apply {
+  .ac-container {
+    background-color: #f7f7f7 !important;
+    border: 1px solid #d9d9d9;
+    font-size: 14px;
+    left: 18px !important;
+    width: 90% !important;
+    overflow: hidden;
+    top:40px !important;
+    position:absolute;
+
+    img {
+      width: 25px;
+      height: 25px;
+      line-height: 24px;
+      border-radius: 3px;
+      margin: 3px 5px 0;
+      overflow: hidden;
+      float: left;
+    }
+
+    a {
+      padding: 0 !important;
+      background-color: #f7f7f7;
+      position: relative;
+      z-index: 100;
+      &:hover {
+        background-color: #bfbfbf;
+      }
+
+      .newCo {
+        padding: 0 0 0 25px;
+        background-color: #ccc;
+        color: #f7f7f7;
+      }
+    }
+
+    &::before {
+      display: block;
+      width: 100%;
+      padding: 0 0 0 35px;
+      line-height: 35px;
+      content: '已出现公司直接选中，没有则选择创建';
+      color: #a0a0a0;
+      background-color: #f7f7f7;
+    }
+    .ac-menu {
+      background-color: #f7f7f7;
+      border: none 0;
+      box-shadow: none;
+
+      li {
+        border: none 0;
+        &:hover {
+          background-color: #bfbfbf;
+          color: #fff;
+        }
+        &:active {
+          background-color: #bfbfbf;
+          color: #fff;
+        }
+
+        .coList {
+          margin: 0 0 0 25px;
+          border-top: 1px solid #dedede;
+        }
+
+      }
+
+    }
+  }
     .title{
          background-color:rgb(247, 247, 247);
          height:40px;
          line-height: 50px;
          color:#686868;
          margin:0;
-         padding:0 20px;
+         padding:0 10px;
          border:none;
+		 font-size:16px;
     }
-    .radio {
-        label {
-            text-align: left;
-            input {
-                width:auto;
-            }
-        }
-        .active {
-            color:#008df2;
-        }
 
-    }
     .welcome-form {
+		.focus-area {
+			height:35px;
+			.label-control{
+				.tip{
+					margin-left:0;
+				}
+			}
+		}
         .basic-info {
+			font-size:14px;
             &:first-of-type {
                 border-top:none;
-                padding:0 20px;
+                padding:0 10px;
             }
         }
     }
@@ -36,17 +105,140 @@
         border-collapse: collapse;
 
     }
+    .s-block{
+        height:auto;
+        overflow:hidden;
+        padding:5px 0;
+        .form-group{
+            float:left;
+            clear:both;
+            display:block;
+            margin-bottom:10px;
+            &:last-of-type{
+                 margin-bottom:0;
+            }
+        }
+
+    }
+    .border-none{
+        border-top:0;
+        border-right:0;
+        border-bottom:0;
+        border-left:0;
+    }
     .form-group {
+        clear:both;
+		&.brief{
+			height:80px;
+			textarea{
+				height:40px;
+			}
+		}
+        &.m-options {
+			padding-bottom:0px;
+            .s-list{
+                clear:both;
+                display:block;
+                list-style-type:none;
+                padding:5px 0;
+                .s-i{
+                    clear:both;
+                    .i-header{
+                        margin:5px 0;
+                        .radio {
+							margin-left:5px;
+                            label {
+                                text-align: right;
+                                input {
+                                    width:auto;
+									height:auto;
+                                }
+                            }
+                            .active {
+                                color:#008df2;
+                            }
+
+                        }
+                    }
+                    .i-body{
+					padding-bottom:10px;
+                        .content-list{
+                            list-style-type:none;
+                            clear:both;
+                            li{
+                                margin-top:5px;
+                                position:relative;
+                                .title,
+                                .main{
+                                    display:block;
+                                }
+                                .title{
+                                    height:30px;
+                                    width:70px;
+                                    padding:0;
+                                    line-height:30px;
+                                    background-color:transparent;
+                                    vertical-align:top;
+									font-size:14px;
+									margin-left:5px;
+                                }
+                                .main{
+                                    margin-left:5px;
+                                    li{
+                                        display:inline-block;
+                                    }
+                                    select{
+                                        width:150px;
+                                        height:30px;
+                                        outline:none;
+                                        border:1px solid #e4e4e4;
+                                        background-color:#fff;
+										&.w70{
+											width:70px;
+										}
+                                    }
+                                    input[type=text],
+                                    textarea {
+                                        border:1px solid #e4e4e4;
+                                        width:200px;
+                                        height:30px;
+                                        text-indent:10px;
+                                        border-radius:2px;
+                                    }
+                                    textarea{
+                                       height:80px;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
         .label-control{
+			margin-right:0px;
             .box-content {
-                width:100px;
-                text-align: right;
-                padding-right:10px;
+                text-align:left;
                 display:inline-block;
             }
         }
+        .col-max{
+            clear:both;
+            display:block;
+			margin-left:5px;
+        }
         &.upload-pictures {
             border-bottom: none;
+			.intro-pic-list{
+				margin-bottom:15px;
+			}
+			.col-max {
+				width:90%;
+				p{
+					color:#999;
+				}
+			}
         }
         .btn-auth {
             border:none;
@@ -74,10 +266,13 @@
     .form-group.invest-money{
         padding-bottom:0;
         .label-control{
+			.box-content{
+				padding-right:0;
+			}
             .tip {
-                    margin-left: 20px;
                     font-size: 13px;
                     color: #B6B6B6;
+					margin-left:-15px;
             }
         }
         .form-group-box {
@@ -85,7 +280,7 @@
             .item {
                 padding:8px 0;
                 border-bottom:1px solid #ddd;
-                margin-left:56px;
+                margin-left:5px;
                 &:last-of-type {
                     border-bottom:none;
                 }

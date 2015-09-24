@@ -24,6 +24,11 @@
 .create_company {
   background-color: #fff;
 
+  select{
+    border: none 0;
+    height: 30px;
+  }
+
 
   .jisuTip{
     padding: 10px 15px;
@@ -130,6 +135,7 @@
     border-bottom: 1px solid @border-gray;
     background-color: @bg_gray;
     font-size: 14px;
+	margin-bottom:0;
     b {
       color: @color_blue;
       float: right;
@@ -137,7 +143,7 @@
   }
 
   .list {
-    padding: 0 0 0 15px;
+    padding: 0 0 0 10px;
 
     table {
       table-layout: fixed;
@@ -146,17 +152,22 @@
       td {
         font-size: 14px;
         border-bottom: 1px solid @border-gray;
-        padding: 15px;
+        padding: 15px 15px 15px 0;
         line-height: 1.5;
         width: 100%;
+        display: block;
         &:first-child {
-          width: 72px;
-          text-align: right;
-          padding: 15px 0;
+          //width: 72px;
+          //text-align: right;
+          padding-bottom: 0;
           white-space: nowrap;
+          border: none 0;
           span {
             display: inline-block;
           }
+        }
+        &:last-child{
+          padding: 10px 0 10px 10px;
         }
       }
 
@@ -169,7 +180,7 @@
         background-color: @transparent;
         color:#333;
       }
-      
+
       input {
         width: 90%;
         border: 0 none;
@@ -180,6 +191,8 @@
 
       select {
         width: 80px;
+		background-color:#fff;
+		border:1px solid #eee;
       }
       .intro textarea{
         font-size: 12px;
@@ -253,9 +266,10 @@
       }
 
       .card {
+		  border-bottom:0 solid transparent;
         p {
           max-width: 100%;
-          margin: 0 0 10px 0;
+          margin: 0 10px 10px 0;
         }
         .pic {
           display: block;
@@ -282,16 +296,16 @@
       }
       .pro_status{
         select{
-          width: 120px;
+          width: 140px;
         }
       }
       .time {
         color: #888;
         select {
-          width: 60px;
+          width: 100px;
         }
         select{
-          font-size: 12px;
+          font-size: 14px;
         }
       }
       .job {
@@ -304,7 +318,7 @@
           padding-right: 0;
         }
         select{
-          width: 120px;
+          width: 150px;
         }
       }
 
@@ -314,6 +328,7 @@
   .submit {
     padding: 1px;
     background-color: #f6f6f6;
+	border-top:1px solid #ddd;
     button {
       display: block;
       margin: 10px auto;

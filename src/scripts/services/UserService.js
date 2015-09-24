@@ -444,6 +444,43 @@ angular.module('defaultApp.service').service('UserService', [
                 callback && callback(err);
             });
         };
+        //获取用户的在职公司工作经历
+        service.getCurrentWorkCompanys = function(uid,callback,error){
+            $http.get('/api/user/'+uid+'/cur_work?type=com').success(function(data){
+                callback && callback(data);
+            }).catch(function(err){
+                error && error(err);
+            });
+        };
+        //获取用户的在职机构工作经历
+        service.getCurrentWorkOrganizations = function(uid,callback,error){
+            $http.get('/api/user/'+uid+'/cur_work?type=org').success(function(data){
+                callback && callback(data);
+            }).catch(function(err){
+                error && error(err);
+            });
+        };
+
+        //新增用户任职经历
+        service.addWorkExperience = function(data,callback,error){
+            $http.post('/api/user/'+data.uid+'/work',data).success(function(response){
+                callback && callback(response);
+            }).catch(function(err){
+                error && error(err);
+            });
+        };
+
+        //更新用户任职经历
+        service.updateWorkExperience = function(data,callback,error){
+            $http.put('/api/user/'+data.uid+'/work/'+data.id,data).success(function(response){
+                callback && callback(response);
+            }).catch(function(err){
+                error && error(err);
+            });
+        }
+
+
+
 
         return service;
     }

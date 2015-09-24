@@ -151,7 +151,8 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             var q = term.toLowerCase().trim();
 
             SuggestService.query({
-                wd: q
+                wd: q,
+                sub: 'company'
             }, function (data) {
                 var exist = data.data.filter(function (item) {
                     return item.name.toLowerCase() == q.toLowerCase();
@@ -176,14 +177,14 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         // add new company
         $scope.formData.operationStatus = 'OPEN';
-        
+
         $scope.addCompany = function (name) {
             $scope.opNext = 0;
             $scope.formData.name = name;
             $scope.formData.website = '';
             $scope.formData.brief = '';
             $scope.formData.logo = '';
-            
+
             $scope.formData.bizCardLink = '';
             $scope.formData.cid = null;
             $scope.temp_logo = '';
@@ -433,6 +434,8 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 //});
                 angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoEmpty", false);
                 return;
+            }else{
+                angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoEmpty", true);
             }
 
 
@@ -616,12 +619,16 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             }
         }
 
-    }]).service('SuggestService', [
+    }]);
+
+
+
+/*service('SuggestService', [
     '$http',
     'BasicService',
     function ($http, BasicService) {
         var service = BasicService("/api/suggest/company", {})
 
         return service;
-    }])
+    }])*/
 
