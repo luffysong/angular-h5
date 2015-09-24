@@ -41,12 +41,16 @@
             <div class="stage stage-two">
                 <div class="stage-item">阶段二<span class="status" ng-class="{'not': item.trade_c_f_balance.payment.status == 1, 'has': item.trade_c_f_balance.payment.status == 3}">{{ item.trade_c_f_balance.payment.status | dict_trade_status }}</span></div>
                 <div class="stage-item">
-                    <div class="item-left">支付保证金</div>
+                    <div class="item-left">支付剩余款</div>
                     <div class="item-right">￥{{ item.trade_c_f_balance.balance }}万</div>
                 </div>
                 <div class="stage-item" ng-if="item.trade_c_f_balance.payment.status == 3">
                     <div class="item-left">付款时间</div>
                     <div class="item-right">{{ item.trade_c_f_balance.payment.notify_time }}</div>
+                </div>
+                <div class="stage-item" ng-if="item.trade_c_f_balance.payment.status == 1">
+                    <div class="item-left">剩余付款时间</div>
+                    <div class="item-right"><span countdown date='{{ item.trade_c_f_balance.payment.end_time }}'></span></div>
                 </div>
                 <a class="btn btn-default stage-btn" ng-if="item.trade_c_f_balance.payment.status == 1 && item.trade_c_f_balance.payment.platform_type != 1">付款</a>
                 <a class="btn btn-default stage-btn" ng-if="item.trade_c_f_balance.payment.status == 1 && item.trade_c_f_balance.payment.platform_type == 1" href="{{rongHost}}/#/zhongchou/pay?tid={{item.trade_c_f_balance.trade_id}}">查看汇款信息</a>
