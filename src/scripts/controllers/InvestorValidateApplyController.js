@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateApplyController',
 
-    function(OrganizationService,CompanyService,$state,$scope,SuggestService,$q, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService,monthOptions,yearOptions) {
+    function(OrganizationService,CompanyService,$state,$scope,SuggestService,$q, SearchService,DictionaryService,ErrorService,DefaultService,$upload,checkForm,$timeout,UserService,$location,InvestorauditService,monthOptions,yearOptions,AndroidUploadService) {
         $scope.investorValidateApply = {
             status:''
         }
