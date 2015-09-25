@@ -11,7 +11,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
             balance:"支付剩余款"
         };
         $scope.orderType = $stateParams.type;
-        $scope.typeText = text[$scope.type];
+        $scope.typeText = text[$stateParams.type];
         $scope.uid = UserService.getUID();
         $scope.tid = $stateParams.tid;
         $scope.amount = $stateParams.amount;
