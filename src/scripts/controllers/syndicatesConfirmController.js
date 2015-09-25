@@ -16,7 +16,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         $scope.uid = UserService.getUID();
         $scope.formData = {};
         $scope.isRead = false;
-        $scope.isPreHeat = true;
+        $scope.isPreHeat = false;
         $scope.validateSuc = false;
         $scope.activeBtn = "";
         $scope.krCode = {
