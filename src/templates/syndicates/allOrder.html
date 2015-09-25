@@ -36,7 +36,7 @@
                 </div>
                 <a class="btn btn-default stage-btn" ng-if="item.status != 14 && item.trade_c_f_deposit.payment.status == 1 && item.trade_c_f_deposit.payment.platform_type != 1" ui-sref="syndicatesPayWay({tid:item.trade_id,amount:item.trade_c_f_deposit.deposit,type:'deposit'})">付款</a>
                 <a class="btn btn-default stage-btn" ng-if="item.status != 14 && item.trade_c_f_deposit.payment.status == 1 && item.trade_c_f_deposit.payment.platform_type == 1" href="{{rongHost}}/#/zhongchou/pay?tid={{item.trade_c_f_deposit.trade_id}}&type=deposit">查看汇款信息</a>
-                <a class="btn btn-default stage-btn" ng-if="item.status != 14 && (item.trade_c_f_deposit.payment.status == 3) && (item.trade_c_f_balance.payment.status != 1) && !item.trade_c_f_deposit.refund_timeout" ng-click="askForRefund(item.trade_c_f_deposit.trade_id);">申请退款</a>
+                <a class="btn btn-default stage-btn" ng-if="item.status != 14 && (item.trade_c_f_deposit.payment.status == 3) && (item.trade_c_f_balance.payment.status == 0) && !item.trade_c_f_deposit.refund_timeout" ng-click="askForRefund(item.trade_c_f_deposit.trade_id);">申请退款</a>
             </div>
             <div class="stage stage-two" ng-if="item.trade_c_f_balance">
                 <div class="stage-item">阶段二<span class="status" ng-class="{'not': item.trade_c_f_balance.payment.status == 1, 'has': item.trade_c_f_balance.payment.status == 3}">{{ item.trade_c_f_balance.payment.status | dict_trade_status }}</span></div>
