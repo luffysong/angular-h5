@@ -58,13 +58,12 @@
             </div>
         </div>
     </div>
-
-    <div class="syndicates-index loadMore" ng-click="loadMore()" ng-if="!noMore && orderData.length">
+    <div class="syndicates-index loadMore" ng-click="loadMore()" ng-if="!noData && !noMore && orderData.length">
         查看更多
     </div>
 
     <div class="no-order-data" ng-if="noData">
-        <div class="icon-file-text text-center"></div>
+        <div class="icon-h5-search text-center"></div>
         <p class="remind-info text-center">还没有投资过任何项目，看看有喜欢的么？</p>
         <a class="invest-btn btn btn-default" ui-sref="syndicates()">查看全部项目</a>
 
