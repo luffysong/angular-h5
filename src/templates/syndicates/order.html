@@ -6,10 +6,10 @@
         <div class="order-detail" ng-repeat="item in tempData">
             <div class="order-info">
                 <div class="company-name">{{item.company.name}}</div>
-                <div class="pay-tip">总支付金额: <span class="error">￥{{item.payment.amount}}</span></div>
+                <div class="pay-tip">待付保证金: <span class="error">￥{{item.trade_c_f_deposit.deposit}}</span></div>
             </div>
             <div class="order-handle">
-                <a class="go-pay-btn" href="" ng-click="goPay(item.trade_id,item.payment.amount)" baidu-btn="待付款订单页-去付款按钮点击">去付款></a>
+                <a class="go-pay-btn" href="" ng-click="goPay(item.trade_id,item.trade_c_f_deposit.deposit)" baidu-btn="待付款订单页-去付款按钮点击">去付款></a>
             </div>
         </div>
     </div>

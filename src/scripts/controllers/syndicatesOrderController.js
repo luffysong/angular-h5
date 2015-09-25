@@ -21,7 +21,7 @@ angular.module('defaultApp.controller').controller('syndicatesOrderController',
             $scope.tempData = [];
             /*过滤数据，去除线下汇款订单*/
             angular.forEach($scope.listData,function(obj,index){
-                if(obj.payment.platform_type != 1 && obj.payment.status == 1){
+                if(obj.payment.platform_type != 1 && obj.payment.status == 1 && obj.trade_c_f_deposit && obj.trade_c_f_deposit.deposit){
                     $scope.tempData.push(obj);
                 }
             });
@@ -51,7 +51,8 @@ angular.module('defaultApp.controller').controller('syndicatesOrderController',
         $scope.goPay = function(tid,amount){
             $state.go("syndicatesPayWay",{
                 tid:tid,
-                amount:amount
+                amount:amount,
+                type:"deposit"
             });
             /*if(!$scope.hasRecord){
                 location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+tid,'url_order='+encodeURIComponent(location.href),'back_url='+encodeURIComponent(location.href)]).join('&');

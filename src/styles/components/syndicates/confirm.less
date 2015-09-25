@@ -249,20 +249,23 @@
         resize: none;
         padding-left: 15px;
     }
-    .pay-title {
+    .confirm-pay-title {
         height: 50px;
         line-height: 50px;
         background-color: #fff;
         text-align: center;
         color: #000;
         font-size: 16px;
-        border-bottom: 1px solid #DFDFDF;
+
     }
     .confirm-title {
         width: 100%;
-        padding: 5px 15px;
-        height: auto;
+        padding-left: 15px;
+        height: 40px;
+        line-height: 38px;
         background-color: @default-color;
+        border: 1px solid #DFDFDF;
+        color: #000;
         .validate-suc {
             font-size: 14px;
             color: #000;
@@ -281,14 +284,16 @@
         img {
             display: block;
             margin: 0 10px 0 15px;
+            border-radius: 50%;
+            border: 1px solid #e4e4e4;
         }
     }
     .confirm-content {
         width: 100%;
-        height: 150px;
+        height: auto;
+        padding-bottom: 20px;
         background-color: #fff;
         padding-left: 15px;
-        border: 1px solid #DFDFDF;
         .content-count {
             width: 100%;
             height: 50px;
@@ -296,8 +301,36 @@
             font-size: 14px;
             color: #333;
             border-bottom: 1px solid #DFDFDF;
+            .cal-btn {
+                display: block;
+                float: right;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                border: 1px solid #ccc;
+                color: #aaaaaa;
+                font-size: 15px;
+                background-color: #f7f7f7;
+                margin-top: 10px;
+                &.plus-btn {
+                    border-top-left-radius: 2px;
+                    border-bottom-left-radius: 2px;
+                }
+                &.minus-btn {
+                    border-left: 0;
+                    border-top-right-radius: 2px;
+                    border-bottom-right-radius: 2px;
+                    margin-right: 15px;
+                }
+                &.active {
+                    background-color: #008DF2;
+                    color: #fff;
+                }
+            }
+
             .invest-val {
-                width: 70%;
+                width: 50%;
                 height: 100%;
                 border: 0;
                 margin-left: 15px;
@@ -306,6 +339,9 @@
         .content-info {
             .mt-12 {
                 margin-top: 12px;
+            }
+            .mt-20 {
+                margin-top: 20px;
             }
             p {
                 margin: 0;
@@ -322,14 +358,6 @@
             }
         }
 
-    }
-    .content-bottom {
-        padding: 20px 0 0 15px;
-        background: #f7f7f7;
-        border-bottom: 1px solid #DFDFDF;
-        .select-way {
-            margin-top: 30px;
-        }
     }
     .pay-way {
         width: 100%;
