@@ -210,6 +210,10 @@
         text-align: left;
         &.apply-code {
             text-align: right;
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none !important;
+            }
             &:before {
                 content: "￥";
                 color: #888888;
