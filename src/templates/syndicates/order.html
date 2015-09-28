@@ -1,4 +1,4 @@
-<div class="syndicate-order">
+<div class="syndicate-order" ng-hide="loadingInst.syndicatesOrder">
     <div class="order-title">
         你有  <span class="error">{{tempList.length}}</span>个{{tempData.company.name}}待付款订单
     </div>
@@ -18,3 +18,4 @@
     </div>
     <a ui-sref="syndicatesConfirm({cid:companyId,fundingId:fundingId})" class="re-buy" baidu-btn="待付款订单页-重新购买按钮点击">重新购买</a>
 </div>
+<div loading="syndicatesOrder"></div>
