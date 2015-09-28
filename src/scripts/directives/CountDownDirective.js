@@ -29,7 +29,7 @@ angular.module('defaultApp.directive').directive('countdown', [
                     return result.join('');
                 }
 
-                var future = new Date(scope.date);
+                var future = new Date(scope.date.replace('-', '/'));
                 $interval(function () {
                     var diff = Math.floor((future.getTime() - new Date().getTime()) / 1000);
                     return element.text(toDhms(diff));
