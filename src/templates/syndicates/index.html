@@ -43,9 +43,9 @@
                         </a>
                         <span class="text">领投</span>
                     </div>
-                    <div class="syndicates-status bg-{{item.color}}" ng-class="{'pd-19':item.color == '60'}">
+                    <div class="syndicates-status bg-{{item.timeout && item.fundingStatus != 'preheat'  ? 50 : item.color}}" ng-class="{'pd-19':item.color == '60'}">
                         <i class="icon-h5-time"></i>
-                        {{item.name}}
+                        {{item.timeout && item.name != '融资成功' && item.fundingStatus != 'preheat' ? "募资完成" : item.name}}
                     </div>
                 </div>
                 <span class="hot-icon" ng-if="item.hot == 1"></span>
