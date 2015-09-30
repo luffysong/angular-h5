@@ -233,13 +233,10 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 if(new Date($scope.syndicatesInfo.base.end_time) < new Date()){
                     $scope.timeout = true;
                 }
-                if($scope.syndicatesInfo.base.min_investment && $scope.syndicatesInfo.base.min_investment > $scope.syndicatesInfo.base.cf_max_raising - $scope.syndicatesInfo.base.cf_success_raising){
-                    $scope.timeout = true;
-                }
             }
-            if($scope.syndicatesInfo.co_investors && $scope.syndicatesInfo.base.max_coinvestor_number <= $scope.syndicatesInfo.co_investors.length){
+            /*if($scope.syndicatesInfo.co_investors && $scope.syndicatesInfo.base.max_coinvestor_number <= $scope.syndicatesInfo.co_investors.length){
                 $scope.timeout = true;
-            }
+            }*/
             if(!$scope.syndicatesInfo.detail)return;
             /*视频链接处理*/
             if($scope.syndicatesInfo.detail.com_video_link){

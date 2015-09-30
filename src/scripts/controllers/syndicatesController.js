@@ -23,7 +23,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                  2.剩余投资金额不足
                  3.跟投人达到最多跟投人数
                  * */
-                if(key.status != 25 && (key.status == 50 || new Date(key.end_time) < new Date() || (key.min_investment && key.min_investment > key.cf_max_raising - key.cf_success_raising) || key.investor_count >= key.max_coinvestor_number)){
+                if(key.status != 25 && (key.status == 50 || new Date(key.end_time) < new Date())){
                     key.timeout = true;
                 }
                 if(parseInt(key.cf_success_raising_offer) === 0 || !key.cf_success_raising_offer){
