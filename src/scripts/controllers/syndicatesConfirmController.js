@@ -262,13 +262,50 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 });
                 return;
             }else if($scope.formData.investVal > $scope.baseData.base.cf_max_raising - $scope.baseData.funding.lead_investment){
-                ErrorService.alert({
-                    msg:"投资金额不能大于剩余可投金额"
-                });
+                 $modal.open({
+                     templateUrl: 'templates/company/pop-amount-notEnough.html',
+                     controller: [
+                     '$scope', '$modalInstance','scope',
+                     function ($scope, $modalInstance, scope) {
+                         $scope.account = $scope.remainAmount =  scope.baseData.base.cf_max_raising - scope.baseData.funding.lead_investment;
+                         $scope.remainAmount = $scope.remainAmount >= 10000 ? $scope.remainAmount / 10000 + "万" : $scope.remainAmount;
+                         $scope.ok = function(){
+                             CrowdFundingService['cf-trade'].save({},{
+                                 user_id: scope.uid,
+                                 goods_id: scope.fundingId,
+                                 goods_name: '众筹跟投', //TODO:这两个字段得产品确认一下写啥
+                                 goods_desc: '众筹跟投',
+                                 investment: $scope.account,
+                                 invite_code:scope.krCode.numer
+                             }, function(data){
+                                 $state.go('syndicatesPay', {
+                                     tid: data.trade_deposit_id,
+                                     type:"deposit"
+                                 });
+                             },function(err){
+                                 console.log(err);
+                                 /*同一个项目未支付订单超过10个*/
+                                 if(err.code == 2101){
+                                     $modal.open({
+                                         templateUrl: 'templates/syndicates/pop-order-full.html'
+                                     });
+                                 }else {
+                                     ErrorService.alert(err);
+                                 }
+                             });
+                         }
+                         $scope.cancel = function () {
+                            $modalInstance.dismiss();
+                         }
+                     }],
+                     resolve: {
+                         scope: function(){
+                         return $scope;
+                         }
+                     }
+                 });
                 return;
             }
-            /*$scope.remainAmount = $scope.baseData.base.cf_max_raising - $scope.baseData.base.cf_success_raising;
-            $scope.remainAmount = Math.max($scope.remainAmount,0);*/
             /*支付宝*/
             if($scope.payType == 'alipay') {
                 CrowdFundingService['cf-trade'].save({}, {
