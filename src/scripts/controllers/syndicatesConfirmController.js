@@ -261,6 +261,11 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                     msg:"投资金额不能小于最低跟投金额"
                 });
                 return;
+            }else if($scope.formData.investVal > $scope.baseData.base.cf_max_raising - $scope.baseData.funding.lead_investment){
+                ErrorService.alert({
+                    msg:"投资金额不能大于剩余可投金额"
+                });
+                return;
             }
             /*$scope.remainAmount = $scope.baseData.base.cf_max_raising - $scope.baseData.base.cf_success_raising;
             $scope.remainAmount = Math.max($scope.remainAmount,0);*/
@@ -301,36 +306,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                     ErrorService.alert(err);
                 });
             }
-
-                /*/!*剩余金额不足，小于用户投资金额*!/
-                if($scope.formData.investVal > $scope.remainAmount){
-                    $modal.open({
-                        templateUrl: 'templates/company/pop-amount-notEnough.html',
-                        controller: [
-                            '$scope', '$modalInstance','scope',
-                            function ($scope, $modalInstance, scope) {
-                                $scope.remainAmount =  scope.remainAmount;
-                                $scope.notEnougn = $scope.remainAmount < scope.baseData.base.min_investment ? true : false;
-                                $scope.remainAmount = $scope.remainAmount >= 10000 ? $scope.remainAmount / 10000 + "万" : $scope.remainAmount;
-                                $scope.ok = function(){
-                                    goToPay();
-                                }
-                                /!*$scope为弹出层中scope*!/
-                                $scope.cancel = function () {
-                                    $modalInstance.dismiss();
-                                }
-                            }
-                        ],
-                        resolve: {
-                            scope: function(){
-                                return $scope;
-                            }
-                        }
-                    });
-                }else{
-                    goToPay();
-                }*/
-            }
+        }
             /*加减按钮*/
             $scope.countVal = function(type){
                 $scope.activeBtn = type;
