@@ -142,6 +142,11 @@ window.DICTIONARY_DATA =  {
             "desc": "完成融资",
             "id": 5,
             "value": "FUND_COMPLETE"
+        },
+        {
+            "desc": "投资人认证",
+            "id": 6,
+            "value": "INVESTOR_AUDIT"
         }
     ],
     "OrgType": [
@@ -598,6 +603,38 @@ window.DICTIONARY_DATA =  {
             "value": "PASSPORT"
         }
     ],
+    "FaBindingStatus": [
+        {
+            "desc": "初步绑定",
+            "id": 10,
+            "value": "INIT"
+        },
+        {
+            "desc": "开启融资",
+            "id": 20,
+            "value": "FUNDING"
+        },
+        {
+            "desc": "交割中",
+            "id": 30,
+            "value": "NEGOTIATING"
+        },
+        {
+            "desc": "暂停中",
+            "id": 40,
+            "value": "PAUSED"
+        },
+        {
+            "desc": "已成功",
+            "id": 50,
+            "value": "SUCCESS"
+        },
+        {
+            "desc": "已撤销",
+            "id": 60,
+            "value": "CANCELED"
+        }
+    ],
     "InvestorFollowedIndustry": [
         {
             "desc": "电子商务",
@@ -1042,6 +1079,16 @@ window.DICTIONARY_DATA =  {
             "desc": "h5创建",
             "id": 13,
             "value": "H5_CREATION"
+        },
+        {
+            "desc": "FA创建",
+            "id": 14,
+            "value": "FA_CREATION"
+        },
+        {
+            "desc": "投资人认证",
+            "id": 15,
+            "value": "INVESTOR_AUDIT"
         }
     ],
     "CurrencyUnit": [

@@ -396,10 +396,12 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 });
             }
         }
+        /*status为1时，为待付保证金订单*/
         CoInvestorService['my-financing'].query({
             company_id:$scope.companyId,
-            status:  0,
             per_page:100,
+            status:1,
+            payment_status:1,
             page: 1
         },function(data){
             /*过滤数据，去除线下汇款订单*/
