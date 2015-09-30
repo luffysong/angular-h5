@@ -406,7 +406,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         },function(data){
             /*过滤数据，去除线下汇款订单*/
             angular.forEach(data.data,function(obj,index){
-                if(obj.payment.platform_type != 1 && obj.payment.status == 1){
+                if(obj.payment.platform_type != 1 && obj.payment.status == 1 && obj.trade_c_f_deposit){
                     $scope.orderData.push(obj);
                 }
             });
