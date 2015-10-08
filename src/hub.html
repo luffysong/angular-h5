@@ -27,6 +27,7 @@
 //    var appstore='http://app.36kr.com';//app下载地址
     var intent = "kr36://open";
     var userSystem=navigator.userAgent; //userAgent
+    document.write(userSystem)
     function preventPopup() { //定义preventPopup函数
         clearTimeout(timeout);
         window.removeEventListener('pagehide', preventPopup);
@@ -55,7 +56,7 @@
             $('.mask-apple').show();  //ios用safari打开
         }
     }else{
-        startApp();
+//        startApp();
     }
 
 </script>
