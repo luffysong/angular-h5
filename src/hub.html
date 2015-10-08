@@ -27,12 +27,13 @@
 //    var appstore='http://app.36kr.com';//app下载地址
     var intent = "kr36://open";
     var userSystem=navigator.userAgent; //userAgent
+//    document.write(userSystem)
     function preventPopup() { //定义preventPopup函数
         clearTimeout(timeout);
         window.removeEventListener('pagehide', preventPopup);
     }
     function startApp(){ //定义startApp函数
-        if(navigator.userAgent.match(/Chrome/)&&navigator.userAgent.match(/Android/)){ //chrome浏览器
+        if(navigator.userAgent.match(/Android/)){ //chrome浏览器
             document.location = 'http://fir.im/45sa';
         }else{
             var ifr = document.createElement('iframe');
