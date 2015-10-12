@@ -8,7 +8,7 @@
         </div>
         <div class="company-info">
             <a class="company-logo" ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.cf_id })">
-                <img src="{{ item.company.logo }}" alt="{{ item.company.name }}">
+                <img src="{{ item.company.logo | image }}" alt="{{ item.company.name }}">
             </a>
             <a class="company-name" ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.cf_id })">{{item.company.name}}</a>
             <div class="banner" ng-if="!!item.invite_code">Kr码认购</div>
