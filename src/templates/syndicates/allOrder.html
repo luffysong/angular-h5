@@ -28,7 +28,7 @@
                 <div class="stage-item">阶段一<span class="status" ng-class="{'not': item.trade_c_f_deposit.payment.status == 1, 'has': item.trade_c_f_deposit.payment.status == 3}">{{ item.trade_c_f_deposit.payment.status | dict_trade_status }}</span></div>
                 <div class="stage-item">
                     <div class="item-left">支付保证金</div>
-                    <div class="item-right">￥{{ item.trade_c_f_deposit.deposit }}万</div>
+                    <div class="item-right">￥{{ item.trade_c_f_deposit.deposit }}元</div>
                 </div>
                 <div class="stage-item" ng-if="item.trade_c_f_deposit.payment.status == 3">
                     <div class="item-left">付款时间</div>
@@ -42,7 +42,7 @@
                 <div class="stage-item">阶段二<span class="status" ng-class="{'not': item.trade_c_f_balance.payment.status == 1, 'has': item.trade_c_f_balance.payment.status == 3}">{{ item.trade_c_f_balance.payment.status | dict_trade_status }}</span></div>
                 <div class="stage-item">
                     <div class="item-left">支付剩余款</div>
-                    <div class="item-right">￥{{ item.trade_c_f_balance.balance }}万</div>
+                    <div class="item-right">￥{{ item.trade_c_f_balance.balance }}元</div>
                 </div>
                 <div class="stage-item" ng-if="item.trade_c_f_balance.payment.status == 3">
                     <div class="item-left">付款时间</div>
