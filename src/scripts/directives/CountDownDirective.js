@@ -8,31 +8,37 @@ angular.module('defaultApp.directive').directive('countdown', [
     function ($interval) {
         return {
             restrict: 'A',
-            scope: { date: '@' },
+            scope: {
+                date: '@',
+                'openDate': '@'
+            },
             link: function (scope, element) {
                 function toDhms(t) {
-                    var days, hours, minutes, seconds, result = [];
-                    days = Math.floor(t / 86400);
-                    t -= days * 86400;
-                    hours = Math.floor(t / 3600) % 24;
+                    var hours, minutes, seconds, result = [];
+                    hours = Math.floor(t / 3600);
                     t -= hours * 3600;
                     minutes = Math.floor(t / 60) % 60;
                     t -= minutes * 60;
                     seconds = t % 60;
 
-                    hours += days * 24;
-
-                    result.push((Math.abs(hours ) < 10 ? ('0' + hours) : hours) + ' 小时 ');
+                    result.push((Math.abs(hours) < 10 ? ('0' + hours) : hours) + ' 小时 ');
                     result.push((Math.abs(minutes) < 10 ? ('0' + minutes) : minutes) + ' 分 ');
                     result.push((Math.abs(seconds) < 10 ? ('0' + seconds) : seconds) + ' 秒 ');
 
                     return result.join('');
                 }
 
+                var before = new Date(scope.openDate.replace('-', '/'));
                 var future = new Date(scope.date.replace('-', '/'));
                 $interval(function () {
                     var diff = Math.floor((future.getTime() - new Date().getTime()) / 1000);
-                    return element.text(toDhms(diff));
+
+                    if(diff <= 0) {
+                        var days = Math.floor((future.getTime() - before.getTime()) / (1000 * 60 * 60 * 24));
+                        return element.text('未在' + days + '天内付款');
+                    } else {
+                        return element.text(toDhms(diff));
+                    }
                 }, 1000);
             }
         };
