@@ -338,21 +338,29 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 goToPay();
             }
         }
-            /*加减按钮*/
-            $scope.countVal = function(type){
-                $scope.activeBtn = type;
-                if(type == "plus"){
+        /*加减按钮*/
+        $scope.countVal = function(type){
+            $scope.activeBtn = type;
+            if(!/^[0-9]{0,}$/.test($scope.formData.investVal)){
+                $scope.formData.investVal = $scope.baseData.base.min_investment;
+                return;
+            }
+            if(type == "plus"){
+                if($scope.formData.investVal < $scope.baseData.base.min_investment){
+                    $scope.formData.investVal = $scope.baseData.base.min_investment;
+                }else{
                     $scope.formData.investVal = parseInt($scope.formData.investVal)+10000;
-                }else {
-                    if($scope.formData.investVal >= ($scope.baseData.base.min_investment+10000)){
-                        $scope.formData.investVal -= 10000;
-                    }else{
-                        ErrorService.alert({
-                            msg:"不能低于起投金额"
-                        });
-                        $scope.formData.investVal = $scope.baseData.base.min_investment;
-                    }
+                }
+            }else {
+                if($scope.formData.investVal >= ($scope.baseData.base.min_investment+10000)){
+                    $scope.formData.investVal -= 10000;
+                }else{
+                    ErrorService.alert({
+                        msg:"不能低于起投金额"
+                    });
+                    $scope.formData.investVal = $scope.baseData.base.min_investment;
                 }
             }
+        }
     });
 
