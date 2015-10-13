@@ -35,8 +35,12 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                         obj.trade_c_f_deposit.refund_timeout = !(moment(obj.trade_c_f_deposit.payment.notify_time).add(3, 'days') - moment());
                     }
 
-                    if (obj.trade_c_f_balance && obj.trade_c_f_balance.payment && obj.trade_c_f_balance.payment.status == 3) {
-                        obj.trade_c_f_balance.refund_timeout = !(moment(obj.trade_c_f_balance.payment.close_time) - moment());
+                    if (obj.trade_c_f_balance && obj.trade_c_f_balance.payment && obj.trade_c_f_balance.payment.status == 1) {
+                        if(!!(moment() - moment(obj.trade_c_f_balance.payment.close_time))) {
+                            obj.trade_c_f_balance.refund_timeout = true;
+                        } else {
+                            obj.trade_c_f_balance.refund_timeout = false;
+                        }
                     }
                 });
 
