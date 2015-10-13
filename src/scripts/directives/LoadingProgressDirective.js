@@ -48,7 +48,7 @@ angular.module('defaultApp.directive').directive('loadingProgress', [
                     }
                 }
                 /*生成随机id*/
-                var randomId = parseInt(Math.random()*100);
+                var randomId = parseInt(Math.random()*10000);
                 /*已筹集*/
                 var canvas_has = $("<canvas width='15' height='15' id='canvas_has"+ randomId +"' class='myCanvas'>");
                 /*众筹目标*/

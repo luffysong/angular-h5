@@ -2,8 +2,8 @@
     <div class="container">
         <div class="investor-validate syndicate-detail">
             <div class="syndicatesInfo-banner text-center c-white">
-                <span class="syndicatesInfo-status bg-{{timeout && fundingStatus != 'preheat'  ? 50 : color}}">
-                    {{timeout && status != '融资成功' && fundingStatus != 'preheat' ? "募资完成" : status}}
+                <span class="syndicatesInfo-status bg-{{timeout && fundingStatus != 'preheat' && !secret  ? 50 : color}}">
+                    {{timeout && status != '融资成功' && fundingStatus != 'preheat' && !secret ? "募资完成" : status}}
                 </span>
                 <a ui-sref="company_detail({id:companyData.company.id})">
                     <div class="company-logo" style="background-image: url({{companyData.basic.logo}})"></div>
@@ -32,16 +32,6 @@
                     <div class="account">
                         <loading-progress percent="syndicatesInfo.base.percent" loading-tip="true" suc-raise="syndicatesInfo.base.cf_success_raising_offer" raise-goal="syndicatesInfo.base.cf_raising">
                         </loading-progress>
-                        <!--<loading-bar percent="syndicatesInfo.base.percent" loading-tip="syndicatesInfo.base.cf_success_raising">
-                        </loading-bar>
-                        <p class="clearfix mt-15 has-syndicate">
-                            <span ng-hide="secret && !syndicatesInfo.base.cf_success_raising">
-                                已筹集<span class="ml-10">{{syndicatesInfo.base.cf_success_raising | unitConversion}}</span>
-                            </span>
-                            <span class="fl-right">
-                                目标金额<span class="c-orange ml-10">{{syndicatesInfo.base.cf_raising | unitConversion}}</span>
-                            </span>
-                        </p>-->
                     </div>
                     <div class="syndicate-detail-num line clearfix text-center" ng-hide="!syndicatesInfo.base.min_investment && !syndicatesInfo.base.max_coinvestor_number && !syndicatesInfo.base.time_left && secret && !syndicatesInfo.funding.sell_shares">
                         <div class="detail" ng-hide="secret && !syndicatesInfo.base.min_investment">
