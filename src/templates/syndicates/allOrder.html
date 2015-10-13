@@ -67,12 +67,12 @@
         <a class="invest-btn btn btn-default" ui-sref="syndicates()">查看全部项目</a>
 
         <div class="recommend-item" ng-repeat="item in recommendList | limitTo: 3">
-            <div class="item-top">
-                <div class="company-logo" ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.cf_id })">
+            <div class="item-top" ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.id })">
+                <div class="company-logo" ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.id })">
                     <img src="{{ item.company.logo | image }}" alt="{{ item.company.name }}" />
                 </div>
                 <div class="company-name">
-                    <a ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.cf_id })">{{ item.company.name }}</a>
+                    <a ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.id })">{{ item.company.name }}</a>
 
                     <span class="status bg-{{item.timeout && item.fundingStatus != 'preheat'  ? 50 : item.color}}">
                         {{ item.timeout && item.name != '融资成功' && item.fundingStatus != 'preheat' ? "筹集成功" : item.name }}
@@ -80,7 +80,7 @@
                 </div>
                 <div class="company-brief">{{ item.company.brief }}</div>
             </div>
-            <div class="item-bottom">
+            <div class="item-bottom" ui-sref="syndicatesDetail({ companyId:item.company.id, fundingId:item.id })">
                 <div ng-repeat="key in item.desc.cf_advantage | limitTo : 3">
                     <div class="bottom-left">
                         <p>{{ key.label }}</p>
