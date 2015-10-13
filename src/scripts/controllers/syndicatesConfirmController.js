@@ -71,8 +71,10 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         };
         /*实时计算数据*/
         $scope.$watch("formData.investVal", function (from) {
-            if (!/^[0-9]{0,}$/.test(from)) {
-                return;
+            if(!/^[0-9]{0,}$/.test(from)){
+                $scope.formData.ensureVal = 0;
+            }else{
+                $scope.formData.ensureVal = from;
             }
             if(!$scope.baseData.funding || !$scope.baseData.funding.valuation)return;
             /*管理费*/
@@ -86,12 +88,20 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 var num = parseInt($scope.baseData.funding.fund_raising - $scope.baseData.funding.cf_raising);
                 /*融资类型，新股*/
                 if ($scope.baseData.base.financing_type == 1) {
-                    var min = $scope.handleData(from * 100 / (valuation + num + parseInt($scope.baseData.base.cf_min_raising)));
-                    var max = $scope.handleData(from * 100 / (valuation + num + parseInt($scope.baseData.base.cf_max_raising)));
+                    if(!/^[0-9]{0,}$/.test(from)){
+                        var max = "0%",min = "0%";
+                    }else{
+                        var min = $scope.handleData(from * 100 / (valuation + num + parseInt($scope.baseData.base.cf_min_raising)));
+                        var max = $scope.handleData(from * 100 / (valuation + num + parseInt($scope.baseData.base.cf_max_raising)));
+                    }
                     $scope.sharePercent = max + "~" + min;
                 } else {
                     /*旧股*/
-                    var per = from * 100 / valuation;
+                    if(!/^[0-9]{0,}$/.test(from)){
+                        var per = 0;
+                    }else{
+                        var per = from * 100 / valuation;
+                    }
                     $scope.sharePercent = $scope.handleData(per);
                 }
             }
