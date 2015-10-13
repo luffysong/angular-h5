@@ -93,8 +93,7 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
                             var startTime = new Date(key.start_time);
                             if(new Date() < startTime){
                                 key.fundingStatus = "preheat";
-                                var minute = startTime.getMinutes() > 9 ? startTime.getMinutes() : "0"+startTime.getMinutes();
-                                key.name = parseInt(startTime.getMonth())+1+"月"+startTime.getDate()+"日  " + "  开始融资";
+                                key.name = "锚定中";
                                 key.color = 60;
                             }
                         } else if(key.status == 25) {
