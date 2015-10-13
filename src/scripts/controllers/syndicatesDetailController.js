@@ -249,7 +249,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     obj.isHide = true;
                 });
             }
-            $scope.shareError = parseInt($scope.syndicatesInfo.detail.es_funding_team) + parseInt($scope.syndicatesInfo.detail.es_investor) + parseInt($scope.syndicatesInfo.detail.es_staff) == 100 ? false : true;
+            $scope.shareError = $scope.syndicatesInfo.detail.es_funding_team * 1 + $scope.syndicatesInfo.detail.es_investor * 1 + $scope.syndicatesInfo.detail.es_staff * 1 == 100 ? false : true;
             var chartData = [$scope.syndicatesInfo.detail.es_investor,$scope.syndicatesInfo.detail.es_funding_team,$scope.syndicatesInfo.detail.es_staff];
             angular.forEach($scope.chartConfig.series[0].data,function(obj,index){
                 if(chartData[index] == 0){
