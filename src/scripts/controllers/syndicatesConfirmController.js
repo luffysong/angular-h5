@@ -63,6 +63,10 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             if(!$scope.baseData.detail.agreements_img){
                 $scope.baseData.detail.agreements_img = [];
             }
+            if(!$scope.baseData.detail.agreements){
+                $scope.baseData.detail.agreements = [];
+            }
+            $scope.baseData.detail.agreements.push(obj);
             $scope.baseData.detail.agreements_img.push(obj);
         });
         /*金额四舍五入取小数点后四位*/
