@@ -31,12 +31,17 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
 
                 angular.forEach($scope.orderData, function(obj, index){
                     obj.created_at = moment(obj.created_at).format('YYYY-MM-DD');
+                    // TODO: 修正判断条件
                     if (obj.trade_c_f_deposit && obj.trade_c_f_deposit.payment && obj.trade_c_f_deposit.payment.status == 3) {
-                        obj.trade_c_f_deposit.refund_timeout = !(moment(obj.trade_c_f_deposit.payment.notify_time).add(3, 'days') - moment());
+                        if((moment() - moment(obj.trade_c_f_deposit.payment.notify_time).add(5, 'minutes')) > 0) {
+                            obj.trade_c_f_deposit.refund_timeout = true;
+                        } else {
+                            obj.trade_c_f_deposit.refund_timeout = false;
+                        }
                     }
 
                     if (obj.trade_c_f_balance && obj.trade_c_f_balance.payment && obj.trade_c_f_balance.payment.status == 1) {
-                        if(!!(moment() - moment(obj.trade_c_f_balance.payment.close_time))) {
+                        if((moment() - moment(obj.trade_c_f_balance.payment.close_time)) > 0) {
                             obj.trade_c_f_balance.refund_timeout = true;
                         } else {
                             obj.trade_c_f_balance.refund_timeout = false;
