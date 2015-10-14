@@ -48,7 +48,7 @@
                     <div class="item-left">付款时间</div>
                     <div class="item-right">{{ item.trade_c_f_balance.payment.notify_time }}</div>
                 </div>
-                <div class="stage-item" ng-if="item.trade_c_f_balance.payment.status == 1">
+                <div class="stage-item" ng-if="item.status != 14 && item.trade_c_f_balance.payment.status == 1">
                     <div class="item-left">剩余付款时间</div>
                     <div class="item-right"><span countdown date='{{ item.trade_c_f_balance.payment.close_time }}' open-date='{{ item.trade_c_f_balance.payment.open_time }}'></span></div>
                 </div>
