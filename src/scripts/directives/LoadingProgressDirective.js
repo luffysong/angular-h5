@@ -36,8 +36,8 @@ angular.module('defaultApp.directive').directive('loadingProgress', [
                     cxt.stroke();
                 }
                 function handleData(num){
-                    if(!num){
-                        return "￥"+ 0;
+                    if(!num || num == 0){
+                        return "即将开启";
                     }else{
                         if(parseInt(num) >= 10000){
                             i = parseInt(num) / 10000 + "万";
