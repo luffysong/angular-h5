@@ -13,6 +13,11 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             $scope.system = "android";
         }
         var statusList = DictionaryService.getDict("crowd_funding_status");
+        /*是否开始播放视频*/
+        $scope.startPlay = false;
+        $scope.startVideo = function(){
+            $scope.startPlay = true;
+        }
         /*股权结构是否出错*/
         $scope.shareError = false;
         /*众筹信息是否全部展开*/
