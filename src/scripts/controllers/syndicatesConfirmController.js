@@ -284,8 +284,14 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                         invite_code: $scope.krCode.number
                     }, function(data) {
                         location.href = '//'+location.host+'/p/payment/4/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_deposit_id,'url_order=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
-                    }, function(err) {
-                        ErrorService.alert(err);
+                    }, function(err) {                    /*同一个项目未支付订单超过10个*/
+                        if(err.code == 2101) {
+                            $modal.open({
+                                templateUrl: 'templates/syndicates/pop-order-full.html'
+                            });
+                        } else {
+                            ErrorService.alert(err);
+                        }
                     });
                 } else {
                     CrowdFundingService['cf-trade'].save({},{
@@ -307,7 +313,13 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                             });
                         }
                     },function(err){
-                        ErrorService.alert(err);
+                        if(err.code == 2101) {
+                            $modal.open({
+                                templateUrl: 'templates/syndicates/pop-order-full.html'
+                            });
+                        } else {
+                            ErrorService.alert(err);
+                        }
                     });
                 }
             }
