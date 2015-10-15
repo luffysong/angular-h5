@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="syndicates-pay-outline">
+        <h5><b>收款方信息</b></h5>
+        <table>
+            <tbody>
+                <tr>
+                    <td>应付总额</td>
+                    <td><span class="money">￥{{tradeData.payment.amount}}</span></td>
+                </tr>
+                <tr>
+                    <td>户名</td>
+                    <td>北京协力筑成金融信息服务有限公司</td>
+                </tr>
+                <tr>
+                    <td>账号</td>
+                    <td>110914749610102{{tradeData.payment.iban_suffix}}</td>
+                </tr>
+                <tr>
+                    <td>开户行</td>
+                    <td>招商银行北京建国门支行</td>
+                </tr>
+                <tr>
+                    <td>在备注里注明</td>
+                    <td>36氪-{{tradeData.company.name}}投资款</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="info-area text-center">
+            <h5><b>收款方信息已经发送到你的邮箱</b></h5>
+            <p>收款方信息已经发送到你的邮箱 {{myEmail}}</p>
+        </div>
+        <div class="notice">
+            <h5 class="text-center"><b>请阅读注意事项</b></h5>
+            <p>1.请选择最快到账的方式，通知付款后3天后未到款，会被系统取消交易；</p>
+            <p>2.请确保到款金额准确等于应付总额，多余或少于应付总额的情况都会导致无法完成交易；</p>
+            <p>3.汇款手续费请自行支付，应付总额不包括汇款手续费；</p>
+            <p>4.如果由于汇款信息输入错误导致无法完成情况，产生的费用由汇款方承担；</p>
+            <p>5.特殊汇款情况，请在汇款时备注里注明情况；</p>
+            <p>6.为防止汇款信息意外丢失，建议自行记录汇款信息一份，例如：拍照、记事本</p>
+        </div>
+        <a class="btn btn-default view-btn" ui-sref="syndicatesAllOrder">
+            查看我跟投的公司
+        </a>
+    </div>
+</div>

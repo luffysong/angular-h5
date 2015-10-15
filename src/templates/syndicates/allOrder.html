@@ -35,7 +35,7 @@
                     <div class="item-right">{{ item.trade_c_f_deposit.payment.notify_time }}</div>
                 </div>
                 <a class="btn btn-default stage-btn" ng-if="item.status != 14 && item.trade_c_f_deposit.payment.status == 1 && item.trade_c_f_deposit.payment.platform_type != 1" ui-sref="syndicatesPayWay({tid:item.trade_c_f_deposit.trade_id,amount:item.trade_c_f_deposit.deposit,type:'deposit'})">付款</a>
-                <a class="btn btn-default stage-btn" ng-if="item.status != 14 && item.trade_c_f_deposit.payment.status == 1 && item.trade_c_f_deposit.payment.platform_type == 1" href="{{rongHost}}/#/zhongchou/payOutline?tid={{item.trade_c_f_deposit.trade_id}}&type=deposit">查看汇款信息</a>
+                <a class="btn btn-default stage-btn" ng-if="item.status != 14 && item.trade_c_f_deposit.payment.status == 1 && item.trade_c_f_deposit.payment.platform_type == 1" ui-sref="syndicatesPayOutline({ tid:item.trade_c_f_deposit.trade_id, type:'deposit' })">查看汇款信息</a>
                 <a class="btn btn-default stage-btn" ng-if="item.status != 14 && (item.trade_c_f_deposit.payment.status == 3) && (item.trade_c_f_balance.payment.status == 0) && !item.trade_c_f_deposit.refund_timeout && !item.invite_code" ng-click="askForRefund(item.trade_c_f_deposit.trade_id);">申请退款</a>
             </div>
             <div class="stage stage-two" ng-if="item.trade_c_f_balance">
@@ -53,7 +53,7 @@
                     <div class="item-right"><span countdown date='{{ item.trade_c_f_balance.payment.close_time }}' open-date='{{ item.trade_c_f_balance.payment.open_time }}'></span></div>
                 </div>
                 <a class="btn btn-default stage-btn" ng-if="item.status != 14 && item.trade_c_f_balance.payment.status == 1 && item.trade_c_f_balance.payment.platform_type != 1 && !item.trade_c_f_balance.refund_timeout" ui-sref="syndicatesPayWay({tid:item.trade_c_f_balance.trade_id,amount:item.trade_c_f_balance.balance,type:'balance'})">付款</a>
-                <a class="btn btn-default stage-btn" ng-if="item.status != 14 && item.trade_c_f_balance.payment.status == 1 && item.trade_c_f_balance.payment.platform_type == 1" href="{{rongHost}}/#/zhongchou/payOutline?tid={{item.trade_c_f_balance.trade_id}}&type=balance">查看汇款信息</a>
+                <a class="btn btn-default stage-btn" ng-if="item.status != 14 && item.trade_c_f_balance.payment.status == 1 && item.trade_c_f_balance.payment.platform_type == 1" ui-sref="syndicatesPayOutline({ tid: item.trade_c_f_balance.trade_id, type: 'balance' })">查看汇款信息</a>
             </div>
         </div>
     </div>

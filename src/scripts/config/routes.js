@@ -169,6 +169,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             }
         }
     });
+
+    /*线下支付页面*/
+    $stateProvider.state('syndicatesPayOutline', {
+        url: '/zhongchouPayOutline?{tid}&{type}',
+        templateUrl: 'templates/syndicates/pay-outline.html',
+        controller: 'syndicatesPayOutlineController'
+    });
+
     /*跟投人认证*/
     $stateProvider.state('investorValidate', {
         url: '/investorValidate?type',
