@@ -200,7 +200,7 @@
             <!--参与的跟投人-->
             <div ng-if="fundingId && tempData.length">
                 <div class="basic-info">
-                    参与的跟投人（{{tempData.length}}）
+                    意向跟投人（{{tempData.length}}）
                 </div>
                 <div class="co-investor clearfix">
                     <div ng-repeat="co in syndicatesInfo.co_investors track by $index" title="{{co.user.name}}" class="co-investor-logo text-center">
@@ -490,7 +490,7 @@
         </a>
         <a ui-sref="company_detail({id:companyData.company.id})" class="more-info" ng-class="{'no-remind-btn': color !== 60}" baidu-btn="众筹项目页-{{companyData.basic.name}}-查看更多公司信息按钮点击">更多信息</a>
         <a href="" class="invest-btn disabled" ng-if="color == 25" ng-class="{'no-remind-btn': color !== 60}">即将开启</a>
-        <a login-btn="{{rongHost}}/m/#/zhongchouDetail?companyId={{companyId}}&fundingId={{fundingId}}&checkValid=1&login=true" class="invest-btn" ng-click="wantInvest($event)" ng-if="color == 30 && !timeout" ng-class="{'no-remind-btn': color !== 60}" baidu-btn="众筹项目页-{{companyData.basic.name}}-我要投资按钮点击" ng-disabled="companyData.basic.managerId == uid">我要投资</a>
+        <a login-btn="{{rongHost}}/m/#/zhongchouDetail?companyId={{companyId}}&fundingId={{fundingId}}&checkValid=1&login=true" class="invest-btn btn" ng-click="wantInvest($event)" ng-if="color == 30 && !timeout" ng-class="{'no-remind-btn': color !== 60,'disabled':companyData.basic.managerId != uid}" baidu-btn="众筹项目页-{{companyData.basic.name}}-我要投资按钮点击" ng-disabled="companyData.basic.managerId != uid">我要投资</a>
         <a href="" class="invest-btn disabled" ng-if="color == 35 || color == 50 || (color != 25 && timeout)" ng-class="{'no-remind-btn': color !== 60}">停止投资</a>
         <a class="set-remind" ng-click="krCode()" login-btn="{{rongHost}}/m/#/zhongchouDetail?companyId={{companyId}}&fundingId={{fundingId}}&checkValid=1&login=true" ng-if="color == 60 && !timeout" ng-class="{'no-remind-btn': color !== 60}" baidu-btn="众筹项目页-{{companyData.basic.name}}-Kr码优先购买按钮点击">
             Kr码优先购买

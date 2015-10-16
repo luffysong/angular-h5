@@ -26,7 +26,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                 if(key.status != 25 && (key.status == 50 || new Date(key.end_time) < new Date())){
                     key.timeout = true;
                 }
-                if(parseInt(key.cf_success_raising_offer) === 0 || !key.cf_success_raising_offer){
+                if(parseInt(key.cf_success_raising_offer) === 0 || !key.cf_success_raising_offer || !key.cf_raising){
                     key.percent = 0;
                 }else{
                     key.percent = (parseInt(key.cf_success_raising_offer) * 100 / parseInt(key.cf_raising)).toFixed(0);

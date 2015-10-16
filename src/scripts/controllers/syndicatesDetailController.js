@@ -224,7 +224,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 $scope.status = "预热中";
             }
             if($scope.syndicatesInfo.base){
-                if(parseInt($scope.syndicatesInfo.base.cf_success_raising_offer) === 0 || !$scope.syndicatesInfo.base.cf_success_raising_offer){
+                if(parseInt($scope.syndicatesInfo.base.cf_success_raising_offer) === 0 || !$scope.syndicatesInfo.base.cf_success_raising_offer || !$scope.syndicatesInfo.base.cf_raising){
                     $scope.syndicatesInfo.base.percent = 0;
                 }else{
                     $scope.syndicatesInfo.base.percent = (parseInt($scope.syndicatesInfo.base.cf_success_raising_offer) * 100 / parseInt($scope.syndicatesInfo.base.cf_raising)).toFixed(0);
