@@ -492,7 +492,7 @@
         <a href="" class="invest-btn disabled" ng-if="color == 25" ng-class="{'no-remind-btn': color !== 60}">即将开启</a>
         <a login-btn="{{rongHost}}/m/#/zhongchouDetail?companyId={{companyId}}&fundingId={{fundingId}}&checkValid=1&login=true" class="invest-btn btn" ng-click="wantInvest($event)" ng-if="color == 30 && !timeout && (syndicatesInfo.base.cf_success_raising < syndicatesInfo.base.cf_max_raising)" ng-class="{'no-remind-btn': color !== 60,'disabled':companyData.basic.managerId == uid}" baidu-btn="众筹项目页-{{companyData.basic.name}}-我要投资按钮点击" ng-disabled="companyData.basic.managerId == uid">我要投资</a>
         <a href="" class="invest-btn disabled" ng-if="color == 35 || color == 50 || (color != 25 && timeout) || (syndicatesInfo.base.cf_success_raising >= syndicatesInfo.base.cf_max_raising)" ng-class="{'no-remind-btn': color !== 60}">停止投资</a>
-        <a class="set-remind" ng-click="krCode()" login-btn="{{rongHost}}/m/#/zhongchouDetail?companyId={{companyId}}&fundingId={{fundingId}}&checkValid=1&login=true" ng-if="color == 60 && !timeout" ng-class="{'no-remind-btn': color !== 60}" baidu-btn="众筹项目页-{{companyData.basic.name}}-Kr码优先购买按钮点击">
+        <a class="set-remind" ng-click="krCode()" login-btn="{{rongHost}}/m/#/zhongchouDetail?companyId={{companyId}}&fundingId={{fundingId}}&checkValid=1&login=true" ng-if="color == 60 && !timeout" ng-class="{'no-remind-btn': color !== 60,'disabled':companyData.basic.managerId == uid}" baidu-btn="众筹项目页-{{companyData.basic.name}}-Kr码优先购买按钮点击" ng-disabled="companyData.basic.managerId == uid">
             Kr码优先购买
         </a>
     </div>
