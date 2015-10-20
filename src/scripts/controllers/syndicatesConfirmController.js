@@ -194,6 +194,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                                 $scope.minError = false;
                             }
                         });
+                        $scope.wishNum = scope.baseData.base.min_investment;
                         $scope.ok = function(){
                             if(!checkForm("krCodeForm")){
                                 return;
