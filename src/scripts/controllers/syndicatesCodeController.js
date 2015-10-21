@@ -13,6 +13,7 @@ angular.module('defaultApp.controller').controller('syndicatesCodeController',
             "id":$scope.fundingId
         },function(data){
             $scope.baseData = data;
+            $scope.wishNum = $scope.baseData.base.min_investment;
         });
         $scope.$watch("wishNum",function(from){
             if(!$scope.baseData)return;
