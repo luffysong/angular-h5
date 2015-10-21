@@ -56,18 +56,27 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             });
             /*输入框默认为最低投资金额*/
             $scope.formData.investVal = $scope.baseData.base.min_investment;
-            var obj = {
+            /*var obj = {
                 link:"#/riskTipAll",
                 name:"风险揭示书"
-            };
+            };*/
+            var arr = [{
+                link:"#/riskTipAll",
+                name:"风险揭示书"
+            },{
+                link:"#/serviceProtocol",
+                name:"用户服务协议"
+            }];
             if(!$scope.baseData.detail.agreements_img){
                 $scope.baseData.detail.agreements_img = [];
             }
             if(!$scope.baseData.detail.agreements){
                 $scope.baseData.detail.agreements = [];
             }
-            $scope.baseData.detail.agreements.push(obj);
-            $scope.baseData.detail.agreements_img.push(obj);
+            $scope.baseData.detail.agreements = $scope.baseData.detail.agreements.concat(arr);
+            $scope.baseData.detail.agreements_img = $scope.baseData.detail.agreements_img.concat(arr);
+            /*$scope.baseData.detail.agreements.push(obj);
+            $scope.baseData.detail.agreements_img.push(obj);*/
         });
         /*金额四舍五入取小数点后四位*/
         $scope.handleData = function (data) {
@@ -80,7 +89,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             }else{
                 $scope.formData.ensureVal = from;
             }
-            if(!$scope.baseData.funding || !$scope.baseData.funding.valuation)return;
+            if(!$scope.baseData || !$scope.baseData.funding || !$scope.baseData.funding.valuation)return;
             /*管理费*/
             $scope.manager_fee = ($scope.baseData.funding.lead_management_fee * from).toFixed(2) ? ($scope.baseData.funding.lead_management_fee * from).toFixed(2) : 0;
             /*总支付费用*/
@@ -116,6 +125,25 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 event.preventDefault();
                 $modal.open({
                     templateUrl: 'templates/company/pop-risk-tip-all.html',
+                    windowClass: 'remind-modal-window',
+                    controller: [
+                        '$scope', '$modalInstance', 'scope',
+                        function ($scope, $modalInstance, scope) {
+                            $scope.ok = function () {
+                                $modalInstance.dismiss();
+                            }
+                        }
+                    ],
+                    resolve: {
+                        scope: function () {
+                            return $scope;
+                        }
+                    }
+                });
+            }else if(link == "#/serviceProtocol"){
+                event.preventDefault();
+                $modal.open({
+                    templateUrl: 'templates/company/pop-service-protocol.html',
                     windowClass: 'remind-modal-window',
                     controller: [
                         '$scope', '$modalInstance', 'scope',
