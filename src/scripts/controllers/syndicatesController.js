@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,$timeout,loading) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,$timeout,loading, $cookies) {
         document.title="36氪股权投资";
         loading.show("syndicatesList");
         var statusList = DictionaryService.getDict("crowd_funding_status");
@@ -187,6 +187,32 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                 });
             }
         };
+
+        /* 众筹改版上线弹层提示 */
+        if(!$cookies.newTipsClear && (moment('2015-10-29 10:00') - moment()) > 0) {
+            $timeout(function() {
+                $modal.open({
+                    templateUrl: 'templates/syndicates/pop-new-tips.html',
+                    windowClass: 'new-tips-modal',
+                    controller: ['$scope', 'scope', '$modalInstance',
+                        function($scope, scope, $modalInstance) {
+                            $scope.close = function() {
+                                var expires = new Date();
+                                expires.setYear(expires.getFullYear() + 1);
+                                document.cookie = 'newTipsClear=clear' + '; expires=' + expires.toGMTString();
+
+                                $modalInstance.dismiss();
+                            };
+                        }],
+                    resolve: {
+                        scope: function() {
+                            return $scope;
+                        }
+                    }
+                });
+            }, 500);
+        }
+
         WEIXINSHARE = {
             shareTitle: "36氪股权投资",
             shareDesc: "让创业更简单",
