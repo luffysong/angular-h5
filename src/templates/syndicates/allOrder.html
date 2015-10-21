@@ -1,5 +1,5 @@
 <div class="syndicate-all-order">
-    <div class="order-head">众筹订单</div>
+    <div class="order-head">我的订单</div>
     <div class="order-item" ng-repeat="item in orderData" ng-if="!noData">
         <div class="sup-header">
             <span class="order-status" ng-if="item.status < 3 || (item.status > 9 && item.status != 14)">订单状态：{{ item.status | dict_trade_crowd_funding_status }}</span>

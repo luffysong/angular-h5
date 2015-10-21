@@ -78,7 +78,7 @@ angular.module('defaultApp.directive').directive('loadingProgress', [
                                 drawLine("canvas_has"+randomId,color);
                                 /*众筹目标线条*/
                                 var container_progress = $("<div class='loading-container syndicate-goal'></div>");
-                                container_progress.append("<span class='loading-detail'>众筹目标：" + temp + "</span><span class='loading-point'></span>").append(canvas_goal);
+                                container_progress.append("<span class='loading-detail'>融资目标：" + temp + "</span><span class='loading-point'></span>").append(canvas_goal);
                                 element.find(".loading-progress").append(container_progress);
                                 drawLine("canvas_goal"+randomId,"#dddddd");
                             }

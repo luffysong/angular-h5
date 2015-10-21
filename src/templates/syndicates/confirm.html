@@ -46,7 +46,7 @@
                     </p>
                     <p>
                         <span class="info-attr">保证金</span>
-                        <span>￥{{formData.ensureVal}} X 1% ＝ {{formData.ensureVal * 0.01}}元</span>
+                        <span>￥{{formData.ensureVal}} X 1% ＝ <span class="c-orange">{{formData.ensureVal * 0.01}}元</span></span>
                     </p>
                     <p class="mt-20">
                         <input type="checkbox" ng-model="isRead" ng-click="isRead!=isRead"  />
@@ -96,7 +96,28 @@
 
                 </div>
             </div>
-            <a class="ensure-pay btn" ng-disabled="!isRead || confirmForm.$invalid" ng-click="ensurePay()" baidu-btn="确认支付按钮点击">确认支付</a>
+            <a class="ensure-pay btn" ng-disabled="!isRead || confirmForm.$invalid" ng-click="ensurePay()" baidu-btn="确认支付按钮点击">支付保证金</a>
+            <ul class="deposit-tip">
+                <li>
+                    保证金提示：
+                </li>
+                <li>
+                    <span class="list-point"></span>
+                    越早支付保证金，越先锁定投资名额
+                </li>
+                <li>
+                    <span class="list-point"></span>
+                    支付完保证金后，3天冷静期内可以申请退款
+                </li>
+                <li>
+                    <span class="list-point"></span>
+                    如放弃支付剩余款，保证金恕不退还，将由项目方收取
+                </li>
+                <li>
+                    <span class="list-point"></span>
+                    通过Kr码认购，将没有申请退款的权利
+                </li>
+            </ul>
         </div>
     </div>
 </form>
