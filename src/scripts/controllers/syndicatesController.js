@@ -37,7 +37,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                         key.color = obj.value;
                         if(key.status == 25){
                             key.name = "预热中";
-                        }else if(key.status == 30 || key.status == 35){
+                        }else if(key.status == 30){
                             /*众筹未开始*/
                             var startTime = new Date(key.start_time);
                             if(new Date() < startTime){
