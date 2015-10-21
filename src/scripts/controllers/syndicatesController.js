@@ -42,9 +42,8 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                             var startTime = new Date(key.start_time);
                             if(new Date() < startTime){
                                 key.fundingStatus = "preheat";
-                                /*var minute = startTime.getMinutes() > 9 ? startTime.getMinutes() : "0"+startTime.getMinutes();*/
-                                /*key.name = parseInt(startTime.getMonth())+1+"月"+startTime.getDate()+"日  "+startTime.getHours()+":"+minute+"  开始融资";*/
-                                key.name = "锚定中";
+                                var minute = startTime.getMinutes() > 9 ? startTime.getMinutes() : "0"+startTime.getMinutes();
+                                key.name = "锚定中 " + (parseInt(startTime.getMonth())+1)+"月"+startTime.getDate()+"日  "+startTime.getHours()+":"+minute+"  开放募资";
                                 key.color = 60;
                             }
                         }

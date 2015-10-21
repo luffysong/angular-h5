@@ -203,17 +203,18 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             angular.forEach(statusList,function(obj,index){
                 if(obj.value == data.base.status){
                     $scope.status = obj.desc;
-                    var date = new Date(data.base.start_time);
+                    var startTime = new Date(data.base.start_time);
                     /*/!*超募中*!/
                     if(data.base.cf_success_raising > data.base.cf_raising && data.base.cf_raising > 0){
                         $scope.status = "超募中";
                     }*/
                     /*预热中*/
-                    if(new Date() < date && $scope.color != 25){
+                    if(new Date() < startTime && $scope.color != 25){
                         $scope.fundingStatus = "preheat";
                         //var minute = date.getMinutes() > 9 ? date.getMinutes() : "0"+date.getMinutes();
                         /*$scope.status = (parseInt(date.getMonth())+1)+"月"+date.getDate()+"日  "+date.getHours()+":"+minute+" 开始融资";*/
-                        $scope.status = "锚定中";
+                        var minute = startTime.getMinutes() > 9 ? startTime.getMinutes() : "0"+startTime.getMinutes();
+                        $scope.status = "锚定中 " + (parseInt(startTime.getMonth())+1)+"月"+startTime.getDate()+"日  "+startTime.getHours()+":"+minute+"  开放募资";
                         $scope.color = 60;
                     }
                 }
