@@ -209,7 +209,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                         $scope.status = "超募中";
                     }*/
                     /*预热中*/
-                    if(new Date() < startTime && $scope.color != 25 && $scope.color != 35){
+                    if(new Date() < startTime && $scope.color == 30){
                         $scope.fundingStatus = "preheat";
                         //var minute = date.getMinutes() > 9 ? date.getMinutes() : "0"+date.getMinutes();
                         /*$scope.status = (parseInt(date.getMonth())+1)+"月"+date.getDate()+"日  "+date.getHours()+":"+minute+" 开始融资";*/
