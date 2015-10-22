@@ -95,8 +95,103 @@
 }
 .syndicates-confirm {
     @default-color:#F7F7F7;
-    .href-tip {
-        font-size: 11px;
+    .kr-code-title {
+        height: 45px;
+        line-height: 45px;
+        color: #000;
+        text-align: center;
+        background-color: #fff;
+        font-size: 16px;
+    }
+    .kr-code-tip {
+        height: 38px;
+        line-height: 36px;
+        color: #000;
+        border-top: 1px solid #DFDFDF;
+        text-align: left;
+        font-size: 16px;
+        padding-left: 12px;
+        background-color: #f7f7f7;
+    }
+    .kr-code-apply {
+        position: relative;
+        height: auto;
+        min-height: 190px;
+        padding-top: 30px;
+        border-top: 1px solid #DFDFDF;
+        background-color: #f7f7f7;
+        text-align: center;
+        &.apply-suc {
+            .apply-icon,.apply-tip{
+                color: #94d663;
+            }
+            .href-tip {
+                display: block;
+                padding: 0;
+                height: 40px;
+                line-height: 40px;
+                margin: 40px 15px 0;
+                text-align: center;
+                border-radius: 4px;
+                color: #fff;
+                background-color: #008DF2;
+                border: 1px solid #DFDFDF;
+            }
+        }
+        p {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+        }
+        .apply-icon {
+            display: block;
+            font-size: 45px;
+            color: #e5a642;
+            margin-bottom: 10px;
+        }
+        .apply-tip {
+            font-size: 18px;
+            color: #e5a642;
+        }
+        .enter-tip {
+            color: #000;
+            position: absolute;
+            padding-left: 10px;
+            text-align: left;
+            bottom: 10px;
+        }
+    }
+    .empty-error {
+        color: red;
+        padding-left: 10px;
+    }
+    .kr-code-btn {
+        height: auto;
+        padding: 15px;
+        .validate-kr-code {
+            display: block;
+            padding: 0;
+            height: 40px;
+            line-height: 40px;
+            margin-bottom: 15px;
+            text-align: center;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #008DF2;
+            &.suc {
+                background-color: #008DF2;
+            }
+        }
+        .href-tip {
+            .validate-kr-code;
+            border: 1px solid #DFDFDF;
+            color: #888888;
+            background-color: #f7f7f7;
+            &.apply-suc {
+                background-color: #008DF2;
+                color: #fff;
+            }
+        }
     }
     .error-tip {
         padding: 5px 0 0 15px;
@@ -105,64 +200,104 @@
         color: #e66565;
         margin: 0;
     }
-    .kr-code-way {
-        width: 100%;
-        height: 35px;
-        line-height: 35px;
-        padding: 0 15px;
-        text-align: right;
-        .clearfix;
-    }
     .kr-code-enter {
+        position: relative;
         background-color: #fff;
         border: 1px solid #DFDFDF;
         height: 50px;
         padding: 0 15px;
         overflow: hidden;
+        text-align: left;
+        &.apply-code {
+            text-align: right;
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none !important;
+            }
+            &:before {
+                content: "￥";
+                color: #888888;
+                position: absolute;
+                left: 15px;
+                top: 50%;
+                transform: translate(0,-50%);
+            }
+        }
         .kr-code-input {
-            display: inline-block;
-            width: 75%;
+            display: block;
+            width: 100%;
             height: 100%;
             border: 0;
             font-size: 14px;
-            color: #008DF2;
+            color: #000;
+            text-align: right;
         }
-        .validate-kr-code {
-            display: inline-block;
-            float: right;
-            width: 65px;
-            height: 35px;
-            line-height: 35px;
-            margin-top: 7px;
-            text-align: center;
-            border-radius: 2px;
-            color: #fff;
-            background-color: #DEDEDE;
-            &.suc {
-                background-color: #008DF2;
-            }
+
+    }
+    .apply-reason {
+        padding: 10px;
+        background-color: #f7f7f7;
+        color: #000;
+        .error {
+            color: red;
+            margin-bottom: 10px;
         }
+    }
+    .invest-reason {
+        width: 100%;
+        height: 110px;
+        background-color: #fff;
+        border: 1px solid #dfdfdf;
+        outline: none;
+        -webkit-appearance: none;
+        resize: none;
+        padding-left: 15px;
+    }
+    .confirm-pay-title {
+        height: 50px;
+        line-height: 50px;
+        background-color: #fff;
+        text-align: center;
+        color: #000;
+        font-size: 16px;
+
     }
     .confirm-title {
         width: 100%;
-        padding: 5px 15px;
-        height: auto;
+        padding-left: 15px;
+        height: 40px;
+        line-height: 38px;
         background-color: @default-color;
+        border: 1px solid #DFDFDF;
+        color: #000;
         .validate-suc {
             font-size: 14px;
-            color: #22AC38;
+            color: #000;
         }
         .risk-tip {
             float: right;
             font-size: 14px;
         }
     }
+    .confirm-project {
+        display: -webkit-box;
+        height: 60px;
+        background-color: #fff;
+        color: #000;
+        -webkit-box-align: center;
+        img {
+            display: block;
+            margin: 0 10px 0 15px;
+            border-radius: 50%;
+            border: 1px solid #e4e4e4;
+        }
+    }
     .confirm-content {
         width: 100%;
-        height: 150px;
+        height: auto;
+        padding-bottom: 20px;
         background-color: #fff;
         padding-left: 15px;
-        border: 1px solid #DFDFDF;
         .content-count {
             width: 100%;
             height: 50px;
@@ -170,8 +305,36 @@
             font-size: 14px;
             color: #333;
             border-bottom: 1px solid #DFDFDF;
+            .cal-btn {
+                display: block;
+                float: right;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                border: 1px solid #ccc;
+                color: #aaaaaa;
+                font-size: 15px;
+                background-color: #f7f7f7;
+                margin-top: 10px;
+                &.plus-btn {
+                    border-top-left-radius: 2px;
+                    border-bottom-left-radius: 2px;
+                }
+                &.minus-btn {
+                    border-left: 0;
+                    border-top-right-radius: 2px;
+                    border-bottom-right-radius: 2px;
+                    margin-right: 15px;
+                }
+                &.active {
+                    background-color: #008DF2;
+                    color: #fff;
+                }
+            }
+
             .invest-val {
-                width: 70%;
+                width: 50%;
                 height: 100%;
                 border: 0;
                 margin-left: 15px;
@@ -180,6 +343,9 @@
         .content-info {
             .mt-12 {
                 margin-top: 12px;
+            }
+            .mt-20 {
+                margin-top: 20px;
             }
             p {
                 margin: 0;
@@ -196,14 +362,6 @@
             }
         }
 
-    }
-    .content-bottom {
-        padding: 20px 0 0 15px;
-        background: #f7f7f7;
-        border-bottom: 1px solid #DFDFDF;
-        .select-way {
-            margin-top: 30px;
-        }
     }
     .pay-way {
         width: 100%;
@@ -244,18 +402,37 @@
     }
     .ensure-pay {
         display: block;
-        width: 75%;
         height: 40px;
         line-height: 40px;
         padding: 0;
         font-size: 15px;
         text-align: center;
         color: #fff;
-        background-color: #F28E00;
+        background-color: #008DF1;
         border-radius: 3px;
-        margin: 30px auto;
+        margin: 30px 15px;
+    }
+    .deposit-tip {
+        margin: 0 15px 0;
+        list-style: none;
+        li:first-child {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #333;
+        }
     }
 }
+
+.syndicates-pay-full {
+    .all-order-btn {
+        width: 100%;
+        border-top: 1px solid #ccc;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+        padding: 10px;
+    }
+}
+
 /*ActionSheet样式*/
 .shade-layer {
     position: fixed;

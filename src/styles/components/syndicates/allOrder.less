@@ -1,208 +1,267 @@
 /*众筹订单页样式*/
-.syndicate-order-all {
+.syndicate-all-order {
+    padding-bottom: 50px;
+
     .order-head {
-        width: 100%;
-        height: 42px;
-        line-height: 42px;
+        height: 44px;
+        line-height: 44px;
         text-align: center;
-        font-size: 20px;
-        background: #FFFFFF;
+        color: #333;
+        font-size: 16px;
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
     }
-    .order-nav {
-        width: 100%;
-        height: 43px;
-        border: 1px solid #DFDFDF;
-        background: #FFFFFF;
-        padding: 10px 0;
-        .nav-type {
-            display: inline-block;
-            position: relative;
-            width: 25%;
-            height: 100%;
-            border-right: 1px solid #DFDFDF;
-            text-align: center;
-            &.active {
-                color: #008DF2;
-            }
-            .under-line {
-                position: absolute;
-                width: 80%;
-                height: 1px;
-                left: 50%;
-                transform: translate(-50%,0);
-                background-color: #008DF2;
-                bottom: -10px;
-            }
-            &:last-of-type {
-                border: 0;
-            }
-        }
+
+    .sup-header {
+        height: 38px;
+        line-height: 38px;
+        padding: 0 10px;
+        color: #333;
+        font-size: 14px;
+        background-color: transparent;
     }
-    .order-content {
-        width: 100%;
-        height: 170px;
-        border: 1px solid #DFDFDF;
-        background: #fff;
-        padding: 30px 0;
-        margin-top: 10px;
-        .empty-image {
-            width: 100%;
-            height: 50px;
-            font-size: 50px;
-            color: #ccc;
-            text-align: center;
-            margin-bottom: 25px;
-        }
+
+    .order-cancel,
+    .order-procedure {
+        float: right;
+        font-size: 12px;
     }
-    .invest-btn {
-        display: block;
-        width: 250px;
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
-        color: #fff;
-        background: #008DF2;
-        border-radius: 3px;
-        margin: 30px auto;
-    }
-    .order-detail {
-        padding: 0 15px;
-        background-color: #ffffff;
-        margin: 10px 0;
-        border: 1px solid #DFDFDF;
+
+    .company-info {
+        position: relative;
+        display: -webkit-box;
+        padding: 15px 0;
+        -webkit-box-align: center;
+        background-color: #fff;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
         overflow: hidden;
-        .company-data {
-            display: -webkit-box;
-            -webkit-box-align: center;
-            padding: 10px 0;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #DFDFDF;
-            .status {
-                text-align: right;
-                .order-status {
-                    color: #ff9900;
-                }
-            }
-            .company-name {
-                -webkit-box-flex: 1;
-                a {
-                    color: #888888;
-                }
-            }
+
+        .banner {
+            position: absolute;
+            width: 100px;
+            right: -30px;
+            top: 10px;
+            transform: rotate(45deg);
+            color: #fff;
+            background-color: #56b9ff;
+            text-align: center;
+            font-size: 12px;
         }
-        .syndicates-logo {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            margin-right: 15px;
+    }
+
+    .company-logo {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        margin-left: 15px;
+        margin-right: 10px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            border: 1px solid #d6d6d6;
             border-radius: 50%;
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            box-shadow: 0 0 1px rgba(0,0,0,0.2);
         }
-        .syndicates-detail {
-            .clearfix;
-            padding:10px 0;
-            border-top:solid 1px #ddd;
-            p {
-                margin:0;
+    }
+
+    .company-name {
+        display: block;
+        color: #333;
+        white-space: nowrap;
+    }
+
+    .money-info {
+        padding: 10px 0;
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+        overflow: hidden;
+        text-align: center;
+
+        p {
+            font-weight: 500;
+            color: #404040;
+            margin-bottom: 0;
+
+            &.money {
+                font-size: 16px;
+                text-indent: 12px;
+            }
+
+            &.text {
+                color: #999;
             }
         }
-        .props {
-            border-bottom: solid 1px #DFDFDF;
-            margin:20px 0;
+
+        [class^="money-"] {
+            float: left;
+            width: 50%;
+
+            &:first-child {
+                border-right: 1px solid #ddd;
+            }
         }
-        .syndicates-attr {
-            color: #666;
-            font-size: 13px;
+    }
+
+    .stage-info {
+        .stage {
+            padding: 15px;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
         }
-        .syndicates-intro {
+
+        .stage-btn {
+            width: 100%;
+            margin-top: 10px;
+            color: #fff;
+            background-color: #008df2;
+            border: none;
+        }
+
+        .stage-item {
             color: #333;
-            font-size: 13px;
-            text-align: right;
-        }
-
-        .goal {
-            color: #666;
-            font-size: 13px;
-            margin: 8px 0px 0px;
-            text-align: left;
-            .goal-num {
-                float: right;
-                .currency {
-                    color: #FF9900;
-                }
-            }
-
-        }
-        .actions {
-            margin-top: 15px;
             overflow: hidden;
-            .btn {
-                display: block;
-                padding: 0;
-                height: 40px;
-                line-height: 40px;
-                font-size: 15px;
-                margin-top: 10px;
-                border-color: #71a8e9;
-                color: #008df2;
-                &.preheat-detail {
-                    display: inline-block;
-                    width: 46%;
-                    float: left;
-                }
-                &.preheat-remind {
-                    .preheat-detail;
-                    border: 1px solid #F28D00;
-                    float: right;
-                    color: #F28D00;
-                }
+
+            &:first-child {
+                color: #b6b6b6;
+                margin-bottom: 5px;
             }
 
-
-        }
-        .syndicate-info {
-            .clearfix;
-            margin-bottom: 10px;
-            .info-attr {
+            .item-left {
                 float: left;
-                &.progress {
-                    width: 85%;
-                }
             }
-            .info-val {
+
+            .item-right {
                 float: right;
-                &.progress {
-                    position: relative;
-                    top: -7px;
+            }
+
+            .status {
+                font-size: 12px;
+                color: #fff;
+                border-radius: 2px;
+                text-align: center;
+                padding: 3px 10px;
+                margin-left: 18px;
+                background-color: #ccc;
+
+                &.has {
+                    background-color: #ffb658;
+                }
+
+                &.not {
+                    background-color: #56b9ff;
                 }
             }
-            &.first {
-                margin-top: 10px;
+        }
+    }
+
+    .no-order-data {
+        .icon-h5-search {
+            font-size: 60px;
+            margin: 32px auto 0;
+            color: #e86463;
+        }
+
+        .remind-info {
+            width: 60%;
+            font-size: 16px;
+            margin: 16px auto 0;
+        }
+
+        .invest-btn {
+            width: 90%;
+            margin-top: 19px;
+            margin-left: 5%;
+            margin-bottom: 10px;
+            color: #fff;
+            background-color: #008df2;
+            border: none;
+            padding: 10px 12px;
+        }
+
+        .recommend-item {
+            margin-top: 10px;
+            padding: 17px 13px 15px 13px;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+
+            .item-top {
+                padding-bottom: 15px;
+                border-bottom: 1px dashed #ddd;
+                overflow: hidden;
             }
-            &.progress {
-                margin-bottom: 0;
+
+            .company-logo {
+                float: left;
+                display: block;
+                width: 50px;
+                height: 50px;
+                margin-left: 0;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border: 1px solid #ddd;
+                    border-radius: 50%;
+                }
             }
-            &.border {
-                border-bottom: 1px solid #DFDFDF;
-                padding-bottom: 10px;
+
+            .company-name {
+                white-space: nowrap;
+
+                a {
+                    font-size: 16px;
+                    color: #444;
+                    font-weight: 500;
+                    max-width: 222px;
+                    display: inline-block;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    vertical-align: middle;
+                }
+
+                .status {
+                    font-size: 12px;
+                    color: #fff;
+                    border-radius: 2px;
+                    background-color: #6bc1ff;
+                    padding: 1px 5px;
+                    margin-left: 5px;
+                }
+            }
+
+            .company-brief {
+                word-break: break-all;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-height: 20px;
+            }
+
+            .item-bottom {
+                padding-top: 15px;
+                overflow: hidden;
+
+                p {
+                    margin: 0 0 2px;
+                }
+
+                .bottom-left {
+                    float: left;
+                    width: 40%;
+                }
+
+                .bottom-right {
+                    float: right;
+                    width: 60%;
+                    color: #444;
+                    text-align: right;
+                }
             }
         }
-        .pay-layer {
-            margin-bottom: 15px;
-            text-align: right;
-            .pay-btn {
-                display: inline-block;
-                width: 75px;
-                height: 30px;
-                line-height: 30px;
-                text-align: center;
-                color: #fff;
-                background-color: #f28d00;
-                border-radius: 3px;
-            }
-        }
+    }
+
+    .loadMore {
+         margin-top: 20px;
     }
 }
-

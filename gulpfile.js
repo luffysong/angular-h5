@@ -179,7 +179,7 @@ gulp.task('tdd', ['scripts:vendor', 'scripts:init', 'watch'], function () {
     $.connect.server({
         root: ['karma_html', '.tmp', 'src'],
         port: 9000,
-        livereload: true,
+        livereload: false,
         middleware: function () {
             return [historyApiFallback];
         }
@@ -196,7 +196,7 @@ gulp.task('connect', function () {
     $.connect.server({
         root: ['.tmp', 'src'],
         port: 9000,
-        livereload: true,
+        livereload: false,
         middleware: function (connect, opt) {
             var url = require('url');
 
@@ -323,7 +323,7 @@ gulp.task('connect:remote', function () {
     $.connect.server({
         root: ['.tmp', 'src'],
         port: 9001,
-        livereload: true,
+        livereload: false,
         middleware: function (connect, opt) {
             var url = require('url');
             var proxy = require('./tasks/proxy.js');

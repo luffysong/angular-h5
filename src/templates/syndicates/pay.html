@@ -1,6 +1,6 @@
 <div class="syndicate-pay">
     <div class="pay-title">
-        总支付金额  <span class="error amount">￥{{tradeData.amount}}</span>
+        {{typeText}}<span class="error amount">￥{{amount}}</span>
     </div>
     <div class="pay-content">
         <div class="pay-detail" ng-repeat="bank in bankData.agreement_list track by $index" ng-click="selectCard($index)">

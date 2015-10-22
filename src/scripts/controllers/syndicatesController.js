@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,$timeout,loading) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,$timeout,loading, $cookies) {
         document.title="36氪股权投资";
         loading.show("syndicatesList");
         var statusList = DictionaryService.getDict("crowd_funding_status");
@@ -17,19 +17,33 @@ angular.module('defaultApp.controller').controller('syndicatesController',
         /*前端处理，包括融资进度百分比的计算，以及众筹状态*/
         $scope.handleData = function(){
             angular.forEach($scope.investorList,function(key,index){
-                key.percent = parseInt(key.cf_success_raising) * 100 / parseInt(key.cf_raising) ;
+                /*
+                 停止投资三种情况：
+                 1.众筹超时
+                 2.剩余投资金额不足
+                 3.跟投人达到最多跟投人数
+                 * */
+                if(key.status != 25 && (key.status == 50 || new Date(key.end_time) < new Date())){
+                    key.timeout = true;
+                }
+                if(parseInt(key.cf_success_raising_offer) === 0 || !key.cf_success_raising_offer || !key.cf_raising){
+                    key.percent = 0;
+                }else{
+                    key.percent = (parseInt(key.cf_success_raising_offer) * 100 / parseInt(key.cf_raising)).toFixed(0);
+                }
                 angular.forEach(statusList,function(obj,i){
                     if(key.status == obj.value){
                         key.name = obj.desc;
                         key.color = obj.value;
                         if(key.status == 25){
                             key.name = "预热中";
-                        }else if(key.status == 30 || key.status == 35){
+                        }else if(key.status == 30){
                             /*众筹未开始*/
                             var startTime = new Date(key.start_time);
                             if(new Date() < startTime){
+                                key.fundingStatus = "preheat";
                                 var minute = startTime.getMinutes() > 9 ? startTime.getMinutes() : "0"+startTime.getMinutes();
-                                key.name = parseInt(startTime.getMonth())+1+"月"+startTime.getDate()+"日  "+startTime.getHours()+":"+minute+"  开始融资";
+                                key.name = "锚定中 " + (parseInt(startTime.getMonth())+1)+"月"+startTime.getDate()+"日  "+startTime.getHours()+":"+minute+"  开放募资";
                                 key.color = 60;
                             }
                         }
@@ -173,6 +187,32 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                 });
             }
         };
+
+        /* 众筹改版上线弹层提示 */
+        if(!$cookies.newTipsClear && (moment('2015-10-29 10:00') - moment()) > 0) {
+            $timeout(function() {
+                $modal.open({
+                    templateUrl: 'templates/syndicates/pop-new-tips.html',
+                    windowClass: 'new-tips-modal',
+                    controller: ['$scope', 'scope', '$modalInstance',
+                        function($scope, scope, $modalInstance) {
+                            $scope.close = function() {
+                                var expires = new Date();
+                                expires.setYear(expires.getFullYear() + 1);
+                                document.cookie = 'newTipsClear=clear' + '; expires=' + expires.toGMTString();
+
+                                $modalInstance.dismiss();
+                            };
+                        }],
+                    resolve: {
+                        scope: function() {
+                            return $scope;
+                        }
+                    }
+                });
+            }, 500);
+        }
+
         WEIXINSHARE = {
             shareTitle: "36氪股权投资",
             shareDesc: "让创业更简单",

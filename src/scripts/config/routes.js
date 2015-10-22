@@ -106,6 +106,17 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             }
         }
     });
+    /*众筹确定金额页面*/
+    $stateProvider.state('syndicatesKrCode', {
+        url: '/zhongchouCode/{fundingId}/{cid}',
+        templateUrl: 'templates/syndicates/kr-code.html',
+        controller: 'syndicatesCodeController',
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
+    });
     /*众筹订单页面*/
     $stateProvider.state('syndicatesOrder', {
         url: '/zhongchouOrder/{cid}/{fundingId}',
@@ -117,20 +128,17 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             }
         }*/
     });
+
     /*众筹个人所有订单页面*/
     $stateProvider.state('syndicatesAllOrder', {
         url: '/zhongchouAllOrder',
         templateUrl: 'templates/syndicates/allOrder.html',
-        controller: 'syndicatesAllOrderController'/*,
-         data:{
-         permissions : {
-         only : ['valid']
-         }
-         }*/
+        controller: 'syndicatesAllOrderController'
     });
+
     /*众筹选择支付方式页面*/
     $stateProvider.state('syndicatesPayWay', {
-        url: '/zhongchouPayWay/{tid}/{amount}',
+        url: '/zhongchouPayWay/{tid}/{amount}?type',
         templateUrl: 'templates/syndicates/payWay.html',
         controller: 'syndicatesPayWayController'/*,
          data:{
@@ -141,7 +149,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*众筹支付页面*/
     $stateProvider.state('syndicatesPay', {
-        url: '/zhongchouPay/{tid}/{amount}',
+        url: '/zhongchouPay/{tid}/{amount}?type',
         templateUrl: 'templates/syndicates/pay.html',
         controller: 'syndicatesPayController'/*,
         data:{
@@ -161,6 +169,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             }
         }
     });
+
+    /*线下支付页面*/
+    $stateProvider.state('syndicatesPayOutline', {
+        url: '/zhongchouPayOutline?{tid}&{type}',
+        templateUrl: 'templates/syndicates/pay-outline.html',
+        controller: 'syndicatesPayOutlineController'
+    });
+
     /*跟投人认证*/
     $stateProvider.state('investorValidate', {
         url: '/investorValidate?type',

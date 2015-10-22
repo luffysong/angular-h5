@@ -1,0 +1,43 @@
+<form name="applyCodeForm">
+    <div class="syndicates-confirm">
+        <div class="kr-code-title">申请Kr码</div>
+        <div ng-show="!applySuc">
+            <div class="kr-code-apply">
+                <div class="apply-icon icon-h5-pen"></div>
+                <p class="apply-tip">
+                    请确保所填认购金额是真实意向
+                </p>
+                <!--<p>通过Kr码认购，将没有申请
+                    退款的权利。</p>-->
+                <p>如果符合发放Kr码的标准，我们会联系你。</p>
+                <p class="enter-tip">输入意向金额</p>
+            </div>
+            <div class="kr-code-enter apply-code">
+                <input class="kr-code-input" type="numer" placeholder="请输入意愿跟投金额" ng-model="wishNum" num-validate name="wishNum" required />
+                <!---->
+            </div>
+            <div class="apply-reason">
+                <div class="error" ng-show="applyCodeForm.wishNum.$error.notNumber">金额只能为纯数字</div>
+                <div class="error" ng-show="applyCodeForm.wishNum.$error.required && applyCodeForm.wishNum.$dirty">金额不能为空</div>
+                <div class="error" ng-show="minError">不能小于最低跟投金额</div>
+                申请理由
+            </div>
+            <textarea class="invest-reason" placeholder="请输入投资理由" ng-model="reason" name="reason" required></textarea>
+            <div class="empty-error" ng-show="applyCodeForm.reason.$error.required && applyCodeForm.reason.$dirty">申请理由不能为空</div>
+            <div class="kr-code-btn">
+                <a href="" class="btn validate-kr-code" ng-disabled="applyCodeForm.$invalid && !minError" ng-click="apply()" baidu-btn="申请Kr码点击">申请</a>
+                <a ui-sref="syndicatesConfirm({fundingId:fundingId,cid:companyId})" class="href-tip">返回</a>
+            </div>
+        </div>
+        <div ng-show="applySuc">
+            <div class="kr-code-apply apply-suc">
+                <div class="apply-icon icon-schedule"></div>
+                <p class="apply-tip">
+                    申请Kr码已提交
+                </p>
+                <p>申请完成！如果符合要求，我们会联系你。</p>
+                <a ui-sref="syndicatesDetail({fundingId:fundingId,companyId:companyId})" class="href-tip apply-suc">返回</a>
+            </div>
+        </div>
+    </div>
+</form>

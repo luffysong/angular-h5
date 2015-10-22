@@ -24,28 +24,36 @@
          ng-style="{marginTop:isInApp?0:''}"
          ng-repeat="item in investorList track by $index"
          ng-class="{'mt-30': $index == 0,'mb-50': $index == investorList.length-1 && noMore}">
-
         <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
-            <div class="syndicates-pic" style="">
-                <div class="syndicates-status bg-{{item.color}}" ng-class="{'pd-19':item.color == '60'}">
-                    <i class="icon-h5-time"></i> {{item.name}}
+            <div class="title-info">
+                <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="syndicates-logo" style="background-image: url({{item.company.logo || ''}});"></a>
+                <div class="syndicates-intro">
+                    <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
+                        {{item.company.name}}
+                    </a>
+                    <div class="brief">{{item.company.brief}}</div>
                 </div>
-                <img ng-src="{{item.desc.file_list_img}}" alt=""/>
+            </div>
+            <div class="syndicates-pic">
+                <div class="syndicates-container">
+                    <img height="160" ng-src="{{item.desc.file_list_img}}" alt=""/>
+                    <div class="investor-led-title" ng-if="item.investorData.name">
+                        <a ui-sref="{{item.investorData | investorLink:'id':'type'}}" title="{{item.investorData.name}}" class="led-name">
+                            {{item.investorData.name}}
+                        </a>
+                        <span class="text">领投</span>
+                    </div>
+                    <div class="syndicates-status bg-{{item.timeout && item.fundingStatus != 'preheat'  ? 50 : item.color}}" ng-class="{'pd-19':item.color == '60'}">
+                        <i class="icon-h5-time"></i>
+                        {{item.timeout && item.name != '融资成功' && item.fundingStatus != 'preheat' ? "募资完成" : item.name}}
+                    </div>
+                </div>
                 <span class="hot-icon" ng-if="item.hot == 1"></span>
             </div>
 
         </a>
         <div class="syndicates-brief-info">
-            <div class="investor-led-title" ng-if="item.investorData.name">
-                <a ui-sref="{{item.investorData | investorLink:'id':'type'}}" title="{{item.investorData.name}}" class="led-name">
-                    {{item.investorData.name}}
-                </a>
-                <span class="text">领投</span>
-            </div>
             <div class="investor-detail">
-                <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="syndicates-logo" style="background-image: url({{item.company.logo || ''}});"></a>
-                <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">{{item.company.name}}</a>
-                <div class="brief">{{item.company.brief}}</div>
                 <div class="props">
                     <div class="syndicates-detail" ng-repeat="key in item.desc.cf_advantage | limitTo : 3">
                         <div class="syndicates-attr">
@@ -56,24 +64,31 @@
                         </div>
                     </div>
                 </div>
+
                 <!--融资进度条-->
-                <loading-bar percent="item.percent" loading-tip="item.cf_success_raising">
+                <!--<loading-bar percent="item.percent">
                 </loading-bar>
 
                 <div class="goal">
-                    已筹集<span class="ml-10">{{item.cf_success_raising | unitConversion}}</span>
+                    已筹集<span class="ml-10">{{item.cf_success_raising_offer | unitConversion}}</span>
                     <span class="goal-num">融资目标<b class="currency ml-10">{{item.cf_raising | unitConversion}}</b>
                     </span>
-                </div>
-                <div class="actions clearfix">
-                    <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default" ng-if="item.color != '60'" baidu-btn="众筹列表页-{{item.company.name}}-详情按钮点击">查看详情</a>
-                    <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default preheat-detail" ng-if="item.color == '60'" baidu-btn="众筹列表页-{{item.company.name}}-详情按钮点击">查看详情</a>
-                    <a href="" class="btn btn-default preheat-remind" login-btn ng-if="item.color == '60'"
-                       ng-click="startRemind($event,item.has_reminder,item.id,$index)" baidu-btn="众筹列表页-{{item.company.name}}-开投提醒按钮点击">
-                        开投提醒
-                    </a>
-                </div>
+                </div>-->
+
             </div>
+        </div>
+        <div class="loading-in">
+            <loading-progress percent="item.percent" loading-tip="true" suc-raise="item.cf_success_raising_offer" raise-goal="item.cf_raising">
+            </loading-progress>
+        </div>
+        <div class="actions clearfix">
+            <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default" ng-if="item.color != '60'" baidu-btn="众筹列表页-{{item.company.name}}-详情按钮点击">查看详情</a>
+            <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default preheat-detail" ng-if="item.color == '60'" baidu-btn="众筹列表页-{{item.company.name}}-详情按钮点击">查看详情</a>
+            <a href="" class="btn btn-default preheat-remind" login-btn ng-if="item.color == '60'"
+               ng-click="startRemind($event,item.has_reminder,item.id,$index)" baidu-btn="众筹列表页-{{item.company.name}}-开投提醒按钮点击">
+                <i class="icon-h5-time"></i>
+                开投提醒
+            </a>
         </div>
     </div>
     <div class="syndicates-index loadMore" ng-click="loadMore()" ng-show="!noMore">

@@ -53,8 +53,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.addr1Options = DictionaryService.getLocation();
         $scope.addr2Options = [];
         /*跟投人认证信息回写*/
-        CrowdFundingService["co-investor"].get({
-            id:"info"
+        CrowdFundingService["audit"].get({
+            id:"co-investor",
+            submodel:"info"
         },function(data){
             delete data.name;
             if(data.cert_info){
@@ -254,8 +255,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.user.city = $scope.basic.value.address2;
                 $scope.user.country = $scope.basic.value.address1;
             }
-            CrowdFundingService["co-investor"].save({
-                id:'identity-cert'
+            CrowdFundingService["audit"].save({
+                id:'co-investor',
+                submodel:'identity-cert'
             },$scope.user,function(data){
                 $scope.valStatus = "validating";
                 /**

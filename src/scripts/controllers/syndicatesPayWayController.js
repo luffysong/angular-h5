@@ -6,6 +6,12 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesPayWayController',
     function($scope, UserService , $stateParams,DictionaryService,CrowdFundingService,CoInvestorService,$state,$rootScope) {
+        var text = {
+            deposit:"支付保证金",
+            balance:"支付剩余款"
+        };
+        $scope.type = $stateParams.type;
+        $scope.typeText = text[$scope.type];
         $scope.uid = UserService.getUID();
         $scope.tid = $stateParams.tid;
         $scope.amount = $stateParams.amount;
@@ -40,7 +46,8 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
                 }else{
                     $state.go("syndicatesPay",{
                         tid:$scope.tid,
-                        amount:$scope.amount
+                        amount:$scope.amount,
+                        type:$scope.type
                     });
                 }
             }

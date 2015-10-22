@@ -5,13 +5,19 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesDetailController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService, $cookies,$sce) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,CoInvestorService, $cookies,$sce,loading) {
+        loading.show("syndicatesDetail");
         if(navigator.userAgent.match(/mac/i)){
             $scope.system = "ios";
         }else{
             $scope.system = "android";
         }
         var statusList = DictionaryService.getDict("crowd_funding_status");
+        /*是否开始播放视频*/
+        $scope.startPlay = false;
+        $scope.startVideo = function(){
+            $scope.startPlay = true;
+        }
         /*股权结构是否出错*/
         $scope.shareError = false;
         /*众筹信息是否全部展开*/
@@ -197,15 +203,18 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             angular.forEach(statusList,function(obj,index){
                 if(obj.value == data.base.status){
                     $scope.status = obj.desc;
-                    var date = new Date(data.base.start_time);
+                    var startTime = new Date(data.base.start_time);
                     /*/!*超募中*!/
                     if(data.base.cf_success_raising > data.base.cf_raising && data.base.cf_raising > 0){
                         $scope.status = "超募中";
                     }*/
                     /*预热中*/
-                    if(new Date() < date && $scope.color != 25){
-                        var minute = date.getMinutes() > 9 ? date.getMinutes() : "0"+date.getMinutes();
-                        $scope.status = (parseInt(date.getMonth())+1)+"月"+date.getDate()+"日  "+date.getHours()+":"+minute+" 开始融资";
+                    if(new Date() < startTime && $scope.color != 25 && $scope.color != 35){
+                        $scope.fundingStatus = "preheat";
+                        //var minute = date.getMinutes() > 9 ? date.getMinutes() : "0"+date.getMinutes();
+                        /*$scope.status = (parseInt(date.getMonth())+1)+"月"+date.getDate()+"日  "+date.getHours()+":"+minute+" 开始融资";*/
+                        var minute = startTime.getMinutes() > 9 ? startTime.getMinutes() : "0"+startTime.getMinutes();
+                        $scope.status = "锚定中 " + (parseInt(startTime.getMonth())+1)+"月"+startTime.getDate()+"日  "+startTime.getHours()+":"+minute+"  开放募资";
                         $scope.color = 60;
                     }
                 }
@@ -216,7 +225,11 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 $scope.status = "预热中";
             }
             if($scope.syndicatesInfo.base){
-                $scope.syndicatesInfo.base.percent = parseInt($scope.syndicatesInfo.base.cf_success_raising) * 100 / parseInt($scope.syndicatesInfo.base.cf_raising);
+                if(parseInt($scope.syndicatesInfo.base.cf_success_raising_offer) === 0 || !$scope.syndicatesInfo.base.cf_success_raising_offer || !$scope.syndicatesInfo.base.cf_raising){
+                    $scope.syndicatesInfo.base.percent = 0;
+                }else{
+                    $scope.syndicatesInfo.base.percent = (parseInt($scope.syndicatesInfo.base.cf_success_raising_offer) * 100 / parseInt($scope.syndicatesInfo.base.cf_raising)).toFixed(0);
+                }
                 /*
                  停止投资三种情况：
                  1.众筹超时
@@ -226,13 +239,10 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 if(new Date($scope.syndicatesInfo.base.end_time) < new Date()){
                     $scope.timeout = true;
                 }
-                if($scope.syndicatesInfo.base.min_investment && $scope.syndicatesInfo.base.min_investment > $scope.syndicatesInfo.base.cf_max_raising - $scope.syndicatesInfo.base.cf_success_raising){
-                    $scope.timeout = true;
-                }
             }
-            if($scope.syndicatesInfo.co_investors && $scope.syndicatesInfo.base.max_coinvestor_number <= $scope.syndicatesInfo.co_investors.length){
+            /*if($scope.syndicatesInfo.co_investors && $scope.syndicatesInfo.base.max_coinvestor_number <= $scope.syndicatesInfo.co_investors.length){
                 $scope.timeout = true;
-            }
+            }*/
             if(!$scope.syndicatesInfo.detail)return;
             /*视频链接处理*/
             if($scope.syndicatesInfo.detail.com_video_link){
@@ -245,7 +255,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     obj.isHide = true;
                 });
             }
-            $scope.shareError = parseInt($scope.syndicatesInfo.detail.es_funding_team) + parseInt($scope.syndicatesInfo.detail.es_investor) + parseInt($scope.syndicatesInfo.detail.es_staff) == 100 ? false : true;
+            $scope.shareError = $scope.syndicatesInfo.detail.es_funding_team * 1 + $scope.syndicatesInfo.detail.es_investor * 1 + $scope.syndicatesInfo.detail.es_staff * 1 == 100 ? false : true;
             var chartData = [$scope.syndicatesInfo.detail.es_investor,$scope.syndicatesInfo.detail.es_funding_team,$scope.syndicatesInfo.detail.es_staff];
             angular.forEach($scope.chartConfig.series[0].data,function(obj,index){
                 if(chartData[index] == 0){
@@ -254,7 +264,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     obj[1] = chartData[index];
                 }
             });
-
+            loading.hide("syndicatesDetail");
         },function(err){
             ErrorService.alert(err);
         });
@@ -389,15 +399,17 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 });
             }
         }
+        /*status为1时，为待付保证金订单*/
         CoInvestorService['my-financing'].query({
             company_id:$scope.companyId,
-            status:  0,
             per_page:100,
+            status:1,
+            payment_status:1,
             page: 1
         },function(data){
             /*过滤数据，去除线下汇款订单*/
             angular.forEach(data.data,function(obj,index){
-                if(obj.payment.platform_type != 1 && obj.payment.status == 1){
+                if(obj.payment.platform_type != 1 && obj.payment.status == 1 && obj.trade_c_f_deposit){
                     $scope.orderData.push(obj);
                 }
             });
