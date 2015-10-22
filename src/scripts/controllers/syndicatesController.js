@@ -201,6 +201,8 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                                 expires.setYear(expires.getFullYear() + 1);
                                 document.cookie = 'newTipsClear=clear' + '; expires=' + expires.toGMTString();
 
+                                location.href = scope.helpHost + '/q-m-zc-new.html';
+
                                 $modalInstance.dismiss();
                             };
                         }],
