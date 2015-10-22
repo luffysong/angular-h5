@@ -309,9 +309,9 @@ window.DICTIONARY_CF_DATA =  {
         ],
         "03170000": [
             {
-                "auth_type": "",
-                "limit_once": "2万",
-                "limit_everyday": "10万"
+                "auth_type": "个人网银大众版",
+                "limit_once": "无限制",
+                "limit_everyday": "5000"
             }
         ],
         "04031000": [
