@@ -67,6 +67,19 @@
                 选择支付方式
             </div>
             <div class="pay-way">
+                <div class="way-detail" ng-click="selectWay('alipay')">
+                    <div class="way-image">
+                        <span class="ali-pay">
+                        </span>
+                    </div>
+                    <div class="way-info">
+                        <div class="way-intro">支付宝</div>
+                        <div class="intro-detail">推荐有支付宝账号的用户使用</div>
+                    </div>
+                    <div class="way-handle" ng-if="payType == 'alipay'">
+                        <a href="" class="glyphicon glyphicon-ok"></a>
+                    </div>
+                </div>
                 <div class="way-detail" ng-click="selectWay('card')">
                     <div class="way-image">
                         <span class="icon-uniE620">
@@ -80,20 +93,6 @@
                     <div class="way-handle" ng-if="payType == 'card'">
                         <a href="" class="glyphicon glyphicon-ok"></a>
                     </div>
-                </div>
-                <div class="way-detail" ng-click="selectWay('alipay')">
-                    <div class="way-image">
-                        <span class="ali-pay">
-                        </span>
-                    </div>
-                    <div class="way-info">
-                        <div class="way-intro">支付宝</div>
-                        <div class="intro-detail">推荐有支付宝账号的用户使用</div>
-                    </div>
-                    <div class="way-handle" ng-if="payType == 'alipay'">
-                        <a href="" class="glyphicon glyphicon-ok"></a>
-                    </div>
-
                 </div>
             </div>
             <a class="ensure-pay btn" ng-disabled="!isRead || confirmForm.$invalid" ng-click="ensurePay()" baidu-btn="确认支付按钮点击">支付保证金</a>

@@ -22,7 +22,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         $scope.krCode = {
             number:""
         };
-        $scope.payType = "card";
+        $scope.payType = "alipay";
         /*选择支付方式*/
         $scope.selectWay = function(target){
             $scope.payType = target;
