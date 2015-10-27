@@ -1,21 +1,12 @@
 <div class="home-wrap" ng-if="!isInApp">
     <div class="slider-container syndicates">
         <slick infinite=true autoplay=false pauseOnHover=false speed=1000 dots="true" arrows="false">
-            <div class="slider syndicates">
-                <div class="slider-image">
-                    <a href="" class="banner-btn" ng-click="gotoInvest()">我要投资</a>
+            <div class="slider syndicates" ng-repeat="item in banners">
+                <div class="slider-image" style="background-image: url('{{item.img_url}}'); background-color:#333">
+                    <a href="{{item.link_url}}"></a>
                 </div>
                 <div class="slider-bottom">
-                    <h3>从考拉班车之死说起班车服务到底有多差？</h3>
-                </div>
-            </div>
-
-             <div class="slider syndicates">
-                 <div class="slider-image next">
-                     <a href="{{helpHost}}/q-m-zc.html" class="banner-btn">查看详情</a>
-                 </div>
-                <div class="slider-bottom">
-                    <h3>从考拉班车之死说起班车服务到底有多差？</h3>
+                    <h3>{{item.title}}</h3>
                 </div>
             </div>
         </slick>

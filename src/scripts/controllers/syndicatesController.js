@@ -5,9 +5,30 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,$timeout,loading, $cookies) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,$timeout,loading, $cookies, CMSService) {
         document.title="36氪股权投资";
         loading.show("syndicatesList");
+        // 获取首页 banner
+        CMSService.getZhongchouBanner().success(function(data){
+            $scope.banners = data;
+        }).catch(function(){
+            $scope.banners = [];
+        });
+
+        // 加载首页头条
+        CrowdFundingService["sm"].get({
+            'id': 'news',
+            'pid': 2,
+            'per_page': 3
+        },function(data){
+            if(!data.info || !data.info.data || !data.info.data.length) {
+                return $scope.bannerNews = [];
+            }
+            $scope.bannerNews = data.info.data;
+        },function(err) {
+            ErrorService.alert(err);
+        });
+
         var statusList = DictionaryService.getDict("crowd_funding_status");
         /*每页几条数据*/
         var pageSize = 30;
