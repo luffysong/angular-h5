@@ -1,4 +1,5 @@
 #!/bin/bash
+
 gulp build:prod
 rsync -rvltOD ./dist/* dev05:/data/work/asset/m
 rsync -rvltOD ./dist/* dev06:/data/work/asset/m
