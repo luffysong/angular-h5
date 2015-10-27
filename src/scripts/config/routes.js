@@ -71,6 +71,20 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
+    /*众筹所有模块*/
+
+    /*新闻公告模块*/
+    $stateProvider.state('syndicatesNews', {
+        url: '/zhongchouNews',
+        templateUrl: 'templates/syndicates/news/index.html',
+        controller: 'syndicatesNewsController'
+    });
+    /*新闻详情模块*/
+    $stateProvider.state('syndicatesNews.detail', {
+        url: '/detail?{id}',
+        templateUrl: 'templates/syndicates/news/detail.html',
+        controller: 'syndicatesNewsDetailController'
+    });
     /*我要上众筹活动*/
     $stateProvider.state('syndicatesDesire', {
         url: '/zhongchouDesire',
