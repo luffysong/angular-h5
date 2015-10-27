@@ -1,24 +1,27 @@
 <div class="home-wrap" ng-if="!isInApp">
-    <div class="slider-container">
-        <div class="top-slide-arrow syndicates">
-            <!--<a href="javascript:void(0)" class="top-slide-arrow-left"></a>
-            <a href="javascript:void(0)" class="top-slide-arrow-right"></a>-->
-        </div>
-        <slick infinite=true autoplay=false pauseOnHover=false speed=1000 prev-arrow=".top-slide-arrow-left"
-               next-arrow=".top-slide-arrow-right">
+    <div class="slider-container syndicates">
+        <slick infinite=true autoplay=false pauseOnHover=false speed=1000 dots="true" arrows="false">
             <div class="slider syndicates">
                 <div class="slider-image">
-                    <a href="" class="banner-btn" ng-click="gotoInvest()" baidu-btn="众筹列表页-banner点击">我要投资</a>
+                    <a href="" class="banner-btn" ng-click="gotoInvest()">我要投资</a>
+                </div>
+                <div class="slider-bottom">
+                    <h3>从考拉班车之死说起班车服务到底有多差？</h3>
                 </div>
             </div>
-            <div class="slider syndicates">
-                <div class="slider-image next">
-                    <a href="{{helpHost}}/q-m-zc.html" class="banner-btn" baidu-btn="众筹列表页-banner点击">查看详情</a>
+
+             <div class="slider syndicates">
+                 <div class="slider-image next">
+                     <a href="{{helpHost}}/q-m-zc.html" class="banner-btn">查看详情</a>
+                 </div>
+                <div class="slider-bottom">
+                    <h3>从考拉班车之死说起班车服务到底有多差？</h3>
                 </div>
             </div>
         </slick>
     </div>
 </div>
+
 <div class="container" ng-hide="loadingInst.syndicatesList">
     <div class="syndicates-index"
          ng-style="{marginTop:isInApp?0:''}"
