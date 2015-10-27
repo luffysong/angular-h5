@@ -80,8 +80,8 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controller: 'syndicatesNewsController'
     });
     /*新闻详情模块*/
-    $stateProvider.state('syndicatesNews.detail', {
-        url: '/detail?{id}',
+    $stateProvider.state('syndicatesNewsDetail', {
+        url: '/zhongchouNewsDetail?{id}',
         templateUrl: 'templates/syndicates/news/detail.html',
         controller: 'syndicatesNewsDetailController'
     });

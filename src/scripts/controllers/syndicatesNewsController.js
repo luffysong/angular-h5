@@ -15,9 +15,10 @@ angular.module('defaultApp.controller').controller('syndicatesNewsController',
         $scope.pageNo = 1;
         var pageSize = 3;
         /*默认新闻页数*/
-        var newsPageSize = 2;
+        var newsPageSize = 12;
         $scope.newsPageNo = 1;
         $scope.totalPage = 1;
+        $scope.activePid = "";
         /*是否用关键字查询*/
         $scope.keywordSearch = false;
         /*新闻分类Column*/
@@ -28,6 +29,7 @@ angular.module('defaultApp.controller').controller('syndicatesNewsController',
         }];
         var statusList = DictionaryService.getDict("crowd_funding_status");
         $scope.switchNews = function(index,pid){
+            if($scope.newsList[index].active)return;
             $scope.showLoading("syndicatesNewsList");
             angular.forEach($scope.newsList,function(obj,index){
                 obj.active = false;
@@ -35,7 +37,10 @@ angular.module('defaultApp.controller').controller('syndicatesNewsController',
             $scope.loadNews({
                 column_id:pid
             });
+            $scope.activePid = pid;
             $scope.newsList[index].active = true;
+            $scope.newsPageNo = 1;
+            $scope.keywordSearch = false;
         }
         /*新闻分类Column*/
         $scope.loadNewsColumn = function(){
@@ -119,9 +124,16 @@ angular.module('defaultApp.controller').controller('syndicatesNewsController',
                     page:$scope.newsPageNo
                 },"push");
             }else{
-                $scope.loadNews({
-                    page:$scope.newsPageNo
-                },"push");
+                if($scope.activePid){
+                    $scope.loadNews({
+                        column_id:$scope.activePid,
+                        page:$scope.newsPageNo
+                    },"push");
+                }else{
+                    $scope.loadNews({
+                        page:$scope.newsPageNo
+                    },"push");
+                }
             }
         }
         $scope.submit = function(){
@@ -129,7 +141,6 @@ angular.module('defaultApp.controller').controller('syndicatesNewsController',
         }
         /*根据标题查询*/
         $scope.searchData = function(){
-            window.scrollTo(0,0);
             if($scope.news.keyword === "")return;
             angular.forEach($scope.newsList,function(obj){
                 if(obj.name == "全部"){
@@ -141,6 +152,8 @@ angular.module('defaultApp.controller').controller('syndicatesNewsController',
             $scope.loadNews({
                 title:$scope.news.keyword
             });
+            $scope.activePid = "";
+            $scope.newsPageNo = 1;
             $scope.showLoading("syndicatesNewsList");
         }
         /*右侧融资项目数据处理*/

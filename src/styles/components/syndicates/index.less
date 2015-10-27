@@ -1,7 +1,11 @@
 
 /*众筹首页样式*/
 .syndicates-index {
-    padding:15px;
+    padding: 0 15px;
+    margin-bottom: 15px;
+    &:first-of-type {
+        margin-top: 15px;
+    }
     .actions {
         overflow: hidden;
         .btn {
@@ -9,11 +13,11 @@
             padding: 0;
             height: 40px;
             line-height: 40px;
-            font-size: 15px;
+            font-size: 16px;
             border-radius: 0;
             border: 0;
             background: #fff;
-            border-top: 1px solid #DFDFDF;
+            border-top: 1px solid #f0f0f0;
             color: #008df2;
             &.preheat-detail {
                 width: 50%;
@@ -76,8 +80,7 @@
     .title-info {
         width: 100%;
         .clearfix;
-        height: 70px;
-        padding: 15px 15px 0;
+        padding: 15px;
         background: #fff;
         .syndicates-logo {
             display: block;
@@ -93,15 +96,16 @@
         .syndicates-intro {
             margin-left: 55px;
             a {
-                color: #000;
+                color: #333;
                 font-weight: 600;
                 white-space: nowrap;
+                font-size: 16px;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
             .brief {
                 color: #999;
-                font-size: 12px;
+                font-size: 13px;
                 line-height: 1.25;
                 word-break: break-all;
             }
@@ -227,18 +231,18 @@
             }
             .syndicates-detail {
                 .clearfix;
-                padding:3px 0;
+                padding:1px 0;
                 p {
                     margin:0;
                 }
             }
             .props {
-                border-bottom: solid 1px #DFDFDF;
+                border-bottom: solid 1px #f0f0f0;
                 padding-bottom: 10px;
             }
             .syndicates-attr {
                 float: left;
-                color: #666;
+                color: #999;
                 font-size: 13px;
             }
             .syndicates-intro {
@@ -759,7 +763,7 @@
 }
 .loading-in {
     height: 85px;
-    padding: 20px 15px;
+    padding: 25px 15px;
     background: #fff;
 }
 /*众筹2.0改版进度条Directive样式*/
@@ -813,7 +817,7 @@
             }
         }
         .loading-detail {
-            color: #000;
+            color: #555;
         }
         .loading-point {
             margin: 0 5px;

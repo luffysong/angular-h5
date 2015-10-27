@@ -13,19 +13,25 @@
     </div>
     <div ng-hide="loadingInst.syndicatesNewsList">
         <div class="desire-content">
-            <div class="news-list" ui-sref="syndicatesDesireDetail({id:item.id})" ng-repeat="item in newsData track by $index" ng-class="{'normal':$index % 3 == 0 && $index != 0}">
-                    <a class="news-logo" href="" ui-sref="syndicatesNews.detail({id:data.id})" style="background-image:url({{item.list_image | image}})"></a>
-                    <!--<span class="praise-add" ng-class="{'showPraise':item.isPraise}">+{{point}}</span>-->
-                    <div class="news-center">
-                        <a class="news-title" href="" ui-sref="syndicatesNews.detail({id:data.id})" ng-bind-html="item.title"></a>
-                        <section class="news-time">
-                            <span class="icon-h5-time"></span>
-                            <span class="time-text" ng-bind="item.time"></span>
-                        </section>
-                    </div>
+            <div class="news-list" ui-sref="syndicatesNewsDetail({id:item.id})" ng-repeat="item in newsData track by $index" ng-class="{'normal':$index % 3 == 0 && $index != 0}">
+                <a class="news-logo" href="" ui-sref="syndicatesNewsDetail({id:item.id})" style="background-image:url({{item.list_image | image}})">
+                    <span class="type-tags bg-{{item.column_id}}" ng-bind="item.column_id_zh"></span>
+                </a>
+                <!--<span class="praise-add" ng-class="{'showPraise':item.isPraise}">+{{point}}</span>-->
+                <div class="news-center">
+                    <a class="news-title" href="" ui-sref="syndicatesNewsDetail({id:item.id})" ng-bind-html="item.title"></a>
+                    <section class="news-time">
+                        <span class="icon-h5-time"></span>
+                        <span class="time-text" ng-bind="item.time"></span>
+                    </section>
+                </div>
             </div>
         </div>
         <div class="more-data" ng-click="loadMore()" ng-show="totalPage != newsPageNo && newsData.length">加载更多</div>
+        <div class="no-data-layer text-center" ng-show="!newsData.length">
+            <div class="icon-h5-search"></div>
+            <p class="remind-info">暂无数据</p>
+        </div>
     </div>
     <div loading="syndicatesNewsList"></div>
 </div>
