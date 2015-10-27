@@ -1,37 +1,54 @@
-<div class="syndicates-desire">
-    <a class="activity-detail" href="" ng-click="activityDetail()">活动详情</a>
-    <div class="desire-nav">
-        <div class="nav-content">
-            <div class="nav-type" ng-repeat="item in newsList track by $index" ng-click="switchNews($index,item.id)" ng-bind="item.name" ng-class="{'active':item.active}"></div>
-        </div>
-        <div class="search-bar">
-            <span class="icon-search2" ng-show="!keyword"></span>
-            <form name="searchForm" ng-submit="submit()">
-                <input type="text" placeholder="搜索" ng-model="news.keyword">
-            </form>
+<div ng-hide="loadingInst.newsBanner">
+    <div class="home-wrap">
+        <div class="slider-container syndicates">
+            <slick infinite=true autoplay=false pauseOnHover=false speed=1000 dots="true" arrows="false">
+                <div class="slider syndicates" ng-repeat="item in banners">
+                    <div class="slider-image" style="background-image: url('{{item.img_url}}'); background-color:#333">
+                        <a href="{{item.link_url}}"></a>
+                    </div>
+                    <div class="slider-bottom">
+                        <h3>{{item.title}}</h3>
+                    </div>
+                </div>
+            </slick>
         </div>
     </div>
-    <div ng-hide="loadingInst.syndicatesNewsList">
-        <div class="desire-content">
-            <div class="news-list" ui-sref="syndicatesNewsDetail({id:item.id})" ng-repeat="item in newsData track by $index" ng-class="{'normal':$index % 3 == 0 && $index != 0}">
-                <a class="news-logo" href="" ui-sref="syndicatesNewsDetail({id:item.id})" style="background-image:url({{item.list_image | image}})">
-                    <span class="type-tags bg-{{item.column_id}}" ng-bind="item.column_id_zh"></span>
-                </a>
-                <!--<span class="praise-add" ng-class="{'showPraise':item.isPraise}">+{{point}}</span>-->
-                <div class="news-center">
-                    <a class="news-title" href="" ui-sref="syndicatesNewsDetail({id:item.id})" ng-bind-html="item.title"></a>
-                    <section class="news-time">
-                        <span class="icon-h5-time"></span>
-                        <span class="time-text" ng-bind="item.time"></span>
-                    </section>
-                </div>
+    <div class="syndicates-desire">
+        <a class="activity-detail" href="" ng-click="activityDetail()">活动详情</a>
+        <div class="desire-nav">
+            <div class="nav-content">
+                <div class="nav-type" ng-repeat="item in newsList track by $index" ng-click="switchNews($index,item.id)" ng-bind="item.name" ng-class="{'active':item.active}"></div>
+            </div>
+            <div class="search-bar">
+                <span class="icon-search2" ng-show="!keyword"></span>
+                <form name="searchForm" ng-submit="submit()">
+                    <input type="text" placeholder="搜索" ng-model="news.keyword">
+                </form>
             </div>
         </div>
-        <div class="more-data" ng-click="loadMore()" ng-show="totalPage != newsPageNo && newsData.length">加载更多</div>
-        <div class="no-data-layer text-center" ng-show="!newsData.length">
-            <div class="icon-h5-search"></div>
-            <p class="remind-info">暂无数据</p>
+        <div ng-hide="loadingInst.syndicatesNewsList">
+            <div class="desire-content">
+                <div class="news-list" ui-sref="syndicatesNewsDetail({id:item.id})" ng-repeat="item in newsData track by $index" ng-class="{'normal':$index % 3 == 0 && $index != 0}">
+                    <a class="news-logo" href="" ui-sref="syndicatesNewsDetail({id:item.id})" style="background-image:url({{item.list_image | image}})">
+                        <span class="type-tags bg-{{item.column_id}}" ng-bind="item.column_id_zh"></span>
+                    </a>
+                    <!--<span class="praise-add" ng-class="{'showPraise':item.isPraise}">+{{point}}</span>-->
+                    <div class="news-center">
+                        <a class="news-title" href="" ui-sref="syndicatesNewsDetail({id:item.id})" ng-bind-html="item.title"></a>
+                        <section class="news-time">
+                            <span class="icon-h5-time"></span>
+                            <span class="time-text" ng-bind="item.time"></span>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="more-data" ng-click="loadMore()" ng-show="totalPage != newsPageNo && newsData.length">加载更多</div>
+            <div class="no-data-layer text-center" ng-hide="newsData.length">
+                <div class="icon-h5-search"></div>
+                <p class="remind-info">暂无数据</p>
+            </div>
         </div>
+        <div loading="syndicatesNewsList"></div>
     </div>
-    <div loading="syndicatesNewsList"></div>
 </div>
+<div loading="newsBanner"></div>
