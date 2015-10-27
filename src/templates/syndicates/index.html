@@ -1,4 +1,4 @@
-<div class="home-wrap" ng-if="!isInApp">
+<div class="home-wrap" ng-if="!isInApp" ng-hide="loadingInst.syndicatesList">
     <div class="slider-container syndicates">
         <slick infinite=true autoplay=false pauseOnHover=false speed=1000 dots="true" arrows="false">
             <div class="slider syndicates" ng-repeat="item in banners">
@@ -10,6 +10,19 @@
                 </div>
             </div>
         </slick>
+    </div>
+
+    <div class="news-container clearfix">
+        <div class="news-header">
+            <h3>新闻公告</h3>
+            <a class="view-more" href="" ui-sref="syndicatesNews">更多>></a>
+        </div>
+        <ul class="news-items">
+            <li class="news-item" ng-repeat="news in bannerNews">
+                <span class="item-num">{{$index + 1}}</span>
+                <a href="" target="_blank" ui-sref="syndicatesNews.detail({id: news.id})">{{news.title}}</a>
+            </li>
+        </ul>
     </div>
 </div>
 
@@ -58,17 +71,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!--融资进度条-->
-                <!--<loading-bar percent="item.percent">
-                </loading-bar>
-
-                <div class="goal">
-                    已筹集<span class="ml-10">{{item.cf_success_raising_offer | unitConversion}}</span>
-                    <span class="goal-num">融资目标<b class="currency ml-10">{{item.cf_raising | unitConversion}}</b>
-                    </span>
-                </div>-->
-
             </div>
         </div>
         <div class="loading-in">
@@ -90,3 +92,5 @@
     </div>
 </div>
 <div loading="syndicatesList"></div>
+
+<div ng-include="'templates/syndicates/bottom-menu.html'"></div>

@@ -686,7 +686,75 @@
         &:hover .top-slide-arrow > a {
             .c-translate(0, 0);
         }
+    }
 
+    .news-container {
+    }
+
+    .news-container {
+        position: relative;
+        height: 123px;
+        margin-top: 10px;
+        margin-bottom: -15px;
+        background: #fff;
+        color: #555;
+
+        .news-header {
+            height: 37px;
+            padding-top: 5px;
+            line-height: 30px;
+
+            h3 {
+                display: inline-block;
+                margin: 0 0 0 10px;
+                font-size: 14px;
+                color: #999;
+            }
+
+            .view-more {
+                float: right;
+                color: #008df2;
+                margin-right: 10px;
+            }
+        }
+
+        .news-items {
+            list-style: none;
+            margin: 0;
+            padding: 0 20px 0 0;
+
+            .news-item {
+                position: relative;
+                margin-top: 5px;
+                height: 22px;
+                padding-left: 38px;
+                overflow: hidden;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                .item-num {
+                    position: absolute;
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    top: 4px;
+                    left: 10px;
+                    line-height: 18px;
+                    text-align: center;
+                    background-color: #deebff;
+                    border-radius: 2px;
+                    font-weight: 500;
+                    color: #86b1f1;
+                }
+
+                &> a {
+                    color: #555;
+                    text-decoration: none;
+                }
+            }
+        }
     }
 }
 .loading-in {
@@ -824,6 +892,55 @@
             bottom: -12px;
             left: 50%;
             margin-left: -3px;
+        }
+    }
+}
+
+// 众筹底部导航
+.syndicates-bottom-menu {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 45px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, .8);
+    border-top: 1px solid #c6c6c6;
+    border-bottom: 1px solid #c6c6c6;
+
+    li {
+        position: relative;
+        float: left;
+        width: 25%;
+
+        a {
+            display: block;
+            width: 100%;
+            height: 50px;
+            padding-top: 25px;
+            line-height: 20px;
+            color: #929292;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        &.active a {
+            color: #007aff;
+        }
+
+        span {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            margin-left: -10px;
+            font-size: 20px;
+        }
+
+        .icon-home:before {
+            content: "\e901";
         }
     }
 }
