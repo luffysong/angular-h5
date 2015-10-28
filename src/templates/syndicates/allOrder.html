@@ -8,10 +8,10 @@
             <a class="order-cancel" ng-if="(item.status < 3 || (item.status > 9 && item.status != 14)) && item.trade_c_f_deposit.payment.status == 1" ng-click="cancelOrder(item.trade_id);">取消订单</a>
         </div>
         <div class="company-info">
-            <a class="company-logo" ui-sref="company_detail({ id:item.company.id })">
+            <a class="company-logo" ui-sref="company_detail({ id:item.company.id })" data-stat-click="orderlist.company">
                 <img src="{{ item.company.logo | image }}" alt="{{ item.company.name }}">
             </a>
-            <a class="company-name" ui-sref="company_detail({ id:item.company.id })">{{item.company.name}}</a>
+            <a class="company-name" ui-sref="company_detail({ id:item.company.id })" data-stat-click="orderlist.company">{{item.company.name}}</a>
             <div class="banner" ng-if="!!item.invite_code">Kr码认购</div>
         </div>
         <div class="money-info">
@@ -35,9 +35,9 @@
                     <div class="item-left">付款时间</div>
                     <div class="item-right">{{ item.trade_c_f_deposit.payment.notify_time }}</div>
                 </div>
-                <a class="btn btn-default stage-btn" ng-if="(item.status < 3 || (item.status > 9 && item.status != 14)) && item.trade_c_f_deposit.payment.status == 1 && item.trade_c_f_deposit.payment.platform_type != 1" ui-sref="syndicatesPayWay({tid:item.trade_c_f_deposit.trade_id,amount:item.trade_c_f_deposit.deposit,type:'deposit'})">付款</a>
-                <a class="btn btn-default stage-btn" ng-if="(item.status < 3 || (item.status > 9 && item.status != 14)) && item.trade_c_f_deposit.payment.status == 1 && item.trade_c_f_deposit.payment.platform_type == 1" ui-sref="syndicatesPayOutline({ tid:item.trade_c_f_deposit.trade_id, type:'deposit' })">查看汇款信息</a>
-                <a class="btn btn-default stage-btn" ng-if="(item.status < 3 || (item.status > 9 && item.status != 14)) && (item.trade_c_f_deposit.payment.status == 3) && (item.trade_c_f_balance.payment.status == 0) && !item.trade_c_f_deposit.refund_timeout && !item.invite_code" ng-click="askForRefund(item.trade_c_f_deposit.trade_id);">申请退款</a>
+                <a class="btn btn-default stage-btn" ng-if="(item.status < 3 || (item.status > 9 && item.status != 14)) && item.trade_c_f_deposit.payment.status == 1 && item.trade_c_f_deposit.payment.platform_type != 1" ui-sref="syndicatesPayWay({tid:item.trade_c_f_deposit.trade_id,amount:item.trade_c_f_deposit.deposit,type:'deposit'})" data-stat-click="orderlist.pay">付款</a>
+                <a class="btn btn-default stage-btn" ng-if="(item.status < 3 || (item.status > 9 && item.status != 14)) && item.trade_c_f_deposit.payment.status == 1 && item.trade_c_f_deposit.payment.platform_type == 1" ui-sref="syndicatesPayOutline({ tid:item.trade_c_f_deposit.trade_id, type:'deposit' })" data-stat-click="orderlist.do">查看汇款信息</a>
+                <a class="btn btn-default stage-btn" ng-if="(item.status < 3 || (item.status > 9 && item.status != 14)) && (item.trade_c_f_deposit.payment.status == 3) && (item.trade_c_f_balance.payment.status == 0) && !item.trade_c_f_deposit.refund_timeout && !item.invite_code" ng-click="askForRefund(item.trade_c_f_deposit.trade_id);" data-stat-click="orderlist.do">申请退款</a>
             </div>
             <div class="stage stage-two" ng-if="item.trade_c_f_balance">
                 <div class="stage-item">阶段二<span class="status" ng-class="{'not': item.trade_c_f_balance.payment.status == 1, 'has': item.trade_c_f_balance.payment.status == 3}">{{ item.trade_c_f_balance.payment.status | dict_trade_status }}</span></div>
@@ -53,8 +53,8 @@
                     <div class="item-left">剩余付款时间</div>
                     <div class="item-right"><span countdown date='{{ item.trade_c_f_balance.payment.close_time }}' open-date='{{ item.trade_c_f_balance.payment.open_time }}'></span></div>
                 </div>
-                <a class="btn btn-default stage-btn" ng-if="(item.status < 3 || (item.status > 9 && item.status != 14)) && item.trade_c_f_balance.payment.status == 1 && item.trade_c_f_balance.payment.platform_type != 1 && !item.trade_c_f_balance.refund_timeout" ui-sref="syndicatesPayWay({tid:item.trade_c_f_balance.trade_id,amount:item.trade_c_f_balance.balance,type:'balance'})">付款</a>
-                <a class="btn btn-default stage-btn" ng-if="(item.status < 3 || (item.status > 9 && item.status != 14)) && item.trade_c_f_balance.payment.status == 1 && item.trade_c_f_balance.payment.platform_type == 1" ui-sref="syndicatesPayOutline({ tid: item.trade_c_f_balance.trade_id, type: 'balance' })">查看汇款信息</a>
+                <a class="btn btn-default stage-btn" ng-if="(item.status < 3 || (item.status > 9 && item.status != 14)) && item.trade_c_f_balance.payment.status == 1 && item.trade_c_f_balance.payment.platform_type != 1 && !item.trade_c_f_balance.refund_timeout" ui-sref="syndicatesPayWay({tid:item.trade_c_f_balance.trade_id,amount:item.trade_c_f_balance.balance,type:'balance'})" data-stat-click="orderlist.pay" data-stat-click="orderlist.do">付款</a>
+                <a class="btn btn-default stage-btn" ng-if="(item.status < 3 || (item.status > 9 && item.status != 14)) && item.trade_c_f_balance.payment.status == 1 && item.trade_c_f_balance.payment.platform_type == 1" ui-sref="syndicatesPayOutline({ tid: item.trade_c_f_balance.trade_id, type: 'balance' })" data-stat-click="orderlist.do">查看汇款信息</a>
             </div>
         </div>
     </div>
