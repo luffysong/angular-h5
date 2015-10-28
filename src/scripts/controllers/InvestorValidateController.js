@@ -223,7 +223,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 }
             });
         }
-        /*表单提交*/
+        /*表单提交-跟投人信息*/
         $scope.submitForm = function(){
             $scope.enterCard = true;
             /*/!*初始化*!/
@@ -369,6 +369,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.hasClick = false;
             });
         };
+        /*表单提交-用户信息*/
+        $scope.submitFormUser = function(){
+            console.log(111);
+            console.log($scope.user);
+        });
 
         WEIXINSHARE = {
             shareTitle: "36氪股权投资",
