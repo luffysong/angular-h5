@@ -3,7 +3,7 @@
         <slick infinite=true autoplay=false pauseOnHover=false speed=1000 dots="true" arrows="false">
             <div class="slider syndicates" ng-repeat="item in banners">
                 <div class="slider-image" style="background-image: url('{{item.img_url}}'); background-color:#333">
-                    <a href="{{item.link_url}}"></a>
+                    <a href="{{item.link_url}}" ng-stat-click="lunbotu.button"></a>
                 </div>
                 <div class="slider-bottom">
                     <h3>{{item.title}}</h3>
@@ -33,7 +33,7 @@
          ng-class="{'mb-50': $index == investorList.length-1 && noMore}">
         <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
             <div class="title-info">
-                <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="syndicates-logo" style="background-image: url({{item.company.logo || ''}});"></a>
+                <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="syndicates-logo" style="background-image: url({{item.company.logo || ''}});"  data-stat-click="zhongchouliebiao.zhongchougongsilogo.{{$index}}.{{item.id}}"></a>
                 <div class="syndicates-intro">
                     <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
                         {{item.company.name}}
@@ -43,7 +43,7 @@
             </div>
             <div class="syndicates-pic">
                 <div class="syndicates-container">
-                    <img height="160" ng-src="{{item.desc.file_list_img}}" alt=""/>
+                    <img height="160" ng-src="{{item.desc.file_list_img}}" alt="" data-stat-click="zhongchouliebiao.gongsitu.{{$index}}.{{item.id}}"/>
                     <div class="investor-led-title" ng-if="item.investorData.name">
                         <a ui-sref="{{item.investorData | investorLink:'id':'type'}}" title="{{item.investorData.name}}" class="led-name">
                             {{item.investorData.name}}
@@ -78,10 +78,10 @@
             </loading-progress>
         </div>
         <div class="actions clearfix">
-            <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default" ng-if="item.color != '60'" baidu-btn="众筹列表页-{{item.company.name}}-详情按钮点击">查看详情</a>
-            <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default preheat-detail" ng-if="item.color == '60'" baidu-btn="众筹列表页-{{item.company.name}}-详情按钮点击">查看详情</a>
+            <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default" ng-if="item.color != '60'" data-stat-click="zhongchouliebiao.caozuobutton.{{$index}}.{{item.id}}">查看详情</a>
+            <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default preheat-detail" ng-if="item.color == '60'" data-stat-click="zhongchouliebiao.caozuobutton.{{$index}}.{{item.id}}">查看详情</a>
             <a href="" class="btn btn-default preheat-remind" login-btn ng-if="item.color == '60'"
-               ng-click="startRemind($event,item.has_reminder,item.id,$index)" baidu-btn="众筹列表页-{{item.company.name}}-开投提醒按钮点击">
+               ng-click="startRemind($event,item.has_reminder,item.id,$index)" data-stat-click="zhongchouliebiao.kaitoutixing.{{item.id}}">
                 <i class="icon-h5-time"></i>
                 开投提醒
             </a>
