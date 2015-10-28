@@ -66,6 +66,10 @@
                      ng-show="createForm.website.$invalid && createForm.website.$dirty" ng-if="!formData.cid && !(formData.operationStatus == 'ONLINE_IN_6MONTH' || formData.operationStatus == 'ONLINE_IN_3MONTH')">
                     <span>请填写公司网址，http://开头</span>
                 </div>
+
+                <div class="error-alert error" ng-show="createForm.$error.urlblacklist">
+                    <span>所填网址无法作为公司独立网址</span>
+                </div>
                 <div class="error-alert error"
                      ng-show="createForm.name.$invalid && createForm.name.$dirty">
                     <span>请填写公司简称</span>
@@ -89,7 +93,7 @@
                             <div class="suggest_wrap" ng-click="positionSet($event);">
                                 <input type="text" ng-model="formData.name"
                                        name="name"
-                                       placeholder="请填写大众熟知的项目名称"
+                                       placeholder="请填写公司核心产品名称或项目名称。如：36氪"
                                        required
                                        class="form-control"
                                         mass-autocomplete-item="autocomplete_options"/>

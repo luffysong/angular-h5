@@ -4,6 +4,7 @@ var angular = require('angular');
 require('./config/setting');
 require('./config/dictionary');
 require('./config/dictionary_cf');
+require('./config/dictionary_url');
 
 require('./config/city');
 

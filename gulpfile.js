@@ -629,6 +629,7 @@ gulp.task('dict', function(){
     loadDictionary.loadCityData();
     loadDictionary.loadDictData();
     loadDictionary.loadCFDictData();
+    loadDictionary.loadURLDictData();
 });
 // 默认任务
 gulp.task('default', ['serve']);
