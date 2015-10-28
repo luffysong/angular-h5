@@ -31,9 +31,9 @@ angular.module('defaultApp')
     }).run(function($modal,$rootScope, $location){
         var iframe = $('<iframe src="about:blank" style="display: none"></iframe>').appendTo('body');
         $rootScope.$on('$locationChangeStart', function () {
-            //if(!!navigator.userAgent.match(/36kr/) && !navigator.userAgent.match(/android/)){
-            //    iframe[0].src='kr36://hashchange?_='+ $.now();
-            //}
+            if(!!navigator.userAgent.match(/36kr/) && !navigator.userAgent.match(/android/)){
+                iframe[0].src='kr36://hashchange?_='+ $.now();
+            }
             $modal.closeAll();
             window.scrollTo(0, 0);
 
