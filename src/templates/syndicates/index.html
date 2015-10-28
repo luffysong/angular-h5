@@ -15,12 +15,12 @@
     <div class="news-container clearfix">
         <div class="news-header">
             <h3>新闻公告</h3>
-            <a class="view-more" href="" ui-sref="syndicatesNews">更多</a>
+            <a class="view-more" ui-sref="syndicatesNews">更多</a>
         </div>
         <ul class="news-items">
             <li class="news-item" ng-repeat="news in bannerNews">
                 <span class="item-num">{{$index + 1}}</span>
-                <a href="" target="_blank" ui-sref="syndicatesNews.detail({id: news.id})">{{news.title}}</a>
+                <a ui-sref="syndicatesNewsDetail({id: news.id})">{{news.title}}</a>
             </li>
         </ul>
     </div>
