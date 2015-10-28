@@ -28,7 +28,10 @@
         </div>
         <div ng-hide="loadingInst.syndicatesNewsList">
             <div class="desire-content">
-                <div class="news-list" ui-sref="syndicatesNewsDetail({id:item.id})" ng-repeat="item in newsData track by $index" ng-class="{'normal':$index % 3 == 0 && $index != 0}">
+                <article class="news-list" ui-sref="syndicatesNewsDetail({id:item.id})" ng-repeat="item in newsData track by $index" ng-class="{'normal':$index % 3 == 0 && $index != 0}">
+                    <div class="right-discount" ng-if="item.top == 1">
+                        <div class="discount">置顶</div>
+                    </div>
                     <a class="news-logo" href="" ui-sref="syndicatesNewsDetail({id:item.id})" style="background-image:url({{item.list_image | image}})">
                         <span class="type-tags bg-{{item.column_id}}" ng-bind="item.column_id_zh"></span>
                     </a>
@@ -40,7 +43,7 @@
                             <span class="time-text" ng-bind="item.time"></span>
                         </section>
                     </div>
-                </div>
+                </article>
             </div>
             <div class="more-data" ng-click="loadMore()" ng-show="totalPage != newsPageNo && newsData.length">加载更多</div>
             <div class="no-data-layer text-center" ng-hide="newsData.length">
