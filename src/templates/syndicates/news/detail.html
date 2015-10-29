@@ -36,27 +36,29 @@
         </div>-->
         <div class="project-detail" ng-hide="loadingInst.randomList">
             <div class="detail-list" ng-repeat="item in projectList track by $index">
-                <span class="syndicates-logo" ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" ng-style="{'background-image':'url(\'{{item.company.logo | image:100}}\')'}"></span>
-                <div class="project-intro">
-                    <a class="company-name" href="" ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
-                        <strong title="{{item.company.name}}">{{item.company.name}}</strong>
-                    </a>
-                    <div class="brief" title="{{item.company.brief}}">{{item.company.brief}}</div>
+                <div ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
+                    <span class="syndicates-logo" ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" ng-style="{'background-image':'url(\'{{item.company.logo | image:100}}\')'}"></span>
+                    <div class="project-intro">
+                        <a class="company-name" href="" ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
+                            <strong title="{{item.company.name}}">{{item.company.name}}</strong>
+                        </a>
+                        <div class="brief" title="{{item.company.brief}}">{{item.company.brief}}</div>
+                    </div>
+                    <div class="progress-bottom">
+                        <div class="progress-value" style="width:{{item.percent}}" ng-bind="item.percent" ng-show="item.percent"></div>
+                    </div>
+                    <p class="project-progress-info">
+                            <span>
+                                <i class="red-point"></i>
+                                已筹集 {{item.cf_success_raising_offer | unitConversion}}
+                            </span>
+                            <span class="right-info">
+                                <i class="grey-point"></i>
+                                融资目标 {{item.cf_raising | unitConversion}}
+                            </span>
+                    </p>
+                    <p class="project-status">{{item.name}}</p>
                 </div>
-                <div class="progress-bottom">
-                    <div class="progress-value" style="width:{{item.percent}}" ng-bind="item.percent" ng-show="item.percent"></div>
-                </div>
-                <p class="project-progress-info">
-                        <span>
-                            <i class="red-point"></i>
-                            已筹集 {{item.cf_success_raising_offer | unitConversion}}
-                        </span>
-                        <span class="right-info">
-                            <i class="grey-point"></i>
-                            融资目标 {{item.cf_raising | unitConversion}}
-                        </span>
-                </p>
-                <p class="project-status">{{item.name}}</p>
             </div>
         </div>
         <div loading="randomList"></div>
