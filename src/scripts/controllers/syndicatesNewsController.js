@@ -66,9 +66,8 @@ angular.module('defaultApp.controller').controller('syndicatesNewsController',
         }
         /*处理日期*/
         $scope.handleDate = function(date){
-            var d = new Date(date);
-            return d.getFullYear()+"年"+ (d.getMonth()+1)+"月"+ d.getDate()+"日";
-        }
+            return moment(date).format('YYYY年MM月DD日');
+        };
         $scope.showLoading = function(name){
             loading.show(name);
         }
