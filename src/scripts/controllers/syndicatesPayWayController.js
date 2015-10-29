@@ -15,7 +15,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
         $scope.uid = UserService.getUID();
         $scope.tid = $stateParams.tid;
         $scope.amount = $stateParams.amount;
-        $scope.payType = "card";
+        $scope.payType = "alipay";
         $scope.bankDetails = DictionaryService.getDict('bank_limit_lianlianpay');
         /*选择支付方式*/
         $scope.selectWay = function(target){
