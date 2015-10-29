@@ -61,7 +61,7 @@ angular.module('defaultApp.controller').controller('syndicatesNewsDetailControll
                     key.percent = 0;
                 }else{
                     key.percent = (parseInt(key.cf_success_raising_offer) * 100 / parseInt(key.cf_raising)).toFixed(0);
-                    key.percent = key.percent > 100 ? "100%" : key.percent+"%";
+                    key.percent = Math.min(key.percent,100);
                 }
                 angular.forEach(statusList,function(obj,i){
                     if(key.status == obj.value){
