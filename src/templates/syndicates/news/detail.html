@@ -36,9 +36,9 @@
         </div>-->
         <div class="project-detail" ng-hide="loadingInst.randomList">
             <div class="detail-list" ng-repeat="item in projectList track by $index">
-                <span class="syndicates-logo" ui-sref="companys.detail.crowFunding({id:item.company.id,fundingId:item.id})" ng-style="{'background-image':'url(\'{{item.company.logo | image:100}}\')'}"></span>
+                <span class="syndicates-logo" ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" ng-style="{'background-image':'url(\'{{item.company.logo | image:100}}\')'}"></span>
                 <div class="project-intro">
-                    <a class="company-name" href="" ui-sref="companys.detail.crowFunding({id:item.company.id,fundingId:item.id})">
+                    <a class="company-name" href="" ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
                         <strong title="{{item.company.name}}">{{item.company.name}}</strong>
                     </a>
                     <div class="brief" title="{{item.company.brief}}">{{item.company.brief}}</div>
