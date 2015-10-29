@@ -378,7 +378,7 @@ window.DICTIONARY_DATA =  {
             "value": "PASSED"
         },
         {
-            "desc": "已被推荐",
+            "desc": "优质项目",
             "id": 4,
             "value": "RECOMMENDED"
         },

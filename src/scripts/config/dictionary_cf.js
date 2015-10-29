@@ -1,4 +1,27 @@
 window.DICTIONARY_CF_DATA =  {
+    "bank_order_alipay": [
+        "CCB-DEBIT",
+        "ICBC-DEBIT",
+        "BOC-DEBIT",
+        "ABC",
+        "COMM-DEBIT",
+        "CMB-DEBIT",
+        "GDB-DEBIT",
+        "CEB-DEBIT",
+        "SPDB-DEBIT",
+        "CMBC",
+        "SPA-DEBIT",
+        "CITIC-DEBIT",
+        "CIB",
+        "PSBC-DEBIT",
+        "BJBANK",
+        "SHRCB",
+        "WZCBB2C-DEBIT",
+        "BJRCB",
+        "SHBANK",
+        "NBBANK",
+        "HZCBB2C"
+    ],
     "bank_order_lianlianpay": [
         "01020000",
         "01050000",
@@ -20,6 +43,256 @@ window.DICTIONARY_CF_DATA =  {
         "03170000",
         "04031000"
     ],
+    "bank_limit_alipay": {
+        "ICBC-ICBC": [
+            {
+                "auth_type": "口令电子银行",
+                "limit_once": "2000",
+                "limit_everyday": "5000"
+            },
+            {
+                "auth_type": "U盾客户",
+                "limit_once": "100万",
+                "limit_everyday": "100万"
+            }
+        ],
+        "CBB-DEBIT": [
+            {
+                "auth_type": "一代网银盾",
+                "limit_once": "5万",
+                "limit_everyday": "10万"
+            },
+            {
+                "auth_type": "二代网银盾",
+                "limit_once": "50万",
+                "limit_everyday": "50万"
+            }
+        ],
+        "ABC": [
+            {
+                "auth_type": "一代K宝",
+                "limit_once": "50万",
+                "limit_everyday": "100万"
+            },
+            {
+                "auth_type": "二代K宝",
+                "limit_once": "100万",
+                "limit_everyday": "500万"
+            }
+        ],
+        "CMB-DEBIT": [
+            {
+                "auth_type": "大众版",
+                "limit_once": "500",
+                "limit_everyday": "500"
+            },
+            {
+                "auth_type": "专业版",
+                "limit_once": "无限额",
+                "limit_everyday": "无限额"
+            }
+        ],
+        "COMM-DEBIT": [
+            {
+                "auth_type": "USB证书",
+                "limit_once": "100万",
+                "limit_everyday": "100万"
+            },
+            {
+                "auth_type": "短信密码",
+                "limit_once": "5万",
+                "limit_everyday": "5万"
+            }
+        ],
+        "BOC-DEBIT": [
+            {
+                "auth_type": "无网银盾",
+                "limit_once": "1000",
+                "limit_everyday": "1000"
+            },
+            {
+                "auth_type": "网银盾",
+                "limit_once": "5万",
+                "limit_everyday": "50万"
+            }
+        ],
+        "CEB-DEBIT": [
+            {
+                "auth_type": "手机动态密码",
+                "limit_once": "2万",
+                "limit_everyday": "2万"
+            },
+            {
+                "auth_type": "令牌动态密码",
+                "limit_once": "100万",
+                "limit_everyday": "100万"
+            }
+        ],
+        "CMBC": [
+            {
+                "auth_type": "证书/短信",
+                "limit_once": "5000",
+                "limit_everyday": "5000"
+            },
+            {
+                "auth_type": "U宝/动态令牌",
+                "limit_once": "50万",
+                "limit_everyday": "50万"
+            }
+        ],
+        "CIB": [
+            {
+                "auth_type": "证书保护",
+                "limit_once": "100万",
+                "limit_everyday": "100万"
+            }
+        ],
+        "GDB-DEBIT": [
+            {
+                "auth_type": "手机动态",
+                "limit_once": "3000",
+                "limit_everyday": "3000"
+            },
+            {
+                "auth_type": "Key盾",
+                "limit_once": "30万",
+                "limit_everyday": "30万"
+            },
+            {
+                "auth_type": "认证支付",
+                "limit_once": "50万",
+                "limit_everyday": "100万",
+                "limit_everymonth": "无限额"
+            }
+        ],
+        "SPDB-DEBIT": [
+            {
+                "auth_type": "动态密码版",
+                "limit_once": "20万",
+                "limit_everyday": "20万"
+            },
+            {
+                "auth_type": "数字证书版",
+                "limit_once": "无限额",
+                "limit_everyday": "无限额"
+            }
+        ],
+        "SPA-DEBIT": [
+            {
+                "auth_type": "手机动态密码",
+                "limit_once": "5万",
+                "limit_everyday": "5万"
+            }
+        ],
+        "NBBANK": [
+            {
+                "auth_type": "动态密码令牌",
+                "limit_once": "5万",
+                "limit_everyday": "5万"
+            },
+            {
+                "auth_type": "USBKey移动证书",
+                "limit_once": "无限额",
+                "limit_everyday": "无限额"
+            }
+        ],
+        "SHBANK": [
+            {
+                "auth_type": "动态密码",
+                "limit_once": "6000",
+                "limit_everyday": "1万"
+            },
+            {
+                "auth_type": "E盾证书专业版",
+                "limit_once": "50万",
+                "limit_everyday": "100万"
+            }
+        ],
+        "PSBC-DEBIT": [
+            {
+                "auth_type": "电子令牌",
+                "limit_once": "20万",
+                "limit_everyday": "20万"
+            },
+            {
+                "auth_type": "USB-KEY",
+                "limit_once": "200万",
+                "limit_everyday": "200万"
+            }
+        ],
+        "SHRCB": [
+            {
+                "auth_type": "短信专业版",
+                "limit_once": "1000",
+                "limit_everyday": "5000"
+            },
+            {
+                "auth_type": "证书专业版",
+                "limit_once": "1万",
+                "limit_everyday": "500万"
+            }
+        ],
+        "HZCBB2C": [
+            {
+                "auth_type": "大众版网银",
+                "limit_once": "300",
+                "limit_everyday": "300"
+            },
+            {
+                "auth_type": "专业版网银",
+                "limit_once": "无限额",
+                "limit_everyday": "无限额"
+            }
+        ],
+        "CITIC-DEBIT": [
+            {
+                "auth_type": "文件证书",
+                "limit_once": "1000",
+                "limit_everyday": "5000"
+            },
+            {
+                "auth_type": "移动证书",
+                "limit_once": "100万",
+                "limit_everyday": "100万"
+            }
+        ],
+        "BJBANK": [
+            {
+                "auth_type": "动态密码",
+                "limit_once": "1000",
+                "limit_everyday": "5000"
+            },
+            {
+                "auth_type": "证书版",
+                "limit_once": "100万",
+                "limit_everyday": "100万"
+            }
+        ],
+        "WZCBB2C-DEBIT": [
+            {
+                "auth_type": "大众版",
+                "limit_once": "800",
+                "limit_everyday": "800"
+            },
+            {
+                "auth_type": "专业版",
+                "limit_once": "无限额",
+                "limit_everyday": "无限额"
+            }
+        ],
+        "BJRCB": [
+            {
+                "auth_type": "手机认证",
+                "limit_once": "10万",
+                "limit_everyday": "10万"
+            },
+            {
+                "auth_type": "证书认证",
+                "limit_once": "20万",
+                "limit_everyday": "20万"
+            }
+        ]
+    },
     "bank_limit_lianlianpay": {
         "64296510": [
             {
@@ -357,6 +630,29 @@ window.DICTIONARY_CF_DATA =  {
             }
         ]
     },
+    "bank_name_alipay": {
+        "CCB-DEBIT": "建设银行",
+        "ICBC-DEBIT": "工商银行",
+        "BOC-DEBIT": "中国银行",
+        "ABC": "农业银行",
+        "COMM-DEBIT": "交通银行",
+        "CMB-DEBIT": "招商银行",
+        "GDB-DEBIT": "广发银行",
+        "CEB-DEBIT": "光大银行",
+        "SPDB-DEBIT": "浦发银行",
+        "CMBC": "民生银行",
+        "SPA-DEBIT": "平安银行",
+        "CITIC-DEBIT": "中信银行",
+        "CIB": "兴业银行",
+        "PSBC-DEBIT": "中国邮储银行",
+        "BJBANK": "北京银行",
+        "SHRCB": "上海农商银行",
+        "WZCBB2C-DEBIT": "温州银行",
+        "BJRCB": "北京农商银行",
+        "SHBANK": "上海银行",
+        "NBBANK": "宁波银行",
+        "HZCBB2C": "杭州银行"
+    },
     "bank_name_lianlianpay": {
         "01020000": "工商银行",
         "01050000": "建设银行",
@@ -426,9 +722,10 @@ window.DICTIONARY_CF_DATA =  {
     },
     "trade_platform_type": {
         "1": "线下汇款",
-        "2": "连连网银支付",
-        "3": "连连认证支付",
-        "4": "支付宝"
+        "2": "连连网银",
+        "3": "连连认证",
+        "4": "支付宝余额",
+        "5": "支付宝网银"
     },
     "trade_refund_status": {
         "1": "已申请",
