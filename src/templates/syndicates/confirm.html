@@ -22,8 +22,8 @@
                <a href="" class="risk-tip" ng-click="seeRisk()">风险点</a>
             </div>
             <div class="confirm-project">
-                    <img ng-src="{{companyData.logo}}" ui-sref="company_detail({id:companyId})" width="40" alt=""/>
-                    <section ui-sref="company_detail({id:companyId})">{{companyData.name}}</section>
+                    <img ng-src="{{companyData.logo}}" ui-sref="company_detail({id:companyId})" width="40" alt="" data-stat-click="payment.companyLogo"/>
+                    <section ui-sref="company_detail({id:companyId})" data-stat-click="payment.companyName">{{companyData.name}}</section>
             </div>
             <div class="confirm-title">
                 支付保证金
@@ -67,7 +67,7 @@
                 选择支付方式
             </div>
             <div class="pay-way">
-                <div class="way-detail" ng-click="selectWay('alipay')">
+                <div class="way-detail" ng-click="selectWay('alipay')" data-stat-click="payment.alipay">
                     <div class="way-image">
                         <span class="ali-pay">
                         </span>
@@ -80,7 +80,7 @@
                         <a href="" class="glyphicon glyphicon-ok"></a>
                     </div>
                 </div>
-                <div class="way-detail" ng-click="selectWay('card')">
+                <div class="way-detail" ng-click="selectWay('card')" data-stat-click="payment.card">
                     <div class="way-image">
                         <span class="icon-uniE620">
                             <span class="path1"></span><span class="path2"></span>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
             </div>
-            <a class="ensure-pay btn" ng-disabled="!isRead || confirmForm.$invalid" ng-click="ensurePay()" baidu-btn="确认支付按钮点击">支付保证金</a>
+            <a class="ensure-pay btn" ng-disabled="!isRead || confirmForm.$invalid" ng-click="ensurePay()" data-stat-click="payment.pay">支付保证金</a>
             <ul class="deposit-tip">
                 <li>
                     保证金提示：
