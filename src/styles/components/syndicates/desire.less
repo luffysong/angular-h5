@@ -267,7 +267,7 @@
         height: auto;
         .news-list {
             position: relative;
-            display: -webkit-box;
+            display: block;
             width: 100%;
             height: 75px;
             -webkit-box-align: center;
@@ -301,12 +301,14 @@
             }
             .news-logo {
                 position: relative;
+                float: left;
                 display: block;
                 width: 100px;
                 height: 55px;
                 background-size: 100% auto;
                 background-repeat: no-repeat;
                 margin-right: 10px;
+
                 .type-tags {
                     display: block;
                     width: auto;
@@ -331,14 +333,18 @@
             }
             .news-center {
                 -webkit-box-float: 1;
-                margin-right: 8px;
+
                 .news-title {
                     display: block;
-                    font-size: 16px;
+                    font-size: 15px;
+                    line-height: 18px;
+                    max-height: 36px;
                     font-weight: 600;
                     word-break: break-all;
                     word-wrap: break-word;
                     color: #333333;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
                 }
                 .news-time {
                     color: #aaaaaa;
