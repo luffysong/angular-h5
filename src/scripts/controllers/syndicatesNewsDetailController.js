@@ -18,9 +18,8 @@ angular.module('defaultApp.controller').controller('syndicatesNewsDetailControll
         $scope.config.desc = "刚看到这篇文章不错，推荐给你看看～";
         /*处理日期*/
         $scope.handleDate = function(date){
-            var d = new Date(date);
-            return d.getFullYear()+"年"+ (d.getMonth()+1)+"月"+ d.getDate()+"日";
-        }
+            return moment(date).format('YYYY年MM月DD日');
+        };
         /*分享*/
         $scope.shareSyndicate = function () {
             $scope.config.url = $scope.mailConfig.body = encodeURIComponent(location.href);
