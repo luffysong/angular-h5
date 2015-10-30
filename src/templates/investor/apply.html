@@ -115,14 +115,15 @@
                             </span>
                         </label>
                         <ul class="s-list">
-                            <!--个人投资人-->
+                            <!--专业天使投资人-->
                             <li class="s-i">
                                 <div class="i-header">
                                     <div class="radio">
                                         <label>
                                             <input type="radio" name="investIdentity" ng-model="invest.investorRole" value="PERSONAL_INVESTOR">
-                                            <span ng-class="{true:'active'}[invest.investorRole=='PERSONAL_INVESTOR']">&nbsp;个人投资人</span>
+                                            <span ng-class="{true:'active'}[invest.investorRole=='PERSONAL_INVESTOR']">&nbsp;专业天使投资人</span>
                                         </label>
+										<a  ui-sref="investorValidate" style="margin-left:30px;">跟投人认证</a>
                                     </div>
                                 </div>
                             </li>
