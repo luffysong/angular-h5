@@ -15,7 +15,6 @@ angular.module('defaultApp.controller').controller('syndicatesNewsDetailControll
         /*分享config*/
         $scope.config = {};
         $scope.mailConfig = {};
-        $scope.config.desc = "刚看到这篇文章不错，推荐给你看看～";
         /*处理日期*/
         $scope.handleDate = function(date){
             return moment(date).format('YYYY年MM月DD日');
@@ -32,7 +31,7 @@ angular.module('defaultApp.controller').controller('syndicatesNewsDetailControll
             if(!data.info)return;
             data.info.time = $scope.handleDate(data.info.updated_at);
             $scope.newsDetail.detail = data.info;
-            $scope.config.title = $scope.mailConfig.subject = window.WEIXINSHARE.shareTitle = $scope.newsDetail.detail.title+"【36氪股权投资】";
+            $scope.config.title = $scope.mailConfig.subject = $scope.config.desc = window.WEIXINSHARE.shareTitle = $scope.newsDetail.detail.title+"【36氪股权投资】";
             $timeout(function(){
                 loading.hide("newsDetail");
             },100);
@@ -86,7 +85,7 @@ angular.module('defaultApp.controller').controller('syndicatesNewsDetailControll
         }
         $scope.getRandomProject();
         window.WEIXINSHARE = {
-            shareTitle: "刚看到这篇文章不错，推荐给你看看～",
+            shareTitle: "",
             shareDesc: "刚看到这篇文章不错，推荐给你看看～",
             shareImg: "http://krid-assets.b0.upaiyun.com/uploads/user/avatar/132821/d6bdf8ce-5fca-4cfe-860b-70c8db293b8f.png",
             shareLink: location.href
