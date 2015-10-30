@@ -43,12 +43,15 @@ angular.module('defaultApp.controller').controller('syndicatesNewsController',
             $scope.keywordSearch = false;
         }
         // 获取首页 banner
-        CMSService.getZhongchouBanner().success(function(data){
-            $scope.banners = data;
-            $scope.hideLoading("newsBanner");
-        }).catch(function(){
-            $scope.banners = [];
-        });
+        $timeout(function() {
+            CMSService.getZhongchouBanner().success(function(data){
+                $scope.banners = data;
+                $scope.hideLoading("newsBanner");
+            }).catch(function(){
+                $scope.banners = [];
+            });
+        }, 500);
+
         /*新闻分类Column*/
         $scope.loadNewsColumn = function(){
             CrowdFundingService["sm"].get({

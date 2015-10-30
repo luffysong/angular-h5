@@ -9,11 +9,13 @@ angular.module('defaultApp.controller').controller('syndicatesController',
         document.title="36氪股权投资";
         loading.show("syndicatesList");
         // 获取首页 banner
-        CMSService.getZhongchouBanner().success(function(data){
-            $scope.banners = data;
-        }).catch(function(){
-            $scope.banners = [];
-        });
+        $timeout(function() {
+            CMSService.getZhongchouBanner().success(function(data){
+                $scope.banners = data;
+            }).catch(function(){
+                $scope.banners = [];
+            });
+        }, 500);
 
         // 加载首页头条
         CrowdFundingService["sm"].get({
