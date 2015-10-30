@@ -147,7 +147,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('syndicatesAllOrder', {
         url: '/zhongchouAllOrder',
         templateUrl: 'templates/syndicates/allOrder.html',
-        controller: 'syndicatesAllOrderController'
+        controller: 'syndicatesAllOrderController',
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
     });
 
     /*众筹选择支付方式页面*/
