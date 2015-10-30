@@ -1,6 +1,6 @@
 <div class="home-wrap" ng-if="!isInApp" ng-hide="loadingInst.syndicatesList">
     <div class="slider-container syndicates">
-        <slick infinite=true autoplay=false pauseOnHover=false speed=1000 dots="true" arrows="false" ng-if="banners">
+        <slick infinite=true autoplay=true pauseOnHover=false speed=1000 dots="true" arrows="false" ng-if="banners">
             <div class="slider syndicates" ng-repeat="item in banners">
                 <div class="slider-image" style="background-image: url('{{item.img_url}}'); background-color:#333">
                     <a href="{{item.link_url}}" ng-stat-click="lunbotu.button"></a>
