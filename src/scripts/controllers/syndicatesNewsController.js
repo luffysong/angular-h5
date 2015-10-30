@@ -44,7 +44,7 @@ angular.module('defaultApp.controller').controller('syndicatesNewsController',
         }
         // 获取首页 banner
         $timeout(function() {
-            CMSService.getZhongchouBanner().success(function(data){
+            CMSService.getZhongchouNewsBanner().success(function(data){
                 $scope.banners = data;
                 $scope.hideLoading("newsBanner");
             }).catch(function(){

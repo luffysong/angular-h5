@@ -22,6 +22,13 @@ angular.module('defaultApp.service').service('CMSService',
                         type: 41
                     }
                 });
+            },
+            getZhongchouNewsBanner: function(){
+                return $http.get(service.url, {
+                    params: {
+                        type: 43
+                    }
+                });
             }
         }
 
