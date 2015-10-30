@@ -15,7 +15,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
             }).catch(function(){
                 $scope.banners = [];
             });
-        }, 500);
+        }, 1000);
 
         // 加载首页头条
         CrowdFundingService["sm"].get({

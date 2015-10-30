@@ -50,7 +50,7 @@ angular.module('defaultApp.controller').controller('syndicatesNewsController',
             }).catch(function(){
                 $scope.banners = [];
             });
-        }, 500);
+        }, 1000);
 
         /*新闻分类Column*/
         $scope.loadNewsColumn = function(){
