@@ -49,11 +49,11 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 				if(data.company.dataLights.length){
 					companyIntro += data.company.dataLights+'\n\n';
 				}
-				if(data.company.projectPlan.length){
-					companyIntro += data.company.projectPlan+'\n\n';
-				}
 				if(data.company.competitor.length){
 					companyIntro += data.company.competitor+'\n\n';
+				}
+				if(data.company.projectPlan.length){
+					companyIntro += data.company.projectPlan+'\n\n';
 				}
 				if(data.company.intro.length){
 					companyIntro += data.company.intro+'\n\n';
