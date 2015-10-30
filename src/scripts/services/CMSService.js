@@ -19,7 +19,7 @@ angular.module('defaultApp.service').service('CMSService',
             getZhongchouBanner: function(){
                 return $http.get(service.url, {
                     params: {
-                        type:1
+                        type: 41
                     }
                 });
             }
