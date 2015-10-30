@@ -30,6 +30,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             CompanyService.get({
                 id: $scope.companyId
             }, function(data) {
+				console.log('--请求的数据--',data);
                 $scope.company.value = data;
 
                 document.title=data.basic.name + " | 36氪";
@@ -40,9 +41,26 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 };
                 InitWeixin();
 
+				var companyIntro = '';
+
+				if( data.company.projectAdvantage.length){
+					companyIntro += data.company.projectAdvantage+'\n\n';
+				}
+				if(data.company.dataLights.length){
+					companyIntro += data.company.dataLights+'\n\n';
+				}
+				if(data.company.projectPlan.length){
+					companyIntro += data.company.projectPlan+'\n\n';
+				}
+				if(data.company.competitor.length){
+					companyIntro += data.company.competitor+'\n\n';
+				}
+				if(data.company.intro.length){
+					companyIntro += data.company.intro+'\n\n';
+				}
 
                 $scope.intro.value = {
-                    intro: data.company.intro
+                    intro:companyIntro
                 }
 
                 /**
