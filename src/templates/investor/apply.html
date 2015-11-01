@@ -53,6 +53,10 @@
                 <div class="error-alert error" ng-show="investorValidateForm.companySelectName.$invalid && investorValidateForm.companySelectName.$dirty">
                     <span>请选择任职公司</span>
                 </div>
+                <div class="error-alert error" ng-show="investorValidateForm.companyWebsite.$invalid && investorValidateForm.companyWebsite.$dirty">
+                    <span ng-show="investorValidateForm.companyWebsite.$error.url">请以http://开头</span>
+                    <span ng-show="investorValidateForm.companyWebsite.$error.urlblacklist">所填网址无法作为公司独立网址</span>
+                </div>
                 <!--机构-->
                 <div class="error-alert error" ng-show="investorValidateForm.organizationStartMonth.$invalid && investorValidateForm.organizationStartMonth.$dirty">
                     <span>请选择机构任职时间的月份</span>
@@ -70,7 +74,11 @@
                     <span>请选择任职机构</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.organizationBrief.$invalid && investorValidateForm.organizationBrief.$dirty">
-                    <span "investorValidateForm.organizationBrief.$error.required">请输入机构简介</span>
+                    <span>请输入机构简介</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationWebsite.$invalid && investorValidateForm.organizationWebsite.$dirty">
+                    <span ng-show="investorValidateForm.organizationWebsite.$error.url">请以http://开头</span>
+                    <span ng-show="investorValidateForm.organizationWebsite.$error.urlblacklist">所填网址无法作为公司独立网址</span>
                 </div>
 
                 <div class="form-horizontal welcome-form">
@@ -171,7 +179,7 @@
                                             <label class="title"><span class="c-orange"></span>机构网址</label>
                                             <ul class="main">
                                                 <li>
-                                                    <input type="text" fill-url  name="organizationWebsite" ng-model="organization.addForm.website" full-url placeholder="如：http://www.36kr.com">
+                                                    <input type="url" fill-url  name="organizationWebsite" ng-model="organization.addForm.website" full-url placeholder="如：http://www.36kr.com">
                                                 </li>
                                             </ul>
                                         </li>
@@ -274,7 +282,7 @@
                                             <label class="title"><span class="c-orange"  ng-hide="(company.addForm.operationStatus == 'ONLINE_IN_3MONTH' || company.addForm.operationStatus == 'ONLINE_IN_6MONTH')">*</span>公司网址</label>
                                             <ul class="main">
                                                 <li>
-                                                    <input type="text" fill-url ng-model="company.addForm.website" ng-required="!(company.addForm.operationStatus == 'ONLINE_IN_3MONTH' || company.addForm.operationStatus == 'ONLINE_IN_6MONTH')" name="companyWebsite" placeholder="如：http://www.36kr.com">
+                                                    <input type="url" fill-url ng-model="company.addForm.website" ng-required="!(company.addForm.operationStatus == 'ONLINE_IN_3MONTH' || company.addForm.operationStatus == 'ONLINE_IN_6MONTH')" name="companyWebsite" placeholder="如：http://www.36kr.com">
                                                 </li>
                                             </ul>
                                         </li>
