@@ -223,7 +223,7 @@
         <!--认证审核中-->
         <div ng-if="valStatus == 'validating'" class="welcome-form">
             <div class="validating-info text-center">
-                <div class="validating-logo"></div>
+                <div class="icon-1-03"></div>
                 <p class="c-orange fs-15">恭喜你迈出参与股权投资的第一步</p>
                 <p class="fs-12">我们核对信息后，会在1个工作日内为你开通参与股权投资的直通车。</p>
             </div>
@@ -232,7 +232,7 @@
         <!--认证审核失败-->
         <div ng-if="valStatus == 'fail'" class="welcome-form">
             <div class="validating-info text-center">
-                <div class="validating-logo fail"></div>
+                <div class="icon-1-03"></div>
                 <p class="c-orange fs-15">您多次身份证验证未通过</p>
                 <p class="fs-12">导致无法继续申请参与股权投资</p>
                 <p class="fs-12">如有疑问请联系我们：<a href="">service@36kr.com</a></p>
@@ -242,8 +242,8 @@
         <!--已经是跟投人-->
         <div ng-if="valStatus == 'withoutVal'" class="welcome-form">
             <div class="validating-info text-center">
-                <div class="validating-logo"></div>
-                <p class="c-orange fs-15">恭喜！你已成为跟投人</p>
+                <div class="icon-1-04"></div>
+                <p class="c-green fs-15">恭喜！你已成为跟投人</p>
                 <p ng-if="user_cache.is_completed == 0" class="text-center bottom-tip">
                     完善以下资料，更容易让公司方了解你，更容易获得跟投的资格哦！
                 </p>
