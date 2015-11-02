@@ -414,7 +414,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             // console.log($scope.user);
             // console.log($scope.userId);
             $scope.enterCard =true;
-            // if(!checkForm("userValidateForm"))return;
+            if(!checkForm("userValidateForm"))return;
             $scope.hasClick = true;
 
             var param = {};

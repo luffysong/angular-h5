@@ -249,7 +249,24 @@
                 </p>
             </div>
 
-            <form ng-if="user_cache.is_completed == 0" ng-submit="$event.preventDefault()"  action="" name="userValidateForm" >
+        </div>
+
+        <div ng-if="valStatus == 'withoutVal' || valStatus == 'validating'" class="welcome-form">
+            <form ng-if="user_cache.is_completed == 0" ng-submit="$event.preventDefault()"  action="" name="userValidateForm">
+                <div class="error-alert error" ng-show="(userValidateForm.investFrom.$invalid && userValidateForm.investFrom.$dirty) || (userValidateForm.investTo.$invalid && userValidateForm.investTo.$dirty)">
+                    <span ng-show="userValidateForm.investFrom.$error.required || userValidateForm.investTo.$error.required">请输入投资金额</span>
+                    <span ng-show="userValidateForm.investFrom.$error.pattern || userValidateForm.investTo.$error.pattern">投资金额只能是整数</span>
+                </div>
+                <div class="error-alert error" ng-show="userValidateForm.$error.industyEmpty">
+                    <span>请选择关注领域</span>
+                </div>
+                <div class="error-alert error" ng-show="userValidateForm.$error.stageEmpty">
+                    <span>请选择投资阶段</span>
+                </div>
+                <div class="error-alert error" ng-show="userValidateForm.intro.$invalid && userValidateForm.intro.$dirty">
+                    <span ng-show="userValidateForm.intro.$error.required">请输入一句话简介</span>
+                </div>
+
                 <!--投资信息-->
                 <div ng-if="user_cache.is_completed == 0" class="basic-info">
                     投资信息
@@ -293,12 +310,9 @@
                     </div>
                     <span class="currency-kind">(人民币金额)</span>
                 </div>
-
-                <div ng-if="user_cache.is_completed == 0" class="form-group">
-                    <a href="" class="btn btn-default btn-auth" ng-click="submitFormUser($event)" ng-disabled="hasClick" baidu-btn="保存跟投人资料">保存</a>
-                </div>
             </form>
         </div>
+        <a ng-if="(valStatus == 'withoutVal' || valStatus == 'validating') && user_cache.is_completed == 0" class="btn btn-default btn-cancel" ng-click="submitFormUser($event)" ng-disabled="hasClick">保存</a>
         <a ng-if="valStatus == 'withoutVal' || valStatus == 'validating'" ui-sref="syndicates" class="btn btn-default btn-cancel">查看股权投资列表</a>
     </div>
 </div>
