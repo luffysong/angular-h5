@@ -1,0 +1,67 @@
+<div class="news-detail">
+    <article class="detail-container" ng-hide="loadingInst.newsDetail">
+        <header>
+            <h1 class="news-title" ng-bind="newsDetail.detail.title"></h1>
+        </header>
+        <div class="news-author">
+            <span class="author-name" ng-bind="newsDetail.detail.ext1"></span>
+            <span class="author-time" ng-bind="newsDetail.detail.time"></span>
+        </div>
+        <!--<div class="news-pic">
+            <img alt="O2O 的玩法只能先垂直后平台？想做基础服务铺路人的 “考拉社区” 并不这么想" width="100%" src="http://a.36krcnd.com/nil_class/3b4244a3-d151-404d-b09f-7c4358774c6b/8.pic_hd.jpg!heading">
+        </div>-->
+        <section class="news-content" ng-bind-html="newsDetail.detail.content"></section>
+        <section class="news-share">
+            <div class="share-list">
+                <div class="share-group">
+                    <a href="" target="_blank" share-way="sqq" baidu-share="config" ng-click="shareSyndicate()">
+                        <i class="icon-qq"></i>
+                    </a>
+                    <a href="" target="_blank" share-way="tsina" baidu-share="config" ng-click="shareSyndicate()">
+                        <i class="icon-weibo"></i>
+                    </a>
+                    <a href="" share-way="mail" baidu-share="mailConfig" ng-click="shareSyndicate()">
+                        <i class="icon-mail"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </article>
+    <div loading="newsDetail"></div>
+    <!--融资项目列表-->
+    <div class="project-list">
+        <!--<div class="project-title">
+            正在融资的项目
+            <a href="" class="change-btn" ng-click="changeProject()">换一批</a>
+        </div>-->
+        <div class="project-detail" ng-hide="loadingInst.randomList">
+            <div class="detail-list" ng-repeat="item in projectList track by $index">
+                <div ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
+                    <span class="syndicates-logo" ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" ng-style="{'background-image':'url(\'{{item.company.logo | image:100}}\')'}"></span>
+                    <div class="project-intro">
+                        <a class="company-name" href="" ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
+                            <strong title="{{item.company.name}}">{{item.company.name}}</strong>
+                        </a>
+                        <div class="brief" title="{{item.company.brief}}">{{item.company.brief}}</div>
+                    </div>
+                    <div class="progress-bottom">
+                        <div class="progress-value" style="width:{{item.percent}}%" ng-show="item.percent">{{item.percent > 10 ? item.percent+'%' : ''}}</div>
+                    </div>
+                    <p class="project-progress-info">
+                            <span>
+                                <i class="red-point"></i>
+                                已筹集 {{item.cf_success_raising_offer | unitConversion}}
+                            </span>
+                            <span class="right-info">
+                                <i class="grey-point"></i>
+                                融资目标 {{item.cf_raising | unitConversion}}
+                            </span>
+                    </p>
+                    <p class="project-status">{{item.name}}</p>
+                </div>
+            </div>
+        </div>
+        <div loading="randomList"></div>
+    </div>
+</div>
+

@@ -3,7 +3,7 @@
         {{typeText}}<span class="error amount">￥{{amount}}</span>
     </div>
     <div class="pay-way">
-        <div class="way-detail" ng-click="selectWay('alipay')">
+        <div class="way-detail" ng-click="selectWay('alipay')" data-stat-click="payment.alipay">
             <div class="way-image">
                         <span class="ali-pay">
                         </span>
@@ -16,7 +16,7 @@
                 <a href="" class="glyphicon glyphicon-ok"></a>
             </div>
         </div>
-        <div class="way-detail" ng-click="selectWay('card')">
+        <div class="way-detail" ng-click="selectWay('card')" data-stat-click="payment.card">
             <div class="way-image">
                 <span class="icon-uniE620">
                     <span class="path1"></span><span class="path2"></span>
@@ -31,5 +31,5 @@
             </div>
         </div>
     </div>
-    <a href="" class="go-pay btn" ng-click="goPay()" tooltip="{{cardIndex === '' ? '请选择银行卡' : ''}}" baidu-btn="立即支付按钮点击">立即支付</a>
+    <a href="" class="go-pay btn" ng-click="goPay()" tooltip="{{cardIndex === '' ? '请选择银行卡' : ''}}" data-stat-click="payment.pay">立即支付</a>
 </div>

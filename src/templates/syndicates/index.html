@@ -1,32 +1,39 @@
-<div class="home-wrap" ng-if="!isInApp">
-    <div class="slider-container">
-        <div class="top-slide-arrow syndicates">
-            <!--<a href="javascript:void(0)" class="top-slide-arrow-left"></a>
-            <a href="javascript:void(0)" class="top-slide-arrow-right"></a>-->
-        </div>
-        <slick infinite=true autoplay=false pauseOnHover=false speed=1000 prev-arrow=".top-slide-arrow-left"
-               next-arrow=".top-slide-arrow-right">
-            <div class="slider syndicates">
-                <div class="slider-image">
-                    <a href="" class="banner-btn" ng-click="gotoInvest()" baidu-btn="众筹列表页-banner点击">我要投资</a>
+<div class="home-wrap" ng-if="!isInApp" ng-hide="loadingInst.syndicatesList">
+    <div class="slider-container syndicates">
+        <slick infinite=true autoplay=true pauseOnHover=false speed=1000 dots="true" arrows="false" ng-if="banners">
+            <div class="slider syndicates" ng-repeat="item in banners">
+                <div class="slider-image" style="background-image: url('{{item.img_url}}'); background-color:#333">
+                    <a href="{{item.link_url}}" ng-stat-click="lunbotu.button"></a>
                 </div>
-            </div>
-            <div class="slider syndicates">
-                <div class="slider-image next">
-                    <a href="{{helpHost}}/q-m-zc.html" class="banner-btn" baidu-btn="众筹列表页-banner点击">查看详情</a>
+                <div class="slider-bottom">
+                    <h3>{{item.title}}</h3>
                 </div>
             </div>
         </slick>
     </div>
+
+    <div class="news-container clearfix">
+        <div class="news-header">
+            <h3>新闻公告</h3>
+            <a class="view-more" ui-sref="syndicatesNews">更多</a>
+        </div>
+        <ul class="news-items">
+            <li class="news-item" ng-repeat="news in bannerNews">
+                <span class="item-num">{{$index + 1}}</span>
+                <a ui-sref="syndicatesNewsDetail({id: news.id})">{{news.title}}</a>
+            </li>
+        </ul>
+    </div>
 </div>
+
 <div class="container" ng-hide="loadingInst.syndicatesList">
     <div class="syndicates-index"
          ng-style="{marginTop:isInApp?0:''}"
          ng-repeat="item in investorList track by $index"
-         ng-class="{'mt-30': $index == 0,'mb-50': $index == investorList.length-1 && noMore}">
+         ng-class="{'mb-50': $index == investorList.length-1 && noMore}">
         <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
             <div class="title-info">
-                <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="syndicates-logo" style="background-image: url({{item.company.logo || ''}});"></a>
+                <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="syndicates-logo" style="background-image: url({{item.company.logo || ''}});"  data-stat-click="zhongchouliebiao.zhongchougongsilogo.{{$index}}.{{item.id}}"></a>
                 <div class="syndicates-intro">
                     <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
                         {{item.company.name}}
@@ -36,7 +43,7 @@
             </div>
             <div class="syndicates-pic">
                 <div class="syndicates-container">
-                    <img height="160" ng-src="{{item.desc.file_list_img}}" alt=""/>
+                    <img height="160" ng-src="{{item.desc.file_list_img}}" alt="" data-stat-click="zhongchouliebiao.gongsitu.{{$index}}.{{item.id}}"/>
                     <div class="investor-led-title" ng-if="item.investorData.name">
                         <a ui-sref="{{item.investorData | investorLink:'id':'type'}}" title="{{item.investorData.name}}" class="led-name">
                             {{item.investorData.name}}
@@ -64,17 +71,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!--融资进度条-->
-                <!--<loading-bar percent="item.percent">
-                </loading-bar>
-
-                <div class="goal">
-                    已筹集<span class="ml-10">{{item.cf_success_raising_offer | unitConversion}}</span>
-                    <span class="goal-num">融资目标<b class="currency ml-10">{{item.cf_raising | unitConversion}}</b>
-                    </span>
-                </div>-->
-
             </div>
         </div>
         <div class="loading-in">
@@ -82,10 +78,10 @@
             </loading-progress>
         </div>
         <div class="actions clearfix">
-            <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default" ng-if="item.color != '60'" baidu-btn="众筹列表页-{{item.company.name}}-详情按钮点击">查看详情</a>
-            <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default preheat-detail" ng-if="item.color == '60'" baidu-btn="众筹列表页-{{item.company.name}}-详情按钮点击">查看详情</a>
+            <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default" ng-if="item.color != '60'" data-stat-click="zhongchouliebiao.caozuobutton.{{$index}}.{{item.id}}">查看详情</a>
+            <a ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" class="btn btn-default preheat-detail" ng-if="item.color == '60'" data-stat-click="zhongchouliebiao.caozuobutton.{{$index}}.{{item.id}}">查看详情</a>
             <a href="" class="btn btn-default preheat-remind" login-btn ng-if="item.color == '60'"
-               ng-click="startRemind($event,item.has_reminder,item.id,$index)" baidu-btn="众筹列表页-{{item.company.name}}-开投提醒按钮点击">
+               ng-click="startRemind($event,item.has_reminder,item.id,$index)" data-stat-click="zhongchouliebiao.kaitoutixing.{{item.id}}">
                 <i class="icon-h5-time"></i>
                 开投提醒
             </a>
@@ -96,3 +92,5 @@
     </div>
 </div>
 <div loading="syndicatesList"></div>
+
+<div ng-include="'templates/syndicates/bottom-menu.html'"></div>

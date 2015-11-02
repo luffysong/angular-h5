@@ -17,7 +17,9 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
                 'co-investor',
                 'audit',
                 'cf-trade-deposit',
-                'cf-trade-balance'
+                'cf-trade-balance',
+                'sm',
+                'crowd-funding-random'
             ]
         }, {
             'crowd-funding': {
@@ -36,7 +38,7 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
                 get: {
                     method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
-
+                        if(!res || !res.data)return;
                         var baseData = res.data.base;
                         baseData && setInvestor(baseData);
 
@@ -61,12 +63,6 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
 
                         res.data.created_at = new Date(res.data.created_at);
 
-                        return res;
-                    })
-                },
-                put: {
-                    method: 'PUT',
-                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
                         return res;
                     })
                 }
@@ -137,6 +133,11 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
                 get: {
                     method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
+                        if(!res.data)return;
+                        var fundingData = res.data.financing;
+                        setInvestor(fundingData);
+
+                        res.data.created_at = new Date(res.data.created_at);
                         return res;
                     })
                 },
@@ -157,11 +158,45 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
                 get: {
                     method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
+                        if(!res.data)return;
+                        var fundingData = res.data.financing;
+                        setInvestor(fundingData);
+
+                        res.data.created_at = new Date(res.data.created_at);
+
                         return res;
                     })
                 },
                 put:{
                     method: 'PUT',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
+                        return res;
+                    })
+                }
+            },
+            'sm': {
+                save: {
+                    method: "POST",
+                    transformRequest: appendTransform($http.defaults.transformRequest, function(res) {
+                        return res;
+                    })
+                },
+                get: {
+                    method: 'GET',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
+                        return res;
+                    })
+                }
+            },
+            'crowd-funding-random': {
+                save: {
+                    method: "POST",
+                    transformRequest: appendTransform($http.defaults.transformRequest, function(res) {
+                        return res;
+                    })
+                },
+                get: {
+                    method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
                         return res;
                     })

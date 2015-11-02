@@ -1,5 +1,24 @@
 .syndicates-desire {
     background-color: #f3f5f7;
+    /*搜索结果高亮*/
+    em.highlight {
+        font-style: normal;
+        color: #ff6600;
+        font-weight: 600;
+    }
+    /*无数据时显示*/
+    .no-data-layer {
+        padding: 32px 0;
+        .remind-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .icon-h5-search {
+            font-size: 60px;
+            margin: auto;
+            color: #e86463;
+        }
+    }
     &.activity-detail {
         background: #011e30;
         padding: 0 10px;
@@ -76,10 +95,23 @@
     .desire-nav {
         width: 100%;
         height: auto;
-        margin-top: -30px;
         background-color: #fff;
         .nav-content {
             .clearfix();
+            .nav-type {
+                width: 25%;
+                float: left;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                border-right: 1px solid #eeeff2;
+                &:last-of-type {
+                    border-right: none;
+                }
+                &.active {
+                    color: #66a1ff;
+                }
+            }
             .select-industry {
                 position: relative;
                 width: 33.33%;
@@ -205,7 +237,7 @@
                 top: 50%;
                 transform: translate(0,-9px);
                 left: 50%;
-                margin-left: -65px;
+                margin-left: -35px;
                 color: #ccc;
                 font-size: 18px;
             }
@@ -232,6 +264,103 @@
     }
     .desire-content {
         height: auto;
+        .news-list {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 75px;
+            -webkit-box-align: center;
+            background-color: #fff;
+            padding: 10px 35px 10px 10px;
+            overflow: hidden;
+            text-align: justify;
+            border-bottom: 1px solid #ebecef;
+            
+            .right-discount {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 75px;
+                height: 75px;
+                overflow: hidden;
+                .discount {
+                    position: absolute;
+                    top: 5px;
+                    right: -18px;
+                    width: 70px;
+                    height: 20px;
+                    background: #56b9ff;
+                    color: #fff;
+                    line-height: 20px;
+                    font-size: 12px;
+                    text-align: center;
+                    transform: rotate(45deg);
+                    opacity: .8;
+                }
+            }
+            &:last-of-type {
+                border-bottom: none;
+            }
+            .news-logo {
+                position: relative;
+                float: left;
+                display: block;
+                width: 100px;
+                height: 55px;
+                background-size: 100% auto;
+                background-repeat: no-repeat;
+                margin-right: 10px;
+
+                .type-tags {
+                    display: block;
+                    width: auto;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    padding: 0px 5px;
+                    font-size: 12px;
+                    background: #35a7fa;
+                    z-index: 50;
+                    color: #fff;
+                    &.bg-4 {
+                        background-color: #f1cd00;
+                    }
+                    &.bg-5 {
+                        background-color: #35a7fa;
+                    }
+                    &.bg-6 {
+                        background-color: #ff5f5c;
+                    }
+                }
+            }
+            .news-center {
+                -webkit-box-float: 1;
+
+                .news-title {
+                    display: block;
+                    font-size: 15px;
+                    line-height: 18px;
+                    max-height: 36px;
+                    font-weight: 600;
+                    word-break: break-all;
+                    word-wrap: break-word;
+                    color: #333333;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
+                }
+                .news-time {
+                    color: #aaaaaa;
+                    font-size: 20px;
+                    .icon-h5-time {
+                        position: relative;
+                        top: 4px;
+                    }
+                    .time-text {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
         .desire-company {
             position: relative;
             display: -webkit-box;
@@ -356,11 +485,12 @@
     }
     .more-data {
         height: 30px;
-        margin: 0 auto 25px;
+        margin: 10px auto 30px;
         line-height: 30px;
         background-color: #cdd8e4;
         color: #91a4ba;
         text-align: center;
+        border-radius: 3px;
     }
     .desire-detail {
         width: 100%;

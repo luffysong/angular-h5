@@ -1,7 +1,11 @@
 
 /*众筹首页样式*/
 .syndicates-index {
-    padding:15px;
+    padding: 0 15px;
+    margin-bottom: 15px;
+    &:first-of-type {
+        margin-top: 15px;
+    }
     .actions {
         overflow: hidden;
         .btn {
@@ -9,11 +13,11 @@
             padding: 0;
             height: 40px;
             line-height: 40px;
-            font-size: 15px;
+            font-size: 16px;
             border-radius: 0;
             border: 0;
             background: #fff;
-            border-top: 1px solid #DFDFDF;
+            border-top: 1px solid #f0f0f0;
             color: #008df2;
             &.preheat-detail {
                 width: 50%;
@@ -69,15 +73,14 @@
         background-color: #D8DFE6;
         color: #000;
         text-align: center;
-        line-height: 10px;
+        line-height: 40px;
         margin-bottom: 30px;
         cursor: pointer;
     }
     .title-info {
         width: 100%;
         .clearfix;
-        height: 70px;
-        padding: 15px 15px 0;
+        padding: 15px;
         background: #fff;
         .syndicates-logo {
             display: block;
@@ -93,15 +96,16 @@
         .syndicates-intro {
             margin-left: 55px;
             a {
-                color: #000;
+                color: #333;
                 font-weight: 600;
                 white-space: nowrap;
+                font-size: 16px;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
             .brief {
                 color: #999;
-                font-size: 12px;
+                font-size: 13px;
                 line-height: 1.25;
                 word-break: break-all;
             }
@@ -227,18 +231,18 @@
             }
             .syndicates-detail {
                 .clearfix;
-                padding:3px 0;
+                padding:1px 0;
                 p {
                     margin:0;
                 }
             }
             .props {
-                border-bottom: solid 1px #DFDFDF;
+                border-bottom: solid 1px #f0f0f0;
                 padding-bottom: 10px;
             }
             .syndicates-attr {
                 float: left;
-                color: #666;
+                color: #999;
                 font-size: 13px;
             }
             .syndicates-intro {
@@ -437,12 +441,16 @@
 
     .slider {
         position: relative;
+
         &.syndicates {
             width: 100%;
-            height: 160px;
+            height: 200px;
+            overflow: hidden;
+
             .slider-image {
                 background: #052d54 url("images/syndicates-banner.jpg") no-repeat center;
                 background-size: auto 100%;
+
                 &.next {
                     background: #008DF2 url("images/syndicates-banner-1.jpg") no-repeat center;
                     background-size: auto 100%;
@@ -465,6 +473,33 @@
                         }
                     }
                 }
+
+                a {
+                    display: block;
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .slider-bottom {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 40px;
+                background-color: rgba(0, 0, 0, .4);
+                width: 100%;
+                z-index: 10;
+                overflow: hidden;
+
+                h3 {
+                    margin-top: 12px;
+                    padding-left: 10px;
+                    color: #fff;
+                    font-size: 14px;
+                    font-weight: 500;
+                    white-space: nowrap;
+                }
             }
         }
         .slider-image {
@@ -477,26 +512,8 @@
             z-index: 2;
             background-position: top center;
             background-repeat: no-repeat;
-            background-image: url(images/home-slider-01.png);
             background-size: cover;
-            .banner-btn {
-                display: inline-block;
-                position: absolute;
-                left: 50%;
-                margin-left: -55px;
-                bottom: 15px;
-                width: 110px;
-                height: 30px;
-                line-height: 30px;
-                text-align: center;
-                background-color: #f4a100;
-                color: #fff;
-                font-size: 14px;
-                border-radius: 3px;
-                &:hover {
-                    background-color: #f4a100 * 0.95;
-                }
-            }
+
             img {
                 width: 100%;
             }
@@ -587,6 +604,53 @@
         position: relative;
         overflow: hidden;
 
+        &.syndicates {
+            height: 200px;
+        }
+
+        .slick-dots {
+            position: absolute;
+            bottom: 14px;
+            right: 10px;
+            display: block;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            text-align: right;
+        }
+
+        .slick-dots li {
+            position: relative;
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            margin: 0 3px;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .slick-dots li button {
+            font-size: 0;
+            line-height: 0;
+            display: block;
+            width: 5px;
+            height: 5px;
+            cursor: pointer;
+            border: 0;
+            outline: none;
+            background: #9c9a9a;
+            border-radius: 5px;
+        }
+
+        .slick-dots li button:focus {
+            outline: none;
+        }
+
+        .slick-dots li.slick-active button {
+            background-color: #fff;
+        }
+
         .top-slide-arrow {
             &.syndicates {
                 .top-slide-arrow-left, .top-slide-arrow-right {
@@ -626,12 +690,81 @@
         &:hover .top-slide-arrow > a {
             .c-translate(0, 0);
         }
+    }
 
+    .news-container {
+    }
+
+    .news-container {
+        position: relative;
+        height: 123px;
+        margin-top: 10px;
+        background: #fff;
+        color: #555;
+
+        .news-header {
+            height: 37px;
+            padding-top: 5px;
+            line-height: 30px;
+
+            h3 {
+                display: inline-block;
+                margin: 0 0 0 10px;
+                font-size: 14px;
+                color: #999;
+            }
+
+            .view-more {
+                float: right;
+                color: #008df2;
+                margin-right: 10px;
+            }
+        }
+
+        .news-items {
+            list-style: none;
+            margin: 0;
+            padding: 0 20px 0 0;
+
+            .news-item {
+                position: relative;
+                margin-top: 5px;
+                height: 22px;
+                padding-left: 38px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                .item-num {
+                    position: absolute;
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    top: 4px;
+                    left: 10px;
+                    line-height: 18px;
+                    text-align: center;
+                    background-color: #deebff;
+                    border-radius: 2px;
+                    font-weight: 500;
+                    color: #86b1f1;
+                }
+
+                &> a {
+                    color: #555;
+                    text-decoration: none;
+                }
+            }
+        }
     }
 }
 .loading-in {
     height: 85px;
-    padding: 20px 15px;
+    padding: 25px 15px;
     background: #fff;
 }
 /*众筹2.0改版进度条Directive样式*/
@@ -685,7 +818,7 @@
             }
         }
         .loading-detail {
-            color: #000;
+            color: #555;
         }
         .loading-point {
             margin: 0 5px;
@@ -764,6 +897,54 @@
             bottom: -12px;
             left: 50%;
             margin-left: -3px;
+        }
+    }
+}
+
+// 众筹底部导航
+.syndicates-bottom-menu {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 45px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, .9);
+    border-top: 1px solid #c6c6c6;
+    border-bottom: 1px solid #c6c6c6;
+    z-index: 100;
+
+    li {
+        position: relative;
+        float: left;
+        width: percentage(1/3);
+
+        a {
+            display: block;
+            width: 100%;
+            height: 50px;
+            padding-top: 25px;
+            line-height: 20px;
+            color: #929292;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        &.active {
+            a, span {
+                color: #007aff;
+            }
+        }
+
+        span {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            margin-left: -10px;
+            font-size: 20px;
         }
     }
 }

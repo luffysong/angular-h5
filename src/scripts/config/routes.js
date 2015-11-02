@@ -71,6 +71,20 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
+    /*众筹所有模块*/
+
+    /*新闻公告模块*/
+    $stateProvider.state('syndicatesNews', {
+        url: '/zhongchouNews',
+        templateUrl: 'templates/syndicates/news/index.html',
+        controller: 'syndicatesNewsController'
+    });
+    /*新闻详情模块*/
+    $stateProvider.state('syndicatesNewsDetail', {
+        url: '/zhongchouNewsDetail?{id}',
+        templateUrl: 'templates/syndicates/news/detail.html',
+        controller: 'syndicatesNewsDetailController'
+    });
     /*我要上众筹活动*/
     $stateProvider.state('syndicatesDesire', {
         url: '/zhongchouDesire',
@@ -133,7 +147,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('syndicatesAllOrder', {
         url: '/zhongchouAllOrder',
         templateUrl: 'templates/syndicates/allOrder.html',
-        controller: 'syndicatesAllOrderController'
+        controller: 'syndicatesAllOrderController',
+        data:{
+            permissions : {
+                only : ['valid']
+            }
+        }
     });
 
     /*众筹选择支付方式页面*/
