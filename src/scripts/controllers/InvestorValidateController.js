@@ -48,9 +48,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             id: $scope.userId
         }, function (data){
             // console.log(data);
-            $scope.user.intro = $scope.user_cache.intro = data.intro;
-            $scope.user.industry = $scope.user_cache.industry = data.industry;
-            $scope.user.investPhases = $scope.user_cache.investPhases = data.investPhases;
+            $scope.user.intro = $scope.user_cache.intro = data.intro || '';
+            $scope.user.industry = $scope.user_cache.industry = data.industry || [];
+            $scope.user.investPhases = $scope.user_cache.investPhases = data.investPhases || [];
             $scope.user.investMoneyUnit = $scope.user_cache.investMoneyUnit = data.mainInvestCurrency || $scope.user.investMoneyUnit;
             $scope.user.investMoneyBegin = $scope.user_cache.investMoneyBegin = data.mainInvestCurrency == 'USD' ? data.investorSettings.usdInvestMin :  data.investorSettings.cnyInvestMin;
             $scope.user.investMoneyEnd = $scope.user_cache.investMoneyEnd = data.mainInvestCurrency == 'USD' ? data.investorSettings.usdInvestMax:  data.investorSettings.cnyInvestMax;
