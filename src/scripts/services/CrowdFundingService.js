@@ -65,6 +65,12 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
 
                         return res;
                     })
+                },
+                put: {
+                    method: 'PUT',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
+                        return res;
+                    })
                 }
             },
             'payment':{
