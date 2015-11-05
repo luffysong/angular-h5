@@ -1,0 +1,203 @@
+<div class="syndicates-class clearfix">
+    <div class="section-0 class-header text-center clearfix">
+        <h1>什么是36氪股权投资</h1>
+        <p>在36氪股权投资平台上，投资者通过购买创业公司股权，从而获得未来收益。</p>
+        <h4>36氪股权投资</h4>
+        <a class="btn btn-more" href="#">了解更过股权投资</a>
+    </div>
+
+    <div class="section section-1 text-center clearfix">
+        <h3 class="section-title">为什么要进行股权投资</h3>
+        <div class="features clearfix">
+            <div class="feature feature-1">
+                <div class="feature-icon feature-icon-1"></div>
+                <p>超高收益预期</p>
+            </div>
+            <div class="feature feature-2">
+                <div class="feature-icon feature-icon-2"></div>
+                <p>增加个人资产配置选择</p>
+            </div>
+            <div class="feature feature-3">
+                <div class="feature-icon feature-icon-3"></div>
+                <p>万元投资早期股权高收益平衡高风险</p>
+            </div>
+            <div class="feature feature-4">
+                <div class="feature-icon feature-icon-4"></div>
+                <p>扩展行业人脉</p>
+            </div>
+        </div>
+        <div class="compare-graph">
+            <h4>收益预期对比</h4>
+            <p>投资股权</p>
+            <div class="graph graph-1">
+                <div class="graph-inner"></div>
+            </div>
+            <p>股票</p>
+            <div class="graph graph-2">
+                <div class="graph-inner"></div>
+            </div>
+            <p>基金</p>
+            <div class="graph graph-3">
+                <div class="graph-inner"></div>
+            </div>
+            <p>P2P</p>
+            <div class="graph graph-4">
+                <div class="graph-inner"></div>
+            </div>
+            <p>宝宝类</p>
+            <div class="graph graph-5">
+                <div class="graph-inner"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-2 text-center clearfix">
+        <h3 class="section-title">谁适合来36氪投资股权</h3>
+        <div class="groups">
+            <div class="group group-1">
+                <div class="group-icon group-icon-1"></div>
+                <p>最近三年个人年均<br>收入不低于<span> 30万元 </span>人民币</p>
+            </div>
+            <div class="group group-2">
+                <div class="group-icon group-icon-2"></div>
+                <p>金融资产<br>不低于<span> 100万元 </span>人民币</p>
+            </div>
+            <div class="group group-3">
+                <div class="group-icon group-icon-3"></div>
+                <p>专业<br>投资机构<span> 投资人 </span></p>
+            </div>
+        </div>
+        <p class="instruction">满足上述任一条件即可</p>
+        <a class="btn btn-identify" href="#">投资前，先要成为36氪认证跟投人</a>
+    </div>
+
+    <div class="section section-3 text-center clearfix">
+        <div class="section-inner">
+            <div class="section-title">成功案例</div>
+            <div class="item xiaomi">
+                <div class="icon-xiaomi"></div>
+                <h4>小米</h4>
+                <p>2010年04月，雷军及团队、晨兴<br>创投、启明创投投资<br>创立小米。4年间，小米估值从2.5亿美元提升至超过<span> 400亿 </span>美元，翻了<span>160倍</span>。</p>
+            </div>
+            <div class="item jumei">
+                <div class="icon-jumei"></div>
+                <h4>聚美优品</h4>
+                <p>徐小平从最初向聚美优品提供的一笔天使投资中<br>获得超过<span> 1000倍 </span>的回报。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-4 text-center clearfix">
+        <div class="section-title">怎么在36氪上投资</div>
+        <p>全新为跟头人设计的认购流程，高效、认购门槛低、认购周期短。</p>
+    </div>
+    <div class="section section-5 text-center clearfix">
+        <div class="section-title">投后管理</div>
+        <p>专业的投后管理服务团队，支付完成后，放心、顺心、称心。</p>
+        <div class="procedure"></div>
+    </div>
+    <div class="section section-6 text-center clearfix">
+        <div class="section-title">如何收益</div>
+        <p>IPO、回购、清算、股权转让、并购重组、新三板上市后你就可以获得退出机会，赚取投资收益</p>
+    </div>
+    <div class="section section-7 text-center clearfix">
+        <div class="section-title">收益计算器</div>
+        <form ng-submit="$event.preventDefault()" class="form-horizontal" name="calForm">
+            <div class="form-group">
+                <label for="cal-amount">投资金额</label>
+                <input id="cal-amount" name="cal-amount" type="text" placeholder="请输入投资金额" ng-model="calculate['cal-amount']" required ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">万元</span>
+
+                <div class="col error" ng-show="calForm['cal-amount'].$invalid && calForm['cal-amount'].$dirty" >
+                    <span ng-show="calForm['cal-amount'].$error.required">请输投资金额</span>
+                    <span ng-show="calForm['cal-amount'].$error.pattern">请输正确的金额</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cal-carry">carry</label>
+                <input id="cal-carry" name="cal-carry" type="text" placeholder="请输入carry" ng-model="calculate['cal-carry']" required ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">%</span>
+
+                <div class="col error" ng-show="calForm['cal-carry'].$invalid && calForm['cal-carry'].$dirty" >
+                    <span ng-show="calForm['cal-carry'].$error.required">请输carry</span>
+                    <span ng-show="calForm['cal-carry'].$error.pattern">请输正确的carry</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cal-manage-fee">管理费率</label>
+                <input id="cal-manage-fee" name="cal-manage-fee" type="text" placeholder="请输入管理费" ng-model="calculate['cal-manage-fee']" required ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">%</span>
+
+                <div class="col error" ng-show="calForm['cal-manage-fee'].$invalid && calForm['cal-manage-fee'].$dirty" >
+                    <span ng-show="calForm['cal-manage-fee'].$error.required">请输管理费率</span>
+                    <span ng-show="calForm['cal-manage-fee'].$error.pattern">请输正确的管理费率</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cal-time">时间</label>
+                <input id="cal-time" name="cal-time" type="text" placeholder="请输入时间" ng-model="calculate['cal-time']" required ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">年</span>
+
+                <div class="col error" ng-show="calForm['cal-time'].$invalid && calForm['cal-time'].$dirty" >
+                    <span ng-show="calForm['cal-time'].$error.required">请输入时间</span>
+                    <span ng-show="calForm['cal-time'].$error.pattern">请输正确的时间</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cal-valuation">投资时的估值</label>
+                <input id="cal-valuation" name="cal-valuation" type="text" placeholder="请输入投资时估值" ng-model="calculate['cal-valuation']" required  ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">万元</span>
+
+                <div class="col error" ng-show="calForm['cal-valuation'].$invalid && calForm['cal-valuation'].$dirty" >
+                    <span ng-show="calForm['cal-valuation'].$error.required">请输投资时估值</span>
+                    <span ng-show="calForm['cal-valuation'].$error.pattern">请输正确的投资时估值</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cal-valuation-exit">退出时的估值</label>
+                <input id="cal-valuation-exit" name="cal-valuation-exit" type="text" placeholder="退出时估值" ng-model="calculate['cal-valuation-exit']" required  ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">万元</span>
+
+                <div class="col error" ng-show="calForm['cal-valuation-exit'].$invalid && calForm['cal-valuation-exit'].$dirty" >
+                    <span ng-show="calForm['cal-valuation-exit'].$error.required">请输入退出时估值</span>
+                    <span ng-show="calForm['cal-valuation-exit'].$error.pattern">请输正确的退出时估值</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cal-rate">综合税率</label>
+                <input id="cal-rate" name="cal-rate" type="text" placeholder="请输入综合税率" ng-model="calculate['cal-rate']" required ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">%</span>
+
+                <div class="col error" ng-show="calForm['cal-rate'].$invalid && calForm['cal-rate'].$dirty" >
+                    <span ng-show="calForm['cal-rate'].$error.required">请输入综合税率</span>
+                    <span ng-show="calForm['cal-rate'].$error.pattern">请输正确的综合税率</span>
+                </div>
+            </div>
+        </form>
+
+        <p>收益</p>
+
+        <div class="result">
+            <span>{{calculate.result}}万元</span><sup>￥</sup>
+        </div>
+
+        <div class="buttons">
+            <a class="btn active btn-cal" href="javascript:void(0);" ng-click="cal($event)">计算收益</a>
+            <a class="btn btn-reset" href="javascript:void(0);" ng-click="reset()">重新计算</a>
+        </div>
+    </div>
+    <div class="section section-8 text-center clearfix">
+        <div class="icon-risk"></div>
+        <div class="section-title">风险提示</div>
+        <p>在美国，风险投资的失败率高达60%~80%</p>
+        <p>高收益意味着高风险，成功的投资人依靠分散投资来控制风险</p>
+    </div>
+    <div class="section section-9 text-center clearfix">
+        <div class="section-title">官方公众号</div>
+        <p>认购项目、投资活动、客户服务一站式解决方案</p>
+        <div class="qrcode"></div>
+        <p>微信扫一扫关注</p>
+        <p>36氪股权投资公众号</p>
+    </div>
+</div>
+<div ng-include="'templates/syndicates/bottom-menu.html'"></div>

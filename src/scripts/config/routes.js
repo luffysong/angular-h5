@@ -85,6 +85,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/syndicates/news/detail.html',
         controller: 'syndicatesNewsDetailController'
     });
+
+    /*新人课堂*/
+    $stateProvider.state('syndicatesClass', {
+        url: '/zhongchouClass',
+        templateUrl: 'templates/syndicates/class.html',
+        controller: 'syndicatesClassController'
+    });
+
     /*我要上众筹活动*/
     $stateProvider.state('syndicatesDesire', {
         url: '/zhongchouDesire',
