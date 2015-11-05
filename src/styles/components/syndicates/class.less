@@ -1,408 +1,108 @@
 .syndicates-class {
     background-color: #55c5ff;
+    max-width: 640px;
+    margin: 0 auto;
 
-    .class-header {
-        height: 579px;
-        background: url(images/class/header-bg.png) no-repeat center top;
+    .btn-more {
+        position: absolute;
+        bottom: 22%;
         color: #fff;
-
-        h1 {
-            margin-top: 130px;
-            font-size: 42px;
-            color: #fff;
-        }
-
-        p {
-            margin-top: 16px;
-            font-size: 18px;
-            color: #fff;
-        }
-
-        h4 {
-            margin-top: 70px;
-            color: #46c0ff;
-        }
-
-        .btn-more {
-            color: #fff;
-            margin-top: 88px;
-            border: 1px solid #fff;
-            padding: 12px 50px;
-            font-size: 16px;
-            border-radius: 24px;
-            transition: all .3s ease-in-out;
-            font-weight: 500;
-
-            &:hover {
-                color: #55c5ff;
-                background-color: #fff;
-                border-color: #fff;
-            }
-        }
+        border: 1px solid #fff;
+        padding: 0.5em 2em;
+        font-size: 16px;
+        border-radius: 24px;
+        transform: translate3d(-50%, 0, 0);
     }
 
     .section {
-        .section-title {
-            font-size: 24px;
-            font-weight: 500;
+        img {
+            width: 100%;
         }
     }
 
     .section-1 {
-        height: 606px;
-        background-color: #fff;
-
-        .section-title {
-            color: #444;
-            margin: 5px auto 50px;
-        }
-
-        .features {
-            height: 150px;
-            width: 919px;
-            margin: 0 auto;
-            overflow: hidden;
-        }
-
-        .feature {
-            float: left;
-            width: 164px;
-            text-align: center;
-            margin-right: 87px;
-
-            &:last-child {
-                margin-right: 0;
-            }
-
-            .feature-icon {
-                height: 90px;
-                width: 90px;
-                margin: 0 auto;
-                border-radius: 50%;
-                background-image: url(images/class/icons.png);
-                background-repeat: no-repeat;
-                margin-bottom: 20px;
-
-                &-1 {
-                    background-color: #ffd47a;
-                    background-position: -20px -330px;
-                }
-
-                &-2 {
-                    background-color: #b8cdff;
-                    background-position: -20px -110px;
-                }
-
-                &-3 {
-                    background-color: #ff8a9c;
-                    background-position: -20px -0px;
-                }
-
-                &-4 {
-                    background-color: #83ecfa;
-                    background-position: -20px -220px;
-                }
-            }
-
-            p {
-                font-size: 14px;
-            }
-        }
-
-        .compare-graph {
-            width: 440px;
-            margin: 50px auto 0;
-            text-align: left;
-
-            h4 {
-                color: #333;
-                font-size: 20px;
-                font-weight: normal;
-                text-align: center;
-            }
-
-            p {
-                color: #666;
-                font-size: 15px;
-                margin-bottom: 8px;
-            }
-
-            .graph {
-                height: 10px;
-                width: 100%;
-                border: 1px solid #55c5ff;
-                background-color: #fff;
-                margin-bottom: 9px;
-                border-radius: 2px;
-
-                &-1 {
-                    .graph-inner {
-                        width: 87%;
-                    }
-                }
-
-                &-2 {
-                    .graph-inner {
-                        width: 37%;
-                    }
-                }
-
-                &-3 {
-                    .graph-inner {
-                        width: 28%;
-                    }
-                }
-
-                &-4 {
-                    .graph-inner {
-                        width: 19%;
-                    }
-                }
-
-                &-5 {
-                    .graph-inner {
-                        width: 11%;
-                    }
-                }
-
-                .graph-inner {
-                    height: 100%;
-                    background-color: #55c5ff;
-                }
-            }
-        }
+        position: relative;
     }
 
     .section-2 {
-        height: 470px;
-        background-image: url(images/class/section-2-bg.png);
-        background-repeat: no-repeat;
-        color: #fff;
-        padding-top: 70px;
-        margin: 0 auto;
-        overflow: hidden;
-
-        .groups {
-            width: 1033px;
-            margin: 50px auto 0;
-            overflow: hidden;
-
-            .group {
-                position: relative;
-                float: left;
-                height: 82px;
-                text-align: left;
-                overflow: hidden;
-
-                &-1 {
-                    width: 420px;
-                }
-
-                &-2 {
-                    width: 387px;
-                }
-
-                &-3 {
-                    width: 226px;
-                }
-
-                .group-icon {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    display: inline-block;
-                    background-image: url(images/class/icons.png);
-                    background-repeat: no-repeat;
-
-                    &-1 {
-                        width: 84px;
-                        height: 81px;
-                        background-position: -20px -440px;
-                    }
-
-                    &-2 {
-                        width: 82px;
-                        height: 81px;
-                        background-position: -20px -644px;
-                    }
-
-                    &-3 {
-                        width: 83px;
-                        height: 83px;
-                        background-position: -20px -541px;
-                    }
-                }
-
-                p {
-                    position: absolute;
-                    top: 20px;
-                    left: 105px;
-                    width: 200px;
-
-                    span {
-                        font-size: 16px;
-                        font-weight: 500;
-                    }
-                }
-            }
-        }
-
-        .instruction {
-            margin-top: 50px;
-        }
-
-        .btn-identify {
-            color: #fff;
-            margin-top: 50px;
-            border: 1px solid #fff;
-            padding: 12px 50px;
-            font-size: 16px;
-            border-radius: 24px;
-            transition: all .3s ease-in-out;
-
-            &:hover {
-                color: #55c5ff;
-                background-color: #fff;
-                border-color: #fff;
-            }
-        }
+        background-color: #fff;
     }
 
     .section-3 {
-        height: 475px;
-        background-color: #fff;
+        position: relative;
+        background-color: #55c5ff;
 
-        .section-inner {
-            padding-top: 50px;
-            margin: 0 auto;
-            width: 910px;
-        }
-
-        h4 {
-            margin-bottom: 20px;
-        }
-
-        p {
-            line-height: 25px;
-            color: #959595;
-
-            span {
-                font-size: 15px;
-                font-weight: 500;
-                color: #55c5ff;
-            }
-        }
-
-        .xiaomi {
-            width: 330px;
-            float: left;
-
-            .icon-xiaomi {
-                width: 120px;
-                height: 81px;
-                margin: 70px auto 39px;
-                background: url(images/class/section-item-1.png) no-repeat center;
-            }
-        }
-
-        .jumei {
-            width: 310px;
-            float: right;
-
-            .icon-jumei {
-                width: 165px;
-                height: 84px;
-                margin: 70px auto 36px;
-                background: url(images/class/section-item-2.png) no-repeat center;
-            }
+        .btn-more {
+            bottom: 8%;
         }
     }
 
     .section-4 {
-        padding-top: 50px;
-        height: 742px;
-        color: #fff;
-        background: url(images/class/section-4-bg.png) no-repeat center top;
-
-        p {
-            margin-top: 20px;
-        }
+        background-color: #fff;
     }
 
     .section-5 {
-        padding-top: 50px;
-        height: 400px;
         background-color: #fff;
-
-        .section-title {
-            margin-bottom: 20px;
-        }
-
-        p {
-            color: #959595;
-        }
-
-        .procedure {
-            width: 930px;
-            height: 153px;
-            margin: 49px auto 0;
-            background: url(images/class/section-5-bg.png) no-repeat center top;
-        }
     }
 
     .section-6 {
-        height: 482px;
-        padding-top: 50px;
-        background: url(images/class/section-6-bg.png) no-repeat center top;
-        color: #fff;
-
-        .section-title {
-            margin-bottom: 20px;
-        }
+        background-color: #fff;
     }
 
     .section-7 {
-        padding-top: 50px;
-        height: 800px;
+        background-color: #55c5ff;
+    }
+
+    .section-8 {
         background-color: #fff;
+        height: 990px;
+        margin-top: -1px;
+        padding-top: 40px;
+
+        .section-title {
+             font-size: 1.3em;
+             font-weight: 500;
+        }
 
         .form-horizontal {
-            margin: 45px auto 0;
-            width: 482px;
-            height: 400px;
+            margin: 20px auto 0;
+			width: 100%;
             text-align: left;
             color: #ababab;
 
             .form-group {
                 position: relative;
                 height: 42px;
-                line-height: 42px;
-                width: 100%;
+                width: 90%;
+				margin-top: 15px;
+				margin-left: 5%;
                 border: 1px solid #ddd;
                 border-radius: 5px;
 
                 label {
-                    positin: absolute;
-                    width: 105px;
+                    position: absolute;
+                    width: 30%;
                     font-weight: normal;
                     left: 0;
                     text-align: right;
+					line-height: 42px;
                 }
 
                 input {
                     position: absolute;
                     border: none;
                     height: 100%;
-                    width: 300px;
+                    width: 50%;
                     color: #444;
-                    left: 125px;
+                    left: 35%;
                 }
 
                 .unit {
                     position: absolute;
-                    right: 23px;
+                    right: 3%;
                     text-align: right;
-                    width: 30px;
+                    width: 10%;
+					line-height: 42px;
                 }
 
                 .error {
@@ -412,93 +112,6 @@
                     transform: translate3d(100%, 0, 0);
                 }
             }
-        }
-
-        .buttons {
-            margin-top: 45px;
-        }
-
-        .btn {
-            font-size: 16px;
-            padding: 12px 40px;
-            border: 1px solid #1ca0e5;
-            border-radius: 40px;
-            transition: all .3s ease-in-out;
-            box-shadow: none;
-            background-color: #fff;
-            color: #1ca0e5;
-
-            &:hover {
-                background-color: #1ca0e5;
-                color: #fff;
-            }
-
-            &-cal {
-                margin-right: 40px;
-            }
-        }
-
-        p {
-            color: #666;
-            font-size: 16px;
-            margin-top: 30px;
-        }
-
-        .result {
-            color: #666;
-            font-size: 24px;
-
-            span {
-                color: #ffad22;
-                font-weight: 500;
-            }
-        }
-    }
-
-    .section-8 {
-        height: 357px;
-        padding-top: 50px;
-        background: #fff url(images/class/section-7-bg.png) no-repeat center top;
-        color: #fff;
-
-        .icon-risk {
-            margin: 0 auto 30px;
-            background-image: url(images/class/icons.png);
-            background-repeat: no-repeat;
-            width: 73px;
-            height: 90px;
-            background-position: -20px -745px;
-        }
-
-        .section-title {
-            margin-bottom: 26px;
-        }
-
-        p {
-            font-size: 14px;
-        }
-    }
-
-    .section-9 {
-        height: 440px;
-        background-color: #fff;
-        padding-top: 50px;
-
-        .section-title {
-            margin-bottom: 20px;
-        }
-
-        p {
-            color: #959595;
-        }
-
-        .qrcode {
-            height: 150px;
-            width: 150px;
-            margin: 30px auto 20px;
-            background: url(images/class/qrcode.png) no-repeat center;
-            border: 1px solid #ebebeb;
-            border-radius: 5px;
         }
     }
 }
