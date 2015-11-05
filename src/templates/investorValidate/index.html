@@ -300,7 +300,7 @@
                 </div>
 
                 <!--个人单笔可投-->
-                <div ng-if="user_cache.investMoneyBegin == '' || user.investMoneyEnd == ''" class="form-group normal clearfix">
+                <div ng-if="user_cache.investMoneyBegin == '' || user_cache.investMoneyEnd == ''" class="form-group normal clearfix">
                     <label class="label-control"><span class="c-orange">*</span>个人单笔可投 </label>
                     <div class="col-flex clearfix ml-10">
                         <input class="form-control account-num" type="tel" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额" ng-pattern="/^\d*$/"  required maxlength="6" />
