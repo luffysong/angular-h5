@@ -155,6 +155,8 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     temp.push(obj);
                 }
             });
+            temp.push("width=");
+            temp.push("height=");
             str = "http://rongtest.36kr.com/p/video/letv/iframe-h5?"+temp.join("&");
             console.log(str);
             /*var vid = "";
