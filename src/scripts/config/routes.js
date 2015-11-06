@@ -203,7 +203,11 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/syndicates/pay-outline.html',
         controller: 'syndicatesPayOutlineController'
     });
-
+    $stateProvider.state('payOutlineRemind', {
+        url: '/zhongchouPayOutline?{tid}&{type}',
+        templateUrl: 'templates/syndicates/pay-outline-remind.html',
+        controller: 'payOutlineRemindController'
+    });
     /*跟投人认证*/
     $stateProvider.state('investorValidate', {
         url: '/investorValidate?type',

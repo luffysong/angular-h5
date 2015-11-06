@@ -148,7 +148,17 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         };
         /*视频链接处理*/
         $scope.handleVideo = function(link){
-            var vid = "";
+            console.log(link);
+            var temp = [],str;
+            var arr = link.split("?")[1].split("&");
+            angular.forEach(arr,function(obj){
+                if(obj.split("=")[0] == "uu" || obj.split("=")[0] == "vu"){
+                    temp.push(obj);
+                }
+            });
+            str = "http://rongtest.36kr.com/p/video/letv/iframe-h5?"+temp.join("&");
+            console.log(str);
+            /*var vid = "";
             link = link.split("?")[0];
             var arr = link.split("/");
             vid = arr[arr.length-1].split(".")[0];
@@ -156,7 +166,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 if(link.indexOf(key) >= 0){
                     link = player[key].url+vid;
                 }
-            });
+            });*/
             return $sce.trustAsResourceUrl(link);
         }
         /*项目问答点击展开收起*/
