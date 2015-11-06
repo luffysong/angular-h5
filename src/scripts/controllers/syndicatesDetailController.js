@@ -148,7 +148,6 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         };
         /*视频链接处理*/
         $scope.handleVideo = function(link){
-            console.log(link);
             var temp = [],str;
             var arr = link.split("?")[1].split("&");
             angular.forEach(arr,function(obj){
@@ -167,7 +166,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     link = player[key].url+vid;
                 }
             });*/
-            return $sce.trustAsResourceUrl(link);
+            return $sce.trustAsResourceUrl(str);
         }
         /*项目问答点击展开收起*/
         $scope.toggleQuestion = function(index){
