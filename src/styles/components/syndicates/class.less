@@ -9,7 +9,7 @@
         color: #fff;
         border: 1px solid #fff;
         padding: 0.5em 2em;
-        font-size: 16px;
+        font-size: 1em;
         border-radius: 24px;
         transform: translate3d(-50%, 0, 0);
     }
@@ -55,13 +55,12 @@
 
     .section-8 {
         background-color: #fff;
-        height: 990px;
         margin-top: -1px;
         padding-top: 40px;
 
         .section-title {
-             font-size: 1.3em;
-             font-weight: 500;
+            font-size: 1.3em;
+            font-weight: 500;
         }
 
         .form-horizontal {
@@ -86,6 +85,7 @@
                     left: 0;
                     text-align: right;
 					line-height: 42px;
+					font-size: .8em;
                 }
 
                 input {
@@ -107,11 +107,53 @@
 
                 .error {
                     position: absolute;
-                    top: 5px;
-                    right: -20px;
-                    transform: translate3d(100%, 0, 0);
+                    left: 0;
+                    top: -20px;
+					font-size: .6em;
                 }
             }
         }
+
+        .buttons {
+            margin-top: 20px;
+			margin-bottom: 40px;
+        }
+
+        .btn {
+            border: 1px solid #1ca0e5;
+            border-radius: 2em;
+            transition: all .3s ease-in-out;
+            box-shadow: none;
+            background-color: #fff;
+            color: #1ca0e5;
+			padding: 0.5em 2em;
+			font-size: 1em;
+
+            &-cal {
+                margin-right: 1em;
+            }
+        }
+
+		p {
+			margin-top: 10px;
+		}
+
+		.result {
+            color: #666;
+            font-size: 1.2em;
+
+            span {
+                color: #ffad22;
+                font-weight: 500;
+            }
+        }
     }
+
+	.section-9 {
+		background-color: #50c2ff;
+	}
+
+	.section-10 {
+		background-color: #fff;
+	}
 }
