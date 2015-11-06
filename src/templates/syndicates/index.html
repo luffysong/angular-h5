@@ -27,6 +27,15 @@
 </div>
 
 <div class="container" ng-hide="loadingInst.syndicatesList">
+    <div class="syndicates-filter">
+        <ul class="filter-inner">
+            <li class="filter-item" ng-click="syndicatesFilter('all');" ng-class="{ 'active': selectedStatus == 'all' }">全部</li>
+            <li class="filter-item" ng-click="syndicatesFilter('underway');" ng-class="{ 'active': selectedStatus == 'underway' }">锚定中/募资中</li>
+            <li class="filter-item" ng-click="syndicatesFilter('raise');" ng-class="{ 'active': selectedStatus == 'raise' }">募资完成</li>
+            <li class="filter-item" ng-click="syndicatesFilter('finish');" ng-class="{ 'active': selectedStatus == 'finish' }">融资成功</li>
+        </ul>
+    </div>
+
     <div class="syndicates-index"
          ng-style="{marginTop:isInApp?0:''}"
          ng-repeat="item in investorList track by $index"

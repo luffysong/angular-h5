@@ -1,3 +1,37 @@
+.syndicates-filter {
+    height: 2.7em;
+    margin: 10px 15px;
+    background-color: #fff;
+    overflow: hidden;
+
+    .filter-inner {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        height: 2.7em;
+        background-color: #fff;
+
+        .filter-item {
+            float: left;
+            display: block;
+            padding: .5em;
+            margin: 0 0 0 .2em;
+            font-size: 13px;
+            color: #4d4d4d;
+            background-color: #fff;
+            border-radius: 2px;
+
+            &.active {
+                color: #fff;
+                background-color: #178fe6;
+            }
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+}
 
 /*众筹首页样式*/
 .syndicates-index {
