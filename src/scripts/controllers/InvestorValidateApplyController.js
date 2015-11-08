@@ -941,6 +941,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }
 
         };
+		$scope.$watch('invest.investorRole',function(){
+			$scope.organization.addForm.website = '';
+			$scope.company.addForm.website = '';
+		});
         /*监听事件*/
         $scope.changeMoney = function(fieldName){
              Error.hide();

@@ -69,7 +69,7 @@ gulp.task('styles', function () {
 var scriptsInit = function (modulesPath) {
     var scriptText = '';
     fs.readdirSync(modulesPath).forEach(function (file) {
-        if (file !== 'index.js' && file.indexOf('.js')>-1) {
+        if (file !== 'index.js' && /\.js$/.test(file)) {
             scriptText += 'require(\'./' + file.replace('.js', '') + '\');\n'
         }
     });
@@ -178,7 +178,7 @@ gulp.task('tdd', ['scripts:vendor', 'scripts:init', 'watch'], function () {
     var historyApiFallback = require('connect-history-api-fallback');
     $.connect.server({
         root: ['karma_html', '.tmp', 'src'],
-        port: 9000,
+        port: 9001,
         livereload: false,
         middleware: function () {
             return [historyApiFallback];
@@ -195,7 +195,7 @@ gulp.task('connect', function () {
     var historyApiFallback = require('connect-history-api-fallback');
     $.connect.server({
         root: ['.tmp', 'src'],
-        port: 9000,
+        port: 9001,
         livereload: false,
         middleware: function (connect, opt) {
             var url = require('url');
@@ -629,6 +629,7 @@ gulp.task('dict', function(){
     loadDictionary.loadCityData();
     loadDictionary.loadDictData();
     loadDictionary.loadCFDictData();
+    loadDictionary.loadURLDictData();
 });
 // 默认任务
 gulp.task('default', ['serve']);

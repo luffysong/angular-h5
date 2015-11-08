@@ -38,12 +38,15 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             });
         })
 
-        console.log($scope.androidUpload)
+        //console.log($scope.androidUpload)
 
         // 职位
         $scope.founderRoles = DictionaryService.getDict('StartupPositionType');
         // 产品状态
         $scope.operationStatus = DictionaryService.getDict('CompanyOperationStatus');
+
+        // url 黑名单
+        $scope.urlblacklist = DictionaryService.getDict('CompanyUrlBlacklist');
 
         $scope.yearOptions = yearOptions;
 
@@ -438,6 +441,14 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("logoEmpty", true);
             }
 
+            // 校验公司黑名单
+            for(var i = 0; i < $scope.urlblacklist.length; i++){
+                if($scope.formData.website.indexOf($scope.urlblacklist[i]) > -1){
+                    angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("urlblacklist", false);
+                    return;
+                }
+            }
+            angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("urlblacklist", true);
 
             Object.keys($scope.createForm).forEach(function (key) {
                 if ($scope.createForm[key] && $scope.createForm[key].$setDirty) {

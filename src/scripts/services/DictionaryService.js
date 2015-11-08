@@ -28,6 +28,9 @@ var wholeDict = (function(){
     dict.bank_limit_lianlianpay = DICTIONARY_CF_DATA.bank_limit_lianlianpay;
     dict.bank_order_lianlianpay = DICTIONARY_CF_DATA.bank_order_lianlianpay;
 
+    // 公司网址黑名单
+    angular.extend(dict, DICTIONARY_URL_DATA);
+
     return dict;
 })();
 

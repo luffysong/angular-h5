@@ -37,6 +37,10 @@ angular.module('defaultApp.controller').controller('syndicatesController',
         $scope.pageNo = 1;
         $scope.noMore = true;
         $scope.UID = UserService.getUID();
+
+        // 众筹列表筛选功能
+        $scope.selectedStatus = 'all';
+
         /*前端处理，包括融资进度百分比的计算，以及众筹状态*/
         $scope.handleData = function(){
             angular.forEach($scope.investorList,function(key,index){
@@ -76,7 +80,8 @@ angular.module('defaultApp.controller').controller('syndicatesController',
         }
         CrowdFundingService["crowd-funding"].query({
             "page":$scope.pageNo,
-            "per_page":pageSize
+            "per_page":pageSize,
+            "status": $scope.selectedStatus
         },function(data){
             if(!data.total || !data.per_page)return;
             $scope.noMore = data.current_page == data.last_page ? true : false;
@@ -92,7 +97,8 @@ angular.module('defaultApp.controller').controller('syndicatesController',
             $scope.pageNo++;
             CrowdFundingService["crowd-funding"].query({
                 "page":$scope.pageNo,
-                "per_page":pageSize
+                "per_page":pageSize,
+                "status": $scope.selectedStatus
             },function(data){
                 if(data.data.length){
                     angular.forEach(data.data,function(o){
@@ -108,6 +114,40 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                 ErrorService.alert(err);
             });
         }
+
+        // 众筹列表筛选功能
+        $scope.syndicatesFilter = function(status) {
+            $scope.selectedStatus = status;
+            $scope.investorList = [];
+            $scope.pageNo = 1;
+            loading.show('syndicatesList');
+
+            CrowdFundingService["crowd-funding"].query({
+                "page": 1,
+                "per_page":pageSize,
+                "status": status
+            },function(data){
+                if(!data.total || !data.per_page)return;
+                $scope.noMore = data.current_page == data.last_page ? true : false;
+
+                if(status == 'underway') {
+                    $scope.investorList = data.data.filter(function(item) {
+                        return (new Date(item.end_time) > new Date());
+                    });
+                } else {
+                    $scope.investorList = data.data;
+                }
+
+                $scope.handleData();
+                $timeout(function(){
+                    loading.hide('syndicatesList');
+                },500);
+            },function(err){
+                ErrorService.alert(err);
+            });
+        };
+
+
 
         /*开投提醒*/
         $scope.startRemind = function($event,hasRemind,fundingId,index){

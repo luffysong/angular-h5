@@ -148,7 +148,18 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         };
         /*视频链接处理*/
         $scope.handleVideo = function(link){
-            var vid = "";
+            var temp = [],str;
+            var arr = link.split("?")[1].split("&");
+            angular.forEach(arr,function(obj){
+                if(obj.split("=")[0] == "uu" || obj.split("=")[0] == "vu"){
+                    temp.push(obj);
+                }
+            });
+            temp.push("width=");
+            temp.push("height=");
+            str = "https://rongtest.36kr.com/p/video/letv/iframe-h5?"+temp.join("&");
+            console.log(str);
+            /*var vid = "";
             link = link.split("?")[0];
             var arr = link.split("/");
             vid = arr[arr.length-1].split(".")[0];
@@ -156,8 +167,8 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                 if(link.indexOf(key) >= 0){
                     link = player[key].url+vid;
                 }
-            });
-            return $sce.trustAsResourceUrl(link);
+            });*/
+            return $sce.trustAsResourceUrl(str);
         }
         /*项目问答点击展开收起*/
         $scope.toggleQuestion = function(index){
@@ -409,7 +420,8 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         },function(data){
             /*过滤数据，去除线下汇款订单*/
             angular.forEach(data.data,function(obj,index){
-                if(obj.payment.platform_type != 1 && obj.payment.status == 1 && obj.trade_c_f_deposit){
+                //obj.payment.platform_type != 1 &&
+                if(obj.payment.status == 1 && obj.trade_c_f_deposit){
                     $scope.orderData.push(obj);
                 }
             });

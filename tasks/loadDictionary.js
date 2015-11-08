@@ -3,7 +3,7 @@ var request = require('request');
 var path = require('path');
 var folderPath = path.resolve(__dirname, '../src/scripts/config');
 var config = require('../config.json');
-var baseUrl = 'http://rongtest.36kr.com';
+var baseUrl = 'http://rongtest3.36kr.com';
 function loadCityData(callback){
     var cityFile = path.resolve(folderPath, 'city.js');
     request(baseUrl+'/api/dict/area', function (error, response, body) {
@@ -34,9 +34,21 @@ function loadCFDictData(callback){
         }
     })
 }
+/* url 规范  包含url 黑名单 */
+function loadURLDictData(callback){
+    var cityFile = path.resolve(folderPath, 'dictionary_url.js');
+    request(baseUrl+'/api/dict/company-url-blacklist', function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            //console.log(body);
+            fs.writeFileSync(cityFile, 'window.DICTIONARY_URL_DATA =  '+JSON.stringify(JSON.parse(body).data,null,4)+";");
+            callback && callback();
+        }
+    })
+}
 
 module.exports = {
     loadCityData: loadCityData,
     loadDictData: loadDictData,
-    loadCFDictData:loadCFDictData
+    loadCFDictData:loadCFDictData,
+    loadURLDictData:loadURLDictData
 };

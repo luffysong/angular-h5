@@ -1,0 +1,127 @@
+<div class="syndicates-class clearfix" ng-hide="loadingInst.syndicatesClass">
+    <div class="section section-1 text-center clearfix">
+        <img src="styles/images/class/section-1.png" alt="什么是36氪股权投资">
+        <a class="btn btn-more" href="{{helpHost}}">了解更过股权投资</a>
+    </div>
+
+    <div class="section section-2 text-center clearfix">
+        <img src="styles/images/class/section-2.png" alt="为什么要股权投资">
+    </div>
+
+    <div class="section section-3 text-center clearfix">
+        <img src="styles/images/class/section-3.png" alt="谁适合来36氪投资股权">
+        <a class="btn btn-more" href="/#/investorValidate">投资前，先要成为36氪认证跟投人</a>
+    </div>
+
+    <div class="section section-4 text-center clearfix">
+        <img src="styles/images/class/section-4.png" alt="成功案例">
+    </div>
+
+    <div class="section section-5 text-center clearfix">
+        <img src="styles/images/class/section-5.png" alt="怎么在36氪上投资">
+    </div>
+
+    <div class="section section-6 text-center clearfix">
+        <img src="styles/images/class/section-6.png" alt="投后管理">
+    </div>
+
+    <div class="section section-7 text-center clearfix">
+        <img src="styles/images/class/section-7.png" alt="如何收益">
+    </div>
+
+    <div class="section section-8 text-center clearfix">
+        <div class="section-title">收益计算器</div>
+        <form ng-submit="$event.preventDefault()" class="form-horizontal" name="calForm">
+            <div class="form-group">
+                <label for="cal-amount">投资金额</label>
+                <input id="cal-amount" name="cal-amount" type="number" placeholder="请输入投资金额" ng-model="calculate['cal-amount']" required ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">万元</span>
+
+                <div class="col error" ng-show="calForm['cal-amount'].$invalid && calForm['cal-amount'].$dirty" >
+                    <span ng-show="calForm['cal-amount'].$error.required">请输投资金额</span>
+                    <span ng-show="calForm['cal-amount'].$error.pattern">请输正确的金额</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cal-carry">carry</label>
+                <input id="cal-carry" name="cal-carry" type="number" placeholder="请输入carry" ng-model="calculate['cal-carry']" required ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">%</span>
+
+                <div class="col error" ng-show="calForm['cal-carry'].$invalid && calForm['cal-carry'].$dirty" >
+                    <span ng-show="calForm['cal-carry'].$error.required">请输carry</span>
+                    <span ng-show="calForm['cal-carry'].$error.pattern">请输正确的carry</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cal-manage-fee">管理费率</label>
+                <input id="cal-manage-fee" name="cal-manage-fee" type="number" placeholder="请输入管理费" ng-model="calculate['cal-manage-fee']" required ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">%</span>
+
+                <div class="col error" ng-show="calForm['cal-manage-fee'].$invalid && calForm['cal-manage-fee'].$dirty" >
+                    <span ng-show="calForm['cal-manage-fee'].$error.required">请输管理费率</span>
+                    <span ng-show="calForm['cal-manage-fee'].$error.pattern">请输正确的管理费率</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cal-time">持股时间</label>
+                <input id="cal-time" name="cal-time" type="number" placeholder="请输入持股时间" ng-model="calculate['cal-time']" required ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">年</span>
+
+                <div class="col error" ng-show="calForm['cal-time'].$invalid && calForm['cal-time'].$dirty" >
+                    <span ng-show="calForm['cal-time'].$error.required">请输入持股时间</span>
+                    <span ng-show="calForm['cal-time'].$error.pattern">请输正确的持股时间</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cal-valuation">投资时的估值</label>
+                <input id="cal-valuation" name="cal-valuation" type="number" placeholder="请输入投资时估值" ng-model="calculate['cal-valuation']" required min="1" ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">万元</span>
+
+                <div class="col error" ng-show="calForm['cal-valuation'].$invalid && calForm['cal-valuation'].$dirty" >
+                    <span ng-show="calForm['cal-valuation'].$error.required">请输投资时估值</span>
+                    <span ng-show="calForm['cal-valuation'].$error.pattern">请输正确的投资时估值</span>
+                    <span ng-show="calForm['cal-valuation'].$error.min">请输正确的投资时估值</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cal-valuation-exit">退出时的估值</label>
+                <input id="cal-valuation-exit" name="cal-valuation-exit" type="number" placeholder="退出时估值" ng-model="calculate['cal-valuation-exit']" required  ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">万元</span>
+
+                <div class="col error" ng-show="calForm['cal-valuation-exit'].$invalid && calForm['cal-valuation-exit'].$dirty" >
+                    <span ng-show="calForm['cal-valuation-exit'].$error.required">请输入退出时估值</span>
+                    <span ng-show="calForm['cal-valuation-exit'].$error.pattern">请输正确的退出时估值</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cal-rate">综合税率</label>
+                <input id="cal-rate" name="cal-rate" type="number" placeholder="请输入综合税率" ng-model="calculate['cal-rate']" required ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <span class="unit">%</span>
+
+                <div class="col error" ng-show="calForm['cal-rate'].$invalid && calForm['cal-rate'].$dirty" >
+                    <span ng-show="calForm['cal-rate'].$error.required">请输入综合税率</span>
+                    <span ng-show="calForm['cal-rate'].$error.pattern">请输正确的综合税率</span>
+                </div>
+            </div>
+        </form>
+
+        <p>收益</p>
+
+        <div class="result">
+            <span>{{calculate.result}}万元</span><sup>￥</sup>
+        </div>
+
+        <div class="buttons">
+            <a class="btn active btn-cal" href="javascript:void(0);" ng-click="cal($event)">计算收益</a>
+            <a class="btn btn-reset" href="javascript:void(0);" ng-click="reset()">重新计算</a>
+        </div>
+    </div>
+    <div class="section section-9 text-center clearfix">
+        <img src="styles/images/class/section-9.png" alt="风险提示">
+    </div>
+    <div class="section section-10 text-center clearfix">
+        <img src="styles/images/class/section-10.png" alt="官方公众账号">
+    </div>
+</div>
+<div loading="syndicatesClass"></div>
+<div ng-include="'templates/syndicates/bottom-menu.html'"></div>

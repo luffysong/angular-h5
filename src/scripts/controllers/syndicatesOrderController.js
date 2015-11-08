@@ -22,7 +22,8 @@ angular.module('defaultApp.controller').controller('syndicatesOrderController',
             $scope.tempData = [];
             /*过滤数据，去除线下汇款订单*/
             angular.forEach($scope.listData,function(obj,index){
-                if(obj.payment.platform_type != 1 && obj.payment.status == 1 && obj.trade_c_f_deposit && obj.trade_c_f_deposit.deposit && obj.trade_c_f_deposit.payment.status == 1 && obj.trade_c_f_deposit.payment.platform_type != 1){
+                //obj.payment.platform_type != 1 &&  obj.trade_c_f_deposit.payment.platform_type != 1
+                if(obj.payment.status == 1 && obj.trade_c_f_deposit && obj.trade_c_f_deposit.deposit && obj.trade_c_f_deposit.payment.status == 1 ){
                     $scope.tempData.push(obj);
                 }
             });

@@ -26,6 +26,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         if(new Date() > fromDate && new Date() < toDate){
             $scope.nowClose = true;
         }
+        $scope.userId = UserService.getUID();
         $scope.user = {
             investMoneyUnit:"CNY",
             rnv_investor_info:"V1_1",
@@ -34,8 +35,32 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             identity_card_type:"IDCARD",
             investPhases:[],
             passport_number:"",
-            passport_url:""
+            passport_url:"",
+            intro:"",
+            industry:[],
+            investMoneyBegin:"",
+            investMoneyEnd:"",
+            is_completed:0
         };
+        $scope.user_cache = angular.copy($scope.user);
+
+        UserService.basic.get({
+            id: $scope.userId
+        }, function (data){
+            // console.log(data);
+            $scope.user.intro = $scope.user_cache.intro = data.intro || '';
+            $scope.user.industry = $scope.user_cache.industry = data.industry || [];
+            $scope.user.investPhases = $scope.user_cache.investPhases = data.investPhases || [];
+            $scope.user.investMoneyUnit = $scope.user_cache.investMoneyUnit = data.mainInvestCurrency || $scope.user.investMoneyUnit;
+            $scope.user.investMoneyBegin = $scope.user_cache.investMoneyBegin = data.mainInvestCurrency == 'USD' ? data.investorSettings.usdInvestMin :  data.investorSettings.cnyInvestMin;
+            $scope.user.investMoneyEnd = $scope.user_cache.investMoneyEnd = data.mainInvestCurrency == 'USD' ? data.investorSettings.usdInvestMax:  data.investorSettings.cnyInvestMax;
+            if (data.intro && data.industry.length && data.investPhases.length && $scope.user.investMoneyBegin && $scope.user.investMoneyEnd) {
+                $scope.user_cache.is_completed = 1;
+            }
+        }, function(error){
+            // console.log(error);
+        });
+
         $scope.basic = {
             value:{}
         };
@@ -89,25 +114,39 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }
             $scope.addr2Options = DictionaryService.getLocation(value);
         });
-        /*$scope.selectStage = function(index){
-            angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("stageEmpty",true);
+        /* 选择个人投资阶段 */
+        $scope.selectStage = function(index, name_form){
+            name_form = name_form != undefined ? name_form : 'investorValidateForm';
+            angular.element($("form[name='" + name_form + "']")).scope()[name_form].$setValidity("stageEmpty",true);
             $scope.investStage[index].active = !$scope.investStage[index].active;
-        }
-        $scope.selectArea = function(index){
-            if($scope.areaList.length == 3 && $scope.areaList.indexOf($scope.fieldsOptions[index].value) < 0){
-                return;
-            }else{
-                $scope.areaList = [];
-                $scope.fieldsOptions[index].active = !$scope.fieldsOptions[index].active;
-                angular.forEach($scope.fieldsOptions,function(obj,i){
-                    if(obj.active && $scope.areaList.indexOf($scope.fieldsOptions[i].value) < 0){
-                        $scope.areaList.push($scope.fieldsOptions[i].value);
-                    }
-                });
 
+            $scope.user.investPhases = [];
+            angular.forEach($scope.investStage,function(key,index){
+                if(key.active && $scope.user.investPhases.indexOf(key.value) < 0){
+                    $scope.user.investPhases.push(key.value);
+                }
+            });
+        }
+        /* 选择关注领域 */
+        $scope.selectArea = function(index, name_form){
+            name_form = name_form != undefined ? name_form : 'investorValidateForm';
+            if($scope.areaList != undefined && $scope.areaList.length == 3 && $scope.areaList.indexOf($scope.fieldsOptions[index].value) < 0){
+                return;
             }
-            if($scope.areaList.length)angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
-        }*/
+
+            $scope.areaList = [];
+            $scope.fieldsOptions[index].active = !$scope.fieldsOptions[index].active;
+            angular.forEach($scope.fieldsOptions,function(obj,i){
+                if(obj.active && $scope.areaList.indexOf($scope.fieldsOptions[i].value) < 0){
+                    $scope.areaList.push($scope.fieldsOptions[i].value);
+                }
+            });
+
+            if($scope.areaList.length) {
+                angular.element($("form[name='" + name_form + "']")).scope()[name_form].$setValidity("industyEmpty",true);
+            }
+            $scope.user.industry = $scope.areaList;
+        }
         /*确认身份证号失去焦点事件*/
         $scope.enterId = function(){
             if(!$scope.user.reIdCardNumber)return;
@@ -223,7 +262,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 }
             });
         }
-        /*表单提交*/
+        /*表单提交-跟投人信息*/
         $scope.submitForm = function(){
             $scope.enterCard = true;
             /*/!*初始化*!/
@@ -366,6 +405,33 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 }else {
                     ErrorService.alert(err);
                 }
+                $scope.hasClick = false;
+            });
+        };
+
+        $scope.submitFormUser = function(){
+            // console.log($scope);
+            // console.log($scope.user);
+            // console.log($scope.userId);
+            $scope.enterCard =true;
+            if(!checkForm("userValidateForm"))return;
+            $scope.hasClick = true;
+
+            var param = {};
+            param['intro'] = $scope.user.intro;
+            param['industry'] = $scope.user.industry.join(',');
+            param['investPhases'] = $scope.user.investPhases.join(',');
+            param['mainInvestCurrency'] = $scope.user.investMoneyUnit;
+            param['cnyInvestMin'] = $scope.user.investMoneyBegin;
+            param['cnyInvestMax'] = $scope.user.investMoneyEnd;
+
+            UserService.basic.update({
+                id: $scope.userId
+            },param ,function(result){
+                console.log(result);
+                $scope.user_cache.is_completed = 1;
+            }, function(error){
+                console.log(error);
                 $scope.hasClick = false;
             });
         };

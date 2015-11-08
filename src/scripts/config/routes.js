@@ -85,6 +85,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/syndicates/news/detail.html',
         controller: 'syndicatesNewsDetailController'
     });
+
+    /*新人课堂*/
+    $stateProvider.state('syndicatesClass', {
+        url: '/zhongchouClass',
+        templateUrl: 'templates/syndicates/class.html',
+        controller: 'syndicatesClassController'
+    });
+
     /*我要上众筹活动*/
     $stateProvider.state('syndicatesDesire', {
         url: '/zhongchouDesire',
@@ -195,7 +203,11 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/syndicates/pay-outline.html',
         controller: 'syndicatesPayOutlineController'
     });
-
+    $stateProvider.state('payOutlineRemind', {
+        url: '/zhongchouPayOutlineRemind?{tid}&{type}',
+        templateUrl: 'templates/syndicates/pay-outline-remind.html',
+        controller: 'payOutlineRemindController'
+    });
     /*跟投人认证*/
     $stateProvider.state('investorValidate', {
         url: '/investorValidate?type',

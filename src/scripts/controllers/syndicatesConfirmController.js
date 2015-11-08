@@ -298,7 +298,32 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         $scope.cancel = function(event){
             $scope.actionSheet = false;
         }
-
+        /*$scope.payOutline = function(){
+            var num = Math.min($scope.baseData.base.cf_max_raising - $scope.baseData.funding.lead_investment,$scope.formData.investVal);
+            CrowdFundingService['cf-trade'].save({},{
+                user_id: $scope.uid,
+                goods_id: $scope.fundingId,
+                goods_name: '众筹跟投', //TODO:这两个字段得产品确认一下写啥
+                goods_desc: '众筹跟投',
+                investment: num,
+                invite_code:$scope.krCode.number
+            }, function(data){
+                console.log(data);
+                $state.go('payOutlineRemind', {
+                    tid: data.trade_deposit_id,
+                    type:"deposit",
+                    fundingId:$scope.fundingId
+                });
+            },function(err){
+                if(err.code == 2101) {
+                    $modal.open({
+                        templateUrl: 'templates/syndicates/pop-order-full.html'
+                    });
+                } else {
+                    ErrorService.alert(err);
+                }
+            });
+        }*/
         $scope.ensurePay = function(){
             function goToPay(num){
                 num = num ? num : $scope.formData.investVal;
