@@ -5,7 +5,6 @@ var _ = require('lodash');
 var gulp = require('gulp');
 var karma = require('karma');
 var $ = require('gulp-load-plugins')();
-var gzip = require('connect-gzip')
 var es = require("event-stream");
 var loadDictionary = require('./tasks/loadDictionary.js');
 var urlAdjuster = require('gulp-css-url-adjuster');
@@ -521,30 +520,6 @@ gulp.task('build:prod:m1', ['clean'],function(){
     gulp.start('build');
 });
 
-gulp.task('local:build', ['build'], function(){
-    $.connect.server({
-        root: ['dist'],
-        port: 9002,
-        middleware: function (connect, opt) {
-            var url = require('url');
-            var proxy = require('proxy-middleware');
-
-            var _proxy = function (path, source) {
-                var options = url.parse(source);
-                options.route = path;
-                return proxy(options);
-            };
-
-            var map = [gzip.gzip({ matchType: /javascript/ })];
-
-            map = map.concat(_.map(config.proxys, function (proxy) {
-                return _proxy(proxy.path, proxy.source);
-            }));
-            //map.push(historyApiFallback);
-            return map;
-        }
-    });
-});
 
 //带模拟接口的本地环境
 gulp.task('local:mock', function () {
