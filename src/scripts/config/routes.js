@@ -204,7 +204,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controller: 'syndicatesPayOutlineController'
     });
     $stateProvider.state('payOutlineRemind', {
-        url: '/zhongchouPayOutline?{tid}&{type}',
+        url: '/zhongchouPayOutlineRemind?{tid}&{type}',
         templateUrl: 'templates/syndicates/pay-outline-remind.html',
         controller: 'payOutlineRemindController'
     });

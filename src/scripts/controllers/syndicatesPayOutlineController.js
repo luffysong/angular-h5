@@ -5,7 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesPayOutlineController',
-    function($scope, UserService, ErrorService, $stateParams, CrowdFundingService) {
+    function($scope, UserService, ErrorService, $stateParams, CrowdFundingService,$timeout,loading) {
+        loading.show("payOutlinePage");
         /* 获取用户信息 */
         UserService.getMyEmail(function(email){
             $scope.myEmail = email;
@@ -22,6 +23,9 @@ angular.module('defaultApp.controller').controller('syndicatesPayOutlineControll
             id:$stateParams.tid
         },function(data){
             $scope.tradeData = data;
+            $timeout(function(){
+                loading.hide("payOutlinePage");
+            },100);
         },function(err){
             ErrorService.alert(err);
         });
