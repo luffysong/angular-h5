@@ -129,7 +129,14 @@ angular.module('defaultApp.controller').controller('syndicatesController',
             },function(data){
                 if(!data.total || !data.per_page)return;
                 $scope.noMore = data.current_page == data.last_page ? true : false;
-                $scope.investorList = data.data;
+
+                if(status == 'underway') {
+                    $scope.investorList = data.data.filter(function(item) {
+                        return (new Date(item.end_time) > new Date());
+                    });
+                } else {
+                    $scope.investorList = data.data;
+                }
                 $scope.handleData();
                 $timeout(function(){
                     loading.hide('syndicatesList');
