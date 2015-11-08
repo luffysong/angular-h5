@@ -5,7 +5,13 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesClassController',
-    function($scope) {
+    function($scope, loading, $timeout) {
+        loading.show("syndicatesClass");
+
+        $timeout(function() {
+            loading.hide("syndicatesClass");
+        }, 1500);
+
         $scope.calculate = {
             'cal-amount': '',
             'cal-carry': '',

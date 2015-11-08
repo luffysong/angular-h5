@@ -1,4 +1,4 @@
-<div class="syndicates-class clearfix">
+<div class="syndicates-class clearfix" ng-hide="loadingInst.syndicatesClass">
     <div class="section section-1 text-center clearfix">
         <img src="styles/images/class/section-1.png" alt="什么是36氪股权投资">
         <a class="btn btn-more" href="{{helpHost}}">了解更过股权投资</a>
@@ -122,4 +122,5 @@
         <img src="styles/images/class/section-10.png" alt="官方公众账号">
     </div>
 </div>
+<div loading="syndicatesClass"></div>
 <div ng-include="'templates/syndicates/bottom-menu.html'"></div>
