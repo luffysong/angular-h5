@@ -63,13 +63,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="cal-time">时间</label>
-                <input id="cal-time" name="cal-time" type="text" placeholder="请输入时间" ng-model="calculate['cal-time']" required ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
+                <label for="cal-time">持股时间</label>
+                <input id="cal-time" name="cal-time" type="text" placeholder="请输入持股时间" ng-model="calculate['cal-time']" required ng-pattern="/^[0-9]+(.[0-9]{1,2})?$/"/>
                 <span class="unit">年</span>
 
                 <div class="col error" ng-show="calForm['cal-time'].$invalid && calForm['cal-time'].$dirty" >
-                    <span ng-show="calForm['cal-time'].$error.required">请输入时间</span>
-                    <span ng-show="calForm['cal-time'].$error.pattern">请输正确的时间</span>
+                    <span ng-show="calForm['cal-time'].$error.required">请输入持股时间</span>
+                    <span ng-show="calForm['cal-time'].$error.pattern">请输正确的持股时间</span>
                 </div>
             </div>
             <div class="form-group">
