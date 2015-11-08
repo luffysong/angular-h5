@@ -251,7 +251,7 @@
 
         </div>
 
-        <div ng-if="valStatus == 'withoutVal' || valStatus == 'validating'" class="welcome-form">
+        <div ng-if="valStatus == 'withoutVal' || valStatus == 'validating'" class="welcome-form suc">
             <form ng-if="user_cache.is_completed == 0" ng-submit="$event.preventDefault()"  action="" name="userValidateForm">
                 <div class="error-alert error" ng-show="(userValidateForm.investFrom.$invalid && userValidateForm.investFrom.$dirty) || (userValidateForm.investTo.$invalid && userValidateForm.investTo.$dirty)">
                     <span ng-show="userValidateForm.investFrom.$error.required || userValidateForm.investTo.$error.required">请输入投资金额</span>
@@ -273,7 +273,7 @@
                 </div>
 
                 <!--用户基本信息-->
-                <div ng-if="user_cache.intro == ''" class="form-group brief clearfix">
+                <div  class="form-group brief clearfix">
                     <label class="label-control"><span class="c-orange">*</span>一句话简介</label>
                     <div class="col-max">
                         <textarea ng-model="user.intro" name="intro" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
@@ -282,7 +282,7 @@
                 </div>
 
                 <!--关注领域-->
-                <div ng-if="user_cache.industry.length == 0" class="form-group clearfix">
+                <div  class="form-group clearfix">
                     <label class="label-control"><span class="c-orange">*</span>关注领域 <span class="tip">(最多可选3个)</span></label>
                     <div class="col-flex clearfix mt-16">
                         <div class="stage" ng-repeat="area in fieldsOptions" ng-click="selectArea($index, 'userValidateForm')" ng-class="{'active':area.active}" name="focusArea">{{area.desc}}</div>
@@ -290,7 +290,7 @@
                 </div>
 
                 <!--投资阶段-->
-                <div ng-if="user_cache.investPhases.length == 0" class="form-group clearfix">
+                <div  class="form-group clearfix">
                     <label class="label-control"><span class="c-orange">*</span>投资阶段</label>
                     <div class="col-flex mt-16">
                         <div class="stage" ng-repeat="stage in investStage" ng-click="selectStage($index, 'userValidateForm')" ng-class="{'active':stage.active}" name="investStage">{{stage.desc}}
@@ -300,7 +300,7 @@
                 </div>
 
                 <!--个人单笔可投-->
-                <div ng-if="user_cache.investMoneyBegin == '' || user_cache.investMoneyEnd == ''" class="form-group normal clearfix">
+                <div  class="form-group normal clearfix">
                     <label class="label-control"><span class="c-orange">*</span>个人单笔可投 </label>
                     <div class="col-flex clearfix ml-10">
                         <input class="form-control account-num" type="tel" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额" ng-pattern="/^\d*$/"  required maxlength="6" />
