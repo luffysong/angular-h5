@@ -187,7 +187,7 @@
                 <div class="basic-info">
                     公司亮点
                 </div>
-                <div class="video-bg" ng-if="videoLink && !startPlay">
+                <div class="video-bg" ng-if="videoLink && !startPlay" style="background-image: url({{syndicatesInfo.detail.video_img ? syndicatesInfo.detail.video_img : 'images/video-bg.png'}})">
                     <div class="video-play" ng-click="startVideo()" />
                     <div class="video-start">即将播放</div>
                 </div>
