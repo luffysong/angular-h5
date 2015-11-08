@@ -298,7 +298,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         $scope.cancel = function(event){
             $scope.actionSheet = false;
         }
-        $scope.payOutline = function(){
+        /*$scope.payOutline = function(){
             var num = Math.min($scope.baseData.base.cf_max_raising - $scope.baseData.funding.lead_investment,$scope.formData.investVal);
             CrowdFundingService['cf-trade'].save({},{
                 user_id: $scope.uid,
@@ -323,7 +323,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                     ErrorService.alert(err);
                 }
             });
-        }
+        }*/
         $scope.ensurePay = function(){
             function goToPay(num){
                 num = num ? num : $scope.formData.investVal;
