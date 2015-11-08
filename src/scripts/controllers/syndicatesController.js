@@ -122,7 +122,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
             loading.show('syndicatesList');
 
             CrowdFundingService["crowd-funding"].query({
-                "page":$scope.pageNo,
+                "page": 1,
                 "per_page":pageSize,
                 "status": status
             },function(data){
