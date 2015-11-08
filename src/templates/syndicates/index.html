@@ -99,6 +99,10 @@
     <div class="syndicates-index loadMore" ng-click="loadMore()" ng-show="!noMore">
         查看更多
     </div>
+    <div class="syndicates-no-data-layer text-center" ng-show="!investorList.length && !loadingInst.syndicatesList">
+        <div class="icon-h5-search"></div>
+        <p class="remind-info">暂无数据</p>
+    </div>
 </div>
 <div loading="syndicatesList"></div>
 

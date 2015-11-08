@@ -137,6 +137,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
                 } else {
                     $scope.investorList = data.data;
                 }
+
                 $scope.handleData();
                 $timeout(function(){
                     loading.hide('syndicatesList');
