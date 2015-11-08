@@ -119,6 +119,7 @@ angular.module('defaultApp.controller').controller('syndicatesController',
         $scope.syndicatesFilter = function(status) {
             $scope.selectedStatus = status;
             $scope.investorList = [];
+            $scope.pageNo = 1;
             loading.show('syndicatesList');
 
             CrowdFundingService["crowd-funding"].query({
