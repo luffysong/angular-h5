@@ -41,7 +41,8 @@ angular.module('defaultApp.directive').directive('fillUrl',
                             });
                         }
                         for (var i = 0; i < urlArr.length; i++){
-                            if(val.indexOf(urlArr[i]) > -1 ){
+
+                            if(val.indexOf('.'+urlArr[i]) > -1 || val.indexOf('//'+urlArr[i]) > -1){
                                 scope.$apply(function(){
                                     formCtrl[element.attr('name')].$setValidity('urlblacklist', false);
                                 });

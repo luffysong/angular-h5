@@ -443,7 +443,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
             // 校验公司黑名单
             for(var i = 0; i < $scope.urlblacklist.length; i++){
-                if($scope.formData.website.indexOf($scope.urlblacklist[i]) > -1){
+                if($scope.formData.website.indexOf('.'+$scope.urlblacklist[i]) > -1 || $scope.formData.website.indexOf('//'+$scope.urlblacklist[i]) > -1){
                     angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("urlblacklist", false);
                     return;
                 }
@@ -483,7 +483,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 } else {
                     location.hash = "/company_create_apply";
                 }
-                
+
                 //if (callback) {
                 //    callback(data.id);
                 //    return;
