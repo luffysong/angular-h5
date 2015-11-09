@@ -11,6 +11,7 @@ angular.module('defaultApp.directive').directive('orderBtn', [
             restrict: 'AE',
             link: function (scope, element, attrs) {
                 element.click(function(e){
+                    e.preventDefault();
                     if(!UserService.getUID()){
                         e.preventDefault();
                         setTimeout(function(){
@@ -23,9 +24,11 @@ angular.module('defaultApp.directive').directive('orderBtn', [
                                 $state.go('guide.welcome', {
                                     type: 'investorValidate'
                                 });
-                            } else if(!data || !data.coInvestor) {
+                            } else if(!data && !data.coInvestor) {
                                 e.preventDefault();
                                 $state.go("investorValidate");
+                            } else {
+                                $state.go("syndicatesAllOrder");
                             }
                         });
                     }
