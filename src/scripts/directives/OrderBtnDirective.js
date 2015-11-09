@@ -12,21 +12,19 @@ angular.module('defaultApp.directive').directive('orderBtn', [
             link: function (scope, element, attrs) {
                 element.click(function(e){
                     if(!UserService.getUID()){
-                        event.preventDefault();
+                        e.preventDefault();
                         setTimeout(function(){
                             location.href = '/user/login?from=' + encodeURIComponent(location.href);
                         }, 300);
                     } else {
                         UserService.getIdentity(function(data) {
                             if(data.code == 4031) {
-                                event.preventDefault();
+                                e.preventDefault();
                                 $state.go('guide.welcome', {
                                     type: 'investorValidate'
                                 });
                             } else if(!data || !data.coInvestor) {
-                                if(event){
-                                    event.preventDefault();
-                                }
+                                e.preventDefault();
                                 $state.go("investorValidate");
                             }
                         });
