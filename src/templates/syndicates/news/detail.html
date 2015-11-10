@@ -37,9 +37,9 @@
         <div class="project-detail" ng-hide="loadingInst.randomList">
             <div class="detail-list" ng-repeat="item in projectList track by $index">
                 <div ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
-                    <span class="syndicates-logo" ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" ng-style="{'background-image':'url(\'{{item.company.logo | image:100}}\')'}"></span>
+                    <span class="syndicates-logo" ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" ng-style="{'background-image':'url(\'{{item.company.logo | image:100}}\')'}" data-stat-click="newsMobile.fundraising.logo"></span>
                     <div class="project-intro">
-                        <a class="company-name" href="" ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})">
+                        <a class="company-name" href="" ui-sref="syndicatesDetail({companyId:item.company.id,fundingId:item.id})" data-stat-click="newsMobile.fundraising.name">
                             <strong title="{{item.company.name}}">{{item.company.name}}</strong>
                         </a>
                         <div class="brief" title="{{item.company.brief}}">{{item.company.brief}}</div>

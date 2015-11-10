@@ -27,6 +27,7 @@ angular.module('defaultApp.controller').controller('syndicatesNewsController',
             id:"",
             active:true
         }];
+        $scope.dataStatList = ['all', 'industry', 'project', 'event'];
         var statusList = DictionaryService.getDict("crowd_funding_status");
         $scope.switchNews = function(index,pid){
             if($scope.newsList[index].active)return;
