@@ -24,9 +24,11 @@ angular.module('defaultApp.directive').directive('orderBtn', [
                                 $state.go('guide.welcome', {
                                     type: 'investorValidate'
                                 });
-                            } else if(!data && !data.coInvestor) {
+                                return;
+                            } else if(!data || !data.coInvestor) {
                                 e.preventDefault();
                                 $state.go("investorValidate");
+                                return;
                             } else {
                                 $state.go("syndicatesAllOrder");
                             }
