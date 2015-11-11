@@ -10,6 +10,27 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
 
         $timeout(function() {
             loading.hide("syndicatesInvite");
-        }, 3000);
+        }, 1500);
+
+        $scope.uid = UserService.getUID();
+        $scope.isLogin = !!UserService.getUID();
+
+        $scope.viewInviteRecord = function($event) {
+            $event.preventDefault();
+            $modal.open({
+                windowClass: 'invite-record-window',
+                templateUrl: 'templates/syndicates/invite/pop-invite-record.html',
+                controller: [
+                    '$scope', 'scope',
+                    function($scope, scope) {
+
+                    }],
+                    resolve: {
+                        scope: function() {
+                            return $scope;
+                        }
+                    }
+            });
+        };
     });
 

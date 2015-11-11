@@ -50,6 +50,12 @@
             <img class="rules-line" src="styles/images/invite/rules-line.png" alt="">
         </div>
     </div>
+
+    <div class="syndicates-invite-stick">
+        <a class="btn login-btn" href="" ng-if="!isLogin" login-btn>登录赚取现金</a>
+        <a class="btn record-btn" href="" ng-if="isLogin" ng-click="viewInviteRecord($event);">邀请记录</a>
+        <a class="btn share-btn" href="" ng-if="isLogin">点击进行分享</a>
+    </div>
 </div>
 
 <div loading="syndicatesInvite"></div>
