@@ -21,9 +21,11 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                 windowClass: 'invite-record-window',
                 templateUrl: 'templates/syndicates/invite/pop-invite-record.html',
                 controller: [
-                    '$scope', 'scope',
-                    function($scope, scope) {
-
+                    '$scope', 'scope', '$modalInstance',
+                    function($scope, scope, $modalInstance) {
+                        $scope.ok = function() {
+                            $modalInstance.dismiss();
+                        }
                     }],
                     resolve: {
                         scope: function() {
