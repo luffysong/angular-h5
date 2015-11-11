@@ -302,4 +302,10 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/syndicates/invite/index.html',
         controller: 'SyndicatesInviteController'
     });
+
+    $stateProvider.state('syndicatesShare', {
+        url: '/syndicatesShare',
+        templateUrl: 'templates/syndicates/invite/share.html',
+        controller: 'SyndicatesShareController'
+    })
 });
