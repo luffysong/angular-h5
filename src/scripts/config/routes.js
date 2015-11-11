@@ -296,4 +296,10 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controller: 'FinacingSuccessController' // todo : controller
     });
 
+    // 跟投人拉新活动
+    $stateProvider.state('syndicatesInvite', {
+        url: '/syndicatesInvite',
+        templateUrl: 'templates/syndicates/invite/index.html',
+        controller: 'SyndicatesInviteController'
+    });
 });
