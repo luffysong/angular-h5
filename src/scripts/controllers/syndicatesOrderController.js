@@ -51,12 +51,19 @@ angular.module('defaultApp.controller').controller('syndicatesOrderController',
             $scope.tempData = $scope.tempList;
             $scope.showAll = true;
         }
-        $scope.goPay = function(tid,amount){
-            $state.go("syndicatesPayWay",{
-                tid:tid,
-                amount:amount,
-                type:"deposit"
-            });
+        $scope.goPay = function(tid,amount,platType){
+            if(platType+"" === "1"){
+                $state.go("syndicatesPayOutline",{
+                    tid:tid,
+                    type:"deposit"
+                });
+            }else{
+                $state.go("syndicatesPayWay",{
+                    tid:tid,
+                    amount:amount,
+                    type:"deposit"
+                });
+            }
             /*if(!$scope.hasRecord){
                 location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+tid,'url_order='+encodeURIComponent(location.href),'back_url='+encodeURIComponent(location.href)]).join('&');
             }else{

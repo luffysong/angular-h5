@@ -9,7 +9,7 @@
                 <div class="pay-tip">待付保证金: <span class="error">￥{{item.trade_c_f_deposit.deposit}}</span></div>
             </div>
             <div class="order-handle">
-                <a class="go-pay-btn" href="" ng-click="goPay(item.trade_c_f_deposit.trade_id,item.trade_c_f_deposit.deposit)" baidu-btn="待付款订单页-去付款按钮点击">去付款></a>
+                <a class="go-pay-btn" href="" ng-click="goPay(item.trade_c_f_deposit.trade_id,item.trade_c_f_deposit.deposit,item.trade_c_f_deposit.payment.platform_type)" baidu-btn="待付款订单页-去付款按钮点击">去付款></a>
             </div>
         </div>
     </div>
