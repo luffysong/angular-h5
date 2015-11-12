@@ -96,7 +96,7 @@
                 </div>
             </div>
             <!--<a href="" class="outline-pay" ui-sref="payOutlineRemind({tid:tid,type:'deposit'})" ng-click="payOutline()">线下汇款</a>-->
-            <a class="ensure-pay btn" ng-disabled="!isRead || confirmForm.$invalid" ng-click="ensurePay()" data-stat-click="payment.pay">支付保证金</a>
+            <a class="ensure-pay btn" ng-disabled="!isRead || confirmForm.$invalid" submit-btn ng-click="ensurePay()" data-stat-click="payment.pay">支付保证金</a>
             <ul class="deposit-tip">
                 <li>
                     保证金提示：
