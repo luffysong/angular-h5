@@ -307,5 +307,11 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url: '/syndicatesShare',
         templateUrl: 'templates/syndicates/invite/share.html',
         controller: 'SyndicatesShareController'
+    });
+
+    $stateProvider.state('syndicatesGift', {
+        url: '/syndicatesGift',
+        templateUrl: 'templates/syndicates/invite/gift.html',
+        controller: 'SyndicatesGiftController'
     })
 });
