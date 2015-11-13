@@ -8,8 +8,30 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
     function($scope, $state, $stateParams, $q, $modal, notify, $timeout, $interval, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
         loading.show('syndicatesInvite');
 
+        // 登录状态
         $scope.uid = UserService.getUID();
         $scope.isLogin = !!UserService.getUID();
+
+        // 跟投人身份
+        if($scope.isLogin) {
+            UserService.getIdentity(function (data) {
+                if(data && data.coInvestor) {
+                    $scope.permit = "coInvestor";
+                } else {
+                    CrowdFundingService["audit"].get({
+                        id:"co-investor",
+                        submodel:"info"
+                    }, function(data) {
+                    }, function(err) {
+                        if(err.code == 1002) {
+                            $scope.permit = "preInvestor";
+                        } else {
+                            $state.go('syndicatesValid');
+                        }
+                    });
+                }
+            });
+        }
 
         CrowdFundingService['coupon'].get({
             per_page: 50
@@ -83,32 +105,6 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
             });
         };
 
-        // 准跟投人身份
-        var valid = function(){
-            var deferred = $q.defer();
-            UserService.getIdentity(function (data) {
-                if(data) {
-                    deferred.resolve();
-                    $scope.permit = data.coInvestor ? "coInvestor" : "";
-                } else {
-                    deferred.reject();
-                }
-            });
-            return deferred.promise;
-        };
-
-        valid().then(function(){
-            CrowdFundingService["audit"].get({
-                id:"co-investor",
-                submodel:"info"
-            }, function(data) {
-            }, function(err) {
-                if(err.code == 1002) {
-                    $scope.permit = "preInvestor";
-                }
-            });
-        });
-
         $scope.share = function($event) {
             $event.preventDefault();
             $modal.open({
@@ -123,5 +119,14 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                     }]
             });
         };
+
+        window.WEIXINSHARE = {
+            shareTitle: $scope.shareTitle,
+            shareDesc: $scope.shareDesc,
+            shareImg: $scope.shareImg,
+            shareLink: location.href
+        };
+
+        InitWeixin();
 });
 

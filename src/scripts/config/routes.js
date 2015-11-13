@@ -306,13 +306,23 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('syndicatesShare', {
         url: '/syndicatesShare',
         templateUrl: 'templates/syndicates/invite/share.html',
-        controller: 'SyndicatesShareController'
+        controller: 'SyndicatesShareController',
+        data:{
+            permissions : {
+                only : ['login']
+            }
+        }
     });
 
     $stateProvider.state('syndicatesGift', {
         url: '/syndicatesGift',
         templateUrl: 'templates/syndicates/invite/gift.html',
-        controller: 'SyndicatesGiftController'
+        controller: 'SyndicatesGiftController',
+        data:{
+            permissions : {
+                only : ['login']
+            }
+        }
     });
 
     $stateProvider.state('syndicatesValidate', {
