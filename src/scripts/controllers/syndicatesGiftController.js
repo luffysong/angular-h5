@@ -1,5 +1,5 @@
 /**
- * Controller Name: syndicatesShareController
+ * Controller Name: syndicatesGiftController
  */
 
 var angular = require('angular');

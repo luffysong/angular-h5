@@ -1,0 +1,59 @@
+<div class="syndicates-validate" ng-if="!loadingInst.syndicatesValidate">
+    <form ng-submit="$event.preventDefault()"  action="" name="syndicatesValidateForm">
+        <div class="form-group name-group">
+            <label class="label-control" for="investor-name"><span class="c-red">*</span>姓名</label>
+            <input class="form-control" type="text" id="investor-name" name="investor-name" placeholder="点击填写" maxlength="15" required ng-model="investor.name">
+            <div class="split"></div>
+            <div class="avatar-container">
+                <input class="avatar" type="file" id="investor-avatar" name="investor-avatar" required>
+                <span class="avatar-tip">头像</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="label-control" for="investor-id"><span class="c-red">*</span>身份证</label>
+            <input class="form-control" type="text" id="investor-id" name="investor-id" placeholder="点击填写" required ng-model="investor.id">
+        </div>
+        <div class="form-group">
+            <label class="label-control" for="investor-id"><span class="c-red">*</span>确认身份证</label>
+            <input class="form-control" type="text" id="investor-id" name="investor-id-confirm" placeholder="点击填写" required ng-model="investor['id-confirm']">
+        </div>
+        <div class="form-group">
+            <label class="label-control" for="investor-email"><span class="c-red">*</span>邮箱</label>
+            <input class="form-control" type="text" id="investor-email" name="investor-email" placeholder="点击填写" required ng-model="investor.email">
+        </div>
+        <div class="form-group">
+            <label class="label-control" for="investor-phone"><span class="c-red">*</span>手机号码</label>
+            <input class="form-control" type="text" id="investor-phone" name="investor-phone" placeholder="点击填写" required ng-model="investor.phone">
+        </div>
+        <div class="form-group">
+            <label class="label-control" for="investor-captcha"><span class="c-red">*</span>验证码</label>
+            <input class="form-control" type="text" id="investor-captcha" name="investor-captcha" placeholder="点击填写" required ng-model="investor.captcha">
+        </div>
+        <div class="form-group">
+            <label class="label-control" for="investor-company"><span class="c-red">*</span>公司</label>
+            <input class="form-control" type="text" id="investor-company" name="investor-company" placeholder="点击填写" required ng-model="investor.company">
+        </div>
+        <div class="form-group">
+            <label class="label-control" for="investor-work"><span class="c-red">*</span>职位</label>
+            <input class="form-control" type="text" id="investor-work" name="investor-work" placeholder="点击填写" required ng-model="investor.work">
+        </div>
+        <div class="form-group">
+            <label class="label-control" for="investor-address"><span class="c-red">*</span>所在地</label>
+            <input class="form-control" type="text" id="investor-address" name="investor-address" placeholder="点击填写" required ng-model="investor.address">
+        </div>
+        <div class="form-group">
+            <label class="label-control" for="investor-condition"><span class="c-red">*</span>投资条件</label>
+            <input class="form-control" type="text" id="investor-condition" name="investor-condition" placeholder="点击填写" required ng-model="investor.condition">
+        </div>
+        <div class="form-group">
+            <a href="" class="btn btn-submit" ng-click="submitForm($event)" ng-disabled="hasClick">提交申请</a>
+            <p class="text-center bottom-tip">
+                点击-提交申请，即表示你同意
+                <a href="" ng-click="seeRisk()">《风险揭示书》</a>
+                <a href="" ng-click="seeProtocol()">《用户服务协议》</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+<div loading="syndicatesValidate"></div>

@@ -313,5 +313,11 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url: '/syndicatesGift',
         templateUrl: 'templates/syndicates/invite/gift.html',
         controller: 'SyndicatesGiftController'
+    });
+
+    $stateProvider.state('syndicatesValidate', {
+        url: '/syndicatesValidate',
+        templateUrl: 'templates/syndicates/invite/validate.html',
+        controller: 'SyndicatesValidateController'
     })
 });
