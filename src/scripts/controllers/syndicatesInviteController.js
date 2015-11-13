@@ -5,15 +5,20 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('SyndicatesInviteController',
-    function($scope, $state, $stateParams, $modal, notify, $timeout, loading, UserService, ErrorService, DictionaryService, CoInvestorService) {
+    function($scope, $state, $stateParams, $modal, notify, $timeout, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
         loading.show("syndicatesInvite");
-
-        $timeout(function() {
-            loading.hide("syndicatesInvite");
-        }, 1500);
 
         $scope.uid = UserService.getUID();
         $scope.isLogin = !!UserService.getUID();
+
+        CrowdFundingService["coupon"].get({
+            per_page: 50
+        },function(data) {
+            $scope.couponList = data.data;
+            loading.hide("syndicatesInvite");
+        },function(err) {
+            ErrorService.alert(err);
+        });
 
         $scope.viewInviteRecord = function($event) {
             $event.preventDefault();

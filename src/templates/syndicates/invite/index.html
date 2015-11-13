@@ -14,7 +14,9 @@
         <div class="records-wrapper">
             <div class="records-title">新获得券用户</div>
             <ul class="records-list">
-                <li ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8]">Cloudd{{i}}云云 获得 <span>500元</span> 投资券</li>
+                <li ng-repeat="item in couponList">
+                    {{item.user.name}}获得<span>{{item.amount}}元</span>投资卷
+                </li>
             </ul>
 
             <img class="records-line" src="styles/images/invite/gift-line.png" alt="">
