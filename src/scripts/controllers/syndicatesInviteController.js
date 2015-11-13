@@ -6,23 +6,25 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('SyndicatesInviteController',
     function($scope, $state, $stateParams, $modal, notify, $timeout, $interval, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
-        loading.show("syndicatesInvite");
+        loading.show('syndicatesInvite');
 
         $scope.uid = UserService.getUID();
         $scope.isLogin = !!UserService.getUID();
 
-        CrowdFundingService["coupon"].get({
+        CrowdFundingService['coupon'].get({
             per_page: 50
         },function(data) {
             $scope.couponList = data.data;
-            loading.hide("syndicatesInvite");
+            loading.hide('syndicatesInvite');
             $scope.scroll();
         },function(err) {
             ErrorService.alert(err);
         });
 
-        var timer;
+        var timer, scrollStart;
         $scope.scroll = function() {
+            scrollStart = true;
+
             $timeout(function() {
                 timer = $interval(function() {
                     var $recordsList = $('.records-list');
@@ -38,13 +40,17 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                     }
                     $recordsList.scrollTop(scrollTop);
                 }, 30);
-            }, 1000);
+            }, 100);
         };
 
-        $scope.scroll();
-
-        $scope.stop = function(){
-            $interval.cancel(timer);
+        $scope.scrollClick = function(){
+            if(scrollStart) {
+                scrollStart = false;
+                $interval.cancel(timer);
+            } else {
+                scrollStart = false;
+                $scope.scroll();
+            }
         };
 
         $scope.viewInviteRecord = function($event) {
@@ -53,8 +59,18 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                 windowClass: 'invite-record-window',
                 templateUrl: 'templates/syndicates/invite/pop-invite-record.html',
                 controller: [
-                    '$scope', 'scope', '$modalInstance',
-                    function($scope, scope, $modalInstance) {
+                    '$scope', 'scope', '$modalInstance', 'CrowdFundingService', 'ErrorService',
+                    function($scope, scope, $modalInstance, CrowdFundingService, ErrorService) {
+                        if(scope.uid) {
+                            CrowdFundingService['co-investor'].get({
+                                id: 'my-spred-list'
+                            }, function(data) {
+                                $scope.inviteData = data.data;
+                            }, function(err) {
+                                ErrorService.alert(err);
+                            });
+                        }
+
                         $scope.ok = function() {
                             $modalInstance.dismiss();
                         }

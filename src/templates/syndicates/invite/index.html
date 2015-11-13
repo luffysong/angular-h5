@@ -13,7 +13,7 @@
     <div class="invite-records clearfix">
         <div class="records-wrapper">
             <div class="records-title">新获得券用户</div>
-            <ul class="records-list" ng-mousedown="stop()">
+            <ul class="records-list" ng-mousedown="scrollClick()">
                 <li ng-repeat="item in couponList">
                     {{item.user.name}}获得<span>{{item.amount}}元</span>投资卷
                 </li>
