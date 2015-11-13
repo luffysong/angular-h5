@@ -4,41 +4,190 @@
 
 var angular = require('angular');
 
-angular.module('defaultApp.controller').controller('SyndicatesValidateController',
-    function($scope, $state, $stateParams, $modal, notify, $timeout, loading, UserService, checkForm, ErrorService, DictionaryService, CoInvestorService) {
-        document.title = "36氪股权投资";
+angular.module('defaultApp.controller').controller('syndicatesValidateController',
+    function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CoInvestorService) {
+        document.title = '36氪股权投资';
 
         $timeout(function(){
             window.scroll(0,0);
         }, 0);
 
-        loading.show("syndicatesValidate");
+        loading.show('syndicatesValidate');
 
         $timeout(function() {
-            loading.hide("syndicatesValidate");
+            loading.hide('syndicatesValidate');
         }, 500);
 
         $scope.uid = UserService.getUID();
         $scope.isLogin = !!UserService.getUID();
 
+        $scope.action = {};
+
         $scope.investor = {
-            "name": '',
-            "id": '',
-            "id-confirm": '',
-            "email": '',
-            "phone": '',
-            "captcha": '',
-            "company": '',
-            "work": '',
-            "address": '',
-            "condition": ''
+            'name': '',
+            'avatar': '',
+            'id': '',
+            'id-confirm': '',
+            'email': '',
+            'phone': '',
+            'captcha': '',
+            'company': '',
+            'work': '',
+            'address': '',
+            'condition': ''
+        };
+
+        // 获取用户信息
+        UserService.basic.get({
+            id: $scope.uid
+        }, function(data){
+            delete data.$promise;
+            delete data.$resolved;
+            if(data.phone){
+                $scope.investor.hasPhone = true;
+                delete $scope.investor.phone;
+            }
+            if(data.email && data.isEmailActivate){
+                $scope.investor.hasEmail = true;
+                delete $scope.investor.email;
+            }
+            $scope.investor.name = data.name;
+            $scope.investor.avatar = data.avatar;
+        });
+
+        // 头像上传
+        $scope.androidUpload = AndroidUploadService.setClick(function(file) {
+            $scope.$apply(function() {
+                $scope.investor.avatar = file;
+            });
+        });
+
+        $scope.imgFileSelected  = function(files, e) {
+            e.preventDefault();
+
+            var upyun = window.kr.upyun;
+
+            if(files[0].size > 5 * 1024 * 1024){
+                ErrorService.alert({
+                    msg:'附件大于5M'
+                });
+                return;
+            }
+
+            for(var i = 0; i < files.length; i++) {
+                var file = files[i];
+                $scope.action.uploading = true;
+                DefaultService.getUpToken({
+                    'x-gmkerl-type': 'fix_width', //限定宽度,高度自适应
+                    'x-gmkerl-value': '900',      //限定的宽度的值
+                    'x-gmkerl-unsharp': true
+                }).then(function (data) {
+                    $scope.upload = $upload.upload({
+                        url: upyun.api + '/' + upyun.bucket.name,
+                        data: data,
+                        file: file,
+                        withCredentials: false
+                    }).progress(function (evt) {
+
+                    }).success(function (data, status, headers, config) {
+                        var filename = data.url.toLowerCase();
+                        if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
+                            $scope.investor.avatar = upyun.bucket.url + data.url;
+                        } else {
+                            ErrorService.alert({
+                                msg: '格式不支持，请重新上传！'
+                            });
+                        }
+                        $scope.action.uploading = false;
+                    }).error(function(){
+                        ErrorService.alert({
+                            msg: '格式不支持，请重新上传！'
+                        });
+                        $scope.action.uploading = false;
+                    });
+                }, function (err) {
+                    ErrorService.alert(err);
+                    $scope.action.uploading = false;
+                });
+            }
+        };
+
+        var checkTimeout;
+        // 邮箱校验
+        $scope.$watch('investor.email', function(email) {
+            if(!email || $scope.syndicatesValidateForm['investor-email'].$error.email) {
+                return;
+            }
+            $scope.syndicatesValidateForm['investor-email'].$setValidity('checked', true);
+            checkTimeout && $timeout.cancel(checkTimeout);
+            checkTimeout = $timeout(function() {
+                $scope.syndicatesValidateForm['investor-email'].$setDirty();
+                UserService.check.get({
+                    id: $scope.uid,
+                    email: email
+                }, function(data) {
+
+                }, function() {
+                    $scope.syndicatesValidateForm['investor-email'].$setValidity('checked', false);
+                });
+            }, 800);
+        });
+
+        // 手机验证
+        $scope.$watch('investor.phone', function(phone) {
+            if(!phone || !$rootScope.REGEXP.phone.test(phone)){
+                return;
+            }
+            $scope.syndicatesValidateForm['investor-phone'].$setValidity("checked", true);
+            checkTimeout && $timeout.cancel(checkTimeout);
+            checkTimeout = $timeout(function(){
+                $scope.syndicatesValidateForm['investor-phone'].$setDirty();
+                UserService.check.get({
+                    id: $scope.uid,
+                    phone: phone
+                }, function(data) {
+
+                }, function() {
+                    $scope.syndicatesValidateForm['investor-phone'].$setValidity("checked", false);
+                });
+            }, 800);
+        });
+
+        $scope.getCode = function(e){
+            e.preventDefault();
+            if(!$scope.investor.phone) {
+                return;
+            }
+            if($scope.wait) {
+                return;
+            }
+            $scope.wait = 60;
+            var interval = setInterval(function() {
+                $scope.$apply(function() {
+                    $scope.wait--;
+                    if($scope.wait == 0){
+                        $scope.wait = 0;
+                        clearInterval(interval);
+                    }
+                })
+            }, 1000);
+            UserService['send-sms'].send({
+                id: $scope.uid
+            }, {
+                phone: $scope.investor.phone
+            }, function(data) {
+            }, function(){
+                 ErrorService.alert({
+                     msg:'发送失败!'
+                 });
+            });
         };
 
         $scope.submitForm = function() {
             if(!checkForm('syndicatesValidateForm')) return;
         };
 
-        /*查看风险揭示书*/
+        // 看风险揭示书
         $scope.seeRisk = function(){
             $modal.open({
                 templateUrl: 'templates/company/pop-risk-tip-all.html',
@@ -59,7 +208,7 @@ angular.module('defaultApp.controller').controller('SyndicatesValidateController
             });
         };
 
-        /*查看用户服务协议*/
+        //查看用户服务协议
         $scope.seeProtocol = function () {
             $modal.open({
                 templateUrl: 'templates/company/pop-service-protocol.html',

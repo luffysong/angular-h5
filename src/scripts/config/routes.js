@@ -318,6 +318,11 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('syndicatesValidate', {
         url: '/syndicatesValidate',
         templateUrl: 'templates/syndicates/invite/validate.html',
-        controller: 'SyndicatesValidateController'
+        controller: 'syndicatesValidateController',
+        data:{
+            permissions : {
+                only : ['login']
+            }
+        }
     })
 });
