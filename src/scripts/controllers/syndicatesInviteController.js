@@ -65,7 +65,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                             CrowdFundingService['co-investor'].get({
                                 id: 'my-spred-list'
                             }, function(data) {
-                                $scope.inviteData = data.data;
+                                $scope.inviteList = data.data;
                             }, function(err) {
                                 ErrorService.alert(err);
                             });
