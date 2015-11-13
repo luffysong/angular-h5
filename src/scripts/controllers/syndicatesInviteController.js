@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('SyndicatesInviteController',
-    function($scope, $state, $stateParams, $modal, notify, $timeout, $interval, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
+    function($scope, $state, $stateParams, $q, $modal, notify, $timeout, $interval, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
         loading.show('syndicatesInvite');
 
         $scope.uid = UserService.getUID();
@@ -82,5 +82,46 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                     }
             });
         };
-    });
+
+        // 准跟投人身份
+        var valid = function(){
+            var deferred = $q.defer();
+            UserService.getIdentity(function (data) {
+                if(data) {
+                    deferred.resolve();
+                    $scope.permit = data.coInvestor ? "coInvestor" : "";
+                } else {
+                    deferred.reject();
+                }
+            });
+            return deferred.promise;
+        };
+
+        valid().then(function(){
+            CrowdFundingService["audit"].get({
+                id:"co-investor",
+                submodel:"info"
+            }, function(data) {
+            }, function(err) {
+                if(err.code == 1002) {
+                    $scope.permit = "preInvestor";
+                }
+            });
+        });
+
+        $scope.share = function($event) {
+            $event.preventDefault();
+            $modal.open({
+                windowClass: 'invite-share-window',
+                templateUrl: 'templates/syndicates/invite/pop-invite-share.html',
+                controller: [
+                    '$scope', '$modalInstance',
+                    function($scope, $modalInstance) {
+                        $scope.ok = function() {
+                            $modalInstance.dismiss();
+                        }
+                    }]
+            });
+        };
+});
 
