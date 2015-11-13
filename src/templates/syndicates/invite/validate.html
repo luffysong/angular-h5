@@ -9,38 +9,65 @@
                 <span class="avatar-tip">头像</span>
             </div>
         </div>
+        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-name'].$invalid && syndicatesValidateForm['investor-name'].$dirty">
+            <span ng-show="syndicatesValidateForm['investor-name'].$error.required"><span class="tip-icon">!</span>请输入你的姓名</span>
+        </div>
         <div class="form-group">
             <label class="label-control" for="investor-id"><span class="c-red">*</span>身份证</label>
             <input class="form-control" type="text" id="investor-id" name="investor-id" placeholder="点击填写" required ng-model="investor.id">
         </div>
+        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-id'].$invalid && syndicatesValidateForm['investor-id'].$dirty">
+            <span ng-show="syndicatesValidateForm['investor-id'].$error.required"><span class="tip-icon">!</span>请输入你的身份证号</span>
+        </div>
         <div class="form-group">
             <label class="label-control" for="investor-id"><span class="c-red">*</span>确认身份证</label>
-            <input class="form-control" type="text" id="investor-id" name="investor-id-confirm" placeholder="点击填写" required ng-model="investor['id-confirm']">
+            <input class="form-control" type="text" id="investor-id-confirm" name="investor-id-confirm" placeholder="点击填写" required ng-model="investor['id-confirm']">
+        </div>
+        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-id-confirm'].$invalid && syndicatesValidateForm['investor-id-confirm'].$dirty">
+            <span ng-show="syndicatesValidateForm['investor-id-confirm'].$error.required"><span class="tip-icon">!</span>请重新输入你的身份证号</span>
         </div>
         <div class="form-group">
             <label class="label-control" for="investor-email"><span class="c-red">*</span>邮箱</label>
             <input class="form-control" type="text" id="investor-email" name="investor-email" placeholder="点击填写" required ng-model="investor.email">
         </div>
+        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-email'].$invalid && syndicatesValidateForm['investor-email'].$dirty">
+            <span ng-show="syndicatesValidateForm['investor-email'].$error.required"><span class="tip-icon">!</span>请输入你的邮箱</span>
+        </div>
         <div class="form-group">
             <label class="label-control" for="investor-phone"><span class="c-red">*</span>手机号码</label>
             <input class="form-control" type="text" id="investor-phone" name="investor-phone" placeholder="点击填写" required ng-model="investor.phone">
+        </div>
+        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-phone'].$invalid && syndicatesValidateForm['investor-phone'].$dirty">
+            <span ng-show="syndicatesValidateForm['investor-phone'].$error.required"><span class="tip-icon">!</span>请输入你的电话号码</span>
         </div>
         <div class="form-group">
             <label class="label-control" for="investor-captcha"><span class="c-red">*</span>验证码</label>
             <input class="form-control" type="text" id="investor-captcha" name="investor-captcha" placeholder="点击填写" required ng-model="investor.captcha">
             <a class="btn btn-captcha" href="">点击发送</a>
         </div>
+        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-captcha'].$invalid && syndicatesValidateForm['investor-captcha'].$dirty">
+            <span ng-show="syndicatesValidateForm['investor-captcha'].$error.required"><span class="tip-icon">!</span>请输入你收到的验证码</span>
+        </div>
         <div class="form-group">
             <label class="label-control" for="investor-company"><span class="c-red">*</span>公司</label>
             <input class="form-control" type="text" id="investor-company" name="investor-company" placeholder="点击填写" required ng-model="investor.company">
+        </div>
+        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-company'].$invalid && syndicatesValidateForm['investor-company'].$dirty">
+            <span ng-show="syndicatesValidateForm['investor-company'].$error.required"><span class="tip-icon">!</span>请输入你的公司名称</span>
         </div>
         <div class="form-group">
             <label class="label-control" for="investor-work"><span class="c-red">*</span>职位</label>
             <input class="form-control" type="text" id="investor-work" name="investor-work" placeholder="点击填写" required ng-model="investor.work">
         </div>
+        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-work'].$invalid && syndicatesValidateForm['investor-work'].$dirty">
+            <span ng-show="syndicatesValidateForm['investor-work'].$error.required"><span class="tip-icon">!</span>请输入你的职位</span>
+        </div>
         <div class="form-group">
             <label class="label-control" for="investor-address"><span class="c-red">*</span>所在地</label>
             <input class="form-control" type="text" id="investor-address" name="investor-address" placeholder="点击填写" required ng-model="investor.address">
+        </div>
+        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-address'].$invalid && syndicatesValidateForm['investor-address'].$dirty">
+            <span ng-show="syndicatesValidateForm['investor-address'].$error.required"><span class="tip-icon">!</span>请输入你的所在地</span>
         </div>
         <div class="form-group">
             <label class="label-control" for="investor-condition"><span class="c-red">*</span>投资条件</label>
