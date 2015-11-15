@@ -37,6 +37,7 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
             });
         }
 
+        // 分享
         $scope.share = function($event) {
             $event.preventDefault();
             $modal.open({

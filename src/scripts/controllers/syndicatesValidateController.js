@@ -10,16 +10,15 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
 
         $timeout(function(){
             window.scroll(0,0);
+            loading.show('syndicatesValidate');
         }, 0);
-
-        loading.show('syndicatesValidate');
 
         $timeout(function() {
             loading.hide('syndicatesValidate');
         }, 500);
 
         $scope.uid = UserService.getUID();
-        $scope.isLogin = !!UserService.getUID();
+        $scope.isLogin = !!$scope.uid;
 
         $scope.action = {};
 
@@ -112,8 +111,8 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             }
         };
 
-        var checkTimeout;
         // 邮箱校验
+        var checkTimeout;
         $scope.$watch('investor.email', function(email) {
             if(!email || $scope.syndicatesValidateForm['investor-email'].$error.email) {
                 return;
@@ -153,6 +152,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             }, 800);
         });
 
+        // 获取验证码
         $scope.getCode = function(e){
             e.preventDefault();
             if(!$scope.investor.phone) {
@@ -187,7 +187,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             if(!checkForm('syndicatesValidateForm')) return;
         };
 
-        // 看风险揭示书
+        // 查看风险揭示书
         $scope.seeRisk = function(){
             $modal.open({
                 templateUrl: 'templates/company/pop-risk-tip-all.html',
@@ -208,7 +208,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             });
         };
 
-        //查看用户服务协议
+        // 查看用户服务协议
         $scope.seeProtocol = function () {
             $modal.open({
                 templateUrl: 'templates/company/pop-service-protocol.html',
