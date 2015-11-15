@@ -20,7 +20,9 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         $scope.uid = UserService.getUID();
         $scope.isLogin = !!$scope.uid;
 
-        $scope.action = {};
+        $scope.action = {
+            uploaded: false
+        };
 
         $scope.investor = {
             'name': '',
@@ -87,11 +89,12 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                         file: file,
                         withCredentials: false
                     }).progress(function (evt) {
-
+                        $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
                     }).success(function (data, status, headers, config) {
                         var filename = data.url.toLowerCase();
                         if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
                             $scope.investor.avatar = upyun.bucket.url + data.url;
+                            $scope.action.uploaded = true;
                         } else {
                             ErrorService.alert({
                                 msg: '格式不支持，请重新上传！'

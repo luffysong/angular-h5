@@ -1,11 +1,12 @@
 <div class="syndicates-validate" ng-show="!loadingInst.syndicatesValidate">
+    <div class="avatar-process" ng-if="!investor.avatar && process != 100"></div>
     <form ng-submit="$event.preventDefault()"  action="" name="syndicatesValidateForm">
         <!-- 完善资料（姓名&头像）-->
         <div class="form-group name-group">
             <label class="label-control" for="investor-name"><span class="c-red">*</span>姓名</label>
             <input class="form-control" type="text" id="investor-name" name="investor-name" placeholder="须与身份证一致" maxlength="15" required ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" ng-model="investor.name">
-            <div class="split"></div>
-            <div class="avatar-container" style="background-image: url({{investor.avatar | image: 70 : 'user'}});">
+            <div class="split" ng-if="!investor.avatar || action.uploaded"></div>
+            <div class="avatar-container" style="background-image: url({{investor.avatar | image: 70 : 'user'}});" ng-if="!investor.avatar || action.uploaded">
                 <input class="avatar" type="file" id="investor-avatar" name="investor-avatar" required
                        ng-file-select
                        ng-file-change="imgFileSelected($files, $event)"
