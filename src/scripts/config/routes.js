@@ -305,6 +305,17 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controller: 'SyndicatesInviteController'
     });
 
+    $stateProvider.state('syndicatesValidate', {
+        url: '/syndicatesValidate',
+        templateUrl: 'templates/syndicates/invite/validate.html',
+        controller: 'syndicatesValidateController',
+        data:{
+            permissions : {
+                only : ['login']
+            }
+        }
+    });
+
     $stateProvider.state('syndicatesShare', {
         url: '/syndicatesShare',
         templateUrl: 'templates/syndicates/invite/share.html',
@@ -326,15 +337,4 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             }
         }
     });
-
-    $stateProvider.state('syndicatesValidate', {
-        url: '/syndicatesValidate?id',
-        templateUrl: 'templates/syndicates/invite/validate.html',
-        controller: 'syndicatesValidateController',
-        data:{
-            permissions : {
-                only : ['login']
-            }
-        }
-    })
 });

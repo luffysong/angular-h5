@@ -6,7 +6,13 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('SyndicatesInviteController',
     function($scope, $state, $stateParams, $q, $modal, notify, $timeout, $interval, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
-        loading.show('syndicatesInvite');
+        document.title = '36氪股权投资';
+
+        $timeout(function(){
+            window.scroll(0, 0);
+            loading.show('syndicatesInvite');
+        }, 0);
+
 
         // 登录状态
         $scope.uid = UserService.getUID();
@@ -19,9 +25,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                     $scope.permit = "coInvestor";
                 } else {
                     if(data && data.code == 4031) {
-                        $state.go('syndicatesValidate', {
-                            id: $scope.uid
-                        });
+                        $state.go('syndicatesValidate');
                     } else {
                         CrowdFundingService["audit"].get({
                             id: "co-investor",
@@ -31,9 +35,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                             if(err.code == 1002) {
                                 $scope.permit = "preInvestor";
                             } else {
-                                $state.go('syndicatesValidate', {
-                                    id: $scope.uid
-                                });
+                                $state.go('syndicatesValidate');
                             }
                         });
                     }
@@ -61,11 +63,11 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                 timer = $interval(function() {
                     var $recordsList = $('.records-list');
                     var $recordsItem = $recordsList.find('li');
-                    var outterHeight = $recordsList.height();
+                    var outerHeight = $recordsList.height();
                     var innerHeight = $recordsItem.height() * $recordsItem.length;
 
                     var scrollTop = $recordsList.scrollTop();
-                    if(outterHeight + scrollTop >= innerHeight){
+                    if(outerHeight + scrollTop >= innerHeight){
                         scrollTop -= (innerHeight / 2) + 10;
                     } else {
                         scrollTop++;
