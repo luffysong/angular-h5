@@ -10,7 +10,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
 
         // 登录状态
         $scope.uid = UserService.getUID();
-        $scope.isLogin = !!UserService.getUID();
+        $scope.isLogin = !!$scope.uid;
 
         // 跟投人身份
         if($scope.isLogin) {
@@ -18,21 +18,30 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                 if(data && data.coInvestor) {
                     $scope.permit = "coInvestor";
                 } else {
-                    CrowdFundingService["audit"].get({
-                        id:"co-investor",
-                        submodel:"info"
-                    }, function(data) {
-                    }, function(err) {
-                        if(err.code == 1002) {
-                            $scope.permit = "preInvestor";
-                        } else {
-                            $state.go('syndicatesValid');
-                        }
-                    });
+                    if(data && data.code == 4031) {
+                        $state.go('syndicatesValidate', {
+                            id: $scope.uid
+                        });
+                    } else {
+                        CrowdFundingService["audit"].get({
+                            id: "co-investor",
+                            submodel: "info"
+                        }, function(data) {
+                        }, function(err) {
+                            if(err.code == 1002) {
+                                $scope.permit = "preInvestor";
+                            } else {
+                                $state.go('syndicatesValidate', {
+                                    id: $scope.uid
+                                });
+                            }
+                        });
+                    }
                 }
             });
         }
 
+        // 获取平台获奖信息
         CrowdFundingService['coupon'].get({
             per_page: 50
         },function(data) {
@@ -43,6 +52,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
             ErrorService.alert(err);
         });
 
+        // 获奖信息滚动显示
         var timer, scrollStart;
         $scope.scroll = function() {
             scrollStart = true;
@@ -65,6 +75,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
             }, 100);
         };
 
+        // 控制滚动信息停止和开始
         $scope.scrollClick = function(){
             if(scrollStart) {
                 scrollStart = false;
@@ -75,6 +86,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
             }
         };
 
+        // 弹出个人获奖记录
         $scope.viewInviteRecord = function($event) {
             $event.preventDefault();
             $modal.open({
@@ -105,6 +117,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
             });
         };
 
+        // 微信分享
         $scope.share = function($event) {
             $event.preventDefault();
             $modal.open({
@@ -121,10 +134,10 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
         };
 
         window.WEIXINSHARE = {
-            shareTitle: $scope.shareTitle,
-            shareDesc: $scope.shareDesc,
-            shareImg: $scope.shareImg,
-            shareLink: location.href
+            shareTitle: '分享标题',
+            shareDesc: '分享描述',
+            shareImg: '分享小图',
+            shareLink: location.href + '&id=' + ($scope.isLogin ? $scope.uid : $stateParams.id)
         };
 
         InitWeixin();
