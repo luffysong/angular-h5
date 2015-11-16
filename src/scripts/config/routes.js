@@ -306,7 +306,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('syndicatesValidate', {
-        url: '/syndicatesValidate',
+        url: '/syndicatesValidate?inviter_id',
         templateUrl: 'templates/syndicates/invite/validate.html',
         controller: 'syndicatesValidateController',
         data:{

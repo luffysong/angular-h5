@@ -38,7 +38,8 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 'address1': '',
                 'address2': ''
             },
-            'condition': 'V1_1'
+            'condition': 'V1_1',
+            'uid_inviter': $stateParams.inviter_id
         };
 
         // 获取用户信息
@@ -86,7 +87,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         });
 
         $scope.imgFileSelected  = function(files, e) {
-            e.preventDefault();
+            e && e.preventDefault();
 
             var upyun = window.kr.upyun;
 
@@ -285,7 +286,8 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     id_card_number: $scope.investor.id,
                     city: $scope.investor.address.address2,
                     country: $scope.investor.address.address1,
-                    rnv_investor_info: $scope.investor.condition
+                    rnv_investor_info: $scope.investor.condition,
+                    uid_inviter: $scope.investor.uid_inviter
                 }, function(data) {
                     if(data) {
                         $state.go('syndicatesGift');

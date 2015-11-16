@@ -35,7 +35,9 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                             if(err.code == 1002) {
                                 $scope.permit = "preInvestor";
                             } else {
-                                $state.go('syndicatesValidate');
+                                $state.go('syndicatesValidate', {
+                                    inviter_id: $stateParams.id
+                                });
                             }
                         });
                     }
@@ -139,7 +141,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
             shareTitle: '分享标题',
             shareDesc: '分享描述',
             shareImg: '分享小图',
-            shareLink: location.href + '&id=' + ($scope.isLogin ? $scope.uid : $stateParams.id)
+            shareLink: location.protocol + '//' + location.host + location.pathname + '&id=' + ($scope.isLogin ? $scope.uid : $stateParams.id)
         };
 
         InitWeixin();

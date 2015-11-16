@@ -56,5 +56,14 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
                     }]
             });
         };
+
+        window.WEIXINSHARE = {
+            shareTitle: '分享标题',
+            shareDesc: '分享描述',
+            shareImg: '分享小图',
+            shareLink: location.protocol + '//' + location.host + '/m/#/syndicatesInvite' + '&id=' + $scope.uid
+        };
+
+        InitWeixin();
     });
 
