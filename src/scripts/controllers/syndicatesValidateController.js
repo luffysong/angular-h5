@@ -261,22 +261,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 return;
             }
 
-            if(!$scope.investor.address.address1 || !$scope.investor.address.address2) {
-                $('<div class="error-alert error error-code">请选择所在地</div>').appendTo('body');
-                $timeout(function() {
-                    $('.error-code').fadeOut();
-                }, 2000);
-                return;
-            }
-
-            if(!$scope.investor.condition) {
-                $('<div class="error-alert error error-code">请选择投资条件</div>').appendTo('body');
-                $timeout(function() {
-                    $('.error-code').fadeOut();
-                }, 2000);
-                return;
-            }
-
             $scope.hasClick = true;
 
             UserService.basic.update({

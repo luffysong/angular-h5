@@ -95,16 +95,19 @@
                 <option value="">请选择</option>
             </select>
         </div>
-        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-address'].$invalid && syndicatesValidateForm['investor-address'].$dirty">
-            <span ng-show="syndicatesValidateForm['investor-address'].$error.required"><span class="tip-icon">!</span>请输入你的所在地</span>
+        <div class="error-tip error" ng-show="syndicatesValidateForm.address1.$invalid && syndicatesValidateForm.address1.$dirty">
+            <span ng-show="syndicatesValidateForm.address1.$error.required"><span class="tip-icon">!</span>请选择你的所在地</span>
         </div>
         <!-- 认证跟投人（投资条件）-->
         <div class="form-group">
             <label class="label-control condition"><span class="c-red">*</span>投资条件</label>
             <div ng-repeat="item in condition">
-                <input type="radio" name="permit" id="condition{{$index}}" ng-model="investor.condition" value="{{item.value}}" />
+                <input type="radio" name="condition" id="condition{{$index}}" ng-model="investor.condition" value="{{item.value}}" required/>
                 <label for="condition{{$index}}">{{item.desc}}</label>
             </div>
+        </div>
+        <div class="error-tip error" ng-show="syndicatesValidateForm.condition.$invalid && syndicatesValidateForm.condition.$dirty">
+            <span ng-show="syndicatesValidateForm.condition.$error.required"><span class="tip-icon">!</span>请选择你的投资条件</span>
         </div>
         <div class="form-group">
             <a href="" class="btn btn-submit" ng-click="submitForm($event)" ng-disabled="hasClick">提交申请</a>
