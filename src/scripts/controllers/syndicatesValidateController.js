@@ -36,7 +36,8 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             'work': '',
             'address': {
                 'address1': '',
-                'address2': ''
+                'address2': '',
+                'address3': ''
             },
             'condition': ''
         };
@@ -212,13 +213,12 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         $scope.addr2Options = [];
         $scope.addr1Change = function() {
             if ($scope.investor.address) {
-                $scope.investor.address.address1 = '';
                 $scope.investor.address.address2 = '';
+                $scope.investor.address.address3 = '';
             }
         };
 
         $scope.$watch('investor.address.address1', function(value) {
-            console.log(value);
             $scope.addr2Options = [];
             if (!value) {
                 return;
