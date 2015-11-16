@@ -64,6 +64,20 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             ErrorService.alert(err);
         });
 
+        // 跟投人认证信息
+        CrowdFundingService["audit"].get({
+            id:"co-investor",
+            submodel:"info"
+        }, function(data) {
+            if(data.cert_info){
+                $scope.investor.id = data.cert_info.id_card_number;
+                $scope.investor.address.address1 = data.cert_info.country;
+                $scope.investor.address.address2 = data.cert_info.city;
+            }
+        }, function(err) {
+            console.log(err);
+        });
+
         // 头像上传
         $scope.androidUpload = AndroidUploadService.setClick(function(file) {
             $scope.$apply(function() {
@@ -236,6 +250,9 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         $scope.hasClick = false;
         $scope.submitForm = function(e) {
             e && e.preventDefault();
+            $scope.enterCard = true;
+            if(!checkForm('syndicatesValidateForm')) return;
+
             if(!$scope.investor.avatar) {
                 $('<div class="error-alert error error-code">请上传真实头像</div>').appendTo('body');
                 $timeout(function() {
@@ -244,8 +261,22 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 return;
             }
 
-            $scope.enterCard = true;
-            if(!checkForm('syndicatesValidateForm')) return;
+            if(!$scope.investor.address.address1 || !$scope.investor.address.address2) {
+                $('<div class="error-alert error error-code">请选择所在地</div>').appendTo('body');
+                $timeout(function() {
+                    $('.error-code').fadeOut();
+                }, 2000);
+                return;
+            }
+
+            if(!$scope.investor.condition) {
+                $('<div class="error-alert error error-code">请选择投资条件</div>').appendTo('body');
+                $timeout(function() {
+                    $('.error-code').fadeOut();
+                }, 2000);
+                return;
+            }
+
             $scope.hasClick = true;
 
             UserService.basic.update({
