@@ -272,7 +272,9 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     country: $scope.investor.address.address1,
                     rnv_investor_info: $scope.investor.condition
                 }, function(data) {
-                    console.log(data);
+                    if(data) {
+                        $state.go('syndicatesGift');
+                    }
 
                     $scope.hasClick = false;
                 }, function(err) {

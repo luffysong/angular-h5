@@ -25,17 +25,21 @@ angular.module('defaultApp.controller').controller('SyndicatesGiftController',
                 if(data && data.coInvestor) {
                     $scope.permit = "coInvestor";
                 } else {
-                    CrowdFundingService["audit"].get({
-                        id:"co-investor",
-                        submodel:"info"
-                    }, function(data) {
-                    }, function(err) {
-                        if(err.code == 1002) {
-                            $scope.permit = "preInvestor";
-                        } else {
-                            $state.go('syndicatesValidate');
-                        }
-                    });
+                    if(data && data.code == 4031) {
+                        $state.go('syndicatesValidate');
+                    } else {
+                        CrowdFundingService["audit"].get({
+                            id: "co-investor",
+                            submodel: "info"
+                        }, function(data) {
+                        }, function(err) {
+                            if(err.code == 1002) {
+                                $scope.permit = "preInvestor";
+                            } else {
+                                $state.go('syndicatesValidate');
+                            }
+                        });
+                    }
                 }
             });
         }
