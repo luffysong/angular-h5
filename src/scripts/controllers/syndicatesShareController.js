@@ -14,7 +14,7 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
 
         // 登录状态
         $scope.uid = UserService.getUID();
-        $scope.isLogin = !!UserService.getUID();
+        $scope.isLogin = !!$scope.uid;
 
         // 跟投人身份
         if($scope.isLogin) {
@@ -79,7 +79,7 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
             shareTitle: '36氪股权投资富豪养成计划',
             shareDesc: '我是' + $scope.uname + '，这是我的富豪养成计划，马上加入投资立减最高1000元',
             shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
-            shareLink: location.protocol + '//' + location.host + '/m/#/syndicatesInvite' + '&id=' + $scope.uid
+            shareLink: location.protocol + '//' + location.pathname + '/m/#/syndicatesInvite' + '&id=' + $scope.uid
         };
 
         InitWeixin();
