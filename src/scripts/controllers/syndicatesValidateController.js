@@ -290,13 +290,13 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     rnv_investor_info: $scope.investor.condition,
                     uid_inviter: $scope.investor.uid_inviter
                 }, function(data) {
-                    if(data) {
-                        $state.go('syndicatesGift');
-                    }
-
                     $scope.hasClick = false;
                 }, function(err) {
-                    ErrorService.alert(err);
+                    if(err.code && err.code == 1002) {
+                        $state.go('syndicatesGift');
+                    } else {
+                        ErrorService.alert(err);
+                    }
                     $scope.hasClick = false;
                 });
             }, function(err){
