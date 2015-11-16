@@ -20,23 +20,33 @@ angular.module('defaultApp.controller').controller('SyndicatesGiftController',
         $scope.isLogin = !!UserService.getUID();
 
         // 跟投人身份
+        // 跟投人身份
         if($scope.isLogin) {
             UserService.getIdentity(function (data) {
-                if(data && data.coInvestor) {
+                if (data && data.coInvestor) {
                     $scope.permit = "coInvestor";
                 } else {
-                    if(data && data.code == 4031) {
-                        $state.go('syndicatesValidate');
+                    if (data && data.code == 4031) {
+                        $state.go('syndicatesValidate', {
+                            inviter_id: $stateParams.id
+                        });
                     } else {
                         CrowdFundingService["audit"].get({
                             id: "co-investor",
                             submodel: "info"
-                        }, function(data) {
-                        }, function(err) {
-                            if(err.code == 1002) {
+                        }, function (data) {
+                            if (data.cert_info && data.cert_info.length == 0) {
+                                $state.go('syndicatesValidate', {
+                                    inviter_id: $stateParams.id
+                                });
+                            }
+                        }, function (err) {
+                            if (err.code == 1002) {
                                 $scope.permit = "preInvestor";
                             } else {
-                                $state.go('syndicatesValidate');
+                                $state.go('syndicatesValidate', {
+                                    inviter_id: $stateParams.id
+                                });
                             }
                         });
                     }
