@@ -191,7 +191,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
 
         // 身份证验证
         $timeout(function(){
-            $scope.$watch("[investor['confirm-id'], investor.id]",function(from){
+            $scope.$watch("[investor['id-confirm'], investor.id]",function(from){
                 if(angular.element($("form[name='syndicatesValidateForm']")).length > 0) {
                     if(from[0] != from[1]) {
                         angular.element($("form[name='syndicatesValidateForm']")).scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", false);
@@ -203,7 +203,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         }, 500);
 
         $scope.enterId = function(){
-            if(!$scope.investor['confirm-id']) return;
+            if(!$scope.investor['id-confirm']) return;
             $scope.enterCard = true;
         };
 
