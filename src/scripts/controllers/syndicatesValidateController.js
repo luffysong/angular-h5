@@ -36,10 +36,9 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             'work': '',
             'address': {
                 'address1': '',
-                'address2': '',
-                'address3': ''
+                'address2': ''
             },
-            'condition': ''
+            'condition': 'V1_1'
         };
 
         // 获取用户信息
@@ -214,7 +213,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         $scope.addr1Change = function() {
             if ($scope.investor.address) {
                 $scope.investor.address.address2 = '';
-                $scope.investor.address.address3 = '';
             }
         };
 
@@ -226,19 +224,8 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             $scope.addr2Options = DictionaryService.getLocation(value);
         });
 
-        // 选择个人投资阶段
-        $scope.selectStage = function(index, name_form){
-            name_form = name_form != undefined ? name_form : 'investorValidateForm';
-            angular.element($("form[name='" + name_form + "']")).scope()[name_form].$setValidity("stageEmpty",true);
-            $scope.investStage[index].active = !$scope.investStage[index].active;
-
-            $scope.user.investPhases = [];
-            angular.forEach($scope.investStage,function(key,index){
-                if(key.active && $scope.user.investPhases.indexOf(key.value) < 0){
-                    $scope.user.investPhases.push(key.value);
-                }
-            });
-        };
+        // 投资阶段
+        $scope.condition = DictionaryService.getDict("RnvInvestorInfo");
 
         $scope.submitForm = function() {
             $scope.enterCard = true;
