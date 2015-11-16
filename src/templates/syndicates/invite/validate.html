@@ -51,7 +51,8 @@
         <!-- 完善资料（手机号码）-->
         <div class="form-group" ng-if="!investor.hasPhone">
             <label class="label-control" for="investor-phone"><span class="c-red">*</span>手机号码</label>
-            <input class="form-control" type="text" id="investor-phone" name="investor-phone" placeholder="点击填写" required ng-pattern="REGEXP.phone" ng-model="investor.phone">
+            <!--ng-pattern="REGEXP.phone" -->
+            <input class="form-control" type="text" id="investor-phone" name="investor-phone" placeholder="点击填写" required ng-model="investor.phone">
         </div>
         <div class="error-tip error" ng-show="syndicatesValidateForm['investor-phone'].$invalid && syndicatesValidateForm['investor-phone'].$dirty" ng-if="!investor.hasPhone">
             <span ng-show="syndicatesValidateForm['investor-phone'].$error.required"><span class="tip-icon">!</span>请输入你的电话号码</span>
