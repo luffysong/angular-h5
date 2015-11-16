@@ -39,6 +39,15 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
                     }
                 }
             });
+
+            // 获取用户信息
+            UserService.basic.get({
+                id: $scope.uid
+            }, function(data){
+                $scope.uname = data.name;
+            }, function(err) {
+                console.log(err);
+            });
         }
 
         // 分享
@@ -59,7 +68,7 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
 
         window.WEIXINSHARE = {
             shareTitle: '分享标题',
-            shareDesc: '分享描述',
+            shareDesc: '我是' + $scope.uname + '，这是我的富豪养成计划，马上加入投资立减最高1000元',
             shareImg: '分享小图',
             shareLink: location.protocol + '//' + location.host + '/m/#/syndicatesInvite' + '&id=' + $scope.uid
         };
