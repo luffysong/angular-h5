@@ -25,12 +25,19 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                     $scope.permit = "coInvestor";
                 } else {
                     if(data && data.code == 4031) {
-                        $state.go('syndicatesValidate');
+                        $state.go('syndicatesValidate', {
+                            inviter_id: $stateParams.id
+                        });
                     } else {
                         CrowdFundingService["audit"].get({
                             id: "co-investor",
                             submodel: "info"
                         }, function(data) {
+                            if(data.cert_info && data.cert_info.length == 0) {
+                                $state.go('syndicatesValidate', {
+                                    inviter_id: $stateParams.id
+                                });
+                            }
                         }, function(err) {
                             if(err.code == 1002) {
                                 $scope.permit = "preInvestor";
