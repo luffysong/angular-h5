@@ -5,22 +5,28 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesPayWayController',
-    function($scope, UserService , $stateParams,DictionaryService,CrowdFundingService,CoInvestorService,$state,$rootScope) {
+    function($scope, UserService , $stateParams,DictionaryService,CrowdFundingService,CoInvestorService,$state,$rootScope,ErrorService) {
         var text = {
             deposit:"支付保证金",
             balance:"支付剩余款"
         };
         $scope.type = $stateParams.type;
+        $scope.interFace = {
+            deposit:"cf-trade-deposit",
+            balance:"cf-trade-balance"
+        };
         $scope.typeText = text[$scope.type];
         $scope.uid = UserService.getUID();
         $scope.tid = $stateParams.tid;
         $scope.amount = $stateParams.amount;
+        $scope.ids = $stateParams.ids;
         $scope.payType = "alipay";
         $scope.bankDetails = DictionaryService.getDict('bank_limit_lianlianpay');
         /*选择支付方式*/
         $scope.selectWay = function(target){
             $scope.payType = target;
         }
+
         /*用户签约信息查询*/
         CrowdFundingService["payment"].get({
             id:3,

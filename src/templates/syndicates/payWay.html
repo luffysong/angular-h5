@@ -1,4 +1,14 @@
 <div class="syndicate-pay syndicates-confirm">
+    <div class="coupon-option" ng-if="type == 'balance'">
+        <div class="coupon-select" ui-sref="syndicatesCoupon({tid:tid,amount:amount})">
+            <span class="icon-h5-coupon">
+				<span class="path1"></span><span class="path2"></span>
+			</span>
+            优惠劵
+            <span class="icon-h5-arrow">
+			</span>
+        </div>
+    </div>
     <div class="pay-title">
         {{typeText}}<span class="error amount">￥{{amount}}</span>
     </div>
