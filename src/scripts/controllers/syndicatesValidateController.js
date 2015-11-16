@@ -34,7 +34,10 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             'captcha': '',
             'company': '',
             'work': '',
-            'address': '',
+            'address': {
+                'address1': '',
+                'address2': ''
+            },
             'condition': ''
         };
 
@@ -89,7 +92,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                         file: file,
                         withCredentials: false
                     }).progress(function (evt) {
-                        $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+                        console.log(parseInt(100.0 * evt.loaded / evt.total));
                     }).success(function (data, status, headers, config) {
                         var filename = data.url.toLowerCase();
                         if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
@@ -186,7 +189,59 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             });
         };
 
+        // 身份证验证
+        $timeout(function(){
+            $scope.$watch("[investor['confirm-id'], investor.id]",function(from){
+                if(angular.element($("form[name='syndicatesValidateForm']")).length > 0) {
+                    if(from[0] != from[1]) {
+                        angular.element($("form[name='syndicatesValidateForm']")).scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", false);
+                    } else {
+                        angular.element($("form[name='syndicatesValidateForm']")).scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", true);
+                    }
+                }
+            });
+        }, 500);
+
+        $scope.enterId = function(){
+            if(!$scope.investor['confirm-id']) return;
+            $scope.enterCard = true;
+        };
+
+        // 选择所在地
+        $scope.addr1Options = DictionaryService.getLocation();
+        $scope.addr2Options = [];
+        $scope.addr1Change = function() {
+            if ($scope.investor.address) {
+                $scope.investor.address.address1 = '';
+                $scope.investor.address.address2 = '';
+            }
+        };
+
+        $scope.$watch('investor.address.address1', function(value) {
+            console.log(value);
+            $scope.addr2Options = [];
+            if (!value) {
+                return;
+            }
+            $scope.addr2Options = DictionaryService.getLocation(value);
+        });
+
+        // 选择个人投资阶段
+        $scope.selectStage = function(index, name_form){
+            name_form = name_form != undefined ? name_form : 'investorValidateForm';
+            angular.element($("form[name='" + name_form + "']")).scope()[name_form].$setValidity("stageEmpty",true);
+            $scope.investStage[index].active = !$scope.investStage[index].active;
+
+            $scope.user.investPhases = [];
+            angular.forEach($scope.investStage,function(key,index){
+                if(key.active && $scope.user.investPhases.indexOf(key.value) < 0){
+                    $scope.user.investPhases.push(key.value);
+                }
+            });
+        };
+
         $scope.submitForm = function() {
+            $scope.enterCard = true;
             if(!checkForm('syndicatesValidateForm')) return;
         };
 

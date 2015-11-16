@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
             <label class="label-control" for="investor-id"><span class="c-red">*</span>确认身份证</label>
-            <input class="form-control" type="text" id="investor-id-confirm" name="investor-id-confirm" placeholder="点击填写" required ng-model="investor['id-confirm']">
+            <input class="form-control" type="text" id="investor-id-confirm" name="investor-id-confirm" placeholder="点击填写" required ng-model="investor['id-confirm']" ng-blur="enterId()">
         </div>
         <div class="error-tip error" ng-show="syndicatesValidateForm['investor-id-confirm'].$invalid && syndicatesValidateForm['investor-id-confirm'].$dirty">
             <span ng-show="syndicatesValidateForm['investor-id-confirm'].$error.required"><span class="tip-icon">!</span>请重新输入你的身份证号</span>
@@ -82,8 +82,15 @@
         </div>
         <!-- 认证跟投人（所在地）-->
         <div class="form-group">
-            <label class="label-control" for="investor-address"><span class="c-red">*</span>所在地</label>
-            <input class="form-control" type="text" id="investor-address" name="investor-address" placeholder="点击填写" required ng-model="investor.address">
+            <label class="label-control"><span class="c-red">*</span>所在地</label>
+            <select class="form-control place" name="address1" ng-model="investor.address.address1"
+                    ng-options="c.id as c.name for c in addr1Options" required ng-change="addr1Change()">
+                <option value="">请选择</option>
+            </select>
+            <select class="form-control place" name="address2" ng-model="investor.address.address2" ng-show="addr2Options.length"
+                    ng-options="c.id as c.name for c in addr2Options">
+                <option value="">请选择</option>
+            </select>
         </div>
         <div class="error-tip error" ng-show="syndicatesValidateForm['investor-address'].$invalid && syndicatesValidateForm['investor-address'].$dirty">
             <span ng-show="syndicatesValidateForm['investor-address'].$error.required"><span class="tip-icon">!</span>请输入你的所在地</span>
