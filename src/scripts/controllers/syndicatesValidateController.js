@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesValidateController',
-    function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CoInvestorService) {
+    function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService) {
         document.title = '36氪股权投资';
 
         $timeout(function(){
@@ -47,6 +47,9 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         }, function(data){
             delete data.$promise;
             delete data.$resolved;
+
+            console.log(data);
+
             if(data.phone){
                 $scope.investor.hasPhone = true;
                 delete $scope.investor.phone;
@@ -57,6 +60,8 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             }
             $scope.investor.name = data.name;
             $scope.investor.avatar = data.avatar;
+        }, function(err) {
+            ErrorService.alert(err);
         });
 
         // 头像上传
@@ -227,9 +232,57 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         // 投资阶段
         $scope.condition = DictionaryService.getDict("RnvInvestorInfo");
 
-        $scope.submitForm = function() {
+        // 提交表单
+        $scope.hasClick = false;
+        $scope.submitForm = function(e) {
+            e && e.preventDefault();
+            if(!$scope.investor.avatar) {
+                $('<div class="error-alert error error-code">请上传真实头像</div>').appendTo('body');
+                $timeout(function() {
+                    $('.error-code').fadeOut();
+                }, 2000);
+                return;
+            }
+
             $scope.enterCard = true;
             if(!checkForm('syndicatesValidateForm')) return;
+            $scope.hasClick = true;
+
+            UserService.basic.update({
+                id: $scope.uid
+            }, {
+                avatar: $scope.investor.avatar,
+                name: $scope.investor.name,
+                email: $scope.investor.email,
+                phone: $scope.investor.phone,
+                smscode: $scope.investor.captcha
+            }, function(data){
+                console.log(data);
+
+                CrowdFundingService["audit"].save({
+                    id: 'co-investor',
+                    submodel: 'identity-cert'
+                }, {
+                    name: $scope.investor.name,
+                    company_name: $scope.investor.company,
+                    position_name: $scope.investor.work,
+                    identity_card_type: 'IDCARD',
+                    id_card_number: $scope.investor.id,
+                    city: $scope.investor.address.address2,
+                    country: $scope.investor.address.address1,
+                    rnv_investor_info: $scope.investor.condition
+                }, function(data) {
+                    console.log(data);
+
+                    $scope.hasClick = false;
+                }, function(err) {
+                    ErrorService.alert(err);
+                    $scope.hasClick = false;
+                });
+            }, function(err){
+                $scope.hasClick = false;
+                ErrorService.alert(err);
+            });
         };
 
         // 查看风险揭示书
