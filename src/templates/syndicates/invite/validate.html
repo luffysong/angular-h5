@@ -62,7 +62,7 @@
         <div class="form-group" ng-if="!investor.hasPhone">
             <label class="label-control" for="investor-captcha"><span class="c-red">*</span>验证码</label>
             <input class="form-control" type="text" id="investor-captcha" name="investor-captcha" placeholder="点击填写" required ng-model="investor.captcha">
-            <a class="btn btn-captcha" href="">点击发送</a>
+            <a class="btn btn-captcha" href="" ng-click="getCode($event)">点击发送</a>
         </div>
         <div class="error-tip error" ng-show="syndicatesValidateForm['investor-captcha'].$invalid && syndicatesValidateForm['investor-captcha'].$dirty" ng-if="!investor.hasPhone">
             <span ng-show="syndicatesValidateForm['investor-captcha'].$error.required"><span class="tip-icon">!</span>请输入你收到的验证码</span>

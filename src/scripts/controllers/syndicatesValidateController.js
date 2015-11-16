@@ -181,7 +181,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
 
         // 获取验证码
         $scope.getCode = function(e){
-            e.preventDefault();
+            e && e.preventDefault();
             if(!$scope.investor.phone) {
                 return;
             }
