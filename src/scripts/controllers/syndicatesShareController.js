@@ -76,7 +76,7 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
         };
 
         window.WEIXINSHARE = {
-            shareTitle: '分享标题',
+            shareTitle: '36氪股权投资富豪养成计划',
             shareDesc: '我是' + $scope.uname + '，这是我的富豪养成计划，马上加入投资立减最高1000元',
             shareImg: '分享小图',
             shareLink: location.protocol + '//' + location.host + '/m/#/syndicatesInvite' + '&id=' + $scope.uid

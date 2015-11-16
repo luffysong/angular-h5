@@ -154,7 +154,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
         };
 
         window.WEIXINSHARE = {
-            shareTitle: '分享标题',
+            shareTitle: '36氪股权投资富豪养成计划',
             shareDesc: $scope.isLogin ? '我是' + $scope.uname + '，这是我的富豪养成计划，马上加入投资立减最高1000元。' : '加入36氪股权投资富豪养成计划，投资马上立减最高1000元。',
             shareImg: '分享小图',
             shareLink: location.protocol + '//' + location.host + location.pathname + '&id=' + ($scope.isLogin ? $scope.uid : $stateParams.id)
