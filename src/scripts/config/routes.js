@@ -334,7 +334,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('syndicatesGift', {
-        url: '/syndicatesGift',
+        url: '/syndicatesGift?id',
         templateUrl: 'templates/syndicates/invite/gift.html',
         controller: 'SyndicatesGiftController',
         data:{

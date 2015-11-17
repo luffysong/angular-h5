@@ -293,7 +293,9 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     $scope.hasClick = false;
                 }, function(err) {
                     if(err.code && err.code == 1002) {
-                        $state.go('syndicatesGift');
+                        $state.go('syndicatesGift', {
+                            id: $scope.investor.uid_inviter
+                        });
                     } else {
                         ErrorService.alert(err);
                     }

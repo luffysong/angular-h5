@@ -13,13 +13,15 @@ angular.module('defaultApp.controller').controller('SyndicatesGiftController',
         $timeout(function() {
             window.scroll(0,0);
             loading.hide("syndicatesGift");
-        }, 1500);
+        }, 500);
 
         // 登录状态
         $scope.uid = UserService.getUID();
         $scope.isLogin = !!UserService.getUID();
 
-        // 跟投人身份
+        // 奖励
+        $scope.giftMoney = $stateParams.id ? 300 : 200;
+
         // 跟投人身份
         if($scope.isLogin) {
             UserService.getIdentity(function (data) {

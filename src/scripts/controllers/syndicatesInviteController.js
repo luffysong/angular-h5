@@ -8,12 +8,10 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
     function($scope, $state, $stateParams, $q, $modal, notify, $timeout, $interval, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
         document.title = '富豪养成计划';
 
-        $timeout(function() {
-            window.scroll(0, 0);
-            loading.show('syndicatesInvite');
-        }, 0);
+        loading.show('syndicatesInvite');
 
         $timeout(function() {
+            window.scroll(0, 0);
             loading.hide('syndicatesInvite');
         }, 500);
 

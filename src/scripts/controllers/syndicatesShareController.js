@@ -12,7 +12,7 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
 
         $timeout(function() {
             loading.hide("syndicatesShare");
-        }, 1500);
+        }, 500);
 
         // 登录状态
         $scope.uid = UserService.getUID();
