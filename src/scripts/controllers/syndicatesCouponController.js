@@ -71,7 +71,7 @@ angular.module('defaultApp.controller').controller('syndicatesCouponController',
         /*处理优惠劵剩余时间*/
         $scope.leftTime = function(obj){
             angular.forEach(obj,function(item){
-                var timeObj = $scope.handleTime(new Date(),item.expire_time);
+                var timeObj = $scope.handleTime(new Date(),item.expire_time.replace(/-/g,"/"));
                 item.leftTime = timeObj.days + "天";
             });
         }
@@ -168,12 +168,17 @@ angular.module('defaultApp.controller').controller('syndicatesCouponController',
             });
             $scope.ids = ids.join(",");
             console.log($scope.ids+","+calAmount);
-            $state.go("syndicatesPayWay",{
+            var obj = calAmount ? {
                 tid:$scope.tid,
                 type:"balance",
                 ids:$scope.ids,
                 calAmount:calAmount
-            });
+            } : {
+                tid:$scope.tid,
+                type:"balance",
+                ids:$scope.ids,
+            };
+            $state.go("syndicatesPayWay",obj);
         }
     });
 

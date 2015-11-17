@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="load-more" ng-show="lastPage != pageNo && !hasUseCoupon" ng-click="loadMore()">加载更多</div>
+        <div class="load-more" ng-hide="lastPage == pageNo || hasUseCoupon" ng-click="loadMore()">加载更多</div>
     </div>
 
     <div class="coupon-bottom">
