@@ -19,7 +19,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
         $scope.typeText = text[$scope.type];
         $scope.uid = UserService.getUID();
         $scope.tid = $stateParams.tid;
-        $scope.ids = $stateParams.ids;
+        $scope.ids = $stateParams.ids || "";
         $scope.calAmount = $stateParams.calAmount;
         $scope.payType = "alipay";
         $scope.bankDetails = DictionaryService.getDict('bank_limit_lianlianpay');
