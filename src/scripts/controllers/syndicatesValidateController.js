@@ -73,6 +73,9 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         }, function(data) {
             if(data.cert_info){
                 $scope.investor.id = data.cert_info.id_card_number;
+                $scope.investor['id-confirm'] = data.cert_info.id_card_number;
+                $scope.investor.company = data.cert_info.company_name;
+                $scope.investor.work = data.cert_info.position_name;
                 $scope.investor.address.address1 = data.cert_info.country;
                 $scope.investor.address.address2 = data.cert_info.city;
             }
