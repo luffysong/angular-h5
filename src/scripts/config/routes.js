@@ -165,7 +165,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     /*众筹选择支付方式页面*/
     $stateProvider.state('syndicatesPayWay', {
-        url: '/zhongchouPayWay/{tid}/{amount}?type&ids',
+        url: '/zhongchouPayWay/{tid}?type&ids&calAmount',
         templateUrl: 'templates/syndicates/payWay.html',
         controller: 'syndicatesPayWayController'/*,
          data:{
@@ -174,9 +174,15 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
          }
          }*/
     });
+    /*优惠劵页面*/
+    $stateProvider.state('syndicatesCoupon', {
+        url: '/zhongchouCoupon/{tid}?{ids}',
+        templateUrl: 'templates/syndicates/coupon.html',
+        controller: 'syndicatesCouponController'
+    });
     /*众筹支付页面*/
     $stateProvider.state('syndicatesPay', {
-        url: '/zhongchouPay/{tid}/{amount}?type',
+        url: '/zhongchouPay/{tid}/{amount}?type&ids',
         templateUrl: 'templates/syndicates/pay.html',
         controller: 'syndicatesPayController'/*,
         data:{
@@ -196,12 +202,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             }
         }
     });
-    /*优惠劵页面*/
-    $stateProvider.state('syndicatesCoupon', {
-        url: '/zhongchouCoupon?{tid}&{type}&{amount}',
-        templateUrl: 'templates/syndicates/coupon.html',
-        controller: 'syndicatesCouponController'
-    });
+
     /*线下支付页面*/
     $stateProvider.state('syndicatesPayOutline', {
         url: '/zhongchouPayOutline?{tid}&{type}',

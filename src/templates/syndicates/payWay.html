@@ -1,6 +1,6 @@
-<div class="syndicate-pay syndicates-confirm">
+<div class="syndicate-pay syndicates-confirm" ng-hide="loadingInst.payWay">
     <div class="coupon-option" ng-if="type == 'balance'">
-        <div class="coupon-select" ui-sref="syndicatesCoupon({tid:tid,amount:amount})">
+        <div class="coupon-select" ui-sref="syndicatesCoupon({tid:tid,amount:amount,ids:ids})">
             <span class="icon-h5-coupon">
 				<span class="path1"></span><span class="path2"></span>
 			</span>
@@ -9,7 +9,10 @@
 			</span>
         </div>
     </div>
-    <div class="pay-title">
+    <div class="pay-title coupon" ng-if="type == 'balance' && calAmount > 0">
+        优惠劵<span class="amount">-￥{{calAmount}}</span>
+    </div>
+    <div class="pay-title" ng-class="{'active':type == 'balance' && calAmount > 0}">
         {{typeText}}<span class="error amount">￥{{amount}}</span>
     </div>
     <div class="pay-way">
@@ -44,3 +47,4 @@
     <a href="" class="outline-pay" ui-sref="payOutlineRemind({tid:tid,type:type})">线下汇款</a>
     <a href="" class="go-pay btn" ng-click="goPay()" tooltip="{{cardIndex === '' ? '请选择银行卡' : ''}}" data-stat-click="payment.pay">立即支付</a>
 </div>
+<div loading="payWay"></div>

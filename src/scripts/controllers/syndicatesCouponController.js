@@ -5,7 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesCouponController',
-    function($scope,UserService,$stateParams,DictionaryService,CrowdFundingService,CoInvestorService,$state,$rootScope,ErrorService,$timeout) {
+    function($scope,UserService,$stateParams,DictionaryService,CrowdFundingService,CoInvestorService,$state,$rootScope,ErrorService,$timeout,loading) {
+        loading.show("couponList");
         $scope.isUse = false;
         $scope.useCoupon = function(){
             if(!$scope.isUse){
@@ -18,7 +19,7 @@ angular.module('defaultApp.controller').controller('syndicatesCouponController',
         $scope.uid = UserService.getUID();
         $scope.tid = $stateParams.tid;
         $scope.amount = $stateParams.amount;
-        $scope.ids = "";
+        $scope.ids = $stateParams.ids || "";
         /*是否使用过优惠劵*/
         $scope.hasUseCoupon = false;
         /*已选优惠劵金额*/
@@ -44,7 +45,7 @@ angular.module('defaultApp.controller').controller('syndicatesCouponController',
         $scope.countMax  = false;
         /*选择优惠劵*/
         $scope.selectCoupon = function(index){
-            if($scope.hasUseCoupon){
+            if($scope.hasUseCoupon || $scope.isUse){
                 return;
             }
             var num = 0;
@@ -59,9 +60,9 @@ angular.module('defaultApp.controller').controller('syndicatesCouponController',
             }else{
                 $scope.countMax = true;
                 $scope.calTop = $("body").scrollTop() - 40 + "px";
-                /*$timeout(function(){
+                $timeout(function(){
                     $scope.countMax = false;
-                },2000);*/
+                },2000);
             }
             angular.forEach($scope.inviteData,function(item){
                 if(item.active)$scope.couponCount += parseInt(item.amount);
@@ -70,7 +71,6 @@ angular.module('defaultApp.controller').controller('syndicatesCouponController',
         /*处理优惠劵剩余时间*/
         $scope.leftTime = function(obj){
             angular.forEach(obj,function(item){
-                console.log(item);
                 var timeObj = $scope.handleTime(new Date(),item.expire_time);
                 item.leftTime = timeObj.days + "天";
             });
@@ -81,17 +81,28 @@ angular.module('defaultApp.controller').controller('syndicatesCouponController',
                 per_page:obj.perPage,
                 page:obj.page,
                 uid:$scope.uid,
-                expire:2
+                expire:2,
+                status:1
             },function(data){
                 console.log(data);
                 if(!data.data)return;
-                if($scope.hasUseCoupon){
+                /*if($scope.hasUseCoupon){
                     angular.forEach(data.data,function(i){
-                        console.log(i.trade_id+","+$stateParams.tid);
                         if(i.trade_id == $stateParams.tid){
                             i.active = true;
                         }
                     });
+                }*/
+                if($scope.ids){
+                    var arr = $scope.ids.split(",");
+                    angular.forEach(data.data,function(i){
+                        angular.forEach(arr,function(obj){
+                            if(obj == i.id){
+                                i.active = true;
+                            }
+                        });
+                    });
+                    console.log(data.data);
                 }
                 $scope.lastPage = data.last_page;
                 $scope.leftTime(data.data);
@@ -101,6 +112,7 @@ angular.module('defaultApp.controller').controller('syndicatesCouponController',
                 }else{
                     $scope.inviteData = data.data;
                 }
+                loading.hide("couponList");
             },function(err){
                 ErrorService.alert(err);
             });
@@ -117,6 +129,7 @@ angular.module('defaultApp.controller').controller('syndicatesCouponController',
                     });
                     $scope.leftTime(data.trade_coupon);
                     $scope.inviteData = data.trade_coupon;
+                    loading.hide("couponList");
                 }else{
                     $scope.hasUseCoupon = false;
                     /*获取优惠劵数据*/
@@ -146,19 +159,20 @@ angular.module('defaultApp.controller').controller('syndicatesCouponController',
         }
         $scope.ensure = function(){
             var ids = [];
+            var calAmount = 0;
             angular.forEach($scope.inviteData,function(obj){
                 if(obj.active){
                     ids.push(obj.id);
+                    calAmount += parseInt(obj.amount);
                 }
             });
             $scope.ids = ids.join(",");
-            console.log($scope.ids);
-            return;
+            console.log($scope.ids+","+calAmount);
             $state.go("syndicatesPayWay",{
                 tid:$scope.tid,
-                amount:$scope.amount,
                 type:"balance",
-                ids:$scope.ids
+                ids:$scope.ids,
+                calAmount:calAmount
             });
         }
     });
