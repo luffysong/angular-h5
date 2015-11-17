@@ -118,6 +118,12 @@
             border: none;
         }
 
+        .coupon-split {
+            height: 1px;
+            margin: 10px -15px;
+            background-color: #d8d8d8;
+        }
+
         .stage-item {
             color: #333;
             overflow: hidden;
@@ -125,6 +131,15 @@
             &:first-child {
                 color: #b6b6b6;
                 margin-bottom: 5px;
+            }
+
+            &.coupon {
+                font-size: 13px;
+                color: #999;
+
+                .item-right {
+                    color: #fd7e0d;
+                }
             }
 
             .item-left {
