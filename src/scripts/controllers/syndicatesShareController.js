@@ -92,7 +92,7 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
             shareTitle: '36氪股权投资富豪养成计划',
             shareDesc: shareDesc,
             shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
-            shareLink: location.protocol + '//' + location.host + location.pathname + '&id=' + $scope.uid
+            shareHref: location.protocol + '//' + location.host + location.pathname + '&id=' + $scope.uid
         };
 
         InitWeixin();
