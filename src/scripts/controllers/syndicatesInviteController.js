@@ -8,10 +8,14 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
     function($scope, $state, $stateParams, $q, $modal, notify, $timeout, $interval, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
         document.title = '富豪养成计划';
 
-        $timeout(function(){
+        $timeout(function() {
             window.scroll(0, 0);
             loading.show('syndicatesInvite');
         }, 0);
+
+        $timeout(function() {
+            loading.hide('syndicatesInvite');
+        }, 500);
 
 
         // 登录状态
@@ -66,7 +70,6 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
             per_page: 50
         },function(data) {
             $scope.couponList = data.data;
-            loading.hide('syndicatesInvite');
             $scope.scroll();
         },function(err) {
             ErrorService.alert(err);
@@ -138,7 +141,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
         };
 
         // 微信分享
-        var shareDesc = '';
+        $scope.shareDesc = '';
         $scope.share = function($event) {
             $event.preventDefault();
             $modal.open({
