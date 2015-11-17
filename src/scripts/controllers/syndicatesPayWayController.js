@@ -73,6 +73,14 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
             ErrorService.alert(err);
         });
         $scope.goPay = function(){
+            if($scope.type != "deposit" && !$scope.hasUseCoupon && $scope.calAmount > 0){
+                $scope.showEnsure = true;
+            }else{
+                $scope.showEnsure = false;
+                $scope.skipPay();
+            }
+        }
+        $scope.skipPay = function(){
             /*支付宝*/
             if($scope.payType == 'alipay'){
                 location.href = '//'+location.host+'/p/payment/4/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'coupon_ids='+$scope.ids]).join('&');
