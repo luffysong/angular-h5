@@ -77,11 +77,22 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
             });
         };
 
+        var shareDesc = '';
+        if($scope.isLogin) {
+            if($scope.uname) {
+                shareDesc = '我是' + $scope.uname + '，这是我的富豪养成计划，马上加入投资立减最高1000元。';
+            } else {
+                shareDesc = '加入36氪股权投资富豪养成计划，投资马上立减最高1000元。';
+            }
+        } else {
+            shareDesc = '加入36氪股权投资富豪养成计划，投资马上立减最高1000元。';
+        }
+
         window.WEIXINSHARE = {
             shareTitle: '36氪股权投资富豪养成计划',
-            shareDesc: '我是' + $scope.uname + '，这是我的富豪养成计划，马上加入投资立减最高1000元',
+            shareDesc: shareDesc,
             shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
-            shareLink: location.protocol + '//' + location.pathname + '/m/#/syndicatesInvite' + '&id=' + $scope.uid
+            shareLink: location.protocol + '//' + location.host + location.pathname + '&id=' + $scope.uid
         };
 
         InitWeixin();
