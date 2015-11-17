@@ -169,7 +169,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                 shareTitle: '36氪股权投资富豪养成计划',
                 shareDesc: $scope.shareDesc,
                 shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
-                shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesInvite&id=' + ($scope.isLogin ? $scope.uid : $stateParams.id)
+                shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesInvite?id=' + ($scope.isLogin ? $scope.uid : $stateParams.id)
             };
 
             InitWeixin();
