@@ -8,6 +8,8 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
     function($scope, $state, $stateParams, $modal, notify, $timeout, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
         loading.show("syndicatesShare");
 
+        document.title = '富豪养成计划';
+
         $timeout(function() {
             loading.hide("syndicatesShare");
         }, 1500);

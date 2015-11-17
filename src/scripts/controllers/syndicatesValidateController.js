@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesValidateController',
     function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService) {
-        document.title = '36氪股权投资';
+        document.title = '富豪养成计划';
 
         $timeout(function(){
             window.scroll(0,0);

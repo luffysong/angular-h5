@@ -8,7 +8,7 @@ angular.module('defaultApp.controller').controller('SyndicatesGiftController',
     function($scope, $state, $stateParams, $modal, notify, $timeout, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
         loading.show("syndicatesGift");
 
-        document.title = '36氪股权投资';
+        document.title = '富豪养成计划';
 
         $timeout(function() {
             window.scroll(0,0);
