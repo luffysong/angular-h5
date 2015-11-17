@@ -3,7 +3,7 @@
         我邀请<a href="">item.user.name</a>投资了<a href="">item.company.name</a>，获得了<span>{{item.amount}}元</span>投资券
     </li>
 
-    <div class="no-record">
+    <div class="no-record" ng-if="inviteList.length == 0">
         邀请列表为空
     </div>
 </ul>
