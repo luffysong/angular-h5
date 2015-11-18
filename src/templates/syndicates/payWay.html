@@ -9,7 +9,7 @@
 			</span>
         </div>
     </div>
-    <div class="pay-title coupon" ng-if="type == 'balance' && calAmount > 0">
+    <div class="pay-title coupon" ng-hide="type == 'deposit' || !tradeData.trade_coupon.length || (payment.amount_coupons <= 0 && tradeData.payment.pay_times > 0)">
         优惠劵<span class="amount">-￥{{calAmount}}</span>
     </div>
     <div class="pay-title" ng-class="{'active':type == 'balance' && calAmount > 0}">

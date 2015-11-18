@@ -55,11 +55,12 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
             id:$stateParams.tid
         },function(data){
             console.log(data);
+            $scope.tradeData = data;
             $scope.amount = data.payment.amount;
             if($scope.orderType != "deposit"){
                 if(data.payment.amount_coupons > 0){
                     $scope.hasUseCoupon = true;
-                    $scope.amount = data.payment.amount * 1 - data.payment.amount_coupons * 1;
+                    $scope.amount = data.payment.amount * 1;
                     $scope.calAmount = data.payment.amount_coupons;
                 }else{
                     $scope.hasUseCoupon = false;
