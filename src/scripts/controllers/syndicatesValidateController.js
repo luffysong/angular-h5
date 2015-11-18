@@ -62,7 +62,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             }
             $scope.investor.name = data.name;
             $scope.investor.avatar = data.avatar;
-            $scope.investor.email = data.email;
         }, function(err) {
             ErrorService.alert(err);
         });
