@@ -109,8 +109,10 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                     function($scope, scope, $modalInstance, CrowdFundingService, ErrorService) {
                         if(scope.uid) {
                             CrowdFundingService['co-investor'].get({
-                                id: 'my-spred-list'
+                                id: "my-spred-list",
+                                activity_id: 2
                             }, function(data) {
+                                console.log(data);
                                 $scope.inviteList = data.data;
                             }, function(err) {
                                 ErrorService.alert(err);
