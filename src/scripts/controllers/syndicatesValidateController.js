@@ -7,6 +7,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller').controller('syndicatesValidateController',
     function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService) {
         document.title = '富豪养成计划';
+        CommonHeader.setNavActive('zhong');
 
         $timeout(function(){
             window.scroll(0,0);

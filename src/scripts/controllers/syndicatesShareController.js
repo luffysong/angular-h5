@@ -9,6 +9,7 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
         loading.show("syndicatesShare");
 
         document.title = '富豪养成计划';
+        CommonHeader.setNavActive('zhong');
 
         $timeout(function() {
             loading.hide("syndicatesShare");

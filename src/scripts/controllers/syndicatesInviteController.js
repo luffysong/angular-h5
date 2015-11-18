@@ -7,6 +7,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller').controller('SyndicatesInviteController',
     function($scope, $state, $stateParams, $q, $modal, notify, $timeout, $interval, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
         document.title = '富豪养成计划';
+        CommonHeader.setNavActive('zhong');
 
         loading.show('syndicatesInvite');
 

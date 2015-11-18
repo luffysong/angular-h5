@@ -9,6 +9,7 @@ angular.module('defaultApp.controller').controller('SyndicatesGiftController',
         loading.show("syndicatesGift");
 
         document.title = '富豪养成计划';
+        CommonHeader.setNavActive('zhong');
 
         $timeout(function() {
             window.scroll(0,0);
