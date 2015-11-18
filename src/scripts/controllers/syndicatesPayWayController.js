@@ -54,25 +54,37 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
         CrowdFundingService[$scope.interFace[$scope.type]].get({
             id:$stateParams.tid
         },function(data){
-            console.log(data);
-            $scope.tradeData = data;
             $scope.amount = data.payment.amount;
             if($scope.orderType != "deposit"){
                 if(data.payment.amount_coupons > 0){
                     $scope.hasUseCoupon = true;
                     $scope.amount = data.payment.amount * 1;
                     $scope.calAmount = data.payment.amount_coupons;
+                    $scope.couponData = data.trade_coupon;
                 }else{
                     $scope.hasUseCoupon = false;
                     if($scope.calAmount > 0){
                         $scope.amount = data.payment.amount * 1 - $scope.calAmount;
                     }
+                    $scope.loadCoupon();
                 }
             }
-            loading.hide("payWay");
         },function(err){
             ErrorService.alert(err);
         });
+        /*加载优惠劵*/
+        $scope.loadCoupon = function(){
+            CrowdFundingService["coupon"].get({
+                per_page:8,
+                page:1,
+                uid:$scope.uid,
+                expire:2,
+                status:1
+            },function(data){
+                $scope.couponData = data.data;
+                loading.hide("payWay");
+            });
+        }
         $scope.goPay = function(){
             if($scope.type != "deposit" && !$scope.hasUseCoupon && $scope.calAmount > 0){
                 $scope.showEnsure = true;

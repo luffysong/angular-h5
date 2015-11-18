@@ -6,7 +6,7 @@
                 <div class="coupon-info" ng-class="{'active':item.active}">
                     <!--<i class="selected icon-select" ng-show="item.active"></i>-->
                     <!--<i class="selected icon-cancel" ng-click="cancelSelect($index);$event.stopPropagation();"></i>-->
-                    <div class="info-detail"><span class="detail-title">优惠券</span><span class="detail-time">（剩余{{item.leftTime}}）</span></div>
+                    <div class="info-detail"><span class="detail-title">投资券</span><span class="detail-time">（剩余{{item.leftTime}}）</span></div>
                 </div>
             </div>
         </div>
@@ -17,12 +17,12 @@
         <span ng-click="useCoupon()" ng-show="!hasUseCoupon">
             <span class="icon-icon-select" ng-class="{'active':isUse}" >
             </span>
-            不使用优惠券
+            不使用投资券
         </span>
         <a href="" class="ensure-btn" ng-click="ensure()">确定</a>
     </div>
     <div class="error-window" ng-class="{active:countMax}" style="margin-top:{{calTop}}">
-        <div class="error-tip">最多只能使用两张优惠券</div>
+        <div class="error-tip">最多只能使用两张投资券</div>
         <div ng-click="countMax = false">知道了</div>
     </div>
 </div>
