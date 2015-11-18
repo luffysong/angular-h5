@@ -6,7 +6,7 @@
                 <div class="coupon-info" ng-class="{'active':item.active}">
                     <!--<i class="selected icon-select" ng-show="item.active"></i>-->
                     <!--<i class="selected icon-cancel" ng-click="cancelSelect($index);$event.stopPropagation();"></i>-->
-                    <div class="info-detail"><span class="detail-title">优惠劵</span><span class="detail-time">（剩余{{item.leftTime}}）</span></div>
+                    <div class="info-detail"><span class="detail-title">优惠券</span><span class="detail-time">（剩余{{item.leftTime}}）</span></div>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
         <span ng-click="useCoupon()" ng-show="!hasUseCoupon">
             <span class="icon-icon-select" ng-class="{'active':isUse}" >
             </span>
-            不使用优惠劵
+            不使用优惠券
         </span>
         <a href="" class="ensure-btn" ng-click="ensure()">确定</a>
     </div>
