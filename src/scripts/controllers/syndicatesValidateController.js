@@ -56,7 +56,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 $scope.investor.hasPhone = true;
                 delete $scope.investor.phone;
             }
-            if(data.email && data.isEmailActivate){
+            if(data.email){
                 $scope.investor.hasEmail = true;
                 delete $scope.investor.email;
             }
