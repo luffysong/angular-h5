@@ -101,34 +101,35 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
         // 弹出个人获奖记录
         $scope.viewInviteRecord = function($event) {
             $event.preventDefault();
-            $modal.open({
-                windowClass: 'invite-record-window',
-                templateUrl: 'templates/syndicates/invite/pop-invite-record.html',
-                controller: [
-                    '$scope', 'scope', '$modalInstance', 'CrowdFundingService', 'ErrorService',
-                    function($scope, scope, $modalInstance, CrowdFundingService, ErrorService) {
-                        if(scope.uid) {
-                            CrowdFundingService['co-investor'].get({
-                                id: "my-spred-list",
-                                activity_id: 2
-                            }, function(data) {
-                                console.log(data);
-                                $scope.inviteList = data.data;
-                            }, function(err) {
-                                ErrorService.alert(err);
-                            });
-                        }
+            if($scope.uid) {
+                CrowdFundingService['co-investor'].get({
+                    id: "my-spred-list",
+                    activity_id: 2
+                }, function(data) {
+                    console.log(data);
+                    $scope.inviteList = data.data;
 
-                        $scope.ok = function() {
-                            $modalInstance.dismiss();
-                        }
-                    }],
-                    resolve: {
-                        scope: function() {
-                            return $scope;
-                        }
-                    }
-            });
+                    $modal.open({
+                        windowClass: 'invite-record-window',
+                        templateUrl: 'templates/syndicates/invite/pop-invite-record.html',
+                        controller: [
+                            '$scope', 'scope', '$modalInstance',
+                            function($scope, scope, $modalInstance) {
+                                $scope.inviteList = scope.inviteList;
+                                $scope.ok = function() {
+                                    $modalInstance.dismiss();
+                                }
+                            }],
+                            resolve: {
+                                scope: function() {
+                                    return $scope;
+                                }
+                            }
+                    });
+                }, function(err) {
+                    ErrorService.alert(err);
+                });
+            }
         };
 
         // 微信分享

@@ -3,7 +3,8 @@
         我邀请<a href="" ui-sref="user_detail({id: item.user.id})">{{item.user.name}}</a>投资了<a href="" ui-sref="company_detail({id: item.company.id})">{{item.company.name}}</a>，获得了<span>{{item.amount}}元</span>投资券
     </li>
 
-    <div class="no-record" ng-if="inviteList.length == 0">
+    <div class="no-record" ng-hide="inviteList.length">
+        <span class="icon-hezi"></span>
         邀请列表为空
     </div>
 </ul>
