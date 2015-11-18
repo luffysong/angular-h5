@@ -43,7 +43,7 @@
                 <div class="stage-item">阶段二<span class="status" ng-class="{'not': item.trade_c_f_balance.payment.status == 1, 'has': item.trade_c_f_balance.payment.status == 3}">{{ item.trade_c_f_balance.payment.status | dict_trade_status }}</span></div>
                 <div class="stage-item">
                     <div class="item-left">支付剩余款</div>
-                    <div class="item-right">￥{{ (item.trade_c_f_balance.balance * 1 + item.trade_c_f_balance.payment.amount_coupons * 1) | number: 2 }}元</div>
+                    <div class="item-right">￥{{ item.trade_c_f_balance.balance }}元</div>
                 </div>
                 <div class="stage-item" ng-if="item.trade_c_f_balance.payment.status == 3">
                     <div class="item-left">付款时间</div>
@@ -63,7 +63,7 @@
 
                 <div class="stage-item" ng-if="item.trade_c_f_balance.payment.amount_coupons > 0">
                     <div class="item-left">支付剩余款</div>
-                    <div class="item-right">￥{{ item.trade_c_f_balance.balance }}元</div>
+                    <div class="item-right">￥{{ item.trade_c_f_balance.payment.amount }}元</div>
                 </div>
 
                 <a class="btn btn-default stage-btn" ng-if="(item.status < 3 || (item.status > 9 && item.status != 14)) && item.trade_c_f_balance.payment.status == 1 && item.trade_c_f_balance.payment.platform_type != 1 && !item.trade_c_f_balance.refund_timeout" ui-sref="syndicatesPayWay({tid:item.trade_c_f_balance.trade_id,amount:item.trade_c_f_balance.balance,type:'balance'})" data-stat-click="orderlist.pay" data-stat-click="orderlist.do">付款</a>
