@@ -61,6 +61,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
                     $scope.amount = data.payment.amount * 1;
                     $scope.calAmount = data.payment.amount_coupons;
                     $scope.couponData = data.trade_coupon;
+                    loading.hide("payWay");
                 }else{
                     $scope.hasUseCoupon = false;
                     if($scope.calAmount > 0){
