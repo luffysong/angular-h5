@@ -26,8 +26,9 @@ ul,li{list-style: none}
   padding: 1px 0 0 0;
   width: 100%;
   height: 100%;
-  background: url('images/jisu3/0.png') center center;
-  background-size: cover;
+  background: url('images/jisu4/word-investor_banner.jpg') center top no-repeat;
+    background-size: 100% auto;
+    background-color: #000;
 
   .share{
     width: 100%;
@@ -64,7 +65,7 @@ ul,li{list-style: none}
     position: absolute;
     width: 26px;
     height: 26px;
-    background: url(images/jisu3/2.png) no-repeat;
+    background: url(images/jisu4/radio.png) no-repeat;
     background-size: contain;
     top: 20px;
     right: 20px;
@@ -175,7 +176,7 @@ ul,li{list-style: none}
         bottom: 0;
         text-align: center;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%) translateY(10px);
         margin: 0 auto;
         a{
           text-align: center;
@@ -202,7 +203,7 @@ ul,li{list-style: none}
           border-radius: 50%;
           width: 70px;
           height: 70px;
-          border: rgb(229, 96, 68) solid 2px;
+          border: @yellow solid 2px;
           overflow: hidden;
           position: static;
           transform: translateX(0);
@@ -218,7 +219,7 @@ ul,li{list-style: none}
       }
       em {
         font-style: normal;
-        color: rgb(229, 96, 68);
+        color: @yellow;
       }
       h3, h4 {
         display: inline-block;
@@ -227,7 +228,7 @@ ul,li{list-style: none}
         line-height: 1.5;
       }
       h3 {
-        color: rgb(229, 96, 68);
+        color: @yellow;
         margin: 0 10px 0 0;
         font-size: 18px;
         margin-top: 8px;
@@ -253,7 +254,7 @@ ul,li{list-style: none}
     transform: translateX(-50%);
 
     li {
-      background-color: rgb(229, 96, 68);
+      background-color: @yellow;
       float: left;
       width: 8px;
       height: 8px;
