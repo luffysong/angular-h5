@@ -8,7 +8,7 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
         $scope.params.cfid = $stateParams.cfid || 0;
 
         if(!$scope.params.cfid) {
-            return $state.go('syndicatesAllOrder');
+            return $state.go('zhongchouAllOrder.all');
         }
 
         // 手续进度详情
