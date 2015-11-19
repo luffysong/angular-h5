@@ -152,16 +152,33 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     /*众筹个人所有订单页面*/
-    $stateProvider.state('syndicatesAllOrder', {
+   $urlRouterProvider.when('/zhongchouAllOrder', '/zhongchouAllOrder/all');
+    $stateProvider.state('zhongchouAllOrder', {
         url: '/zhongchouAllOrder',
         templateUrl: 'templates/syndicates/allOrder.html',
-        controller: 'syndicatesAllOrderController',
-        data:{
-            permissions : {
-                only : ['valid']
-            }
-        }
+        controller: 'syndicatesAllOrderController'
+//      data:{
+//          permissions : {
+//              only : ['valid']
+//          }
+//      }
     });
+     $stateProvider.state('zhongchouAllOrder.all', {
+        url: '/all',
+        templateUrl: 'templates/syndicates/allOrder.html',
+        controller: 'syndicatesAllOrderController'
+    });
+    $stateProvider.state('zhongchouAllOrder.obligations', {
+        url: '/obligations',
+        templateUrl: 'templates/syndicates/allOrder.html',
+        controller: 'syndicatesAllOrderController'
+    });
+    $stateProvider.state('zhongchouAllOrder.paid', {
+        url: '/paid',
+        templateUrl: 'templates/syndicates/allOrder.html',
+        controller: 'syndicatesAllOrderController'
+    });
+
 
     /*众筹选择支付方式页面*/
     $stateProvider.state('syndicatesPayWay', {
