@@ -488,7 +488,10 @@
         <a href="" class="remind-btn icon-h5-time" ng-if="color == 60" ng-click="setRemind($event)" data-stat-click="zhongchouliebiao.kaitoutixing.{{fundingId}}">
             <p class="btn-text remind-text">提醒</p>
         </a>
-        <a ui-sref="syndicatesAllOrder()" ng-click="myOrder($event)" class="more-info" ng-class="{'no-remind-btn': color !== 60}"  login-btn="{{rongHost}}/m/#/zhongchouAllOrder" data-stat-click="caidan.dingdanbutton">我的订单</a>
+
+        <a ng-if="canSeeProcedure && syndicatesInfo.formality && syndicatesInfo.formality.status > 1" ui-sref="procedure({ cfid: syndicatesInfo.formality.cf_id })" class="more-info" ng-class="{'no-remind-btn': color !== 60}"  login-btn="{{rongHost}}/m/#/procedure?cfid={{syndicatesInfo.formality.cf_id}}">查看手续进度</a>
+        <a ng-if="!(canSeeProcedure && syndicatesInfo.formality && syndicatesInfo.formality.status > 1)" ui-sref="syndicatesAllOrder()" ng-click="myOrder($event)" class="more-info" ng-class="{'no-remind-btn': color !== 60}"  login-btn="{{rongHost}}/m/#/zhongchouAllOrder" data-stat-click="caidan.dingdanbutton">我的订单</a>
+
         <a href="" class="invest-btn disabled" ng-if="color == 25" ng-class="{'no-remind-btn': color !== 60}">即将开启</a>
         <a login-btn="{{rongHost}}/m/#/zhongchouDetail?companyId={{companyId}}&fundingId={{fundingId}}&checkValid=1&login=true" class="invest-btn btn" ng-click="wantInvest($event)" ng-if="color == 30 && !timeout && (syndicatesInfo.base.cf_success_raising < syndicatesInfo.base.cf_max_raising)" ng-class="{'no-remind-btn': color !== 60,'disabled':companyData.basic.managerId == uid}" data-stat-click="caidan.touzibutton" ng-disabled="companyData.basic.managerId == uid">认购</a>
         <a href="" class="invest-btn disabled" ng-if="color == 35 || color == 50 || (color != 25 && timeout) || (syndicatesInfo.base.cf_success_raising >= syndicatesInfo.base.cf_max_raising)" ng-class="{'no-remind-btn': color !== 60}">停止投资</a>
