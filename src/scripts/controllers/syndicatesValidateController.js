@@ -123,6 +123,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                         console.log(parseInt(100.0 * evt.loaded / evt.total));
                     }).success(function (data, status, headers, config) {
                         var filename = data.url.toLowerCase();
+                        alert(filename);
                         if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
                             $scope.investor.avatar = upyun.bucket.url + data.url;
                             $scope.action.uploaded = true;
@@ -133,7 +134,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                         }
                         $scope.action.uploading = false;
                     }).error(function(err){
-                        alert(err);
                         ErrorService.alert({
                             msg: '上传过程中出现错误，请重新上传！'
                         });
