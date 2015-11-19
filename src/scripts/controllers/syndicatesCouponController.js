@@ -126,8 +126,9 @@ angular.module('defaultApp.controller').controller('syndicatesCouponController',
                     $scope.hasUseCoupon = true;
                     angular.forEach(data.trade_coupon,function(item){
                         item.active = true;
+                        item.leftTime = "";
                     });
-                    $scope.leftTime(data.trade_coupon);
+                    /*$scope.leftTime(data.trade_coupon);*/
                     $scope.inviteData = data.trade_coupon;
                     loading.hide("couponList");
                 }else{

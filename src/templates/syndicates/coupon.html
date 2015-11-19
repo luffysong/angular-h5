@@ -6,7 +6,7 @@
                 <div class="coupon-info" ng-class="{'active':item.active}">
                     <!--<i class="selected icon-select" ng-show="item.active"></i>-->
                     <!--<i class="selected icon-cancel" ng-click="cancelSelect($index);$event.stopPropagation();"></i>-->
-                    <div class="info-detail"><span class="detail-title">投资券</span><span class="detail-time">（剩余{{item.leftTime}}）</span></div>
+                    <div class="info-detail"><span class="detail-title">投资券</span><span class="detail-time" ng-if="item.leftTime">（剩余{{item.leftTime}}）</span></div>
                 </div>
             </div>
         </div>
