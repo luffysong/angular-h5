@@ -1,3 +1,16 @@
+.transform_center(@y){
+    left: 50%;
+    transform: translateX(-50%) translateY(@y);
+    -webkit-transform: translateX(-50%) translateY(@y);
+}
+.transform_vertical{
+    top: 50%;
+    transform: translateX(0) translateY(-50%);
+    -webkit-transform: translateX(0) translateY(-50%);
+}
+@yellow:#ffd200;
+@gray:#3c3837;
+
 * {
   margin: 0;
   padding: 0;
