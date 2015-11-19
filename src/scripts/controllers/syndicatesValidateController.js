@@ -132,9 +132,10 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                             });
                         }
                         $scope.action.uploading = false;
-                    }).error(function(){
+                    }).error(function(err){
+                        alert(err);
                         ErrorService.alert({
-                            msg: '格式不支持，请重新上传！'
+                            msg: '上传过程中出现错误，请重新上传！'
                         });
                         $scope.action.uploading = false;
                     });
