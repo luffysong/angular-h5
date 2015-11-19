@@ -1,6 +1,6 @@
 <ul class="records-list">
     <li ng-repeat="item in inviteList" ng-if="inviteList.length">
-        我邀请<a href="" ui-sref="user_detail({id: item.user.id})">{{item.user.name}}</a>投资了<a href="" ui-sref="company_detail({id: item.company.id})">{{item.company.name}}</a>，获得了<span>500元</span>投资券
+        我邀请<a href="" ui-sref="user_detail({id: item.user.id})"> {{item.user.name}} </a>投资了<a href="" ui-sref="company_detail({id: item.company.id})"> {{item.company.name}} </a>,获得了<span>500元</span>投资券
     </li>
 
     <div class="no-record" ng-hide="inviteList.length">
