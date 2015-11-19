@@ -23,7 +23,7 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
             var durationArr = [2, 3, 20, 2];
             var durationForeignArr = [2, 3, 80, 2];
             if(data.status >= 2 && data.status <= 6) {
-                 $scope.formality.forecast_complete_time = updateDate.add(data.capital_type == 1 ? durationArr[data.status - 2] : durationForeignArr[data.status - 2], 'days').format('YYYY年MM月DD日');
+                $scope.formality.forecast_complete_time = updateDate.add(data.capital_type == 1 ? durationArr[data.status - 2] : durationForeignArr[data.status - 2], 'days').format('YYYY年MM月DD日');
             }
         }, function(err) {
             notify.closeAll();
@@ -36,7 +36,7 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
             AuditService['user-identity-card-result'].get(function(data) {
                 $scope.audit = data;
                 $scope.audit.exist = true;
-                $scope.audit.auditPic = data.copies;
+                $scope.audit.auditPics = data.copies;
             }, function(err) {
                 if(err.code == 404) {
                     $scope.audit.exist = false;
@@ -50,7 +50,7 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
             e.preventDefault();
             if(!checkForm('AuditForm')) return;
             AuditService['user-identity-card'].post({
-                copies: $scope.audit.auditPic
+                copies: $scope.audit.auditPics.join(',')
             }, function(data) {
                 $scope.previewMode = false;
                 $scope.loadAuditInfo();
@@ -70,22 +70,22 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
         $scope.imgFileSelected = function(files, e) {
             var upyun = window.kr.upyun;
             $scope.previewMode = true;
+            $scope.audit.auditPics = [];
 
             if($scope.audit && $scope.audit.status == 3) {
                 $scope.audit.reaudit = true;
             }
 
-            for(var i = 0; i < files.length; i++) {
-                var file = files[i];
-                $scope.progress = 1;
+            DefaultService.getUpToken({
+                'x-gmkerl-unsharp': true
+            }).then(function(data) {
 
-                DefaultService.getUpToken({
-                    'x-gmkerl-unsharp': true
-                }).then(function(data) {
+                for(var i = 0; i < files.length; i++) {
+                    $scope.progress = 1;
                     $scope.upload = $upload.upload({
                         url: upyun.api + '/' + upyun.bucket.name,
                         data: data,
-                        file: file,
+                        file: files[i],
                         withCredentials: false
                     }).progress(function(evt) {
                         $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
@@ -94,7 +94,7 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
                         var filename = data.url.toLowerCase();
                         if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
                             $scope.previewMode = true;
-                            $scope.audit.auditPic = window.kr.upyun.bucket.url + data.url;
+                            $scope.audit.auditPics.push(window.kr.upyun.bucket.url + data.url);
                             $scope.audit.exist = true;
                             notify.closeAll();
                             notify({
@@ -119,15 +119,15 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
                             msg: '格式不支持，请重新上传！'
                         });
                     });
-                }, function(err) {
-                    if($scope.audit.status !== 3) {
-                        $scope.audit.exist = false;
-                    }
-                    $scope.previewMode = false;
-                    notify.closeAll();
-                    ErrorService.alert(err);
-                });
-            }
+                }
+            }, function(err) {
+                if($scope.audit.status !== 3) {
+                    $scope.audit.exist = false;
+                }
+                $scope.previewMode = false;
+                notify.closeAll();
+                ErrorService.alert(err);
+            });
         };
 
         // Toggle class

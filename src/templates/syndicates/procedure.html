@@ -106,7 +106,7 @@
                     <div class="icon-success" ng-if="audit.exist && audit.status == 2 && !previewMode"></div>
                     <div class="icon-fail" ng-if="audit.exist && audit.status == 3 && !previewMode"></div>
 
-                    <div class="preview" style="background-image: url({{ audit.auditPic }})" ng-if="audit.exist && audit.status == 3 && audit.reaudit || previewMode">
+                    <div class="preview" ng-repeat="item in audit.auditPics" style="background-image: url({{ item }})" ng-if="audit.exist && audit.status == 3 && audit.reaudit || previewMode">
                         <div class="progress-num" data-percent="{{ progress }}" ng-if="progress > 0"></div>
                     </div>
 
@@ -127,7 +127,7 @@
                         <span ng-if="audit.exist" data-stat-click="task.uploadAgain">重新上传</span>
                         <input type="file" name="auditPic" ng-file-select
                                ng-file-change="imgFileSelected($files, $event)"
-                               ng-multiple="false"
+                               ng-multiple="true"
                                accept=".jpg, .gif, .png"
                                resetOnClick="true">
                     </a>
@@ -135,7 +135,7 @@
                         <span ng-if="audit.exist" data-stat-click="task.uploadAgain">重新上传</span>
                         <input type="file" name="auditPic" ng-file-select
                                ng-file-change="imgFileSelected($files, $event)"
-                               ng-multiple="false"
+                               ng-multiple="true"
                                accept=".jpg, .gif, .png"
                                resetOnClick="true">
                     </a>
