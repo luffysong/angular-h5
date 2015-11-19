@@ -9,6 +9,10 @@ angular.module('defaultApp.controller').controller('SyndicatesGiftController',
         loading.show("syndicatesGift");
 
         document.title = '富豪养成计划';
+        $scope.$on('$locationChangeStart', function() {
+            document.title = '36氪股权融资';
+        });
+        
         CommonHeader.setNavActive('zhong');
 
         $timeout(function() {
