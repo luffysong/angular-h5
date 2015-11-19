@@ -124,7 +124,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     }).success(function (data, status, headers, config) {
                         var filename = data.url.toLowerCase();
                         alert(filename);
-                        if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
+                        if(filename.indexOf('.jpeg') != -1 || filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
                             $scope.investor.avatar = upyun.bucket.url + data.url;
                             $scope.action.uploaded = true;
                         } else {
