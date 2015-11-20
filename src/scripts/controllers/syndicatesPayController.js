@@ -15,7 +15,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayController',
         $scope.uid = UserService.getUID();
         $scope.tid = $stateParams.tid;
         $scope.amount = $stateParams.amount;
-        $scope.ids = $stateParams.ids;
+        $scope.ids = $stateParams.ids || "";
         $scope.bankDetails = DictionaryService.getDict('bank_limit_lianlianpay');
         $scope.interFace = {
             deposit:"cf-trade-deposit",
