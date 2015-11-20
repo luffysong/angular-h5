@@ -58,9 +58,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             operationStatus: $scope.operationStatus[1].value
         };
 
-
         $scope.uid = UserService.getUID();
-        //console.log($scope.uid)
         //UserService.isProfileValid(function (cs) {
         //    if(!cs){
         //        $state.go('guide.welcome');
@@ -79,7 +77,6 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         // 定位
         $scope.positionSet = function(e){
-            //console.log(e)
             e.preventDefault();
             var wrap = $('.suggest_wrap');
             var top = wrap.offset().top;
@@ -160,7 +157,6 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 var exist = data.data.filter(function (item) {
                     return item.name.toLowerCase() == q.toLowerCase();
                 });
-                //console.log(exist)
                 if (!exist.length) {
                     data.data.push({
                         name: q,
@@ -207,7 +203,6 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             }, function (data) {
                 data.company.logo = selected.obj.logo;
                 var company = data.company;
-                //console.log(data)
                 if (data.manager) {
                     $scope.opNext = 2;
                     $scope.founder = data.manager.name;
@@ -237,7 +232,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             on_error: console.log,
             on_detach: function (cs) {
                 $scope.formData.name = name_cache
-                console.log(cs, 'detach')
+                //console.log(cs, 'detach')
             },
             on_select: function (selected) {
                 if (selected.obj.status != 'add') {
@@ -467,8 +462,6 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             // todo : 时间修复
             $scope.formData.startDate = $scope.formData.startYear + '-' + $scope.formData.startMonth + '-01' ;
             if (!$scope.formData.logo) $scope.formData.logo = '//krplus-pic.b0.upaiyun.com/default_logo.png!30';
-
-
             CompanyService.save({
                 'mode': 'direct'
             }, angular.copy($scope.formData), function (data) {
