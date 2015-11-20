@@ -17,20 +17,24 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
         /*获取订单数据*/
         $scope.queryData = function(params, statusType) {
 
-			params = params || {};
+            params = params || {};
+            if(statusType){
+                $scope.orderData = [];
+                params.pageNo = 1;
+            }
 
-			var statename = $state.current.name;
-			var status = '';
-			statusType = statusType || statename;
-			$scope.loadingData = true;
-			switch(statusType){
-				case 'zhongchouAllOrder.obligations' :  status = '1,12';break;
-				case 'zhongchouAllOrder.paid'			   : status = '2,11,13';break
-				default									   :  status = ''
-			}
+            var statename = $state.current.name;
+            var status = '';
+            statusType = statusType || statename;
+            $scope.loadingData = true;
+            switch(statusType){
+                case 'zhongchouAllOrder.obligations' :  status = '1,12';break;
+                case 'zhongchouAllOrder.paid'			   : status = '2,11,13';break
+                default									   :  status = ''
+            }
 
-			$scope.loadingMore = true;
-			$scope.noData = false;
+            $scope.noData = false;
+
             CoInvestorService['my-financing'].query({
                 'page' : params.pageNo ? params.pageNo : $scope.pageNo,
                 'per_page': params.pageSize ? params.pageSize : pageSize,
