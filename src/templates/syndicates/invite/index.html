@@ -12,7 +12,7 @@
 
     <div class="invite-records clearfix">
         <div class="records-wrapper">
-            <div class="records-title">新获得券用户</div>
+            <div class="records-title">投资券GET · 光荣榜</div>
             <ul class="records-list" ng-mousedown="scrollClick()">
                 <li ng-repeat="item in couponList">
                     {{item.user.name}}获得<span>{{item.amount}}元</span>投资券
@@ -30,7 +30,6 @@
                 <h4>使用方法：</h4>
                 <h5>推荐人：</h5>
                 <ul class="usage">
-                    <li>登录36氪股权投资页面，pc端扫一扫“我的邀请二维码”移动端点击“邀请按钮”获取专属邀请页面</li>
                     <li>转发专属页面，发送给推荐好友</li>
                 </ul>
                 <h5>被推荐人：</h5>
@@ -54,7 +53,7 @@
     </div>
 
     <div class="syndicates-invite-stick">
-        <a class="btn record-btn" href="" ng-if="!isLogin" login-btn data-stat-click="laxinhuodong-h5.denglubutton">登录</a>
+        <a class="btn record-btn" href="" ng-if="!isLogin" login-btn data-stat-click="laxinhuodong-h5.denglubutton">立即参与</a>
         <a class="btn record-btn" href="" ng-if="isLogin" ng-click="viewInviteRecord($event);">邀请记录</a>
         <a class="btn share-btn" href="" ng-click="share($event)" data-stat-click="laxinhuodong-h5.fenxiangbutton"><span class="icon-share3"></span>点击进行分享</a>
     </div>
