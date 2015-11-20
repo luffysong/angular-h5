@@ -84,6 +84,7 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
                 }
             } else {
                 $scope.shareDesc = '立刻加入36氪股权投资富豪养成计划，点我获得1000元投资现金，上不封顶！';
+                $scope.shareTitle = '36氪股权投资 · 富豪养成计划';
             }
 
             window.WEIXINSHARE = {
