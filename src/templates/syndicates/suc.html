@@ -1,4 +1,4 @@
-<div class="syndicate-suc">
+<div class="syndicate-suc" ng-hide="loadingInst.zhongchouSuc">
     <div class="suc-content">
         <div class="suc-hand"></div>
         <p class="suc-tip">恭喜您，成功认购{{companyName}}！</p>
@@ -11,3 +11,4 @@
         <a href="" class="share-qq" share-way="sqq" baidu-share="config" ng-click="shareSyndicate()" baidu-btn="支付成功页-分享QQ空间按钮点击"></a>
     </div>
 </div>
+<div loading="zhongchouSuc"></div>

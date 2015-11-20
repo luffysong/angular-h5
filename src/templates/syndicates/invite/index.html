@@ -1,0 +1,63 @@
+<div class="syndicates-invite" ng-if="!loadingInst.syndicatesInvite">
+    <div class="invite-welcome">
+        <img src="styles/images/invite/welcome.png" alt="邀请好友赚翻天">
+    </div>
+
+    <div class="invite-gifts">
+        <img class="gift-title" src="styles/images/invite/gift-title.png" alt="三重福利">
+        <img class="gift-one" src="styles/images/invite/gift-1.png" alt="注册就送200元/位新手好礼">
+        <img class="gift-two" src="styles/images/invite/gift-2.png" alt="邀请好友就送500元/位推荐重礼">
+        <img class="gift-three" src="styles/images/invite/gift-3.png" alt="被邀请注册认证就送300/位推荐大礼">
+    </div>
+
+    <div class="invite-records clearfix">
+        <div class="records-wrapper">
+            <div class="records-title">新获得券用户</div>
+            <ul class="records-list" ng-mousedown="scrollClick()">
+                <li ng-repeat="item in couponList">
+                    {{item.user.name}}获得<span>{{item.amount}}元</span>投资卷
+                </li>
+            </ul>
+
+            <img class="records-line" src="styles/images/invite/gift-line.png" alt="">
+        </div>
+    </div>
+
+    <div class="invite-rules clearfix">
+        <div class="rules-wrapper">
+            <div class="rules-title">活动细则</div>
+            <div class="rules-list">
+                <h4>使用方法：</h4>
+                <h5>推荐人：</h5>
+                <ul class="usage">
+                    <li>登录36氪股权投资页面，pc端扫一扫“我的邀请二维码”移动端点击“邀请按钮”获取专属邀请页面</li>
+                    <li>转发专属页面，发送给推荐好友</li>
+                </ul>
+                <h5>被推荐人：</h5>
+                <ul class="usage">
+                    <li>被推荐人直接点击推荐人发送的邀请链接，在36氪完成注册、认证和投资。</li>
+                </ul>
+                <h4>福利规则：</h4>
+                <ul class="gifts">
+                    <li>1、成功认证36氪股权投资跟投人都可以参加本次活动。</li>
+                    <li>2、活动时间：2015年11月19日——2015年12月31日。</li>
+                    <li>3、投资券获得即日起，有效期为60天。</li>
+                    <li>4、邀请人的推荐好礼、推荐重礼以被邀请人投资冷静后开始计算，赠送于36氪股权投资人跟投人账户中（支付剩余款时可直接选择抵扣金额）。</li>
+                    <li>5、本活动投资券可抵扣同等金额，保证金不可使用投资券。</li>
+                    <li>6、投资券每笔订单最多可叠加两张使用。</li>
+                </ul>
+
+                <p class="copy-right">本活动最终解释权归36氪所有</p>
+            </div>
+            <img class="rules-line" src="styles/images/invite/rules-line.png" alt="">
+        </div>
+    </div>
+
+    <div class="syndicates-invite-stick">
+        <a class="btn record-btn" href="" ng-if="!isLogin" login-btn>登录</a>
+        <a class="btn record-btn" href="" ng-if="isLogin" ng-click="viewInviteRecord($event);">邀请记录</a>
+        <a class="btn share-btn" href="" ng-click="share($event)"><span class="icon-share3"></span>点击进行分享</a>
+    </div>
+</div>
+
+<div loading="syndicatesInvite"></div>

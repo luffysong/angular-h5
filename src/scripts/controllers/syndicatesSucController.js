@@ -5,7 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesSucController',
-    function($scope, UserService, ErrorService, $stateParams,DictionaryService,CrowdFundingService,CompanyService,$state,$rootScope) {
+    function($scope, UserService, ErrorService, $stateParams,DictionaryService,CrowdFundingService,CompanyService,$state,$rootScope,loading) {
+        loading.show("zhongchouSuc");
         $scope.companyId = $stateParams.cid ||  $rootScope.companyId ;
         $scope.fundingId = $stateParams.fundingId ||  $rootScope.fundingId;
         $scope.share = {};
@@ -16,7 +17,7 @@ angular.module('defaultApp.controller').controller('syndicatesSucController',
             if(!data.basic)return;
             $scope.companyName = data.basic.name;
             $scope.companyBrief = data.basic.brief;
-            console.log(data);
+            loading.hide("zhongchouSuc");
         }, function(err) {
             ErrorService.alert(err);
         });

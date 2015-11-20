@@ -1,5 +1,225 @@
 /*众筹订单页样式*/
+/*提示信息*/
+.error-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 176px;
+    height: 98px;
+    margin-left: -88px;
+    margin-top: -49px;
+    border-radius: 3px;
+    padding: 15px 3px 10px;
+    background-color: #666;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    z-index: 9;
+    transition: opacity .5s;
+    transform: scale(0);
+    opacity: 0;
+    &.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+    .error-tip {
+        padding-bottom: 13px;
+        border-bottom: 1px solid #8e8e8e;
+        margin-bottom: 10px;
+    }
+}
+/*优惠券支付确认弹窗*/
+.tip-window {
+    .error-window;
+    width: 300px;
+    height: 120px;
+    margin-left: -150px;
+    margin-top: -60px;
+    transition: all .5s;
+    .icon-icon-cancel {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+}
+/*投资卷*/
+.coupon-bottom {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    border-top: #dadada;
+    padding: 8px 15px;
+    line-height: 34px;
+    font-size: 13px;
+    color: #333;
+    z-index: 99;
+    .icon-icon-select {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+        background-color: #fff;
+        border-radius: 3px;
+        color: #fff;
+        margin-right: 10px;
+        text-align: center;
+        font-size: 17px;
+        vertical-align: middle;
+        border: 1px solid #E0DCDC;
+        &.active {
+            border: none;
+            background-color: #178fe6;
+        }
+    }
+    .ensure-btn {
+        display: inline-block;
+        float: right;
+        width: auto;
+        height: 34px;
+        line-height: 34px;
+        padding: 0 35px;
+        text-align: center;
+        border-radius: 3px;
+        background-color: #F28E00;
+        color: #fff;
+    }
+}
+
+.coupon-container {
+    padding: 20px 15px;
+    .clearfix;
+    .coupon-item {
+        height: 45px;
+        margin-bottom: 10px;
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+        .clearfix;
+        .coupon-num {
+            position: relative;
+            float: left;
+            width: 20%;
+            height: 45px;
+            line-height: 45px;
+            background-color: #75c3fe;
+            font-size: 15px;
+            color: #fff;
+            text-align: center;
+            .coupon-unit {
+                font-size: 13px;
+            }
+            &:before {
+                content: "";
+                position: absolute;
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                top: -5px;
+                right: -5px;
+                z-index: 9;
+                background-color: #f0f0f0;
+            }
+            &:after {
+                content: "";
+                position: absolute;
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                bottom: -5px;
+                right: -5px;
+                z-index: 9;
+                background-color: #f0f0f0;
+            }
+        }
+        .coupon-info {
+            position: relative;
+            float: left;
+            width: 80%;
+            height: 45px;
+            line-height: 40px;
+            text-align: left;
+            padding-left: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #e4e4e4;
+            border-left: 1px dashed #e4e4e4;
+            cursor: pointer;
+            &.active {
+                border: 1px solid #65b7f5;
+                border-left: 1px dashed #65b7f5;
+            }
+            .info-detail {
+                .detail-title {
+                    font-size: 13px;
+                    color: #333;
+                    font-weight: 600;
+                }
+                .detail-time {
+                    font-size: 12px;
+                    color: #666;
+                }
+
+            }
+            /*.selected {
+                display: inline-block;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 10px;
+                border-color: #65b7f5 #65b7f5 transparent transparent;
+                font-size: 12px;
+                color: #fff;
+                &.icon-select:before{
+                    position: absolute;
+                    top: -11px;
+                    left: -1px;
+                }
+            }*/
+        }
+    }
+}
 .syndicate-pay {
+    .load-more {
+        height: 40px;
+        line-height: 40px;
+        background-color: #D8DFE6;
+        color: #000;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    .coupon-option {
+        height: 60px;
+        background-color: #fff;
+        padding-left: 15px;
+        .coupon-select {
+            height: 100%;
+            line-height: 60px;
+            border-bottom: 1px solid #DFDFDF;
+            padding-right: 15px;
+            font-size: 14px;
+            color: #333;
+            .icon-h5-coupon {
+                font-size: 35px;
+                vertical-align: middle;
+                margin-right: -15px;
+            }
+            .icon-h5-arrow {
+                float: right;
+                font-size: 30px;
+                margin-top: 15px;
+                color: #ccc;
+            }
+        }
+    }
     .orange {
         color: #F28E00;
     }
@@ -10,12 +230,21 @@
     }
     .pay-title {
         width: 100%;
-        height: 35px;
         line-height: 35px;
         padding: 0 15px;
         background-color: #F7F7F7;
+        &.active {
+            padding-bottom: 10px;
+        }
+        &.coupon {
+            padding: 10px 15px 0;
+        }
         .amount {
             float: right;
+            color: #333;
+            &.error {
+                color: red;
+            }
         }
     }
     .pay-content {
