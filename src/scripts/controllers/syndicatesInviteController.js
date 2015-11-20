@@ -156,16 +156,18 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
         $scope.$watch('uname', function(from) {
             if($scope.isLogin) {
                 if(from) {
-                    $scope.shareDesc = '我是' + from + '，这是我的富豪养成计划，马上加入投资立减最高1000元。';
+                    $scope.shareDesc = '我是' + from + '，这是我的富豪养成计划。点我获得1000元投资现金，上不封顶！';
+                    $scope.shareTitle = from + '的富豪养成计划';
                 } else {
-                    $scope.shareDesc = '加入36氪股权投资富豪养成计划，投资马上立减最高1000元。';
+                    $scope.shareDesc = '立刻加入36氪股权投资富豪养成计划，点我获得1000元投资现金，上不封顶！';
+                    $scope.shareTitle = '36氪股权投资 · 富豪养成计划';
                 }
             } else {
-                $scope.shareDesc = '加入36氪股权投资富豪养成计划，投资马上立减最高1000元。';
+                $scope.shareDesc = '立刻加入36氪股权投资富豪养成计划，点我获得1000元投资现金，上不封顶！';
             }
 
             window.WEIXINSHARE = {
-                shareTitle: '36氪股权投资富豪养成计划',
+                shareTitle: $scope.shareTitle,
                 shareDesc: $scope.shareDesc,
                 shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
                 shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesInvite?id=' + ($scope.isLogin ? $scope.uid : $stateParams.id)
