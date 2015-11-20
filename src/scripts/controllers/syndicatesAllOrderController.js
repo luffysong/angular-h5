@@ -20,12 +20,12 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
 			params = params || {};
 
 			var statename = $state.current.name;
-			var status = [];
+			var status = '';
 			statusType = statusType || statename;
 			$scope.loadingData = true;
 			switch(statusType){
-				case 'zhongchouAllOrder.obligations' :  status = [1,12];break;
-				case 'zhongchouAllOrder.paid'			   : status = [2,11,13];break
+				case 'zhongchouAllOrder.obligations' :  status = '1,12';break;
+				case 'zhongchouAllOrder.paid'			   : status = '2,11,13';break
 				default									   :  status = ''
 			}
 
