@@ -22,7 +22,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
     function ($stateParams,$timeout, $q, $modal, $scope, DictionaryService, dateFilter, DefaultService, AndroidUploadService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
         //console.log($stateParams)
-        if($stateParams.from && decodeURIComponent($stateParams.from).indexOf('speed3')>-1){
+        if($stateParams.from && decodeURIComponent($stateParams.from).indexOf('speed4')>-1){
             $scope.jisu = true;
             $.ajax('/api/speed/count/click-create-hook', {
                 type:"GET"
