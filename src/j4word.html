@@ -51,7 +51,7 @@
     <div class="swiper-container">
         <div class="logo"></div>
         <div class="bgm-icon"></div>
-        <!--<audio src="styles/images/jisu3/speech.mp3" loop="1" autoplay="autoplay" id="bgm"></audio>-->
+        <audio src="styles/images/jisu4/m1.mp3" loop="1" autoplay="autoplay" id="bgm"></audio>
 
 
         <div class="swiper-wrapper">
@@ -186,23 +186,6 @@
     });
 
 
-//    function checkcookie(cid) {
-//        var cookies = $.cookie('j3word');
-//        if (!cookies) {
-//            $.cookie('j3word', encodeURIComponent('&' + cid + '&'))
-//            return false;
-//        }
-//
-//        cookies = decodeURIComponent(cookies);
-//
-//        if (cookies.indexOf("&" + cid + "&") > -1) {
-//            return true;
-//        } else {
-//            $.cookie('j3word', encodeURIComponent(cookies + cid + '&'))
-//            return false;
-//        }
-//
-//    }
 
     var cid;
     location.search.replace(/cid=([\d]+)/ig, function ($1, $2) {
@@ -262,16 +245,7 @@
                 krtracker('trackEvent', '按钮', "创业感言支持TA");
 
 
-                $.ajax('/api/speed/rank/support/'+weixinObj.cid, {
-                    data:{
-                        source:weixinObj.source
-                    },
-                    type : 'GET',
-                    success:function(){
-                        location.reload();
-                    }
-                })
-
+                location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&redirect_uri=https%3A%2F%2Frong.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&response_type=code&scope=snsapi_base&state='+weixinObj.cid+'#wechat_redirect'
 
 //                $('.share').css({'display': 'block'})
 //                setTimeout(function () {
