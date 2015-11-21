@@ -59,6 +59,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 					companyIntro += data.company.intro+'\n\n';
 				}
 
+				$scope.company.value.company.intro = companyIntro;
                 $scope.intro.value = {
                     intro:companyIntro
                 }
