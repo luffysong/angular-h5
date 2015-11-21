@@ -223,8 +223,8 @@
             })
 
             window.WEIXINSHARE = {
-                shareTitle: "#为什么要创业？#" + data.data.company.name + "创始人" + data.data.user.name + "在36氪“极速融资”给了你答案",
-                shareDesc: "极速融资: 30位靠谱投资人，24小时回复你BP。",
+                shareTitle: "#创业中遇过的坑？#" + data.data.company.name + "创始人" + data.data.user.name + "正在参加36氪“极速融资”。",
+                shareDesc: "极速融资: 21位靠谱投资人，24小时回复你BP。",
                 shareLink: link,
                 shareImg: data.data.company.logo
             };
@@ -262,11 +262,11 @@
                 krtracker('trackEvent', '按钮', "创业感言支持TA");
 
 
-                $.ajax('/api/speed/rank/'+weixinObj.cid, {
+                $.ajax('/api/speed/rank/support/'+weixinObj.cid, {
                     data:{
                         source:weixinObj.source
                     },
-                    type : 'PUT',
+                    type : 'GET',
                     success:function(){
                         location.reload();
                     }
