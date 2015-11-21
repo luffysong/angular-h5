@@ -43,19 +43,19 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
 				var companyIntro = '';
 
-				if( data.company.projectAdvantage.length){
+				if(data.company.projectAdvantage &&  data.company.projectAdvantage.length){
 					companyIntro += data.company.projectAdvantage+'\n\n';
 				}
-				if(data.company.dataLights.length){
+				if(data.company.dataLights && data.company.dataLights.length){
 					companyIntro += data.company.dataLights+'\n\n';
 				}
-				if(data.company.competitor.length){
+				if(data.company.competitor && data.company.competitor.length){
 					companyIntro += data.company.competitor+'\n\n';
 				}
-				if(data.company.projectPlan.length){
+				if(data.company.projectPlan && data.company.projectPlan.length){
 					companyIntro += data.company.projectPlan+'\n\n';
 				}
-				if(data.company.intro.length){
+				if(data.company.intro && data.company.intro.length){
 					companyIntro += data.company.intro+'\n\n';
 				}
 
