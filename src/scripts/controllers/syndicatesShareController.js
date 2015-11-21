@@ -13,8 +13,6 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
             document.title = '36氪股权融资';
         });
 
-        CommonHeader.setNavActive('zhong');
-
         $timeout(function() {
             loading.hide("syndicatesShare");
         }, 500);

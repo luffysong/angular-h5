@@ -11,8 +11,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             document.title = '36氪股权融资';
         });
 
-        CommonHeader.setNavActive('zhong');
-
         $timeout(function(){
             window.scroll(0,0);
             loading.show('syndicatesValidate');

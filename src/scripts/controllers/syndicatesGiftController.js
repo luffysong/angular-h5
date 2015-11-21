@@ -12,8 +12,6 @@ angular.module('defaultApp.controller').controller('SyndicatesGiftController',
         $scope.$on('$locationChangeStart', function() {
             document.title = '36氪股权融资';
         });
-        
-        CommonHeader.setNavActive('zhong');
 
         $timeout(function() {
             window.scroll(0,0);

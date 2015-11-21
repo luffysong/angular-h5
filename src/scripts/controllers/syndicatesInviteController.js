@@ -11,8 +11,6 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
             document.title = '36氪股权融资';
         });
 
-        CommonHeader.setNavActive('zhong');
-
         loading.show('syndicatesInvite');
 
         $timeout(function() {
