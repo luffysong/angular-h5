@@ -127,6 +127,21 @@
 
 
 <script>
+
+    /*计算屏幕有效显示区域*/
+    function setWidthHeight(){
+        var scale = 750/1026;
+        var wrap = $('.swiper-container');
+        var width = $('body').width();
+        var height = $('body').height();
+        width/height > scale ? ~function(){
+            wrap.width(scale*height).height(height)
+        }() : ~function(){
+            wrap.height(width/scale).width(width)
+        }()
+    };
+    setWidthHeight();
+
     var bgmTL = new TimelineMax().add([
         TweenMax.from($('.bgm-icon'), 5, {
             rotation: -360,

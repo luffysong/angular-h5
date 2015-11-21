@@ -26,6 +26,14 @@ html,body{
   height: 100%;
   font-size: 12px;
 }
+
+.displayzone{
+    position: relative;
+    margin: 0 auto;
+    .transform_vertical;
+    overflow: hidden;
+}
+
 .j3investor{
   padding: 1px 0 0 0;
   width: 100%;
@@ -61,10 +69,9 @@ html,body{
   }
   .title{
     width: 66%;
-    margin: 26px auto 20px;
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    .transform_center(0);
+      top:7%;
   }
   .sign{
     position: absolute;
@@ -109,7 +116,7 @@ html,body{
     width: 100%;
 
     position: absolute;
-    top: 30%;
+    top: 36%;
 
 
 
@@ -194,7 +201,7 @@ html,body{
   }
 }
 
-@media screen and (max-height: 440px) {
+@media screen and (max-height: 500px) {
  .title{
    width: 50% !important;
  }
