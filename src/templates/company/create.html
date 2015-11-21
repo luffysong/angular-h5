@@ -20,13 +20,7 @@
                     <span>图片过大</span>
                 </div>
 
-                <div class="error-alert error" ng-show="createForm.projectAdvantage.$invalid && createForm.projectAdvantage.$dirty">
-                    <span ng-show="createForm.projectAdvantage.$error.required">请输入我们的产品于优势</span>
-                </div>
 
-                <div class="error-alert error" ng-show="createForm.dataLights.$invalid && createForm.dataLights.$dirty">
-                    <span ng-show="createForm.dataLights.$error.required">请输入我们的用户</span>
-                </div>
 
                 <div class="error-alert error"
                      ng-show="createForm.startYear.$invalid && createForm.startYear.$dirty ">
@@ -48,6 +42,13 @@
                     <span>请填写职务</span>
                 </div>
 
+                <div class="error-alert error" ng-show="createForm.dataLights.$invalid && createForm.dataLights.$dirty">
+                    <span ng-show="createForm.dataLights.$error.required">请输入我们的用户</span>
+                </div>
+
+                <div class="error-alert error" ng-show="createForm.projectAdvantage.$invalid && createForm.projectAdvantage.$dirty">
+                    <span ng-show="createForm.projectAdvantage.$error.required">请输入我们的产品于优势</span>
+                </div>
                 <div class="error-alert error" ng-show="createForm.$error.logoEmpty">
                     <span>请上传公司LOGO</span>
                 </div>
