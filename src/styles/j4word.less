@@ -1,0 +1,325 @@
+.transform_center(@y){
+    left: 50%;
+    transform: translateX(-50%) translateY(@y);
+    -webkit-transform: translateX(-50%) translateY(@y);
+}
+.transform_vertical{
+    top: 50%;
+    transform: translateX(0) translateY(-50%);
+    -webkit-transform: translateX(0) translateY(-50%);
+}
+@yellow:#ffd200;
+@gray:#3c3837;
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color:rgba(255,255,255,0);
+}
+html, body{
+  height: 100%;
+}
+
+ul,li{list-style: none}
+
+.j3word {
+  padding: 1px 0 0 0;
+  width: 100%;
+  height: 100%;
+  background: url('images/jisu4/word-investor_banner.jpg') center top no-repeat;
+    background-size: 100% auto;
+    background-color: #000;
+
+  .share{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    font-size: 0;
+    background-color: rgba(0,0,0,0.8);
+    text-align: center;
+    img{
+      line-height: 100%;
+      width: 80%;
+      vertical-align: middle;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
+  .logo {
+    width: 17%;
+    max-width: 100px;
+    background: url("images/jisu3/1.png") no-repeat;
+    background-size: 100% auto;
+    height: 40px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+  .bgm-icon {
+    z-index: 101;
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    background: url(images/jisu4/radio.png) no-repeat;
+    background-size: contain;
+    top: 20px;
+    right: 20px;
+  }
+
+
+  .footer {
+    position: absolute;
+    width: 83%;
+    bottom: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    div {
+      max-width: 440px;
+      width: 100%;
+      margin: 10px auto 0;
+      a {
+        display: inline-block;
+        text-decoration: none;
+        color: white;
+        height: 35px;
+        line-height: 35px;
+        border-radius: 3px;
+        vertical-align: middle;
+      }
+      .support {
+        width: 47%;
+        //border: rgb(229, 96, 68) solid 2px;
+        //background: rgb(229, 96, 68);
+
+      }
+      .join {
+        //border: rgb(229, 96, 68) solid 2px;
+        width: 47%;
+        //font-size: 10px;
+      }
+    }
+    img {
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+
+
+
+  img {
+    width: 100%;
+  }
+
+  .swiper-wrapper {
+    width: 100%;
+    position: relative;
+    height: 55%;
+    top: 8%;
+  }
+  .swiper-container {
+    height: 100%;
+    max-width: 520px;
+  }
+  .page {
+    margin-bottom: 20px;
+    .logo {
+      width: 25%;
+      margin-top: 20px;
+      margin-left: 30px;
+      max-width: 150px;
+    }
+
+    .content {
+      color: white;
+      font-weight: 100;
+      ul {
+        padding: 0;
+        font-size: 90%
+      }
+      li {
+        display: block;
+        margin: 0 4%;
+        div {
+          margin: 0 auto;
+          position: absolute;
+          left: 50%;
+          top: 55%;
+          transform: translateX(-50%);
+          white-space: nowrap;
+          //bottom:22%;
+        }
+      }
+
+      .word {
+        text-align: center;
+        em{
+          word-wrap: break-word;
+          word-break: break-all;
+        }
+        p{
+          -webkit-line-clamp: 3;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          width: 100%;
+          display: -webkit-box;
+          -webkit-box-orient: block-axis;
+        }
+      }
+      .rank{
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        margin: 0 auto;
+        a{
+          text-align: center;
+          img{
+            width: 90%;
+          }
+        }
+      }
+      .head {
+        text-align: center;
+        position: relative;
+        width: 70px;
+        margin: 0 auto 10px ;
+        padding: 0;
+        .hot {
+          width: 28px;
+          height: 32px;
+          position: absolute;
+          right: -9px;
+          border: transparent;
+          top: 48px;
+        }
+        .imgwrap{
+          border-radius: 50%;
+          width: 70px;
+          height: 70px;
+          border: @yellow solid 2px;
+          overflow: hidden;
+          position: static;
+          transform: translateX(0);
+          background-clip: padding-box;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+
+          }
+        }
+
+      }
+      em {
+        font-style: normal;
+        color: @yellow;
+      }
+      h3, h4 {
+        display: inline-block;
+      }
+      span {
+        line-height: 1.5;
+      }
+      h3 {
+        color: @yellow;
+        margin: 0 10px 0 0;
+        font-size: 18px;
+        margin-top: 8px;
+      }
+      h4 {
+        font-size: 20px;
+        margin-left: 3%
+      }
+      a {
+        margin-top: 10px;
+        img {
+          width: 200px;
+          margin-top: 10px;
+        }
+      }
+    }
+
+  }
+  .dir {
+    position: absolute;
+    top: 96%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    li {
+      background-color: @yellow;
+      float: left;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      opacity: 0.5;
+    }
+    li:first-child{
+      margin-right: 20px;
+    }
+    li.active{
+      opacity: 1;
+    }
+  }
+
+
+  .company{
+    .head {
+
+      img{
+        border-color: #fff !important;
+      }
+    }
+    .word p{
+      -webkit-line-clamp: 1 !important;
+    }
+  }
+}
+
+@media screen and (max-height: 440px) {
+  .j3word{
+    li{
+      transform: scale(0.8);
+    }
+    .support_li{
+      div{
+        top: 10% !important;
+      }
+      h3{
+        font-size: 13px !important;
+      }
+      h4{
+        font-size: 15px !important;
+      }
+    }
+    .word {
+      p{
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: block-axis;
+        line-height: 1.1;
+      }
+    }
+    .rank img{
+      width: 70% !important;
+    }
+    .footer{
+      width: 60%;
+    }
+    .dir{
+      a{
+        width: 30% !important;
+      }
+
+    }
+  }
+}

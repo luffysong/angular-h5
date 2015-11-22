@@ -80,6 +80,7 @@ angular.module('defaultApp.service').service('CompanyService', [
             save: {
                 method: 'POST',
                 transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
+					console.log('---提交的创建公司数据:',data);
                     if(data.companySource){
                         //console.log(data)
                         data.startDate = data.startYear + '-'+(data.startMonth.length>1?data.startMonth:('0'+data.startMonth))+'-'+'01 '+ '00:00:00';
@@ -98,6 +99,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                         data.type = data.level;
                     }
 
+					console.log('---创建公司提交的数据－－',data);
                     return data;
                 })
             },

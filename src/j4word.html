@@ -11,9 +11,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <link rel="apple-touch-icon-precomposed" href="/images/wanda-icon.png"/>
     <link rel="apple-touch-startup-image" href="/images/wanda-icon.png"/>
-    <!-- build:css /styles/j3word.css -->
+    <!-- build:css /styles/j4word.css -->
     <link rel="stylesheet" href="/components/swiper/dist/css/swiper.min.css"/>
-    <link rel="stylesheet" href="/styles/j3word.css">
+    <link rel="stylesheet" href="/styles/j4word.css">
     <!-- endbuild -->
     <script>
         var _hmt = _hmt || [];
@@ -31,10 +31,10 @@
     <script>
         (function (i, s, o, g, r, a, m) {
             i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
             a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
+                m = s.getElementsByTagName(o)[0];
             a.async = 1;
             a.src = g;
             m.parentNode.insertBefore(a, m)
@@ -51,7 +51,7 @@
     <div class="swiper-container">
         <div class="logo"></div>
         <div class="bgm-icon"></div>
-        <audio src="styles/images/jisu3/speech.mp3" loop="1" autoplay="autoplay" id="bgm"></audio>
+        <audio src="styles/images/jisu4/m1.mp3" loop="1" autoplay="autoplay" id="bgm"></audio>
 
 
         <div class="swiper-wrapper">
@@ -61,14 +61,14 @@
 
 
         <div class="footer">
-            <img src="styles/images/jisu3/9.png" alt="">
+            <img src="styles/images/jisu4/word_title.jpg" alt="">
 
             <div>
                 <a class="support" href="javascript:void(0)">
-                    <img src="styles/images/jisu3/jword_btn_support.png" alt=""/>
+                    <img src="styles/images/jisu4/word_support.png" alt=""/>
                 </a>
-                <a class="join" href="//huodong.36kr.com/h5/speed3/">
-                    <img src="styles/images/jisu3/jword_btn_join.png" alt=""/>
+                <a class="join" href="//huodong.36kr.com/h5/speed4/">
+                    <img src="styles/images/jisu4/word_create.png" alt=""/>
                 </a>
             </div>
         </div>
@@ -98,7 +98,6 @@
                     <img src="<%=user.avatar%>" alt="">
                 </div>
 
-                <img src="styles/images/jisu3/7.png" alt="" class="hot">
             </li>
             <li class="word">
                 <p>我是<span><%=company.name%></span>创始人 <span><%=user.name%></span>，<em>＃我为什么要创业?＃</em>
@@ -113,7 +112,7 @@
 
             </li>
             <li class="rank">
-                <a href="/m/j3rank.html"><img src="styles/images/jisu3/8.png" alt=""></a>
+                <a href="/m/j4rank.html"><img src="styles/images/jisu4/word_ranklink.png" alt=""></a>
             </li>
         </ul>
     </div>
@@ -144,17 +143,18 @@
 
             </li>
             <li class="rank">
-                <a href="/m/j3rank.html"><img src="styles/images/jisu3/8.png" alt=""></a>
+                <a href="/m/j4rank.html"><img src="styles/images/jisu4/word_ranklink.png" alt=""></a>
             </li>
         </ul>
     </div>
 </div>
 
+
 </script>
 
 <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
-<!-- build:js /scripts/j3word.js -->
+<!-- build:js /scripts/j4word.js -->
 <script src="/components/jquery/dist/jquery.min.js"></script>
 <script src="/components/jquery-cookie/jquery.cookie.js"></script>
 <script src="/scripts/weixin.js"></script>
@@ -186,23 +186,6 @@
     });
 
 
-    function checkcookie(cid) {
-        var cookies = $.cookie('j3word');
-        if (!cookies) {
-            $.cookie('j3word', encodeURIComponent('&'+cid +'&'))
-            return false;
-        }
-
-        cookies = decodeURIComponent(cookies);
-
-        if (cookies.indexOf("&" + cid + "&") > -1) {
-            return true;
-        } else {
-            $.cookie('j3word', encodeURIComponent(cookies + cid + '&'))
-            return false;
-        }
-
-    }
 
     var cid;
     location.search.replace(/cid=([\d]+)/ig, function ($1, $2) {
@@ -223,16 +206,16 @@
             })
 
             window.WEIXINSHARE = {
-                shareTitle: "#为什么要创业？#" + data.data.company.name + "创始人" + data.data.user.name + "在36氪“极速融资”给了你答案",
-                shareDesc: "极速融资: 30位靠谱投资人，24小时回复你BP。",
+                shareTitle: "#创业中遇过的坑？#" + data.data.company.name + "创始人" + data.data.user.name + "正在参加36氪“极速融资”。",
+                shareDesc: "极速融资: 21位靠谱投资人，24小时回复你BP。",
                 shareLink: link,
                 shareImg: data.data.company.logo
             };
 
             var weixinObj = {
-                    cid: cid,
-                    source: source
-                }
+                cid: cid,
+                source: source
+            }
 
             InitWeixin(weixinObj);
 
@@ -242,7 +225,7 @@
             if (!data.data.company.logo) {
                 data.data.company.logo = '//krplus-pic.b0.upaiyun.com/default_avatar.png!70'
             }
-            if(!data.data.startupFeeling){
+            if (!data.data.startupFeeling) {
                 data.data.startupFeeling = ' '
             }
             var str = ejs.render($('#tml')[0].innerHTML, data.data)
@@ -262,72 +245,32 @@
                 krtracker('trackEvent', '按钮', "创业感言支持TA");
 
 
-//                      https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&redirect_uri=http%3A%2F%2Frongtest3.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&response_type=code&scope=snsapi_base&state=150186#wechat_redirect
-//                $.ajax('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&redirect_uri=http%3A%2F%2Frongtest3.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&response_type=code&scope=snsapi_base&state='+weixinObj.cid+'#wechat_redirect', {
-//                    type : 'GET',
-//                    dataType:'json',
-//                    success : function(data){
-//                        alert(data)
-//                    },
-//                    error : function(){
-//                        alert('err')
-//                    },
-//                    complete : function(){
-//                        alert('complete')
-//                    }
-//                })
+                location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&redirect_uri=http%3A%2F%2Frongtest3.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&response_type=code&scope=snsapi_base&state='+weixinObj.cid+'#wechat_redirect'
 
-//                location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&redirect_uri=http%3A%2F%2Frong.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&response_type=code&scope=snsapi_base&state='+weixinObj.cid+'#wechat_redirect'
-
-
-//                if(checkcookie(weixinObj.cid)) {
-//                    $('.share').css({'display': 'block'})
-//                    setTimeout(function(){
-//                        $('.share').css({'display': 'none'})
-//                    }, 4000)
-//
-//                    return;
-//                };
-
-
-
-
-//                $.ajax('/api/speed/rank/'+weixinObj.cid, {
-//                    data:{
-//                        source:weixinObj.source
-//                    },
-//                    type : 'PUT',
-//                    success:function(){
-//                        location.reload();
-//                    }
-//                })
-
-
-                $('.share').css({'display': 'block'})
-                    setTimeout(function(){
-                        $('.share').css({'display': 'none'})
-                    }, 2500)
-
+//                $('.share').css({'display': 'block'})
+//                setTimeout(function () {
+//                    $('.share').css({'display': 'none'})
+//                }, 2500)
 
 
             })
-            $('.share').on('click', function (e) {
-                $(e.currentTarget).css({'display': 'none'})
-            })
+//            $('.share').on('click', function (e) {
+//                $(e.currentTarget).css({'display': 'none'})
+//            })
 
-            $('.rank a').on('click', function(e){
+            $('.rank a').on('click', function (e) {
                 e.preventDefault()
                 _hmt.push(['_trackEvent', '按钮', '创业感言排行榜']);
                 krtracker('trackEvent', '按钮', "创业感言排行榜");
-                setTimeout(function(){
+                setTimeout(function () {
                     location.href = $(e.currentTarget).attr('href')
                 }, 400)
             })
-            $('.join').on('click', function(e){
+            $('.join').on('click', function (e) {
                 e.preventDefault()
                 _hmt.push(['_trackEvent', '按钮', '创业感言我要参加']);
                 krtracker('trackEvent', '按钮', "创业感言我要参加");
-                setTimeout(function(){
+                setTimeout(function () {
                     location.href = $(e.currentTarget).attr('href')
                 }, 400)
             })
@@ -335,8 +278,8 @@
         }
     })
 
-    _hmt.push(['_trackPageview', "/speed3/word/page1"]);
-    krtracker('trackPageView', "/speed3/word/page1");
+    _hmt.push(['_trackPageview', "/speed4/word/page1"]);
+    krtracker('trackPageView', "/speed4/word/page1");
 </script>
 
 

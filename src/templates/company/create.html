@@ -4,9 +4,7 @@
         如你已创建过公司，请用电脑进入 rong.36kr.com 直接参与极速融资；添加36氪融资小秘书：rong36krservice，获取更多融资信息。
     </p>
     <div class="content_wrap">
-
         <h2>创建公司 <b ng-click="createTip()">特别提醒</b></h2>
-
         <form action="" name="createForm" compare-time-valid="formData" nowdate-valid="formData" ng-submit="$event.preventDefault()">
             <div class="list">
                 <div class="error-alert error" ng-show="createForm.userWeixin.$invalid && createForm.userWeixin.$dirty">
@@ -21,6 +19,7 @@
                 <div class="error-alert error" ng-show="createForm.$error.cardSize">
                     <span>图片过大</span>
                 </div>
+
 
 
                 <div class="error-alert error"
@@ -43,6 +42,13 @@
                     <span>请填写职务</span>
                 </div>
 
+                <div class="error-alert error" ng-show="createForm.dataLights.$invalid && createForm.dataLights.$dirty">
+                    <span ng-show="createForm.dataLights.$error.required">请输入我们的用户</span>
+                </div>
+
+                <div class="error-alert error" ng-show="createForm.projectAdvantage.$invalid && createForm.projectAdvantage.$dirty">
+                    <span ng-show="createForm.projectAdvantage.$error.required">请输入我们的产品与优势</span>
+                </div>
                 <div class="error-alert error" ng-show="createForm.$error.logoEmpty">
                     <span>请上传公司LOGO</span>
                 </div>
@@ -52,6 +58,7 @@
                 <div class="error-alert error" ng-show="createForm.$error.logoSize">
                     <span>图片过大</span>
                 </div>
+
                 <div class="error-alert error"
                      ng-show="createForm.intro.$invalid && createForm.intro.$dirty">
                     <span>请填写公司介绍，不要少于60个字</span>
@@ -60,7 +67,6 @@
                      ng-show="createForm.brief.$invalid && createForm.brief.$dirty">
                     <span>请填写公司简介，不要少于5个字</span>
                 </div>
-
 
                 <div class="error-alert error"
                      ng-show="createForm.website.$invalid && createForm.website.$dirty" ng-if="!formData.cid && !(formData.operationStatus == 'ONLINE_IN_6MONTH' || formData.operationStatus == 'ONLINE_IN_3MONTH')">
@@ -75,13 +81,10 @@
                     <span>请填写公司简称</span>
                 </div>
 
-
                 <div class="error-alert error"
                      ng-show="createForm.$error.serverError">
                     <span>{{serverErrorMsg}}</span>
                 </div>
-
-
 
                 <table  mass-autocomplete="{debounce_blur:700}">
                     <tr>
@@ -171,6 +174,27 @@
                             <p ng-if="!formData.cid">支持小于5M的JPG、JPEG和PNG格式，为保证最佳显示，建议尺寸120*120px</p>
                         </td>
                     </tr>
+					<!--我们的产品与优势-->
+					<tr  class="projectAdvantage">
+						<td>
+							<b class="important">*</b>
+							<span>我们的产品与优势</span>
+						</td>
+						<td>
+							<textarea name="projectAdvantage" ng-model="formData.projectAdvantage" maxlength="200" class="form-control" placeholder="介绍一下公司的主营业务和产品模式，写明产品优势，突显亮点，获得可投资人第一眼关注" required ></textarea>
+						</td>
+					</tr>
+
+					<!--我们的用户-->
+					<tr class="dataLights">
+						<td>
+							<b class="important">*</b>
+							<span>我们的用户</span>
+						</td>
+						<td>
+							<textarea class="form-control" placeholder="说说市场规模及目标用户，服务的人群，典型的用户是什么样的" required maxlength="200" name="dataLights" ng-model="formData.dataLights"></textarea>
+						</td>
+					</tr>
 
                     <tr ng-if="jisu == true" class="intro">
                         <td class="vtop">

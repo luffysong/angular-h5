@@ -49,20 +49,20 @@
                     success: function () {
 
                         // 用户确认分享后执行的回调函数
-                        if(obj && obj.cid){
-
-                            if(checkcookie(obj.cid)) return;
-
-                            $.ajax('/api/speed/rank/'+obj.cid, {
-                                data:{
-                                    source:obj.source
-                                },
-                                type : 'PUT',
-                                success:function(){
-                                    location.reload();
-                                }
-                            })
-                        }
+                        //if(obj && obj.cid){
+                        //
+                        //    if(checkcookie(obj.cid)) return;
+                        //
+                        //    $.ajax('/api/speed/rank/'+obj.cid, {
+                        //        data:{
+                        //            source:obj.source
+                        //        },
+                        //        type : 'PUT',
+                        //        success:function(){
+                        //            location.reload();
+                        //        }
+                        //    })
+                        //}
                     },
                     cancel: function () {
                         // 用户取消分享后执行的回调函数
@@ -78,17 +78,17 @@
                     success: function () {
                         document.write($.cookies('j3word'))
                         // 用户确认分享后执行的回调函数
-                        if(obj && obj.cid){
-                            $.ajax('/api/speed/rank/'+obj.cid, {
-                                data:{
-                                    source:obj.source
-                                },
-                                type : 'PUT',
-                                success:function(){
-                                    location.reload();
-                                }
-                            })
-                        }
+                        //if(obj && obj.cid){
+                        //    $.ajax('/api/speed/rank/'+obj.cid, {
+                        //        data:{
+                        //            source:obj.source
+                        //        },
+                        //        type : 'PUT',
+                        //        success:function(){
+                        //            location.reload();
+                        //        }
+                        //    })
+                        //}
 
                     },
                     cancel: function () {

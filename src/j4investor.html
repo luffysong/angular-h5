@@ -12,9 +12,9 @@
     <link rel="apple-touch-icon-precomposed" href="/images/wanda-icon.png"/>
     <link rel="apple-touch-startup-image" href="/images/wanda-icon.png"/>
     <title>极速融资投资人阵容</title>
-    <!-- build:css /styles/j3investor.css -->
+    <!-- build:css /styles/j4investor.css -->
     <link rel="stylesheet" href="/components/swiper/dist/css/swiper.min.css"/>
-    <link rel="stylesheet" href="/styles/j3investor.css">
+    <link rel="stylesheet" href="/styles/j4investor.css">
     <!-- endbuild -->
     <script>
         var _hmt = _hmt || [];
@@ -49,17 +49,17 @@
     <div class="swiper-container">
         <div class="logo"></div>
         <div class="bgm-icon"></div>
-        <audio src="styles/images/jisu3/investor.mp3" id="bgm" loop=1 autoplay=1></audio>
+        <audio src="styles/images/jisu4/m2.mp3" id="bgm" loop=1 autoplay=1></audio>
 
         <div class="title">
-            <img src="styles/images/jisu3/investor_title.png" alt=""/>
+            <img src="styles/images/jisu4/investor_banner.png" alt=""/>
         </div>
 
         <div class="pre">
-            <img src="styles/images/jisu3/arr_pre.png" alt=""/>
+            <img src="styles/images/jisu4/arr_pre.png" alt=""/>
         </div>
         <div class="next">
-            <img src="styles/images/jisu3/arr_next.png" alt=""/>
+            <img src="styles/images/jisu4/arr_next.png" alt=""/>
         </div>
 
         <div class="swiper-wrapper">
@@ -68,7 +68,7 @@
 
         </div>
 
-        <a href="/m/#/company_create?from=speed3" class="sign">活动报名</a>
+        <a href="/m/#/company_create?from=speed4" class="sign">活动报名</a>
     </div>
 
 
@@ -116,7 +116,7 @@
 
 <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
-<!-- build:js /scripts/j3investor.js -->
+<!-- build:js /scripts/j4investor.js -->
 <script src="/components/jquery/dist/jquery.min.js"></script>
 <script src="/components/jquery-cookie/jquery.cookie.js"></script>
 <script src="/scripts/weixin.js"></script>
@@ -127,6 +127,21 @@
 
 
 <script>
+
+    /*计算屏幕有效显示区域*/
+    function setWidthHeight(){
+        var scale = 750/1026;
+        var wrap = $('.swiper-container');
+        var width = $('body').width();
+        var height = $('body').height();
+        width/height > scale ? ~function(){
+            wrap.width(scale*height).height(height)
+        }() : ~function(){
+            wrap.height(width/scale).width(width)
+        }()
+    };
+    setWidthHeight();
+
     var bgmTL = new TimelineMax().add([
         TweenMax.from($('.bgm-icon'), 5, {
             rotation: -360,
@@ -156,16 +171,16 @@
         })
     }
 
-    _hmt.push(['_trackPageview', "/speed3/investor/page1"]);
-    krtracker('trackPageView', "/speed3/investor/page1");
+    _hmt.push(['_trackPageview', "/speed4/investor/page1"]);
+    krtracker('trackPageView', "/speed4/investor/page1");
 
     $.ajax('/api/speed/index', {
         dataType: 'json',
         success: function (data) {
             window.WEIXINSHARE = {
-                shareTitle: "30位投资人正在36氪“极速融资”回复创业者BP，点击查看。",
-                shareDesc: "极速融资: 30位靠谱投资人，24小时回复你BP。",
-                shareImg:"http://krplus-pic.b0.upaiyun.com/201508/17141823/63faf4efd3481ffe.jpg!120"
+                shareTitle: "21位投资人正在36氪“极速融资”回复创业者BP，点击查看。",
+                shareDesc: "极速融资: 21位靠谱投资人，24小时回复你BP。",
+                shareImg:"http://krplus-pic.b0.upaiyun.com/201511/21115545/0ydxoorqgh19uzno.jpg!120"
             };
 
 
@@ -179,7 +194,7 @@
             $(str).appendTo('.swiper-wrapper')
 
             var mySwiper = new Swiper('.swiper-container',{
-                autoplay : 4000,
+                autoplay : 400000,
                 loop:true
             })
 
