@@ -1,214 +1,187 @@
-.transform_center(@y){
+.transform_center(@y) {
     left: 50%;
     transform: translateX(-50%) translateY(@y);
     -webkit-transform: translateX(-50%) translateY(@y);
 }
-.transform_vertical{
+
+.transform_vertical {
     top: 50%;
     transform: translateX(0) translateY(-50%);
     -webkit-transform: translateX(0) translateY(-50%);
 }
-@yellow:#ffd200;
-@gray:#3c3837;
 
+@yellow: #ffd200;
+@gray: #3c3837;
 
-*{margin: 0;padding: 0;-webkit-tap-highlight-color:rgba(255,255,255,0);}
-ul,ol{list-style: none;}
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+ul, ol {
+    list-style: none;
+}
+
 .clearfix:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
 }
 
-html,body{
-  height: 100%;
-  font-size: 12px;
+html, body {
+    height: 100%;
+    font-size: 12px;
 }
 
-.displayzone{
-    position: relative;
-    margin: 0 auto;
-    .transform_vertical;
-    overflow: hidden;
-}
-
-.j3investor{
-  padding: 1px 0 0 0;
-  width: 100%;
-  height: 100%;
-  background: url("images/jisu4/word-investor_banner.jpg") no-repeat center top;
-  background-size: 100% auto;
+.j3investor {
+    padding: 1px 0 0 0;
+    width: 100%;
+    height: 100%;
+    background: url("images/jisu4/word-investor_banner.jpg") no-repeat center top;
+    background-size: 100% auto;
     background-color: #000;
 
-  .logo{
-    width: 17%;
-    max-width: 100px;
-    background: url("images/jisu3/1.png") no-repeat;
-    background-size: 100% auto;
-    height: 40px;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-  }
-
-  .bgm-icon {
-    z-index: 101;
-    position: absolute;
-    width: 26px;
-    height: 26px;
-    background: url(images/jisu4/radio.png) no-repeat;
-    background-size: contain;
-    top: 20px;
-    right: 20px;
-  }
-
-  img{
-    width: 100%;
-  }
-  .title{
-    width: 66%;
-    position: absolute;
-    .transform_center(0);
-      top:7%;
-  }
-  .sign{
-    position: absolute;
-    top: 93%;
-    width: 70%;
-    z-index: 10;
-    text-decoration: none;
-    display: inline-block;
-    height: 26px;
-    line-height: 25px;
-    color: #fff;
-    border-radius: 5px;
-    background-color: @yellow;
-    text-align: center;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .swiper-container{
-    height: 100%;
-
-
-  }
-
-  .pre, .next{
-    position: absolute;
-    width: 12px;
-    height: 21px;
-    top: 55%;
-    z-index: 10;
-    img{
-      width: 100%;
+    .logo {
+        position: relative;
+        top:10px;
+        left: 10px;
+        width: 70px;
+        background: url("images/jisu3/1.png") no-repeat;
+        background-size: 100% auto;
+        height:40px;
     }
-  }
-  .pre{
-    left: 10px;
-  }
-  .next{
-    right: 10px;
-  }
 
-  .swiper-wrapper{
-    width: 100%;
+    .bgm-icon {
+        z-index: 101;
+        position: absolute;
+        width: 26px;
+        height: 26px;
+        background: url(images/jisu4/radio.png) no-repeat;
+        background-size: contain;
+        top: 20px;
+        right: 20px;
+    }
 
-    position: absolute;
-    top: 36%;
-
-
-
-    li{
-      width: 80%;
-      margin: 22px auto;
-      .imgwrap{
-        float: left;
-        border-radius: 50%;
-        border: 2px solid @yellow;
-        width: 65px;
-        height: 65px;
-        overflow: hidden;
-        img{
-          width: 100%;
-        }
-      }
-
-      .info{
-        float: left;
+    img {
+        width: 100%;
+    }
+    .title {
+        width: 66%;
+        margin: 0 auto;
+    }
+    .sign {
+        position: relative;
         width: 70%;
-      }
-      .border{
-        width: 15px;
-        height: 71px;
-        background: url("images/jisu4/investor_border_l.png") no-repeat;
-        background-size: cover;
-        float: left;
-        opacity: 0.5;
-      }
-      .text{
-        width: 80%;
-        float: left;
-        height: 65px;
-        padding: 2px 4px 2px 12px;
-        border: 1px solid rgba(231, 193, 41, 0.25);
-        border-left: none;
-        background-color: rgba(72, 64, 31, 0.25);
-
-
-        h4{
-          color: @yellow;
-          font-weight: normal;
-          padding: 2px 0;
-          font-size: 14px;
-        }
-        p{
-          color: #fff;
-          line-height: 1.2;
-        }
-        .des{
-          -webkit-line-clamp: 2;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          width: 100%;
-          display: -webkit-box;
-          -webkit-box-orient: block-axis;
-        }
-      }
+        text-decoration: none;
+        display: inline-block;
+        height: 26px;
+        line-height: 25px;
+        color: #fff;
+        border-radius: 5px;
+        background-color: @yellow;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
     }
-    li:nth-child(even){
-      .imgwrap{
-        float: right;
-      }
-      .info{
-        float: right;
-      }
-      .border{
-        float: right;
-        background: url("images/jisu4/investor_border_r.png") no-repeat;
-        background-size: cover;
-      }
-      .text{
-        float: right;
-        border: 1px solid rgba(231, 193, 41, 0.25);
-        border-right: none;
-      }
+
+    .pre, .next {
+        position: absolute;
+        width: 12px;
+        height: 21px;
+        top: 55%;
+        z-index: 10;
+        img {
+            width: 100%;
+        }
+    }
+    .pre {
+        left: 10px;
+    }
+    .next {
+        right: 10px;
     }
 
 
+    .swiper-wrapper {
+        position: relative;
+        width: 100%;
+        li {
+            width: 80%;
+            margin: 22px auto;
+            .imgwrap {
+                float: left;
+                border-radius: 50%;
+                border: 2px solid @yellow;
+                width: 65px;
+                height: 65px;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                }
+            }
 
-  }
-}
+            .info {
+                float: left;
+                width: 70%;
+            }
+            .border {
+                width: 15px;
+                height: 71px;
+                background: url("images/jisu4/investor_border_l.png") no-repeat;
+                background-size: cover;
+                float: left;
+                opacity: 0.5;
+            }
+            .text {
+                width: 80%;
+                float: left;
+                height: 65px;
+                padding: 2px 4px 2px 12px;
+                border: 1px solid rgba(231, 193, 41, 0.25);
+                border-left: none;
+                background-color: rgba(72, 64, 31, 0.25);
 
-@media screen and (max-height: 500px) {
- .title{
-   width: 50% !important;
- }
-  .swiper-wrapper{
-    top: 20% !important;
-  }
-  .swiper-slide{
-    transform: scale(0.75);
-  }
+                h4 {
+                    color: @yellow;
+                    font-weight: normal;
+                    padding: 2px 0;
+                    font-size: 14px;
+                }
+                p {
+                    color: #fff;
+                    line-height: 1.2;
+                }
+                .des {
+                    -webkit-line-clamp: 2;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    width: 100%;
+                    display: -webkit-box;
+                    -webkit-box-orient: block-axis;
+                }
+            }
+        }
+        li:nth-child(even) {
+            .imgwrap {
+                float: right;
+            }
+            .info {
+                float: right;
+            }
+            .border {
+                float: right;
+                background: url("images/jisu4/investor_border_r.png") no-repeat;
+                background-size: cover;
+            }
+            .text {
+                float: right;
+                border: 1px solid rgba(231, 193, 41, 0.25);
+                border-right: none;
+            }
+        }
+
+    }
 }
