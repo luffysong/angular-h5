@@ -46,7 +46,6 @@
 <body>
 <div class="j3investor">
 
-    <div class="swiper-container">
         <div class="logo"></div>
         <div class="bgm-icon"></div>
         <audio src="styles/images/jisu4/m2.mp3" id="bgm" loop=1 autoplay=1></audio>
@@ -55,26 +54,28 @@
             <img src="styles/images/jisu4/investor_banner.png" alt=""/>
         </div>
 
-        <div class="pre">
-            <img src="styles/images/jisu4/arr_pre.png" alt=""/>
+
+        <div class="swiper-container">
+            <div class="pre">
+                <img src="styles/images/jisu4/arr_pre.png" alt=""/>
+            </div>
+            <div class="next">
+                <img src="styles/images/jisu4/arr_next.png" alt=""/>
+            </div>
+
+            <div class="swiper-wrapper">
+
+
+
+            </div>
         </div>
-        <div class="next">
-            <img src="styles/images/jisu4/arr_next.png" alt=""/>
-        </div>
 
-        <div class="swiper-wrapper">
-
-
-
-        </div>
 
         <a href="/m/#/company_create?from=speed4" class="sign">活动报名</a>
-    </div>
 
 
 </div>
 
-</div>
 
 <script type="tml" id="tml">
 
@@ -127,20 +128,6 @@
 
 
 <script>
-
-    /*计算屏幕有效显示区域*/
-    function setWidthHeight(){
-        var scale = 750/1026;
-        var wrap = $('.swiper-container');
-        var width = $('body').width();
-        var height = $('body').height();
-        width/height > scale ? ~function(){
-            wrap.width(scale*height).height(height)
-        }() : ~function(){
-            wrap.height(width/scale).width(width)
-        }()
-    };
-    setWidthHeight();
 
     var bgmTL = new TimelineMax().add([
         TweenMax.from($('.bgm-icon'), 5, {
