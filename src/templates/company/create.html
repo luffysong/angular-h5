@@ -59,10 +59,10 @@
                     <span>图片过大</span>
                 </div>
 
-                <div class="error-alert error"
-                     ng-show="createForm.intro.$invalid && createForm.intro.$dirty">
-                    <span>请填写公司介绍，不要少于60个字</span>
-                </div>
+                <!--<div class="error-alert error"-->
+                     <!--ng-show="createForm.intro.$invalid && createForm.intro.$dirty">-->
+                    <!--<span>请填写公司介绍，不要少于60个字</span>-->
+                <!--</div>-->
                 <div class="error-alert error"
                      ng-show="createForm.brief.$invalid && createForm.brief.$dirty">
                     <span>请填写公司简介，不要少于5个字</span>
@@ -196,17 +196,17 @@
 						</td>
 					</tr>
 
-                    <tr ng-if="jisu == true" class="intro">
-                        <td class="vtop">
-                            <b class="important" ng-if="!formData.cid">*</b>
-                            <span>公司介绍</span>
-                        </td>
-                        <td>
-                            <p ng-if="formData.cid">{{formData.intro}}</p>
-                            <textarea name="intro" class="form-control" placeholder="请具体介绍下产品机制和模式，不少于60字" required ng-disabled="formData.cid"
-                                      ng-model="formData.intro" ng-if="!formData.cid" ng-pattern="/^.{60,1000}/" minlength="60" maxlength="1000"></textarea>
-                        </td>
-                    </tr>
+                    <!--<tr ng-if="jisu == true" class="intro">-->
+                        <!--<td class="vtop">-->
+                            <!--<b class="important" ng-if="!formData.cid">*</b>-->
+                            <!--<span>公司介绍</span>-->
+                        <!--</td>-->
+                        <!--<td>-->
+                            <!--<p ng-if="formData.cid">{{formData.intro}}</p>-->
+                            <!--<textarea name="intro" class="form-control" placeholder="请具体介绍下产品机制和模式，不少于60字" required ng-disabled="formData.cid"-->
+                                      <!--ng-model="formData.intro" ng-if="!formData.cid" ng-pattern="/^.{60,1000}/" minlength="60" maxlength="1000"></textarea>-->
+                        <!--</td>-->
+                    <!--</tr>-->
 
                     <tr class="job">
                         <td class="vtop">
