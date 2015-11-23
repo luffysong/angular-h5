@@ -469,7 +469,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 $scope.krCode.status = data.status;
                 $scope.krCode.code = data.code;
                 $scope.krCode.text = $scope.statusList[$scope.krCode.status-1].text;
-                $scope.krCode.status_use = data.status_use;
+                $scope.krCode.status_code = data.status_code;
                 loading.hide("confirmPage");
             },function(err){
                 if(err.code == 404 || err.code == 500){

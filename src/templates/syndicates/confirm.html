@@ -16,8 +16,8 @@
             </div>
             <div class="kr-code-enter suc" ng-if="krCode.status == 2">
                 获得Kr码<span class="audit-status" ng-bind="krCode.code"></span>
-                <a href="" class="btn view-detail" ng-click="checkCode('suc')" ng-hide="krCode.status_use">点击使用</a>
-                <span class="has-use" ng-show="krCode.status_use">已使用</span>
+                <a href="" class="btn view-detail" ng-click="checkCode('suc')" ng-hide="krCode.status_code">点击使用</a>
+                <span class="has-use" ng-show="krCode.status_code">已使用</span>
             </div>
             <p class="error-tip" ng-if="errMsg && hasCheck && !validateSuc">{{errMsg}}</p>
             <div class="kr-code-btn">
