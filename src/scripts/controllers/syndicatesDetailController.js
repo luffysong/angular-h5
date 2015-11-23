@@ -285,7 +285,9 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     obj[1] = chartData[index];
                 }
             });
-            loading.hide("syndicatesDetail");
+            $timeout(function(){
+                loading.hide("syndicatesDetail");
+            },500);
         },function(err){
             ErrorService.alert(err);
         });
