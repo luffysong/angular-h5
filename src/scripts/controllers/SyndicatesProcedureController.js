@@ -68,6 +68,13 @@ angular.module('defaultApp.controller').controller('SyndicatesProcedureControlle
         // 上传扫描件
         $scope.previewMode = false;
         $scope.imgFileSelected = function(files, e) {
+            if(files.length > 2) {
+                ErrorService.alert({
+                    msg: '选择张数过多，请选择最多两张照片！'
+                });
+                return;
+            }
+
             var upyun = window.kr.upyun;
             $scope.previewMode = true;
             $scope.audit.auditPics = [];
