@@ -174,14 +174,14 @@
             InitWeixin();
             var arr = randomArr(data.data.investors),
                     newArr = [];
-            while (arr.length > 3) {
+            while (arr.length >= 3) {
                 newArr.push(arr.splice(0, 3));
             }
             var str = ejs.render($('#tml')[0].innerHTML, {newArr:newArr})
             $(str).appendTo('.swiper-wrapper')
 
             var mySwiper = new Swiper('.swiper-container',{
-                autoplay : 400000,
+                autoplay : 4000,
                 loop:true
             })
 
