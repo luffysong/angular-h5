@@ -474,6 +474,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             },function(err){
                 if(err.code == 404 || err.code == 500){
                     $scope.krCode.status = "unapply";
+                    loading.hide("confirmPage");
                 }else{
                     ErrorService.alert(err);
                 }

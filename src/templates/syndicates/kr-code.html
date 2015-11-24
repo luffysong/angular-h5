@@ -4,12 +4,13 @@
         <div ng-show="!applySuc">
             <div class="kr-code-progress">
                 <div class="kr-code-container">
-                    <span class="first-point active">1<span class="point-stage first">提交申请</span></span><div class="progress-line active"></div><span class="first-point" ng-class="{'active':krCode.status == 3}">2<span class="point-stage second" ng-if="krCode.status == 1">审核中</span><span class="point-stage second" ng-if="krCode.status == 3">审核未通过</span></span><div class="progress-line"></div><span class="first-point">3<span class="point-stage third">收到Kr码</span></span>
+                    <span class="first-point active">1<span class="point-stage first">提交申请</span></span><div class="progress-line active"></div><span class="first-point" ng-class="{'active':krCode.status == 3}">2<span class="point-stage second" ng-if="krCode.status == 1 || krCode.status == 'unapply'">审核中</span><span class="point-stage second active" ng-if="krCode.status == 3">审核未通过</span></span><div class="progress-line"></div><span class="first-point">3<span class="point-stage third">收到Kr码</span></span>
                 </div>
-                <p class="fail-tip red">抱歉，暂不符合发放条件</p>
-                <p class="fail-tip">开放募资后，可以直接认购 ，感谢支持！</p>
+                <p class="fail-tip auditing" ng-if="krCode.status == 1">正在处理中，请耐心等待！</p>
+                <p class="fail-tip red" ng-if="krCode.status == 3">抱歉，暂不符合发放条件</p>
+                <p class="fail-tip" ng-if="krCode.status == 3">开放募资后，可以直接认购 ，感谢支持！</p>
             </div>
-            <div ng-if="krCode.status != 3">
+            <div ng-show="krCode.status == 'unapply'">
                 <div class="kr-code-enter apply-code">
                     <input class="kr-code-input" type="numer" placeholder="请输入意愿跟投金额" ng-model="wishNum" num-validate name="wishNum" required />
                     <!---->
@@ -23,11 +24,11 @@
                 <textarea class="invest-reason" placeholder="请输入投资理由" ng-model="reason" name="reason" required></textarea>
                 <div class="empty-error" ng-show="applyCodeForm.reason.$error.required && applyCodeForm.reason.$dirty">申请理由不能为空</div>
             </div>
-            <div class="kr-code-btn" ng-if="krCode.status != 3">
+            <div class="kr-code-btn" ng-if="krCode.status == 'unapply'">
                 <a href="" class="btn validate-kr-code" ng-disabled="applyCodeForm.$invalid && !minError" ng-click="apply()" baidu-btn="申请Kr码点击">申请</a>
                 <a ui-sref="syndicatesConfirm({fundingId:fundingId,cid:companyId})" class="href-tip">返回</a>
             </div>
-            <div class="info-container" ng-if="krCode.status == 3">
+            <div class="info-container" ng-hide="krCode.status == 'unapply'">
                 <ul class="info-list">
                     <li>
                         <span class="info-list-tag"></span>

@@ -48,15 +48,16 @@ angular.module('defaultApp.controller').controller('syndicatesCodeController',
         /*申请Kr码*/
         $scope.apply = function(){
             if(!checkForm("applyCodeForm"))return;
-            CrowdFundingService.save({
-                model:"crowd-funding",
-                id:$scope.fundingId,
-                submodel:"invite-code-apply"
+            CrowdFundingService["audit"].save({
+                id:"invite-code-cf-apply"
             },{
+                cf_id:$scope.fundingId,
                 investment:$scope.wishNum,
                 reason:$scope.reason
             },function(data){
+                console.log(data);
                 $scope.applySuc = true;
+                $scope.krCode.status = 1;
             },function(err){
                 ErrorService.alert(err);
             });
