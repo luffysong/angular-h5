@@ -283,6 +283,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 subid:code
             },function(data){
                 $scope.validateSuc = true;
+                $scope.krCode.code = code;
                 loading.hide("confirmPage");
             },function(err){
                 $scope.errMsg = err.msg;
@@ -299,7 +300,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             }else{
                 /*输入达到8位时，调用check*/
                 if($scope.krCode.number.length == 8){
-                    $scope.submitCode($scope.krCode.numer);
+                    $scope.submitCode($scope.krCode.number);
                 }else{
                     return;
                 }
@@ -349,7 +350,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                         goods_name: '众筹跟投', //TODO:这两个字段得产品确认一下写啥
                         goods_desc: '众筹跟投',
                         investment: num,
-                        invite_code: $scope.krCode.number
+                        invite_code: $scope.krCode.code || $scope.krCode.number
                     }, function(data) {
                         location.href = '//'+location.host+'/p/payment/4/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_deposit_id,'url_order=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
                     }, function(err) {                    /*同一个项目未支付订单超过10个*/
@@ -368,7 +369,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                         goods_name: '众筹跟投', //TODO:这两个字段得产品确认一下写啥
                         goods_desc: '众筹跟投',
                         investment: num,
-                        invite_code:$scope.krCode.number
+                        invite_code:$scope.krCode.code || $scope.krCode.number
                     }, function(data){
                         console.log(data);
                         if(!$scope.hasRecord){
