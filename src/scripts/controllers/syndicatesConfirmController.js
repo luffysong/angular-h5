@@ -352,7 +352,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                         investment: num,
                         invite_code: $scope.krCode.code || $scope.krCode.number
                     }, function(data) {
-                        location.href = '//'+location.host+'/p/payment/4/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_deposit_id,'url_order=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
+                        location.href = '//'+location.host+'/p/payment/4/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_deposit_id,'url_order=https:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=https:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
                     }, function(err) {                    /*同一个项目未支付订单超过10个*/
                         if(err.code == 2101) {
                             $modal.open({
@@ -373,7 +373,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                     }, function(data){
                         console.log(data);
                         if(!$scope.hasRecord){
-                            location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_deposit_id,'url_order=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
+                            location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_deposit_id,'url_order=https:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=https:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
                         }else{
                             $state.go('syndicatesPay', {
                                 tid: data.trade_deposit_id,
