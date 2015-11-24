@@ -661,7 +661,7 @@
             padding: 0;
             margin: 0;
             list-style: none;
-            text-align: right;
+            text-align: center;
         }
 
         .slick-dots li {
@@ -678,21 +678,28 @@
             font-size: 0;
             line-height: 0;
             display: block;
-            width: 5px;
-            height: 5px;
+            width: 6px;
+            height: 6px;
             cursor: pointer;
             border: 0;
             outline: none;
-            background: #9c9a9a;
-            border-radius: 5px;
+            background: rgba(0, 0, 0, .4);
+            border-radius: 6px;
         }
 
         .slick-dots li button:focus {
             outline: none;
         }
 
-        .slick-dots li.slick-active button {
-            background-color: #fff;
+        .slick-dots li.slick-active {
+            width: 11px;
+
+            button {
+                height: 4px;
+                width: 11px;
+                border-radius: 5px;
+                background-color: #fff;
+            }
         }
 
         .top-slide-arrow {
@@ -741,61 +748,61 @@
 
     .news-container {
         position: relative;
-        height: 123px;
+        height: 145px;
         margin-top: 10px;
         background: #fff;
         color: #555;
 
         .news-header {
-            height: 37px;
+            height: 39px;
             padding-top: 5px;
             line-height: 30px;
+            border: 1px solid #e9eaec;
 
             h3 {
                 display: inline-block;
                 margin: 0 0 0 10px;
-                font-size: 14px;
-                color: #999;
+                font-size: 15px;
+                color: #333;
+                font-weight: normal;
             }
 
             .view-more {
                 float: right;
                 color: #008df2;
                 margin-right: 10px;
+                font-size: 13px;
             }
         }
 
         .news-items {
             list-style: none;
             margin: 0;
-            padding: 0 20px 0 0;
+            padding: 0 20px 20px 0;
+            background-color: #fff;
 
             .news-item {
                 position: relative;
                 margin-top: 5px;
                 height: 22px;
-                padding-left: 38px;
+                padding-left: 23px;
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
 
                 &:first-child {
-                    margin-top: 0;
+                    margin-top: 10px;
                 }
 
                 .item-num {
                     position: absolute;
                     display: inline-block;
-                    width: 18px;
-                    height: 18px;
-                    top: 4px;
+                    width: 4px;
+                    height: 4px;
+                    top: 10px;
                     left: 10px;
-                    line-height: 18px;
-                    text-align: center;
-                    background-color: #deebff;
-                    border-radius: 2px;
-                    font-weight: 500;
-                    color: #86b1f1;
+                    background-color: #999;
+                    transform: rotate(45deg);
                 }
 
                 &> a {

@@ -30,7 +30,7 @@ angular.module('defaultApp.directive').directive('orderBtn', [
                                 $state.go("investorValidate");
                                 return;
                             } else {
-                                $state.go("syndicatesAllOrder");
+                                $state.go("zhongchouAllOrder.all");
                             }
                         });
                     }

@@ -5,7 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesConfirmController',
-    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope) {
+    function($scope, UserService, $modal, ErrorService, $stateParams,DictionaryService,CrowdFundingService,notify,CompanyService,$timeout,$state,$rootScope,loading) {
+        loading.show("confirmPage");
         if(navigator.userAgent.match(/mac/i)){
             $scope.system = "ios";
         }else{
@@ -20,7 +21,8 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         $scope.validateSuc = false;
         $scope.activeBtn = "";
         $scope.krCode = {
-            number:""
+            number:"",
+            status:"unapply"
         };
         $scope.payType = "alipay";
         /*选择支付方式*/
@@ -49,8 +51,10 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                     $scope.baseData.base.status = obj.desc;
                     if(obj.value == 30 && new Date() < new Date($scope.baseData.base.start_time)){
                         $scope.isPreHeat = true;
+                        $scope.getKrCodeStatus();
                     }else{
                         $scope.isPreHeat = false;
+                        loading.hide("confirmPage");
                     }
                 }
             });
@@ -77,6 +81,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
             $scope.baseData.detail.agreements_img = $scope.baseData.detail.agreements_img.concat(arr);
             /*$scope.baseData.detail.agreements.push(obj);
             $scope.baseData.detail.agreements_img.push(obj);*/
+
         });
         /*金额四舍五入取小数点后四位*/
         $scope.handleData = function (data) {
@@ -270,25 +275,35 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
         },function(err){
             $scope.hasRecord = false;
         });
+        $scope.submitCode = function(code){
+            CrowdFundingService.get({
+                model:"crowd-funding",
+                id:$scope.fundingId,
+                submodel:"invite-code-check",
+                subid:code
+            },function(data){
+                $scope.validateSuc = true;
+                $scope.krCode.code = code;
+                loading.hide("confirmPage");
+            },function(err){
+                $scope.errMsg = err.msg;
+                $scope.validateSuc = false;
+                $scope.hasCheck = true;
+                loading.hide("confirmPage");
+            });
+        }
         /*校验Kr码*/
-        $scope.checkCode = function(){
-            /*输入达到8位时，调用check*/
-            if($scope.krCode.number.length == 8){
-                CrowdFundingService.get({
-                    model:"crowd-funding",
-                    id:$scope.fundingId,
-                    submodel:"invite-code-check",
-                    subid:$scope.krCode.number
-                },function(data){
-                    $scope.validateSuc = true;
-                },function(err){
-                    $scope.errMsg = err.msg;
-                    $scope.validateSuc = false;
-                    $scope.hasCheck = true;
-                });
-
+        $scope.checkCode = function(type){
+            loading.show("confirmPage");
+            if(type == "suc"){
+                $scope.submitCode($scope.krCode.code);
             }else{
-                return;
+                /*输入达到8位时，调用check*/
+                if($scope.krCode.number.length == 8){
+                    $scope.submitCode($scope.krCode.number);
+                }else{
+                    return;
+                }
             }
         }
         /*打开ActionSheet*/
@@ -335,7 +350,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                         goods_name: '众筹跟投', //TODO:这两个字段得产品确认一下写啥
                         goods_desc: '众筹跟投',
                         investment: num,
-                        invite_code: $scope.krCode.number
+                        invite_code: $scope.krCode.code || $scope.krCode.number
                     }, function(data) {
                         location.href = '//'+location.host+'/p/payment/4/send-payment-request?'+(['pay_type=D','trade_id='+data.trade_deposit_id,'url_order=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=http:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder')]).join('&');
                     }, function(err) {                    /*同一个项目未支付订单超过10个*/
@@ -354,7 +369,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                         goods_name: '众筹跟投', //TODO:这两个字段得产品确认一下写啥
                         goods_desc: '众筹跟投',
                         investment: num,
-                        invite_code:$scope.krCode.number
+                        invite_code:$scope.krCode.code || $scope.krCode.number
                     }, function(data){
                         console.log(data);
                         if(!$scope.hasRecord){
@@ -431,6 +446,40 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                     $scope.formData.investVal = $scope.baseData.base.min_investment;
                 }
             }
+        }
+        $scope.statusList = [
+            {
+                id:1,
+                text:"审核中"
+            },{
+                ids:2,
+                text:"申请成功"
+            },{
+                id:3,
+                text:"申请失败"
+            }
+        ];
+        //获取Kr码信息
+        $scope.getKrCodeStatus = function(){
+            /*获取Kr码审核信息*/
+            CrowdFundingService["audit"].get({
+                id:"invite-code-cf-apply-result",
+                cf_id:$scope.fundingId
+            },function(data){
+                console.log(data);
+                $scope.krCode.status = data.status;
+                $scope.krCode.code = data.code;
+                $scope.krCode.text = $scope.statusList[$scope.krCode.status-1].text;
+                $scope.krCode.status_code = data.status_code;
+                loading.hide("confirmPage");
+            },function(err){
+                if(err.code == 404 || err.code == 500){
+                    $scope.krCode.status = "unapply";
+                    loading.hide("confirmPage");
+                }else{
+                    ErrorService.alert(err);
+                }
+            });
         }
     });
 

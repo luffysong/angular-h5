@@ -40,7 +40,7 @@ angular.module('defaultApp.directive').directive('loadingProgress', [
                         return "即将开启";
                     }else{
                         if(parseInt(num) >= 10000){
-                            i = parseInt(num) / 10000 + "万";
+                            i = parseInt(num) % 10000 ? (parseInt(num) / 10000).toFixed(1) + "万" : (parseInt(num) / 10000) + "万";
                         }else{
                             i = parseInt(num);
                         }
