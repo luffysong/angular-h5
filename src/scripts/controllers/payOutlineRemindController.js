@@ -8,6 +8,7 @@ angular.module('defaultApp.controller').controller('payOutlineRemindController',
     function($scope, UserService, ErrorService, $stateParams, CrowdFundingService,$state) {
         $scope.tid = $stateParams.tid;
         $scope.type = $stateParams.type;
+        $scope.couponIds = $stateParams.couponIds || '';
         $scope.interFace = {
             deposit:"cf-trade-deposit",
             balance:"cf-trade-balance"
@@ -24,10 +25,14 @@ angular.module('defaultApp.controller').controller('payOutlineRemindController',
             }, {
                 platform_type: 1
             }, function() {
-                $state.go('syndicatesPayOutline', {
-                    tid: $scope.tid,
-                    type: $scope.type
-                });
+
+                var offpayUrl = encodeURIComponent("https://" + location.host + '/m/#/zhongchouPayOutline?tid=' + $scope.tid + '&type=' + $scope.type);
+                var url = '//' + location.host+'/p/payment/1/send-payment-request?' +
+                    (['trade_id='+$scope.tid,
+                        'url_order=',
+                        'coupon_ids='+ $scope.couponIds,
+                        'back_url=' + offpayUrl].join('&'));
+                window.location.href = url;
             }, function(err) {
                 ErrorService.alert(err);
             });
