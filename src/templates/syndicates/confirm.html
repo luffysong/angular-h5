@@ -1,17 +1,50 @@
-<form name="confirmForm">
+<form name="confirmForm" ng-hide="loadingInst.confirmPage">
     <div class="syndicates-confirm">
         <!--预热中，Kr码购买-->
         <div ng-if="isPreHeat && !validateSuc">
             <div class="kr-code-title">Kr码优先购买</div>
-            <div class="kr-code-tip">输入Kr码</div>
             <div class="kr-code-enter">
-                <input type="text" maxlength="8" class="kr-code-input" ng-disabled="validateSuc" placeholder="Kr码为8位数字和字母组合" ng-model="krCode.number" name="krCode" />
+                输入Kr码<input type="text" maxlength="8" class="kr-code-input" ng-disabled="validateSuc" placeholder="Kr码为8位数字和字母组合" ng-model="krCode.number" name="krCode" />
+                <a href="" class="btn validate-kr-code" ng-disabled="krCode.number.length != 8" ng-click="checkCode()">使用</a>
                 <!---->
+            </div>
+            <div class="kr-code-enter">
+                申请Kr码<span class="audit-status status-{{krCode.status}}" ng-bind="krCode.text"></span>
+                <a href="" class="btn view-detail" ui-sref="syndicatesKrCode({fundingId:fundingId,cid:companyId})" ng-hide="krCode.status == 2 || krCode.status == 'unapply'">查看详情</a>
+                <a href="" class="btn view-detail" ui-sref="syndicatesKrCode({fundingId:fundingId,cid:companyId})" ng-if="krCode.status == 'unapply'">点击申请</a>
+                <!---->
+            </div>
+            <div class="kr-code-enter suc" ng-if="krCode.status == 2">
+                获得Kr码<span class="audit-status" ng-bind="krCode.code"></span>
+                <a href="" class="btn view-detail" ng-click="checkCode('suc')" ng-hide="krCode.status_code">点击使用</a>
+                <span class="has-use" ng-show="krCode.status_code">已使用</span>
             </div>
             <p class="error-tip" ng-if="errMsg && hasCheck && !validateSuc">{{errMsg}}</p>
             <div class="kr-code-btn">
-                <a href="" class="btn validate-kr-code" ng-disabled="krCode.number.length != 8" ng-click="checkCode()">使用</a>
-                <a href="" class="href-tip" ui-sref="syndicatesKrCode({fundingId:fundingId,cid:companyId})">申请Kr码</a>
+                <!--<a href="" class="href-tip" ui-sref="syndicatesKrCode({fundingId:fundingId,cid:companyId})">申请Kr码</a>-->
+                <ul class="info-list">
+                    <li>
+                        <span class="info-list-tag"></span>
+                        <div class="list-title">Kr码是什么</div>
+                        <div class="list-content">Kr码是36Kr股权投资平台发出的一种可以在项目锚定中提前认购的优先码。通俗的说，通过Kr码认购可以率先锁定跟投人名额。</div>
+                    </li>
+                    <li>
+                        <span class="info-list-tag"></span>
+                        <div class="list-title">Kr码的规则</div>
+                        <div class="list-content">
+                            1、Kr码不得私自转交给他人，Kr码是发给特定人的优先权。
+                        </div>
+                        <div class="list-content">
+                            2、Kr码一经使用，则会自动作废。
+                        </div>
+                        <div class="list-content">
+                            3、Kr码认购的保证金恕不退款，项目融资失败除外。
+                        </div>
+                        <div class="list-content">
+                            4、每位用户一个项目只能申请一次。
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
         <div ng-if="validateSuc || !isPreHeat">
@@ -121,6 +154,7 @@
         </div>
     </div>
 </form>
+<div loading="confirmPage"></div>
 <!--ActionSheet-->
 <div class="shade-layer" ng-class="{'normal':actionSheet}" ng-click="cancel($event)">
 </div>

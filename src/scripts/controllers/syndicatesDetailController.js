@@ -13,6 +13,9 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             $scope.system = "android";
         }
         var statusList = DictionaryService.getDict("crowd_funding_status");
+        // 手续进度是否可见
+        $scope.canSeeProcedure = false;
+
         /*是否开始播放视频*/
         $scope.startPlay = false;
         $scope.startVideo = function(){
@@ -210,6 +213,13 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     $scope.tempData = angular.copy($scope.syndicatesInfo.co_investors);
                     $scope.showAll = true;
                 }
+
+                // 查看手续进度权限
+                $scope.syndicatesInfo.co_investors.filter(function(item) {
+                    if(item.user_id == $scope.uid) {
+                        return $scope.canSeeProcedure = true;
+                    }
+                });
             }
             angular.forEach(statusList,function(obj,index){
                 if(obj.value == data.base.status){
@@ -275,7 +285,9 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     obj[1] = chartData[index];
                 }
             });
-            loading.hide("syndicatesDetail");
+            $timeout(function(){
+                loading.hide("syndicatesDetail");
+            },500);
         },function(err){
             ErrorService.alert(err);
         });

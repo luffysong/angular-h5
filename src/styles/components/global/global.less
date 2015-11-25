@@ -744,3 +744,71 @@ textarea {
     }
 }
 
+// Give the tabs something to sit on
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+    margin-bottom:20px;
+    overflow: hidden;
+    padding-bottom: 1px;
+    list-style: none;
+    background-color: #fff;
+    &:after{
+       content: "";
+    }
+    > li {
+        float: left;
+        // Make the list-items overlay the bottom border
+        margin-bottom: -1px;
+
+        // Actual tabs (as links)
+        > a {
+            margin-right: 2px;
+            color: #333333;
+            line-height: 1.428571429;
+            height:1.428571429;
+            overflow: hidden;
+            border: 0;
+            border-radius: 2px 2px 0 0;
+            font-size: 15px;
+            display: block;
+            padding: 12px;
+            >.badge {
+                background: #f0ad4e;
+                border-radius: 2px;
+                position: relative;
+                font-size: 12px;
+                margin-left:8px;
+                padding:1px 4px;
+                font-family: Arial;
+                top:-1px;
+                &:after {
+                    position: absolute;
+                    bottom:0;
+                    left:-4px;
+                    content:" ";
+                    border-bottom:4px solid #f0ad4e;
+                    border-left:8px solid transparent;
+                }
+            }
+            &:hover {
+                color:#178fe6;
+            }
+        }
+
+        // Active state, and its :hover to override normal :hover
+        &.active > a {
+            &,
+            &:hover,
+            &:focus {
+                color: #333;
+//                background-color: @nav-tabs-active-link-hover-bg;
+                background: none;
+                border:0;
+                border-bottom: 2px solid  #78bcec;
+//                border-bottom-color: transparent;
+                cursor: default;
+//                font-weight: bold;
+            }
+        }
+    }
+}
