@@ -8,7 +8,7 @@ angular.module('defaultApp.controller').controller('payOutlineRemindController',
     function($scope, UserService, ErrorService, $stateParams, CrowdFundingService,$state) {
         $scope.tid = $stateParams.tid;
         $scope.type = $stateParams.type;
-        $scope.couponIds = $stateParams.couponIds;
+        $scope.couponIds = $stateParams.couponIds || '';
         $scope.interFace = {
             deposit:"cf-trade-deposit",
             balance:"cf-trade-balance"
