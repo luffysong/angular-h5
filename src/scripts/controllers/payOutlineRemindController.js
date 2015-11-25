@@ -31,8 +31,7 @@ angular.module('defaultApp.controller').controller('payOutlineRemindController',
                     (['trade_id='+$scope.tid,
                         'url_order=',
                         'coupon_ids='+ $scope.couponIds,
-                        "back_url=",
-                        'offpay_url=' + offpayUrl].join('&'));
+                        'back_url=' + offpayUrl].join('&'));
                 window.location.href = url;
             }, function(err) {
                 ErrorService.alert(err);
