@@ -205,12 +205,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     /*线下支付页面*/
     $stateProvider.state('syndicatesPayOutline', {
-        url: '/zhongchouPayOutline?{tid}&{type}',
+        url: '/zhongchouPayOutline?{tid}&{type}&{couponIds}',
         templateUrl: 'templates/syndicates/pay-outline.html',
         controller: 'syndicatesPayOutlineController'
     });
     $stateProvider.state('payOutlineRemind', {
-        url: '/zhongchouPayOutlineRemind?{tid}&{type}',
+        url: '/zhongchouPayOutlineRemind?{tid}&{type}&{couponIds}',
         templateUrl: 'templates/syndicates/pay-outline-remind.html',
         controller: 'payOutlineRemindController'
     });
