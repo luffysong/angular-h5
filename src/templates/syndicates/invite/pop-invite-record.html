@@ -1,6 +1,6 @@
 <ul class="records-list">
     <li ng-repeat="item in inviteList" ng-if="inviteList.length">
-        我邀请<a href="" ui-sref="user_detail({id: item.user.id})"> {{item.user.name}} </a>已成功认证跟投人
+        我邀请<a href="" ui-sref="user_detail({id: item.uid})"> {{item.real_name}} </a>已成功认证跟投人
     </li>
 
     <div class="no-record" ng-hide="inviteList.length">
