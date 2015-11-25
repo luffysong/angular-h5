@@ -76,6 +76,11 @@
                 <div class="error-alert error" ng-show="createForm.$error.urlblacklist">
                     <span>所填网址无法作为公司独立网址</span>
                 </div>
+                <!--industry-->
+                <div class="error-alert error"
+                     ng-show="createForm.industry.$invalid && createForm.industry.$dirty">
+                    <span>请选择行业</span>
+                </div>
                 <div class="error-alert error"
                      ng-show="createForm.name.$invalid && createForm.name.$dirty">
                     <span>请填写公司简称</span>
@@ -156,14 +161,17 @@
                             <span>所属行业</span>
                         </td>
                         <td>
-                            <select name="firstIndustry" class="form-control" ng-model="formData.industry"
-                                    ng-options="y.value as y.desc for y in industry"
+                            <select name="industry" class="form-control industryselect"
+                                    ng-model="selectIndustryObj.industryObj"
+                                    ng-options="y.desc for y in industry"
                                     ng-change="industryChange()" required>
+                                <option value="">请选择</option>
                             </select>
-                            <select name="" id="">
-                                <option value="">
-                                    dfsaf
-                                </option>
+                            <select name="industry2" class="form-control industryselect" ng-show="industry2.length>0"
+                                    ng-model="selectIndustryObj.industry2Obj"
+                                    ng-options="y.desc for y in industry2"
+                                    ng-change="industry2Change()">
+
                             </select>
                         </td>
                     </tr>

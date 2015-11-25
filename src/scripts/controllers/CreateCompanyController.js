@@ -19,8 +19,9 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
     'ErrorService',
     'AvatarEdit',
     '$upload',
+    '$http',
 
-    function ($stateParams,$timeout, $q, $modal, $scope, DictionaryService, dateFilter, DefaultService, AndroidUploadService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
+    function ($stateParams,$timeout, $q, $modal, $scope, DictionaryService, dateFilter, DefaultService, AndroidUploadService, CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload, $http) {
         //console.log($stateParams)
         if($stateParams.from && decodeURIComponent($stateParams.from).indexOf('speed4')>-1){
             $scope.jisu = true;
@@ -51,6 +52,12 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 		$scope.yearOptions = yearOptions;
         // 所属行业 一级
         $scope.industry = DictionaryService.getDict('CompanyIndustry');
+        // 所属行业 二级
+        $scope.industry2 = []
+        $scope.selectIndustryObj = {
+            industryObj:'',
+            industry2Obj:''
+        };
 
         $scope.yearOptions = yearOptions;
 
@@ -59,7 +66,8 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         $scope.formData = {
             level: $scope.founderRoles[0].value,
             logo: "//krplus-pic.b0.upaiyun.com/default_logo.png!70",
-            operationStatus: $scope.operationStatus[1].value
+            operationStatus: $scope.operationStatus[1].value,
+            website:''
         };
 
         $scope.uid = UserService.getUID();
@@ -79,9 +87,23 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             if($scope.formData.website == 'http://') $scope.formData.website = '';
         }
 
-        // 切换一级行业
+        console.log($scope.formData.industry)
+        // 切换一级行业 监听事件操作
         $scope.industryChange = function(){
+            $scope.formData.industry = $scope.selectIndustryObj.industryObj.value;
+            $scope.industry2 = ''
+
             console.log($scope.formData.industry)
+
+            $http.get('/api/dict/industry/'+$scope.selectIndustryObj.industryObj.id).success(function(data){
+                $scope.industry2 = data.data;
+            }).error(function(data){
+
+            })
+        }
+        $scope.industry2Change = function(){
+            $scope.formData.industry2 = $scope.selectIndustryObj.industry2Obj.id;
+            console.log($scope.formData.industry2)
         }
 
 
@@ -456,6 +478,12 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 }
             }
             angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("urlblacklist", true);
+
+            //if(!$scope.formData.industry){
+            //    angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("industry", false);
+            //}else{
+            //    angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("industry", true);
+            //}
 
             Object.keys($scope.createForm).forEach(function (key) {
                 if ($scope.createForm[key] && $scope.createForm[key].$setDirty) {
