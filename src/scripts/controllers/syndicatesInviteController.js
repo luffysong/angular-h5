@@ -151,18 +151,27 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
             });
         };
 
+        //查看融资公司
+        $scope.skipToIndex = function($event){
+            $event.preventDefault();
+            $state.go('syndicates');
+        }
+
+        $scope.formUserNmae = '';
         $scope.$watch('uname', function(from) {
             if($scope.isLogin) {
                 if(from) {
-                    $scope.shareDesc = '我是' + from + '，这是我的富豪养成计划。点我获得1000元投资现金，上不封顶！';
+                    $scope.shareDesc = '我是' + from + '，请你来拿300元现金，一起做土豪！';
                     $scope.shareTitle = from + '的富豪养成计划';
+                    $scope.shareTitle = '来新锐互联网公司当股东，顺便领钱！';
+                    $scope.formUserNmae = from;
                 } else {
-                    $scope.shareDesc = '立刻加入36氪股权投资富豪养成计划，点我获得1000元投资现金，上不封顶！';
-                    $scope.shareTitle = '36氪股权投资 · 富豪养成计划';
+                    $scope.shareDesc = '36氪限时福利】立得200元现金，加入富豪养成！';
+                    $scope.shareTitle = '【36氪限时福利】立得200元现金，加入富豪养成！';
                 }
             } else {
-                $scope.shareDesc = '立刻加入36氪股权投资富豪养成计划，点我获得1000元投资现金，上不封顶！';
-                $scope.shareTitle = '36氪股权投资 · 富豪养成计划';
+                $scope.shareDesc = '【36氪限时福利】立得200元现金，加入富豪养成！';
+                $scope.shareTitle = '来新锐互联网公司当股东，顺便领钱！';
             }
 
             window.WEIXINSHARE = {

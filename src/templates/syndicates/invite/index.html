@@ -9,7 +9,9 @@
         <img class="gift-two" src="styles/images/invite/gift-2.png" alt="邀请好友就送500元/位推荐重礼">
         <img class="gift-three" src="styles/images/invite/gift-3.png" alt="被邀请注册认证就送300/位推荐大礼">
     </div>
-
+    <div class="invite-skip">
+        <a class="btn" href="#" ng-click="skipToIndex($event)">查看推荐融资公司</a>
+    </div>
     <div class="invite-records clearfix">
         <div class="records-wrapper">
             <div class="records-title">投资券GET · 光荣榜</div>
@@ -54,9 +56,11 @@
     </div>
 
     <div class="syndicates-invite-stick">
+        <a class="btn share-btn" href=""  data-stat-click="laxinhuodong-h5.fenxiangbutton">
+            求炫耀:{{formUserNmae ? formUserNmae + "的" : ''}}富豪养成计划
+        </a>
         <a class="btn record-btn" href="" ng-if="!isLogin" login-btn data-stat-click="laxinhuodong-h5.denglubutton">立即参与</a>
         <a class="btn record-btn" href="" ng-if="isLogin" ng-click="viewInviteRecord($event);">邀请记录</a>
-        <a class="btn share-btn" href="" ng-click="share($event)" data-stat-click="laxinhuodong-h5.fenxiangbutton"><span class="icon-share3"></span>点击进行分享</a>
     </div>
 </div>
 
