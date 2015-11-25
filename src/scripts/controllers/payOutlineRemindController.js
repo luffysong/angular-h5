@@ -26,7 +26,7 @@ angular.module('defaultApp.controller').controller('payOutlineRemindController',
                 platform_type: 1
             }, function() {
 
-                var offpayUrl = encodeURIComponent("https://" + location.host + '/#/zhongchouPayOutline?tid=' + $scope.tid + '&type=' + $scope.type);
+                var offpayUrl = encodeURIComponent("https://" + location.host + '/m/#/zhongchouPayOutline?tid=' + $scope.tid + '&type=' + $scope.type);
                 var url = '//' + location.host+'/p/payment/1/send-payment-request?' +
                     (['trade_id='+$scope.tid,
                         'url_order=',
