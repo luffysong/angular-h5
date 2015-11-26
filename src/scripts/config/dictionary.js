@@ -26,6 +26,28 @@ window.DICTIONARY_DATA =  {
             "value": "DELETED"
         }
     ],
+    "WriterRoleEnum": [
+        {
+            "desc": "普通作者",
+            "id": 0,
+            "value": "WRITER"
+        },
+        {
+            "desc": "创业者",
+            "id": 1,
+            "value": "ENTREPRENEUR"
+        },
+        {
+            "desc": "投资人",
+            "id": 2,
+            "value": "INVESTOR"
+        },
+        {
+            "desc": "机构",
+            "id": 3,
+            "value": "ORGANIZATION"
+        }
+    ],
     "EmployeeType": [
         {
             "desc": "创始人",
@@ -147,6 +169,23 @@ window.DICTIONARY_DATA =  {
             "desc": "投资人认证",
             "id": 6,
             "value": "INVESTOR_AUDIT"
+        }
+    ],
+    "WiseVoteEntityTypeEnum": [
+        {
+            "desc": "创业者",
+            "id": 1,
+            "value": "STARTUP_USER"
+        },
+        {
+            "desc": "跟投人",
+            "id": 2,
+            "value": "CO_INVESTOR"
+        },
+        {
+            "desc": "创业公司",
+            "id": 3,
+            "value": "STARTUP_COMPANY"
         }
     ],
     "OrgType": [
@@ -320,6 +359,11 @@ window.DICTIONARY_DATA =  {
             "desc": "创业活动通知",
             "id": 7,
             "value": "CHUANG_HUODONG"
+        },
+        {
+            "desc": "跟投人认证成功",
+            "id": 8,
+            "value": "CO_INVESTOR_SUCCESS"
         }
     ],
     "CoinvestorType": [
@@ -647,22 +691,12 @@ window.DICTIONARY_DATA =  {
             "value": "SOCIAL_NETWORK"
         },
         {
-            "desc": "广告营销",
-            "id": 3,
-            "value": "ADVERTISING_MARKETING"
-        },
-        {
-            "desc": "游戏动漫",
-            "id": 4,
-            "value": "GAME_ANIMATION"
-        },
-        {
             "desc": "智能硬件",
             "id": 5,
             "value": "INTELLIGENT_HARDWARE"
         },
         {
-            "desc": "媒体",
+            "desc": "媒体门户",
             "id": 6,
             "value": "MEDIA"
         },
@@ -702,12 +736,12 @@ window.DICTIONARY_DATA =  {
             "value": "PROPERTY_AND_HOME_FURNISHINGS"
         },
         {
-            "desc": "文体艺术",
+            "desc": "数字娱乐",
             "id": 14,
             "value": "CULTURE_SPORTS_ART"
         },
         {
-            "desc": "教育培训",
+            "desc": "在线教育",
             "id": 15,
             "value": "EDUCATION_TRAINING"
         },
@@ -749,22 +783,12 @@ window.DICTIONARY_DATA =  {
             "value": "SOCIAL_NETWORK"
         },
         {
-            "desc": "广告营销",
-            "id": 3,
-            "value": "ADVERTISING_MARKETING"
-        },
-        {
-            "desc": "游戏动漫",
-            "id": 4,
-            "value": "GAME_ANIMATION"
-        },
-        {
             "desc": "智能硬件",
             "id": 5,
             "value": "INTELLIGENT_HARDWARE"
         },
         {
-            "desc": "媒体",
+            "desc": "媒体门户",
             "id": 6,
             "value": "MEDIA"
         },
@@ -804,12 +828,12 @@ window.DICTIONARY_DATA =  {
             "value": "PROPERTY_AND_HOME_FURNISHINGS"
         },
         {
-            "desc": "文体艺术",
+            "desc": "数字娱乐",
             "id": 14,
             "value": "CULTURE_SPORTS_ART"
         },
         {
-            "desc": "教育培训",
+            "desc": "在线教育",
             "id": 15,
             "value": "EDUCATION_TRAINING"
         },

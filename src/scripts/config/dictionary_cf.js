@@ -678,6 +678,16 @@ window.DICTIONARY_CF_DATA =  {
         "1": "国内",
         "2": "国外"
     },
+    "coupon_status": [
+        "未激活",
+        "待使用",
+        "已锁定",
+        "已使用",
+        "已失效"
+    ],
+    "coupon_type": {
+        "1": "现金券"
+    },
     "crowd_funding_formality_status": {
         "1": "未开始",
         "2": "身份证扫描件搜集中",
@@ -725,7 +735,8 @@ window.DICTIONARY_CF_DATA =  {
         "2": "连连网银",
         "3": "连连认证",
         "4": "支付宝余额",
-        "5": "支付宝网银"
+        "5": "支付宝网银",
+        "6": "优惠券"
     },
     "trade_refund_status": {
         "1": "已申请",
