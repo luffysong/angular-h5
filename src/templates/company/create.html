@@ -3,9 +3,12 @@
     <p class="jisuTip" ng-if="jisu">
         如你已创建过公司，请用电脑进入 rong.36kr.com 直接参与极速融资；添加36氪融资小秘书：rong36krservice，获取更多融资信息。
     </p>
+
     <div class="content_wrap">
         <h2>创建公司 <b ng-click="createTip()">特别提醒</b></h2>
-        <form action="" name="createForm" compare-time-valid="formData" nowdate-valid="formData" ng-submit="$event.preventDefault()">
+
+        <form action="" name="createForm" compare-time-valid="formData" nowdate-valid="formData"
+              ng-submit="$event.preventDefault()">
             <div class="list">
                 <div class="error-alert error" ng-show="createForm.userWeixin.$invalid && createForm.userWeixin.$dirty">
                     <span>请填写可联系微信号</span>
@@ -20,8 +23,6 @@
                     <span>图片过大</span>
                 </div>
 
-
-
                 <div class="error-alert error"
                      ng-show="createForm.startYear.$invalid && createForm.startYear.$dirty ">
                     <span>请选择时间段</span>
@@ -35,7 +36,7 @@
                     <span>时间不能大于当前时间</span>
                 </div>
                 <!--<div class="error-alert error" ng-show="createForm.$invalid && createForm.$dirty">-->
-                    <!--<span ng-show="createForm.$error.nowdate">不能大于现在的时间！</span>-->
+                <!--<span ng-show="createForm.$error.nowdate">不能大于现在的时间！</span>-->
                 <!--</div>-->
                 <div class="error-alert error"
                      ng-show="createForm.position.$invalid && createForm.position.$dirty">
@@ -46,7 +47,8 @@
                     <span ng-show="createForm.dataLights.$error.required">请输入我们的用户</span>
                 </div>
 
-                <div class="error-alert error" ng-show="createForm.projectAdvantage.$invalid && createForm.projectAdvantage.$dirty">
+                <div class="error-alert error"
+                     ng-show="createForm.projectAdvantage.$invalid && createForm.projectAdvantage.$dirty">
                     <span ng-show="createForm.projectAdvantage.$error.required">请输入我们的产品与优势</span>
                 </div>
                 <div class="error-alert error" ng-show="createForm.$error.logoEmpty">
@@ -60,8 +62,8 @@
                 </div>
 
                 <!--<div class="error-alert error"-->
-                     <!--ng-show="createForm.intro.$invalid && createForm.intro.$dirty">-->
-                    <!--<span>请填写公司介绍，不要少于60个字</span>-->
+                <!--ng-show="createForm.intro.$invalid && createForm.intro.$dirty">-->
+                <!--<span>请填写公司介绍，不要少于60个字</span>-->
                 <!--</div>-->
                 <div class="error-alert error"
                      ng-show="createForm.brief.$invalid && createForm.brief.$dirty">
@@ -69,7 +71,8 @@
                 </div>
 
                 <div class="error-alert error"
-                     ng-show="createForm.website.$invalid && createForm.website.$dirty" ng-if="!formData.cid && !(formData.operationStatus == 'ONLINE_IN_6MONTH' || formData.operationStatus == 'ONLINE_IN_3MONTH')">
+                     ng-show="createForm.website.$invalid && createForm.website.$dirty"
+                     ng-if="!formData.cid && !(formData.operationStatus == 'ONLINE_IN_6MONTH' || formData.operationStatus == 'ONLINE_IN_3MONTH')">
                     <span>请填写公司网址，http://开头</span>
                 </div>
 
@@ -91,7 +94,7 @@
                     <span>{{serverErrorMsg}}</span>
                 </div>
 
-                <table  mass-autocomplete="{debounce_blur:700}">
+                <table mass-autocomplete="{debounce_blur:700}">
                     <tr>
                         <td>
                             <b class="important">*</b>
@@ -104,7 +107,7 @@
                                        placeholder="请填写公司核心产品名称或项目名称。如：36氪"
                                        required
                                        class="form-control"
-                                        mass-autocomplete-item="autocomplete_options"/>
+                                       mass-autocomplete-item="autocomplete_options"/>
                             </div>
                         </td>
 
@@ -147,29 +150,33 @@
             <td>
               <p ng-if="formData.cid">{{formData.website}}</p>
 
-                            <input type="url" class="form-control" placeholder="如：http://www.36kr.com" required ng-disabled="formData.cid" ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
-                                   name="website" ng-model="formData.website" ng-if="!formData.cid&& !(formData.operationStatus == 'ONLINE_IN_6MONTH' || formData.operationStatus == 'ONLINE_IN_3MONTH')"/>
+                            <input type="url" class="form-control" placeholder="如：http://www.36kr.com"
+                                   ng-change="websiteChange()"
+                                   ng-required="!(formData.operationStatus == 'ONLINE_IN_6MONTH' || formData.operationStatus == 'ONLINE_IN_3MONTH')"
+                                   ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
+                                   name="website" ng-model="formData.website"
+                                   ng-if="!formData.cid&& !(formData.operationStatus == 'ONLINE_IN_6MONTH' || formData.operationStatus == 'ONLINE_IN_3MONTH')"/>
 
-                            <input type="url" class="form-control" placeholder="如：http://www.36kr.com"  ng-focus="webSiteFocus()" ng-blur="webSiteBlur()"
-                                   name="website" ng-model="formData.website" ng-if="!formData.cid && (formData.operationStatus == 'ONLINE_IN_6MONTH' || formData.operationStatus == 'ONLINE_IN_3MONTH')"/>
                         </td>
                     </tr>
 
-                    <tr>
+                    <tr ng-class="{true:'gray_color', false:''}[!!formData.cid]">
                         <td>
-                            <b class="important">*</b>
+                            <b class="important" ng-if="!formData.cid">*</b>
                             <span>所属行业</span>
                         </td>
                         <td>
                             <select name="industry" class="form-control industryselect"
                                     ng-model="selectIndustryObj.industryObj"
                                     ng-options="y.desc for y in industry"
-                                    ng-change="industryChange()" required>
+                                    ng-disabled="formData.cid"
+                                    ng-change="industryChange()" ng-required="!formData.cid">
                                 <option value="">请选择</option>
                             </select>
                             <select name="industry2" class="form-control industryselect" ng-show="industry2.length>0"
                                     ng-model="selectIndustryObj.industry2Obj"
                                     ng-options="y.desc for y in industry2"
+                                    ng-disabled="formData.cid"
                                     ng-change="industry2Change()">
 
                             </select>
@@ -183,8 +190,10 @@
                         </td>
                         <td>
                             <p ng-if="formData.cid">{{formData.brief}}</p>
-                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，5-30字以内" required ng-disabled="formData.cid"
-                                      ng-model="formData.brief" ng-if="!formData.cid" ng-pattern="/^.{5,30}/" maxlength="30"></textarea>
+                            <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，5-30字以内" required
+                                      ng-disabled="formData.cid"
+                                      ng-model="formData.brief" ng-if="!formData.cid" ng-pattern="/^.{5,30}/"
+                                      maxlength="30"></textarea>
                         </td>
                     </tr>
 
@@ -199,7 +208,8 @@
                                     <img ng-src="//krplus-pic.b0.upaiyun.com/default_logo.png!70" width="70" height="70"
                                          alt=""
                                          src="{{formData.logo || temp_logo || '//krplus-pic.b0.upaiyun.com/default_logo.png!70'}}">
-                                    <div class="progress" ng-show="logo.uploading" style="height:{{logo.progress}}%"></div>
+                                    <div class="progress" ng-show="logo.uploading"
+                                         style="height:{{logo.progress}}%"></div>
                                     <span class="filewrap" ng-if="!formData.cid">
                                         上传
                                         <input type="file" name="logo"
@@ -215,38 +225,41 @@
                             <p ng-if="!formData.cid">支持小于5M的JPG、JPEG和PNG格式，为保证最佳显示，建议尺寸120*120px</p>
                         </td>
                     </tr>
-					<!--我们的产品与优势-->
-					<tr  class="projectAdvantage">
-						<td>
-							<b class="important">*</b>
-							<span>我们的产品与优势</span>
-						</td>
-						<td>
-							<textarea name="projectAdvantage" ng-model="formData.projectAdvantage" maxlength="200" class="form-control" placeholder="介绍一下公司的主营业务和产品模式，写明产品优势，突显亮点，获得可投资人第一眼关注" required ></textarea>
-						</td>
-					</tr>
+                    <!--我们的产品与优势-->
+                    <tr class="projectAdvantage">
+                        <td>
+                            <b class="important">*</b>
+                            <span>我们的产品与优势</span>
+                        </td>
+                        <td>
+                            <textarea name="projectAdvantage" ng-model="formData.projectAdvantage" maxlength="200"
+                                      class="form-control" placeholder="介绍一下公司的主营业务和产品模式，写明产品优势，突显亮点，获得可投资人第一眼关注"
+                                      required></textarea>
+                        </td>
+                    </tr>
 
-					<!--我们的用户-->
-					<tr class="dataLights">
-						<td>
-							<b class="important">*</b>
-							<span>我们的用户</span>
-						</td>
-						<td>
-							<textarea class="form-control" placeholder="说说市场规模及目标用户，服务的人群，典型的用户是什么样的" required maxlength="200" name="dataLights" ng-model="formData.dataLights"></textarea>
-						</td>
-					</tr>
+                    <!--我们的用户-->
+                    <tr class="dataLights">
+                        <td>
+                            <b class="important">*</b>
+                            <span>我们的用户</span>
+                        </td>
+                        <td>
+                            <textarea class="form-control" placeholder="说说市场规模及目标用户，服务的人群，典型的用户是什么样的" required
+                                      maxlength="200" name="dataLights" ng-model="formData.dataLights"></textarea>
+                        </td>
+                    </tr>
 
                     <!--<tr ng-if="jisu == true" class="intro">-->
-                        <!--<td class="vtop">-->
-                            <!--<b class="important" ng-if="!formData.cid">*</b>-->
-                            <!--<span>公司介绍</span>-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<p ng-if="formData.cid">{{formData.intro}}</p>-->
-                            <!--<textarea name="intro" class="form-control" placeholder="请具体介绍下产品机制和模式，不少于60字" required ng-disabled="formData.cid"-->
-                                      <!--ng-model="formData.intro" ng-if="!formData.cid" ng-pattern="/^.{60,1000}/" minlength="60" maxlength="1000"></textarea>-->
-                        <!--</td>-->
+                    <!--<td class="vtop">-->
+                    <!--<b class="important" ng-if="!formData.cid">*</b>-->
+                    <!--<span>公司介绍</span>-->
+                    <!--</td>-->
+                    <!--<td>-->
+                    <!--<p ng-if="formData.cid">{{formData.intro}}</p>-->
+                    <!--<textarea name="intro" class="form-control" placeholder="请具体介绍下产品机制和模式，不少于60字" required ng-disabled="formData.cid"-->
+                    <!--ng-model="formData.intro" ng-if="!formData.cid" ng-pattern="/^.{60,1000}/" minlength="60" maxlength="1000"></textarea>-->
+                    <!--</td>-->
                     <!--</tr>-->
 
                     <tr class="job">
@@ -258,7 +271,7 @@
                             <select ng-options="c.value as c.desc for c in founderRoles" ng-model="formData.level"
                                     class="form-control"
                                     name="level" required>
-								<option value="">请选择</option>
+                                <option value="">请选择</option>
                             </select>
 
                             <div class="split">
@@ -276,12 +289,14 @@
                         <td>
 
                             <select class="form-control" ng-model="formData.startYear" class="form-control"
-                                    ng-options="y for y in yearOptions" name="startYear" required ng-change="checkDate()">
+                                    ng-options="y for y in yearOptions" name="startYear" required
+                                    ng-change="checkDate()">
                                 <option value="">年</option>
                             </select>
                             &nbsp;
                             <select class="form-control" ng-model="formData.startMonth" class="form-control"
-                                    ng-options="m+'月' for m in monthOptions" name="startMonth" required ng-change="checkDate()">
+                                    ng-options="m+'月' for m in monthOptions" name="startMonth" required
+                                    ng-change="checkDate()">
                                 <option value="">月</option>
                             </select>
                             — 至今
@@ -290,20 +305,22 @@
 
                         </td>
                     </tr>
-                    <tr >
-                        <td class="vtop" >
+                    <tr>
+                        <td class="vtop">
                             <b class="important" ng-if="formData.cid && opNext == 1">＊</b>
                             <span>上传名片</span>
                         </td>
                         <td class="logo card clearfix">
                             <p>名片、营业执照、网站域名或微信公众号后台相关证明图片,上传名片有助于提升审核速度, 支持小于5M的JPG、JPEG和PNG格式</p>
+
                             <div class="pic">
                                 <span class="upload-b ng-binding">
 
                                     <img width="110" height="70"
                                          alt=""
                                          src="{{formData.bizCardLink || temp_bizCardLink  || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANcAAACJBAMAAABN17ABAAAAG1BMVEX///8AjfIZmPO23vv1+f3I4PaVxe1nq+VPnuGS0jTRAAAAeklEQVRo3u3YwQmDQBBA0YmmgGwqSFKBJaQLrzbh3dLFiwcXwYurC+818GFZGGZi/EcZz36KgoYAAAAAANhof10U06RPFPNIr9gjJiYmJpYTu1Ws/aatdxcnaVJmHdl1x44+Y30fRExMTExMLFfxAr+cJgAAAAAALjTMqvgNecQF9eAAAAAASUVORK5CYII='}}">
-                                    <div class="progress" ng-show="card.uploading" style="height:{{card.progress}}%"></div>
+                                    <div class="progress" ng-show="card.uploading"
+                                         style="height:{{card.progress}}%"></div>
                                     <span class="filewrap">
                                         <!--仅供审核使用-->
                                         <input type="file" name="bizCardLink"
@@ -319,7 +336,7 @@
                         </td>
                     </tr>
                     <tr ng-if="jisu == true">
-                        <td class="vtop" >
+                        <td class="vtop">
                             <b class="important">＊</b>
                             <span>可联系微信号</span>
                         </td>
