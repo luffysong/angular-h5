@@ -6,15 +6,15 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesCompanyController',
     function($scope, $state, $stateParams, $q, $modal, notify, $timeout, $interval, loading, UserService, CrowdFundingService, ErrorService) {
-        document.title = '合作推广计划';
+        document.title = '下一站，股东!';
         $scope.$on('$locationChangeStart', function() {
             document.title = '36氪股权融资';
         });
         var activityMap = {
-            '4' : 'baidu', //百度
+            //'4' : 'baidu', //百度
             '5' : 'ali', //阿狸
-            '6' : 'tencent', //腾讯
-            '7' : 'xiaomi' //小米
+            //'6' : 'tencent', //腾讯
+            //'7' : 'xiaomi' //小米
         };
         $scope.activity_id = $stateParams.activity_id ||'';
         $scope.isActivity = !!($scope.activity_id && activityMap[$scope.activity_id]);
@@ -58,20 +58,47 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
             $scope.isLoading = false;
         }
 
-        var emailMap = {
-         '4':{
-          'baidu.com':true
-         },
-         '5':{
-          'aliyun.com':true,
-          'taobao.com':true
-         },
-         '6':{
+        //检查是否下线
+        CrowdFundingService["activity"].get({
+            id: "coupon",
+            submodel: "activity-config",
+            activity_id:$scope.activity_id
+        },function(data) {
+            if(data && data.info && data.info.is_over){
 
-         },
-         '7':{
-          'mi.com':true
-         }
+                $scope.checkOffline = true;
+                $scope.isLoading = false;
+            }
+
+        },function(err){
+            ErrorService.alert(err);
+            $scope.checkOffline = true;
+            $scope.isLoading = false;
+        });
+
+        var emailMap = {
+            //'4':{
+            //    'baidu.com':true
+            //},
+            '5':{
+                'aliyun.com':true,
+                'alibaba-inc.com':true,
+                'taobao.com':true,
+                'tmall.com':true,
+                'alipay.com':true,
+                'autonavi.com':true,
+                'ucweb.com':true,
+                'umeng.com':true,
+                'xiami.com':true,
+                'ttpod.com':true,
+                'koubei.com':true
+            }
+            //'6':{
+            //
+            //},
+            //'7':{
+            //    'mi.com':true
+            //}
         };
 
         $scope.doCheckEmail = function($event){
@@ -158,30 +185,28 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
         }
 
 
+        var shareTileMap = {
+            4:'',
+            5:'阿里系股东直通车的已经到站，等你搭乘。',
+            6:'',
+            7:''
+        }
 
+        if($scope.isLogin) {
+                $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.activity_id];
+                $scope.shareDesc = '高回报，做新锐互联网公司股东！ ';
+        } else {
+            $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.activity_id];
+            $scope.shareDesc = '做新锐互联网公司股东，认证即获2000现金';
+        }
 
-        //return;
-        //$scope.formUserNmae = '';
-        //if($scope.isLogin) {
-        //    if(from) {
-        //        $scope.shareTitle = '我是' + from + '，请你来拿300元现金，一起做土豪！';
-        //        $scope.shareDesc = '来新锐互联网公司当股东，顺便领钱！';
-        //        $scope.formUserNmae = from;
-        //    } else {
-        //        $scope.shareTitle = '36氪限时福利】立得200元现金，加入富豪养成！';
-        //        $scope.shareDesc = '【36氪限时福利】立得200元现金，加入富豪养成！';
-        //    }
-        //} else {
-        //    $scope.shareTitle = '【36氪限时福利】立得200元现金，加入富豪养成！';
-        //    $scope.shareDesc = '来新锐互联网公司当股东，顺便领钱！';
-        //}
-        //
-        //window.WEIXINSHARE = {
-        //    shareTitle: $scope.shareTitle,
-        //    shareDesc: $scope.shareDesc,
-        //    shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
-        //    shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesInvite?id=' + ($scope.isLogin ? $scope.uid : $stateParams.id)
-        //};
-        //
-        //InitWeixin();
+        window.WEIXINSHARE = {
+            shareTitle: $scope.shareTitle,
+            shareDesc: $scope.shareDesc,
+            shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
+            shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesCompany?activity_id=' + $scope.activity_id
+        };
+
+        InitWeixin();
 });
+

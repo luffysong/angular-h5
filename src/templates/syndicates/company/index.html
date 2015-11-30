@@ -1,5 +1,5 @@
-<div ng-show="!isActivity" class="company-expand-no">
-        活动不存在!
+<div ng-show="!isActivity || checkOffline" class="company-expand-no">
+        活动不存在或者已下线!
 </div>
 <div ng-show="!checkOffline && isActivity && !isLoading" class="company-expand" ng-style="{'font-size': fontSize}">
     <div>
