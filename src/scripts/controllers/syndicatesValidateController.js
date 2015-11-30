@@ -42,7 +42,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 'address2': ''
             },
             'condition': 'V1_1',
-            'uid_inviter': $stateParams.inviter_id
+            'uid_inviter': $stateParams.inviter_id || ''
         };
 
         // 获取用户信息
@@ -298,9 +298,16 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     $scope.hasClick = false;
                 }, function(err) {
                     if(err.code && err.code == 1002) {
-                        $state.go('syndicatesGift', {
-                            id: $scope.investor.uid_inviter
-                        });
+                        if($stateParams.activity_id){
+                            $state.go('syndicatesCompany', {
+                                activity_id: $stateParams.activity_id,
+                                skipstep:'checkemail'
+                            });
+                        }else{
+                            $state.go('syndicatesGift', {
+                                id: $scope.investor.uid_inviter
+                            });
+                        }
                     } else {
                         ErrorService.alert(err);
                     }

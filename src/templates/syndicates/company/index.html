@@ -1,0 +1,133 @@
+<div ng-show="!isActivity" class="company-expand-no">
+        活动不存在!
+</div>
+<div ng-show="!checkOffline && isActivity && !isLoading" class="company-expand" ng-style="{'font-size': fontSize}">
+    <div>
+        <div class="banner">
+            <div class="pad"></div>
+            <img src="{{companyImgUrl}}"/>
+        </div>
+        <div ng-show="!checkEmail">
+            <div class="box-cell">
+                <div class="box-inner">
+                    <div class="title">
+                        <div class="title-pad"></div>
+                        <div class="title-inner">
+                            36氪股权投资
+                        </div>
+                    </div>
+                    <div class="content" ng-style="{'line-height': (fontSize + 8) + 'px'}">
+                        <div>36氪股权投资是国内最大的股权类互联网金融平台。</div>
+                        <div>通过投资最具前途互联网公司获得股权，带来可期高回报收益.</div>
+                        <div>20000余名高净值理财人士已经加入</div>
+                    </div>
+                    <div class="txt-img">
+                        <img src="/styles/images/company/txt.png">
+                    </div>
+                    <div class="btn-box">
+                        <a href="#" ui-sref="syndicatesCompany">
+                            <span class="line-pad"></span>
+                            <span class="txt">下一个BAT正在融资</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="step-box box-cell" style="padding-bottom: 0">
+                <div class="box-inner">
+                    <div class="title">
+                        <div class="title-pad"></div>
+                        <div class="title-inner">
+                            把钱装进口袋要3步
+                        </div>
+                    </div>
+                    <img src="/styles/images/company/step.png">
+                </div>
+
+            </div>
+            <div class="box-cell">
+                <div class="box-inner">
+                    <div class="title">
+                        <div class="title-pad"></div>
+                        <div class="title-inner">
+                            活动规则
+                        </div>
+                    </div>
+                    <div class="content no-padding" ng-style="{'line-height': (fontSize + 8) + 'px'}">
+                        <h3>活动时间:12月4日-12月13日</h3>
+                        <div class="txt-box">
+                            <div class="tit"><span></span>活动介绍:</div>
+                            <div>本次阿里巴巴专享活动的公司包括阿里巴巴集团旗下阿里巴巴、淘宝、天猫、支付宝、聚划算、高德、UC、友盟、虾米、天天动听、来往、
+                                钉钉、口碑网、1688、阿里妈妈、阿里云、阿里旅行·去啊、一淘全部阿里系公司。
+                            </div>
+                            <div>如果你的公司不在本期列表，也可以提交，我们将尽快开通你公司优惠通道（申请越多，开通越快）。</div>
+
+                        </div>
+                        <div class="txt-box">
+                            <div class="tit"><span></span>投资券使用说明:</div>
+                            <div>1、员工身份认证成功后，1000元投资券将发送至您在36氪股权投资的账号中。</div>
+                            <div>2、投资券使用有效期为到帐后60天。</div>
+                            <div>3、投资券可抵扣同等金额，支付剩余款时可直接抵扣相应金额的现金，但不可用于支付保证金。</div>
+                            <div>4、每笔订单最多可叠加2张使用。</div>
+                        </div>
+                        <div class="txt-box">
+                            <div class="tit"><span></span>更多福利Get: </div>
+                            <div>1、活动期间所有认证成功的新用户，都将获得滴滴福利大礼包。</div>
+                            <div>2、活动期间所有认证成功的新用户，都将获得滴滴福利大礼包。</div>
+                            <div>3、活动期间所有认证成功的新用户，都将获得滴滴福利大礼包。</div>
+                            <div class="logo-box clearfix">
+                                <a href="javascript:;">
+                                    <img src="/styles/images/company/logo_didi.png"/>
+                                </a>
+                                <a href="javascript:;">
+                                    <img src="/styles/images/company/logo_didi.png"/>
+                                </a>
+                                <a href="javascript:;">
+                                    <img src="/styles/images/company/logo_didi.png"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="checkIdentity" class="bottom-btn-box">
+                <span>身份认证中...</span>
+            </div>
+            <div ng-if="!checkIdentity" class="bottom-btn-box">
+                <span ng-if="!isLogin" login-btn>参加活动</span>
+                <span ng-if="isLogin && !isInvestor" ui-sref="syndicatesValidate({activity_id: activity_id})" >认证获取现金</span>
+                <span ng-if="isLogin && isInvestor && !hasCoupon" ui-sref="syndicatesCompany">验证公司邮箱</span>
+                <span ng-if="isLogin && isInvestor && hasCoupon" ui-sref="syndicatesCompany">已获取,返回</span>
+            </div>
+        </div>
+        <div ng-show="checkEmail">
+            <div class="box-cell">
+                <div class="box-inner">
+                    <div class="title">
+                        <div class="title-pad"></div>
+                        <div class="title-inner">
+                            验证邮箱
+                        </div>
+                    </div>
+                    <div class="content" ng-style="{'line-height': (fontSize + 8) + 'px'}">
+                        <div>填写你的公司邮箱(必须是真实邮箱: 如XXXXX@163.com)验证通过就能领券啦!</div>
+                        <div class="eamil-box">
+                            <div class="email-inner">
+                                <span class="icon-mail"></span>
+                                <input type="text" class="email" placeholder="Email"/>
+                            </div>
+                        </div>
+                        <div class="warm">该邮箱不在赠送的范围内,请重试</div>
+                    </div>
+                    <div class="btn-box">
+                        <a href="#" ui-sref="syndicatesCompany">
+                            <span class="line-pad"></span>
+                            <span class="txt">验证</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fix-pad" ng-show="checkEmail"></div>
+</div>
+<div loading="syndicatesCompany" ng-if="isLoading"></div>

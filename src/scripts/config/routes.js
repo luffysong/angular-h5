@@ -329,7 +329,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('syndicatesValidate', {
-        url: '/syndicatesValidate?inviter_id',
+        url: '/syndicatesValidate?{inviter_id}&{activity_id}',
         templateUrl: 'templates/syndicates/invite/validate.html',
         controller: 'syndicatesValidateController',
         data:{
@@ -348,6 +348,16 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
                 only : ['login']
             }
         }
+    });
+
+        /**
+     * 大公司合作推广
+     * */
+
+    $stateProvider.state('syndicatesCompany', {
+        url: '/syndicatesCompany?{activity_id}&{skipstep}',
+        templateUrl: 'templates/syndicates/company/index.html',
+        controller: 'syndicatesCompanyController'
     });
 
     $stateProvider.state('syndicatesGift', {
