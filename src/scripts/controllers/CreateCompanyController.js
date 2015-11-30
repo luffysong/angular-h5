@@ -50,7 +50,9 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         $scope.urlblacklist = DictionaryService.getDict('CompanyUrlBlacklist');
 
         // 所属行业 一级
-        $scope.industry = DictionaryService.getDict('CompanyIndustry');
+        $scope.industry = DictionaryService.getDict('CompanyIndustry').filter(function(el, i){
+            if(el.desc != "非TMT") return el;
+        });
         // 所属行业 二级
         $scope.industry2 = []
         $scope.selectIndustryObj = {
