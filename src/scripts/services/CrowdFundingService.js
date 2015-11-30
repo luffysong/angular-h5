@@ -100,6 +100,12 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
                     transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
                         return res;
                     })
+                },
+                save:{
+                    method: 'POST',
+                    transformRequest: appendTransform($http.defaults.transformRequest, function(res) {
+                        return res;
+                    })
                 }
             },
             'co-investor': {

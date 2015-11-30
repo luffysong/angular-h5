@@ -95,8 +95,8 @@
             <div ng-if="!checkIdentity" class="bottom-btn-box">
                 <span ng-if="!isLogin" login-btn>参加活动</span>
                 <span ng-if="isLogin && !isInvestor" ui-sref="syndicatesValidate({activity_id: activity_id})" >认证获取现金</span>
-                <span ng-if="isLogin && isInvestor && !hasCoupon" ui-sref="syndicatesCompany">验证公司邮箱</span>
-                <span ng-if="isLogin && isInvestor && hasCoupon" ui-sref="syndicatesCompany">已获取,返回</span>
+                <span ng-if="isLogin && isInvestor && !hasCoupon" ui-sref="syndicatesCompany({activity_id: activity_id,skipstep:'checkemail'})">验证公司邮箱</span>
+                <span ng-if="isLogin && isInvestor && hasCoupon">已获取,返回</span>
             </div>
         </div>
         <div ng-show="checkEmail">
@@ -113,15 +113,15 @@
                         <div class="eamil-box">
                             <div class="email-inner">
                                 <span class="icon-mail"></span>
-                                <input type="text" class="email" placeholder="Email"/>
+                                <input type="text" ng-model="email" class="email" placeholder="Email" ng-blur="doCheckEmail($event)"/>
                             </div>
                         </div>
-                        <div class="warm">该邮箱不在赠送的范围内,请重试</div>
+                        <div class="warm" ng-if="!emailFlag">该邮箱不在赠送的范围内,请重试</div>
                     </div>
                     <div class="btn-box">
-                        <a href="#" ui-sref="syndicatesCompany">
+                        <a href="javascript:;" ng-click="doPostEmail($event)">
                             <span class="line-pad"></span>
-                            <span class="txt">验证</span>
+                            <span class="txt">{{checkTxt}}</span>
                         </a>
                     </div>
                 </div>

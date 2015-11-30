@@ -359,7 +359,11 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/syndicates/company/index.html',
         controller: 'syndicatesCompanyController'
     });
-
+    $stateProvider.state('syndicatesCompanyGift', {
+        url: '/syndicatesCompanyGift?{id}',
+        templateUrl: 'templates/syndicates/company/gift.html',
+        controller: 'syndicatesCompanyGiftController'
+    });
     $stateProvider.state('syndicatesGift', {
         url: '/syndicatesGift?id',
         templateUrl: 'templates/syndicates/invite/gift.html',

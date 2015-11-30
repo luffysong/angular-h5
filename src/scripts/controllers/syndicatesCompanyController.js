@@ -11,14 +11,16 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
             document.title = '36氪股权融资';
         });
         var activityMap = {
-            '4' : '11',
-            '5' : '11',
-            '6' : '11',
-            '7' : '11'
+            '4' : 'baidu', //百度
+            '5' : 'ali', //阿狸
+            '6' : 'tencent', //腾讯
+            '7' : 'xiaomi' //小米
         };
         $scope.activity_id = $stateParams.activity_id ||'';
         $scope.isActivity = !!($scope.activity_id && activityMap[$scope.activity_id]);
         if(!$scope.isActivity) return false;
+
+        $scope.companyImgUrl = '/styles/images/company/banner_' + activityMap[$scope.activity_id] + '.jpg';
 
         //loading.hide('syndicatesCompany');
         var wWidth = $(window).width();
@@ -46,6 +48,9 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
 
         $scope.isLoading = true;
 
+        $scope.emailFlag = true;
+        $scope.email = '';
+
         //
         $scope.checkEmail = false;
         if($stateParams.skipstep){
@@ -53,6 +58,56 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
             $scope.isLoading = false;
         }
 
+        var emailMap = {
+         '4':{
+          'baidu.com':true
+         },
+         '5':{
+          'aliyun.com':true,
+          'taobao.com':true
+         },
+         '6':{
+
+         },
+         '7':{
+          'mi.com':true
+         }
+        };
+
+        $scope.doCheckEmail = function($event){
+            var val = $scope.email;
+            var suffix = val.split('@')[1];
+            if(!(suffix && emailMap[$scope.activity_id][suffix])){
+                $scope.emailFlag = false;
+            }else{
+                $scope.emailFlag = true;
+            }
+        }
+
+        $scope.checkTxt = '验证';
+        $scope.doPostEmail = function($event){
+            $event.preventDefault();
+            if(!$scope.emailFlag)return false;
+            if($scope.checkTxt == '验证中...')return false;
+            $scope.checkTxt = '验证中...';
+            CrowdFundingService["activity"].save({
+                id: "coupon",
+                submodel: "batm",
+                subid:'get-coupon'
+            },{
+                company_email:$scope.email,
+                activity_id:$scope.activity_id
+            }, function(data) {
+                $scope.checkTxt = '验证';
+                $state.go('syndicatesCompanyGift', {
+                    id: $stateParams.activity_id
+                });
+            },function(err){
+                $scope.checkTxt = '重新验证';
+                ErrorService.alert(err);
+            });
+
+        }
 
         var checkCoupon = function(){
 
@@ -60,12 +115,17 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
                 activity_id:$scope.activity_id,
                 uid:$scope.uid
             }, function(data) {
+                if(data.data && data.data.length != 0){
+                    $scope.checkEmail = false;
+                    $scope.hasCoupon = true;
+                }
                 $scope.isLoading = false;
                 $scope.checkIdentity = false;
             },function(err){
                 $scope.isLoading = false;
                 $scope.checkIdentity = false;
             });
+
         }
 
 
@@ -98,7 +158,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
         }
 
 
-        $scope.companyImgUrl = '/styles/images/company/banner_ali.jpg';
+
 
         //return;
         //$scope.formUserNmae = '';
