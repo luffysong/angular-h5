@@ -31,8 +31,8 @@
                     <div class="right-discount" ng-if="item.top == 1">
                         <div class="discount">置顶</div>
                     </div>
+                    <!--<span class="type-tags bg-{{item.column_id}}" ng-bind="item.column_id_zh"></span>-->
                     <a class="news-logo" href="" ui-sref="syndicatesNewsDetail({id:item.id})" style="background-image:url({{item.list_image | image}})">
-                        <span class="type-tags bg-{{item.column_id}}" ng-bind="item.column_id_zh"></span>
                     </a>
                     <!--<span class="praise-add" ng-class="{'showPraise':item.isPraise}">+{{point}}</span>-->
                     <div class="news-center">
@@ -40,6 +40,7 @@
                         <section class="news-time">
                             <span class="icon-h5-time"></span>
                             <span class="time-text" ng-bind="item.time"></span>
+                            <span class="type-tags bg-{{item.column_id}}" ng-bind="item.column_id_zh"></span>
                         </section>
                     </div>
                 </article>
