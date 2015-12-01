@@ -42,7 +42,12 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
             });
         }
 
-
+        var shareTileMap = {
+            4:'',
+            5:'阿里系股东直通车的已经到站，等你搭乘。',
+            6:'',
+            7:''
+        };
         CrowdFundingService["activity"].get({
             id: "coupon",
             submodel: "batm",
@@ -63,7 +68,6 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
             krtracker('trackPageView', url);
         };
 
-
         $scope.$watch('rank', function(from) {
             $scope.shareDesc = '做新锐互联网公司股东，认证即获2000现金';
             $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.activity_id];
@@ -79,7 +83,6 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
                 shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
                 shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesCompany?activity_id=' + $scope.activity_id
             };
-
             InitWeixin({
                 success:weixinshare
             });

@@ -62,6 +62,27 @@
       width: 85%;
       margin: 0 auto;
       color: @text-color;
+      .records-list {
+        max-height: 400px;
+        padding: 0;
+        margin: 20px 15px;
+        color: #3f1a01;
+        list-style: none;
+        overflow: hidden;
+
+        li {
+          padding: .5em 1em;
+          border-bottom: 1px dashed #fff;
+
+          span {
+            color: #ff7b72;
+          }
+
+        }
+        :last-child{
+          border: none;
+        }
+      }
       h3{
         font-size: 110%;
         font-weight: bold;
@@ -158,6 +179,14 @@
       }
     }
   }
+  .skip-out{
+    display: block;
+    text-align: center;
+    font-size: 90%;
+    margin-top: 7%;
+    color: #473f4d;
+    text-decoration: underline;
+  }
   .step-box{
     .box-inner{
       background: #ffd19b;
@@ -228,5 +257,23 @@
   }
   .margin-btn{
     margin-right:4%
+  }
+}
+
+.syndicates-gift.company-expand-gift {
+  position: relative;
+  .gift{
+    background: url(images/company/gift.png) no-repeat center;
+    background-size: contain;
+  }
+  .tell{
+    position: absolute;
+    top:0;
+    right: 0;
+    margin: -6% 5% 0 0;
+    width: 33.59%;
+    padding-bottom: 3.6%;
+    background: url(images/company/tell.png) no-repeat center;
+    background-size: 100%;
   }
 }

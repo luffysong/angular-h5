@@ -20,7 +20,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
         $scope.isActivity = !!($scope.activity_id && activityMap[$scope.activity_id]);
         if(!$scope.isActivity) return false;
 
-        $scope.companyImgUrl = '/styles/images/company/banner_' + activityMap[$scope.activity_id] + '.jpg';
+        $scope.companyImgUrl = 'styles/images/company/banner_' + activityMap[$scope.activity_id] + '.jpg';
 
         //loading.hide('syndicatesCompany');
         var wWidth = $(window).width();
@@ -238,7 +238,6 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
             6:'',
             7:''
         };
-
         CrowdFundingService["activity"].get({
             id: "coupon",
             submodel: "batm",
