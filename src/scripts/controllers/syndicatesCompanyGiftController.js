@@ -88,4 +88,8 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
             });
         });
 
+        _hmt.push(['_trackPageview', "/syndicatesCompany/gift"]);
+        krtracker('trackPageView', "/syndicatesCompany/gift");
+
     });
+

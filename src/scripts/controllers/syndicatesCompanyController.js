@@ -160,7 +160,10 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
         $scope.checkTxt = '验证';
         $scope.doPostEmail = function($event){
             $event.preventDefault();
-            if(!$scope.emailFlag)return false;
+            if($scope.email == ''){
+                ErrorService.alert('填一下邮箱吧,不要太调皮哦!');
+                return false;
+            }
             if($scope.checkTxt == '验证中...')return false;
             $scope.checkTxt = '验证中...';
             CrowdFundingService["activity"].save({
@@ -278,6 +281,17 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
                 success:weixinshare
             });
         });
+
+        $scope.$watch('checkEmail', function(from) {
+            if(from){
+                _hmt.push(['_trackPageview', "/syndicatesCompany/checakEmail"]);
+                krtracker('trackPageView', "/syndicatesCompany/checakEmail");
+            }
+        });
+
+        _hmt.push(['_trackPageview', "/syndicatesCompany/index"]);
+        krtracker('trackPageView', "/syndicatesCompany/index");
+
 
 });
 
