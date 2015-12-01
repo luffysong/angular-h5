@@ -63,6 +63,7 @@
                         //        }
                         //    })
                         //}
+                        obj.success && obj.success();
                     },
                     cancel: function () {
                         // 用户取消分享后执行的回调函数
@@ -89,6 +90,7 @@
                         //        }
                         //    })
                         //}
+                        obj.success && obj.success();
 
                     },
                     cancel: function () {

@@ -49,6 +49,23 @@
                     <div class="title">
                         <div class="title-pad"></div>
                         <div class="title-inner">
+                            获奖榜单
+                        </div>
+                    </div>
+                    <div class="content no-padding" ng-style="{'line-height': (fontSize + 8) + 'px'}">
+                        <ul class="records-list" ng-mousedown="scrollClick()">
+                            <li ng-repeat="item in couponList">
+                                {{item.user.name}}获得<span>{{item.amount}}元</span>投资券
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="box-cell">
+                <div class="box-inner">
+                    <div class="title">
+                        <div class="title-pad"></div>
+                        <div class="title-inner">
                             活动规则
                         </div>
                     </div>
@@ -93,9 +110,11 @@
                 <span>身份认证中...</span>
             </div>
             <div ng-if="!checkIdentity" class="bottom-btn-box">
-                <span ng-if="!isLogin" login-btn>参加活动</span>
-                <span ng-if="isLogin && !isInvestor" ui-sref="syndicatesValidate({activity_id: activity_id})" >认证获取现金</span>
-                <span ng-if="isLogin && isInvestor && !hasCoupon" ui-sref="syndicatesCompany({activity_id: activity_id,skipstep:'checkemail'})">验证公司邮箱</span>
+                <span ng-if="!isLogin" login-btn data-stat-click="dagongsihuodong.denglubutton.click">参加活动</span>
+                <span ng-if="isLogin && !isInvestor" ui-sref="syndicatesValidate({activity_id: activity_id})"
+                      data-stat-click="dagongsihuodong.renzhengbutton.click">认证获取现金</span>
+                <span ng-if="isLogin && isInvestor && !hasCoupon" data-stat-click="dagongsihuodong.yanzhengbutton.click"
+                      ui-sref="syndicatesCompany({activity_id: activity_id,skipstep:'checkemail'})">验证公司邮箱</span>
                 <span ng-if="isLogin && isInvestor && hasCoupon">已获取,返回</span>
             </div>
         </div>
@@ -121,7 +140,7 @@
                     <div class="btn-box">
                         <a href="javascript:;" ng-click="doPostEmail($event)">
                             <span class="line-pad"></span>
-                            <span class="txt">{{checkTxt}}</span>
+                            <span class="txt" data-stat-click="yanzhenggongsiyouxiang.yanzhengbutton.click">{{checkTxt}}</span>
                         </a>
                     </div>
                 </div>

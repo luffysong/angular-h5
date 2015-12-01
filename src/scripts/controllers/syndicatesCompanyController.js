@@ -76,6 +76,52 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
             $scope.isLoading = false;
         });
 
+        $scope.couponList = [];
+        // 获取平台获奖信息
+        CrowdFundingService['coupon'].get({
+            per_page: 50,
+            activity_id:$scope.activity_id
+        },function(data) {
+            $scope.couponList = data.data;
+            $scope.scroll();
+        },function(err) {
+            ErrorService.alert(err);
+        });
+
+        // 获奖信息滚动显示
+        var timer, scrollStart;
+        $scope.scroll = function() {
+            scrollStart = true;
+
+            $timeout(function() {
+                timer = $interval(function() {
+                    var $recordsList = $('.records-list');
+                    var $recordsItem = $recordsList.find('li');
+                    var outerHeight = $recordsList.height();
+                    var innerHeight = $recordsItem.height() * $recordsItem.length;
+
+                    var scrollTop = $recordsList.scrollTop();
+                    if(outerHeight + scrollTop >= innerHeight){
+                        scrollTop -= (innerHeight / 2) + 10;
+                    } else {
+                        scrollTop++;
+                    }
+                    $recordsList.scrollTop(scrollTop);
+                }, 30);
+            }, 100);
+        };
+
+        // 控制滚动信息停止和开始
+        $scope.scrollClick = function(){
+            if(scrollStart) {
+                scrollStart = false;
+                $interval.cancel(timer);
+            } else {
+                scrollStart = false;
+                $scope.scroll();
+            }
+        };
+
         var emailMap = {
             //'4':{
             //    'baidu.com':true
@@ -190,23 +236,48 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
             5:'阿里系股东直通车的已经到站，等你搭乘。',
             6:'',
             7:''
-        }
-
-        if($scope.isLogin) {
-                $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.activity_id];
-                $scope.shareDesc = '高回报，做新锐互联网公司股东！ ';
-        } else {
-            $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.activity_id];
-            $scope.shareDesc = '做新锐互联网公司股东，认证即获2000现金';
-        }
-
-        window.WEIXINSHARE = {
-            shareTitle: $scope.shareTitle,
-            shareDesc: $scope.shareDesc,
-            shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
-            shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesCompany?activity_id=' + $scope.activity_id
         };
 
-        InitWeixin();
+        CrowdFundingService["activity"].get({
+            id: "coupon",
+            submodel: "batm",
+            subid:'rank',
+            activity_id:$scope.activity_id,
+            uid:$scope.uid
+        }, function(data) {
+            $scope.rank = data.rank;
+        },function(err){
+        });
+
+
+        var weixinshare = function(){
+            var url = "/syndicatesCompany/weixinshare?uid="+$scope.uid;
+            if($scope.isInvestor){
+                url += '&isInvestor=true';
+            }
+            _hmt.push(['_trackPageview', url]);
+            krtracker('trackPageView', url);
+        };
+
+        $scope.$watch('rank', function(from) {
+            $scope.shareDesc = '做新锐互联网公司股东，认证即获2000现金';
+            $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.activity_id];
+            if($scope.isLogin && from) {
+                if($stateParams.activity_id == 5){
+                    $scope.shareTitle = '下一站，股东！| 我是阿里系第' + from + '个搭上股东直通车的VIP。'
+                }
+            }
+
+            window.WEIXINSHARE = {
+                shareTitle: $scope.shareTitle,
+                shareDesc: $scope.shareDesc,
+                shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
+                shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesCompany?activity_id=' + $scope.activity_id
+            };
+            InitWeixin({
+                success:weixinshare
+            });
+        });
+
 });
 

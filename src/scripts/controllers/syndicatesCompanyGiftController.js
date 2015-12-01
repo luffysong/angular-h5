@@ -42,4 +42,48 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
                 activity_id: $stateParams.id
             });
         }
+
+
+        CrowdFundingService["activity"].get({
+            id: "coupon",
+            submodel: "batm",
+            subid:'rank',
+            activity_id:$stateParams.activity_id,
+            uid:$scope.uid
+        }, function(data) {
+            $scope.rank = data.rank;
+        },function(err){
+        });
+
+        var weixinshare = function(){
+            var url = "/syndicatesCompany/weixinshare?uid="+$scope.uid;
+            if($scope.isInvestor){
+                url += '&isInvestor=true';
+            }
+            _hmt.push(['_trackPageview', url]);
+            krtracker('trackPageView', url);
+        };
+
+
+        $scope.$watch('rank', function(from) {
+            $scope.shareDesc = '做新锐互联网公司股东，认证即获2000现金';
+            $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.activity_id];
+            if($scope.isLogin && from) {
+                if($stateParams.activity_id == 5){
+                    $scope.shareTitle = '下一站，股东！| 我是阿里系第' + from + '个搭上股东直通车的VIP。'
+                }
+            }
+
+            window.WEIXINSHARE = {
+                shareTitle: $scope.shareTitle,
+                shareDesc: $scope.shareDesc,
+                shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
+                shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesCompany?activity_id=' + $scope.activity_id
+            };
+
+            InitWeixin({
+                success:weixinshare
+            });
+        });
+
     });
