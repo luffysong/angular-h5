@@ -227,6 +227,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
                 }
             });
         }else{
+            $scope.isLoading = false;
             $scope.checkIdentity = false;
         }
 

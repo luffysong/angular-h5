@@ -17,7 +17,6 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
         $scope.isLogin = !!UserService.getUID();
 
 
-        // 跟投人身份
         if($scope.isLogin) {
             CrowdFundingService["coupon"].get({
                 activity_id: $stateParams.id || '',
@@ -57,7 +56,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
 
         var weixinshare = function(){
             var url = "/syndicatesCompany/weixinshare?uid="+$scope.uid;
-            if($scope.isInvestor){
+            if($scope.giftMoney){
                 url += '&isInvestor=true';
             }
             _hmt.push(['_trackPageview', url]);
