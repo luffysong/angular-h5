@@ -286,12 +286,10 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
             if(from){
                 _hmt.push(['_trackPageview', "/syndicatesCompany/checakEmail"]);
                 krtracker('trackPageView', "/syndicatesCompany/checakEmail");
+            }else{
+                _hmt.push(['_trackPageview', "/syndicatesCompany/index"]);
+                krtracker('trackPageView', "/syndicatesCompany/index");
             }
         });
-
-        _hmt.push(['_trackPageview', "/syndicatesCompany/index"]);
-        krtracker('trackPageView', "/syndicatesCompany/index");
-
-
 });
 
