@@ -12,6 +12,16 @@ elif [ $2 = 'test03' ]; then
     target=test3;
 elif [ $2 = 'test04' ]; then
     target=test4;
+elif [ $2 = 'test05' ]; then
+    target=test5;
+elif [ $2 = 'test06' ]; then
+    target=test6;
+elif [ $2 = 'test07' ]; then
+    target=test7;
+elif [ $2 = 'test08' ]; then
+    target=test8;
+elif [ $2 = 'test09' ]; then
+    target=test9;
 fi
 
 gulp build:$target

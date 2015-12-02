@@ -505,7 +505,22 @@ gulp.task('build:test5', ['clean'],function(){
     gulp.start('build');
 });
 gulp.task('build:test6', ['clean'],function(){
-    buildMode = 'test';
+    buildMode = 'test6';
+    CDNPrefix = '/m';
+    gulp.start('build');
+});
+gulp.task('build:test7', ['clean'],function(){
+    buildMode = 'test7';
+    CDNPrefix = '/m';
+    gulp.start('build');
+});
+gulp.task('build:test8', ['clean'],function(){
+    buildMode = 'test8';
+    CDNPrefix = '/m';
+    gulp.start('build');
+});
+gulp.task('build:test9', ['clean'],function(){
+    buildMode = 'test9';
     CDNPrefix = '/m';
     gulp.start('build');
 });
@@ -587,11 +602,25 @@ gulp.task('remote:test5', function(){
     gulp.start('remote');
 });
 gulp.task('remote:test6', function(){
-    buildMode = 'test';
+    buildMode = 'test6';
     apiHost = 'http://rongtest6.36kr.com';
     gulp.start('remote');
 });
-
+gulp.task('remote:test7', function(){
+    buildMode = 'test7';
+    apiHost = 'http://rongtest7.36kr.com';
+    gulp.start('remote');
+});
+gulp.task('remote:test8', function(){
+    buildMode = 'test8';
+    apiHost = 'http://rongtest8.36kr.com';
+    gulp.start('remote');
+});
+gulp.task('remote:test9', function(){
+    buildMode = 'test9';
+    apiHost = 'http://rongtest9.36kr.com';
+    gulp.start('remote');
+});
 
 //编译页头
 gulp.task('header', function(){
@@ -601,7 +630,10 @@ gulp.task('header', function(){
         test3: '//huodong.36kr.com/common-module/common-header-test3/script.js',
         test4: '//huodong.36kr.com/common-module/common-header-test4/script.js',
         test5: '//huodong.36kr.com/common-module/common-header-test4/script.js',
-        test6: '//huodong.36kr.com/common-module/common-header-test/script.js',
+        test6: '//huodong.36kr.com/common-module/common-header-test6/script.js',
+        test7: '//huodong.36kr.com/common-module/common-header-test7/script.js',
+        test8: '//huodong.36kr.com/common-module/common-header-test8/script.js',
+        test9: '//huodong.36kr.com/common-module/common-header-test9/script.js',
         dev: '//huodong.36kr.com/common-module/common-header-dev/script.js',
         prod: '//krplus-cdn.b0.upaiyun.com/common-module/common-header/script.js'
     };
