@@ -578,47 +578,47 @@ gulp.task('remote:dev', function(){
 
 gulp.task('remote:test', function(){
     buildMode = 'test';
-    apiHost = 'http://rongtest.36kr.com';
+    apiHost = 'http://rongtest01.36kr.com';
     gulp.start('remote');
 });
 gulp.task('remote:test2', function(){
     buildMode = 'test2';
-    apiHost = 'http://rongtest2.36kr.com';
+    apiHost = 'http://rongtest02.36kr.com';
     gulp.start('remote');
 });
 gulp.task('remote:test3', function(){
     buildMode = 'test3';
-    apiHost = 'http://rongtest3.36kr.com';
+    apiHost = 'http://rongtest03.36kr.com';
     gulp.start('remote');
 });
 gulp.task('remote:test4', function(){
     buildMode = 'test4';
-    apiHost = 'http://rongtest4.36kr.com';
+    apiHost = 'http://rongtest04.36kr.com';
     gulp.start('remote');
 });
 gulp.task('remote:test5', function(){
     buildMode = 'test5';
-    apiHost = 'http://rongtest5.36kr.com';
+    apiHost = 'http://rongtest05.36kr.com';
     gulp.start('remote');
 });
 gulp.task('remote:test6', function(){
     buildMode = 'test6';
-    apiHost = 'http://rongtest6.36kr.com';
+    apiHost = 'http://rongtest06.36kr.com';
     gulp.start('remote');
 });
 gulp.task('remote:test7', function(){
     buildMode = 'test7';
-    apiHost = 'http://rongtest7.36kr.com';
+    apiHost = 'http://rongtest07.36kr.com';
     gulp.start('remote');
 });
 gulp.task('remote:test8', function(){
     buildMode = 'test8';
-    apiHost = 'http://rongtest8.36kr.com';
+    apiHost = 'http://rongtest08.36kr.com';
     gulp.start('remote');
 });
 gulp.task('remote:test9', function(){
     buildMode = 'test9';
-    apiHost = 'http://rongtest9.36kr.com';
+    apiHost = 'http://rongtest09.36kr.com';
     gulp.start('remote');
 });
 
