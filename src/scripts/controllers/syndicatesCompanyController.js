@@ -40,11 +40,8 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
         $scope.checkIdentity = true;
 
         //是否下线
-        $scope.offline = true;
-        $scope.checkOffline = true;
-
         $scope.checkOffline = false;
-        $scope.offline = false;
+
 
         $scope.isLoading = true;
 
@@ -54,6 +51,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
         //
         $scope.checkEmail = false;
         if($stateParams.skipstep){
+            $scope.checkOffline = false;
             $scope.checkEmail = true;
             $scope.isLoading = false;
         }
@@ -65,9 +63,9 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
             activity_id:$scope.activity_id
         },function(data) {
             if(data && data.info && data.info.is_over){
-
                 $scope.checkOffline = true;
                 $scope.isLoading = false;
+            }else{
             }
 
         },function(err){
@@ -99,15 +97,20 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
                     var $recordsItem = $recordsList.find('li');
                     var outerHeight = $recordsList.height();
                     var innerHeight = $recordsItem.height() * $recordsItem.length;
+                    var top = $recordsItem.eq(0).outerHeight();
 
-                    var scrollTop = $recordsList.scrollTop();
-                    if(outerHeight + scrollTop >= innerHeight){
-                        scrollTop -= (innerHeight / 2) + 10;
-                    } else {
-                        scrollTop++;
+                    if(innerHeight <= outerHeight){
+
+                    }else{
+                        $recordsList.animate({
+                            'scrollTop':top
+                        },1000,'linear',function(){
+                            console.log(222);
+                            $recordsList.scrollTop(0);
+                            $recordsItem.eq(0).appendTo($recordsList);
+                        })
                     }
-                    $recordsList.scrollTop(scrollTop);
-                }, 30);
+                }, 1200);
             }, 100);
         };
 
