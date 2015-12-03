@@ -54,6 +54,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
             $scope.isLoading = false;
             $scope.checkEmail = true;
             $scope.checkOffline = false;
+            window.scroll(0,$(window).width() * 1.17);
         }
 
         //检查是否下线
