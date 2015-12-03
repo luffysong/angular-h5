@@ -7,7 +7,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller').controller('syndicatesCompanyGiftController',
     function($scope, $state, $stateParams, $modal, notify, $timeout, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
 
-        document.title = '富豪养成计划';
+        document.title = '下一站，股东！|  阿里巴巴专场';
         $scope.$on('$locationChangeStart', function() {
             document.title = '36氪股权融资';
         });
@@ -44,7 +44,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
 
         var shareTileMap = {
             4:'',
-            5:'阿里系股东直通车的已经到站，等你搭乘。',
+            5:'“阿里系”员工财富直通车已经到站，等你搭乘。',
             6:'',
             7:''
         };
@@ -69,6 +69,8 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
         };
 
         $scope.$watch('rank', function(from) {
+
+            console.log(1111111111111111111);
             $scope.shareDesc = '做新锐互联网公司股东，认证即获2000现金';
             $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.activity_id];
             if($scope.isLogin && from) {
@@ -87,6 +89,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
                 success:weixinshare
             });
         });
+        $scope.rank = 0;
 
         _hmt.push(['_trackPageview', "/syndicatesCompany/gift"]);
         krtracker('trackPageView', "/syndicatesCompany/gift");

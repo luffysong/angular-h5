@@ -52,8 +52,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             delete data.$promise;
             delete data.$resolved;
 
-            console.log(data);
-
             if(data.phone){
                 $scope.investor.hasPhone = true;
                 delete $scope.investor.phone;

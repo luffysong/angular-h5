@@ -579,6 +579,7 @@ gulp.task('remote:dev', function(){
 gulp.task('remote:test', function(){
     buildMode = 'test';
     apiHost = 'http://rongtest01.36kr.com';
+    apiHost = 'http://rongtest.36kr.com';
     gulp.start('remote');
 });
 gulp.task('remote:test2', function(){

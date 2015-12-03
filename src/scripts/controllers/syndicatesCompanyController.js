@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesCompanyController',
     function($scope, $state, $stateParams, $q, $modal, notify, $timeout, $interval, loading, UserService, CrowdFundingService, ErrorService) {
-        document.title = '下一站，股东!';
+        document.title = '下一站，股东！|  阿里巴巴专';
         $scope.$on('$locationChangeStart', function() {
             document.title = '36氪股权融资';
         });
@@ -51,9 +51,9 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
         //
         $scope.checkEmail = false;
         if($stateParams.skipstep){
-            $scope.checkOffline = false;
-            $scope.checkEmail = true;
             $scope.isLoading = false;
+            $scope.checkEmail = true;
+            $scope.checkOffline = false;
         }
 
         //检查是否下线
@@ -178,6 +178,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
                 activity_id:$scope.activity_id
             }, function(data) {
                 $scope.checkTxt = '验证';
+                $scope.rank = $scope.rank + 1;
                 $state.go('syndicatesCompanyGift', {
                     id: $stateParams.activity_id
                 });
@@ -240,7 +241,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
 
         var shareTileMap = {
             4:'',
-            5:'阿里系股东直通车的已经到站，等你搭乘。',
+            5:'“阿里系”员工财富直通车已经到站，等你搭乘。',
             6:'',
             7:''
         };
