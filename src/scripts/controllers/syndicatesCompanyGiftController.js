@@ -70,7 +70,6 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
 
         $scope.$watch('rank', function(from) {
 
-            console.log(1111111111111111111);
             $scope.shareDesc = '做新锐互联网公司股东，认证即获2000现金';
             $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.activity_id];
             if($scope.isLogin && from) {
@@ -82,7 +81,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
             window.WEIXINSHARE = {
                 shareTitle: $scope.shareTitle,
                 shareDesc: $scope.shareDesc,
-                shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
+                shareImg: 'https://krplus-normal.b0.upaiyun.com/201512/03120636/irh7rcuolj5t42wq.jpg',
                 shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesCompany?activity_id=' + $scope.activity_id
             };
             InitWeixin({

@@ -278,7 +278,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
             window.WEIXINSHARE = {
                 shareTitle: $scope.shareTitle,
                 shareDesc: $scope.shareDesc,
-                shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
+                shareImg: 'https://krplus-normal.b0.upaiyun.com/201512/03120636/irh7rcuolj5t42wq.jpg',
                 shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesCompany?activity_id=' + $scope.activity_id
             };
             InitWeixin({
