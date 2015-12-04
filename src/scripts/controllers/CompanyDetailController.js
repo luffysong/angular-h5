@@ -5,19 +5,18 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('CompanyDetailController',
-    function($scope, $location, $stateParams, $state, CompanyService, $timeout, UserService, ErrorService, $rootScope) {
+    function($scope, $location, $stateParams, $state, CompanyService, $timeout, UserService, ErrorService, $rootScope, DictionaryService) {
         $timeout(function(){
             window.scroll(0,0);
         },0);
         $scope.companyId = $stateParams.id || 12;
-
-
 
         $scope.company = {
             value: {}
         };
 
         $scope.basic = {
+            industry2Desc:'',
             value: {}
         };
 
@@ -32,6 +31,26 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }, function(data) {
 				console.log('--请求的数据--',data);
                 $scope.company.value = data;
+
+                if($scope.company.value.company.industry2){
+                    $.each(DictionaryService.getDict("CompanyIndustry").filter(function (item) {
+                        return item.value != "NON_TMT";
+                    }), function(i, el){
+                        if(el.value == $scope.company.value.basic.industry){
+                            CompanyService.getIndustry2(el.id).then(function(data){
+                                $.each(data.data, function(i, el){
+                                    if(el.id == $scope.company.value.company.industry2){
+                                        $scope.basic.industry2Desc = el.desc;
+                                    }
+                                })
+                            }, function(){
+
+                            })
+                        }
+                    })
+
+
+                }
 
                 document.title=data.basic.name + " | 36氪";
                 WEIXINSHARE = {

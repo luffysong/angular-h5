@@ -5,8 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.service').service('CompanyService', [
-    '$location', 'BasicService', 'dateFilter', 'appendTransform', '$http', '$stateParams',
-    function ($location, BasicService, dateFilter, appendTransform, $http, $stateParams) {
+    '$location', 'BasicService', 'dateFilter', 'appendTransform', '$http', '$stateParams','$q',
+    function ($location, BasicService, dateFilter, appendTransform, $http, $stateParams,$q) {
         var service = BasicService('/api/company/:id/:sub/:subid', {
             query: {
                 method: "GET",
@@ -437,6 +437,18 @@ angular.module('defaultApp.service').service('CompanyService', [
             console.log(err);
         })
     }
+
+
+        service.getIndustry2 = function(id){
+            var deferred = $q.defer();
+            $http.get('/api/dict/industry/'+id).success(function(data){
+                deferred.resolve(data);
+            }).error(function(){
+                deferred.reject();
+            })
+            return deferred.promise;
+        }
+
 
 
     return service;
