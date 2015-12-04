@@ -52,7 +52,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
             id: "coupon",
             submodel: "batm",
             subid:'rank',
-            activity_id:$stateParams.activity_id,
+            activity_id:$stateParams.id,
             uid:$scope.uid
         }, function(data) {
             $scope.rank = data.rank;
@@ -71,7 +71,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
         $scope.$watch('rank', function(from) {
 
             $scope.shareDesc = '做新锐互联网公司股东，认证即获2000现金';
-            $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.activity_id];
+            $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.id];
             if($scope.isLogin && from) {
                 if($stateParams.activity_id == 5){
                     $scope.shareTitle = '下一站，股东！| 我是阿里系第' + from + '个搭上股东直通车的VIP。'
