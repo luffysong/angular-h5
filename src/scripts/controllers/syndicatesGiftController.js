@@ -8,7 +8,7 @@ angular.module('defaultApp.controller').controller('SyndicatesGiftController',
     function($scope, $state, $stateParams, $modal, notify, $timeout, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
         loading.show("syndicatesGift");
 
-        document.title = '富豪养成计划';
+        document.title = '来36氪做股东';
         $scope.$on('$locationChangeStart', function() {
             document.title = '36氪股权融资';
         });
@@ -23,7 +23,7 @@ angular.module('defaultApp.controller').controller('SyndicatesGiftController',
         $scope.isLogin = !!UserService.getUID();
 
         // 奖励
-        $scope.giftMoney = $stateParams.id ? 300 : 200;
+        $scope.giftMoney = 1000;
 
         // 跟投人身份
         if($scope.isLogin) {

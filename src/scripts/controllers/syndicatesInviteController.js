@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('SyndicatesInviteController',
     function($scope, $state, $stateParams, $q, $modal, notify, $timeout, $interval, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
-        document.title = '富豪养成计划';
+        document.title = '来36氪做股东';
         $scope.$on('$locationChangeStart', function() {
             document.title = '36氪股权融资';
         });
@@ -23,6 +23,9 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
         $scope.uid = UserService.getUID();
         $scope.isLogin = !!$scope.uid;
 
+        // 邀请人 ID
+        $scope.inviterId = $stateParams.id;
+
         // 跟投人身份
         if($scope.isLogin) {
             UserService.getIdentity(function (data) {
@@ -31,18 +34,22 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                         id: "co-investor",
                         submodel: "info"
                     }, function(data) {
-                        $state.go('syndicatesValidate', {
-                            inviter_id: $stateParams.id
-                        });
+                        //$state.go('syndicatesValidate', {
+                        //    inviter_id: $stateParams.id
+                        //});
+                        $scope.isCoInvestor = false;
                     }, function(err) {
                         if(err.code == 1002) {
-
+                            $scope.isCoInvestor = true;
                         } else {
-                            $state.go('syndicatesValidate', {
-                                inviter_id: $stateParams.id
-                            });
+                            //$state.go('syndicatesValidate', {
+                            //    inviter_id: $stateParams.id
+                            //});
+                            $scope.isCoInvestor = false;
                         }
                     });
+                } else {
+                    $scope.isCoInvestor = true;
                 }
             });
 
@@ -157,22 +164,22 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
         $scope.$watch('uname', function(from) {
             if($scope.isLogin) {
                 if(from) {
-                    $scope.shareTitle = '我是' + from + '，请你来拿300元现金，一起做土豪！';
-                    $scope.shareDesc = '来新锐互联网公司当股东，顺便领钱！';
+                    $scope.shareTitle = '【36氪限时福利】我是' + from + '，请你来拿1000元投资现金，一起做股东！';
+                    $scope.shareDesc = '投资新锐互联网公司，获得高收益！';
                     $scope.formUserNmae = from;
                 } else {
-                    $scope.shareTitle = '36氪限时福利】立得200元现金，加入富豪养成！';
-                    $scope.shareDesc = '【36氪限时福利】立得200元现金，加入富豪养成！';
+                    $scope.shareTitle = '【限时福利】来36氪，做股东，立得1000元！';
+                    $scope.shareDesc = '投资新锐互联网公司，获得高收益！';
                 }
             } else {
-                $scope.shareTitle = '【36氪限时福利】立得200元现金，加入富豪养成！';
-                $scope.shareDesc = '来新锐互联网公司当股东，顺便领钱！';
+                $scope.shareTitle = '【限时福利】来36氪，做股东，立得1000元！';
+                $scope.shareDesc = '投资新锐互联网公司，获得高收益！';
             }
 
             window.WEIXINSHARE = {
                 shareTitle: $scope.shareTitle,
                 shareDesc: $scope.shareDesc,
-                shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
+                shareImg: 'http://krplus-pic.b0.upaiyun.com/201512/04094947/x0bjnbw0hra8nne8.jpg',
                 shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesInvite?id=' + ($scope.isLogin ? $scope.uid : $stateParams.id)
             };
 

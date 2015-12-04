@@ -329,7 +329,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('syndicatesValidate', {
-        url: '/syndicatesValidate?inviter_id',
+        url: '/syndicatesValidate?{inviter_id}&{activity_id}',
         templateUrl: 'templates/syndicates/invite/validate.html',
         controller: 'syndicatesValidateController',
         data:{
@@ -350,6 +350,20 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
+        /**
+     * 大公司合作推广
+     * */
+
+    $stateProvider.state('syndicatesCompany', {
+        url: '/syndicatesCompany?{activity_id}&{skipstep}',
+        templateUrl: 'templates/syndicates/company/index.html',
+        controller: 'syndicatesCompanyController'
+    });
+    $stateProvider.state('syndicatesCompanyGift', {
+        url: '/syndicatesCompanyGift?{id}',
+        templateUrl: 'templates/syndicates/company/gift.html',
+        controller: 'syndicatesCompanyGiftController'
+    });
     $stateProvider.state('syndicatesGift', {
         url: '/syndicatesGift?id',
         templateUrl: 'templates/syndicates/invite/gift.html',

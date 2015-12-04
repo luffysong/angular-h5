@@ -3,16 +3,57 @@
     margin: 0 auto;
 
     .invite-welcome {
-        background-color: #f0f6fd;
+        position: relative;
+        background-color: #4c72ef;
 
-        img {
+        .welcome {
             width: 100%;
+        }
+
+        .sign-area {
+            position: absolute;
+            top: 64%;
+            right: 19%;
+            width: 49%;
+            height: 30%;
+
+            .sign {
+                width: 100%;
+            }
+
+            p {
+                font-size: .8em;
+                color: #fff;
+                text-align: center;
+
+                &.name {
+                    position: absolute;
+                    top: 25%;
+                    left: 0;
+                    width: 100%;
+                    height: 24px;
+                    line-height: 24px;
+                    text-align: center;
+                }
+            }
+        }
+
+        .welcome-msg {
+            position: absolute;
+            width: 58%;
+            top: 72%;
+            right: 12%;
+
+            .msg {
+                width: 100%;
+            }
         }
     }
 
     .invite-gifts {
         width: 100%;
-        background-color: #1c1e36;
+        padding-bottom: 25px;
+        background-color: #4c72ef;
 
         .gift-title {
             width: 90%;
@@ -39,21 +80,44 @@
         }
     }
 
-    .invite-skip {
-        padding: 20px 0;
-        background-color: #1c1e36;
-        text-align: center;
+    .invite-intro {
+        width: 100%;
+        padding-bottom: 20px;
+        background-color: #eff3ff;
+        border-bottom: 1px solid #e7eaf4;
 
-        .btn {
-            font-size:18px;
-            border:1px solid #ff7b72;
-            border-radius: 4px;
-            color: #ff7b72;
+        .intro {
+            width: 90%;
+            margin-top: 20px;
+            margin-left: 5%;
+        }
+
+        .btns {
+            padding: 0 5%;
+            margin-top: 20px;
+
+            .btn-view {
+                float: left;
+                color: #fff;
+                background-color: #6e90ff;
+                border-radius: 3px;
+                width: 51%;
+            }
+
+            .btn-know {
+                float: right;
+                color: #6e90ff;
+                background-color: transparent;
+                border: 1px solid #6e90ff;
+                border-radius: 3px;
+                width: 43%;
+            }
         }
     }
 
     .invite-records {
-        background-color: #1c1e36;
+        padding-top: 20px;
+        background-color: #eff3ff;
 
         .records-wrapper {
             position: relative;
@@ -72,12 +136,12 @@
                 color: #fce119;
                 font-size: 1.2em;
                 text-align: center;
-                border-bottom-left-radius: 1.6em;
-                border-bottom-right-radius: 1.6em;
+                border-bottom-left-radius: 1em;
+                border-bottom-right-radius: 1em;
             }
 
             .records-list {
-                height: 400px;
+                height: 200px;
                 padding: 0;
                 margin: 20px 15px;
                 padding-bottom: 40px;
@@ -104,7 +168,7 @@
     }
 
     .invite-rules {
-        background-color: #1c1e36;
+        background-color: #eff3ff;
         border-radius: 2px;
         padding-bottom: 40px;
 
@@ -117,7 +181,7 @@
             border-top-right-radius: 2px;
 
             .rules-title {
-                background-color: #363853;
+                background-color: #4f5467;
                 height: 2em;
                 width: 60%;
                 margin: 0 auto;
@@ -125,8 +189,8 @@
                 color: #fff;
                 font-size: 1.2em;
                 text-align: center;
-                border-bottom-left-radius: 1.6em;
-                border-bottom-right-radius: 1.6em;
+                border-bottom-left-radius: 1em;
+                border-bottom-right-radius: 1em;
             }
         }
 
@@ -181,7 +245,7 @@
         .btn {
             height: 40px;
             padding: 8px;
-            background-color: #fd9d2d;
+            background-color: #ff8189;
             color: #fff;
             text-align: center;
             border-radius: 0;
@@ -194,7 +258,7 @@
 
             &.record-btn {
                 float: left;
-                width: 26%;
+                width: 36%;
                 background-color: #f6f6f6;
                 color: #666;
                 text-decoration: underline;
@@ -202,7 +266,9 @@
 
             &.share-btn {
                 float: left;
-                width: 74%;
+                width: 64%;
+                color: #fff;
+                background-color: #ff8189;
             }
         }
     }
@@ -218,6 +284,9 @@
 
         li {
             margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
             a {
                 color: #3c3c3c;
@@ -398,13 +467,27 @@
         }
     }
 
-    .invite-btn {
+    .btns {
         width: 90%;
         margin: 40px 5% 0;
-        background-color: #fd9d2d;
-        color: #fff;
-        font-size: 1.2em;
-        padding: 8px;
+
+        .btn-view {
+            float: left;
+            width: 48%;
+            background-color: #fd9d2d;
+            color: #fff;
+            font-size: 1.1em;
+            padding: 10px 0;
+        }
+
+        .btn-invite {
+            float: right;
+            width: 48%;
+            border: 1px solid #fd9d2d;
+            color: #fd9d2d;
+            font-size: 1.1em;
+            padding: 10px 0;
+        }
     }
 }
 

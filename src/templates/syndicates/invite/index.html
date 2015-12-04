@@ -1,16 +1,29 @@
 <div class="syndicates-invite" ng-if="!loadingInst.syndicatesInvite">
     <div class="invite-welcome">
-        <img src="styles/images/invite/welcome.png" alt="邀请好友赚翻天">
-    </div>
+        <img class="welcome" src="styles/images/invite/welcome.png" alt="邀请好友赚翻天">
+        <div class="sign-area" ng-if="isLogin && isCoInvestor">
+            <img class="sign" src="styles/images/invite/invite-sign.png" alt=""/>
+            <p class="name">{{ formUserNmae }}的专属页</p>
+            <p>即刻把专属页面发送给好友</p>
+        </div>
+        <div class="welcome-msg" ng-if="!isLogin">
+            <img class="msg" src="styles/images/invite/invite-join.png" alt=""/>
+        </div>
 
+        <div class="welcome-msg" ng-if="isLogin && !isCoInvestor">
+            <img class="msg" src="styles/images/invite/invite-join-2.png" alt=""/>
+        </div>
+    </div>
     <div class="invite-gifts">
-        <img class="gift-title" src="styles/images/invite/gift-title.png" alt="三重福利">
         <img class="gift-one" src="styles/images/invite/gift-1.png" alt="注册就送200元/位新手好礼">
         <img class="gift-two" src="styles/images/invite/gift-2.png" alt="邀请好友就送500元/位推荐重礼">
-        <img class="gift-three" src="styles/images/invite/gift-3.png" alt="被邀请注册认证就送300/位推荐大礼">
     </div>
-    <div class="invite-skip">
-        <a class="btn" href="#" ui-sref="syndicates">下一个BAT正在融资</a>
+    <div class="invite-intro">
+        <img class="intro" src="styles/images/invite/invite-intro.png" alt="股权投资">
+        <div class="btns clearfix">
+            <a class="btn btn-view" href="#" ui-sref="syndicates">下一个BAT正在融资</a>
+            <a class="btn btn-know" href="#" ui-sref="syndicatesClass">了解股权投资</a>
+        </div>
     </div>
     <div class="invite-records clearfix">
         <div class="records-wrapper">
@@ -29,24 +42,16 @@
         <div class="rules-wrapper">
             <div class="rules-title">活动细则</div>
             <div class="rules-list">
-                <h4>使用方法：</h4>
-                <h5>推荐人：</h5>
+                <h4>跟投人如何邀请：</h4>
                 <ul class="usage">
-                    <li>转发专属页面，发送给推荐好友</li>
-                    <li>推荐好友注册认证跟投人并投资后，冷静期结束推荐人即可获得500元推荐重礼。</li>
-                </ul>
-                <h5>被推荐人：</h5>
-                <ul class="usage">
-                    <li>被推荐人直接点击推荐人发送的邀请链接，在36氪完成注册、认证和投资。</li>
+                    <li>点击“立即参与” - 登录36氪账号 - 看到页面显示“xxx的专属页”后，即可把专属页面发给好友。</li>
                 </ul>
                 <h4>福利规则：</h4>
                 <ul class="gifts">
-                    <li>1、成功认证36氪股权投资跟投人都可以参加本次活动。</li>
-                    <li>2、活动时间：2015年11月19日——2015年12月31日。</li>
-                    <li>3、投资券获得即日起，有效期为60天。</li>
-                    <li>4、邀请人的推荐好礼、推荐重礼以被邀请人投资冷静后开始计算，赠送于36氪股权投资人跟投人账户中（支付剩余款时可直接选择抵扣金额）。</li>
-                    <li>5、本活动投资券可抵扣同等金额，保证金不可使用投资券。</li>
-                    <li>6、投资券每笔订单最多可叠加两张使用。</li>
+                    <li>1、活动时间：2015年12月4日——2015年12月31日。</li>
+                    <li>2、投资券将直接发送至您在36氪股权投资的账户中，有效期为60天。</li>
+                    <li>3、投资券可在支付剩余款时抵扣相应金额的现金但不可用于支付保证金。</li>
+                    <li>4、每笔订单最多叠加使用2张使用。</li>
                 </ul>
 
                 <p class="copy-right">本活动最终解释权归36氪所有</p>
@@ -55,12 +60,16 @@
         </div>
     </div>
 
-    <div class="syndicates-invite-stick">
-        <a class="btn share-btn" href=""  data-stat-click="laxinhuodong-h5.fenxiangbutton">
-            求炫耀:{{formUserNmae ? formUserNmae + "的" : ''}}富豪养成计划
-        </a>
-        <a class="btn record-btn" href="" ng-if="!isLogin" login-btn data-stat-click="laxinhuodong-h5.denglubutton">立即参与</a>
-        <a class="btn record-btn" href="" ng-if="isLogin" ng-click="viewInviteRecord($event);">邀请记录</a>
+    <div class="syndicates-invite-stick" ng-if="isLogin">
+        <a class="btn login-btn" href="" ng-click="viewInviteRecord($event);">邀请记录</a>
+    </div>
+
+    <div class="syndicates-invite-stick" ng-if="!isLogin">
+        <a class="btn login-btn" href="" login-btn data-stat-click="laxinhuodong-h5.denglubutton">立即参与</a>
+    </div>
+
+    <div class="syndicates-invite-stick" ng-if="isLogin && !isCoInvestor">
+        <a class="btn login-btn" href="" ui-sref="syndicatesValidate({inviter_id: inviterId})">认证领钱</a>
     </div>
 </div>
 
