@@ -74,15 +74,16 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
         $scope.$watch('uname', function(from) {
             if($scope.isLogin) {
                 if(from) {
-                    $scope.shareDesc = '我是' + from + '，这是我的富豪养成计划。点我获得1000元投资现金，上不封顶！';
-                    $scope.shareTitle = from + '的富豪养成计划';
+                    $scope.shareTitle = '【36氪限时福利】我是' + from + '，请你来拿1000元投资现金，一起做股东！';
+                    $scope.shareDesc = '投资新锐互联网公司，获得高收益！';
+                    $scope.formUserNmae = from;
                 } else {
-                    $scope.shareDesc = '立刻加入36氪股权投资富豪养成计划，点我获得1000元投资现金，上不封顶！';
-                    $scope.shareTitle = '36氪股权投资 · 富豪养成计划';
+                    $scope.shareTitle = '【限时福利】来36氪，做股东，立得1000元！';
+                    $scope.shareDesc = '投资新锐互联网公司，获得高收益！';
                 }
             } else {
-                $scope.shareDesc = '立刻加入36氪股权投资富豪养成计划，点我获得1000元投资现金，上不封顶！';
-                $scope.shareTitle = '36氪股权投资 · 富豪养成计划';
+                $scope.shareTitle = '【限时福利】来36氪，做股东，立得1000元！';
+                $scope.shareDesc = '投资新锐互联网公司，获得高收益！';
             }
 
             window.WEIXINSHARE = {

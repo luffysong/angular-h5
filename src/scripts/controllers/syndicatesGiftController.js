@@ -23,7 +23,7 @@ angular.module('defaultApp.controller').controller('SyndicatesGiftController',
         $scope.isLogin = !!UserService.getUID();
 
         // 奖励
-        $scope.giftMoney = $stateParams.id ? 300 : 200;
+        $scope.giftMoney = 1000;
 
         // 跟投人身份
         if($scope.isLogin) {
