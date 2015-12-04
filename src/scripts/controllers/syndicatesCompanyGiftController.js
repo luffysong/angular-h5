@@ -16,7 +16,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
         $scope.uid = UserService.getUID();
         $scope.isLogin = !!UserService.getUID();
 
-
+        $scope.giftMoney =0;
         if($scope.isLogin) {
             CrowdFundingService["coupon"].get({
                 activity_id: $stateParams.id || '',
@@ -28,7 +28,11 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
                     });
                 }else{
                     // 奖励
-                    $scope.giftMoney = data.data[0].amount;
+
+                    $.each((data.data || []), function(index, el){
+                        $scope.giftMoney += parseInt(el.amount);
+                    })
+
                     loading.hide("syndicatesGift");
                 }
             }, function(err) {
