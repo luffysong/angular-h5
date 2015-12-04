@@ -23,6 +23,9 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
         $scope.uid = UserService.getUID();
         $scope.isLogin = !!$scope.uid;
 
+        // 邀请人 ID
+        $scope.inviterId = $stateParams.id;
+
         // 跟投人身份
         if($scope.isLogin) {
             UserService.getIdentity(function (data) {
@@ -31,16 +34,18 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                         id: "co-investor",
                         submodel: "info"
                     }, function(data) {
-                        $state.go('syndicatesValidate', {
-                            inviter_id: $stateParams.id
-                        });
+                        //$state.go('syndicatesValidate', {
+                        //    inviter_id: $stateParams.id
+                        //});
+                        $scope.isCoInvestor = false;
                     }, function(err) {
                         if(err.code == 1002) {
 
                         } else {
-                            $state.go('syndicatesValidate', {
-                                inviter_id: $stateParams.id
-                            });
+                            //$state.go('syndicatesValidate', {
+                            //    inviter_id: $stateParams.id
+                            //});
+                            $scope.isCoInvestor = false;
                         }
                     });
                 }

@@ -1,13 +1,17 @@
 <div class="syndicates-invite" ng-if="!loadingInst.syndicatesInvite">
     <div class="invite-welcome">
         <img class="welcome" src="styles/images/invite/welcome.png" alt="邀请好友赚翻天">
-        <div class="sign-area" ng-if="isLogin">
+        <div class="sign-area" ng-if="isLogin && isCoInvestor">
             <img class="sign" src="styles/images/invite/invite-sign.png" alt=""/>
             <p class="name">{{ formUserNmae }}的专属页</p>
             <p>即刻把专属页面发送给好友</p>
         </div>
         <div class="welcome-msg" ng-if="!isLogin">
             <img class="msg" src="styles/images/invite/invite-join.png" alt=""/>
+        </div>
+
+        <div class="welcome-msg" ng-if="isLogin && !isCoInvestor">
+            <img class="msg" src="styles/images/invite/invite-join-2.png" alt=""/>
         </div>
     </div>
     <div class="invite-gifts">
@@ -38,10 +42,9 @@
         <div class="rules-wrapper">
             <div class="rules-title">活动细则</div>
             <div class="rules-list">
-                <h4>如何邀请：</h4>
-                <h5>推荐人：</h5>
+                <h4>跟投人如何邀请：</h4>
                 <ul class="usage">
-                    <li>点击“立即参与” - 登录36氪账号 - 看到页面显示“xxx的专属邀请页”后，即可把专属页面发给好友。</li>
+                    <li>点击“立即参与” - 登录36氪账号 - 看到页面显示“xxx的专属页”后，即可把专属页面发给好友。</li>
                 </ul>
                 <h4>福利规则：</h4>
                 <ul class="gifts">
@@ -58,15 +61,15 @@
     </div>
 
     <div class="syndicates-invite-stick" ng-if="isLogin">
-        <a class="btn record-btn" href="" ng-click="viewInviteRecord($event);">邀请记录</a>
-        <a class="btn share-btn" href=""  data-stat-click="laxinhuodong-h5.fenxiangbutton">
-            <span class="icon-share3"></span>
-            点击进行分享
-        </a>
+        <a class="btn login-btn" href="" ng-click="viewInviteRecord($event);">邀请记录</a>
     </div>
 
     <div class="syndicates-invite-stick" ng-if="!isLogin">
         <a class="btn login-btn" href="" login-btn data-stat-click="laxinhuodong-h5.denglubutton">立即参与</a>
+    </div>
+
+    <div class="syndicates-invite-stick" ng-if="!isCoInvestor">
+        <a class="btn login-btn" href="" ui-sref="syndicatesValidate({inviter_id: inviterId})">认证领钱</a>
     </div>
 </div>
 
