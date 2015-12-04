@@ -172,7 +172,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
             window.WEIXINSHARE = {
                 shareTitle: $scope.shareTitle,
                 shareDesc: $scope.shareDesc,
-                shareImg: 'http://krplus-pic.b0.upaiyun.com/201511/16090813/bure3v9cy22gs04k.jpg',
+                shareImg: 'http://krplus-pic.b0.upaiyun.com/201512/04094947/x0bjnbw0hra8nne8.jpg',
                 shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesInvite?id=' + ($scope.isLogin ? $scope.uid : $stateParams.id)
             };
 
