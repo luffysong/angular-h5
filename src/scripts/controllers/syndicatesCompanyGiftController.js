@@ -48,7 +48,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
 
         var shareTileMap = {
             4:'',
-            5:'“阿里系”员工财富直通车已经到站，等你搭乘。',
+            5:'阿里系员工财富直通车已经到站，等你搭乘',
             6:'',
             7:''
         };
@@ -74,11 +74,12 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
 
         $scope.$watch('rank', function(from) {
 
-            $scope.shareDesc = '做新锐互联网公司股东，认证即获2000现金';
+            $scope.shareDesc = '做新锐互联网公司股东，注册即获2000现金';
             $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.id];
+
             if($scope.isLogin && from) {
                 if($stateParams.id == 5){
-                    $scope.shareTitle = '下一站，股东！| 我是阿里系第' + from + '个搭上股东直通车的VIP。'
+                    $scope.shareTitle = '下一站，股东！| 我是阿里系员工第' + from + '个搭上财富直通车的VIP。'
                 }
             }
 
@@ -86,7 +87,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
                 shareTitle: $scope.shareTitle,
                 shareDesc: $scope.shareDesc,
                 shareImg: 'https://krplus-normal.b0.upaiyun.com/201512/03120636/irh7rcuolj5t42wq.jpg',
-                shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesCompany?activity_id=' + $scope.activity_id
+                shareHref: location.protocol + '//' + location.host + '/m/#/syndicatesCompany?activity_id=' + $stateParams.id
             };
             InitWeixin({
                 success:weixinshare
