@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesValidateController',
     function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService) {
-        document.title = '富豪养成计划';
+        document.title = '来36氪做股东';
         $scope.$on('$locationChangeStart', function() {
             document.title = '36氪股权融资';
         });

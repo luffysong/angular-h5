@@ -8,7 +8,7 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
     function($scope, $state, $stateParams, $modal, notify, $timeout, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
         loading.show("syndicatesShare");
 
-        document.title = '富豪养成计划';
+        document.title = '来36氪做股东';
         $scope.$on('$locationChangeStart', function() {
             document.title = '36氪股权融资';
         });
