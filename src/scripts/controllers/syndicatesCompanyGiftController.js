@@ -77,7 +77,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyGiftControl
             $scope.shareDesc = '做新锐互联网公司股东，认证即获2000现金';
             $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.id];
             if($scope.isLogin && from) {
-                if($stateParams.activity_id == 5){
+                if($stateParams.id == 5){
                     $scope.shareTitle = '下一站，股东！| 我是阿里系第' + from + '个搭上股东直通车的VIP。'
                 }
             }
