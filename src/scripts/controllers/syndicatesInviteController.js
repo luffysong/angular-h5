@@ -40,7 +40,7 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                         $scope.isCoInvestor = false;
                     }, function(err) {
                         if(err.code == 1002) {
-
+                            $scope.isCoInvestor = true;
                         } else {
                             //$state.go('syndicatesValidate', {
                             //    inviter_id: $stateParams.id
@@ -48,6 +48,8 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                             $scope.isCoInvestor = false;
                         }
                     });
+                } else {
+                    $scope.isCoInvestor = true;
                 }
             });
 
