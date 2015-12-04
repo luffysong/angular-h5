@@ -32,6 +32,8 @@ elif [ $1 = 'all' ]; then
     rsync -rvltOD ./dist/* ali-rong-proxy-02:$pathstr
     rsync -rvltOD ./dist/* ali-rong-php-02:$pathstr
     rsync -rvltOD ./dist/* ali-rong-tomcat-02:$pathstr
+elif [ $1 = 'sim' ]; then
+    rsync -rvltOD ./dist/* ali-rong-sim-01:$pathstr
 fi
 
 
