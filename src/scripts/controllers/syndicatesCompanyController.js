@@ -17,6 +17,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
             //'7' : 'xiaomi' //小米
         };
         $scope.activity_id = $stateParams.activity_id ||'';
+        $scope.activity_id = $scope.activity_id.substr(0,1);
         $scope.isActivity = !!($scope.activity_id && activityMap[$scope.activity_id]);
         if(!$scope.isActivity) return false;
 
