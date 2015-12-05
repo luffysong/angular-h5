@@ -274,7 +274,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
 
         $scope.$watch('rank', function(from) {
             $scope.shareDesc = '做新锐互联网公司股东，注册即获2000现金';
-            $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.activity_id];
+            $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$scope.activity_id];
             if($scope.isLogin && from) {
                 if($stateParams.activity_id == 5){
                     $scope.shareTitle = '下一站，股东！| 我是阿里系员工第' + from + '个搭上财富直通车的VIP。'
