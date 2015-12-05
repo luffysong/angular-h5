@@ -186,7 +186,7 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
                 $scope.checkTxt = '验证';
                 $scope.rank = $scope.rank + 1;
                 $state.go('syndicatesCompanyGift', {
-                    id: $stateParams.activity_id
+                    id: $scope.activity_id
                 });
             },function(err){
                 $scope.checkTxt = '重新验证';
@@ -274,9 +274,9 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
 
         $scope.$watch('rank', function(from) {
             $scope.shareDesc = '做新锐互联网公司股东，注册即获2000现金';
-            $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$stateParams.activity_id];
+            $scope.shareTitle = '下一站，股东！| ' + shareTileMap[$scope.activity_id];
             if($scope.isLogin && from) {
-                if($stateParams.activity_id == 5){
+                if($scope.activity_id == 5){
                     $scope.shareTitle = '下一站，股东！| 我是阿里系员工第' + from + '个搭上财富直通车的VIP。'
                 }
             }
