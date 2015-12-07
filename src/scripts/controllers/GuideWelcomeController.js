@@ -152,7 +152,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
 
                     }).success(function (data, status, headers, config) {
                         var filename = data.url.toLowerCase();
-                        if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
+                        if(filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1 || filename.indexOf('.jpeg') != -1) {
                             $scope.user.avatar = window.kr.upyun.bucket.url + data.url;
                         } else {
                             $('<div class="error-alert error error-photo">格式不支持，请重新上传！</div>').appendTo('body');
