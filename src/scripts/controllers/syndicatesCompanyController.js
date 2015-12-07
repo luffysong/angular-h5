@@ -10,6 +10,12 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
         $scope.$on('$locationChangeStart', function() {
             document.title = '36氪股权融资';
         });
+
+        var $bar = $('.J_appDownloadWrapper');
+        if($bar.length > 0) {
+            $bar.hide();
+        }
+
         var activityMap = {
             //'4' : 'baidu', //百度
             '5' : 'ali', //阿狸
