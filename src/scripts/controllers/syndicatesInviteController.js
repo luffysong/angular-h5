@@ -18,6 +18,11 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
             loading.hide('syndicatesInvite');
         }, 500);
 
+        var $bar = $('.J_appDownloadWrapper');
+        if($bar.length > 0) {
+            $bar.hide();
+        }
+
 
         // 登录状态
         $scope.uid = UserService.getUID();
