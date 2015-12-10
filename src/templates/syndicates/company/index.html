@@ -101,7 +101,7 @@
             </div>
             <div ng-if="!checkIdentity" class="bottom-btn-box">
                 <span ng-if="!isLogin" login-btn data-stat-click="dagongsihuodong.denglubutton.click">参加活动</span>
-                <span ng-if="isLogin && !isInvestor" ui-sref="syndicatesValidate({activity_id: activity_id,source:'alizc'})"
+                <span ng-if="isLogin && !isInvestor" ui-sref="syndicatesValidate({activity_id: activity_id,krsrc:'alizc'})"
                       data-stat-click="dagongsihuodong.renzhengbutton.click">认证领取现金</span>
                 <span ng-if="isLogin && isInvestor && !hasCoupon" data-stat-click="dagongsihuodong.yanzhengbutton.click"
                       ui-sref="syndicatesCompany({activity_id: activity_id,skipstep:'checkemail'})">验证公司邮箱</span>

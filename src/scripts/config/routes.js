@@ -233,7 +233,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*跟投人认证*/
     $stateProvider.state('investorValidate', {
-        url: '/investorValidate?type&source',
+        url: '/investorValidate?type&source&krsrc',
         templateUrl: 'templates/investorValidate/index.html',
         controller: 'InvestorValidateController'
     });

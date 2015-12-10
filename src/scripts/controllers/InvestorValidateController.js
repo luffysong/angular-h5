@@ -29,11 +29,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.userId = UserService.getUID();
         /*跟投人认证来源埋点*/
         $scope.handleSource = function(){
-            if($stateParams.source){
+            if($stateParams.source || $stateParams.krsrc){
+                var s = $stateParams.krsrc || $stateParams.source;
                 if(!$cookies.coinvestor_src1){
-                    $cookies.coinvestor_src1 = "m_investorValidate:"+$stateParams.source;
+                    $cookies.coinvestor_src1 = "pc_investorValidate:"+s;
                 }
-                $cookies.coinvestor_src2 = "m_investorValidate:"+$stateParams.source;
+                $cookies.coinvestor_src2 = "pc_investorValidate:"+s;
             }
         }
         $scope.handleSource();
