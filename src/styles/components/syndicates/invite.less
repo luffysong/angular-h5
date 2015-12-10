@@ -636,11 +636,21 @@
         }
 
         .btn-submit {
+            position: relative;
             width: 90%;
             margin: 15px 5% 10px;
             padding: 8px;
             color: #fff;
             background-color: #188fef;
+
+            .btn-loading-wrap {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 100;
+            }
         }
 
         .bottom-tip {
