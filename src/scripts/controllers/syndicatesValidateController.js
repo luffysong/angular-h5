@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesValidateController',
-    function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService) {
+    function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService, $cookies) {
         document.title = '来36氪做股东';
         $scope.$on('$locationChangeStart', function() {
             document.title = '36氪股权融资';
@@ -19,6 +19,20 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         $timeout(function() {
             loading.hide('syndicatesValidate');
         }, 500);
+
+        /*跟投人认证来源埋点*/
+        $scope.handleSource = function(){
+            if($stateParams.source || $stateParams.krsrc){
+                var s = $stateParams.krsrc || $stateParams.source;
+
+                if(!$cookies.coinvestor_src1){
+                    $cookies.coinvestor_src1 = "h5_investorValidate:" + s;
+                }
+
+                $cookies.coinvestor_src2 = "h5_investorValidate:" + s;
+            }
+        };
+        $scope.handleSource();
 
         $scope.uid = UserService.getUID();
         $scope.isLogin = !!$scope.uid;
