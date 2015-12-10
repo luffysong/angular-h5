@@ -4,7 +4,7 @@
         <div ng-show="!applySuc">
             <div class="kr-code-progress">
                 <div class="kr-code-container">
-                    <span class="first-point active">1<span class="point-stage first">提交申请</span></span><div class="progress-line active"></div><span class="first-point" ng-class="{'active':krCode.status == 3}">2<span class="point-stage second" ng-if="krCode.status == 1 || krCode.status == 'unapply'">审核中</span><span class="point-stage second active" ng-if="krCode.status == 3">审核未通过</span></span><div class="progress-line"></div><span class="first-point">3<span class="point-stage third">收到Kr码</span></span>
+                    <span class="first-point active">1<span class="point-stage first">提交申请</span></span><div class="progress-line active"></div><span class="first-point" ng-class="{'active':krCode.status == 3 || krCode.status == 1}">2<span class="point-stage second" ng-if="krCode.status == 1 || krCode.status == 'unapply'">审核中</span><span class="point-stage second active" ng-if="krCode.status == 3">审核未通过</span></span><div class="progress-line"></div><span class="first-point">3<span class="point-stage third">收到Kr码</span></span>
                 </div>
                 <p class="fail-tip auditing" ng-if="krCode.status == 1">正在处理中，请耐心等待！</p>
                 <p class="fail-tip red" ng-if="krCode.status == 3">抱歉，暂不符合发放条件</p>
@@ -40,7 +40,7 @@
                             2、如果审核通过，我们会通过短信发送Kr码到你的手机上。
                         </div>
                         <div class="list-content">
-                            3、如果审核不通过，我们会3个工作日内通知你。
+                            3、审核结果，最晚会在开放募资前3天内通知您。
                         </div>
                     </li>
                 </ul>
