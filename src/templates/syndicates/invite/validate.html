@@ -7,6 +7,7 @@
             <input class="form-control" type="text" id="investor-name" name="investor-name" placeholder="须与身份证一致" maxlength="15" required ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" ng-model="investor.name">
             <div class="split" ng-if="!investor.avatar || action.uploaded"></div>
             <div class="avatar-container" style="background-image: url({{investor.avatar | image: 70 : 'user'}});" ng-if="!investor.avatar || action.uploaded">
+                <div class="progress" ng-if="avatarProgress && (avatarProgress != 100)">{{avatarProgress }}%</div>
                 <input class="avatar" type="file" id="investor-avatar" name="investor-avatar" required
                        ng-file-select
                        ng-file-change="imgFileSelected($files, $event)"
@@ -111,7 +112,20 @@
             <span ng-show="syndicatesValidateForm.condition.$error.required"><span class="tip-icon">!</span>请选择你的投资条件</span>
         </div>
         <div class="form-group">
-            <a href="" class="btn btn-submit" ng-click="submitForm($event)" ng-disabled="hasClick" data-stat-click="shenqinggentouren-h5.tijiaobutton">提交申请</a>
+            <a href="" class="btn btn-submit" ng-click="submitForm($event)" ng-disabled="hasClick" data-stat-click="shenqinggentouren-h5.tijiaobutton">
+                <span ng-if="!hasClick">提交申请</span>
+                <span ng-if="hasClick">正在提交</span>
+                <div class="btn-loading-wrap" ng-if="hasClick">
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                </div>
+            </a>
+
             <p class="text-center bottom-tip">
                 点击-提交申请，即表示你同意<br>
                 <a href="" ng-click="seeRisk()">《风险揭示书》</a>

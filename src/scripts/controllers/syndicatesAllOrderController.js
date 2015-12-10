@@ -27,6 +27,8 @@ angular.module('defaultApp.controller').controller('syndicatesAllOrderController
             var status = '';
             statusType = statusType || statename;
             $scope.loadingData = true;
+
+            $scope.currentStatus = statusType;
             switch(statusType){
                 case 'zhongchouAllOrder.obligations' :  status = '1,12';break;
                 case 'zhongchouAllOrder.paid'			   : status = '2,11,13';break

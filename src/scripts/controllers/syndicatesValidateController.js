@@ -131,7 +131,9 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                         withCredentials: false
                     }).progress(function (evt) {
                         console.log(parseInt(100.0 * evt.loaded / evt.total));
+                        $scope.avatarProgress = parseInt(100.0 * evt.loaded / evt.total);
                     }).success(function (data, status, headers, config) {
+                        $scope.avatarProgress = 0;
                         var filename = data.url.toLowerCase();
                         if(filename.indexOf('.jpeg') != -1 || filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
                             $scope.investor.avatar = upyun.bucket.url + data.url;
