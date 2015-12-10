@@ -16,9 +16,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             if($stateParams.source || $stateParams.krsrc){
                 var s = $stateParams.krsrc || $stateParams.source;
                 if(!$cookies.coinvestor_src1){
-                    $cookies.coinvestor_src1 = "pc_investorValidate:"+s;
+                    $cookies.coinvestor_src1 = "h5_investorValidate:"+s;
                 }
-                $cookies.coinvestor_src2 = "pc_investorValidate:"+s;
+                $cookies.coinvestor_src2 = "h5_investorValidate:"+s;
             }
         }
         $scope.handleSource();
