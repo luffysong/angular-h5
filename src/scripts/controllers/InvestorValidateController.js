@@ -5,12 +5,23 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
-    function($scope,DictionaryService,ErrorService,checkForm,$timeout,UserService,$modal, $stateParams,$state,CrowdFundingService,loading) {
+    function($scope,DictionaryService,ErrorService,checkForm,$timeout,UserService,$modal, $stateParams,$state,CrowdFundingService,loading,$cookies) {
         document.title="36氪股权投资";
         loading.show("investorVal");
         $timeout(function(){
             window.scroll(0,0);
         },0);
+        /*跟投人认证来源埋点*/
+        $scope.handleSource = function(){
+            if($stateParams.source || $stateParams.krsrc){
+                var s = $stateParams.krsrc || $stateParams.source;
+                if(!$cookies.coinvestor_src1){
+                    $cookies.coinvestor_src1 = "h5_investorValidate:"+s;
+                }
+                $cookies.coinvestor_src2 = "h5_investorValidate:"+s;
+            }
+        }
+        $scope.handleSource();
         /*先判断用户是否完善资料*/
         UserService.isProfileValid(function (valid) {
             if(!valid){
@@ -27,6 +38,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             $scope.nowClose = true;
         }
         $scope.userId = UserService.getUID();
+
         $scope.user = {
             investMoneyUnit:"CNY",
             rnv_investor_info:"V1_1",

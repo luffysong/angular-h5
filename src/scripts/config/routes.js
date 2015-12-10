@@ -233,7 +233,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*跟投人认证*/
     $stateProvider.state('investorValidate', {
-        url: '/investorValidate?type',
+        url: '/investorValidate?type&source&krsrc',
         templateUrl: 'templates/investorValidate/index.html',
         controller: 'InvestorValidateController'
     });
@@ -329,7 +329,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('syndicatesValidate', {
-        url: '/syndicatesValidate?{inviter_id}&{activity_id}',
+        url: '/syndicatesValidate?{inviter_id}&{activity_id}&source&krsrc',
         templateUrl: 'templates/syndicates/invite/validate.html',
         controller: 'syndicatesValidateController',
         data:{
