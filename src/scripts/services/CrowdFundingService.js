@@ -20,7 +20,8 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
                 'cf-trade-balance',
                 'sm',
                 'crowd-funding-random',
-                'coupon'
+                'coupon',
+                'coupon-channel'
             ]
         }, {
             'crowd-funding': {
@@ -225,6 +226,20 @@ angular.module('defaultApp.service').service('CrowdFundingService', [
                 save: {
                     method: "POST",
                     transformRequest: appendTransform($http.defaults.transformRequest, function(res) {
+                        return res;
+                    })
+                }
+            },
+            'coupon-channel': {
+                save: {
+                    method: "POST",
+                    transformRequest: appendTransform($http.defaults.transformRequest, function(res) {
+                        return res;
+                    })
+                },
+                get: {
+                    method: 'GET',
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
                         return res;
                     })
                 }
