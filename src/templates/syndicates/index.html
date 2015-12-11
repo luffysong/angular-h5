@@ -2,7 +2,7 @@
     <div class="slider-container syndicates">
         <slick infinite=true autoplay=true pauseOnHover=false speed=1000 dots="true" arrows="false" ng-if="banners">
             <div class="slider syndicates" ng-repeat="item in banners">
-                <div class="slider-image" style="background-image: url('{{item.img_url}}'); background-color:#333">
+                <div class="slider-image" style="background-image: url('{{item.img_url | image:640}}'); background-color:#333">
                     <a href="{{item.link_url}}" ng-stat-click="lunbotu.button"></a>
                 </div>
             </div>
@@ -49,7 +49,7 @@
             </div>
             <div class="syndicates-pic">
                 <div class="syndicates-container">
-                    <img height="160" ng-src="{{item.desc.file_list_img}}" alt="" data-stat-click="zhongchouliebiao.gongsitu.{{$index}}.{{item.id}}"/>
+                    <img height="160" ng-src="{{item.desc.file_list_img | image:640}}" alt="" data-stat-click="zhongchouliebiao.gongsitu.{{$index}}.{{item.id}}"/>
                     <div class="investor-led-title" ng-if="item.investorData.name">
                         <a ui-sref="{{item.investorData | investorLink:'id':'type'}}" title="{{item.investorData.name}}" class="led-name">
                             {{item.investorData.name}}
