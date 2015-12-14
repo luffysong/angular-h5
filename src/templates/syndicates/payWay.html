@@ -29,14 +29,14 @@
             <div class="coupon-option" ng-show="pay.activeWay == 'code'">
                 <div class="coupon-select">
                     填写渠道码
-                    <input type="text" class="form-control code-input" name="chanelCode" ng-model="chanel.code" ng-change="enterCode()" ng-disabled="chanel.validate" maxlength="10" required />
+                    <input type="text" class="form-control code-input" name="chanelCode" ng-model="chanel.code" ng-change="enterCode()" ng-blur="enterCode('suc')" ng-disabled="chanel.validate" maxlength="10" required />
                     <!--<span class="ensure-btn">确定</span>-->
                 </div>
             </div>
-            <div class="pay-title suc" ng-show="chanel.validate">
+            <div class="pay-title suc" ng-show="chanel.validate && pay.activeWay == 'code'">
                 验证成功
             </div>
-            <div class="pay-title error" ng-show="((chanelCodeForm.chanelCode.$error.required && chanelCodeForm.chanelCode.$dirty) || chanel.error) && !chanel.validate">
+            <div class="pay-title error" ng-show="((chanelCodeForm.chanelCode.$error.required && chanelCodeForm.chanelCode.$dirty) || chanel.error) && !chanel.validate && pay.activeWay == 'code'">
                 *{{chanel.errorText}}
             </div>
         </div>
