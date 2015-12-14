@@ -28,7 +28,8 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
         };
         $scope.chanel = {
             code:"",
-            errorText:"请输入有效渠道码"
+            errorText:"请输入有效渠道码",
+            id:""
         };
         /*输入渠道码*/
         $scope.enterCode = function(){
