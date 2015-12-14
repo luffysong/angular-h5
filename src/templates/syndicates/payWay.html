@@ -41,10 +41,10 @@
             </div>
         </div>
         <div class="pay-title coupon" ng-show="calAmount > 0 && pay.activeWay == 'coupon'">
-            投资券<span class="amount">-￥{{calAmount}}</span>
+            已优惠<span class="amount">-￥{{calAmount}}</span>
         </div>
         <div class="pay-title coupon" ng-show="chanel.amount > 0 && pay.activeWay == 'code'">
-            渠道码<span class="amount">-￥{{chanel.amount}}</span>
+            已优惠<span class="amount">-￥{{chanel.amount}}</span>
         </div>
     </div>
     <div class="pay-title" ng-class="{'active':type == 'balance' && calAmount > 0 && pay.activeWay == 'coupon'}" ng-hide="chanel.amount > 0">
