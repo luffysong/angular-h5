@@ -1,21 +1,21 @@
 <form name="chanelCodeForm">
 <div class="syndicate-pay syndicates-confirm" ng-hide="loadingInst.payWay">
     <div ng-show="type == 'balance'">
-        <div ng-hide="hasBind">
+        <div ng-hide="hasBind || (!hasUseCoupon && tradeData.payment.pay_times > 0)">
             <div class="pay-title">
                 优惠方式
             </div>
             <div class="type-container">
                 <div class="type-list">
-                    <div class="type-code" ng-class="{'active':pay.activeWay == 'code'}" ng-click="selectType('code')">
+                    <div class="type-code" ng-class="{'active':pay.activeWay == 'code'}" ng-click="selectType('code')" ng-hide="hasUseCoupon">
                         <span class="icon-icon-select"></span>渠道码
                     </div>
-                    <div class="type-coupon" ng-class="{'active':pay.activeWay == 'coupon'}" ng-click="selectType('coupon')" ng-hide="!couponData.length || (payment.amount_coupons <= 0 && tradeData.payment.pay_times > 0)">
+                    <div class="type-coupon" ng-class="{'active':pay.activeWay == 'coupon'}" ng-click="selectType('coupon')" ng-hide="!couponData.length">
                         <span class="icon-icon-select"></span>投资券
                     </div>
                 </div>
             </div>
-            <div class="coupon-option" ng-hide="pay.activeWay == '' || pay.activeWay == 'code' || !couponData.length || (payment.amount_coupons <= 0 && tradeData.payment.pay_times > 0)">
+            <div class="coupon-option" ng-hide="pay.activeWay == '' || pay.activeWay == 'code' || !couponData.length">
                 <div class="coupon-select" ui-sref="syndicatesCoupon({tid:tid,amount:amount,ids:ids})">
                     <span class="icon-h5-coupon">
                         <span class="path1"></span><span class="path2"></span>

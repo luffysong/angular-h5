@@ -65,7 +65,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
             if(target == "code"){
                 $scope.calAmount = 0;
                 $scope.ids = "";
-                $scope.amount = $scope.orderData.payment.amount * 1;
+                $scope.amount = $scope.tradeData.payment.amount * 1;
             }else{
                 $scope.chanel.id = "";
                 $scope.chanel.amount = "";
@@ -103,7 +103,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
         CrowdFundingService[$scope.interFace[$scope.type]].get({
             id:$stateParams.tid
         },function(data){
-            $scope.orderData = data;
+            $scope.tradeData = data;
             $scope.amount = data.payment.amount;
             if($scope.orderType != "deposit"){
                 if(data.payment.amount_coupons > 0){
