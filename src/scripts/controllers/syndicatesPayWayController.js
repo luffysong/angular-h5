@@ -69,7 +69,6 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
                 $scope.amount = $scope.tradeData.payment.amount * 1;
             }else{
                 $scope.chanel.id = "";
-                $scope.chanel.amount = "";
             }
         }
         /*$scope.amount = $stateParams.amount;*/
