@@ -29,18 +29,25 @@
     }
 }
 /*优惠券支付确认弹窗*/
-.tip-window {
-    .error-window;
-    width: 300px;
-    height: auto;
-    margin-left: -150px;
-    top: 50%;
-    transform: translate(0,-50%);
-    transition: all .5s;
-    .icon-icon-cancel {
-        position: absolute;
-        right: 5px;
-        top: 5px;
+.tip-layer {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,.8);
+    .tip-window {
+        .error-window;
+        width: 300px;
+        height: 120px;
+        margin-left: -150px;
+        margin-top: -60px;
+        transition: all .5s;
+        .icon-icon-cancel {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+        }
     }
 }
 /*投资券*/
@@ -197,6 +204,38 @@
         font-size: 14px;
         cursor: pointer;
     }
+    .type-container {
+        height: auto;
+        background-color: #fff;
+        padding: 25px 0 15px 15px;
+        .type-list {
+            .type-code,.type-coupon {
+                display: inline-block;
+                width: 83px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                border: 1px solid #dfdfdf;
+                color: #666;
+                border-radius: 3px;
+                margin-right: 15px;
+                .icon-icon-select {
+                    display: none;
+                }
+                &.active {
+                    color: #f28f00;
+                    border: 1px solid #f28f00;
+                    .icon-icon-select {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+    .coupon-layer {
+        height: 20px;
+        background-color: #fff;
+    }
     .coupon-option {
         height: 60px;
         background-color: #fff;
@@ -205,13 +244,37 @@
             height: 100%;
             line-height: 60px;
             border-bottom: 1px solid #DFDFDF;
+            border-top: 1px solid #DFDFDF;
             padding-right: 15px;
             font-size: 14px;
             color: #333;
+            .code-input {
+                display: inline-block;
+                width: 70%;
+                -webkit-appearance: none;
+                border: none;
+                height: 50px;
+                line-height: 50px;
+                float: right;
+                padding-left: 10px;
+                margin-top: 5px;
+            }
             .icon-h5-coupon {
                 font-size: 35px;
                 vertical-align: middle;
                 margin-right: -15px;
+            }
+            .ensure-btn {
+                float: right;
+                display: inline-block;
+                width: 55px;
+                height: 25px;
+                line-height: 25px;
+                text-align: center;
+                border-radius: 3px;
+                background-color: #008df1;
+                color: #fff;
+                margin-top: 17px;
             }
             .icon-h5-arrow {
                 float: right;
@@ -236,6 +299,12 @@
         background-color: #F7F7F7;
         &.active {
             padding-bottom: 10px;
+        }
+        &.error {
+            color: red;
+        }
+        &.suc {
+            color: #90cd2e;
         }
         &.coupon {
             padding: 10px 15px 0;

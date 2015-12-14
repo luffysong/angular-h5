@@ -1,25 +1,63 @@
+<form name="chanelCodeForm">
 <div class="syndicate-pay syndicates-confirm" ng-hide="loadingInst.payWay">
-    <div class="coupon-option" ng-hide="type == 'deposit' || !couponData.length || (payment.amount_coupons <= 0 && tradeData.payment.pay_times > 0)">
-        <div class="coupon-select" ui-sref="syndicatesCoupon({tid:tid,amount:amount,ids:ids})">
-            <span class="icon-h5-coupon">
-				<span class="path1"></span><span class="path2"></span>
-			</span>
-            投资券
-            <span class="icon-h5-arrow">
-			</span>
+    <div ng-show="type == 'balance'">
+        <div ng-hide="hasBind || (!hasUseCoupon && tradeData.payment.pay_times > 0)">
+            <div class="pay-title">
+                优惠方式
+            </div>
+            <div class="type-container">
+                <div class="type-list">
+                    <div class="type-code" ng-class="{'active':pay.activeWay == 'code'}" ng-click="selectType('code')" ng-hide="hasUseCoupon">
+                        <span class="icon-icon-select"></span>渠道码
+                    </div>
+                    <div class="type-coupon" ng-class="{'active':pay.activeWay == 'coupon'}" ng-click="selectType('coupon')" ng-hide="!couponData.length">
+                        <span class="icon-icon-select"></span>投资券
+                    </div>
+                </div>
+            </div>
+            <div class="coupon-option" ng-hide="pay.activeWay == '' || pay.activeWay == 'code' || !couponData.length">
+                <div class="coupon-select" ui-sref="syndicatesCoupon({tid:tid,amount:amount,ids:ids})">
+                    <span class="icon-h5-coupon">
+                        <span class="path1"></span><span class="path2"></span>
+                    </span>
+                    投资券
+                    <span class="icon-h5-arrow">
+                    </span>
+                </div>
+            </div>
+            <!--<div class="coupon-layer" ng-show="pay.activeWay == 'code'"></div>-->
+            <div class="coupon-option" ng-show="pay.activeWay == 'code'">
+                <div class="coupon-select">
+                    填写渠道码
+                    <input type="text" class="form-control code-input" name="chanelCode" ng-model="chanel.code" ng-change="enterCode()" ng-blur="enterCode('suc')" ng-disabled="chanel.validate" maxlength="10" required />
+                    <!--<span class="ensure-btn">确定</span>-->
+                </div>
+            </div>
+            <div class="pay-title suc" ng-show="chanel.validate && pay.activeWay == 'code'">
+                验证成功
+            </div>
+            <div class="pay-title error" ng-show="((chanelCodeForm.chanelCode.$error.required && chanelCodeForm.chanelCode.$dirty) || chanel.error) && !chanel.validate && pay.activeWay == 'code'">
+                *{{chanel.errorText}}
+            </div>
+        </div>
+        <div class="pay-title coupon" ng-show="calAmount > 0 && pay.activeWay == 'coupon'">
+            已优惠<span class="amount">-￥{{calAmount}}</span>
+        </div>
+        <div class="pay-title coupon" ng-show="chanel.amount > 0 && pay.activeWay == 'code'">
+            已优惠<span class="amount">-￥{{chanel.amount}}</span>
         </div>
     </div>
-    <div class="pay-title coupon" ng-if="type == 'balance' && calAmount > 0">
-        投资券<span class="amount">-￥{{calAmount}}</span>
-    </div>
-    <div class="pay-title" ng-class="{'active':type == 'balance' && calAmount > 0}">
+    <div class="pay-title" ng-class="{'active':type == 'balance' && calAmount > 0 && pay.activeWay == 'coupon'}" ng-hide="pay.activeWay == 'code'">
         {{typeText}}<span class="error amount">￥{{amount}}</span>
+    </div>
+    <div class="pay-title" ng-class="{'active':type == 'balance' && chanel.amount > 0}" ng-show="pay.activeWay == 'code'">
+        支付剩余款<span class="error amount">￥{{amount - chanel.amount}}</span>
     </div>
     <div class="pay-way">
         <div class="way-detail" ng-click="selectWay('alipay')" data-stat-click="payment.alipay">
             <div class="way-image">
-                        <span class="ali-pay">
-                        </span>
+                <span class="ali-pay">
+                </span>
             </div>
             <div class="way-info">
                 <div class="way-intro">支付宝</div>
@@ -47,12 +85,15 @@
     <a href="" class="outline-pay" ui-sref="payOutlineRemind({tid:tid,type:type,couponIds:ids})">线下汇款</a>
     <a href="" class="go-pay btn" ng-click="goPay()" tooltip="{{cardIndex === '' ? '请选择银行卡' : ''}}" data-stat-click="payment.pay">立即支付</a>
 </div>
-<div class="tip-window" ng-class="{active:showEnsure}">
-    <span class="icon-icon-cancel" ng-click="showEnsure = false"></span>
-    <div class="error-tip">
-        确认使用投资券？
-        <div>一旦使用则与该订单绑定，不可新增或删除投资券</div>
+<div class="tip-layer" ng-show="showEnsure" ng-click="showEnsure = false">
+    <div class="tip-window" ng-class="{active:showEnsure}">
+        <span class="icon-icon-cancel" ng-click="showEnsure = false"></span>
+        <div class="error-tip">
+            {{tip.msgTitle}}
+            <div>{{tip.msgContent}}</div>
+        </div>
+        <div ng-click="skipPay()" submit-btn>确定</div>
     </div>
-    <div ng-click="skipPay()">确定</div>
 </div>
 <div loading="payWay"></div>
+</form>
