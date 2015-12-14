@@ -47,7 +47,7 @@
             已优惠<span class="amount">-￥{{chanel.amount}}</span>
         </div>
     </div>
-    <div class="pay-title" ng-class="{'active':type == 'balance' && calAmount > 0 && pay.activeWay == 'coupon'}" ng-hide="chanel.amount > 0">
+    <div class="pay-title" ng-class="{'active':type == 'balance' && calAmount > 0 && pay.activeWay == 'coupon'}" ng-hide="pay.activeWay == 'code'">
         {{typeText}}<span class="error amount">￥{{amount}}</span>
     </div>
     <div class="pay-title" ng-class="{'active':type == 'balance' && chanel.amount > 0}" ng-show="chanel.amount > 0 && pay.activeWay == 'code'">
