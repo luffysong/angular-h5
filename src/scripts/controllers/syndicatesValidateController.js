@@ -95,18 +95,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 $scope.investor.address.address1 = data.cert_info.country;
                 $scope.investor.address.address2 = data.cert_info.city;
             }
-            $scope.$watch("[investor['id-confirm'], investor.id]",function(from){
 
-                var $elment = angular.element($("form[name='syndicatesValidateForm']"));
-
-                if($elment.length > 0) {
-                    if(IDCardService.getIdCardInfo($scope.investor.id).isTrue) {
-                        $elment.scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", true);
-                    } else {
-                        $elment.scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", false);
-                    }
-                }
-            });
         }, function(err) {
 
             //todo;
@@ -178,6 +167,19 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         //        });
         //    }
         //};
+
+        $scope.$watch("[investor['id-confirm'], investor.id]",function(from){
+
+            var $elment = angular.element($("form[name='syndicatesValidateForm']"));
+
+            if($elment.length > 0) {
+                if(IDCardService.getIdCardInfo($scope.investor.id).isTrue) {
+                    $elment.scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", true);
+                } else {
+                    $elment.scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", false);
+                }
+            }
+        });
 
         // 邮箱校验
         var checkTimeout;
