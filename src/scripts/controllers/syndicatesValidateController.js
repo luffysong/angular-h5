@@ -251,7 +251,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             });
         };
 
-        
+
 
         $scope.enterId = function(){
             if(!$scope.investor['id-confirm']) return;
@@ -369,15 +369,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 }
             });
         };
-
-        //公司提醒
-        $scope.companyWarm = function(){
-
-            ErrorService.alert({
-                msg:' 公司全称会作为跟投人审核的重要依据，若无公司则填写“自由职业者”。'
-            });
-
-        }
 
         // 为什么填写身份证
         $scope.whyCard = function(){
