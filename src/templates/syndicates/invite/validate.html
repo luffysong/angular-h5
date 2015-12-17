@@ -5,7 +5,7 @@
         <div class="form-group">
             <label class="label-control" for="investor-name"><span class="c-red">*</span>姓名</label>
             <input class="form-control" type="text" id="investor-name" name="investor-name" placeholder="须与身份证一致" maxlength="15" required ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" ng-model="investor.name">
-            <div class="split" ng-if="!investor.avatar || action.uploaded"></div>
+            <!--<div class="split" ng-if="!investor.avatar || action.uploaded"></div>-->
             <!--<div class="avatar-container" style="background-image: url({{investor.avatar | image: 70 : 'user'}});" ng-if="!investor.avatar || action.uploaded">-->
                 <!--<div class="progress" ng-if="avatarProgress && (avatarProgress != 100)">{{avatarProgress }}%</div>-->
                 <!--<input class="avatar" type="file" id="investor-avatar" name="investor-avatar" required-->
@@ -27,8 +27,7 @@
             <input class="form-control" type="text" id="investor-id" name="investor-id" placeholder="点击填写"  required ng-model="investor.id">
         </div>
         <div class="error-tip error clearfix">
-            <span ng-show="(syndicatesValidateForm['investor-id'].$invalid && syndicatesValidateForm['investor-id'].$dirty) &&
-                            (syndicatesValidateForm['investor-id'].$error.required || syndicatesValidateForm.$error.idcardInvalid)">
+            <span ng-show="(syndicatesValidateForm['investor-id'].$error.required || syndicatesValidateForm.$error.idcardInvalid)">
                 <span class="tip-icon">!</span>请输入正确的身份证号码
             </span>
             <a href="javascript:;" class="why-card" ng-click="whyCard($event)">为什么填写身份证?</a>
