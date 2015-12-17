@@ -315,7 +315,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             UserService.basic.update({
                 id: $scope.uid
             }, {
-                avatar: $scope.investor.avatar,
+                avatar: $scope.investor.avatar || kr.defaulImg.defaultAvatarUrl,
                 name: $scope.investor.name,
                 email: $scope.investor.email,
                 phone: $scope.investor.phone,
