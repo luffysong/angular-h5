@@ -290,7 +290,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         $scope.condition = DictionaryService.getDict("RnvInvestorInfo");
 
 
-        var investorSkip = function(){
+        var investorSkip = function(flag){
 
             if($stateParams.activity_id){
                 $state.go('syndicatesCompany', {
@@ -300,6 +300,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             }else{
 
                 var statusPage = $stateParams.isFromLogin ? 'syndicatesInvite' : 'syndicatesGif';
+                statusPage = flag ? 'syndicatesGif' : statusPage;
                 $state.go(statusPage, {
                     id: $scope.investor.uid_inviter
                 });
@@ -350,7 +351,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     $scope.hasClick = false;
                 }, function(err) {
                     if(err.code && (err.code == 1002 || err.code == 1003)) {
-                        investorSkip();
+                        investorSkip(true);
                     } else {
                         ErrorService.alert(err);
                     }
