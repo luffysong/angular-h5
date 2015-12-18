@@ -60,12 +60,12 @@
         </div>
     </div>
 
-    <div class="syndicates-invite-stick" ng-if="isLogin">
+    <div class="syndicates-invite-stick" ng-if="isLogin && isCoInvestor">
         <a class="btn login-btn" href="" ng-click="viewInviteRecord($event);">邀请记录</a>
     </div>
 
     <div class="syndicates-invite-stick" ng-if="!isLogin">
-        <a class="btn login-btn" href="" login-btn="{{rongHost}}/m/#/syndicatesValidate?krsrc=sqzw_h5" data-stat-click="laxinhuodong-h5.denglubutton">立即参与</a>
+        <a class="btn login-btn" href="" login-btn="{{rongHost}}/m/#/syndicatesValidate?krsrc=sqzw_h5&isFromLogin=1" data-stat-click="laxinhuodong-h5.denglubutton">立即参与</a>
     </div>
 
     <div class="syndicates-invite-stick" ng-if="isLogin && !isCoInvestor">

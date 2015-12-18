@@ -298,7 +298,9 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     skipstep:'checkemail'
                 });
             }else{
-                $state.go('syndicatesGift', {
+
+                var statusPage = $stateParams.isFromLogin ? 'syndicatesInvite' : 'syndicatesGif';
+                $state.go(statusPage, {
                     id: $scope.investor.uid_inviter
                 });
             }
