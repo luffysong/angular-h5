@@ -349,6 +349,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     uid_inviter: $scope.investor.uid_inviter
                 }, function(data) {
                     $scope.hasClick = false;
+                    investorSkip(true);
                 }, function(err) {
                     if(err.code && (err.code == 1002 || err.code == 1003)) {
                         investorSkip(true);
