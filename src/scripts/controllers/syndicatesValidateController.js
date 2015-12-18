@@ -5,11 +5,13 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesValidateController',
-    function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService, $cookies) {
+    function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, IDCardService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService, $cookies) {
         document.title = '来36氪做股东';
         $scope.$on('$locationChangeStart', function() {
             document.title = '36氪股权融资';
         });
+        //IDCardService.getIdCardInfo('500381198704197577')
+
 
         $timeout(function(){
             window.scroll(0,0);
@@ -93,69 +95,100 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 $scope.investor.address.address1 = data.cert_info.country;
                 $scope.investor.address.address2 = data.cert_info.city;
             }
+
         }, function(err) {
-            console.log(err);
+
+            //todo;
+            if(err.code && (err.code == 1002 || err.code == 1003)){
+                investorSkip();
+            } else {
+                ErrorService.alert(err);
+            }
         });
 
-        // 头像上传
-        $scope.androidUpload = AndroidUploadService.setClick(function(file) {
-            $scope.$apply(function() {
-                $scope.investor.avatar = file;
-            });
+
+
+        //// 头像上传
+        //$scope.androidUpload = AndroidUploadService.setClick(function(file) {
+        //    $scope.$apply(function() {
+        //        $scope.investor.avatar = file;
+        //    });
+        //});
+        //
+        //$scope.imgFileSelected  = function(files, e) {
+        //    e && e.preventDefault();
+        //
+        //    var upyun = window.kr.upyun;
+        //
+        //    if(files[0].size > 5 * 1024 * 1024){
+        //        ErrorService.alert({
+        //            msg:'附件大于5M'
+        //        });
+        //        return;
+        //    }
+        //
+        //    for(var i = 0; i < files.length; i++) {
+        //        var file = files[i];
+        //        $scope.action.uploading = true;
+        //        DefaultService.getUpToken({
+        //            'x-gmkerl-type': 'fix_width', //限定宽度,高度自适应
+        //            'x-gmkerl-value': '900',      //限定的宽度的值
+        //            'x-gmkerl-unsharp': true
+        //        }).then(function (data) {
+        //            $scope.upload = $upload.upload({
+        //                url: upyun.api + '/' + upyun.bucket.name,
+        //                data: data,
+        //                file: file,
+        //                withCredentials: false
+        //            }).progress(function (evt) {
+        //                console.log(parseInt(100.0 * evt.loaded / evt.total));
+        //                $scope.avatarProgress = parseInt(100.0 * evt.loaded / evt.total);
+        //            }).success(function (data, status, headers, config) {
+        //                $scope.avatarProgress = 0;
+        //                var filename = data.url.toLowerCase();
+        //                if(filename.indexOf('.jpeg') != -1 || filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
+        //                    $scope.investor.avatar = upyun.bucket.url + data.url;
+        //                    $scope.action.uploaded = true;
+        //                } else {
+        //                    ErrorService.alert({
+        //                        msg: '格式不支持，请重新上传！'
+        //                    });
+        //                }
+        //                $scope.action.uploading = false;
+        //            }).error(function(err){
+        //                ErrorService.alert({
+        //                    msg: '上传过程中出现错误，请重新上传！'
+        //                });
+        //                $scope.action.uploading = false;
+        //            });
+        //        }, function (err) {
+        //            ErrorService.alert(err);
+        //            $scope.action.uploading = false;
+        //        });
+        //    }
+        //};
+
+        $scope.$watch("[investor.id]",function(from){
+
+            var $elment = angular.element($("form[name='syndicatesValidateForm']"));
+
+            if($elment.length > 0) {
+                if(IDCardService.getIdCardInfo($scope.investor.id).isTrue) {
+                    $elment.scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", true);
+                }
+            }
         });
+        $scope.checkId = function(){
+            var $elment = angular.element($("form[name='syndicatesValidateForm']"));
 
-        $scope.imgFileSelected  = function(files, e) {
-            e && e.preventDefault();
-
-            var upyun = window.kr.upyun;
-
-            if(files[0].size > 5 * 1024 * 1024){
-                ErrorService.alert({
-                    msg:'附件大于5M'
-                });
-                return;
+            if($elment.length > 0) {
+                if(IDCardService.getIdCardInfo($scope.investor.id).isTrue) {
+                    $elment.scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", true);
+                } else {
+                    $elment.scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", false);
+                }
             }
-
-            for(var i = 0; i < files.length; i++) {
-                var file = files[i];
-                $scope.action.uploading = true;
-                DefaultService.getUpToken({
-                    'x-gmkerl-type': 'fix_width', //限定宽度,高度自适应
-                    'x-gmkerl-value': '900',      //限定的宽度的值
-                    'x-gmkerl-unsharp': true
-                }).then(function (data) {
-                    $scope.upload = $upload.upload({
-                        url: upyun.api + '/' + upyun.bucket.name,
-                        data: data,
-                        file: file,
-                        withCredentials: false
-                    }).progress(function (evt) {
-                        console.log(parseInt(100.0 * evt.loaded / evt.total));
-                        $scope.avatarProgress = parseInt(100.0 * evt.loaded / evt.total);
-                    }).success(function (data, status, headers, config) {
-                        $scope.avatarProgress = 0;
-                        var filename = data.url.toLowerCase();
-                        if(filename.indexOf('.jpeg') != -1 || filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1) {
-                            $scope.investor.avatar = upyun.bucket.url + data.url;
-                            $scope.action.uploaded = true;
-                        } else {
-                            ErrorService.alert({
-                                msg: '格式不支持，请重新上传！'
-                            });
-                        }
-                        $scope.action.uploading = false;
-                    }).error(function(err){
-                        ErrorService.alert({
-                            msg: '上传过程中出现错误，请重新上传！'
-                        });
-                        $scope.action.uploading = false;
-                    });
-                }, function (err) {
-                    ErrorService.alert(err);
-                    $scope.action.uploading = false;
-                });
-            }
-        };
+        }
 
         // 邮箱校验
         var checkTimeout;
@@ -229,18 +262,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             });
         };
 
-        // 身份证验证
-        $timeout(function(){
-            $scope.$watch("[investor['id-confirm'], investor.id]",function(from){
-                if(angular.element($("form[name='syndicatesValidateForm']")).length > 0) {
-                    if(from[0] != from[1]) {
-                        angular.element($("form[name='syndicatesValidateForm']")).scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", false);
-                    } else {
-                        angular.element($("form[name='syndicatesValidateForm']")).scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", true);
-                    }
-                }
-            });
-        }, 500);
+
 
         $scope.enterId = function(){
             if(!$scope.investor['id-confirm']) return;
@@ -267,6 +289,24 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         // 投资阶段
         $scope.condition = DictionaryService.getDict("RnvInvestorInfo");
 
+
+        var investorSkip = function(flag){
+
+            if($stateParams.activity_id){
+                $state.go('syndicatesCompany', {
+                    activity_id: $stateParams.activity_id,
+                    skipstep:'checkemail'
+                });
+            }else{
+
+                var statusPage = $stateParams.isFromLogin ? 'syndicatesInvite' : 'syndicatesGift';
+                statusPage = flag ? 'syndicatesGift' : statusPage;
+                $state.go(statusPage, {
+                    id: $scope.investor.uid_inviter
+                });
+            }
+        }
+
         // 提交表单
         $scope.hasClick = false;
         $scope.submitForm = function(e) {
@@ -274,26 +314,25 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             $scope.enterCard = true;
             if(!checkForm('syndicatesValidateForm')) return;
 
-            if(!$scope.investor.avatar) {
-                $('<div class="error-alert error error-code">请上传真实头像</div>').appendTo('body');
-                $timeout(function() {
-                    $('.error-code').fadeOut();
-                }, 2000);
-                return;
-            }
+            //if(!$scope.investor.avatar) {
+            //    $('<div class="error-alert error error-code">请上传真实头像</div>').appendTo('body');
+            //    $timeout(function() {
+            //        $('.error-code').fadeOut();
+            //    }, 2000);
+            //    return;
+            //}
 
             $scope.hasClick = true;
 
             UserService.basic.update({
                 id: $scope.uid
             }, {
-                avatar: $scope.investor.avatar,
+                avatar: $scope.investor.avatar || kr.defaulImg.defaultAvatarUrl,
                 name: $scope.investor.name,
                 email: $scope.investor.email,
                 phone: $scope.investor.phone,
                 smscode: $scope.investor.captcha
             }, function(data){
-                console.log(data);
 
                 CrowdFundingService["audit"].save({
                     id: 'co-investor',
@@ -310,18 +349,10 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     uid_inviter: $scope.investor.uid_inviter
                 }, function(data) {
                     $scope.hasClick = false;
+                    investorSkip(true);
                 }, function(err) {
-                    if(err.code && err.code == 1002) {
-                        if($stateParams.activity_id){
-                            $state.go('syndicatesCompany', {
-                                activity_id: $stateParams.activity_id,
-                                skipstep:'checkemail'
-                            });
-                        }else{
-                            $state.go('syndicatesGift', {
-                                id: $scope.investor.uid_inviter
-                            });
-                        }
+                    if(err.code && (err.code == 1002 || err.code == 1003)) {
+                        investorSkip(true);
                     } else {
                         ErrorService.alert(err);
                     }
@@ -337,6 +368,27 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         $scope.seeRisk = function(){
             $modal.open({
                 templateUrl: 'templates/company/pop-risk-tip-all.html',
+                windowClass: 'remind-modal-window',
+                controller: [
+                    '$scope', '$modalInstance','scope',
+                    function ($scope, $modalInstance, scope) {
+                        $scope.ok = function(){
+                            $modalInstance.dismiss();
+                        }
+                    }
+                ],
+                resolve: {
+                    scope: function(){
+                        return $scope;
+                    }
+                }
+            });
+        };
+
+        // 为什么填写身份证
+        $scope.whyCard = function(){
+            $modal.open({
+                templateUrl: 'templates/common/why-card.html',
                 windowClass: 'remind-modal-window',
                 controller: [
                     '$scope', '$modalInstance','scope',

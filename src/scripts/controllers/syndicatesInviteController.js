@@ -33,6 +33,10 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
 
         // 跟投人身份
         if($scope.isLogin) {
+
+            if(!$stateParams.id){
+                window.location.hash = '/syndicatesInvite?id='+$scope.uid;
+            }
             UserService.getIdentity(function (data) {
                 if(!data.coInvestor) {
                     CrowdFundingService["audit"].get({

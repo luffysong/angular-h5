@@ -1,21 +1,25 @@
 <div class="syndicates-validate" ng-show="!loadingInst.syndicatesValidate">
-    <div class="avatar-process" ng-if="!investor.avatar && process != 100"></div>
+    <div class="title-txt">
+        <h3>认证跟投人</h3>
+        <h4>拥有贵氪身份,进行股权投资</h4>
+    </div>
+    <!--<div class="avatar-process" ng-if="!investor.avatar && process != 100"></div>-->
     <form ng-submit="$event.preventDefault()"  action="" name="syndicatesValidateForm">
         <!-- 完善资料（姓名&头像）-->
-        <div class="form-group name-group">
+        <div class="form-group">
             <label class="label-control" for="investor-name"><span class="c-red">*</span>姓名</label>
-            <input class="form-control" type="text" id="investor-name" name="investor-name" placeholder="须与身份证一致" maxlength="15" required ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" ng-model="investor.name">
-            <div class="split" ng-if="!investor.avatar || action.uploaded"></div>
-            <div class="avatar-container" style="background-image: url({{investor.avatar | image: 70 : 'user'}});" ng-if="!investor.avatar || action.uploaded">
-                <div class="progress" ng-if="avatarProgress && (avatarProgress != 100)">{{avatarProgress }}%</div>
-                <input class="avatar" type="file" id="investor-avatar" name="investor-avatar" required
-                       ng-file-select
-                       ng-file-change="imgFileSelected($files, $event)"
-                       ng-multiple="false"
-                       resetOnClick="true" accept="image/*"
-                       ng-click="androidUpload($event)">
-                <span class="avatar-tip" ng-if="!investor.avatar">头像</span>
-            </div>
+            <input class="form-control" type="text" id="investor-name" name="investor-name" placeholder="填写身份证上姓名" maxlength="15" required ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" ng-model="investor.name">
+            <!--<div class="split" ng-if="!investor.avatar || action.uploaded"></div>-->
+            <!--<div class="avatar-container" style="background-image: url({{investor.avatar | image: 70 : 'user'}});" ng-if="!investor.avatar || action.uploaded">-->
+                <!--<div class="progress" ng-if="avatarProgress && (avatarProgress != 100)">{{avatarProgress }}%</div>-->
+                <!--<input class="avatar" type="file" id="investor-avatar" name="investor-avatar" required-->
+                       <!--ng-file-select-->
+                       <!--ng-file-change="imgFileSelected($files, $event)"-->
+                       <!--ng-multiple="false"-->
+                       <!--resetOnClick="true" accept="image/*"-->
+                       <!--ng-click="androidUpload($event)">-->
+                <!--<span class="avatar-tip" ng-if="!investor.avatar">头像</span>-->
+            <!--</div>-->
         </div>
         <div class="error-tip error" ng-show="syndicatesValidateForm['investor-name'].$invalid && syndicatesValidateForm['investor-name'].$dirty">
             <span ng-show="syndicatesValidateForm['investor-name'].$error.required"><span class="tip-icon">!</span>请输入你的姓名</span>
@@ -24,27 +28,36 @@
         <!-- 认证跟投人（身份证号码）-->
         <div class="form-group">
             <label class="label-control" for="investor-id"><span class="c-red">*</span>身份证</label>
-            <input class="form-control" type="text" id="investor-id" name="investor-id" placeholder="点击填写" required ng-model="investor.id">
+            <input class="form-control" type="text" id="investor-id"  ng-blur="checkId($event)"
+                   name="investor-id" placeholder="填写正确的身份证号码"  required ng-model="investor.id">
         </div>
-        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-id'].$invalid && syndicatesValidateForm['investor-id'].$dirty">
-            <span ng-show="syndicatesValidateForm['investor-id'].$error.required"><span class="tip-icon">!</span>请输入你的身份证号</span>
+        <div class="error-tip error clearfix">
+
+            <a href="javascript:;" class="why-card" ng-click="whyCard($event)">为什么填写身份证?</a>
+            <span ng-show="syndicatesValidateForm['investor-id'].$dirty &&
+                            syndicatesValidateForm.$error.idcardInvalid ">
+                <span class="tip-icon">!</span>请输入正确的身份证号码
+            </span>
+
         </div>
-        <div class="form-group">
-            <label class="label-control" for="investor-id"><span class="c-red">*</span>确认身份证</label>
-            <input class="form-control" type="text" id="investor-id-confirm" name="investor-id-confirm" placeholder="点击填写" required ng-model="investor['id-confirm']" ng-blur="enterId()">
-        </div>
-        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-id-confirm'].$invalid && syndicatesValidateForm['investor-id-confirm'].$dirty">
-            <span ng-show="syndicatesValidateForm['investor-id-confirm'].$error.required"><span class="tip-icon">!</span>请重新输入你的身份证号</span>
-        </div>
-        <div class="error-tip error" ng-show="syndicatesValidateForm.$error.idcardInvalid && enterCard">
-            <span><span class="tip-icon">!</span>两次输入身份证号码不一致</span>
-        </div>
+
+
+        <!--<div class="form-group">-->
+            <!--<label class="label-control" for="investor-id"><span class="c-red">*</span>确认身份证</label>-->
+            <!--<input class="form-control" type="text" id="investor-id-confirm" name="investor-id-confirm" placeholder="点击填写" required ng-model="investor['id-confirm']" ng-blur="enterId()">-->
+        <!--</div>-->
+        <!--<div class="error-tip error" ng-show="syndicatesValidateForm['investor-id-confirm'].$invalid && syndicatesValidateForm['investor-id-confirm'].$dirty">-->
+            <!--<span ng-show="syndicatesValidateForm['investor-id-confirm'].$error.required"><span class="tip-icon">!</span>请重新输入你的身份证号</span>-->
+        <!--</div>-->
+        <!--<div class="error-tip error" ng-show="syndicatesValidateForm.$error.idcardInvalid && enterCard">-->
+            <!--<span><span class="tip-icon">!</span>两次输入身份证号码不一致</span>-->
+        <!--</div>-->
         <!-- 完善资料（邮箱）-->
-        <div class="form-group" ng-if="!investor.hasEmail">
+        <div class="form-group" ng-if="investor.hasEmail">
             <label class="label-control" for="investor-email"><span class="c-red">*</span>邮箱</label>
-            <input class="form-control" type="email" id="investor-email" name="investor-email" placeholder="点击填写" required ng-model="investor.email">
+            <input class="form-control" type="email" id="investor-email" name="investor-email" placeholder="填写常用邮箱" required ng-model="investor.email">
         </div>
-        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-email'].$invalid && syndicatesValidateForm['investor-email'].$dirty" ng-if="!investor.hasEmail">
+        <div class="error-tip error" ng-show="syndicatesValidateForm['investor-email'].$invalid && syndicatesValidateForm['investor-email'].$dirty" ng-if="investor.hasEmail">
             <span ng-show="syndicatesValidateForm['investor-email'].$error.required"><span class="tip-icon">!</span>请输入你的邮箱</span>
             <span ng-show="syndicatesValidateForm['investor-email'].$error.email"><span class="tip-icon">!</span>请输入合法邮箱地址</span>
             <span ng-show="investor.email && syndicatesValidateForm['investor-email'].$error.checked && !syndicatesValidateForm['investor-email'].$error.email"><span class="tip-icon">!</span>你输入的邮箱已被占用</span>
@@ -53,7 +66,8 @@
         <div class="form-group" ng-if="!investor.hasPhone">
             <label class="label-control" for="investor-phone"><span class="c-red">*</span>手机号码</label>
             <!--ng-pattern="REGEXP.phone" -->
-            <input class="form-control" type="text" id="investor-phone" name="investor-phone" placeholder="点击填写" required ng-model="investor.phone">
+            <input class="form-control" type="text" id="investor-phone" name="investor-phone" placeholder="填写常用手机号" required ng-model="investor.phone">
+            <span class="icon-"></span>
         </div>
         <div class="error-tip error" ng-show="syndicatesValidateForm['investor-phone'].$invalid && syndicatesValidateForm['investor-phone'].$dirty" ng-if="!investor.hasPhone">
             <span ng-show="syndicatesValidateForm['investor-phone'].$error.required"><span class="tip-icon">!</span>请输入你的电话号码</span>
@@ -72,7 +86,7 @@
         <!-- 认证跟投人（公司）-->
         <div class="form-group">
             <label class="label-control" for="investor-company"><span class="c-red">*</span>公司</label>
-            <input class="form-control" type="text" id="investor-company" name="investor-company" placeholder="点击填写" required ng-model="investor.company">
+            <input class="form-control" type="text" id="investor-company" name="investor-company" placeholder='填公司全称，若无填“自由职业者”' required ng-model="investor.company">
         </div>
         <div class="error-tip error" ng-show="syndicatesValidateForm['investor-company'].$invalid && syndicatesValidateForm['investor-company'].$dirty">
             <span ng-show="syndicatesValidateForm['investor-company'].$error.required"><span class="tip-icon">!</span>请输入你的公司名称</span>
@@ -80,7 +94,7 @@
         <!-- 认证跟投人（职位）-->
         <div class="form-group">
             <label class="label-control" for="investor-work"><span class="c-red">*</span>职位</label>
-            <input class="form-control" type="text" id="investor-work" name="investor-work" placeholder="点击填写" required ng-model="investor.work">
+            <input class="form-control" type="text" id="investor-work" name="investor-work" placeholder="填写您的职位" required ng-model="investor.work">
         </div>
         <div class="error-tip error" ng-show="syndicatesValidateForm['investor-work'].$invalid && syndicatesValidateForm['investor-work'].$dirty">
             <span ng-show="syndicatesValidateForm['investor-work'].$error.required"><span class="tip-icon">!</span>请输入你的职位</span>

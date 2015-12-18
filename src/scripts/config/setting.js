@@ -12,4 +12,7 @@ kr.upyun = {
         url: 'http://krplus-normal.b0.upaiyun.com'
     }
 };
+kr.defaulImg = {
+    defaultAvatarUrl:"http://krplus.b0.upaiyun.com/default_avatar.png"
+}
 
