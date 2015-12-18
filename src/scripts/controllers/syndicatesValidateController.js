@@ -299,8 +299,8 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 });
             }else{
 
-                var statusPage = $stateParams.isFromLogin ? 'syndicatesInvite' : 'syndicatesGif';
-                statusPage = flag ? 'syndicatesGif' : statusPage;
+                var statusPage = $stateParams.isFromLogin ? 'syndicatesInvite' : 'syndicatesGift';
+                statusPage = flag ? 'syndicatesGift' : statusPage;
                 $state.go(statusPage, {
                     id: $scope.investor.uid_inviter
                 });
