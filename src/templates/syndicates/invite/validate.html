@@ -1,7 +1,7 @@
 <div class="syndicates-validate" ng-show="!loadingInst.syndicatesValidate">
     <div class="title-txt">
         <h3>认证跟投人</h3>
-        <h4>拥有贵客身份,进行股权投资</h4>
+        <h4>拥有贵氪身份,进行股权投资</h4>
     </div>
     <!--<div class="avatar-process" ng-if="!investor.avatar && process != 100"></div>-->
     <form ng-submit="$event.preventDefault()"  action="" name="syndicatesValidateForm">
@@ -28,17 +28,20 @@
         <!-- 认证跟投人（身份证号码）-->
         <div class="form-group">
             <label class="label-control" for="investor-id"><span class="c-red">*</span>身份证</label>
-            <input class="form-control" type="text" id="investor-id" name="investor-id" placeholder="填写正确的身份证号码"  required ng-model="investor.id">
+            <input class="form-control" type="text" id="investor-id"  ng-blur="checkId($event)"
+                   name="investor-id" placeholder="填写正确的身份证号码"  required ng-model="investor.id">
         </div>
         <div class="error-tip error clearfix">
+
             <a href="javascript:;" class="why-card" ng-click="whyCard($event)">为什么填写身份证?</a>
-            <span ng-show="
-                (syndicatesValidateForm['investor-id'].$error.required || syndicatesValidateForm.$error.idcardInvalid)
-                ">
+            <span ng-show="syndicatesValidateForm['investor-id'].$dirty &&
+                            syndicatesValidateForm.$error.idcardInvalid ">
                 <span class="tip-icon">!</span>请输入正确的身份证号码
             </span>
 
         </div>
+
+
         <!--<div class="form-group">-->
             <!--<label class="label-control" for="investor-id"><span class="c-red">*</span>确认身份证</label>-->
             <!--<input class="form-control" type="text" id="investor-id-confirm" name="investor-id-confirm" placeholder="点击填写" required ng-model="investor['id-confirm']" ng-blur="enterId()">-->

@@ -168,8 +168,17 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         //    }
         //};
 
-        $scope.$watch("[investor['id-confirm'], investor.id]",function(from){
+        $scope.$watch("[investor.id]",function(from){
 
+            var $elment = angular.element($("form[name='syndicatesValidateForm']"));
+
+            if($elment.length > 0) {
+                if(IDCardService.getIdCardInfo($scope.investor.id).isTrue) {
+                    $elment.scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", true);
+                }
+            }
+        });
+        $scope.checkId = function(){
             var $elment = angular.element($("form[name='syndicatesValidateForm']"));
 
             if($elment.length > 0) {
@@ -179,7 +188,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     $elment.scope()["syndicatesValidateForm"].$setValidity("idcardInvalid", false);
                 }
             }
-        });
+        }
 
         // 邮箱校验
         var checkTimeout;
