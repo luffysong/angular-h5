@@ -1,6 +1,19 @@
 /*众筹订单页样式*/
 .syndicate-all-order {
+    @color-gary-bg:#fafafa;
+    @color-gary-hader:#999999;
+    @color-gary-txt:#333333;
+    @color-yellow:#ff6600;
+    @color-blue:#008df2;
     padding-bottom: 50px;
+    background-color: #e7ebee;
+    .fl-right{
+        float: right;
+    }
+
+    .order-item{
+        margin-bottom: 30px;
+    }
 
     .order-head {
         height: 44px;
@@ -16,10 +29,11 @@
     .sup-header {
         height: 38px;
         line-height: 38px;
-        padding: 0 10px;
-        color: #333;
-        font-size: 14px;
-        background-color: transparent;
+        padding: 0 15px;
+        color: @color-gary-hader;
+        font-size: 12px;
+        background-color: @color-gary-bg;
+
     }
 
     .order-cancel,
@@ -34,20 +48,15 @@
         padding: 15px 0;
         -webkit-box-align: center;
         background-color: #fff;
-        border-top: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
         overflow: hidden;
 
-        .banner {
-            position: absolute;
-            width: 100px;
-            right: -30px;
-            top: 10px;
-            transform: rotate(45deg);
-            color: #fff;
-            background-color: #56b9ff;
-            text-align: center;
+        .kr-code{
             font-size: 12px;
+            border: 1px solid @color-blue;
+            margin-left: 5px;
+            color: @color-blue;
+            padding:1px 5px;
+            border-radius: 8px;
         }
     }
 
@@ -68,40 +77,24 @@
 
     .company-name {
         display: block;
-        color: #333;
+        color: @color-gary-txt;
+        font-weight: 500;
         white-space: nowrap;
     }
 
     .money-info {
-        padding: 10px 0;
-        background-color: #fff;
-        border-bottom: 1px solid #ddd;
+        padding: 10px 15px;
+        background-color: @color-gary-bg;
         overflow: hidden;
-        text-align: center;
 
         p {
-            font-weight: 500;
-            color: #404040;
+            color: @color-gary-txt;
             margin-bottom: 0;
-
-            &.money {
-                font-size: 16px;
-                text-indent: 12px;
-            }
-
-            &.text {
-                color: #999;
+            &:first-child{
+                margin-bottom: 5px;
             }
         }
 
-        [class^="money-"] {
-            float: left;
-            width: 50%;
-
-            &:first-child {
-                border-right: 1px solid #ddd;
-            }
-        }
     }
 
     .stage-info {
@@ -110,10 +103,12 @@
             background-color: #fff;
             border-bottom: 1px solid #ddd;
         }
-
+        .stage-btn-box{
+            text-align: center;
+            background-color: #fff;
+            padding: 20px 0 20px;
+        }
         .stage-btn {
-            width: 100%;
-            margin-top: 10px;
             color: #fff;
             background-color: #008df2;
             border: none;
@@ -126,12 +121,12 @@
         }
 
         .stage-item {
-            color: #333;
+            color: @color-gary-txt;
             overflow: hidden;
+            margin-bottom: 5px;
 
-            &:first-child {
-                color: #b6b6b6;
-                margin-bottom: 5px;
+            &:last-child {
+                margin-bottom: 0px;
             }
 
             &.coupon {
@@ -156,16 +151,19 @@
                 color: #fff;
                 border-radius: 2px;
                 text-align: center;
-                padding: 3px 10px;
+                padding: 0px 5px;
                 margin-left: 18px;
                 background-color: #ccc;
 
                 &.has {
-                    background-color: #ffb658;
+                    background-color: #fff;
+                    border:1px solid @color-blue;
+                    color: @color-blue;
+                    border-radius: 2px;
                 }
 
                 &.not {
-                    background-color: #56b9ff;
+                    background-color: @color-blue;
                 }
             }
         }
