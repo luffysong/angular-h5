@@ -180,7 +180,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
         $scope.goOutline = false;
         /*线下付款*/
         $scope.payOutline = function(e){
-            if($scope.pay.activeWay == "coupon" && $scope.calAmount <= 0 && $scope.couponData.length){
+            if($scope.pay.activeWay == "coupon" && $scope.calAmount <= 0 && $scope.couponData.length && $scope.type != "deposit"){
                 $scope.showEnsure = true;
                 $scope.tip.msgTitle = "你有投资券尚未使用";
                 $scope.tip.msgContent = "一旦确定则不可新增或删除投资券";
