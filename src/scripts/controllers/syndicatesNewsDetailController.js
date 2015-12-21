@@ -31,7 +31,6 @@ angular.module('defaultApp.controller').controller('syndicatesNewsDetailControll
             data.info.time = $scope.handleDate(data.info.updated_at);
             $scope.newsDetail.detail = data.info;
             $scope.config.title = $scope.mailConfig.subject = $scope.config.desc = window.WEIXINSHARE.shareTitle = $scope.newsDetail.detail.title+"【36氪股权投资】";
-            InitWeixin();
             $timeout(function(){
                 loading.hide("newsDetail");
             },100);
@@ -39,7 +38,8 @@ angular.module('defaultApp.controller').controller('syndicatesNewsDetailControll
                 if($("section.news-content img").length){
                     window.WEIXINSHARE.shareImg = $("section.news-content img")[0].src;
                 }
-            },2000);
+                InitWeixin();
+            },1000);
         },function(err){
             ErrorService.alert(err);
         });
