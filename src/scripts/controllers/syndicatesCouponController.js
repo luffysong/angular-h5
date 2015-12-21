@@ -177,7 +177,7 @@ angular.module('defaultApp.controller').controller('syndicatesCouponController',
             } : {
                 tid:$scope.tid,
                 type:"balance",
-                ids:$scope.ids,
+                ids:$scope.ids
             };
             $state.go("syndicatesPayWay",obj);
         }
