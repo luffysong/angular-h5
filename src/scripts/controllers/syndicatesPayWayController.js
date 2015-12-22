@@ -20,7 +20,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
         $scope.uid = UserService.getUID();
         $scope.tid = $stateParams.tid;
         $scope.ids = $stateParams.ids || "";
-        $scope.calAmount = $stateParams.calAmount;
+        $scope.calAmount = $stateParams.calAmount || 0;
         $scope.payType = "alipay";
         $scope.bankDetails = DictionaryService.getDict('bank_limit_lianlianpay');
         $scope.pay = {
@@ -145,18 +145,30 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
         }
         $scope.tip = {
             msgTitle:"确认使用投资券？",
-            msgContent:"一旦使用则与该订单绑定，不可新增或删除投资券"
+            msgContent:"一旦使用则与该订单绑定，不可新增或删除投资券",
+            btnText:"确定"
         };
         $scope.goPay = function(){
-            if($scope.type != "deposit" && !$scope.hasUseCoupon){
+            if($scope.type != "deposit" && !$scope.hasUseCoupon && $scope.tradeData.payment.pay_times <= 0){
                 if($scope.pay.activeWay == "code" && $scope.chanel.validate){
                     $scope.showEnsure = true;
                     $scope.tip.msgTitle = "确认使用渠道码？";
                     $scope.tip.msgContent = "一旦使用则与该订单绑定，不可更改订单金额";
-                }else if($scope.pay.activeWay == "coupon" && $scope.calAmount > 0){
-                    $scope.showEnsure = true;
-                    $scope.tip.msgTitle = "确认使用投资券？";
-                    $scope.tip.msgContent = "一旦使用则与该订单绑定，不可新增或删除投资券";
+                    $scope.tip.btnText = "确定";
+                }else if($scope.pay.activeWay == "coupon"){
+                    if($scope.calAmount > 0){
+                        $scope.showEnsure = true;
+                        $scope.tip.msgTitle = "确认使用投资券？";
+                        $scope.tip.msgContent = "一旦使用则与该订单绑定，不可新增或删除投资券";
+                        $scope.tip.btnText = "确定";
+                    }else if($scope.couponData.length){
+                        $scope.showEnsure = true;
+                        $scope.tip.msgTitle = "你有投资券尚未使用";
+                        $scope.tip.msgContent = "一旦确定则不可新增或删除投资券";
+                        $scope.tip.btnText = "不使用投资劵";
+                    }else{
+                        $scope.skipPay();
+                    }
                 }else{
                     $scope.skipPay();
                 }
@@ -165,7 +177,24 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
                 $scope.skipPay();
             }
         }
+        $scope.goOutline = false;
+        /*线下付款*/
+        $scope.payOutline = function(e){
+            if($scope.pay.activeWay == "coupon" && $scope.calAmount <= 0 && $scope.couponData.length && $scope.type != "deposit" && $scope.tradeData.payment.pay_times <= 0){
+                $scope.showEnsure = true;
+                $scope.tip.msgTitle = "你有投资券尚未使用";
+                $scope.tip.msgContent = "一旦确定则不可新增或删除投资券";
+                $scope.tip.btnText = "不使用投资劵";
+                $scope.goOutline = true;
+                e.preventDefault();
+            }
+        }
         $scope.skipPay = function(){
+            if($scope.goOutline){
+                $state.go("payOutlineRemind",{
+                    tid:$scope.tid,type:$scope.type,couponIds:$scope.ids
+                });
+            }
             /*支付宝*/
             if($scope.payType == 'alipay'){
                 location.href = '//'+location.host+'/p/payment/4/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order=https:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=https:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'coupon_ids='+$scope.ids,'coupon_channel_id='+$scope.chanel.id]).join('&');

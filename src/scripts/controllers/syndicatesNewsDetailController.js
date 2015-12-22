@@ -27,7 +27,6 @@ angular.module('defaultApp.controller').controller('syndicatesNewsDetailControll
             id:"news",
             submodel:$scope.newsDetail.id
         },function(data){
-            console.log(data);
             if(!data.info)return;
             data.info.time = $scope.handleDate(data.info.updated_at);
             $scope.newsDetail.detail = data.info;
@@ -35,6 +34,12 @@ angular.module('defaultApp.controller').controller('syndicatesNewsDetailControll
             $timeout(function(){
                 loading.hide("newsDetail");
             },100);
+            $timeout(function(){
+                if($("section.news-content img").length){
+                    window.WEIXINSHARE.shareImg = $("section.news-content img")[0].src;
+                }
+                InitWeixin();
+            },1000);
         },function(err){
             ErrorService.alert(err);
         });
@@ -87,7 +92,7 @@ angular.module('defaultApp.controller').controller('syndicatesNewsDetailControll
         window.WEIXINSHARE = {
             shareTitle: "",
             shareDesc: "刚看到这篇文章不错，推荐给你看看～",
-            shareImg: "http://krid-assets.b0.upaiyun.com/uploads/user/avatar/132821/d6bdf8ce-5fca-4cfe-860b-70c8db293b8f.png",
+            shareImg: "http://krplus-pic.b0.upaiyun.com/201509/08153430/df86c04afbd4c8a7.jpg",
             shareLink: location.href
         };
         InitWeixin();
