@@ -49,7 +49,7 @@
                 <div class="stage-item">阶段一<span class="status" ng-class="{'not': item.trade_c_f_deposit.payment.status == 1, 'has': item.trade_c_f_deposit.payment.status == 3}">{{ item.trade_c_f_deposit.payment.status | dict_trade_status }}</span></div>
                 <div class="stage-item">
                     <div class="item-left">支付保证金</div>
-                    <div class="item-right">￥{{ item.trade_c_f_deposit.deposit }}元</div>
+                    <div class="item-right">￥{{ item.trade_c_f_deposit.deposit }}</div>
                 </div>
                 <div class="stage-item" ng-if="item.trade_c_f_deposit.payment.status == 3">
                     <div class="item-left">付款时间</div>
@@ -78,9 +78,13 @@
             </div>
             <div class="stage stage-two" ng-if="item.trade_c_f_balance">
                 <div class="stage-item">阶段二<span class="status" ng-class="{'not': item.trade_c_f_balance.payment.status == 1, 'has': item.trade_c_f_balance.payment.status == 3}">{{ item.trade_c_f_balance.payment.status | dict_trade_status }}</span></div>
+                <div class="stage-item coupon" ng-if="item.trade_c_f_balance.payment.amount_coupons > 0">
+                    <div class="item-left">使用优惠券</div>
+                    <div class="item-right">-￥{{ item.trade_c_f_balance.payment.amount_coupons }}</div>
+                </div>
                 <div class="stage-item">
                     <div class="item-left">支付剩余款</div>
-                    <div class="item-right">￥{{ item.trade_c_f_balance.balance }}元</div>
+                    <div class="item-right">￥{{ item.trade_c_f_balance.balance }}</div>
                 </div>
                 <div class="stage-item" ng-if="item.trade_c_f_balance.payment.status == 3">
                     <div class="item-left">付款时间</div>
@@ -91,16 +95,13 @@
                     <div class="item-right remaining-pay-time"><span countdown date='{{ item.trade_c_f_balance.payment.close_time }}' open-date='{{ item.trade_c_f_balance.payment.open_time }}'></span></div>
                 </div>
 
-                <div class="coupon-split" ng-if="item.trade_c_f_balance.payment.amount_coupons > 0"></div>
+                <!--<div class="coupon-split" ng-if="item.trade_c_f_balance.payment.amount_coupons > 0"></div>-->
 
-                <div class="stage-item coupon" ng-if="item.trade_c_f_balance.payment.amount_coupons > 0">
-                    <div class="item-left">已优惠</div>
-                    <div class="item-right">-￥{{ item.trade_c_f_balance.payment.amount_coupons }}元</div>
-                </div>
+
 
                 <div class="stage-item" ng-if="item.trade_c_f_balance.payment.amount_coupons > 0">
                     <div class="item-left">支付剩余款</div>
-                    <div class="item-right">￥{{ item.trade_c_f_balance.payment.amount }}元</div>
+                    <div class="item-right">￥{{ item.trade_c_f_balance.payment.amount }}</div>
                 </div>
                 <div class="stage-btn-box" ng-if="(item.status < 3 || (item.status > 9
                 && item.status != 14)) &&
