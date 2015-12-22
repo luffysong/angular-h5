@@ -45,7 +45,7 @@
                         <div class="brief" title="{{item.company.brief}}">{{item.company.brief}}</div>
                     </div>
                     <div class="progress-bottom">
-                        <div class="progress-value" style="width:{{item.percent}}%" ng-class="{'max':item.percent == 100}" ng-show="item.percent">{{item.percent > 10 ? item.percent+'%' : ''}}</div>
+                        <div class="progress-value" style="width:{{item.percent > 100 ? 100 : item.percent}}%" ng-class="{'max':item.percent >= 100}" ng-show="item.percent">{{item.percent > 10 ? item.percent+'%' : ''}}</div>
                     </div>
                     <p class="project-progress-info">
                             <span>
