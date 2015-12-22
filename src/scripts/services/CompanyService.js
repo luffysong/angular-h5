@@ -160,10 +160,12 @@ angular.module('defaultApp.service').service('CompanyService', [
         }, {
             sub: [
                 "finance",
+                "past-finance",
                 "employee",
                 "founder",
                 "funds",
                 "investor",
+                "past-investor",
                 "product",
                 "other"
             ]
@@ -304,6 +306,21 @@ angular.module('defaultApp.service').service('CompanyService', [
                     })
                 }
             },
+            'past-finance': {
+                query: {
+                    method: "GET",
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (data) {
+                        if (data.data && data.data.data) {
+                            data.data.data.forEach(function (item) {
+                                // item.entity = JSON.parse(item.entity);
+                                financeAdaptor(item);
+                            });
+                        }
+                        return data;
+                    })
+                }
+            },
+
             'investor': {
                 save: {
                     method: 'POST',
@@ -317,6 +334,9 @@ angular.module('defaultApp.service').service('CompanyService', [
                     })
                 }
             },
+            'past-investor': {
+            },
+
             'funds': {
                 finish: {
                     method: 'POST',

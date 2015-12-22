@@ -185,7 +185,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             listLimit: 2
         }
         $scope.loadFinanceData = function (callback) {
-            CompanyService.finance.query({
+            CompanyService['past-finance'].query({
                 id: $scope.companyId
             }, function (data) {
                 $scope.finance.list = data.data;
@@ -201,7 +201,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             listLimit: 2
         };
         $scope.loadInvestorData = function (callback) {
-            CompanyService.investor.query({
+            CompanyService['past-investor'].query({
                 id: $scope.companyId,
                 pageSize: 100
             }, function (data) {

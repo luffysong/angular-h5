@@ -139,14 +139,14 @@
                             <!--融资金额及融资估值-->
                             <div class="detail clearfix">
                                 <div class="num text-center">
-                                    <p class="c-orange" ng-show="past.financeValue">{{past.financeValueUnit | moneyUnit}}{{past.financeValue | wanText}}</p>
-                                    <p class="c-orange" ng-show="!past.financeValue">{{parseInt(past.financeValue) === 0 ? 0 : "未知"}}</p>
+                                    <p class="c-orange" ng-show="past.financeAmount">{{past.financeAmountUnit | moneyUnit}}{{past.financeAmount | wanText}}</p>
+                                    <p class="c-orange" ng-show="!past.financeAmount">{{parseInt(past.financeAmount) === 0 ? 0 : "未知"}}</p>
                                     <p>融资金额</p>
                                 </div>
                                 <div class="line"></div>
                                 <div class="num text-center">
-                                    <p class="c-orange" ng-show="past.estimateValue">{{past.estimateValueUnit | moneyUnit}}{{past.estimateValue | wanText}}</p>
-                                    <p class="c-orange" ng-show="!past.estimateValue">{{parseInt(past.estimateValue) === 0 ? 0 : "未知"}}</p>
+                                    <p class="c-orange" ng-show="past.valuation">{{past.valuationUnit | moneyUnit}}{{past.valuation | wanText}}</p>
+                                    <p class="c-orange" ng-show="!past.valuation">{{parseInt(past.valuation) === 0 ? 0 : "未知"}}</p>
                                     <p>融资估值</p>
                                 </div>
                             </div>

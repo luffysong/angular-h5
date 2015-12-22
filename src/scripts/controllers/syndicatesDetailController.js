@@ -292,7 +292,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             ErrorService.alert(err);
         });
         /*过往投资方数据获取*/
-        CompanyService.finance.query({
+        CompanyService['past-finance'].query({
             id:$stateParams.companyId
         },{},function(data){
             if(data.data && data.data.length){
