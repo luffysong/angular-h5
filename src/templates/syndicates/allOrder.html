@@ -82,10 +82,7 @@
                     <div class="item-left">使用优惠券</div>
                     <div class="item-right">-￥{{ item.trade_c_f_balance.payment.amount_coupons }}</div>
                 </div>
-                <div class="stage-item">
-                    <div class="item-left">支付剩余款</div>
-                    <div class="item-right">￥{{ item.trade_c_f_balance.balance }}</div>
-                </div>
+
                 <div class="stage-item" ng-if="item.trade_c_f_balance.payment.status == 3">
                     <div class="item-left">付款时间</div>
                     <div class="item-right">{{ item.trade_c_f_balance.payment.notify_time }}</div>
@@ -97,8 +94,10 @@
 
                 <!--<div class="coupon-split" ng-if="item.trade_c_f_balance.payment.amount_coupons > 0"></div>-->
 
-
-
+                <div class="stage-item" ng-if="!item.trade_c_f_balance.payment.amount_coupons">
+                    <div class="item-left">支付剩余款</div>
+                    <div class="item-right">￥{{ item.trade_c_f_balance.balance }}</div>
+                </div>
                 <div class="stage-item" ng-if="item.trade_c_f_balance.payment.amount_coupons > 0">
                     <div class="item-left">支付剩余款</div>
                     <div class="item-right">￥{{ item.trade_c_f_balance.payment.amount }}</div>
