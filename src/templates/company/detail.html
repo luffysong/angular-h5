@@ -103,13 +103,13 @@
 					</div>
 					<div class="summary-panel finance-info">
 						<span>
-							融资金额&nbsp;&nbsp;<i class="money-unit" ng-if="item.financeValue">{{item.financeValueUnit | moneyUnit}} </i><span class="money" ng-if="item.financeValue">{{item.financeValue | wanText}}</span>
-							<span class="money" ng-if="!item.financeValue">未知</span>
+							融资金额&nbsp;&nbsp;<i class="money-unit" ng-if="item.financeAmount">{{item.financeAmountUnit | moneyUnit}} </i><span class="money" ng-if="item.financeAmount">{{item.financeAmount | wanText}}</span>
+							<span class="money" ng-if="!item.financeAmount">未知</span>
 						</span>
 						<span class="dividing">|</span>
 						<span>
-							融资估值&nbsp;&nbsp;<i class="money-unit" ng-if="item.estimateValue">{{item.estimateValueUnit | moneyUnit}} </i><span class="money-value" ng-if="item.estimateValue">{{item.estimateValue | wanText}}</span>
-							<span class="money-value" ng-if="!item.estimateValue">未知</span>
+							融资估值&nbsp;&nbsp;<i class="money-unit" ng-if="item.valuation">{{item.valuationUnit | moneyUnit}} </i><span class="money-value" ng-if="item.valuation">{{item.valuation | wanText}}</span>
+							<span class="money-value" ng-if="!item.valuation">未知</span>
 						</span>
 					</div>
 				</div>
