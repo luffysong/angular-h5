@@ -165,6 +165,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                 "founder",
                 "funds",
                 "investor",
+                "past-investor",
                 "product",
                 "other"
             ]
@@ -333,6 +334,9 @@ angular.module('defaultApp.service').service('CompanyService', [
                     })
                 }
             },
+            'past-investor': {
+            },
+
             'funds': {
                 finish: {
                     method: 'POST',
