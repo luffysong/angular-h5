@@ -94,7 +94,7 @@
 
                 <!--<div class="coupon-split" ng-if="item.trade_c_f_balance.payment.amount_coupons > 0"></div>-->
 
-                <div class="stage-item" ng-if="!item.trade_c_f_balance.payment.amount_coupons">
+                <div class="stage-item" ng-if="item.trade_c_f_balance.payment.amount_coupons == 0">
                     <div class="item-left">支付剩余款</div>
                     <div class="item-right">￥{{ item.trade_c_f_balance.balance }}</div>
                 </div>
