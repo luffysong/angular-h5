@@ -152,7 +152,9 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
                 'umeng.com':true,
                 'xiami.com':true,
                 'ttpod.com':true,
-                'koubei.com':true
+                'koubei.com':true,
+                'youku.com':true,
+                'tudou.com':true
             }
             //'6':{
             //
