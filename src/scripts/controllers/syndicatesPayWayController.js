@@ -149,7 +149,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
             btnText:"确定"
         };
         $scope.goPay = function(){
-            if($scope.type != "deposit" && !$scope.hasUseCoupon){
+            if($scope.type != "deposit" && !$scope.hasUseCoupon && $scope.tradeData.payment.pay_times <= 0){
                 if($scope.pay.activeWay == "code" && $scope.chanel.validate){
                     $scope.showEnsure = true;
                     $scope.tip.msgTitle = "确认使用渠道码？";
