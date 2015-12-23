@@ -38,7 +38,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
                     code:$scope.chanel.code
                 },function(data){
                     console.log(data.data);
-                    if(!data.data.length){
+                    if(!data.data || !data.data.length){
                         $scope.chanel.error = true;
                     }else{
                         /*渠道码已过期*/
@@ -56,6 +56,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
                     $scope.chanel.error = true;
                     $scope.chanel.errorText = "请输入有效渠道码";
                     if(err.code != 404){
+                        alert(JSON.stringify(err));
                         ErrorService.alert(err);
                     }
                 });
@@ -128,6 +129,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
                 }
             }
         },function(err){
+            alert(JSON.stringify(err));
             ErrorService.alert(err);
         });
         /*加载优惠劵*/
