@@ -56,7 +56,6 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
                     $scope.chanel.error = true;
                     $scope.chanel.errorText = "请输入有效渠道码";
                     if(err.code != 404){
-                        alert(JSON.stringify(err));
                         ErrorService.alert(err);
                     }
                 });
@@ -129,7 +128,6 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
                 }
             }
         },function(err){
-            alert(JSON.stringify(err));
             ErrorService.alert(err);
         });
         /*加载优惠劵*/
