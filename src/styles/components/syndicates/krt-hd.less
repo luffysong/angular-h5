@@ -511,14 +511,6 @@
         padding: 32px 10px;
         font-size: 13px;
         margin-bottom:55px;
-        @media (min-width:320px){
-          font-size: 12px;
-          line-height:20px;
-        }
-        @media (min-width:370px){
-          font-size: 13px;
-          line-height:22px;
-        }
 
         .logo {
           width: 60px;
@@ -530,6 +522,31 @@
             display: none;
           }
         }
+        span{
+          float: left;
+        }
+
+        @media (min-width:320px){
+          font-size: 12px;
+          line-height:20px;
+
+          span{
+            width:72%;
+            margin-top:-5px;
+          }
+        }
+
+        @media (min-width:370px){
+          font-size: 13px;
+
+          span{
+            font-size: 13px;
+            width:74%;
+            margin-top:0;
+            line-height:22px;
+          }
+        }
+
       }
       h2{
         margin-top:40px;
