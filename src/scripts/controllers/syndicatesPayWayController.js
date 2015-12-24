@@ -33,7 +33,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
         };
         /*输入渠道码*/
         $scope.enterCode = function(way){
-            if(($scope.chanel.code && $scope.chanel.code.length == 10) || way == "suc"){
+            if($scope.chanel.code && ($scope.chanel.code.length == 10 || way == "suc")){
                 CrowdFundingService["coupon-channel"].get({
                     code:$scope.chanel.code
                 },function(data){
