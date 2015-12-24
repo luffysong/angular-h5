@@ -19,6 +19,7 @@ angular.module('defaultApp.service').config([
                         return response;
                     }
                     if (response.data.code != 0) {
+                        alert(JSON.stringify(response.data));
                         if(response.data.code == 4031){
                             /*setTimeout(function(){
                                 location.hash="#/guide/welcome";
