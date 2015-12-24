@@ -55,7 +55,7 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
                 },function(err){
                     $scope.chanel.error = true;
                     $scope.chanel.errorText = "请输入有效渠道码";
-                    if(err.code != 404){
+                    if(err.code && err.code != 404){
                         ErrorService.alert(err);
                     }
                 });

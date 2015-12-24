@@ -113,7 +113,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*众筹详情*/
     $stateProvider.state('syndicatesDetail', {
-        url: '/zhongchouDetail?companyId&fundingId&login&source&checkValid',
+        url: '/zhongchouDetail?companyId&fundingId&login&source&checkValid&krsrc',
         templateUrl: 'templates/syndicates/detail.html',
         controller: 'syndicatesDetailController'
     });
@@ -338,6 +338,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             }
         }
     });
+
+    // 下轮氪退
+    $stateProvider.state('syndicateskrQuitMobile', {
+        url: '/promotion/krt',
+        templateUrl: 'templates/syndicates/krt-m.html',
+        controller:'syndicatesKrQuitController.js'
+    });
+
 
     $stateProvider.state('syndicatesShare', {
         url: '/syndicatesShare',

@@ -1,0 +1,639 @@
+
+.krt-common-wrapper{
+  background: #e1e2e3;
+  //margin-bottom: -40px;
+
+  @lightblue:#00a8ff;
+  @darkblue:#28446f;
+  @white:#ffffff;
+
+  .container {
+    width: 1170px;
+    height: auto;
+    margin: 0 auto;
+    .a-btn{
+      display: block;
+      width: 230px;
+      height:45px;
+      line-height: 45px;
+      text-align: center;
+      font-size: 18px;
+      color:@white;
+      background:@lightblue;
+      margin: 0 auto;
+    }
+  }
+
+  .clearfloat{
+    content: "";
+    height: 0;
+    display: block;
+    clear: both;
+  }
+
+  h1,h2,h3{
+    font-weight: 600;
+    text-align: center;
+
+  }
+  p{
+    text-align: center;
+  }
+
+  header {
+    width: 100%;
+    min-width: 1170px;
+    height: 530px;
+    background: #010101;
+    overflow: hidden;
+
+    .banner {
+      width: 1280px;
+      height: 100%;
+      background: url("images/syndicates/krtui/banner-bg.jpg") no-repeat center top;
+      background-size: cover;
+      margin: 0 auto;
+    }
+  }
+
+  .common-screen {
+
+    .container {
+      padding: 0 76px;
+      .title {
+        width: 265px;
+        height: 130px;
+        text-align: center;
+        margin: 0 auto;
+        position: relative;
+        border:none;
+
+        .arrow-down, .fonts {
+          position: absolute;
+          top: 0;
+        }
+        .arrow-down {
+          width: 0;
+          height: 0;
+          border-left: 130px solid transparent;
+          border-right: 130px solid transparent;
+        }
+        .fonts {
+          width: 100%;
+          text-align: center;
+          font-size: 40px;
+          line-height: 100px;
+          font-weight: 600;
+          font-family: "sans-serif";
+        }
+      }
+
+      .introduces {
+        width: 100%;
+        padding: 25px 0 30px;
+        border: 1px solid @darkblue;
+
+        &:after {
+          .clearfloat;
+        }
+        .subtile {
+          width: auto;
+          height: 56px;
+          font-size: 30px;
+          text-align: center;
+          color: @darkblue;
+          background: #e1e2e3;
+          margin: 0 auto;
+          margin-top: -50px;
+          font-weight: 600;
+        }
+
+        .subtile1 {
+          width: 240px;
+        }
+        .subtile2 {
+          width: 370px;
+        }
+
+        dl {
+          width: 50%;
+          height: 310px;
+          float: left;
+
+          dt, dd {
+            margin: 0 auto;
+          }
+          dt {
+            height: 160px;
+            img {
+              width: 100%;
+            }
+          }
+
+          dd {
+            border-radius: 5px;
+            font-size: 16px;
+            height: 130px;
+            background: #e8e9e9;
+            margin-top: 20px;
+          }
+        }
+
+        dl.first {
+          .logo {
+            width: 160px;
+          }
+          dd {
+            width: 270px;
+            line-height: 130px;
+            color: @darkblue;
+            text-align: center;
+          }
+        }
+
+        dl.second {
+          .logo {
+            width: 274px;
+          }
+          dd {
+            width: 420px;
+            padding: 15px 40px;
+            color: #595757;
+            line-height: 26px;
+          }
+        }
+      }
+
+      .first-introdu {
+        margin-top: 70px;
+      }
+
+      .second-introdu {
+        margin-top: 100px;
+      }
+    }
+  }
+
+  .first-screen {
+    padding-bottom: 90px;
+
+    .title {
+      .arrow-down {
+        border-top: 130px solid @darkblue;
+      }
+
+      .fonts {
+        color: @lightblue;
+      }
+    }
+  }
+
+  .second-screen {
+    width: 100%;
+    height: 682px;
+    background: url("images/syndicates/krtui/second-bg.jpg") no-repeat center top;
+    background-size: cover;
+    .container {
+      .title {
+        .arrow-down {
+          border-top: 130px solid @lightblue;
+        }
+        .fonts {
+          color:@white;
+        }
+      }
+
+      h2 {
+        font-size: 54px;
+        color: @lightblue;
+        margin-top:84px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      p {
+        font-size: 24px;
+        color:@white;
+        margin-bottom: 40px;
+      }
+
+      .desc{
+        width:840px;
+        height:90px;
+        border:1px solid @lightblue;
+        color:@white;
+        font-size:16px;
+        margin: 0 auto;
+        padding: 22px 54px;
+        margin-bottom:86px;
+
+        .logo{
+          width:70px;
+          height:70px;
+          float: left;
+          margin:-12px 60px 0 0;
+          position: relative;
+
+          &:after{
+            position: absolute;
+            content: "";
+            width:2px;
+            height:70px;
+            display: block;
+            right: -30px;
+            top:0px;
+            border-right:1px solid @lightblue;
+          }
+          img{width:100%}
+        }
+
+        p{
+          float: left;
+          display: block;
+        }
+      }
+      .next-krtui{ font-weight: 600; }
+
+    }
+  }
+
+  .third-screen{
+    padding-top:70px;
+    .container{
+      padding:0;
+    }
+
+    h3{
+      font-size: 30px;
+      color:@darkblue;
+      margin-bottom:60px;
+
+      span{color:@lightblue;}
+    }
+
+    .company-content{
+      //padding: 0 2%;
+
+      &:after{
+        .clearfloat;
+      }
+
+      &>div:first-child{
+        padding-left:0;
+      }
+      //&>div:last-child{
+      //  padding-right:0;
+      //}
+      &>div:nth-child(2n){
+        padding-right:0;
+      }
+
+      .company-list{
+        float: left;
+        width:50%;
+        //width:33.333%;
+        padding:0 15px 60px;
+
+        .company-items{
+          width:100%;
+          border:1px solid #a4a5a5;
+          margin-bottom:30px;
+          .top-img{
+            width: 100%;
+            background: #3e3e3e;
+            img{width: 100%}
+          }
+          dl{
+            padding:25px 0 25px 145px;
+            //padding:25px 10px 25px 125px;
+            background: #e8e9e9;
+            position: relative;
+            font-size: 14px;
+            margin-bottom:0;
+
+            .company-logo{
+              position: absolute;
+              top:30px;
+              left:30px;
+              //left: 15px;
+              width: 92px;
+              height: 92px;
+              overflow: hidden;
+              border-radius:10px;
+              background:#ccc;
+              float: left;
+
+              img{width: 100%}
+            }
+            .names{
+              font-size: 20px;
+              color:#595757;
+              font-weight: 600;
+            }
+            .descp{ color:#9fa0a0; margin:2px 0 5px;}
+            .team,
+            .product{
+              color:#727171;
+              width:100%;
+              height:22px;
+              overflow:hidden;
+              text-overflow:ellipsis;
+              //-o-text-overflow:ellipsis;
+              //-webkit-text-overflow:ellipsis;
+              //-moz-text-overflow:ellipsis;
+              white-space:nowrap;
+              span{color:#a4a5a5}
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .fourth-screen{
+    padding: 40px 0 80px;
+    background: @lightblue;
+    color:@white;
+
+    h1{ font-size: 30px;}
+    p{
+      font-size: 14px;
+      line-height: 28px;
+      margin-bottom: 20px;
+    }
+
+    .code-q{
+      width: 190px;
+      height: 190px;
+      padding: 8px;
+      border:1px solid @white;
+      margin: 0 auto;
+      text-align: center;
+
+      img{width: 100%;}
+      span{ font-size:14px;line-height:48px;}
+
+      .fourth-screen{
+        position:absolute;
+        width:20px;
+        height:20px;
+      }
+    }
+
+  }
+}
+
+.krt-m-wrapper{
+  width: 100%;
+  margin-bottom: -45px;
+
+  .common-screen{
+    .container{
+      width: 100%;
+      padding: 0;
+
+      .title{
+        width:132px;
+        height:65px;
+
+        .arrow-down{
+          border-left: 65px solid transparent;
+          border-right: 65px solid transparent;
+          //border-top: 65px solid #28446f;
+        }
+        .fonts{
+          font-size: 20px;
+          line-height: 48px;
+        }
+      }
+
+
+
+
+
+      .introduces {
+        //width:85%;
+        //margin: 0 auto;
+        .subtile{
+          font-size:18px;
+          height: 28px;
+          margin-top: -40px;
+        }
+
+        dl.first,
+        dl.second{
+          float: none;
+          width: 100%;
+          height: auto;
+          dd{
+            width:90%;
+          }
+        }
+
+        dl.first{
+          margin: 20px 0;
+
+          dd{
+            height:70px;
+            line-height: 70px;
+          }
+        }
+
+        dl.second{
+          height: auto;
+          dd{
+            height: auto;
+            padding:15px 20px;
+            text-align: justify;
+          }
+        }
+      }
+      .first-introdu {
+        margin-top: 40px;
+        .subtile{
+          width:50%;
+        }
+      }
+
+      .second-introdu{
+
+        margin-top:65px;
+        .subtile{
+          width:66%;
+        }
+      }
+      .company-content{
+        .company-list{
+          float: none;
+        }
+      }
+
+
+
+    }
+  }
+
+
+  header{
+    width: 100%;
+    min-width:300px;
+    height:auto;
+    img{width: 100%;}
+  }
+
+  .first-screen{
+    padding-bottom: 50px;
+
+    .container{
+      padding: 0 15px;
+      .title{
+        .arrow-down{
+          border-top: 65px solid #28446f;
+        }
+      }
+    }
+  }
+
+  .second-screen{
+    height: auto;
+    background: url("images/krtui/second-m-bg.jpg") no-repeat center top;
+    background-size: cover;
+    padding-bottom: 58px;
+    .container{
+      padding: 0 15px;
+
+      .title{
+        .arrow-down{
+          border-top: 65px solid #00a8ff;
+        }
+      }
+      .desc {
+        width: 100%;
+        height: 125px;
+        padding: 32px 10px;
+        font-size: 13px;
+        margin-bottom:55px;
+        @media (min-width:320px){
+          font-size: 12px;
+          line-height:20px;
+        }
+        @media (min-width:370px){
+          font-size: 13px;
+          line-height:22px;
+        }
+
+        .logo {
+          width: 60px;
+          height: 60px;
+          margin: 0 12px 0 0;
+
+          &:after{
+            right:-12px;
+            display: none;
+          }
+        }
+      }
+      h2{
+        margin-top:40px;
+        font-size: 44px;
+      }
+      p{font-size:18px}
+    }
+  }
+
+  .third-screen {
+    padding-top:40px;
+    .container{
+      padding:0 15px;
+    }
+    h3 {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+  }
+  .fourth-screen{
+    padding: 43px 0 48px;
+    .code-q{
+      width: 180px;
+      height: 180px;
+      margin-bottom: 70px;
+    }
+    .gqzc-logo{
+      width: 117px;
+      height: 32px;
+      background:url("images/krtui/gqzc-logo.png") no-repeat;
+      background-size: cover;
+      text-indent: -9999em;
+      margin: 0 auto;
+    }
+  }
+
+.common-screen{
+  .company-content{
+    .company-list{
+      width: 100%;
+      padding: 0;
+
+      .company-items{
+        .company-items-detail{
+          padding:20px 15px;
+          background: #e8e9e9;
+
+          .items-detail-top{
+            padding-bottom:10px;
+
+            .company-logo{
+              float: left;
+              width:56px;
+              height:56px;
+              border-radius:10px;
+              overflow: hidden;
+
+              img{width:100%;}
+            }
+
+            .company-name-slogan{
+              padding-left:65px;
+              span{ display: block;line-height: 30px;}
+
+              .names{font-size:18px;color:#595757; font-weight: 600}
+              .descp{
+                font-size: 14px;
+                width:100%;
+                height:30px;
+                word-break:break-all;
+                display:-webkit-box;
+                -webkit-line-clamp:1;
+                -webkit-box-orient:vertical;
+                overflow:hidden;
+              }
+            }
+          }
+
+          .team,
+          .product{
+            font-size: 15px;
+            color: #727171;
+            span{color:#a4a5a5}
+
+            @media (min-width:320px) {
+              font-size: 14px;
+            }
+            @media (min-width:370px) {
+              font-size: 15px;
+            }
+          }
+
+        }
+      }
+
+      .a-btn{
+        margin: 20px auto 30px;
+      }
+
+    }
+  }
+}
+
+}
+
+
