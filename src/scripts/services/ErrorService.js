@@ -10,6 +10,7 @@ angular.module('defaultApp.service').service('ErrorService', [
 
         var service = {
             alert: function(err){
+                alert(JSON.stringify(err));
                 if(err && err.msg){
                     notify.closeAll()
                     notify({
