@@ -244,7 +244,6 @@
           }
           img{width:100%}
         }
-
         p{
           float: left;
           display: block;
@@ -260,38 +259,18 @@
     .container{
       padding:0;
     }
-
     h3{
       font-size: 30px;
       color:@darkblue;
       margin-bottom:60px;
-
       span{color:@lightblue;}
     }
 
     .company-content{
-      //padding: 0 2%;
-
       &:after{
         .clearfloat;
       }
-
-      &>div:first-child{
-        padding-left:0;
-      }
-      //&>div:last-child{
-      //  padding-right:0;
-      //}
-      &>div:nth-child(2n){
-        padding-right:0;
-      }
-
       .company-list{
-        float: left;
-        width:50%;
-        //width:33.333%;
-        padding:0 15px 60px;
-
         .company-items{
           width:100%;
           border:1px solid #a4a5a5;
@@ -301,48 +280,7 @@
             background: #3e3e3e;
             img{width: 100%}
           }
-          dl{
-            padding:25px 0 25px 145px;
-            //padding:25px 10px 25px 125px;
-            background: #e8e9e9;
-            position: relative;
-            font-size: 14px;
-            margin-bottom:0;
 
-            .company-logo{
-              position: absolute;
-              top:30px;
-              left:30px;
-              //left: 15px;
-              width: 92px;
-              height: 92px;
-              overflow: hidden;
-              border-radius:10px;
-              background:#ccc;
-              float: left;
-
-              img{width: 100%}
-            }
-            .names{
-              font-size: 20px;
-              color:#595757;
-              font-weight: 600;
-            }
-            .descp{ color:#9fa0a0; margin:2px 0 5px;}
-            .team,
-            .product{
-              color:#727171;
-              width:100%;
-              height:22px;
-              overflow:hidden;
-              text-overflow:ellipsis;
-              //-o-text-overflow:ellipsis;
-              //-webkit-text-overflow:ellipsis;
-              //-moz-text-overflow:ellipsis;
-              white-space:nowrap;
-              span{color:#a4a5a5}
-            }
-          }
         }
       }
     }
@@ -367,17 +305,14 @@
       border:1px solid @white;
       margin: 0 auto;
       text-align: center;
-
       img{width: 100%;}
       span{ font-size:14px;line-height:48px;}
-
       .fourth-screen{
         position:absolute;
         width:20px;
         height:20px;
       }
     }
-
   }
 }
 
@@ -397,7 +332,6 @@
         .arrow-down{
           border-left: 65px solid transparent;
           border-right: 65px solid transparent;
-          //border-top: 65px solid #28446f;
         }
         .fonts{
           font-size: 20px;
@@ -405,13 +339,7 @@
         }
       }
 
-
-
-
-
       .introduces {
-        //width:85%;
-        //margin: 0 auto;
         .subtile{
           font-size:18px;
           height: 28px;
@@ -427,7 +355,6 @@
             width:90%;
           }
         }
-
         dl.first{
           margin: 20px 0;
 
@@ -454,7 +381,6 @@
       }
 
       .second-introdu{
-
         margin-top:65px;
         .subtile{
           width:66%;
@@ -465,9 +391,6 @@
           float: none;
         }
       }
-
-
-
     }
   }
 
@@ -560,6 +483,71 @@
     padding-top:40px;
     .container{
       padding:0 15px;
+
+      .company-content{
+        .company-list{
+          width: 100%;
+          padding: 0;
+
+          .company-items{
+            margin-bottom: 20px;
+
+            .company-items-detail{
+              padding:20px 15px;
+              background: #e8e9e9;
+
+              .items-detail-top{
+                padding-bottom:10px;
+
+                .company-logo{
+                  float: left;
+                  width:56px;
+                  height:56px;
+                  border-radius:10px;
+                  overflow: hidden;
+
+                  img{width:100%;}
+                }
+
+                .company-name-slogan{
+                  padding-left:65px;
+                  span{ display: block;line-height: 30px;}
+
+                  .names{font-size:18px;color:#595757; font-weight: 600}
+                  .descp{
+                    font-size: 14px;
+                    width:100%;
+                    height:30px;
+                    word-break:break-all;
+                    display:-webkit-box;
+                    -webkit-line-clamp:1;
+                    -webkit-box-orient:vertical;
+                    overflow:hidden;
+                  }
+                }
+              }
+
+              .team,
+              .product{
+                font-size: 15px;
+                color: #727171;
+                span{color:#a4a5a5}
+
+                @media (min-width:320px) {
+                  font-size: 14px;
+                }
+                @media (min-width:370px) {
+                  font-size: 15px;
+                }
+              }
+            }
+          }
+          .a-btn{
+            margin-bottom:50px;
+          }
+
+        }
+      }
     }
     h3 {
       font-size: 18px;
@@ -572,7 +560,10 @@
     .code-q{
       width: 180px;
       height: 180px;
-      margin-bottom: 70px;
+      margin-bottom: 10px;
+    }
+    .code-desc{
+      margin-bottom:45px;
     }
     .gqzc-logo{
       width: 117px;
@@ -583,74 +574,6 @@
       margin: 0 auto;
     }
   }
-
-.common-screen{
-  .company-content{
-    .company-list{
-      width: 100%;
-      padding: 0;
-
-      .company-items{
-        .company-items-detail{
-          padding:20px 15px;
-          background: #e8e9e9;
-
-          .items-detail-top{
-            padding-bottom:10px;
-
-            .company-logo{
-              float: left;
-              width:56px;
-              height:56px;
-              border-radius:10px;
-              overflow: hidden;
-
-              img{width:100%;}
-            }
-
-            .company-name-slogan{
-              padding-left:65px;
-              span{ display: block;line-height: 30px;}
-
-              .names{font-size:18px;color:#595757; font-weight: 600}
-              .descp{
-                font-size: 14px;
-                width:100%;
-                height:30px;
-                word-break:break-all;
-                display:-webkit-box;
-                -webkit-line-clamp:1;
-                -webkit-box-orient:vertical;
-                overflow:hidden;
-              }
-            }
-          }
-
-          .team,
-          .product{
-            font-size: 15px;
-            color: #727171;
-            span{color:#a4a5a5}
-
-            @media (min-width:320px) {
-              font-size: 14px;
-            }
-            @media (min-width:370px) {
-              font-size: 15px;
-            }
-          }
-
-        }
-      }
-
-      .a-btn{
-        margin: 20px auto 30px;
-      }
-
-    }
-  }
-}
-
 }
 
 
