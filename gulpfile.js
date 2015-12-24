@@ -8,8 +8,6 @@ var $ = require('gulp-load-plugins')();
 var es = require("event-stream");
 var loadDictionary = require('./tasks/loadDictionary.js');
 var urlAdjuster = require('gulp-css-url-adjuster');
-var through2 = require('through2');
-var browserify = require('browserify');
 
 var config = require('./config.json');
 
@@ -143,16 +141,7 @@ gulp.task('scripts:vendor', function () {
 gulp.task('scripts:browserify', ['scripts:init'], function () {
     gulp.src(['src/scripts/*.js'])
         .pipe($.plumber({errorHandler: handler}))
-        .pipe(through2.obj(function(file, enc, next) {
-            browserify(file.path)
-            // .transform(reactify)
-                .bundle(function(err, res) {
-                    err && console.log(err.stack);
-                    file.contents = res;
-                    next(null, file);
-                });
-        }))
-        //.pipe($.browserify({debug: true}))
+        .pipe($.browserify({debug: true}))
         .pipe($.plumber.stop())
         //.pipe($.ngmin())
         //.pipe($.uglify())
@@ -421,16 +410,7 @@ gulp.task('build:templates', function () {
 gulp.task('build:scripts', ['scripts:vendor', 'scripts:ui:template', 'scripts:init', 'build:templates'], function () {
     return gulp.src(['src/scripts/*.js'])
         .pipe($.replace(/\/\*##(.+)##\*\//, '$1'))
-        .pipe(through2.obj(function(file, enc, next) {
-            browserify(file.path)
-            // .transform(reactify)
-                .bundle(function(err, res) {
-                    err && console.log(err.stack);
-                    file.contents = res;
-                    next(null, file);
-                });
-        }))
-        //.pipe($.browserify())
+        .pipe($.browserify())
         .pipe($.ngAnnotate())  //处理angular依赖
         .pipe(gulp.dest('.tmp/scripts'))
         .pipe($.size());
