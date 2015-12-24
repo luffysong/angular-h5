@@ -23,6 +23,16 @@
                     <span ng-repeat="item in companyData.tags">{{item.name}}</span>
                 </p>
             </div>
+            <!--下轮氪退-->
+            <div ng-if="syndicatesInfo.base.can_exit">
+                <div class="basic-info">
+                    下轮氪退
+                </div>
+                <div class="next-quit">
+                    该企业在下次正式融资时，此次认购的跟投人均有权利选择退出并获得收益。
+                    <a class="see-detail" href="{{helpHost}}/#next-quit">查看详情>></a>
+                </div>
+            </div>
             <!--众筹目标-->
             <div ng-show="syndicatesInfo">
                 <div class="basic-info">
@@ -93,16 +103,7 @@
                 </div>
             </div>
 
-            <!--下轮氪退-->
-            <div>
-                <div class="basic-info">
-                    下轮氪退
-                </div>
-                <div class="next-quit">
-                    该企业在下次正式融资时，此次认购的跟投人均有权利选择退出并获得收益。
-                    <a class="see-detail" href="{{helpHost}}/#next-quit">查看详情>></a>
-                </div>
-            </div>
+
 
             <!--领投人-->
             <div ng-if="syndicatesInfo.base.investorData.logo && syndicatesInfo.base.investorData.name" class="welcome-form">
