@@ -195,12 +195,13 @@ angular.module('defaultApp.controller').controller('syndicatesPayWayController',
                     tid:$scope.tid,type:$scope.type,couponIds:$scope.ids
                 });
             }
+            var channelIds = $scope.chanel.validate && $scope.pay.activeWay == 'code' ? $scope.chanel.id : "";
             /*支付宝*/
             if($scope.payType == 'alipay'){
-                location.href = '//'+location.host+'/p/payment/4/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order=https:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=https:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'coupon_ids='+$scope.ids,'coupon_channel_id='+$scope.chanel.id]).join('&');
+                location.href = '//'+location.host+'/p/payment/4/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order=https:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=https:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'coupon_ids='+$scope.ids,'coupon_channel_id='+channelIds]).join('&');
             }else {
                 if(!$scope.hasRecord){
-                    location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order=https:'+$scope.rongHost+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=https:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'coupon_ids='+$scope.ids,'coupon_channel_id='+$scope.chanel.id]).join('&');
+                    location.href = '//'+location.host+'/p/payment/3/send-payment-request?'+(['pay_type=D','trade_id='+$scope.tid,'url_order=https:'+$scope.rongHost+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'back_url=https:'+encodeURIComponent($scope.rongHost+'/m/#/zhongchouAllOrder'),'coupon_ids='+$scope.ids,'coupon_channel_id='+channelIds]).join('&');
                 }else{
                     $state.go("syndicatesPay",{
                         tid:$scope.tid,
