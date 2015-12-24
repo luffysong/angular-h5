@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('SyndicatesInviteController',
-    function($scope, $state, $stateParams, $q, $modal, notify, $timeout, $interval, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService) {
+    function($scope, $state, $stateParams, $q, $modal, notify, $timeout, $interval, loading, UserService, CrowdFundingService, ErrorService, DictionaryService, CoInvestorService,$cookies) {
         document.title = '来36氪做股东';
         $scope.$on('$locationChangeStart', function() {
             document.title = '36氪股权融资';
@@ -30,7 +30,10 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
 
         // 邀请人 ID
         $scope.inviterId = $stateParams.id;
-
+        if($scope.inviterId && (!$cookies.uid_inviter || $scope.uid != $scope.inviterId)){
+            //过期时间一个月
+            $cookies.uid_inviter = $scope.inviterId;
+        }
         // 跟投人身份
         if($scope.isLogin) {
 

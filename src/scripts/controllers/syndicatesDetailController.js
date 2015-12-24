@@ -151,6 +151,7 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         };
         /*视频链接处理*/
         $scope.handleVideo = function(link){
+            if(!link || link.split("?").length <= 1)return;
             var temp = [],str;
             var arr = link.split("?")[1].split("&");
             angular.forEach(arr,function(obj){
