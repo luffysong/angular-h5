@@ -113,7 +113,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
     /*众筹详情*/
     $stateProvider.state('syndicatesDetail', {
-        url: '/zhongchouDetail?companyId&fundingId&login&source&checkValid',
+        url: '/zhongchouDetail?companyId&fundingId&login&source&checkValid&krsrc',
         templateUrl: 'templates/syndicates/detail.html',
         controller: 'syndicatesDetailController'
     });

@@ -511,18 +511,21 @@
         padding: 32px 10px;
         font-size: 13px;
         margin-bottom:55px;
+        @media (min-width:320px){
+          font-size: 12px;
+          line-height:20px;
+        }
+        @media (min-width:370px){
+          font-size: 13px;
+          line-height:22px;
+        }
 
         .logo {
           width: 60px;
           height: 60px;
           margin: 0 12px 0 0;
-          //margin: -12px 34px 0 0;
-          //float: left;
-          //margin: -12px 60px 0 0;
-          //position: relative;
 
           &:after{
-            //right: -20px;
             right:-12px;
             display: none;
           }
