@@ -339,6 +339,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
+    // 下轮氪退
+    $stateProvider.state('syndicateskrQuitMobile', {
+        url: '/krt',
+        templateUrl: 'templates/syndicates/krt-m.html',
+        controller:'syndicatesKrQuitController.js'
+    });
+
+
     $stateProvider.state('syndicatesShare', {
         url: '/syndicatesShare',
         templateUrl: 'templates/syndicates/invite/share.html',
