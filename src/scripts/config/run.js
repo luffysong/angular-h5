@@ -1,7 +1,7 @@
 angular.module('defaultApp')
     .run(function($rootScope){
         $rootScope.REGEXP = $rootScope.REGEXP || {};
-        $rootScope.REGEXP.phone = /^1\d{10}$/;
+        $rootScope.REGEXP.phone = /^\d{11}$/;
         $rootScope.isInApp = !!navigator.userAgent.match(/36kr/) || window.isAppAgent;
     })
     .run(function ($http, $rootScope,notify) {

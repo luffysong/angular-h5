@@ -15,6 +15,7 @@ angular.module('defaultApp.service').config([
                     if (response.config.url.indexOf('templates') > -1 ||
                         response.config.url.indexOf('template') > -1 ||
                         response.config.url.indexOf('bootstrap') > -1 ||
+                        response.config.url.indexOf(projectEnvConfig.passportHost) > -1 ||
                         response.config.url.indexOf(kr.upyun.api) > -1) {
                         return response;
                     }

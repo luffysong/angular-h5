@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('GuideWelcomeController',
-    function($stateParams, $scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope, $timeout, $upload, AndroidUploadService) {
+    function($stateParams, $scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope, $timeout, $upload, AndroidUploadService, LoginService) {
         $scope.sourceType = $stateParams.type || 'other';
 
         $scope.user = {
@@ -75,7 +75,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
         });
 
 
-        $scope.getCode = function(e){
+        $scope.getCode = function(e, voice){
             e && e.preventDefault();
             if(!$scope.user.phone){
                 return;
@@ -96,7 +96,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             UserService['send-sms'].send({
                 id: $scope.userId
             },{
-                phone: $scope.user.phone
+                phone: $scope.getPhoneWithCountryCode()
             }, function(data){
             }, function(err){
                 $('<div class="error-alert error error-sms">发送失败</div>').appendTo('body');
@@ -207,7 +207,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 avatar: $scope.user.avatar,
                 name: $scope.user.name,
                 email: $scope.user.email,
-                phone: $scope.user.phone,
+                phone: $scope.getPhoneWithCountryCode(),
                 smscode: $scope.user.smscode
             }, function(data){
                 if($scope.sourceType == "investorValidate"){
@@ -235,6 +235,31 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 // ErrorService.alert(err);
             })
         };
+
+        LoginService.getCountryDict({}, function(data){
+            $scope.countryDict = data;
+            $scope.countryDict.forEach(function(item){
+                if(item.cc=='86'){
+                    $scope.user.cc = item;
+                }
+            });
+        });
+
+
+        /**
+         * 修改国家
+         */
+        $scope.changeCountry = function(usernameModel){
+            $scope.user.phone = '';
+            usernameModel.$setPristine();
+        }
+
+        /**
+         * 获取要发送的用户名
+         */
+        $scope.getPhoneWithCountryCode = function(){
+            return [$scope.user.cc.cc, $scope.user.phone].join('+');
+        }
 
     }
 );
