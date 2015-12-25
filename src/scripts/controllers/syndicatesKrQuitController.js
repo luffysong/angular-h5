@@ -5,7 +5,12 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesKrQuitController.js',
-    function($scope) {
+    function($scope, loading,  $timeout) {
+
+        loading.show("krtLoading");
+        $timeout(function() {
+            loading.hide("krtLoading");
+        }, 1500);
 
         $scope.SharWeiXin = function(){
             window.WEIXINSHARE = {
