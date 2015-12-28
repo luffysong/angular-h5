@@ -33,14 +33,13 @@ angular.module('defaultApp.controller').controller('SyndicatesGiftController',
                         id: "co-investor",
                         submodel: "info"
                     }, function(data) {
-                        if(data.status == 1) {
+                        if(data.status == 1 || data.status == 2) {
 
                         } else {
                             $state.go('syndicatesValidate', {
                                 inviter_id: $stateParams.id
                             });
                         }
-
                     }, function(err) {
 
                     });
