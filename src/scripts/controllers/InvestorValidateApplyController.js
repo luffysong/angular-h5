@@ -94,13 +94,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     $scope.organization.isAdd = false;
                     var organization = $scope.organizationList.data[0];
                     $scope.organization.addForm.name = organization.name;
-                    $scope.organization.addForm.id = organization.id;                        
+                    $scope.organization.addForm.id = organization.id;
                     return;
                 }
 
                 $scope.organization.isAddExperience = true;
                 $scope.organization.isAdd = true;
-                $scope.organization.addForm.id = 0;                      
+                $scope.organization.addForm.id = 0;
             },
             on_select: function (selected) {
                 if (selected.obj.status != 'add') {
@@ -121,6 +121,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30',
                     //label = '<img src="' + logo + '">' + '<span>' + item.name + '</span>';
                     label
+
                 if(item.status!='add'){
                     label = '<div class="coList"><img src="' + logo + '">' + item.name + '</div>';
                 }else{
@@ -173,7 +174,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             suggest: suggest_state_remote,
             on_error: console.log,
             on_detach: function (cs) {
-                     
             },
             on_select: function (selected) {
                 if (selected.obj.status != 'add') {
@@ -216,6 +216,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             var deferred = $q.defer();
             var q = term.toLowerCase().trim();
 
+            $scope.company.isAddExperience = true;
+            $scope.company.addForm.name = term;
+            $scope.company.addForm.id = 0;
+
+
             SuggestService.query({
                 wd: q,
                 sub: 'company'
@@ -223,19 +228,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 var exist = data.data.filter(function (item) {
                     return item.name.toLowerCase() == q.toLowerCase();
                 });
-                if (!exist.length) {
-                    /*fixme 创建公司输入内容无匹配时不显示suggest*/
-                    // data.data.push({
-                    //     name: q,
-                    //     id:'',
-                    //     type:'',
-                    //     status: 'add',
-                    //     value: q
-                    // })
-                    $scope.company.isAddExperience = true;
-                    $scope.company.addForm.name = q;
-                    $scope.company.addForm.id = 0;
-                }
+
                 deferred.resolve(suggest_state(data.data));
             }, function () {
 
@@ -272,6 +265,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     $scope.company.form.positionDetail = '';
                     $scope.company.form.startYear = '';
                     $scope.company.form.startMonth = '';
+                    $scope.company.form.groupName='';
 
 					$scope.company.addForm.id = '';
 					$scope.company.addForm.name = '';
@@ -292,6 +286,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 });
                 var startDate = new Date(company.startDate);
                 $scope.company.form.groupId = company.groupId;
+                $scope.company.form.groupName=company.groupName;
                 $scope.company.form.position = company.position;
                 $scope.company.form.positionDetail = company.positionDetail;
                 $scope.company.form.startYear = startDate.getFullYear() +'';
@@ -857,59 +852,36 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         console.log('---任职公司');
                         if($scope.company.isAddExperience){
                             if($scope.company.isAdd){
-                                //快速创建公司
-                                var data = {};
-                                    data['mode'] = 'fast';
-                                    data['name'] = $scope.company.addForm['name'];
-                                    data['brief'] = $scope.company.addForm['brief'];
-                                    data['website'] = $scope.company.addForm['website'];
-                                    data['operationStatus'] = $scope.company.addForm['operationStatus'];
+                                //创建经历
+                                var expData = {};
+                                expData['uid'] = UserService.getUID();
+                                expData['groupIdType'] = 3;
+                                expData['current'] = true;
+                                expData['groupId'] = 0;
+                                expData['groupName'] = $scope.company.addForm.name;
+                                expData['position'] = $scope.company.form.position;
+                                expData['positionDetail'] = $scope.company.form.positionDetail;
+                                expData['startDate'] = $scope.company.form.startYear +'-'+$scope.company.form.startMonth+'-01 01:01:01';
+                                console.log('---要提交的创建经历数据--',expData);
 
-                                var createCompanyPromise = createCompany(data);
-                                createCompanyPromise.then(function(response){
-                                    console.log('---公司返回数据--',response);
-                                    //创建经历
-                                    var expData = {};
-                                        expData['uid'] = UserService.getUID();
-                                        expData['groupIdType'] = 3;
-                                        expData['groupName'] = $scope.company.addForm.name;
-                                        expData['current'] = true;
-                                        expData['groupId'] = response.id;
-                                        expData['position'] = $scope.company.form.position;
-                                        expData['positionDetail'] = $scope.company.form.positionDetail;
-                                        expData['startDate'] = $scope.company.form.startYear +'-'+$scope.company.form.startMonth+'-01 01:01:01';
-                                        console.log('---要提交的创建经历数据--',expData);
-
-                                    var createExperiencePromise = createExperience(expData);
-                                    createExperiencePromise.then(function(response){
-                                        console.log('--创建经历成功--');
-                                        //提交总数据
-                                        send(response.id);
-                                    },function(err){
-                                        console.log('--创建经历失败--',err);
-                                    });
+                                var createExperiencePromise = createExperience(expData);
+                                createExperiencePromise.then(function(response){
+                                    console.log('--创建经历成功--');
+                                    //提交总数据
+                                    send(response.id);
                                 },function(err){
-                                    /*fixme 增加错误提示*/
-                                    if( err.msg.indexOf('不符合') !== -1) {
-                                        ErrorService.alert({
-                                            msg: '对不起，该机构不符合平台收录标准'
-                                        });
-                                    } else if(err.msg.indexOf("10次") !== -1) {
-                                        ErrorService.alert({
-                                            msg: '今日创建公司已经超过10次限制，请明天重新尝试！'
-                                        });
-                                    }
-                                    console.log('---创建公司失败--',err);
+                                    console.log('--创建经历失败--');
                                 });
+
                             }else{
                                 console.log('---company---',$scope.company);
                                 //创建经历
                                     var expData = {};
                                         expData['uid'] = UserService.getUID();
-                                        expData['groupName'] = $scope.company.addForm.name;
                                         expData['groupIdType'] = 3;
                                         expData['current'] = true;
                                         expData['groupId'] = $scope.company.addForm.id;
+                                        expData['groupName'] = $scope.company.form.groupName;
                                         expData['position'] = $scope.company.form.position;
                                         expData['positionDetail'] = $scope.company.form.positionDetail;
                                         expData['startDate'] = $scope.company.form.startYear +'-'+$scope.company.form.startMonth+'-01 01:01:01';
@@ -931,8 +903,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                                 expData['uid'] = UserService.getUID();
                                 expData['groupIdType'] = 3;
                                 expData['current'] = true;
-                                expData['groupName'] = $scope.company.addForm.name;
                                 expData['id'] = $scope.company.form.id;
+                                expData['groupName'] = $scope.company.form.groupName;
                                 expData['groupId'] = $scope.company.form.groupId;
                                 expData['position'] = $scope.company.form.position;
                                 expData['positionDetail'] = $scope.company.form.positionDetail;
@@ -1007,7 +979,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }
             }
         }
-
 
     }
 );
