@@ -43,19 +43,14 @@ angular.module('defaultApp.controller').controller('SyndicatesInviteController',
                         id: "co-investor",
                         submodel: "info"
                     }, function(data) {
-                        //$state.go('syndicatesValidate', {
-                        //    inviter_id: $stateParams.id
-                        //});
-                        $scope.isCoInvestor = false;
-                    }, function(err) {
-                        if(err.code == 1002) {
+
+                        if( data.status == 1 || data.status == 2 ) {
                             $scope.isCoInvestor = true;
                         } else {
-                            //$state.go('syndicatesValidate', {
-                            //    inviter_id: $stateParams.id
-                            //});
                             $scope.isCoInvestor = false;
                         }
+                    }, function(err) {
+
                     });
                 } else {
                     $scope.isCoInvestor = true;
