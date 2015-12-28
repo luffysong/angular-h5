@@ -164,7 +164,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             on_detach: function (cs) {
             },
             on_select: function (selected) {
-                console.log('000000000');
                 if (selected.obj.status != 'add') {
                     $scope.company.isAdd = false;
                     var company = selected.obj;
@@ -976,6 +975,25 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }
             }
         }
+         // 机构suggest失去焦点判断
+        $scope.Blur = function(){
+            var investorRole  = $scope.invest.investorRole;
+            if(investorRole == 'ORG_INVESTOR'){
+                if(!$scope.organization.addForm.id){
+                    $scope.organization.isAddExperience = true;
+                    $scope.organization.isAdd = true;
+                    $scope.organization.addForm.id = 0;
+                }
+            }else if(investorRole == 'COMPANY_INVEST_DEPT'){
+                if(!$scope.company.addForm.id){
+                    $scope.company.isAddExperience = true;
+                    $scope.company.isAdd = true;
+                    $scope.company.addForm.id = 0;
+                }
+            }
+            
+        };
+
 
     }
 );

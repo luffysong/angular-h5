@@ -144,7 +144,7 @@
                                             <label class="title"><span class="c-orange">*</span>任职机构</label>
                                             <ul class="main">
                                                 <li>
-                                                    <select name="organizationSelectName" ng-change="organization.choose()" ng-options="y.id as y.groupName for y in organization.response.data" ng-model="organization.form.id" required>
+                                                    <select name="organizationSelectName" ng-change="organization.choose()" ng-options="y.id as y.groupName for y in organization.response.data" ng-model="organization.form.id" required  >
                                                         <option value="">请选择</option>
                                                     </select>
                                                 </li>
@@ -162,7 +162,7 @@
                                                     placeholder="请输入机构名"
                                                     required
                                                     class="form-control"
-                                                    mass-autocomplete-item="autocomplete_options_organization" selectFirst="true"/>
+                                                    mass-autocomplete-item="autocomplete_options_organization" selectFirst="true"ng-blur="Blur()"/>
                                                 </li>
                                             </ul>
                                         </li>
@@ -262,7 +262,7 @@
                                                     placeholder="请输入公司简称"
                                                     required
                                                     class="form-control"
-                                                    mass-autocomplete-item="autocomplete_options"/>
+                                                    mass-autocomplete-item="autocomplete_options"ng-blur="Blur()"/>
                                                 </li>
                                             </ul>
                                         </li>
