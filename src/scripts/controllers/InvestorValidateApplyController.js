@@ -164,6 +164,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             on_detach: function (cs) {
             },
             on_select: function (selected) {
+                console.log('000000000');
                 if (selected.obj.status != 'add') {
                     $scope.company.isAdd = false;
                     var company = selected.obj;
