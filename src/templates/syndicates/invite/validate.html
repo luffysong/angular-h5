@@ -52,6 +52,7 @@
         <!--<div class="error-tip error" ng-show="syndicatesValidateForm.$error.idcardInvalid && enterCard">-->
             <!--<span><span class="tip-icon">!</span>两次输入身份证号码不一致</span>-->
         <!--</div>-->
+
         <!-- 完善资料（邮箱）-->
         <div class="form-group" ng-if="!investor.hasEmail">
             <label class="label-control" for="investor-email"><span class="c-red">*</span>邮箱</label>
@@ -98,6 +99,7 @@
             <a class="btn btn-captcha " href="javascript:void(0)" ng-disabled="wait" ng-if="wait">{{wait+'秒'}}</a>
             <a class="btn btn-captcha message-code" href="javascript:void(0)" ng-disabled="!user.phone" ng-if="!wait" ng-click="getCode($event)">短信验证</a>
             <a class="btn btn-captcha " href="javascript:void(0)" ng-disabled="!user.phone" ng-if="!wait" ng-click="getCode($event, true)">语音验证</a>
+
 
         </div>
         <div class="error-tip error" ng-show="syndicatesValidateForm['investor-captcha'].$invalid && syndicatesValidateForm['investor-captcha'].$dirty" ng-if="!investor.hasPhone">

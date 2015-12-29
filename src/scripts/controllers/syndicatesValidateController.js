@@ -87,6 +87,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             id:"co-investor",
             submodel:"info"
         }, function(data) {
+
             if(data.cert_info){
                 $scope.investor.id = data.cert_info.id_card_number;
                 $scope.investor['id-confirm'] = data.cert_info.id_card_number;
@@ -263,7 +264,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         };
 
 
-
         $scope.enterId = function(){
             if(!$scope.investor['id-confirm']) return;
             $scope.enterCard = true;
@@ -373,7 +373,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         };
 
         /**
-         * 获取过编码
+         * 获取国编码
          */
         $scope.user = {};
         LoginService.getCountryDict({}, function (data) {

@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
-    function($scope,DictionaryService,ErrorService,checkForm,$timeout,UserService,$modal, $stateParams,$state,CrowdFundingService,loading,$cookies) {
+    function($scope,DictionaryService,ErrorService,checkForm,$timeout,UserService,$modal, $stateParams,$state,CrowdFundingService,loading,$cookies,LoginService) {
         document.title="36氪股权投资";
         loading.show("investorVal");
         $timeout(function(){
@@ -23,6 +23,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         }
         $scope.handleSource();
         /*先判断用户是否完善资料*/
+
         UserService.isProfileValid(function (valid) {
             if(!valid){
                 $state.go('guide.welcome', {
@@ -31,6 +32,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 return;
             }
         });
+
         /*本周六（0919）20点至本周日（0920）8点跟投人验证功能暂时关闭*/
         var fromDate = new Date(2015,8,19,20,00,00);
         var toDate = new Date(2015,8,20,8,00,00);
@@ -44,6 +46,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             rnv_investor_info:"V1_1",
             id_card_number: "",
             reIdCardNumber:"",
+            email: '',
+            phone: '',
+            captcha: '',
             identity_card_type:"IDCARD",
             investPhases:[],
             passport_number:"",
@@ -66,7 +71,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             $scope.user.investMoneyUnit = $scope.user_cache.investMoneyUnit = data.mainInvestCurrency || $scope.user.investMoneyUnit;
             $scope.user.investMoneyBegin = $scope.user_cache.investMoneyBegin = data.mainInvestCurrency == 'USD' ? data.investorSettings.usdInvestMin :  data.investorSettings.cnyInvestMin;
             $scope.user.investMoneyEnd = $scope.user_cache.investMoneyEnd = data.mainInvestCurrency == 'USD' ? data.investorSettings.usdInvestMax:  data.investorSettings.cnyInvestMax;
-            if (data.intro && data.industry.length && data.investPhases.length && $scope.user.investMoneyBegin && $scope.user.investMoneyEnd) {
+            if (data.intro && data.industry && data.industry.length && data.investPhases.length && $scope.user.investMoneyBegin && $scope.user.investMoneyEnd) {
                 $scope.user_cache.is_completed = 1;
             }
         }, function(error){
@@ -421,6 +426,90 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.hasClick = false;
             });
         };
+
+        // 手机验证
+        $scope.$watch('investor.phone', function(phone) {
+            if(!phone || !$rootScope.REGEXP.phone.test(phone)){
+                return;
+            }
+            $scope.syndicatesValidateForm['investor-phone'].$setValidity("checked", true);
+            checkTimeout && $timeout.cancel(checkTimeout);
+            checkTimeout = $timeout(function(){
+                $scope.syndicatesValidateForm['investor-phone'].$setDirty();
+                UserService.check.get({
+                    id: $scope.uid,
+                    phone: phone
+                }, function(data) {
+
+                }, function() {
+                    $scope.syndicatesValidateForm['investor-phone'].$setValidity("checked", false);
+                });
+            }, 800);
+        });
+
+        // 获取验证码
+        $scope.getCode = function(e, voice){
+            e && e.preventDefault();
+            if(!$scope.investor.phone) {
+                return;
+            }
+            if($scope.wait) {
+                return;
+            }
+            $scope.wait = 60;
+            var interval = setInterval(function() {
+                $scope.$apply(function() {
+                    $scope.wait--;
+                    if($scope.wait == 0){
+                        $scope.wait = 0;
+                        clearInterval(interval);
+                    }
+                })
+            }, 1000);
+            UserService['send-sms'].send({
+                id: $scope.uid
+            }, {
+                //phone: $scope.investor.phone
+                phone: getPhoneWithCountryCode()
+            }, function(data) {
+            }, function(){
+                ErrorService.alert({
+                    msg:'发送失败!'
+                });
+            });
+        };
+
+
+        /**
+         * 获取国编码
+         */
+        $scope.user = {};
+        LoginService.getCountryDict({}, function (data) {
+            $scope.countryDict = data;
+            $scope.countryDict.forEach(function (item) {
+                if (item.cc == '86') {
+                    $scope.user.cc = item;
+                }
+            });
+        });
+
+        /**
+         * 修改国家
+         */
+        $scope.changeCountry = function (usernameModel) {
+            $scope.investor.phone = '';
+            usernameModel.$setPristine();
+        }
+
+        /**
+         * 获取要发送的用手机
+         */
+        $scope.getPhoneWithCountryCode = function () {
+            return [$scope.user.cc.cc, $scope.investor.phone].join('+');
+        }
+
+
+
 
         $scope.submitFormUser = function(){
             // console.log($scope);

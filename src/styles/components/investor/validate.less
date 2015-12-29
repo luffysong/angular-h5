@@ -90,6 +90,25 @@
             }
         }
     }
+    .form-group{
+        position: relative;
+
+        .btn-captcha{
+            position: absolute;
+            top: 7px;
+            right: 10px;
+            width: 82px;
+            padding: 4px;
+            background-color: #fff;
+            color: #008df2;
+            border: 1px solid #008df2;
+            z-index: 20;
+        }
+        &>.message-code {
+            right: 100px;
+        }
+    }
+
     .basic-info {
         width: 100%;
         height: 44px;

@@ -30,6 +30,8 @@
                 <div class="error-alert error" ng-show="investorValidateForm.intro.$invalid && investorValidateForm.intro.$dirty">
                     <span ng-show="investorValidateForm.intro.$error.required">请输入一句话简介</span>
                 </div>-->
+
+
                 <div class="error-alert error" ng-show="investorValidateForm.address1.$invalid && investorValidateForm.address1.$dirty">
                     <span ng-show="investorValidateForm.address1.$error.required">请选择所在地</span>
                 </div>
@@ -39,18 +41,19 @@
                 <div class="error-alert error" ng-show="investorValidateForm.company.$invalid && investorValidateForm.company.$dirty">
                     <span ng-show="investorValidateForm.company.$error.required">请输入公司</span>
                 </div>
-                <div class="error-alert error" ng-show="investorValidateForm.reIdCardNumber.$invalid && investorValidateForm.reIdCardNumber.$dirty">
-                    <span ng-show="investorValidateForm.reIdCardNumber.$error.required">请再次输入身份证号码</span>
-                </div>
-                <div class="error-alert error" ng-show="investorValidateForm.$error.idcardInvalid && enterCard">
-                    <span>两次输入身份证号码不一致</span>
-                </div>
+                <!--<div class="error-alert error" ng-show="investorValidateForm.reIdCardNumber.$invalid && investorValidateForm.reIdCardNumber.$dirty">-->
+                    <!--<span ng-show="investorValidateForm.reIdCardNumber.$error.required">请再次输入身份证号码</span>-->
+                <!--</div>-->
+                <!--<div class="error-alert error" ng-show="investorValidateForm.$error.idcardInvalid && enterCard">-->
+                    <!--<span>两次输入身份证号码不一致</span>-->
+                <!--</div>-->
                 <div class="error-alert error" ng-show="investorValidateForm.idCardNumber.$invalid && investorValidateForm.idCardNumber.$dirty">
                     <span ng-show="investorValidateForm.idCardNumber.$error.required">请输入身份证号码</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.name.$invalid && investorValidateForm.name.$dirty">
                     <span ng-show="investorValidateForm.name.$error.required">请输入真实姓名</span>
                 </div>
+
 
                 <div class="form-horizontal welcome-form">
 
@@ -63,25 +66,76 @@
                         <div class="col-max">
                             <input class="form-control" type="text" ng-model="user.name" name="name" placeholder="须与身份证姓名保持一致" maxlength="15"  required/>
                         </div>
-
                     </div>
-
 
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>身份证号码</label>
                         <div class="col-max">
-                            <input class="form-control" type="text" ng-model="user.id_card_number" name="idCardNumber" placeholder="点击填写"  required />
+                            <input class="form-control" type="text" ng-model="user.id_card_number" name="idCardNumber" maxlength="18" placeholder="点击填写"  required />
                         </div>
-
                     </div>
-                    <div class="form-group">
-                        <label class="label-control"><span class="c-orange">*</span>确认证件号码</label>
+                    <!--<div class="form-group">-->
+                        <!--<label class="label-control"><span class="c-orange">*</span>确认证件号码</label>-->
+                        <!--<div class="col-max">-->
+                            <!--<input class="form-control" type="text" ng-model="user.reIdCardNumber" name="reIdCardNumber" maxlength="15" placeholder="再次填写" ng-blur="enterId()"  required />-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+
+                    <!-- 完善资料（邮箱）-->
+                    <div class="form-group" ng-if="!user.hasEmail">
+                        <label class="label-control" for="user-email"><span class="c-orange">*</span>邮箱</label>
                         <div class="col-max">
-                            <input class="form-control" type="text" ng-model="user.reIdCardNumber" name="reIdCardNumber" placeholder="再次填写" ng-blur="enterId()"  required />
+                            <input class="form-control" type="email" id="user-email" name="user-email" placeholder="填写常用邮箱" required ng-model="user.email">
                         </div>
-
-
                     </div>
+                    <div class="error-tip error" ng-show="syndicatesValidateForm['user-email'].$invalid && syndicatesValidateForm['user-email'].$dirty" ng-if="!user.hasEmail">
+                        <span ng-show="syndicatesValidateForm['user-email'].$error.required"><span class="tip-icon">!</span>请输入你的邮箱</span>
+                        <span ng-show="syndicatesValidateForm['user-email'].$error.email"><span class="tip-icon">!</span>请输入合法邮箱地址</span>
+                        <span ng-show="user.email && syndicatesValidateForm['user-email'].$error.checked && !syndicatesValidateForm['user-email'].$error.email"><span class="tip-icon">!</span>你输入的邮箱已被占用</span>
+                    </div>
+
+                    <!--add 选择国家-->
+                    <div class="form-group" ng-if="!user.hasPhone">
+                        <label class="label-control" for="user-country"><span class="c-orange">*</span>选择国家</label>
+                        <div class="control">
+                            <select name="cc" ng-model="user.cc" id="user-country" class="form-control place"
+                                    ng-change="changeCountry(syndicatesValidateForm['user-phone'])"
+                                    ng-options="item as (item.desc+' (+'+item.cc+')') for item in countryDict"></select>
+                        </div>
+                    </div>
+
+                    <!-- 完善资料（手机号码）-->
+                    <div class="form-group" ng-if="!user.hasPhone">
+                        <label class="label-control" for="user-phone"><span class="c-orange">*</span>手机号码</label>
+                        <!--ng-pattern="REGEXP.phone" -->
+                        <div class="col-max">
+                            <input class="form-control" type="text" id="user-phone" name="user-phone" placeholder="填写常用手机号"  maxlength="11" required ng-model="user.phone">
+                        </div>
+                        <span class="icon-"></span>
+                    </div>
+                    <div class="error-tip error" ng-show="syndicatesValidateForm['user-phone'].$invalid && syndicatesValidateForm['user-phone'].$dirty" ng-if="!user.hasPhone">
+                        <span ng-show="syndicatesValidateForm['user-phone'].$error.required"><span class="tip-icon">!</span>请输入你的电话号码</span>
+                        <span ng-show="syndicatesValidateForm['user-phone'].$error.pattern"><span class="tip-icon">!</span>请输入合法手机号码</span>
+                        <span ng-show="user.phone && syndicatesValidateForm['user-phone'].$error.checked && !syndicatesValidateForm['user-phone'].$error.phone"><span class="tip-icon">!</span>你输入的手机号码已被占用</span>
+                    </div>
+
+                    <!-- 完善资料（验证码）-->
+                    <div class="form-group" ng-if="!user.hasPhone">
+                        <label class="label-control" for="user-captcha"><span class="c-orange">*</span>验证码</label>
+                        <div class="col-max">
+                            <input class="form-control" type="text" id="user-captcha" name="user-captcha" placeholder="点击填写" required ng-model="user.captcha">
+                        </div>
+                        <!--<a class="btn btn-captcha" href="" ng-click="getCode($event)" ng-disabled="wait || syndicatesValidateForm['investor-phone'].$invalid">{{wait ? wait + '秒' : '点击获取'}}</a>-->
+
+                        <a class="btn btn-captcha " href="javascript:void(0)" ng-disabled="wait" ng-if="wait">{{wait+'秒'}}</a>
+                        <a class="btn btn-captcha message-code" href="javascript:void(0)" ng-disabled="!user.phone" ng-if="!wait" ng-click="getCode($event)">短信验证</a>
+                        <a class="btn btn-captcha " href="javascript:void(0)" ng-disabled="!user.phone" ng-if="!wait" ng-click="getCode($event, true)">语音验证</a>
+                    </div>
+                    <div class="error-tip error" ng-show="syndicatesValidateForm['user-captcha'].$invalid && syndicatesValidateForm['user-captcha'].$dirty" ng-if="!user.hasPhone">
+                        <span ng-show="syndicatesValidateForm['user-captcha'].$error.required"><span class="tip-icon">!</span>请输入你收到的验证码</span>
+                    </div>
+
 
                     <div class="form-group">
                         <label class="label-control"><span class="c-orange">*</span>公司</label>
