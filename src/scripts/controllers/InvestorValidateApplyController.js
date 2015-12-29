@@ -881,7 +881,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                                         expData['groupIdType'] = 3;
                                         expData['current'] = true;
                                         expData['groupId'] = $scope.company.addForm.id;
-                                        expData['groupName'] = $scope.company.addForm.groupName;
+                                        expData['groupName'] = $scope.company.addForm.name;
                                         expData['position'] = $scope.company.form.position;
                                         expData['positionDetail'] = $scope.company.form.positionDetail;
                                         expData['startDate'] = $scope.company.form.startYear +'-'+$scope.company.form.startMonth+'-01 01:01:01';
