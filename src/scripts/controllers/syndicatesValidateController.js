@@ -263,7 +263,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             });
         };
 
-
         $scope.enterId = function(){
             if(!$scope.investor['id-confirm']) return;
             $scope.enterCard = true;
@@ -363,8 +362,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     //}
                     ErrorService.alert(err);
                     $scope.hasClick = false;
-
-
                 });
             }, function(err){
                 $scope.hasClick = false;

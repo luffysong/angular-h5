@@ -25,6 +25,8 @@
             <span ng-show="syndicatesValidateForm['investor-name'].$error.required"><span class="tip-icon">!</span>请输入你的姓名</span>
             <span ng-show="syndicatesValidateForm['investor-name'].$error.pattern"><span class="tip-icon">!</span>请输入正确的姓名</span>
         </div>
+
+
         <!-- 认证跟投人（身份证号码）-->
         <div class="form-group">
             <label class="label-control" for="investor-id"><span class="c-red">*</span>身份证</label>
@@ -35,10 +37,9 @@
 
             <a href="javascript:;" class="why-card" ng-click="whyCard($event)">为什么填写身份证?</a>
             <span ng-show="syndicatesValidateForm['investor-id'].$dirty &&
-                            syndicatesValidateForm.$error.idcardInvalid ">
+                            syndicatesValidateForm.$error.idcardInvalid">
                 <span class="tip-icon">!</span>请输入正确的身份证号码
             </span>
-
         </div>
 
 
@@ -54,7 +55,7 @@
         <!--</div>-->
 
         <!-- 完善资料（邮箱）-->
-        <div class="form-group" ng-if="!investor.hasEmail">
+        <div class="form-group" ng-if="investor.hasEmail">
             <label class="label-control" for="investor-email"><span class="c-red">*</span>邮箱</label>
             <input class="form-control" type="email" id="investor-email" name="investor-email" placeholder="填写常用邮箱" required ng-model="investor.email">
         </div>
@@ -65,7 +66,7 @@
         </div>
 
         <!--add 选择国家-->
-        <div class="form-group" ng-if="!investor.hasPhone">
+        <div class="form-group" ng-if="investor.hasPhone">
             <label class="label-control" for="investor-country"><span class="c-red">*</span>选择国家</label>
             <div class="control">
                 <select name="cc" ng-model="user.cc" id="investor-country" class="form-control place" ng-change="changeCountry(syndicatesValidateForm['investor-phone'])"
@@ -77,7 +78,7 @@
         </div>
 
         <!-- 完善资料（手机号码）-->
-        <div class="form-group" ng-if="!investor.hasPhone">
+        <div class="form-group" ng-if="investor.hasPhone">
             <label class="label-control" for="investor-phone"><span class="c-red">*</span>手机号码</label>
             <!--ng-pattern="REGEXP.phone" -->
             <input class="form-control" type="text" id="investor-phone" name="investor-phone" placeholder="填写常用手机号" required ng-model="investor.phone">
@@ -91,16 +92,16 @@
 
 
         <!-- 完善资料（验证码）-->
-        <div class="form-group" ng-if="!investor.hasPhone">
+        <div class="form-group" ng-if="investor.hasPhone">
             <label class="label-control" for="investor-captcha"><span class="c-red">*</span>验证码</label>
-            <input class="form-control" type="text" id="investor-captcha" name="investor-captcha" placeholder="点击填写" required ng-model="investor.captcha">
+            <div class="col-max">
+                <input class="form-control" type="text" id="investor-captcha" name="investor-captcha" placeholder="点击填写" required ng-model="investor.captcha">
+            </div>
             <!--<a class="btn btn-captcha" href="" ng-click="getCode($event)" ng-disabled="wait || syndicatesValidateForm['investor-phone'].$invalid">{{wait ? wait + '秒' : '点击获取'}}</a>-->
 
             <a class="btn btn-captcha " href="javascript:void(0)" ng-disabled="wait" ng-if="wait">{{wait+'秒'}}</a>
-            <a class="btn btn-captcha message-code" href="javascript:void(0)" ng-disabled="!user.phone" ng-if="!wait" ng-click="getCode($event)">短信验证</a>
-            <a class="btn btn-captcha " href="javascript:void(0)" ng-disabled="!user.phone" ng-if="!wait" ng-click="getCode($event, true)">语音验证</a>
-
-
+            <a class="btn btn-captcha message-code" href="javascript:void(0)" ng-disabled="!investor.phone" ng-if="!wait" ng-click="getCode($event)">短信验证</a>
+            <a class="btn btn-captcha " href="javascript:void(0)" ng-disabled="!investor.phone" ng-if="!wait" ng-click="getCode($event, true)">语音验证</a>
         </div>
         <div class="error-tip error" ng-show="syndicatesValidateForm['investor-captcha'].$invalid && syndicatesValidateForm['investor-captcha'].$dirty" ng-if="!investor.hasPhone">
             <span ng-show="syndicatesValidateForm['investor-captcha'].$error.required"><span class="tip-icon">!</span>请输入你收到的验证码</span>

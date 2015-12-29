@@ -11,8 +11,8 @@
         }
         .welcome-form {
             .label-control {
-                text-align: right !important;
-                width: 100px !important;
+                //text-align: right !important;
+                //width: 100px !important;
             }
             &.suc {
                 .label-control {
@@ -21,6 +21,17 @@
                 }
             }
         }
+        .form-horizontal{
+            &>.form-group{
+                .label-control{
+                    width:35%;
+                    margin-right: 5px;
+                    text-align: left;
+                    padding-left: 10px;
+                }
+            }
+        }
+
     }
     .mt-16 {
         margin-top: 16px;
@@ -73,8 +84,11 @@
     .intro {
         width: 100%;
         height: auto;
-        padding: 10px 0;
+        padding: 10px 0 20px;
         background: #fff;
+        h3{
+            font-size:24px;
+        }
         .temp-notice {
             height: auto;
             text-align: center;
@@ -92,6 +106,7 @@
     }
     .form-group{
         position: relative;
+        margin-left:0;
 
         .btn-captcha{
             position: absolute;
@@ -117,11 +132,22 @@
         color: #333;
         background-color: @title-color;
         padding-left: 10px;
-        border: 1px solid #dfdfdf;
+        border-top: 1px solid #dfdfdf;
+        border-bottom: 1px solid #dfdfdf;
         &.common-problem {
             text-align: right;
             border-top: 0;
             color: #008df2;
+        }
+    }
+    .basic-border-top{
+        border-top:0;
+        text-align: right;
+        padding: 3px 0 3px 10px;
+        background: #f7f7f7;
+        .why-card{
+            margin-right: 10px;
+            font-size:12px;
         }
     }
     .validating-info {
@@ -178,4 +204,30 @@
         color: #ffffff;
         border: 0;
     }
+
+    .error-tip {
+        color: #f67576;
+        background:#f0f0f0;
+        font-size: 12px;
+        padding: 3px 0 3px 10px;
+
+        .tip-icon {
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            margin-right: 5px;
+            line-height: 12px;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 50%;
+            background-color: #f67576;
+            text-align: center;
+        }
+        .why-card{
+            float: right;
+            margin-right: 10px;
+        }
+    }
+
+
 }

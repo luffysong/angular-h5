@@ -5,7 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
-    function($scope,DictionaryService,ErrorService,checkForm,$timeout,UserService,$modal, $stateParams,$state,CrowdFundingService,loading,$cookies,LoginService) {
+    //function($scope,  $modal, DictionaryService, ErrorService, checkForm, $timeout, UserService, IDCardService, $stateParams, $state, CrowdFundingService, loading, $cookies, LoginService) {
+    function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, IDCardService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService, $cookies, LoginService) {
         document.title="36氪股权投资";
         loading.show("investorVal");
         $timeout(function(){
@@ -26,9 +27,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
 
         UserService.isProfileValid(function (valid) {
             if(!valid){
-                $state.go('guide.welcome', {
-                    type: "investorValidate"
-                });
+                $state.go('investorValidate');
                 return;
             }
         });
@@ -64,7 +63,17 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         UserService.basic.get({
             id: $scope.userId
         }, function (data){
+
             // console.log(data);
+            if(data.phone){
+                $scope.user.hasPhone = true;
+                delete $scope.user.phone;
+            }
+            if(data.email){
+                $scope.user.hasEmail = true;
+                delete $scope.user.email;
+            }
+
             $scope.user.intro = $scope.user_cache.intro = data.intro || '';
             $scope.user.industry = $scope.user_cache.industry = data.industry || [];
             $scope.user.investPhases = $scope.user_cache.investPhases = data.investPhases || [];
@@ -74,6 +83,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             if (data.intro && data.industry && data.industry.length && data.investPhases.length && $scope.user.investMoneyBegin && $scope.user.investMoneyEnd) {
                 $scope.user_cache.is_completed = 1;
             }
+
         }, function(error){
             // console.log(error);
         });
@@ -167,11 +177,26 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }
             $scope.user.industry = $scope.areaList;
         }
+
+
         /*确认身份证号失去焦点事件*/
-        $scope.enterId = function(){
-            if(!$scope.user.reIdCardNumber)return;
-            $scope.enterCard = true;
-        }
+        //$scope.enterId = function(){
+        //    if(!$scope.user.reIdCardNumber)return;
+        //    $scope.enterCard = true;
+        //}
+        //
+        //$timeout(function(){
+        //    $scope.$watch("[user.reIdCardNumber,user.id_card_number]",function(from){
+        //        if(angular.element($("form[name='investorValidateForm']")).length > 0){
+        //            if(from[0] != from[1]){
+        //                angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("idcardInvalid",false);
+        //            }else{
+        //                angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("idcardInvalid",true);
+        //            }
+        //        }
+        //    });
+        //},500);
+
 
 
         //android客户端
@@ -230,58 +255,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 });
             }
         };*/
-        $timeout(function(){
-            $scope.$watch("[user.reIdCardNumber,user.id_card_number]",function(from){
-                if(angular.element($("form[name='investorValidateForm']")).length > 0){
-                    if(from[0] != from[1]){
-                        angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("idcardInvalid",false);
-                    }else{
-                        angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("idcardInvalid",true);
-                    }
-                }
-            });
-        },500);
 
-        /*查看风险揭示书*/
-        $scope.seeRisk = function(){
-            $modal.open({
-                templateUrl: 'templates/company/pop-risk-tip-all.html',
-                windowClass: 'remind-modal-window',
-                controller: [
-                    '$scope', '$modalInstance','scope',
-                    function ($scope, $modalInstance, scope) {
-                        $scope.ok = function(){
-                            $modalInstance.dismiss();
-                        }
-                    }
-                ],
-                resolve: {
-                    scope: function(){
-                        return $scope;
-                    }
-                }
-            });
-        }
-        /*查看用户服务协议*/
-        $scope.seeProtocol = function () {
-            $modal.open({
-                templateUrl: 'templates/company/pop-service-protocol.html',
-                windowClass: 'remind-modal-window',
-                controller: [
-                    '$scope', '$modalInstance','scope',
-                    function ($scope, $modalInstance, scope) {
-                        $scope.ok = function(){
-                            $modalInstance.dismiss();
-                        }
-                    }
-                ],
-                resolve: {
-                    scope: function(){
-                        return $scope;
-                    }
-                }
-            });
-        }
+
+
         /*表单提交-跟投人信息*/
         $scope.submitForm = function(){
             $scope.enterCard = true;
@@ -427,30 +403,104 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             });
         };
 
+        /**
+         *  身份证验证
+         */
+        $scope.$watch("[user.reIdCardNumber]",function(from){
+
+            var $elment = angular.element($("form[name='investorValidateForm']"));
+
+            if($elment.length > 0) {
+                if(IDCardService.getIdCardInfo($scope.user.reIdCardNumber).isTrue) {
+                    $elment.scope()["investorValidateForm"].$setValidity("idcardInvalid", true);
+                }
+            }
+        });
+        $scope.checkId = function(){
+            var $elment = angular.element($("form[name='investorValidateForm']"));
+
+            if($elment.length > 0) {
+                if(IDCardService.getIdCardInfo($scope.user.reIdCardNumber).isTrue) {
+                    $elment.scope()["investorValidateForm"].$setValidity("idcardInvalid", true);
+                } else {
+                    $elment.scope()["investorValidateForm"].$setValidity("idcardInvalid", false);
+                }
+            }
+        }
+
+        // 邮箱校验
+        var checkTimeout;
+        $scope.$watch('user.email', function(email) {
+            if(!email || $scope.investorValidateForm['user-email'].$error.email) {
+                return;
+            }
+            $scope.investorValidateForm['user-email'].$setValidity('checked', true);
+            checkTimeout && $timeout.cancel(checkTimeout);
+            checkTimeout = $timeout(function() {
+                $scope.investorValidateForm['user-email'].$setDirty();
+                UserService.check.get({
+                    id: $scope.uid,
+                    email: email
+                }, function(data) {
+
+                }, function() {
+                    $scope.investorValidateForm['user-email'].$setValidity('checked', false);
+                });
+            }, 800);
+        });
+
         // 手机验证
-        $scope.$watch('investor.phone', function(phone) {
+        $scope.$watch('user.phone', function(phone) {
             if(!phone || !$rootScope.REGEXP.phone.test(phone)){
                 return;
             }
-            $scope.syndicatesValidateForm['investor-phone'].$setValidity("checked", true);
+            $scope.investorValidateForm['user-phone'].$setValidity("checked", true);
             checkTimeout && $timeout.cancel(checkTimeout);
             checkTimeout = $timeout(function(){
-                $scope.syndicatesValidateForm['investor-phone'].$setDirty();
+                $scope.investorValidateForm['user-phone'].$setDirty();
                 UserService.check.get({
                     id: $scope.uid,
                     phone: phone
                 }, function(data) {
 
                 }, function() {
-                    $scope.syndicatesValidateForm['investor-phone'].$setValidity("checked", false);
+                    $scope.investorValidateForm['user-phone'].$setValidity("checked", false);
                 });
             }, 800);
         });
 
+        /**
+         * 获取国编码
+         */
+        $scope.user = {};
+        LoginService.getCountryDict({}, function (data) {
+            $scope.countryDict = data;
+            $scope.countryDict.forEach(function (item) {
+                if (item.cc == '86') {
+                    $scope.user.cc = item;
+                }
+            });
+        });
+
+        /**
+         * 修改国家
+         */
+        $scope.changeCountry = function (usernameModel) {
+            $scope.user.phone = '';
+            usernameModel.$setPristine();
+        }
+
+        /**
+         * 获取要发送的用手机
+         */
+        $scope.getPhoneWithCountryCode = function () {
+            return [$scope.user.cc.cc, $scope.user.phone].join('+');
+        }
+
         // 获取验证码
         $scope.getCode = function(e, voice){
             e && e.preventDefault();
-            if(!$scope.investor.phone) {
+            if(!$scope.user.phone) {
                 return;
             }
             if($scope.wait) {
@@ -472,42 +522,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 //phone: $scope.investor.phone
                 phone: getPhoneWithCountryCode()
             }, function(data) {
+
             }, function(){
                 ErrorService.alert({
                     msg:'发送失败!'
                 });
             });
         };
-
-
-        /**
-         * 获取国编码
-         */
-        $scope.user = {};
-        LoginService.getCountryDict({}, function (data) {
-            $scope.countryDict = data;
-            $scope.countryDict.forEach(function (item) {
-                if (item.cc == '86') {
-                    $scope.user.cc = item;
-                }
-            });
-        });
-
-        /**
-         * 修改国家
-         */
-        $scope.changeCountry = function (usernameModel) {
-            $scope.investor.phone = '';
-            usernameModel.$setPristine();
-        }
-
-        /**
-         * 获取要发送的用手机
-         */
-        $scope.getPhoneWithCountryCode = function () {
-            return [$scope.user.cc.cc, $scope.investor.phone].join('+');
-        }
-
 
 
 
@@ -520,23 +541,90 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             $scope.hasClick = true;
 
             var param = {};
-            param['intro'] = $scope.user.intro;
+            param['intro'] = $scope.user.intro || $scope.user.company_name + $scope.user.position_name;
             param['industry'] = $scope.user.industry.join(',');
             param['investPhases'] = $scope.user.investPhases.join(',');
             param['mainInvestCurrency'] = $scope.user.investMoneyUnit;
             param['cnyInvestMin'] = $scope.user.investMoneyBegin;
             param['cnyInvestMax'] = $scope.user.investMoneyEnd;
+            param['email'] = $scope.user.email;
+            param['phone'] =  getPhoneWithCountryCode();
+            param['smscode'] = $scope.user.captcha;
 
             UserService.basic.update({
                 id: $scope.userId
             },param ,function(result){
+
                 console.log(result);
                 $scope.user_cache.is_completed = 1;
+
             }, function(error){
                 console.log(error);
                 $scope.hasClick = false;
             });
         };
+
+        /*为什么填写身份证*/
+        $scope.whyCard = function(){
+            $modal.open({
+                templateUrl: 'templates/common/why-card.html',
+                windowClass: 'remind-modal-window',
+                controller: [
+                    '$scope', '$modalInstance','scope',
+                    function ($scope, $modalInstance, scope) {
+                        $scope.ok = function(){
+                            $modalInstance.dismiss();
+                        }
+                    }
+                ],
+                resolve: {
+                    scope: function(){
+                        return $scope;
+                    }
+                }
+            });
+        };
+        /*查看风险揭示书*/
+        $scope.seeRisk = function(){
+            $modal.open({
+                templateUrl: 'templates/company/pop-risk-tip-all.html',
+                windowClass: 'remind-modal-window',
+                controller: [
+                    '$scope', '$modalInstance','scope',
+                    function ($scope, $modalInstance, scope) {
+                        $scope.ok = function(){
+                            $modalInstance.dismiss();
+                        }
+                    }
+                ],
+                resolve: {
+                    scope: function(){
+                        return $scope;
+                    }
+                }
+            });
+        }
+        /*查看用户服务协议*/
+        $scope.seeProtocol = function () {
+            $modal.open({
+                templateUrl: 'templates/company/pop-service-protocol.html',
+                windowClass: 'remind-modal-window',
+                controller: [
+                    '$scope', '$modalInstance','scope',
+                    function ($scope, $modalInstance, scope) {
+                        $scope.ok = function(){
+                            $modalInstance.dismiss();
+                        }
+                    }
+                ],
+                resolve: {
+                    scope: function(){
+                        return $scope;
+                    }
+                }
+            });
+        }
+
 
         WEIXINSHARE = {
             shareTitle: "36氪股权投资",
