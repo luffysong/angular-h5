@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('syndicatesValidateController',
-    function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, IDCardService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService, $cookies) {
+    function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, IDCardService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService, $cookies, LoginService) {
         document.title = '来36氪做股东';
         $scope.$on('$locationChangeStart', function() {
             document.title = '36氪股权融资';
@@ -231,7 +231,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         });
 
         // 获取验证码
-        $scope.getCode = function(e){
+        $scope.getCode = function(e, voice){
             e && e.preventDefault();
             if(!$scope.investor.phone) {
                 return;
@@ -252,7 +252,8 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             UserService['send-sms'].send({
                 id: $scope.uid
             }, {
-                phone: $scope.investor.phone
+                //phone: $scope.investor.phone
+                phone: getPhoneWithCountryCode()
             }, function(data) {
             }, function(){
                  ErrorService.alert({
@@ -329,7 +330,8 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 avatar: $scope.investor.avatar || kr.defaulImg.defaultAvatarUrl,
                 name: $scope.investor.name,
                 email: $scope.investor.email,
-                phone: $scope.investor.phone,
+                //phone: $scope.investor.phone,
+                phone: getPhoneWithCountryCode(),
                 smscode: $scope.investor.captcha
             }, function(data){
 
@@ -369,6 +371,39 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 ErrorService.alert(err);
             });
         };
+
+        /**
+         * 获取过编码
+         */
+        $scope.user = {};
+        LoginService.getCountryDict({}, function (data) {
+
+            debugger;
+            console.log(data);
+
+            $scope.countryDict = data;
+            $scope.countryDict.forEach(function (item) {
+                if (item.cc == '86') {
+                    $scope.user.cc = item;
+                }
+            });
+        });
+
+        /**
+         * 修改国家
+         */
+        $scope.changeCountry = function (usernameModel) {
+            $scope.investor.phone = '';
+            usernameModel.$setPristine();
+        }
+
+        /**
+         * 获取要发送的用手机
+         */
+        $scope.getPhoneWithCountryCode = function () {
+            return [$scope.user.cc.cc, $scope.investor.phone].join('+');
+        }
+
 
         // 查看风险揭示书
         $scope.seeRisk = function(){
