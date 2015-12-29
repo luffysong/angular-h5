@@ -377,10 +377,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
          */
         $scope.user = {};
         LoginService.getCountryDict({}, function (data) {
-
-            debugger;
-            console.log(data);
-
             $scope.countryDict = data;
             $scope.countryDict.forEach(function (item) {
                 if (item.cc == '86') {

@@ -64,10 +64,10 @@
         </div>
 
         <!--add 选择国家-->
-        <div class="form-group" ng-if="!user.hasPhone">
+        <div class="form-group" ng-if="!investor.hasPhone">
             <label class="label-control" for="investor-country"><span class="c-red">*</span>选择国家</label>
             <div class="control">
-                <select name="cc" ng-model="user.cc" id="investor-country" class="form-control place" ng-change="changeCountry(guideForm.phone)"
+                <select name="cc" ng-model="user.cc" id="investor-country" class="form-control place" ng-change="changeCountry(syndicatesValidateForm['investor-phone'])"
                         ng-options="item as (item.desc+' (+'+item.cc+')') for item in countryDict"></select>
             </div>
             <!--<div class="col">-->
