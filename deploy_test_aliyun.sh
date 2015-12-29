@@ -22,6 +22,12 @@ elif [ $2 = 'test08' ]; then
     target=test8;
 elif [ $2 = 'test09' ]; then
     target=test9;
+elif [ $2 = 'test10' ]; then
+    target=test10;
+elif [ $2 = 'test11' ]; then
+    target=test11;
+elif [ $2 = 'test12' ]; then
+    target=test12;
 fi
 
 gulp build:$target
@@ -40,4 +46,3 @@ rsync -rvltOD ./dist/* "ali-rong-$1:/data/docker/$2/work/frontend/prod/36kr/krpl
 #  server='04'
 #fi
 #rsync -rvltOD ./dist/* "dev$server:/data/work/frontend/$target/36kr/krplus/dist/m"
-
