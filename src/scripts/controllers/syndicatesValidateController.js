@@ -96,14 +96,13 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 $scope.investor.address.address2 = data.cert_info.city;
             }
 
-        }, function(err) {
-
-            //todo;
-            if(err.code && (err.code == 1002 || err.code == 1003)){
+            if( data.status && ( data.status == 1 || data.status == 2) ){
                 investorSkip();
-            } else {
-                ErrorService.alert(err);
             }
+
+        }, function(err) {
+            ErrorService.alert(err);
+
         });
 
 
@@ -348,15 +347,22 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     rnv_investor_info: $scope.investor.condition,
                     uid_inviter: $scope.investor.uid_inviter
                 }, function(data) {
-                    $scope.hasClick = false;
-                    investorSkip(true);
-                }, function(err) {
-                    if(err.code && (err.code == 1002 || err.code == 1003)) {
+
+                    if(data.status && (data.status == 1 || data.status == 2)) {
+                        $scope.hasClick = false;
                         investorSkip(true);
-                    } else {
-                        ErrorService.alert(err);
                     }
+
+                }, function(err) {
+                    //if(err.code && (err.code == 1002 || err.code == 1003)) {
+                    //    investorSkip(true);
+                    //} else {
+                    //    ErrorService.alert(err);
+                    //}
+                    ErrorService.alert(err);
                     $scope.hasClick = false;
+
+
                 });
             }, function(err){
                 $scope.hasClick = false;

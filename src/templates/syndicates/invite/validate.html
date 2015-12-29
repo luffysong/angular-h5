@@ -29,7 +29,7 @@
         <div class="form-group">
             <label class="label-control" for="investor-id"><span class="c-red">*</span>身份证</label>
             <input class="form-control" type="text" id="investor-id"  ng-blur="checkId($event)"
-                   name="investor-id" placeholder="填写正确的身份证号码"  required ng-model="investor.id">
+                   name="investor-id" placeholder="填写正确的身份证号码"  required ng-model="investor.id" maxlength="18">
         </div>
         <div class="error-tip error clearfix">
 

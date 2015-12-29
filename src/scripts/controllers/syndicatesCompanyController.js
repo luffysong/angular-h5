@@ -230,16 +230,14 @@ angular.module('defaultApp.controller').controller('syndicatesCompanyController'
                         id: "co-investor",
                         submodel: "info"
                     }, function(data) {
-                        $scope.isLoading = false;
-                        $scope.checkIdentity = false;
-                    },function(err){
-                        if(err.code == 1002){
+                        if(data.status == 1 || data.status == 2 ){
                             checkCoupon();
                             $scope.isInvestor = true;
                         }else {
                             $scope.isLoading = false;
                             $scope.checkIdentity = false;
                         }
+                    },function(err){
 
                     });
                 }else{

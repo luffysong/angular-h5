@@ -94,23 +94,26 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             id:"co-investor",
             submodel:"info"
         },function(data){
-            delete data.name;
-            if(data.cert_info){
-                $scope.user.reIdCardNumber = data.cert_info.id_card_number;
-                $scope.basic.value.address1 = data.cert_info.country;
-                $scope.basic.value.address2 = data.cert_info.city;
+            /*status 1：认证中 2：认证成功 3：多次身份证验证失败，禁止提交 4 ：正常接收*/
+            if(data.status == 1){
+                $scope.valStatus = "validating";
+            }else if(data.status == 2){
+                $scope.valStatus = "suc";
+            }else if(data.status == 3){
+                $scope.valStatus = "fail";
+            }else if(data.status == 4){
+                delete data.name;
+                if(data.cert_info) {
+                    $scope.user.reIdCardNumber = data.cert_info.id_card_number;
+                    $scope.basic.value.address1 = data.cert_info.country;
+                    $scope.basic.value.address2 = data.cert_info.city;
+                }
+                angular.extend($scope.user,data.cert_info);
             }
-            angular.extend($scope.user,data.cert_info);
             loading.hide("investorVal");
         },function(err){
-            if(err.code == 1001){
-                $scope.valStatus = "fail";
-            }else if(err.code == 1002){
-                $scope.valStatus = "validating";
-            }else if(err.code == 1003){
-                $scope.valStatus = "withoutVal";
-            }
             loading.hide("investorVal");
+            ErrorService.alert(err);
         });
         /*选择所在地事件*/
         $scope.addr1Change = function() {
@@ -310,7 +313,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 id:'co-investor',
                 submodel:'identity-cert'
             },$scope.user,function(data){
-                $scope.valStatus = "validating";
+                if(data.status == 1){
+                    $scope.valStatus = "validating";
+                }else if(data.status == 3){
+                    $scope.valStatus = "fail";
+                }
                 /**
                  * 金蛋理财活动
                  *
@@ -410,13 +417,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 }
                 */
             },function(err){
-                if(err.code == 1001){
-                    $scope.valStatus = "fail";
-                }else if(err.code == 1002){
-                    $scope.valStatus = "validating";
-                }else {
-                    ErrorService.alert(err);
-                }
+                ErrorService.alert(err);
                 $scope.hasClick = false;
             });
         };
