@@ -122,15 +122,20 @@
         cursor: pointer;
     }
     .title-info {
+        display: -webkit-box;
         width: 100%;
         .clearfix;
         padding: 15px;
         background: #fff;
+        .quit-logo {
+            display: block;
+            height: 50px;
+            margin-left: 20px;
+        }
         .syndicates-logo {
             display: block;
             width: 40px;
             height: 40px;
-            float: left;
             margin-right: 15px;
             border-radius: 50%;
             background-repeat: no-repeat;
@@ -138,7 +143,7 @@
             box-shadow: 0 0 1px rgba(0,0,0,0.2);
         }
         .syndicates-intro {
-            margin-left: 55px;
+            -webkit-box-flex: 1;
             a {
                 color: #333;
                 font-weight: 600;

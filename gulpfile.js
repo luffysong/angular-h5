@@ -151,6 +151,8 @@ gulp.task('scripts:browserify', ['scripts:init'], function () {
         .pipe(reloadPage());
 });
 
+
+
 // Scripts
 gulp.task('scripts', ['scripts:vendor', 'scripts:browserify', 'scripts:ui:template']);
 

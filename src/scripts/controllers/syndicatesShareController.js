@@ -29,17 +29,17 @@ angular.module('defaultApp.controller').controller('SyndicatesShareController',
                         id: "co-investor",
                         submodel: "info"
                     }, function(data) {
-                        $state.go('syndicatesValidate', {
-                            inviter_id: $stateParams.id
-                        });
-                    }, function(err) {
-                        if(err.code == 1002) {
+
+                        if(data.status == 1 ) {
 
                         } else {
                             $state.go('syndicatesValidate', {
                                 inviter_id: $stateParams.id
                             });
                         }
+
+                    }, function(err) {
+
                     });
                 }
             });

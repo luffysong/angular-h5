@@ -3,5 +3,5 @@ window.projectEnvConfig = {
     krHost: 'stable.36kr.com',
     rongHost: 'rongtest09.36kr.com',
     ucHost: 'uctest09.36kr.com',
-    helpHost: 'helptest.36kr.com'
+    helpHost: 'helptest09.36kr.com'
 };
