@@ -11,6 +11,9 @@ var urlAdjuster = require('gulp-css-url-adjuster');
 
 var config = require('./config.json');
 
+var through2 = require('through2');
+var browserify = require('browserify');
+
 var reloadTimeout, CDNPrefix, buildMode='prod';
 function reloadPage() {
     return es.map(function (file, callback) {
@@ -141,11 +144,24 @@ gulp.task('scripts:vendor', function () {
 gulp.task('scripts:browserify', ['scripts:init'], function () {
     gulp.src(['src/scripts/*.js'])
         .pipe($.plumber({errorHandler: handler}))
-        .pipe($.browserify({debug: true}))
+        // .pipe($.browserify({debug: true}))
+         .pipe(through2.obj(function(file, enc, next) {
++            var self = this;
+             browserify(file.path)
+             // .transform(reactify)
+                 .bundle(function(err, res) {
+                     err && console.log(err.stack);
+-                    file.contents = res;
+-                    next(null, file);
++                    file.contents = new Buffer(res);
++                    self.push(file);
++                    next();
+                 });
+         }))
         .pipe($.plumber.stop())
         //.pipe($.ngmin())
         //.pipe($.uglify())
-        //.pipe($.sourcemaps.write())
+        .pipe($.sourcemaps.write())
         .pipe(gulp.dest('.tmp/scripts'))
         .pipe($.size())
         .pipe(reloadPage());
@@ -406,11 +422,26 @@ gulp.task('build:templates', function () {
         .pipe($.size());
 });
 
-// Build Scripts
-gulp.task('build:scripts', ['scripts:vendor', 'scripts:ui:template', 'scripts:init', 'build:templates'], function () {
-    return gulp.src(['src/scripts/*.js'])
+gulp.task('build:addTemplates', function () {
+    return gulp.src(['src/scripts/**/*.js'])
         .pipe($.replace(/\/\*##(.+)##\*\//, '$1'))
-        .pipe($.browserify())
+        .pipe(gulp.dest('.tmp/tmp-scripts'));
+});
+// Build Scripts
+gulp.task('build:scripts', ['scripts:vendor', 'scripts:ui:template', 'scripts:init', 'build:templates','build:addTemplates'], function () {
+    return gulp.src(['.tmp/tmp-scripts/*.js'])
+		.pipe(through2.obj(function(file, enc, next) {
+			var self = this;
+			browserify(file.path)
+			// .transform(reactify)
+			.bundle(function(err, res) {
+				err && console.log(err.stack);
+				file.contents = new Buffer(res);
+				self.push(file);
+				next();
+			});
+		}))
+        // .pipe($.browserify())
         .pipe($.ngAnnotate())  //处理angular依赖
         .pipe(gulp.dest('.tmp/scripts'))
         .pipe($.size());
@@ -440,7 +471,7 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
         .pipe($.replace("styles/images/","images/"))
         .pipe(assets)
         .pipe($['if']('*.css', $.csso()))
-        .pipe($['if']('*.js', $.uglify()))
+        // .pipe($['if']('*.js', $.uglify()))
         .pipe(assets.restore())
         .pipe($.useref())
 
