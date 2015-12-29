@@ -146,17 +146,15 @@ gulp.task('scripts:browserify', ['scripts:init'], function () {
         .pipe($.plumber({errorHandler: handler}))
         // .pipe($.browserify({debug: true}))
          .pipe(through2.obj(function(file, enc, next) {
-+            var self = this;
+            var self = this;
              browserify(file.path)
              // .transform(reactify)
                  .bundle(function(err, res) {
                      err && console.log(err.stack);
--                    file.contents = res;
--                    next(null, file);
-+                    file.contents = new Buffer(res);
-+                    self.push(file);
-+                    next();
-                 });
+					 file.contents = new Buffer(res);
+					 self.push(file);
+					 next();
+				 });
          }))
         .pipe($.plumber.stop())
         //.pipe($.ngmin())
