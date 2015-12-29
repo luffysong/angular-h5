@@ -273,35 +273,35 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                    <ul class="content-list" ng-if="company.isAddExperience && company.isAdd">
-                                        <!--产品状态-->
-                                        <li>
-                                            <label class="title"><span class="c-orange">*</span>产品状态</label>
-                                            <ul class="main">
-                                                <li>
-                                                    <select id="" name="" ng-model="company.addForm.operationStatus" ng-options="y.value as y.desc for y in operationStatus">
-                                                        <option value="">请选择</option>
-                                                    </select>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <label class="title"><span class="c-orange"  ng-hide="(company.addForm.operationStatus == 'ONLINE_IN_3MONTH' || company.addForm.operationStatus == 'ONLINE_IN_6MONTH')">*</span>公司网址</label>
-                                            <ul class="main">
-                                                <li>
-                                                    <input type="url" fill-url ng-model="company.addForm.website" ng-required="!(company.addForm.operationStatus == 'ONLINE_IN_3MONTH' || company.addForm.operationStatus == 'ONLINE_IN_6MONTH')" name="companyWebsite" placeholder="如：http://www.36kr.com">
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <label class="title"><span class="c-orange">*</span>公司简介</label>
-                                            <ul class="main">
-                                                <li>
-                                                    <textarea  name="companyBrief" required ng-model="company.addForm.brief" placeholder="简单介绍你的个人经历，30字" maxlength="30"></textarea>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                    <!--<ul class="content-list" ng-if="company.isAddExperience && company.isAdd">-->
+                                        <!--&lt;!&ndash;产品状态&ndash;&gt;-->
+                                        <!--<li>-->
+                                            <!--<label class="title"><span class="c-orange">*</span>产品状态</label>-->
+                                            <!--<ul class="main">-->
+                                                <!--<li>-->
+                                                    <!--<select id="" name="" ng-model="company.addForm.operationStatus" ng-options="y.value as y.desc for y in operationStatus">-->
+                                                        <!--<option value="">请选择</option>-->
+                                                    <!--</select>-->
+                                                <!--</li>-->
+                                            <!--</ul>-->
+                                        <!--</li>-->
+                                        <!--<li>-->
+                                            <!--<label class="title"><span class="c-orange"  ng-hide="(company.addForm.operationStatus == 'ONLINE_IN_3MONTH' || company.addForm.operationStatus == 'ONLINE_IN_6MONTH')">*</span>公司网址</label>-->
+                                            <!--<ul class="main">-->
+                                                <!--<li>-->
+                                                    <!--<input type="url" fill-url ng-model="company.addForm.website" ng-required="!(company.addForm.operationStatus == 'ONLINE_IN_3MONTH' || company.addForm.operationStatus == 'ONLINE_IN_6MONTH')" name="companyWebsite" placeholder="如：http://www.36kr.com">-->
+                                                <!--</li>-->
+                                            <!--</ul>-->
+                                        <!--</li>-->
+                                        <!--<li>-->
+                                            <!--<label class="title"><span class="c-orange">*</span>公司简介</label>-->
+                                            <!--<ul class="main">-->
+                                                <!--<li>-->
+                                                    <!--<textarea  name="companyBrief" required ng-model="company.addForm.brief" placeholder="简单介绍你的个人经历，30字" maxlength="30"></textarea>-->
+                                                <!--</li>-->
+                                            <!--</ul>-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
                                     <!--/新增公司-->
                                     <ul class="content-list">
                                         <!--职位-->
