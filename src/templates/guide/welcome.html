@@ -45,6 +45,17 @@
 		                    <span ng-show="user.email && guideForm.email.$error.checked && !guideForm.email.$error.email">你输入的邮箱已被占用</span>
 		                </div>
 				</div>
+				<div class="form-group" ng-if="!user.hasPhone">
+					<label class="label-control">选择国家</label>
+					<div class="control">
+						<select name="cc" ng-model="user.cc" class="form-control country"
+								ng-change="changeCountry(guideForm.phone)"
+								ng-options="item as (item.desc+' (+'+item.cc+')') for item in countryDict"></select>
+					</div>
+					<!--<div class="col">-->
+					<!--<a href="#" class="update-phone">修改手机号码</a>-->
+					<!--</div>-->
+				</div>
 	            <div class="form-group" ng-if="!user.hasPhone">
 	                <label class="label-control">手机号码</label>
 	                <div class="control">
@@ -64,7 +75,17 @@
 					<div class="control validate-code">
 						<input class="form-control" type="text" ng-model="user.smscode" name="smscode" required/>
 					</div>
-					<a class="btn btn-linear get-code" href="javascript:void(0)" ng-click="getCode($event)" ng-disabled="wait || guideForm.phone.$invalid">{{wait?wait+'秒':'获取验证码'}}</a>
+					<a class="btn btn-linear get-code" href="javascript:void(0)" ng-disabled="wait" ng-if="wait">{{wait+'秒'}}</a>
+					<a class="btn btn-linear get-code btn-thin btn-sms"
+					   href="javascript:void(0)"
+					   ng-disabled="!user.phone"
+					   ng-if="!wait"
+					   ng-click="getCode($event)">短信验证</a>
+					<a class="btn btn-linear get-code btn-thin"
+					   href="javascript:void(0)"
+					   ng-disabled="!user.phone"
+					   ng-if="!wait"
+					   ng-click="getCode($event, true)">语音验证</a>
 				</div>
 				<div class="form-group">
 					<a href="#" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="guideForm.$invalid" ng-if="sourceType=='investorValidate'" baidu-btn="继续跟投人认证按钮点击">继续跟投人认证</a>
