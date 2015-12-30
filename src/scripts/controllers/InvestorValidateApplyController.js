@@ -90,6 +90,17 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             suggest: suggest_state_remote_organization,
             on_error: console.log,
             on_detach: function (cs) {
+                if(($scope.organizationList.data[0].name === $scope.organization.addForm.name) && !$scope.organizationList.data[0].status) {
+                    $scope.organization.isAdd = false;
+                    var organization = $scope.organizationList.data[0];
+                    $scope.organization.addForm.name = organization.name;
+                    $scope.organization.addForm.id = organization.id;                        
+                    return;
+                }
+
+                $scope.organization.isAddExperience = true;
+                $scope.organization.isAdd = true;
+                $scope.organization.addForm.id = 0;                      
             },
             on_select: function (selected) {
                 if (selected.obj.status != 'add') {
@@ -110,7 +121,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30',
                     //label = '<img src="' + logo + '">' + '<span>' + item.name + '</span>';
                     label
-
                 if(item.status!='add'){
                     label = '<div class="coList"><img src="' + logo + '">' + item.name + '</div>';
                 }else{
@@ -135,6 +145,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 wd: q,
                 sub: 'institution'
             }, function (data) {
+                $scope.organizationList = data;
                 var exist = data.data.filter(function (item) {
                     return item.name.toLowerCase() == q.toLowerCase();
                 });
@@ -162,6 +173,17 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             suggest: suggest_state_remote,
             on_error: console.log,
             on_detach: function (cs) {
+                var companySuggest = $scope.companyList.data.length;
+                if(($scope.companyList.data[0].name === $scope.company.addForm.name) && !$scope.companyList.data[0].status) {
+                    $scope.company.isAdd = false;
+                    var company = $scope.companyList.data[0];
+                    $scope.company.addForm.name = company.name;
+                    $scope.company.addForm.id = company.id;                       
+                    return;
+                }
+                $scope.company.isAddExperience = true;
+                $scope.company.isAdd = true;
+                $scope.company.addForm.id = 0;                      
             },
             on_select: function (selected) {
                 if (selected.obj.status != 'add') {
@@ -220,7 +242,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         value: q
                     })
                 }
-
+                $scope.companyList = data;
                 deferred.resolve(suggest_state(data.data));
             }, function () {
 
@@ -975,24 +997,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }
             }
         }
-         // 机构suggest失去焦点判断
-        $scope.Blur = function(){
-            var investorRole  = $scope.invest.investorRole;
-            if(investorRole == 'ORG_INVESTOR'){
-                if(!$scope.organization.addForm.id){
-                    $scope.organization.isAddExperience = true;
-                    $scope.organization.isAdd = true;
-                    $scope.organization.addForm.id = 0;
-                }
-            }else if(investorRole == 'COMPANY_INVEST_DEPT'){
-                if(!$scope.company.addForm.id){
-                    $scope.company.isAddExperience = true;
-                    $scope.company.isAdd = true;
-                    $scope.company.addForm.id = 0;
-                }
-            }
-            
-        };
 
 
     }
