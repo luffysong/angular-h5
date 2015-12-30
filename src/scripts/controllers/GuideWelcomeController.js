@@ -259,6 +259,8 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
          * 获取要发送的用户名
          */
         $scope.getPhoneWithCountryCode = function(){
+            if(!$scope.user.phone)return;
+            if($scope.user.cc.cc=='86')return $scope.user.phone;
             return [$scope.user.cc.cc, $scope.user.phone].join('+');
         }
 
