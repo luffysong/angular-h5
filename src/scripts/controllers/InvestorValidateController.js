@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
     //function($scope,  $modal, DictionaryService, ErrorService, checkForm, $timeout, UserService, IDCardService, $stateParams, $state, CrowdFundingService, loading, $cookies, LoginService) {
-    function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, IDCardService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService, $cookies, LoginService) {
+    function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, IDCardService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService, $cookies, LoginService, $q) {
         document.title="36氪股权投资";
         loading.show("investorVal");
         $timeout(function(){
@@ -49,10 +49,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             passport_number:"",
             passport_url:"",
             intro:"",
-            email: '',
-            phone: '',
-            captcha: '',
-            avatar: '',
             industry:[],
             avatar:'',
             investMoneyBegin:"",
@@ -75,6 +71,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 delete $scope.user.email;
             }
             $scope.user.avatar = data.avatar;
+
             console.log(data.intro);
             $scope.user.intro  = data.intro ? data.intro :  '';
             $scope.user.industry = $scope.user_cache.industry = data.industry || [];
@@ -286,8 +283,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }else{
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
             }*/
-
-
             $scope.hasClick = true;
             if($scope.basic.value){
                 $scope.user.city = $scope.basic.value.address2;
@@ -295,39 +290,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }
 
             //User接口
-            var userUpdate = function(){
-                var def = $q.defer();
-                var param = {
-                    avatar: $scope.investor.avatar || kr.defaulImg.defaultAvatarUrl,
-                    name: $scope.user.name,
-                    email: $scope.user.email,
-                    phone: $scope.getPhoneWithCountryCode(),
-                    smscode: $scope.user.smscode
-                };
-                if($scope.user.hasPhone){
-                    delete param.phone;
-                    delete param.smscode;
-                }
-                if($scope.user.hasEmail){
-                    delete param.email;
-                }
-                UserService.basic.update({
-                    id: $scope.uid
-                }, param, function() {
-                    def.resolve();
-                }, function(err) {
-                    ErrorService.alert(err);
-                    def.reject();
-                });
-                return def.promise;
-            };
 
-            userUpdate().then(function(){
                 CrowdFundingService["audit"].save({
                     id:'co-investor',
                     submodel:'identity-cert'
 
                 },$scope.user,function(data){
+
                     if(data.status == 1){
                         $scope.valStatus = "validating";
                     }else if(data.status == 3){
@@ -436,7 +405,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     ErrorService.alert(err);
                     $scope.hasClick = false;
                 });
-            });
+
         };
 
         /**
@@ -580,19 +549,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
 
             var param = {};
 
-            //param['avatar'] = $scope.user.avatar || kr.defaulImg.defaultAvatarUrl;
-
             param['intro'] = $scope.user.intro || $scope.user.company_name + $scope.user.position_name;
-
             param['industry'] = $scope.user.industry.join(',');
             param['investPhases'] = $scope.user.investPhases.join(',');
             param['mainInvestCurrency'] = $scope.user.investMoneyUnit;
             param['cnyInvestMin'] = $scope.user.investMoneyBegin;
             param['cnyInvestMax'] = $scope.user.investMoneyEnd;
-
-            //param['email'] = $scope.user.email;
-            //param['phone'] =  $scope.getPhoneWithCountryCode();
-            //param['smscode'] = $scope.user.captcha;
 
             UserService.basic.update({
                 id: $scope.userId
