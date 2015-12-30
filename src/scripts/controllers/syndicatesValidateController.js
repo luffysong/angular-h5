@@ -251,11 +251,12 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 })
             }, 1000);
             UserService['send-sms'].send({
-                id: $scope.uid
+                id: $scope.uid,
+                subid: voice?'voice':''
             }, {
-                //phone: $scope.investor.phone
-                phone: getPhoneWithCountryCode()
+                phone: $scope.getPhoneWithCountryCode()
             }, function(data) {
+
             }, function(){
                  ErrorService.alert({
                      msg:'发送失败!'
@@ -290,14 +291,12 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
 
 
         var investorSkip = function(flag){
-
             if($stateParams.activity_id){
                 $state.go('syndicatesCompany', {
                     activity_id: $stateParams.activity_id,
                     skipstep:'checkemail'
                 });
             }else{
-
                 var statusPage = $stateParams.isFromLogin ? 'syndicatesInvite' : 'syndicatesGift';
                 statusPage = flag ? 'syndicatesGift' : statusPage;
                 $state.go(statusPage, {
@@ -323,16 +322,24 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
 
             $scope.hasClick = true;
 
-            UserService.basic.update({
-                id: $scope.uid
-            }, {
+            var param = {
                 avatar: $scope.investor.avatar || kr.defaulImg.defaultAvatarUrl,
                 name: $scope.investor.name,
                 email: $scope.investor.email,
-                //phone: $scope.investor.phone,
-                phone: getPhoneWithCountryCode(),
+                phone: $scope.getPhoneWithCountryCode(),
                 smscode: $scope.investor.captcha
-            }, function(data){
+            };
+            if($scope.investor.hasPhone){
+                delete param.phone;
+                delete param.smscode;
+            }
+            if($scope.investor.hasEmail){
+                delete param.email;
+            }
+
+            UserService.basic.update({
+                id: $scope.uid
+            }, param, function(data){
 
                 CrowdFundingService["audit"].save({
                     id: 'co-investor',

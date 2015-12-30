@@ -28,7 +28,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         UserService.isProfileValid(function (valid) {
             if(!valid){
                 $state.go('investorValidate');
-                return;
             }
         });
 
@@ -45,15 +44,17 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             rnv_investor_info:"V1_1",
             id_card_number: "",
             reIdCardNumber:"",
-            email: '',
-            phone: '',
-            captcha: '',
             identity_card_type:"IDCARD",
             investPhases:[],
             passport_number:"",
             passport_url:"",
             intro:"",
+            email: '',
+            phone: '',
+            captcha: '',
+            avatar: '',
             industry:[],
+            avatar:'',
             investMoneyBegin:"",
             investMoneyEnd:"",
             is_completed:0
@@ -63,8 +64,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         UserService.basic.get({
             id: $scope.userId
         }, function (data){
-
             // console.log(data);
+
             if(data.phone){
                 $scope.user.hasPhone = true;
                 delete $scope.user.phone;
@@ -73,8 +74,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.user.hasEmail = true;
                 delete $scope.user.email;
             }
-
-            $scope.user.intro = $scope.user_cache.intro = data.intro || '';
+            $scope.user.avatar = data.avatar;
+            console.log(data.intro);
+            $scope.user.intro  = data.intro ? data.intro :  '';
             $scope.user.industry = $scope.user_cache.industry = data.industry || [];
             $scope.user.investPhases = $scope.user_cache.investPhases = data.investPhases || [];
             $scope.user.investMoneyUnit = $scope.user_cache.investMoneyUnit = data.mainInvestCurrency || $scope.user.investMoneyUnit;
@@ -198,7 +200,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         //},500);
 
 
-
         //android客户端
         /*$scope.androidUpload = AndroidUploadService.setClick(function(filename){
             $scope.$apply(function(){
@@ -285,133 +286,168 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }else{
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
             }*/
+
+
             $scope.hasClick = true;
             if($scope.basic.value){
                 $scope.user.city = $scope.basic.value.address2;
                 $scope.user.country = $scope.basic.value.address1;
             }
-            CrowdFundingService["audit"].save({
-                id:'co-investor',
-                submodel:'identity-cert'
-            },$scope.user,function(data){
-                if(data.status == 1){
-                    $scope.valStatus = "validating";
-                }else if(data.status == 3){
-                    $scope.valStatus = "fail";
-                }
-                /**
-                 * 金蛋理财活动
-                 *
-                 * @condition: $stateParams.type == 'goldEgg'
-                 */
-                /*
-                if ($stateParams.type == 'goldEgg') {
-                    krtracker("trackPageView", '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "提交跟投人认证申请");
 
-                    $modal.open({
-                        templateUrl: 'templates/syndicates/pop-gold-egg.html',
-                        windowClass: 'gold-egg-modal',
-                        controller: [
-                            '$scope', '$modalInstance', 'scope', 'UserService', 'CrowdFundingService', '$stateParams',
-                            function ($scope, $modalInstance, scope, UserService, CrowdFundingService, $stateParams) {
-                                // 获取用户 id
-                                $scope.userId = UserService.getUID();
-                                // 获取用户是否登录
-                                $scope.isLogin = !!$scope.userId;
-                                // 用户手机号码 & mask
-                                $scope.user = {
-                                    phone: "",
-                                    phoneMask: ""
-                                };
-                                UserService.getPhone(function(phone) {
-                                    if(!phone) return;
-                                    $scope.user.phone = phone;
-                                    $scope.user.phoneMask = phone.slice(0,3) + "****" + phone.slice(phone.length - 4, phone.length);
-                                });
-                                // 获取用户是否为跟投人
-                                $scope.isCoInvestor = true;
-                                $scope.showForm = false;
-                                $scope.isValidateAction = true;
-                                $scope.showFormAction = function() {
-                                    $scope.showForm = true;
-                                    krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "点击弹框 - 进行奖品领取");
-                                };
-                                // 获取用户是否完善资料
-                                UserService.isProfileValid(function(data) {
-                                    $scope.isProfileValided = data;
-                                });
-                                // 领取奖品操作
-                                $scope.earn = function() {
-                                    krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "领取奖励 - 提交手机号");
-                                    CrowdFundingService.save({
-                                        model:"crowd-funding",
-                                        submodel:"jindan-gift"
-                                    }, {
-                                        "phone": $scope.user.phone
-                                    }, function(data) {
-                                        if (!data) return;
-                                        switch(data.type) {
-                                            case 1:
-                                                $scope.welcomeText = '恭喜您：';
-                                                $scope.prizeTitle = '领取2万元金蛋理财特权本金';
-                                                $scope.nextText = '登录金蛋理财App完成投资即可领取';
-                                                krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 2万元金蛋理财特权本金");
-                                                break;
-                                            case 2:
-                                                $scope.welcomeText = '恭喜您：';
-                                                $scope.prizeTitle = '领取3000元金蛋理财特权本金';
-                                                $scope.nextText = '登录金蛋理财App完成投资即可领取';
-                                                krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 3000元金蛋理财特权本金");
-                                                break;
-                                            case 3:
-                                                $scope.welcomeText = '很抱歉，本活动礼包仅限：';
-                                                $scope.prizeTitle = '2015年8月1日0点前36Kr注册用户领取';
-                                                $scope.nextText = '您可以下载金蛋理财App，完成新手任务，即得最高1万元特权本金哦！';
-                                                $scope.titleSmaller = 'smaller';
-                                                krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 获取奖励失败");
-                                                break;
-                                        }
-                                        $scope.resultView = true;
-                                        var expires = new Date();
-                                        expires.setYear(expires.getFullYear() + 1);
-                                        document.cookie = 'goldEggClear=clear.' + $scope.userId + '; expires=' + expires.toGMTString();
-                                    }, function(err) {
-                                        ErrorService.alert(err);
-                                    });
-                                };
-                                // 关闭弹框操作
-                                $scope.close = function() {
-                                    $modalInstance.dismiss();
-                                };
-                                // 统计来源
-                                $scope.uaStatistics = function(str) {
-                                    krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + str);
-                                };
-                            }
-                        ],
-                        resolve: {
-                            scope: function() {
-                                return $scope;
-                            }
-                        }
-                    });
+            //User接口
+            var userUpdate = function(){
+                var def = $q.defer();
+                var param = {
+                    avatar: $scope.investor.avatar || kr.defaulImg.defaultAvatarUrl,
+                    name: $scope.user.name,
+                    email: $scope.user.email,
+                    phone: $scope.getPhoneWithCountryCode(),
+                    smscode: $scope.user.smscode
+                };
+                if($scope.user.hasPhone){
+                    delete param.phone;
+                    delete param.smscode;
                 }
-                */
-            },function(err){
-                ErrorService.alert(err);
-                $scope.hasClick = false;
+                if($scope.user.hasEmail){
+                    delete param.email;
+                }
+                UserService.basic.update({
+                    id: $scope.uid
+                }, param, function() {
+                    def.resolve();
+                }, function(err) {
+                    ErrorService.alert(err);
+                    def.reject();
+                });
+                return def.promise;
+            };
+
+            userUpdate().then(function(){
+                CrowdFundingService["audit"].save({
+                    id:'co-investor',
+                    submodel:'identity-cert'
+
+                },$scope.user,function(data){
+                    if(data.status == 1){
+                        $scope.valStatus = "validating";
+                    }else if(data.status == 3){
+                        $scope.valStatus = "fail";
+                    }
+
+                    /**
+                     * 金蛋理财活动
+                     *
+                     * @condition: $stateParams.type == 'goldEgg'
+                     */
+                    /*
+                     if ($stateParams.type == 'goldEgg') {
+                     krtracker("trackPageView", '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "提交跟投人认证申请");
+
+                     $modal.open({
+                     templateUrl: 'templates/syndicates/pop-gold-egg.html',
+                     windowClass: 'gold-egg-modal',
+                     controller: [
+                     '$scope', '$modalInstance', 'scope', 'UserService', 'CrowdFundingService', '$stateParams',
+                     function ($scope, $modalInstance, scope, UserService, CrowdFundingService, $stateParams) {
+                     // 获取用户 id
+                     $scope.userId = UserService.getUID();
+                     // 获取用户是否登录
+                     $scope.isLogin = !!$scope.userId;
+                     // 用户手机号码 & mask
+                     $scope.user = {
+                     phone: "",
+                     phoneMask: ""
+                     };
+                     UserService.getPhone(function(phone) {
+                     if(!phone) return;
+                     $scope.user.phone = phone;
+                     $scope.user.phoneMask = phone.slice(0,3) + "****" + phone.slice(phone.length - 4, phone.length);
+                     });
+                     // 获取用户是否为跟投人
+                     $scope.isCoInvestor = true;
+                     $scope.showForm = false;
+                     $scope.isValidateAction = true;
+                     $scope.showFormAction = function() {
+                     $scope.showForm = true;
+                     krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "点击弹框 - 进行奖品领取");
+                     };
+                     // 获取用户是否完善资料
+                     UserService.isProfileValid(function(data) {
+                     $scope.isProfileValided = data;
+                     });
+                     // 领取奖品操作
+                     $scope.earn = function() {
+                     krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "领取奖励 - 提交手机号");
+                     CrowdFundingService.save({
+                     model:"crowd-funding",
+                     submodel:"jindan-gift"
+                     }, {
+                     "phone": $scope.user.phone
+                     }, function(data) {
+                     if (!data) return;
+                     switch(data.type) {
+                     case 1:
+                     $scope.welcomeText = '恭喜您：';
+                     $scope.prizeTitle = '领取2万元金蛋理财特权本金';
+                     $scope.nextText = '登录金蛋理财App完成投资即可领取';
+                     krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 2万元金蛋理财特权本金");
+                     break;
+                     case 2:
+                     $scope.welcomeText = '恭喜您：';
+                     $scope.prizeTitle = '领取3000元金蛋理财特权本金';
+                     $scope.nextText = '登录金蛋理财App完成投资即可领取';
+                     krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 3000元金蛋理财特权本金");
+                     break;
+                     case 3:
+                     $scope.welcomeText = '很抱歉，本活动礼包仅限：';
+                     $scope.prizeTitle = '2015年8月1日0点前36Kr注册用户领取';
+                     $scope.nextText = '您可以下载金蛋理财App，完成新手任务，即得最高1万元特权本金哦！';
+                     $scope.titleSmaller = 'smaller';
+                     krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + "获得奖励 - 获取奖励失败");
+                     break;
+                     }
+                     $scope.resultView = true;
+                     var expires = new Date();
+                     expires.setYear(expires.getFullYear() + 1);
+                     document.cookie = 'goldEggClear=clear.' + $scope.userId + '; expires=' + expires.toGMTString();
+                     }, function(err) {
+                     ErrorService.alert(err);
+                     });
+                     };
+                     // 关闭弹框操作
+                     $scope.close = function() {
+                     $modalInstance.dismiss();
+                     };
+                     // 统计来源
+                     $scope.uaStatistics = function(str) {
+                     krtracker('trackEvent', '金蛋理财活动', "来源：" + $stateParams.source + " | 操作：" + str);
+                     };
+                     }
+                     ],
+                     resolve: {
+                     scope: function() {
+                     return $scope;
+                     }
+                     }
+                     });
+                     }
+                     */
+                },function(err){
+                    ErrorService.alert(err);
+                    $scope.hasClick = false;
+                });
             });
         };
 
         /**
          *  身份证验证
          */
-        $scope.$watch("[user.reIdCardNumber]",function(from){
+        $scope.$watch("user.id_card_number",function(from){
 
             var $elment = angular.element($("form[name='investorValidateForm']"));
 
             if($elment.length > 0) {
-                if(IDCardService.getIdCardInfo($scope.user.reIdCardNumber).isTrue) {
+                if(IDCardService.getIdCardInfo($scope.user.id_card_number).isTrue) {
                     $elment.scope()["investorValidateForm"].$setValidity("idcardInvalid", true);
                 }
             }
@@ -420,7 +456,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             var $elment = angular.element($("form[name='investorValidateForm']"));
 
             if($elment.length > 0) {
-                if(IDCardService.getIdCardInfo($scope.user.reIdCardNumber).isTrue) {
+                if(IDCardService.getIdCardInfo($scope.user.id_card_number).isTrue) {
                     $elment.scope()["investorValidateForm"].$setValidity("idcardInvalid", true);
                 } else {
                     $elment.scope()["investorValidateForm"].$setValidity("idcardInvalid", false);
@@ -431,6 +467,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         // 邮箱校验
         var checkTimeout;
         $scope.$watch('user.email', function(email) {
+
+
             if(!email || $scope.investorValidateForm['user-email'].$error.email) {
                 return;
             }
@@ -439,7 +477,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             checkTimeout = $timeout(function() {
                 $scope.investorValidateForm['user-email'].$setDirty();
                 UserService.check.get({
-                    id: $scope.uid,
+                    id: $scope.userId,
                     email: email
                 }, function(data) {
 
@@ -459,7 +497,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             checkTimeout = $timeout(function(){
                 $scope.investorValidateForm['user-phone'].$setDirty();
                 UserService.check.get({
-                    id: $scope.uid,
+                    id: $scope.userId,
                     phone: phone
                 }, function(data) {
 
@@ -517,10 +555,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 })
             }, 1000);
             UserService['send-sms'].send({
-                id: $scope.uid
+                id: $scope.userId,
+                subid: voice?'voice':''
             }, {
                 //phone: $scope.investor.phone
-                phone: getPhoneWithCountryCode()
+                phone: $scope.getPhoneWithCountryCode()
             }, function(data) {
 
             }, function(){
@@ -529,7 +568,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 });
             });
         };
-
 
 
         $scope.submitFormUser = function(){
@@ -541,15 +579,20 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             $scope.hasClick = true;
 
             var param = {};
+
+            //param['avatar'] = $scope.user.avatar || kr.defaulImg.defaultAvatarUrl;
+
             param['intro'] = $scope.user.intro || $scope.user.company_name + $scope.user.position_name;
+
             param['industry'] = $scope.user.industry.join(',');
             param['investPhases'] = $scope.user.investPhases.join(',');
             param['mainInvestCurrency'] = $scope.user.investMoneyUnit;
             param['cnyInvestMin'] = $scope.user.investMoneyBegin;
             param['cnyInvestMax'] = $scope.user.investMoneyEnd;
-            param['email'] = $scope.user.email;
-            param['phone'] =  getPhoneWithCountryCode();
-            param['smscode'] = $scope.user.captcha;
+
+            //param['email'] = $scope.user.email;
+            //param['phone'] =  $scope.getPhoneWithCountryCode();
+            //param['smscode'] = $scope.user.captcha;
 
             UserService.basic.update({
                 id: $scope.userId

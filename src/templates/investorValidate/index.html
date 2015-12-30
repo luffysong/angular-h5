@@ -62,10 +62,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="label-control"><span class="c-red">*</span>身份证号码</label>
+                        <label class="label-control"><span class="c-red">*</span>身份证</label>
                         <div class="col-max">
                             <input class="form-control" type="text" name="idCardNumber" ng-model="user.id_card_number"
-                                   ng-blur="checkId($event)" maxlength="18" placeholder="点击填写"  required />
+                                   ng-blur="checkId($event)" maxlength="18" placeholder="填写正确的身份证号码"  required />
                         </div>
                     </div>
                     <div class="error-tip error clearfix">
@@ -74,8 +74,6 @@
                             <span class="tip-icon">!</span>请输入正确的身份证号码
                           </span>
                     </div>
-
-
 
                     <!--<div class="basic-info">-->
                         <!---->
@@ -88,7 +86,7 @@
                     <!--</div>-->
 
                     <!-- 完善资料（邮箱）-->
-                    <div class="form-group" ng-if="user.hasEmail">
+                    <div class="form-group" ng-if="!user.hasEmail">
                         <label class="label-control" for="user-email"><span class="c-red">*</span>邮箱</label>
                         <div class="col-max">
                             <input class="form-control" type="email" id="user-email" name="user-email" placeholder="填写常用邮箱" required ng-model="user.email">
@@ -101,7 +99,7 @@
                     </div>
 
                     <!--add 选择国家-->
-                    <div class="form-group" ng-if="user.hasPhone">
+                    <div class="form-group" ng-if="!user.hasPhone">
                         <label class="label-control"><span class="c-red">*</span>选择国家</label>
                         <div class="control">
                             <select name="cc" ng-model="user.cc" class="form-control place" ng-change="changeCountry(investorValidateForm['user-phone'])"
@@ -109,8 +107,9 @@
                         </div>
                     </div>
 
+
                     <!-- 完善资料（手机号码）-->
-                    <div class="form-group" ng-if="user.hasPhone">
+                    <div class="form-group" ng-if="!user.hasPhone">
                         <label class="label-control" for="user-phone"><span class="c-red">*</span>手机号码</label>
                         <!--ng-pattern="REGEXP.phone" -->
                         <div class="col-max">
@@ -125,7 +124,7 @@
                     </div>
 
                     <!-- 完善资料（验证码）-->
-                    <div class="form-group" ng-if="user.hasPhone">
+                    <div class="form-group" ng-if="!user.hasPhone">
                         <label class="label-control" for="user-captcha"><span class="c-red">*</span>验证码</label>
                         <div class="col-max">
                             <input class="form-control" type="text" id="user-captcha" name="user-captcha" placeholder="点击填写" required ng-model="user.captcha">
@@ -316,19 +315,6 @@
 
         <div ng-if="valStatus == 'withoutVal' || valStatus == 'validating'" class="welcome-form suc">
             <form ng-if="user_cache.is_completed == 0" ng-submit="$event.preventDefault()"  action="" name="userValidateForm">
-                <div class="error-alert error" ng-show="(userValidateForm.investFrom.$invalid && userValidateForm.investFrom.$dirty) || (userValidateForm.investTo.$invalid && userValidateForm.investTo.$dirty)">
-                    <span ng-show="userValidateForm.investFrom.$error.required || userValidateForm.investTo.$error.required">请输入投资金额</span>
-                    <span ng-show="userValidateForm.investFrom.$error.pattern || userValidateForm.investTo.$error.pattern">投资金额只能是整数</span>
-                </div>
-                <div class="error-alert error" ng-show="userValidateForm.$error.industyEmpty">
-                    <span>请选择关注领域</span>
-                </div>
-                <div class="error-alert error" ng-show="userValidateForm.$error.stageEmpty">
-                    <span>请选择投资阶段</span>
-                </div>
-                <!--<div class="error-alert error" ng-show="userValidateForm.intro.$invalid && userValidateForm.intro.$dirty">
-                    <span ng-show="userValidateForm.intro.$error.required">请输入一句话简介</span>
-                </div>-->
 
                 <!--投资信息-->
                 <div ng-if="user_cache.is_completed == 0" class="basic-info">
@@ -341,7 +327,9 @@
                     <div class="col-max">
                         <textarea ng-model="user.intro" name="intro" placeholder="简单介绍你的个人经历，30字" maxlength="30"></textarea>
                     </div>
-
+                </div>
+                <div class="error-tip error" ng-show="userValidateForm.intro.$invalid && userValidateForm.intro.$dirty">
+                    <span ng-show="userValidateForm.intro.$error.required">请输入一句话简介</span>
                 </div>
 
                 <!--关注领域-->
@@ -351,6 +339,9 @@
                         <div class="stage" ng-repeat="area in fieldsOptions" ng-click="selectArea($index, 'userValidateForm')" ng-class="{'active':area.active}" name="focusArea">{{area.desc}}</div>
                     </div>
                 </div>
+                <div class="error-tip error" ng-show="userValidateForm.$error.industyEmpty">
+                    <span>请选择关注领域</span>
+                </div>
 
                 <!--投资阶段-->
                 <div  class="form-group clearfix">
@@ -359,7 +350,9 @@
                         <div class="stage" ng-repeat="stage in investStage" ng-click="selectStage($index, 'userValidateForm')" ng-class="{'active':stage.active}" name="investStage">{{stage.desc}}
                         </div>
                     </div>
-
+                </div>
+                <div class="error-tip error" ng-show="userValidateForm.$error.stageEmpty">
+                    <span>请选择投资阶段</span>
                 </div>
 
                 <!--个人单笔可投-->
@@ -372,6 +365,10 @@
                         万元
                     </div>
                     <span class="currency-kind">(人民币金额)</span>
+                </div>
+                <div class="error-tip error" ng-show="(userValidateForm.investFrom.$invalid && userValidateForm.investFrom.$dirty) || (userValidateForm.investTo.$invalid && userValidateForm.investTo.$dirty)">
+                    <span ng-show="userValidateForm.investFrom.$error.required || userValidateForm.investTo.$error.required">请输入投资金额</span>
+                    <span ng-show="userValidateForm.investFrom.$error.pattern || userValidateForm.investTo.$error.pattern">投资金额只能是整数</span>
                 </div>
             </form>
         </div>
