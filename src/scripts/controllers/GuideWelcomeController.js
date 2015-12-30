@@ -94,7 +94,8 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 })
             },1000);
             UserService['send-sms'].send({
-                id: $scope.userId
+                id: $scope.userId,
+                subid: voice?'voice':''
             },{
                 phone: $scope.getPhoneWithCountryCode()
             }, function(data){
