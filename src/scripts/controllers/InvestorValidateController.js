@@ -5,7 +5,6 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateController',
-    //function($scope,  $modal, DictionaryService, ErrorService, checkForm, $timeout, UserService, IDCardService, $stateParams, $state, CrowdFundingService, loading, $cookies, LoginService) {
     function($scope, $rootScope, $state, $stateParams, $modal, $upload, notify, $timeout, loading, UserService, IDCardService, checkForm, AndroidUploadService, ErrorService, DefaultService, DictionaryService, CrowdFundingService, CoInvestorService, $cookies, LoginService, $q) {
         document.title="36氪股权投资";
         loading.show("investorVal");
@@ -24,7 +23,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         }
         $scope.handleSource();
         /*先判断用户是否完善资料*/
-
         UserService.isProfileValid(function (valid) {
             if(!valid){
                 $state.go('investorValidate');
@@ -61,7 +59,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             id: $scope.userId
         }, function (data){
             // console.log(data);
-
             if(data.phone){
                 $scope.user.hasPhone = true;
                 delete $scope.user.phone;
@@ -70,10 +67,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.user.hasEmail = true;
                 delete $scope.user.email;
             }
+            $scope.user.name = data.name;
             $scope.user.avatar = data.avatar;
+            //console.log(data.intro);
 
-            console.log(data.intro);
-            $scope.user.intro  = data.intro ? data.intro :  '';
+            //$scope.user.intro  = data.intro ? data.intro : '';
+            $scope.user.intro = data.intro ? data.intro : $scope.user.company_name + $scope.user.position_name;
+
             $scope.user.industry = $scope.user_cache.industry = data.industry || [];
             $scope.user.investPhases = $scope.user_cache.investPhases = data.investPhases || [];
             $scope.user.investMoneyUnit = $scope.user_cache.investMoneyUnit = data.mainInvestCurrency || $scope.user.investMoneyUnit;
@@ -290,13 +290,43 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }
 
             //User接口
+            var userUpdate = function(){
+                var def = $q.defer();
+                var param = {
+                    avatar: $scope.user.avatar || kr.defaulImg.defaultAvatarUrl,
+                    name: $scope.user.name,
+                    email: $scope.user.email,
+                    phone: $scope.getPhoneWithCountryCode(),
+                    smscode: $scope.user.smscode
+                };
+                if($scope.user.hasPhone){
+                    delete param.phone;
+                    delete param.smscode;
+                }
+                if($scope.user.hasEmail){
+                    delete param.email;
+                }
+                UserService.basic.update({
+                    id: $scope.userId
+                }, param, function(data) {
 
+                    console.log(data);
+
+                    def.resolve();
+                }, function(err) {
+                    ErrorService.alert(err);
+                    def.reject();
+
+                });
+                return def.promise;
+            };
+            userUpdate().then(function(){
                 CrowdFundingService["audit"].save({
                     id:'co-investor',
                     submodel:'identity-cert'
 
                 },$scope.user,function(data){
-
+                    console.log(data);
                     if(data.status == 1){
                         $scope.valStatus = "validating";
                     }else if(data.status == 3){
@@ -405,7 +435,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     ErrorService.alert(err);
                     $scope.hasClick = false;
                 });
-
+            });
         };
 
         /**
@@ -436,8 +466,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         // 邮箱校验
         var checkTimeout;
         $scope.$watch('user.email', function(email) {
-
-
             if(!email || $scope.investorValidateForm['user-email'].$error.email) {
                 return;
             }
@@ -455,6 +483,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 });
             }, 800);
         });
+
 
         // 手机验证
         $scope.$watch('user.phone', function(phone) {
@@ -479,12 +508,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         /**
          * 获取国编码
          */
-        $scope.user = {};
+
+        $scope.countryData = {};
+
         LoginService.getCountryDict({}, function (data) {
             $scope.countryDict = data;
             $scope.countryDict.forEach(function (item) {
                 if (item.cc == '86') {
-                    $scope.user.cc = item;
+                    $scope.countryData.cc = item;
                 }
             });
         });
@@ -501,7 +532,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
          * 获取要发送的用手机
          */
         $scope.getPhoneWithCountryCode = function () {
-            return [$scope.user.cc.cc, $scope.user.phone].join('+');
+            return [$scope.countryData.cc.cc, $scope.user.phone].join('+');
         }
 
         // 获取验证码
@@ -564,7 +595,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.user_cache.is_completed = 1;
 
             }, function(error){
-                console.log(error);
+                //console.log(error);
                 $scope.hasClick = false;
             });
         };

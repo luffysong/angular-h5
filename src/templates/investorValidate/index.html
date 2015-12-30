@@ -4,7 +4,7 @@
             <a href="{{helpHost}}/#tab1-5" target="_blank">跟投人认证常见问题</a>
         </div>
         <!--跟投人未提交验证-->
-        <div ng-if="valStatus == 'normal'">
+        <div ng-show="valStatus == 'normal'">
             <div class="intro text-center">
                 <h3 class="c-orange fs-16">完成跟投人认证</h3>
                 <h4>查看更多项目详情，参与跟投</h4>
@@ -16,40 +16,21 @@
             </div>
 
             <form ng-submit="$event.preventDefault()"  action="" name="investorValidateForm" >
-                <!--所有报错信息-->
-                <!--<div class="error-alert error" ng-show="(investorValidateForm.investFrom.$invalid && investorValidateForm.investFrom.$dirty) || (investorValidateForm.investTo.$invalid && investorValidateForm.investTo.$dirty)">
-                    <span ng-show="investorValidateForm.investFrom.$error.required || investorValidateForm.investTo.$error.required">请输入投资金额</span>
-                    <span ng-show="investorValidateForm.investFrom.$error.pattern || investorValidateForm.investTo.$error.pattern">投资金额只能是整数</span>
-                </div>
-                <div class="error-alert error" ng-show="investorValidateForm.$error.industyEmpty">
-                    <span>请选择关注领域</span>
-                </div>
-                <div class="error-alert error" ng-show="investorValidateForm.$error.stageEmpty">
-                    <span>请选择投资阶段</span>
-                </div>
-                <div class="error-alert error" ng-show="investorValidateForm.intro.$invalid && investorValidateForm.intro.$dirty">
-                    <span ng-show="investorValidateForm.intro.$error.required">请输入一句话简介</span>
-                </div>-->
-                <!--<div class="error-alert error" ng-show="investorValidateForm.address1.$invalid && investorValidateForm.address1.$dirty">-->
-                    <!--<span ng-show="investorValidateForm.address1.$error.required">请选择所在地</span>-->
-                <!--</div>-->
-                <!--<div class="error-alert error" ng-show="investorValidateForm.position.$invalid && investorValidateForm.position.$dirty">-->
-                    <!--<span ng-show="investorValidateForm.position.$error.required">请输入职位</span>-->
-                <!--</div>-->
-                <!--<div class="error-alert error" ng-show="investorValidateForm.idCardNumber.$invalid && investorValidateForm.idCardNumber.$dirty">-->
-                <!--<span ng-show="investorValidateForm.idCardNumber.$error.required">请输入身份证号码</span>-->
-                <!--</div>-->
-                <!--<div class="error-alert error" ng-show="investorValidateForm.reIdCardNumber.$invalid && investorValidateForm.reIdCardNumber.$dirty">-->
-                    <!--<span ng-show="investorValidateForm.reIdCardNumber.$error.required">请再次输入身份证号码</span>-->
-                <!--</div>-->
-                <!--<div class="error-alert error" ng-show="investorValidateForm.$error.idcardInvalid && enterCard">-->
-                    <!--<span>两次输入身份证号码不一致</span>-->
-                <!--</div>-->
-
 
                 <div class="form-horizontal welcome-form">
                     <!--基本信息-->
                     <!--<div class="basic-info">基本信息</div>-->
+                    <!--<div class="form-group">
+                        <label  class="label-control w-160"><span class="c-red">*</span>真实头像</label>
+                        <div class="col col-5">
+                            <div class="file-upload {{investorValForm.avatar.$invalid && investorValForm.avatar.$dirty?'invalid-pic':''}}"  ng-click="changeAvatar()" >
+                                <img ng-src="{{user.avatar | image:70:'avatar'}}" width="70" height="70" alt=""/>
+                                <span>上传头像</span>
+                                <input type="hidden" ng-model="user.avatar" name="avatar" required/>
+                            </div>
+                        </div>
+
+                    </div>-->
                     <div class="form-group">
                         <label class="label-control"><span class="c-red">*</span>姓名</label>
                         <div class="col-max">
@@ -75,38 +56,28 @@
                           </span>
                     </div>
 
-                    <!--<div class="basic-info">-->
-                        <!---->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<label class="label-control"><span class="c-orange">*</span>确认证件号码</label>-->
-                        <!--<div class="col-max">-->
-                            <!--<input class="form-control" type="text" ng-model="user.reIdCardNumber" name="reIdCardNumber" maxlength="15" placeholder="再次填写" ng-blur="enterId()"  required />-->
-                        <!--</div>-->
-                    <!--</div>-->
-
                     <!-- 完善资料（邮箱）-->
+
                     <div class="form-group" ng-if="!user.hasEmail">
                         <label class="label-control" for="user-email"><span class="c-red">*</span>邮箱</label>
                         <div class="col-max">
                             <input class="form-control" type="email" id="user-email" name="user-email" placeholder="填写常用邮箱" required ng-model="user.email">
                         </div>
                     </div>
-                    <div class="error-tip error" ng-show="investorValidateForm['user-email'].$invalid && investorValidateForm['user-email'].$dirty" ng-if="!user.hasEmail">
+                    <div class="error-tip error" ng-show="investorValidateForm['user-email'].$invalid && investorValidateForm['user-email'].$dirty" ng-if="!investor.hasEmail">
                         <span ng-show="investorValidateForm['user-email'].$error.required"><span class="tip-icon">!</span>请输入你的邮箱</span>
                         <span ng-show="investorValidateForm['user-email'].$error.email"><span class="tip-icon">!</span>请输入合法邮箱地址</span>
-                        <span ng-show="user.email && investorValidateForm['user-email'].$error.checked && !investorValidateForm['user-email'].$error.email"><span class="tip-icon">!</span>你输入的邮箱已被占用</span>
+                        <span ng-show="investor.email && investorValidateForm['investor-email'].$error.checked && !investorValidateForm['user-email'].$error.email"><span class="tip-icon">!</span>你输入的邮箱已被占用</span>
                     </div>
 
                     <!--add 选择国家-->
                     <div class="form-group" ng-if="!user.hasPhone">
                         <label class="label-control"><span class="c-red">*</span>选择国家</label>
                         <div class="control">
-                            <select name="cc" ng-model="user.cc" class="form-control place" ng-change="changeCountry(investorValidateForm['user-phone'])"
+                            <select name="cc" ng-model="countryData.cc" class="form-control place" ng-change="changeCountry(investorValidateForm['user-phone'])"
                                     ng-options="item as (item.desc+' (+'+item.cc+')') for item in countryDict"></select>
                         </div>
                     </div>
-
 
                     <!-- 完善资料（手机号码）-->
                     <div class="form-group" ng-if="!user.hasPhone">
@@ -323,7 +294,7 @@
 
                 <!--用户基本信息-->
                 <div  class="form-group brief clearfix">
-                    <label class="label-control"><span class="c-orange">*</span>一句话简介</label>
+                    <label class="label-control"><span class="c-red">*</span>一句话简介</label>
                     <div class="col-max">
                         <textarea ng-model="user.intro" name="intro" placeholder="简单介绍你的个人经历，30字" maxlength="30"></textarea>
                     </div>
@@ -334,7 +305,7 @@
 
                 <!--关注领域-->
                 <div  class="form-group clearfix">
-                    <label class="label-control"><span class="c-orange">*</span>关注领域 <span class="tip">(最多可选3个)</span></label>
+                    <label class="label-control"><span class="c-red">*</span>关注领域 <span class="tip">(最多可选3个)</span></label>
                     <div class="col-flex clearfix mt-16">
                         <div class="stage" ng-repeat="area in fieldsOptions" ng-click="selectArea($index, 'userValidateForm')" ng-class="{'active':area.active}" name="focusArea">{{area.desc}}</div>
                     </div>
@@ -345,7 +316,7 @@
 
                 <!--投资阶段-->
                 <div  class="form-group clearfix">
-                    <label class="label-control"><span class="c-orange">*</span>投资阶段</label>
+                    <label class="label-control"><span class="c-red">*</span>投资阶段</label>
                     <div class="col-flex mt-16">
                         <div class="stage" ng-repeat="stage in investStage" ng-click="selectStage($index, 'userValidateForm')" ng-class="{'active':stage.active}" name="investStage">{{stage.desc}}
                         </div>
@@ -357,7 +328,7 @@
 
                 <!--个人单笔可投-->
                 <div  class="form-group normal clearfix">
-                    <label class="label-control"><span class="c-orange">*</span>个人单笔可投 </label>
+                    <label class="label-control"><span class="c-red">*</span>个人单笔可投 </label>
                     <div class="col-flex clearfix ml-10">
                         <input class="form-control account-num" type="tel" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额" ng-pattern="/^\d*$/"  required maxlength="6" />
                         至
