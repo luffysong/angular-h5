@@ -473,7 +473,7 @@ angular.module('defaultApp.controller').controller('syndicatesConfirmController'
                 $scope.krCode.status_code = data.status_code;
                 loading.hide("confirmPage");
             },function(err){
-                if(err.code == 404 || err.code == 500){
+                if(err.code == 22000 || err.code == 500){
                     $scope.krCode.status = "unapply";
                     loading.hide("confirmPage");
                 }else{
