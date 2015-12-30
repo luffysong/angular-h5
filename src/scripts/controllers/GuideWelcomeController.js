@@ -24,6 +24,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             if(data.email && data.phone && data.avatar && data.name){
                 $state.go('investorValidate');
             }
+			console.log(data.phone)
             if(data.phone){
                 $scope.user.hasPhone = true;
                 delete $scope.user.phone;
@@ -266,26 +267,3 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
 
     }
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
