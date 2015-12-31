@@ -38,6 +38,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $scope.userId = UserService.getUID();
 
         $scope.user = {
+            name:"",
+            company_name:"",
+            position_name:"",
             investMoneyUnit:"CNY",
             rnv_investor_info:"V1_1",
             id_card_number: "",
@@ -71,9 +74,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             $scope.user.avatar = data.avatar;
             //console.log(data.intro);
 
-            //$scope.user.intro  = data.intro ? data.intro : '';
-            $scope.user.intro = data.intro ? data.intro : $scope.user.company_name + $scope.user.position_name;
-
+            $scope.user.intro  = data.intro;
+            //$scope.user.intro = data.intro ? data.intro : $scope.user.company_name + $scope.user.position_name;
             $scope.user.industry = $scope.user_cache.industry = data.industry || [];
             $scope.user.investPhases = $scope.user_cache.investPhases = data.investPhases || [];
             $scope.user.investMoneyUnit = $scope.user_cache.investMoneyUnit = data.mainInvestCurrency || $scope.user.investMoneyUnit;
@@ -158,14 +160,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             });
         }
         /* 选择关注领域 */
+
         $scope.selectArea = function(index, name_form){
             name_form = name_form != undefined ? name_form : 'userValidateForm';
-            if($scope.areaList != undefined && $scope.areaList.length == 3 && $scope.areaList.indexOf($scope.fieldsOptions[index].value) < 0){
-                return;
-            }
+            if($scope.areaList != undefined && $scope.areaList.length == 3 && $scope.areaList.indexOf($scope.fieldsOptions[index].value) < 0) return;
 
-            $scope.areaList = [];
             $scope.fieldsOptions[index].active = !$scope.fieldsOptions[index].active;
+            $scope.areaList = [];
             angular.forEach($scope.fieldsOptions,function(obj,i){
                 if(obj.active && $scope.areaList.indexOf($scope.fieldsOptions[i].value) < 0){
                     $scope.areaList.push($scope.fieldsOptions[i].value);
@@ -285,6 +286,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("industyEmpty",true);
             }*/
             $scope.hasClick = true;
+            //$scope.user.intro = $scope.user.company_name + ' ' + $scope.user.position_name;
             if($scope.basic.value){
                 $scope.user.city = $scope.basic.value.address2;
                 $scope.user.country = $scope.basic.value.address1;
@@ -325,12 +327,17 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     submodel:'identity-cert'
                 },$scope.user,function(data){
                     console.log(data);
+
                     if(data.status == 1){
                         $scope.valStatus = "validating";
+                    }else if(data.status == 2){
+                        $scope.valStatus = "suc";
                     }else if(data.status == 3){
                         $scope.valStatus = "fail";
                     }
                     $scope.hasClick = false;
+                    //console.log(data);
+                    //$scope.user.intro = $scope.user.intro || (data.company_name + data.position_name);
 
                     /**
                      * 金蛋理财活动
@@ -505,12 +512,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         /**
          * 获取国编码
          */
-        $scope.countryData = {};
+        $scope.countryDatas = {};
         LoginService.getCountryDict({}, function (data) {
             $scope.countryDict = data;
             $scope.countryDict.forEach(function (item) {
                 if (item.cc == '86') {
-                    $scope.countryData.cc = item;
+                    $scope.countryDatas.cc = item;
                 }
             });
         });
@@ -526,8 +533,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         /**
          * 获取要发送的用手机
          */
+        //debugger;
         $scope.getPhoneWithCountryCode = function () {
-            return [$scope.countryData.cc.cc, $scope.user.phone].join('+');
+            if(!$scope.user.phone)return;
+            if($scope.countryDatas.cc.cc=='86')return $scope.user.phone;
+            return [$scope.countryDatas.cc.cc, $scope.user.phone].join('+');
         }
 
         // 获取验证码
@@ -568,9 +578,21 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             // console.log($scope);
             // console.log($scope.user);
             // console.log($scope.userId);
-            $scope.enterCard =true;
+            //$scope.enterCard =true;
+
+            if(!$scope.user.investPhases.length){
+                angular.element($("form[name='userValidateForm']")).scope()["userValidateForm"].$setValidity("stageEmpty",false);
+            }else{
+                angular.element($("form[name='userValidateForm']")).scope()["userValidateForm"].$setValidity("stageEmpty",true);
+            }
+            if(!$scope.user.industry.length){
+                angular.element($("form[name='userValidateForm']")).scope()["userValidateForm"].$setValidity("industyEmpty",false);
+            }else{
+                angular.element($("form[name='userValidateForm']")).scope()["userValidateForm"].$setValidity("industyEmpty",true);
+            }
 
             if(!checkForm("userValidateForm"))return;
+
             $scope.hasClick = true;
 
             var param = {};
@@ -589,7 +611,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.user_cache.is_completed = 1;
 
             }, function(error){
-                //console.log(error);
+                ErrorService.alert(err);
                 $scope.hasClick = false;
             });
         };
@@ -654,7 +676,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 }
             });
         }
-
 
         WEIXINSHARE = {
             shareTitle: "36氪股权投资",
