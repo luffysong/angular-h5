@@ -84,7 +84,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }
 
         }, function(error){
-            // console.log(error);
+             console.log(error);
         });
 
         $scope.basic = {
@@ -143,9 +143,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }
             $scope.addr2Options = DictionaryService.getLocation(value);
         });
+
         /* 选择个人投资阶段 */
         $scope.selectStage = function(index, name_form){
-            name_form = name_form != undefined ? name_form : 'investorValidateForm';
+            name_form = name_form != undefined ? name_form : 'userValidateForm';
             angular.element($("form[name='" + name_form + "']")).scope()[name_form].$setValidity("stageEmpty",true);
             $scope.investStage[index].active = !$scope.investStage[index].active;
 
@@ -158,7 +159,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         }
         /* 选择关注领域 */
         $scope.selectArea = function(index, name_form){
-            name_form = name_form != undefined ? name_form : 'investorValidateForm';
+            name_form = name_form != undefined ? name_form : 'userValidateForm';
             if($scope.areaList != undefined && $scope.areaList.length == 3 && $scope.areaList.indexOf($scope.fieldsOptions[index].value) < 0){
                 return;
             }
@@ -309,9 +310,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 UserService.basic.update({
                     id: $scope.userId
                 }, param, function(data) {
-
                     console.log(data);
-
                     def.resolve();
                 }, function(err) {
                     ErrorService.alert(err);
@@ -324,7 +323,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 CrowdFundingService["audit"].save({
                     id:'co-investor',
                     submodel:'identity-cert'
-
                 },$scope.user,function(data){
                     console.log(data);
                     if(data.status == 1){
@@ -332,6 +330,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     }else if(data.status == 3){
                         $scope.valStatus = "fail";
                     }
+                    $scope.hasClick = false;
 
                     /**
                      * 金蛋理财活动
@@ -442,9 +441,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
          *  身份证验证
          */
         $scope.$watch("user.id_card_number",function(from){
-
             var $elment = angular.element($("form[name='investorValidateForm']"));
-
             if($elment.length > 0) {
                 if(IDCardService.getIdCardInfo($scope.user.id_card_number).isTrue) {
                     $elment.scope()["investorValidateForm"].$setValidity("idcardInvalid", true);
@@ -508,9 +505,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         /**
          * 获取国编码
          */
-
         $scope.countryData = {};
-
         LoginService.getCountryDict({}, function (data) {
             $scope.countryDict = data;
             $scope.countryDict.forEach(function (item) {
@@ -558,7 +553,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 id: $scope.userId,
                 subid: voice?'voice':''
             }, {
-                //phone: $scope.investor.phone
                 phone: $scope.getPhoneWithCountryCode()
             }, function(data) {
 
@@ -575,12 +569,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             // console.log($scope.user);
             // console.log($scope.userId);
             $scope.enterCard =true;
+
             if(!checkForm("userValidateForm"))return;
             $scope.hasClick = true;
 
             var param = {};
-
-            param['intro'] = $scope.user.intro || $scope.user.company_name + $scope.user.position_name;
+            param['intro'] = $scope.user.intro;
             param['industry'] = $scope.user.industry.join(',');
             param['investPhases'] = $scope.user.investPhases.join(',');
             param['mainInvestCurrency'] = $scope.user.investMoneyUnit;

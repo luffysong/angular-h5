@@ -148,6 +148,18 @@
                     <div class="error-tip error" ng-show="investorValidateForm.address1.$invalid && investorValidateForm.address1.$dirty">
                         <span ng-show="investorValidateForm.address1.$error.required"><span class="tip-icon">!</span>请选择所在地</span>
                     </div>
+
+                    <!--投资条件-->
+                    <div class="form-group no-b">
+                        <label class="label-control"><span class="c-red">*</span>投资条件</label>
+                        <div class="col-flex">
+                            <div ng-repeat="item in condition">
+                                <input type="radio" name="permit" id="condition{{$index}}" ng-model="user.rnv_investor_info" value="{{item.value}}" />
+                                <label for="condition{{$index}}">{{item.desc}}</label>
+                            </div>
+                        </div>
+                    </div>
+
                     <!--<div class="form-group brief">
                         <label class="label-control"><span class="c-orange">*</span>一句话简介</label>
                         <div class="col-max">
@@ -190,18 +202,6 @@
                         </div>
                         <span class="currency-kind">(人民币金额)</span>
                     </div>-->
-
-                    <!--投资条件-->
-                    <div class="form-group no-b">
-                        <label class="label-control"><span class="c-red">*</span>投资条件</label>
-                        <div class="col-flex">
-                            <div ng-repeat="item in condition">
-                                <input type="radio" name="permit" id="condition{{$index}}" ng-model="user.rnv_investor_info" value="{{item.value}}" />
-                                <label for="condition{{$index}}">{{item.desc}}</label>
-                            </div>
-                        </div>
-                    </div>
-
 
                     <!--上传名片-->
                     <!--<div class="basic-info">
@@ -273,7 +273,7 @@
 
         </div>
         <!--已经是跟投人-->
-        <div ng-if="valStatus == 'withoutVal'" class="welcome-form">
+        <div ng-if="valStatus == 'suc'" class="welcome-form">
             <div class="validating-info text-center">
                 <div class="icon-1-04"></div>
                 <p class="c-green fs-15">恭喜！你已成为跟投人</p>
@@ -284,7 +284,7 @@
 
         </div>
 
-        <div ng-if="valStatus == 'withoutVal' || valStatus == 'validating'" class="welcome-form suc">
+        <div ng-if="valStatus == 'suc' || valStatus == 'validating'" class="welcome-form suc">
             <form ng-if="user_cache.is_completed == 0" ng-submit="$event.preventDefault()"  action="" name="userValidateForm">
 
                 <!--投资信息-->
@@ -310,7 +310,7 @@
                         <div class="stage" ng-repeat="area in fieldsOptions" ng-click="selectArea($index, 'userValidateForm')" ng-class="{'active':area.active}" name="focusArea">{{area.desc}}</div>
                     </div>
                 </div>
-                <div class="error-tip error" ng-show="userValidateForm.$error.industyEmpty">
+                <div class="error-tip error" ng-show="userValidateForm.focusArea.$dirty && userValidateForm.$error.industyEmpty">
                     <span>请选择关注领域</span>
                 </div>
 
@@ -343,8 +343,8 @@
                 </div>
             </form>
         </div>
-        <a ng-if="(valStatus == 'withoutVal' || valStatus == 'validating') && user_cache.is_completed == 0" class="btn btn-default btn-cancel" ng-click="submitFormUser($event)" ng-disabled="hasClick">保存</a>
-        <a ng-if="valStatus == 'withoutVal' || valStatus == 'validating'" ui-sref="syndicates" class="btn btn-default btn-cancel">查看股权投资列表</a>
+        <a ng-if="(valStatus == 'suc' || valStatus == 'validating') && user_cache.is_completed == 0" class="btn btn-default btn-cancel" ng-click="submitFormUser($event)" ng-disabled="hasClick">保存</a>
+        <a ng-if="valStatus == 'suc' || valStatus == 'validating'" ui-sref="syndicates" class="btn btn-default btn-cancel">查看股权投资列表</a>
     </div>
 </div>
 <div loading="investorVal"></div>
