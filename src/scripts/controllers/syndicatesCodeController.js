@@ -30,7 +30,7 @@ angular.module('defaultApp.controller').controller('syndicatesCodeController',
             $scope.krCode.code = data.code;
             loading.hide("codePage");
         },function(err){
-            if(err.code == 404 || err.code == 500){
+            if(err.code == 22000 || err.code == 500){
                 $scope.krCode.status = "unapply";
                 loading.hide("codePage");
             }else{
