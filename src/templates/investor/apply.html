@@ -70,11 +70,17 @@
                 <div class="error-alert error" ng-show="investorValidateForm.organizationName.$invalid && investorValidateForm.organizationName.$dirty">
                     <span>请输入机构名称</span>
                 </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationName.$invalid && investorValidateForm.organizationName.$dirty && (investorValidateForm.organizationName.$error.minlength || investorValidateForm.organizationName.$error.maxlength)">
+                    <span>机构名称长度应在 2 到 30 个字符之间</span>
+                </div>
                 <div class="error-alert error" ng-show="investorValidateForm.organizationSelectName.$invalid && investorValidateForm.organizationSelectName.$dirty">
                     <span>请选择任职机构</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.organizationBrief.$invalid && investorValidateForm.organizationBrief.$dirty">
                     <span>请输入机构简介</span>
+                </div>
+                <div class="error-alert error" ng-show="investorValidateForm.organizationBrief.$invalid && investorValidateForm.organizationBrief.$dirty && (investorValidateForm.organizationBrief.$error.maxlength || investorValidateForm.organizationBrief.$error.minlength)">
+                    <span>机构简介长度应在10到30个字符之间</span>
                 </div>
                 <div class="error-alert error" ng-show="investorValidateForm.organizationWebsite.$invalid && investorValidateForm.organizationWebsite.$dirty">
                     <span ng-show="investorValidateForm.organizationWebsite.$error.url">请以http://开头</span>
@@ -162,7 +168,7 @@
                                                     placeholder="请输入机构名"
                                                     required
                                                     class="form-control"
-                                                    mass-autocomplete-item="autocomplete_options_organization" selectFirst="true"ng-blur="Blur()"/>
+                                                    mass-autocomplete-item="autocomplete_options_organization" minlength='2' maxlength="30" />
                                                 </li>
                                             </ul>
                                         </li>
@@ -188,7 +194,7 @@
                                             <label class="title"><span class="c-orange">*</span>机构简介</label>
                                             <ul class="main">
                                                 <li>
-													<textarea  name="organizationBrief"   ng-model="organization.addForm.brief"  ng-required="true" ng-pattern="/^.{10,1000}$/" placeholder="简单介绍你的个人经历，30字"></textarea>
+													<textarea  name="organizationBrief"   ng-model="organization.addForm.brief"  ng-required="true" ng-pattern="/^.{10,1000}$/" placeholder="简单介绍你的个人经历，30字" minlength="10" maxlength="30" minlength='10' ></textarea>
                                                 </li>
                                             </ul>
                                         </li>
@@ -262,7 +268,7 @@
                                                     placeholder="请输入公司简称"
                                                     required
                                                     class="form-control"
-                                                    mass-autocomplete-item="autocomplete_options"ng-blur="Blur()"/>
+                                                    mass-autocomplete-item="autocomplete_options" maxlength="15" />
                                                 </li>
                                             </ul>
                                         </li>
