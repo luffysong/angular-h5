@@ -81,7 +81,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             $scope.user.name = data.name;
             $scope.user.avatar = data.avatar;
 
-            $scope.user.intro  =  $scope.user.brief = data.intro || '';
+            $scope.user.brief = data.intro;
+            console.log(data.intro)
 
             $scope.user.industry = $scope.user_cache.industry = data.industry || [];
             $scope.user.investPhases = $scope.user_cache.investPhases = data.investPhases || [];
@@ -123,7 +124,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }else if(data.status == 2){
                 $scope.valStatus = "suc";
                 if(data.cert_info) {
-                    $scope.user.intro = $scope.user.brief || (data.cert_info.company_name +' '+ data.cert_info.position_name);
+                    if ($scope.user.brief == undefined || $scope.user.brief == '') {
+                        $scope.user.intro = data.cert_info.company_name + ' ' + data.cert_info.position_name;
+                        console.log($scope.user.brief)
+                    } else {
+                        $scope.user.intro = $scope.user.brief;
+                        console.log($scope.user.intro)
+                    }
                 }
             }else if(data.status == 3){
                 $scope.valStatus = "fail";
@@ -298,6 +305,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }*/
             $scope.hasClick = true;
             //$scope.user.intro = $scope.user.company_name + ' ' + $scope.user.position_name;
+
             if($scope.basic.value){
                 $scope.user.city = $scope.basic.value.address2;
                 $scope.user.country = $scope.basic.value.address1;
