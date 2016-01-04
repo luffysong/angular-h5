@@ -807,6 +807,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                                         console.log('--创建经历失败--');
                                     });
                                 },function(err){
+                                    ErrorService.alert({
+                                        msg: '对不起，该机构不符合平台收录标准'
+                                    });
                                     console.log('---创建公司失败--');
                                 });
                             }else{
@@ -875,6 +878,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                                     var expData = {};
                                         expData['uid'] = UserService.getUID();
                                         expData['groupIdType'] = 3;
+                                        expData['groupIdName'] = $scope.company.addForm.name;
                                         expData['current'] = true;
                                         expData['groupId'] = response.id;
                                         expData['position'] = $scope.company.form.position;
@@ -891,6 +895,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                                         console.log('--创建经历失败--');
                                     });
                                 },function(err){
+                                    ErrorService.alert({
+                                        msg: '对不起，该机构不符合平台收录标准'
+                                    });
                                     console.log('---创建公司失败--');
                                 });
                             }else{
@@ -898,6 +905,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                                 //创建经历
                                     var expData = {};
                                         expData['uid'] = UserService.getUID();
+                                        expData['groupIdName'] = $scope.company.addForm.name;
                                         expData['groupIdType'] = 3;
                                         expData['current'] = true;
                                         expData['groupId'] = $scope.company.addForm.id;
@@ -922,6 +930,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                                 expData['uid'] = UserService.getUID();
                                 expData['groupIdType'] = 3;
                                 expData['current'] = true;
+                                expData['groupIdName'] = $scope.company.addForm.name;
                                 expData['id'] = $scope.company.form.id;
                                 expData['groupId'] = $scope.company.form.groupId;
                                 expData['position'] = $scope.company.form.position;
