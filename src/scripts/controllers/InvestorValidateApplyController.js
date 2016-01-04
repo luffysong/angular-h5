@@ -340,7 +340,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 name:'',
                 brief:'',
 				enName:'',
-				website:''
+				website:'',
+                fullName:'',
+                logo:''
             },
             response:{
                 data:[]
@@ -360,6 +362,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
 					$scope.organization.addForm.id = '';
 					$scope.organization.addForm.enName = '';
+					$scope.organization.addForm.fullName = '';
+					$scope.organization.addForm.logo = '';
 					$scope.organization.addForm.name = '';
 					$scope.organization.addForm.website = '';
 					$scope.organization.addForm.brief = '';
@@ -412,6 +416,75 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
 
         };
+        // 上传logo start
+        $scope.logo = {};
+        $scope.logoFileSelected = function (files, e) {
+            var upyun = window.kr.upyun;
+            if (files[0].size > 5 * 1024 * 1024) {
+                //ErrorService.alert({
+                //    msg: "附件大于5M"
+                //});
+                angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("logoSize", true);
+                return;
+            }
+            $scope.temp_logo = '';
+            $scope.organization.addForm.logo = '';
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                $scope.logo.uploading = true;
+                $scope.logo.progress = 0;
+                DefaultService.getUpToken({
+                    'x-gmkerl-type': 'fix_width', //限定宽度,高度自适应
+                    'x-gmkerl-value': '900',      //限定的宽度的值
+                    'x-gmkerl-unsharp': true
+                }).then(function (data) {
+                    $scope.upload = $upload.upload({
+                        url: upyun.api + '/' + upyun.bucket.name,
+                        data: data,
+                        file: file,
+                        withCredentials: false
+                    }).progress(function (evt) {
+                        $scope.logo.progress = evt.loaded * 100 / evt.total;
+                    }).success(function (data, status, headers, config) {
+
+                        var reader = new FileReader();
+                        reader.onload = function(){
+
+                            //$('.J_aa')[0].src = reader.result
+
+                            $scope.temp_logo = reader.result;
+
+                        }
+
+                        var filename = data.url.toLowerCase();
+                        if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
+
+                            reader.readAsDataURL(file)
+                            $scope.organization.addForm.logo = window.kr.upyun.bucket.url + data.url;
+
+                            angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("logoEmpty", true);
+                        } else {
+                            //ErrorService.alert({
+                            //    msg: '格式不支持，请重新上传！'
+                            //});
+                            angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("logoType", true);
+                        }
+                        $scope.logo.uploading = false;
+                        $scope.temp_logo = ''
+                    }).error(function () {
+                        ErrorService.alert({
+                            msg: '格式不支持，请重新上传！'
+                        });
+
+                        $scope.logo.uploading = false;
+                    });
+                }, function (err) {
+                    $scope.logo.uploading = false;
+                    ErrorService.alert(err);
+                });
+            }
+        };
+        // 上传logo end
         $scope.organization.loadData();
         //投资人认证表单
         $scope.intro = {};
@@ -769,6 +842,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                                 var data = {};
                                     data['name'] = $scope.organization.addForm['name'];
                                     data['enName'] = $scope.organization.addForm['enName'];
+                                    data['fullName'] = $scope.organization.addForm['fullName'];
+                                    data['logo'] = $scope.organization.addForm['logo'];
                                     data['brief'] = $scope.organization.addForm['brief'];
                                     data['website'] = $scope.organization.addForm['website'];
                                     data['source'] = 'INVESTOR_AUDIT';
