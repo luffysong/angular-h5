@@ -172,7 +172,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.autocomplete_options = {
             suggest: suggest_state_remote,
             on_error: console.log,
-            on_detach: function (cs) {                     
+            on_detach: function (cs) {
+                     
             },
             on_select: function (selected) {
                 if (selected.obj.status != 'add') {
@@ -233,6 +234,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     // })
                     $scope.company.isAddExperience = true;
                     $scope.company.addForm.name = q;
+                    $scope.company.addForm.id = 0;
                 }
                 deferred.resolve(suggest_state(data.data));
             }, function () {
