@@ -300,7 +300,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     name: $scope.user.name,
                     email: $scope.user.email,
                     phone: $scope.getPhoneWithCountryCode(),
-                    smscode: $scope.user.smscode
+                    smscode: $scope.user.captcha
                 };
                 if($scope.user.hasPhone){
                     delete param.phone;
@@ -533,7 +533,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         /**
          * 获取要发送的用手机
          */
-        //debugger;
+
         $scope.getPhoneWithCountryCode = function () {
             if(!$scope.user.phone)return;
             if($scope.countryDatas.cc.cc=='86')return $scope.user.phone;

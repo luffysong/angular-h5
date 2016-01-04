@@ -93,7 +93,7 @@
         <div class="form-group" ng-if="!investor.hasPhone">
             <label class="label-control" for="investor-captcha"><span class="c-red">*</span>验证码</label>
             <div class="col-max">
-                <input class="form-control" type="text" id="investor-captcha" name="investor-captcha" placeholder="点击填写" required ng-model="investor.captcha">
+                <input class="form-control" type="text" id="investor-captcha" name="investor-captcha" placeholder="点击填写" required ng-model="investor.captcha" maxlength="8">
             </div>
             <!--<a class="btn btn-captcha" href="" ng-click="getCode($event)" ng-disabled="wait || syndicatesValidateForm['investor-phone'].$invalid">{{wait ? wait + '秒' : '点击获取'}}</a>-->
 
