@@ -22,6 +22,12 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             loading.hide('syndicatesValidate');
         }, 500);
 
+        var $bar = $('.J_appDownloadWrapper');
+        if($bar.length > 0) {
+            $bar.hide();
+        }
+
+
         /*跟投人认证来源埋点*/
         $scope.handleSource = function(){
             if($stateParams.source || $stateParams.krsrc){

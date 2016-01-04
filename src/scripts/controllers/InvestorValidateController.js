@@ -11,6 +11,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         $timeout(function(){
             window.scroll(0,0);
         },0);
+
+        var $bar = $('.J_appDownloadWrapper');
+        if($bar.length > 0) {
+            $bar.hide();
+        }
+
         /*跟投人认证来源埋点*/
         $scope.handleSource = function(){
             if($stateParams.source || $stateParams.krsrc){
@@ -49,9 +55,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             investPhases:[],
             passport_number:"",
             passport_url:"",
-            intro:"",
             industry:[],
-            avatar:'',
+            avatar:"",
+            intro:"",
+            brief:"",
             investMoneyBegin:"",
             investMoneyEnd:"",
             is_completed:0
@@ -61,7 +68,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         UserService.basic.get({
             id: $scope.userId
         }, function (data){
-            // console.log(data);
+             //console.log(data);
+
             if(data.phone){
                 $scope.user.hasPhone = true;
                 delete $scope.user.phone;
@@ -72,10 +80,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             }
             $scope.user.name = data.name;
             $scope.user.avatar = data.avatar;
-            //console.log(data.intro);
 
-            $scope.user.intro  = data.intro;
-            //$scope.user.intro = data.intro ? data.intro : $scope.user.company_name + $scope.user.position_name;
+            $scope.user.intro  =  $scope.user.brief = data.intro || '';
+
             $scope.user.industry = $scope.user_cache.industry = data.industry || [];
             $scope.user.investPhases = $scope.user_cache.investPhases = data.investPhases || [];
             $scope.user.investMoneyUnit = $scope.user_cache.investMoneyUnit = data.mainInvestCurrency || $scope.user.investMoneyUnit;
@@ -115,6 +122,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.valStatus = "validating";
             }else if(data.status == 2){
                 $scope.valStatus = "suc";
+                if(data.cert_info) {
+                    $scope.user.intro = $scope.user.brief || (data.cert_info.company_name +' '+ data.cert_info.position_name);
+                }
             }else if(data.status == 3){
                 $scope.valStatus = "fail";
             }else if(data.status == 4){
@@ -126,6 +136,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 }
                 angular.extend($scope.user,data.cert_info);
             }
+
             loading.hide("investorVal");
         },function(err){
             loading.hide("investorVal");
@@ -326,8 +337,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     id:'co-investor',
                     submodel:'identity-cert'
                 },$scope.user,function(data){
-                    console.log(data);
-
                     if(data.status == 1){
                         $scope.valStatus = "validating";
                     }else if(data.status == 2){
@@ -337,7 +346,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     }
                     $scope.hasClick = false;
                     //console.log(data);
-                    //$scope.user.intro = $scope.user.intro || (data.company_name + data.position_name);
 
                     /**
                      * 金蛋理财活动
@@ -610,7 +618,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 console.log(result);
                 $scope.user_cache.is_completed = 1;
 
-            }, function(error){
+            }, function(err){
                 ErrorService.alert(err);
                 $scope.hasClick = false;
             });
