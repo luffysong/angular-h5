@@ -172,18 +172,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.autocomplete_options = {
             suggest: suggest_state_remote,
             on_error: console.log,
-            on_detach: function (cs) {
-                var companySuggest = $scope.companyList.data.length;
-                if(($scope.companyList.data[0].name === $scope.company.addForm.name) && !$scope.companyList.data[0].status) {
-                    $scope.company.isAdd = false;
-                    var company = $scope.companyList.data[0];
-                    $scope.company.addForm.name = company.name;
-                    $scope.company.addForm.id = company.id;                       
-                    return;
-                }
-                $scope.company.isAddExperience = true;
-                $scope.company.isAdd = true;
-                $scope.company.addForm.id = 0;                      
+            on_detach: function (cs) {                     
             },
             on_select: function (selected) {
                 if (selected.obj.status != 'add') {
@@ -234,15 +223,17 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     return item.name.toLowerCase() == q.toLowerCase();
                 });
                 if (!exist.length) {
-                    data.data.push({
-                        name: q,
-                        id:'',
-                        type:'',
-                        status: 'add',
-                        value: q
-                    })
+                    /*fixme 创建公司输入内容无匹配时不显示suggest*/
+                    // data.data.push({
+                    //     name: q,
+                    //     id:'',
+                    //     type:'',
+                    //     status: 'add',
+                    //     value: q
+                    // })
+                    $scope.company.isAddExperience = true;
+                    $scope.company.addForm.name = q;
                 }
-                $scope.companyList = data;
                 deferred.resolve(suggest_state(data.data));
             }, function () {
 
