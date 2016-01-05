@@ -263,10 +263,15 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 phone: $scope.getPhoneWithCountryCode()
             }, function(data) {
 
-            }, function(){
-                 ErrorService.alert({
-                     msg:'发送失败!'
-                 });
+            }, function(err){
+                console.log(err)
+                if( err.msg =="短信发送失败"){
+                    ErrorService.alert({msg:"请不要频繁操作!"});
+                }else{
+                    ErrorService.alert({
+                        msg:'发送失败!'
+                    });
+                }
             });
         };
 
@@ -407,8 +412,8 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
          * 获取要发送的用手机
          */
         $scope.getPhoneWithCountryCode = function () {
-            if(!$scope.user.phone)return;
-            if($scope.user.cc.cc=='86')return $scope.user.phone;
+            //if(!$scope.user.phone)return;
+            //if($scope.user.cc.cc=='86')return $scope.user.phone;
             return [$scope.user.cc.cc, $scope.investor.phone].join('+');
         }
 

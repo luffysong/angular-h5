@@ -284,7 +284,7 @@
 
         </div>
 
-        <div ng-if="valStatus == 'suc' " class="welcome-form suc">
+        <div ng-if="valStatus == 'suc' || valStatus == 'validating'" class="welcome-form suc">
             <form ng-if="user_cache.is_completed == 0" ng-submit="$event.preventDefault()"  action="" name="userValidateForm">
 
                 <!--投资信息-->
@@ -344,7 +344,7 @@
 
             </form>
         </div>
-        <a ng-if="valStatus == 'suc' && user_cache.is_completed == 0" class="btn btn-default btn-cancel" ng-click="submitFormUser($event)" ng-disabled="hasClick">保存</a>
+        <a ng-if="(valStatus == 'suc' || valStatus == 'validating') && user_cache.is_completed == 0" class="btn btn-default btn-cancel" ng-click="submitFormUser($event)" ng-disabled="hasClick">保存</a>
         <a ng-if="valStatus == 'suc' || valStatus == 'validating'" ui-sref="syndicates" class="btn btn-default btn-cancel">查看股权投资列表</a>
     </div>
 </div>

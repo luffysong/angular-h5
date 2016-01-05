@@ -82,7 +82,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             $scope.user.avatar = data.avatar;
 
             $scope.user.brief = data.intro;
-            console.log(data.intro)
+            //console.log(data.intro)
 
             $scope.user.industry = $scope.user_cache.industry = data.industry || [];
             $scope.user.investPhases = $scope.user_cache.investPhases = data.investPhases || [];
@@ -123,15 +123,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.valStatus = "validating";
             }else if(data.status == 2){
                 $scope.valStatus = "suc";
-                if(data.cert_info) {
-                    if ($scope.user.brief == undefined || $scope.user.brief == '') {
-                        $scope.user.intro = data.cert_info.company_name + ' ' + data.cert_info.position_name;
-                        console.log($scope.user.brief)
-                    } else {
-                        $scope.user.intro = $scope.user.brief;
-                        console.log($scope.user.intro)
-                    }
-                }
             }else if(data.status == 3){
                 $scope.valStatus = "fail";
             }else if(data.status == 4){
@@ -142,6 +133,16 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     $scope.basic.value.address2 = data.cert_info.city;
                 }
                 angular.extend($scope.user,data.cert_info);
+            }
+
+            if(data.status == 1 || data.status == 2){
+                if(data.cert_info) {
+                    if (!$scope.user.brief) {
+                        $scope.user.intro = data.cert_info.company_name + ' ' + data.cert_info.position_name;
+                    } else {
+                        $scope.user.intro = $scope.user.brief;
+                    }
+                }
             }
 
             loading.hide("investorVal");
@@ -551,8 +552,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
          */
 
         $scope.getPhoneWithCountryCode = function () {
-            if(!$scope.user.phone)return;
-            if($scope.countryDatas.cc.cc=='86')return $scope.user.phone;
+            //if(!$scope.user.phone)return;
+            //if($scope.countryDatas.cc.cc=='86')return $scope.user.phone;
             return [$scope.countryDatas.cc.cc, $scope.user.phone].join('+');
         }
 
@@ -582,10 +583,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 phone: $scope.getPhoneWithCountryCode()
             }, function(data) {
 
-            }, function(){
-                ErrorService.alert({
-                    msg:'发送失败!'
-                });
+            }, function(err){
+                if( err.msg =="短信发送失败"){
+                    ErrorService.alert({msg:"请不要频繁操作!"});
+                }else{
+                    ErrorService.alert({
+                        msg:'发送失败!'
+                    });
+                }
             });
         };
 
