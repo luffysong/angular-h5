@@ -91,6 +91,24 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             //console.log(data.intro)
             $scope.user.industry = $scope.user_cache.industry = data.industry || [];
             $scope.user.investPhases = $scope.user_cache.investPhases = data.investPhases || [];
+            if(data.investPhases && data.investPhases.length){
+                angular.forEach(data.investPhases,function(obj){
+                    angular.forEach($scope.investStage,function(key,index){
+                        if(obj == key.value){
+                            key.active = true;
+                        }
+                    });
+                });
+            }
+            if(data.industry && data.industry.length){
+                angular.forEach(data.industry,function(obj){
+                    angular.forEach($scope.fieldsOptions,function(key,index){
+                        if(obj == key.value){
+                            key.active = true;
+                        }
+                    });
+                });
+            }
             $scope.user.investMoneyUnit = $scope.user_cache.investMoneyUnit = data.mainInvestCurrency || $scope.user.investMoneyUnit;
             $scope.user.investMoneyBegin = $scope.user_cache.investMoneyBegin = data.mainInvestCurrency == 'USD' ? data.investorSettings.usdInvestMin :  data.investorSettings.cnyInvestMin;
             $scope.user.investMoneyEnd = $scope.user_cache.investMoneyEnd = data.mainInvestCurrency == 'USD' ? data.investorSettings.usdInvestMax:  data.investorSettings.cnyInvestMax;
@@ -170,7 +188,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
 
         /* 选择个人投资阶段 */
         $scope.selectStage = function(index, name_form){
-            name_form = name_form != undefined ? name_form : 'userValidateForm';
+            name_form = name_form != undefined ? name_form : 'investorValidateForm';
             angular.element($("form[name='" + name_form + "']")).scope()[name_form].$setValidity("stageEmpty",true);
             $scope.investStage[index].active = !$scope.investStage[index].active;
 
@@ -184,7 +202,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         /* 选择关注领域 */
 
         $scope.selectArea = function(index, name_form){
-            name_form = name_form != undefined ? name_form : 'userValidateForm';
+            name_form = name_form != undefined ? name_form : 'investorValidateForm';
             if($scope.areaList != undefined && $scope.areaList.length == 3 && $scope.areaList.indexOf($scope.fieldsOptions[index].value) < 0) return;
 
             $scope.fieldsOptions[index].active = !$scope.fieldsOptions[index].active;

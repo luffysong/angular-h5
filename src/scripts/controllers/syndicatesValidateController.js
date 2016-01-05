@@ -412,11 +412,10 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
          * 获取要发送的用手机
          */
         $scope.getPhoneWithCountryCode = function () {
-            if(!$scope.user.phone)return;
-            if($scope.user.cc.cc=='86')return $scope.user.phone;
+            if(!$scope.investor.phone)return;
+            if($scope.user.cc.cc=='86')return $scope.investor.phone;
             return [$scope.user.cc.cc, $scope.investor.phone].join('+');
         }
-
 
         // 查看风险揭示书
         $scope.seeRisk = function(){
