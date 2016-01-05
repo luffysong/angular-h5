@@ -412,8 +412,8 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
          * 获取要发送的用手机
          */
         $scope.getPhoneWithCountryCode = function () {
-            //if(!$scope.user.phone)return;
-            //if($scope.user.cc.cc=='86')return $scope.user.phone;
+            if(!$scope.user.phone)return;
+            if($scope.user.cc.cc=='86')return $scope.user.phone;
             return [$scope.user.cc.cc, $scope.investor.phone].join('+');
         }
 

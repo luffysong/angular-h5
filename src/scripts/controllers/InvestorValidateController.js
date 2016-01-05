@@ -332,7 +332,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 UserService.basic.update({
                     id: $scope.userId
                 }, param, function(data) {
-                    console.log(data);
+
                     def.resolve();
                 }, function(err) {
                     ErrorService.alert(err);
@@ -552,8 +552,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
          */
 
         $scope.getPhoneWithCountryCode = function () {
-            //if(!$scope.user.phone)return;
-            //if($scope.countryDatas.cc.cc=='86')return $scope.user.phone;
+            if(!$scope.user.phone)return;
+            if($scope.countryDatas.cc.cc=='86')return $scope.user.phone;
             return [$scope.countryDatas.cc.cc, $scope.user.phone].join('+');
         }
 

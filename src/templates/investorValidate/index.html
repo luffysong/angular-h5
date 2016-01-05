@@ -67,7 +67,7 @@
                     <div class="error-tip error" ng-show="investorValidateForm['user-email'].$invalid && investorValidateForm['user-email'].$dirty" ng-if="!investor.hasEmail">
                         <span ng-show="investorValidateForm['user-email'].$error.required"><span class="tip-icon">!</span>请输入你的邮箱</span>
                         <span ng-show="investorValidateForm['user-email'].$error.email"><span class="tip-icon">!</span>请输入合法邮箱地址</span>
-                        <span ng-show="investor.email && investorValidateForm['investor-email'].$error.checked && !investorValidateForm['user-email'].$error.email"><span class="tip-icon">!</span>你输入的邮箱已被占用</span>
+                        <span ng-show="user.email && investorValidateForm['user-email'].$error.checked && !investorValidateForm['user-email'].$error.email"><span class="tip-icon">!</span>你输入的邮箱已被占用</span>
                     </div>
 
                     <!--add 选择国家-->
@@ -327,7 +327,7 @@
                 </div>
 
                 <!--个人单笔可投-->
-                <div  class="form-group normal clearfix">
+                <div  class="form-group normal clearfix investment-amount">
                     <label class="label-control"><span class="c-red">*</span>个人单笔可投 </label>
                     <div class="col-flex clearfix ml-10">
                         <input class="form-control account-num" type="tel" ng-model="user.investMoneyBegin" name="investFrom" placeholder="填写金额" ng-pattern="/^\d*$/"  required maxlength="6" />
