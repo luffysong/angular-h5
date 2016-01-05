@@ -91,7 +91,7 @@
                     <div class="error-tip error" ng-show="investorValidateForm['user-phone'].$invalid && investorValidateForm['user-phone'].$dirty" ng-if="!user.hasPhone">
                         <span ng-show="investorValidateForm['user-phone'].$error.required"><span class="tip-icon">!</span>请输入你的电话号码</span>
                         <span ng-show="investorValidateForm['user-phone'].$error.pattern"><span class="tip-icon">!</span>请输入合法手机号码</span>
-                        <span ng-show="user.phone && investorValidateForm['user-phone'].$error.checked && !investorValidateForm['user-phone'].$error.phone"><span class="tip-icon">!</span>你输入的手机号码已被占用</span>
+                        <span ng-show="user.phone && investorValidateForm['user-phone'].$error.checked && !investorValidateForm['user-phone'].$error.pattern"><span class="tip-icon">!</span>你输入的手机号码已被占用</span>
                     </div>
 
                     <!-- 完善资料（验证码）-->
