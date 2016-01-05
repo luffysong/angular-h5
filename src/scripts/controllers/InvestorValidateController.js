@@ -310,6 +310,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             $scope.hasClick = true;
             //$scope.user.intro = $scope.user.company_name + ' ' + $scope.user.position_name;
 
+            if (!$scope.user.intro) {
+                $scope.user.intro = $scope.user.company_name + ' ' + $scope.user.position_name;
+            }
             if($scope.basic.value){
                 $scope.user.city = $scope.basic.value.address2;
                 $scope.user.country = $scope.basic.value.address1;
