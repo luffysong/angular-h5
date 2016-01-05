@@ -81,9 +81,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             $scope.user.name = data.name;
             $scope.user.avatar = data.avatar;
 
-            $scope.user.brief = data.intro;
-            //console.log(data.intro)
+            //$scope.user.intro = $scope.user.brief = data.intro;
+            if( data.intro ){
+                $scope.user.intro = data.intro;
+            }else{
+                $scope.user.intro = $scope.user.brief;
+            }
 
+            //console.log(data.intro)
             $scope.user.industry = $scope.user_cache.industry = data.industry || [];
             $scope.user.investPhases = $scope.user_cache.investPhases = data.investPhases || [];
             $scope.user.investMoneyUnit = $scope.user_cache.investMoneyUnit = data.mainInvestCurrency || $scope.user.investMoneyUnit;
@@ -137,10 +142,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
 
             if(data.status == 1 || data.status == 2){
                 if(data.cert_info) {
-                    if (!$scope.user.brief) {
-                        $scope.user.intro = data.cert_info.company_name + ' ' + data.cert_info.position_name;
-                    } else {
-                        $scope.user.intro = $scope.user.brief;
+                    if (!$scope.user.intro) {
+                        $scope.user.brief = data.cert_info.company_name + ' ' + data.cert_info.position_name;
                     }
                 }
             }
