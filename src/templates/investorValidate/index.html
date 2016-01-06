@@ -45,8 +45,8 @@
                     <div class="form-group">
                         <label class="label-control"><span class="c-red">*</span>身份证</label>
                         <div class="col-max">
-                            <input class="form-control" type="text" name="idCardNumber" ng-model="user.id_card_number"
-                                   ng-blur="checkId($event)" maxlength="18" placeholder="填写正确的身份证号码"  required />
+                            <input class="form-control" type="text" name="idCardNumber" ng-model="user.id_card_number" maxlength="18" placeholder="填写正确的身份证号码"  required
+                                   ng-pattern="/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/">
                         </div>
                     </div>
                     <div class="error-tip error clearfix">
@@ -54,10 +54,11 @@
                           <span ng-show="investorValidateForm.idCardNumber.$dirty && investorValidateForm.$error.idcardInvalid">
                             <span class="tip-icon">!</span>请输入正确的身份证号码
                           </span>
+                        <span ng-show="investorValidateForm.idCardNumber.$dirty && investorValidateForm.idCardNumber.$error.pattern"><span class="tip-icon">!</span>请输入正确的身份证号码</span>
+                        <span ng-show="investorValidateForm.idCardNumber.$dirty && investorValidateForm.idCardNumber.$error.required"><span class="tip-icon">!</span>请输入身份证号码</span>
                     </div>
-
+                    
                     <!-- 完善资料（邮箱）-->
-
                     <div class="form-group" ng-if="!user.hasEmail">
                         <label class="label-control" for="user-email"><span class="c-red">*</span>邮箱</label>
                         <div class="col-max">
@@ -152,7 +153,7 @@
                     <!--投资条件-->
                     <div class="form-group no-b">
                         <label class="label-control"><span class="c-red">*</span>投资条件</label>
-                        <div class="col-flex">
+                        <div class="col-flex condition">
                             <div ng-repeat="item in condition">
                                 <input type="radio" name="permit" id="condition{{$index}}" ng-model="user.rnv_investor_info" value="{{item.value}}" />
                                 <label for="condition{{$index}}">{{item.desc}}</label>

@@ -4,6 +4,11 @@
     width: 100%;
     height: auto;
     min-height: 500px;
+
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px white inset;
+    }
+
     &.val {
         .basic-info {
             font-size: 13px !important;
@@ -142,6 +147,9 @@
         }
         &>.message-code {
             right: 82px;
+        }
+        .condition{
+            margin-left:0;
         }
     }
     .investment-amount{

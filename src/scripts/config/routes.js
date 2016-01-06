@@ -344,14 +344,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
-    // 下轮氪退
-    $stateProvider.state('syndicateskrQuitMobile', {
-        url: '/promotion/krt',
-        templateUrl: 'templates/syndicates/krt-m.html',
-        controller:'syndicatesKrQuitController.js'
-    });
-
-
     $stateProvider.state('syndicatesShare', {
         url: '/syndicatesShare',
         templateUrl: 'templates/syndicates/invite/share.html',
@@ -363,7 +355,15 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
-        /**
+    // 下轮氪退
+    $stateProvider.state('syndicateskrQuitMobile', {
+        url: '/promotion/krt',
+        templateUrl: 'templates/syndicates/krt-m.html',
+        controller:'syndicatesKrQuitController.js'
+    });
+
+
+    /**
      * 大公司合作推广
      * */
 
