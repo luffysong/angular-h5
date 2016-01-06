@@ -362,6 +362,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
 
                     def.resolve();
                 }, function(err) {
+                    $scope.hasClick = false;
                     ErrorService.alert(err);
                     def.reject();
 
