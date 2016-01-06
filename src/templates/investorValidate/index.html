@@ -98,7 +98,7 @@
                     <div class="form-group" ng-if="!user.hasPhone">
                         <label class="label-control" for="user-captcha"><span class="c-red">*</span>验证码</label>
                         <div class="col-max">
-                            <input class="form-control" type="text" id="user-captcha" name="user-captcha" placeholder="点击填写" required ng-model="user.captcha" maxlength="8">
+                            <input class="form-control" type="text" id="user-captcha" name="user-captcha" placeholder="点击填写" required ng-model="user.captcha" maxlength="6">
                         </div>
                         <a class="btn btn-captcha " href="javascript:void(0)" ng-disabled="wait" ng-if="wait">{{wait+'秒'}}</a>
                         <a class="btn btn-captcha message-code" href="javascript:void(0)"
@@ -244,7 +244,19 @@
                         </div>
                     </div>-->
                     <div class="form-group">
-                        <a href="" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="hasClick" baidu-btn="跟投人认证提交资料">提交资料</a>
+                        <a href="" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="hasClick" baidu-btn="跟投人认证提交资料">
+                            <span ng-if="!hasClick">提交资料</span>
+                            <span ng-if="hasClick">正在提交</span>
+                            <div class="btn-loading-wrap" ng-if="hasClick">
+                                <div class="spinner">
+                                    <div class="rect1"></div>
+                                    <div class="rect2"></div>
+                                    <div class="rect3"></div>
+                                    <div class="rect4"></div>
+                                    <div class="rect5"></div>
+                                </div>
+                            </div>
+                        </a>
                         <p class="text-center bottom-tip">
                             点击-提交资料，即表示你同意
                         </p>
