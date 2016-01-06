@@ -16,7 +16,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         //    return;
         //}
 
-        //用户个人信息是否满足条件
+        //用户个人信息是否满 足条件
         //UserService.isProfileValid(function(response){
         //    if(!response){
         //        $state.go('guide.welcome');
@@ -174,18 +174,20 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             suggest: suggest_state_remote,
             on_error: console.log,
             on_detach: function (cs) {
-                console.log('---------------', $scope.company.addForm);
                 if($scope.companyList.data.length == 0) {
                     $scope.company.isAddExperience = true;
                     $scope.company.addForm.name = cs;
                     $scope.company.addForm.id = 0;
-                    console.log('exist', $scope.company.addForm);
                 } else if(($scope.companyList.data[0].name === $scope.company.addForm.name) && !$scope.companyList.data[0].status) {
                     $scope.company.isAdd = false;
                     var company = $scope.companyList.data[0];
                     $scope.company.addForm.name = company.name;
                     $scope.company.addForm.id = company.id;
                     return;
+                } else {
+                    $scope.company.isAddExperience = true;
+                    $scope.company.addForm.name = cs;
+                    $scope.company.addForm.id = 0;
                 }
             },
             on_select: function (selected) {
@@ -843,6 +845,18 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 investoraudit['businessCardLink']   = $scope.intro.value.pictures;
                 //$scope.hasClick = true;
 
+                // 时间
+                var myDate = new Date();
+                    year = myDate.getFullYear();
+                    month = myDate.getMonth() + 1;
+                if($scope.organization.form.startMonth > month && $scope.organization.form.startYear == year) {
+                    Error.show("任职的起始时间不能大于当前月");
+                    return false;
+                }
+                if($scope.company.form.startMonth > month && $scope.company.form.startYear == year) {
+                    Error.show("任职的起始时间不能大于当前月");
+                    return false;
+                }
                 //判断投资身份
                 var investorRole  = $scope.invest.investorRole;
                 switch(investorRole){
@@ -1037,6 +1051,49 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 			$scope.organization.addForm.website = '';
 			$scope.company.addForm.website = '';
 		});
+        var myDate = new Date();
+            year = myDate.getFullYear();
+            month = myDate.getMonth() + 1;
+        $scope.$watch('organization.form.startMonth',function(){
+            if($scope.organization.form.startYear && $scope.organization.form.startYear == year) {
+                if($scope.organization.form.startMonth > month) {
+                     Error.show("任职的起始时间不能大于当前月");
+                     return false;
+                } else {
+                    Error.hide();
+                }
+            }
+        });
+        $scope.$watch('company.form.startMonth',function(){
+            if($scope.company.form.startYear && $scope.company.form.startYear == year) {
+                if($scope.company.form.startMonth > month) {
+                     Error.show("任职的起始时间不能大于当前月");
+                     return false;
+                } else {
+                    Error.hide();
+                }
+            }
+        });
+        $scope.$watch('company.form.startYear',function(){
+            if($scope.company.form.startYear && $scope.company.form.startYear == year) {
+                if($scope.company.form.startMonth > month) {
+                     Error.show("任职的起始时间不能大于当前月");
+                     return false;
+                } else {
+                    Error.hide();
+                }
+            }
+        });
+        $scope.$watch('organization.form.startYear',function(){
+            if($scope.organization.form.startYear && $scope.organization.form.startYear == year) {
+                if($scope.organization.form.startMonth > month) {
+                     Error.show("任职的起始时间不能大于当前月");
+                     return false;
+                } else {
+                    Error.hide();
+                }
+            }
+        });
         /*监听事件*/
         $scope.changeMoney = function(fieldName){
              Error.hide();
