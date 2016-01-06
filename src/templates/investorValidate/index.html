@@ -57,7 +57,7 @@
                         <span ng-show="investorValidateForm.idCardNumber.$dirty && investorValidateForm.idCardNumber.$error.pattern"><span class="tip-icon">!</span>请输入正确的身份证号码</span>
                         <span ng-show="investorValidateForm.idCardNumber.$dirty && investorValidateForm.idCardNumber.$error.required"><span class="tip-icon">!</span>请输入身份证号码</span>
                     </div>
-                    
+
                     <!-- 完善资料（邮箱）-->
                     <div class="form-group" ng-if="!user.hasEmail">
                         <label class="label-control" for="user-email"><span class="c-red">*</span>邮箱</label>
@@ -85,14 +85,13 @@
                         <label class="label-control" for="user-phone"><span class="c-red">*</span>手机号码</label>
                         <!--ng-pattern="REGEXP.phone" -->
                         <div class="col-max">
-                            <input class="form-control" type="text" id="user-phone" name="user-phone" placeholder="填写常用手机号"  maxlength="11" required ng-model="user.phone" ng-pattern="REGEXP.phone">
+                            <input class="form-control" type="text" id="user-phone" name="user-phone" placeholder="填写常用手机号" required ng-model="user.phone" ng-pattern="/\d{11}/" maxlength="11">
                         </div>
-                        <span class="icon-"></span>
                     </div>
                     <div class="error-tip error" ng-show="investorValidateForm['user-phone'].$invalid && investorValidateForm['user-phone'].$dirty" ng-if="!user.hasPhone">
-                        <span ng-show="investorValidateForm['user-phone'].$error.required"><span class="tip-icon">!</span>请输入你的电话号码</span>
+                        <span ng-show="investorValidateForm['user-phone'].$error.required"><span class="tip-icon">!</span>请输入你的手机号码</span>
                         <span ng-show="investorValidateForm['user-phone'].$error.pattern"><span class="tip-icon">!</span>请输入合法手机号码</span>
-                        <span ng-show="user.phone && investorValidateForm['user-phone'].$error.checked && !investorValidateForm['user-phone'].$error.pattern"><span class="tip-icon">!</span>你输入的手机号码已被占用</span>
+                        <span ng-show="user.phone && investorValidateForm['user-phone'].$error.checked && !investorValidateForm['user-phone'].$error.pattern" ng-bind="phoneError.msg"></span>
                     </div>
 
                     <!-- 完善资料（验证码）-->
@@ -101,10 +100,14 @@
                         <div class="col-max">
                             <input class="form-control" type="text" id="user-captcha" name="user-captcha" placeholder="点击填写" required ng-model="user.captcha" maxlength="8">
                         </div>
-                        <!--<a class="btn btn-captcha" href="" ng-click="getCode($event)" ng-disabled="wait || syndicatesValidateForm['investor-phone'].$invalid">{{wait ? wait + '秒' : '点击获取'}}</a>-->
                         <a class="btn btn-captcha " href="javascript:void(0)" ng-disabled="wait" ng-if="wait">{{wait+'秒'}}</a>
-                        <a class="btn btn-captcha message-code" href="javascript:void(0)" ng-disabled="!user.phone" ng-if="!wait" ng-click="getCode($event)">短信验证</a>
-                        <a class="btn btn-captcha " href="javascript:void(0)" ng-disabled="!user.phone" ng-if="!wait" ng-click="getCode($event, true)">语音验证</a>
+                        <a class="btn btn-captcha message-code" href="javascript:void(0)"
+                           ng-disabled="!user.phone || user.phone.length != 11 || !phone.isValid"
+                           ng-if="!wait" ng-click="getCode($event)">短信验证</a>
+
+                        <a class="btn btn-captcha " href="javascript:void(0)"
+                           ng-disabled="!user.phone || user.phone.length != 11 || !phone.isValid"
+                           ng-if="!wait" ng-click="getCode($event, true)">语音验证</a>
                     </div>
                     <div class="error-tip error" ng-show="investorValidateForm['user-captcha'].$invalid && investorValidateForm['user-captcha'].$dirty" ng-if="!user.hasPhone">
                         <span ng-show="investorValidateForm['user-captcha'].$error.required"><span class="tip-icon">!</span>请输入你收到的验证码</span>

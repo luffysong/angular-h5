@@ -12,7 +12,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         });
         //IDCardService.getIdCardInfo('500381198704197577')
 
-
         $timeout(function(){
             window.scroll(0,0);
             loading.show('syndicatesValidate');
@@ -26,7 +25,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         if($bar.length > 0) {
             $bar.hide();
         }
-
 
         /*跟投人认证来源埋点*/
         $scope.handleSource = function(){
@@ -44,11 +42,9 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
 
         $scope.uid = UserService.getUID();
         $scope.isLogin = !!$scope.uid;
-
         $scope.action = {
             uploaded: false
         };
-
         $scope.investor = {
             'name': '',
             'avatar': '',
@@ -65,6 +61,12 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             },
             'condition': 'V1_1',
             'uid_inviter': $stateParams.inviter_id || ''
+        };
+        $scope.phone = {
+            isValid:false
+        };
+        $scope.phoneError = {
+            msg:"手机号已经被使用"
         };
 
         // 获取用户信息
@@ -93,7 +95,6 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             id:"co-investor",
             submodel:"info"
         }, function(data) {
-
             if(data.cert_info){
                 $scope.investor.id = data.cert_info.id_card_number;
                 $scope.investor['id-confirm'] = data.cert_info.id_card_number;
@@ -102,14 +103,11 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                 $scope.investor.address.address1 = data.cert_info.country;
                 $scope.investor.address.address2 = data.cert_info.city;
             }
-
             if( data.status && ( data.status == 1 || data.status == 2) ){
                 investorSkip();
             }
-
         }, function(err) {
             ErrorService.alert(err);
-
         });
 
 
@@ -219,7 +217,10 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
 
         // 手机验证
         $scope.$watch('investor.phone', function(phone) {
-            if(!phone || !$rootScope.REGEXP.phone.test(phone)){
+            //if(!phone || !$rootScope.REGEXP.phone.test(phone)){
+            //    return;
+            //}
+            if(!phone) {
                 return;
             }
             $scope.syndicatesValidateForm['investor-phone'].$setValidity("checked", true);
@@ -230,9 +231,12 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
                     id: $scope.uid,
                     phone: phone
                 }, function(data) {
-
-                }, function() {
+                    $scope.phone.isValid = true;
+                }, function(err) {
+                    //$scope.syndicatesValidateForm['investor-phone'].$setValidity("checked", false);
+                    $scope.phone.isValid = false;
                     $scope.syndicatesValidateForm['investor-phone'].$setValidity("checked", false);
+                    $scope.phoneError.msg = err.msg;
                 });
             }, 800);
         });
@@ -240,10 +244,7 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
         // 获取验证码
         $scope.getCode = function(e, voice){
             e && e.preventDefault();
-            if(!$scope.investor.phone) {
-                return;
-            }
-            if($scope.wait) {
+            if (!$scope.investor.phone || $scope.investor.phone.length != 11 || $scope.wait || !$scope.phone.isValid) {
                 return;
             }
             $scope.wait = 60;
@@ -266,7 +267,9 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             }, function(err){
                 console.log(err)
                 if( err.msg =="短信发送失败"){
-                    ErrorService.alert({msg:"请不要频繁操作!"});
+                    ErrorService.alert({
+                        msg:"请在60秒后再验证"
+                    });
                 }else{
                     ErrorService.alert({
                         msg:'发送失败!'
@@ -296,10 +299,8 @@ angular.module('defaultApp.controller').controller('syndicatesValidateController
             }
             $scope.addr2Options = DictionaryService.getLocation(value);
         });
-
         // 投资阶段
         $scope.condition = DictionaryService.getDict("RnvInvestorInfo");
-
 
         var investorSkip = function(flag){
             if($stateParams.activity_id){

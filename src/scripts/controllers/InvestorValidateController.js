@@ -63,6 +63,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             investMoneyEnd:"",
             is_completed:0
         };
+        $scope.phone = {
+            isValid:false
+        };
+        $scope.phoneError = {
+            msg:"手机号已经被使用"
+        };
         $scope.user_cache = angular.copy($scope.user);
 
         UserService.basic.get({
@@ -78,17 +84,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 $scope.user.hasEmail = true;
                 delete $scope.user.email;
             }
+
             $scope.user.name = data.name;
             $scope.user.avatar = data.avatar;
-
-            //$scope.user.intro = $scope.user.brief = data.intro;
             if( data.intro ){
                 $scope.user.intro = data.intro;
             }else{
                 $scope.user.intro = $scope.user.brief;
             }
-
-            //console.log(data.intro)
             $scope.user.industry = $scope.user_cache.industry = data.industry || [];
             $scope.user.investPhases = $scope.user_cache.investPhases = data.investPhases || [];
             if(data.investPhases && data.investPhases.length){
@@ -532,7 +535,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
 
         // 手机验证
         $scope.$watch('user.phone', function(phone) {
-            if(!phone || !$rootScope.REGEXP.phone.test(phone)){
+            if(!phone) {
                 return;
             }
             $scope.investorValidateForm['user-phone'].$setValidity("checked", true);
@@ -543,12 +546,50 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                     id: $scope.userId,
                     phone: phone
                 }, function(data) {
+                    $scope.phone.isValid = true;
 
-                }, function() {
+                }, function(err) {
+                    $scope.phone.isValid = false;
                     $scope.investorValidateForm['user-phone'].$setValidity("checked", false);
+                    $scope.phoneError.msg = err.msg;
                 });
             }, 800);
         });
+        // 获取验证码
+        $scope.getCode = function(e, voice){
+            e && e.preventDefault();
+            if (!$scope.user.phone || $scope.user.phone.length != 11 || $scope.wait || !$scope.phone.isValid) {
+                return;
+            }
+            $scope.wait = 60;
+            var interval = setInterval(function() {
+                $scope.$apply(function() {
+                    $scope.wait--;
+                    if($scope.wait == 0){
+                        clearInterval(interval);
+                        $scope.wait = 0;
+                    }
+                })
+            }, 1000);
+            UserService['send-sms'].send({
+                id: $scope.userId,
+                subid: voice?'voice':''
+            }, {
+                phone: $scope.getPhoneWithCountryCode()
+            }, function(data) {
+
+            }, function(err){
+                if( err.msg =="短信发送失败"){
+                    ErrorService.alert({
+                        msg:"请在60秒后再验证"
+                    });
+                }else{
+                    ErrorService.alert({
+                        msg:'发送失败!'
+                    });
+                }
+            });
+        };
 
         /**
          * 获取国编码
@@ -581,42 +622,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
             return [$scope.countryDatas.cc.cc, $scope.user.phone].join('+');
         }
 
-        // 获取验证码
-        $scope.getCode = function(e, voice){
-            e && e.preventDefault();
-            if(!$scope.user.phone) {
-                return;
-            }
-            if($scope.wait) {
-                return;
-            }
-            $scope.wait = 60;
-            var interval = setInterval(function() {
-                $scope.$apply(function() {
-                    $scope.wait--;
-                    if($scope.wait == 0){
-                        $scope.wait = 0;
-                        clearInterval(interval);
-                    }
-                })
-            }, 1000);
-            UserService['send-sms'].send({
-                id: $scope.userId,
-                subid: voice?'voice':''
-            }, {
-                phone: $scope.getPhoneWithCountryCode()
-            }, function(data) {
-
-            }, function(err){
-                if( err.msg =="短信发送失败"){
-                    ErrorService.alert({msg:"请不要频繁操作!"});
-                }else{
-                    ErrorService.alert({
-                        msg:'发送失败!'
-                    });
-                }
-            });
-        };
 
 
         $scope.submitFormUser = function(){

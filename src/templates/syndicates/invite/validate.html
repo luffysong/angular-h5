@@ -71,15 +71,13 @@
         <!-- 完善资料（手机号码）-->
         <div class="form-group" ng-if="!investor.hasPhone">
             <label class="label-control"><span class="c-red">*</span>手机号码</label>
-            <input class="form-control" type="text" name="investor-phone" placeholder="填写常用手机号" required ng-model="investor.phone" maxlength="11" ng-pattern="REGEXP.phone">
+            <input class="form-control" type="text" name="investor-phone" placeholder="填写常用手机号" required ng-model="investor.phone" ng-pattern="/\d{11}/" maxlength="11">
             <span class="icon-"></span>
         </div>
         <div class="error-tip error" ng-show="syndicatesValidateForm['investor-phone'].$invalid && syndicatesValidateForm['investor-phone'].$dirty" ng-if="!investor.hasPhone">
-            <span ng-show="syndicatesValidateForm['investor-phone'].$error.required"><span class="tip-icon">!</span>请输入你的电话号码</span>
+            <span ng-show="syndicatesValidateForm['investor-phone'].$error.required"><span class="tip-icon">!</span>请输入你的手机号码</span>
             <span ng-show="syndicatesValidateForm['investor-phone'].$error.pattern"><span class="tip-icon">!</span>请输入合法手机号码</span>
-            <span ng-show="investor.phone && syndicatesValidateForm['investor-phone'].$error.checked && !syndicatesValidateForm['investor-phone'].$error.pattern">
-                <span class="tip-icon">!</span>你输入的手机号码已被占用
-            </span>
+            <span ng-show="investor.phone && syndicatesValidateForm['investor-phone'].$error.checked && !syndicatesValidateForm['investor-phone'].$error.pattern" ng-bind="phoneError.msg"></span>
         </div>
 
         <!-- 完善资料（验证码）-->
@@ -88,11 +86,14 @@
             <div class="col-max">
                 <input class="form-control" type="text" id="investor-captcha" name="investor-captcha" placeholder="点击填写" required ng-model="investor.captcha" maxlength="6">
             </div>
-            <!--<a class="btn btn-captcha" href="" ng-click="getCode($event)" ng-disabled="wait || syndicatesValidateForm['investor-phone'].$invalid">{{wait ? wait + '秒' : '点击获取'}}</a>-->
-
             <a class="btn btn-captcha " href="javascript:void(0)" ng-disabled="wait" ng-if="wait">{{wait+'秒'}}</a>
-            <a class="btn btn-captcha message-code" href="javascript:void(0)" ng-disabled="!investor.phone" ng-if="!wait" ng-click="getCode($event)">短信验证</a>
-            <a class="btn btn-captcha " href="javascript:void(0)" ng-disabled="!investor.phone" ng-if="!wait" ng-click="getCode($event, true)">语音验证</a>
+            <a class="btn btn-captcha message-code" href="javascript:void(0)"
+               ng-disabled="!investor.phone || investor.phone.length != 11 || !phone.isValid"
+               ng-if="!wait" ng-click="getCode($event)">短信验证</a>
+
+            <a class="btn btn-captcha " href="javascript:void(0)"
+               ng-disabled="!investor.phone || investor.phone.length != 11 || !phone.isValid"
+               ng-if="!wait" ng-click="getCode($event, true)">语音验证</a>
         </div>
         <div class="error-tip error" ng-show="syndicatesValidateForm['investor-captcha'].$invalid && syndicatesValidateForm['investor-captcha'].$dirty" ng-if="!investor.hasPhone">
             <span ng-show="syndicatesValidateForm['investor-captcha'].$error.required"><span class="tip-icon">!</span>请输入你收到的验证码</span>
