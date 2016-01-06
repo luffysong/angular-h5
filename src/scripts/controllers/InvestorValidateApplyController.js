@@ -174,6 +174,19 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             suggest: suggest_state_remote,
             on_error: console.log,
             on_detach: function (cs) {
+                console.log('---------------', $scope.company.addForm);
+                if($scope.companyList.data.length == 0) {
+                    $scope.company.isAddExperience = true;
+                    $scope.company.addForm.name = cs;
+                    $scope.company.addForm.id = 0;
+                    console.log('exist', $scope.company.addForm);
+                } else if(($scope.companyList.data[0].name === $scope.company.addForm.name) && !$scope.companyList.data[0].status) {
+                    $scope.company.isAdd = false;
+                    var company = $scope.companyList.data[0];
+                    $scope.company.addForm.name = company.name;
+                    $scope.company.addForm.id = company.id;
+                    return;
+                }
             },
             on_select: function (selected) {
                 if (selected.obj.status != 'add') {
@@ -216,15 +229,15 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             var deferred = $q.defer();
             var q = term.toLowerCase().trim();
 
-            $scope.company.isAddExperience = true;
-            $scope.company.addForm.name = term;
-            $scope.company.addForm.id = 0;
+            
 
 
             SuggestService.query({
                 wd: q,
                 sub: 'company'
             }, function (data) {
+                $scope.companyList = data;
+                console.log('---------',data);
                 var exist = data.data.filter(function (item) {
                     return item.name.toLowerCase() == q.toLowerCase();
                 });
