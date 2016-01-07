@@ -1082,6 +1082,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 } else {
                     Error.hide();
                 }
+            } else {
+                Error.hide();
             }
         });
         $scope.$watch('organization.form.startYear',function(){
@@ -1092,6 +1094,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 } else {
                     Error.hide();
                 }
+            } else {
+                Error.hide();
             }
         });
         /*监听事件*/
