@@ -165,6 +165,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 if(data.cert_info) {
                     if (!$scope.user.intro) {
                         $scope.user.brief = data.cert_info.company_name + ' ' + data.cert_info.position_name;
+                        $scope.user.intro = $scope.user.brief;
                     }
                 }
             }
@@ -439,6 +440,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
                 });
             }, 800);
         });
+
 
         // 获取验证码
         $scope.getCode = function(e, voice){
