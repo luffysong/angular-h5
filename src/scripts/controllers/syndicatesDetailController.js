@@ -159,8 +159,8 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
                     temp.push(obj);
                 }
             });
-            temp.push("width=");
-            temp.push("height=");
+            temp.push("width="+$(window).width());
+            temp.push("height=250");
             str = "https://"+projectEnvConfig.rongHost+"/p/video/letv/iframe-h5?"+temp.join("&");
             console.log(str);
             /*var vid = "";
