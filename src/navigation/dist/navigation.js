@@ -122,7 +122,7 @@ var HeaderInterval = setInterval(function(){
 
                             user = data.data;
 
-                            config.user_avatar = user.avatar || 'http://krplus.b0.upaiyun.com/default_avatar.png!50';
+                            config.user_avatar = user.avatar || 'https://krplus.b0.upaiyun.com/default_avatar.png!50';
                             config.user_name = user.name || '未填写';
                             config.user_id = user.id;
 

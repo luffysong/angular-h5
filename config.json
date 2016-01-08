@@ -22,7 +22,7 @@
         "bucket": {
             "name": "krplus",
             "secret": "DQG3kIbOd1Iszo3ZwdlH5Zr1yio=",
-            "url": "http://krplus.b0.upaiyun.com"
+            "url": "https://krplus.b0.upaiyun.com"
         },
         "fileBucket":{
             "name": "krplus-file",
