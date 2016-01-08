@@ -4,6 +4,11 @@
     width: 100%;
     height: auto;
     min-height: 500px;
+
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px white inset;
+    }
+
     &.val {
         .basic-info {
             font-size: 13px !important;
@@ -11,8 +16,8 @@
         }
         .welcome-form {
             .label-control {
-                text-align: right !important;
-                width: 100px !important;
+                //text-align: right !important;
+                //width: 100px !important;
             }
             &.suc {
                 .label-control {
@@ -21,7 +26,59 @@
                 }
             }
         }
+        .form-horizontal{
+            &>.form-group{
+                .label-control{
+                    width:28%;
+                    margin-right: 5px;
+                    text-align: left;
+                    padding-left: 10px;
+                }
+                .col-max{
+                    margin-left: 0;
+                    width:68%;
+
+                }
+
+                .form-control {
+                    float: left;
+                    border: 0;
+                    outline: 0;
+                    width: 100%;
+
+
+                    &.place {
+                        width: 48%;
+                        background-color: rgb(248, 248, 248);
+                        border: 1px solid rgb(166, 166, 166);
+                        border-image-source: initial;
+                        border-image-slice: initial;
+                        border-image-width: initial;
+                        border-image-outset: initial;
+                        border-image-repeat: initial;
+                    }
+                }
+
+                .btn-auth {
+                    position: relative;
+                    width: 90%;
+                    margin: 15px 5% 10px;
+                    color: #fff;
+                    background-color: #188fef;
+
+                    .btn-loading-wrap {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 100;
+                    }
+                }
+            }
+        }
     }
+
     .mt-16 {
         margin-top: 16px;
     }
@@ -68,13 +125,15 @@
         line-height: 40px;
         padding-right: 20px;
         font-size: @default-font;
-
     }
     .intro {
         width: 100%;
         height: auto;
-        padding: 10px 0;
+        padding: 10px 0 20px;
         background: #fff;
+        h3{
+            font-size:24px;
+        }
         .temp-notice {
             height: auto;
             text-align: center;
@@ -90,6 +149,40 @@
             }
         }
     }
+    .form-group{
+        position: relative;
+        margin-left:0;
+
+        .btn-captcha{
+            position: absolute;
+            top: 7px;
+            right: 10px;
+            width: 68px;
+            padding: 4px;
+            background-color: #fff;
+            color: #008df2;
+            border: 1px solid #008df2;
+            z-index: 20;
+        }
+        &>.message-code {
+            right: 82px;
+        }
+        .condition{
+            margin-left:0;
+        }
+    }
+    .investment-amount{
+        padding-bottom:10px;
+        .label-control{
+           display: block;
+        }
+        input{margin:5px;width:35%;}
+    }
+
+    .brief{
+        padding-top:15px;
+    }
+
     .basic-info {
         width: 100%;
         height: 44px;
@@ -98,11 +191,22 @@
         color: #333;
         background-color: @title-color;
         padding-left: 10px;
-        border: 1px solid #dfdfdf;
+        border-top: 1px solid #dfdfdf;
+        border-bottom: 1px solid #dfdfdf;
         &.common-problem {
             text-align: right;
             border-top: 0;
             color: #008df2;
+        }
+    }
+    .basic-border-top{
+        border-top:0;
+        text-align: right;
+        padding: 3px 0 3px 10px;
+        background: #f7f7f7;
+        .why-card{
+            margin-right: 10px;
+            font-size:12px;
         }
     }
     .validating-info {
@@ -159,4 +263,32 @@
         color: #ffffff;
         border: 0;
     }
+
+    .error-tip {
+        color: #f67576;
+        background:#f0f0f0;
+        font-size: 12px;
+        line-height: 28px;
+        span{
+            margin-left: 10px;
+        }
+        .tip-icon {
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            margin-right: 5px;
+            line-height: 12px;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 50%;
+            background-color: #f67576;
+            text-align: center;
+        }
+        .why-card{
+            float: right;
+            margin-right: 10px;
+        }
+    }
+
+
 }

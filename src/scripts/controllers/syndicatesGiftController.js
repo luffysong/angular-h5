@@ -18,6 +18,12 @@ angular.module('defaultApp.controller').controller('SyndicatesGiftController',
             loading.hide("syndicatesGift");
         }, 500);
 
+        var $bar = $('.J_appDownloadWrapper');
+        if($bar.length > 0) {
+            $bar.hide();
+        }
+
+
         // 登录状态
         $scope.uid = UserService.getUID();
         $scope.isLogin = !!UserService.getUID();

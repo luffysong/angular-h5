@@ -21,9 +21,10 @@ angular.module('defaultApp.directive').directive('orderBtn', [
                         UserService.getIdentity(function(data) {
                             if(data.code == 4031) {
                                 e.preventDefault();
-                                $state.go('guide.welcome', {
-                                    type: 'investorValidate'
-                                });
+                                //$state.go('guide.welcome', {
+                                //    type: 'investorValidate'
+                                //});
+                                $state.go("investorValidate");
                                 return;
                             } else if(!data || !data.coInvestor) {
                                 e.preventDefault();

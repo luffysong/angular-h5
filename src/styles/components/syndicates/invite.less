@@ -2,6 +2,9 @@
     max-width: 640px;
     margin: 0 auto;
 
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px white inset;
+    }
     .invite-welcome {
         position: relative;
         background-color: #4c72ef;
@@ -608,8 +611,8 @@
 
         .label-control {
             float: left;
-            width: 30%;
-            margin-right: 5%;
+            width: 28%;
+            margin-right: 5px;
             text-align: left;
             padding-left: 10px;
             white-space: nowrap;
@@ -626,7 +629,7 @@
             width: 65%;
 
             &.place {
-                width: 30%;
+                width: 34%;
                 background-color: rgb(248, 248, 248);
                 border: 1px solid rgb(166, 166, 166);
                 border-image-source: initial;
@@ -640,12 +643,19 @@
         .btn-captcha {
             position: absolute;
             top: 7px;
-            right: 10px;
-            width: 82px;
+            right: 7px;
+            width: 68px;
             padding: 4px;
             background-color: #fff;
             color: #008df2;
             border: 1px solid #008df2;
+            z-index:20;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        .message-code{
+            right:82px;
         }
 
         .btn-submit {
@@ -672,7 +682,15 @@
             white-space: normal;
             padding: 0 10px;
         }
+        &>.col-max{
+            float: left;
+            width: 55%;
+            color: #333;
+        }
     }
+
+
+
 
     .error-tip {
         color: #f67576;

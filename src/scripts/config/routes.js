@@ -235,7 +235,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('investorValidate', {
         url: '/investorValidate?type&source&krsrc',
         templateUrl: 'templates/investorValidate/index.html',
-        controller: 'InvestorValidateController'
+        controller: 'InvestorValidateController',
+        data: {
+            permissions: {
+                only: ['login']
+            }
+        }
     });
     /*投资人认证申请*/
     $stateProvider.state('investorValidateApply', {
@@ -339,14 +344,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
-    // 下轮氪退
-    $stateProvider.state('syndicateskrQuitMobile', {
-        url: '/promotion/krt',
-        templateUrl: 'templates/syndicates/krt-m.html',
-        controller:'syndicatesKrQuitController.js'
-    });
-
-
     $stateProvider.state('syndicatesShare', {
         url: '/syndicatesShare',
         templateUrl: 'templates/syndicates/invite/share.html',
@@ -358,7 +355,15 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
-        /**
+    // 下轮氪退
+    $stateProvider.state('syndicateskrQuitMobile', {
+        url: '/promotion/krt',
+        templateUrl: 'templates/syndicates/krt-m.html',
+        controller:'syndicatesKrQuitController.js'
+    });
+
+
+    /**
      * 大公司合作推广
      * */
 

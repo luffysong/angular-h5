@@ -38,7 +38,8 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         if($scope.uid && !!$stateParams.checkValid) {
             UserService.isProfileValid(function(data) {
                 if(!data) {
-                    $state.go('guide.welcome', {from:encodeURIComponent(location.href), type: 'investorValidate'});
+                    //$state.go('guide.welcome', {from:encodeURIComponent(location.href), type: 'investorValidate'});
+                    $state.go("investorValidate");
                 } else {
                     UserService.getIdentity(function(data){
                         if(!data.coInvestor) {
@@ -82,9 +83,10 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             }
             else if($scope.invalid){
                 event.preventDefault();
-                $state.go('guide.welcome', {
-                    type: 'investorValidate'
-                });
+                //$state.go('guide.welcome', {
+                //    type: 'investorValidate'
+                //});
+                $state.go("investorValidate");
             }
             else if(!$scope.isCoInvestor){
                 if(event){
@@ -97,9 +99,10 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
             if(!$scope.uid)return;
             if($scope.invalid){
                 event.preventDefault();
-                $state.go('guide.welcome', {
-                    type: 'investorValidate'
-                });
+                //$state.go('guide.welcome', {
+                //    type: 'investorValidate'
+                //});
+                $state.go("investorValidate");
             }
             else if(!$scope.isCoInvestor){
                 if(event){
@@ -379,9 +382,10 @@ angular.module('defaultApp.controller').controller('syndicatesDetailController',
         $scope.investorVal = function(event){
             if($scope.invalid){
                 event.preventDefault();
-                $state.go('guide.welcome', {
-                    type: 'investorValidate'
-                });
+                //$state.go('guide.welcome', {
+                //    type: 'investorValidate'
+                //});
+                $state.go("investorValidate");
             }
         }
         /*查看BP*/
