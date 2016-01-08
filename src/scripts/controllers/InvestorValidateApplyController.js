@@ -58,7 +58,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         WEIXINSHARE = {
             shareTitle: "36氪投资人认证申请",
             shareDesc: "投资人认证申请",
-            shareImg: 'http://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg'
+            shareImg: 'https://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg'
         };
         InitWeixin();
         var Error = {
@@ -231,7 +231,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             var deferred = $q.defer();
             var q = term.toLowerCase().trim();
 
-            
+
 
 
             SuggestService.query({

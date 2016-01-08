@@ -91,7 +91,7 @@ angular.module('defaultApp.controller').controller('syndicatesNewsDetailControll
         window.WEIXINSHARE = {
             shareTitle: "",
             shareDesc: "刚看到这篇文章不错，推荐给你看看～",
-            shareImg: "http://krplus-pic.b0.upaiyun.com/201509/08153430/df86c04afbd4c8a7.jpg",
+            shareImg: "https://krplus-pic.b0.upaiyun.com/201509/08153430/df86c04afbd4c8a7.jpg",
             shareLink: location.href
         };
         InitWeixin();
