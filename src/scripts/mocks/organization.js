@@ -74,7 +74,7 @@ angular.module('defaultApp.mocks').run(function ($httpBackend) {
                 }],
                 "investComCount": 2,
                 "member": [{
-                    "avatar": "http://krplus.b0.upaiyun.com/201502/05172722/@拉依库兹出品 (7).jpg",
+                    "avatar": "https://krplus.b0.upaiyun.com/201502/05172722/@拉依库兹出品 (7).jpg",
                     "city": 20310,
                     "country": 103,
                     "cteateTime": 1422953794000,

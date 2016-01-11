@@ -384,7 +384,7 @@ angular.module('defaultApp.controller').controller('syndicatesDesireController',
         window.WEIXINSHARE = {
             shareTitle: "创客筹赞 | 想融资，没人比我更赞",
             shareDesc: "9月10日，一次战役解决PR与融资双重难题，群雄逐鹿，只有最棒的你才能傲视群雄！",
-            shareImg: "http://krplus-pic.b0.upaiyun.com/201509/08153430/df86c04afbd4c8a7.jpg",
+            shareImg: "https://krplus-pic.b0.upaiyun.com/201509/08153430/df86c04afbd4c8a7.jpg",
             shareLink: location.href
         };
         InitWeixin();

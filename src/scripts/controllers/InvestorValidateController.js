@@ -601,7 +601,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateController',
         WEIXINSHARE = {
             shareTitle: "36氪股权投资",
             shareDesc: "成为跟投人",
-            shareImg: 'http://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg'
+            shareImg: 'https://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg'
         };
         InitWeixin();
     }

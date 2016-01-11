@@ -407,7 +407,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                 data.data.forEach(function(item, i){
                     var company = {
                         'company_logo': item.company.logo,
-                        'company_bg': 'http://krplus-pic.b0.upaiyun.com/home/company-bg-'+(i%3)+'.jpg',
+                        'company_bg': 'https://krplus-pic.b0.upaiyun.com/home/company-bg-'+(i%3)+'.jpg',
                         'company_name': item.company.name,
                         'finance_start': {
                             'date': dateFilter(new Date(item.startDateStr), 'yyyy.MM'),
