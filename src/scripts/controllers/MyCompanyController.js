@@ -10,14 +10,14 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
         $scope.stateParams = $stateParams;
         $scope.myCompanyList = {
             data: [],
-            selectedCompanyId: ''
-        }
+            selectedCompanyId: '',
+        };
 
         // 返回上一页
         $scope.goBack = function(e) {
             e && e.preventDefault();
             history.go(-1);
-        }
+        };
 
         loading.show('myCompanyListShow');
         $scope.loadUserBasicData = function() {
@@ -26,49 +26,53 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
                 $.each(data.data, function(i, val) {
                     data.data[i].checkStatus = false;
                 });
+
                 loading.hide('myCompanyListShow');
             }, function(err) {
+
                 ErrorService.alert(err);
                 loading.hide('myCompanyListShow');
             });
-        }
+        };
+
         $scope.loadUserBasicData();
 
         $scope.btnRadio = function(e, index, id) {
             e && e.preventDefault();
             $.each($scope.myCompanyList.data, function(i, val) {
                 val.checkStatus = false;
-            })
+            });
 
-            if(id) {
+            if (id) {
                 $scope.myCompanyList.data[index].checkStatus = true;
                 $scope.myCompanyList.selectedCompanyId = id;
             } else {
                 $scope.myCompanyList.data[index].checkStatus = false;
                 $scope.myCompanyList.selectedCompanyId = '';
             }
-        }
+        };
 
         $scope.submitForm = function(e) {
             e && e.preventDefault();
             console.log($stateParams);
-            $scope.applyForm = angular.element($("[name='applyForm']")).scope()["applyForm"];
-            Object.keys($scope.applyForm).forEach(function(key){
-                if($scope.applyForm[key]&&$scope.applyForm[key].$setDirty){
+            $scope.applyForm = angular.element($("[name='applyForm']")).scope()['applyForm'];
+            Object.keys($scope.applyForm).forEach(function(key) {
+                if ($scope.applyForm[key] && $scope.applyForm[key].$setDirty) {
                     $scope.applyForm[key].$setDirty();
                 }
             });
 
-            if($scope.submiting || $scope.applyForm.$invalid){
+            if ($scope.submiting || $scope.applyForm.$invalid) {
                 return;
             }
 
             $scope.submiting = true;
 
             CompanyService.ventureApply($scope.myCompanyList.selectedCompanyId, {
-                type: $stateParams.from
+                type: $stateParams.from,
             }, function(data) {
-                $state.go('finacingSuccess', {from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId});
+                $state.go('finacingSuccess', { from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId });
+
                 // if(data.company) {
                 //     // $state.go(finacingSuccess({type: 'list', cid: $scope.myCompanyList.selectedCompanyId}));
                 //     $state.go('finacingSuccess', {from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId});
@@ -76,8 +80,8 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
                 //     // $state.go(finacingSuccess({type: 'accept', cid: $scope.myCompanyList.selectedCompanyId}));
                 //     $state.go('finacingSuccess', {from: $stateParams.from});
                 // }
-                
-            })
-        }
+
+            });
+        };
     }
 );

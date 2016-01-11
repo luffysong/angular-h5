@@ -1,12 +1,22 @@
-
-// FIXME:删除body 背景 应该应用到相应容器
-// 2015-12-30 15:34
 body,html{
     height:100%;
 }
 .company-detail{
+    padding-bottom:100px;
+    position:relative;
     color:#969fa9;
     background:#f9f9f9;
+    &:after{
+        display:block;
+        content:"";
+        position: absolute;
+        bottom:0;
+        left:0;
+        right:0;
+        height:100px;
+        background:white;
+        z-index:0;
+    }
     h3{
         font-size:17px;
         line-height:100%;
