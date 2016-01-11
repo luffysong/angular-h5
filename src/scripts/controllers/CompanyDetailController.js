@@ -5,119 +5,207 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('CompanyDetailController',
-    function($scope, $location, $stateParams, $state, CompanyService, $timeout, UserService, ErrorService, $rootScope, DictionaryService) {
-        $timeout(function(){
-            window.scroll(0,0);
-        },0);
+    function($scope, $location, $stateParams, $state, CompanyService, $timeout,
+              UserService, ErrorService, $rootScope, DictionaryService,
+              SocialService
+              ) {
+        var KR_DEFAULT_IMAGE = window.kr.defaultImg;
+        var MOBILE_TYPE = {
+            IOS:'IOS',
+            ANDROID:'安卓',
+        };
+        var fundsApplyStatus = {
+            APPLY:'等待创业者同意',
+            REFUSE: '创业者已拒绝',
+        };
+        var API_STATUS = {
+            FUNDS_NOT_DOING:100,
+            FUNDS_NOT_AOLLOW_VIEW:102,
+
+        };
+        $timeout(function() {
+            window.scroll(0, 0);
+        }, 0);
+
         $scope.companyId = $stateParams.id || 12;
 
+        initCapitalMeta();
+
         $scope.company = {
-            value: {}
+            value: {
+                company:{},
+                funds:{},
+                basic:{},
+            },
+        };
+        $scope.capitalDetail = {
+            list:[],
         };
 
-        $scope.basic = {
-            industry2Desc:'',
-            value: {}
+        $scope.fa = {};
+
+        setMobileType();
+        loadQichacha();
+
+        $scope.existLinks = function() {
+            return $scope.appLinks || $scope.company.value.company.webLink;
         };
 
-        $scope.intro = {
-            value: {}
+        $scope.existProductIntro = function() {
+            return $scope.slides.length ||
+                $scope.existIntroDetail ||
+                $scope.company.value.company.intro;
         };
+
+        $scope.existCapitalDetail = function() {
+            return $scope.isReplaceDefault ? $scope.capitalDetail.faRecommendedText :
+                $scope.capitalDetail.list.length;
+        };
+
+        $scope.existCapitalBasic = function() {
+            return $scope.company.value.funds.crowdFundingId || $scope.company.value.funds.fundsId;
+        };
+
+        //工商信息
+        $scope.existBusiness = function() {
+            return $scope.qichacha;
+        };
+
+        //设置系统种类
+        function setMobileType() {
+            $scope.mobileType = getMobileOperatingSystem();
+        }
+
+        function getMobileOperatingSystem() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            if (isIos(userAgent)) {
+                return MOBILE_TYPE.IOS;
+            } else if (userAgent.match(/Android/i)) {
+                return MOBILE_TYPE.ANDROID;
+            } else {
+                return 'unknown';
+            }
+        }
+
+        function isIos(userAgent) {
+            return userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPod/i);
+        }
+
+        function setAppDownloadLink(company) {
+            if ($scope.mobileType === MOBILE_TYPE.IOS) {
+                $scope.appLink = company.iphoneAppstoreLink;
+            }else if ($scope.mobileType === MOBILE_TYPE.ANDROID) {
+                $scope.appLink = company.androidLink;
+            }
+        }
 
         // 获取公司基本信息
         $scope.companyBasicData = function(callback) {
             CompanyService.get({
-                id: $scope.companyId
+                id: $scope.companyId,
             }, function(data) {
-				console.log('--请求的数据--',data);
+                console.log('--请求的数据--', data);
+                var isIpoOrAcquiredReg = /IPO|ACQUIRED/;
                 $scope.company.value = data;
+                $scope.funds = data.funds;
+                $scope.teamTags = data.teamTags;
+                $scope.isIpoOrAcquired = isIpoOrAcquiredReg.test(data.funds.phase);
+                introProduct(data.company);
+                setAppDownloadLink(data.company);
 
-                if($scope.company.value.company.industry2){
-                    $.each(DictionaryService.getDict("CompanyIndustry").filter(function (item) {
-                        return item.value != "NON_TMT";
-                    }), function(i, el){
-                        if(el.value == $scope.company.value.basic.industry){
-                            CompanyService.getIndustry2(el.id).then(function(data){
-                                $.each(data.data, function(i, el){
-                                    if(el.id == $scope.company.value.company.industry2){
-                                        $scope.basic.industry2Desc = el.desc;
-                                    }
-                                })
-                            }, function(){
-
-                            })
-                        }
-                    })
-
-
+                if(data.company.faId){
+                    loadFa(data.company.faId);
                 }
 
-                document.title=data.basic.name + " | 36氪";
-                WEIXINSHARE = {
-                    shareTitle: data.basic.name + " | 36氪",
+                document.title = data.basic.name + ' | 36氪';
+                window.WEIXINSHARE = {
+                    shareTitle: data.basic.name + ' | 36氪',
                     shareDesc: data.basic.brief || data.basic.name,
-                    shareImg: data.basic.logo || 'http://img.36tr.com/logo/20140520/537aecb26e02d'
+                    shareImg: data.basic.logo ||
+                    'http://img.36tr.com/logo/20140520/537aecb26e02d',
                 };
-                InitWeixin();
+                window.InitWeixin();
 
-				var companyIntro = '';
-
-				if(data.company.projectAdvantage &&  data.company.projectAdvantage.length){
-					companyIntro += data.company.projectAdvantage+'\n\n';
-				}
-				if(data.company.dataLights && data.company.dataLights.length){
-					companyIntro += data.company.dataLights+'\n\n';
-				}
-				if(data.company.competitor && data.company.competitor.length){
-					companyIntro += data.company.competitor+'\n\n';
-				}
-				if(data.company.projectPlan && data.company.projectPlan.length){
-					companyIntro += data.company.projectPlan+'\n\n';
-				}
-				if(data.company.intro && data.company.intro.length){
-					companyIntro += data.company.intro+'\n\n';
-				}
-
-				$scope.company.value.company.intro = companyIntro;
-                $scope.intro.value = {
-                    intro:companyIntro
+                if (callback) {
+                    callback(data);
                 }
 
-                /**
-                 * 解决打开两次问题，先注释掉
-                 */
-                //if($scope.company.value.funds.privilege) {
-                //    $stateParams.type = 1;
-                //} else {
-                //    $stateParams.type = 4;
-                //}
-                //
-                //$location.search('type=' + $stateParams.type);
-
-                callback && callback(data);
-            }, function(err) {
-
-            })
+            }, angular.noop);
         };
 
+        $scope.isManager = function(id) {
+            if ($scope.company.value.basic) {
+                return $scope.company.value.basic.managerId === id;
+            }
 
+            return false;
 
-        // if($scope.company.value.funds.privilege) {
-        //     $stateParams.type = 1;
-        // } else {
-        //     $stateParams.type = 4;
-        // }
-        // console.log($stateParams);
+        };
 
+        var productMeta = [{
+            propName: 'projectAdvantage',
+            title: '我们的产品与优势',
+            className: 'intro-icon-product',
+        }, {
+            propName: 'dataLights',
+            title: '我们的用户',
+            className: 'intro-icon-user',
+        }, {
+            propName: 'projectPlan',
+            title: '未来的我们',
+            className: 'intro-icon-future',
+        }, {
+            propName: 'competitor',
+            title: '与我们相似的产品',
+            className: 'intro-icon-same',
+        }, {
+            propName: 'intro',
+            title: '其他',
+            className: 'intro-icon-other',
+        }, ];
 
+        //产品介绍
+        function introProduct(company) {
+            var productIntro = [];
+            var existIntroDetail = false;
+            var item;
+            var i;
+            var l;
+            for (i = 0, l = productMeta.length; i < l; i++) {
+                item = productMeta[i];
+                if (company[item.propName]) {
+                    if (!existIntroDetail && item.propName !== 'intro') {
+                        existIntroDetail = true;
+                    }
+
+                    productIntro.push({
+                        text: company[item.propName],
+                        title: item.title,
+                        className: item.className,
+                    });
+                }
+            }
+
+            $scope.existIntroDetail = existIntroDetail;
+            $scope.productIntroData = productIntro;
+        }
+
+        $scope.slides = [];
         $scope.companyBasicData(function() {
-            // 轮播图
-            $scope.myInterval = 5000;
 
-            var slides = $scope.slides = [];
+            var slides = $scope.slides;
+            if ($scope.company.value.company.video) {
+                slides.push({
+                    video: $scope.company.value.company.video,
+                    image: KR_DEFAULT_IMAGE.defaultVideoUrl,
+                });
+
+            }
+
             $scope.addSlide = function(i) {
                 slides.push({
-                    image: $scope.company.value.other.pictures[i]
+                    image: $scope.company.value.other.pictures[i],
                 });
             };
 
@@ -126,119 +214,224 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }
         });
 
-        // 格式化公司介绍
-        $scope.$watch('intro.value.intro', function(val){
-            if(!$scope.intro.value.intro) {
-                return;
-            }
+        getFeeds();
 
-            $scope.intro.html = val.replace(/>/g,'&gt;').replace(/</g,'&lt;').replace(/\n/g, '<br/>');
-        });
-
-        $scope.introLines = 5;
-
-        //more的显示隐藏
-        $timeout(function() {
-            if( $scope.introLines==4)return;
-            if($(".company-intro").height() > 4 * 40 && $scope.introLines!=4) {
-                $scope.introLines = 4;
-            } else {
-                $scope.introLines = 100;
-            }
-        },500);
-
-        // 子产品
-        $scope.product = {
-            list: [],
-            listLimit: 3
+        //公司动态
+        function getFeeds() {
+            CompanyService.feed.get({
+                id: $scope.companyId,
+            }, function(data) {
+                $scope.originFeedsCount = data.data.length;
+                $scope.feeds = data.data.slice(0, 3);
+            });
         }
-        $scope.loadProductData = function (callback) {
-            CompanyService.product.query({
-                id: $scope.companyId
-            }, function (data) {
-                $scope.product.list = data.data;
-            }, function (err) {
-                ErrorService.alert(err);
-            })
-        };
-        $scope.loadProductData();
+
+        //fa
+
+        function loadFa(id){
+            UserService.basic.get({
+                id:id
+            },function(data){
+                $scope.fa = data;
+            });
+        }
 
         // 创始团队
         $scope.founder = {
             list: [],
-            listLimit: 2
-        }
-        $scope.loadFounderData = function (callback) {
-            CompanyService.founder.query({
-                id: $scope.companyId
-            }, function (data) {
-                $scope.founder.list = data.data;
-            }, function (err) {
-                ErrorService.alert(err);
-            })
+            listLimit: 2,
         };
-        $scope.loadFounderData();
+        loadFounderData();
+
+        function loadFounderData(callback) {
+            CompanyService.founder.query({
+                id: $scope.companyId,
+            }, function(data) {
+                $scope.founder.list = data.data;
+            }, function(err) {
+
+                ErrorService.alert(err);
+            });
+        }
 
         //获取融资经历数据
         $scope.finance = {
             list: [],
-            listLimit: 2
-        }
-        $scope.loadFinanceData = function (callback) {
+            listLimit: 2,
+        };
+        loadFinanceData();
+        loadCapitalDetail();
+
+        //过往融资经历
+        function loadFinanceData(callback) {
+
             CompanyService['past-finance'].query({
-                id: $scope.companyId
-            }, function (data) {
-                $scope.finance.list = data.data;
-            }, function (err) {
-                ErrorService.alert(err);
-            })
-        };
-        $scope.loadFinanceData();
-
-        //过往投资方
-        $scope.investor = {
-            list: [],
-            listLimit: 2
-        };
-        $scope.loadInvestorData = function (callback) {
-            CompanyService['past-investor'].query({
                 id: $scope.companyId,
-                pageSize: 100
-            }, function (data) {
-                $scope.investor.list = data.data;
-                $scope.investor.list.forEach(function (v) {
-                    if (v.type == 'COMPANY') {
-                        v.link = 'companys.detail.overview({id: "' + v.investorId + '"})';
-                    }
-                    if (v.type == 'INDIVIDUAL') {
-                        v.link = 'users.overview({id: "' + v.investorId + '"})';
-                    }
-                    if (v.type == 'ORGANIZATION') {
-                        v.link = 'organizations.overview({id: "' + v.investorId + '"})';
-                    }
-                })
-            }, function (err) {
-                ErrorService.alert(err);
-            })
-        };
-        $scope.loadInvestorData();
+            }, function(data) {
+                $scope.finance.originListCount = data.data.length;
+                $scope.finance.list = data.data.slice(0, 1);
+            }, function(err) {
 
-        //获取团队数据
-        $scope.employee = {
-            list: [],
-            listLimit: 2
+                ErrorService.alert(err);
+            });
         }
-        $scope.loadEmployeeData = function (callback) {
-            CompanyService.employee.query({
-                id: $scope.companyId
-            }, function (data) {
-                $scope.employee.list = data.data;
-            }, function (err) {
-                ErrorService.alert(err);
-            })
+
+        //获取融资详情
+        function loadCapitalDetail(callback) {
+            CompanyService.funds.get({
+                id: $scope.companyId,
+            }, function(data) {
+                $scope.capitalDetail = data;
+                setCapitalList();
+            }, function(data) {
+
+                setApplyState(data);
+            });
+        }
+
+        function setCapitalList() {
+            $scope.capitalDetail.list = [];
+            for (var i = 0, l = $scope.capitalQs.length; i < l; i++) {
+                var q = $scope.capitalQs[i];
+                if ($scope.capitalDetail[q.propName]) {
+                    $scope.capitalDetail.list.push({
+                        question:q.text,
+                        answer:$scope.capitalDetail[q.propName],
+                    });
+                }
+            }
+        }
+
+        function initCapitalMeta() {
+            var questions = [
+                {
+                    propName: 'scale',
+                    text: '你的目标市场规模及分析？',
+                }, {
+                    propName: 'dataLights',
+                    text: '用户需求切入点，及现有业务数据亮点？',
+                }, {
+                    propName: 'competitor',
+                    text: '主要竞争对手情况及国内外标杆（如有）？',
+                }, {
+                    propName: 'projectAdvantage',
+                    text: '你的项目的主要优势？',
+                }, {
+                    propName: 'projectPlan',
+                    text: '下一步发展规划及长期愿景？',
+                },
+            ];
+            $scope.capitalQs = questions;
+        }
+
+        function loadQichacha() {
+            CompanyService.qichacha.get({
+                id:$scope.companyId,
+            }, function(data) {
+                $scope.qichacha = !!data.Name;
+            });
+
+        }
+
+        function setApplyState(data) {
+            if (data.code === API_STATUS.FUNDS_NOT_AOLLOW_VIEW) {
+                $scope.needApply = true;
+                $scope.applyStarted =  !!data.data.applyStatus;
+                $scope.applyStateText = fundsApplyStatus[data.data.applyStatus];
+                $scope.applyStateText = $scope.applyStateText || '申请查看';
+            }
+        }
+
+        //Event Handelr
+
+        $scope.likeClick = function(isLike, e) {
+            e.preventDefault();
+            if (!isLike) {
+                SocialService.likes.yes({
+                    id:$scope.companyId,
+                }, {
+                }, function(data) {
+                    setLikeState(data, isLike);
+                });
+            }else {
+                SocialService.likes.no({
+                    id:$scope.companyId,
+                }, function(data) {
+                    setLikeState(data, isLike);
+                });
+            }
         };
-        $scope.loadEmployeeData();
 
+        $scope.followClick = function(followed, e) {
+            e.preventDefault();
+            if (!followed) {
+                SocialService.follow.yes({
+                    id:$scope.companyId,
+                }, {
 
-    }
-);
+                }, function(data) {
+                    setFollowState(data, followed);
+                });
+            }else {
+                SocialService.follow.no({
+                    id:$scope.companyId,
+                }, {
+
+                }, function(data) {
+                    setFollowState(data, followed);
+                });
+            }
+        };
+
+        $scope.applyViewClick = function(e) {
+            e.preventDefault();
+            if ($scope.needApply && !$scope.applyStarted) {
+                $scope.applyStarted = true;
+                $scope.applyStateText = fundsApplyStatus.APPLY;
+                CompanyService.funds.applyView({
+                    id:$scope.companyId,
+                }, {
+
+                }, function(data) {
+
+                });
+            }
+        };
+
+        $scope.buyOrTalkClick = function(type, e) {
+            e.preventDefault();
+            if (type === 'buy') {
+
+            }else {
+                showAppDownload();
+            }
+        };
+
+        $scope.cancellDownloadClick = function(e) {
+            e.preventDefault();
+            cancellDownload();
+
+        };
+
+        function showAppDownload() {
+            $scope.showAppDownload = true;
+        }
+
+        function cancellDownload() {
+            $scope.showAppDownload = false;
+        }
+
+        function setLikeState(apiData, isLike) {
+            $scope.company.value.isLikes = !isLike;
+            var count = !isLike ? 1 : -1;
+            $scope.company.value.statistics.likesCount += count;
+        }
+
+        function setFollowState(apiData, followed) {
+            $scope.company.value.followed = !followed;
+            var count = !followed ? 1 : -1;
+            $scope.company.value.statistics.followCount += count;
+        }
+
+    });
+

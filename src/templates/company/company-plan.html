@@ -1,0 +1,19 @@
+<div ng-if="company.value.funds.fundsId && !needApply" class="company-plan">
+    <header>
+        <h3>商业技术书</h3>
+    </header>
+    <section>
+        <img src="/styles/images/plan-back.jpg" />
+        <div class="plan-wrapper">
+            <div>
+                <div>
+                    <span class="plan-name" ng-bind="company.value.basic.name +'商业技术书'"></span>
+                    <span ng-bind="capitalDetail.bp_access_count" class="apply-count"></span>
+                    <a ng-href="{{capitalDetail.bp}}">查看BP</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+

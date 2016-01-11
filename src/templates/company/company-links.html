@@ -1,0 +1,15 @@
+<div  ng-if="existLinks()" class="company-links">
+    <header>
+        <h3>产品链接</h3>
+    </header>
+    <section>
+        <a class="app-link" ng-if="appLink" ng-href="{{appLink}}">
+            <img src="/styles/images/download.png">
+            <span ng-bind="mobileType + '下载'"></span>
+        </a>
+        <a  ng-if="company.value.company.webLink"
+            ng-href="{{company.value.company.webLink}}">
+            <span>@ 网站</span>
+        </a>
+    </section>
+</div>

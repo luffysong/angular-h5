@@ -1,0 +1,21 @@
+<div class="footbar">
+    <div>
+        <a href="#"  class="like">
+            <i ng-click="likeClick(company.value.isLikes,$event)"
+               ng-class="{active:company.value.isLikes}"
+               ng-bind="company.value.statistics.likesCount" ></i>
+        </a>
+        <a class="follow">
+            <i ng-click="followClick(company.value.followed,$event)"
+               ng-class="{active:company.value.followed}"
+               ng-bind="company.value.statistics.followCount" ></i>
+        </a>
+        <a ng-click="buyOrTalkClick(company.value.funds.crowdFundingId ? 'buy':'talk',$event)"
+            class="buy-talk" href="#">
+            <span  ng-if="!company.value.funds.crowdFundingId" class="fa-talk">约谈</span>
+            <span ng-if="company.value.funds.crowdFundingId" class="crow-buy">
+                <span>认购</span>
+            </span>
+        </a>
+    </div>
+</div>

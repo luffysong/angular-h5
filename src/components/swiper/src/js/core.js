@@ -55,10 +55,6 @@ var defaults = {
     slidesPerColumnFill: 'column',
     slidesPerGroup: 1,
     centeredSlides: false,
-    slidesOffsetBefore: 0, // in px
-    slidesOffsetAfter: 0, // in px
-    // Round length
-    roundLengths: false,
     // Touches
     touchRatio: 1,
     touchAngle: 45,
@@ -73,7 +69,6 @@ var defaults = {
     touchMoveStopPropagation: true,
     // Pagination
     pagination: null,
-    paginationElement: 'span',
     paginationClickable: false,
     paginationHide: false,
     paginationBulletRender: null,
@@ -106,7 +101,6 @@ var defaults = {
     // Control
     control: undefined,
     controlInverse: false,
-    controlBy: 'slide', //or 'container'
     // Swiping/no swiping
     allowSwipeToPrev: true,
     allowSwipeToNext: true,
@@ -134,7 +128,6 @@ var defaults = {
     nextSlideMessage: 'Next slide',
     firstSlideMessage: 'This is the first slide',
     lastSlideMessage: 'This is the last slide',
-    paginationBulletMessage: 'Go to slide {{index}}',
     // Callbacks
     runCallbacksOnInit: true
     /*
@@ -186,7 +179,7 @@ for (var def in defaults) {
 var s = this;
 
 // Version
-s.version = '3.1.0';
+s.version = '3.0.8';
 
 // Params
 s.params = params;
@@ -196,21 +189,17 @@ s.classNames = [];
 /*=========================
   Dom Library and plugins
   ===========================*/
-if (typeof $ !== 'undefined' && typeof Dom7 !== 'undefined'){
-    $ = Dom7;
-}  
-if (typeof $ === 'undefined') {
-    if (typeof Dom7 === 'undefined') {
-        $ = window.Dom7 || window.Zepto || window.jQuery;
-    }
-    else {
-        $ = Dom7;
-    }
-    if (!$) return;
+var $;
+if (typeof Dom7 === 'undefined') {
+    $ = window.Dom7 || window.Zepto || window.jQuery;
 }
+else {
+    $ = Dom7;
+}
+if (!$) return;
+
 // Export it to Swiper instance
 s.$ = $;
-
 /*=========================
   Preparation - Define Container, Wrapper and Pagination
   ===========================*/
@@ -328,9 +317,7 @@ s.progress = 0;
 // Velocity
 s.velocity = 0;
 
-/*=========================
-  Locks, unlocks
-  ===========================*/
+// Locks, unlocks
 s.lockSwipeToNext = function () {
     s.params.allowSwipeToNext = false;
 };
@@ -350,12 +337,7 @@ s.unlockSwipes = function () {
     s.params.allowSwipeToNext = s.params.allowSwipeToPrev = true;
 };
 
-/*=========================
-  Round helper
-  ===========================*/
-function round(a) {
-    return Math.floor(a);
-}  
+
 /*=========================
   Set grab cursor
   ===========================*/
@@ -497,12 +479,6 @@ s.updateContainerSize = function () {
     if (width === 0 && isH() || height === 0 && !isH()) {
         return;
     }
-    
-    //Subtract paddings
-    width = width - parseInt(s.container.css('padding-left'), 10) - parseInt(s.container.css('padding-right'), 10);
-    height = height - parseInt(s.container.css('padding-top'), 10) - parseInt(s.container.css('padding-bottom'), 10);
-    
-    // Store values
     s.width = width;
     s.height = height;
     s.size = isH() ? s.width : s.height;
@@ -515,7 +491,7 @@ s.updateSlidesSize = function () {
     s.slidesSizesGrid = [];
 
     var spaceBetween = s.params.spaceBetween,
-        slidePosition = -s.params.slidesOffsetBefore,
+        slidePosition = 0,
         i,
         prevSlideSize = 0,
         index = 0;
@@ -584,12 +560,9 @@ s.updateSlidesSize = function () {
         if (slide.css('display') === 'none') continue;
         if (s.params.slidesPerView === 'auto') {
             slideSize = isH() ? slide.outerWidth(true) : slide.outerHeight(true);
-            if (s.params.roundLengths) slideSize = round(slideSize);
         }
         else {
             slideSize = (s.size - (s.params.slidesPerView - 1) * spaceBetween) / s.params.slidesPerView;
-            if (s.params.roundLengths) slideSize = round(slideSize);
-
             if (isH()) {
                 s.slides[i].style.width = slideSize + 'px';
             }
@@ -620,7 +593,7 @@ s.updateSlidesSize = function () {
 
         index ++;
     }
-    s.virtualSize = Math.max(s.virtualSize, s.size) + s.params.slidesOffsetAfter;
+    s.virtualSize = Math.max(s.virtualSize, s.size);
 
     var newSlidesGrid;
 
@@ -849,14 +822,11 @@ s.updatePagination = function () {
                 bulletsHTML += s.params.paginationBulletRender(i, s.params.bulletClass);
             }
             else {
-                bulletsHTML += '<' + s.params.paginationElement+' class="' + s.params.bulletClass + '"></' + s.params.paginationElement + '>';
+                bulletsHTML += '<span class="' + s.params.bulletClass + '"></span>';
             }
         }
         s.paginationContainer.html(bulletsHTML);
         s.bullets = s.paginationContainer.find('.' + s.params.bulletClass);
-        if (s.params.paginationClickable && s.params.a11y && s.a11y) {
-            s.a11y.initPagination();
-        }
     }
 };
 /*=========================
@@ -879,14 +849,11 @@ s.update = function (updateTranslate) {
     }
     if (updateTranslate) {
         var translated, newTranslate;
-        if (s.controller && s.controller.spline) {
-            s.controller.spline = undefined;
-        }
         if (s.params.freeMode) {
             forceSetTranslate();
         }
         else {
-            if ((s.params.slidesPerView === 'auto' || s.params.slidesPerView > 1) && s.isEnd && !s.params.centeredSlides) {
+            if (s.params.slidesPerView === 'auto' && s.isEnd && !s.params.centeredSlides) {
                 translated = s.slideTo(s.slides.length - 1, 0, false, true);
             }
             else {
@@ -904,19 +871,12 @@ s.update = function (updateTranslate) {
   Resize Handler
   ===========================*/
 s.onResize = function (forceUpdatePagination) {
-    // Disable locks on resize
-    var allowSwipeToPrev = s.params.allowSwipeToPrev;
-    var allowSwipeToNext = s.params.allowSwipeToNext;
-    s.params.allowSwipeToPrev = s.params.allowSwipeToNext = true;
-
     s.updateContainerSize();
     s.updateSlidesSize();
+    s.updateProgress();
     if (s.params.slidesPerView === 'auto' || s.params.freeMode || forceUpdatePagination) s.updatePagination();
     if (s.params.scrollbar && s.scrollbar) {
         s.scrollbar.set();
-    }
-    if (s.controller && s.controller.spline) {
-        s.controller.spline = undefined;
     }
     if (s.params.freeMode) {
         var newTranslate = Math.min(Math.max(s.translate, s.maxTranslate()), s.minTranslate());
@@ -926,16 +886,14 @@ s.onResize = function (forceUpdatePagination) {
     }
     else {
         s.updateClasses();
-        if ((s.params.slidesPerView === 'auto' || s.params.slidesPerView > 1) && s.isEnd && !s.params.centeredSlides) {
+        if (s.params.slidesPerView === 'auto' && s.isEnd && !s.params.centeredSlides) {
             s.slideTo(s.slides.length - 1, 0, false, true);
         }
         else {
             s.slideTo(s.activeIndex, 0, false, true);
         }
     }
-    // Return locks after resize
-    s.params.allowSwipeToPrev = allowSwipeToPrev;
-    s.params.allowSwipeToNext = allowSwipeToNext;
+
 };
 
 /*=========================
@@ -998,7 +956,6 @@ s.initEvents = function (detach) {
     }
     if (s.params.pagination && s.params.paginationClickable) {
         $(s.paginationContainer)[actionDom]('click', '.' + s.params.bulletClass, s.onClickIndex);
-        if (s.params.a11y && s.a11y) $(s.paginationContainer)[actionDom]('keydown', '.' + s.params.bulletClass, s.a11y.onEnterKey);
     }
 
     // Prevent Links Clicks
@@ -1028,12 +985,10 @@ s.preventClicks = function (e) {
 // Clicks
 s.onClickNext = function (e) {
     e.preventDefault();
-    if (s.isEnd && !s.params.loop) return;
     s.slideNext();
 };
 s.onClickPrev = function (e) {
     e.preventDefault();
-    if (s.isBeginning && !s.params.loop) return;
     s.slidePrev();
 };
 s.onClickIndex = function (e) {
@@ -1183,13 +1138,8 @@ s.onTouchMove = function (e) {
     if (isTouchEvent && e.type === 'mousemove') return;
     if (e.preventedByNestedSwiper) return;
     if (s.params.onlyExternal) {
-        // isMoved = true;
+        isMoved = true;
         s.allowClick = false;
-        if (isTouched) {
-            s.touches.startX = s.touches.currentX = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
-            s.touches.startY = s.touches.currentY = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
-            touchStartTime = Date.now();
-        }
         return;
     }
     if (isTouchEvent && document.activeElement) {
@@ -1263,7 +1213,7 @@ s.onTouchMove = function (e) {
     isMoved = true;
 
     var diff = s.touches.diff = isH() ? s.touches.currentX - s.touches.startX : s.touches.currentY - s.touches.startY;
-    
+
     diff = diff * s.params.touchRatio;
     if (s.rtl) diff = -diff;
 
@@ -1620,10 +1570,11 @@ s.slideTo = function (slideIndex, speed, runCallbacks, internal) {
 
     // Normalize slideIndex
     for (var i = 0; i < s.slidesGrid.length; i++) {
-        if (- Math.floor(translate * 100) >= Math.floor(s.slidesGrid[i] * 100)) {
+        if (- translate >= s.slidesGrid[i]) {
             slideIndex = i;
         }
     }
+
     if (typeof speed === 'undefined') speed = s.params.speed;
     s.previousIndex = s.activeIndex || 0;
     s.activeIndex = slideIndex;

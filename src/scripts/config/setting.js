@@ -1,7 +1,7 @@
 window.kr = {};
 
 // 又拍云
-kr.upyun = {
+window.kr.upyun = {
     api: '//v0.api.upyun.com',
     bucket: {
         name: 'krplus-pic',
@@ -12,7 +12,9 @@ kr.upyun = {
         url: 'https://krplus-normal.b0.upaiyun.com'
     }
 };
-kr.defaulImg = {
-    defaultAvatarUrl:"https://krplus.b0.upaiyun.com/default_avatar.png"
-}
+window.kr.defaultImg = {
+    defaultAvatarUrl:'https://krplus.b0.upaiyun.com/default_avatar.png',
+    defaultVideoUrl: 'https://krplus-pic.b0.upaiyun.com/201512/18065817/5qf5kwfe397qmzzv.jpeg'
+};
+
 

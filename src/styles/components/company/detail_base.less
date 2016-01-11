@@ -1,0 +1,96 @@
+
+// FIXME:删除body 背景 应该应用到相应容器
+// 2015-12-30 15:34
+body,html{
+    height:100%;
+}
+.company-detail{
+    color:#969fa9;
+    background:#f9f9f9;
+    h3{
+        font-size:17px;
+        line-height:100%;
+        color:#969fa9;
+        margin:0;
+        padding:0;
+        font-weight:normal;
+    }
+    header{
+        position: relative;
+    }
+    b{
+        font-weight:500;
+    }
+    ul,li{
+        margin:0;
+        padding:0;
+    }
+
+    li{
+        list-style:none;
+    }
+
+    .content-base{
+        background: white;
+        width: 100%;
+        padding-left: 14px;
+        padding-right: 14px;
+
+    }
+    .company-icons{
+        background-image: url(/styles/images/company_h5_icons.png);
+        background-size: 152px 334.5px;
+    }
+    .split-border(@value:#e7e7e7){
+        border-bottom: 1px solid @value;
+    }
+    .split-border-top(@value:#e7e7e7){
+        border-top: 1px solid @value;
+    }
+    .split-border-right(@value:#e7e7e7){
+        border-right: 1px solid @value;
+    }
+    .more-info{
+        position:absolute;
+        right:0;
+        top:0;
+        line-height:17px;
+        span{
+            color:#969fa9;
+            display:inline-block;
+            font-size:13px;
+            &:last-child{
+                .company-icons;
+                background-position: -1px -94px;
+                width: 11px;
+                height: 14px;
+                vertical-align:middle;
+            }
+        }
+    }
+    nav.company-sub{
+        height:50px;
+        position: relative;
+        width:100%;
+        background:white;
+        text-align:center;
+        border-bottom:1px solid #e7e7e7;
+        h3{
+            color:#222c38;
+            font-size:18px;
+            line-height:50px;
+        }
+        a{
+            position: absolute;
+            left:15px;
+            .company-icons;
+            background-position: 0px -146px;
+            width: 19px;
+            height: 16px;
+            top:50%;
+            transform:translateY(-50%);
+        }
+    }
+
+
+}

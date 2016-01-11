@@ -1,13 +1,12 @@
 /**
  * Service Name: BasicService
  */
-
+/* globals kr */
 var angular = require('angular');
 
-angular.module('defaultApp.service').config([
-    "$provide", "$httpProvider",
+angular.module('defaultApp.service').config([ '$provide', '$httpProvider',
     function ($provide, $httpProvider) {
-        $provide.factory('commonInterceptor', ["$q",  function ($q) {
+        $provide.factory('commonInterceptor', ['$q',  function ($q) {
             return {
 
                 // optional method
@@ -19,13 +18,7 @@ angular.module('defaultApp.service').config([
                         response.config.url.indexOf(kr.upyun.api) > -1) {
                         return response;
                     }
-                    if (response.data.code != 0) {
-                        if(response.data.code == 4031){
-                            /*setTimeout(function(){
-                                location.hash="#/guide/welcome";
-                            },5000);*/
-                            /*return $q.reject(nul);*/
-                        }
+                    if (response.data.code !== 0) {
                         return $q.reject(response.data);
                     }
                     // do something on success
@@ -43,12 +36,16 @@ angular.module('defaultApp.service').config([
         $httpProvider.defaults.headers.delete = {'Content-Type': 'application/x-www-form-urlencoded'};
         $httpProvider.defaults.withCredentials = true;
         $httpProvider.defaults.transformRequest = function (data) {
-            if (data === undefined) return data;
-            if (!angular.isObject(data)) return data;
+            if (data === undefined){
+                return data;
+            }
+            if (!angular.isObject(data)) {
+                return data;
+            }
             var clonedData = angular.copy(data);
             var k;
             for(k in clonedData){
-                if(k.indexOf('$')==0){
+                if(k.indexOf('$')===0){
                     delete clonedData[k];
                 }
             }
@@ -81,19 +78,19 @@ angular.module('defaultApp.service').config([
             var contructor = function (path, params, actions) {
                 var finalActions = {
                     update: {
-                        method: "PUT"
+                        method: 'PUT'
                     },
                     query: {
-                        method: "GET"
+                        method: 'GET'
                     },
                     get: {
-                        method: "GET"
+                        method: 'GET'
                     },
                     save: {
-                        method: "POST"
+                        method: 'POST'
                     },
                     remove: {
-                        method: "DELETE"
+                        method: 'DELETE'
                     }
                 };
                 actions = actions || {};
@@ -105,16 +102,16 @@ angular.module('defaultApp.service').config([
                 var Model = contructor(path, {}, actions);
                 subActions = subActions || {};
 
-                if (!submodels)return Model;
-
+                if (!submodels){
+                    return Model;
+                }
 
                 Object.keys(submodels).forEach(function (key) {
                     submodels[key].forEach(function (model) {
                         var params = {};
                         params[key] = model;
                         if (!!Model[model]) {
-                            throw "SubModel Name Is Invalid:" + model;
-                            return;
+                            throw 'SubModel Name Is Invalid:' + model;
                         }
                         Model[model] = contructor(path, params, subActions[model]);
                     });

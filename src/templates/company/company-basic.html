@@ -1,0 +1,51 @@
+
+<div class="detail-wrapper" >
+
+    <!-- 公司信息基本信息开始 -->
+    <section class="detail-basic">
+
+        <!-- 基本信息内容开始 -->
+        <div class="basic-content">
+            <img ng-src="{{company.value.basic.logo | image:70:'logo'}}"
+                 class="img-circle"
+                 alt=""
+                 width="67" />
+            <div>
+                <div class="basic-row-1">
+                    <h3 class="basic-name" ng-bind="company.value.basic.name"></h3>
+                    <i class="kr-space" ng-if="company.value.krspaceTerm"></i>
+                    <span class="company-state"
+                          ng-bind="company.value.funds.phase | dict_CompanyFinancePhase"
+                          ng-if="isIpoOrAcquired"></span>
+                </div>
+                <div class="basic-row-2">
+                    <i class="basic-industry-icon"></i>
+                    <span class="basic-industry-text"
+                        ng-bind="company.value.basic.industry | dict_CompanyIndustry">
+                    </span>
+                </div>
+                <div class="basic-row-3">
+
+                    <span ng-if="company.value.basic.startDate">
+                        <i  class="time-icon"></i>
+                        <span ng-bind="company.value.basic.startDate + '年'" class="time-text"></span>
+                    </span>
+                    <span ng-if="company.value.basic.address1">
+                        <i class="location-icon"></i>
+                        <span ng-bind="company.value.basic.address1 | city" class="location-text"></span>
+                    </span>
+                    <span ng-if="company.value.statistics.accessCount">
+                        <i class="view-icon"></i>
+                        <span ng-bind="company.value.statistics.accessCount" class="view-text"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- 基本信息内容结束 -->
+
+        <!-- 描述 -->
+        <p ng-bind="company.value.basic.brief" class="basic-brief"> </p>
+
+    </section>
+    <!-- 公司信息基本信息结束 -->
+</div>

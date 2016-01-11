@@ -1,0 +1,29 @@
+<div ng-if="finance.list.length" class="capital-history">
+    <header ng-hide="fullCapital">
+        <h3>融资经历</h3>
+        <a class="more-info"  ui-sref="companyDetailCapitalHistory({id:companyId})">
+            <span ng-bind="'('+finance.originListCount+')'"></span>
+            <span></span>
+        </a>
+    </header>
+    <section>
+        <ul>
+            <li ng-repeat="item in finance.list">
+                <span ng-bind="item.financeDate | date : 'yyyy-MM'"></span>
+                <b ng-bind="item.phase | dict_CompanyFinancePhase"></b>
+                <p>
+                    <span>融资：</span><span ng-bind="item.financeAmountUnit | moneyUnit"></span>
+                    <span ng-bind="item.financeAmount | wanText"></span>
+                    <span class="valuation">估值：</span>
+                    <span ng-if="item.valuation" ng-bind="item.valuationUnit | moneyUnit"></span>
+                    <span ng-bind="item.valuation | wanText"></span>
+                </p>
+                <ul>
+                    <li ng-bind="organ.name" ng-repeat="organ in item.participants">
+
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</div>

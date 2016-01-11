@@ -1,0 +1,107 @@
+@import "detail_base";
+.company-detail{
+    .capital-history{
+        .company-detail .content-base;
+        padding-bottom:50px;
+        h3{
+            .company-detail .split-border;
+            padding-bottom:15px;
+        }
+        section  > ul{
+            margin-top:24px;
+            padding-left:26px;
+            &>li{
+                position: relative;
+                padding-bottom:24px;
+                padding-left:13px;
+                &:last-child{
+                    padding-bottom:14px;
+                }
+                span{
+                    display:block;
+                    line-height: 100%;
+                }
+                &>span:first-child{
+                    font-size:11px;
+                }
+                b{
+                    color:#ff6e0e;
+                    font-size:15px;
+                    line-height:1;
+                    margin-top:14px;
+                    font-weight:normal;
+                    display:inline-block;
+                    margin-bottom:8px;
+                }
+                p{
+                    margin-bottom:8px;
+                    span{
+                        display:inline-block;
+                        font-size:15px;
+                    }
+                    .valuation{
+                        margin-left:25px;
+                    }
+                }
+                ul{
+                    overflow: hidden;
+                    padding:0;
+                    margin:0;
+                }
+                li{
+                    &:after{
+                        display:block;
+                        content:"";
+                        position:absolute;
+                        top:0px;
+                        bottom:0px;
+                        right:11px;
+                        width:1px;
+                        background:#e7e7e7;
+                    }
+                    &:last-child:after{
+                        display:none;
+                    }
+                    float:left;
+                    position:relative;
+                    padding:0;
+                    margin:0;
+                    padding-right:21px;
+                    color:#4285f4;
+                    font-size:13px;
+                    line-height:1.2;
+                    &:first-child{
+                        padding-left:0px;
+                    }
+                    &:last-child{
+                        padding-bottom:0px;
+                        padding-right:0px;
+                    }
+                }
+                &:before{
+                    content:"";
+                    display:block;
+                    width:8px;
+                    height:8px;
+                    position:absolute;
+                    left:0px;
+                    transform:translateX(-3.5px);
+                    top:1px;
+                    border-radius:50%;
+                    background:#ff6e0e;
+                }
+                &:after{
+                    content:"";
+                    display:block;
+                    position:absolute;
+                    left:0px;
+                    top:9px;
+                    bottom:0px;
+                    width:1px;
+                    background:#ddd;
+                }
+            }
+        }
+    }
+
+}

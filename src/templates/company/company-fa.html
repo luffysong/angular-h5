@@ -1,0 +1,23 @@
+<div ng-if="company.value.company.faId" class="company-team">
+    <header>
+        <h3>
+            融资顾问
+        </h3>
+    </header>
+    <section>
+        <ul>
+            <li >
+                <a ui-sref="user_detail({id:fa.id})">
+                    <img ng-src="{{fa.avatar}}" />
+                </a>
+                <div>
+                    <h5 >
+                        <span ng-bind="fa.name"></span>
+                    </h5>
+                    <span >融资顾问</span>
+                    <p ng-bind="fa.intro"></p>
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>

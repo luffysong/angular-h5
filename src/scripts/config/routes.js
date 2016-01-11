@@ -1,3 +1,7 @@
+
+
+/* jshint maxstatements:100 */
+
 var angular = require('angular');
 
 angular.module('defaultApp').config(function ($locationProvider, $stateProvider, $urlRouterProvider, $provide, $sceDelegateProvider) {
@@ -6,35 +10,39 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         'self'
     ]);
 
-    //$provide.decorator('$uiViewScroll', function () {
-    //    return function (uiViewElement) {
-    //        setTimeout(function(){
-    //            var top = uiViewElement.offset().top;
-    //            if(uiViewElement.hasClass('main-content-wrap')){
-    //                window.scrollTo(0, 0);
-    //            }else {
-    //                window.scrollTo(0, top-30);
-    //            }
-    //        },0)
-    //    };
-    //});
+
 
     $urlRouterProvider.otherwise('/404');
 
     $locationProvider.html5Mode(false);
 
-    // $stateProvider.state('guide', {
-    //     url: '/guide',
-    //     templateUrl: 'templates/guide.html'
-    //     // controller: 'CompanyDetailController'
-    // });
-
     // 公司详情页
-    $stateProvider.state('company_detail', {
+    $stateProvider.state('companyDetail', {
         url: '/company/{id}',
         templateUrl: 'templates/company/detail.html',
         controller: 'CompanyDetailController'
     });
+
+    $stateProvider.state('companyDetailTips', {
+        url: '/company/{id}/tips',
+        templateUrl: 'templates/company/company-tips-full.html',
+        controller: 'CompanyTipsController'
+    });
+
+
+    $stateProvider.state('companyDetailCapitalHistory', {
+        url: '/company/{id}/capital',
+        templateUrl: 'templates/company/company-capital-history-full.html',
+        controller: 'CompanyCapitalHistoryController'
+    });
+
+    $stateProvider.state('companyDetailQichacha', {
+        url: '/company/{id}/qichacha',
+        templateUrl: 'templates/company/company-qichacha.html',
+        controller: 'CompanyQichachaController'
+    });
+
+
     // 用户详情页
     $stateProvider.state('user_detail', {
         url: '/user/{id}',

@@ -1,0 +1,118 @@
+@import "detail_base";
+.company-detail{
+    .capital-wrapper{
+        margin-top:10px;
+        .company-detail .split-border-top;
+        .company-detail .content-base;
+        .capital-head{
+            *{
+                font-size:15px;
+            }
+            .company-detail .split-border;
+            height:45px;
+            h3{
+                float:left;
+                margin:0;
+                padding:0;
+                margin-top:15px;
+                line-height:15px;
+            }
+            span,a{
+                display:block;
+                float:right;
+                height:21px;
+                padding:0px 16px;
+                line-height:21px;
+                margin-top:13px;
+                border:1px solid #ff9a6c;
+                color:#ff9a6c;
+                border-radius:2px;
+                text-align:center;
+            }
+            a{
+                border:none;
+                color:#008DF2;
+            }
+        }
+        .capital-list{
+            *{
+                line-height:100%;
+            }
+            background:#f9f9f9;
+            .capital-row{
+                &>div{
+                    .company-detail .split-border-right;
+                }
+                &>div:last-child{
+                    border-right: none;
+                }
+                margin-top:25px;
+                padding-top:20px;
+                font-size:15px;
+            }
+            .row{
+                &:nth-child(2){
+                    margin-top:8px;
+                    padding-bottom:18px;
+                }
+                overflow: hidden;
+                &>div{
+                    float:left;
+                    width:33.33%;
+                    text-align:center;
+                    font-size:13px;
+                }
+            }
+        }
+        .capital-qa{
+            color:#5a626d;
+            font-size:15px;
+            line-height:18px;
+            margin-top:50px;
+
+            h3{
+                padding-bottom:14px;
+                .company-detail .split-border;
+            }
+            .qa-row{
+                margin-top:20px;
+            }
+            p{
+                margin:0;
+                padding:0;
+            }
+            .apply-view{
+                p{
+                    font-size:14px;
+                    line-height:1.2;
+                    margin:25px 0px;
+                }
+                a{
+                    width: 100%;
+                    display: block;
+                    background: #008DF2;
+                    height: 40px;
+                    color: white;
+                    border-radius: 5px;
+                    line-height: 40px;
+                    text-align: center;
+                }
+                a.disabled{
+                    background: #ccc;
+                }
+            }
+            .capital-a{
+                margin-top:10px;
+                & span:first-child{
+                    color:#ff6e0e;
+                }
+            }
+            .capital-q{
+                & span:first-child{
+                    color:#4285f4;
+                }
+            }
+        }
+
+    }
+}

@@ -1,0 +1,35 @@
+<div ng-if="existProductIntro()" class="product-intro">
+    <h3>产品介绍</h3>
+    <section>
+        <ul ng-if="existIntroDetail">
+            <li ng-repeat="item in productIntroData">
+                <i ng-class="item.className"></i>
+
+                <div>
+                    <h4 ng-bind="item.title">
+                    </h4>
+
+                    <p ng-bind="item.text">
+                    </p>
+                </div>
+            </li>
+        </ul>
+        <p ng-bind="company.value.company.intro" ng-if="!existIntroDetail">
+        </p>
+    </section>
+</div>
+<div  ng-if="slides.length" class="product-intro-media">
+    <div kr-swiper slides="slides" class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" ng-repeat="item in slides">
+                <a ng-href="{{item.video || item.image}}">
+                    <img ng-src="{{item.image}}"/>
+                    <i ng-if="item.video"></i>
+                </a>
+            </div>
+        </div>
+        <span class="swiper-indicator">
+            <span ng-bind="(slides.active||1) + ('/' + slides.length)"></span>
+        </span>
+    </div>
+</div>

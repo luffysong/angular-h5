@@ -1,0 +1,71 @@
+.pop-app-download{
+    display:none;
+    .app-download-mask{
+        position: fixed;
+        left:0;
+        top:0;
+        right:0;
+        bottom:0;
+        background:black;
+        opacity:0.5;
+        z-index: 999;
+    }
+    section{
+        text-align:center;
+        line-height:1;
+        border-radius:5px;
+        b{
+            font-weight:500;
+        }
+        div *{
+            display:inline-block;
+        }
+        div:last-child{
+            height:50px;
+            border-top:1px solid #e7e7e7;
+            width:100%;
+            position: absolute;
+            overflow:hidden;
+            bottom:0px;
+            a{
+                width:50%;
+                font-size:17px;
+                line-height:50px;
+                float:left;
+            }
+            .no{
+                color:#505761;
+                border-right:1px solid #e7e7e7;
+            }
+            .yes{
+                color:#3c64d2;
+            }
+
+        }
+        img{
+            width:61px;
+            height:60px;
+            margin-top:25px;
+            margin-bottom:25px;
+        }
+        b{
+            margin-bottom:13px;
+            font-size:17px;
+        }
+        span{
+            font-size:15px;
+            margin-bottom:25px;
+        }
+        background:white;
+        width:300px;
+        height:230px;
+        position: fixed;
+        left:50%;
+        top:50%;
+        transform:translate3d(-50%,-50%,0);
+        z-index:1000;
+    }
+}
+.show-app-download{
+    display:block;
+}

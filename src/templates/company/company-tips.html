@@ -1,0 +1,17 @@
+<div ng-if="feeds.length" class="project-tips">
+    <header ng-hide="fullTips">
+        <h3>项目动态</h3>
+        <a class="more-info" ui-sref="companyDetailTips({id:companyId})">
+            <span ng-bind="'('+originFeedsCount+')'"></span>
+            <span></span>
+        </a>
+    </header>
+    <section>
+        <ul>
+            <li ng-repeat="item in feeds">
+                <span class="feed-time" ng-bind="item.feedTime"></span>
+                <span class="feed-text" ng-bind-html="item.content"></span>
+            </li>
+        </ul>
+    </section>
+</div>

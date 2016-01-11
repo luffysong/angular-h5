@@ -1,0 +1,15 @@
+<div ng-if="teamTags.length || company.value.company.story" class="team-pro">
+    <header>
+        <h3>
+            团队优势
+        </h3>
+    </header>
+    <section>
+        <ul>
+            <li ng-bind="item" ng-repeat="item in teamTags">
+            </li>
+        </ul>
+
+        <p ng-bind="company.value.company.story"></p>
+    </section>
+</div>

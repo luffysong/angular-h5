@@ -1,0 +1,17 @@
+<div class="company-detail company-qichacha">
+    <nav class="company-sub">
+        <a href="javascript:history.go(-1)"></a>
+        <h3 >工商信息</h3>
+    </nav>
+    <div>
+        <ul>
+            <li ng-repeat="item in qichachaList">
+                <span ng-bind="item.name"></span>
+                <span ng-bind="item.value"></span>
+            </li>
+        </ul>
+        <div>
+            <span>企查查提供<a ng-href="{{moreHref}}">更多信息</a></span>
+        </div>
+    </div>
+</div>

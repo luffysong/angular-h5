@@ -1,0 +1,78 @@
+@import "detail_base";
+.company-detail{
+    .footbar{
+        position: fixed;
+        bottom:0px;
+        left:0px;
+        right:0px;
+        height:50px;
+        z-index: 999;
+        div{
+            overflow: hidden;
+            width:100%;
+            height:100%;
+        }
+        a{
+            display:block;
+            float:left;
+            height:100%;
+            line-height:50px;
+            text-align:center;
+            display:flex;
+            align-items:center;
+            i{
+                .company-detail .company-icons;
+                display:block;
+                color:#222c38;
+                font-size:13px;
+                font-style:normal;
+                margin:0 auto;
+            }
+        }
+        .like,.follow{
+            width:25%;
+            background:#f9f9f9;
+        }
+        .like{
+            border-right:1px solid #ddd;
+            i{
+                background-position: 0px -110px;
+                height:16px;
+                line-height:17px;
+                padding-left:20px;
+            }
+            i.active{
+                background-position: 0px -128px;
+            }
+        }
+        .follow{
+            i{
+                background-position: 0px -31px;
+                height:16px;
+                padding-left:22px;
+                line-height:16px;
+            }
+            i.active{
+                background-position: 0px -77px;
+            }
+        }
+        .buy-talk{
+            width:50%;
+            font-size:15px;
+            .fa-talk{
+                text-align:center;
+                margin:0 auto;
+            }
+            .crow-buy{
+                margin:0 auto;
+                span{
+                    display:block;
+                    line-height:100%;
+                }
+            }
+            background:#ff6e0e;
+            color:#fff;
+        }
+
+    }
+}

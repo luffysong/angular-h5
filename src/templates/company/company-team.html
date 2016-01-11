@@ -1,0 +1,24 @@
+<div ng-if="founder.list.length" class="company-team">
+    <header>
+        <h3>
+            创始团队
+        </h3>
+    </header>
+    <section>
+        <ul>
+            <li ng-repeat="item in founder.list">
+                <a ui-sref="user_detail({id:item.id})">
+                    <img ng-src="{{item.avatar}}" />
+                </a>
+                <div>
+                    <h5 >
+                        <span ng-bind="item.name"></span> <i ng-if="isManager(item.id)">管理员</i>
+                    </h5>
+                    <span ng-bind="item.type | dict_StartupPositionType"></span>
+                    <span ng-bind="item.position"></span>
+                    <p ng-bind="item.intro"></p>
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>

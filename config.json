@@ -53,7 +53,8 @@
         "src/components/highcharts-ng/dist/highcharts-ng.min.js",
         "src/components/angular-mass-autocomplete/massautocomplete.js",
         "src/components/angular-permission/dist/angular-permission.js",
-        "src/components/moment/min/moment.min.js"
+        "src/components/moment/min/moment.min.js",
+        "src/components/swiper/dist/js/swiper.js"
     ],
     "angularUiTpls": [
     ],

@@ -27,7 +27,7 @@ Swiper.prototype = {
         var ipod = ua.match(/(iPod)(.*OS\s([\d_]+))?/);
         var iphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
         return {
-            ios: ipad || iphone || ipod,
+            ios: ipad || iphone || ipad,
             android: android
         };
     })(),

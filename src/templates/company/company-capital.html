@@ -1,0 +1,66 @@
+<div ng-if="existCapitalBasic()" class="capital-wrapper">
+    <section ng-if="!company.value.funds.crowdFundingId" class="capital-head">
+        <h3>正在融资</h3>
+        <span ng-if="company.value.company.faId" class="capital-fa">FA推荐</span>
+    </section>
+    <section ng-if="company.value.funds.crowdFundingId" class="capital-head">
+        <h3>股权融资</h3>
+        <a ui-sref="syndicatesDetail({companyId:compnayId,fundingId:company.value.funds.crowdFundingId})">查看详情</a>
+    </section>
+    <div >
+        <section class="capital-list">
+            <header class="capital-row row">
+                <div >融资轮次</div>
+                <div >融资金额</div>
+                <div >出让股权</div>
+            </header>
+            <div  class="row">
+                <div  ng-bind="funds.phase | dict_CompanyFinancePhase" > </div>
+                <div  >
+                  <span ng-bind="funds.unit | moneyUnit"></span>
+                  <span ng-bind="funds.value | WanNum"></span>
+                </div>
+                <div  ng-bind="company.value.funds.shares + '%'" ></div>
+            </div>
+        </section>
+
+        <!-- 公司不可能同时众筹和融资 -->
+        <!-- 融资中的公司融资详情可能设置详情 -->
+        <section ng-if="(!company.value.funds.crowdFundingId || !needApply) && existCapitalDetail()" class="capital-qa">
+            <h3>融资详情</h3>
+            <div  class="qa-content">
+                <ul ng-if="!capitalDetail.isReplaceDefault">
+                    <li class="qa-row" ng-repeat="qa in capitalDetail.list">
+                        <p  class="capital-q">
+                            <span >Q：</span>
+                            <span ng-bind="qa.question"></span>
+                        </p>
+                        <p  class="capital-a">
+                            <span >A：</span>
+                            <span ng-bind="qa.answer"></span>
+                       </p>
+                    </li>
+                </ul>
+                <ul ng-if="capitalDetail.isReplaceDefault">
+                    <li class="qa-row" ng-bind="capitalDetail.faRecommendedText"></li>
+                </ul>
+
+            </div>
+
+
+            <!-- 需要申请才能查看融资详情 -->
+            <div ng-if="needApply" class="apply-view">
+                <p>
+                    <span>当前公司的市场规模、业务数据、项目优势、竞品 情况、未来规划等融资信息，</span>
+                    <span>
+                    创业者设置需获其同意 才能查看。
+                    </span>
+                </p>
+                <a  ng-bind="applyStateText"
+                    ng-class="{disabled:applyStarted}"
+                    ng-click="applyViewClick($event)">申请查看</a>
+            </div>
+        </section>
+
+    </div>
+</div>
