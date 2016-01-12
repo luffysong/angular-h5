@@ -6,13 +6,15 @@
 	"expr": true,
 	"immed": true,
 	"noarg": true,
-	"quotmark": "single",
 	"undef": true,
 	"unused": true,
     "camelcase": true,
 
 
-    "predef":["projectEnvConfig","_hmt","krtracker"],
+    "predef":["projectEnvConfig","_hmt","krtracker","kr","CITY_DATA",
+        "DICTIONARY_DATA","DICTIONARY_CF_DATA","DICTIONARY_URL_DATA"],
+
+    "loopfunc": true,
 
 	"node": true,
     "jquery":true,

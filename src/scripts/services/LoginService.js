@@ -5,11 +5,9 @@
 var angular = require('angular');
 
 angular.module('defaultApp.service').service('LoginService',
-    function (BasicService) {
+    function(BasicService) {
 
-
-
-        var service = BasicService('https://'+projectEnvConfig.passportHost+'/:action/:sub/:sub_action', {
+        var service = BasicService('https://' + projectEnvConfig.passportHost + '/:action/:sub/:sub_action', {
 
             /**
              * 获取国际手机前辍
@@ -23,7 +21,6 @@ angular.module('defaultApp.service').service('LoginService',
                 }
             }
         });
-
 
         return service;
     }

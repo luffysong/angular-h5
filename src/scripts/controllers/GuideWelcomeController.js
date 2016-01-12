@@ -5,7 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('GuideWelcomeController',
-    function($stateParams, $scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope, $timeout, $upload, AndroidUploadService, LoginService) {
+    function($stateParams, $scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope,
+        $timeout, $upload, AndroidUploadService, LoginService) {
         $scope.sourceType = $stateParams.type || 'other';
 
         $scope.user = {
@@ -22,8 +23,9 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
 
             //data.avatar = ""
             angular.extend($scope.user, angular.copy(data));
+
             if (data.email && data.phone && data.avatar && data.name) {
-                $state.go('investorValidate');
+                location.href = '//' + projectEnvConfig.rongHost;
             }
 
             console.log(data.phone);
@@ -51,9 +53,9 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 UserService.check.get({
                     id: $scope.userId,
                     phone: phone
-                }, function(data) {
+                }, function() {
 
-                }, function(err) {
+                }, function() {
 
                     $scope.guideForm.phone.$setValidity('checked', false);
                 });
@@ -73,9 +75,9 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 UserService.check.get({
                     id: $scope.userId,
                     email: email
-                }, function(data) {
+                }, function() {
 
-                }, function(err) {
+                }, function() {
 
                     $scope.guideForm.email.$setValidity('checked', false);
                 });
@@ -108,8 +110,8 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 subid: voice ? 'voice' : ''
             }, {
                 phone: $scope.getPhoneWithCountryCode()
-            }, function(data) {
-            }, function(err) {
+            }, function() {
+            }, function() {
 
                 $('<div class="error-alert error error-sms">发送失败</div>').appendTo('body');
                 $timeout(function() {
@@ -136,7 +138,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 });
         });
 
-        $scope.imgFileSelected  = function(files, e) {
+        $scope.imgFileSelected  = function(files) {
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
                 $('<div class="error-alert error error-avatar">附件大于5M</div>').appendTo('body');
@@ -163,11 +165,12 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                         data: data,
                         file: file,
                         withCredentials: false
-                    }).progress(function(evt) {
+                    }).progress(function() {
 
-                    }).success(function(data, status, headers, config) {
+                    }).success(function(data) {
                         var filename = data.url.toLowerCase();
-                        if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.gif') != -1 || filename.indexOf('.jpeg') != -1) {
+                        if (filename.indexOf('.jpg') !== -1 || (filename.indexOf('.png') !== -1) ||
+                                filename.indexOf('.gif') !== -1 || filename.indexOf('.jpeg') !== -1) {
                             $scope.user.avatar = window.kr.upyun.bucket.url + data.url;
                         } else {
                             $('<div class="error-alert error error-photo">格式不支持，请重新上传！</div>').appendTo('body');
@@ -235,8 +238,8 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 email: $scope.user.email,
                 phone: $scope.getPhoneWithCountryCode(),
                 smscode: $scope.user.smscode
-            }, function(data) {
-                if ($scope.sourceType == 'investorValidate') {
+            }, function() {
+                if ($scope.sourceType === 'investorValidate') {
                     $state.go('investorValidate');
                     return;
                 }
@@ -268,7 +271,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
         LoginService.getCountryDict({}, function(data) {
             $scope.countryDict = data;
             $scope.countryDict.forEach(function(item) {
-                if (item.cc == '86') {
+                if (item.cc === '86' || item.cc === 86) {
                     $scope.user.cc = item;
                 }
             });
@@ -290,7 +293,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 return;
             }
 
-            if ($scope.user.cc.cc == '86') {
+            if ($scope.user.cc.cc === '86' || $scope.user.cc.cc === 86) {
                 return $scope.user.phone;
             }
 

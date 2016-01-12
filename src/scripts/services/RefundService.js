@@ -8,7 +8,7 @@ angular.module('defaultApp.service').service('RefundService',
     function($location, BasicService, appendTransform, $http) {
         var service = BasicService('/api/p/trade-refund', {
             post: {
-                method: "POST",
+                method: 'POST',
                 transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
                     return data;
                 })

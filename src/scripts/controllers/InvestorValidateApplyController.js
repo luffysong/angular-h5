@@ -2,11 +2,14 @@
  * Controller Name: SearchController
  */
 
+// jscs:disable  requireCamelCaseOrUpperCaseIdentifiers
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateApplyController',
 
-    function(OrganizationService, CompanyService, $state, $scope, SuggestService, $q, SearchService, DictionaryService, ErrorService, DefaultService, $upload, checkForm, $timeout, UserService, $location, InvestorauditService, monthOptions, yearOptions, AndroidUploadService) {
+    function(OrganizationService, CompanyService, $state, $scope, SuggestService, $q, SearchService,
+        DictionaryService, ErrorService, DefaultService, $upload, checkForm,
+        $timeout, UserService, $location, InvestorauditService, monthOptions, yearOptions, AndroidUploadService) {
         $scope.investorValidateApply = {
             status:''
         };
@@ -109,7 +112,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             },
 
             on_select: function(selected) {
-                if (selected.obj.status != 'add') {
+                if (selected.obj.status !== 'add') {
                     $scope.organization.isAdd = false;
                     var organization = selected.obj;
                     $scope.organization.addForm.name = organization.name;
@@ -124,12 +127,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         function suggest_state_organization(data) {
             //var q = term.toLowerCase().trim();
             var results = data.map(function(item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
-                var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30',
+                var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30"' +
+                    ' src="//krplus-pic.b0.upaiyun.com/default_logo.png!30';
 
-                    //label = '<img src="' + logo + '">' + '<span>' + item.name + '</span>';
-                    label;
+                var    label;
 
-                if (item.status != 'add') {
+                if (item.status !== 'add') {
                     label = '<div class="coList"><img src="' + logo + '">' + item.name + '</div>';
                 }else {
                     label = '<div class="newCo">' + '<span>创建 </span> “' + item.name + '”</div>';
@@ -156,7 +159,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }, function(data) {
                 $scope.organizationList = data;
                 var exist = data.data.filter(function(item) {
-                    return item.name.toLowerCase() == q.toLowerCase();
+                    return item.name.toLowerCase() === q.toLowerCase();
                 });
 
                 if (!exist.length) {
@@ -203,7 +206,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             },
 
             on_select: function(selected) {
-                if (selected.obj.status != 'add') {
+                if (selected.obj.status !== 'add') {
                     $scope.company.isAdd = false;
                     var company = selected.obj;
                     $scope.company.addForm.name = company.name;
@@ -219,12 +222,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         function suggest_state(data) {
             //var q = term.toLowerCase().trim();
             var results = data.map(function(item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
-                var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30',
+                var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30"' +
+                    ' src="//krplus-pic.b0.upaiyun.com/default_logo.png!30';
 
-                    //label = '<img src="' + logo + '">' + '<span>' + item.name + '</span>';
-                    label;
+                //label = '<img src="' + logo + '">' + '<span>' + item.name + '</span>';
+                var  label;
 
-                if (item.status != 'add') {
+                if (item.status !== 'add') {
                     label = '<div class="coList"><img src="' + logo + '">' + item.name + '</div>';
                 }else {
                     label = '<div class="newCo">' + '<span>创建 </span> “' + item.name + '”</div>';
@@ -283,9 +287,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 data:[]
             },
             choose:function() {
-                var companyId = $scope.company.form.id,
-                    companyData = $scope.company.response.data,
-                    company = {};
+                var companyId = $scope.company.form.id;
+                var   companyData = $scope.company.response.data;
+                var    company = {};
 
                 if (companyId === 0) {
                     $scope.company.isAddExperience = true;
@@ -307,7 +311,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 $scope.company.isAdd = false;
 
                 angular.forEach(companyData, function(item) {
-                    if (companyId == item.id) {
+                    if (companyId === item.id) {
                         company = item;
                         return true;
                     }
@@ -381,9 +385,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 data:[]
             },
             choose:function() {
-                var orId = $scope.organization.form.id,
-                    organizationData = $scope.organization.response.data,
-                    organization = {};
+                var orId = $scope.organization.form.id;
+                var organizationData = $scope.organization.response.data;
+                var organization = {};
 
                 //新增机构工作经历
                 if (orId === 0) {
@@ -406,7 +410,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 $scope.organization.isAdd = false;
 
                 angular.forEach(organizationData, function(item) {
-                    if (orId == item.id) {
+                    if (orId === item.id) {
                         organization = item;
                         return true;
                     }
@@ -607,9 +611,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             /*关注领域数据处理*/
             if (data.industry && data.industry.length) {
                 angular.extend($scope.areaList, data.industry);
-                angular.forEach(data.industry, function(o, i) {
-                    angular.forEach($scope.invest.investorFocusIndustrys, function(key, index) {
-                        if (key.value == o) {
+                angular.forEach(data.industry, function(o) {
+                    angular.forEach($scope.invest.investorFocusIndustrys, function(key) {
+                        if (key.value === o) {
                             key.active = true;
                         }
                     });
@@ -618,7 +622,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             /*投资阶段数据处理*/
             angular.forEach(data.investPhases, function(val) {
                 angular.forEach($scope.invest.fundsPhases, function(item) {
-                    if (val == item.engName) {
+                    if (val === item.engName) {
                         item.active = true;
                     }
                 });
@@ -644,7 +648,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
         /*更改选择领域*/
         $scope.selectArea = function(index) {
-            if ($scope.areaList.length == 3 && $scope.areaList.indexOf($scope.invest.investorFocusIndustrys[index].value) < 0) {
+            if ($scope.areaList.length === 3 && $scope.areaList.indexOf($scope.invest.investorFocusIndustrys[index].value) < 0) {
                 return;
             }else {
                 angular.element($('form[name="investorValidateForm"]')).scope().investorValidateForm.$setValidity('industyEmpty', true);
@@ -658,7 +662,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
         };
         /*上传名片*/
-        $scope.imgFileSelected  = function(files, e) {
+        $scope.imgFileSelected  = function(files) {
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
                 ErrorService.alert({
@@ -684,9 +688,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         withCredentials: false
                     }).progress(function(evt) {
                         $scope.intro.progress = evt.loaded * 100 / evt.total;
-                    }).success(function(data, status, headers, config) {
+                    }).success(function(data) {
                         var filename = data.url.toLowerCase();
-                        if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
+                        if (filename.indexOf('.jpg') !== -1 || (filename.indexOf('.png') !== -1) || filename.indexOf('.jpeg') !== -1) {
                             $scope.intro.value.pictures = window.kr.upyun.bucket.url + data.url;
 
                             //隐藏提示信息
@@ -775,7 +779,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
             /*检查投资阶段是否选择，给出相应提示*/
             $scope.stageList = [];
-            angular.forEach($scope.invest.fundsPhases, function(key, index) {
+            angular.forEach($scope.invest.fundsPhases, function(key) {
                 if (key.active) {
                     $scope.stageList.push(key);
                 }
@@ -793,8 +797,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 angular.element($('form[name="investorValidateForm"]')).scope().investorValidateForm.$setValidity('industyEmpty', true);
             }
 
-            var isPersonal = ($scope.invest.cnyInvestMin || $scope.invest.cnyInvestMax || $scope.invest.usdInvestMin || $scope.invest.usdInvestMax),
-                isFund     = ($scope.invest.fundCnyInvestMin || $scope.invest.fundCnyInvestMax || $scope.invest.fundUsdInvestMin || $scope.invest.fundUsdInvestMax);
+            var isPersonal = ($scope.invest.cnyInvestMin || $scope.invest.cnyInvestMax || $scope.invest.usdInvestMin || $scope.invest.usdInvestMax);
+            var isFund     = ($scope.invest.fundCnyInvestMin || $scope.invest.fundCnyInvestMax || $scope.invest.fundUsdInvestMin || $scope.invest.fundUsdInvestMax);
             /*检查单笔可投额度*/
             if (isPersonal) {
                 /*个人*/
@@ -846,7 +850,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             investoraudit.intro   = $scope.invest.intro;
             /*投资阶段*/
             investoraudit.fundsPhases = [];
-            angular.forEach($scope.invest.fundsPhases, function(val, key) {
+            angular.forEach($scope.invest.fundsPhases, function(val) {
                     if (val.active) {
                         investoraudit.fundsPhases.push(val.engName);
                     }
@@ -946,7 +950,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
                                         //提交总数据
                                         send(response.id);
-                                    }, function(err) {
+                                    }, function() {
 
                                         console.log('--创建经历失败--');
                                     });
@@ -975,7 +979,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
                                     //提交总数据
                                     send(response.id);
-                                }, function(err) {
+                                }, function() {
 
                                     console.log('--创建经历失败--');
                                 });
@@ -999,7 +1003,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
                                     //提交总数据
                                     send(response.id);
-                                }, function(err) {
+                                }, function() {
 
                                     console.log('--更新经历失败--');
                                 });
@@ -1029,23 +1033,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                             var createExperiencePromise = createExperience(expData);
                             createExperiencePromise.then(function(response){
                                 console.log('--创建经历成功--');
+
                                 //提交总数据
                                 send(response.id);
                             },function(err){
-                                console.log('--创建经历失败--');
-                                    var createExperiencePromise = createExperience(expData);
-                                    createExperiencePromise.then(function(response) {
-                                        console.log('--创建经历成功--');
 
-                                        //提交总数据
-                                        send(response.id);
-                                    }, function(err) {
-
-                                        console.log('--创建经历失败--');
-                                    });
-                                }, function(err) {
-
-                                    console.log('---创建公司失败--');
+                                console.log('---创建公司失败--');
                             });
                         }else {
                             console.log('---company---', $scope.company);
@@ -1069,7 +1062,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
                                     //提交总数据
                                     send(response.id);
-                                }, function(err) {
+                                }, function() {
 
                                     console.log('--创建经历失败--');
                                 });
@@ -1095,7 +1088,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
                                     //提交总数据
                                     send(response.id);
-                                }, function(err) {
+                                }, function() {
 
                                     console.log('--更新经历失败--');
                                 });
@@ -1116,7 +1109,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         investoraudit.workExpId = workExpId;
                     }
 
-                    InvestorauditService.save(investoraudit, function(response) {
+                    InvestorauditService.save(investoraudit, function() {
                         $scope.investorValidateApply.status = 'checking';
                     }, function(err) {
 
@@ -1182,26 +1175,26 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         /*监听事件*/
         $scope.changeMoney = function(fieldName) {
             Error.hide();
-            if (fieldName == 'cnyInvestMin' ||  fieldName == 'cnyInvestMax') {
+            if (fieldName === 'cnyInvestMin' ||  fieldName === 'cnyInvestMax') {
                 if (parseFloat($scope.invest.cnyInvestMin) > parseFloat($scope.invest.cnyInvestMax)) {
                     Error.show('投资额下限不能大于上限值');
                 }else {
                     Error.hide();
                 }
-            }else if (fieldName == 'fundCnyInvestMin' || fieldName ==  'fundCnyInvestMax') {
+            }else if (fieldName === 'fundCnyInvestMin' || fieldName ===  'fundCnyInvestMax') {
                 if (parseFloat($scope.invest.fundCnyInvestMin) > parseFloat($scope.invest.fundCnyInvestMax)) {
                     Error.show('投资额下限不能大于上限值');
                 }else {
                     Error.hide();
                 }
-            }else if (fieldName == 'usdInvestMin' || fieldName == 'usdInvestMax') {
+            }else if (fieldName === 'usdInvestMin' || fieldName === 'usdInvestMax') {
                 if (parseFloat($scope.invest.usdInvestMin)  > parseFloat($scope.invest.usdInvestMax)) {
                     Error.show('投资额下限不能大于上限值');
                 }else {
                     Error.hide();
                 }
 
-            }else if (fieldName == 'fundUsdInvestMin' || fieldName == 'fundUsdInvestMax') {
+            }else if (fieldName === 'fundUsdInvestMin' || fieldName === 'fundUsdInvestMax') {
                 if (parseFloat($scope.invest.fundUsdInvestMin)  > parseFloat($scope.invest.fundUsdInvestMax)) {
                     Error.show('投资额下限不能大于上限值');
                 }else {

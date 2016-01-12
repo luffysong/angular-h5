@@ -1,5 +1,6 @@
 
-/* globals angular */
+var angular = require('angular');
+
 angular.module('defaultApp')
     .run(function($rootScope) {
         $rootScope.REGEXP = $rootScope.REGEXP || {};

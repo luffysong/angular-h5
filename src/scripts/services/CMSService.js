@@ -5,32 +5,34 @@
 var angular = require('angular');
 
 angular.module('defaultApp.service').service('CMSService',
-    function ($http) {
+    function($http) {
         var service = {
-            name: "CMSService",
+            name: 'CMSService',
             url: '/api/p/sc/images',
-            getRongBanner: function(){
+            getRongBanner: function() {
                 return $http.get(service.url, {
                     params: {
                         type:2
                     }
                 });
             },
-            getZhongchouBanner: function(){
+
+            getZhongchouBanner: function() {
                 return $http.get(service.url, {
                     params: {
                         type: 41
                     }
                 });
             },
-            getZhongchouNewsBanner: function(){
+
+            getZhongchouNewsBanner: function() {
                 return $http.get(service.url, {
                     params: {
                         type: 43
                     }
                 });
             }
-        }
+        };
 
         return service;
     }

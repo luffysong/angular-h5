@@ -5,33 +5,34 @@
 var angular = require('angular');
 
 angular.module('defaultApp.directive').directive('orderBtn', [
-    '$location','UserService', '$state',
-    function ($location,UserService, $state) {
+    '$location', 'UserService', '$state',
+    function($location, UserService, $state) {
         return {
             restrict: 'AE',
-            link: function (scope, element, attrs) {
-                element.click(function(e){
+            link: function(scope, element) {
+                element.click(function(e) {
                     e.preventDefault();
-                    if(!UserService.getUID()){
+                    if (!UserService.getUID()) {
                         e.preventDefault();
-                        setTimeout(function(){
+                        setTimeout(function() {
                             location.href = '/user/login?from=' + encodeURIComponent(location.href);
                         }, 300);
                     } else {
                         UserService.getIdentity(function(data) {
-                            if(data.code == 4031) {
+                            if (data.code === 4031) {
                                 e.preventDefault();
+
                                 //$state.go('guide.welcome', {
                                 //    type: 'investorValidate'
                                 //});
-                                $state.go("investorValidate");
+                                $state.go('investorValidate');
                                 return;
-                            } else if(!data || !data.coInvestor) {
+                            } else if (!data || !data.coInvestor) {
                                 e.preventDefault();
-                                $state.go("investorValidate");
+                                $state.go('investorValidate');
                                 return;
                             } else {
-                                $state.go("zhongchouAllOrder.all");
+                                $state.go('zhongchouAllOrder.all');
                             }
                         });
                     }

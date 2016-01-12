@@ -11,7 +11,7 @@ angular.module('defaultApp.directive').directive('krSwiper',
         return {
             restrict: 'A',
             scope: '=slides',
-            link: function(scope, element, attrs, formCtrl) {
+            link: function(scope, element) {
                 scope.$watch('slides', function() {
                     var img;
                     if (scope.slides && scope.slides.length > 1) {

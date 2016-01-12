@@ -16,5 +16,6 @@ window.kr.defaultImg = {
     defaultAvatarUrl:'https://krplus.b0.upaiyun.com/default_avatar.png',
     defaultVideoUrl: 'https://krplus-pic.b0.upaiyun.com/201512/18065817/5qf5kwfe397qmzzv.jpeg'
 };
+window.kr.H5_PATH = '/m/#/';
 
 

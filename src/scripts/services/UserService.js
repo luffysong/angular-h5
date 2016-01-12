@@ -2,6 +2,7 @@
  * Service Name: UserService
  */
 
+//jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 var angular = require('angular');
 
 angular.module('defaultApp.service').service('UserService', [
@@ -49,7 +50,10 @@ angular.module('defaultApp.service').service('UserService', [
                         mode: $stateParams.mode,
                     },
                     transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
-                        if (data.code === 0 && window.localStorage && (data.data.email || data.data.phone) && service.getUID() == data.data.id) {
+                        if (data.code === 0 &&
+                                window.localStorage &&
+                                (data.data.email || data.data.phone) &&
+                                service.getUID() === data.data.id) {
 
                             localStorage.setItem('uemail', data.data.email);
                             localStorage.setItem('uphone', data.data.phone);
@@ -123,15 +127,17 @@ angular.module('defaultApp.service').service('UserService', [
                     method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
                         data.data.expList.forEach(function(item) {
-                            if (!item.startDate){
+                            if (!item.startDate) {
                                 return;
                             }
+
                             var startDate = new Date(item.startDate);
                             item.startYear = startDate.getFullYear() + '';
                             item.startMonth = startDate.getMonth() + 1 + '';
-                            if (!item.endDate){
+                            if (!item.endDate) {
                                 return;
                             }
+
                             if (!item.isCurrent) {
                                 var endDate = new Date(item.endDate);
                                 item.endYear = endDate.getFullYear() + '';
@@ -183,6 +189,7 @@ angular.module('defaultApp.service').service('UserService', [
                     method: 'POST',
                     transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
 
+                        var c;
                         if (data.groupIdType && data.groupId) {
                             data.startDate = data.startDate || [data.startYear, data.startMonth, '01'].join('-') + ' 01:01:01';
                             if (!data.isCurrent) {
@@ -196,8 +203,8 @@ angular.module('defaultApp.service').service('UserService', [
                             return data;
                         }
 
-                        if (data.groupIdType == 3) {
-                            var c = data.company;
+                        if (data.groupIdType === 3) {
+                            c = data.company;
                             data.groupId = c.id;
                             data.position = c.position;
                             data.positionDetail = c.positionDetail;
@@ -212,8 +219,8 @@ angular.module('defaultApp.service').service('UserService', [
                             }
                         }
 
-                        if (data.groupIdType == 2) {
-                            var c = data.organization;
+                        if (data.groupIdType === 2) {
+                            c = data.organization;
                             data.groupId = c.id;
                             data.position = c.position;
                             data.positionDetail = c.positionDetail;
@@ -256,11 +263,17 @@ angular.module('defaultApp.service').service('UserService', [
                     method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
                         data.data.expList.forEach(function(item) {
-                            if (!item.startDate)return;
+                            if (!item.startDate) {
+                                return;
+                            }
+
                             var startDate = new Date(item.startDate);
                             item.startYear = startDate.getFullYear() + '';
                             item.startMonth = startDate.getMonth() + 1 + '';
-                            if (!item.endDate)return;
+                            if (!item.endDate) {
+                                return;
+                            }
+
                             if (!item.isCurrent) {
                                 var endDate = new Date(item.endDate);
                                 item.endYear = endDate.getFullYear() + '';
@@ -276,7 +289,10 @@ angular.module('defaultApp.service').service('UserService', [
                 query: {
                     method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
-                        if (!data.data || data.code != 0)return data;
+                        if (!data.data || data.code !== 0) {
+                            return data;
+                        }
+
                         data.data.data.forEach(function(item) {
                             adaptFinanceItem(item);
                         });
@@ -293,7 +309,10 @@ angular.module('defaultApp.service').service('UserService', [
                     }),
 
                     transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
-                        if (!data.data || data.code != 0)return data;
+                        if (!data.data || data.code !== 0) {
+                            return data;
+                        }
+
                         adaptFinanceItem(data.data);
 
                         return data;
@@ -307,7 +326,10 @@ angular.module('defaultApp.service').service('UserService', [
                     }),
 
                     transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
-                        if (!data.data || data.code != 0)return data;
+                        if (!data.data || data.code !== 0) {
+                            return data;
+                        }
+
                         adaptFinanceItem(data.data);
                         return data;
                     }),
@@ -403,7 +425,7 @@ angular.module('defaultApp.service').service('UserService', [
             }
 
             var result = localStorage.getItem('isEmailActivate');
-            if (result && result != 'undefined') {
+            if (result && result !== 'undefined') {
                 callback(JSON.parse(result));
                 return;
             }

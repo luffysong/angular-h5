@@ -4,9 +4,7 @@
 
 var angular = require('angular');
 angular.module('defaultApp.controller').controller('CompanyTipsController',
-    function($scope, $location, $stateParams, $state, CompanyService, $timeout,
-              UserService, ErrorService, $rootScope, DictionaryService,
-              SocialService) {
+    function($scope, $location, $stateParams, $state, CompanyService) {
         $scope.companyId = $stateParams.id;
         $scope.fullTips = true;
         $scope.title = '项目动态';

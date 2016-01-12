@@ -1,4 +1,6 @@
 /*globals -$ */
+
+//jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 var path = require('path');
 var fs = require('fs');
 
@@ -480,7 +482,10 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
         .pipe($.replace('styles/images/', 'images/'))
         .pipe(assets)
         .pipe($['if']('*.css', $.cssnano({ debug:true })))
-        .pipe($['if']('*.js', $.uglify()))
+        .pipe($['if']('*.js',
+            $.uglify({ compress:{
+				drop_console:true }
+            })))
         .pipe(assets.restore())
         .pipe($.useref())
 

@@ -5,7 +5,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('MyCompanyController',
-    function($scope, $rootScope, $state, $stateParams, loading, $location, $modal, CompanyService, UserService, DictionaryService, $http, ErrorService, $timeout) {
+    function($scope, $rootScope, $state, $stateParams, loading, $location, $modal, CompanyService, UserService,
+        DictionaryService, $http, ErrorService) {
         $scope.uid = UserService.getUID();
         $scope.stateParams = $stateParams;
         $scope.myCompanyList = {
@@ -23,7 +24,7 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
         $scope.loadUserBasicData = function() {
             CompanyService.getManaged({}, function(data) {
                 $scope.myCompanyList.data = data.data;
-                $.each(data.data, function(i, val) {
+                $.each(data.data, function(i) {
                     data.data[i].checkStatus = false;
                 });
 
@@ -70,7 +71,7 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
 
             CompanyService.ventureApply($scope.myCompanyList.selectedCompanyId, {
                 type: $stateParams.from,
-            }, function(data) {
+            }, function() {
                 $state.go('finacingSuccess', { from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId });
 
                 // if(data.company) {

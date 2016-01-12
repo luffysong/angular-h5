@@ -23,7 +23,7 @@ angular.module('defaultApp.filter').filter('investorLink', function() {
             };
         }
         /*机构页未完成，当投资主体为机构时，链接置空*/
-        if (input[typeKey] == 'ORGANIZATION' || input[typeKey] == 2) {
+        if (input[typeKey] === 'ORGANIZATION' || input[typeKey] === 2) {
             return 'index';
         }else {
             return input[typeKey] ? types[input[typeKey]].replace('{{id}}', input[idKey]) : 'index';

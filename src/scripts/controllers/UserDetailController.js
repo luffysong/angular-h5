@@ -2,6 +2,7 @@
  * Controller Name: UserDetailController
  */
 
+// jscs:disable  requireCamelCaseOrUpperCaseIdentifiers
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('UserDetailController', [

@@ -10,6 +10,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
               SocialService
               ) {
         var KR_DEFAULT_IMAGE = window.kr.defaultImg;
+        var ZHONG_HOST = '//' + projectEnvConfig.zhongHost + kr.H5_PATH;
         var MOBILE_TYPE = {
             IOS:'IOS',
             ANDROID:'安卓',
@@ -101,8 +102,8 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         }
 
         function setCrowdFundingDetailUrl(crowdFundingId) {
-            $scope.crowdFundingDetailUrl = '//' + projectEnvConfig.zhongHost +
-                '/#/zhongchouDetail?source=rongzi&fundingId=' + crowdFundingId;
+            $scope.crowdFundingDetailUrl = ZHONG_HOST +
+                'zhongchouDetail?source=rongzi&fundingId=' + crowdFundingId;
         }
 
         // 获取公司基本信息

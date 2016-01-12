@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('FinacingSuccessController',
-    function($scope, $rootScope, $stateParams, $location, loading, $modal, CompanyService, UserService, DictionaryService, $http, ErrorService, $timeout) {
+    function($scope, $rootScope, $stateParams, $location, loading, $modal, CompanyService, UserService) {
         $scope.uid = UserService.getUID();
         $scope.stateParams = $stateParams;
         $scope.successfulTips = false;

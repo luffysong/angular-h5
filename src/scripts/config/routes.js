@@ -4,7 +4,6 @@
 /* globals angular */
 angular.module('defaultApp').config(function($locationProvider, $stateProvider, $urlRouterProvider, $provide, $sceDelegateProvider) {
 
-    var ZHONGHOST = '//' + projectEnvConfig.zhongHost;
     $sceDelegateProvider.resourceUrlWhitelist([
         'self',
     ]);
