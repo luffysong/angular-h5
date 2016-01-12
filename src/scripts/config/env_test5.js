@@ -4,5 +4,5 @@ window.projectEnvConfig = {
     rongHost: 'rongtest05.36kr.com',
     zhongHost:'ztest05.36kr.com',
     ucHost: 'uctest05.36kr.com',
-    helpHost: 'helptest05.36kr.com'
+    helpHost: 'helptest05.36kr.com',
 };

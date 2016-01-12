@@ -6,9 +6,10 @@ var angular = require('angular');
 
 angular.module('defaultApp.filter').filter('substr', function() {
     return function(input, count, symbol) {
-        if (!input){
+        if (!input) {
             return input;
         }
+
         if (!count) {
             return input;
         }

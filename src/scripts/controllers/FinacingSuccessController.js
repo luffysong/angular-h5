@@ -9,27 +9,32 @@ angular.module('defaultApp.controller').controller('FinacingSuccessController',
         $scope.uid = UserService.getUID();
         $scope.stateParams = $stateParams;
         $scope.successfulTips = false;
+
         // 返回上一页
         $scope.goBack = function(e) {
             e && e.preventDefault();
             history.go(-1);
+        };
+
+        if (!$stateParams.cid) {
+            return;
         }
 
-        if(!$stateParams.cid) return;
         $scope.finacingList = {};
-        
+
         loading.show('finacingSuccess');
         CompanyService.ventureApply($scope.stateParams.cid, {
             type: $stateParams.from
         }, function(data) {
             console.log(data);
-            if(data.company) {
+            if (data.company) {
                 $scope.finacingList = data;
             } else {
                 $scope.successfulTips = true;
             }
+
             loading.hide('finacingSuccess');
-            
+
         });
     }
 );

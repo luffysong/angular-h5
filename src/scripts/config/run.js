@@ -1,4 +1,5 @@
 
+/* globals angular */
 angular.module('defaultApp')
     .run(function($rootScope) {
         $rootScope.REGEXP = $rootScope.REGEXP || {};
@@ -62,7 +63,7 @@ angular.module('defaultApp')
             if (/zhongchouDesire/.test(path)) {
                 $('.common-header.J_commonHeaderWrapper').hide();
             }else {
-                if ($('.common-header.J_commonHeaderWrapper').css('display') == 'none') {
+                if ($('.common-header.J_commonHeaderWrapper').css('display') === 'none') {
                     $('.common-header.J_commonHeaderWrapper').show();
                 }
             }
@@ -74,23 +75,10 @@ angular.module('defaultApp')
                 window.CommonHeader.setNavActive(type);
             }
         });
-    }).run(function($rootScope, $window, $state) {
-        $rootScope.$on('$stateChangeStart',
-		function(e, toState, toParams, fromState, fromParams) {
-            if (toState.external) {
-                e.preventDefault();
-
-                //此处默认生成路径已为外部绝对路径
-
-                var href = $state.href(toState.name, toParams);
-                href = href.slice(1);
-                $window.open(href, '_self');
-            }
-		});
-    })
-    .run(function($http, $rootScope, $location, $state, notify, Permission, UserService, $q,  $modal) {
+    }).run(function($http, $rootScope, $location, $state, notify, Permission, UserService, $q) {
         //Define Roles
-        var login, valid;
+        var login;
+        var valid;
 
         Permission.defineRole('login', login = function() {
             if (UserService.getUID()) {
@@ -119,13 +107,10 @@ angular.module('defaultApp')
                     deferred.resolve();
                 } else {
 
-                    var href = location.href,
-                        type,
-                        from;
-                    if (href.indexOf('#/investorValidate') != -1) {
-                        type = 'investorValidate';
-                        from = href;
-                    }else if (href.indexOf('#/investor/apply') != -1) {
+                    var href = location.href;
+                    var type;
+                    var   from;
+                    if (href.indexOf('#/investor/apply') !== -1) {
                         type = 'investor_apply';
                         from = '#/investor/apply';
                     }else {

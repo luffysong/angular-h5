@@ -1,0 +1,23 @@
+{
+	"boss": true,
+	"curly": true,
+	"eqeqeq": true,
+	"eqnull": true,
+	"expr": true,
+	"immed": true,
+	"noarg": true,
+	"quotmark": "single",
+	"undef": true,
+	"unused": true,
+    "camelcase": true,
+
+
+    "predef":["projectEnvConfig","_hmt","krtracker"],
+
+	"node": true,
+    "jquery":true,
+    "browser": true,
+    "browserify":true
+
+
+}

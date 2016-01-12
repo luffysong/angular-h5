@@ -55,7 +55,7 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
         $scope.submitForm = function(e) {
             e && e.preventDefault();
             console.log($stateParams);
-            $scope.applyForm = angular.element($("[name='applyForm']")).scope()['applyForm'];
+            $scope.applyForm = angular.element($('[name="applyForm"]')).scope().applyForm;
             Object.keys($scope.applyForm).forEach(function(key) {
                 if ($scope.applyForm[key] && $scope.applyForm[key].$setDirty) {
                     $scope.applyForm[key].$setDirty();

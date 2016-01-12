@@ -100,6 +100,11 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }
         }
 
+        function setCrowdFundingDetailUrl(crowdFundingId) {
+            $scope.crowdFundingDetailUrl = '//' + projectEnvConfig.zhongHost +
+                '/#/zhongchouDetail?source=rongzi&fundingId=' + crowdFundingId;
+        }
+
         // 获取公司基本信息
         $scope.companyBasicData = function(callback) {
             CompanyService.get({
@@ -113,8 +118,9 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 $scope.isIpoOrAcquired = isIpoOrAcquiredReg.test(data.funds.phase);
                 introProduct(data.company);
                 setAppDownloadLink(data.company);
+                setCrowdFundingDetailUrl(data.funds.crowdFundingId);
 
-                if(data.company.faId){
+                if (data.company.faId) {
                     loadFa(data.company.faId);
                 }
 
@@ -163,7 +169,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             propName: 'intro',
             title: '其他',
             className: 'intro-icon-other',
-        }, ];
+        }];
 
         //产品介绍
         function introProduct(company) {
@@ -228,10 +234,10 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
         //fa
 
-        function loadFa(id){
+        function loadFa(id) {
             UserService.basic.get({
                 id:id
-            },function(data){
+            }, function(data) {
                 $scope.fa = data;
             });
         }
@@ -248,6 +254,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 id: $scope.companyId,
             }, function(data) {
                 $scope.founder.list = data.data;
+                callback &&  callback(data);
             }, function(err) {
 
                 ErrorService.alert(err);
@@ -270,6 +277,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }, function(data) {
                 $scope.finance.originListCount = data.data.length;
                 $scope.finance.list = data.data.slice(0, 1);
+                callback && callback(data);
             }, function(err) {
 
                 ErrorService.alert(err);
@@ -283,6 +291,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }, function(data) {
                 $scope.capitalDetail = data;
                 setCapitalList();
+                callback && callback();
             }, function(data) {
 
                 setApplyState(data);
@@ -390,18 +399,14 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 $scope.applyStateText = fundsApplyStatus.APPLY;
                 CompanyService.funds.applyView({
                     id:$scope.companyId,
-                }, {
-
-                }, function(data) {
-
-                });
+                }, { });
             }
         };
 
         $scope.buyOrTalkClick = function(type, e) {
             e.preventDefault();
             if (type === 'buy') {
-
+                location.href = $scope.crowdFundingDetailUrl;
             }else {
                 showAppDownload();
             }

@@ -4,11 +4,11 @@
 
 var angular = require('angular');
 
-angular.module('defaultApp.filter').filter('WanNum', function () {
-    return function (input, value) {
+angular.module('defaultApp.filter').filter('WanNum', function() {
+    return function(input, value) {
         var num = input - 0;
-        if(typeof num == 'number'){
-            num = num/10000 + '万';
+        if (typeof num == 'number') {
+            num = num / 10000 + '万';
         }
 
         return num;

@@ -5,7 +5,7 @@
     </section>
     <section ng-if="company.value.funds.crowdFundingId" class="capital-head">
         <h3>股权融资</h3>
-        <a ui-sref="syndicatesDetail({companyId:compnayId,fundingId:company.value.funds.crowdFundingId})">查看详情</a>
+        <a ng-href={{crowdFundingDetailUrl}}>查看详情</a>
     </section>
     <div >
         <section class="capital-list">

@@ -1,17 +1,13 @@
 
 
 /* jshint maxstatements:100 */
+/* globals angular */
+angular.module('defaultApp').config(function($locationProvider, $stateProvider, $urlRouterProvider, $provide, $sceDelegateProvider) {
 
-var angular = require('angular');
-
-angular.module('defaultApp').config(function ($locationProvider, $stateProvider, $urlRouterProvider, $provide, $sceDelegateProvider) {
-
-    var ZHONGHOST = '//'+projectEnvConfig.zhongHost;
+    var ZHONGHOST = '//' + projectEnvConfig.zhongHost;
     $sceDelegateProvider.resourceUrlWhitelist([
-        'self'
+        'self',
     ]);
-
-
 
     $urlRouterProvider.otherwise('/404');
 
@@ -21,52 +17,51 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('companyDetail', {
         url: '/company/{id}',
         templateUrl: 'templates/company/detail.html',
-        controller: 'CompanyDetailController'
+        controller: 'CompanyDetailController',
     });
 
     $stateProvider.state('companyDetailTips', {
         url: '/company/{id}/tips',
         templateUrl: 'templates/company/company-tips-full.html',
-        controller: 'CompanyTipsController'
+        controller: 'CompanyTipsController',
     });
-
 
     $stateProvider.state('companyDetailCapitalHistory', {
         url: '/company/{id}/capital',
         templateUrl: 'templates/company/company-capital-history-full.html',
-        controller: 'CompanyCapitalHistoryController'
+        controller: 'CompanyCapitalHistoryController',
     });
 
     $stateProvider.state('companyDetailQichacha', {
         url: '/company/{id}/qichacha',
         templateUrl: 'templates/company/company-qichacha.html',
-        controller: 'CompanyQichachaController'
+        controller: 'CompanyQichachaController',
     });
-
 
     // 用户详情页
     $stateProvider.state('user_detail', {
         url: '/user/{id}',
         templateUrl: 'templates/user/detail.html',
-        controller: 'UserDetailController'
+        controller: 'UserDetailController',
     });
+
     // 机构详情页
     $stateProvider.state('organization_detail', {
         url: '/organization/{id}',
         templateUrl: 'templates/organization/detail.html',
-        controller: 'OrganizationDetailController'
+        controller: 'OrganizationDetailController',
     });
 
     $stateProvider.state('search', {
         url: '/search',
         templateUrl: 'templates/search/result.html',
-        controller: 'SearchController'
+        controller: 'SearchController',
     });
 
     // welcome
     $stateProvider.state('guide', {
         url: '/guide',
-        template: '<div ui-view></div>'
+        template: '<div ui-view></div>',
     });
 
     $stateProvider.state('guide.welcome', {
@@ -74,10 +69,10 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/guide/welcome.html',
         controller: 'GuideWelcomeController',
         data:{
-            permissions : {
-                only : ['login']
-            }
-        }
+            permissions: {
+                only: ['login'],
+            },
+        },
     });
 
     /*众筹所有模块*/
@@ -121,6 +116,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     //     controller: 'syndicatesController'
     // });
     /*众筹详情*/
+
     // $stateProvider.state('syndicatesDetail', {
     //     url: ZHONGHOST+'/#/zhongchouDetail?companyId&fundingId&login&source&checkValid&krsrc',
     //     external:true
@@ -160,16 +156,17 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     // });
     //
     /*众筹个人所有订单页面*/
-   // $urlRouterProvider.when('/zhongchouAllOrder', '/zhongchouAllOrder/all');
-   //  $stateProvider.state('zhongchouAllOrder', {
-   //      url: '/zhongchouAllOrder',
-   //      templateUrl: 'templates/syndicates/allOrder.html',
-   //      controller: 'syndicatesAllOrderController'
-//      data:{
-//          permissions : {
-//              only : ['valid']
-//          }
-//      }
+
+    // $urlRouterProvider.when('/zhongchouAllOrder', '/zhongchouAllOrder/all');
+    //  $stateProvider.state('zhongchouAllOrder', {
+    //      url: '/zhongchouAllOrder',
+    //      templateUrl: 'templates/syndicates/allOrder.html',
+    //      controller: 'syndicatesAllOrderController'
+    //      data:{
+    //          permissions : {
+    //              only : ['valid']
+    //          }
+    //      }
     // });
     //  $stateProvider.state('zhongchouAllOrder.all', {
     //     url: '/all',
@@ -251,11 +248,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/investor/apply.html',
         controller: 'InvestorValidateApplyController',
         data:{
-            permissions : {
-                only : ['valid']
-            }
-        }
+            permissions: {
+                only: ['valid'],
+            },
+        },
     });
+
     // #<{(|协议路由，用户服务协议|)}>#
     // $stateProvider.state('serviceProtocol', {
     //     url: '/serviceProtocol',
@@ -283,10 +281,10 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/company/create.html',  // todo : 文件路径
         controller: 'CreateCompanyController', // todo : controller
         data:{
-            permissions : {
-                only : ['valid']
-            }
-        }
+            permissions: {
+                only: ['valid'],
+            },
+        },
     });
     /*创建公司审核页*/
     $stateProvider.state('createCompanyApply', {
@@ -314,10 +312,10 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/company/my-company.html', // todo : 文件路径
         controller: 'MyCompanyController', // todo : controller
         data:{
-            permissions : {
-                only : ['valid']
-            }
-        }
+            permissions: {
+                only: ['valid'],
+            },
+        },
     });
 
     // 我要融资-提交成功
