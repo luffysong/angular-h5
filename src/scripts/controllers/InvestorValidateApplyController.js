@@ -97,8 +97,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.autocomplete_options_organization = {
             suggest: suggest_state_remote_organization,
             on_error: console.log,
-            on_detach: function (cs) {
-                if(($scope.organizationList.data[0].name === $scope.organization.addForm.name) && !$scope.organizationList.data[0].status) {
+            on_detach: function() {
+                if (($scope.organizationList.data[0].name === $scope.organization.addForm.name) &&
+                        !$scope.organizationList.data[0].status) {
                     $scope.organization.isAdd = false;
                     var organization = $scope.organizationList.data[0];
                     $scope.organization.addForm.name = organization.name;
@@ -187,12 +188,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.autocomplete_options = {
             suggest: suggest_state_remote,
             on_error: console.log,
-            on_detach: function (cs) {
-                if($scope.companyList.data.length == 0) {
+            on_detach: function(cs) {
+                if ($scope.companyList.data.length === 0) {
                     $scope.company.isAddExperience = true;
                     $scope.company.addForm.name = cs;
                     $scope.company.addForm.id = 0;
-                } else if(($scope.companyList.data[0].name === $scope.company.addForm.name) && !$scope.companyList.data[0].status) {
+                } else if (($scope.companyList.data[0].name === $scope.company.addForm.name) && !$scope.companyList.data[0].status) {
                     $scope.company.isAdd = false;
                     var company = $scope.companyList.data[0];
                     $scope.company.addForm.name = company.name;
@@ -254,10 +255,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 sub: 'company'
             }, function(data) {
                 $scope.companyList = data;
-                console.log('---------',data)
-                var exist = data.data.filter(function(item) {
-                    return item.name.toLowerCase() == q.toLowerCase();
-                });
+                console.log('---------', data);
+
+                // var exist = data.data.filter(function(item) {
+                //     return item.name.toLowerCase() == q.toLowerCase();
+                // });
 
                 deferred.resolve(suggest_state(data.data));
             }, function() {
@@ -297,7 +299,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     $scope.company.form.positionDetail = '';
                     $scope.company.form.startYear = '';
                     $scope.company.form.startMonth = '';
-                    $scope.company.form.groupName='';
+                    $scope.company.form.groupName = '';
 
                     $scope.company.addForm.id = '';
                     $scope.company.addForm.name = '';
@@ -320,7 +322,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
                 var startDate = new Date(company.startDate);
                 $scope.company.form.groupId = company.groupId;
-                $scope.company.form.groupName=company.groupName;
+                $scope.company.form.groupName = company.groupName;
                 $scope.company.form.position = company.position;
                 $scope.company.form.positionDetail = company.positionDetail;
                 $scope.company.form.startYear = startDate.getFullYear() + '';
@@ -377,7 +379,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 name:'',
                 brief:'',
                 enName:'',
-				website:'',
+                website:'',
                 fullName:'',
                 logo:''
             },
@@ -396,13 +398,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     $scope.organization.form.startYear = '';
                     $scope.organization.form.startMonth = '';
 
-					$scope.organization.addForm.id = '';
-					$scope.organization.addForm.enName = '';
-					$scope.organization.addForm.fullName = '';
-					$scope.organization.addForm.logo = '';
-					$scope.organization.addForm.name = '';
-					$scope.organization.addForm.website = '';
-					$scope.organization.addForm.brief = '';
+                    $scope.organization.addForm.id = '';
+                    $scope.organization.addForm.enName = '';
+                    $scope.organization.addForm.fullName = '';
+                    $scope.organization.addForm.logo = '';
+                    $scope.organization.addForm.name = '';
+                    $scope.organization.addForm.website = '';
+                    $scope.organization.addForm.brief = '';
                     return false;
                 }
 
@@ -456,17 +458,19 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
 
         };
+
         // 上传logo start
         $scope.logo = {};
-        $scope.logoFileSelected = function (files, e) {
+        $scope.logoFileSelected = function(files) {
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
                 //ErrorService.alert({
                 //    msg: "附件大于5M"
                 //});
-                angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("logoSize", true);
+                angular.element($("form[name='investorValidateForm']")).scope().investorValidateForm.$setValidity('logoSize', true);
                 return;
             }
+
             $scope.temp_logo = '';
             $scope.organization.addForm.logo = '';
             for (var i = 0; i < files.length; i++) {
@@ -477,53 +481,56 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     'x-gmkerl-type': 'fix_width', //限定宽度,高度自适应
                     'x-gmkerl-value': '900',      //限定的宽度的值
                     'x-gmkerl-unsharp': true
-                }).then(function (data) {
+                }).then(function(data) {
                     $scope.upload = $upload.upload({
                         url: upyun.api + '/' + upyun.bucket.name,
                         data: data,
                         file: file,
                         withCredentials: false
-                    }).progress(function (evt) {
+                    }).progress(function(evt) {
                         $scope.logo.progress = evt.loaded * 100 / evt.total;
-                    }).success(function (data, status, headers, config) {
+                    }).success(function(data) {
 
                         var reader = new FileReader();
-                        reader.onload = function(){
+                        reader.onload = function() {
 
                             //$('.J_aa')[0].src = reader.result
 
                             $scope.temp_logo = reader.result;
 
-                        }
+                        };
 
                         var filename = data.url.toLowerCase();
-                        if (filename.indexOf('.jpg') != -1 || (filename.indexOf('.png') != -1) || filename.indexOf('.jpeg') != -1) {
+                        if (filename.indexOf('.jpg') !== -1 || (filename.indexOf('.png') !== -1) || filename.indexOf('.jpeg') !== -1) {
 
-                            reader.readAsDataURL(file)
+                            reader.readAsDataURL(file);
                             $scope.organization.addForm.logo = window.kr.upyun.bucket.url + data.url;
 
-                            angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("logoEmpty", true);
+                            angular.element($("form[name='investorValidateForm']")).scope().investorValidateForm.$setValidity('logoEmpty', true);
                         } else {
                             //ErrorService.alert({
                             //    msg: '格式不支持，请重新上传！'
                             //});
-                            angular.element($("form[name='investorValidateForm']")).scope()["investorValidateForm"].$setValidity("logoType", true);
+                            angular.element($("form[name='investorValidateForm']")).scope().investorValidateForm.$setValidity('logoType', true);
                         }
+
                         $scope.logo.uploading = false;
-                        $scope.temp_logo = ''
-                    }).error(function () {
+                        $scope.temp_logo = '';
+                    }).error(function() {
                         ErrorService.alert({
                             msg: '格式不支持，请重新上传！'
                         });
 
                         $scope.logo.uploading = false;
                     });
-                }, function (err) {
+                }, function(err) {
+
                     $scope.logo.uploading = false;
                     ErrorService.alert(err);
                 });
             }
         };
+
         // 上传logo end
         $scope.organization.loadData();
 
@@ -719,17 +726,17 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         /*表单提交*/
         $scope.submitForm = function() {
             //创建公司
-            function createCompany(data) {
-                    var deferred = $q.defer();
-                    CompanyService.save(data, function(response) {
-                        deferred.resolve(response);
-                    }, function(error) {
-
-                        deferred.reject(error);
-                    });
-
-                    return deferred.promise;
-                }
+            // function createCompany(data) {
+            //         var deferred = $q.defer();
+            //         CompanyService.save(data, function(response) {
+            //             deferred.resolve(response);
+            //         }, function(error) {
+            //
+            //             deferred.reject(error);
+            //         });
+            //
+            //         return deferred.promise;
+            //     }
 
             //创建机构
             function createOrganization(data) {
@@ -893,18 +900,17 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
             //$scope.hasClick = true;
 
-
-
             // 时间
             var myDate = new Date();
-            year = myDate.getFullYear();
-            month = myDate.getMonth() + 1;
-            if($scope.organization.form.startMonth > month && $scope.organization.form.startYear == year) {
-                Error.show("任职的起始时间不能大于当前月");
+            var year = myDate.getFullYear();
+            var month = myDate.getMonth() + 1;
+            if ($scope.organization.form.startMonth > month && $scope.organization.form.startYear === year) {
+                Error.show('任职的起始时间不能大于当前月');
                 return false;
             }
-            if($scope.company.form.startMonth > month && $scope.company.form.startYear == year) {
-                Error.show("任职的起始时间不能大于当前月");
+
+            if ($scope.company.form.startMonth > month && $scope.company.form.startYear === year) {
+                Error.show('任职的起始时间不能大于当前月');
                 return false;
             }
 
@@ -954,12 +960,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
                                         console.log('--创建经历失败--');
                                     });
-                                }, function(err){
+                                }, function(err) {
                                     /*fixme 增加错误提示*/
                                     ErrorService.alert({
                                         msg: '对不起，该机构不符合平台收录标准'
                                     });
-                                    console.log('---创建公司失败--',err,err.msg.indexOf('10次'),err.msg.indexOf("不符合"));
+                                    console.log('---创建公司失败--', err, err.msg.indexOf('10次'), err.msg.indexOf('不符合'));
                                 });
                         }else {
                             //创建经历
@@ -1019,7 +1025,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     if ($scope.company.isAddExperience) {
                         if ($scope.company.isAdd) {
                             //创建经历
-                            var expData = {};
+                            expData = {};
                             expData.uid = UserService.getUID();
                             expData.groupIdType = 3;
                             expData.current = true;
@@ -1030,13 +1036,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                             expData.startDate = $scope.company.form.startYear + '-' + $scope.company.form.startMonth + '-01 01:01:01';
                             console.log('---要提交的创建经历数据--', expData);
 
-                            var createExperiencePromise = createExperience(expData);
-                            createExperiencePromise.then(function(response){
+                            createExperiencePromise = createExperience(expData);
+                            createExperiencePromise.then(function(response) {
                                 console.log('--创建经历成功--');
 
                                 //提交总数据
                                 send(response.id);
-                            },function(err){
+                            }, function() {
 
                                 console.log('---创建公司失败--');
                             });
@@ -1075,7 +1081,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         expData.current = true;
                         expData.id = $scope.company.form.id;
                         expData.groupId = $scope.company.form.groupId;
-                        expData.groupName = $scope.company.form.groupName
+                        expData.groupName = $scope.company.form.groupName;
                         expData.position = $scope.company.form.position;
                         expData.positionDetail = $scope.company.form.positionDetail;
                         expData.startDate = $scope.company.form.startYear + '-' + $scope.company.form.startMonth + '-01 01:01:01';
@@ -1126,32 +1132,34 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         });
 
         var myDate = new Date();
-        year = myDate.getFullYear();
-        month = myDate.getMonth() + 1;
-        $scope.$watch('organization.form.startMonth',function(){
-            if($scope.organization.form.startYear && $scope.organization.form.startYear == year) {
-                if($scope.organization.form.startMonth > month) {
-                    Error.show("任职的起始时间不能大于当前月");
+        var year = myDate.getFullYear();
+        var month = myDate.getMonth() + 1;
+        $scope.$watch('organization.form.startMonth', function() {
+            if ($scope.organization.form.startYear && $scope.organization.form.startYear === year) {
+                if ($scope.organization.form.startMonth > month) {
+                    Error.show('任职的起始时间不能大于当前月');
                     return false;
                 } else {
                     Error.hide();
                 }
             }
         });
-        $scope.$watch('company.form.startMonth',function(){
-            if($scope.company.form.startYear && $scope.company.form.startYear == year) {
-                if($scope.company.form.startMonth > month) {
-                    Error.show("任职的起始时间不能大于当前月");
+
+        $scope.$watch('company.form.startMonth', function() {
+            if ($scope.company.form.startYear && $scope.company.form.startYear === year) {
+                if ($scope.company.form.startMonth > month) {
+                    Error.show('任职的起始时间不能大于当前月');
                     return false;
                 } else {
                     Error.hide();
                 }
             }
         });
-        $scope.$watch('company.form.startYear',function(){
-            if($scope.company.form.startYear && $scope.company.form.startYear == year) {
-                if($scope.company.form.startMonth > month) {
-                    Error.show("任职的起始时间不能大于当前月");
+
+        $scope.$watch('company.form.startYear', function() {
+            if ($scope.company.form.startYear && $scope.company.form.startYear === year) {
+                if ($scope.company.form.startMonth > month) {
+                    Error.show('任职的起始时间不能大于当前月');
                     return false;
                 } else {
                     Error.hide();
@@ -1160,10 +1168,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 Error.hide();
             }
         });
-        $scope.$watch('organization.form.startYear',function(){
-            if($scope.organization.form.startYear && $scope.organization.form.startYear == year) {
-                if($scope.organization.form.startMonth > month) {
-                    Error.show("任职的起始时间不能大于当前月");
+
+        $scope.$watch('organization.form.startYear', function() {
+            if ($scope.organization.form.startYear && $scope.organization.form.startYear === year) {
+                if ($scope.organization.form.startMonth > month) {
+                    Error.show('任职的起始时间不能大于当前月');
                     return false;
                 } else {
                     Error.hide();
