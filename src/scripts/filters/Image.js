@@ -4,35 +4,36 @@
 
 var angular = require('angular');
 
-var defaults = {
-    avatar: 'https://krplus.b0.upaiyun.com/default_avatar.png',
-    logo: 'https://krplus.b0.upaiyun.com/default_logo.png',
-    user: 'https://krplus-pic.b0.upaiyun.com/201511/16070248/kopb6thbg3opudsr.png'
-};
-var sizeArr = [20,30,50,70,100,120,200,500,640,800];
+var sizeArr = [20, 30, 50, 70, 100, 120, 200, 500, 640, 800];
 
-
-angular.module('defaultApp.filter').filter('image', function () {
-    return function (input, size, type) {
+angular.module('defaultApp.filter').filter('image', function() {
+    var defaults = {
+        avatar: kr.defaultImg.defaultAvatarUrl,
+        logo: kr.defaultImg.defaultLogoUrl,
+        user: kr.defaultImg.defaultUserUrl
+    };
+    return function(input, size, type) {
         size = size || 800;
         type = type || 'logo';
-        var realSize = 800, distance = 800;
+        var realSize = 800;
+        var distance = 800;
         var src = input;
 
-        sizeArr.forEach(function(s){
+        sizeArr.forEach(function(s) {
             var dis = Math.abs(size - s);
-            if(dis < distance){
+            if (dis < distance) {
                 distance = dis;
                 realSize = s;
             }
         });
 
-        if(!input){
+        if (!input) {
             src = defaults[type];
         }
-        if(src.indexOf('krplus-pic.b0.upaiyun.com/')>-1){
+
+        if (src.indexOf('krplus-pic.b0.upaiyun.com/') > -1) {
             src = src.replace(/\!.+$/, '');
-            src = src+'!'+realSize;
+            src = src + '!' + realSize;
         }
 
         return src;

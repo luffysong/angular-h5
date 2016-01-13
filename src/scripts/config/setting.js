@@ -14,7 +14,9 @@ window.kr.upyun = {
 };
 window.kr.defaultImg = {
     defaultAvatarUrl:'https://krplus.b0.upaiyun.com/default_avatar.png',
-    defaultVideoUrl: 'https://krplus-pic.b0.upaiyun.com/201512/18065817/5qf5kwfe397qmzzv.jpeg'
+    defaultVideoUrl: 'https://krplus-pic.b0.upaiyun.com/201512/18065817/5qf5kwfe397qmzzv.jpeg',
+    defaultLogoUrl: 'https://krplus.b0.upaiyun.com/default_logo.png',
+    defaultUserUrl: 'https://krplus-pic.b0.upaiyun.com/201511/16070248/kopb6thbg3opudsr.png'
 };
 window.kr.H5_PATH = '/m/#/';
 

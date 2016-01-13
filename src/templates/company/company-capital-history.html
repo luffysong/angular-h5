@@ -19,8 +19,8 @@
                     <span ng-bind="item.valuation | wanText"></span>
                 </p>
                 <ul>
-                    <li ng-bind="organ.name" ng-repeat="organ in item.participants">
-
+                    <li  ng-repeat="organ in item.participants">
+                        <a ng-bind="organ.name" ng-href="{{getUISref(organ.entityType,organ.id)}}" ></a>
                     </li>
                 </ul>
             </li>

@@ -6,3 +6,4 @@ require('./UnitConversion');
 require('./WanNum');
 require('./WanText');
 require('./default');
+require('./share');

@@ -8,7 +8,6 @@
 	"noarg": true,
 	"undef": true,
 	"unused": true,
-    "camelcase": true,
 
 
     "predef":["projectEnvConfig","_hmt","krtracker","kr","CITY_DATA",

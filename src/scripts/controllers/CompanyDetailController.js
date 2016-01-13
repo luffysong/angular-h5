@@ -21,8 +21,13 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         };
         var API_STATUS = {
             FUNDS_NOT_DOING:100,
-            FUNDS_NOT_AOLLOW_VIEW:102,
-
+            NOT_INVESTOR:101,
+            FUNDS_NOT_AOLLOW_VIEW:102
+        };
+        var INVESTOR_TYPE = {
+            INDIVIDUAL: 'INDIVIDUAL',
+            ORGANIZATION: 'ORGANIZATION',
+            COMPANY: 'COMPANY'
         };
         $timeout(function() {
             window.scroll(0, 0);
@@ -48,6 +53,8 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         setMobileType();
         loadQichacha();
 
+        $scope.getUISref = getUISref;
+
         $scope.existLinks = function() {
             return $scope.appLinks || $scope.company.value.company.webLink;
         };
@@ -58,12 +65,8 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 $scope.company.value.company.intro;
         };
 
-        $scope.existCapitalDetail = function() {
-            return $scope.isReplaceDefault ? $scope.capitalDetail.faRecommendedText :
-                $scope.capitalDetail.list.length;
-        };
-
-        $scope.existCapitalBasic = function() {
+        //众筹或者融资存在，没有权限的情况两个ID均不存在
+        $scope.isFunding = function() {
             return $scope.company.value.funds.crowdFundingId || $scope.company.value.funds.fundsId;
         };
 
@@ -120,6 +123,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 introProduct(data.company);
                 setAppDownloadLink(data.company);
                 setCrowdFundingDetailUrl(data.funds.crowdFundingId);
+                loadCrowdFundingDetail(data.funds.crowdFundingId);
 
                 if (data.company.faId) {
                     loadFa(data.company.faId);
@@ -221,6 +225,20 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }
         });
 
+        function loadCrowdFundingDetail(id) {
+            CompanyService.getCrowdFunding({
+                id:id
+            }, function(data) {
+                $scope.funds.phase = data.funding.round;
+                $scope.funds.unit = 'CNY';
+
+                //jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+                $scope.funds.value = data.funding.cf_raising;
+                $scope.company.value.funds.shares = data.funding.sell_shares.replace('%', '');
+
+            });
+        }
+
         getFeeds();
 
         //公司动态
@@ -283,6 +301,16 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
                 ErrorService.alert(err);
             });
+        }
+
+        function getUISref(type, id) {
+            if (type === INVESTOR_TYPE.ORGANIZATION) {
+                return $state.href('organization_detail', { id: id });
+            }else if (type === INVESTOR_TYPE.INDIVIDUAL) {
+                return $state.href('user_detail', { id: id });
+            }else {
+                return $state.href('companyDetail', { id: id });
+            }
         }
 
         //获取融资详情
@@ -349,6 +377,8 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 $scope.applyStarted =  !!data.data.applyStatus;
                 $scope.applyStateText = fundsApplyStatus[data.data.applyStatus];
                 $scope.applyStateText = $scope.applyStateText || '申请查看';
+            }else if (data.code === API_STATUS.NOT_INVESTOR) {
+                $scope.notInvestor = true;
             }
         }
 
