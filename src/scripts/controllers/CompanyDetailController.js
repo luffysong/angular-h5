@@ -381,6 +381,10 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 $scope.applyStateText = $scope.applyStateText || '申请查看';
             }else if (data.code === API_STATUS.NOT_INVESTOR) {
                 $scope.notInvestor = true;
+            }else if (data.code === API_STATUS.FUNDS_NOT_DOING) {
+
+                //获得公司
+                $scope.notFunding = true;
             }
         }
 

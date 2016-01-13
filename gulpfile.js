@@ -431,14 +431,14 @@ gulp.task('build:templates', function() {
         .pipe($.size());
 });
 
-gulp.task('build:addTemplates', function() {
+gulp.task('build:addTemplates', ['build:templates'], function() {
     return gulp.src(['src/scripts/**/*.js'])
         .pipe($.replace(/\/\*##(.+)##\*\//, '$1'))
         .pipe(gulp.dest('.tmp/tmp-scripts'));
 });
 
 // Build Scripts
-gulp.task('build:scripts', ['scripts:vendor', 'scripts:init', 'build:templates', 'build:addTemplates'], function() {
+gulp.task('build:scripts', ['scripts:vendor', 'scripts:init', 'build:addTemplates'], function() {
     return gulp.src(['.tmp/tmp-scripts/*.js'])
 		.pipe(through2.obj(function(file, enc, next) {
     var self = this;
