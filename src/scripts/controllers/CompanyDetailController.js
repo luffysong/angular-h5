@@ -123,7 +123,9 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 introProduct(data.company);
                 setAppDownloadLink(data.company);
                 setCrowdFundingDetailUrl(data.funds.crowdFundingId);
-                loadCrowdFundingDetail(data.funds.crowdFundingId);
+                if (data.funds.crowdFundingId) {
+                    loadCrowdFundingDetail(data.funds.crowdFundingId);
+                }
 
                 if (data.company.faId) {
                     loadFa(data.company.faId);
