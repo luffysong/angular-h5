@@ -438,7 +438,7 @@ gulp.task('build:addTemplates', function() {
 });
 
 // Build Scripts
-gulp.task('build:scripts', ['scripts:vendor', 'scripts:ui:template', 'scripts:init', 'build:templates', 'build:addTemplates'], function() {
+gulp.task('build:scripts', ['scripts:vendor', 'scripts:init', 'build:templates', 'build:addTemplates'], function() {
     return gulp.src(['.tmp/tmp-scripts/*.js'])
 		.pipe(through2.obj(function(file, enc, next) {
     var self = this;
