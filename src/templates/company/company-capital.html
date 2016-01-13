@@ -8,7 +8,7 @@
         <a ng-href={{crowdFundingDetailUrl}}>查看详情</a>
     </section>
     <div >
-        <section class="capital-list">
+        <section ng-if="!company.value.funds.crowdFundingId" class="capital-list">
             <header class="capital-row row">
                 <div >融资轮次</div>
                 <div >融资金额</div>
