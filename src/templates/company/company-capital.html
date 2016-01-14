@@ -1,4 +1,6 @@
-<div ng-hide="notFunding"  class="capital-wrapper">
+
+<!-- 明确知道公司未进行融资 且未进行股权融资 -->
+<div ng-hide="notFunding && !company.value.funds.crowdFundingId"  class="capital-wrapper">
     <section ng-if="company.value.funds.fundsId" class="capital-head">
         <h3>正在融资</h3>
         <span ng-if="company.value.company.faId" class="capital-fa">FA推荐</span>
@@ -25,10 +27,11 @@
         </section>
 
         <!-- 融资中的公司融资详情可能设置权限 -->
-        <section  class="capital-qa">
-            <h3>融资详情</h3>
+        <!-- 公司正在股权融资 则不展示此数据，股权融资不要求权限 -->
+        <section ng-if="!company.value.funds.crowdFundingId"  class="capital-qa">
+            <h3 ng-bind="capitalDetail.isReplaceDefault ? '项目亮点' : '融资详情'">融资详情</h3>
 
-            <!-- 没有权限没有数据 -->
+            <!-- 有权限没有数据 -->
             <div  ng-if="company.value.funds.fundsId" class="qa-content">
                 <ul ng-if="!capitalDetail.isReplaceDefault">
                     <li class="qa-row" ng-repeat="qa in capitalDetail.list">
@@ -54,7 +57,7 @@
                 <p>
                     <span>当前公司的市场规模、业务数据、项目优势、竞品 情况、未来规划等融资信息，</span>
                     <span>
-                    创业者设置需获其同意 才能查看。
+                    创业者设置需获其同意才能查看。
                     </span>
                 </p>
                 <a  ng-bind="applyStateText"
@@ -63,6 +66,7 @@
             </div>
 
 
+            <!--需要成为投资人 -->
             <div ng-if="notInvestor" class="guide-investor-view">
                 <p>
                 <span>当前公司的市场规模、业务数据、项目优势、竞品情况、未来规划等融资信息，

@@ -7,7 +7,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller').controller('CompanyDetailController',
     function($scope, $location, $stateParams, $state, CompanyService, $timeout,
               UserService, ErrorService, $rootScope, DictionaryService,
-              SocialService
+              SocialService, CredentialService
               ) {
         var KR_DEFAULT_IMAGE = window.kr.defaultImg;
         var ZHONG_HOST = '//' + projectEnvConfig.zhongHost + kr.H5_PATH;
@@ -22,7 +22,8 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         var API_STATUS = {
             FUNDS_NOT_DOING:100,
             NOT_INVESTOR:101,
-            FUNDS_NOT_AOLLOW_VIEW:102
+            FUNDS_NOT_AOLLOW_VIEW:102,
+            NOT_LOGIN: 403
         };
         var INVESTOR_TYPE = {
             INDIVIDUAL: 'INDIVIDUAL',
@@ -388,10 +389,17 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }
         }
 
+        function ensureLogin() {
+            if (!UserService.getUID()) {
+                CredentialService.directToLogin();
+            }
+        }
+
         //Event Handelr
 
         $scope.likeClick = function(isLike, e) {
             e.preventDefault();
+            ensureLogin();
             if (!isLike) {
                 SocialService.likes.yes({
                     id:$scope.companyId,
@@ -410,6 +418,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
         $scope.followClick = function(followed, e) {
             e.preventDefault();
+            ensureLogin();
             if (!followed) {
                 SocialService.follow.yes({
                     id:$scope.companyId,

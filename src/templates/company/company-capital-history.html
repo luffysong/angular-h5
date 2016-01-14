@@ -1,7 +1,7 @@
 <div ng-if="finance.list.length" class="capital-history">
     <header ng-hide="fullCapital">
         <h3>融资经历</h3>
-        <a class="more-info"  ui-sref="companyDetailCapitalHistory({id:companyId})">
+        <a class="more-info" ng-if="finance.originListCount > 1"  ui-sref="companyDetailCapitalHistory({id:companyId})">
             <span ng-bind="'('+finance.originListCount+')'"></span>
             <span></span>
         </a>
@@ -20,7 +20,7 @@
                 </p>
                 <ul>
                     <li  ng-repeat="organ in item.participants">
-                        <a ng-bind="organ.name" ng-href="{{getUISref(organ.entityType,organ.id)}}" ></a>
+                        <a ng-bind="organ.name" ></a>
                     </li>
                 </ul>
             </li>

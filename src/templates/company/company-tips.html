@@ -1,7 +1,7 @@
 <div ng-if="feeds.length" class="project-tips">
     <header ng-hide="fullTips">
         <h3>项目动态</h3>
-        <a class="more-info" ui-sref="companyDetailTips({id:companyId})">
+        <a class="more-info" ng-if="originFeedsCount > 3" ui-sref="companyDetailTips({id:companyId})">
             <span ng-bind="'('+originFeedsCount+')'"></span>
             <span></span>
         </a>
