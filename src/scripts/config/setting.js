@@ -20,4 +20,3 @@ window.kr.defaultImg = {
 };
 window.kr.H5_PATH = '/m/#/';
 
-
