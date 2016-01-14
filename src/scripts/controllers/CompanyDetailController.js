@@ -106,7 +106,8 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
         function setCrowdFundingDetailUrl(crowdFundingId) {
             $scope.crowdFundingDetailUrl = ZHONG_HOST +
-                'zhongchouDetail?source=rongzi&fundingId=' + crowdFundingId;
+                'zhongchouDetail?source=rongzi&fundingId=' + crowdFundingId +
+                'companyId=' + $scope.companyId;
         }
 
         // 获取公司基本信息
