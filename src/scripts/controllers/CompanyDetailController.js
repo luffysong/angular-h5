@@ -234,7 +234,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 $scope.funds.unit = 'CNY';
 
                 //jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-                $scope.funds.value = data.funding.cf_raising;
+                $scope.funds.value = data.base.cf_raising;
                 $scope.company.value.funds.shares = data.funding.sell_shares.replace('%', '');
 
             });
