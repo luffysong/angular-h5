@@ -9,7 +9,6 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
               UserService, ErrorService, $rootScope, DictionaryService,
               SocialService, CredentialService
               ) {
-        var KR_DEFAULT_IMAGE = window.kr.defaultImg;
         var ZHONG_HOST = '//' + projectEnvConfig.zhongHost + kr.H5_PATH;
         var MOBILE_TYPE = {
             IOS:'IOS',
@@ -211,8 +210,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             var slides = $scope.slides;
             if ($scope.company.value.company.video) {
                 slides.push({
-                    video: $scope.company.value.company.video,
-                    image: KR_DEFAULT_IMAGE.defaultVideoUrl,
+                    video: $scope.company.value.company.video
                 });
 
             }

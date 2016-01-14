@@ -15,7 +15,7 @@ angular.module('defaultApp.directive').directive('krSwiper',
                 scope.$watch('slides', function() {
                     var img;
                     if (scope.slides && scope.slides.length > 1) {
-                        img = element.find('img')[0];
+                        img = element.find('img')[1];
                         $timeout(makeSwiper, 100);
                     }
 

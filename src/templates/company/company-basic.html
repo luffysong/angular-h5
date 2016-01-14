@@ -23,6 +23,12 @@
                     <span class="basic-industry-text"
                         ng-bind="company.value.basic.industry | dict_CompanyIndustry">
                     </span>
+                    <span ng-repeat="item  in company.value.tags">
+                        <span>，</span>
+                        <span class="basic-industry-text"
+                            ng-bind="item.name">
+                        </span>
+                    </span>
                 </div>
                 <div class="basic-row-3">
 
@@ -33,6 +39,7 @@
                     <span ng-if="company.value.basic.address1">
                         <i class="location-icon"></i>
                         <span ng-bind="company.value.basic.address1 | city" class="location-text"></span>
+                        <span ng-bind="company.value.basic.address2 | city" class="location-text"></span>
                     </span>
                     <span ng-if="company.value.statistics.accessCount">
                         <i class="view-icon"></i>
