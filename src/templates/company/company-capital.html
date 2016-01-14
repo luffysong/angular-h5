@@ -28,7 +28,7 @@
 
         <!-- 融资中的公司融资详情可能设置权限 -->
         <!-- 公司正在股权融资 则不展示此数据，股权融资不要求权限 -->
-        <section ng-if="!company.value.funds.crowdFundingId"  class="capital-qa">
+        <section ng-if="!company.value.funds.crowdFundingId"   class="capital-qa">
             <h3 ng-bind="capitalDetail.isReplaceDefault ? '项目亮点' : '融资详情'">融资详情</h3>
 
             <!-- 有权限没有数据 -->
