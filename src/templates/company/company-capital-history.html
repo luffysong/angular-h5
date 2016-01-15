@@ -9,7 +9,7 @@
     <section>
         <ul>
             <li ng-repeat="item in finance.list">
-                <span ng-bind="item.financeDate | date : 'yyyy-MM'"></span>
+                <span ng-bind="item.financeDate | date : 'yyyy.MM'"></span>
                 <b ng-bind="item.phase | dict_CompanyFinancePhase"></b>
                 <b class="crowd-invesment" ng-if="item.financeChannel === 'CROWD'">股权投资</b>
                 <p>

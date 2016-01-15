@@ -9,7 +9,7 @@
     <section>
         <ul>
             <li ng-repeat="item in feeds">
-                <span class="feed-time" ng-bind="item.feedTime"></span>
+                <span class="feed-time" ng-bind="item.feedTime | date:'yyyy.MM'"></span>
                 <span class="feed-text" ng-bind-html="item.content"></span>
             </li>
         </ul>
