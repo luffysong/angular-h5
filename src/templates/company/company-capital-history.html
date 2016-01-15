@@ -21,7 +21,8 @@
                 </p>
                 <ul>
                     <li  ng-repeat="organ in item.participants">
-                        <a ng-bind="organ.name" ></a>
+                        <a ng-bind="organ.name" ng-href="{{getUISref(organ.entityType,organ.entityId)}}"
+                            target="{{isOrganization(organ.entityType) ? '_blank' : '_self'}}" ></a>
                     </li>
                 </ul>
             </li>

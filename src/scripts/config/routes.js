@@ -44,13 +44,6 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controller: 'UserDetailController',
     });
 
-    // 机构详情页
-    $stateProvider.state('organization_detail', {
-        url: '/organization/{id}',
-        templateUrl: 'templates/organization/detail.html',
-        controller: 'OrganizationDetailController',
-    });
-
     $stateProvider.state('search', {
         url: '/search',
         templateUrl: 'templates/search/result.html',

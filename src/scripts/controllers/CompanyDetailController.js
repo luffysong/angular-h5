@@ -10,6 +10,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
               SocialService, CredentialService
               ) {
         var ZHONG_HOST = '//' + projectEnvConfig.zhongHost + kr.H5_PATH;
+        var RONG_HOST = '//' + projectEnvConfig.rongHost;
         var MOBILE_TYPE = {
             IOS:'IOS',
             ANDROID:'安卓',
@@ -55,6 +56,10 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         loadQichacha();
 
         $scope.getUISref = getUISref;
+
+        $scope.isOrganization = function(type) {
+            return type === INVESTOR_TYPE.ORGANIZATION;
+        };
 
         $scope.existLinks = function() {
             return $scope.appLinks || $scope.company.value.company.webLink;
@@ -308,7 +313,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
         function getUISref(type, id) {
             if (type === INVESTOR_TYPE.ORGANIZATION) {
-                return $state.href('organization_detail', { id: id });
+                return RONG_HOST + '/organization/' + id;
             }else if (type === INVESTOR_TYPE.INDIVIDUAL) {
                 return $state.href('user_detail', { id: id });
             }else {
