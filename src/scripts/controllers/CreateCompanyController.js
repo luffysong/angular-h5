@@ -713,7 +713,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 startMonth: $scope.formData.startMonth,
                 endYear: $scope.formData.endYear,
                 endMonth: $scope.formData.endMonth,
-                isCurrent: $scope.formData.isCurrent,
+                isCurrent: ($scope.formData.isCurrent ? true : false),
                 operationStatus: $scope.formData.operationStatus,
                 bizCardLink: $scope.formData.bizCardLink
             }, function() {
