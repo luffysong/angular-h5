@@ -14,6 +14,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             status:''
         };
 
+        $scope.zhongInvestorUrl = '//' + projectEnvConfig.zhongHost + kr.H5_PATH +
+            'investorValidate?krsrc=investorApply';
+
         //用户是否登录
         //if(!UserService.getUID()){
         //    location.href = "/user/login?from=" + encodeURIComponent(location.href);
@@ -1134,8 +1137,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         var myDate = new Date();
         var year = myDate.getFullYear();
         var month = myDate.getMonth() + 1;
+
+        //FIXME 此处使用字符串与数字的对比，代码不规范
+        //2016-01-15 18:35 songkaiyu
         $scope.$watch('organization.form.startMonth', function() {
-            if ($scope.organization.form.startYear && $scope.organization.form.startYear === year) {
+            if ($scope.organization.form.startYear && $scope.organization.form.startYear === year + '') {
                 if ($scope.organization.form.startMonth > month) {
                     Error.show('任职的起始时间不能大于当前月');
                     return false;
@@ -1146,7 +1152,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         });
 
         $scope.$watch('company.form.startMonth', function() {
-            if ($scope.company.form.startYear && $scope.company.form.startYear === year) {
+            if ($scope.company.form.startYear && $scope.company.form.startYear === year + '') {
                 if ($scope.company.form.startMonth > month) {
                     Error.show('任职的起始时间不能大于当前月');
                     return false;
@@ -1157,7 +1163,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         });
 
         $scope.$watch('company.form.startYear', function() {
-            if ($scope.company.form.startYear && $scope.company.form.startYear === year) {
+            if ($scope.company.form.startYear && $scope.company.form.startYear === year + '') {
                 if ($scope.company.form.startMonth > month) {
                     Error.show('任职的起始时间不能大于当前月');
                     return false;
@@ -1170,7 +1176,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         });
 
         $scope.$watch('organization.form.startYear', function() {
-            if ($scope.organization.form.startYear && $scope.organization.form.startYear === year) {
+            if ($scope.organization.form.startYear && $scope.organization.form.startYear === year + '') {
                 if ($scope.organization.form.startMonth > month) {
                     Error.show('任职的起始时间不能大于当前月');
                     return false;

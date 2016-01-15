@@ -19,6 +19,12 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controller: 'CompanyDetailController',
     });
 
+    $stateProvider.state('company_detail', {
+        url: '/company/{id}',
+        templateUrl: 'templates/company/detail.html',
+        controller: 'CompanyDetailController',
+    });
+
     $stateProvider.state('companyDetailTips', {
         url: '/company/{id}/tips',
         templateUrl: 'templates/company/company-tips-full.html',
