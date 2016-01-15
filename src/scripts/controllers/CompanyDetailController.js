@@ -22,7 +22,8 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             FUNDS_NOT_DOING:100,
             NOT_INVESTOR:101,
             FUNDS_NOT_AOLLOW_VIEW:102,
-            NOT_LOGIN: 403
+            NOT_LOGIN: 403,
+            NOT_GOOD_PROFILE: 4031
         };
         var INVESTOR_TYPE = {
             INDIVIDUAL: 'INDIVIDUAL',
@@ -322,6 +323,10 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }, function(data) {
                 $scope.capitalDetail = data;
                 setCapitalList();
+                if (!$scope.company.value.funds.fundsId) {
+                    $scope.notFunding = true;
+                }
+
                 callback && callback();
             }, function(data) {
 
@@ -394,6 +399,16 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }
         }
 
+        function ensureGoodProfile(code) {
+            if (code === API_STATUS.NOT_GOOD_PROFILE) {
+                CredentialService.directToWelcome();
+            }
+        }
+
+        function profileErrorCallback(data) {
+            ensureGoodProfile(data.code);
+        }
+
         //Event Handelr
 
         $scope.likeClick = function(isLike, e) {
@@ -405,13 +420,13 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 }, {
                 }, function(data) {
                     setLikeState(data, isLike);
-                });
+                }, profileErrorCallback);
             }else {
                 SocialService.likes.no({
                     id:$scope.companyId,
                 }, function(data) {
                     setLikeState(data, isLike);
-                });
+                }, profileErrorCallback);
             }
         };
 
@@ -425,7 +440,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
                 }, function(data) {
                     setFollowState(data, followed);
-                });
+                }, profileErrorCallback);
             }else {
                 SocialService.follow.no({
                     id:$scope.companyId,
@@ -433,7 +448,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
                 }, function(data) {
                     setFollowState(data, followed);
-                });
+                }, profileErrorCallback);
             }
         };
 

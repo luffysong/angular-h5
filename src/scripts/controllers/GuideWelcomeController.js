@@ -7,13 +7,13 @@ var angular = require('angular');
 angular.module('defaultApp.controller').controller('GuideWelcomeController',
     function($stateParams, $scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope,
         $timeout, $upload, AndroidUploadService, LoginService) {
-        $scope.sourceType = $stateParams.type || 'other';
 
         $scope.user = {
             avatar:''
         };
 
         $scope.userId = UserService.getUID();
+        $scope.sourceType = $stateParams.type || 'other';
 
         UserService.basic.get({
             id: $scope.userId
@@ -239,23 +239,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 phone: $scope.getPhoneWithCountryCode(),
                 smscode: $scope.user.smscode
             }, function() {
-                if ($scope.sourceType === 'investorValidate') {
-                    $state.go('investorValidate');
-                    return;
-                }
-
-                if ($scope.applySpaceEnter) {
-                    $state.go('krspace.judge');
-                }else if ($stateParams.from) {
-                    // $state.go('guide.success-enter');
-                    //$state.go('investorValidate');
-                    console.log($stateParams.from);
-                    location.href = decodeURIComponent($stateParams.from);
-                }
-
-                //setTimeout(function(){
-                //    location.reload();
-                //},0);
+                location.href = decodeURIComponent($stateParams.from);
             }, function(err) {
 
                 $scope.hasClick = false;
