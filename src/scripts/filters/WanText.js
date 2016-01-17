@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.filter').filter('wanText', function() {
     return function(input) {
-        if (input === undefined) {
+        if (input === undefined || input === '') {
             return '未披露';
         }
 
