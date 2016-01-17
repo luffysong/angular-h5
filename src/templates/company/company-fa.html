@@ -12,7 +12,9 @@
                 </a>
                 <div>
                     <h5 >
-                        <span ng-bind="fa.name"></span>
+                        <a ui-sref="user_detail({id:fa.id})">
+                            <span ng-bind="fa.name"></span>
+                        </a>
                     </h5>
                     <span >融资顾问</span>
                     <p ng-bind="fa.intro"></p>

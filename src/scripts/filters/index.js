@@ -1,3 +1,4 @@
+require('./EntityLink');
 require('./Image');
 require('./InvestorLink');
 require('./MoneyUnit');

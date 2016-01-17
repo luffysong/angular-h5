@@ -12,7 +12,11 @@
                 </a>
                 <div>
                     <h5 >
-                        <span ng-bind="item.name"></span> <i ng-if="isManager(item.id)">管理员</i>
+
+                        <a ui-sref="user_detail({id:item.id})">
+                            <span ng-bind="item.name"></span>
+                        </a>
+                        <i ng-if="isManager(item.id)">管理员</i>
                     </h5>
                     <span ng-bind="item.type | dict_StartupPositionType"></span>
                     <span ng-bind="item.position"></span>

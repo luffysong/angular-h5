@@ -12,7 +12,7 @@
 	<div class="item">
 		<div class="item-heading">
 			<h4>投资总数</h4>
-			<span class="bage">{{user.invest_cases.length || 0}}</span>		
+			<span class="bage">{{user.invest_cases.length || 0}}</span>
 		</div>
 		<div class="item-body">
 			<div class="clearfix" ng-if="user.investMoneyBegin || user.investMoneyEnd">
@@ -30,7 +30,7 @@
 			<h4>关注领域</h4>
 		</div>
 		<div class="item-body field">
-			<span ng-repeat="field in user.industry">{{field | dict_InvestorFollowedIndustry}}</span>	
+			<span ng-repeat="field in user.industry">{{field | dict_InvestorFollowedIndustry}}</span>
 		</div>
 	</div>
 	<div class="item" ng-if="user.isInvestPhase">
@@ -109,11 +109,15 @@
 		<ul class="list-item">
 			<!-- <li ng-repeat="worked_case in user.worked_cases | limitTo: user.workedLimit"> -->
 			<li ng-repeat="worked_case in user.worked_cases">
-				<a class="logo" ui-sref="{{worked_case | investorLink:'groupId':'groupIdType'}}">
+				<a  class="logo"
+                    target="{{worked_case.groupIdType | entityTarget}}"
+                    ng-href="{{worked_case.groupIdType | entityLink:worked_case.groupId}}">
 					<img class="img-rounded" ng-src="{{worked_case.logo | image:60:'logo'}}" alt="" width="60" >
 				</a>
 				<div class="info">
-					<a ui-sref="{{worked_case | investorLink:'groupId':'groupIdType'}}">{{worked_case.groupName | substr: 10}}</a>
+                    <a  target="{{worked_case.groupIdType | entityTarget}}"
+                        ng-href="{{worked_case.groupIdType | entityLink:worked_case.groupId}}"
+                        >{{worked_case.groupName | substr: 10}}</a>
 					<span class="confirm-status" ng-show="!worked_case.isConfirmed">待确认</span>
 					<p class="one-line">{{worked_case.description}}</p>
 					<div class="clearfix">
