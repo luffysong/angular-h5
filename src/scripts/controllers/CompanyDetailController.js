@@ -127,6 +127,8 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 $scope.funds = data.funds;
                 $scope.teamTags = data.teamTags;
                 $scope.isIpoOrAcquired = isIpoOrAcquiredReg.test(data.funds.phase);
+                loadCapitalDetail();
+
                 introProduct(data.company);
                 setAppDownloadLink(data.company);
                 setCrowdFundingDetailUrl(data.funds.crowdFundingId);
@@ -212,6 +214,8 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         }
 
         $scope.slides = [];
+
+        loadFinanceData();
         $scope.companyBasicData(function() {
 
             var slides = $scope.slides;
@@ -293,8 +297,6 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             list: [],
             listLimit: 2,
         };
-        loadFinanceData();
-        loadCapitalDetail();
 
         //过往融资经历
         function loadFinanceData(callback) {
