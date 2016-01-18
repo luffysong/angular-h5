@@ -7,10 +7,15 @@
 
     <script>
         (function(){
-            //强制https
+            // 移动端路由兼容跳转
+            if(/^\#\/zhongchou*/.test(location.hash)) {
+                location.href = 'https://' + location.hostname.replace('rong', 'z') + location.pathname + location.hash;
+            }
+
+            // 强制https
             var url = location.href;
-            if(url.match(/(^http:\/\/rong\.36kr|^http:\/\/rongtest\.36kr)/)){
-                location.href=url.replace(/^http:/,'https:');
+            if(url.match(/(^http:\/\/rong\.36kr|^http:\/\/rongtest\.36kr)/)) {
+                location.href =url.replace(/^http:/,'https:');
             }
         })();
     </script>
