@@ -1,0 +1,16 @@
+<div ng-if="feeds.length" class="project-tips">
+    <header ng-hide="fullTips">
+        <h3>项目动态</h3>
+    </header>
+    <section>
+        <ul>
+            <li ng-repeat="item in feeds">
+                <span class="feed-time" ng-bind="item.feedTime | date:'yyyy.MM'"></span>
+                <span class="feed-text" ng-bind-html="item.content"></span>
+            </li>
+        </ul>
+    </section>
+    <div class="more" login-btn>
+        登录查看更多
+    </div>
+</div>

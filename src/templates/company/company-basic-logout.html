@@ -1,0 +1,44 @@
+
+<div class="detail-wrapper" >
+
+    <!-- 公司信息基本信息开始 -->
+    <section class="logout-detail-basic">
+
+        <!-- 基本信息内容开始 -->
+        <div class="logout-basic-content">
+            <img ng-src="{{company.value.basic.logo | image:70:'logo'}}"
+                 alt="" />
+            <div>
+                <div class="basic-row-1">
+                    <span 
+                        ng-bind="company.value.basic.name">
+                    </span>
+                </div>
+                <div class="basic-row-2">
+                    <span 
+                        ng-bind="company.value.basic.industry | dict_CompanyIndustry">
+                    </span>
+                </div>
+                <div class="basic-row-3">
+                    <span ng-if="company.value.basic.website">
+                        {{company.value.basic.website}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- 基本信息内容结束 -->
+
+        <div class="basic-login">
+            <p class="access">
+                <span class="count">{{company.value.statistics.accessCount}}</span>人已查阅过该公司的全部信息
+            </p>
+            <p class="desc">立即加入36氪，追踪创业公司最新动态，获取创业最新动向，联络更多的创业者。</p>
+            <div class="login" login-btn>
+                登录36氪，查看更多信息
+            </div>
+        </div>
+
+    </section>
+
+    <!-- 公司信息基本信息结束 -->
+</div>

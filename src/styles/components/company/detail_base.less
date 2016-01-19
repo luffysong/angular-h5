@@ -103,5 +103,48 @@ body,html{
         }
     }
 
+    .news,.hot-fix{
+        .company-detail .content-base;
+        padding-top:50px;
+        .company-detail .product-intro;
+    }
+    .hot-fix{
+        li{
+            display: inline-block;
+            border:1px solid #008DF2;
+            color: #008DF2;
+            padding: 5px;
+            margin: 5px 5px 5px 0;
+            border-radius: 4px;
+        }
+    }
+    .news{
+        li{
+            a{
+                color: #666;
+                margin: 4px 4px 0;
+                &:before{
+                    content: '';
+                    width:3px;
+                    height: 3px;
+                    background-color: #666;
+                    border-radius: 3px;
+                    display: inline-block;
+                    transform:translateY(-50%);
+                    margin-right: 6px;
+                }
+            }
+            
+        }
+    }
+    .team-pro{
+        .company-story{
+            // color: #969fa9;
+            line-height: 24px;
+        }
+    }
+    
+
+
 
 }
