@@ -481,7 +481,7 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
     return gulp.src(['.tmp/*.html'])
         .pipe($.replace('styles/images/', 'images/'))
         .pipe(assets)
-        .pipe($['if']('*.css', $.cssnano({ debug:true })))
+        .pipe($['if']('*.css', $.cssnano({ safe:true })))
         .pipe($['if']('*.js',
             $.uglify({ compress:{
 				drop_console:true }
