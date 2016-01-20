@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -11,7 +11,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <link rel="apple-touch-icon-precomposed" href="/images/wanda-icon.png"/>
     <link rel="apple-touch-startup-image" href="/images/wanda-icon.png"/>
-
+    <title>报名成功</title>
+    <!-- build:css /styles/j4companycreate.css -->
+    <link rel="stylesheet" href="/styles/j5companycreate.css">
+    <!-- endbuild -->
     <script>
         var _hmt = _hmt || [];
         (function () {
@@ -38,65 +41,40 @@
         })(window, document, 'script', '//36kr.com/global/stat.js', 'krtracker');
         krtracker('trackPageView', location.pathname);
     </script>
-    <title>36氪极速融资</title>
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-        }
-        html,body{
-            height: 100%;
-        }
-        .j3wordresult{
-            width: 100%;
-            height: 100%;
-            position: relative;
-
-        }
-        .share{
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            z-index: 100;
-            font-size: 0;
-            background-color: rgba(0,0,0,0.8);
-            text-align: center;
-        }
-        img{
-            line-height: 100%;
-            width: 80%;
-            vertical-align: middle;
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-    </style>
 </head>
 <body>
-
-<div class="j3wordresult">
-
-
-    <div class="share">
-        <!-- 已经支持过了 -->
-        <!--<img src="http://krplus-pic.b0.upaiyun.com/201601/20071105/6xyxuhu5z22afjp9.png" alt=""/>-->
-        <!-- 支持成功 +1 -->
-        <img src="http://krplus-pic.b0.upaiyun.com/201601/20070857/0sx5tlrv5ufd7rw6.png" alt=""/>
-    </div>
-
-
+<div class="j3companycreate">
+    <a href="//huodong.36kr.com/h5/speed5" class="goto">返回活动页</a>
+    <img src="styles/images/jisu5/company-result.jpg" alt=""/>
 </div>
 
-
-
+<!-- build:js /scripts/j4companycreate.js -->
+<script src="/components/jquery/dist/jquery.min.js"></script>
+<!-- endbuild -->
 <script>
-    document.querySelector('.share').onclick=function(){
-        location.href = '//rong.36kr.com/m/j5word.html?cid=' + 'cid'
-    }
+    var cid;
+    location.search.replace(/cid=(\d+)/ig, function($1, $2){
+        cid = $2
+        $.ajax('/api/speed/count/'+cid+'/create-succ-hook', {
+            type : "GET"
+        })
+        $.ajax('/api/speed/count/'+cid+'/apply-speed-hook', {
+            type : "GET"
+        })
+    })
+    _hmt.push(['_trackPageview', "/speed5/companycreate/page1"]);
+    krtracker('trackPageView', "/speed5/companycreate/page1");
+
+    $('.goto').on('click', function(e){
+        e.preventDefault()
+        _hmt.push(['_trackEvent', '按钮', "创建公司成功页，返回按钮"]);
+        krtracker('trackEvent', '按钮', '创建公司成功页，返回按钮');
+        setTimeout(function(){
+            location.href = $(e.currentTarget).attr('href')
+        }, 400)
+
+    })
 </script>
-
-
 </body>
 </html>
+

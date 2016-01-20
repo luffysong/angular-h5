@@ -26,7 +26,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
     function($stateParams, $timeout, $q, $modal, $scope, DictionaryService, dateFilter, DefaultService, AndroidUploadService,
             CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
         //console.log($stateParams)
-        if ($stateParams.from && decodeURIComponent($stateParams.from).indexOf('speed4') > -1) {
+        if ($stateParams.from && decodeURIComponent($stateParams.from).indexOf('speed5') > -1) {
             $scope.jisu = true;
             $.ajax('/api/speed/count/click-create-hook', {
                 type:'GET'
@@ -582,7 +582,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 mode: 'direct'
             }, angular.copy($scope.formData), function(data) {
                 if ($scope.jisu) {
-                    location.href = '/m/j4companycreate.html?cid=' + data.id;
+                    location.href = '/m/j5companycreate.html?cid=' + data.id;
                 }else {
                     location.hash = '/company_create_apply';
                 }

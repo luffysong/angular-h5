@@ -13,7 +13,7 @@
     <link rel="apple-touch-startup-image" href="/images/wanda-icon.png"/>
     <!-- build:css /styles/j4word.css -->
     <link rel="stylesheet" href="/components/swiper/dist/css/swiper.min.css"/>
-    <link rel="stylesheet" href="/styles/j4word.css">
+    <link rel="stylesheet" href="/styles/j5word.css">
     <!-- endbuild -->
     <script>
         var _hmt = _hmt || [];
@@ -38,7 +38,7 @@
             a.async = 1;
             a.src = g;
             m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//stat.36kr.com/stat.js', 'krtracker');
+        })(window, document, 'script', '//36kr.com/global/stat.js', 'krtracker');
         krtracker('trackPageView', location.pathname);
     </script>
     <title>36氪极速融资</title>
@@ -50,8 +50,6 @@
 
     <div class="swiper-container">
         <div class="logo"></div>
-        <div class="bgm-icon"></div>
-        <audio src="styles/images/jisu4/m1.mp3" loop="1" autoplay="autoplay" id="bgm"></audio>
 
 
         <div class="swiper-wrapper">
@@ -61,13 +59,13 @@
 
 
         <div class="footer">
-            <img src="styles/images/jisu4/word_title.jpg" alt="">
+            <img src="styles/images/jisu5/word-title.png" alt="">
 
             <div>
                 <a class="support" href="javascript:void(0)">
                     <img src="styles/images/jisu4/word_support.png" alt=""/>
                 </a>
-                <a class="join" href="//huodong.36kr.com/h5/speed4/">
+                <a class="join" href="//huodong.36kr.com/h5/speed5">
                     <img src="styles/images/jisu4/word_create.png" alt=""/>
                 </a>
             </div>
@@ -82,7 +80,7 @@
     </div>
 
     <div class="share" style="display: none">
-        <img src="styles/images/jisu3/share_block.png" alt=""/>
+        <img src="styles/images/jisu5/rankclose.png" alt=""/>
     </div>
 
 
@@ -100,8 +98,8 @@
 
             </li>
             <li class="word">
-                <p>我是<span><%=company.name%></span>创始人 <span><%=user.name%></span>，<em>＃我为什么要创业?＃</em>
-                <em>“<%=startupFeeling%>”</em></p>
+                <p>我是<span><%=company.name%></span>创始人 <span><%=user.name%></span>，<em>＃创业路上遇到的坑?＃</em>
+                </p><em>“<%=startupFeeling%>”</em>
             </li>
 
             <li  class="support_li">
@@ -112,7 +110,7 @@
 
             </li>
             <li class="rank">
-                <a href="/m/j4rank.html"><img src="styles/images/jisu4/word_ranklink.png" alt=""></a>
+                <a href="/m/j5rank.html"><img src="styles/images/jisu5/word-rank-link.png" alt=""></a>
             </li>
         </ul>
     </div>
@@ -143,7 +141,7 @@
 
             </li>
             <li class="rank">
-                <a href="/m/j4rank.html"><img src="styles/images/jisu4/word_ranklink.png" alt=""></a>
+                <a href="/m/j5rank.html"><img src="styles/images/jisu5/word-rank-link.png" alt=""></a>
             </li>
         </ul>
     </div>
@@ -206,8 +204,8 @@
             })
 
             window.WEIXINSHARE = {
-                shareTitle: "#创业中遇过的坑？#" + data.data.company.name + "创始人" + data.data.user.name + "正在参加36氪“极速融资”。",
-                shareDesc: "极速融资: 21位靠谱投资人，24小时回复你BP。",
+                shareTitle: data.data.company.name+'·'+data.data.user.name+'：创业路上我踩过这些坑…… | 快来36氪极速融资支持我',
+                shareDesc: "36位投资人在等待我崭露头角！",
                 shareLink: link,
                 shareImg: data.data.company.logo
             };
@@ -243,20 +241,23 @@
             $('.support').on('click', function () {
                 _hmt.push(['_trackEvent', '按钮', '创业感言支持TA']);
                 krtracker('trackEvent', '按钮', "创业感言支持TA");
+                location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&'+
+                    'redirect_uri=http%3A%2F%2Frong.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&'+
+                    'response_type=code&scope=snsapi_base&state='+weixinObj.cid+'#wechat_redirect';
 
-
-                location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&redirect_uri=http%3A%2F%2Frong.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&response_type=code&scope=snsapi_base&state='+weixinObj.cid+'#wechat_redirect'
-
-//                $('.share').css({'display': 'block'})
-//                setTimeout(function () {
-//                    $('.share').css({'display': 'none'})
-//                }, 2500)
+                //TODO
+                //封榜以后显示此内容
+                //2016-01-20 14:48 宋凯宇
+                // $('.share').css({'display': 'block'})
+                // setTimeout(function () {
+                //     $('.share').css({'display': 'none'})
+                // }, 2500)
 
 
             })
-//            $('.share').on('click', function (e) {
-//                $(e.currentTarget).css({'display': 'none'})
-//            })
+            $('.share').on('click', function (e) {
+                $(e.currentTarget).css({'display': 'none'})
+            })
 
             $('.rank a').on('click', function (e) {
                 e.preventDefault()
@@ -278,10 +279,11 @@
         }
     })
 
-    _hmt.push(['_trackPageview', "/speed4/word/page1"]);
-    krtracker('trackPageView', "/speed4/word/page1");
+    _hmt.push(['_trackPageview', "/speed5/word/page1"]);
+    krtracker('trackPageView', "/speed5/word/page1");
 </script>
 
 
 </body>
 </html>
+
