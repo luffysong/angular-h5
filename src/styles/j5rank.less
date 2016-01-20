@@ -282,6 +282,8 @@ html, body {
     margin: 4%;
     position: relative;
     top: 6%;
+    border-radius:5px;
+    background-color: #de1a33;
 
     line-height: 140%;
     height: 85%;
@@ -295,16 +297,22 @@ html, body {
     h4 {
         color: @yellow;
         margin: 0 5%;
-        font-size: 12px;
+        text-align:center;
+        color:white;
+        font-size: 13px;
+    }
+    h5{
+        font-size:13px;
+        color:@yellow;
+        text-align:left;
+        padding:0 10%;
     }
     ul {
         font-size: 12px;
-        margin: 1% 5% 3%;
-        padding: 0;
-        color: #838383;
+        margin: 1% 0;
+        padding: 0 20%;
         li {
-            display: block;
-
+            list-style:disc;
         }
 
         em {
@@ -315,11 +323,15 @@ html, body {
     .scrollwrap {
         height: 80%;
         overflow: auto;
-        background-color: rgb(34, 29, 36);
+        background-color: #de1a33;
     }
 
     .J_closepop {
-        width: 100%;
+        width: 50%;
+        margin: 0 auto;
+        margin-bottom:30px;
+        margin-top:30px;
+        border-radius:5px;
         height: 40px;
         line-height: 35px;
         text-align: center;

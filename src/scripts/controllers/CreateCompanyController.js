@@ -582,7 +582,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 mode: 'direct'
             }, angular.copy($scope.formData), function(data) {
                 if ($scope.jisu) {
-                    location.href = '/m/j4companycreate.html?cid=' + data.id;
+                    location.href = '/m/j5companycreate.html?cid=' + data.id;
                 }else {
                     location.hash = '/company_create_apply';
                 }

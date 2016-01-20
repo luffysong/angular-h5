@@ -38,7 +38,7 @@
             a.async = 1;
             a.src = g;
             m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//36kr.com/global/stat.js', 'krtracker');
+        })(window, document, 'script', '//stat.36kr.com/stat.js', 'krtracker');
         krtracker('trackPageView', location.pathname);
     </script>
     <title>36氪极速融资</title>
@@ -82,7 +82,7 @@
     </div>
 
     <div class="share" style="display: none">
-        <img src="styles/images/jisu4/rankclose.png" alt=""/>
+        <img src="styles/images/jisu3/share_block.png" alt=""/>
     </div>
 
 
@@ -206,7 +206,7 @@
             })
 
             window.WEIXINSHARE = {
-                shareTitle: "#我为什么要创业?#" + data.data.company.name + "创始人" + data.data.user.name + "正在参加36氪“极速融资”。",
+                shareTitle: "#创业中遇过的坑？#" + data.data.company.name + "创始人" + data.data.user.name + "正在参加36氪“极速融资”。",
                 shareDesc: "极速融资: 21位靠谱投资人，24小时回复你BP。",
                 shareLink: link,
                 shareImg: data.data.company.logo
@@ -244,16 +244,19 @@
                 _hmt.push(['_trackEvent', '按钮', '创业感言支持TA']);
                 krtracker('trackEvent', '按钮', "创业感言支持TA");
 
-                $('.share').css({'display': 'block'})
-                setTimeout(function () {
-                    $('.share').css({'display': 'none'})
-                }, 2500)
+
+                location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&redirect_uri=http%3A%2F%2Frong.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&response_type=code&scope=snsapi_base&state='+weixinObj.cid+'#wechat_redirect'
+
+//                $('.share').css({'display': 'block'})
+//                setTimeout(function () {
+//                    $('.share').css({'display': 'none'})
+//                }, 2500)
 
 
             })
-            $('.share').on('click', function (e) {
-                $(e.currentTarget).css({'display': 'none'})
-            })
+//            $('.share').on('click', function (e) {
+//                $(e.currentTarget).css({'display': 'none'})
+//            })
 
             $('.rank a').on('click', function (e) {
                 e.preventDefault()

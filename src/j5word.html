@@ -65,7 +65,7 @@
                 <a class="support" href="javascript:void(0)">
                     <img src="styles/images/jisu4/word_support.png" alt=""/>
                 </a>
-                <a class="join" href="//htest03.36kr.com/">
+                <a class="join" href="//huodong.36kr.com/h5/speed5">
                     <img src="styles/images/jisu4/word_create.png" alt=""/>
                 </a>
             </div>
@@ -80,7 +80,7 @@
     </div>
 
     <div class="share" style="display: none">
-        <img src="styles/images/jisu4/rankclose.png" alt=""/>
+        <img src="styles/images/jisu5/rankclose.png" alt=""/>
     </div>
 
 
@@ -98,8 +98,8 @@
 
             </li>
             <li class="word">
-                <p>我是<span><%=company.name%></span>创始人 <span><%=user.name%></span>，<em>＃我为什么要创业?＃</em>
-                <em>“<%=startupFeeling%>”</em></p>
+                <p>我是<span><%=company.name%></span>创始人 <span><%=user.name%></span>，<em>＃创业路上遇到的坑?＃</em>
+                </p><em>“<%=startupFeeling%>”</em>
             </li>
 
             <li  class="support_li">
@@ -110,7 +110,7 @@
 
             </li>
             <li class="rank">
-                <a href="/m/j4rank.html"><img src="styles/images/jisu5/word-rank-link.png" alt=""></a>
+                <a href="/m/j5rank.html"><img src="styles/images/jisu5/word-rank-link.png" alt=""></a>
             </li>
         </ul>
     </div>
@@ -204,8 +204,8 @@
             })
 
             window.WEIXINSHARE = {
-                shareTitle: "#我为什么要创业?#" + data.data.company.name + "创始人" + data.data.user.name + "正在参加36氪“极速融资”。",
-                shareDesc: "极速融资: 21位靠谱投资人，24小时回复你BP。",
+                shareTitle: data.data.company.name+'·'+data.data.user.name+'：创业路上我踩过这些坑…… | 快来36氪极速融资支持我',
+                shareDesc: "36位投资人在等待我崭露头角！",
                 shareLink: link,
                 shareImg: data.data.company.logo
             };
@@ -241,11 +241,17 @@
             $('.support').on('click', function () {
                 _hmt.push(['_trackEvent', '按钮', '创业感言支持TA']);
                 krtracker('trackEvent', '按钮', "创业感言支持TA");
+                location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&'+
+                    'redirect_uri=http%3A%2F%2Frong.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&'+
+                    'response_type=code&scope=snsapi_base&state='+weixinObj.cid+'#wechat_redirect';
 
-                $('.share').css({'display': 'block'})
-                setTimeout(function () {
-                    $('.share').css({'display': 'none'})
-                }, 2500)
+                //TODO
+                //封榜以后显示此内容
+                //2016-01-20 14:48 宋凯宇
+                // $('.share').css({'display': 'block'})
+                // setTimeout(function () {
+                //     $('.share').css({'display': 'none'})
+                // }, 2500)
 
 
             })
