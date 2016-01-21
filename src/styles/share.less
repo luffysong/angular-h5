@@ -139,6 +139,9 @@
                 animation-fill-mode: forwards;
                 overflow: hidden;
                 .clearfix();
+                &.bounceInDown {
+                    opacity: 1;
+                }
                 .info-detail {
                     display: block;
                     padding-top:25px;
@@ -177,11 +180,17 @@
                 font-weight: 600;
                 animation-duration: 1.5s;
                 animation-fill-mode: forwards;
+                &.bounceInDown {
+                    opacity: 1;
+                }
             }
             section {
                 opacity: 0;
                 margin: 10% 0;
                 font-size: 20px;
+                &.bounceInDown {
+                    opacity: 1;
+                }
                 &.section-1 {
                     animation-duration: 1.5s;
                     animation-delay: .5s;
