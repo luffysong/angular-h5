@@ -180,31 +180,21 @@
                 font-weight: 600;
                 animation-duration: 1.5s;
                 animation-fill-mode: forwards;
-                &.bounceInDown {
-                    opacity: 1;
-                }
             }
             section {
                 opacity: 0;
                 margin: 10% 0;
                 font-size: 20px;
-                &.bounceInDown {
-                    opacity: 1;
-                }
+                animation-duration: 1.5s;
+                animation-fill-mode: forwards;
                 &.section-1 {
-                    animation-duration: 1.5s;
                     animation-delay: .5s;
-                    animation-fill-mode: forwards;
                 }
                 &.section-2 {
-                    animation-duration: 1.5s;
                     animation-delay: 1s;
-                    animation-fill-mode: forwards;
                 }
                 &.section-3 {
-                    animation-duration: 1.5s;
                     animation-delay: 1.5s;
-                    animation-fill-mode: forwards;
                 }
             }
             .view-btn {
@@ -230,10 +220,6 @@
     }
 
     @keyframes bounceInDown {
-        0%, 60%, 75%, 90%, 100% {
-            animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-        }
-
         0% {
             opacity: 0;
             transform: translate3d(0, -3000px, 0);
@@ -259,7 +245,32 @@
             transform: none;
         }
     }
+    @-webkit-keyframes bounceInDown {
+        0% {
+            opacity: 0;
+            transform: translate3d(0, -3000px, 0);
+        }
 
+        60% {
+            opacity: 1;
+            transform: translate3d(0, 25px, 0);
+        }
+
+        75% {
+            opacity: 1;
+            transform: translate3d(0, -10px, 0);
+        }
+
+        90% {
+            opacity: 1;
+            transform: translate3d(0, 5px, 0);
+        }
+
+        100% {
+            opacity: 1;
+            transform: none;
+        }
+    }
     .bounceInDown {
         animation-name: bounceInDown;
     }
