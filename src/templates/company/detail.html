@@ -1,4 +1,4 @@
-<div class="company-detail" ng-if="uid">
+<div class="company-detail" ng-if="uid || company.value.funds.crowdFundingId">
     <div ng-include="'templates/company/company-basic.html'"></div>
 
     <div ng-include="'templates/company/company-capital.html'"></div>
@@ -27,7 +27,7 @@
 </div>
 
 <!-- 未登录状态 -->
-<div ng-if="!uid" class="company-detail">
+<div ng-if="!uid && !company.value.funds.crowdFundingId" class="company-detail">
     <div ng-include="'templates/company/company-basic-logout.html'"></div>
     <div ng-include="'templates/company/logout-company-product-intro.html'"></div>
     <div ng-if="teamTags.length || company.value.company.story" class="team-pro">
