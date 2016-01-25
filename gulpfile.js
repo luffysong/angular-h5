@@ -103,7 +103,7 @@ var scriptsInit = function(modulesPath) {
     return src.pipe(gulp.dest(modulesPath));
 };
 
-gulp.task('scripts:lint', function() {
+gulp.task('scripts:jshint', function() {
     return gulp.src(['src/scripts/controllers/*.js',
         'src/scripts/services/*.js',
         'src/scripts/filters/*.js',
@@ -111,6 +111,27 @@ gulp.task('scripts:lint', function() {
         .pipe($.jshint())
         .pipe($.jshint.reporter('default'))
         .pipe($.jshint.reporter('fail'));
+});
+
+gulp.task('scripts:jscs', function() {
+    return gulp.src(['src/scripts/controllers/*.js',
+        'src/scripts/services/*.js',
+        'src/scripts/filters/*.js',
+        'src/scripts/directives/*.js'])
+        .pipe($.jscs())
+        .pipe($.jscs.reporter())
+        .pipe($.jscs.reporter('fail'));
+});
+
+gulp.task('scripts:jscs:fix', function() {
+    return gulp.src(['src/scripts/controllers/*.js',
+        'src/scripts/services/*.js',
+        'src/scripts/filters/*.js',
+        'src/scripts/directives/*.js'])
+        .pipe($.jscs({ fix: true }))
+        .pipe($.jscs.reporter())
+        .pipe($.jscs.reporter('fail'))
+        .pipe(gulp.dest('src'));
 });
 
 gulp.task('scripts:init:controllers', function() {
