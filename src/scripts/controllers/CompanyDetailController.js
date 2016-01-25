@@ -57,6 +57,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
         setMobileType();
         loadQichacha();
+        getLogoutData();
 
         $scope.getUISref = getUISref;
 
@@ -508,19 +509,27 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             $scope.company.value.statistics.followCount += count;
         }
 
-        // 获取热点数据
-        SeoGetInfoService.getInfoLinks('rong-company-overview', $scope.companyId).success(function(data) {
-            $scope.recommend = data;
-        }).catch(function() {
-            $scope.recommend = {};
-        });
+        function getLogoutData() {
+            if (UserService.getUID()) {
+                return;
+            }
 
-        // 获取最新资讯
-        CompanyService.news($scope.companyId, function(response) {
-            $scope.newsList = response.feeds_news;
-            console.log('-----', $scope.newsList);
-        }, function() {
+            // 获取热点数据
+            SeoGetInfoService.getInfoLinks('rong-company-overview', $scope.companyId).success(function(data) {
+                $scope.recommend = data;
+            }).catch(function() {
+                $scope.recommend = {};
+            });
 
-            $scope.newsList = {};
-        });
+            // 获取最新资讯
+            CompanyService.news($scope.companyId, function(response) {
+                $scope.newsList = response.feeds_news;
+                console.log('-----', $scope.newsList);
+            }, function() {
+
+                $scope.newsList = {};
+            });
+
+        }
+
     });

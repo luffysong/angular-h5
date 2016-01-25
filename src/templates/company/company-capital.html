@@ -1,7 +1,7 @@
 
 <!-- 明确知道公司未进行融资 且未进行股权融资 -->
 <div ng-if="!notFunding || company.value.funds.crowdFundingId"  class="capital-wrapper">
-    <section ng-if="company.value.funds.fundsId" class="capital-head">
+    <section ng-if="!company.value.funds.crowdFundingId" class="capital-head">
         <h3>正在融资</h3>
         <span ng-if="company.value.company.faId" class="capital-fa">FA推荐</span>
     </section>

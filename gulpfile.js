@@ -387,20 +387,20 @@ gulp.task('build:scripts', ['scripts:vendor', 'scripts:init', 'build:addTemplate
 });
 
 // Build Images
+// gulp.task('build:images', function() {
+//     return gulp.src(['src/styles/images#<{(||)}>#*'])
+//         .pipe($.imagemin({
+//             optimizationLevel: 3,
+//             progressive: true,
+//             interlaced: true,
+//         }))
+//         .pipe(gulp.dest('.tmp/images'))
+//         .pipe($.size());
+// });
+
 gulp.task('build:images', function() {
     return gulp.src(['src/styles/images/**/*'])
-        .pipe($.imagemin({
-            optimizationLevel: 3,
-            progressive: true,
-            interlaced: true,
-        }))
-        .pipe(gulp.dest('.tmp/images'))
-        .pipe($.size());
-});
-
-gulp.task('build:images-1', function() {
-    return gulp.src(['src/styles/images/**/*'])
-        .pipe($.conflict('.images/'))
+        .pipe($.changed('.images/', { hasChanged: $.changed.compareSha1Digest }))
         .pipe(gulp.dest('.images/'))
         .pipe($.imagemin({
             optimizationLevel: 3,
