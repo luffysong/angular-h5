@@ -168,7 +168,13 @@ gulp.task('scripts:init:services', function() {
     return scriptsInit('src/scripts/services');
 });
 
-gulp.task('scripts:init', ['scripts:init:controllers', 'scripts:init:directives', 'scripts:init:filters', 'scripts:init:services']);
+gulp.task('scripts:init', [
+    'jshint',
+    'jscs',
+    'scripts:init:controllers',
+    'scripts:init:directives',
+    'scripts:init:filters',
+    'scripts:init:services']);
 
 // Scripts Ui Bootstrap Template
 gulp.task('scripts:ui:template', function() {
@@ -383,6 +389,19 @@ gulp.task('build:scripts', ['scripts:vendor', 'scripts:init', 'build:addTemplate
 // Build Images
 gulp.task('build:images', function() {
     return gulp.src(['src/styles/images/**/*'])
+        .pipe($.imagemin({
+            optimizationLevel: 3,
+            progressive: true,
+            interlaced: true,
+        }))
+        .pipe(gulp.dest('.tmp/images'))
+        .pipe($.size());
+});
+
+gulp.task('build:images-1', function() {
+    return gulp.src(['src/styles/images/**/*'])
+        .pipe($.conflict('.images/'))
+        .pipe(gulp.dest('.images/'))
         .pipe($.imagemin({
             optimizationLevel: 3,
             progressive: true,

@@ -52,8 +52,9 @@ xb_server
 src/scripts/controllers/index.js
 src/scripts/directives/index.js
 src/scripts/services/index.js
-
+#宋凯宇
 *.swp
+.images
 cscope.*
 ncscope.*
 tags
