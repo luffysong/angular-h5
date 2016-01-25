@@ -420,8 +420,10 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
     return gulp.src(['.tmp/*.html'])
         .pipe($.replace('styles/images/', 'images/'))
         .pipe(assets)
+        .pipe($.debug())
+
         .pipe($['if']('*.css', $.cssnano({ safe:true })))
-        .pipe($['if']('*.js',
+        .pipe($['if'](/.*krmin\.js/,
             $.uglify({ compress:{
 				drop_console:true }
             })))
@@ -432,6 +434,10 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
         .pipe($['if']('*.js', gulp.dest('.tmp/build')))
         .pipe($['if']('*.html', gulp.dest('dist')))
         .pipe($.size());
+});
+
+gulp.task('local:html', ['header'], function() {
+    gulp.start('build:html');
 });
 
 // Build Rev
