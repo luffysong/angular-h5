@@ -103,7 +103,7 @@ var scriptsInit = function(modulesPath) {
     return src.pipe(gulp.dest(modulesPath));
 };
 
-gulp.task('scripts:jshint', function() {
+gulp.task('jshint', function() {
     return gulp.src(['src/scripts/controllers/*.js',
         'src/scripts/services/*.js',
         'src/scripts/filters/*.js',
@@ -113,7 +113,43 @@ gulp.task('scripts:jshint', function() {
         .pipe($.jshint.reporter('fail'));
 });
 
-gulp.task('scripts:jscs', function() {
+gulp.task('jscs:controllers', function() {
+    return gulp.src('src/scripts/controllers/*.js')
+        .pipe($.jscs({ fix: true }))
+        .pipe($.jscs.reporter())
+        .pipe($.jscs.reporter('fail'))
+        .pipe(gulp.dest('src/scripts/controllers'));
+
+});
+
+gulp.task('jscs:services', function() {
+    return gulp.src('src/scripts/services/*.js')
+        .pipe($.jscs({ fix: true }))
+        .pipe($.jscs.reporter())
+        .pipe($.jscs.reporter('fail'))
+        .pipe(gulp.dest('src/scripts/services'));
+
+});
+
+gulp.task('jscs:directives', function() {
+    return gulp.src('src/scripts/directives/*.js')
+        .pipe($.jscs({ fix: true }))
+        .pipe($.jscs.reporter())
+        .pipe($.jscs.reporter('fail'))
+        .pipe(gulp.dest('src/scripts/directives'));
+
+});
+
+gulp.task('jscs:filters', function() {
+    return gulp.src('src/scripts/filters/*.js')
+        .pipe($.jscs({ fix: true }))
+        .pipe($.jscs.reporter())
+        .pipe($.jscs.reporter('fail'))
+        .pipe(gulp.dest('src/scripts/controllers'));
+
+});
+
+gulp.task('jscs', function() {
     return gulp.src(['src/scripts/controllers/*.js',
         'src/scripts/services/*.js',
         'src/scripts/filters/*.js',
@@ -123,16 +159,7 @@ gulp.task('scripts:jscs', function() {
         .pipe($.jscs.reporter('fail'));
 });
 
-gulp.task('scripts:jscs:fix', function() {
-    return gulp.src(['src/scripts/controllers/*.js',
-        'src/scripts/services/*.js',
-        'src/scripts/filters/*.js',
-        'src/scripts/directives/*.js'])
-        .pipe($.jscs({ fix: true }))
-        .pipe($.jscs.reporter())
-        .pipe($.jscs.reporter('fail'))
-        .pipe(gulp.dest('src'));
-});
+gulp.task('jscs:fix', ['jscs:controllers', 'jscs:services', 'jscs:directives', 'jscs:filters']);
 
 gulp.task('scripts:init:controllers', function() {
     return scriptsInit('src/scripts/controllers');
