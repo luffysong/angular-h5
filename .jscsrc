@@ -3,5 +3,6 @@
 	"validateIndentation" : 4,
     "requireTrailingComma" : false,
 	"safeContextKeyword":["_this","self"],
+    "requireCamelCaseOrUpperCaseIdentifiers": {"ignoreProperties": true, "strict": false},
     "excludeFiles":["**/dictionary**"]
 }

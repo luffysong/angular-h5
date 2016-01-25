@@ -39,7 +39,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
         // 获取uid
         $scope.uid = UserService.getUID();
-        
+
         initCapitalMeta();
 
         $scope.company = {
@@ -509,18 +509,18 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         }
 
         // 获取热点数据
-        SeoGetInfoService.getInfoLinks('rong-company-overview',$scope.companyId).success(function(data) {
+        SeoGetInfoService.getInfoLinks('rong-company-overview', $scope.companyId).success(function(data) {
             $scope.recommend = data;
         }).catch(function() {
             $scope.recommend = {};
         });
 
         // 获取最新资讯
-        CompanyService.news($scope.companyId,function(response){
+        CompanyService.news($scope.companyId, function(response) {
             $scope.newsList = response.feeds_news;
-            console.log('-----',$scope.newsList); 
-        },function(err){
-            $scope.newsList = {};
-        })
-    });
+            console.log('-----', $scope.newsList);
+        }, function() {
 
+            $scope.newsList = {};
+        });
+    });

@@ -103,6 +103,16 @@ var scriptsInit = function(modulesPath) {
     return src.pipe(gulp.dest(modulesPath));
 };
 
+gulp.task('scripts:lint', function() {
+    return gulp.src(['src/scripts/controllers/*.js',
+        'src/scripts/services/*.js',
+        'src/scripts/filters/*.js',
+        'src/scripts/directives/*.js'])
+        .pipe($.jshint())
+        .pipe($.jshint.reporter('default'))
+        .pipe($.jshint.reporter('fail'));
+});
+
 gulp.task('scripts:init:controllers', function() {
     return scriptsInit('src/scripts/controllers');
 });
@@ -221,135 +231,6 @@ gulp.task('test', function() {
     gulp.start('karma');
 });
 
-// http 服务
-// gulp.task('connect', function() {
-//     var historyApiFallback = require('connect-history-api-fallback');
-//     $.connect.server({
-//         root: ['.tmp', 'src'],
-//         port: 9001,
-//         livereload: false,
-//         middleware: function(connect, opt) {
-//             var url = require('url');
-//
-//             var map = [];
-//
-//             map.push(require('connect-query')());
-//             map.push(require('connect-multiparty')());
-//
-//             var bodyParser = require('body-parser');
-//             map.push(bodyParser.urlencoded({ extended: false }));
-//             map.push(bodyParser.json());
-//
-//             map.push(function(req, res, done) {
-//                 if (req.originalUrl !== '/api/upload/form-api') {
-//                     return done();
-//                 }
-//
-//                 var secret = req.body.type == 'pic' ? config.upyun.bucket.secret : config.upyun.fileBucket.secret;
-//                 var policy = new Buffer(req.body.param).toString('base64');
-//                 var signature = crypto.createHash('md5').update(policy + '&' + secret).digest('hex');
-//                 res.writeHead(200, { 'Content-Type': 'application/json' });
-//                 res.statuCode = 200;
-//                 res.end(JSON.stringify({
-//                     code: 0,
-//                     data: {
-//                         policy: policy,
-//                         signature: signature,
-//                     },
-//                 }));
-//             });
-//
-//             map.push(function(req, res, done) {
-//                 if (req.originalUrl.indexOf('/user/login') == -1) {
-//                     return done();
-//                 }
-//
-//                 res.writeHead(302, {
-//                     Location: req.originalUrl.replace('/user/login', '/oauth/callback'),
-//                 });
-//                 res.end();
-//             });
-//
-//             map.push(function(req, res, done) {
-//                 if (req.originalUrl.indexOf('/oauth/callback') == -1) {
-//                     return done();
-//                 }
-//
-//                 res.writeHead(302, {
-//                     Location: decodeURIComponent(req.originalUrl.replace('/oauth/callback?from=', '')),
-//                     'Set-Cookie': 'kr_plus_id=1;Path=/;Expires=Wed, 09 Jun 2021 10:18:14 GMT;Domain=.36kr.com;',
-//                     'Set-Cookie': 'kr_valid=1;Path=/;Expires=Wed, 09 Jun 2021 10:18:14 GMT;Domain=.36kr.com;',
-//                     'Set-Cookie': 'kr_email_valid=1;Path=/;Expires=Wed, 09 Jun 2021 10:18:14 GMT;Domain=.36kr.com;',
-//                 });
-//                 res.end();
-//             });
-//
-//             map.push(function(req, res, done) {
-//                 if (req.originalUrl.indexOf('/api/') !== 0) {
-//                     return done();
-//                 }
-//
-//                 var url = req._parsedUrl.pathname.substring(5);
-//                 var filePath = 'mocksup-data/' + url + '.' + req.method;
-//                 var indexFilePath = 'mocksup-data/' + url + '/index.' + req.method;
-//
-//                 filePath = filePath.replace(/[0-9]+/g, ':integer').replace(/(\/\/){1}/g, '/');
-//                 indexFilePath = indexFilePath.replace(/[0-9]+/g, ':integer').replace(/(\/\/){1}/g, '/');
-//
-//                 fs.exists(filePath, function(exist) {
-//                     if (!exist) {
-//                         fs.exists(indexFilePath, function(exist) {
-//                             if (!exist) {
-//                                 return done();
-//                             }
-//
-//                             fs.readFile(indexFilePath, function(err, data) {
-//                                 if (err) {
-//                                     return done(err);
-//                                 }
-//
-//                                 try {
-//                                     res.writeHead(200, { 'Content-Type': 'application/json' });
-//                                     res.statuCode = 200;
-//                                     res.end(_.template(data, {
-//                                         headers: req.headers,
-//                                         query: req.query,
-//                                         body: req.body,
-//                                     }));
-//                                 } catch (err) {
-//                                     return done(err);
-//                                 }
-//                             });
-//                         });
-//                     } else {
-//                         fs.readFile(filePath, function(err, data) {
-//                             if (err) {
-//                                 return done(err);
-//                             }
-//
-//                             try {
-//                                 res.writeHead(200, { 'Content-Type': 'application/json' });
-//                                 res.statuCode = 200;
-//                                 res.end(_.template(data, {
-//                                     headers: req.headers,
-//                                     query: req.query,
-//                                     body: req.body,
-//                                 }));
-//                             } catch (err) {
-//                                 return done(err);
-//                             }
-//                         });
-//                     }
-//                 });
-//             });
-//
-//             //map.push(historyApiFallback);
-//             return map;
-//         },
-//     });
-// });
-
-// http 服务
 gulp.task('connect:remote', function() {
     // not use
     // var historyApiFallback = require('connect-history-api-fallback');
