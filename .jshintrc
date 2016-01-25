@@ -9,8 +9,7 @@
 	"undef": true,
 	"unused": true,
 
-
-    "predef":["projectEnvConfig","_hmt","krtracker","kr","CITY_DATA",
+    "predef":["projectEnvConfig","_hmt","krtracker","kr","CITY_DATA","angular",
         "DICTIONARY_DATA","DICTIONARY_CF_DATA","DICTIONARY_URL_DATA"],
 
     "loopfunc": true,
