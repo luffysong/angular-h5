@@ -103,8 +103,17 @@ var scriptsInit = function(modulesPath) {
     return src.pipe(gulp.dest(modulesPath));
 };
 
+function jsFixInit(modulesPath) {
+    return gulp.src(modulesPath + '/*.js')
+        .pipe($.jscs({ fix: true }))
+        .pipe($.jscs.reporter())
+        .pipe($.jscs.reporter('fail'))
+        .pipe(gulp.dest(modulesPath));
+}
+
 gulp.task('jshint', function() {
     return gulp.src(['src/scripts/controllers/*.js',
+        'src/scripts/bootstrap/*.js',
         'src/scripts/services/*.js',
         'src/scripts/filters/*.js',
         'src/scripts/directives/*.js'])
@@ -114,43 +123,25 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('jscs:controllers', function() {
-    return gulp.src('src/scripts/controllers/*.js')
-        .pipe($.jscs({ fix: true }))
-        .pipe($.jscs.reporter())
-        .pipe($.jscs.reporter('fail'))
-        .pipe(gulp.dest('src/scripts/controllers'));
-
+    return jsFixInit('src/scripts/controllers');
 });
 
 gulp.task('jscs:services', function() {
-    return gulp.src('src/scripts/services/*.js')
-        .pipe($.jscs({ fix: true }))
-        .pipe($.jscs.reporter())
-        .pipe($.jscs.reporter('fail'))
-        .pipe(gulp.dest('src/scripts/services'));
-
+    return jsFixInit('src/scripts/services');
 });
 
 gulp.task('jscs:directives', function() {
-    return gulp.src('src/scripts/directives/*.js')
-        .pipe($.jscs({ fix: true }))
-        .pipe($.jscs.reporter())
-        .pipe($.jscs.reporter('fail'))
-        .pipe(gulp.dest('src/scripts/directives'));
-
+    return jsFixInit('src/scripts/directives');
 });
 
 gulp.task('jscs:filters', function() {
-    return gulp.src('src/scripts/filters/*.js')
-        .pipe($.jscs({ fix: true }))
-        .pipe($.jscs.reporter())
-        .pipe($.jscs.reporter('fail'))
-        .pipe(gulp.dest('src/scripts/controllers'));
-
+    return jsFixInit('src/scripts/filters');
 });
 
 gulp.task('jscs', function() {
-    return gulp.src(['src/scripts/controllers/*.js',
+    return gulp.src(['src/scripts/bootstrap/*.js',
+        'src/scripts/bootstrap/*.js',
+        'src/scripts/controllers/*.js',
         'src/scripts/services/*.js',
         'src/scripts/filters/*.js',
         'src/scripts/directives/*.js'])
