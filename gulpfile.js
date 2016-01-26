@@ -51,7 +51,8 @@ var handler = function(err) {
 // 清除垃圾数据
 gulp.task('clean', function(callback) {
     var del = require('del');
-    del(['.tmp', 'dist'], callback);
+    del.sync(['.tmp', 'dist']);
+    callback && callback();
 
     // del(['.tmp#<{(|*', '!.tmp', '!.tmp/images#<{(|*', 'dist'], callback);
 });
@@ -547,12 +548,14 @@ gulp.task('build:test12', ['clean'], function() {
 
 gulp.task('build:prod', ['clean'], function() {
     buildMode = 'prod';
+    DEBUG = false;
     CDNPrefix = '//krplus-cdn.b0.upaiyun.com/m';
     gulp.start('build');
 });
 
 gulp.task('build:prod:m1', ['clean'], function() {
     buildMode = 'prod';
+    DEBUG = false;
     CDNPrefix = '//krplus-cdn.b0.upaiyun.com/m1';
     gulp.start('build');
 });
@@ -581,7 +584,6 @@ gulp.task('remote', ['watch', 'scripts', 'connect:remote', 'styles', 'header']);
 
 gulp.task('remote:prod', function() {
     buildMode = 'prod';
-    DEBUG = true;
     apiHost = 'http://rong.36kr.com';
     gulp.start('remote');
 });
