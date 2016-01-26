@@ -38,6 +38,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             $scope.$apply(function() {
                 if (window.kr36 && window.kr36.tempCache && window.kr36.tempCache.imgsource) {
                     $scope.formData[window.kr36.tempCache.imgsource] = filename;
+                    angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('cardEmpty', true);
                 }
 
             });

@@ -576,6 +576,15 @@ angular.module('defaultApp.service').service('CompanyService', [
             return deferred.promise;
         };
 
+        // 获取最新快讯
+        service.news = function(id, callback, errcallback) {
+            $http.get('/api/company/' + id + '/news').success(function(response) {
+                callback && callback(response);
+            }).catch(function(err) {
+                errcallback && errcallback(err);
+            });
+        };
+
         return service;
     }
 ]);

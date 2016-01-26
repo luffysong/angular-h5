@@ -1,4 +1,4 @@
-<div class="company-detail">
+<div class="company-detail" ng-if="uid || company.value.funds.crowdFundingId">
     <div ng-include="'templates/company/company-basic.html'"></div>
 
     <div ng-include="'templates/company/company-capital.html'"></div>
@@ -24,6 +24,56 @@
     <div ng-include="'templates/company/company-footbar.html'"></div>
 
     <div ng-include="'templates/company/pop-app-download.html'"></div>
+</div>
+
+<!-- 未登录状态 -->
+<div ng-if="!uid && !company.value.funds.crowdFundingId" class="company-detail">
+    <div ng-include="'templates/company/company-basic-logout.html'"></div>
+    <div ng-include="'templates/company/logout-company-product-intro.html'"></div>
+    <div ng-if="teamTags.length || company.value.company.story" class="team-pro">
+        <header>
+            <h3>
+                团队介绍
+            </h3>
+        </header>
+        <section>
+            <p ng-bind="company.value.company.story" class="company-story"></p>
+        </section>
+    </div>
+
+    <div ng-include="'templates/company/logout-company-tips.html'"></div>
+
+    <div ng-if="newsList.length>0" class="news">
+        <header>
+            <h3>
+                最新快讯
+            </h3>
+        </header>
+        <div class="container">
+            <ul>
+                <li ng-repeat="item in newsList">
+                    <a href="{{item.url}}">
+                        <span class="content">
+                            {{item.title}}
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- fixme 热点聚焦无数据可测 -->
+    <div class="hot-fix" ng-if="recommend.internal_links_description || recommend.internal_links.length">
+        <header>
+            <h3>
+                热点聚焦
+            </h3>
+        </header>
+        <div class="container">
+            <ul>
+                <li ng-repeat="item in recommend.internal_links"> <a href="{{item.url}}" target="_blank">{{item.title}}</a> </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 

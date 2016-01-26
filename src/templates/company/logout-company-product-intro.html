@@ -1,0 +1,20 @@
+<div ng-if="existProductIntro()" class="product-intro">
+    <h3>公司介绍</h3>
+    <section>
+        <ul ng-if="existIntroDetail">
+            <li ng-repeat="item in productIntroData">
+                <i ng-class="item.className"></i>
+
+                <div>
+                    <h4 ng-bind="item.title">
+                    </h4>
+
+                    <p ng-bind="item.text">
+                    </p>
+                </div>
+            </li>
+        </ul>
+        <p ng-bind="company.value.company.intro" ng-if="!existIntroDetail" class="company-intro">
+        </p>
+    </section>
+</div>

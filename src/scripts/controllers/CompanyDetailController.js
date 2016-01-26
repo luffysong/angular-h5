@@ -7,7 +7,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller').controller('CompanyDetailController',
     function($scope, $location, $stateParams, $state, CompanyService, $timeout,
               UserService, ErrorService, $rootScope, DictionaryService,
-              SocialService, CredentialService
+              SocialService, CredentialService, SeoGetInfoService
               ) {
         var ZHONG_HOST = '//' + projectEnvConfig.zhongHost + kr.H5_PATH;
         var RONG_HOST = '//' + projectEnvConfig.rongHost;
@@ -37,6 +37,9 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
         $scope.companyId = $stateParams.id || 12;
 
+        // 获取uid
+        $scope.uid = UserService.getUID();
+
         initCapitalMeta();
 
         $scope.company = {
@@ -54,6 +57,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
         setMobileType();
         loadQichacha();
+        getLogoutData();
 
         $scope.getUISref = getUISref;
 
@@ -505,5 +509,27 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             $scope.company.value.statistics.followCount += count;
         }
 
-    });
+        function getLogoutData() {
+            if (UserService.getUID()) {
+                return;
+            }
 
+            // 获取热点数据
+            SeoGetInfoService.getInfoLinks('rong-company-overview', $scope.companyId).success(function(data) {
+                $scope.recommend = data;
+            }).catch(function() {
+                $scope.recommend = {};
+            });
+
+            // 获取最新资讯
+            CompanyService.news($scope.companyId, function(response) {
+                $scope.newsList = response.feeds_news;
+                console.log('-----', $scope.newsList);
+            }, function() {
+
+                $scope.newsList = {};
+            });
+
+        }
+
+    });

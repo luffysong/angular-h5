@@ -15,7 +15,7 @@ var loadDictionary = require('./tasks/loadDictionary.js');
 var urlAdjuster = require('gulp-css-url-adjuster');
 
 var config = require('./config.json');
-
+var DEBUG = true;
 var through2 = require('through2');
 var browserify = require('browserify');
 var apiHost;
@@ -51,7 +51,10 @@ var handler = function(err) {
 // 清除垃圾数据
 gulp.task('clean', function(callback) {
     var del = require('del');
-    del(['.tmp', 'dist'], callback);
+    del.sync(['.tmp', 'dist']);
+    callback && callback();
+
+    // del(['.tmp#<{(|*', '!.tmp', '!.tmp/images#<{(|*', 'dist'], callback);
 });
 
 gulp.task('html', ['header'], function() {
@@ -103,6 +106,55 @@ var scriptsInit = function(modulesPath) {
     return src.pipe(gulp.dest(modulesPath));
 };
 
+function jsFixInit(modulesPath) {
+    return gulp.src(modulesPath + '/*.js')
+        .pipe($.jscs({ fix: true }))
+        .pipe($.jscs.reporter())
+        .pipe($.jscs.reporter('fail'))
+        .pipe(gulp.dest(modulesPath));
+}
+
+gulp.task('jshint', function() {
+    return gulp.src(['src/scripts/controllers/*.js',
+        'src/scripts/bootstrap/*.js',
+        'src/scripts/services/*.js',
+        'src/scripts/filters/*.js',
+        'src/scripts/directives/*.js'])
+        .pipe($.jshint())
+        .pipe($.jshint.reporter('default'))
+        .pipe($.jshint.reporter('fail'));
+});
+
+gulp.task('jscs:controllers', function() {
+    return jsFixInit('src/scripts/controllers');
+});
+
+gulp.task('jscs:services', function() {
+    return jsFixInit('src/scripts/services');
+});
+
+gulp.task('jscs:directives', function() {
+    return jsFixInit('src/scripts/directives');
+});
+
+gulp.task('jscs:filters', function() {
+    return jsFixInit('src/scripts/filters');
+});
+
+gulp.task('jscs', function() {
+    return gulp.src(['src/scripts/bootstrap/*.js',
+        'src/scripts/bootstrap/*.js',
+        'src/scripts/controllers/*.js',
+        'src/scripts/services/*.js',
+        'src/scripts/filters/*.js',
+        'src/scripts/directives/*.js'])
+        .pipe($.jscs())
+        .pipe($.jscs.reporter())
+        .pipe($.jscs.reporter('fail'));
+});
+
+gulp.task('jscs:fix', ['jscs:controllers', 'jscs:services', 'jscs:directives', 'jscs:filters']);
+
 gulp.task('scripts:init:controllers', function() {
     return scriptsInit('src/scripts/controllers');
 });
@@ -119,7 +171,13 @@ gulp.task('scripts:init:services', function() {
     return scriptsInit('src/scripts/services');
 });
 
-gulp.task('scripts:init', ['scripts:init:controllers', 'scripts:init:directives', 'scripts:init:filters', 'scripts:init:services']);
+gulp.task('scripts:init', [
+    'jshint',
+    'jscs',
+    'scripts:init:controllers',
+    'scripts:init:directives',
+    'scripts:init:filters',
+    'scripts:init:services']);
 
 // Scripts Ui Bootstrap Template
 gulp.task('scripts:ui:template', function() {
@@ -138,12 +196,12 @@ gulp.task('scripts:vendor', function() {
     var files = config.vendors;
     files.push('src/scripts/config/env_' + buildMode + '.js');
     return gulp.src(files)
-        .pipe($.sourcemaps.init())
-        .pipe($.concat('vendor.js'))
+        .pipe($.if(DEBUG, $.sourcemaps.init()))
 
-        //.pipe($.ngmin())
-        //.pipe($.uglify())
-        .pipe($.sourcemaps.write())
+        //压缩未压缩的vendor文件
+        .pipe($.if(!DEBUG && /^((?!\.min\.).)*$/, $.uglify()))
+        .pipe($.concat('vendor.js'))
+        .pipe($.if(DEBUG, $.sourcemaps.write()))
         .pipe(gulp.dest('.tmp/scripts'))
         .pipe($.size());
 });
@@ -221,135 +279,6 @@ gulp.task('test', function() {
     gulp.start('karma');
 });
 
-// http 服务
-// gulp.task('connect', function() {
-//     var historyApiFallback = require('connect-history-api-fallback');
-//     $.connect.server({
-//         root: ['.tmp', 'src'],
-//         port: 9001,
-//         livereload: false,
-//         middleware: function(connect, opt) {
-//             var url = require('url');
-//
-//             var map = [];
-//
-//             map.push(require('connect-query')());
-//             map.push(require('connect-multiparty')());
-//
-//             var bodyParser = require('body-parser');
-//             map.push(bodyParser.urlencoded({ extended: false }));
-//             map.push(bodyParser.json());
-//
-//             map.push(function(req, res, done) {
-//                 if (req.originalUrl !== '/api/upload/form-api') {
-//                     return done();
-//                 }
-//
-//                 var secret = req.body.type == 'pic' ? config.upyun.bucket.secret : config.upyun.fileBucket.secret;
-//                 var policy = new Buffer(req.body.param).toString('base64');
-//                 var signature = crypto.createHash('md5').update(policy + '&' + secret).digest('hex');
-//                 res.writeHead(200, { 'Content-Type': 'application/json' });
-//                 res.statuCode = 200;
-//                 res.end(JSON.stringify({
-//                     code: 0,
-//                     data: {
-//                         policy: policy,
-//                         signature: signature,
-//                     },
-//                 }));
-//             });
-//
-//             map.push(function(req, res, done) {
-//                 if (req.originalUrl.indexOf('/user/login') == -1) {
-//                     return done();
-//                 }
-//
-//                 res.writeHead(302, {
-//                     Location: req.originalUrl.replace('/user/login', '/oauth/callback'),
-//                 });
-//                 res.end();
-//             });
-//
-//             map.push(function(req, res, done) {
-//                 if (req.originalUrl.indexOf('/oauth/callback') == -1) {
-//                     return done();
-//                 }
-//
-//                 res.writeHead(302, {
-//                     Location: decodeURIComponent(req.originalUrl.replace('/oauth/callback?from=', '')),
-//                     'Set-Cookie': 'kr_plus_id=1;Path=/;Expires=Wed, 09 Jun 2021 10:18:14 GMT;Domain=.36kr.com;',
-//                     'Set-Cookie': 'kr_valid=1;Path=/;Expires=Wed, 09 Jun 2021 10:18:14 GMT;Domain=.36kr.com;',
-//                     'Set-Cookie': 'kr_email_valid=1;Path=/;Expires=Wed, 09 Jun 2021 10:18:14 GMT;Domain=.36kr.com;',
-//                 });
-//                 res.end();
-//             });
-//
-//             map.push(function(req, res, done) {
-//                 if (req.originalUrl.indexOf('/api/') !== 0) {
-//                     return done();
-//                 }
-//
-//                 var url = req._parsedUrl.pathname.substring(5);
-//                 var filePath = 'mocksup-data/' + url + '.' + req.method;
-//                 var indexFilePath = 'mocksup-data/' + url + '/index.' + req.method;
-//
-//                 filePath = filePath.replace(/[0-9]+/g, ':integer').replace(/(\/\/){1}/g, '/');
-//                 indexFilePath = indexFilePath.replace(/[0-9]+/g, ':integer').replace(/(\/\/){1}/g, '/');
-//
-//                 fs.exists(filePath, function(exist) {
-//                     if (!exist) {
-//                         fs.exists(indexFilePath, function(exist) {
-//                             if (!exist) {
-//                                 return done();
-//                             }
-//
-//                             fs.readFile(indexFilePath, function(err, data) {
-//                                 if (err) {
-//                                     return done(err);
-//                                 }
-//
-//                                 try {
-//                                     res.writeHead(200, { 'Content-Type': 'application/json' });
-//                                     res.statuCode = 200;
-//                                     res.end(_.template(data, {
-//                                         headers: req.headers,
-//                                         query: req.query,
-//                                         body: req.body,
-//                                     }));
-//                                 } catch (err) {
-//                                     return done(err);
-//                                 }
-//                             });
-//                         });
-//                     } else {
-//                         fs.readFile(filePath, function(err, data) {
-//                             if (err) {
-//                                 return done(err);
-//                             }
-//
-//                             try {
-//                                 res.writeHead(200, { 'Content-Type': 'application/json' });
-//                                 res.statuCode = 200;
-//                                 res.end(_.template(data, {
-//                                     headers: req.headers,
-//                                     query: req.query,
-//                                     body: req.body,
-//                                 }));
-//                             } catch (err) {
-//                                 return done(err);
-//                             }
-//                         });
-//                     }
-//                 });
-//             });
-//
-//             //map.push(historyApiFallback);
-//             return map;
-//         },
-//     });
-// });
-
-// http 服务
 gulp.task('connect:remote', function() {
     // not use
     // var historyApiFallback = require('connect-history-api-fallback');
@@ -472,6 +401,19 @@ gulp.task('build:images', function() {
         .pipe($.size());
 });
 
+// gulp.task('build:images', function() {
+//     return gulp.src(['src/styles/images#<{(||)}>#*'])
+//         .pipe($.changed('.tmp-images/', { hasChanged: $.changed.compareSha1Digest }))
+//         .pipe(gulp.dest('.tmp-images/'))
+//         .pipe($.imagemin({
+//             optimizationLevel: 3,
+//             progressive: true,
+//             interlaced: true,
+//         }))
+//         .pipe(gulp.dest('.tmp/images'))
+//         .pipe($.size());
+// });
+
 // Build Html
 gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:scripts', 'build:images'], function() {
     var assets = $.useref.assets({
@@ -481,8 +423,9 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
     return gulp.src(['.tmp/*.html'])
         .pipe($.replace('styles/images/', 'images/'))
         .pipe(assets)
+        .pipe($.debug())
         .pipe($['if']('*.css', $.cssnano({ safe:true })))
-        .pipe($['if']('*.js',
+        .pipe($['if'](/.*krmin\.js/,
             $.uglify({ compress:{
 				drop_console:true }
             })))
@@ -493,6 +436,11 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
         .pipe($['if']('*.js', gulp.dest('.tmp/build')))
         .pipe($['if']('*.html', gulp.dest('dist')))
         .pipe($.size());
+});
+
+gulp.task('local:html', ['header'], function() {
+    DEBUG = false;
+    gulp.start('build:html');
 });
 
 // Build Rev
@@ -600,12 +548,14 @@ gulp.task('build:test12', ['clean'], function() {
 
 gulp.task('build:prod', ['clean'], function() {
     buildMode = 'prod';
+    DEBUG = false;
     CDNPrefix = '//krplus-cdn.b0.upaiyun.com/m';
     gulp.start('build');
 });
 
 gulp.task('build:prod:m1', ['clean'], function() {
     buildMode = 'prod';
+    DEBUG = false;
     CDNPrefix = '//krplus-cdn.b0.upaiyun.com/m1';
     gulp.start('build');
 });
@@ -646,8 +596,7 @@ gulp.task('remote:dev', function() {
 
 gulp.task('remote:test', function() {
     buildMode = 'test';
-    apiHost = 'http://rongtest01.36kr.com';
-    apiHost = 'http://rongtest.36kr.com';
+    apiHost = 'http://rong.36kr.com';
     gulp.start('remote');
 });
 
