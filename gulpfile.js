@@ -51,7 +51,7 @@ var handler = function(err) {
 // 清除垃圾数据
 gulp.task('clean', function(callback) {
     var del = require('del');
-    del(['.tmp/**', '!./tmp/images', 'dist'], callback);
+    del(['.tmp/**', '!.tmp', '!.tmp/images/**', 'dist'], callback);
 });
 
 gulp.task('html', ['header'], function() {
@@ -193,12 +193,12 @@ gulp.task('scripts:vendor', function() {
     var files = config.vendors;
     files.push('src/scripts/config/env_' + buildMode + '.js');
     return gulp.src(files)
-        .pipe($.if(!DEBUG, $.sourcemaps.init()))
+        .pipe($.if(DEBUG, $.sourcemaps.init()))
 
         //压缩未压缩的vendor文件
         .pipe($.if(!DEBUG && /^((?!\.min\.).)*$/, $.uglify()))
         .pipe($.concat('vendor.js'))
-        .pipe($.if(!DEBUG, $.sourcemaps.write()))
+        .pipe($.if(DEBUG, $.sourcemaps.write()))
         .pipe(gulp.dest('.tmp/scripts'))
         .pipe($.size());
 });
@@ -436,6 +436,7 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
 });
 
 gulp.task('local:html', ['header'], function() {
+    DEBUG = false;
     gulp.start('build:html');
 });
 
