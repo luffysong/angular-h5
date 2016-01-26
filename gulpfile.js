@@ -51,7 +51,7 @@ var handler = function(err) {
 // 清除垃圾数据
 gulp.task('clean', function(callback) {
     var del = require('del');
-    del(['.tmp', 'dist'], callback);
+    del(['.tmp/**', '!./tmp/images', 'dist'], callback);
 });
 
 gulp.task('html', ['header'], function() {
@@ -400,8 +400,8 @@ gulp.task('build:scripts', ['scripts:vendor', 'scripts:init', 'build:addTemplate
 
 gulp.task('build:images', function() {
     return gulp.src(['src/styles/images/**/*'])
-        .pipe($.changed('.images/', { hasChanged: $.changed.compareSha1Digest }))
-        .pipe(gulp.dest('.images/'))
+        .pipe($.changed('.tmp-images/', { hasChanged: $.changed.compareSha1Digest }))
+        .pipe(gulp.dest('.tmp-images/'))
         .pipe($.imagemin({
             optimizationLevel: 3,
             progressive: true,
@@ -420,8 +420,6 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
     return gulp.src(['.tmp/*.html'])
         .pipe($.replace('styles/images/', 'images/'))
         .pipe(assets)
-        .pipe($.debug())
-
         .pipe($['if']('*.css', $.cssnano({ safe:true })))
         .pipe($['if'](/.*krmin\.js/,
             $.uglify({ compress:{

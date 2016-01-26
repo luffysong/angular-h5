@@ -55,6 +55,7 @@ src/scripts/services/index.js
 #宋凯宇
 *.swp
 .images
+.tmp-images
 cscope.*
 ncscope.*
 tags
