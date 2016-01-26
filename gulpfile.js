@@ -15,7 +15,7 @@ var loadDictionary = require('./tasks/loadDictionary.js');
 var urlAdjuster = require('gulp-css-url-adjuster');
 
 var config = require('./config.json');
-
+var DEBUG = true;
 var through2 = require('through2');
 var browserify = require('browserify');
 var apiHost;
@@ -193,12 +193,12 @@ gulp.task('scripts:vendor', function() {
     var files = config.vendors;
     files.push('src/scripts/config/env_' + buildMode + '.js');
     return gulp.src(files)
-        .pipe($.sourcemaps.init())
-        .pipe($.concat('vendor.js'))
+        .pipe($.if(!DEBUG, $.sourcemaps.init()))
 
-        //.pipe($.ngmin())
-        //.pipe($.uglify())
-        .pipe($.sourcemaps.write())
+        //压缩未压缩的vendor文件
+        .pipe($.if(!DEBUG && /^((?!\.min\.).)*$/, $.uglify()))
+        .pipe($.concat('vendor.js'))
+        .pipe($.if(!DEBUG, $.sourcemaps.write()))
         .pipe(gulp.dest('.tmp/scripts'))
         .pipe($.size());
 });
@@ -420,6 +420,7 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
     return gulp.src(['.tmp/*.html'])
         .pipe($.replace('styles/images/', 'images/'))
         .pipe(assets)
+        .pipe($.debug())
         .pipe($['if']('*.css', $.cssnano({ safe:true })))
         .pipe($['if'](/.*krmin\.js/,
             $.uglify({ compress:{
@@ -577,6 +578,7 @@ gulp.task('remote', ['watch', 'scripts', 'connect:remote', 'styles', 'header']);
 
 gulp.task('remote:prod', function() {
     buildMode = 'prod';
+    DEBUG = true;
     apiHost = 'http://rong.36kr.com';
     gulp.start('remote');
 });
