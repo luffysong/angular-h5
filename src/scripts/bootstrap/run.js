@@ -41,6 +41,12 @@ angular.module('defaultApp')
             return /android/.test(navigator.userAgent) && /krversion4.0/.test(navigator.userAgent);
         }
 
+        $rootScope.$on('$stateChangeStart', function(e, $toState) {
+            if (androidVersion4() && /\/company\//.test($toState.url)) {
+                e.preventDefault();
+            }
+        });
+
         $rootScope.$on('$locationChangeStart', function(e) {
             var path = $location.path();
             if (/36kr/.test(navigator.userAgent)) {
