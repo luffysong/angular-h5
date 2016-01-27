@@ -34,7 +34,7 @@ angular.module('defaultApp')
             });
         };
 
-    }).run(function($modal, $rootScope, $location, $stateParams) {
+    }).run(function($modal, $rootScope, $location) {
         var iframe = $('<iframe src="about:blank" style="display: none"></iframe>').appendTo('body');
 
         function androidVersion4() {
@@ -48,7 +48,7 @@ angular.module('defaultApp')
                 if (androidVersion4() && /\/company\//.test(path)) {
                     e.preventDefault();
                     iframe[0].src = 'kr36://hashchange?companyId=' +
-                        $stateParams.companyId +
+                        path.split('/')[2] +
                         '&_=' + $.now();
                 }else if (!/android/.test(navigator.userAgent)) {
                     iframe[0].src = 'kr36://hashchange?_=' + $.now();
