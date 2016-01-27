@@ -41,11 +41,11 @@ angular.module('defaultApp')
             return /android/.test(navigator.userAgent) && /krversion4.0/.test(navigator.userAgent);
         }
 
-        $rootScope.$on('$stateChangeStart', function(e, $toState) {
+        $rootScope.$on('$stateChangeStart', function(e, $toState, $toStateParams) {
             if (androidVersion4() && /\/company\//.test($toState.url)) {
                 e.preventDefault();
                 iframe[0].src = 'kr36://hashchange?companyId=' +
-                    $toState.id +
+                    $toStateParams.id +
                     '&_=' + $.now();
             }
         });
