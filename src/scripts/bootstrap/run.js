@@ -34,15 +34,23 @@ angular.module('defaultApp')
             });
         };
 
-    }).run(function($modal, $rootScope, $location) {
+    }).run(function($modal, $rootScope, $location, $stateParams) {
         var iframe = $('<iframe src="about:blank" style="display: none"></iframe>').appendTo('body');
+
+        function androidVersion4() {
+            return /android/.test(navigator.userAgent) && /krversion4.0/.test(navigator.userAgent);
+        }
+
         $rootScope.$on('$locationChangeStart', function(e) {
             var path = $location.path();
             if (/36kr/.test(navigator.userAgent)) {
-                if (/android/.test(navigator.userAgent) && /\/company\//.test(path)) {
+
+                if (androidVersion4() && /\/company\//.test(path)) {
                     e.preventDefault();
-                    iframe[0].src = 'kr36://hashchange?&action=company&_=' + $.now();
-                }else {
+                    iframe[0].src = 'kr36://hashchange?companyId=' +
+                        $stateParams.companyId +
+                        '&_=' + $.now();
+                }else if (!/android/.test(navigator.userAgent)) {
                     iframe[0].src = 'kr36://hashchange?_=' + $.now();
                 }
             }
