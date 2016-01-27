@@ -44,21 +44,15 @@ angular.module('defaultApp')
         $rootScope.$on('$stateChangeStart', function(e, $toState) {
             if (androidVersion4() && /\/company\//.test($toState.url)) {
                 e.preventDefault();
+                iframe[0].src = 'kr36://hashchange?companyId=' +
+                    $toState.id +
+                    '&_=' + $.now();
             }
         });
 
-        $rootScope.$on('$locationChangeStart', function(e) {
-            var path = $location.path();
-            if (/36kr/.test(navigator.userAgent)) {
-
-                if (androidVersion4() && /\/company\//.test(path)) {
-                    e.preventDefault();
-                    iframe[0].src = 'kr36://hashchange?companyId=' +
-                        path.split('/')[2] +
-                        '&_=' + $.now();
-                }else if (!/android/.test(navigator.userAgent)) {
-                    iframe[0].src = 'kr36://hashchange?_=' + $.now();
-                }
+        $rootScope.$on('$locationChangeStart', function() {
+            if (/36kr/.test(navigator.userAgent) && !/android/.test(navigator.userAgent)) {
+                iframe[0].src = 'kr36://hashchange?_=' + $.now();
             }
 
             $modal.closeAll();
