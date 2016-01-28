@@ -36,8 +36,22 @@ angular.module('defaultApp')
 
     }).run(function($modal, $rootScope, $location) {
         var iframe = $('<iframe src="about:blank" style="display: none"></iframe>').appendTo('body');
+
+        function androidVersion4() {
+            return /android/.test(navigator.userAgent) && /krversion4.0/.test(navigator.userAgent);
+        }
+
+        $rootScope.$on('$stateChangeStart', function(e, $toState, $toStateParams) {
+            if (androidVersion4() && /\/company\//.test($toState.url)) {
+                e.preventDefault();
+                iframe[0].src = 'kr36://hashchange?companyId=' +
+                    $toStateParams.id +
+                    '&_=' + $.now();
+            }
+        });
+
         $rootScope.$on('$locationChangeStart', function() {
-            if (!!navigator.userAgent.match(/36kr/) && !navigator.userAgent.match(/android/)) {
+            if (/36kr/.test(navigator.userAgent) && !/android/.test(navigator.userAgent)) {
                 iframe[0].src = 'kr36://hashchange?_=' + $.now();
             }
 
@@ -129,4 +143,3 @@ angular.module('defaultApp')
         });
 
     });
-
