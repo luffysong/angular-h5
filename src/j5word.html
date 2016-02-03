@@ -241,17 +241,14 @@
             $('.support').on('click', function () {
                 _hmt.push(['_trackEvent', '按钮', '创业感言支持TA']);
                 krtracker('trackEvent', '按钮', "创业感言支持TA");
-                location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&'+
-                    'redirect_uri=http%3A%2F%2Frong.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&'+
-                    'response_type=code&scope=snsapi_base&state='+weixinObj.cid+'#wechat_redirect';
-
-                //TODO
-                //封榜以后显示此内容
-                //2016-01-20 14:48 宋凯宇
-                // $('.share').css({'display': 'block'})
-                // setTimeout(function () {
-                //     $('.share').css({'display': 'none'})
-                // }, 2500)
+                // location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx533e2291edcd4031&'+
+                //     'redirect_uri=http%3A%2F%2Frong.36kr.com%2Fapi%2Fspeed%2Frank%2Fsupport&'+
+                //     'response_type=code&scope=snsapi_base&state='+weixinObj.cid+'#wechat_redirect';
+                //
+                $('.share').css({'display': 'block'})
+                setTimeout(function () {
+                    $('.share').css({'display': 'none'})
+                }, 2500)
 
 
             })
