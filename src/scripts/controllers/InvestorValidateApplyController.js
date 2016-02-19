@@ -1123,6 +1123,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                             window.webkit.messageHandlers.investor.postMessage();
                             return;
                         } catch (e) {}
+                        
                         $scope.investorValidateApply.status = 'checking';
                     }, function(err) {
 
