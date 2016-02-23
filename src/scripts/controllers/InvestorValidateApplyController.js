@@ -1119,6 +1119,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     }
 
                     InvestorauditService.save(investoraudit, function() {
+                        try {
+                            window.webkit.messageHandlers.investor.postMessage();
+                            return;
+                        } catch (e) {}
+
                         $scope.investorValidateApply.status = 'checking';
                     }, function(err) {
 
