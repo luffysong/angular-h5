@@ -83,7 +83,7 @@
 					   ng-click="getCode($event)">短信验证</a>
 					<a class="btn btn-linear get-code btn-thin"
 					   href="javascript:void(0)"
-					   ng-disabled="!user.phone"
+					   ng-disabled="!user.phone || user.cc.cc != '86' || user.cc.cc != 86"
 					   ng-if="!wait"
 					   ng-click="getCode($event, true)">语音验证</a>
 				</div>
