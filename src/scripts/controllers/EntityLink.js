@@ -4,7 +4,7 @@
 
 var angular = require('angular');
 
-angular.module('defaultApp.filter').filter('entityLink', function($state) {
+angular.module('defaultApp.filter').filter('entityLink', function ($state) {
     var INVESTOR_TYPE = {
         INDIVIDUAL: 1,
         ORGANIZATION: 2,
@@ -23,13 +23,13 @@ angular.module('defaultApp.filter').filter('entityLink', function($state) {
             }
         }
 
-    return function(type, id) {
+    return function (type, id) {
         return getUISref(type, id);
     };
 });
 
-angular.module('defaultApp.filter').filter('entityTarget', function() {
-    return function(type) {
+angular.module('defaultApp.filter').filter('entityTarget', function () {
+    return function (type) {
 
         return type === 2 ? '_blank' : '_self';
     };

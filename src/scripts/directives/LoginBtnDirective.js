@@ -6,11 +6,11 @@ var angular = require('angular');
 
 angular.module('defaultApp.directive').directive('loginBtn', [
     '$location', 'UserService',
-    function($location, UserService) {
+    function ($location, UserService) {
         return {
             restrict: 'AE',
-            link: function(scope, element, attrs) {
-                element.click(function(e) {
+            link: function (scope, element, attrs) {
+                element.click(function (e) {
 
                     if (UserService.getUID()) {
                         return;
@@ -22,7 +22,7 @@ angular.module('defaultApp.directive').directive('loginBtn', [
                     }
 
                     e.preventDefault();
-                    setTimeout(function() {
+                    setTimeout(function () {
                         location.href = '/user/login?from=' + encodeURIComponent(attrs.loginBtn || location.href);
                     }, 300);
                 });

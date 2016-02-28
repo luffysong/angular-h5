@@ -4,8 +4,8 @@
 
 var angular = require('angular');
 
-angular.module('defaultApp.filter').filter('investorLink', function() {
-    return function(input, idKey, typeKey) {
+angular.module('defaultApp.filter').filter('investorLink', function () {
+    return function (input, idKey, typeKey) {
         var userLink = 'user_detail({id:"{{id}}"})';
         var companyLink = 'company_detail({id:"{{id}}"})';
         var orgLink = 'organization_detail({id:"{{id}}"})';

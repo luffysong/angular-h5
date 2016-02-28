@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('MyCompanyController',
-    function($scope, $rootScope, $state, $stateParams, loading, $location, $modal, CompanyService, UserService,
+    function ($scope, $rootScope, $state, $stateParams, loading, $location, $modal, CompanyService, UserService,
         DictionaryService, $http, ErrorService) {
         $scope.uid = UserService.getUID();
         $scope.stateParams = $stateParams;
@@ -15,21 +15,21 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
         };
 
         // 返回上一页
-        $scope.goBack = function(e) {
+        $scope.goBack = function (e) {
             e && e.preventDefault();
             history.go(-1);
         };
 
         loading.show('myCompanyListShow');
-        $scope.loadUserBasicData = function() {
-            CompanyService.getManaged({}, function(data) {
+        $scope.loadUserBasicData = function () {
+            CompanyService.getManaged({}, function (data) {
                 $scope.myCompanyList.data = data.data;
-                $.each(data.data, function(i) {
+                $.each(data.data, function (i) {
                     data.data[i].checkStatus = false;
                 });
 
                 loading.hide('myCompanyListShow');
-            }, function(err) {
+            }, function (err) {
 
                 ErrorService.alert(err);
                 loading.hide('myCompanyListShow');
@@ -38,9 +38,9 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
 
         $scope.loadUserBasicData();
 
-        $scope.btnRadio = function(e, index, id) {
+        $scope.btnRadio = function (e, index, id) {
             e && e.preventDefault();
-            $.each($scope.myCompanyList.data, function(i, val) {
+            $.each($scope.myCompanyList.data, function (i, val) {
                 val.checkStatus = false;
             });
 
@@ -53,11 +53,11 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
             }
         };
 
-        $scope.submitForm = function(e) {
+        $scope.submitForm = function (e) {
             e && e.preventDefault();
             console.log($stateParams);
             $scope.applyForm = angular.element($('[name="applyForm"]')).scope().applyForm;
-            Object.keys($scope.applyForm).forEach(function(key) {
+            Object.keys($scope.applyForm).forEach(function (key) {
                 if ($scope.applyForm[key] && $scope.applyForm[key].$setDirty) {
                     $scope.applyForm[key].$setDirty();
                 }
@@ -71,7 +71,7 @@ angular.module('defaultApp.controller').controller('MyCompanyController',
 
             CompanyService.ventureApply($scope.myCompanyList.selectedCompanyId, {
                 type: $stateParams.from,
-            }, function() {
+            }, function () {
                 $state.go('finacingSuccess', { from: $stateParams.from, cid: $scope.myCompanyList.selectedCompanyId });
 
                 // if(data.company) {

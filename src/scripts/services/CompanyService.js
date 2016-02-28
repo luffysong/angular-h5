@@ -8,16 +8,16 @@ var angular = require('angular');
 angular.module('defaultApp.service').service('CompanyService', [
     '$location', 'BasicService', 'dateFilter', 'appendTransform', '$http',
     '$stateParams', '$q',
-    function($location, BasicService, dateFilter, appendTransform, $http,
+    function ($location, BasicService, dateFilter, appendTransform, $http,
              $stateParams, $q) {
         var service = BasicService('/api/company/:id/:sub/:subid', {
             query: {
                 method: 'GET',
                 transformResponse: appendTransform($http.defaults.transformResponse,
-                    function(data) {
+                    function (data) {
                         if (data.data && data.data.data && data.data.data.length) {
                             var list = data.data.data;
-                            list.forEach(function(item) {
+                            list.forEach(function (item) {
                                 if (item.founder && !item.user) {
                                     item.user = item.founder;
                                 }
@@ -33,7 +33,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                     mode: $stateParams.mode
                 },
                 transformResponse: appendTransform($http.defaults.transformResponse,
-                    function(data) {
+                    function (data) {
 
                         var basics = {
                             name: '36氪',
@@ -55,7 +55,7 @@ angular.module('defaultApp.service').service('CompanyService', [
 
                         if (data.data && data.data.company) {
                             data.data.basic = {};
-                            Object.keys(basics).forEach(function(k) {
+                            Object.keys(basics).forEach(function (k) {
                                 data.data.basic[k] = data.data.company[k];
                                 delete data.data.company[k];
                             });
@@ -94,7 +94,7 @@ angular.module('defaultApp.service').service('CompanyService', [
             save: {
                 method: 'POST',
                 transformRequest: appendTransform($http.defaults.transformRequest,
-                    function(data) {
+                    function (data) {
                         console.log('---提交的创建公司数据:', data);
                         if (data.companySource) {
                             //console.log(data)
@@ -158,7 +158,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                     action: 'claim'
                 },
                 transformRequest: appendTransform($http.defaults.transformRequest,
-                    function(data) {
+                    function (data) {
                         data.startDate = data.startYear + '-' + (data.startMonth.length >
                             1 ? data.startMonth : ('0' + data.startMonth)) + '-' +
                             '01 ' + '00:00:00';
@@ -204,7 +204,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                         sub: undefined
                     },
                     transformRequest: appendTransform($http.defaults.transformRequest,
-                        function(data) {
+                        function (data) {
                             data.pictures = data.pictures ? data.pictures.join(',') :
                                 '';
                             if (data.story) {
@@ -254,7 +254,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                 save: {
                     method: 'POST',
                     transformRequest: appendTransform($http.defaults.transformRequest,
-                        function(data) {
+                        function (data) {
                             data.mode = $stateParams.mode;
                             return data;
                         })
@@ -262,7 +262,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                 update: {
                     method: 'PUT',
                     transformRequest: appendTransform($http.defaults.transformRequest,
-                        function(data) {
+                        function (data) {
                             data.mode = $stateParams.mode;
                             return data;
                         })
@@ -278,7 +278,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                 save: {
                     method: 'POST',
                     transformRequest: appendTransform($http.defaults.transformRequest,
-                        function(data) {
+                        function (data) {
                             data.mode = $stateParams.mode;
                             return data;
                         })
@@ -286,7 +286,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                 update: {
                     method: 'PUT',
                     transformRequest: appendTransform($http.defaults.transformRequest,
-                        function(data) {
+                        function (data) {
                             data.mode = $stateParams.mode;
                             return data;
                         })
@@ -296,9 +296,9 @@ angular.module('defaultApp.service').service('CompanyService', [
                 query: {
                     method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse,
-                        function(data) {
+                        function (data) {
                             if (data.data && data.data.data) {
-                                data.data.data.forEach(function(item) {
+                                data.data.data.forEach(function (item) {
                                     // item.entity = JSON.parse(item.entity);
                                     financeAdaptor(item);
                                 });
@@ -310,12 +310,12 @@ angular.module('defaultApp.service').service('CompanyService', [
                 save: {
                     method: 'POST',
                     transformRequest: appendTransform($http.defaults.transformRequest,
-                        function(data) {
+                        function (data) {
                             data.financeDate = dateFilter(new Date([data.startYear,
                                     data.startMonth, '1'].join('/')),
                                 'yyyy-MM-dd hh:mm:ss');
 
-                            data.entitys.forEach(function(item) {
+                            data.entitys.forEach(function (item) {
                                 if (item.id) {
                                     if (!item.entityId) {
                                         item.entityId = item.id;
@@ -335,7 +335,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                         }),
 
                     transformResponse: appendTransform($http.defaults.transformResponse,
-                        function(data) {
+                        function (data) {
                             var item = data.data;
                             financeAdaptor(item);
                             return data;
@@ -344,12 +344,12 @@ angular.module('defaultApp.service').service('CompanyService', [
                 update: {
                     method: 'PUT',
                     transformRequest: appendTransform($http.defaults.transformRequest,
-                        function(data) {
+                        function (data) {
                             data.financeDate = dateFilter(new Date([data.startYear,
                                     data.startMonth, '1'].join('/')),
                                 'yyyy-MM-dd hh:mm:ss');
                             if (data.entitys) {
-                                data.entitys.forEach(function(item) {
+                                data.entitys.forEach(function (item) {
                                     if (item.id) {
                                         if (!item.entityId) {
                                             item.entityId = item.id;
@@ -371,7 +371,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                         }),
 
                     transformResponse: appendTransform($http.defaults.transformResponse,
-                        function(data) {
+                        function (data) {
                             var item = data.data;
                             financeAdaptor(item);
                             return data;
@@ -382,9 +382,9 @@ angular.module('defaultApp.service').service('CompanyService', [
                 query: {
                     method: 'GET',
                     transformResponse: appendTransform($http.defaults.transformResponse,
-                        function(data) {
+                        function (data) {
                             if (data.data && data.data.data) {
-                                data.data.data.forEach(function(item) {
+                                data.data.data.forEach(function (item) {
                                     // item.entity = JSON.parse(item.entity);
                                     financeAdaptor(item);
                                 });
@@ -399,7 +399,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                 save: {
                     method: 'POST',
                     transformRequest: appendTransform($http.defaults.transformRequest,
-                        function(data) {
+                        function (data) {
                             if (!data.investorId) {
                                 data.investorId = data.id;
                                 delete data.id;
@@ -414,7 +414,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                 get: {
                     method: 'get',
                     transformResponse: appendTransform($http.defaults.transformResponse,
-                        function(data) {
+                        function (data) {
                             return data;
                         })
                 }, applyView: {
@@ -429,9 +429,9 @@ angular.module('defaultApp.service').service('CompanyService', [
                         action: 'complete'
                     },
                     transformRequest: appendTransform($http.defaults.transformRequest,
-                        function(data) {
+                        function (data) {
 
-                            data.entitys.forEach(function(item) {
+                            data.entitys.forEach(function (item) {
                                 if (item.id) {
                                     if (!item.entityId) {
                                         item.entityId = item.id;
@@ -478,7 +478,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                 item.entitys = item.details;
                 item.showNotifyTip = false;
                 item.showInviteTip = false;
-                item.entitys.forEach(function(entity) {
+                item.entitys.forEach(function (entity) {
                     if (entity.status === 'PENDING' && entity.source === 'INVESTOR') {
                         item.showNotifyTip = true;
                     }
@@ -494,12 +494,12 @@ angular.module('defaultApp.service').service('CompanyService', [
 
         }
 
-        service.getCompanyListForHome = function(callback) {
+        service.getCompanyListForHome = function (callback) {
 
-            $http.get('/api/organization/finished-com').success(function(data) {
+            $http.get('/api/organization/finished-com').success(function (data) {
                 var list = [];
                 if (data.data) {
-                    data.data.forEach(function(item, i) {
+                    data.data.forEach(function (item, i) {
                         var company = {
                             company_logo: item.company.logo,
                             company_bg: 'http://krplus-pic.b0.upaiyun.com/' +
@@ -515,7 +515,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                             },
                             finance_rounds: []
                         };
-                        item.financeExpList.forEach(function(exp) {
+                        item.financeExpList.forEach(function (exp) {
                             var round = {
                                 date: dateFilter(new Date(exp.fundDateStr),
                                     'yyyy.MM'),
@@ -547,29 +547,29 @@ angular.module('defaultApp.service').service('CompanyService', [
                 if (callback) {
                     callback(list);
                 }
-            }).error(function(err) {
+            }).error(function (err) {
                 console.log(err);
             });
 
         };
 
-        service.ventureApply = function(cid, type, callback) {
+        service.ventureApply = function (cid, type, callback) {
             $http.get('/api/company/intention/' + cid, {
                 params: type
-            }).success(function(data) {
+            }).success(function (data) {
                 if (callback) {
                     callback(data);
                 }
-            }).error(function(err) {
+            }).error(function (err) {
                 console.log(err);
             });
         };
 
-        service.getIndustry2 = function(id) {
+        service.getIndustry2 = function (id) {
             var deferred = $q.defer();
-            $http.get('/api/dict/industry/' + id).success(function(data) {
+            $http.get('/api/dict/industry/' + id).success(function (data) {
                 deferred.resolve(data);
-            }).error(function() {
+            }).error(function () {
                 deferred.reject();
             });
 
@@ -577,10 +577,10 @@ angular.module('defaultApp.service').service('CompanyService', [
         };
 
         // 获取最新快讯
-        service.news = function(id, callback, errcallback) {
-            $http.get('/api/company/' + id + '/news').success(function(response) {
+        service.news = function (id, callback, errcallback) {
+            $http.get('/api/company/' + id + '/news').success(function (response) {
                 callback && callback(response);
-            }).catch(function(err) {
+            }).catch(function (err) {
                 errcallback && errcallback(err);
             });
         };

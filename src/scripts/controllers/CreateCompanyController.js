@@ -23,7 +23,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
     '$upload',
     '$http',
 
-    function($stateParams, $timeout, $q, $modal, $scope, DictionaryService, dateFilter, DefaultService, AndroidUploadService,
+    function ($stateParams, $timeout, $q, $modal, $scope, DictionaryService, dateFilter, DefaultService, AndroidUploadService,
             CompanyService, SuggestService, monthOptions, yearOptions, $state, UserService, ErrorService, AvatarEdit, $upload) {
         //console.log($stateParams)
         if ($stateParams.from && decodeURIComponent($stateParams.from).indexOf('speed5') > -1) {
@@ -34,8 +34,8 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         }
 
         //android客户端
-        $scope.androidUpload = AndroidUploadService.setClick(function(filename) {
-            $scope.$apply(function() {
+        $scope.androidUpload = AndroidUploadService.setClick(function (filename) {
+            $scope.$apply(function () {
                 if (window.kr36 && window.kr36.tempCache && window.kr36.tempCache.imgsource) {
                     $scope.formData[window.kr36.tempCache.imgsource] = filename;
                     angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('cardEmpty', true);
@@ -56,7 +56,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         $scope.urlblacklist = DictionaryService.getDict('CompanyUrlBlacklist');
 
         // 所属行业 一级
-        $scope.industry = DictionaryService.getDict('CompanyIndustry').filter(function(el) {
+        $scope.industry = DictionaryService.getDict('CompanyIndustry').filter(function (el) {
             if (el.desc !== '非TMT') {
                 return el;
             }
@@ -91,19 +91,19 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         //});
 
         // 公司网址
-        $scope.webSiteFocus = function() {
+        $scope.webSiteFocus = function () {
             if (!$scope.formData.website) {
                 $scope.formData.website = 'http://';
             }
         };
 
-        $scope.webSiteBlur = function() {
+        $scope.webSiteBlur = function () {
             if ($scope.formData.website === 'http://') {
                 $scope.formData.website = '';
             }
         };
 
-        $scope.websiteChange = function() {
+        $scope.websiteChange = function () {
             angular.element($('form[name="createForm"]'))
                 .scope()
                 .createForm
@@ -113,7 +113,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         console.log($scope.formData.industry);
 
         // 切换一级行业 监听事件操作
-        $scope.industryChange = function() {
+        $scope.industryChange = function () {
             if (!$scope.selectIndustryObj.industryObj) {
                 return;
             }
@@ -122,20 +122,20 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             $scope.industry2 = '';
 
             //console.log($scope.formData.industry)
-            CompanyService.getIndustry2($scope.selectIndustryObj.industryObj.id).then(function(data) {
+            CompanyService.getIndustry2($scope.selectIndustryObj.industryObj.id).then(function (data) {
                 $scope.industry2 = data.data;
-            }, function() {
+            }, function () {
 
             });
         };
 
-        $scope.industry2Change = function() {
+        $scope.industry2Change = function () {
             $scope.formData.industry2 = $scope.selectIndustryObj.industry2Obj.id;
             console.log($scope.formData.industry2);
         };
 
         // 定位
-        $scope.positionSet = function(e) {
+        $scope.positionSet = function (e) {
             e.preventDefault();
             var wrap = $('.suggest_wrap');
             var top = wrap.offset().top;
@@ -151,7 +151,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         };
 
         // 重要提示 start
-        $scope.createTip = function() {
+        $scope.createTip = function () {
             $modal.open({
                 templateUrl: 'templates/company/create_tip.html',
                 windowClass: 'pop_create_tip_wrap',
@@ -159,14 +159,14 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     '$scope',
                     '$modalInstance',
                     'scope',
-                    function($scope, $modalInstance) {
-                        $scope.ok = function() {
+                    function ($scope, $modalInstance) {
+                        $scope.ok = function () {
                             $modalInstance.dismiss();
                         };
                     }
                 ],
                 resolve: {
-                    scope: function() {
+                    scope: function () {
                         return $scope;
                     }
                 }
@@ -180,7 +180,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         function suggest_state(data) {
             //var q = term.toLowerCase().trim();
-            var results = data.map(function(item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
+            var results = data.map(function (item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
                 var logo = item.logo ? item.logo :
                     '//krplus-pic.b0.upaiyun.com/default_logo.png!30"' +
                     ' src="//krplus-pic.b0.upaiyun.com/default_logo.png!30';
@@ -214,8 +214,8 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             SuggestService.query({
                 wd: q,
                 sub: 'company'
-            }, function(data) {
-                var exist = data.data.filter(function(item) {
+            }, function (data) {
+                var exist = data.data.filter(function (item) {
                     return item.name.toLowerCase() === q.toLowerCase();
                 });
 
@@ -230,7 +230,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 }
 
                 deferred.resolve(suggest_state(data.data));
-            }, function() {
+            }, function () {
 
             });
 
@@ -240,7 +240,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         // add new company
         $scope.formData.operationStatus = 'OPEN';
 
-        $scope.addCompany = function(name) {
+        $scope.addCompany = function (name) {
             $scope.opNext = 0;
             $scope.formData.name = name;
             $scope.formData.website = '';
@@ -266,7 +266,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         function checkName(selected) {
             CompanyService.checkName({
                 name: selected.obj.name
-            }, function(data) {
+            }, function (data) {
                 data.company.logo = selected.obj.logo;
                 var company = data.company;
                 if (data.manager) {
@@ -293,19 +293,19 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
                 $scope.formData.industry = company.industry;
                 $scope.formData.industry2 = company.industry2;
-                $.each($scope.industry, function(i, el) {
+                $.each($scope.industry, function (i, el) {
                     if (el.value === $scope.formData.industry) {
                         $scope.selectIndustryObj.industryObj = el;
 
-                        CompanyService.getIndustry2($scope.selectIndustryObj.industryObj.id).then(function(data) {
+                        CompanyService.getIndustry2($scope.selectIndustryObj.industryObj.id).then(function (data) {
                             $scope.industry2 = data.data;
 
-                            $.each($scope.industry2, function(i, el) {
+                            $.each($scope.industry2, function (i, el) {
                                 if (el.id === $scope.formData.industry2) {
                                     $scope.selectIndustryObj.industry2Obj = el;
                                 }
                             });
-                        }, function() {
+                        }, function () {
 
                         });
                     }
@@ -317,13 +317,13 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         $scope.autocomplete_options = {
             suggest: suggest_state_remote,
             on_error: console.log,
-            on_detach: function() {
+            on_detach: function () {
                 $scope.formData.name = name_cache;
 
                 //console.log(cs, 'detach')
             },
 
-            on_select: function(selected) {
+            on_select: function (selected) {
                 if (selected.obj.status !== 'add') {
                     checkName(selected);
                 } else {
@@ -340,7 +340,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         // 上传logo start
         $scope.logo = {};
-        $scope.logoFileSelected = function(files) {
+        $scope.logoFileSelected = function (files) {
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
                 //ErrorService.alert({
@@ -363,18 +363,18 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     'x-gmkerl-type': 'fix_width', //限定宽度,高度自适应
                     'x-gmkerl-value': '900',      //限定的宽度的值
                     'x-gmkerl-unsharp': true
-                }).then(function(data) {
+                }).then(function (data) {
                     $scope.upload = $upload.upload({
                         url: upyun.api + '/' + upyun.bucket.name,
                         data: data,
                         file: file,
                         withCredentials: false
-                    }).progress(function(evt) {
+                    }).progress(function (evt) {
                         $scope.logo.progress = evt.loaded * 100 / evt.total;
-                    }).success(function(data) {
+                    }).success(function (data) {
 
                         var reader = new FileReader();
-                        reader.onload = function() {
+                        reader.onload = function () {
 
                             //$('.J_aa')[0].src = reader.result
 
@@ -399,20 +399,20 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
                         $scope.logo.uploading = false;
                         $scope.temp_logo = '';
-                    }).error(function(err) {
+                    }).error(function (err) {
                         //ErrorService.alert({
                         //    msg: '格式不支持，请重新上传！'
                         //});
                         angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', false);
                         $scope.serverErrorMsg = err.msg;
 
-                        $timeout(function() {
+                        $timeout(function () {
                             angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', true);
                         }, 4000);
 
                         $scope.logo.uploading = false;
                     });
-                }, function(err) {
+                }, function (err) {
 
                     $scope.logo.uploading = false;
 
@@ -420,7 +420,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', false);
                     $scope.serverErrorMsg = err.msg;
 
-                    $timeout(function() {
+                    $timeout(function () {
                         angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', true);
                     }, 4000);
                 });
@@ -431,7 +431,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         // 上传名片 start
         $scope.card = {};
-        $scope.cardFileSelected = function(files) {
+        $scope.cardFileSelected = function (files) {
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
                 //ErrorService.alert({
@@ -451,18 +451,18 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     'x-gmkerl-type': 'fix_width', //限定宽度,高度自适应
                     'x-gmkerl-value': '900',      //限定的宽度的值
                     'x-gmkerl-unsharp': true
-                }).then(function(data) {
+                }).then(function (data) {
                     $scope.upload = $upload.upload({
                         url: upyun.api + '/' + upyun.bucket.name,
                         data: data,
                         file: file,
                         withCredentials: false
-                    }).progress(function(evt) {
+                    }).progress(function (evt) {
                         $scope.card.progress = evt.loaded * 100 / evt.total;
-                    }).success(function(data) {
+                    }).success(function (data) {
 
                         var reader = new FileReader();
-                        reader.onload = function() {
+                        reader.onload = function () {
 
                             //$('.J_aa')[0].src = reader.result
 
@@ -488,20 +488,20 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                         $scope.card.uploading = false;
 
                         $scope.temp_bizCardLink = '';
-                    }).error(function(err) {
+                    }).error(function (err) {
                         //ErrorService.alert({
                         //    msg: '格式不支持，请重新上传！'
                         //});
                         angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', false);
                         $scope.serverErrorMsg = err.msg;
 
-                        $timeout(function() {
+                        $timeout(function () {
                             angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', true);
                         }, 4000);
 
                         $scope.card.uploading = false;
                     });
-                }, function(err) {
+                }, function (err) {
 
                     $scope.card.uploading = false;
 
@@ -509,7 +509,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                     angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', false);
                     $scope.serverErrorMsg = err.msg;
 
-                    $timeout(function() {
+                    $timeout(function () {
                         angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', true);
                     }, 4000);
                 });
@@ -520,7 +520,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         //新建公司 start
         $scope.submitting = false;
-        $scope.submitForm = function(e) {
+        $scope.submitForm = function (e) {
             e && e.preventDefault();
 
             // if (!$scope.formData.bizCardLink) {
@@ -558,7 +558,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             //    angular.element($("form[name='createForm']")).scope()["createForm"].$setValidity("industry", true);
             //}
 
-            Object.keys($scope.createForm).forEach(function(key) {
+            Object.keys($scope.createForm).forEach(function (key) {
                 if ($scope.createForm[key] && $scope.createForm[key].$setDirty) {
                     $scope.createForm[key].$setDirty();
                 }
@@ -581,7 +581,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
             CompanyService.save({
                 mode: 'direct'
-            }, angular.copy($scope.formData), function(data) {
+            }, angular.copy($scope.formData), function (data) {
                 if ($scope.jisu) {
                     location.href = '/m/j5companycreate.html?cid=' + data.id;
                 }else {
@@ -601,12 +601,12 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 //$state.go('companys.detail.overview', {
                 //    id: data.id
                 //});
-            }, function(err) {
+            }, function (err) {
                 //ErrorService.alert(err);
                 angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', false);
                 $scope.serverErrorMsg = err.msg;
 
-                $timeout(function() {
+                $timeout(function () {
                     angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', true);
                 }, 4000);
 
@@ -623,7 +623,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         // 申请认领 start
         //$scope.applyStatus = true;
-        $scope.applyUnclaimed = function(e) {
+        $scope.applyUnclaimed = function (e) {
             e && e.preventDefault();
             if (!$scope.formData.bizCardLink) {
                 //ErrorService.alert({
@@ -633,7 +633,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 return;
             }
 
-            Object.keys($scope.createForm).forEach(function(key) {
+            Object.keys($scope.createForm).forEach(function (key) {
                 if ($scope.createForm[key] && $scope.createForm[key].$setDirty) {
                     $scope.createForm[key].$setDirty();
                 }
@@ -651,14 +651,14 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             $scope.claimedCid = cid;
             CompanyService.claim({
                 id: cid
-            }, angular.copy($scope.formData), function() {
+            }, angular.copy($scope.formData), function () {
 
                 $scope.submitting = false;
                 $scope.applyStatus = false;
 
                 location.hash = '/company_create_apply';
 
-            }, function(err) {
+            }, function (err) {
 
                 $scope.submitting = false;
                 $scope.applyStatus = true;
@@ -669,7 +669,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', false);
                 $scope.serverErrorMsg = err.msg;
 
-                $timeout(function() {
+                $timeout(function () {
                     angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', true);
                 }, 4000);
             });
@@ -679,7 +679,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         // 添加为我的创业经历 start
         $scope.addStatus = true;
-        $scope.addEntrepreneurialExp = function(e) {
+        $scope.addEntrepreneurialExp = function (e) {
             e && e.preventDefault();
             if (!$scope.formData.bizCardLink) {
                 //ErrorService.alert({
@@ -689,7 +689,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 return;
             }
 
-            Object.keys($scope.createForm).forEach(function(key) {
+            Object.keys($scope.createForm).forEach(function (key) {
                 if ($scope.createForm[key] && $scope.createForm[key].$setDirty) {
                     $scope.createForm[key].$setDirty();
                 }
@@ -717,13 +717,13 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 isCurrent: ($scope.formData.isCurrent ? true : false),
                 operationStatus: $scope.formData.operationStatus,
                 bizCardLink: $scope.formData.bizCardLink
-            }, function() {
+            }, function () {
                 $scope.submitting = false;
                 $scope.addStatus = false;
 
                 location.hash = '/company_create_apply';
 
-            }, function(err) {
+            }, function (err) {
 
                 $scope.submitting = false;
                 $scope.addStatus = true;
@@ -734,7 +734,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
                 angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', false);
                 $scope.serverErrorMsg = err.msg;
 
-                $timeout(function() {
+                $timeout(function () {
                     angular.element($('form[name="createForm"]')).scope().createForm.$setValidity('serverError', true);
                 }, 4000);
             });
@@ -743,7 +743,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         // 添加为我的创业经历 end
 
-        $scope.checkDate = function() {
+        $scope.checkDate = function () {
             if ($scope.formData.startYear && $scope.formData.startMonth) {
                 var selectTime = $scope.formData.startYear + '/' + $scope.formData.startMonth + '/1';
                 if (new Date(selectTime) - 0 > (new Date() - 0)) {

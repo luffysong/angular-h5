@@ -5,12 +5,12 @@
 var angular = require('angular');
 
 angular.module('defaultApp.service').config(['$provide', '$httpProvider',
-    function($provide, $httpProvider) {
-        $provide.factory('commonInterceptor', ['$q',  function($q) {
+    function ($provide, $httpProvider) {
+        $provide.factory('commonInterceptor', ['$q',  function ($q) {
             return {
 
                 // optional method
-                response: function(response) {
+                response: function (response) {
                     if (response.config.url.indexOf('templates') > -1 ||
                         response.config.url.indexOf('template') > -1 ||
                         response.config.url.indexOf('bootstrap') > -1 ||
@@ -37,7 +37,7 @@ angular.module('defaultApp.service').config(['$provide', '$httpProvider',
         $httpProvider.defaults.headers.put = { 'Content-Type': 'application/x-www-form-urlencoded' };
         $httpProvider.defaults.headers.delete = { 'Content-Type': 'application/x-www-form-urlencoded' };
         $httpProvider.defaults.withCredentials = true;
-        $httpProvider.defaults.transformRequest = function(data) {
+        $httpProvider.defaults.transformRequest = function (data) {
             if (data === undefined) {
                 return data;
             }
@@ -57,7 +57,7 @@ angular.module('defaultApp.service').config(['$provide', '$httpProvider',
             return $.param(clonedData);
         };
     }])
-    .service('appendTransform', ['$http', function($http) {
+    .service('appendTransform', ['$http', function ($http) {
         function appendTransform(defaults, transform) {
 
             if (defaults === $http.defaults.transformRequest) {
@@ -78,9 +78,9 @@ angular.module('defaultApp.service').config(['$provide', '$httpProvider',
 
     .service('BasicService', [
         '$location', '$http', '$resource',
-        function($location, $http, $resource) {
+        function ($location, $http, $resource) {
 
-            var contructor = function(path, params, actions) {
+            var contructor = function (path, params, actions) {
                 var finalActions = {
                     update: {
                         method: 'PUT'
@@ -103,7 +103,7 @@ angular.module('defaultApp.service').config(['$provide', '$httpProvider',
                 return $resource(path, params, finalActions);
             };
 
-            return function(path, actions, submodels, subActions) {
+            return function (path, actions, submodels, subActions) {
                 var Model = contructor(path, {}, actions);
                 subActions = subActions || {};
 
@@ -111,8 +111,8 @@ angular.module('defaultApp.service').config(['$provide', '$httpProvider',
                     return Model;
                 }
 
-                Object.keys(submodels).forEach(function(key) {
-                    submodels[key].forEach(function(model) {
+                Object.keys(submodels).forEach(function (key) {
+                    submodels[key].forEach(function (model) {
                         var params = {};
                         params[key] = model;
                         if (!!Model[model]) {

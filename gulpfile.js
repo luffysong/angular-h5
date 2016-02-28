@@ -1,4 +1,4 @@
-/*globals -$ */
+/* globals -$ */
 
 //jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 var path = require('path');
@@ -25,14 +25,14 @@ var CDNPrefix;
 var buildMode = 'prod';
 
 function reloadPage() {
-    return es.map(function(file, callback) {
+    return es.map(function (file, callback) {
         if (reloadTimeout) {
             clearTimeout(reloadTimeout);
             reloadTimeout = null;
         }
 
-        reloadTimeout = setTimeout(function() {
-            setTimeout(function() {
+        reloadTimeout = setTimeout(function () {
+            setTimeout(function () {
                 gulp.src(['src/index.html']).pipe($.connect.reload());
                 reloadTimeout = null;
             }, 1000);
@@ -43,13 +43,13 @@ function reloadPage() {
 }
 
 // 错误处理
-var handler = function(err) {
+var handler = function (err) {
     $.util.beep();
     $.util.log($.util.colors.red(err.name), err.message);
 };
 
 // 清除垃圾数据
-gulp.task('clean', function(callback) {
+gulp.task('clean', function (callback) {
     var del = require('del');
     del.sync(['.tmp', 'dist']);
     callback && callback();
@@ -57,7 +57,7 @@ gulp.task('clean', function(callback) {
     // del(['.tmp#<{(|*', '!.tmp', '!.tmp/images#<{(|*', 'dist'], callback);
 });
 
-gulp.task('html', ['header'], function() {
+gulp.task('html', ['header'], function () {
     gulp.src(['src/*.html', 'src/templates/**/*.html'])
 
         //.pipe(gulp.dest('.tmp'))
@@ -65,7 +65,7 @@ gulp.task('html', ['header'], function() {
 });
 
 // 样式
-gulp.task('styles', function() {
+gulp.task('styles', function () {
     gulp.src(['src/styles/*.less'])
         .pipe($.plumber({
             errorHandler: handler,
@@ -81,9 +81,9 @@ gulp.task('styles', function() {
 });
 
 // Scripts Init
-var scriptsInit = function(modulesPath) {
+var scriptsInit = function (modulesPath) {
     var scriptText = '';
-    fs.readdirSync(modulesPath).forEach(function(file) {
+    fs.readdirSync(modulesPath).forEach(function (file) {
         if (file !== 'index.js' && /\.js$/.test(file)) {
             scriptText += 'require(\'./' + file.replace('.js', '') + '\');\n';
         }
@@ -93,7 +93,7 @@ var scriptsInit = function(modulesPath) {
         objectMode: true,
     });
 
-    src._read = function() {
+    src._read = function () {
         this.push(new $.util.File({
             cwd: '',
             base: '',
@@ -114,7 +114,7 @@ function jsFixInit(modulesPath) {
         .pipe(gulp.dest(modulesPath));
 }
 
-gulp.task('jshint', function() {
+gulp.task('jshint', function () {
     return gulp.src(['src/scripts/controllers/*.js',
         'src/scripts/bootstrap/*.js',
         'src/scripts/services/*.js',
@@ -125,23 +125,23 @@ gulp.task('jshint', function() {
         .pipe($.jshint.reporter('fail'));
 });
 
-gulp.task('jscs:controllers', function() {
+gulp.task('jscs:controllers', function () {
     return jsFixInit('src/scripts/controllers');
 });
 
-gulp.task('jscs:services', function() {
+gulp.task('jscs:services', function () {
     return jsFixInit('src/scripts/services');
 });
 
-gulp.task('jscs:directives', function() {
+gulp.task('jscs:directives', function () {
     return jsFixInit('src/scripts/directives');
 });
 
-gulp.task('jscs:filters', function() {
+gulp.task('jscs:filters', function () {
     return jsFixInit('src/scripts/filters');
 });
 
-gulp.task('jscs', function() {
+gulp.task('jscs', function () {
     return gulp.src(['src/scripts/bootstrap/*.js',
         'src/scripts/bootstrap/*.js',
         'src/scripts/controllers/*.js',
@@ -155,19 +155,19 @@ gulp.task('jscs', function() {
 
 gulp.task('jscs:fix', ['jscs:controllers', 'jscs:services', 'jscs:directives', 'jscs:filters']);
 
-gulp.task('scripts:init:controllers', function() {
+gulp.task('scripts:init:controllers', function () {
     return scriptsInit('src/scripts/controllers');
 });
 
-gulp.task('scripts:init:directives', function() {
+gulp.task('scripts:init:directives', function () {
     return scriptsInit('src/scripts/directives');
 });
 
-gulp.task('scripts:init:filters', function() {
+gulp.task('scripts:init:filters', function () {
     return scriptsInit('src/scripts/filters');
 });
 
-gulp.task('scripts:init:services', function() {
+gulp.task('scripts:init:services', function () {
     return scriptsInit('src/scripts/services');
 });
 
@@ -180,7 +180,7 @@ gulp.task('scripts:init', [
     'scripts:init:services']);
 
 // Scripts Ui Bootstrap Template
-gulp.task('scripts:ui:template', function() {
+gulp.task('scripts:ui:template', function () {
     return gulp.src(config.angularUiTpls)
         .pipe($.html2js({
             outputModuleName: 'ui.bootstrap.tpls',
@@ -192,7 +192,7 @@ gulp.task('scripts:ui:template', function() {
 });
 
 // Scripts Vendor
-gulp.task('scripts:vendor', function() {
+gulp.task('scripts:vendor', function () {
     var files = config.vendors;
     files.push('src/scripts/config/env_' + buildMode + '.js');
     return gulp.src(files)
@@ -207,19 +207,19 @@ gulp.task('scripts:vendor', function() {
 });
 
 // Scripts Browserify
-gulp.task('scripts:browserify', ['scripts:init'], function() {
+gulp.task('scripts:browserify', ['scripts:init'], function () {
     gulp.src(['src/scripts/*.js'])
         .pipe($.plumber({ errorHandler: handler }))
 
         // .pipe($.browserify({debug: true}))
-         .pipe(through2.obj(function(file, enc, next) {
+         .pipe(through2.obj(function (file, enc, next) {
              var self = this;
              browserify(file.path, {
                  debug:true,
              })
 
              // .transform(reactify)
-                 .bundle(function(err, res) {
+                 .bundle(function (err, res) {
                      if (err) {
                          console.log(err.stack);
                      }
@@ -242,25 +242,25 @@ gulp.task('scripts:browserify', ['scripts:init'], function() {
 // Scripts
 gulp.task('scripts', ['scripts:vendor', 'scripts:browserify', 'scripts:ui:template']);
 
-gulp.task('karma', ['scripts:vendor', 'scripts:init'], function() {
+gulp.task('karma', ['scripts:vendor', 'scripts:init'], function () {
     karma.server.start({
         configFile: __dirname + '/karma.conf.js',
         singleRun: true,
-    }, function() {
+    }, function () {
         process.exit();
     });
 });
 
 //TDD模式：自动watch代码变化，运行测试用例
-gulp.task('tdd', ['scripts:vendor', 'scripts:init', 'watch'], function() {
+gulp.task('tdd', ['scripts:vendor', 'scripts:init', 'watch'], function () {
     gulp.watch(['src/scripts/**/*.js'], ['scripts:vendor', 'scripts:init']);
-    gulp.watch(['karma_html/**/*.html'], function() {
+    gulp.watch(['karma_html/**/*.html'], function () {
         gulp.src(['karma_html/**/*.html']).pipe(reloadPage());
     });
 
     karma.server.start({
         configFile: __dirname + '/karma.conf.js',
-    }, function() {
+    }, function () {
         process.exit();
     });
 
@@ -269,28 +269,28 @@ gulp.task('tdd', ['scripts:vendor', 'scripts:init', 'watch'], function() {
         root: ['karma_html', '.tmp', 'src'],
         port: 9001,
         livereload: false,
-        middleware: function() {
+        middleware: function () {
             return [historyApiFallback];
         },
     });
 });
 
-gulp.task('test', function() {
+gulp.task('test', function () {
     gulp.start('karma');
 });
 
-gulp.task('connect:remote', function() {
+gulp.task('connect:remote', function () {
     // not use
     // var historyApiFallback = require('connect-history-api-fallback');
     $.connect.server({
         root: ['.tmp', 'src'],
         port: 9001,
         livereload: false,
-        middleware: function() {
+        middleware: function () {
             var url = require('url');
             var proxy = require('./tasks/proxy.js');
 
-            var _proxy = function(path, source) {
+            var _proxy = function (path, source) {
                 var options = url.parse(source);
                 options.route = path;
                 return proxy(options);
@@ -298,7 +298,7 @@ gulp.task('connect:remote', function() {
 
             var map = [];
 
-            map = map.concat(_.map(config.proxys, function(proxy) {
+            map = map.concat(_.map(config.proxys, function (proxy) {
                 var source = proxy.source;
                 if (apiHost) {
                     source = source.replace('http://rong.dev.36kr.com', apiHost);
@@ -314,7 +314,7 @@ gulp.task('connect:remote', function() {
 });
 
 // Watch
-gulp.task('watch', function() {
+gulp.task('watch', function () {
     gulp.watch('src/**/*.html', ['header']);
     gulp.watch('src/styles/**/*.less', ['styles']);
     gulp.watch(['src/scripts/**/*.js'], ['scripts:browserify']);
@@ -322,7 +322,7 @@ gulp.task('watch', function() {
 });
 
 // Build Assets
-gulp.task('build:assets', function() {
+gulp.task('build:assets', function () {
     return gulp.src(['src/*.{ico,png,txt,xml}', 'src/*/dist/navigation.js'])
         .pipe($['if']('*.js', $.uglify()))
         .pipe(gulp.dest('dist'))
@@ -330,7 +330,7 @@ gulp.task('build:assets', function() {
 });
 
 // Build Fonts
-gulp.task('build:fonts', function() {
+gulp.task('build:fonts', function () {
     return gulp.src(['src/**/*.{eot,svg,ttf,woff,woff2}'])
         .pipe($.flatten())
         .pipe(gulp.dest('.tmp/fonts'))
@@ -338,7 +338,7 @@ gulp.task('build:fonts', function() {
 });
 
 // Build Styles
-gulp.task('build:styles', function() {
+gulp.task('build:styles', function () {
     return gulp.src(['src/styles/*.less'])
         .pipe($.less())
         .pipe($.autoprefixer('last 2 version', 'safari 5', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
@@ -350,7 +350,7 @@ gulp.task('build:styles', function() {
 });
 
 // Build Angular Templates
-gulp.task('build:templates', function() {
+gulp.task('build:templates', function () {
     return gulp.src(['src/templates/**/*.html'])
         .pipe($.replace('styles/images/', 'images/'))
         .pipe($.angularTemplatecache({
@@ -360,19 +360,19 @@ gulp.task('build:templates', function() {
         .pipe($.size());
 });
 
-gulp.task('build:addTemplates', ['build:templates'], function() {
+gulp.task('build:addTemplates', ['build:templates'], function () {
     return gulp.src(['src/scripts/**/*.js'])
         .pipe($.replace(/\/\*##(.+)##\*\//, '$1'))
         .pipe(gulp.dest('.tmp/tmp-scripts'));
 });
 
 // Build Scripts
-gulp.task('build:scripts', ['scripts:vendor', 'scripts:init', 'build:addTemplates'], function() {
+gulp.task('build:scripts', ['scripts:vendor', 'scripts:init', 'build:addTemplates'], function () {
     return gulp.src(['.tmp/tmp-scripts/*.js'])
-		.pipe(through2.obj(function(file, enc, next) {
+		.pipe(through2.obj(function (file, enc, next) {
     var self = this;
     browserify(file.path)
-			.bundle(function(err, res) {
+			.bundle(function (err, res) {
     if (err) {
         console.log(err.stack);
     }
@@ -390,7 +390,7 @@ gulp.task('build:scripts', ['scripts:vendor', 'scripts:init', 'build:addTemplate
 });
 
 // Build Images
-gulp.task('build:images', function() {
+gulp.task('build:images', function () {
     return gulp.src(['src/styles/images/**/*'])
         .pipe($.imagemin({
             optimizationLevel: 3,
@@ -415,7 +415,7 @@ gulp.task('build:images', function() {
 // });
 
 // Build Html
-gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:scripts', 'build:images'], function() {
+gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:scripts', 'build:images'], function () {
     var assets = $.useref.assets({
         searchPath: ['.tmp', 'src'],
     });
@@ -438,16 +438,16 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
         .pipe($.size());
 });
 
-gulp.task('local:html', ['header'], function() {
+gulp.task('local:html', ['header'], function () {
     DEBUG = false;
     gulp.start('build:html');
 });
 
 // Build Rev
-gulp.task('build:rev', ['build:html'], function() {
+gulp.task('build:rev', ['build:html'], function () {
     return gulp.src(['.tmp/{fonts,images}/**', '.tmp/build/{styles,scripts}/**'])
         .pipe($.revAll({
-            transformFilename: function(file, hash) {
+            transformFilename: function (file, hash) {
                 var ext = path.extname(file.path);
                 return hash.substr(0, 8) + '.' + path.basename(file.path, ext) + ext;
             },
@@ -458,7 +458,7 @@ gulp.task('build:rev', ['build:html'], function() {
 });
 
 // Build Rev Replace
-gulp.task('build:rev:replace', ['build:rev'], function() {
+gulp.task('build:rev:replace', ['build:rev'], function () {
     var manifest = require('./.tmp/manifest.json');
     return gulp.src(['dist/**/*.{css,html}', 'dist/**/*scripts*'])
         .pipe($.fingerprint(manifest, {
@@ -470,90 +470,90 @@ gulp.task('build:rev:replace', ['build:rev'], function() {
 });
 
 // 编译
-gulp.task('build', ['header'], function() {
+gulp.task('build', ['header'], function () {
     gulp.start('build:rev:replace');
 });
 
-gulp.task('build:test', ['clean'], function() {
+gulp.task('build:test', ['clean'], function () {
     buildMode = 'test';
     CDNPrefix = '/m';
     gulp.start('build');
 });
 
-gulp.task('build:test2', ['clean'], function() {
+gulp.task('build:test2', ['clean'], function () {
     buildMode = 'test2';
     CDNPrefix = '/m';
     gulp.start('build');
 });
 
-gulp.task('build:test3', ['clean'], function() {
+gulp.task('build:test3', ['clean'], function () {
     buildMode = 'test3';
     CDNPrefix = '/m';
     gulp.start('build');
 });
 
-gulp.task('build:test4', ['clean'], function() {
+gulp.task('build:test4', ['clean'], function () {
     buildMode = 'test4';
     CDNPrefix = '/m';
     gulp.start('build');
 });
 
-gulp.task('build:test5', ['clean'], function() {
+gulp.task('build:test5', ['clean'], function () {
     buildMode = 'test5';
     CDNPrefix = '/m';
     gulp.start('build');
 });
 
-gulp.task('build:test6', ['clean'], function() {
+gulp.task('build:test6', ['clean'], function () {
     buildMode = 'test6';
     CDNPrefix = '/m';
     gulp.start('build');
 });
 
-gulp.task('build:test7', ['clean'], function() {
+gulp.task('build:test7', ['clean'], function () {
     buildMode = 'test7';
     CDNPrefix = '/m';
     gulp.start('build');
 });
 
-gulp.task('build:test8', ['clean'], function() {
+gulp.task('build:test8', ['clean'], function () {
     buildMode = 'test8';
     CDNPrefix = '/m';
     gulp.start('build');
 });
 
-gulp.task('build:test9', ['clean'], function() {
+gulp.task('build:test9', ['clean'], function () {
     buildMode = 'test9';
     CDNPrefix = '/m';
     gulp.start('build');
 });
 
-gulp.task('build:test10', ['clean'], function() {
+gulp.task('build:test10', ['clean'], function () {
     buildMode = 'test10';
     CDNPrefix = '/m';
     gulp.start('build');
 });
 
-gulp.task('build:test11', ['clean'], function() {
+gulp.task('build:test11', ['clean'], function () {
     buildMode = 'test11';
     CDNPrefix = '/m';
     gulp.start('build');
 });
 
-gulp.task('build:test12', ['clean'], function() {
+gulp.task('build:test12', ['clean'], function () {
     buildMode = 'test12';
     CDNPrefix = '/m';
     gulp.start('build');
 });
 
-gulp.task('build:prod', ['clean'], function() {
+gulp.task('build:prod', ['clean'], function () {
     buildMode = 'prod';
     DEBUG = false;
     CDNPrefix = '//krplus-cdn.b0.upaiyun.com/m';
     gulp.start('build');
 });
 
-gulp.task('build:prod:m1', ['clean'], function() {
+gulp.task('build:prod:m1', ['clean'], function () {
     buildMode = 'prod';
     DEBUG = false;
     CDNPrefix = '//krplus-cdn.b0.upaiyun.com/m1';
@@ -561,7 +561,7 @@ gulp.task('build:prod:m1', ['clean'], function() {
 });
 
 //带模拟接口的本地环境
-gulp.task('local:mock', function() {
+gulp.task('local:mock', function () {
     return gulp.src(config.vendors.concat(config.mocks))
         .pipe($.sourcemaps.init())
         .pipe($.concat('vendor.js'))
@@ -570,7 +570,7 @@ gulp.task('local:mock', function() {
         .pipe($.size());
 });
 
-gulp.task('local', ['watch', 'scripts', 'connect', 'local:mock', 'styles', 'header'], function() {
+gulp.task('local', ['watch', 'scripts', 'connect', 'local:mock', 'styles', 'header'], function () {
     gulp.src(config.vendors.concat(config.mocks))
         .pipe($.sourcemaps.init())
         .pipe($.concat('vendor.js'))
@@ -582,92 +582,92 @@ gulp.task('local', ['watch', 'scripts', 'connect', 'local:mock', 'styles', 'head
 
 gulp.task('remote', ['watch', 'scripts', 'connect:remote', 'styles', 'header']);
 
-gulp.task('remote:prod', function() {
+gulp.task('remote:prod', function () {
     buildMode = 'prod';
     apiHost = 'http://rong.36kr.com';
     gulp.start('remote');
 });
 
-gulp.task('remote:dev', function() {
+gulp.task('remote:dev', function () {
     buildMode = 'dev';
     apiHost = 'http://rongdev.36kr.com';
     gulp.start('remote');
 });
 
-gulp.task('remote:test', function() {
+gulp.task('remote:test', function () {
     buildMode = 'test';
     apiHost = 'http://rongtest01.36kr.com';
     gulp.start('remote');
 });
 
-gulp.task('remote:test2', function() {
+gulp.task('remote:test2', function () {
     buildMode = 'test2';
     apiHost = 'http://rongtest02.36kr.com';
     gulp.start('remote');
 });
 
-gulp.task('remote:test3', function() {
+gulp.task('remote:test3', function () {
     buildMode = 'test3';
     apiHost = 'http://rongtest03.36kr.com';
     gulp.start('remote');
 });
 
-gulp.task('remote:test4', function() {
+gulp.task('remote:test4', function () {
     buildMode = 'test4';
     apiHost = 'http://rongtest04.36kr.com';
     gulp.start('remote');
 });
 
-gulp.task('remote:test5', function() {
+gulp.task('remote:test5', function () {
     buildMode = 'test5';
     apiHost = 'http://rongtest05.36kr.com';
     gulp.start('remote');
 });
 
-gulp.task('remote:test6', function() {
+gulp.task('remote:test6', function () {
     buildMode = 'test6';
     apiHost = 'http://rongtest06.36kr.com';
     gulp.start('remote');
 });
 
-gulp.task('remote:test7', function() {
+gulp.task('remote:test7', function () {
     buildMode = 'test7';
     apiHost = 'http://rongtest07.36kr.com';
     gulp.start('remote');
 });
 
-gulp.task('remote:test8', function() {
+gulp.task('remote:test8', function () {
     buildMode = 'test8';
     apiHost = 'http://rongtest08.36kr.com';
     gulp.start('remote');
 });
 
-gulp.task('remote:test9', function() {
+gulp.task('remote:test9', function () {
     buildMode = 'test9';
     apiHost = 'http://rongtest09.36kr.com';
     gulp.start('remote');
 });
 
-gulp.task('remote:test10', function() {
+gulp.task('remote:test10', function () {
     buildMode = 'test10';
     apiHost = 'http://rongtest10.36kr.com';
     gulp.start('remote');
 });
 
-gulp.task('remote:test11', function() {
+gulp.task('remote:test11', function () {
     buildMode = 'test11';
     apiHost = 'http://rongtest11.36kr.com';
     gulp.start('remote');
 });
 
-gulp.task('remote:test12', function() {
+gulp.task('remote:test12', function () {
     buildMode = 'test12';
     apiHost = 'http://rongtest12.36kr.com';
     gulp.start('remote');
 });
 
 //编译页头
-gulp.task('header', function() {
+gulp.task('header', function () {
     var headers = {
         test: '//huodong.36kr.com/common-module/common-header-test/script.js',
         test2: '//huodong.36kr.com/common-module/common-header-test2/script.js',
@@ -689,7 +689,7 @@ gulp.task('header', function() {
         .pipe(gulp.dest('.tmp'));
 });
 /*字典task*/
-gulp.task('dict', function() {
+gulp.task('dict', function () {
     loadDictionary.loadCityData();
     loadDictionary.loadDictData();
     loadDictionary.loadCFDictData();

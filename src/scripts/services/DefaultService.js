@@ -1,6 +1,6 @@
 var angular = require('angular');
 
-angular.module('defaultApp.service').service('DefaultService', function($http) {
+angular.module('defaultApp.service').service('DefaultService', function ($http) {
     return {
         /**
          * @api {post} /api/uptoken 获取又拍云 Token 信息
@@ -27,7 +27,7 @@ angular.module('defaultApp.service').service('DefaultService', function($http) {
          *       }
          *     }
          */
-        getUpToken: function(options, file) {
+        getUpToken: function (options, file) {
             var data = $.extend({}, {
                 bucket: kr.upyun.bucket.name,
                 expiration: parseInt((new Date().getTime() + 600000) / 1000, 10),
@@ -37,7 +37,7 @@ angular.module('defaultApp.service').service('DefaultService', function($http) {
             return $http.post('/api/upload/form-api', {
           param: JSON.stringify(data),
           type: file ? 'file' : 'pic'
-      }).then(function(response) {
+      }).then(function (response) {
           return response.data;
       });
         }

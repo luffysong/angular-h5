@@ -5,15 +5,15 @@
 var angular = require('angular');
 
 angular.module('defaultApp.directive').directive('numValidate',
-    function() {
+    function () {
         return {
             restrict: 'AE',
             require: 'ngModel',
             scope:{
                 title:'@numValidate'
             },
-            link: function(scope, element, attrs, ctrl) {
-                ctrl.$parsers.unshift(function(val) {
+            link: function (scope, element, attrs, ctrl) {
+                ctrl.$parsers.unshift(function (val) {
                     if (val !== '') {
                         if (/^\d*$/.test(val)) {
                             ctrl.$setValidity('notNumber', true);

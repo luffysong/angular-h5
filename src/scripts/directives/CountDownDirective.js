@@ -5,14 +5,14 @@
 var angular = require('angular');
 angular.module('defaultApp.directive').directive('countdown', [
     '$interval',
-    function($interval) {
+    function ($interval) {
         return {
             restrict: 'A',
             scope: {
                 date: '@',
                 openDate: '@'
             },
-            link: function(scope, element) {
+            link: function (scope, element) {
                 function toDhms(t) {
                     var hours;
                     var minutes;
@@ -33,7 +33,7 @@ angular.module('defaultApp.directive').directive('countdown', [
 
                 var before = new Date(scope.openDate.replace(/-/g, '/'));
                 var future = new Date(scope.date.replace(/-/g, '/'));
-                $interval(function() {
+                $interval(function () {
                     var diff = Math.floor((future.getTime() - new Date().getTime()) / 1000);
 
                     if (diff <= 0) {

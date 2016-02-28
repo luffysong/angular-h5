@@ -6,19 +6,19 @@ var angular = require('angular');
 
 angular.module('defaultApp.directive').directive('orderBtn', [
     '$location', 'UserService', '$state',
-    function($location, UserService, $state) {
+    function ($location, UserService, $state) {
         return {
             restrict: 'AE',
-            link: function(scope, element) {
-                element.click(function(e) {
+            link: function (scope, element) {
+                element.click(function (e) {
                     e.preventDefault();
                     if (!UserService.getUID()) {
                         e.preventDefault();
-                        setTimeout(function() {
+                        setTimeout(function () {
                             location.href = '/user/login?from=' + encodeURIComponent(location.href);
                         }, 300);
                     } else {
-                        UserService.getIdentity(function(data) {
+                        UserService.getIdentity(function (data) {
                             if (data.code === 4031) {
                                 e.preventDefault();
 

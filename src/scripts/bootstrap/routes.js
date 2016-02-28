@@ -113,6 +113,19 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         },
     });
 
+    //极速融资产品化
+    $stateProvider.state('extreme', {
+        url: '/extreme',
+        abstract: true,
+        template: '<div ui-view></div>'
+    });
+
+    $stateProvider.state('extreme.join', {
+        url: '/join/{id}',
+        controller: 'ExtremeIndexController',
+        templateUrl: 'templates/extreme/investor-join.html'
+    });
+
     // 我要融资-提交成功
     $stateProvider.state('finacingSuccess', {
         url: '/finacing_success?{from}&{cid}',

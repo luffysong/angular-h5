@@ -5,24 +5,24 @@
 var angular = require('angular');
 
 angular.module('defaultApp.directive')
-    .config(function($provide, $httpProvider) {
-        $provide.factory('submitInterceptor', function($q, $rootScope) {
+    .config(function ($provide, $httpProvider) {
+        $provide.factory('submitInterceptor', function ($q, $rootScope) {
             return {
-                request: function(config) {
+                request: function (config) {
 
                     $rootScope.$broadcast('submitRequestStart', config);
                     return config;
                 },
 
                 // optional method
-                response: function(response) {
+                response: function (response) {
 
                     $rootScope.$broadcast('submitRequestEnd', response);
                     return response;
                 },
 
                 // optional method
-                responseError: function(rejection) {
+                responseError: function (rejection) {
                     // do something on error
                     $rootScope.$broadcast('submitRequestEnd', rejection);
                     return $q.reject(rejection);
@@ -32,11 +32,11 @@ angular.module('defaultApp.directive')
 
         $httpProvider.interceptors.push('submitInterceptor');
     })
-    .directive('submitBtn', function() {
+    .directive('submitBtn', function () {
         return {
             restrict: 'AE',
             require: '?^form',
-            link: function(scope, element) {
+            link: function (scope, element) {
                 var template = '<div class="btn-loading-wrap"><div class="spinner">' +
                 '<div class="rect1"></div>' +
                 '<div class="rect2"></div>' +
@@ -51,7 +51,7 @@ angular.module('defaultApp.directive')
                 //    });
                 //}
 
-                $(element).click(function() {
+                $(element).click(function () {
                     var startTimeout;
                     var endTimeout;
                     var bindStart;
@@ -60,7 +60,7 @@ angular.module('defaultApp.directive')
                     var btn = $(this);
                     var cover;
 
-                    var makeCover = function(btn) {
+                    var makeCover = function (btn) {
                         var pos = btn.offset();
                         var w = btn.outerWidth();
                         var h = btn.outerHeight();
@@ -73,18 +73,18 @@ angular.module('defaultApp.directive')
                         });
                     };
 
-                    var delCover = function() {
+                    var delCover = function () {
                         cover.remove();
                     };
 
-                    startTimeout = setTimeout(function() {
+                    startTimeout = setTimeout(function () {
                         if (!reqCount) {
                             bindStart();
                             bindEnd();
                         }
                     }, 300);
 
-                    bindStart = scope.$on('submitRequestStart', function() {
+                    bindStart = scope.$on('submitRequestStart', function () {
                         if (!reqCount && !endTimeout) {
                             makeCover(btn);
                             btn.css('visibility', 'hidden');
@@ -106,7 +106,7 @@ angular.module('defaultApp.directive')
                         console.log(reqCount, 'requests started!');
                     });
 
-                    bindEnd = scope.$on('submitRequestEnd', function() {
+                    bindEnd = scope.$on('submitRequestEnd', function () {
                         reqCount--;
                         console.log(reqCount, 'requests left!');
 
@@ -115,7 +115,7 @@ angular.module('defaultApp.directive')
                         }
 
                         delCover();
-                        endTimeout = setTimeout(function() {
+                        endTimeout = setTimeout(function () {
                             bindStart();
                             bindEnd();
                             delCover();

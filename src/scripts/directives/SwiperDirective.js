@@ -7,12 +7,12 @@
 var angular = require('angular');
 
 angular.module('defaultApp.directive').directive('krSwiper',
-    function($timeout) {
+    function ($timeout) {
         return {
             restrict: 'A',
             scope: '=slides',
-            link: function(scope, element) {
-                scope.$watch('slides', function() {
+            link: function (scope, element) {
+                scope.$watch('slides', function () {
                     var img;
                     if (scope.slides && scope.slides.length > 1) {
                         img = element.find('img')[1];
@@ -30,10 +30,10 @@ angular.module('defaultApp.directive').directive('krSwiper',
                             loop: true,
                             speed: 1000,
                             slidesPerView: 1,
-                            onSlideChangeEnd: function() {
+                            onSlideChangeEnd: function () {
 
                                 //更新轮播索引
-                                scope.$evalAsync(function() {
+                                scope.$evalAsync(function () {
                                     scope.slides.active = swiper.activeIndex % slidesLength ||
                                         slidesLength;
                                 });
