@@ -141,6 +141,10 @@ gulp.task('jscs:filters', function () {
     return jsFixInit('src/scripts/filters');
 });
 
+gulp.task('jscs:bootstrap', function () {
+    return jsFixInit('src/scripts/bootstrap');
+});
+
 gulp.task('jscs', function () {
     return gulp.src(['src/scripts/bootstrap/*.js',
         'src/scripts/bootstrap/*.js',
@@ -153,7 +157,7 @@ gulp.task('jscs', function () {
         .pipe($.jscs.reporter('fail'));
 });
 
-gulp.task('jscs:fix', ['jscs:controllers', 'jscs:services', 'jscs:directives', 'jscs:filters']);
+gulp.task('jscs:fix', ['jscs:controllers', 'jscs:services', 'jscs:directives', 'jscs:filters', 'jscs:bootstrap']);
 
 gulp.task('scripts:init:controllers', function () {
     return scriptsInit('src/scripts/controllers');

@@ -2,12 +2,12 @@
 var angular = require('angular');
 
 angular.module('defaultApp')
-    .run(function($rootScope) {
+    .run(function ($rootScope) {
         $rootScope.REGEXP = $rootScope.REGEXP || {};
         $rootScope.REGEXP.phone = /^[0-9]*$/;
         $rootScope.isInApp = !!navigator.userAgent.match(/36kr/) || window.isAppAgent;
     })
-    .run(function($http, $rootScope, notify) {
+    .run(function ($http, $rootScope, notify) {
         notify.config({
             templateUrl: 'templates/angular-notify.html',
         });
@@ -17,31 +17,31 @@ angular.module('defaultApp')
         $rootScope.helpHost = '//' + projectEnvConfig.helpHost;
         $rootScope.zhongHost = '//' + projectEnvConfig.zhongHost;
         $rootScope.rongHost = '//' + location.host;
-    }).run(function($modal) {
+    }).run(function ($modal) {
         var originOpen = $modal.open;
         var openedWindow = [];
-        $modal.open = function() {
+        $modal.open = function () {
             var instance = originOpen.apply($modal, arguments);
             openedWindow.push(instance);
             return instance;
         };
 
-        $modal.closeAll = function() {
-            openedWindow.forEach(function(pop) {
+        $modal.closeAll = function () {
+            openedWindow.forEach(function (pop) {
                 if (pop.dismiss) {
                     pop.dismiss();
                 }
             });
         };
 
-    }).run(function($modal, $rootScope, $location) {
+    }).run(function ($modal, $rootScope, $location) {
         var iframe = $('<iframe src="about:blank" style="display: none"></iframe>').appendTo('body');
 
         function androidVersion4() {
             return /android/.test(navigator.userAgent) && /krversion4.0/.test(navigator.userAgent);
         }
 
-        $rootScope.$on('$stateChangeStart', function(e, $toState, $toStateParams) {
+        $rootScope.$on('$stateChangeStart', function (e, $toState, $toStateParams) {
             if (androidVersion4() && /\/company\//.test($toState.url)) {
                 e.preventDefault();
                 iframe[0].src = 'kr36://hashchange?companyId=' +
@@ -50,7 +50,7 @@ angular.module('defaultApp')
             }
         });
 
-        $rootScope.$on('$locationChangeStart', function() {
+        $rootScope.$on('$locationChangeStart', function () {
             if (/36kr/.test(navigator.userAgent) && !/android/.test(navigator.userAgent)) {
                 iframe[0].src = 'kr36://hashchange?_=' + $.now();
             }
@@ -71,8 +71,8 @@ angular.module('defaultApp')
             }
         });
     })
-    .run(function($rootScope, $location) {
-        $rootScope.$on('$locationChangeStart', function() {
+    .run(function ($rootScope, $location) {
+        $rootScope.$on('$locationChangeStart', function () {
             var path = $location.path();
             /*我要上众筹route特殊处理*/
             if (/zhongchouDesire/.test(path)) {
@@ -90,12 +90,12 @@ angular.module('defaultApp')
                 window.CommonHeader.setNavActive(type);
             }
         });
-    }).run(function($http, $rootScope, $location, $state, notify, Permission, UserService, $q) {
+    }).run(function ($http, $rootScope, $location, $state, notify, Permission, UserService, $q) {
         //Define Roles
         var login;
         var valid;
 
-        Permission.defineRole('login', login = function() {
+        Permission.defineRole('login', login = function () {
             if (UserService.getUID()) {
                 console.log('is login');
                 return true; // Is anonymous
@@ -104,20 +104,20 @@ angular.module('defaultApp')
             _hmt.push(['_trackPageview', '/user/login##fromUser=0']);
             krtracker('trackPageView', '/user/login');
 
-            setTimeout(function() {
+            setTimeout(function () {
                 location.href = '/user/login?from=' + encodeURIComponent(location.href);
             }, 300);
 
             return false;
         });
 
-        Permission.defineRole('valid', valid = function() {
+        Permission.defineRole('valid', valid = function () {
             var deferred = $q.defer();
             if (!login()) {
                 return;
             }
 
-            UserService.isProfileValid(function(valid) {
+            UserService.isProfileValid(function (valid) {
                 if (valid) {
                     deferred.resolve();
                 } else {

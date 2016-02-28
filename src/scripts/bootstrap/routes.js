@@ -1,6 +1,6 @@
 
 var angular = require('angular');
-angular.module('defaultApp').config(function($locationProvider, $stateProvider, $urlRouterProvider, $provide, $sceDelegateProvider) {
+angular.module('defaultApp').config(function ($locationProvider, $stateProvider, $urlRouterProvider, $provide, $sceDelegateProvider) {
 
     $sceDelegateProvider.resourceUrlWhitelist([
         'self',
