@@ -1,6 +1,5 @@
 {
 	"boss": true,
-	"curly": true,
 	"eqeqeq": true,
 	"eqnull": true,
 	"expr": true,
@@ -8,16 +7,15 @@
 	"noarg": true,
 	"undef": true,
 	"unused": true,
-
-    "predef":["projectEnvConfig","_hmt","krtracker","kr","CITY_DATA",
+    "predef":["projectEnvConfig","_hmt","krtracker","kr","CITY_DATA","$clamp",
         "DICTIONARY_DATA","DICTIONARY_CF_DATA","DICTIONARY_URL_DATA"],
 
     "loopfunc": true,
+    "maxerr": 500,
 
 	"node": true,
     "jquery":true,
     "browser": true,
     "browserify":true
-
-
 }
+

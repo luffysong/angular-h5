@@ -77,8 +77,8 @@ angular.module('defaultApp.service').config(['$provide', '$httpProvider',
     }])
 
     .service('BasicService', [
-        '$location', '$http', '$resource',
-        function ($location, $http, $resource) {
+        '$location', '$http', '$resource', 'appendTransform',
+        function ($location, $http, $resource, appendTransform) {
 
             var contructor = function (path, params, actions) {
                 var finalActions = {
@@ -103,7 +103,7 @@ angular.module('defaultApp.service').config(['$provide', '$httpProvider',
                 return $resource(path, params, finalActions);
             };
 
-            return function (path, actions, submodels, subActions) {
+            var basicService =  function (path, actions, submodels, subActions) {
                 var Model = contructor(path, {}, actions);
                 subActions = subActions || {};
 
@@ -125,5 +125,19 @@ angular.module('defaultApp.service').config(['$provide', '$httpProvider',
 
                 return Model;
             };
+
+            basicService.jqParams = getSerilizeDataTool;
+            basicService.makeResponseConverter = makeResponseConverter;
+            return basicService;
+            function getSerilizeDataTool() {
+                    return appendTransform($http.defaults.transformRequest, function (data) {
+                        return $.param(data, true);
+                    });
+                }
+
+            function makeResponseConverter(fn) {
+                return appendTransform($http.defaults.transformResponse, fn);
+            }
+
         }
     ]);

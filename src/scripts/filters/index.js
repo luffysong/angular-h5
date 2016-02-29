@@ -2,6 +2,7 @@ require('./EntityLink');
 require('./Image');
 require('./InvestorLink');
 require('./MoneyUnit');
+require('./SimpleRender');
 require('./Substr');
 require('./UnitConversion');
 require('./WanNum');

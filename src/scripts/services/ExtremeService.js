@@ -10,10 +10,10 @@ angular.module('defaultApp.service').service('ExtremeSerivce',
     var BASE_URL = '/api/bpdeliver/:id/:sub/:subid';
     var service = BasicService(BASE_URL, {
             save:{
-                method: 'PUT',
+                method: 'POST',
                 transformRequest: BasicService.jqParams()
             }, update:{
-                method: 'POST',
+                method: 'PUT',
                 transformRequest: BasicService.jqParams()
             }, get:{
                 method: 'GET',
@@ -21,16 +21,23 @@ angular.module('defaultApp.service').service('ExtremeSerivce',
                     var convertObj = data.data;
                     var originRef = data;
                     data = data.data;
-                    convertObj.domains = data.industryList;
+                    convertObj.domains = data.industryList.map(function (data) {
+                        data.num = 1;
+                        return data;
+                    });
+
                     convertObj.start = new Date(data.beginDate);
                     convertObj.end = new Date(data.endDate);
                     convertObj.type = data.type;
                     convertObj.name = data.name;
+                    convertObj.banner = data.topBanner;
                     convertObj.desc = data.info;
                     return originRef;
                 })
             } },
-    { sub: [ ] },
+    { sub: [
+        'investor'
+    ] },
     { });
 
     return service;

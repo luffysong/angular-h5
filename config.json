@@ -54,7 +54,8 @@
         "src/components/angular-mass-autocomplete/massautocomplete.js",
         "src/components/angular-permission/dist/angular-permission.js",
         "src/components/moment/min/moment.min.js",
-        "src/components/swiper/dist/js/swiper.js"
+        "src/components/swiper/dist/js/swiper.js",
+        "src/components/checklist-model/checklist-model.js"
     ],
     "angularUiTpls": [
     ],
