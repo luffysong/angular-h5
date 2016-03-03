@@ -18,7 +18,7 @@
                   <div class="meet-num" ng-show="extreme.selectDomains.indexOf(domain) !== -1">
                       预计在活动中约见
                       <select  ng-options="item  for item in arrayLimit" ng-model="domain.num">
-                          <option disabled value="">0</option>
+                          <option disabled value="">请选择</option>
                       </select>项目
                   </div>
                 </div>
@@ -26,21 +26,24 @@
                     <div>
                         <div class="form-group">
                             <label class="label-control"><span class="required">*</span>机构名称</label>
-                            <input class="form-control" required ng-model="extreme.organizationName">
+                            <input class="form-control" placeholder="15个字符以内" ng-maxlength="15"
+                            required ng-model="extreme.organizationName">
                         </div>
 
                         <div class="form-group">
                             <label class="label-control"><span class="required">*</span>职位</label>
-                            <input class="form-control" required ng-model="extreme.job">
+                            <input class="form-control" ng-maxlength="8" placeholder="8个字符以内"
+                            required ng-model="extreme.job">
                         </div>
 
                         <div class="form-group">
                             <label class="label-control"><span class="required">*</span>微信号</label>
-                            <input class="form-control" required ng-model="extreme.weixinAccount">
+                            <input class="form-control" ng-maxlength="20" ng-minlength="6" required
+                            placeholder="6-20个字符" ng-model="extreme.weixinAccount">
                         </div>
-                        <a class="save" ng-click="apply($event)" href="#">提交报名信息</a>
-                    </div>
-                </form>
+                        <a class="save" ng-class="{disabled:!applyIsValid()}" ng-bind="saveText"
+                            ng-click="apply($event)" href="#">提交报名信息</a>
+                    </div>                </form>
             </div>
         </section>
         <section ng-show="success" ng-include="'templates/extreme/join-success.html'">

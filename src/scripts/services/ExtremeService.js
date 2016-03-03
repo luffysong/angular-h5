@@ -21,11 +21,7 @@ angular.module('defaultApp.service').service('ExtremeSerivce',
                     var convertObj = data.data;
                     var originRef = data;
                     data = data.data;
-                    convertObj.domains = data.industryList.map(function (data) {
-                        data.num = 1;
-                        return data;
-                    });
-
+                    convertObj.domains = data.industryList;
                     convertObj.start = new Date(data.beginDate);
                     convertObj.end = new Date(data.endDate);
                     convertObj.type = data.type;

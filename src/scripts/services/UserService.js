@@ -413,7 +413,7 @@ angular.module('defaultApp.service').service('UserService', [
                     return;
                 }
 
-                service.investorType(callback);
+                callback(data.investorType);
             });
         };
 

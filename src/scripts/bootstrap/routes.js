@@ -123,7 +123,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('extreme.join', {
         url: '/join/{id}',
         controller: 'ExtremeIndexController',
-        templateUrl: 'templates/extreme/investor-join.html'
+        templateUrl: 'templates/extreme/investor-join.html',
+        data: {
+            permissions: {
+                only: ['valid']
+            }
+        }
     });
 
     // 我要融资-提交成功
