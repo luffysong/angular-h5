@@ -26,7 +26,6 @@ angular.module('defaultApp.service').service('ExtremeSerivce',
                     convertObj.end = new Date(data.endDate);
                     convertObj.type = data.type;
                     convertObj.name = data.name;
-                    convertObj.banner = data.topBanner;
                     convertObj.desc = data.info;
                     return originRef;
                 })

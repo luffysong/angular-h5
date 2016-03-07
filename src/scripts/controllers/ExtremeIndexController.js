@@ -14,6 +14,7 @@ angular.module('defaultApp.controller').controller('ExtremeIndexController',
             NORMAL: 100
         };
         initScope();
+        initWeixin();
         function initScope() {
             loadExtreme();
             $scope.apply = apply;
@@ -21,6 +22,15 @@ angular.module('defaultApp.controller').controller('ExtremeIndexController',
             $scope.arrayLimit = [1, 2, 3, 4, 5];
             $scope.saveText  = '提交报名信息';
             openInvestorValidate();
+        }
+
+        function initWeixin() {
+            window.WEIXINSHARE = {
+                shareTitle: '【极速融资2.0】全网最优质的项目正在等你投资！',
+                shareDesc: '五大领域专场，高效排会系统，投资人招募火爆开启！',
+                shareImg: 'http://krplus-pic.b0.upaiyun.com/201603/07024835/441gsg4ap16epmv3.jpg'
+            };
+            window.InitWeixin();
         }
 
         function openInvestorValidate() {
@@ -61,7 +71,7 @@ angular.module('defaultApp.controller').controller('ExtremeIndexController',
 
         function limit2(domain) {
             var domains = $scope.extreme.selectDomains;
-            return domains.length < 2 || domains.indexOf(domain) !== -1;
+            return domains.length > 1 && domains.indexOf(domain) === -1;
         }
 
         function getSaveText(startMs, endMs) {

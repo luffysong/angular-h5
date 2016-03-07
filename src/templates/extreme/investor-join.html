@@ -12,10 +12,11 @@
                     <h5>请选择活动专场(最多2场)</h5>
                 </div>
                 <div class="check-list" ng-repeat="domain in extreme.domains">
-                    <input type="checkbox" checklist-before-change="limit2(domain)"
+                    <input type="checkbox" ng-disabled="limit2(domain)"
                     data-checklist-model="extreme.selectDomains" data-checklist-value="domain">
                   <span ng-bind="domain.name"></span>
                   <div class="meet-num" ng-show="extreme.selectDomains.indexOf(domain) !== -1">
+                      <span>*</span>
                       预计在活动中约见
                       <select  ng-options="item  for item in arrayLimit" ng-model="domain.num">
                           <option disabled value="">请选择</option>
