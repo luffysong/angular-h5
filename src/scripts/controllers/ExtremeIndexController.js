@@ -21,7 +21,6 @@ angular.module('defaultApp.controller').controller('ExtremeIndexController',
             $scope.uid = UserService.getUID();
             $scope.arrayLimit = [1, 2, 3, 4, 5];
             $scope.saveText  = '提交报名信息';
-            document.title = '极速融资2.0|投资人报名';
             openInvestorValidate();
         }
 
