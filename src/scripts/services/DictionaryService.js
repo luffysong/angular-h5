@@ -5,7 +5,7 @@
 //jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 var angular = require('angular');
 
-var wholeDict = (function() {
+var wholeDict = (function () {
 
     var dict = {};
 
@@ -14,10 +14,10 @@ var wholeDict = (function() {
 
     //处理众筹字典
     var cfDictNames = Object.keys(DICTIONARY_CF_DATA);
-    cfDictNames.forEach(function(name) {
+    cfDictNames.forEach(function (name) {
         dict[name] = [];
         var vals = Object.keys(DICTIONARY_CF_DATA[name]);
-        vals.forEach(function(val) {
+        vals.forEach(function (val) {
             var desc = DICTIONARY_CF_DATA[name][val];
             dict[name].push({
                 value: val,
@@ -36,20 +36,20 @@ var wholeDict = (function() {
 })();
 
 var app = angular.module('defaultApp.service').service('DictionaryService', [
-    function() {
+    function () {
         var service = {
             name: 'DictionaryService',
             _dict: wholeDict,
-            getDict: function(name) {
+            getDict: function (name) {
                 return service._dict[name];
             },
 
-            getLocation: function(id) {
+            getLocation: function (id) {
                 id = id || 0;
 
-                return CITY_DATA.filter(function(v) {
+                return CITY_DATA.filter(function (v) {
                     return v.parentId === id;
-                }).sort(function(a, b) {
+                }).sort(function (a, b) {
                     if (a.dispOrder && b.dispOrder) {
                         return b.dispOrder - a.dispOrder;
                     }
@@ -67,11 +67,11 @@ var app = angular.module('defaultApp.service').service('DictionaryService', [
 
             },
 
-            getHotLocation: function() {
-                return CITY_DATA.filter(function(v) {
+            getHotLocation: function () {
+                return CITY_DATA.filter(function (v) {
                     v.name = v.name.replace('特别行政区', '');
                     return v.parentId === 0 || v.feature !== 0;
-                }).sort(function(a, b) {
+                }).sort(function (a, b) {
                     if (a.dispOrder && b.dispOrder) {
                         return b.dispOrder - a.dispOrder;
                     }
@@ -93,11 +93,11 @@ var app = angular.module('defaultApp.service').service('DictionaryService', [
     }
 ]);
 
-Object.keys(wholeDict).forEach(function(key) {
-    app.filter('dict_' + key, function() {
-        return function(input) {
+Object.keys(wholeDict).forEach(function (key) {
+    app.filter('dict_' + key, function () {
+        return function (input) {
             var out = input;
-            wholeDict[key].forEach(function(item) {
+            wholeDict[key].forEach(function (item) {
                 if (item.value + '' === input + '') {
                     out = item.desc;
                 }else if (item.id + '' === input + '') {
@@ -114,10 +114,10 @@ Object.keys(wholeDict).forEach(function(key) {
     });
 });
 
-app.filter('city', function() {
-    return function(input) {
+app.filter('city', function () {
+    return function (input) {
         var out = '';
-        CITY_DATA.forEach(function(item) {
+        CITY_DATA.forEach(function (item) {
             if (item.id === input || item.id === parseInt(input)) {
                 out = item.name;
             }

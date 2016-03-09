@@ -4,8 +4,8 @@
 
 var angular = require('angular');
 
-angular.module('defaultApp.filter').filter('substr', function() {
-    return function(input, count, symbol) {
+angular.module('defaultApp.filter').filter('substr', function () {
+    return function (input, count, symbol) {
         if (!input) {
             return input;
         }

@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.service').service('SocialService',
-    function($http, BasicService, appendTransform) {
+    function ($http, BasicService, appendTransform) {
         var service = BasicService('/api/:action/:id', {
         }, { action: [
                 'likes',
@@ -19,7 +19,7 @@ angular.module('defaultApp.service').service('SocialService',
                     params:{
                         type:'company'
                     },
-                    transformResponse: appendTransform($http.defaults.transformResponse, function(res) {
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
                         return res;
                     })
                 },
@@ -36,7 +36,7 @@ angular.module('defaultApp.service').service('SocialService',
                     params:{
                         type:'company'
                     },
-                    transformResponse: appendTransform($http.defaults.transformResponse, function(res) {
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (res) {
                         return res;
                     })
                 },

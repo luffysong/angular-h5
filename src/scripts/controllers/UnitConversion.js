@@ -4,8 +4,8 @@
 
 var angular = require('angular');
 
-angular.module('defaultApp.filter').filter('unitConversion', function() {
-    return function(input) {
+angular.module('defaultApp.filter').filter('unitConversion', function () {
+    return function (input) {
         if (!input || input === 0 || input === '0') {
             return '即将开启';
         } else {

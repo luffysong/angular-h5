@@ -5,9 +5,9 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('CreateApplyController',
-    function($scope, $rootScope, $state, $stateParams) {
+    function ($scope, $rootScope, $state, $stateParams) {
         $scope.stateParams = $stateParams;
-        $scope.goOnApply = function(e) {
+        $scope.goOnApply = function (e) {
             e && e.preventDefault();
 
             if ($stateParams.from) {

@@ -7,11 +7,11 @@ var angular = require('angular');
 
 angular.module('defaultApp.service').service('UserService', [
     '$location', 'BasicService', 'dateFilter', 'appendTransform', '$http', '$cookies', '$stateParams',
-    function($location, BasicService, dateFilter, appendTransform, $http, $cookies, $stateParams) {
+    function ($location, BasicService, dateFilter, appendTransform, $http, $cookies, $stateParams) {
         var service = BasicService('/api/user/:id/:sub/:subid', {
             save: {
                 method: 'POST',
-                transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
+                transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
 
                     delete data.status;
 
@@ -49,7 +49,7 @@ angular.module('defaultApp.service').service('UserService', [
                     params: {
                         mode: $stateParams.mode,
                     },
-                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (data) {
                         if (data.code === 0 &&
                                 window.localStorage &&
                                 (data.data.email || data.data.phone) &&
@@ -70,7 +70,7 @@ angular.module('defaultApp.service').service('UserService', [
                 },
                 update: {
                     method: 'PUT',
-                    transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
+                    transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
                         if (!data.phone) {
                             delete data.phone;
                         }
@@ -116,7 +116,7 @@ angular.module('defaultApp.service').service('UserService', [
             base: {
                 update: {
                     method: 'PUT',
-                    transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
+                    transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
 
                         return data;
                     }),
@@ -125,8 +125,8 @@ angular.module('defaultApp.service').service('UserService', [
             company: {
                 query: {
                     method: 'GET',
-                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
-                        data.data.expList.forEach(function(item) {
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (data) {
+                        data.data.expList.forEach(function (item) {
                             if (!item.startDate) {
                                 return;
                             }
@@ -151,7 +151,7 @@ angular.module('defaultApp.service').service('UserService', [
                 },
                 save: {
                     method: 'POST',
-                    transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
+                    transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
                         data.startDate = dateFilter(new Date([data.startYear, data.startMonth, '1'].join('/')), 'yyyy-MM-dd hh:mm:ss');
 
                         data.endDate = data.endYear ? dateFilter(new Date([data.endYear, data.endMonth, '1'].join('/')), 'yyyy-MM-dd hh:mm:ss') : '';
@@ -161,14 +161,14 @@ angular.module('defaultApp.service').service('UserService', [
                         return data;
                     }),
 
-                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (data) {
 
                         return data;
                     }),
                 },
                 update: {
                     method: 'PUT',
-                    transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
+                    transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
                         data.startDate = dateFilter(new Date([data.startYear, data.startMonth, '1'].join('/')), 'yyyy-MM-dd hh:mm:ss');
 
                         data.endDate = data.endYear ? dateFilter(new Date([data.endYear, data.endMonth, '1'].join('/')), 'yyyy-MM-dd hh:mm:ss') : '';
@@ -178,7 +178,7 @@ angular.module('defaultApp.service').service('UserService', [
                         return data;
                     }),
 
-                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (data) {
 
                         return data;
                     }),
@@ -187,7 +187,7 @@ angular.module('defaultApp.service').service('UserService', [
             work: {
                 save: {
                     method: 'POST',
-                    transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
+                    transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
 
                         var c;
                         if (data.groupIdType && data.groupId) {
@@ -241,14 +241,14 @@ angular.module('defaultApp.service').service('UserService', [
                         return data;
                     }),
 
-                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (data) {
 
                         return data;
                     }),
                 },
                 update: {
                     method: 'PUT',
-                    transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
+                    transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
                         data.startDate = [data.startYear, data.startMonth, '01'].join('-') + ' 01:01:01';
                         if (!data.isCurrent) {
                             data.endDate = [data.endYear, data.endMonth, '01'].join('-') + ' 01:01:01';
@@ -261,8 +261,8 @@ angular.module('defaultApp.service').service('UserService', [
                 },
                 query: {
                     method: 'GET',
-                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
-                        data.data.expList.forEach(function(item) {
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (data) {
+                        data.data.expList.forEach(function (item) {
                             if (!item.startDate) {
                                 return;
                             }
@@ -288,12 +288,12 @@ angular.module('defaultApp.service').service('UserService', [
             finacing: {
                 query: {
                     method: 'GET',
-                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (data) {
                         if (!data.data || data.code !== 0) {
                             return data;
                         }
 
-                        data.data.data.forEach(function(item) {
+                        data.data.data.forEach(function (item) {
                             adaptFinanceItem(item);
                         });
 
@@ -302,13 +302,13 @@ angular.module('defaultApp.service').service('UserService', [
                 },
                 save: {
                     method: 'POST',
-                    transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
+                    transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
                         data.investDate = dateFilter(new Date([data.investYear, data.investMonth, '1'].join('/')), 'yyyy-MM-dd hh:mm:ss');
 
                         return data;
                     }),
 
-                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (data) {
                         if (!data.data || data.code !== 0) {
                             return data;
                         }
@@ -320,12 +320,12 @@ angular.module('defaultApp.service').service('UserService', [
                 },
                 update: {
                     method: 'PUT',
-                    transformRequest: appendTransform($http.defaults.transformRequest, function(data) {
+                    transformRequest: appendTransform($http.defaults.transformRequest, function (data) {
                         data.investDate = dateFilter(new Date([data.investYear, data.investMonth, '1'].join('/')), 'yyyy-MM-dd hh:mm:ss');
                         return data;
                     }),
 
-                    transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
+                    transformResponse: appendTransform($http.defaults.transformResponse, function (data) {
                         if (!data.data || data.code !== 0) {
                             return data;
                         }
@@ -370,13 +370,13 @@ angular.module('defaultApp.service').service('UserService', [
             };
         }
 
-        service.getUID = function() {
+        service.getUID = function () {
             return $cookies.kr_plus_id;
 
             //return 115;
         };
 
-        service.isProfileValid = function(callback) {
+        service.isProfileValid = function (callback) {
             if (!service.getUID()) {
                 callback(false);
                 return;
@@ -384,7 +384,7 @@ angular.module('defaultApp.service').service('UserService', [
 
             service.basic.get({
                 id: service.getUID(),
-            }, function(data) {
+            }, function (data) {
                 if (data.email && data.phone && data.avatar && data.name) {
                     callback(true);
                 }else {
@@ -393,7 +393,7 @@ angular.module('defaultApp.service').service('UserService', [
             });
         };
 
-        service.investorType = function(callback) {
+        service.investorType = function (callback) {
             if (!window.localStorage || !service.getUID()) {
                 callback(100);
                 return;
@@ -407,17 +407,17 @@ angular.module('defaultApp.service').service('UserService', [
 
             service.basic.get({
                 id: service.getUID(),
-            }, function(data) {
+            }, function (data) {
                 if (!data.investorType) {
                     callback(100);
                     return;
                 }
 
-                service.investorType(callback);
+                callback(data.investorType);
             });
         };
 
-        service.isEmailValid = function(callback) {
+        service.isEmailValid = function (callback) {
 
             if (!window.localStorage || !service.getUID()) {
                 callback(false);
@@ -432,13 +432,13 @@ angular.module('defaultApp.service').service('UserService', [
 
             service.basic.get({
                 id: service.getUID(),
-            }, function(data) {
+            }, function (data) {
                 localStorage.setItem('isEmailActivate', data.isEmailActivate);
                 callback(data.isEmailActivate);
             });
         };
 
-        service.getMyEmail = function(callback) {
+        service.getMyEmail = function (callback) {
             if (!window.localStorage || !service.getUID()) {
                 callback(null);
                 return;
@@ -452,7 +452,7 @@ angular.module('defaultApp.service').service('UserService', [
 
             service.basic.get({
                 id: service.getUID(),
-            }, function(data) {
+            }, function (data) {
                 if (!data.email) {
                     callback(null);
                     return;
@@ -462,7 +462,7 @@ angular.module('defaultApp.service').service('UserService', [
             });
         };
 
-        service.getPhone = function(callback) {
+        service.getPhone = function (callback) {
             if (!window.localStorage || !service.getUID()) {
                 callback(null);
                 return;
@@ -476,7 +476,7 @@ angular.module('defaultApp.service').service('UserService', [
 
             service.basic.get({
                 id: service.getUID(),
-            }, function(data) {
+            }, function (data) {
                 if (!data.phone) {
                     callback(null);
                     return;
@@ -486,46 +486,46 @@ angular.module('defaultApp.service').service('UserService', [
             });
         };
 
-        service.getIdentity = function(callback) {
-            $http.get('/api/user/identity').success(function(data) {
+        service.getIdentity = function (callback) {
+            $http.get('/api/user/identity').success(function (data) {
                 callback && callback(data);
-            }).catch(function(err) {
+            }).catch(function (err) {
                 callback && callback(err);
             });
         };
 
         //获取用户的在职公司工作经历
-        service.getCurrentWorkCompanys = function(uid, callback, error) {
-            $http.get('/api/user/' + uid + '/cur_work?type=com').success(function(data) {
+        service.getCurrentWorkCompanys = function (uid, callback, error) {
+            $http.get('/api/user/' + uid + '/cur_work?type=com').success(function (data) {
                 callback && callback(data);
-            }).catch(function(err) {
+            }).catch(function (err) {
                 error && error(err);
             });
         };
 
         //获取用户的在职机构工作经历
-        service.getCurrentWorkOrganizations = function(uid, callback, error) {
-            $http.get('/api/user/' + uid + '/cur_work?type=org').success(function(data) {
+        service.getCurrentWorkOrganizations = function (uid, callback, error) {
+            $http.get('/api/user/' + uid + '/cur_work?type=org').success(function (data) {
                 callback && callback(data);
-            }).catch(function(err) {
+            }).catch(function (err) {
                 error && error(err);
             });
         };
 
         //新增用户任职经历
-        service.addWorkExperience = function(data, callback, error) {
-            $http.post('/api/user/' + data.uid + '/work', data).success(function(response) {
+        service.addWorkExperience = function (data, callback, error) {
+            $http.post('/api/user/' + data.uid + '/work', data).success(function (response) {
                 callback && callback(response);
-            }).catch(function(err) {
+            }).catch(function (err) {
                 error && error(err);
             });
         };
 
         //更新用户任职经历
-        service.updateWorkExperience = function(data, callback, error) {
-            $http.put('/api/user/' + data.uid + '/work/' + data.id, data).success(function(response) {
+        service.updateWorkExperience = function (data, callback, error) {
+            $http.put('/api/user/' + data.uid + '/work/' + data.id, data).success(function (response) {
                 callback && callback(response);
-            }).catch(function(err) {
+            }).catch(function (err) {
                 error && error(err);
             });
         };

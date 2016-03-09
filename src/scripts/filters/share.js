@@ -4,8 +4,8 @@
 
 var angular = require('angular');
 
-angular.module('defaultApp.filter').filter('share', function() {
-    return function(input) {
+angular.module('defaultApp.filter').filter('share', function () {
+    return function (input) {
         if (input === undefined) {
             return '未披露';
         }

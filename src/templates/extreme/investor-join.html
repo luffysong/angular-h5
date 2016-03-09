@@ -1,0 +1,54 @@
+<div class="container extreme-join-wrapper">
+    <article>
+        <header>
+            <!-- fixme 请加入banner图 -->
+            <img ng-src="{{extreme.banner}}">
+        </header>
+        <section ng-show="!success">
+            <div class="join-content-wrapper">
+                <p ng-bind-html="extreme.desc | SimpleRender"></p>
+                <h4>报名信息</h4>
+                <div>
+                    <h5>请选择活动专场(最多2场)</h5>
+                </div>
+                <div class="check-list" ng-repeat="domain in extreme.domains">
+                    <input type="checkbox" ng-disabled="limit2(domain)"
+                    data-checklist-model="extreme.selectDomains" data-checklist-value="domain">
+                  <span ng-bind="domain.name"></span>
+                  <div class="meet-num" ng-show="extreme.selectDomains.indexOf(domain) !== -1">
+                      <span>*</span>
+                      预计在活动中约见
+                      <select  ng-options="item  for item in arrayLimit" ng-model="domain.num">
+                          <option disabled value="">请选择</option>
+                      </select>个项目
+                  </div>
+                </div>
+                <form name="investorInfo">
+                    <div>
+                        <div class="form-group">
+                            <label class="label-control"><span class="required">*</span>机构名称</label>
+                            <input class="form-control" placeholder="15个字符以内" ng-maxlength="15"
+                            required ng-model="extreme.organizationName">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="label-control"><span class="required">*</span>职位</label>
+                            <input class="form-control" ng-maxlength="8" placeholder="8个字符以内"
+                            required ng-model="extreme.job">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="label-control"><span class="required">*</span>微信号</label>
+                            <input class="form-control" ng-maxlength="20" ng-minlength="6" required
+                            placeholder="6-20个字符" ng-model="extreme.weixinAccount">
+                        </div>
+                        <a class="save" ng-class="{disabled:!applyIsValid()}" ng-bind="saveText"
+                            ng-click="apply($event)" href="#">提交报名信息</a>
+                    </div>                </form>
+            </div>
+        </section>
+        <section ng-show="success" ng-include="'templates/extreme/join-success.html'">
+        </section>
+
+    </article>
+</div>

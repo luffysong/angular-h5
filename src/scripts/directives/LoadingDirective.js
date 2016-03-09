@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.directive').directive('loading', [
     '$rootScope', '$compile',
-    function($rootScope, $compile) {
+    function ($rootScope, $compile) {
         $rootScope.loadingInst = $rootScope.loadingInst || {};
         var template = '<div class="loading-wrap" ng-show="loadingInst.{{name}}"><div class="spinner">' +
                 '<div class="rect1"></div>' +
@@ -17,7 +17,7 @@ angular.module('defaultApp.directive').directive('loading', [
                 '</div></div>';
         return {
             restrict: 'AE',
-            link: function(scope, element, attrs) {
+            link: function (scope, element, attrs) {
                 if (!attrs.loading) {
                     return;
                 }
@@ -30,9 +30,9 @@ angular.module('defaultApp.directive').directive('loading', [
             }
         };
     }
-]).service('loading', ['$rootScope', function($rootScope) {
+]).service('loading', ['$rootScope', function ($rootScope) {
     return {
-        show: function(name) {
+        show: function (name) {
             if (angular.isUndefined($rootScope.loadingInst[name])) {
                 return;
             }
@@ -40,7 +40,7 @@ angular.module('defaultApp.directive').directive('loading', [
             $rootScope.loadingInst[name] = true;
         },
 
-        hide: function(name) {
+        hide: function (name) {
             if (angular.isUndefined($rootScope.loadingInst[name])) {
                 return;
             }

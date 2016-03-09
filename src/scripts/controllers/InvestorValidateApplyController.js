@@ -7,7 +7,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('InvestorValidateApplyController',
 
-    function(OrganizationService, CompanyService, $state, $scope, SuggestService, $q, SearchService,
+    function (OrganizationService, CompanyService, $state, $scope, SuggestService, $q, SearchService,
         DictionaryService, ErrorService, DefaultService, $upload, checkForm,
         $timeout, UserService, $location, InvestorauditService, monthOptions, yearOptions, AndroidUploadService) {
         $scope.investorValidateApply = {
@@ -32,15 +32,15 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         //});
 
         //android客户端
-        $scope.androidUpload = AndroidUploadService.setClick(function(filename) {
-            $scope.$apply(function() {
+        $scope.androidUpload = AndroidUploadService.setClick(function (filename) {
+            $scope.$apply(function () {
                 $scope.intro.value.pictures = filename;
             });
 
         });
 
         /*查询投资人认证申请状态*/
-        InvestorauditService.queryStatus({}, function(response) {
+        InvestorauditService.queryStatus({}, function (response) {
             switch (response.status){
                 /*审核中*/
                 case 0:
@@ -53,12 +53,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 default:
                     break;
             }
-        }, function(err) {
+        }, function (err) {
 
             ErrorService.alert(err);
         });
 
-        $timeout(function() {
+        $timeout(function () {
             window.scroll(0, 0);
         }, 0);
 
@@ -70,12 +70,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
         window.InitWeixin();
         var Error = {
-            show:function(msg) {
+            show:function (msg) {
                 $scope.error.msg = msg;
                 $scope.error.code = 1;
             },
 
-            hide:function() {
+            hide:function () {
                 $scope.error.code = 0;
             }
         };
@@ -100,7 +100,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.autocomplete_options_organization = {
             suggest: suggest_state_remote_organization,
             on_error: console.log,
-            on_detach: function() {
+            on_detach: function () {
                 if (($scope.organizationList.data[0].name === $scope.organization.addForm.name) &&
                         !$scope.organizationList.data[0].status) {
                     $scope.organization.isAdd = false;
@@ -115,7 +115,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 $scope.organization.addForm.id = 0;
             },
 
-            on_select: function(selected) {
+            on_select: function (selected) {
                 if (selected.obj.status !== 'add') {
                     $scope.organization.isAdd = false;
                     var organization = selected.obj;
@@ -130,7 +130,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
         function suggest_state_organization(data) {
             //var q = term.toLowerCase().trim();
-            var results = data.map(function(item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
+            var results = data.map(function (item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
                 var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30"' +
                     ' src="//krplus-pic.b0.upaiyun.com/default_logo.png!30';
 
@@ -160,9 +160,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             SuggestService.query({
                 wd: q,
                 sub: 'institution'
-            }, function(data) {
+            }, function (data) {
                 $scope.organizationList = data;
-                var exist = data.data.filter(function(item) {
+                var exist = data.data.filter(function (item) {
                     return item.name.toLowerCase() === q.toLowerCase();
                 });
 
@@ -177,7 +177,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }
 
                 deferred.resolve(suggest_state_organization(data.data));
-            }, function() {
+            }, function () {
 
             });
 
@@ -191,7 +191,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.autocomplete_options = {
             suggest: suggest_state_remote,
             on_error: console.log,
-            on_detach: function(cs) {
+            on_detach: function (cs) {
                 if ($scope.companyList.data.length === 0) {
                     $scope.company.isAddExperience = true;
                     $scope.company.addForm.name = cs;
@@ -209,7 +209,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }
             },
 
-            on_select: function(selected) {
+            on_select: function (selected) {
                 if (selected.obj.status !== 'add') {
                     $scope.company.isAdd = false;
                     var company = selected.obj;
@@ -225,7 +225,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
         function suggest_state(data) {
             //var q = term.toLowerCase().trim();
-            var results = data.map(function(item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
+            var results = data.map(function (item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
                 var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30"' +
                     ' src="//krplus-pic.b0.upaiyun.com/default_logo.png!30';
 
@@ -256,7 +256,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             SuggestService.query({
                 wd: q,
                 sub: 'company'
-            }, function(data) {
+            }, function (data) {
                 $scope.companyList = data;
                 console.log('---------', data);
 
@@ -265,7 +265,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 // });
 
                 deferred.resolve(suggest_state(data.data));
-            }, function() {
+            }, function () {
 
             });
 
@@ -291,7 +291,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             response:{
                 data:[]
             },
-            choose:function() {
+            choose:function () {
                 var companyId = $scope.company.form.id;
                 var   companyData = $scope.company.response.data;
                 var    company = {};
@@ -315,7 +315,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 $scope.company.isAddExperience = false;
                 $scope.company.isAdd = false;
 
-                angular.forEach(companyData, function(item) {
+                angular.forEach(companyData, function (item) {
                     if (companyId === item.id) {
                         company = item;
                         return true;
@@ -333,9 +333,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
             },
 
-            loadData:function() {
+            loadData:function () {
                 //获取当前用户在职公司工作经历
-                UserService.getCurrentWorkCompanys(UserService.getUID(), function(response) {
+                UserService.getCurrentWorkCompanys(UserService.getUID(), function (response) {
                     console.log('获取当前用户在职公司工作经历', response);
                     $scope.company.response.data = angular.copy(response.expList);
 
@@ -359,7 +359,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         $scope.company.form.startYear = startDate.getFullYear()+'';
                         $scope.company.form.startMonth = 1 + startDate.getMonth()+'';
                     }*/
-                }, function(err) {
+                }, function (err) {
 
                     ErrorService.alert(err);
                 });
@@ -389,7 +389,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             response:{
                 data:[]
             },
-            choose:function() {
+            choose:function () {
                 var orId = $scope.organization.form.id;
                 var organizationData = $scope.organization.response.data;
                 var organization = {};
@@ -414,7 +414,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 $scope.organization.isAddExperience = false;
                 $scope.organization.isAdd = false;
 
-                angular.forEach(organizationData, function(item) {
+                angular.forEach(organizationData, function (item) {
                     if (orId === item.id) {
                         organization = item;
                         return true;
@@ -429,9 +429,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 $scope.organization.form.startYear = startDate.getFullYear() + '';
             },
 
-            loadData:function() {
+            loadData:function () {
                 //获取当前用户在职机构工作经历
-                UserService.getCurrentWorkOrganizations(UserService.getUID(), function(response) {
+                UserService.getCurrentWorkOrganizations(UserService.getUID(), function (response) {
                     $scope.organization.response.data = angular.copy(response.expList);
 
                     if (!response.expList.length) {
@@ -454,7 +454,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         $scope.organization.form.startMonth = 1 + startDate.getMonth()+'';
                     }*/
 
-                }, function(err) {
+                }, function (err) {
 
                     ErrorService.alert(err);
                 });
@@ -464,7 +464,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
         // 上传logo start
         $scope.logo = {};
-        $scope.logoFileSelected = function(files) {
+        $scope.logoFileSelected = function (files) {
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
                 //ErrorService.alert({
@@ -484,18 +484,18 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     'x-gmkerl-type': 'fix_width', //限定宽度,高度自适应
                     'x-gmkerl-value': '900',      //限定的宽度的值
                     'x-gmkerl-unsharp': true
-                }).then(function(data) {
+                }).then(function (data) {
                     $scope.upload = $upload.upload({
                         url: upyun.api + '/' + upyun.bucket.name,
                         data: data,
                         file: file,
                         withCredentials: false
-                    }).progress(function(evt) {
+                    }).progress(function (evt) {
                         $scope.logo.progress = evt.loaded * 100 / evt.total;
-                    }).success(function(data) {
+                    }).success(function (data) {
 
                         var reader = new FileReader();
-                        reader.onload = function() {
+                        reader.onload = function () {
 
                             //$('.J_aa')[0].src = reader.result
 
@@ -519,14 +519,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
                         $scope.logo.uploading = false;
                         $scope.temp_logo = '';
-                    }).error(function() {
+                    }).error(function () {
                         ErrorService.alert({
                             msg: '格式不支持，请重新上传！'
                         });
 
                         $scope.logo.uploading = false;
                     });
-                }, function(err) {
+                }, function (err) {
 
                     $scope.logo.uploading = false;
                     ErrorService.alert(err);
@@ -614,15 +614,15 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         /*获取用户默认的关注领域和投资阶段的数据*/
         UserService.basic.get({
             id:UserService.getUID()
-        }, function(data) {
+        }, function (data) {
             /*基本信息*/
             $scope.invest.name = data.name;
             $scope.invest.intro = data.intro;
             /*关注领域数据处理*/
             if (data.industry && data.industry.length) {
                 angular.extend($scope.areaList, data.industry);
-                angular.forEach(data.industry, function(o) {
-                    angular.forEach($scope.invest.investorFocusIndustrys, function(key) {
+                angular.forEach(data.industry, function (o) {
+                    angular.forEach($scope.invest.investorFocusIndustrys, function (key) {
                         if (key.value === o) {
                             key.active = true;
                         }
@@ -630,8 +630,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 });
             }
             /*投资阶段数据处理*/
-            angular.forEach(data.investPhases, function(val) {
-                angular.forEach($scope.invest.fundsPhases, function(item) {
+            angular.forEach(data.investPhases, function (val) {
+                angular.forEach($scope.invest.fundsPhases, function (item) {
                     if (val === item.engName) {
                         item.active = true;
                     }
@@ -647,24 +647,24 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             $scope.invest.usdInvestMax      =   data.investorSettings.usdInvestMax;
             $scope.invest.usdInvestMin      =   data.investorSettings.usdInvestMin;
 
-        }, function(err) {
+        }, function (err) {
 
             ErrorService.alert(err);
         });
         /*更改投资阶段被选中状态*/
-        $scope.selectStage = function(index) {
+        $scope.selectStage = function (index) {
             angular.element($('form[name="investorValidateForm"]')).scope().investorValidateForm.$setValidity('stageEmpty', true);
             $scope.invest.fundsPhases[index].active = !$scope.invest.fundsPhases[index].active;
         };
         /*更改选择领域*/
-        $scope.selectArea = function(index) {
+        $scope.selectArea = function (index) {
             if ($scope.areaList.length === 3 && $scope.areaList.indexOf($scope.invest.investorFocusIndustrys[index].value) < 0) {
                 return;
             }else {
                 angular.element($('form[name="investorValidateForm"]')).scope().investorValidateForm.$setValidity('industyEmpty', true);
                 $scope.areaList = [];
                 $scope.invest.investorFocusIndustrys[index].active = !$scope.invest.investorFocusIndustrys[index].active;
-                angular.forEach($scope.invest.investorFocusIndustrys, function(obj, i) {
+                angular.forEach($scope.invest.investorFocusIndustrys, function (obj, i) {
                     if (obj.active && $scope.areaList.indexOf($scope.invest.investorFocusIndustrys[i].value) < 0) {
                         $scope.areaList.push($scope.invest.investorFocusIndustrys[i].value);
                     }
@@ -672,7 +672,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
         };
         /*上传名片*/
-        $scope.imgFileSelected  = function(files) {
+        $scope.imgFileSelected  = function (files) {
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
                 ErrorService.alert({
@@ -690,15 +690,15 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     'x-gmkerl-type': 'fix_width', //限定宽度,高度自适应
                     'x-gmkerl-value': '900',      //限定的宽度的值
                     'x-gmkerl-unsharp': true
-                }).then(function(data) {
+                }).then(function (data) {
                     $scope.upload = $upload.upload({
                         url: upyun.api + '/' + upyun.bucket.name,
                         data: data,
                         file: file,
                         withCredentials: false
-                    }).progress(function(evt) {
+                    }).progress(function (evt) {
                         $scope.intro.progress = evt.loaded * 100 / evt.total;
-                    }).success(function(data) {
+                    }).success(function (data) {
                         var filename = data.url.toLowerCase();
                         if (filename.indexOf('.jpg') !== -1 || (filename.indexOf('.png') !== -1) || filename.indexOf('.jpeg') !== -1) {
                             $scope.intro.value.pictures = window.kr.upyun.bucket.url + data.url;
@@ -713,13 +713,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         }
 
                         $scope.intro.uploading = false;
-                    }).error(function() {
+                    }).error(function () {
                         ErrorService.alert({
                             msg: '格式不支持，请重新上传！'
                         });
                         $scope.intro.uploading = false;
                     });
-                }, function(err) {
+                }, function (err) {
 
                     $scope.intro.uploading = false;
                     ErrorService.alert(err);
@@ -727,7 +727,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
         };
         /*表单提交*/
-        $scope.submitForm = function() {
+        $scope.submitForm = function () {
             //创建公司
             // function createCompany(data) {
             //         var deferred = $q.defer();
@@ -744,9 +744,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             //创建机构
             function createOrganization(data) {
                     var deferred = $q.defer();
-                    OrganizationService.save(data, function(response) {
+                    OrganizationService.save(data, function (response) {
                         deferred.resolve(response);
-                    }, function(err) {
+                    }, function (err) {
 
                         deferred.reject(err);
                     });
@@ -757,9 +757,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             //创建任职经历
             function createExperience(data) {
                     var deferred = $q.defer();
-                    UserService.addWorkExperience(data, function(response) {
+                    UserService.addWorkExperience(data, function (response) {
                         deferred.resolve(response);
-                    }, function(err) {
+                    }, function (err) {
 
                         deferred.reject(err);
                     });
@@ -770,9 +770,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             //更新任职经历
             function updateExperience(data) {
                     var deferred = $q.defer();
-                    UserService.updateWorkExperience(data, function(response) {
+                    UserService.updateWorkExperience(data, function (response) {
                         deferred.resolve(response);
-                    }, function(err) {
+                    }, function (err) {
 
                         deferred.reject(err);
                     });
@@ -789,7 +789,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
             /*检查投资阶段是否选择，给出相应提示*/
             $scope.stageList = [];
-            angular.forEach($scope.invest.fundsPhases, function(key) {
+            angular.forEach($scope.invest.fundsPhases, function (key) {
                 if (key.active) {
                     $scope.stageList.push(key);
                 }
@@ -860,7 +860,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             investoraudit.intro   = $scope.invest.intro;
             /*投资阶段*/
             investoraudit.fundsPhases = [];
-            angular.forEach($scope.invest.fundsPhases, function(val) {
+            angular.forEach($scope.invest.fundsPhases, function (val) {
                     if (val.active) {
                         investoraudit.fundsPhases.push(val.engName);
                     }
@@ -940,7 +940,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                             data.source = 'INVESTOR_AUDIT';
 
                             var createOrganizationPromise = createOrganization(data);
-                            createOrganizationPromise.then(function(response) {
+                            createOrganizationPromise.then(function (response) {
                                     console.log('---公司返回数据--', response);
 
                                     //创建经历
@@ -954,16 +954,16 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                                     console.log('---要提交的创建经历数据--', expData);
 
                                     var createExperiencePromise = createExperience(expData);
-                                    createExperiencePromise.then(function(response) {
+                                    createExperiencePromise.then(function (response) {
                                         console.log('--创建经历成功--');
 
                                         //提交总数据
                                         send(response.id);
-                                    }, function() {
+                                    }, function () {
 
                                         console.log('--创建经历失败--');
                                     });
-                                }, function(err) {
+                                }, function (err) {
                                     /*fixme 增加错误提示*/
                                     ErrorService.alert({
                                         msg: '对不起，该机构不符合平台收录标准'
@@ -983,12 +983,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                             console.log('---要提交的创建经历数据--', expData);
 
                             createExperiencePromise = createExperience(expData);
-                            createExperiencePromise.then(function(response) {
+                            createExperiencePromise.then(function (response) {
                                     console.log('--创建经历成功--');
 
                                     //提交总数据
                                     send(response.id);
-                                }, function() {
+                                }, function () {
 
                                     console.log('--创建经历失败--');
                                 });
@@ -1007,12 +1007,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         console.log('---提交更新任职经历数据--', expData);
 
                         updateExperiencePromise = updateExperience(expData);
-                        updateExperiencePromise.then(function(response) {
+                        updateExperiencePromise.then(function (response) {
                                     console.log('--更新经历成功--');
 
                                     //提交总数据
                                     send(response.id);
-                                }, function() {
+                                }, function () {
 
                                     console.log('--更新经历失败--');
                                 });
@@ -1040,12 +1040,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                             console.log('---要提交的创建经历数据--', expData);
 
                             createExperiencePromise = createExperience(expData);
-                            createExperiencePromise.then(function(response) {
+                            createExperiencePromise.then(function (response) {
                                 console.log('--创建经历成功--');
 
                                 //提交总数据
                                 send(response.id);
-                            }, function() {
+                            }, function () {
 
                                 console.log('---创建公司失败--');
                             });
@@ -1066,12 +1066,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                             console.log('---要提交的创建经历数据--', expData);
 
                             createExperiencePromise = createExperience(expData);
-                            createExperiencePromise.then(function(response) {
+                            createExperiencePromise.then(function (response) {
                                     console.log('--创建经历成功--');
 
                                     //提交总数据
                                     send(response.id);
-                                }, function() {
+                                }, function () {
 
                                     console.log('--创建经历失败--');
                                 });
@@ -1092,12 +1092,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         console.log('---提交更新任职经历数据--', expData);
 
                         updateExperiencePromise = updateExperience(expData);
-                        updateExperiencePromise.then(function(response) {
+                        updateExperiencePromise.then(function (response) {
                                     console.log('--更新经历成功--');
 
                                     //提交总数据
                                     send(response.id);
-                                }, function() {
+                                }, function () {
 
                                     console.log('--更新经历失败--');
                                 });
@@ -1118,14 +1118,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         investoraudit.workExpId = workExpId;
                     }
 
-                    InvestorauditService.save(investoraudit, function() {
+                    InvestorauditService.save(investoraudit, function () {
                         try {
                             window.webkit.messageHandlers.investor.postMessage();
                             return;
                         } catch (e) {}
 
                         $scope.investorValidateApply.status = 'checking';
-                    }, function(err) {
+                    }, function (err) {
 
                         $scope.hasClick = false;
                         ErrorService.alert(err);
@@ -1134,7 +1134,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
         };
 
-        $scope.$watch('invest.investorRole', function() {
+        $scope.$watch('invest.investorRole', function () {
             $scope.organization.addForm.website = '';
             $scope.company.addForm.website = '';
         });
@@ -1145,7 +1145,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
         //FIXME 此处使用字符串与数字的对比，代码不规范
         //2016-01-15 18:35 songkaiyu
-        $scope.$watch('organization.form.startMonth', function() {
+        $scope.$watch('organization.form.startMonth', function () {
             if ($scope.organization.form.startYear && $scope.organization.form.startYear === year + '') {
                 if ($scope.organization.form.startMonth > month) {
                     Error.show('任职的起始时间不能大于当前月');
@@ -1156,7 +1156,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
         });
 
-        $scope.$watch('company.form.startMonth', function() {
+        $scope.$watch('company.form.startMonth', function () {
             if ($scope.company.form.startYear && $scope.company.form.startYear === year + '') {
                 if ($scope.company.form.startMonth > month) {
                     Error.show('任职的起始时间不能大于当前月');
@@ -1167,7 +1167,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
         });
 
-        $scope.$watch('company.form.startYear', function() {
+        $scope.$watch('company.form.startYear', function () {
             if ($scope.company.form.startYear && $scope.company.form.startYear === year + '') {
                 if ($scope.company.form.startMonth > month) {
                     Error.show('任职的起始时间不能大于当前月');
@@ -1180,7 +1180,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
         });
 
-        $scope.$watch('organization.form.startYear', function() {
+        $scope.$watch('organization.form.startYear', function () {
             if ($scope.organization.form.startYear && $scope.organization.form.startYear === year + '') {
                 if ($scope.organization.form.startMonth > month) {
                     Error.show('任职的起始时间不能大于当前月');
@@ -1193,7 +1193,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
         });
         /*监听事件*/
-        $scope.changeMoney = function(fieldName) {
+        $scope.changeMoney = function (fieldName) {
             Error.hide();
             if (fieldName === 'cnyInvestMin' ||  fieldName === 'cnyInvestMax') {
                 if (parseFloat($scope.invest.cnyInvestMin) > parseFloat($scope.invest.cnyInvestMax)) {

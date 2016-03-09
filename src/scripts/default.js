@@ -14,7 +14,7 @@ angular.module('ui.carousel', ['ui.bootstrap']);
 angular.module('defaultApp.filter', []);
 angular.module('defaultApp.directive', []);
 angular.module('defaultApp.service', ['ngResource']);
-angular.module('defaultApp.controller', ['ngTouch', 'MassAutoComplete']);
+angular.module('defaultApp.controller', ['ngTouch', 'MassAutoComplete', 'checklist-model']);
 angular.module('templates', []);
 
 require('./filters');
@@ -55,7 +55,7 @@ require('./bootstrap/routes');
 require('./bootstrap/run');
 
 // 启动
-$(document).ready(function() {
+$(document).ready(function () {
     //if(navigator.userAgent.match(/36kr/) && location.hash.indexOf('zhongchou')>-1){
     //    console.log("test");
     //    location.href = 'http://'+projectEnvConfig.helpHost+'/q-zc-helper.html';

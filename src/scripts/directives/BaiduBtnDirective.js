@@ -5,15 +5,15 @@
 var angular = require('angular');
 
 angular.module('defaultApp.directive').directive('baiduBtn', [
-    function() {
+    function () {
         return {
             restrict: 'AE',
-            link: function(scope, element, attrs) {
+            link: function (scope, element, attrs) {
                 if (!attrs.baiduBtn) {
                     return;
                 }
 
-                $(element).click(function() {
+                $(element).click(function () {
                     _hmt.push(['_trackEvent', '按钮', attrs.baiduBtn]);
                     krtracker('trackEvent', '按钮', attrs.baiduBtn);
                 });

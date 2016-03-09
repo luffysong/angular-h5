@@ -46,7 +46,7 @@ var angular = require('angular');
  */
 angular.module('defaultApp.service').service('SearchService', [
     '$location', 'BasicService',
-    function($location, BasicService) {
+    function ($location, BasicService) {
         var service = BasicService('/api/search', {
           query: {
               method: 'POST'

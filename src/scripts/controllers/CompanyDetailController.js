@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('CompanyDetailController',
-    function($scope, $location, $stateParams, $state, CompanyService, $timeout,
+    function ($scope, $location, $stateParams, $state, CompanyService, $timeout,
               UserService, ErrorService, $rootScope, DictionaryService,
               SocialService, CredentialService, SeoGetInfoService
               ) {
@@ -31,7 +31,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             ORGANIZATION: 'ORGANIZATION',
             COMPANY: 'COMPANY'
         };
-        $timeout(function() {
+        $timeout(function () {
             window.scroll(0, 0);
         }, 0);
 
@@ -61,27 +61,27 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
         $scope.getUISref = getUISref;
 
-        $scope.isOrganization = function(type) {
+        $scope.isOrganization = function (type) {
             return type === INVESTOR_TYPE.ORGANIZATION;
         };
 
-        $scope.existLinks = function() {
+        $scope.existLinks = function () {
             return $scope.appLinks || $scope.company.value.company.webLink;
         };
 
-        $scope.existProductIntro = function() {
+        $scope.existProductIntro = function () {
             return $scope.slides.length ||
                 $scope.existIntroDetail ||
                 $scope.company.value.company.intro;
         };
 
         //众筹或者融资存在，没有权限的情况两个ID均不存在
-        $scope.isFunding = function() {
+        $scope.isFunding = function () {
             return $scope.company.value.funds.crowdFundingId || $scope.company.value.funds.fundsId;
         };
 
         //工商信息
-        $scope.existBusiness = function() {
+        $scope.existBusiness = function () {
             return $scope.qichacha;
         };
 
@@ -121,10 +121,10 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         }
 
         // 获取公司基本信息
-        $scope.companyBasicData = function(callback) {
+        $scope.companyBasicData = function (callback) {
             CompanyService.get({
                 id: $scope.companyId,
-            }, function(data) {
+            }, function (data) {
                 console.log('--请求的数据--', data);
                 var isIpoOrAcquiredReg = /IPO|ACQUIRED/;
                 $scope.company.value = data;
@@ -160,7 +160,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }, angular.noop);
         };
 
-        $scope.isManager = function(id) {
+        $scope.isManager = function (id) {
             if ($scope.company.value.basic) {
                 return $scope.company.value.basic.managerId === id;
             }
@@ -220,7 +220,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         $scope.slides = [];
 
         loadFinanceData();
-        $scope.companyBasicData(function() {
+        $scope.companyBasicData(function () {
 
             var slides = $scope.slides;
             if ($scope.company.value.company.video) {
@@ -230,7 +230,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
             }
 
-            $scope.addSlide = function(i) {
+            $scope.addSlide = function (i) {
                 slides.push({
                     image: $scope.company.value.other.pictures[i],
                 });
@@ -244,7 +244,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         function loadCrowdFundingDetail(id) {
             CompanyService.getCrowdFunding({
                 id:id
-            }, function(data) {
+            }, function (data) {
                 $scope.funds.phase = data.funding.round;
                 $scope.funds.unit = 'CNY';
 
@@ -261,7 +261,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         function getFeeds() {
             CompanyService.feed.get({
                 id: $scope.companyId,
-            }, function(data) {
+            }, function (data) {
                 $scope.originFeedsCount = data.data.length;
                 $scope.feeds = data.data.slice(0, 3);
             });
@@ -272,7 +272,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         function loadFa(id) {
             UserService.basic.get({
                 id:id
-            }, function(data) {
+            }, function (data) {
                 $scope.fa = data;
             });
         }
@@ -287,10 +287,10 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         function loadFounderData(callback) {
             CompanyService.founder.query({
                 id: $scope.companyId,
-            }, function(data) {
+            }, function (data) {
                 $scope.founder.list = data.data;
                 callback &&  callback(data);
-            }, function(err) {
+            }, function (err) {
 
                 ErrorService.alert(err);
             });
@@ -307,11 +307,11 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
             CompanyService['past-finance'].query({
                 id: $scope.companyId,
-            }, function(data) {
+            }, function (data) {
                 $scope.finance.originListCount = data.data.length;
                 $scope.finance.list = data.data.slice(0, 1);
                 callback && callback(data);
-            }, function(err) {
+            }, function (err) {
 
                 ErrorService.alert(err);
             });
@@ -331,7 +331,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         function loadCapitalDetail(callback) {
             CompanyService.funds.get({
                 id: $scope.companyId,
-            }, function(data) {
+            }, function (data) {
                 $scope.capitalDetail = data;
                 setCapitalList();
                 if (!$scope.company.value.funds.fundsId) {
@@ -339,7 +339,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                 }
 
                 callback && callback();
-            }, function(data) {
+            }, function (data) {
 
                 setApplyState(data);
             });
@@ -383,7 +383,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         function loadQichacha() {
             CompanyService.qichacha.get({
                 id:$scope.companyId,
-            }, function(data) {
+            }, function (data) {
                 $scope.qichacha = !!data.Name;
             });
 
@@ -422,26 +422,26 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
         //Event Handelr
 
-        $scope.likeClick = function(isLike, e) {
+        $scope.likeClick = function (isLike, e) {
             e.preventDefault();
             ensureLogin();
             if (!isLike) {
                 SocialService.likes.yes({
                     id:$scope.companyId,
                 }, {
-                }, function(data) {
+                }, function (data) {
                     setLikeState(data, isLike);
                 }, profileErrorCallback);
             }else {
                 SocialService.likes.no({
                     id:$scope.companyId,
-                }, function(data) {
+                }, function (data) {
                     setLikeState(data, isLike);
                 }, profileErrorCallback);
             }
         };
 
-        $scope.followClick = function(followed, e) {
+        $scope.followClick = function (followed, e) {
             e.preventDefault();
             ensureLogin();
             if (!followed) {
@@ -449,7 +449,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                     id:$scope.companyId,
                 }, {
 
-                }, function(data) {
+                }, function (data) {
                     setFollowState(data, followed);
                 }, profileErrorCallback);
             }else {
@@ -457,13 +457,13 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                     id:$scope.companyId,
                 }, {
 
-                }, function(data) {
+                }, function (data) {
                     setFollowState(data, followed);
                 }, profileErrorCallback);
             }
         };
 
-        $scope.applyViewClick = function(e) {
+        $scope.applyViewClick = function (e) {
             e.preventDefault();
             if ($scope.needApply && !$scope.applyStarted) {
                 $scope.applyStarted = true;
@@ -474,7 +474,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }
         };
 
-        $scope.buyOrTalkClick = function(type, e) {
+        $scope.buyOrTalkClick = function (type, e) {
             e.preventDefault();
             if (type === 'buy') {
                 location.href = $scope.crowdFundingDetailUrl;
@@ -483,7 +483,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }
         };
 
-        $scope.cancellDownloadClick = function(e) {
+        $scope.cancellDownloadClick = function (e) {
             e.preventDefault();
             cancellDownload();
 
@@ -515,17 +515,17 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
             }
 
             // 获取热点数据
-            SeoGetInfoService.getInfoLinks('rong-company-overview', $scope.companyId).success(function(data) {
+            SeoGetInfoService.getInfoLinks('rong-company-overview', $scope.companyId).success(function (data) {
                 $scope.recommend = data;
-            }).catch(function() {
+            }).catch(function () {
                 $scope.recommend = {};
             });
 
             // 获取最新资讯
-            CompanyService.news($scope.companyId, function(response) {
+            CompanyService.news($scope.companyId, function (response) {
                 $scope.newsList = response.feeds_news;
                 console.log('-----', $scope.newsList);
-            }, function() {
+            }, function () {
 
                 $scope.newsList = {};
             });

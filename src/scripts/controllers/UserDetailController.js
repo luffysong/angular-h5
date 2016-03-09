@@ -7,8 +7,8 @@ var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('UserDetailController', [
     '$scope', '$location', '$stateParams', '$state', 'UserService', '$timeout',
-    function($scope, $location, $stateParams, $state, UserService, $timeout) {
-        $timeout(function() {
+    function ($scope, $location, $stateParams, $state, UserService, $timeout) {
+        $timeout(function () {
             window.scroll(0, 0);
         }, 0);
 
@@ -17,7 +17,7 @@ angular.module('defaultApp.controller').controller('UserDetailController', [
             // investCasesLimit: 3
         };
 
-        UserService.basic.get({ id: $stateParams.id }, function(response) {
+        UserService.basic.get({ id: $stateParams.id }, function (response) {
 
             document.title = response.name + '的创投名片 | 36氪';
             window.WEIXINSHARE = {
@@ -46,7 +46,7 @@ angular.module('defaultApp.controller').controller('UserDetailController', [
         //投资信息，投资经历
         UserService.finacing.query({
             id: $stateParams.id
-        }, function(response) {
+        }, function (response) {
             $scope.user.invest_cases = response.data;
         });
 
@@ -57,7 +57,7 @@ angular.module('defaultApp.controller').controller('UserDetailController', [
         $scope.user.founderLimit = 2;
         UserService.company.query({
             id: $stateParams.id
-        }, function(response) {
+        }, function (response) {
             $scope.user.founder_cases = response.expList;
 
         });
@@ -66,7 +66,7 @@ angular.module('defaultApp.controller').controller('UserDetailController', [
         $scope.user.workedLimit = 2;
         UserService.work.query({
             id: $stateParams.id
-        }, function(response) {
+        }, function (response) {
             $scope.user.worked_cases = response.expList;
         });
     }

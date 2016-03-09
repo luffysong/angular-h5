@@ -4,7 +4,7 @@
 
 var angular = require('angular');
 angular.module('defaultApp.controller').controller('CompanyCapitalHistoryController',
-    function($scope, $location, $stateParams, $state, CompanyService) {
+    function ($scope, $location, $stateParams, $state, CompanyService) {
         $scope.companyId = $stateParams.id;
         $scope.fullCapital = true;
         $scope.title = '融资经历';
@@ -18,11 +18,11 @@ angular.module('defaultApp.controller').controller('CompanyCapitalHistoryControl
 
         var RONG_HOST = '//' + projectEnvConfig.rongHost;
 
-        $scope.isOrganization = function(type) {
+        $scope.isOrganization = function (type) {
             return type === INVESTOR_TYPE.ORGANIZATION;
         };
 
-        $scope.getUISref = function(type, id) {
+        $scope.getUISref = function (type, id) {
             if (type === INVESTOR_TYPE.ORGANIZATION) {
                 return RONG_HOST + '/organization/' + id;
             }else if (type === INVESTOR_TYPE.INDIVIDUAL) {
@@ -34,7 +34,7 @@ angular.module('defaultApp.controller').controller('CompanyCapitalHistoryControl
 
         CompanyService['past-finance'].query({
                 id:$scope.companyId
-            }, function(data) {
+            }, function (data) {
                 $scope.finance.originListCount = data.data.length;
                 $scope.finance.list = data.data;
             });

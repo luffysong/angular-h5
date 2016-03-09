@@ -1,15 +1,15 @@
 var angular = require('angular');
 
-angular.module('defaultApp.service').directive('imgCropped', function($timeout) {
+angular.module('defaultApp.service').directive('imgCropped', function ($timeout) {
     var bounds = { x: 0, y: 0 };
 
     return {
         restrict: 'A',
         scope: { src: '=', rotate: '=', selected: '&' },
-        link: function(scope, element) {
+        link: function (scope, element) {
             var myImg;
             var _myImg;
-            var clear = function() {
+            var clear = function () {
                 if (myImg) {
                     myImg.next().remove();
                     myImg.remove();
@@ -17,7 +17,7 @@ angular.module('defaultApp.service').directive('imgCropped', function($timeout) 
                 }
             };
 
-            scope.$watch('rotate', function() {
+            scope.$watch('rotate', function () {
                 if (!myImg) {
                     return false;
                 }
@@ -31,7 +31,7 @@ angular.module('defaultApp.service').directive('imgCropped', function($timeout) 
                 //});
             });
 
-            scope.$watch('src', function(nv) {
+            scope.$watch('src', function (nv) {
                 clear();
                 if (!nv) {
                     return;
@@ -43,7 +43,7 @@ angular.module('defaultApp.service').directive('imgCropped', function($timeout) 
                 _myImg.attr('src', nv);
                 element.append(myImg);
                 element.append(_myImg);
-                $timeout(function() {
+                $timeout(function () {
                     var cW = $(myImg).width();
                     var cH = $(myImg).height();
                     var cSize = cW > cH ? cH : cW;
@@ -58,9 +58,9 @@ angular.module('defaultApp.service').directive('imgCropped', function($timeout) 
                     $(myImg).Jcrop({
                         trackDocument: true,
                         setSelect: [cLeft, cTop, cSize, cSize],
-                        onSelect: function(cords) {
-                            $timeout(function() {
-                                scope.$apply(function() {
+                        onSelect: function (cords) {
+                            $timeout(function () {
+                                scope.$apply(function () {
                                     cords.bx = bounds.x;
                                     cords.by = bounds.y;
                                     scope.selected({
@@ -75,7 +75,7 @@ angular.module('defaultApp.service').directive('imgCropped', function($timeout) 
                         },
 
                         aspectRatio: 1
-                    }, function() {
+                    }, function () {
                         var boundsArr = this.getBounds();
                         bounds.x = boundsArr[0];
                         bounds.y = boundsArr[1];
@@ -90,30 +90,30 @@ angular.module('defaultApp.service').directive('imgCropped', function($timeout) 
     };
 });
 
-angular.module('defaultApp.service').factory('fileReader', function($q) {
-    var onLoad = function(reader, deferred, Sscope) {
-        return function() {
-            Sscope.$apply(function() {
+angular.module('defaultApp.service').factory('fileReader', function ($q) {
+    var onLoad = function (reader, deferred, Sscope) {
+        return function () {
+            Sscope.$apply(function () {
                 deferred.resolve(reader.result);
             });
         };
     };
 
-    var onError = function(reader, deferred, Sscope) {
-        return function() {
-            Sscope.$apply(function() {
+    var onError = function (reader, deferred, Sscope) {
+        return function () {
+            Sscope.$apply(function () {
                 deferred.reject(reader.result);
             });
         };
     };
 
-    var onProgress = function(reader, Sscope) {
-        return function(event) {
+    var onProgress = function (reader, Sscope) {
+        return function (event) {
             Sscope.$broadcast('fileProgress', { total: event.total, loaded: event.loaded });
         };
     };
 
-    var getReader = function(deferred, Sscope) {
+    var getReader = function (deferred, Sscope) {
         var reader = new FileReader();
         reader.onload = onLoad(reader, deferred, Sscope);
         reader.onerror = onError(reader, deferred, Sscope);
@@ -121,7 +121,7 @@ angular.module('defaultApp.service').factory('fileReader', function($q) {
         return reader;
     };
 
-    var readAsDataURL = function(file, Sscope) {
+    var readAsDataURL = function (file, Sscope) {
         var deferred = $q.defer();
         var reader = getReader(deferred, Sscope);
         reader.readAsDataURL(file);
@@ -131,12 +131,12 @@ angular.module('defaultApp.service').factory('fileReader', function($q) {
     return { readAsDataUrl: readAsDataURL };
 });
 
-angular.module('defaultApp.service').directive('krFileSelect', function() {
+angular.module('defaultApp.service').directive('krFileSelect', function () {
     return {
         scope: {
             krChange: '&krChange', krModel: '=krModel'
-        }, link: function(dirScope, el) {
-            el.bind('change', function(e) {
+        }, link: function (dirScope, el) {
+            el.bind('change', function (e) {
                 dirScope.krModel.file = (e.srcElement || e.target).files[0];
                 dirScope.krChange();
             });
@@ -144,33 +144,33 @@ angular.module('defaultApp.service').directive('krFileSelect', function() {
     };
 });
 
-angular.module('defaultApp.service').factory('AvatarEdit', function($modal, ErrorService) {
+angular.module('defaultApp.service').factory('AvatarEdit', function ($modal, ErrorService) {
     return {
-        open: function() {
+        open: function () {
             return $modal.open({
                 templateUrl: 'templates/avatar-edit.html',
                 backdrop: 'static',
-                controller: function($scope, $timeout, $upload, $modalInstance, fileReader, DefaultService) {
+                controller: function ($scope, $timeout, $upload, $modalInstance, fileReader, DefaultService) {
                     $scope.file = {};
                     $scope.corpWrapStyle = {};
                     $scope.cropScale = 1;
                     var wrapSize = [400, 400];
-                    $scope.getFile = function() {
-                        $scope.$apply(function() {
+                    $scope.getFile = function () {
+                        $scope.$apply(function () {
                             $scope.readingFile = true;
                         });
 
-                        fileReader.readAsDataUrl($scope.file.file, $scope).then(function(result) {
+                        fileReader.readAsDataUrl($scope.file.file, $scope).then(function (result) {
 
                             var img = new Image();
-                            img.onload = function() {
+                            img.onload = function () {
                                 $scope.readingFile = false;
                                 var width = img.width;
                                 var height = img.height;
                                 var ratio = width / height;
                                 var wrapRatio = wrapSize[0] / wrapSize[1];
                                 var finalSize = [];
-                                $scope.$apply(function() {
+                                $scope.$apply(function () {
                                     if (ratio > wrapRatio) {
                                         finalSize[0] = wrapSize[0];
                                         finalSize[1] = finalSize[0] / ratio;
@@ -190,11 +190,11 @@ angular.module('defaultApp.service').factory('AvatarEdit', function($modal, Erro
                                 });
                             };
 
-                            img.onerror = function() {
+                            img.onerror = function () {
                                 ErrorService.alert({
                                     msg:'图片格式有误，请重新选择文件'
                                 });
-                                $scope.$apply(function() {
+                                $scope.$apply(function () {
                                     $scope.readingFile = false;
                                 });
                             };
@@ -205,7 +205,7 @@ angular.module('defaultApp.service').factory('AvatarEdit', function($modal, Erro
                     };
 
                     $scope.previewRotate = 0;
-                    $scope.selected = function(cords, _pic) {
+                    $scope.selected = function (cords, _pic) {
 
                         $scope.picWidth = _pic.w * $scope.cropScale;
                         $scope.picHeight = _pic.h * $scope.cropScale;
@@ -225,12 +225,12 @@ angular.module('defaultApp.service').factory('AvatarEdit', function($modal, Erro
                         };
                     };
 
-                    $scope.rotateLeft = function() {
+                    $scope.rotateLeft = function () {
                         $scope.previewRotate -= 90;
                         $scope.previewStyle.transform = 'rotate(' + $scope.previewRotate + 'deg)';
                     };
 
-                    $scope.rotateRight = function() {
+                    $scope.rotateRight = function () {
                         $scope.previewRotate += 90;
                         $scope.previewStyle.transform = 'rotate(' + $scope.previewRotate + 'deg)';
                     };
@@ -238,7 +238,7 @@ angular.module('defaultApp.service').factory('AvatarEdit', function($modal, Erro
                     $scope._demoFiles = [];
 
                     // 确认
-                    $scope.ok = function() {
+                    $scope.ok = function () {
 
                         var crop = {
                             x: -($scope.previewStyle.marginLeft * $scope._picWidth / $scope.previewStyle.width),
@@ -287,32 +287,32 @@ angular.module('defaultApp.service').factory('AvatarEdit', function($modal, Erro
 
                         var upyun = window.kr.upyun;
 
-                        DefaultService.getUpToken(parameter).then(function(data) {
+                        DefaultService.getUpToken(parameter).then(function (data) {
                             $scope.upload = $upload.upload({
                                 url: upyun.api + '/' + upyun.bucket.name,
                                 data: data,
                                 file: $scope.file.file,
                                 withCredentials: false
-                            }).progress(function(evt) {
+                            }).progress(function (evt) {
                                 $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
 
                                 //console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total) + '% file :' + evt.config.file.name);
-                            }).success(function(data) {
+                            }).success(function (data) {
                                 $scope.progress = 0;
                                 $modalInstance.close(data);
-                            }).error(function() {
+                            }).error(function () {
                                 ErrorService.alert({
                                     msg: '格式不支持，请重新选择文件！'
                                 });
                                 $scope.progress = 0;
                             });
-                        }, function(err) {
+                        }, function (err) {
 
                             ErrorService.alert(err);
                         });
                     };
 
-                    $scope.cancel = function() {
+                    $scope.cancel = function () {
                         $modalInstance.close();
                     };
                 }

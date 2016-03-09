@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.controller').controller('GuideWelcomeController',
-    function($stateParams, $scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope,
+    function ($stateParams, $scope, UserService, DefaultService, $state, checkForm, ErrorService, $rootScope,
         $timeout, $upload, AndroidUploadService, LoginService) {
 
         $scope.user = {
@@ -17,7 +17,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
 
         UserService.basic.get({
             id: $scope.userId
-        }, function(data) {
+        }, function (data) {
             delete data.$promise;
             delete data.$resolved;
 
@@ -41,21 +41,21 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
         });
 
         var checkTimeout;
-        $scope.$watch('user.phone', function(phone) {
+        $scope.$watch('user.phone', function (phone) {
             if (!phone || !$rootScope.REGEXP.phone.test(phone)) {
                 return;
             }
 
             $scope.guideForm.phone.$setValidity('checked', true);
             checkTimeout && $timeout.cancel(checkTimeout);
-            checkTimeout = $timeout(function() {
+            checkTimeout = $timeout(function () {
                 $scope.guideForm.phone.$setDirty();
                 UserService.check.get({
                     id: $scope.userId,
                     phone: phone
-                }, function() {
+                }, function () {
 
-                }, function() {
+                }, function () {
 
                     $scope.guideForm.phone.$setValidity('checked', false);
                 });
@@ -63,28 +63,28 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
 
         });
 
-        $scope.$watch('user.email', function(email) {
+        $scope.$watch('user.email', function (email) {
             if (!email || $scope.guideForm.email.$error.email) {
                 return;
             }
 
             $scope.guideForm.email.$setValidity('checked', true);
             checkTimeout && $timeout.cancel(checkTimeout);
-            checkTimeout = $timeout(function() {
+            checkTimeout = $timeout(function () {
                 $scope.guideForm.email.$setDirty();
                 UserService.check.get({
                     id: $scope.userId,
                     email: email
-                }, function() {
+                }, function () {
 
-                }, function() {
+                }, function () {
 
                     $scope.guideForm.email.$setValidity('checked', false);
                 });
             }, 800);
         });
 
-        $scope.getCode = function(e, voice) {
+        $scope.getCode = function (e, voice) {
             e && e.preventDefault();
             if (!$scope.user.phone) {
                 return;
@@ -95,8 +95,8 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             }
 
             $scope.wait = 60;
-            var interval = setInterval(function() {
-                $scope.$apply(function() {
+            var interval = setInterval(function () {
+                $scope.$apply(function () {
                     $scope.wait--;
                     if ($scope.wait === 0) {
                         clearInterval(interval);
@@ -110,11 +110,11 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 subid: voice ? 'voice' : ''
             }, {
                 phone: $scope.getPhoneWithCountryCode()
-            }, function() {
-            }, function() {
+            }, function () {
+            }, function () {
 
                 $('<div class="error-alert error error-sms">发送失败</div>').appendTo('body');
-                $timeout(function() {
+                $timeout(function () {
                     $('.error-sms').fadeOut();
                 }, 2000);
 
@@ -132,17 +132,17 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
         };
 
         //android客户端
-        $scope.androidUpload = AndroidUploadService.setClick(function(filename) {
-            $scope.$apply(function() {
+        $scope.androidUpload = AndroidUploadService.setClick(function (filename) {
+            $scope.$apply(function () {
                     $scope.user.avatar = filename;
                 });
         });
 
-        $scope.imgFileSelected  = function(files) {
+        $scope.imgFileSelected  = function (files) {
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
                 $('<div class="error-alert error error-avatar">附件大于5M</div>').appendTo('body');
-                $timeout(function() {
+                $timeout(function () {
                     $('.error-avatar').fadeOut();
                 }, 2000);
 
@@ -159,22 +159,22 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                     'x-gmkerl-type': 'fix_width', //限定宽度,高度自适应
                     'x-gmkerl-value': '900',      //限定的宽度的值
                     'x-gmkerl-unsharp': true
-                }).then(function(data) {
+                }).then(function (data) {
                     $scope.upload = $upload.upload({
                         url: upyun.api + '/' + upyun.bucket.name,
                         data: data,
                         file: file,
                         withCredentials: false
-                    }).progress(function() {
+                    }).progress(function () {
 
-                    }).success(function(data) {
+                    }).success(function (data) {
                         var filename = data.url.toLowerCase();
                         if (filename.indexOf('.jpg') !== -1 || (filename.indexOf('.png') !== -1) ||
                                 filename.indexOf('.gif') !== -1 || filename.indexOf('.jpeg') !== -1) {
                             $scope.user.avatar = window.kr.upyun.bucket.url + data.url;
                         } else {
                             $('<div class="error-alert error error-photo">格式不支持，请重新上传！</div>').appendTo('body');
-                            $timeout(function() {
+                            $timeout(function () {
                                 $('.error-photo').fadeOut();
                             }, 2000);
 
@@ -184,9 +184,9 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                         }
 
                         $scope.intro.uploading = false;
-                    }).error(function() {
+                    }).error(function () {
                         $('<div class="error-alert error error-pic">格式不支持，请重新上传！</div>').appendTo('body');
-                        $timeout(function() {
+                        $timeout(function () {
                             $('.error-pic').fadeOut();
                         }, 2000);
 
@@ -195,11 +195,11 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                         // });
                         $scope.intro.uploading = false;
                     });
-                }, function(err) {
+                }, function (err) {
 
                     $scope.intro.uploading = false;
                     $('<div class="error-alert error error-msg">' + err.msg + '</div>').appendTo('body');
-                    $timeout(function() {
+                    $timeout(function () {
                         $('.error-msg').fadeOut();
                     }, 2000);
 
@@ -210,11 +210,11 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
 
         $scope.hasClick = false;
 
-        $scope.submitForm = function(e) {
+        $scope.submitForm = function (e) {
             e && e.preventDefault();
             if (!$scope.user.avatar) {
                 $('<div class="error-alert error error-code">请上传真实头像</div>').appendTo('body');
-                $timeout(function() {
+                $timeout(function () {
                     $('.error-code').fadeOut();
                 }, 2000);
 
@@ -238,13 +238,13 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 email: $scope.user.email,
                 phone: $scope.getPhoneWithCountryCode(),
                 smscode: $scope.user.smscode
-            }, function() {
+            }, function () {
                 location.href = decodeURIComponent($stateParams.from);
-            }, function(err) {
+            }, function (err) {
 
                 $scope.hasClick = false;
                 $('<div class="error-alert error error-code">' + err.msg + '</div>').appendTo('body');
-                $timeout(function() {
+                $timeout(function () {
                     $('.error-code').fadeOut();
                 }, 2000);
 
@@ -252,9 +252,9 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             });
         };
 
-        LoginService.getCountryDict({}, function(data) {
+        LoginService.getCountryDict({}, function (data) {
             $scope.countryDict = data;
-            $scope.countryDict.forEach(function(item) {
+            $scope.countryDict.forEach(function (item) {
                 if (item.cc === '86' || item.cc === 86) {
                     $scope.user.cc = item;
                 }
@@ -264,7 +264,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
         /**
          * 修改国家
          */
-        $scope.changeCountry = function(usernameModel) {
+        $scope.changeCountry = function (usernameModel) {
             $scope.user.phone = '';
             usernameModel.$setPristine();
         };
@@ -272,7 +272,7 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
         /**
          * 获取要发送的用户名
          */
-        $scope.getPhoneWithCountryCode = function() {
+        $scope.getPhoneWithCountryCode = function () {
             if (!$scope.user.phone) {
                 return;
             }

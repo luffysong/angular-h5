@@ -4,7 +4,7 @@
 
 var angular = require('angular');
 
-window.androidUploadFileCallback = function() {
+window.androidUploadFileCallback = function () {
 
 };
 
@@ -24,21 +24,21 @@ window.androidUploadFileCallback = function() {
 // }
 
 angular.module('defaultApp.service').service('AndroidUploadService',
-    function() {
+    function () {
 
         var service = {
-            setClick: function(callback) {
+            setClick: function (callback) {
 
                 window.androidUploadFileCallback = callback;
 
-                return function(e) {
+                return function (e) {
                     if (!window.kr36 || !window.kr36.chooseFile) {
                         //logdiv('没有注入方法')
-                        return function() {};
+                        return function () {};
                     }
 
                     e.preventDefault();
-                    setTimeout(function() {
+                    setTimeout(function () {
                         window.kr36.tempCache = {};
                         window.kr36.tempCache.imgsource =
                             $(e.currentTarget).attr('name');

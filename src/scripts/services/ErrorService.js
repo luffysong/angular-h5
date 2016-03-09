@@ -6,10 +6,10 @@ var angular = require('angular');
 
 angular.module('defaultApp.service').service('ErrorService', [
     '$location', 'notify',
-    function($location, notify) {
+    function ($location, notify) {
 
         var service = {
-            alert: function(err) {
+            alert: function (err) {
                 if (err && err.msg) {
                     notify.closeAll();
                     notify({

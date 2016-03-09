@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.service').service('SuggestService', [
     '$location', 'BasicService', 'appendTransform', '$http',
-    function($location, BasicService, appendTransform, $http) {
+    function ($location, BasicService, appendTransform, $http) {
         /**
          * @api {get} /api/suggest 联想结果(公司，人，投资机构)
          * @apiName suggest
@@ -79,7 +79,7 @@ angular.module('defaultApp.service').service('SuggestService', [
              */
             query: {
                 method: 'GET',
-                transformResponse: appendTransform($http.defaults.transformResponse, function(data) {
+                transformResponse: appendTransform($http.defaults.transformResponse, function (data) {
                     if (data.data && data.data.list) {
                         data.data.data = data.data.list;
                     }

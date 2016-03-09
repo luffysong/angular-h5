@@ -5,16 +5,16 @@
 var angular = require('angular');
 
 angular.module('defaultApp.directive').directive('baiduShare', [
-    function() {
+    function () {
         return {
             restrict: 'AE',
             scope:{
                 shareDetail:'=baiduShare',
                 shareWay:'@shareWay'
             },
-            link: function(scope, element) {
+            link: function (scope, element) {
                 var href = '';
-                scope.$watch('shareDetail', function(from) {
+                scope.$watch('shareDetail', function (from) {
                     if (!from) {
                         return;
                     }

@@ -4,13 +4,13 @@
 
 var angular = require('angular');
 angular.module('defaultApp.controller').controller('CompanyQichachaController',
-    function($scope, $location, $stateParams, $state, CompanyService) {
+    function ($scope, $location, $stateParams, $state, CompanyService) {
         $scope.companyId = $stateParams.id;
         $scope.fullCapital = true;
         var QI_CHA_CHA = 'http://open.qichacha.com/open/company?&from=36kr&key=';
         CompanyService.qichacha.get({
                 id:$scope.companyId
-            }, function(data) {
+            }, function (data) {
                 setQichacha(data);
             });
 

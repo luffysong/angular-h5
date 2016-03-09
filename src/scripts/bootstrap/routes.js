@@ -1,6 +1,6 @@
 
 var angular = require('angular');
-angular.module('defaultApp').config(function($locationProvider, $stateProvider, $urlRouterProvider, $provide, $sceDelegateProvider) {
+angular.module('defaultApp').config(function ($locationProvider, $stateProvider, $urlRouterProvider, $provide, $sceDelegateProvider) {
 
     $sceDelegateProvider.resourceUrlWhitelist([
         'self',
@@ -9,6 +9,10 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
     $urlRouterProvider.otherwise('/404');
 
     $locationProvider.html5Mode(false);
+
+    var RONG_HOST = projectEnvConfig.rongHost;
+
+    var PC_BASE_URL = '//' + RONG_HOST + '/';
 
     // 公司详情页
     $stateProvider.state('companyDetail', {
@@ -111,6 +115,31 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
                 only: ['valid'],
             },
         },
+    });
+
+    //极速融资产品化
+    $stateProvider.state('extreme', {
+        url: '/extreme',
+        abstract: true,
+        template: '<div ui-view></div>'
+    });
+
+    $stateProvider.state('extreme.join', {
+        url: '/join/{id}',
+        controller: 'ExtremeIndexController',
+        templateUrl: 'templates/extreme/investor-join.html',
+        onEnter: function (DeviceService, $stateParams) {
+            document.title = '极速融资2.0|投资人报名';
+            if (!DeviceService.isMobile()) {
+                location.href = PC_BASE_URL + 'extreme/join/' + $stateParams.id;
+            }
+        },
+
+        data: {
+            permissions: {
+                only: ['valid']
+            }
+        }
     });
 
     // 我要融资-提交成功

@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.service').service('LoginService',
-    function(BasicService) {
+    function (BasicService) {
 
         var service = BasicService('https://' + projectEnvConfig.passportHost + '/:action/:sub/:sub_action', {
 

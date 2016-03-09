@@ -1,8 +1,35 @@
 {
-	"preset" : "airbnb",
-	"validateIndentation" : 4,
-    "requireTrailingComma" : false,
-	"safeContextKeyword":["_this","self"],
-    "requireCamelCaseOrUpperCaseIdentifiers": {"ignoreProperties": true, "strict": false},
-    "excludeFiles":["**/dictionary**"]
+    "preset": "./airbnb.json",
+    "validateIndentation": 4,
+    "requireTrailingComma": false,
+    "requireDollarBeforejQueryAssignment": false,
+    "safeContextKeyword": [
+        "_this",
+        "self"
+    ],
+    "requireCurlyBraces": {
+        "keywords": [
+            "if",
+            "else",
+            "for",
+            "while",
+            "do",
+            "try",
+            "catch"
+        ],
+        "allExcept": [
+            "return"
+        ]
+    },
+    "requireCamelCaseOrUpperCaseIdentifiers": {
+        "ignoreProperties": true,
+        "strict": false
+    },
+    "excludeFiles": [
+        "**/dictionary**",
+        "**/syndicates**"
+    ],
+    "maximumLineLength": 1000
+
+
 }

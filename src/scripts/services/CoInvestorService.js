@@ -6,7 +6,7 @@
 var angular = require('angular');
 
 angular.module('defaultApp.service').service('CoInvestorService',
-    function($location, BasicService, appendTransform, $http) {
+    function ($location, BasicService, appendTransform, $http) {
         var service = BasicService('/api/p/co-investor/:uid/:obj/:oid', {
         }, {
             obj: [
@@ -16,11 +16,11 @@ angular.module('defaultApp.service').service('CoInvestorService',
             'my-financing': {
                 query: {
                     method: 'GET',
-                    transformResponse:appendTransform($http.defaults.transformResponse, function(data) {
+                    transformResponse:appendTransform($http.defaults.transformResponse, function (data) {
                         var res = data;
                         try {
                             var list = res.data.data;
-                            list.forEach(function(item) {
+                            list.forEach(function (item) {
                                 if (!item || !item.financing) {
                                     return;
                                 }
@@ -51,7 +51,7 @@ angular.module('defaultApp.service').service('CoInvestorService',
             var keys = Object.keys(types);
             var investor = {};
 
-            keys.forEach(function(key) {
+            keys.forEach(function (key) {
                 if (item[key]) {
                     investor.type = types[key];
                     angular.extend(investor, item[key]);

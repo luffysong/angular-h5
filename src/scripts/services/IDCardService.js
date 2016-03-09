@@ -5,9 +5,9 @@
 var angular = require('angular');
 
 angular.module('defaultApp.service').service('IDCardService', [
-    function() {
+    function () {
         var service = {
-            baseInfo:function() {
+            baseInfo:function () {
                 var info = {
                     isTrue: false, // 身份证号是否有效。默认为 false
                     year: null,// 出生年。默认为null
@@ -19,7 +19,7 @@ angular.module('defaultApp.service').service('IDCardService', [
                 return info;
             },
 
-            checkCard15:function(info, cardNo) {
+            checkCard15:function (info, cardNo) {
 
                 var year = cardNo.substring(6, 8);
                 var month = cardNo.substring(8, 10);
@@ -49,7 +49,7 @@ angular.module('defaultApp.service').service('IDCardService', [
                 return info;
             },
 
-            checkCard18:function(info, cardNo) {
+            checkCard18:function (info, cardNo) {
 
                 var year = cardNo.substring(6, 10);
                 var month = cardNo.substring(10, 12);
@@ -103,7 +103,7 @@ angular.module('defaultApp.service').service('IDCardService', [
 
             },
 
-            getIdCardInfo:function(cardNo) {
+            getIdCardInfo:function (cardNo) {
 
                 var info = service.baseInfo();
 
