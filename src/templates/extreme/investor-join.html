@@ -1,9 +1,6 @@
 <div class="container extreme-join-wrapper">
     <article>
-        <header>
-            <!-- fixme 请加入banner图 -->
-            <img ng-src="{{extreme.banner}}">
-        </header>
+        <header ng-style="{'background-image':getUrl(extreme.banner)}"></header>
         <section ng-show="!success">
             <div class="join-content-wrapper">
                 <p ng-bind-html="extreme.desc | SimpleRender"></p>

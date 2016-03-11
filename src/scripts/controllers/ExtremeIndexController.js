@@ -21,7 +21,12 @@ angular.module('defaultApp.controller').controller('ExtremeIndexController',
             $scope.uid = UserService.getUID();
             $scope.arrayLimit = [1, 2, 3, 4, 5];
             $scope.saveText  = '提交报名信息';
+            $scope.getUrl = getUrl;
             openInvestorValidate();
+        }
+
+        function getUrl(src) {
+            return 'url(' + src + ')';
         }
 
         function initWeixin() {
