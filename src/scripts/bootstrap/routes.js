@@ -128,16 +128,11 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url: '/join/{id}',
         controller: 'ExtremeIndexController',
         templateUrl: 'templates/extreme/investor-join.html',
-        onEnter: function (DeviceService, $stateParams) {
+        onEnter: function (DeviceService, $stateParams, UserService) {
+            UserService.ensureValid();
             document.title = '极速融资2.0|投资人报名';
             if (!DeviceService.isMobile()) {
                 location.href = PC_BASE_URL + 'extreme/join/' + $stateParams.id;
-            }
-        },
-
-        data: {
-            permissions: {
-                only: ['valid']
             }
         }
     });
