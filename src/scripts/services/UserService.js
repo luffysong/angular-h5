@@ -6,8 +6,8 @@
 var angular = require('angular');
 
 angular.module('defaultApp.service').service('UserService', [
-    '$location', 'BasicService', 'dateFilter', 'appendTransform', '$http', '$cookies', '$stateParams',
-    function ($location, BasicService, dateFilter, appendTransform, $http, $cookies, $stateParams) {
+    '$location', 'BasicService', 'dateFilter', 'appendTransform', '$http', '$cookies', '$stateParams', '$state',
+    function ($location, BasicService, dateFilter, appendTransform, $http, $cookies, $stateParams, $state) {
         var service = BasicService('/api/user/:id/:sub/:subid', {
             save: {
                 method: 'POST',
@@ -374,6 +374,45 @@ angular.module('defaultApp.service').service('UserService', [
             return $cookies.kr_plus_id;
 
             //return 115;
+        };
+
+        service.ensureLogin = function () {
+            if (!$cookies.kr_plus_id) {
+                setTimeout(function () {
+                    location.href = '/user/login?from=' + encodeURIComponent(location.href);
+                }, 300);
+
+                return false;
+            }
+
+            return true;
+        };
+
+        service.ensureValid = function () {
+            if (!this.ensureLogin()) {
+                return false;
+            }
+
+            this.isProfileValid(function (valid) {
+                if (valid) {
+                    return true;
+                } else {
+
+                    var href = location.href;
+                    var type;
+                    var   from;
+                    if (href.indexOf('#/investor/apply') !== -1) {
+                        type = 'investor_apply';
+                        from = '#/investor/apply';
+                    }else {
+                        type = 'other';
+                        from = href;
+                    }
+
+                    $state.go('guide.welcome', { from:encodeURIComponent(from), type:type });
+                    return false;
+                }
+            });
         };
 
         service.isProfileValid = function (callback) {
