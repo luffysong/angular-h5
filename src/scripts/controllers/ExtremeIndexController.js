@@ -39,14 +39,20 @@ angular.module('defaultApp.controller').controller('ExtremeIndexController',
         }
 
         function openInvestorValidate() {
-            UserService.investorType(function (investorType) {
-                if (parseInt(investorType) === INVESTOR_TYPE.NORMAL) {
-                    $modal.open({
-                        templateUrl: 'templates/extreme/pop-investor-guide.html',
-                        windowClass: 'pop-investor-validate',
-                        backdrop: 'static'
-                    });
+            UserService.ensureValid(function (valid) {
+                if (!valid) {
+                    return;
                 }
+
+                UserService.investorType(function (investorType) {
+                    if (parseInt(investorType) === INVESTOR_TYPE.NORMAL) {
+                        $modal.open({
+                            templateUrl: 'templates/extreme/pop-investor-guide.html',
+                            windowClass: 'pop-investor-validate',
+                            backdrop: 'static'
+                        });
+                    }
+                });
             });
 
         }
@@ -123,4 +129,3 @@ angular.module('defaultApp.controller').controller('ExtremeIndexController',
             }));
         }
     });
-

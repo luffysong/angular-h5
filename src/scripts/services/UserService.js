@@ -388,12 +388,13 @@ angular.module('defaultApp.service').service('UserService', [
             return true;
         };
 
-        service.ensureValid = function () {
+        service.ensureValid = function (callback) {
             if (!this.ensureLogin()) {
                 return false;
             }
 
             this.isProfileValid(function (valid) {
+                callback(valid);
                 if (valid) {
                     return true;
                 } else {
