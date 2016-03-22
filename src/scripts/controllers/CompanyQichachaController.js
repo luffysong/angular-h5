@@ -7,7 +7,7 @@ angular.module('defaultApp.controller').controller('CompanyQichachaController',
     function ($scope, $location, $stateParams, $state, CompanyService) {
         $scope.companyId = $stateParams.id;
         $scope.fullCapital = true;
-        var QI_CHA_CHA = 'http://open.qichacha.com/open/company?&from=36kr&key=';
+        var QI_CHA_CHA = 'http://www.qixin.com/company/';
         CompanyService.qichacha.get({
                 id:$scope.companyId
             }, function (data) {
@@ -29,7 +29,7 @@ angular.module('defaultApp.controller').controller('CompanyQichachaController',
             }];
 
         function setQichacha(data) {
-                $scope.moreHref = QI_CHA_CHA + data.Name;
+                $scope.moreHref = QI_CHA_CHA + data.id + '?from=36kr';
                 $scope.qichachaList = [];
                 for (var i = 0, l = meta.length; i < l; i++) {
                     var pair = meta[i];
@@ -40,4 +40,3 @@ angular.module('defaultApp.controller').controller('CompanyQichachaController',
                 }
             }
     });
-
