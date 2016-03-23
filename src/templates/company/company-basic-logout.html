@@ -29,7 +29,7 @@
 
         <div class="basic-login">
             <p class="access">
-            <span ng-bind="company.value.statistics.accessCount" class="count"></span>人已查阅过该公司的全部信息
+            <span ng-bind="viewCount || 0" class="count"></span>人已查阅过该公司的全部信息
             </p>
             <p class="desc">立即加入36氪，追踪创业公司最新动态，获取创业最新动向，联络更多的创业者。</p>
             <div class="login" login-btn>

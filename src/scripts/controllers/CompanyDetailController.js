@@ -61,6 +61,16 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
 
         $scope.getUISref = getUISref;
 
+        addPv();
+        function addPv() {
+            CompanyService.update({
+                id: $stateParams.id,
+                sub: 'view'
+            }, {}, function (data) {
+                $scope.viewCount = data.value;
+            });
+        }
+
         $scope.isOrganization = function (type) {
             return type === INVESTOR_TYPE.ORGANIZATION;
         };
