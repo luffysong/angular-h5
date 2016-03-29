@@ -570,6 +570,15 @@ angular.module('defaultApp.service').service('UserService', [
             });
         };
 
+        //更新用户
+        service.getInvestCases = function (data, callback, error) {
+            $http.get('/api/user/' + data + '/past-investment').success(function (response) {
+                callback && callback(response);
+            }).catch(function (err) {
+                error && error(err);
+            });
+        };
+
         return service;
     },
 ]);

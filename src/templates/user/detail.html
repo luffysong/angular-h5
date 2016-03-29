@@ -53,16 +53,16 @@
 		<ul class="list-item">
 			<!-- <li ng-repeat="invest_case in user.invest_cases | limitTo: user.investCasesLimit"> -->
 			<li ng-repeat="invest_case in user.invest_cases">
-				<a class="logo" ui-sref="company_detail({id: invest_case.company.id})">
-					<img class="img-rounded" ng-src="{{invest_case.company.logo | image:60:'logo'}}" alt="" width="60">
+				<a class="logo" ui-sref="company_detail({id: invest_case.cid})">
+					<img class="img-rounded" ng-src="{{invest_case.logo | image:60:'logo'}}" alt="" width="60">
 				</a>
 				<div class="info">
-					<a ui-sref="company_detail({id: invest_case.company.id})">{{invest_case.company.name | substr: 10}}</a>
+					<a ui-sref="company_detail({id: invest_case.cid})">{{invest_case.name | substr: 10}}</a>
 					<span class="confirm-status" ng-show="invest_case.status!='CONFIRMED'">待确认</span>
-					<p class="one-line">{{invest_case.company.brief}}</p>
-					<div class="clearfix">
-						<span class="pull-left">{{invest_case.phase || '未知轮次' | dict_FinancePhase}} <i class="time">（{{invest_case.financeDate|date:'yyyy.MM'}}）</i></span>
-						<span class="pull-right" ng-if="invest_case.financeValue">{{invest_case.financeValueUnit | moneyUnit}} <i class="money">{{invest_case.financeValue | wanText}}</i></span>
+					<p class="one-line">{{invest_case.brief}}</p>
+					<div class="clearfix" ng-repeat="invest in invest_case.details">
+						<span class="pull-left">{{invest.phase || '未知轮次' | dict_FinancePhase}} <i class="time">（{{invest.investDate|date:'yyyy.MM'}}）</i></span>
+						<span class="pull-right" ng-if="invest.financeAmount">{{invest.financeAmountUnit | moneyUnit}} <i class="money">{{invest.financeAmount | wanText}}</i></span>
 					</div>
 				</div>
 			</li>
