@@ -44,9 +44,9 @@ angular.module('defaultApp.controller').controller('UserDetailController', [
         });
 
         //投资信息，投资经历
-        UserService.finacing.query({
-            id: $stateParams.id
-        }, function (response) {
+        UserService.getInvestCases(
+           $stateParams.id,
+        function (response) {
             $scope.user.invest_cases = response.data;
         });
 

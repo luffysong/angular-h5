@@ -348,6 +348,11 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
                     $scope.notFunding = true;
                 }
 
+                if ($scope.capitalDetail.isReplaceDefault) {
+                    var val = $scope.capitalDetail.faRecommendedText;
+                    $scope.capitalDetail.faRecommendedText = val.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/\n/g, '<br/>');
+                }
+
                 callback && callback();
             }, function (data) {
 
