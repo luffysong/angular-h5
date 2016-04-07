@@ -75,17 +75,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         },
     });
 
-    //$stateProvider.state('investorValidateApply_v2', {
-    //    url: '/investor/apply_v2',
-    //    templateUrl: 'templates/investor/apply_v2.html',
-    //    controller: 'InvestorValidateApplyV2Controller',
-    //    data:{
-    //        permissions: {
-    //            only: ['login', 'valid'],
-    //        },
-    //    },
-    //});
-
     /*投资人认证申请*/
     $stateProvider.state('investorValidateApply', {
         url: '/investor/apply',
@@ -93,7 +82,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controller: 'InvestorValidateApplyController',
         data:{
             permissions: {
-                only: ['login', 'valid'],
+                only: ['login'],
             },
         },
     });
