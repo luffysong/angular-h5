@@ -51,7 +51,7 @@ angular.module('defaultApp')
         });
 
         $rootScope.$on('$locationChangeStart', function () {
-            if (/36kr/.test(navigator.userAgent) && !/android/.test(navigator.userAgent)) {
+            if (/36kr\-iOS/.test(navigator.userAgent) && !/android/.test(navigator.userAgent)) {
                 iframe[0].src = 'kr36://hashchange?_=' + $.now();
             }
 

@@ -21,15 +21,6 @@ angular.module('defaultApp.service').service('OrganizationService', [
         }, {
 
         });
-
-        //service._data = [
-        //    //TODO: 把机构数据写死在这里
-        //];
-        //
-        //service.query = function(){
-        //    return service._data;
-        //};
-
         return service;
     }
 ]);

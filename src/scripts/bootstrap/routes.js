@@ -82,7 +82,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controller: 'InvestorValidateApplyController',
         data:{
             permissions: {
-                only: ['valid'],
+                only: ['login'],
             },
         },
     });
