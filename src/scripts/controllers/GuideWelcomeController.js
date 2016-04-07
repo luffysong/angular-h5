@@ -15,6 +15,15 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
         $scope.userId = UserService.getUID();
         $scope.sourceType = $stateParams.type || 'other';
 
+        // 头像上传
+        $scope.intro = {};
+        $scope.intro.value = {
+            intro:'',
+            pictures:''
+        };
+
+        $scope.hasClick = false;
+
         UserService.basic.get({
             id: $scope.userId
         }, function (data) {
@@ -25,6 +34,8 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             angular.extend($scope.user, angular.copy(data));
 
             if (data.email && data.phone && data.avatar && data.name) {
+                console.log(1);
+
                 location.href = '//' + projectEnvConfig.rongHost;
             }
 
@@ -124,13 +135,6 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             });
         };
 
-        // 头像上传
-        $scope.intro = {};
-        $scope.intro.value = {
-            intro:'',
-            pictures:''
-        };
-
         //android客户端
         $scope.androidUpload = AndroidUploadService.setClick(function (filename) {
             $scope.$apply(function () {
@@ -208,7 +212,37 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
             }
         };
 
-        $scope.hasClick = false;
+        LoginService.getCountryDict({}, function (data) {
+            $scope.countryDict = data;
+            $scope.countryDict.forEach(function (item) {
+                if (item.cc === '86' || item.cc === 86) {
+                    $scope.user.cc = item;
+                }
+            });
+        });
+
+        /**
+         * 修改国家
+         */
+        $scope.changeCountry = function (usernameModel) {
+            $scope.user.phone = '';
+            usernameModel.$setPristine();
+        };
+
+        /**
+         * 获取要发送的用户名
+         */
+        $scope.getPhoneWithCountryCode = function () {
+            if (!$scope.user.phone) {
+                return;
+            }
+
+            if ($scope.user.cc.cc === '86' || $scope.user.cc.cc === 86) {
+                return $scope.user.phone;
+            }
+
+            return [$scope.user.cc.cc, $scope.user.phone].join('+');
+        };
 
         $scope.submitForm = function (e) {
             e && e.preventDefault();
@@ -251,38 +285,5 @@ angular.module('defaultApp.controller').controller('GuideWelcomeController',
                 // ErrorService.alert(err);
             });
         };
-
-        LoginService.getCountryDict({}, function (data) {
-            $scope.countryDict = data;
-            $scope.countryDict.forEach(function (item) {
-                if (item.cc === '86' || item.cc === 86) {
-                    $scope.user.cc = item;
-                }
-            });
-        });
-
-        /**
-         * 修改国家
-         */
-        $scope.changeCountry = function (usernameModel) {
-            $scope.user.phone = '';
-            usernameModel.$setPristine();
-        };
-
-        /**
-         * 获取要发送的用户名
-         */
-        $scope.getPhoneWithCountryCode = function () {
-            if (!$scope.user.phone) {
-                return;
-            }
-
-            if ($scope.user.cc.cc === '86' || $scope.user.cc.cc === 86) {
-                return $scope.user.phone;
-            }
-
-            return [$scope.user.cc.cc, $scope.user.phone].join('+');
-        };
-
     }
 );

@@ -1,5 +1,109 @@
-.investor-validate-apply {
-  .ac-container {
+.form-container{
+    background: #fff;
+}
+.brief {
+    height: 75px;
+    .col {
+        height: 100%;
+        width: 200px;
+        textarea {
+            width: 100%;
+            height: 100%;
+            outline: 0;
+            border: 0;
+            resize: none;
+        }
+    }
+}
+.investor-amount{
+    width: 43px;
+    border: 0;
+    text-align: right;
+}
+
+.upload-pictures{
+    line-height: 65px;
+}
+.col-max {
+    width: 100%;
+    color: #333;
+    padding-left: 80px;
+    input,
+    textarea {
+        width: 100%;
+        border: 0;
+        resize: none;
+        text-align: right;
+    }
+    .pic-wrapper {
+        float: right;
+        width: 65px;
+        height: 65px;
+        overflow: hidden;
+        position: relative;
+        background: no-repeat center center;
+        background-size: cover;
+
+        &.pic-input {
+            position: relative;
+            color: #c4c5c7;
+            background: #f3f3f3;
+            font-size: 12px;
+            &:before{
+                content: "JPG/PNG 小于5M";
+                .middel-center;
+                line-height: 1.5;
+            }
+        }
+        .stick {
+            width:100%;
+            height:100%;
+            background: #53aeed;
+            position: absolute;
+            bottom:0;
+            left:0;
+            .transition(all 0.8s);
+        }
+        &.progress {
+            border:solid 1px #eee;
+            box-sizing: border-box;
+            background: #f3f3f3;
+        }
+    }
+}
+
+.col-flex {
+    .item {
+        display: inline-block;
+        width: 33.3%;
+        text-align: center;
+        height: 30px;
+        padding: 0 6px;
+        line-height: 35px;
+        margin: 9px 0;
+        span{
+            width: 100%;
+            display: inline-block;
+            border: 1px solid #f4f4f4;
+            color: #5a626d;
+        }
+        &.active span {
+            border: 1px solid @theme-color;
+            background: @theme-color;
+            color: @base-white;
+        }
+    }
+}
+.col {
+    float: left;
+    width: 160px;
+    input,textarea {
+        border: 0;
+        outline: 0;
+    }
+}
+
+.ac-container {
     background-color: #f7f7f7 !important;
     border: 1px solid #d9d9d9;
     font-size: 14px;
@@ -10,390 +114,106 @@
     position:absolute;
 
     img {
-      width: 25px;
-      height: 25px;
-      line-height: 24px;
-      border-radius: 3px;
-      margin: 3px 5px 0;
-      overflow: hidden;
-      float: left;
+        width: 25px;
+        height: 25px;
+        line-height: 24px;
+        border-radius: 3px;
+        margin: 3px 5px 0;
+        overflow: hidden;
+        float: left;
     }
-
     a {
-      padding: 0 !important;
-      background-color: #f7f7f7;
-      position: relative;
-      z-index: 100;
-      &:hover {
-        background-color: #bfbfbf;
-      }
+        padding: 0 !important;
+        background-color: #f7f7f7;
+        position: relative;
+        z-index: 100;
+        &:hover {
+            background-color: #bfbfbf;
+        }
 
-      .newCo {
-        padding: 0 0 0 25px;
-        background-color: #ccc;
-        color: #f7f7f7;
-      }
+        .newCo {
+            padding: 0 0 0 25px;
+            background-color: #ccc;
+            color: #f7f7f7;
+        }
     }
 
     &::before {
-      display: block;
-      width: 100%;
-      padding: 0 0 0 35px;
-      line-height: 35px;
-      content: '已出现公司直接选中，没有则选择创建';
-      color: #a0a0a0;
-      background-color: #f7f7f7;
+        display: block;
+        width: 100%;
+        padding-left: 25px;
+        line-height: 35px;
+        content: '已出现公司直接选中，没有则选择创建';
+        color: #a0a0a0;
+        background-color: #f7f7f7;
     }
     .ac-menu {
-      background-color: #f7f7f7;
-      border: none 0;
-      box-shadow: none;
-
-      li {
+        background-color: #f7f7f7;
         border: none 0;
+        box-shadow: none;
+
+        li {
+            border: none 0;
         &:hover {
-          background-color: #bfbfbf;
-          color: #fff;
+            background-color: #bfbfbf;
+            color: #fff;
         }
         &:active {
-          background-color: #bfbfbf;
-          color: #fff;
+            background-color: #bfbfbf;
+            color: #fff;
         }
-
         .coList {
-          margin: 0 0 0 25px;
-          border-top: 1px solid #dedede;
+            margin: 0 0 0 25px;
+            border-top: 1px solid #dedede;
         }
 
-      }
-
-    }
-  }
-    .title{
-         background-color:rgb(247, 247, 247);
-         height:40px;
-         line-height: 50px;
-         color:#686868;
-         margin:0;
-         padding:0 10px;
-         border:none;
-		 font-size:16px;
-    }
-
-    .welcome-form {
-		.focus-area {
-			height:35px;
-			.label-control{
-				.tip{
-					margin-left:0;
-				}
-			}
-		}
-        .basic-info {
-			font-size:14px;
-            &:first-of-type {
-                border-top:none;
-                padding:0 10px;
-            }
-        }
-    }
-    .welcome-form .col-flex .stage.active {
-        color:#008df2;
-    }
-    .basic-info {
-        border-top:1px solid #ddd;
-        border-collapse: collapse;
-
-    }
-    .s-block{
-        height:auto;
-        overflow:hidden;
-        padding:5px 0;
-        .form-group{
-            float:left;
-            clear:both;
-            display:block;
-            margin-bottom:10px;
-            &:last-of-type{
-                 margin-bottom:0;
-            }
-        }
-
-    }
-    .border-none{
-        border-top:0;
-        border-right:0;
-        border-bottom:0;
-        border-left:0;
-    }
-    .form-group {
-        clear:both;
-		&.brief{
-			height:80px;
-			textarea{
-				height:45px;
-			}
-		}
-        &.m-options {
-			padding-bottom:0px;
-            .s-list{
-                clear:both;
-                display:block;
-                list-style-type:none;
-                padding:5px 0;
-                .s-i{
-                    clear:both;
-                    .i-header{
-                        margin:5px 0;
-                        .radio {
-							margin-left:5px;
-                            label {
-                                text-align: right;
-                                input {
-                                    width:auto;
-									height:auto;
-                                }
-                            }
-                            .active {
-                                color:#008df2;
-                            }
-
-                        }
-                    }
-                    .i-body{
-					padding-bottom:10px;
-                        .content-list{
-                            list-style-type:none;
-                            clear:both;
-                            li{
-                                margin-top:5px;
-                                position:relative;
-                                .title,
-                                .main{
-                                    display:block;
-                                }
-                                .title{
-                                    height:30px;
-                                    width:70px;
-                                    padding:0;
-                                    line-height:30px;
-                                    background-color:transparent;
-                                    vertical-align:top;
-									font-size:14px;
-									margin-left:5px;
-                                }
-                                .main{
-                                    margin-left:5px;
-                                    li{
-                                        display:inline-block;
-                                    }
-                                    select{
-                                        width:150px;
-                                        height:30px;
-                                        outline:none;
-                                        border:1px solid #e4e4e4;
-                                        background-color:#fff;
-										&.w70{
-											width:70px;
-										}
-                                    }
-                                    input[type=text] {
-                                        border:1px solid #e4e4e4;
-                                        width:200px;
-                                        height:30px;
-                                        text-indent:10px;
-                                        border-radius:2px;
-                                    }
-                                    textarea{
-                                        height:80px;
-                                        border:1px solid #e4e4e4;
-                                        width:200px;
-                                        border-radius:2px;
-                                        padding: 5px 10px;
-                                    }
-                                }
-                            }
-                            .logo {
-                                .upload-b {
-                                    overflow: hidden;
-                                    display: block;
-                                    width: 70px;
-                                    height: 70px;
-                                    overflow: hidden;
-                                    border-radius: 50%;
-                                    position: relative;
-                                    border: 1px solid #f5f5f5;
-
-                                    .filewrap {
-                                        display: block;
-                                        position: absolute;
-                                        bottom: 0;
-                                        height: 20px;
-                                        background-color: rgba(0, 0, 0, 0.4);
-                                        text-align: center;
-                                        color: #ddd;
-                                        width: 70px;
-
-                                        .input-file {
-                                            outline: none;
-                                            opacity: 0;
-                                            left: -72px;
-                                            position: absolute;
-                                            width: 210px;
-                                            height: 60px;
-                                            top: -47px;
-
-                                            &:focus {
-                                                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-                                                tap-highlight-color: rgba(0, 0, 0, 0);
-                                            }
-
-                                        }
-                                    }
-                                }
-                                .pic {
-                                    float: left;
-                                    margin-right: 10px;
-                                }
-                                p {
-                                    overflow: hidden;
-                                    margin: 0 0 0 10px;
-                                    color: @color_gray;
-                                }
-                            }
-                        }
-
-                    }
-                }
-            }
-        }
-        .label-control{
-			margin-right:0px;
-            .box-content {
-                text-align:left;
-                display:inline-block;
-            }
-        }
-        .col-max{
-            clear:both;
-            display:block;
-			margin-left:5px;
-        }
-        &.upload-pictures {
-            border-bottom: none;
-			.intro-pic-list{
-				margin-bottom:15px;
-			}
-			.col-max {
-				width:90%;
-				p{
-					color:#999;
-				}
-			}
-        }
-        .btn-auth {
-            border:none;
-        }
-        .form-control,
-        textarea {
-            color:#333;
-            &::-webkit-input-placeholder
-            {
-                color:#999;
-            }
-            &:-moz-placeholder{
-                 color:#999;
-            }
-            &::-moz-placeholder{
-                 color:#999;
-            }
-            &:-ms-input-placeholder{
-                 color:#999;
-            }
-
-        }
-    }
-
-    .form-group.invest-money{
-        padding-bottom:0;
-        .label-control{
-			.box-content{
-				padding-right:0;
-			}
-            .tip {
-                    font-size: 13px;
-                    color: #B6B6B6;
-					margin-left:-15px;
-            }
-        }
-        .form-group-box {
-            padding:5px 0;
-            .item {
-                padding:8px 0;
-                border-bottom:1px solid #ddd;
-                margin-left:5px;
-                &:last-of-type {
-                    border-bottom:none;
-                }
-                .label-control{
-                    .box-content {
-                        width:35px;
-                        text-align: right;
-                        padding-right:53px;
-                        min-width:35px;
-                        display:inline-block;
-                    }
-
-                }
-                .row-1 {
-                    overflow: hidden;
-                    height:auto;
-                    .ml-10 {
-                        clear:both;
-                        margin-left:0;
-                        overflow: hidden;
-                        height:auto;
-                        margin-top:10px;
-                        &:first-of-type {
-                            margin-top:0;
-                        }
-                        .icon-zhi {
-                            display: inline-block;
-                            padding:0 10px;
-                        }
-                    }
-                    input{
-                        text-align: left;
-                    }
-                }
-            }
-        }
-        .label-control{
-            width:auto;
-            text-align: right;
-            .box-content {
-                min-width:100px;
-                text-align: right;
-                display:inline-block;
-                padding-right:15px;
-
-                *{
-                    display:inline-block;
-                }
-            }
-        }
-
-    }
-    .brief {
-        border-bottom:1px solid #ddd !important;
-    }
-    .pic-list {
-        input {
-            margin:0;
         }
     }
 }
+.title{
+     background-color:rgb(247, 247, 247);
+     height:40px;
+     line-height: 50px;
+     color:#686868;
+     margin:0;
+     padding:0 10px;
+     border:none;
+     font-size:16px;
+}
 
+.welcome-form {
+    .focus-area {
+        height:35px;
+        .tip{
+            margin-left:0;
+        }
+    }
+}
+.basic-info {
+    font-size: 15px;
+    line-height: 20px;
+    color: @font-color-gdark;
+    border-top: none;
+    padding: 10px;
+    background: #f7f7f7;
+    text-align: center;
+}
+.border-none{
+    border-top:0;
+    border-right:0;
+    border-bottom:0;
+    border-left:0;
+}
+.pic-list {
+    input {
+        margin:0;
+    }
+}
+
+.form-submit{
+    padding: 30px 0;
+    background: #f7f7f7;
+}
 
 /*审核中  审核成功*/
 .investor-apply-alter,
@@ -422,7 +242,6 @@
             background:transparent url('images/investorValidate/icon-1.png') no-repeat 0 0 ;
             background-size:contain;
         }
-
         label{
             color:rgb(244, 159, 53);
             font-size:17px;
@@ -445,34 +264,32 @@
 
 /*申请成功*/
 .investor-apply-success {
-    .jumbotron {
-        .btn-link {
-            color:rgb(191, 191, 191);
-            font-size:12px;
-            text-decoration:underline;
-            padding:0;
-            &:hover {
-                text-decoration: underline;
-            }
+    .btn-link {
+        color:rgb(191, 191, 191);
+        font-size:12px;
+        text-decoration:underline;
+        padding:0;
+        &:hover {
+            text-decoration: underline;
         }
-        label{
-            color:rgb(244, 159, 53);
-            font-size:17px;
-            display: block;
-            margin:20px 0 5px 0;
-            .icon-tou {
-                height:25px;
-                width:25px;
-                border-radius: 25px;
-                font-size:14px;
-                text-align: center;
-                font-weight: bold;
-                vertical-align: middle;
-                line-height: 25px;
-                background-color:rgb(229, 161, 98);
-                color:rgb(252, 241, 231);
-                display:inline-block;
-            }
+    }
+    label{
+        color:rgb(244, 159, 53);
+        font-size:17px;
+        display: block;
+        margin:20px 0 5px 0;
+        .icon-tou {
+            height:25px;
+            width:25px;
+            border-radius: 25px;
+            font-size:14px;
+            text-align: center;
+            font-weight: bold;
+            vertical-align: middle;
+            line-height: 25px;
+            background-color:rgb(229, 161, 98);
+            color:rgb(252, 241, 231);
+            display:inline-block;
         }
     }
 }

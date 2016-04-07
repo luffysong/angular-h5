@@ -422,7 +422,7 @@ angular.module('defaultApp.service').service('UserService', [
                 return;
             }
 
-            service.basic.get({
+            return service.basic.get({
                 id: service.getUID(),
             }, function (data) {
                 if (data.email && data.phone && data.avatar && data.name) {
@@ -445,7 +445,7 @@ angular.module('defaultApp.service').service('UserService', [
                 return;
             }
 
-            service.basic.get({
+            return service.basic.get({
                 id: service.getUID(),
             }, function (data) {
                 if (!data.investorType) {
@@ -470,7 +470,7 @@ angular.module('defaultApp.service').service('UserService', [
                 return;
             }
 
-            service.basic.get({
+            return service.basic.get({
                 id: service.getUID(),
             }, function (data) {
                 localStorage.setItem('isEmailActivate', data.isEmailActivate);
@@ -490,7 +490,7 @@ angular.module('defaultApp.service').service('UserService', [
                 return;
             }
 
-            service.basic.get({
+            return service.basic.get({
                 id: service.getUID(),
             }, function (data) {
                 if (!data.email) {
@@ -514,7 +514,7 @@ angular.module('defaultApp.service').service('UserService', [
                 return;
             }
 
-            service.basic.get({
+            return service.basic.get({
                 id: service.getUID(),
             }, function (data) {
                 if (!data.phone) {
@@ -527,7 +527,7 @@ angular.module('defaultApp.service').service('UserService', [
         };
 
         service.getIdentity = function (callback) {
-            $http.get('/api/user/identity').success(function (data) {
+            return $http.get('/api/user/identity').success(function (data) {
                 callback && callback(data);
             }).catch(function (err) {
                 callback && callback(err);
@@ -536,7 +536,7 @@ angular.module('defaultApp.service').service('UserService', [
 
         //获取用户的在职公司工作经历
         service.getCurrentWorkCompanys = function (uid, callback, error) {
-            $http.get('/api/user/' + uid + '/cur_work?type=com').success(function (data) {
+            return $http.get('/api/user/' + uid + '/cur_work?type=com').success(function (data) {
                 callback && callback(data);
             }).catch(function (err) {
                 error && error(err);
@@ -545,7 +545,7 @@ angular.module('defaultApp.service').service('UserService', [
 
         //获取用户的在职机构工作经历
         service.getCurrentWorkOrganizations = function (uid, callback, error) {
-            $http.get('/api/user/' + uid + '/cur_work?type=org').success(function (data) {
+            return $http.get('/api/user/' + uid + '/cur_work?type=org').success(function (data) {
                 callback && callback(data);
             }).catch(function (err) {
                 error && error(err);
@@ -554,7 +554,7 @@ angular.module('defaultApp.service').service('UserService', [
 
         //新增用户任职经历
         service.addWorkExperience = function (data, callback, error) {
-            $http.post('/api/user/' + data.uid + '/work', data).success(function (response) {
+            return $http.post('/api/user/' + data.uid + '/work', data).success(function (response) {
                 callback && callback(response);
             }).catch(function (err) {
                 error && error(err);
@@ -563,7 +563,7 @@ angular.module('defaultApp.service').service('UserService', [
 
         //更新用户任职经历
         service.updateWorkExperience = function (data, callback, error) {
-            $http.put('/api/user/' + data.uid + '/work/' + data.id, data).success(function (response) {
+            return $http.put('/api/user/' + data.uid + '/work/' + data.id, data).success(function (response) {
                 callback && callback(response);
             }).catch(function (err) {
                 error && error(err);
@@ -578,6 +578,160 @@ angular.module('defaultApp.service').service('UserService', [
                 error && error(err);
             });
         };
+
+        //错误配置
+        service.errorGroup = [{
+            field: 'email',
+            define: [{
+                type: 'required',
+                msg: '请输入邮箱地址'
+            }, {
+                type: 'email',
+                msg: '请输入合法邮箱地址'
+            }, {
+                type: 'checked',
+                msg: '你输入的邮箱已被占用'
+            }]
+        }, {
+            field: 'smscode',
+            define: [{
+                type: 'required',
+                msg: '请输入验证码'
+            }]
+        }, {
+            field: 'phone',
+            define: [{
+                type: 'required',
+                msg: '请输入手机号码'
+            }, {
+                type: 'pattern',
+                msg: '请输入合法手机号码'
+            }, {
+                type: 'checked',
+                msg: '你输入的手机号已被占用'
+            }]
+        }, {
+            field: 'name',
+            define: [{
+                type: 'required',
+                msg: '请输入真实姓名'
+            }, {
+                type: 'pattern',
+                msg: '请输入真实姓名'
+            }]
+        }, {
+            field: 'avatar',
+            define: [{
+                type: 'size',
+                msg: '文件过大'
+            }, {
+                type: 'type',
+                msg: '请上传目前支持的格式'
+            }, {
+                type: 'required',
+                msg: '请上传您的头像'
+            }]
+        }];
+        service.investorErrorGroup = [{//todo check_this_error
+            field:'organizationWebsite',
+            define: [{
+                type: 'url',
+                msg: '请以http://开头'
+            }, {
+                type: 'urlbacklist',
+                msg: '所填网址无法作为公司独立网址'
+            }]
+        }, {//todo logoType && logoSize
+            field:'upload',
+            define: [{
+                type: 'uploadType',
+                msg: '请上传目前支持的格式'
+            }, {
+                type: 'uploadSize',
+                msg: '文件过大'
+            }]
+        }, {
+            field:'time',
+            define: [{
+                type: 'now',
+                msg: '任职的起始时间不能大于当前月'
+            }, {
+                type: 'time',
+                msg: '请选择任职时间'
+            }]
+        }, {
+            field:'position',
+            define: [{
+                type: 'required',
+                msg: '请选择职位'
+            }]
+        }, {
+            field:'companyName',
+            define: [{
+                type: 'required',
+                msg: '请输入公司简称'
+            }]
+        }, {
+            field:'organizationBrief',
+            define: [{
+                type: 'required',
+                msg: '请输入机构简介'
+            }, {
+                type: 'minlength',
+                msg: '机构简介必须大于十个字'
+            }]
+        }, {
+            field:'organizationName',
+            define: [{
+                type: 'required',
+                msg: '请输入机构简称'
+            }]
+        }, {
+            field:'investFrom',
+            define: [{
+                type: 'required',
+                msg: '请填写单笔可投额'
+            }]
+        }, {
+            field:'investTo',
+            define: [{
+                type: 'required',
+                msg: '请填写单笔可投额'
+            }, {
+                type: 'checked',
+                msg: '投资额下限不能大于上限值'
+            }]
+        }, {
+            field:'identity',
+            define: [{
+                type: 'required',
+                msg: '请选择投资身份'
+            }]
+        }, {
+            field:'stage',
+            define: [{
+                type: 'required',
+                msg: '请选择关注阶段'
+            }]
+        }, {
+            field:'industry',
+            define: [{
+                type: 'required',
+                msg: '请选择关注行业'
+            }]
+        }, {
+            field:'pictures',
+            define: [{
+                type: 'required',
+                msg: '请上传您的名片'
+            }]
+        }, {
+            field:'intro',
+            define: [{
+                type: 'required',
+                msg: '请输入一句话简介'
+            }]
+        }];
 
         return service;
     },

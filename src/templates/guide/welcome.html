@@ -1,97 +1,101 @@
 <div class="container">
-	<div class="welcome">
-		<div class="welcome-words">
-			<span>欢迎来到关于创业的真实社区</span>
-			<p>你在改变世界，我们让世界认识真实的你</p>
-		</div>
-		<form ng-submit="$event.preventDefault()"  action="" name="guideForm" >
-			<div class="form-horizontal welcome-form">
-				<div class="form-group upload-avatar">
-					<ul class="intro-pic-list no-p">
-                        <li class="pic-list" style="background-image: url({{user.avatar | image:70: 'avatar'}});">
-                        </li>
+    <div class="error-wrapper">
+        <!-- 自定义错误信息 -->
+        <div class="error"
+             ng-if="error.code">
+            <span>{{error.msg}}</span>
+        </div>
+        <div class="error"
+             ng-show="guideForm.name.$invalid && guideForm.name.$dirty">
+            <span ng-show="guideForm.name.$error.required || guideForm.name.$error.pattern">请输入真实姓名</span>
+        </div>
+        <div class="error"
+             ng-show="guideForm.email.$invalid && guideForm.email.$dirty">
+            <span ng-show="guideForm.email.$error.required">请输入邮箱地址</span>
+            <span ng-show="guideForm.email.$error.email">请输入合法邮箱地址</span>
+            <span ng-show="user.email && guideForm.email.$error.checked && !guideForm.email.$error.email">你输入的邮箱已被占用</span>
+        </div>
+        <div class="error"
+             ng-show="guideForm.phone.$invalid && guideForm.phone.$dirty">
+            <span ng-show="guideForm.phone.$error.required">请输入手机号码</span>
+            <span ng-show="guideForm.phone.$error.pattern">请输入合法手机号码</span>
+            <span ng-show="user.phone && guideForm.phone.$error.checked && !guideForm.phone.$error.pattern">你输入的手机号已被占用</span>
+        </div>
+    </div>
+    <div class="welcome">
+        <div class="welcome-words">
+            <span>欢迎来到关于创业的真实社区</span>
+            <p>你在改变世界，我们让世界认识真实的你</p>
+        </div>
+        <form class="form-container" name="guideForm"
+              ng-submit="$event.preventDefault()">
+            <div>
+                <div class="line upload-avatar">
+                    <ul class="intro-pic-list">
+                        <li class="pic-list" style="background-image: url({{user.avatar | image:70: 'avatar'}});"></li>
                         <li ng-show='!intro.uploading'>
-                            <span class="upload-b">
-                                <input type="file" name="addPic" class="input-file" ng-file-select
-                                       ng-file-change="imgFileSelected($files, $event)"
-                                       ng-multiple="false"
-                                       resetOnClick="true" accept="image/*"
-                                       ng-click="androidUpload($event)"
-                                    >
-                            </span>
+                            <input class="input-file" type="file" name="addPic" requried
+                                   ng-file-select
+                                   ng-file-change="imgFileSelected($files, $event)"
+                                   ng-multiple="false"
+                                   resetOnClick="true" accept="image/*"
+                                   ng-click="androidUpload($event)"
+                            >
                         </li>
                     </ul>
-					<label class="label-control avatar-label no-mr">真实头像</label>
-				</div>
-				<div class="form-group">
-					<label class="label-control">真实姓名</label>
-					<div class="control">
-						<input class="form-control" type="text" ng-model="user.name" name="name" maxlength="15" ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" required/>
-					</div>
-	                <div class="error-alert error user-name-error" ng-show="guideForm.name.$invalid && guideForm.name.$dirty">
-	                	<!-- <span>请输入真实姓名</span> -->
-	                    <span ng-show="guideForm.name.$error.required || guideForm.name.$error.pattern">请输入真实姓名</span>
-	                </div>
-				</div>
+                    <label class="avatar-label">真实头像</label>
+                </div>
+                <div class="line">
+                    <label class="label-control">真实姓名</label>
+                    <div class="control">
+                        <input class="form-control" type="text" ng-model="user.name" name="name" maxlength="15" ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" required/>
+                    </div>
+                </div>
 
-				<div class="form-group" ng-if="!user.hasEmail">
-					<label class="label-control">常用邮箱</label>
-					<div class="control">
-						<input class="form-control" type="email" ng-model="user.email" name="email" required/>
-					</div>
-		                <div class="error-alert error user-email-error" ng-show="guideForm.email.$invalid && guideForm.email.$dirty">
-		                    <span ng-show="guideForm.email.$error.required">请输入邮箱地址</span>
-		                    <span ng-show="guideForm.email.$error.email">请输入合法邮箱地址</span>
-		                    <span ng-show="user.email && guideForm.email.$error.checked && !guideForm.email.$error.email">你输入的邮箱已被占用</span>
-		                </div>
-				</div>
-				<div class="form-group" ng-if="!user.hasPhone">
-					<label class="label-control">选择国家</label>
-					<div class="control">
-						<select name="cc" ng-model="user.cc" class="form-control country"
-								ng-change="changeCountry(guideForm.phone)"
-								ng-options="item as (item.desc+' (+'+item.cc+')') for item in countryDict"></select>
-					</div>
-					<!--<div class="col">-->
-					<!--<a href="#" class="update-phone">修改手机号码</a>-->
-					<!--</div>-->
-				</div>
-	            <div class="form-group" ng-if="!user.hasPhone">
-	                <label class="label-control">手机号码</label>
-	                <div class="control">
-	                    <input class="form-control" type="text" ng-model="user.phone" name="phone" required ng-pattern="REGEXP.phone"/>
-	                </div>
-	                <div class="error-alert error user-phone-error" ng-show="guideForm.phone.$invalid && guideForm.phone.$dirty">
-	                    <span ng-show="guideForm.phone.$error.required">请输入手机号码</span>
-	                    <span ng-show="guideForm.phone.$error.pattern">请输入合法手机号码</span>
-	                    <span ng-show="user.phone && guideForm.phone.$error.checked && !guideForm.phone.$error.pattern">你输入的手机号已被占用</span>
-	                </div>
-	                <!--<div class="col">-->
-	                    <!--<a href="#" class="update-phone">修改手机号码</a>-->
-	                <!--</div>-->
-	            </div>
-				<div class="form-group" ng-if="!user.hasPhone">
-					<label class="label-control">验证码</label>
-					<div class="control validate-code">
-						<input class="form-control" type="text" ng-model="user.smscode" name="smscode" required/>
-					</div>
-					<a class="btn btn-linear get-code" href="javascript:void(0)" ng-disabled="wait" ng-if="wait">{{wait+'秒'}}</a>
-					<a class="btn btn-linear get-code btn-thin btn-sms"
-					   href="javascript:void(0)"
-					   ng-disabled="!user.phone"
-					   ng-if="!wait"
-					   ng-click="getCode($event)">短信验证</a>
-					<a class="btn btn-linear get-code btn-thin"
-					   href="javascript:void(0)"
-					   ng-disabled="!user.phone || user.cc.cc != '86' || user.cc.cc != 86"
-					   ng-if="!wait"
-					   ng-click="getCode($event, true)">语音验证</a>
-				</div>
-				<div class="form-group">
-					<a href="#" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="guideForm.$invalid" ng-if="sourceType=='other'" baidu-btn="完成">完成</a>
-					<a href="#" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="guideForm.$invalid" ng-if="sourceType=='investor_apply'" baidu-btn="继续投资人认证按钮点击">继续投资人认证</a>
-				</div>
-			</div>
-		</form>
-	</div>
+                <div class="line" ng-if="!user.hasEmail">
+                    <label class="label-control">邮箱</label>
+                    <div class="control">
+                        <input class="form-control" type="email" ng-model="user.email" name="email" required/>
+                    </div>
+                </div>
+                <div class="line" ng-if="!user.hasPhone">
+                    <label class="label-control">国家</label>
+                    <div class="control">
+                        <select name="cc" ng-model="user.cc" class="form-control country"
+                                ng-change="changeCountry(guideForm.phone)"
+                                ng-options="item as (item.desc+' +'+item.cc) for item in countryDict"></select>
+                    </div>
+                </div>
+                <div class="line" ng-if="!user.hasPhone">
+                    <label class="label-control">手机号</label>
+                    <div class="control">
+                        <input class="form-control" type="text" ng-model="user.phone" name="phone" required ng-pattern="REGEXP.phone"/>
+                    </div>
+                </div>
+                <div class="line" ng-if="!user.hasPhone">
+                    <label class="label-control">验证码</label>
+                    <div class="control validate-code">
+                        <input class="form-control" type="text" ng-model="user.smscode" name="smscode" required/>
+                    </div>
+                    <div class="code-group control">
+                        <a class="btn get-code" href="javascript:void(0)" ng-disabled="wait" ng-if="wait">{{wait+'秒'}}</a>
+                        <a class="btn get-code"
+                           href="javascript:void(0)"
+                           ng-disabled="!user.phone"
+                           ng-if="!wait"
+                           ng-click="getCode($event)">点击获取</a>
+                        <a class="btn btn-linear get-code btn-thin"
+                           href="javascript:void(0)"
+                           ng-disabled="!user.phone || user.cc.cc != '86' || user.cc.cc != 86"
+                           ng-if="!wait"
+                           ng-click="getCode($event, true)">接听语音验证码</a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-submit">
+                <a href="#" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="guideForm.$invalid" ng-if="sourceType=='other'" baidu-btn="完成">完成</a>
+                <a href="#" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="guideForm.$invalid" ng-if="sourceType=='investor_apply'" baidu-btn="继续投资人认证按钮点击">继续投资人认证</a>
+            </div>
+        </form>
+    </div>
 </div>
