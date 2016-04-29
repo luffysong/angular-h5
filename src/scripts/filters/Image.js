@@ -31,7 +31,8 @@ angular.module('defaultApp.filter').filter('image', function () {
             src = defaults[type];
         }
 
-        if (src.indexOf('krplus-pic.b0.upaiyun.com/') > -1) {
+        src = src.replace('krplus-pic.b0.upaiyun.com', 'pic.36krcnd.com');
+        if (src.indexOf('pic.36krcnd.com/') > -1) {
             src = src.replace(/\!.+$/, '');
             src = src + '!' + realSize;
         }

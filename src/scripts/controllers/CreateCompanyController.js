@@ -75,7 +75,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         $scope.formData = {
             level: $scope.founderRoles[0].value,
-            logo: '//krplus-pic.b0.upaiyun.com/default_logo.png!70',
+            logo: '//pic.36krcnd.com/default_logo.png!70',
             operationStatus: $scope.operationStatus[1].value,
             website:''
         };
@@ -511,7 +511,7 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
             // todo : 时间修复
             $scope.formData.startDate = $scope.formData.startYear + '-' + $scope.formData.startMonth + '-01';
             if (!$scope.formData.logo) {
-                $scope.formData.logo = '//krplus-pic.b0.upaiyun.com/default_logo.png!30';
+                $scope.formData.logo = '//pic.36krcnd.com/default_logo.png!30';
             }
 
             CompanyService.save({

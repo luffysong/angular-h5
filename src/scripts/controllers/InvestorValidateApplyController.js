@@ -273,7 +273,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         window.WEIXINSHARE = {
             shareTitle: '36氪投资人认证申请',
             shareDesc: '投资人认证申请',
-            shareImg: 'https://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg'
+            shareImg: 'https://pic.36krcnd.com/36kr_new_logo.jpg'
         };
         window.InitWeixin();
         /*错误信息提示*/

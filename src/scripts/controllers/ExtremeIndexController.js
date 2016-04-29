@@ -33,7 +33,7 @@ angular.module('defaultApp.controller').controller('ExtremeIndexController',
             window.WEIXINSHARE = {
                 shareTitle: '【极速融资2.0】全网最优质的项目正在等你投资！',
                 shareDesc: '五大领域专场，高效排会系统，投资人招募火爆开启！',
-                shareImg: 'http://krplus-pic.b0.upaiyun.com/201603/07024835/441gsg4ap16epmv3.jpg'
+                shareImg: 'http://pic.36krcnd.com/201603/07024835/441gsg4ap16epmv3.jpg'
             };
             window.InitWeixin();
         }
