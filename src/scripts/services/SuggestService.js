@@ -42,12 +42,6 @@ angular.module('defaultApp.service').service('SuggestService', [
 
         //console.log(BasicService)
         var service = BasicService('/api/suggest/:sub', {
-            queryCompany: {
-                method: 'GET',
-                params: {
-                    sub: 'company'
-                }
-            },
             /**
              * @api {get} /api/suggest/field 联想结果(公司领域)
              * @apiName suggest field
@@ -91,6 +85,18 @@ angular.module('defaultApp.service').service('SuggestService', [
                 method: 'GET',
                 params: {
                     sub: 'field'
+                }
+            },
+            queryCompany: {
+                method: 'GET',
+                params: {
+                    sub: 'company'
+                }
+            },
+            queryOrganization: {
+                method: 'GET',
+                params: {
+                    sub: 'institution'
                 }
             },
             querySchool: {

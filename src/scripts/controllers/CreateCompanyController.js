@@ -178,64 +178,9 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         // suggest start
 
-        function suggest_state(data) {
-            //var q = term.toLowerCase().trim();
-            var results = data.map(function (item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
-                var logo = item.logo ? item.logo :
-                    '//krplus-pic.b0.upaiyun.com/default_logo.png!30"' +
-                    ' src="//krplus-pic.b0.upaiyun.com/default_logo.png!30';
-
-                var    label;
-
-                if (item.status !== 'add') {
-                    label = '<div class="coList"><img src="' + logo + '">' + item.name + '</div>';
-                }else {
-                    label = '<div class="newCo">' + '<span>创建 </span> “' + item.name + '”</div>';
-                }
-
-                return {
-                    label: label,
-                    value: item.name,
-                    obj: item,
-                    logo: item.logo
-                };
-            });
-
-            return results;
-        }
-
         $scope.suggest = {
             add: []
         };
-        function suggest_state_remote(term) {
-            var deferred = $q.defer();
-            var q = term.toLowerCase().trim();
-
-            SuggestService.query({
-                wd: q,
-                sub: 'company'
-            }, function (data) {
-                var exist = data.data.filter(function (item) {
-                    return item.name.toLowerCase() === q.toLowerCase();
-                });
-
-                if (!exist.length) {
-                    data.data.push({
-                        name: q,
-                        id:'',
-                        type:'',
-                        status: 'add',
-                        value: q
-                    });
-                }
-
-                deferred.resolve(suggest_state(data.data));
-            }, function () {
-
-            });
-
-            return deferred.promise;
-        }
 
         // add new company
         $scope.formData.operationStatus = 'OPEN';
@@ -314,25 +259,15 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
         }
 
         var name_cache = '';
-        $scope.autocomplete_options = {
-            suggest: suggest_state_remote,
+        $scope.suggestObj = {
             on_error: console.log,
-            on_detach: function () {
-                $scope.formData.name = name_cache;
-
-                //console.log(cs, 'detach')
+            on_leaveSelect: function (val) {
+                $scope.addCompany(val);
+                name_cache = val;
             },
 
             on_select: function (selected) {
-                if (selected.obj.status !== 'add') {
-                    checkName(selected);
-                } else {
-                    $scope.addCompany(selected.obj.value);
-
-                }
-
-                name_cache = selected.obj.name;
-
+                checkName(selected);
             }
         };
 
@@ -764,4 +699,3 @@ angular.module('defaultApp.controller').controller('CreateCompanyController', [
 
         return service;
     }])*/
-
