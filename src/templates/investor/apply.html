@@ -186,18 +186,13 @@
                         </div>
                         <!--新增机构-->
                         <div class="line content-list" ng-if="organization.isAddExperience">
-                            <!--机构简称-->
-                            <div mass-autocomplete="{debounce_blur:700}">
+                            <div>
                                 <label>机构简称</label>
-                                <div class="control suggest_wrap">
-                                    <input type="text" ng-model="organization.addForm.name"
-                                           name="organizationName"
-                                           placeholder="未填写"
-                                           required
-                                           class="form-control fr"
-                                           mass-autocomplete-item="autocomplete_options_organization" minlength='2' maxlength="30" />
-                                </div>
                             </div>
+                            <div kr-suggest type="organization" class="kr-fleft control"
+                                suggest-obj="suggestOrganizationObj" max-length="30" min-length="1"
+                                autocomplete-options="suggestOrganizationOption" placeholder="未填写" name="name"
+                            > </div>
                         </div>
                         <div class="line content-list" ng-if="organization.isAddExperience && organization.isAdd">
                             <label>机构简介</label>
@@ -249,17 +244,13 @@
                             </div>
                             <!--新增公司-->
                             <div class="line content-list" ng-if="company.isAddExperience">
-                                <label>公司简称</label>
-                                <div mass-autocomplete="{debounce_blur:700}">
-                                    <div class="control suggest_wrap">
-                                        <input type="text" ng-model="company.addForm.name"
-                                               name="companyName"
-                                               placeholder="未填写"
-                                               required
-                                               class="form-control fr"
-                                               mass-autocomplete-item="autocomplete_options"/>
-                                    </div>
+                                <div>
+                                    <label>公司简称</label>
                                 </div>
+                                <div kr-suggest type="company" class="kr-fleft control"
+                                    suggest-obj="suggestCompanyObj" max-length="30" min-length="1"
+                                    autocomplete-options="suggestCompanyOption" placeholder="未填写" name="name"
+                                > </div>
                             </div>
                             <div class="content-list">
                                 <!--职位-->

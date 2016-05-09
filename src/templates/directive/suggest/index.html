@@ -1,0 +1,13 @@
+<div class="suggest-input" >
+    <div>
+        <div
+            mass-autocomplete="{debounce_blur:700,top:36,left:0.01,maxWidth:maxWidth,
+            position:'parent'}">
+            <input type="text" ng-model="suggestObj.word" data-ng-trim="false"
+            name="{{name}}"
+            ng-required="krRequired !==undefined ? krRequired : true"
+            placeholder="{{placeholder}}" input-focus ng-disabled="krDisabled"
+            mass-autocomplete-item="autocompleteOptions" ng-minlength="minLength"  ng-maxlength="maxLength"   />
+        </div>
+    </div>
+</div>

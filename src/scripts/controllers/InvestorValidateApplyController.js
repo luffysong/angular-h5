@@ -273,7 +273,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         window.WEIXINSHARE = {
             shareTitle: '36氪投资人认证申请',
             shareDesc: '投资人认证申请',
-            shareImg: 'https://krplus-pic.b0.upaiyun.com/36kr_new_logo.jpg'
+            shareImg: 'https://pic.36krcnd.com/36kr_new_logo.jpg'
         };
         window.InitWeixin();
         /*错误信息提示*/
@@ -370,138 +370,39 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
         };
 
-        function suggest_state(data) {
-            //var q = term.toLowerCase().trim();
-            var results = data.map(function (item) {//krplus-pic.b0.upaiyun.com/default_logo.png!30" src="//krplus-pic.b0.upaiyun.com/default_logo.png!30
-                var logo = item.logo ? item.logo : '//krplus-pic.b0.upaiyun.com/default_logo.png!30"' +
-                ' src="//krplus-pic.b0.upaiyun.com/default_logo.png!30';
-
-                //label = '<img src="' + logo + '">' + '<span>' + item.name + '</span>';
-                var  label;
-
-                if (item.status !== 'add') {
-                    label = '<div class="coList"><img src="' + logo + '">' + item.name + '</div>';
-                }else {
-                    label = '<div class="newCo">' + '<span>创建 </span> “' + item.name + '”</div>';
-                }
-
-                return {
-                    label: label,
-                    value: item.name,
-                    obj: item,
-                    logo: item.logo
-                };
-            });
-
-            return results;
-        }
-
-        $scope.autocomplete_options_organization = {
-            suggest: suggest_state_remote_organization,
-            on_error: console.log,
-            on_detach: function () {
-                if (($scope.organizationList.data[0].name === $scope.organization.addForm.name) &&
-                        !$scope.organizationList.data[0].status) {
-                    $scope.organization.isAdd = false;
-                    var organization = $scope.organizationList.data[0];
-                    $scope.organization.addForm.name = organization.name;
-                    $scope.organization.addForm.id = organization.id;
-                    return;
-                }
-
-                $scope.organization.isAddExperience = true;
+        $scope.suggestOrganizationObj = {};
+        $scope.suggestOrganizationOption = {
+            on_leaveSelect: function (val) {
                 $scope.organization.isAdd = true;
+                $scope.organization.addForm.name = val;
+                $scope.organization.isAddExperience = true;
                 $scope.organization.addForm.id = 0;
             },
 
             on_select: function (selected) {
-                if (selected.obj.status !== 'add') {
-                    $scope.organization.isAdd = false;
-                    var organization = selected.obj;
-                    $scope.organization.addForm.name = organization.name;
-                    $scope.organization.addForm.id = organization.id;
-                } else {
-                    $scope.organization.isAdd = true;
-                    $scope.organization.addForm.name = selected.obj.value;
-                    $scope.organization.addForm.id = 0;
-                }
+                $scope.organization.isAdd = false;
+                var organization = selected.obj;
+                $scope.organization.addForm.name = organization.name;
+                $scope.organization.addForm.id = organization.id;
             }
         };
 
-        function suggest_state_remote_organization(term) {
-            var q = term.toLowerCase().trim();
-
-            return SuggestService.query({
-                wd: q,
-                sub: 'institution'
-            }).$promise.then(function (data) {
-                $scope.organizationList = data;
-                var exist = data.data.filter(function (item) {
-                    return item.name.toLowerCase() === q.toLowerCase();
-                });
-
-                if (!exist.length) {
-                    data.data.push({
-                        name: q,
-                        id:'',
-                        type:'',
-                        status: 'add',
-                        value: q
-                    });
-                }
-
-                return suggest_state(data.data);
-            });
-        }
-
-        $scope.autocomplete_options = {
-            suggest: suggest_state_remote,
-            on_error: console.log,
-            on_detach: function (cs) {
-                if ($scope.companyList.data.length === 0) {
-                    $scope.company.isAddExperience = true;
-                    $scope.company.addForm.name = cs;
-                    $scope.company.addForm.id = 0;
-                } else if (($scope.companyList.data[0].name === $scope.company.addForm.name) && !$scope.companyList.data[0].status) {
-                    $scope.company.isAdd = false;
-                    var company = $scope.companyList.data[0];
-                    $scope.company.addForm.name = company.name;
-                    $scope.company.addForm.id = company.id;
-                    return;
-                } else {
-                    $scope.company.isAddExperience = true;
-                    $scope.company.addForm.name = cs;
-                    $scope.company.addForm.id = 0;
-                }
+        $scope.suggestCompanyObj = {};
+        $scope.suggestCompanyOption = {
+            on_leaveSelect: function (val) {
+                $scope.company.isAdd = true;
+                $scope.company.isAddExperience = true;
+                $scope.company.addForm.name = val;
+                $scope.company.addForm.id = 0;
             },
 
             on_select: function (selected) {
-                if (selected.obj.status !== 'add') {
-                    $scope.company.isAdd = false;
-                    var company = selected.obj;
-                    $scope.company.addForm.name = company.name;
-                    $scope.company.addForm.id = company.id;
-                } else {
-                    $scope.company.isAdd = true;
-                    $scope.company.addForm.name = selected.obj.value;
-                    $scope.company.addForm.id = 0;
-                }
-
+                $scope.company.isAdd = false;
+                var company = selected.obj;
+                $scope.company.addForm.name = company.name;
+                $scope.company.addForm.id = company.id;
             }
         };
-
-        function suggest_state_remote(term) {
-            var q = term.toLowerCase().trim();
-
-            return SuggestService.query({
-                wd: q,
-                sub: 'company'
-            }).$promise.then(function (data) {
-                $scope.companyList = data;
-
-                return suggest_state(data.data);
-            });
-        }
 
         //任职公司
         $scope.company = {

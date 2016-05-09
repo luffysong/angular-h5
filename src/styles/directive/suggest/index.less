@@ -1,0 +1,91 @@
+.highlight-word{
+    color:#ff7519;
+}
+
+.suggest-row-content{
+    color:#333;
+    padding-left:12px;
+    padding-right:12px;
+    .highlight-word{
+        color:#ff7519;
+    }
+}
+
+
+.ac-container {
+    border: 1px solid #ddd;
+    border-bottom:none;
+    font-size: 14px;
+    li{
+        list-style: none;
+    }
+    .ac-menu {
+        background-color: #fff;
+        border: none 0;
+        box-shadow: none;
+        li {
+            border: none 0;
+            img {
+                display:inline-block;
+                width: 25px;
+                height: 25px;
+                line-height:25px;
+                border-radius: 3px;
+                margin-right:5px;
+                overflow: hidden;
+            }
+            a {
+                position: relative;
+                z-index: 100;
+                background-color:#fff;
+                border-bottom: 1px solid #dedede;
+                padding:0;
+                display:block;
+                position:relative;
+              }
+        }
+    }
+}
+.ac-container .ac-menu .ac-state-focus .suggest-row-content{
+    background: #e0eaff;
+}
+.suggest-input-450 input{
+    width:450px;
+}
+.suggest-input-400 input{
+    width:400px;
+}
+.suggest-input-210 input{
+    width:210px;
+}
+.suggest-input-280 input{
+    width:280px;
+}
+.suggest-input{
+	max-width:457px;
+	position:relative;
+
+	input[type=text]
+	{
+		outline:none;
+		border:1px solid #ddd;
+		border-radius:2px;
+		padding:0 10px;
+		color:#666;
+		&:focus{
+			border-color:#66afe9;
+		}
+
+		&.ng-dirty{
+			&.ng-invalid{
+				border:1px solid red;
+			}
+		}
+	}
+
+	input
+	{
+		height:32px;
+	}
+
+}

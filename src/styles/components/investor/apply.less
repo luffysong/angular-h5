@@ -20,6 +20,12 @@
     border: 0;
     text-align: right;
 }
+.investor-validate-apply{
+    .suggest-input input[type=text]{
+        height:auto;
+        border: none;
+    }
+}
 
 .upload-pictures{
     line-height: 65px;
@@ -103,73 +109,6 @@
     }
 }
 
-.ac-container {
-    background-color: #f7f7f7 !important;
-    border: 1px solid #d9d9d9;
-    font-size: 14px;
-    left: 18px !important;
-    width: 90% !important;
-    overflow: hidden;
-    top:40px !important;
-    position:absolute;
-
-    img {
-        width: 25px;
-        height: 25px;
-        line-height: 24px;
-        border-radius: 3px;
-        margin: 3px 5px 0;
-        overflow: hidden;
-        float: left;
-    }
-    a {
-        padding: 0 !important;
-        background-color: #f7f7f7;
-        position: relative;
-        z-index: 100;
-        &:hover {
-            background-color: #bfbfbf;
-        }
-
-        .newCo {
-            padding: 0 0 0 25px;
-            background-color: #ccc;
-            color: #f7f7f7;
-        }
-    }
-
-    &::before {
-        display: block;
-        width: 100%;
-        padding-left: 25px;
-        line-height: 35px;
-        content: '已出现公司直接选中，没有则选择创建';
-        color: #a0a0a0;
-        background-color: #f7f7f7;
-    }
-    .ac-menu {
-        background-color: #f7f7f7;
-        border: none 0;
-        box-shadow: none;
-
-        li {
-            border: none 0;
-        &:hover {
-            background-color: #bfbfbf;
-            color: #fff;
-        }
-        &:active {
-            background-color: #bfbfbf;
-            color: #fff;
-        }
-        .coList {
-            margin: 0 0 0 25px;
-            border-top: 1px solid #dedede;
-        }
-
-        }
-    }
-}
 .title{
      background-color:rgb(247, 247, 247);
      height:40px;

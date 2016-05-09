@@ -101,14 +101,11 @@
                             <span>公司简称</span>
                         </td>
                         <td>
-                            <div class="suggest_wrap" mass-autocomplete="{debounce_blur:700}" ng-click="positionSet($event);">
-                                <input type="text" ng-model="formData.name"
-                                       name="name"
-                                       placeholder="请填写公司核心产品名称或项目名称。如：36氪"
-                                       required
-                                       class="form-control"
-                                       mass-autocomplete-item="autocomplete_options"/>
-                            </div>
+                            <div kr-suggest type="company" class="kr-fleft" suggest-obj="suggestObj"
+                                       ng-click="positionSet($event);"
+                                       max-length="30" min-length="1" autocomplete-options="suggestObj"
+                                       placeholder="请填写公司核心产品名称或项目名称。如：36氪" name="name"
+                            > </div>
                         </td>
 
           </tr>

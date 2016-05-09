@@ -502,7 +502,7 @@ angular.module('defaultApp.service').service('CompanyService', [
                     data.data.forEach(function (item, i) {
                         var company = {
                             company_logo: item.company.logo,
-                            company_bg: 'http://krplus-pic.b0.upaiyun.com/' +
+                            company_bg: 'http://pic.36krcnd.com/' +
                             'home/company-bg-' + (i % 3) + '.jpg',
                             company_name: item.company.name,
                             finance_start: {
