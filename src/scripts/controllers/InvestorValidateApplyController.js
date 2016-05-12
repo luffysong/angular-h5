@@ -49,7 +49,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     delete $scope.user.phone;
                 }
 
-                if (data.email && data.isEmailActivate) {
+                if (data.email) {
                     $scope.user.hasEmail = true;
                     delete $scope.user.email;
                 }
