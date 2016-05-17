@@ -10,11 +10,11 @@
     </div>
     <div class="welcome">
         <div class="welcome-words"
-             ng-show="invevalStatusstorValidateApply.status != 'success' && investorValidateApply.status !='checking'">
+             ng-show="investorValidateApply.status != 'success' && investorValidateApply.status !='checking'">
             <p>认证成为投资人,开启发现项目之旅</p>
         </div>
         <form class="form-container" name="guideForm"
-              ng-show="invevalStatusstorValidateApply.status != 'success' && investorValidateApply.status !='checking'"
+              ng-show="investorValidateApply.status != 'success' && investorValidateApply.status !='checking'"
               ng-submit="$event.preventDefault()">
             <div error-wrapper error-group="errorGroup"></div>
             <div class="welcome-form">
@@ -87,7 +87,7 @@
             <div class="basic-info"></div>
         </form>
     </div>
-    <div class="investor-validate investor-validate-apply" ng-show="invevalStatusstorValidateApply.status != 'success' && investorValidateApply.status !='checking'">
+    <div class="investor-validate investor-validate-apply" ng-show="investorValidateApply.status != 'success' && investorValidateApply.status !='checking'">
         <!--跟投人未提交验证-->
         <div>
 
