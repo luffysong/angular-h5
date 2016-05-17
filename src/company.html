@@ -3,28 +3,190 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>36氪精选项目</title>
 
 <!-- build:js /scripts/zepto.min.js -->
 <script src="/components/zepto/zepto.min.js"></script>
+<script src="/components/purl/purl.js"></script>
 <!-- endbuild -->
+<script>
+    var cid = purl(location.href).param('cid');
+    var SUCCESS = 0;
+    var API = '//rong.36kr.com/api/company/'
+    $.getJSON(API + cid,function(data){
+        if(data.code === SUCCESS){
+            data = data.data.company;
+            var title = $('title').html();
+            $('title').html(title+ '：'+ data.name);
+            $(function(){
+                $('#logo').attr('src', data.logo);
+                $('#name').html(data.name);
+                $('#brief').html(data.brief);
+            });
+
+        }
+    });
+
+    $(function () {
+        var userSystem=navigator.userAgent; //userAgent
+         if(userSystem.match(/MicroMessenger/i) === "MicroMessenger" && userSystem.indexOf('Android') !== -1){ //在微信中打开
+             $('.mask').show();  //ios用safari打开
+         }else if(userSystem.indexOf('Android') > -1){
+             location.href="https://rong.36kr.com/m/#/company/" + cid;
+         }
+    })
+
+</script>
+<style type="text/css" >
+    body{
+        text-align: center;
+    }
+    *{
+        box-sizing: border-box;
+    }
+    h3,h2{
+        font-weight: 400;
+    }
+    h3{
+        color: #5a626d;
+        font-size: 17px;
+        text-align: center;
+        margin: 0;
+        margin-top: 55px;
+    }
+    h3:before, h3:after{
+        display: inline-block;
+        content: " ";
+        width:10px;
+        height: 1px;
+        background: #5a626d;
+        vertical-align: middle;
+        margin-right: 8px;
+    }
+    h3:after{
+        margin-right:0px;
+        margin-left: 8px;
+    }
+    .mask{
+       position: fixed;
+       left:0;
+       top:0;
+       bottom:0;
+       right:0;
+       background:rgba(0,0,0,0.8);
+       z-index: 999;
+       display:none;
+    }
+    .arrow{
+        overflow: hidden;
+        margin-top: 10px;
+    }
+    .arrow img{
+        right:0;
+        float: right;
+        margin-right: 20px;
+    }
+    .guide-desc {
+        overflow: hidden;
+    }
+    .guide-desc > div{
+        float: right;
+        margin-right: 60px;
+    }
+    .guide-desc p{
+        font-size: 15px;
+        line-height: 20px;
+        color: #fff;
+        margin:0 ;
+    }
+    .guide-desc > img{
+        float: right;
+        margin-right: 10px;
+    }
+    #logo{
+        margin-top: 50px;
+    }
+    #name{
+        margin: 0;
+        color: #222c38;
+        font-size: 19px;
+        margin:25px 0px 15px;
+    }
+    #brief{
+        color: #5a626d;
+        font-size: 14px;
+    }
+    .split-line{
+        border: 1px dashed rgba(25,28,30,0.1);
+        margin-top: 50px;
+        display:inline-block;
+        width: 90%;
+    }
+    .download-wrapper{
+        width: 210px;
+        overflow: hidden;
+        margin: 0 auto;
+        margin-top: 50px;
+    }
+    .download-wrapper img{
+        float: left;
+        width: 40px;
+    }
+    .download-wrapper div{
+        float: right;
+        text-align:left;
+    }
+    .download-wrapper p{
+        margin: 0;
+        line-height: 20px;
+    }
+    a{
+        display:inline-block;
+        width:210px;
+        line-height: 45px;
+        background:#42cb88;
+        color: #fff;
+        font-size: 15px;
+        text-align: center;
+        box-shadow: 0px 8px 15px rgba(66,203,136,0.55);
+        -webkit-box-shadow: 0px 8px 15px rgba(66,203,136,0.55);
+        border-radius: 3px;
+        margin-top: 20px;
+        text-decoration: none;
+    }
+</style>
 </head>
 <body>
-    <div>
-        <h3>36氪精选项目</h3>
-        <img src="" />
-        <p></p>
-
+    <div class="mask">
+        <div class="arrow">
+            <img width="36px" src="/styles/images/guide-ios-arrow.png" alt="">
+        </div>
+        <div class="guide-desc">
+            <div>
+                <p>请使用Safari打开</p>
+                <p>即刻查看项目详情</p>
+            </div>
+            <img width="42" src="/styles/images/safari.png" alt="">
+        </div>
     </div>
     <div>
-        <div>
+        <h3>36氪精选项目</h3>
+        <img width="95" id="logo" src="" />
+        <h2 id="name"></h6>
+        <p id="brief"></p>
+        <div class="split-line">
+
         </div>
+    </div>
+    <div class="download-wrapper">
+        <img src="/styles/images/investor-app-icon.png" />
         <div>
             <p>下载【36氪创投助手】</p>
             <p>即刻查看该项目详情</p>
         </div>
     </div>
     <div>
-        <a href="#">立即下载</a>
+        <a href="https://itunes.apple.com/cn/app/36ke-chuang-tou-zhu-shou/id1075751043?mt=8">立即下载</a>
     </div>
 </body>
 </html>
