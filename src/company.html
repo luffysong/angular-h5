@@ -12,14 +12,20 @@
 <script>
     var cid = purl(location.href).param('cid');
     var SUCCESS = 0;
-    var API = '//rong.36kr.com/api/company/'
-    $.getJSON(API + cid,function(data){
+    var HOST = location.host;
+    var API = '//' +  HOST + '/api/mobi-investor/company/';
+    var isDesktop = !navigator.userAgent .toLowerCase().match(/(iphone|android)/);
+    $.getJSON(API + cid + '/sharebasic/v3',function(data){
         if(data.code === SUCCESS){
-            data = data.data.company;
+            data = data.data;
             var title = $('title').html();
             $('title').html(title+ '：'+ data.name);
             $(function(){
-                $('#logo').attr('src', data.logo);
+                $('#logo').attr('src', data.logo + '?v');
+                $('#logo').error(function(e) {
+                    this.src = 'https://krplus.b0.upaiyun.com/default_logo.png';
+                });
+
                 $('#name').html(data.name);
                 $('#brief').html(data.brief);
             });
@@ -33,6 +39,8 @@
              $('.mask').show();  //ios用safari打开
          }else if(userSystem.indexOf('Android') > -1){
              location.href="https://rong.36kr.com/m/#/company/" + cid;
+         }else if(isDesktop){
+             location.href = "https://rong.36kr.com/company/" + cid;
          }
     })
 
