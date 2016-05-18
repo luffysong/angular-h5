@@ -14,7 +14,7 @@
     var SUCCESS = 0;
     var HOST = location.host;
     var API = '//' +  HOST + '/api/mobi-investor/company/';
-    var isDesktop = !navigator.userAgent .toLowerCase().match(/(iphone|android)/);
+    var isDesktop = !navigator.userAgent.toLowerCase().match(/(iphone|android)/);
     $.getJSON(API + cid + '/sharebasic/v3',function(data){
         if(data.code === SUCCESS){
             data = data.data;
@@ -35,7 +35,8 @@
 
     $(function () {
         var userSystem=navigator.userAgent; //userAgent
-         if(userSystem.match(/MicroMessenger/i) === "MicroMessenger" && userSystem.indexOf('Android') !== -1){ //在微信中打开
+        if(/MicroMessenger/i.test("MicroMessenger")  &&
+                userSystem.toLowerCase().indexOf('iphone') > -1){ //在微信中打开
              $('.mask').show();  //ios用safari打开
          }else if(userSystem.indexOf('Android') > -1){
              location.href="https://rong.36kr.com/m/#/company/" + cid;
