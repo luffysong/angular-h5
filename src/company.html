@@ -12,9 +12,27 @@
 <script>
     var cid = purl(location.href).param('cid');
     var SUCCESS = 0;
+    var appurl = 'krtou://open';
     var HOST = location.host;
     var API = '//' +  HOST + '/api/mobi-investor/company/';
     var isDesktop = !navigator.userAgent.toLowerCase().match(/(iphone|android)/);
+    function preventPopup() { //定义preventPopup函数
+        clearTimeout(timeout);
+        window.removeEventListener('pagehide', preventPopup);
+    }
+    function startApp(){ //定义startApp函数
+        var ifr = document.createElement('iframe');
+        ifr.src = appurl;
+        ifr.style.display = 'none';
+        document.body.appendChild(ifr);
+        window.setTimeout(function(){
+            document.body.removeChild(ifr);
+        },500);
+        timeout = setTimeout(function(){
+            document.location = "https://itunes.apple.com/cn/app/36ke-chuang-tou-zhu-shou/id1075751043?mt=8";
+        }, 1000);
+        window.addEventListener('pagehide', preventPopup);
+    }
     $.getJSON(API + cid + '/sharebasic/v3',function(data){
         if(data.code === SUCCESS){
             data = data.data;
@@ -35,7 +53,7 @@
 
     $(function () {
         var userSystem=navigator.userAgent; //userAgent
-        if(/MicroMessenger/i.test("MicroMessenger")  &&
+        if(/MicroMessenger/i.test(userSystem)  &&
                 userSystem.toLowerCase().indexOf('iphone') > -1){ //在微信中打开
              $('.mask').show();  //ios用safari打开
          }else if(userSystem.indexOf('Android') > -1){
@@ -43,6 +61,10 @@
          }else if(isDesktop){
              location.href = "https://rong.36kr.com/company/" + cid;
          }
+        $('a').click(function(e){
+            e.preventDefault();
+            startApp();
+        });
     })
 
 </script>
@@ -54,7 +76,7 @@
         box-sizing: border-box;
     }
     h3,h2{
-        font-weight: 400;
+        font-weight: 600;
     }
     h3{
         color: #5a626d;
@@ -68,7 +90,7 @@
         content: " ";
         width:10px;
         height: 1px;
-        background: #5a626d;
+        background: #adb0b7;
         vertical-align: middle;
         margin-right: 8px;
     }
@@ -103,7 +125,8 @@
         margin-right: 60px;
     }
     .guide-desc p{
-        font-size: 15px;
+        font-size: 16px;
+        text-align: left;
         line-height: 20px;
         color: #fff;
         margin:0 ;
@@ -114,12 +137,14 @@
     }
     #logo{
         margin-top: 50px;
+        border-radius: 18px;
+        border: 1px solid #e7e7e7;
     }
     #name{
         margin: 0;
         color: #222c38;
         font-size: 19px;
-        margin:25px 0px 15px;
+        margin:23px 0px 12px;
     }
     #brief{
         color: #5a626d;
@@ -127,7 +152,7 @@
     }
     .split-line{
         border: 1px dashed rgba(25,28,30,0.1);
-        margin-top: 50px;
+        margin-top: 45px;
         display:inline-block;
         width: 90%;
     }
@@ -146,8 +171,13 @@
         text-align:left;
     }
     .download-wrapper p{
+        text-align: left;
         margin: 0;
+        color: #5a626d;
         line-height: 20px;
+    }
+    .download-wrapper p span{
+        color: #222c38;
     }
     a{
         display:inline-block;
@@ -162,6 +192,7 @@
         border-radius: 3px;
         margin-top: 20px;
         text-decoration: none;
+        font-weight: 600;
     }
 </style>
 </head>
@@ -190,12 +221,12 @@
     <div class="download-wrapper">
         <img src="/styles/images/investor-app-icon.png" />
         <div>
-            <p>下载【36氪创投助手】</p>
+            <p>下载<span>【36氪创投助手】</span></p>
             <p>即刻查看该项目详情</p>
         </div>
     </div>
     <div>
-        <a href="https://itunes.apple.com/cn/app/36ke-chuang-tou-zhu-shou/id1075751043?mt=8">立即下载</a>
+        <a href="">立即下载</a>
     </div>
 </body>
 </html>
