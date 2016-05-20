@@ -38,6 +38,7 @@
     }
 
     function goAppStore(){
+        krtracker('trackEvent','按钮', 'h5.ctappshare.download');
         timeout = setTimeout(function(){
             document.location = "https://itunes.apple.com/cn/app/36ke-chuang-tou-zhu-shou/id1075751043?mt=8";
         }, 1000);
@@ -60,7 +61,9 @@
 
         }
     });
-
+    function isIOS9UIWebView(userAgent) {
+      return /(iPhone|iPad|iPod).* OS 9_\d/.test(userAgent) ;
+    }
     $(function () {
         var userSystem=navigator.userAgent; //userAgent
         if(/MicroMessenger/i.test(userSystem)  &&
@@ -71,12 +74,14 @@
          }else if(isDesktop){
              location.href = "https://rong.36kr.com/company/" + cid;
          }else if(/iphone/i.test(userSystem)){
-             startApp();
+            startApp();
+            $('a').click(function(e){
+                e.preventDefault();
+                startApp();
+                goAppStore();
+            });
          }
-        $('a').click(function(e){
-            e.preventDefault();
-            krtracker('trackEvent','按钮', 'h5.ctappshare.download');
-        });
+
     })
 
 </script>
@@ -238,7 +243,7 @@
         </div>
     </div>
     <div>
-        <a href="">立即下载</a>
+        <a id="downloadBtn" href="">立即下载</a>
     </div>
 </body>
 </html>
