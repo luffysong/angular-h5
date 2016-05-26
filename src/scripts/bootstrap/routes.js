@@ -143,4 +143,19 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controller: 'FinacingSuccessController'
     });
 
+    //快速认领
+    $stateProvider.state('fastClaim', {
+        url:'/claim/:id',
+        controller: 'ClaimController',
+        controllerAs: 'vm',
+        templateUrl: 'templates/claim/index.html',
+        resolve: { /* @injection */
+            user: checkClaimStatus
+        }
+    });
+
+    function checkClaimStatus(ClaimService, $stateParams) {
+        return ClaimService.check($stateParams.id);
+    }
+
 });

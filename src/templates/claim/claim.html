@@ -1,0 +1,54 @@
+<div class="claim-form-wrapper">
+    <h5>完成相关信息即可认领公司</h5>
+    <div>
+        <form action="" name="claimForm" method="post">
+            <input type="hidden" required  ng-model="vm.avatar" name="avatar" />
+            <ul class="intro-pic-list upload-avatar">
+                <li class="pic-list"
+                    ng-class="{'avatar-error': claimForm.avatar.$invalid && claimForm.avatar.$dirty}"
+                    style="background-image: url({{vm.avatar | image:70: 'avatar'}});"></li>
+                <li ng-show='!intro.uploading'>
+                    <input class="input-file" type="file"
+                           ng-file-select
+                           ng-file-change="vm.upload($files, $event)"
+                           ng-multiple="false"
+                           resetOnClick="true" accept="image/*"
+                    >
+                </li>
+            </ul>
+
+            <div class="form-row">
+                <label class="label-control">真实姓名</label>
+                <div class="form-control">
+                    <input required type="text" maxlength="20" placeholder="20个字符以内"  name="name" ng-model="vm.name" >
+                </div>
+            </div>
+
+            <div ng-if="claimForm.name.$invalid && claimForm.name.$dirty" class="form-row claim-error">
+                请正确填写姓名</div>
+            <div class="form-row">
+                <label class="label-control">身份</label>
+                <div class="form-control">
+                    <select required name="identity" ng-model="vm.identity" >
+                        <option value="">请选择</option>
+                        <option value="FOUNDER">创始人</option>
+                        <option value="CO_FOUNDER">联合创始人</option>
+                    </select>
+                </div>
+            </div>
+            <div ng-if="claimForm.identity.$invalid && claimForm.identity.$dirty" class="form-row claim-error">请选择身份</div>
+
+            <div class="form-row">
+                <label class="label-control">职位</label>
+                <div class="form-control">
+                    <input required type="text" name="position" ng-model="vm.position" >
+                </div>
+            </div>
+            <div class="form-row claim-error" ng-if="claimForm.position.$invalid && claimForm.position.$dirty" >
+                请填写职位</div>
+
+            <div >
+                <a href="javascript:" ng-click="vm.claim()">完成</a>
+            </div>
+        </form>
+    </div>

@@ -5,7 +5,8 @@
     "requireDollarBeforejQueryAssignment": false,
     "safeContextKeyword": [
         "_this",
-        "self"
+        "self",
+        "vm"
     ],
     "requireCurlyBraces": {
         "keywords": [
