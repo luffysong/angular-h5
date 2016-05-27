@@ -16,6 +16,8 @@
         vm.identity = user.position;
         vm.claimed = user.claimed;
         vm.failed = user.failed;
+        vm.avatar = user.avatar;
+
         vm.msg = user.msg;
 
         vm.upload = upload;
