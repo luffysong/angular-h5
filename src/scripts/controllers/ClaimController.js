@@ -14,10 +14,11 @@
         vm.name = user.name;
         vm.position = user.positionDetail;
         vm.identity = user.position;
-        vm.claimed = user.claimed;
-        vm.failed = user.failed;
         vm.avatar = user.avatar;
+        vm.email = user.email;
 
+        vm.failed = user.failed;
+        vm.claimed = user.claimed;
         vm.msg = user.msg;
 
         vm.upload = upload;
@@ -54,7 +55,8 @@
                 position: vm.identity,
                 positionDetail: vm.position,
                 avatar: vm.avatar,
-                cid: $stateParams.id
+                cid: $stateParams.id,
+                email: vm.email
             }).then(function claimSuccess() {
                 vm.claimed = true;
             }).catch(function claimFailed(data) {
