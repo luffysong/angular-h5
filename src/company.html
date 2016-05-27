@@ -16,7 +16,7 @@
     <script src="/components/purl/purl.js"></script>
 <!-- endbuild -->
 <script>
-    var cid = purl(location.href).param('cid');
+    var cid = purl(location.href).segment(2);
     var SUCCESS = 0;
     var appurl = 'krtou://open';
     var HOST = location.host;
