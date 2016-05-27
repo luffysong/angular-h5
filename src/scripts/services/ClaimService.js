@@ -40,12 +40,13 @@
             }).catch(function checkFailed(data) {
                 if (data.code === NOT_LOGIN) {
                     CredentialService.directToLoginSimple();
+                } else {
+                    return {
+                        failed: true,
+                        msg: data.msg
+                    };
                 }
 
-                return {
-                    failed: true,
-                    msg: data.msg
-                };
             });
         }
 
