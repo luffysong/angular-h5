@@ -36,6 +36,7 @@
                 cid: cid
             }).$promise
             .then(function checked(data) {
+                data.emailExist = !!data.email;
                 return data;
             }).catch(function checkFailed(data) {
                 if (data.code === NOT_LOGIN) {

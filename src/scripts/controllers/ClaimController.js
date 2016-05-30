@@ -16,6 +16,7 @@
         vm.identity = user.position;
         vm.avatar = user.avatar;
         vm.email = user.email;
+        vm.emailExist = user.emailExist;
 
         vm.failed = user.failed;
         vm.claimed = user.claimed;

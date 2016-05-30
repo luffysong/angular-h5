@@ -27,7 +27,7 @@
             <div ng-if="claimForm.name.$invalid && claimForm.name.$dirty" class="form-row claim-error">
                 请正确填写姓名</div>
 
-            <div class="form-row">
+            <div ng-if="!vm.emailExist" class="form-row">
                 <label class="label-control">邮箱</label>
                 <div class="form-control">
                     <input required type="email"   name="email" ng-model="vm.email" >
