@@ -1,0 +1,5 @@
+<div class="claim-wrapper">
+    <div ng-if="!vm.claimed && !vm.failed" ng-include="'templates/claim/claim.html'"></div>
+    <div ng-if="vm.claimed" ng-include="'templates/claim/claim-success.html'"></div>
+    <div ng-if="vm.failed" ng-include="'templates/claim/claim-fail.html'"></div>
+</div>

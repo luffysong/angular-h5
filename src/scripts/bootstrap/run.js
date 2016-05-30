@@ -90,7 +90,7 @@ angular.module('defaultApp')
                 window.CommonHeader.setNavActive(type);
             }
         });
-    }).run(function ($http, $rootScope, $location, $state, notify, Permission, UserService, $q) {
+    }).run(function ($http, $rootScope, $location, $state, notify, Permission, UserService, $q, CredentialService) {
         //Define Roles
         var login;
         var valid;
@@ -98,14 +98,15 @@ angular.module('defaultApp')
         Permission.defineRole('login', login = function () {
             if (UserService.getUID()) {
                 console.log('is login');
-                return true; // Is anonymous
+                return true;
             }
 
+            // Is anonymous
             _hmt.push(['_trackPageview', '/user/login##fromUser=0']);
             krtracker('trackPageView', '/user/login');
 
             setTimeout(function () {
-                location.href = '/user/login?from=' + encodeURIComponent(location.href);
+                CredentialService.directToLogin();
             }, 300);
 
             return false;

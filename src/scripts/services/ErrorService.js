@@ -10,17 +10,24 @@ angular.module('defaultApp.service').service('ErrorService', [
 
         var service = {
             alert: function (err) {
-                if (err && err.msg) {
-                    notify.closeAll();
+
+                notify.closeAll();
+                var className = 'alert-danger';
+
+                if (typeof err === 'string') {
+                    notify({
+                        message: err,
+                        classes: className
+                    });
+                } else if (err && err.msg) {
                     notify({
                         message:err.msg,
-                        classes:'alert-danger'
+                        classes:className
                     });
                 }else if (err) {
-                    notify.closeAll();
                     notify({
                         message:'服务器端未知原因错误',
-                        classes:'alert-danger'
+                        classes:className
                     });
                 }
             }

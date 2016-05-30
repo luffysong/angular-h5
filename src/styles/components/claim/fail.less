@@ -1,0 +1,32 @@
+@import "common.less";
+
+.claim-wrapper{
+    .claim-common();
+    .claim-fail-wrapper{
+        text-align: center;
+        p{
+            padding: 18px;
+            .t-center();
+            color: @deep-gray;
+            font-size: 16px;
+            line-height: 26px;
+            font-weight: 600;
+            .container();
+            width: 274px;
+        }
+        p.service{
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 20px;
+            width: 92%;
+            padding: 0 14px 40px;
+        }
+        img {
+            margin-top: 40px;
+        }
+        a{
+            display: inline;
+            color: @blue;
+        }
+    }
+}
