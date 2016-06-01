@@ -20,6 +20,7 @@ angular.module('defaultApp.service').service('InvestorauditService', [
             },
 
             save:function (data, callback, error) {
+                data.action = 'h5';
                 $http.post('/api/investoraudit/', $.param(data, true)).success(function (response) {
                     callback && callback(response);
                 }).catch(function (err) {

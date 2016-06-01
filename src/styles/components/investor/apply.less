@@ -1,3 +1,66 @@
+
+// 弹窗
+.modal-dialog {
+    width: 600px;
+    @media (max-width: 1000px) {
+        max-width: 90%;
+        width:auto;
+    }
+    margin: 80px auto;
+
+
+}
+.upload-wrapper{
+    margin-top: 10px;
+    position: relative;
+    &:before{
+        content:" ";
+        display:block;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        height: 10px;
+        background: #f7f7f7
+    }
+}
+.validate-welcome-wrapper{
+    .text-code{
+        right: 0;
+    }
+    .validate-code{
+        position: absolute;
+        right: 70px;
+        input{
+            width: 100px;
+        }
+    }
+    .voice-code{
+        position: relative;
+        text-align: right;
+        margin-top: 20px;
+        margin-bottom: 13px;
+        a{
+            border: none;
+        }
+    }
+}
+.pop-geetest .modal-dialog{
+    width:350px;
+    .modal-content {
+        padding-top: 25px;
+    }
+    .geetest-captcha svg{
+        margin:0 auto;
+    }
+
+    @media (max-width: 1000px) {
+        max-width: 90%;
+        width:auto;
+        height:260px;
+    }
+
+}
 .form-container{
     background: #fff;
 }
@@ -24,6 +87,12 @@
     .suggest-input input[type=text]{
         height:auto;
         border: none;
+    }
+    .icon-select{
+        overflow: hidden;
+        select{
+            height: 24px;
+        }
     }
 }
 

@@ -9,7 +9,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
     function (OrganizationService, CompanyService, $state, $scope, $rootScope, $stateParams, SuggestService, $q, SearchService,
         DictionaryService, ErrorService, DefaultService, $upload, checkForm, LoginService,
-        $timeout, UserService, $location, InvestorauditService, monthOptions, yearOptions, AndroidUploadService) {
+        $timeout, UserService, $location, InvestorauditService, monthOptions, yearOptions, AndroidUploadService,
+        PopCaptcha) {
 
         function initUser() {
             $scope.errorGroup = UserService.errorGroup;
@@ -114,30 +115,35 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     return;
                 }
 
-                $scope.wait = 60;
-                var interval = setInterval(function () {
-                    $scope.$apply(function () {
-                        $scope.wait--;
-                        if ($scope.wait === 0) {
-                            clearInterval(interval);
-                            $scope.wait = 0;
-                        }
+                PopCaptcha.show($scope.getPhoneWithCountryCode(), voice) .result
+                    .then(function geestestCb(geesData) {
+                        $scope.wait = 30;
+                        var interval = setInterval(function () {
+                            $scope.$apply(function () {
+                                $scope.wait--;
+                                if ($scope.wait === 0) {
+                                    clearInterval(interval);
+                                    $scope.wait = 0;
+                                }
+                            });
+                        }, 1000);
+
+                        var sendCodeRequestData = angular.copy(geesData);
+                        sendCodeRequestData.phone = $scope.getPhoneWithCountryCode();
+                        UserService.gee.sendCode(sendCodeRequestData, null).$promise
+                            .then(codeRequestSuccess)
+                            .catch(codeRequestFailed);
                     });
-                }, 1000);
-
-                UserService['send-sms'].send({
-                    id: $scope.user.id,
-                    subid: voice ? 'voice' : ''
-                }, {
-                    phone: $scope.getPhoneWithCountryCode()
-                }, function () {
-                }, function () {
-
-                    ErrorService.alert({
-                         msg:'发送失败!'
-                     });
-                });
             };
+
+            function codeRequestSuccess() {
+            }
+
+            function codeRequestFailed() {
+                ErrorService.alert({
+                     msg:'发送失败!'
+                 });
+            }
 
             LoginService.getCountryDict({}, function (data) {
                 $scope.countryDict = data;
@@ -612,18 +618,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 $scope.guideForm.avatar.$setValidity('required', false);
             }
 
-            if ($scope.investorValidateForm.pictures.uploaded || $scope.invest.pictures) {
-                $scope.investorValidateForm.pictures.$setValidity('required', true);
-            } else {
-                $scope.investorValidateForm.pictures.$setValidity('required', false);
-            }
-
-            if (parseFloat($scope.invest.investMin) > parseFloat($scope.invest.investMax)) {
-                $scope.investorValidateForm.investTo.$setValidity('checked', false);
-            } else {
-                $scope.investorValidateForm.investTo.$setValidity('checked', true);
-            }
-
             /*检查表单填写是否正确*/
             if ($scope.investorValidateApply.status === 'new' && !checkForm('guideForm')) {
                 return false;
@@ -633,31 +627,22 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 return false;
             }
 
+            if ($scope.investorValidateForm.pictures.uploaded || $scope.invest.pictures) {
+                $scope.investorValidateForm.pictures.$setValidity('required', true);
+            } else {
+                $scope.investorValidateForm.pictures.$setValidity('required', false);
+                return false;
+            }
+
             var investoraudit = {};
             investoraudit.id = UserService.getUID();
             investoraudit.name   = $scope.user.name;
             investoraudit.investorRole   = $scope.invest.investorRole;
             investoraudit.intro   = $scope.invest.intro;
-            /*投资阶段*/
-            investoraudit.fundsPhases = $scope.invest.investPhases;
-            /*关注领域*/
-            investoraudit.investorFocusIndustrys  = $scope.invest.industry;
             /*名片*/
             investoraudit.businessCardLink   = $scope.invest.pictures || $scope.investorValidateForm.pictures.uploaded;
-            /*主投资币种*/
-            investoraudit.mainCurrency = $scope.invest.mainCurrency;
 
             window.localStorage && localStorage.setItem('invest', JSON.stringify($scope.invest));
-
-            var isPersonal = $scope.invest.investorRole === 'PERSONAL_INVESTOR';
-
-            var currency = $scope.invest.mainCurrency.toLowerCase();
-            if (!isPersonal) {
-                currency = 'fund' + currency.replace(/.{1}/, function (a) {return a.toUpperCase();});
-            }
-
-            investoraudit[currency + 'InvestMin'] = $scope.invest.investMin;
-            investoraudit[currency + 'InvestMax'] = $scope.invest.investMax;
 
             $scope.hasClick = true;
 
