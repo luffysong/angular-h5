@@ -1,0 +1,100 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>36氪创投助手-精选全网最优质的项目</title>
+    <script>
+        (function(i,s,o,g,r,a,m){i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//36kr.com/global/stat.js','krtracker');
+        krtracker('trackPageView', location.pathname+location.search);
+    </script>
+<!-- build:css /styles/assistant.css -->
+    <link rel="stylesheet"  href="/styles/assistant.css"></script>
+<!-- endbuild -->
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!-- build:js /scripts/assistant-min.js -->
+    <script src="/scripts/weixin.js"></script>
+    <script src="/components/zepto/zepto.min.js"></script>
+<!-- endbuild -->
+<script>
+
+    function goAppStore(){
+        krtracker('trackEvent','按钮', 'tzrtqh5');
+        timeout = setTimeout(function(){
+            document.location = "https://appsto.re/cn/dIQhab.i";
+        }, 1000);
+    }
+
+    $(function () {
+        var userSystem=navigator.userAgent; //userAgent
+        $('a').click(clickCb);
+        function clickCb() {
+            if(/MicroMessenger/i.test(userSystem)  &&
+                 userSystem.toLowerCase().indexOf('iphone') > -1){ //在微信中打开
+                 $('.mask').show();  //ios用safari打开
+             }else if(userSystem.indexOf('Android') > -1){
+                 location.href="http://huodong.36kr.com/h5/investor-app/hub.html";
+             }else if(/iphone/i.test(userSystem)){
+                   goAppStore();
+             }
+        }
+
+        window.WEIXINSHARE = {
+            shareTitle: '36氪创投助手-精选全网最优质的项目',
+            shareDesc: '直接约谈创始人，轻松高效',
+            shareImg: 'https://krplus-pic.b0.upaiyun.com/avatar/201606/03093526/lrssomod8m4bfl49.png'
+        };
+        window.InitWeixin();
+
+    })
+</script>
+
+</head>
+<body class="assistant-wrapper">
+    <div class="mask">
+        <div class="arrow">
+            <img width="36px" src="/styles/images/guide-ios-arrow.png" alt="">
+        </div>
+        <div class="guide-desc">
+            <div>
+                <p>请使用Safari打开</p>
+                <p>即刻下载36氪创投助手</p>
+            </div>
+            <img width="42" src="/styles/images/safari.png" alt="">
+        </div>
+    </div>
+    <div class="kr36">
+        <img class="kr36" width="33" src="/styles/images/36kr-white.png" />
+    </div>
+    <div class="app">
+        <img src="/styles/images/investor-app.png" width="86" alt="">
+        <h3>36氪创投助手</h3>
+    </div>
+    <div class="good-project">
+        <h4>精选全网最优质的项目</h4>
+        <p>36氪项目库严格筛选，每天5-10个精品项目</p>
+        <p>直接约谈创始人，轻松高效</p>
+        <img width="226" src="/styles/images/app-figure-1.png" alt="">
+    </div>
+    <div class="spec-investor">
+        <h4>特邀投资人，享受“快速登录”特权</h4>
+        <p>无需注册与审核</p>
+        <p>输入手机号和验证码，立刻登录查看项目</p>
+        <img width="333" src="/styles/images/app-figure-2.png" alt="">
+    </div>
+    <div class="download-wrapper">
+        <img src="/styles/images/investor-app.png" width="52" alt="">
+        <div>
+            <p style="font-size:19px;">36氪创投助手</p>
+            <p style="color:#858d97;font-size:15px;">精选全网最优质的项目</p>
+        </div>
+        <div class="download-btn">
+            <a href="javascript:">立即下载</a>
+        </div>
+    </div>
+</body>
+</html>
+
