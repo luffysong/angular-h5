@@ -6,6 +6,18 @@ angular.module('defaultApp')
         $rootScope.REGEXP = $rootScope.REGEXP || {};
         $rootScope.REGEXP.phone = /^[0-9]*$/;
         $rootScope.isInApp = !!navigator.userAgent.match(/36kr/) || window.isAppAgent;
+        testLocalStorage();
+        function testLocalStorage() {
+            if (typeof localStorage === 'object') {
+                try {
+                    localStorage.setItem('localStorage', 1);
+                    localStorage.removeItem('localStorage');
+                } catch (e) {
+                    window.Storage.prototype._setItem = window.Storage.prototype.setItem;
+                    window.Storage.prototype.setItem = function () {};
+                }
+            }
+        }
     })
     .run(function ($http, $rootScope, notify) {
         notify.config({

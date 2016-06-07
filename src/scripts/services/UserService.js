@@ -35,7 +35,8 @@ angular.module('defaultApp.service').service('UserService', [
                 'finacing',
                 'work',
                 'send-sms',
-                'check'
+                'check',
+                'gee'
 
                 // "finance_sort",
                 // "company_sort",
@@ -339,7 +340,21 @@ angular.module('defaultApp.service').service('UserService', [
                 send: {
                     method: 'post',
                 },
-            },
+            }, gee: {
+                initCode: {
+                    url: '/api/gee-test/init-code',
+                    params:{
+                        sub: undefined
+                    },
+                    method: 'post'
+                }, sendCode: {
+                    url: '/api/gee-test/send-code',
+                    method: 'post',
+                    params: {
+                        sub: undefined
+                    }
+                }
+            }
 
         });
 

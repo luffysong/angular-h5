@@ -8,7 +8,7 @@
         </div>
         <!-- 自定义错误信息 -->
     </div>
-    <div class="welcome">
+    <div class="welcome validate-welcome-wrapper">
         <div class="welcome-words"
              ng-show="investorValidateApply.status != 'success' && investorValidateApply.status !='checking'">
             <p>认证成为投资人,开启发现项目之旅</p>
@@ -69,17 +69,19 @@
                         <input class="form-control" type="text" placeholder="未填写" name="smscode"
                                ng-model="user.smscode" required/>
                     </div>
-                    <div class="control code-group">
+                    <div class="control code-group text-code">
                         <a class="btn btn-linear get-code wait" href="javascript:void(0)" ng-disabled="wait" ng-if="wait">{{wait+'秒'}}</a>
                         <a class="btn btn-linear get-code btn-thin btn-sms"
                            href="javascript:void(0)"
                            ng-disabled="!user.phone"
                            ng-if="!wait"
-                           ng-click="getCode($event)">点击获取</a>
+                           ng-click="getCode($event, false)">点击获取</a>
+                    </div>
+                    <div ng-if="!wait" class="control code-group voice-code">
+                        您也可以尝试
                         <a class="btn btn-linear get-code btn-thin"
                            href="javascript:void(0)"
                            ng-disabled="!user.phone || user.cc.cc != '86' || user.cc.cc != 86"
-                           ng-if="!wait"
                            ng-click="getCode($event, true)">接听语音验证码</a>
                     </div>
                 </div>
@@ -95,70 +97,9 @@
                   name="investorValidateForm"
                   class="form-container">
                 <div error-wrapper error-group="investorErrorGroup"></div>
+
                 <div>
-                    <div class="line brief">
-                        <label>个人简介</label>
-                        <div class="col-max">
-                            <textarea ng-model="invest.intro" name="intro" placeholder="简单介绍你的个人经历，30字" maxlength="30" required></textarea>
-                        </div>
-                    </div>
-                    <!--上传名片-->
-                    <div class="line upload-pictures">
-                        <label for="pictures">上传名片<span class="tip">(仅供审核使用)</span></label>
-                        <div class="col-max">
-                            <div class="item">
-                                <div class="intro-pic-list icon-select">
-                                    <div class="pic-wrapper pic-input">
-                                        <div class="pic-wrapper" ng-show="investorValidateForm.pictures.uploaded || invest.pictures" style="background-image: url({{ investorValidateForm.pictures.uploaded || invest.pictures}});"></div>
-                                        <input ng-file-select
-                                               type="file" name="pictures" id="pictures" class="input-file" accept="image/*"
-                                               ng-file-change="imgFileSelected(investorValidateForm.pictures, $files)"
-                                               ng-click="androidUpload(investorValidateForm.pictures, $event)"
-                                               ng-model="pictures" ng-multiple="false" resetOnClick="true"
-                                        />
-                                        <div ng-show="investorValidateForm.pictures.uploading" class="stick pic-stick" style="height:{{investorValidateForm.pictures.progress}}%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="basic-info">
-                        关注行业
-                    </div>
-                    <div class="line normal">
-                        <div class="col-flex clearfix">
-                            <div picker="invest.investorFocusIndustrys"
-                                 template-url="templates/common/picker.html"
-                                 mp-map="desc,value"
-                                 mp-multiple="true"
-                                 name="industry"
-                                 required
-                                 ng-model="invest.industry"></div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="basic-info">
-                        关注阶段
-                    </div>
-                    <div class="line">
-                        <div class="col-flex">
-                            <div picker="invest.fundsPhase"
-                                 template-url="templates/common/picker.html"
-                                 mp-map="desc,value"
-                                 mp-multiple="true"
-                                 name="stage"
-                                 required
-                                 ng-model="invest.investPhases"></div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="basic-info">
-                        工作经历
-                    </div>
+
                     <div class="line">
                         <label>投资身份</label>
                         <div class="control icon-select">
@@ -194,13 +135,7 @@
                                 autocomplete-options="suggestOrganizationOption" placeholder="未填写" name="name"
                             > </div>
                         </div>
-                        <div class="line content-list" ng-if="organization.isAddExperience && organization.isAdd">
-                            <label>机构简介</label>
-                            <div class="control">
-                                <input type="text" name="organizationBrief" placeholder="未填写" minlength='10'  maxlength="300"
-                                       ng-model="organization.addForm.brief" required/>
-                            </div>
-                        </div>
+
                         <!--新增机构-->
                         <div class="content-list">
                             <!--职位-->
@@ -287,39 +222,31 @@
                             </div>
                         </div>
                 </div>
-                <div>
-                    <div class="basic-info">
-                        单笔可投
-                    </div>
-                    <div class="line">
-                        <label>主投币种</label>
-                        <div class="control icon-select clearfix">
-                            <select ng-model="invest.mainCurrency" required
-                                    name="moneyUnit" class="">
-                                <option value="">未选择</option>
-                                <option value="CNY">人民币</option>
-                                <option value="USD">美元</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="line invest-money normal">
-                        <label>单笔可投额度</label>
-                        <div class="row-1">
-                            <!-- 人民币 -->
-                            <div class="fr clearfix ml-10">
-                                <input ng-model="invest.investMin" ng-change="changeMoney('investMin')"
-                                       type="tel" maxlength="6" placeholder="未填写" required
-                                       class="form-control investor-amount" name="investFrom"/>
-                                万
-                                <span class="icon-zhi">－</span>
-                                <input ng-model="invest.investMax" ng-change="changeMoney('investMax')"
-                                       type="tel" placeholder="未填写" maxlength="6" required
-                                       class="form-control investor-amount" name="investTo"/>
-                                万
+
+                <div class="upload-wrapper">
+                    <!--上传名片-->
+                    <div class="line upload-pictures">
+                        <label for="pictures">上传名片<span class="tip">(仅供审核使用)</span></label>
+                        <div class="col-max">
+                            <div class="item">
+                                <div class="intro-pic-list icon-select">
+                                    <div class="pic-wrapper pic-input">
+                                        <div class="pic-wrapper" ng-show="investorValidateForm.pictures.uploaded || invest.pictures" style="background-image: url({{ investorValidateForm.pictures.uploaded || invest.pictures}});"></div>
+                                        <input ng-file-select
+                                               type="file" name="pictures" id="pictures" class="input-file" accept="image/*"
+                                               ng-file-change="imgFileSelected(investorValidateForm.pictures, $files)"
+                                               ng-click="androidUpload(investorValidateForm.pictures, $event)"
+                                               ng-model="pictures" ng-multiple="false" resetOnClick="true"
+                                        />
+                                        <div ng-show="investorValidateForm.pictures.uploading" class="stick pic-stick" style="height:{{investorValidateForm.pictures.progress}}%;"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
                 <div class="basic-info"></div>
                 <div class="form-submit">
                     <a href="" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="hasClick">提交认证</a>
@@ -351,3 +278,11 @@
     </div>
 
 </div>
+
+<script type="text/ng-template" id="templates/util/pop-captcha.html">
+<div class="pop-form">
+    <div class="geetest-captcha">
+      <div geetest type="type" phone="phone" is-voice="isVoice" callback="callback"></div>
+    </div>
+</div>
+</script>
