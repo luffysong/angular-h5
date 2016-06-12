@@ -39,4 +39,10 @@ angular.module('defaultApp.filter').filter('image', function () {
 
         return src;
     };
+}).directive('img', function () {
+    return function (scope, elem) {
+        elem[0].onerror = function () {
+            elem[0].src = kr.defaultImg.defaultLogoUrl;
+        };
+    };
 });
