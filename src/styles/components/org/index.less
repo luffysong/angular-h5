@@ -1,0 +1,238 @@
+.org-wrapper{
+    @blue:#36bef1;
+    @black: #222c38;
+    @gray: #5a626d;
+    @light-gray: #969fa9;
+    @line-color: #e7e7e7;
+
+    color: @gray;
+    font-size: 15px;
+    ul,li,h4,h3,p{
+        margin:0;
+        padding: 0;
+        list-style: none;
+    }
+    .h3,h3{
+        font-size: 17px;
+        font-weight: 600;
+        line-height: 17px;
+        position: relative;
+        &:before{
+            content:" ";
+            display: inline-block;
+            position: absolute;
+            left: -15px;
+            height: 16px;
+            top: 2px;
+            width: 4px;
+            background: @blue;
+        }
+    }
+    .container(){
+        background: white;
+        padding: 16px 15px 10px 15px;
+        width: 100%;
+    }
+    .logo-wrapper.top-org{
+        background-image:url(/styles/images/org-bg.png);
+    }
+    .logo-wrapper{
+        width: 100%;
+        height: 135px;
+        text-align: center;
+        background:url(/styles/images/normal-org.png);
+        background-size: 100% auto;
+        background-position: 50% 50%;
+        padding-top: 18px;
+        position: relative;
+        span{
+            display:none;
+        }
+        .top-org-text{
+            background: #f8627e;
+            color: #fff;
+            font-size: 11px;
+            line-height: 1.2;
+            position: absolute;
+            padding: 2px 8px;
+            top: 20px;
+            right:0;
+            display: block;
+        }
+        .img-wrapper{
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            overflow: hidden;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto ;
+        }
+        img{
+            width: 100%;
+            vertical-align: middle;
+        }
+        h4{
+            font-size: 15px;
+            color: #fff;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+    }
+    .brief-wrapper{
+        .container();
+        margin-top: 10px;
+        .org-brief  .text-container{
+            padding: 18px 0px;
+            border-top: 1px solid @line-color;
+            border-bottom: 1px solid @line-color;
+            margin: 15px 0px 13px;
+            p{
+                text-align: left;
+                overflow : hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                line-height: 20px;
+                //使用after让浏览器重绘文字 使-webkit-line-clamp生效
+                &:after{
+                    width: 0;
+                    height: 0;
+                    display: inline-block;
+                    overflow: hidden;
+                    content: attr(style);
+                }
+            }
+
+        }
+        .org-brief{
+            text-align: center;
+            a{
+                color: @light-gray;
+            }
+        }
+
+    }
+    .cases-wrapper{
+        .container();
+        padding-bottom: 0px;
+        margin-top: 10px;
+        .invest-cases > ul > li{
+            margin-top: 15px;
+            border-top: 1px solid @line-color;
+            padding-top: 25px;
+            &:last-child{
+                border-bottom: 1px solid @line-color;
+                padding-bottom: 12px;
+            }
+        }
+        .invest-cases{
+            text-align:center;
+            a{
+                line-height: 40px;
+                font-size: 15px;
+                text-align: center;
+                color: @light-gray;
+                display: inline-block;
+            }
+            ul{
+                text-align:left;
+            }
+        }
+        .project-info{
+            overflow: hidden;
+            display: flex;
+            .project-logo-wrapper{
+                width: 64px;
+                min-width: 64px;
+                height: 64px;
+                line-height: 64px;
+                text-align: center;
+                img{
+                    width: 64px;
+                    vertical-align: middle;
+                }
+            }
+            .project-logo-wrapper + div{
+                margin-left: 10px;
+                line-height: 16px;
+                h4{
+                    font-size: 17px;
+                    color: @black;
+                    line-height:1;
+
+                }
+                p{
+                    margin-top: 8px;
+                    text-align: left;
+                    font-size: 13px;
+                    overflow : hidden;
+                    line-height: 1.2;
+                    padding-bottom: 4px;
+                    border-bottom: 1px solid @line-color;
+                }
+            }
+        }
+        .time-line{
+            li{
+                margin-left: 64px;
+                padding-left: 10px;
+                .line(){
+                    &:after{
+                        content:" ";
+                        display: block;
+                        position: absolute;
+                        width: 1px;
+                        top: -7px;
+                        bottom: -15px;
+                        left:-14px;
+                        transform: scaleX(0.5);
+                        background: #ddd;
+                    }
+                }
+                p{
+                    position: relative;
+                    line-height: 1.2;
+                    &:first-child{
+                        padding-top: 10px;
+                        &:before{
+                            content:" ";
+                            display: block;
+                            z-index: 1;
+                            position: absolute;
+                            width: 7px;
+                            height: 7px;
+                            left: -17px;
+                            top: 14px;
+                            border-radius: 50%;
+                            background: #f8627e;
+                        }
+                        .line();
+                        &:after{
+                            bottom: 10px;
+                        }
+                    }
+                    &:nth-child(2){
+                        .line();
+                        padding-top: 3px;
+                    }
+                }
+                &:first-child p:first-child:after{
+                    display:none;
+                }
+                &:last-child p:nth-child(2):after{
+                    bottom: 0px;
+                }
+
+            }
+            .investors{
+                span span{
+                    &:first-child{
+                        margin-left: 0px;
+                    }
+                    margin-left: 6px;
+                }
+            }
+        }
+    }
+
+}

@@ -149,13 +149,39 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controller: 'ClaimController',
         controllerAs: 'vm',
         templateUrl: 'templates/claim/index.html',
-        resolve: { /* @injection */
+        resolve: { /* @ngInjection */
             user: checkClaimStatus
+        }
+    });
+
+    //机构页
+    $stateProvider.state('organization', {
+        url:'/org/:id',
+        controllerAs: 'vm',
+        controller: 'OrganizationDetailController',
+        templateUrl: 'templates/organization/index.html',
+        resolve: {
+            orgInfo: loadOrgBasic,
+            investments: loadOrgInvestments
         }
     });
 
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
+    }
+
+    function loadOrgBasic(OrganizationService, $stateParams) {
+        return OrganizationService.basic.get({
+            id: $stateParams.id
+        }).$promise;
+    }
+
+    function loadOrgInvestments(OrganizationService, $stateParams) {
+        return OrganizationService['past-investment'].get({
+                id: $stateParams.id,
+                page: 1,
+                pageSize: 20
+            }).$promise;
     }
 
 });
