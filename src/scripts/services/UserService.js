@@ -671,7 +671,7 @@ angular.module('defaultApp.service').service('UserService', [
                 type: 'now',
                 msg: '任职的起始时间不能大于当前月'
             }, {
-                type: 'time',
+                type: 'required',
                 msg: '请选择任职时间'
             }]
         }, {
