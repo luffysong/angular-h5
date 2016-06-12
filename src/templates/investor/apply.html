@@ -21,7 +21,9 @@
                 <div class="line upload-avatar">
                     <ul class="intro-pic-list">
                         <li style="background-image: url({{ guideForm.avatar.uploaded || user.avatar | image:70: 'avatar'}});"
-                            class="pic-list">
+                            class="pic-avatar">
+                            <div ng-show="guideForm.avatar.uploading"
+                                ng-style="{height: guideForm.avatar.progress + '%'}" ></div>
                         </li>
                         <li ng-show='!guideForm.picture.uploading'>
                             <input class="input-file" type="file" name="avatar" accept="image/*"
