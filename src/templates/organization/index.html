@@ -34,21 +34,24 @@
                     <li  ng-repeat="investment in vm.investments">
                         <div class="project-info">
                             <div class="project-logo-wrapper">
-                                <img ng-src="{{investment.logo | image: 'logo'}}" /></div>
+                                <img ng-src="{{investment.logo | image: 'logo'}}" />
+                            </div>
                             <div>
                                 <h4>{{investment.name}}</h4>
                                 <p>{{investment.brief}}</p>
+                                <ul class="time-line">
+                                    <li ng-repeat="detail in investment.details">
+                                        <p><span>{{detail.investDate | date:'yyyy.MM'}}  </span>
+                                            <span>{{detail.phase | dict_FinancePhase}}</span></p>
+                                        <p class="investors" ng-if="detail.otherParticipants">
+                                            合投方：<span ng-bind-html="::vm.joinInvestorNames(detail.otherParticipants)"></span>
+                                        </p>
+                                    </li>
+                                </ul>
                             </div>
+
                         </div>
-                        <ul class="time-line">
-                            <li ng-repeat="detail in investment.details">
-                                <p><span>{{detail.investDate | date:'yyyy.MM'}}  </span>
-                                    <span>{{detail.phase | dict_FinancePhase}}</span></p>
-                                <p class="investors" ng-if="detail.otherParticipants">
-                                    合投方：<span ng-bind-html="::vm.joinInvestorNames(detail.otherParticipants)"></span>
-                                </p>
-                            </li>
-                        </ul>
+
                     </li>
                 </ul>
                 <a href="javascript:" ng-if="vm.investments.length&&!vm.allLoaded" ng-click="vm.loadMore()">查看更多</a>

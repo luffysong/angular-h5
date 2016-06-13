@@ -327,7 +327,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 return;
             }
 
-            scope.temp = '';
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 scope.uploading = true;
@@ -347,9 +346,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     }).success(function (data) {
 
                         var reader = new FileReader();
-                        reader.onload = function () {
-                            scope.temp = reader.result;
-                        };
 
                         var filename = data.url.toLowerCase();
                         if (filename.indexOf('.jpg') !== -1 || (filename.indexOf('.png') !== -1) ||
@@ -363,7 +359,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         }
 
                         scope.uploading = false;
-                        scope.temp = '';
                     }).error(function () {
                         scope.$setValidity('type', false);
                         scope.uploading = false;
