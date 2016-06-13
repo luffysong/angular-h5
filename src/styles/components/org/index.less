@@ -120,7 +120,21 @@
         margin-top: 10px;
         .invest-cases > ul > li{
             margin-top: 18px;
-            border-top: 1px solid @line-color;
+            position: relative;
+            &:first-child:before{
+                left: 0px;
+            }
+            &:before{
+                content:"";
+                display: block;
+                height: 1px;
+                transform: scaleY(0.5);
+                position: absolute;
+                top:0;
+                left: 74px;
+                right: 0px;
+                background: @line-color;
+            }
             padding-top: 18px;
             &:last-child{
                 border-bottom: 1px solid @line-color;
@@ -148,6 +162,7 @@
                 min-width: 64px;
                 height: 64px;
                 line-height: 64px;
+                border: 1px solid @line-color;
                 text-align: center;
                 border-radius: 8px;
                 overflow: hidden;
