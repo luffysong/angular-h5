@@ -149,6 +149,8 @@
                 height: 64px;
                 line-height: 64px;
                 text-align: center;
+                border-radius: 8px;
+                overflow: hidden;
                 img{
                     width: 64px;
                     vertical-align: middle;
@@ -194,6 +196,7 @@
                     line-height: 1.2;
                     &:first-child{
                         padding-top: 10px;
+                        color: @black;
                         &:before{
                             content:" ";
                             display: block;
@@ -226,10 +229,7 @@
             }
             .investors{
                 span span{
-                    &:first-child{
-                        margin-left: 0px;
-                    }
-                    margin-left: 6px;
+                    margin-right: 6px;
                 }
             }
         }
