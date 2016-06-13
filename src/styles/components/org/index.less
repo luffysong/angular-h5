@@ -85,8 +85,23 @@
         margin-top: 10px;
         .org-brief  .text-container{
             padding: 18px 0px;
-            border-top: 1px solid @line-color;
-            border-bottom: 1px solid @line-color;
+            position: relative;
+            &:before,&:after{
+                content:"";
+                display: block;
+                position: absolute;
+                height: 1px;
+                left: 0;
+                background: @line-color;
+                right: 0;
+                transform: scaleY(0.5);
+            }
+            &:before{
+                top: 0;
+            }
+            &:after{
+                bottom: 0;
+            }
             margin: 15px 0px 0px;
             p{
                 text-align: left;
