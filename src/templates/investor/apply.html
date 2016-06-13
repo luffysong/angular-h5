@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container investor-apply-wrapper">
     <div class="error-wrapper">
         <!--所有报错信息-->
         <!-- 自定义错误信息 -->
@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="basic-info"></div>
+            <div class="basic-info basic-info-cutter "></div>
         </form>
     </div>
     <div class="investor-validate investor-validate-apply" ng-show="investorValidateApply.status != 'success' && investorValidateApply.status !='checking'">
@@ -104,7 +104,7 @@
 
                     <div class="line">
                         <label>投资身份</label>
-                        <div class="control icon-select">
+                        <div class="control icon-select pr-15">
                             <select ng-model="invest.investorRole"
                                     name="identity"
                                     class="fr" required>
@@ -143,7 +143,7 @@
                             <!--职位-->
                             <div class="line clearfix">
                                 <label>职位</label>
-                                <div class="control icon-select">
+                                <div class="control icon-select pr-15">
                                     <select ng-options="c.value as c.desc for c in orgPositionType"
                                             ng-model="organization.form.position"
                                             name="position"
@@ -165,7 +165,9 @@
                                         <select name="time" required  ng-model="organization.form.startMonth" ng-options="m for m in monthOptions">
                                             <option value="">月</option>
                                         </select>
-                                    </div>－至今
+                                    </div>
+                                    <div class="il-bk to-now" >－至今
+                                    </div>
                                 </div>
                             </div>
                         </div>

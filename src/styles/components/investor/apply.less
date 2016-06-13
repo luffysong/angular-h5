@@ -10,8 +10,21 @@
 
 
 }
+.investor-apply-wrapper{
+    background: #f7f7f7;
+    height:100%;
+    .form-submit{
+        a{
+            border-radius: 4px;
+            color: #fff !important;
+            background:#464e58 !important;
+        }
+        a:active,a:focus,a:hover{
+            color: rgba(255,255,255,0.5) !important;
+        }
+    }
+}
 .upload-wrapper{
-    margin-top: 10px;
     position: relative;
     &:before{
         content:" ";
@@ -43,6 +56,24 @@
         a{
             border: none;
         }
+    }
+    input[type=text],input[type=email]{
+        padding-right: 15px;
+    }
+}
+.investor-validate-apply form{
+    input[type=text]{
+        padding-right: 15px;
+    }
+    .il-bk{
+        vertical-align:middle;
+    }
+    .pr-15{
+        padding-right: 15px;
+    }
+    .to-now{
+        color: #5a626d;
+        margin-top: 2px;
     }
 }
 .pop-geetest .modal-dialog{
@@ -98,6 +129,7 @@
 
 .upload-pictures{
     line-height: 65px;
+    padding-top: 25px;
 }
 .col-max {
     width: 100%;
@@ -205,6 +237,9 @@
     padding: 10px;
     background: #f7f7f7;
     text-align: center;
+}
+.basic-info-cutter{
+    padding-bottom: 0px;
 }
 .border-none{
     border-top:0;
