@@ -10,7 +10,7 @@
             <span ng-class="::{'top-org-text': vm.isTop()}">顶级投资机构</span>
         </div>
     </header>
-    <section class="brief-wrapper">
+    <section class="brief-wrapper" ng-if="::vm.basic.intro">
         <div>
             <h3>机构简介</h3>
             <div class="org-brief">
@@ -26,7 +26,7 @@
             </div>
         </div>
     </section>
-    <section ng-show="vm.investments.length" class="cases-wrapper">
+    <section ng-if="::vm.investments.length" class="cases-wrapper">
         <div>
             <h3>投资案例</h3>
             <div class="invest-cases">
@@ -56,6 +56,13 @@
                 </ul>
                 <a href="javascript:" ng-if="vm.investments.length&&!vm.allLoaded" ng-click="vm.loadMore()">查看更多</a>
             </div>
+        </div>
+    </section>
+
+    <section tou-fill-height class="empty-wrapper" ng-if="!vm.investments.length && !vm.basic.intro">
+        <div>
+            <img width="75" src="/styles/images/empty.png" alt="">
+            <p>暂无机构介绍</p>
         </div>
     </section>
 </div>
