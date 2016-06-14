@@ -15,7 +15,7 @@ angular.module('defaultApp.controller').controller('OrganizationDetailController
         active();
         function active() {
             vm.basic = orgInfo;
-            document.title = orgInfo.nameAbbr + '机介绍';
+            document.title = orgInfo.nameAbbr + '机构介绍';
             pastInvestmentLoaded(investments);
         }
 
