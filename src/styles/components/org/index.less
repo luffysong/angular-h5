@@ -125,6 +125,7 @@
             a{
                 color: @light-gray;
                 line-height: 45px;
+                display: block;
             }
         }
 
@@ -175,14 +176,17 @@
                 width: 64px;
                 min-width: 64px;
                 height: 64px;
-                line-height: 64px;
                 border: 1px solid @line-color;
                 text-align: center;
                 border-radius: 8px;
                 overflow: hidden;
+                position: relative;
                 img{
-                    width: 64px;
-                    vertical-align: middle;
+                    width: 100%;
+                    position: absolute;
+                    left:0;
+                    top: 50%;
+                    transform: translateY(-50%);
                 }
             }
             .project-logo-wrapper + div{
