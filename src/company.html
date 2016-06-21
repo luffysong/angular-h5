@@ -11,15 +11,24 @@
         })(window,document,'script','//36kr.com/global/stat.js','krtracker');
         krtracker('trackPageView', location.pathname+location.search);
     </script>
+
+<!-- build:css /styles/company.css -->
+    <link rel="stylesheet" href="/styles/company.css" >
+<!-- endbuild -->
 <!-- build:js /scripts/zepto.min.js -->
     <script src="/components/zepto/zepto.min.js"></script>
     <script src="/components/purl/purl.js"></script>
 <!-- endbuild -->
 <script>
     var cid = purl(location.href).segment(2);
+
+    //线上环境使用nginx代理 此处为方便本地测试
+    if(!parseInt(cid)){
+        cid = purl(location.href).param('cid');
+    }
     var SUCCESS = 0;
     var appurl = 'krtou://open';
-    var HOST = 'rong.36kr.com';
+    var HOST = location.host;
     var API = '//' +  HOST + '/api/mobi-investor/company/';
     var isDesktop = !navigator.userAgent.toLowerCase().match(/(iphone|android)/);
     function preventPopup() { //定义preventPopup函数
@@ -37,11 +46,13 @@
         },500);
     }
 
-    function goAppStore(){
-        krtracker('trackEvent','按钮', 'h5.ctappshare.download');
+    function goYingyongbao(prefix){
         timeout = setTimeout(function(){
-            document.location = "https://itunes.apple.com/cn/app/36ke-chuang-tou-zhu-shou/id1075751043?mt=8";
-        }, 1000);
+            krtracker('trackEvent','按钮', prefix +'.h5.ctappshare.download');
+            setTimeout(function() {
+                document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
+            },200)
+        }, 500);
          window.addEventListener('pagehide', preventPopup);
     }
     $.getJSON(API + cid + '/sharebasic/v3',function(data){
@@ -57,161 +68,38 @@
 
                 $('#name').html(data.name);
                 $('#brief').html(data.brief);
+                $('#tags').html(data.tags);
+                $('#hot').html(data.advantage);
+                if(!data.advantage){
+                    $('.hot').hide();
+                }
             });
 
         }
     });
-    function isIOS9UIWebView(userAgent) {
-      return /(iPhone|iPad|iPod).* OS 9_\d/.test(userAgent) ;
-    }
+
     $(function () {
         var userSystem=navigator.userAgent; //userAgent
         if(/MicroMessenger/i.test(userSystem)  &&
                 userSystem.toLowerCase().indexOf('iphone') > -1){ //在微信中打开
              $('.mask').show();  //ios用safari打开
          }else if(userSystem.indexOf('Android') > -1){
-             location.href="https://rong.36kr.com/m/#/company/" + cid;
-         }else if(isDesktop){
-             location.href = "https://rong.36kr.com/company/" + cid;
+            $('a').click(function(e){
+                e.preventDefault();
+                goYingyongbao('android');
+            });
          }else if(/iphone/i.test(userSystem)){
             startApp();
             $('a').click(function(e){
                 e.preventDefault();
                 startApp();
-                goAppStore();
+                goYingyongbao('ios');
             });
          }
 
     })
 
 </script>
-<style type="text/css" >
-    body{
-        text-align: center;
-    }
-    *{
-        box-sizing: border-box;
-    }
-    h3,h2{
-        font-weight: 600;
-    }
-    h3{
-        color: #5a626d;
-        font-size: 17px;
-        text-align: center;
-        margin: 0;
-        margin-top: 55px;
-    }
-    h3:before, h3:after{
-        display: inline-block;
-        content: " ";
-        width:10px;
-        height: 1px;
-        background: #adb0b7;
-        vertical-align: middle;
-        margin-right: 8px;
-    }
-    h3:after{
-        margin-right:0px;
-        margin-left: 8px;
-    }
-    .mask{
-       position: fixed;
-       left:0;
-       top:0;
-       bottom:0;
-       right:0;
-       background:rgba(0,0,0,0.8);
-       z-index: 999;
-       display:none;
-    }
-    .arrow{
-        overflow: hidden;
-        margin-top: 10px;
-    }
-    .arrow img{
-        right:0;
-        float: right;
-        margin-right: 20px;
-    }
-    .guide-desc {
-        overflow: hidden;
-    }
-    .guide-desc > div{
-        float: right;
-        margin-right: 60px;
-    }
-    .guide-desc p{
-        font-size: 16px;
-        text-align: left;
-        line-height: 20px;
-        color: #fff;
-        margin:0 ;
-    }
-    .guide-desc > img{
-        float: right;
-        margin-right: 10px;
-    }
-    #logo{
-        margin-top: 50px;
-        border-radius: 18px;
-        border: 1px solid #e7e7e7;
-    }
-    #name{
-        margin: 0;
-        color: #222c38;
-        font-size: 19px;
-        margin:23px 0px 12px;
-    }
-    #brief{
-        color: #5a626d;
-        font-size: 14px;
-    }
-    .split-line{
-        border: 1px dashed rgba(25,28,30,0.1);
-        margin-top: 45px;
-        display:inline-block;
-        width: 90%;
-    }
-    .download-wrapper{
-        width: 210px;
-        overflow: hidden;
-        margin: 0 auto;
-        margin-top: 50px;
-    }
-    .download-wrapper img{
-        float: left;
-        width: 40px;
-    }
-    .download-wrapper div{
-        float: right;
-        text-align:left;
-    }
-    .download-wrapper p{
-        text-align: left;
-        margin: 0;
-        color: #5a626d;
-        line-height: 20px;
-    }
-    .download-wrapper p span{
-        color: #222c38;
-    }
-    a{
-        display:inline-block;
-        width:210px;
-        line-height: 45px;
-        background:#42cb88;
-        color: #fff;
-        font-size: 15px;
-        text-align: center;
-        box-shadow: 0px 8px 15px rgba(66,203,136,0.55);
-        -webkit-box-shadow: 0px 8px 15px rgba(66,203,136,0.55);
-        border-radius: 3px;
-        margin-top: 20px;
-        text-decoration: none;
-        font-weight: 600;
-    }
-</style>
 </head>
 <body>
     <div class="mask">
@@ -226,24 +114,35 @@
             <img width="42" src="/styles/images/safari.png" alt="">
         </div>
     </div>
-    <div>
-        <h3>36氪精选项目</h3>
-        <img width="95" id="logo" src="" />
+    <div class="content content-top">
+        <img width="85" height="85" id="logo" src="" />
         <h2 id="name"></h6>
-        <p id="brief"></p>
-        <div class="split-line">
-
-        </div>
+        <p  class="tag"><img src="/styles/images/company-share/tag.png" width="9" alt=""> <span id="tags"></span></p>
+        <p class="hot"><img src="/styles/images/company-share/hot.png" width="9" alt=""> <span id="hot"></span></p>
+        <p id="brief">汇集全球范围内最优秀的基因测序产</p>
     </div>
-    <div class="download-wrapper">
-        <img src="/styles/images/investor-app-icon.png" />
+    <div class="split-rect">
+        <div class="split-line"></div>
+    </div>
+    <div class="content content-bottom">
+        <div class="download-wrapper">
+            <div>
+                <p>下载<span>【36氪创投助手】，</span>即刻查看该项目详情</p>
+            </div>
+        </div>
         <div>
-            <p>下载<span>【36氪创投助手】</span></p>
-            <p>即刻查看该项目详情</p>
+            <a id="downloadBtn" href="">立即下载</a>
         </div>
+
     </div>
-    <div>
-        <a id="downloadBtn" href="">立即下载</a>
+
+    <div class="app-desc">
+        <ul>
+            <li><p><img src="/styles/images/investor-app-icon.png" /><span>36氪创投助手</span></p></li>
+            <li>严格筛选，推荐全网最优质项目</li>
+            <li>每天上新5-10个精品项目</li>
+            <li>直接约谈创始人，轻松高效</li>
+        </ul>
     </div>
 </body>
 </html>
