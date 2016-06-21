@@ -80,22 +80,20 @@
 
     $(function () {
         var userSystem=navigator.userAgent; //userAgent
-        if(/MicroMessenger/i.test(userSystem)  &&
-                userSystem.toLowerCase().indexOf('iphone') > -1){ //在微信中打开
-             $('.mask').show();  //ios用safari打开
-         }else if(userSystem.indexOf('Android') > -1){
-            $('a').click(function(e){
+        $('a').click(function clickCb(e){
+            e.preventDefault();
+            if(/MicroMessenger/i.test(userSystem)  &&
+                    userSystem.toLowerCase().indexOf('iphone') > -1){ //在微信中打开
+                 $('.mask').show();  //ios用safari打开
+             }else if(userSystem.indexOf('Android') > -1){
                 e.preventDefault();
                 goYingyongbao('android');
-            });
-         }else if(/iphone/i.test(userSystem)){
-            startApp();
-            $('a').click(function(e){
-                e.preventDefault();
+             }else if(/iphone/i.test(userSystem)){
                 startApp();
                 goYingyongbao('ios');
-            });
-         }
+             }
+        })
+
 
     })
 
