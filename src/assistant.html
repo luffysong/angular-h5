@@ -21,24 +21,21 @@
 <!-- endbuild -->
 <script>
 
-    function goAppStore(){
-        krtracker('trackEvent','按钮', 'tzrtqh5');
+    function goYingyongbao(prefix){
+        krtracker('trackEvent','按钮', prefix + '.inviteinvestor.download');
         timeout = setTimeout(function(){
-            document.location = "https://appsto.re/cn/dIQhab.i";
-        }, 1000);
+            document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
+        }, 500);
     }
 
     $(function () {
         var userSystem=navigator.userAgent; //userAgent
         $('a').click(clickCb);
         function clickCb() {
-            if(/MicroMessenger/i.test(userSystem)  &&
-                 userSystem.toLowerCase().indexOf('iphone') > -1){ //在微信中打开
-                 $('.mask').show();  //ios用safari打开
-             }else if(userSystem.indexOf('Android') > -1){
-                 location.href="http://huodong.36kr.com/h5/investor-app/hub.html";
+            if(userSystem.indexOf('Android') > -1){
+                   goYingyongbao('android');
              }else if(/iphone/i.test(userSystem)){
-                   goAppStore();
+                   goYingyongbao('ios');
              }
         }
 
@@ -54,18 +51,6 @@
 
 </head>
 <body class="assistant-wrapper">
-    <div class="mask">
-        <div class="arrow">
-            <img width="36px" src="/styles/images/guide-ios-arrow.png" alt="">
-        </div>
-        <div class="guide-desc">
-            <div>
-                <p>请使用Safari打开</p>
-                <p>即刻下载36氪创投助手</p>
-            </div>
-            <img width="42" src="/styles/images/safari.png" alt="">
-        </div>
-    </div>
     <div class="kr36">
         <img class="kr36" width="33" src="/styles/images/36kr-white.png" />
     </div>
