@@ -63,7 +63,7 @@
             $(function(){
                 $('#logo').attr('src', data.logo + '?v');
                 $('#logo').error(function(e) {
-                    this.src = 'https://krplus.b0.upaiyun.com/default_logo.png';
+                    this.src = $('.app-desc img')[0].src;
                 });
 
                 $('#name').html(data.name);
@@ -106,14 +106,16 @@
         </div>
         <div class="guide-desc">
             <div>
-                <p>请使用Safari打开</p>
+                <p>请使用浏览器打开</p>
                 <p>即刻查看项目详情</p>
             </div>
             <img width="42" src="/styles/images/safari.png" alt="">
         </div>
     </div>
     <div class="content content-top">
-        <img width="85" height="85" id="logo" src="" />
+        <div class="logo">
+            <img  id="logo" src="" />
+        </div>
         <h2 id="name"></h6>
         <p  class="tag"><img src="/styles/images/company-share/tag.png" width="9" alt=""> <span id="tags"></span></p>
         <p class="hot"><img src="/styles/images/company-share/hot.png" width="9" alt=""> <span id="hot"></span></p>
