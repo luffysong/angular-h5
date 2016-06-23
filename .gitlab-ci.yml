@@ -11,7 +11,7 @@ cache:
 before_script:
 - export PATH=/home/gitlab_ci_multi_runner/node-v5.10.1-linux-x64/bin:$PATH
 
-#- export PHANTOMJS_CDNURL=https://npm.taobao.org/dist/phantomjs
+- export PHANTOMJS_CDNURL=https://npm.taobao.org/dist/phantomjs
 
 #Install And Test:
 #  stage: init test
