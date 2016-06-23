@@ -22,10 +22,10 @@ before_script:
 Bleeding Edge Test0203:
   stage: build_test0203
   script:
-  - hostname && whoami
-#  - npm i
-#  - bower i -F --allow-root
-#  - bash deploy_test_aliyun.sh docker-01 test01
+#  - hostname && whoami
+  - npm i
+  - bower i -F --allow-root
+  - bash deploy_test_aliyun.sh docker-01 test01
   only:
   - master
   cache:
