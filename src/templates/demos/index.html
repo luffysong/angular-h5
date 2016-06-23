@@ -1,0 +1,41 @@
+<div class="demos-wrapper">
+    <header ng-style="{'background-image': (vm.banner | backgroundUrl) }">
+        <p>
+            <span>{{::vm.name}}</span>
+            <br>
+            <span>共 <span ng-bind="::vm.count">0</span> 个创业项目</span>
+        </p>
+    </header>
+    <section ng-show="!vm.demos" ng-class="{'slide-up': vm.demos}" class="password-wrapper">
+        <span ng-if="vm.invalid" class="pwd-invalid">密码错误</span>
+        <p>查看该项目集需要密码，请输入四位密码</p>
+        <input maxlength="4" type="text" ng-model="vm.password" />
+        <a ng-click="vm.vadliateAndGetDemos()" href="javascript:">确定</a>
+    </section>
+
+    <section ng-if="vm.demos" class="demos-content-wrapper">
+        <ul>
+            <li ng-repeat="item in ::vm.demos">
+                <div class="base-info-wrapper">
+                    <div class="logo-wrapper">
+                        <img ng-src="{{item.logo | image}}" alt="">
+                    </div>
+                    <div>
+                        <h3>{{item.name}}</h3>
+                        <p>{{item.brief}}</p>
+                        <p ng-if="item.tags" class="tags"><img src="/styles/images/company-share/tag.png"
+                            width="9" alt=""> {{item.tags}}</p>
+                        <p ng-if="item.advantage" class="hot"><img src="/styles/images/company-share/hot.png"
+                            width="9" alt=""> {{item.advantage}}
+                        </p>
+                    </div>
+                </div>
+                <div class="invest-info-wrapper">
+                    <div>{{item.finance_phase}}</div>
+                    <div>{{item.invest}}</div>
+                    <div>{{item.address}}</div>
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>

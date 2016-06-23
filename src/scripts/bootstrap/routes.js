@@ -166,6 +166,17 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
+    //项目集
+    $stateProvider.state('demos', {
+        url:'/demos/:id',
+        controllerAs: 'vm',
+        controller: 'DemosController',
+        templateUrl: 'templates/demos/index.html',
+        resolve: {
+            demos: loadDemos
+        }
+    });
+
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
     }
@@ -182,6 +193,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
                 page: 1,
                 pageSize: 20
             }).$promise;
+    }
+
+    function loadDemos(demosService, $stateParams) {
+        return demosService.getDemos($stateParams.id)
+            .catch(function demosFail(data) {
+                return data;
+            });
     }
 
 });
