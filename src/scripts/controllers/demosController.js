@@ -9,7 +9,7 @@ function DemosController(demosService, $stateParams, demos) {
 
     init();
     function init() {
-        loadCount($stateParams.id);
+        loadBaseInfo($stateParams.id);
         renderDemos(demos);
     }
 
@@ -34,9 +34,9 @@ function DemosController(demosService, $stateParams, demos) {
         vm.invalid = true;
     }
 
-    function loadCount(id) {
-        demosService.getCount(id)
-            .then(function (data) {
+    function loadBaseInfo(id) {
+        demosService.getBaseInfo(id)
+            .then(function setBaseInfo(data) {
                 vm.count = data.proSetCount;
                 vm.banner = data.proSetImgUrl;
                 vm.name = data.proSetName;

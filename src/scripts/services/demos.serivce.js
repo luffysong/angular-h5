@@ -8,7 +8,7 @@ function demosService(BasicService) {
     var network = createNetWork(BasicService);
 
     this.getDemos = getDemos;
-    this.getCount = getCount;
+    this.getBaseInfo = getBaseInfo;
 
     function saveToken(id, token) {
         if (token) {
@@ -37,7 +37,7 @@ function demosService(BasicService) {
         });
     }
 
-    function getCount(id) {
+    function getBaseInfo(id) {
         return network.getCount({
             proSetId: id
         }).$promise;
