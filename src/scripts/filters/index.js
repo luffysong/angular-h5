@@ -7,5 +7,6 @@ require('./Substr');
 require('./UnitConversion');
 require('./WanNum');
 require('./WanText');
+require('./backgroundUrl.filter');
 require('./default');
 require('./share');

@@ -137,6 +137,9 @@ angular.module('defaultApp.service').config(['$provide', '$httpProvider',
 
             basicService.jqParams = getSerilizeDataTool;
             basicService.makeResponseConverter = makeResponseConverter;
+            basicService.STATUS = {
+                SUCCESS: 0
+            };
             return basicService;
         }
     ]);

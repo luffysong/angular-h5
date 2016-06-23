@@ -1,0 +1,134 @@
+@import "../global/krfunction.less";
+.demos-wrapper{
+    .krfunction();
+    .reset();
+    @border-color: #dbdbdb;
+    @black: #222c38;
+    @gray: #5a626d;
+    @btn-color: #464e58;
+    @line-color: #e7e7e7;
+    @red: #f65875;
+    @cutter: 10px;
+    header {
+        height: 130px;
+        background-position: 50% 50%;
+        background-size: cover;
+        color: #fff;
+        text-align: center;
+        font-size: 18px;
+        line-height: 130px;
+        p{
+            display: inline-block;
+            line-height: 1.2;
+            vertical-align: middle;
+        }
+    }
+    .password-wrapper.slide-up{
+        transition: all .5s;
+        height: 0;
+        border:none;
+        margin-top: 0px;
+        display: block !important;
+    }
+    .password-wrapper{
+        height: 204px;
+        width: 90%;
+        border: 1px solid @border-color;
+        border-radius: 3px;
+        margin: 0 auto;
+        background: #fff;
+        margin-top: 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        .pwd-invalid{
+            position: absolute;
+            width: 100%;
+            bottom : 55px;
+            left: 0;
+            color: red;
+        }
+        p{
+            margin-top: 35px;
+            color: @black;
+            font-size: 15px;
+        }
+        input{
+            margin-top: 20px;
+            outline: none;
+            width: 80%;
+            height: 45px;
+            font-size: 15px;
+            line-height: 1;
+            color: #969fa9;
+            text-align: center;
+            border: 1px solid @border-color;
+            border-radius: 3px;
+        }
+        a{
+            background: @btn-color;
+            color: #9099a3;
+            display: block;
+            line-height: 45px;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+    }
+    .demos-content-wrapper{
+        font-size: 13px;
+        color: @gray;
+        p{
+            line-height: 20px;
+        };
+        li{
+            background: #fff;
+            padding: 14px;
+            margin-top: @cutter;
+        }
+        .base-info-wrapper{
+            display: flex;
+            padding-bottom: 12px;
+            border-bottom:1px solid @line-color;
+        }
+        .logo-wrapper{
+            width: 64px;
+            min-width: 64px;
+            height: 64px;
+            border: 1px solid @line-color;
+            text-align: center;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            margin-right: 8px;
+            img{
+                width: 100%;
+                position: absolute;
+                left:0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+        .logo-wrapper + div{
+            h3{
+                font-size: 17px;
+                color: @black;
+                line-height: 22px;
+            }
+            img{
+                margin-right: 5px;
+            }
+            .hot{
+                color:@red;
+            }
+        }
+        .invest-info-wrapper{
+            display: flex;
+            padding-top: 12px;
+            & > div{
+                flex: auto;
+                text-align: center;
+            }
+        }
+    }
+}
