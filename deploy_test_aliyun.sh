@@ -32,7 +32,7 @@ fi
 
 gulp build:$target
 
-rsync -rvltOD ./dist/* "ali-rong-$1:/data/docker/$2/work/frontend/prod/36kr/krplus/dist/m"
+rsync -rvltOD ./dist/* "www@ali-rong-$1:/data/docker/$2/work/frontend/prod/36kr/krplus/dist/m"
 
 
 
