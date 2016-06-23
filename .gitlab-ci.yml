@@ -25,7 +25,7 @@ Bleeding Edge Test0203:
 #  - hostname && whoami
   - npm i
   - bower i -F --allow-root
-  - bash deploy_test_aliyun.sh docker-01 test01
+  - bash -x deploy_test_aliyun.sh docker-01 test01
   only:
   - master
   cache:
