@@ -1,4 +1,6 @@
+@import "components/global/krfunction.less";
 @gray: #5a626d;
+.krfunction();
 body{
     text-align: center;
     background:url(images/company-share/bg.jpg);
@@ -76,10 +78,10 @@ h3:after{
     float: right;
     margin-right: 10px;
 }
-#logo{
-    margin-top: 28px;
+.logo{
+    .logo(18px, 85px);
+    margin:0 auto;
     border-radius: 18px;
-    border: 1px solid #e7e7e7;
 }
 #name{
     margin: 0;
@@ -102,6 +104,7 @@ h3:after{
     border-radius: 5px 5px 0px 0px;
     margin-top: 20px;
     padding-bottom: 15px;
+    padding-top: 20px;
 }
 .content-bottom{
     padding-top: 17px;
