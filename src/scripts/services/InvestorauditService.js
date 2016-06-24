@@ -19,12 +19,9 @@ angular.module('defaultApp.service').service('InvestorauditService', [
                 });
             },
 
-            save:function (data, callback, error) {
-                data.action = 'h5';
-                $http.post('/api/investoraudit/', $.param(data, true)).success(function (response) {
-                    callback && callback(response);
-                }).catch(function (err) {
-                    error && error(err);
+            save:function (data) {
+                return $http.post('/api/investoraudit?action=h5', $.param(data, true)).success(function (response) {
+                    return response;
                 });
             },
 
@@ -36,6 +33,7 @@ angular.module('defaultApp.service').service('InvestorauditService', [
                     error && error(err);
                 });
             }
+
         };
 
         return service;

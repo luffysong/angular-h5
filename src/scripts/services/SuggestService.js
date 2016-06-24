@@ -99,6 +99,22 @@ angular.module('defaultApp.service').service('SuggestService', [
                     sub: 'institution'
                 }
             },
+            queryInvestor: {
+                method: 'GET',
+                params: {
+                    sub: 'investor'
+                }
+            },
+            queryComAndOrg: {
+                params: {
+                    sub: 'com-org'
+                }
+            },
+            queryPosition: {
+                params: {
+                    sub: 'position'
+                }
+            },
             querySchool: {
                 method: 'GET',
                 params: {
