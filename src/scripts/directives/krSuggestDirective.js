@@ -8,7 +8,9 @@ angular.module('defaultApp.directive').directive('krSuggest',
     function (SuggestService, $sce, $q, utls) {
         var TYPE_TO_METHOD = {
             company: 'queryCompany',
-            organization: 'queryOrganization'
+            organization: 'queryOrganization',
+            comAndOrg: 'queryComAndOrg',
+            position: 'queryPosition'
         };
         return {
             restrict: 'AE',
@@ -19,13 +21,17 @@ angular.module('defaultApp.directive').directive('krSuggest',
                 placeholder:'@',
                 suggestObj:'=',
                 type: '@',
-                autocompleteOptions:'=',
+                autocompleteOptions:'=?',
                 krDisabled: '=?',
                 krRequired: '=?',
                 maxWidth: '=?'
             },
             controller: function ($scope) {
 
+                var TYPE_META = {
+                    2: '机构',
+                    3: '公司'
+                };
                 initScope();
                 function initScope() {
                     setAutocompleteOptions();
@@ -38,7 +44,7 @@ angular.module('defaultApp.directive').directive('krSuggest',
                         full_match:fullMatch
                     };
                     $scope.autocompleteOptions =
-                        angular.extend(baseAutocompleteOptions, $scope.autocompleteOptions);
+                        angular.extend(baseAutocompleteOptions, $scope.autocompleteOptions || {});
                 }
 
                 function suggestRemote(word) {
@@ -76,8 +82,18 @@ angular.module('defaultApp.directive').directive('krSuggest',
                 function makeLabel(item, word) {
                     var label =  '<div class="suggest-row-content"> <img src="' + item.logo + '" />' +
                         highlight(item.name, word) + '&nbsp;&nbsp;' + getAliasHighligt(item, word) +
+                        getTypeHtml(item.type) +
                         '</div>';
                     return label;
+                }
+
+                function getTypeHtml(type) {
+                    if (!type) {
+                        return '';
+                    }
+
+                    var text = TYPE_META[type];
+                    return '<span  class="item-type">' + text + '</span>';
                 }
 
                 function getAliasHighligt(item, word) {
