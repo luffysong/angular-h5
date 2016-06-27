@@ -92,7 +92,6 @@
         .base-info-wrapper{
             display: flex;
             padding-bottom: 12px;
-            border-bottom:1px solid @line-color;
         }
         .logo-wrapper{
             width: 64px;
@@ -130,7 +129,27 @@
         .invest-info-wrapper{
             display: flex;
             padding-top: 12px;
-            & > div{
+            text-align: left;
+            font-size: 14px;
+            position: relative;
+            &:before{
+                content:"";
+                position: absolute;
+                top:0;
+                left:0;
+                right:0;
+                height: 1px;
+                transform: scaleY(0.5);
+                background: @line-color;
+            }
+            & > div:first-child{
+                padding-left:16px;
+            }
+            & > div:last-child{
+                padding-right:16px;
+            }
+
+            & > div:nth-child(2){
                 flex: auto;
                 text-align: center;
             }
