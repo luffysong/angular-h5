@@ -40,6 +40,7 @@ function DemosController(demosService, $stateParams, demos) {
                 vm.count = data.proSetCount;
                 vm.banner = data.proSetImgUrl;
                 vm.name = data.proSetName;
+                document.title = data.proSetName;
             });
     }
 }
