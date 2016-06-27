@@ -746,6 +746,12 @@ angular.module('defaultApp.service').service('UserService', [
                 type: 'required',
                 msg: '请输入一句话简介'
             }]
+        }, {
+            field: 'weixin',
+            define: [{
+                type: 'required',
+                msg: '请输入微信'
+            }]
         }];
 
         return service;
