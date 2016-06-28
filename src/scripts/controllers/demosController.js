@@ -22,9 +22,11 @@ function DemosController(demosService, $stateParams, demos) {
     function renderDemos(demos) {
         if (angular.isArray(demos)) {
             vm.demos = demos;
+            vm.fetchCode = undefined;
             vm.invalid = false;
         }else {
             vm.demos = null;
+            vm.fetchCode = demos.fetchCode;
         }
 
         return demos;

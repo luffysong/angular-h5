@@ -198,7 +198,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     function loadDemos(demosService, $stateParams) {
         return demosService.getDemos($stateParams.id)
             .catch(function demosFail(data) {
-                return data;
+                return data.data;
             });
     }
 
