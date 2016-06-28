@@ -4,6 +4,8 @@
             <span>{{::vm.name}}</span>
             <br>
             <span>共 <span ng-bind="::vm.count">0</span> 个创业项目</span>
+            <br ng-if="vm.fetchCode" >
+            <span>{{vm.fetchCode}}</span>
         </p>
     </header>
     <section ng-show="!vm.demos" ng-class="{'slide-up': vm.demos}" class="password-wrapper">
