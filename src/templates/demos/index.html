@@ -16,13 +16,13 @@
 
     <section ng-if="vm.demos" class="demos-content-wrapper">
         <ul>
-            <li ng-repeat="item in ::vm.demos">
+            <li tou-open pid="item.cid" ng-repeat="item in ::vm.demos">
                 <div class="base-info-wrapper">
-                    <div tou-open pid="item.cid" class="logo-wrapper">
+                    <div  class="logo-wrapper">
                         <img ng-src="{{item.logo | image}}" alt="">
                     </div>
                     <div>
-                        <h3 tou-open pid="item.cid" >{{item.name}}</h3>
+                        <h3   >{{item.name}}</h3>
                         <p>{{item.brief}}</p>
                         <p ng-if="item.tags" class="tags"><img src="/styles/images/company-share/tag.png"
                             width="9" alt=""> {{item.tags}}</p>
