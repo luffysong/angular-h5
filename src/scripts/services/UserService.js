@@ -684,7 +684,7 @@ angular.module('defaultApp.service').service('UserService', [
             field:'companyName',
             define: [{
                 type: 'required',
-                msg: '请输入机构或公司简称'
+                msg: '请输入机构简称'
             }]
         }, {
             field:'organizationBrief',
