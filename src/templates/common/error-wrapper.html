@@ -1,4 +1,4 @@
-<div ng-show="formCtrl[errorPack.field].$invalid && formCtrl[errorPack.field].$dirty"
-   tou-minus-zindex  class="error" ng-repeat="errorPack in errorGroup">
-    <span ng-show="formCtrl[errorPack.field].$error[item.type]" ng-repeat="item in errorPack.define">{{item.msg}}</span>
+<div ng-show="vm.formCtrl[errorPack.field].$invalid && vm.formCtrl[errorPack.field].$dirty"
+    ng-style="{'z-index': vm.getZindex(errorPack.field)}"  class="error" ng-repeat="errorPack in vm.errorGroup">
+    <span ng-show="vm.formCtrl[errorPack.field].$error[item.type]" ng-repeat="item in errorPack.define">{{item.msg}}</span>
 </div>
