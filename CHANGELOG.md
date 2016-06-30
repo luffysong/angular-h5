@@ -1,3 +1,13 @@
+<a name="1.2.0"></a>
+# [1.2.0](f2e/kr-rong-h5/compare/v1.1.1...v1.2.0) (2016-06-30)
+
+
+### Features
+
+* **公司分享页:** 支持打开Android app ([2559ea0](f2e/kr-rong-h5/commits/2559ea0))
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](f2e/kr-rong-h5/compare/v1.1.0...v1.1.1) (2016-06-30)
 
