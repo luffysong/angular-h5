@@ -1,3 +1,13 @@
+<a name="1.1.1"></a>
+## [1.1.1](f2e/kr-rong-h5/compare/v1.1.0...v1.1.1) (2016-06-30)
+
+
+### Bug Fixes
+
+* **公司分享页:** 将API请求到rong.36kr.com ([0379eaa](f2e/kr-rong-h5/commits/0379eaa))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](f2e/kr-rong-h5/compare/v1.0.2...v1.1.0) (2016-06-30)
 
