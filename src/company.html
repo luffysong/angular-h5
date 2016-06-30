@@ -39,9 +39,9 @@
         clearTimeout(timeout);
         window.removeEventListener('pagehide', preventPopup);
     }
-    function startApp(){ //定义startApp函数
+    function startApp(androidUrl){ //定义startApp函数
         var ifr = document.createElement('iframe');
-        ifr.src = appurl;
+        ifr.src = appurl || androidUrl;
         ifr.style.display = 'none';
         document.body.appendChild(ifr);
         window.setTimeout(function(){
@@ -91,6 +91,7 @@
                  $('.mask').show();  //ios用safari打开
              }else if(userSystem.indexOf('Android') > -1){
                 e.preventDefault();
+                startApp('krtou://company/' + cid);
                 goYingyongbao('android');
              }else if(/iphone/i.test(userSystem)){
                 startApp();
