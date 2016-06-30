@@ -28,7 +28,11 @@
     }
     var SUCCESS = 0;
     var appurl = 'krtou://open';
+    var hostMap = {
+        '36kr.com' : 'rong.36kr.com'
+    };
     var HOST = location.host;
+    HOST = hostMap[HOST] || HOST;
     var API = '//' +  HOST + '/api/mobi-investor/company/';
     var isDesktop = !navigator.userAgent.toLowerCase().match(/(iphone|android)/);
     function preventPopup() { //定义preventPopup函数
