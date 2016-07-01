@@ -685,7 +685,7 @@ gulp.task('header', function () {
         test10: '//huodong.36kr.com/common-module/common-header-test10/script.js',
         test11: '//huodong.36kr.com/common-module/common-header-test11/script.js',
         test12: '//huodong.36kr.com/common-module/common-header-test12/script.js',
-        prod: '//krplus-cdn.b0.upaiyun.com/common-module/common-header/script.js',
+        prod: '//sta.36krcnd.com/common-module/common-header/script.js?t='+ (new Date - 0),
     };
 
     return gulp.src(['src/*.html'])
