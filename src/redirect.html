@@ -21,5 +21,11 @@ var queryString = function () {
   }
   return query_string;
 }();
-location.href = queryString.redirectUrl;
+var trackImage = new Image();
+var h ='&h=' + location.host;
+var u ='&u=' + encodeURIComponent(location.search + location.hash);
+trackImage.src="http://36kr.com/global/p/sensors/track?r=" + h + u;
+setTimeout(function redirect() {
+    location.href = queryString.redirectUrl;
+},100);
 </script>
