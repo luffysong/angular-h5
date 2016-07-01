@@ -1,3 +1,13 @@
+<a name="1.2.3"></a>
+## [1.2.3](f2e/kr-rong-h5/compare/v1.2.2...v1.2.3) (2016-07-01)
+
+
+### Bug Fixes
+
+* **中转页:** pv埋点 ([2d9aaf4](f2e/kr-rong-h5/commits/2d9aaf4))
+
+
+
 <a name="1.2.2"></a>
 ## [1.2.2](f2e/kr-rong-h5/compare/v1.2.1...v1.2.2) (2016-07-01)
 
