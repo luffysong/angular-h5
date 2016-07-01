@@ -1,3 +1,13 @@
+<a name="1.2.2"></a>
+## [1.2.2](f2e/kr-rong-h5/compare/v1.2.1...v1.2.2) (2016-07-01)
+
+
+### Bug Fixes
+
+* **首页:** 去掉header js中的ng-if ([37b66fe](f2e/kr-rong-h5/commits/37b66fe))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](f2e/kr-rong-h5/compare/v1.1.1...v1.2.0) (2016-06-30)
 
