@@ -32,6 +32,7 @@
         '36kr.com' : 'rong.36kr.com'
     };
     var HOST = location.host;
+    var timeout;
     HOST = hostMap[HOST] || HOST;
     var API = '//' +  HOST + '/api/mobi-investor/company/';
     var isDesktop = !navigator.userAgent.toLowerCase().match(/(iphone|android)/);
@@ -48,6 +49,7 @@
             document.body.removeChild(ifr);
             ifr = null;
         },500);
+        window.addEventListener('pagehide', preventPopup);
     }
 
     function goYingyongbao(prefix){
@@ -56,7 +58,7 @@
             setTimeout(function() {
                 document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
             },200)
-        }, 500);
+        }, 1000);
          window.addEventListener('pagehide', preventPopup);
     }
     $.getJSON(API + cid + '/sharebasic/v3',function(data){
