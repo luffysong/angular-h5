@@ -251,14 +251,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
 
         //android客户端
-        $scope.androidUpload = function (scope, event) {
+        $scope.androidUpload = function (scope, event, type) {
             AndroidUploadService.setClick(function (filename) {
                 $scope.$apply(function () {
                     //logdiv(filename);
                     scope.$setValidity('required', true);
                     scope.uploaded = filename;
                 });
-            })(event);
+            }, type)(event);
         };
 
         $scope.imgFileSelected  = function (scope, files) {

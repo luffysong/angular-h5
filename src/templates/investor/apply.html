@@ -29,7 +29,7 @@
                             <input class="input-file" type="file" name="avatar" accept="image/*"
                                    ng-file-select
                                    ng-file-change="imgFileSelected(guideForm.avatar, $files)"
-                                   ng-click="androidUpload(guideForm.avatar, $event)"
+                                   ng-click="androidUpload(guideForm.avatar, $event, 1)"
                                    ng-model="avatar" ng-multiple="false" resetOnClick="true"
                             />
                         </li>
@@ -157,7 +157,7 @@
                                         <input ng-file-select
                                                type="file" name="pictures" id="pictures" class="input-file" accept="image/*"
                                                ng-file-change="imgFileSelected(investorValidateForm.pictures, $files)"
-                                               ng-click="androidUpload(investorValidateForm.pictures, $event)"
+                                               ng-click="androidUpload(investorValidateForm.pictures, $event, 0)"
                                                ng-model="pictures" ng-multiple="false" resetOnClick="true"
                                         />
                                         <div ng-show="investorValidateForm.pictures.uploading" class="stick pic-stick" style="height:{{investorValidateForm.pictures.progress}}%;"></div>

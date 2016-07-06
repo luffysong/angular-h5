@@ -27,8 +27,9 @@ angular.module('defaultApp.service').service('AndroidUploadService',
     function () {
 
         var service = {
-            setClick: function (callback) {
+            setClick: function (callback, type) {
                 //logdiv('setClick');
+                //type:1 为方图，0 为原图
 
                 window.androidUploadFileCallback = callback;
 
@@ -44,7 +45,7 @@ angular.module('defaultApp.service').service('AndroidUploadService',
                         window.kr36.tempCache = {};
                         window.kr36.tempCache.imgsource =
                             $(e.currentTarget).attr('name');
-                        window.kr36.chooseFile();
+                        window.kr36.chooseFile(type || 0);
                     }, 100);
                 };
 
