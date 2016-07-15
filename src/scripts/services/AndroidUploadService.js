@@ -45,7 +45,13 @@ angular.module('defaultApp.service').service('AndroidUploadService',
                         window.kr36.tempCache = {};
                         window.kr36.tempCache.imgsource =
                             $(e.currentTarget).attr('name');
-                        window.kr36.chooseFile(type || 0);
+                        var matches = navigator.userAgent.match(/36kr-Tou-Android\/([0-9]\.[0-9])/i);
+                        var version = parseFloat(matches[1]);
+                        if (version > 2.1) {
+                            window.kr36.chooseFile(type || 0);
+                        } else {
+                            window.kr36.chooseFile();
+                        }
                     }, 100);
                 };
 
