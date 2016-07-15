@@ -12,13 +12,6 @@
                     <input type="checkbox" ng-disabled="limit2(domain)"
                     data-checklist-model="extreme.selectDomains" data-checklist-value="domain">
                   <span ng-bind="domain.name"></span>
-                  <div class="meet-num" ng-show="extreme.selectDomains.indexOf(domain) !== -1">
-                      <span>*</span>
-                      预计在活动中约见
-                      <select  ng-options="item  for item in arrayLimit" ng-model="domain.num">
-                          <option disabled value="">请选择</option>
-                      </select>个项目
-                  </div>
                 </div>
                 <form name="investorInfo">
                     <div>

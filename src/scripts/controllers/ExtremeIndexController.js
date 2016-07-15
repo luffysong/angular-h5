@@ -19,7 +19,8 @@ angular.module('defaultApp.controller').controller('ExtremeIndexController',
             loadExtreme();
             $scope.apply = apply;
             $scope.uid = UserService.getUID();
-            $scope.arrayLimit = [1, 2, 3, 4, 5];
+
+            // $scope.arrayLimit = [1, 2, 3, 4, 5];
             $scope.saveText  = '提交报名信息';
             $scope.getUrl = getUrl;
             openInvestorValidate();
@@ -73,11 +74,8 @@ angular.module('defaultApp.controller').controller('ExtremeIndexController',
             var extreme = $scope.extreme;
             var timeValid = extreme.beginDate < nowMs && extreme.endDate > nowMs;
             var dataValid = extreme.selectDomains.length > 0 && $scope.investorInfo.$valid;
-            var domainMeetNumValid = extreme.selectDomains.every(function (data) {
-                return data.num;
-            });
 
-            return timeValid && dataValid && domainMeetNumValid;
+            return timeValid && dataValid;
         }
 
         function limit2(domain) {
