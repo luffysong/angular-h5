@@ -5,6 +5,7 @@ angular.module('defaultApp.controller')
 
 function DemosController(demosService, $stateParams, demos) {
     var vm = this;
+    vm.id = $stateParams.id;
     vm.vadliateAndGetDemos = vadliateAndGetDemos;
 
     init();

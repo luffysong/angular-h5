@@ -18,7 +18,7 @@
 
     <section ng-if="vm.demos" class="demos-content-wrapper">
         <ul>
-            <li tou-open pid="item.cid" ng-repeat="item in ::vm.demos">
+            <li tou-open alert-download-app="vm.id" pid="item.cid" ng-repeat="item in ::vm.demos">
                 <div class="base-info-wrapper">
                     <div  class="logo-wrapper">
                         <img ng-src="{{item.logo | image}}" alt="">
