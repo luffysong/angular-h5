@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.directive').directive('touOpen', touOpen);
 
-function touOpen(hybrid, loading) {
+function touOpen(hybrid, loading, $timeout) {
     return {
         restrict: 'AE',
         scope:{
@@ -17,30 +17,35 @@ function touOpen(hybrid, loading) {
             var path = scope.path;
             var pid = scope.pid;
             loading.hide('openApp');
+
             if (!hybrid.isInApp) {
                 return;
             }
 
             element.click(function openApp(e) {
                 e.preventDefault();
+                loadingUI(scope);
                 if (pid) {
                     hybrid.openProject(pid);
                 } else {
                     hybrid.open(path);
                 }
 
-                loadingUI();
             });
         }
     };
 
-    function loadingUI() {
-        loading.show('openApp');
-        window.addEventListener('pagehide', pagehide, false);
+    function loadingUI(scope) {
+        scope.$evalAsync(function showLoading() {
+            loading.show('openApp');
+        });
+
+        function pagehide() {
+            loading.hide('openApp');
+        }
+
+        $timeout(pagehide, 2000);
+
     }
 
-    function pagehide(loading) {
-        loading.hide('openApp');
-        window.removeEventListener('pagehide', pagehide);
-    }
 }
