@@ -60,7 +60,9 @@
 </head>
 <body class="download-show">
     <script src="%%%headerSrc%%%" name="rong" ></script>
-	<ui-view></ui-view>
+    <loading loading="demos" ng-if="needLoading"></loading>
+    <ui-view>
+    </ui-view>
 
 	<!--<footer class="download" style="display: none" ng-if="!isInApp">
 		<div class="download-kr">打开“36氪”，查看更多</div>

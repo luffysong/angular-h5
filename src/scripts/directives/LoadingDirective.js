@@ -9,11 +9,11 @@ angular.module('defaultApp.directive').directive('loading', [
     function ($rootScope, $compile) {
         $rootScope.loadingInst = $rootScope.loadingInst || {};
         var template = '<div class="loading-wrap" ng-show="loadingInst.{{name}}"><div class="spinner">' +
-                '<div class="rect1"></div>' +
-                '<div class="rect2"></div>' +
-                '<div class="rect3"></div>' +
-                '<div class="rect4"></div>' +
-                '<div class="rect5"></div>' +
+                '<div class="rect1"></div>\n' +
+                '<div class="rect2"></div>\n' +
+                '<div class="rect3"></div>\n' +
+                '<div class="rect4"></div>\n' +
+                '<div class="rect5"></div>\n' +
                 '</div></div>';
         return {
             restrict: 'AE',

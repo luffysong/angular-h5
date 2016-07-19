@@ -195,7 +195,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             }).$promise;
     }
 
-    function loadDemos(demosService, $stateParams) {
+    function loadDemos(demosService, $stateParams, $rootScope, loading) {
+        $rootScope.needLoading = true;
+        loading.show('demos');
         return demosService.getDemos($stateParams.id)
             .catch(function demosFail(data) {
                 return data.data;

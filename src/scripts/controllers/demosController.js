@@ -3,7 +3,7 @@ var  angular = require('angular');
 angular.module('defaultApp.controller')
 .controller('DemosController', DemosController);
 
-function DemosController(demosService, $stateParams, demos) {
+function DemosController(demosService, $stateParams, demos, loading) {
     var vm = this;
     vm.id = $stateParams.id;
     vm.vadliateAndGetDemos = vadliateAndGetDemos;
@@ -12,6 +12,7 @@ function DemosController(demosService, $stateParams, demos) {
     function init() {
         loadBaseInfo($stateParams.id);
         renderDemos(demos);
+        loading.hide('demos');
     }
 
     function vadliateAndGetDemos() {
