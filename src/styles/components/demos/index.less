@@ -21,7 +21,18 @@
             display: inline-block;
             line-height: 1.2;
             vertical-align: middle;
+            & > * {
+                display: block;
+            }
         }
+    }
+    .loading-wrap{
+        position: fixed;
+        width: 100%;
+        top: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index:99;
     }
     .password-wrapper.slide-up{
         transition: all .5s;
@@ -29,6 +40,17 @@
         border:none;
         margin-top: 0px;
         display: block !important;
+    }
+    .project-name{
+        font-size: 20px;
+    }
+    .project-num{
+        font-size: 16px;
+        margin-top: 8px;
+    }
+    .how-to-get-pwd{
+        font-size: 14px;
+        margin-top: 14px;
     }
     .password-wrapper{
         height: 204px;
@@ -88,6 +110,9 @@
             background: #fff;
             padding: 14px;
             margin-top: @cutter;
+        }
+        li:active, li:hover{
+            background: #d9d9d9;
         }
         .base-info-wrapper{
             display: flex;

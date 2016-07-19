@@ -1,12 +1,13 @@
 <div class="demos-wrapper">
+    <loading  loading="openApp"></loading>
     <header ng-style="{'background-image': (vm.banner | backgroundUrl) }">
-        <p>
-            <span>{{::vm.name}}</span>
-            <br>
-            <span>共 <span ng-bind="::vm.count">0</span> 个创业项目</span>
-            <br ng-if="vm.fetchCode" >
-            <span>{{vm.fetchCode}}</span>
-        </p>
+        <div>
+             <p>
+                <span class="project-name">{{::vm.name}}</span>
+                <span class="project-num">共 <span ng-bind="::vm.count">0</span> 个创业项目</span>
+                <span ng-if="vm.fetchCode"  class="how-to-get-pwd">{{vm.fetchCode}}</span>
+             </p>
+        </div>
     </header>
     <section ng-show="!vm.demos" ng-class="{'slide-up': vm.demos}" class="password-wrapper">
         <span ng-if="vm.invalid" class="pwd-invalid">密码错误</span>
