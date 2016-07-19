@@ -16,7 +16,6 @@ function touOpen(hybrid, loading, $timeout) {
         link: function (scope, element) {
             var path = scope.path;
             var pid = scope.pid;
-            loading.hide('openApp');
 
             if (!hybrid.isInApp) {
                 return;
