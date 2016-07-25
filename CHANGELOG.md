@@ -1,10 +1,34 @@
+<a name="1.4.0"></a>
+# [1.4.0](f2e/kr-rong-h5/compare/v1.3.2...v1.4.0) (2016-07-25)
+
+
+### Bug Fixes
+
+* **loading:** 使loading组件的inline-block子元素产生间距 ([94242f9](f2e/kr-rong-h5/commits/94242f9))
+* **项目集:** 优化项目集banner样式 ([add3e68](f2e/kr-rong-h5/commits/add3e68))
+* **项目集:** 使用ng-init初始化打开app时展示的loading界面为隐藏 ([74feedf](f2e/kr-rong-h5/commits/74feedf))
+* **项目集:** 打开项目显示loading状态，选中项目，更改背景 ([9b03885](f2e/kr-rong-h5/commits/9b03885))
+
+
+### Features
+
+* **项目集优化:** 项目集优化 ([841f303](f2e/kr-rong-h5/commits/841f303))
+
+
+
 <a name="1.3.2"></a>
 ## [1.3.2](f2e/kr-rong-h5/compare/v1.3.1...v1.3.2) (2016-07-15)
 
 
 ### Bug Fixes
 
+* 调整controller写法 ([d67ff7d](f2e/kr-rong-h5/commits/d67ff7d))
 * **版本兼容:** 投资人认证Android头像上传API兼容 ([4dc78f2](f2e/kr-rong-h5/commits/4dc78f2))
+
+
+### Features
+
+* **创投助手:** 项目集分享后的引导优化 ([940f3f0](f2e/kr-rong-h5/commits/940f3f0))
 
 
 
