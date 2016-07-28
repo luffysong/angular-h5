@@ -42,7 +42,8 @@ var depModules = [
     'slick',
     'highcharts-ng',
     'MassAutoComplete',
-    'permission'
+    'permission',
+    'infinite-scroll'
 ];
 
 if (window.MOCKMODE_ON) {

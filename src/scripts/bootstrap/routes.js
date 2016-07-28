@@ -196,11 +196,15 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     }
 
     function loadDemos(demosService, $stateParams, $rootScope, loading) {
+        var NOT_AUTHORIZE = 401;
         $rootScope.needLoading = true;
         loading.show('demos');
         return demosService.getDemos($stateParams.id)
             .catch(function demosFail(data) {
-                return data.data;
+                return {
+                    code: NOT_AUTHORIZE,
+                    data: data.data
+                };
             });
     }
 

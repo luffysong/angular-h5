@@ -321,7 +321,8 @@ gulp.task('connect:remote', function () {
 gulp.task('watch', function () {
     gulp.watch('src/**/*.html', ['header']);
     gulp.watch('src/styles/**/*.less', ['styles']);
-    gulp.watch(['src/scripts/**/*.js', 'src/local_lib/**/*.js'], ['scripts:browserify']);
+    gulp.watch(['src/local_lib/**/*.js'], ['scripts:vendor']);
+    gulp.watch(['src/scripts/**/*.js'], ['scripts:browserify']);
     gulp.watch(['src/navigation/*.js', 'src/navigation/*.html', 'src/navigation/*.css'], ['header']);
 });
 

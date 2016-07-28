@@ -24,12 +24,19 @@ function demosService(BasicService) {
         return PWD_KEY_PREFIX + id;
     }
 
-    function getDemos(id, pwd) {
+    function getDemos(id, pwd, page) {
         var token = getToken(id);
+        if (typeof pwd === 'number') {
+            page = pwd;
+        }
+
+        page = page || 1;
         return network.getDemos({
             proSetId: id,
             idNum: token,
-            verifyCode: pwd
+            verifyCode: pwd,
+            pageSize: 10,
+            page: page
         }).$promise
         .then(function demosSuccess(data) {
             saveToken(id, data.idNum);
