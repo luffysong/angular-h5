@@ -1,3 +1,18 @@
+<a name="1.5.0"></a>
+# [1.5.0](f2e/kr-rong-h5/compare/v1.4.0...v1.5.0) (2016-07-28)
+
+
+### Bug Fixes
+
+* **项目集:** 项目集加载完成给出提示文案 ([4459cb0](f2e/kr-rong-h5/commits/4459cb0))
+
+
+### Features
+
+* **项目:** 滚动加载 ([42cf958](f2e/kr-rong-h5/commits/42cf958))
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](f2e/kr-rong-h5/compare/v1.3.2...v1.4.0) (2016-07-25)
 
