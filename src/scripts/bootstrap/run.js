@@ -87,7 +87,7 @@ angular.module('defaultApp')
         $rootScope.$on('$locationChangeStart', function () {
             var path = $location.path();
             /*我要上众筹route特殊处理*/
-            if (/zhongchouDesire/.test(path)) {
+            if (/demos/.test(path)) {
                 $('.common-header.J_commonHeaderWrapper').hide();
             }else {
                 if ($('.common-header.J_commonHeaderWrapper').css('display') === 'none') {

@@ -9,6 +9,7 @@
     @line-color: #e7e7e7;
     @red: #f65875;
     @cutter: 10px;
+    position: relative;
     header {
         height: 130px;
         background-position: 50% 50%;
@@ -29,6 +30,71 @@
             background:rgba(0,0,0,0.65);
         }
     }
+
+    .cover-wrapper{
+        height: 100vh;
+        background: url(//krplus-pic.b0.upaiyun.com/avatar/201608/01093726/565v48m3zigl8ze6.png) rgba(0,0,0,0.6);
+        background-size: cover;
+        background-position: 50% 50%;
+        position: fixed;
+        width: 100%;
+        z-index: 222;
+        top:0;
+        display: flex;
+        align-items: center;
+        section{
+            flex: 1;
+        }
+
+        h3{
+            font-size: 20px;
+            color: #fff;
+            text-align: center;
+        }
+        h4{
+            color: #ccc;
+            font-size: 15px;
+            text-align: center;
+            margin: 10px 0 23px;
+        }
+        p{
+            background: rgba(255,255,2555, 0.8);
+            border-radius: 5px;
+            padding: 30px;
+            color: #000;
+            font-size: 14px;
+            line-height: 18px;
+            margin: 0 45px;
+        }
+    }
+
+    .column-detail-wrapper{
+        padding: 0 20px;
+        li{
+            height: 140px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            margin-top: 14px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            div{
+                width: 100%;
+            }
+            h3{
+                font-size: 18px;
+                color: #fff;
+            }
+            h4{
+                font-size: 14px;
+                color: #eceae9;
+                margin-top: 10px;
+            }
+        }
+    }
+
     .loading-wrap{
         position: fixed;
         width: 100%;
@@ -38,11 +104,8 @@
         z-index:99;
     }
     .password-wrapper.slide-up{
-        transition: all .5s;
-        height: 0;
-        border:none;
-        margin-top: 0px;
-        display: block !important;
+        transition: transform  700ms;
+        transform: translateY(-120%);
     }
     .project-name{
         font-size: 20px;
@@ -57,11 +120,34 @@
         margin-top: 14px;
     }
     .password-wrapper{
-        height: 204px;
-        width: 90%;
+        position:fixed;
+        top: 0;
+        width: 100%;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        padding:0 45px;
+        z-index: 111;
+        &>div{
+            position: absolute;
+            background-size: cover;
+            background-position: 50% 50%;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            filter: blur(5px);
+        }
+        section{
+            position: relative;
+            z-index: 11;
+        }
+    }
+    .password-content{
+        height: 224px;
         border: 1px solid @border-color;
-        border-radius: 3px;
+        border-radius: 5px;
         margin: 0 auto;
+        width: 100%;
         background: #fff;
         margin-top: 20px;
         text-align: center;
@@ -81,6 +167,7 @@
             margin-top: 35px;
             color: @black;
             font-size: 15px;
+            line-height: 20px;
         }
         input{
             margin-top: 20px;
@@ -95,7 +182,7 @@
             border-radius: 3px;
         }
         a{
-            background: @btn-color;
+            background: #e7e7e7;
             color: #9099a3;
             display: block;
             line-height: 45px;
@@ -106,6 +193,7 @@
     }
     .demos-content-wrapper{
         font-size: 13px;
+        padding:0 18px;
         color: @gray;
         p{
             line-height: 20px;
@@ -113,14 +201,17 @@
         li{
             background: #fff;
             padding: 14px;
+            border-radius: 5px;
             margin-top: @cutter;
+            *{
+                user-select: none;
+            }
         }
-        li:active{
+        li.active{
             background: #d9d9d9;
         }
         .base-info-wrapper{
             display: flex;
-            padding-bottom: 12px;
         }
         .logo-wrapper{
             width: 64px;
@@ -158,6 +249,7 @@
         .invest-info-wrapper{
             display: flex;
             padding-top: 12px;
+            margin-top: 12px;
             text-align: left;
             font-size: 14px;
             position: relative;

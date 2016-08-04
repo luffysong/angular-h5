@@ -1,48 +1,85 @@
-<div class="demos-wrapper">
+<div  class="demos-wrapper">
     <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
-    <header ng-style="{'background-image': (vm.banner | backgroundUrl) }">
-        <div>
-             <p>
-                <span class="project-name">{{::vm.name}}</span>
-                <span class="project-num">共 <span ng-bind="::vm.count">0</span> 个创业项目</span>
-                <span ng-if="vm.fetchCode"  class="how-to-get-pwd">{{vm.fetchCode}}</span>
-             </p>
-        </div>
-    </header>
-    <section ng-show="!vm.demos" ng-class="{'slide-up': vm.demos}" class="password-wrapper">
-        <span ng-if="vm.invalid" class="pwd-invalid">密码错误</span>
-        <p>查看该项目集需要密码，请输入四位密码</p>
-        <input maxlength="4" type="text" ng-model="vm.password" />
-        <a ng-click="vm.vadliateAndGetDemos()" ng-class="{'pwd-active': vm.password.length === 4}"
-            href="javascript:">确定</a>
-    </section>
+    <!-- <header ng&#45;style="{'background&#45;image': (vm.banner | backgroundUrl) }"> -->
+    <!--     <div> -->
+    <!--          <p> -->
+    <!--             <span class="project&#45;name">{{::vm.name}}</span> -->
+    <!--             <span class="project&#45;num">共 <span ng&#45;bind="::vm.count">0</span> 个创业项目</span> -->
+    <!--             <span ng&#45;if="vm.fetchCode"  class="how&#45;to&#45;get&#45;pwd">{{vm.fetchCode}}</span> -->
+    <!--          </p> -->
+    <!--     </div> -->
+    <!-- </header> -->
 
-    <section ng-if="vm.demos" class="demos-content-wrapper">
-        <ul infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
-            <li ontouchstart="" tou-open alert-download-app="vm.id" pid="item.cid" ng-repeat="item in vm.demos track
-                by $index">
-                <div class="base-info-wrapper">
-                    <div  class="logo-wrapper">
-                        <img ng-src="{{item.logo | image}}" alt="">
-                    </div>
+    <div id="demosCover" ng-style="{'background-image': (vm.cover.bgPic | backgroundUrl)}" rong-cover
+    class="cover-wrapper">
+        <section>
+            <h3>{{vm.cover.name}}</h3>
+            <h4>共{{vm.cover.proSetCount}}个{{vm.getCollectionType()}}</h4>
+            <p>{{vm.cover.intro}}</p>
+        </section>
+    </div>
+
+    <div class="column-detail-wrapper">
+        <section ng-if="vm.isColumn()">
+            <ul>
+                <li ng-style="{'background-image': (item.imgUrl | backgroundUrl)}"
+                    ng-click="vm.goProjects(item.id)"
+                    ng-repeat="item in vm.collectionInfoList track by $index">
                     <div>
-                        <h3   >{{item.name}}</h3>
-                        <p>{{item.brief}}</p>
-                        <p ng-if="item.tags" class="tags"><img src="/styles/images/company-share/tag.png"
-                            width="9" alt=""> {{item.tags}}</p>
-                        <p ng-if="item.advantage" class="hot"><img src="/styles/images/company-share/hot.png"
-                            width="9" alt=""> {{item.advantage}}
-                        </p>
+                        <h3>{{item.name}}</h3>
+                        <h4>共{{item.proCount}}项目</h4>
                     </div>
-                </div>
-                <div class="invest-info-wrapper">
-                    <div>{{item.finance_phase}}</div>
-                    <div>{{item.invest}}</div>
-                    <div>{{item.address}}</div>
-                </div>
-            </li>
-        </ul>
-        <footer ng-if="vm.busy && !vm.finish">加载...</footer>
-        <footer ng-if="vm.finish">全部内容加载完毕</footer>
-    </section>
+                </li>
+            </ul>
+        </section>
+    </div>
+    <div>
+
+    </div>
+    <div ng-if="!vm.isColumn()"  id="demosContent" >
+        <div  ng-class="{'slide-up': vm.demos}" class="password-wrapper">
+            <div ng-style="{'background-image': (vm.cover.bgPic | backgroundUrl)}">
+
+            </div>
+            <section   class="password-content">
+                <span ng-if="vm.invalid" class="pwd-invalid">密码错误</span>
+                <p>查看该项目集需要密码 <br>请输入四位密码</p>
+                <input maxlength="4" type="text" ng-model="vm.password" />
+                <a ng-click="vm.vadliateAndGetDemos()" ng-class="{'pwd-active': vm.password.length === 4}"
+                    href="javascript:">确定</a>
+            </section>
+        </div>
+
+        <section  class="demos-content-wrapper">
+            <ul infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
+                <li ontouchstart="" tou-open kr-active="'active'" alert-download-app="vm.id" pid="item.cid"
+                    ng-repeat="item in vm.demos track
+                    by $index">
+                    <div class="base-info-wrapper">
+                        <div  class="logo-wrapper">
+                            <img ng-src="{{item.logo | image}}" alt="">
+                        </div>
+                        <div>
+                            <h3>{{item.name}}</h3>
+                            <p>{{item.brief}}</p>
+                            <p ng-if="item.tags" class="tags"><img src="/styles/images/company-share/tag.png"
+                                width="9" alt=""> {{item.tags}}</p>
+                            <p ng-if="item.advantage" class="hot"><img src="/styles/images/company-share/hot.png"
+                                width="9" alt=""> {{item.advantage}}
+                            </p>
+                        </div>
+                    </div>
+                    <div ng-if="item.finance_phase && item.invest && item.address "
+                        class="invest-info-wrapper">
+                        <div>{{item.finance_phase}}</div>
+                        <div>{{item.invest}}</div>
+                        <div>{{item.address}}</div>
+                    </div>
+                </li>
+            </ul>
+            <footer ng-if="vm.busy && !vm.finish &&  vm.page">加载...</footer>
+            <footer ng-if="vm.finish">全部内容加载完毕</footer>
+        </section>
+    </div>
+
 </div>

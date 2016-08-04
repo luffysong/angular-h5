@@ -168,12 +168,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //项目集
     $stateProvider.state('demos', {
-        url:'/demos/:id',
+        url:'/demos/:id?type',
         controllerAs: 'vm',
         controller: 'DemosController',
         templateUrl: 'templates/demos/index.html',
         resolve: {
-            demos: loadDemos
+            cover: loadCover
         }
     });
 
@@ -195,17 +195,32 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             }).$promise;
     }
 
-    function loadDemos(demosService, $stateParams, $rootScope, loading) {
+    function loadCover(demosService, projectColumnService, $stateParams, $rootScope, loading) {
         var NOT_AUTHORIZE = 401;
         $rootScope.needLoading = true;
         loading.show('demos');
-        return demosService.getDemos($stateParams.id)
+        var dataPromise;
+        if ($stateParams.type === 'column') {
+            dataPromise = getColumns();
+        } else {
+            dataPromise = getDemos();
+        }
+
+        return dataPromise
             .catch(function demosFail(data) {
                 return {
                     code: NOT_AUTHORIZE,
                     data: data.data
                 };
             });
+
+        function getDemos() {
+            return demosService.getBaseInfo($stateParams.id);
+        }
+
+        function getColumns() {
+            return projectColumnService.getColumn($stateParams.id);
+        }
     }
 
 });
