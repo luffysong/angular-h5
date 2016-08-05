@@ -101,6 +101,7 @@ angular.module('defaultApp')
             if (window.CommonHeader) {
                 window.CommonHeader.setNavActive(type);
             }
+
         });
     }).run(function ($http, $rootScope, $location, $state, notify, Permission, UserService, $q, CredentialService) {
         //Define Roles

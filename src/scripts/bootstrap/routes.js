@@ -226,6 +226,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
         $rootScope.needLoading = true;
         loading.show('demos');
+        $('ui-view')[0].innerHTML = '';
         var dataPromise;
         if ($stateParams.type === 'column') {
             dataPromise = getColumns();

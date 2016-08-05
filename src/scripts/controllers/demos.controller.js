@@ -81,7 +81,7 @@ function DemosController(demosService, projectColumnService,
         $state.go('demos', {
             id: id,
             type: 'projects'
-        });
+        }, { reload: true });
     }
 
     function renderList(data) {
