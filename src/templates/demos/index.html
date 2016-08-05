@@ -15,7 +15,7 @@
         <section>
             <h3>{{vm.cover.name}}</h3>
             <h4>共{{vm.cover.proSetCount}}个{{vm.getCollectionType()}}</h4>
-            <p>{{vm.cover.intro}}</p>
+            <p ng-if="vm.cover.intro">{{vm.cover.intro}}</p>
         </section>
     </div>
 
