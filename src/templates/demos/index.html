@@ -1,14 +1,6 @@
 <div  class="demos-wrapper">
     <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
-    <!-- <header ng&#45;style="{'background&#45;image': (vm.banner | backgroundUrl) }"> -->
-    <!--     <div> -->
-    <!--          <p> -->
-    <!--             <span class="project&#45;name">{{::vm.name}}</span> -->
-    <!--             <span class="project&#45;num">共 <span ng&#45;bind="::vm.count">0</span> 个创业项目</span> -->
-    <!--             <span ng&#45;if="vm.fetchCode"  class="how&#45;to&#45;get&#45;pwd">{{vm.fetchCode}}</span> -->
-    <!--          </p> -->
-    <!--     </div> -->
-    <!-- </header> -->
+
 
     <div id="demosCover" ng-style="{'background-image': (vm.cover.bgPic | backgroundUrl)}" rong-cover
     class="cover-wrapper">
@@ -17,6 +9,7 @@
             <h4>共{{vm.cover.proSetCount}}个{{vm.getCollectionType()}}</h4>
             <p ng-if="vm.cover.intro">{{vm.cover.intro}}</p>
         </section>
+        <img src="/styles/images/arrow.png" width="14" class="animated bounce" alt="">
     </div>
 
     <div class="column-detail-wrapper">

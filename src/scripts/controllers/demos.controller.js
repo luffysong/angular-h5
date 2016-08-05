@@ -26,7 +26,17 @@ function DemosController(demosService, projectColumnService,
         }
 
         renderCover(cover);
+        initWeixin(cover);
         loading.hide('demos');
+    }
+
+    function initWeixin(data) {
+        window.WEIXINSHARE = {
+            shareTitle: data.name || data.proSetName,
+            shareImg: data.sharePic,
+            shareDesc: ''
+        };
+        window.InitWeixin();
     }
 
     function vadliateAndGetDemos() {
@@ -38,7 +48,6 @@ function DemosController(demosService, projectColumnService,
     function renderCover(cover) {
         if (!isColumn()) {
             cover = convertCover(cover);
-
         }
 
         vm.cover = cover;
