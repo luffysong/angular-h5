@@ -18,6 +18,11 @@ function rongCover() {
                 ev.preventDefault();
             });
 
+            function nextPage() {
+                hammertime.destroy();
+                element.css('transform', 'translateY(-100%)');
+            }
+
             hammertime.on('panmove', function pan(ev) {
                 ev.preventDefault();
                 setNoneTransition(element);
@@ -29,7 +34,7 @@ function rongCover() {
             hammertime.on('panend', function panend(ev) {
                 setTransition(element, window.innerHeight - ev.distance);
                 if (ev.deltaY < -70) {
-                    element.css('transform', 'translateY(-100%)');
+                    nextPage();
                 }else {
                     element.css('transform', 'translateY(0%)');
                 }
@@ -41,7 +46,7 @@ function rongCover() {
                     var speed = ev.distance / ev.deltaTime;
                     var time = (height - ev.distance) / speed;
                     setTransition(element, time);
-                    element.css('transform', 'translateY(-100%)');
+                    nextPage();
                 }
             });
         },
