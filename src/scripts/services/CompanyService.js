@@ -180,7 +180,7 @@ angular.module('defaultApp.service').service('CompanyService', [
             },
             getCrowdFunding: {
                 method: 'GET',
-                url: '//' + projectEnvConfig.zhongHost + '/api/p/crowd-funding/:id'
+                url: '//' + projectEnvConfig.jrHost + '/api/p/crowd-funding/:id'
             }
         }, {
             sub: [

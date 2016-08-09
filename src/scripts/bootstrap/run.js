@@ -28,6 +28,7 @@ angular.module('defaultApp')
         $rootScope.ucHost = '//' + projectEnvConfig.ucHost;
         $rootScope.helpHost = '//' + projectEnvConfig.helpHost;
         $rootScope.zhongHost = '//' + projectEnvConfig.zhongHost;
+        $rootScope.jrHost = '//' + projectEnvConfig.jrHost;
         $rootScope.rongHost = '//' + location.host;
     }).run(function ($modal) {
         var originOpen = $modal.open;
