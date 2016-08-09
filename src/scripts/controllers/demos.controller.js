@@ -31,6 +31,7 @@ function DemosController(demosService, projectColumnService,
     }
 
     function initWeixin(data) {
+        document.title = data.name || data.proSetName;
         window.WEIXINSHARE = {
             shareTitle: data.name || data.proSetName,
             shareImg: data.sharePic || 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
