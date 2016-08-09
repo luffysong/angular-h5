@@ -45,8 +45,10 @@
                 wx.onMenuShareTimeline({
                     title: WEIXINSHARE.shareTitle, // 分享标题
                     link: WEIXINSHARE.shareHref || location.href, // 分享链接
-                    imgUrl: WEIXINSHARE.shareImg ||
-                    'http://sta.36krcnd.com/common-module/common-header/images/app_logo.jpg', // 分享图标
+
+                    // 分享图标
+                    imgUrl: (WEIXINSHARE.shareImg ||
+                    'http://sta.36krcnd.com/common-module/common-header/images/app_logo.jpg').replace('https', 'http'),
                     success: function () {
 
                         // 用户确认分享后执行的回调函数
