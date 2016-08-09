@@ -34,7 +34,7 @@ function DemosController(demosService, projectColumnService,
         window.WEIXINSHARE = {
             shareTitle: data.name || data.proSetName,
             shareImg: data.sharePic || 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: ''
+            shareDesc: '来「36氪创投助手」，发现最新最热优质项目！'
         };
         window.InitWeixin();
     }
