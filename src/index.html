@@ -5,21 +5,6 @@
     <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>36氪融资</title>
 
-    <script>
-        (function(){
-            // 移动端路由兼容跳转
-            if(/^\#\/zhongchou*/.test(location.hash)) {
-                location.href = 'https://' + location.hostname.replace('rong', 'z') + location.pathname + location.hash;
-            }
-
-            // 强制https
-            var url = location.href;
-            if(url.match(/(^http:\/\/rong\.36kr|^http:\/\/rongtest\.36kr)/)) {
-                location.href =url.replace(/^http:/,'https:');
-            }
-        })();
-    </script>
-
     <script type='text/javascript'>
   var _vds = _vds || [];(function(){ _vds.push(['setAccountId',
   '76d36bd044527820a1787b198651e2f1']);
@@ -56,9 +41,15 @@
     <link rel="stylesheet" href="fonts/icomoon/style.css"/>
     <link rel="stylesheet" href="/styles/base.css">
     <!-- endbuild -->
+    <script src="/components/jquery/dist/jquery.min.js"></script>
+    <script type="text/x-template" id="topBanner">
+        @@include('index.topBanner.html')
+    </script>
+    <script>
+        @@include('./scripts/header.js')
+    </script>
 </head>
 <body class="download-show">
-    <script src="%%%headerSrc%%%" name="rong" ></script>
     <loading loading="demos" ng-if="needLoading"></loading>
     <ui-view>
     </ui-view>
@@ -75,7 +66,7 @@
         };
     </script>
     <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script src="https://static.geetest.com/static/tools/gt.js"></script>
+    <script async src="https://static.geetest.com/static/tools/gt.js"></script>
 
     <!-- build:js /scripts/vendor-min.js -->
     <script src="/scripts/vendor.js"></script>

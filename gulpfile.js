@@ -18,6 +18,7 @@ var config = require('./config.json');
 var DEBUG = true;
 var through2 = require('through2');
 var browserify = require('browserify');
+var fileinclude = require('gulp-file-include');
 var apiHost;
 
 var reloadTimeout;
@@ -690,9 +691,13 @@ gulp.task('header', function () {
     };
 
     return gulp.src(['src/*.html'])
+        .pipe(fileinclude({
+            prefix:'@@'
+        }))
         .pipe($.replace('%%%headerSrc%%%', headers[buildMode]))
         .pipe(gulp.dest('.tmp'));
 });
+
 /*字典task*/
 gulp.task('dict', function () {
     loadDictionary.loadCityData();

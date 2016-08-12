@@ -31,6 +31,7 @@ angular.module('defaultApp.directive').directive('loading', [
         };
     }
 ]).service('loading', ['$rootScope', function ($rootScope) {
+    $rootScope.loadingInst = $rootScope.loadingInst || {};
     return {
         show: function (name) {
             if (angular.isUndefined($rootScope.loadingInst[name])) {
