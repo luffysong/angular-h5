@@ -15,7 +15,7 @@
     }
 
     function allowReplaceBanner() {
-        return /company\/\d+/.test(location.hash);
+        return true;
     }
 
     function removeHeader() {
