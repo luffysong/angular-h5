@@ -26,7 +26,10 @@ function rongCover() {
             hammertime.on('panmove', function pan(ev) {
                 ev.preventDefault();
                 setNoneTransition(element);
-                if (ev.deltaY < 0) {
+                if (ev.center.y < 5) {
+                    setTransition(element, window.innerHeight - ev.distance);
+                    nextPage();
+                }else if (ev.deltaY < 0) {
                     element.css('transform', 'translateY(' + ev.deltaY + 'px)');
                 }
             });
