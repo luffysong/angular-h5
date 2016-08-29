@@ -37,7 +37,25 @@ function DemosController(demosService, projectColumnService,
             shareImg: data.sharePic || 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '来「36氪创投助手」，发现最新最热优质项目！'
         };
-        window.InitWeixin();
+        var obj = {};
+        obj.timelineSuccess = function timelineSuccess() {
+            if (vm.isColumn()) {
+                krtracker('trackEvent', 'click', 'h5.demosColumn.shareTimeline');
+            } else {
+                krtracker('trackEvent', 'click', 'h5.demosProjects.shareTimeline');
+            }
+
+        };
+
+        obj.appMessageSuccess = function appMessageSuccess() {
+            if (vm.isColumn()) {
+                krtracker('trackEvent', 'click', 'h5.demosColumn.shareAppMessage');
+            } else {
+                krtracker('trackEvent', 'click', 'h5.demosProjects.shareAppMessage');
+            }
+        };
+
+        window.InitWeixin(obj);
     }
 
     function vadliateAndGetDemos() {

@@ -66,7 +66,7 @@
                         //        }
                         //    })
                         //}
-                        obj.success && obj.success();
+                        obj.timelineSuccess && obj.timelineSuccess();
                     },
 
                     cancel: function () {
@@ -82,7 +82,7 @@
                     type: 'link', // 分享类型,music、video或link，不填默认为link
                     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                     success: function () {
-                        document.write($.cookies('j3word'));
+                        // document.write($.cookies('j3word'));
 
                         // 用户确认分享后执行的回调函数
                         //if(obj && obj.cid){
@@ -96,7 +96,7 @@
                         //        }
                         //    })
                         //}
-                        obj.success && obj.success();
+                        obj.appMessageSuccess && obj.appMessageSuccess();
 
                     },
 
