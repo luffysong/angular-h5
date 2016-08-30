@@ -15,7 +15,7 @@ function touOpen(hybrid, loading, $timeout) {
         },
         link: function (scope, element) {
             var pid = scope.pid;
-            element.click(function openApp() {
+            element.click(function openApp(e) {
                 if (!hybrid.isInApp) {
                     var userSystem = navigator.userAgent; //userAgent
                     if (userSystem.indexOf('Android') > -1) {
@@ -25,6 +25,7 @@ function touOpen(hybrid, loading, $timeout) {
                         krtracker('trackEvent', 'click', 'ios.h5.demoslist.download.' + pid);
                     }
                 } else {
+                    e.preventDefault();
                     addClickEvent(scope);
                 }
             });
