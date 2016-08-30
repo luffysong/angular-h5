@@ -47,29 +47,31 @@
 
         <section  class="demos-content-wrapper">
             <ul infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
-                <li ontouchstart="" tou-open kr-active="'active'" pid="item.cid"
+                <li ontouchstart="" kr-active="'active'"
                     ng-repeat="item in vm.demos track
                     by $index">
-                    <div class="base-info-wrapper">
-                        <div  class="logo-wrapper">
-                            <img ng-src="{{item.logo | image}}" alt="">
+                    <a class="demos-content-href" href="http://36kr.com/company/{{item.cid}}?ktm_source=xsd.h5.xiangmuji.{{item.cid}}" pid="item.cid" tou-open>
+                        <div class="base-info-wrapper">
+                            <div  class="logo-wrapper">
+                                <img ng-src="{{item.logo | image}}" alt="">
+                            </div>
+                            <div>
+                                <h3>{{item.name}}</h3>
+                                <p>{{item.brief}}</p>
+                                <p ng-if="item.tags" class="tags"><img src="/styles/images/company-share/tag.png"
+                                    width="9" alt=""> {{item.tags}}</p>
+                                <p ng-if="item.advantage" class="hot"><img src="/styles/images/company-share/hot.png"
+                                    width="9" alt=""> {{item.advantage}}
+                                </p>
+                            </div>
                         </div>
-                        <div>
-                            <h3>{{item.name}}</h3>
-                            <p>{{item.brief}}</p>
-                            <p ng-if="item.tags" class="tags"><img src="/styles/images/company-share/tag.png"
-                                width="9" alt=""> {{item.tags}}</p>
-                            <p ng-if="item.advantage" class="hot"><img src="/styles/images/company-share/hot.png"
-                                width="9" alt=""> {{item.advantage}}
-                            </p>
+                        <div ng-if="item.finance_phase && item.invest && item.address "
+                            class="invest-info-wrapper">
+                            <div>{{item.finance_phase}}</div>
+                            <div>{{item.invest}}</div>
+                            <div>{{item.address}}</div>
                         </div>
-                    </div>
-                    <div ng-if="item.finance_phase && item.invest && item.address "
-                        class="invest-info-wrapper">
-                        <div>{{item.finance_phase}}</div>
-                        <div>{{item.invest}}</div>
-                        <div>{{item.address}}</div>
-                    </div>
+                    </a>
                 </li>
             </ul>
             <footer ng-if="vm.busy && !vm.finish &&  vm.page">加载...</footer>

@@ -36,13 +36,15 @@
     HOST = hostMap[HOST] || HOST;
     var API = '//' +  HOST + '/api/mobi-investor/company/';
     var isDesktop = !navigator.userAgent.toLowerCase().match(/(iphone|android)/);
+
+
     function preventPopup() { //定义preventPopup函数
         clearTimeout(timeout);
         window.removeEventListener('pagehide', preventPopup);
     }
     function startApp(androidUrl){ //定义startApp函数
         var ifr = document.createElement('iframe');
-        ifr.src = appurl || androidUrl;
+        ifr.src = androidUrl || appurl;
         ifr.style.display = 'none';
         document.body.appendChild(ifr);
         window.setTimeout(function(){
@@ -88,8 +90,7 @@
         var userSystem=navigator.userAgent; //userAgent
         $('a').click(function clickCb(e){
             e.preventDefault();
-            if(/MicroMessenger/i.test(userSystem)  &&
-                    userSystem.toLowerCase().indexOf('iphone') > -1){ //在微信中打开
+            if(/MicroMessenger/i.test(userSystem)){ //在微信中打开
                  $('.mask').show();  //ios用safari打开
              }else if(userSystem.indexOf('Android') > -1){
                 e.preventDefault();
@@ -100,7 +101,7 @@
                 goYingyongbao('ios');
              }
         })
-
+        startApp('krtou://company/' + cid);
 
     })
 

@@ -15,38 +15,26 @@ function touOpen(hybrid, loading, $timeout) {
         },
         link: function (scope, element) {
             var pid = scope.pid;
-            element.click(function openApp(e) {
+            element.click(function openApp() {
                 if (!hybrid.isInApp) {
                     var userSystem = navigator.userAgent; //userAgent
                     if (userSystem.indexOf('Android') > -1) {
-                        addClickEvent(scope, e);
-                        setTimeout(function () {
-                            krtracker('trackEvent', 'click', 'android.h5.demoslist.download.' + pid);
-                            setTimeout(function () {
-                                document.location = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment';
-                            }, 200);
-                        }, 1000);
+                        addClickEvent(scope);
+                        krtracker('trackEvent', 'click', 'android.h5.demoslist.download.' + pid);
                     }else if (/iphone/i.test(userSystem)) {
-                        setTimeout(function () {
-                            krtracker('trackEvent', 'click', 'ios.h5.demoslist.download.' + pid);
-                            setTimeout(function () {
-                                document.location = 'http://36kr.com/company/' + pid + '?ktm_source=xiangmuji.' + pid;
-                            }, 200);
-                        }, 1000);
-
+                        krtracker('trackEvent', 'click', 'ios.h5.demoslist.download.' + pid);
                     }
                 } else {
-                    addClickEvent(scope, e);
+                    addClickEvent(scope);
                 }
             });
 
         }
     };
 
-    function addClickEvent(scope, e) {
+    function addClickEvent(scope) {
         var path = scope.path;
         var pid = scope.pid;
-        e.preventDefault();
         loadingUI(scope);
         if (pid) {
             hybrid.openProject(pid);
