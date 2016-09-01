@@ -22,6 +22,7 @@ function touOpen(hybrid, loading, $timeout) {
                         addClickEvent(scope);
                         krtracker('trackEvent', 'click', 'android.h5.demoslist.download.' + pid);
                     }else if (/iphone/i.test(userSystem)) {
+                        loadingUI(scope);
                         krtracker('trackEvent', 'click', 'ios.h5.demoslist.download.' + pid);
                     }
                 } else {
