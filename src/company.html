@@ -26,6 +26,7 @@
     if(!parseInt(cid)){
         cid = purl(location.href).param('cid');
     }
+    var fromWeixin = purl(location.href).param('fromWeixin');
     var SUCCESS = 0;
     var appurl = 'krtou://open';
     var hostMap = {
@@ -101,8 +102,15 @@
                 goYingyongbao('ios');
              }
         })
-        startApp('krtou://company/' + cid);
-
+        if ((!(/MicroMessenger/i.test(userSystem)))&&(parseInt(fromWeixin) === 1)){
+            if(userSystem.indexOf('Android') > -1){
+                startApp('krtou://company/' + cid);
+                goYingyongbao('android');
+            }else if(/iphone/i.test(userSystem)){
+                startApp();
+                goYingyongbao('ios');
+            }
+        }
     })
 
 </script>
@@ -135,11 +143,11 @@
     <div class="content content-bottom">
         <div class="download-wrapper">
             <div>
-                <p>下载<span>【36氪创投助手】，</span>即刻查看该项目详情</p>
+                <p>打开<span>【36氪创投助手】，</span>即刻查看该项目详情</p>
             </div>
         </div>
         <div>
-            <a id="downloadBtn" href="">立即下载</a>
+            <a id="downloadBtn" href="">查看项目详情</a>
         </div>
 
     </div>
@@ -148,8 +156,8 @@
         <ul>
             <li><p><img src="/styles/images/investor-app-icon.png" /><span>36氪创投助手</span></p></li>
             <li>严格筛选，推荐全网最优质项目</li>
-            <li>每天上新5-10个精品项目</li>
-            <li>直接约谈创始人，轻松高效</li>
+            <li>每日上新30+新品项目，直接联络创始人</li>
+            <li>帮助投资人找联系方式，轻松高效</li>
         </ul>
     </div>
 </body>
