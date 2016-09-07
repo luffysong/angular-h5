@@ -16,12 +16,12 @@
             <div class="org-brief">
                 <text-line-clamp line-clamp='4' text="vm.basic.intro" ng-if="vm.investments.length">
                     <div class="text-container">
-                        <p></p>
+                        <div class="text-content"></div>
                     </div>
-                    <a href="javascript:" >展开</a>
+                    <a class="text-toggle" href="javascript:" >展开</a>
                 </text-line-clamp>
                 <div ng-if="!vm.investments.length" class="text-container">
-                    <p >{{:: vm.basic.intro}}</p>
+                    <div class="text-content">{{:: vm.basic.intro}}</div>
                 </div>
             </div>
         </div>

@@ -80,9 +80,88 @@
             transform: translateX(-50%);
         }
     }
+    .demos-header{
+        .header-img{
+            height: 181px;
+            background-size: cover;
+            background-position: 50% 50%;
+
+            p{
+                background-color: rgba(0,0,0,0.30);
+                height: 181px;
+            }
+            .header-name{
+                display: block;
+                text-align: center;
+                font-size: 18px;
+                color: #FFFFFF;
+                line-height: 21.5px;
+                padding-top: 77px;
+                padding-bottom: 9px;
+                letter-spacing: -0.44px;
+            }
+            .header-proSetCount{
+                display: block;
+                text-align: center;
+                font-size: 14px;
+                color: #FFFFFF;
+                line-height: 17px;
+                letter-spacing: -0.34px;
+            }
+        }
+        .header-info{
+            text-align: center;
+            background-color: white;
+            margin-top: 10px;
+            .text-toggle{
+                color: #969fa9;
+                line-height: 45px;
+                display: block;
+            }
+        }
+        .text-container{
+            padding: 20px;
+            position: relative;
+            &:before,&:after{
+                content:"";
+                display: block;
+                position: absolute;
+                height: 1px;
+                left: 0;
+                background: @line-color;
+                right: 0;
+                transform: scaleY(0.5);
+            }
+            &:before{
+                top: 0;
+            }
+            &:after{
+                bottom: 0;
+            }
+            .text-content{
+                text-align: left;
+                overflow : hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                line-height: 22px;
+                font-size: 15px;
+                color: #5A626D;
+                letter-spacing: 0px;
+                //使用after让浏览器重绘文字 使-webkit-line-clamp生效
+                &:after{
+                    width: 0;
+                    height: 0;
+                    display: inline-block;
+                    overflow: hidden;
+                    content: attr(style);
+                }
+            }
+
+        }
+    }
 
     .column-detail-wrapper{
-        padding: 0 20px;
+        padding: 0 10px;
         ul{
             padding-bottom: 14px;
         }
@@ -96,6 +175,8 @@
             margin-top: 14px;
             text-align: center;
             position: relative;
+            background-repeat: no-repeat;
+            background-size: cover;
             &:before{
                 .full-before();
                 background: rgba(0, 0, 0, 0.3);
@@ -228,7 +309,7 @@
     }
     .demos-content-wrapper{
         font-size: 13px;
-        padding:0 18px;
+        padding:0 10px;
         color: @gray;
         p{
             line-height: 20px;

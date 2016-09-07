@@ -2,14 +2,31 @@
     <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
 
 
-    <div id="demosCover" ng-style="{'background-image': (vm.cover.bgPic | backgroundUrl)}" rong-cover
-    class="cover-wrapper">
-        <section>
-            <h3>{{vm.cover.name}}</h3>
-            <h4>共{{vm.cover.proSetCount}}个{{vm.getCollectionType()}}</h4>
-            <p ng-if="vm.cover.intro">{{vm.cover.intro}}</p>
-        </section>
-        <img src="/styles/images/arrow.png" width="14" class="animated bounce" alt="">
+    <!--<div id="demosCover" ng-style="{'background-image': (vm.cover.bgPic | backgroundUrl)}" rong-cover-->
+    <!--class="cover-wrapper">-->
+        <!--<section>-->
+            <!--<h3>{{vm.cover.name}}</h3>-->
+            <!--<h4>共{{vm.cover.proSetCount}}个{{vm.getCollectionType()}}</h4>-->
+            <!--<p ng-if="vm.cover.intro">{{vm.cover.intro}}</p>-->
+        <!--</section>-->
+        <!--<img src="/styles/images/arrow.png" width="14" class="animated bounce" alt="">-->
+    <!--</div>-->
+
+    <div class="demos-header">
+        <div class="header-img" ng-style="{'background-image': (vm.cover.headPic | backgroundUrl)}">
+            <p>
+                <span class="header-name">{{vm.cover.name}}</span>
+                <span class="header-proSetCount">共{{vm.cover.proSetCount}}个{{vm.getCollectionType()}}</span>
+            </p>
+        </div>
+        <div class="header-info" ng-if="vm.cover.intro!=='介绍：'">
+            <text-line-clamp line-clamp='3' text="vm.cover.intro">
+                <div class="text-container">
+                    <div class="text-content"></div>
+                </div>
+                <a class="text-toggle" href="javascript:void(0)" >展开</a>
+            </text-line-clamp>
+        </div>
     </div>
 
     <div class="column-detail-wrapper">
@@ -33,9 +50,6 @@
     </div>
     <div ng-if="!vm.isColumn()"  id="demosContent" >
         <div  ng-class="{'slide-up': vm.demos}" class="password-wrapper">
-            <div ng-style="{'background-image': (vm.cover.bgPic | backgroundUrl)}">
-
-            </div>
             <section   class="password-content">
                 <span ng-if="vm.invalid" class="pwd-invalid">密码错误</span>
                 <p>查看该项目集需要密码 <br>请输入四位密码</p>

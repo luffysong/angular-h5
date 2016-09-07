@@ -22,43 +22,43 @@ angular.module('defaultApp.directive').directive('textLineClamp',
             },
             link: function (scope, element) {
                 var vm = scope.vm;
-                var $p = element.find('p');
-                $p.text(vm.text);
-                var $a = element.find('a');
-                var height = $p[0].offsetHeight;
+                var $textContent = element.find('.text-content');
+                $textContent.html(vm.text);
+                var $toggle = element.find('.text-toggle');
+                var height = $textContent[0].offsetHeight;
                 var lineClamp  = '-webkit-line-clamp';
-                $p.css('text-overflow', 'ellipsis');
-                $p.css(lineClamp, vm.lineClamp);
-                var clampHeight = $p[0].offsetHeight;
-                $p.css('height', clampHeight + 'px');
+                $textContent.css('text-overflow', 'ellipsis');
+                $textContent.css(lineClamp, vm.lineClamp);
+                var clampHeight = $textContent[0].offsetHeight;
+                $textContent.css('height', clampHeight + 'px');
                 if (clampHeight === height) {
-                    element.find('a').hide();
+                    element.find('.text-toggle').hide();
                     return;
                 }
 
                 vm.collapse = true;
-                element.find('a').click(function viewMoreCb() {
+                element.find('.text-toggle').click(function viewMoreCb() {
                     if (vm.collapse) {
-                        $p.css(lineClamp, '');
-                        $p.css('transition', 'height 0.3s');
-                        $p.css('height', height + 'px');
+                        $textContent.css(lineClamp, '');
+                        $textContent.css('transition', 'height 0.3s');
+                        $textContent.css('height', height + 'px');
                     }else {
-                        $p.css('transition', 'height 0.3s');
-                        $p.css('height',  clampHeight + 'px');
+                        $textContent.css('transition', 'height 0.3s');
+                        $textContent.css('height',  clampHeight + 'px');
                     }
                 });
 
-                $p[0].addEventListener('webkitTransitionEnd', function webkitTransitionEnd() {
+                $textContent[0].addEventListener('webkitTransitionEnd', function webkitTransitionEnd() {
                     if (vm.collapse) {
-                        $a[0].innerHTML = '收起';
+                        $toggle[0].innerHTML = '收起';
                         vm.collapse = false;
                     }else {
-                        $a[0].innerHTML = '展开';
+                        $toggle[0].innerHTML = '展开';
                         vm.collapse = true;
-                        $p.css(lineClamp, vm.lineClamp);
+                        $textContent.css(lineClamp, vm.lineClamp);
                     }
 
-                    $p.css('transition', '');
+                    $textContent.css('transition', '');
                 }, false);
             }, controller: function () {
             }

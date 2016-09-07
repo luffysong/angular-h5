@@ -70,14 +70,15 @@ function DemosController(demosService, projectColumnService,
         }
 
         vm.cover = cover;
+        vm.cover.intro = '介绍：' + vm.cover.intro;
     }
 
     function convertCover(cover) {
         var coverCopy = {};
         coverCopy.proSetCount = cover.proSetCount;
-        coverCopy.bgPic = cover.bgPic;
         coverCopy.name = cover.proSetName;
         coverCopy.intro = cover.fetchCode;
+        coverCopy.headPic = cover.imgUrl;
         return coverCopy;
     }
 
