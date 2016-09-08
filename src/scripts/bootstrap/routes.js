@@ -195,34 +195,8 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
             }).$promise;
     }
 
-    function ImageProxy(deferred) {
-        var img = new Image();
-        this.load = load;
-        this.promise = deferred.promise;
-        this.resolve = resolve;
-
-        function load(src) {
-            img.src = src;
-        }
-
-        function resolve() {
-            deferred.resolve();
-        }
-
-        img.onload = function bgLoaded() {
-            deferred.resolve();
-        };
-
-        img.onerror = function bgError() {
-            deferred.resolve();
-        };
-
-    }
-
-    function loadCover(demosService, projectColumnService, $stateParams, $rootScope, loading, $q) {
+    function loadCover(demosService, projectColumnService, $stateParams, $rootScope, loading) {
         var NOT_AUTHORIZE = 401;
-        var deferred = $q.defer();
-        var proxy = new ImageProxy(deferred);
 
         $rootScope.needLoading = true;
         loading.show('demos');
@@ -236,21 +210,16 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
         dataPromise = dataPromise
             .then(function getImageUrl(data) {
-                proxy.load(data.bgPic);
                 return data;
             })
             .catch(function demosFail(data) {
-                proxy.resolve();
                 return {
                     code: NOT_AUTHORIZE,
                     data: data.data
                 };
             });
 
-        return $q.all([dataPromise, proxy.promise]).
-                then(function allLoaded(arr) {
-                    return arr[0];
-                });
+        return dataPromise;
 
         function getDemos() {
             return demosService.getBaseInfo($stateParams.id);

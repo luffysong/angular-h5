@@ -9,6 +9,7 @@ function demosService(BasicService) {
 
     this.getDemos = getDemos;
     this.getBaseInfo = getBaseInfo;
+    this.getToken = getToken;
 
     function saveToken(id, token) {
         if (token) {

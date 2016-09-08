@@ -7,10 +7,12 @@ function DemosController(demosService, projectColumnService,
     $state, $stateParams, cover, loading) {
     var vm = this;
     var COLUMN = 'column';
+
     vm.id = $stateParams.id;
     vm.busy = true;
     vm.demos = [];
     vm.type = $stateParams.type;
+    vm.needPwd = true;
 
     vm.isColumn = isColumn;
     vm.goProjects = goProjects;
@@ -19,6 +21,11 @@ function DemosController(demosService, projectColumnService,
     vm.loadMore = loadMore;
     init();
     function init() {
+        var token = demosService.getToken(vm.id);
+        if (token) {
+            vm.needPwd = false;
+        }
+
         if (isColumn()) {
             loadColumnDetail(1);
         }else {
@@ -34,6 +41,7 @@ function DemosController(demosService, projectColumnService,
         document.title = data.name || data.proSetName;
         window.WEIXINSHARE = {
             shareTitle: data.name || data.proSetName,
+            shareUrl: window.location.href,
             shareImg: data.sharePic || 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '来「36氪创投助手」，发现最新最热优质项目！'
         };
