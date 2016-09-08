@@ -19,7 +19,7 @@
                 <span class="header-proSetCount">共{{vm.cover.proSetCount}}个{{vm.getCollectionType()}}</span>
             </p>
         </div>
-        <div class="header-info" ng-if="vm.cover.intro!=='介绍：'">
+        <div class="header-info" ng-if="vm.cover.intro">
             <text-line-clamp line-clamp='3' text="vm.cover.intro">
                 <div class="text-container">
                     <div class="text-content"></div>

@@ -70,7 +70,9 @@ function DemosController(demosService, projectColumnService,
         }
 
         vm.cover = cover;
-        vm.cover.intro = '介绍：' + vm.cover.intro;
+        if (vm.cover.intro) {
+            vm.cover.intro = '介绍：' + vm.cover.intro;
+        }
     }
 
     function convertCover(cover) {
