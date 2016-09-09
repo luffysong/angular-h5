@@ -12,7 +12,7 @@ function DemosController(demosService, projectColumnService,
     vm.busy = true;
     vm.demos = [];
     vm.type = $stateParams.type;
-    vm.needPwd = true;
+    vm.needPwd = false;
 
     vm.isColumn = isColumn;
     vm.goProjects = goProjects;
@@ -21,10 +21,6 @@ function DemosController(demosService, projectColumnService,
     vm.loadMore = loadMore;
     init();
     function init() {
-        var token = demosService.getToken(vm.id);
-        if (token) {
-            vm.needPwd = false;
-        }
 
         if (isColumn()) {
             loadColumnDetail(1);
@@ -67,6 +63,7 @@ function DemosController(demosService, projectColumnService,
     }
 
     function vadliateAndGetDemos() {
+        vm.inputPwd = true;
         demosService.getDemos($stateParams.id, vm.password)
             .then(renderList)
             .catch(invalidate);
@@ -140,9 +137,15 @@ function DemosController(demosService, projectColumnService,
             vm.demos = vm.demos || [];
             vm.demos = vm.demos.concat(data.data);
             vm.invalid = false;
+            if (vm.inputPwd) {
+                vm.needPwd = true;
+            } else {
+                vm.needPwd = false;
+            }
         }else {
 
             //认证失败 禁止滚动加载
+            vm.needPwd = true;
             vm.demos = null;
             vm.busy = true;
         }
