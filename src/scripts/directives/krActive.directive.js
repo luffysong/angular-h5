@@ -28,10 +28,11 @@ function krActive($parse) {
         });
 
         element.on('touchend', function touchend() {
+            clearTimeout(timeID);
             element.removeClass(className);
         });
 
-        element.on('click', function touchend() {
+        element.on('click', function click() {
             clearTimeout(timeID);
             element.removeClass(className);
         });
