@@ -30,5 +30,10 @@ function krActive($parse) {
         element.on('touchend', function touchend() {
             element.removeClass(className);
         });
+
+        element.on('click', function touchend() {
+            clearTimeout(timeID);
+            element.removeClass(className);
+        });
     }
 }
