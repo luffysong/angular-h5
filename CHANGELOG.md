@@ -1,3 +1,24 @@
+<a name="1.8.0"></a>
+# [1.8.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.7.0...v1.8.0) (2016-09-09)
+
+
+### Bug Fixes
+
+* touchend 增加对 touchstart 的移除 ([ec5be4c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/ec5be4c))
+* 修复点击后touchStart 效果不取消 ([40ac522](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/40ac522))
+* 修复项目集介绍为undefined时隐藏 ([520c57c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/520c57c))
+* 调整颜色值 ([64b6f55](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/64b6f55))
+* 项目集列表touchStart 增加延迟 ([7049a69](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7049a69))
+* 项目集密码逻辑优化 ([2601372](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/2601372))
+* 项目集还是调整颜色值 ([3c2faea](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/3c2faea))
+
+
+### Features
+
+* iOS上传BP引导页，修复项目集密码输入框闪现bug ([cab3708](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cab3708))
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.6.1...v1.7.0) (2016-09-05)
 
