@@ -15,11 +15,15 @@ function krActive($parse) {
 
     function postLink(scope, element, attr) {
         var className = $parse(attr.krActive)();
+        var timeID;
         element.bind('touchstart', function touchstart() {
-            element.addClass(className);
+            timeID = setTimeout(function () {
+                element.addClass(className);
+            }, 300);
         });
 
         element.on('touchmove', function touchmove() {
+            clearTimeout(timeID);
             element.removeClass(className);
         });
 
