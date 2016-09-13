@@ -3,6 +3,7 @@ window.projectEnvConfig = {
     krHost: 'stable.36kr.com',
     rongHost: 'rongtest02.36kr.com',
     zhongHost:'ztest02.36kr.com',
+    jrHost:'test02.36jr.com',
     ucHost: 'uctest02.36kr.com',
     helpHost: 'helptest02.36kr.com',
 };
