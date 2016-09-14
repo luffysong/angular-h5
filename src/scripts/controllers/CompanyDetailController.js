@@ -9,7 +9,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
               UserService, ErrorService, $rootScope, DictionaryService,
               SocialService, CredentialService, SeoGetInfoService
               ) {
-        var jr_HOST = '//' + projectEnvConfig.jrHost + kr.H5_PATH;
+        var JR_HOST = '//' + projectEnvConfig.jrHost + kr.H5_PATH;
         var RONG_HOST = '//' + projectEnvConfig.rongHost;
         var MOBILE_TYPE = {
             IOS:'IOS',
@@ -125,7 +125,7 @@ angular.module('defaultApp.controller').controller('CompanyDetailController',
         }
 
         function setCrowdFundingDetailUrl(crowdFundingId) {
-            $scope.crowdFundingDetailUrl = jr_HOST +
+            $scope.crowdFundingDetailUrl = JR_HOST +
                 'zhongchouDetail?source=rongzi&fundingId=' + crowdFundingId +
                 '&companyId=' + $scope.companyId;
         }
