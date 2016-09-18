@@ -430,7 +430,7 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
         .pipe($.replace('styles/images/', 'images/'))
         .pipe(assets)
         .pipe($.debug())
-        // .pipe($['if']('*.css', $.cssnano({ safe:true })))
+        .pipe($['if']('*.css', $.cssnano({ safe:true })))
         .pipe($['if'](/.*krmin\.js/,
             $.uglify({ compress:{
 				drop_console:true }
