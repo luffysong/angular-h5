@@ -31,9 +31,6 @@
             },500);
             window.addEventListener('pagehide', preventPopup);
         }
-        $('a').click(function clickCb(e){
-            startApp('krtou://openCustomerService');
-        });
     </script>
 </head>
 <body>
@@ -43,6 +40,6 @@
     <p><img width="303" src="/styles/images/BP/Step2@2x.png" alt=""></p>
     <p class="step-info-third">第3步：选择拷贝至36氪创投助手</p>
     <p><img width="303" src="/styles/images/BP/Step3@2x.png" alt=""></p>
-    <a class="footer">如有任何问题，请联系人工客服</a>
+    <a class="footer" onclick="startApp('krtou://openCustomerService')">如有任何问题，请联系人工客服</a>
 </body>
 </html>
