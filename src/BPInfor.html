@@ -15,6 +15,26 @@
 <!-- build:css /styles/BPInfor.css -->
     <link rel="stylesheet" href="/styles/BPInfor.css" >
 <!-- endbuild -->
+    <script>
+        function preventPopup() { //定义preventPopup函数
+            clearTimeout(timeout);
+            window.removeEventListener('pagehide', preventPopup);
+        }
+        function startApp(appurl){ //定义startApp函数
+            var ifr = document.createElement('iframe');
+            ifr.src = appurl;
+            ifr.style.display = 'none';
+            document.body.appendChild(ifr);
+            window.setTimeout(function(){
+                document.body.removeChild(ifr);
+                ifr = null;
+            },500);
+            window.addEventListener('pagehide', preventPopup);
+        }
+        $('a').click(function clickCb(e){
+            startApp('krtou://openCustomerService');
+        });
+    </script>
 </head>
 <body>
     <p class="step-info-first">第1步：手机保存有商业计划书pdf版；如无，可利用微信PC端的文件传输助手<img width="28" src="/styles/images/BP/IconTransport@2x.png" alt="">发送至手机</p>
