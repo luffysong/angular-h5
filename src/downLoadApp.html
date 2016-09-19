@@ -48,6 +48,12 @@
         window.addEventListener('pagehide', preventPopup);
     }
     $(function () {
+        /*是否手机端登录*/
+        var isMobile =  navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iphone/i);
+        if (!isMobile) {
+            krtracker('trackEvent', 'click', 'web.download.' + cid);
+            window.location.href = 'http://download.36kr.com/#rongApp';
+        }
         var userSystem=navigator.userAgent; //userAgent
         if (/MicroMessenger/i.test(userSystem)){
             if(userSystem.indexOf('Android') > -1){
