@@ -27,6 +27,7 @@
         cid = purl(location.href).param('cid');
     }
     var fromWeixin = purl(location.href).param('fromWeixin');
+    var ktm_source = purl(location.href).param('ktm_source');
     var SUCCESS = 0;
     var appurl = 'krtou://open';
     var hostMap = {
@@ -57,7 +58,7 @@
 
     function goYingyongbao(prefix){
         timeout = setTimeout(function(){
-            krtracker('trackEvent','按钮', prefix +'.h5.ctappshare.download');
+            krtracker('trackEvent','按钮', prefix + '.' + ktm_source);
             setTimeout(function() {
                 document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
             },200)

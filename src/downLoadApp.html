@@ -21,6 +21,7 @@
 <!-- endbuild -->
 <script>
     var cid = purl(location.href).param('cid');
+    var ktm_source = purl(location.href).param('ktm_source');
     var appurl = 'krtou://open';
     function preventPopup() { //定义preventPopup函数
         clearTimeout(timeout);
@@ -40,7 +41,7 @@
 
     function goYingyongbao(prefix){
         timeout = setTimeout(function(){
-            krtracker('trackEvent','按钮', prefix +'.h5.crmsharecompany.download');
+            krtracker('trackEvent','按钮', prefix + '.' + ktm_source);
             setTimeout(function() {
                 document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
             },200)
@@ -51,7 +52,7 @@
         /*是否手机端登录*/
         var isMobile =  navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iphone/i);
         if (!isMobile) {
-            krtracker('trackEvent', 'click', 'web.download.' + cid);
+            krtracker('trackEvent', 'click', 'web.download.' + ktm_source);
             window.location.href = 'http://download.36kr.com/#rongApp';
         }
         var userSystem=navigator.userAgent; //userAgent
