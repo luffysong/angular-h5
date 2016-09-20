@@ -1,3 +1,27 @@
+<a name="1.9.0"></a>
+# [1.9.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.8.2...v1.9.0) (2016-09-20)
+
+
+### Bug Fixes
+
+* bp引导修改点击事件 ([35e5d06](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/35e5d06))
+* bp引导向native发消息 ([b425616](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b425616))
+* h5唤醒app增加埋点 ([fbcbccb](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/fbcbccb))
+* notify样式问题测试 ([c34a642](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c34a642))
+* rong h5 顶部banner增加埋点触发 ([db9c041](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/db9c041))
+* 中间页埋点调整 ([38bb5a1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/38bb5a1))
+* 为兼容旧版app，撤销埋点统计 ([0cfb9ee](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0cfb9ee))
+* 修复h5中notify样式问题 ([cccd13e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cccd13e))
+* 去掉debugger ([6635cb9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6635cb9))
+
+
+### Features
+
+* EDM邮件模版着陆页和媒体引流页 加入引流web逻辑 ([3a86dd2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/3a86dd2))
+* 增加唤醒app微信引导打开页、顶部banner替换 ([9213347](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9213347))
+
+
+
 <a name="1.8.2"></a>
 ## [1.8.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.8.1...v1.8.2) (2016-09-14)
 
