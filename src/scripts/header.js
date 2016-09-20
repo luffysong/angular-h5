@@ -33,7 +33,7 @@
             var split = location.href.split('company/');
             if (split[1]) {
                 cid = split[1];
-                $('#goDownLoad').attr('href', 'http://36kr.com/company/' + cid + '?fromShare=1&ktm_source=rong.h5.download.' + cid);
+                $('#goDownLoad').attr('href', 'http://36kr.com/company/' + cid + '?fromShare=1&ktm_source=rong.h5.download.' + cid + '&source=h5_top_pro_list');
             } else {
                 $('#goDownLoad').attr('href', 'http://huodong.36kr.com/h5/investor-app/hub.html?ktm_source=rongh5dingbu');
             }
