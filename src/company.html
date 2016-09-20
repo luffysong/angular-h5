@@ -95,7 +95,7 @@
                  $('.mask').show();  //ios用safari打开
              }else if(userSystem.indexOf('Android') > -1){
                 e.preventDefault();
-                startApp('krtou://company/' + cid + '?source=company_click_pro_list');
+                startApp('krtou://company/' + cid);
                 goYingyongbao('android');
              }else if(/iphone/i.test(userSystem)){
                 startApp();
@@ -104,7 +104,7 @@
         })
         if ((!(/MicroMessenger/i.test(userSystem)))&&(parseInt(fromWeixin) === 1)){
             if(userSystem.indexOf('Android') > -1){
-                startApp('krtou://company/' + cid + '?source=company_auto_pro_list');
+                startApp('krtou://company/' + cid);
                 goYingyongbao('android');
             }else if(/iphone/i.test(userSystem)){
                 startApp();

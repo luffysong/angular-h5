@@ -26,6 +26,6 @@ angular.module('defaultApp.service').service('hybrid', function () {
     }
 
     function openProject(id) {
-        call(buildUrl('/company/' + id + '?source=app_demoday_pro_list'));
+        call(buildUrl('/company/' + id));
     }
 });
