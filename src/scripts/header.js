@@ -49,6 +49,7 @@
     }
 
     function download() {
+        console.log('test');
         var userSystem = navigator.userAgent; //userAgent
         if (userSystem.indexOf('Android') > -1) {
             krtracker('trackEvent', 'click', 'android.h5.rongh5dingbu.download.' + cid);
