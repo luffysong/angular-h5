@@ -376,7 +376,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 UserService.basic.update({
                     id: $scope.user.id
                 }, {
-                    avatar: $scope.user.avatar || $scope.guideForm.avatar.uploaded,
+                    avatar: $scope.guideForm.avatar.uploaded || $scope.user.avatar,
                     name: $scope.user.name,
                     email: $scope.user.email,
                     phone: $scope.getPhoneWithCountryCode(),
@@ -389,7 +389,18 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     });
                 });
             } else {
-                send();
+                UserService.basic.update({
+                    id: $scope.user.id
+                }, {
+                    avatar: $scope.guideForm.avatar.uploaded || $scope.user.avatar,
+                    name: $scope.user.name,
+                }).$promise.then(send)
+                    .catch(function (err) {
+                        $scope.hasClick = false;
+                        ErrorService.alert({
+                            msg: err.msg
+                        });
+                    });
             }
         };
 
