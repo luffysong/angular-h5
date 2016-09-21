@@ -1,13 +1,11 @@
 <div class="footbar">
     <div>
-        <a href="#"  class="like">
-            <i ng-click="likeClick(company.value.isLikes,$event)"
-               ng-class="{active:company.value.isLikes}"
+        <a href="#"  class="like" ng-click="likeClick(company.value.isLikes,$event)">
+            <i ng-class="{active:company.value.isLikes}"
                ng-bind="company.value.statistics.likesCount" ></i>
         </a>
-        <a class="follow">
-            <i ng-click="followClick(company.value.followed,$event)"
-               ng-class="{active:company.value.followed}"
+        <a class="follow" ng-click="followClick(company.value.followed,$event)">
+            <i ng-class="{active:company.value.followed}"
                ng-bind="company.value.statistics.followCount" ></i>
         </a>
         <a ng-click="buyOrTalkClick(company.value.funds.crowdFundingId ? 'buy':'talk',$event)"
