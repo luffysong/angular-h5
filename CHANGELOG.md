@@ -1,3 +1,16 @@
+<a name="1.9.1"></a>
+## [1.9.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.9.0...v1.9.1) (2016-09-27)
+
+
+### Bug Fixes
+
+* h5投资人认证时允许修改头像和姓名 ([76becd9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/76becd9))
+* 修复完善资料页面h5样式 ([49a4a4c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/49a4a4c))
+* 公司底部点赞、收藏扩大点击区域 ([04f277a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/04f277a))
+* 项目集跳转时取消默认title ([0dfe511](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0dfe511))
+
+
+
 <a name="1.9.0"></a>
 # [1.9.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.8.2...v1.9.0) (2016-09-20)
 
