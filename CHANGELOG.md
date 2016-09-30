@@ -1,3 +1,13 @@
+<a name="1.9.2"></a>
+## [1.9.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.9.1...v1.9.2) (2016-09-30)
+
+
+### Bug Fixes
+
+* 埋点完善，增加项目集id、EDM邮件模板id ([d348fd4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d348fd4))
+
+
+
 <a name="1.9.1"></a>
 ## [1.9.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.9.0...v1.9.1) (2016-09-27)
 
