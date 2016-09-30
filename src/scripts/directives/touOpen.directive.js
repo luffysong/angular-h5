@@ -11,19 +11,21 @@ function touOpen(hybrid, loading, $timeout) {
         restrict: 'AE',
         scope:{
             path: '=?',
-            pid: '=?'
+            pid: '=?',
+            demosid: '=?'
         },
         link: function (scope, element) {
             var pid = scope.pid;
+            var demosid = scope.demosid;
             element.click(function openApp(e) {
                 if (!hybrid.isInApp) {
                     var userSystem = navigator.userAgent; //userAgent
                     if (userSystem.indexOf('Android') > -1) {
                         addClickEvent(scope);
-                        krtracker('trackEvent', 'click', 'android.h5.demoslist.download.' + pid);
+                        krtracker('trackEvent', 'click', 'android.h5.demoslist.download.' + demosid + '.' + pid);
                     }else if (/iphone/i.test(userSystem)) {
                         loadingUI(scope);
-                        krtracker('trackEvent', 'click', 'ios.h5.demoslist.download.' + pid);
+                        krtracker('trackEvent', 'click', 'ios.h5.demoslist.download.' + demosid + '.' + pid);
                     }
                 } else {
                     e.preventDefault();

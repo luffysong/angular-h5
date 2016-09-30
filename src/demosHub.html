@@ -18,15 +18,16 @@
 <!-- endbuild -->
 <script>
     var id = purl(location.href).param('id');
+    var mouldId = purl(location.href).param('mouldId');
     $(function () {
         /*是否手机端登录*/
         var isMobile =  navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iphone/i);
         if (!isMobile) {
-            krtracker('trackEvent', 'click', 'demos.web.download.' + id);
+            krtracker('trackEvent', 'click', 'demos.web.download.' + mouldId + '.' + id);
             window.location.href = 'http://download.36kr.com/#rongApp';
         }
         else {
-            krtracker('trackEvent', 'click', 'demos.h5.download.' + id);
+            krtracker('trackEvent', 'click', 'demos.h5.download.' + mouldId + '.' + id);
             window.location.href = 'https://rong.36kr.com/m/#/demos/' + id + '?type=projects';
         }
     })

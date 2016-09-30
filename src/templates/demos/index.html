@@ -64,7 +64,7 @@
                 <li ontouchstart="" kr-active="'active'"
                     ng-repeat="item in vm.demos track
                     by $index">
-                    <a class="demos-content-href" href="http://36kr.com/company/{{item.cid}}?ktm_source=chuangtou.h5.xiangmuji.{{item.cid}}" pid="item.cid" tou-open>
+                    <a class="demos-content-href" href="http://36kr.com/company/{{item.cid}}?ktm_source=chuangtou.h5.xiangmuji.{{vm.id}}.{{item.cid}}" pid="item.cid" demosid="vm.id" tou-open>
                         <div class="base-info-wrapper">
                             <div  class="logo-wrapper">
                                 <img ng-src="{{item.logo | image}}" alt="">
