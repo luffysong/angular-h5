@@ -24,11 +24,15 @@
         var isMobile =  navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iphone/i);
         if (!isMobile) {
             krtracker('trackEvent', 'click', 'demos.web.download.' + mouldId + '.' + id);
-            window.location.href = 'http://download.36kr.com/#rongApp';
+            setTimeout(function() {
+                window.location.href = 'http://download.36kr.com/#rongApp';
+            },200)
         }
         else {
             krtracker('trackEvent', 'click', 'demos.h5.download.' + mouldId + '.' + id);
-            window.location.href = 'https://rong.36kr.com/m/#/demos/' + id + '?type=projects';
+            setTimeout(function() {
+                window.location.href = 'https://rong.36kr.com/m/#/demos/' + id + '?type=projects' + '&ktm_source=mouldId.' + mouldId;
+            },200)
         }
     })
 
