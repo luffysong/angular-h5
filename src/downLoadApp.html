@@ -22,7 +22,7 @@
 <script>
     var cid = purl(location.href).param('cid');
     var ktm_source = purl(location.href).param('ktm_source');
-    var appurl = 'krtou://open';
+    var appurl = 'krtou://home';
     function preventPopup() { //定义preventPopup函数
         clearTimeout(timeout);
         window.removeEventListener('pagehide', preventPopup);
@@ -53,7 +53,9 @@
         var isMobile =  navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iphone/i);
         if (!isMobile) {
             krtracker('trackEvent', 'click', 'web.download.' + ktm_source);
-            window.location.href = 'http://download.36kr.com/#rongApp';
+            setTimeout(function() {
+                window.location.href = 'http://download.36kr.com/#rongApp';
+            },200)
         }
         var userSystem=navigator.userAgent; //userAgent
         if (/MicroMessenger/i.test(userSystem)){
