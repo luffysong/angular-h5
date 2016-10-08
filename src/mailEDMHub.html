@@ -20,17 +20,13 @@
     <script src="/components/purl/purl.js"></script>
 <!-- endbuild -->
 <script>
-    var cid = purl(location.href).segment(2);
-
-    //线上环境使用nginx代理 此处为方便本地测试
-    if(!parseInt(cid)){
-        cid = purl(location.href).param('cid');
-    }
-    var fromWeixin = purl(location.href).param('fromWeixin');
-    var fromMailEDM = purl(location.href).param('fromMailEDM');
+    var cid = purl(location.href).param('cid');
     var ktm_source = purl(location.href).param('ktm_source');
-    var SUCCESS = 0;
+    var isAndroid = !!navigator.userAgent.match(/android/ig);
+    var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+    var isIos9 = !!navigator.userAgent.match(/OS 9/ig);
     var appurl = 'krtou://home';
+    var SUCCESS = 0;
     var hostMap = {
         '36kr.com' : 'rong.36kr.com'
     };
@@ -38,8 +34,6 @@
     var timeout;
     HOST = hostMap[HOST] || HOST;
     var API = '//' +  HOST + '/api/mobi-investor/company/';
-    var isDesktop = !navigator.userAgent.toLowerCase().match(/(iphone|android)/);
-
 
     function preventPopup() { //定义preventPopup函数
         clearTimeout(timeout);
@@ -57,6 +51,13 @@
         window.addEventListener('pagehide', preventPopup);
     }
 
+    function startAppIOS() {
+        window.location = 'krtou://company/' + cid;
+        setTimeout(function() {
+            window.location = "https://itunes.apple.com/cn/app/36ke-chuang-tou-zhu-shou/id1075751043?mt=8";
+        }, 1000);
+    }
+
     function goYingyongbao(prefix){
         timeout = setTimeout(function(){
             krtracker('trackEvent','按钮', prefix + '.' + ktm_source);
@@ -66,6 +67,7 @@
         }, 1000);
          window.addEventListener('pagehide', preventPopup);
     }
+
     $.getJSON(API + cid + '/sharebasic/v3',function(data){
         if(data.code === SUCCESS){
             data = data.data;
@@ -89,35 +91,26 @@
         }
     });
 
-    //EDM中来的请求自动跳转到应用宝下载
-    if(fromMailEDM){
-        window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
-    }
-
     $(function () {
-        var userSystem=navigator.userAgent; //userAgent
+        $('#downloadBtn').attr('href', 'http://36kr.com/company/' + cid + '?&ktm_source=' + ktm_source + '&fromMailEDM=1');
         $('a').click(function clickCb(e){
-            e.preventDefault();
-            if(/MicroMessenger/i.test(userSystem)){ //在微信中打开
-                 $('.mask').show();  //ios用safari打开
-             }else if(userSystem.indexOf('Android') > -1){
-                e.preventDefault();
+           if(isAndroid){
+               e.preventDefault();
                 startApp('krtou://company/' + cid);
                 goYingyongbao('android');
-             }else if(/iphone/i.test(userSystem)){
-                startApp();
-                goYingyongbao('ios');
-             }
+           }else if(isIos && isIos9){
+               startAppIOS();
+           }
         })
-        if ((!(/MicroMessenger/i.test(userSystem)))&&(parseInt(fromWeixin) === 1)){
-            if(userSystem.indexOf('Android') > -1){
-                startApp('krtou://company/' + cid);
-                goYingyongbao('android');
-            }else if(/iphone/i.test(userSystem)){
-                startApp();
-                goYingyongbao('ios');
-            }
+        if(isAndroid){
+            startApp('krtou://company/' + cid);
+            goYingyongbao('android');
+        }else if(isIos && isIos9){
+            startAppIOS();
+        }else if(isIos && !isIos9){
+            window.location = 'krtou://company/' + cid;
         }
+
     })
 
 </script>
