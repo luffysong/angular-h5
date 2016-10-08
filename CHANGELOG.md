@@ -1,3 +1,13 @@
+<a name="1.9.3"></a>
+## [1.9.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.9.2...v1.9.3) (2016-10-08)
+
+
+### Bug Fixes
+
+* 修改线上BP引导文案 ([98488eb](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/98488eb))
+
+
+
 <a name="1.9.2"></a>
 ## [1.9.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.9.1...v1.9.2) (2016-09-30)
 
