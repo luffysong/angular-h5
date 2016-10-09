@@ -1,3 +1,15 @@
+<a name="1.9.4"></a>
+## [1.9.4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.9.3...v1.9.4) (2016-10-09)
+
+
+### Bug Fixes
+
+* EDM唤醒app支持 ([97ecced](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/97ecced))
+* 埋点完善 ([68a345f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/68a345f))
+* 项目集内容为空时不显示数量 ([f7395c8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f7395c8))
+
+
+
 <a name="1.9.3"></a>
 ## [1.9.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.9.2...v1.9.3) (2016-10-08)
 
@@ -5,6 +17,7 @@
 ### Bug Fixes
 
 * 修改线上BP引导文案 ([98488eb](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/98488eb))
+* 埋点完善 ([9726698](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9726698))
 
 
 
