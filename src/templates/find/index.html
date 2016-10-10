@@ -1,0 +1,42 @@
+<div  class="find-wrapper">
+    <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
+
+    <div class="intro">
+        <div ng-if="vm.slides.length" kr-swiper slides="vm.slides" class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" ng-repeat="item in vm.slides">
+                    <a ng-show="item.action === 'web'" ng-href="{{item.location}}">
+                        <img ng-src="{{item.imgUrl}}"/>
+                    </a>
+                    <a ng-show="item.action === 'native'" ng-click="vm.openNativePage(item.location)">
+                        <img ng-src="{{item.imgUrl}}"/>
+                    </a>
+                </div>
+            </div>
+        <span class="swiper-indicator">
+            <span ng-repeat="item in vm.slides" ng-class="{active:(vm.slides.active - 1 == $index)}"></span>
+        </span>
+        </div>
+    </div>
+    <div class="section-one">
+        <div class="line-one">
+            <img src="/styles/images/find/financing@2x.png"/>
+        </div>
+        <div class="line-two">融资速递</div>
+        <div class="line-three">{{vm.financeNewStr}}</div>
+        <a class="glyphicon glyphicon-menu-right "></a>
+    </div>
+    <div class="section-two">
+        <img src="/styles/images/find/collection@2x.png"/>
+        <span class="section-name">项目集</span>
+        <span class="badge" ng-if="vm.proSetCount && vm.proSetCount <= 99">{{vm.proSetCount}}</span>
+        <span class="badge" ng-if="vm.proSetCount > 99">99+</span>
+        <a class="glyphicon glyphicon-menu-right "></a>
+    </div>
+    <div class="section-two">
+        <img src="/styles/images/find/activity@2x.png"/>
+        <span class="section-name">近期活动</span>
+        <a class="glyphicon glyphicon-menu-right "></a>
+    </div>
+
+</div>

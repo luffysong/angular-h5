@@ -177,6 +177,17 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
+    //创投助手app发现页
+    $stateProvider.state('find', {
+        url:'/find',
+        controllerAs: 'vm',
+        controller: 'FindController',
+        templateUrl: 'templates/find/index.html',
+        resolve: {
+            cover: loadFind
+        }
+    });
+
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
     }
@@ -228,6 +239,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         function getColumns() {
             return projectColumnService.getColumn($stateParams.id);
         }
+
+    }
+
+    function loadFind($rootScope, loading) {
+
+        $rootScope.needLoading = true;
+        loading.show('demos');
+        $('ui-view')[0].innerHTML = '';
 
     }
 

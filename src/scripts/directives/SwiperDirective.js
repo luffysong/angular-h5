@@ -10,7 +10,9 @@ angular.module('defaultApp.directive').directive('krSwiper',
     function ($timeout) {
         return {
             restrict: 'A',
-            scope: '=slides',
+            scope: {
+                slides:'=slides'
+            },
             link: function (scope, element) {
                 scope.$watch('slides', function () {
                     var img;
