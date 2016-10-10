@@ -5,10 +5,10 @@
         <div ng-if="vm.slides.length" kr-swiper slides="vm.slides" class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" ng-repeat="item in vm.slides">
-                    <a ng-show="item.action === 'web'" ng-href="{{item.location}}">
+                    <a href="javascript:" ng-show="item.action === 'web'" ng-click="vm.openUrl(item.location)">
                         <img ng-src="{{item.imgUrl}}"/>
                     </a>
-                    <a ng-show="item.action === 'native'" ng-click="vm.openNativePage(item.location)">
+                    <a href="javascript:"  ng-show="item.action === 'native'" ng-click="vm.openNativePage(item.location)">
                         <img ng-src="{{item.imgUrl}}"/>
                     </a>
                 </div>

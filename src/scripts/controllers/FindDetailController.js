@@ -12,6 +12,9 @@ function FindController(FindService, ErrorService, hybrid, loading, $interval, $
     //轮播图唤醒内部页面
     vm.openNativePage = openNativePage;
 
+    //轮播图唤醒url
+    vm.openUrl = openUrl;
+
     init();
     function init() {
         FindService.getRoundpics()
@@ -30,6 +33,11 @@ function FindController(FindService, ErrorService, hybrid, loading, $interval, $
         if (hybrid.isInApp) {
             hybrid.open(path);
         }
+    }
+
+    function openUrl(url) {
+        var path = '/openEncryptionLink/:' + encodeURIComponent(url);
+        openNativePage(path);
     }
 
     function interval() {
