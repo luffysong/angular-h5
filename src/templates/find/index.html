@@ -18,7 +18,7 @@
         </span>
         </div>
     </div>
-    <div class="section-one">
+    <div class="section-one" ng-click="vm.openNativePage('krtou://financenews')">
         <div class="line-one">
             <img src="/styles/images/find/financing@2x.png"/>
         </div>
@@ -26,14 +26,14 @@
         <div class="line-three">{{vm.financeNewStr}}</div>
         <a class="glyphicon glyphicon-menu-right "></a>
     </div>
-    <div class="section-two">
+    <div class="section-two" ng-click="vm.openNativePage('krtou://projectlist')">
         <img src="/styles/images/find/collection@2x.png"/>
         <span class="section-name">项目集</span>
         <span class="badge" ng-if="vm.proSetCount && vm.proSetCount <= 99">{{vm.proSetCount}}</span>
         <span class="badge" ng-if="vm.proSetCount > 99">99+</span>
         <a class="glyphicon glyphicon-menu-right "></a>
     </div>
-    <div class="section-two">
+    <div class="section-two" ng-click="vm.openNativePage('krtou://discoveryall')">
         <img src="/styles/images/find/activity@2x.png"/>
         <span class="section-name">近期活动</span>
         <a class="glyphicon glyphicon-menu-right "></a>
