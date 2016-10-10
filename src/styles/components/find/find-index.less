@@ -54,6 +54,7 @@
                 height: 100%;
                 margin-left: 50%;
                 transform: translateX(-50%);
+                vertical-align: top;
             }
         }
     }
@@ -95,38 +96,48 @@
             text-overflow: ellipsis;
             text-align: center;
         }
-        .glyphicon-menu-right{
+        .arrowRight{
+            display: inline-block;
             position: absolute;
+            transform: translate(0,-50%);
+            top: 50%;
             right: 14px;
-            top: 57px;
-            color: #DADEE2;
+            width: 7px;
+            height: 12px;
         }
     }
     .section-two{
         background-color: #fff;
         margin-bottom: 10px;
         height: 54px;
-        padding: 16px 17px;
+        line-height: 54px;
         cursor: pointer;
         position: relative;
-        img{
+        .section-icon{
+            display: inline-block;
+            position: absolute;
+            transform: translate(0,-50%);
+            top: 50%;
+            left: 16px;
             height: 22px;
             width: 22px;
         }
         .section-name{
-            margin-left: 8px;
+            margin-left: 50px;
             font-size: 15px;
             color: #222C38;
             letter-spacing: 0px;
-            line-height: 18px;
+            line-height: 54px;
             vertical-align: middle;
         }
-        .glyphicon-menu-right{
+        .arrowRight{
+            display: inline-block;
             position: absolute;
+            transform: translate(0,-50%);
+            top: 50%;
             right: 14px;
-            color: #DADEE2;
-            top:50%;
-            transform:translate(0,-50%);
+            width: 7px;
+            height: 12px;
         }
     }
     .badge{
