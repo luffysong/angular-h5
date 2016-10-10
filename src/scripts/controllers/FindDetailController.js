@@ -36,7 +36,7 @@ function FindController(FindService, ErrorService, hybrid, loading, $interval, $
     }
 
     function openUrl(url) {
-        var path = '/openEncryptionLink/:' + encodeURIComponent(url);
+        var path = '/openEncryptionLink/' + encodeURIComponent(url);
         openNativePage(path);
     }
 
