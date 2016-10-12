@@ -1,9 +1,9 @@
 
 var  angular = require('angular');
 angular.module('defaultApp.controller')
-    .controller('FindController', FindController);
+    .controller('FindIndexController', FindIndexController);
 
-function FindController(FindService, ErrorService, hybrid, loading, $interval, $scope) {
+function FindIndexController(FindService, ErrorService, hybrid, loading, $interval, $scope) {
     var vm = this;
 
     //轮播图返回的数据

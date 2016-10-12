@@ -1,0 +1,19 @@
+<div  class="roadShow-wrapper">
+    <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
+
+    <div class="intro">
+        <ul class="sidebar">
+            <li>日</li>
+            <li>一</li>
+            <li>二</li>
+            <li>三</li>
+            <li>四</li>
+            <li>五</li>
+            <li>六</li>
+        </ul>
+        <ul class="date-content">
+            <li ng-repeat="item in vm.date">{{item.name}}</li>
+        </ul>
+    </div>
+
+</div>

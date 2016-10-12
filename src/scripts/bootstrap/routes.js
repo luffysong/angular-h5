@@ -177,12 +177,23 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
-    //创投助手app发现页
+    //创投助手app---发现页
     $stateProvider.state('find', {
         url:'/find',
         controllerAs: 'vm',
-        controller: 'FindController',
+        controller: 'FindIndexController',
         templateUrl: 'templates/find/index.html',
+        resolve: {
+            cover: loadFind
+        }
+    });
+
+    //创投助手app---近期路演
+    $stateProvider.state('roadShow', {
+        url:'/roadShow',
+        controllerAs: 'vm',
+        controller: 'RoadShowController',
+        templateUrl: 'templates/find/roadShowList.html',
         resolve: {
             cover: loadFind
         }

@@ -83,12 +83,9 @@ gulp.task('styles', function () {
 
 // Scripts Init
 var scriptsInit = function (modulesPath) {
-    var scriptText = '';
-    fs.readdirSync(modulesPath).forEach(function (file) {
-        if (file !== 'index.js' && /\.js$/.test(file)) {
-            scriptText += 'require(\'./' + file.replace('.js', '') + '\');\n';
-        }
-    });
+    var pattern = new RegExp(modulesPath + '/', 'gm');
+    var scriptText = eachScriptDir(modulesPath);
+    scriptText = scriptText.replace(pattern, '');
 
     var src = require('stream').Readable({
         objectMode: true,
@@ -106,6 +103,24 @@ var scriptsInit = function (modulesPath) {
 
     return src.pipe(gulp.dest(modulesPath));
 };
+
+function eachScriptDir(modulePath) {
+
+    var scriptText = '';
+    if (fs.statSync(modulePath).isDirectory()) {
+        fs.readdirSync(modulePath).forEach(function (file) {
+            if (file !== 'index.js' && /\.js$/.test(file)) {
+                scriptText += 'require(\'./' + modulePath + '/' + file.replace('.js', '') + '\');\n';
+            }else if (fs.statSync(modulePath + '/' + file).isDirectory()) {
+                scriptText += eachScriptDir(modulePath + '/' + file);
+            }
+        });
+    }else {
+        scriptText += 'require(\'./' + modulePath.replace('.js', '') + '\');\n';
+    }
+
+    return scriptText;
+}
 
 function jsFixInit(modulesPath) {
     return gulp.src(modulesPath + '/*.js')

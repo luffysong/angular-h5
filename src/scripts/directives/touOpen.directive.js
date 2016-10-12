@@ -12,6 +12,7 @@ function touOpen(hybrid, loading, $timeout) {
         scope:{
             path: '=?',
             pid: '=?',
+            ccid: '=?',
             demosid: '=?'
         },
         link: function (scope, element) {
@@ -39,9 +40,10 @@ function touOpen(hybrid, loading, $timeout) {
     function addClickEvent(scope) {
         var path = scope.path;
         var pid = scope.pid;
+        var ccid = scope.ccid;
         loadingUI(scope);
-        if (pid) {
-            hybrid.openProject(pid);
+        if (pid && ccid) {
+            hybrid.openProject(pid, ccid);
         } else {
             hybrid.open(path);
         }

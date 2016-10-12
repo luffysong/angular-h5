@@ -25,7 +25,17 @@ angular.module('defaultApp.service').service('hybrid', function () {
         call(buildUrl(path));
     }
 
-    function openProject(id) {
-        call(buildUrl('/company/' + id));
+    function openProject(id, ccid) {
+
+        //安卓示例:36kr-Tou-Android/2.6  ios示例:36kr-Tou-iOS/2.6
+        var matchesTou = navigator.userAgent.match(/36kr-Tou-[a-zA-Z]{3,7}\/([0-9]\.[0-9])/i);
+
+        var versionTou = matchesTou && matchesTou[1] && parseFloat(matchesTou[1]);
+        if (versionTou && versionTou > 2.5) {
+            call(buildUrl('/crmCompany/' + ccid));
+        } else if (versionTou && versionTou <= 2.5) {
+            call(buildUrl('/company/' + id));
+        }
+
     }
 });
