@@ -11,9 +11,23 @@
             <li>五</li>
             <li>六</li>
         </ul>
-        <ul class="date-content">
-            <li ng-repeat="item in vm.date">{{item.name}}</li>
-        </ul>
+        <div class="date-content">
+            <div ng-repeat="item in vm.originDate" ng-click="vm.setActive(item)"
+                 ng-class="{active:(item.active == true),today:(item.today == true),todayActive:(item.today == true && item.active == true)}">
+                <span>{{item.day}}</span>
+                <ul ng-if="item.num">
+                    <!--<li ng-repeat="innerItem in item.num track by $index"></li>-->
+                    <li ng-if="item.num"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="arrowLeft" ng-click="vm.dateDel()">
+            <img src="/styles/images/find/arrowLeft@2x.png"/>
+        </div>
+        <div class="arrowRight" ng-click="vm.dateAdd()">
+            <img src="/styles/images/find/arrowRight@2x.png"/>
+        </div>
+
     </div>
 
 </div>

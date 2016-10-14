@@ -1,9 +1,137 @@
 .roadShow-wrapper {
     background-color: rgb(242,244,245);
     .intro{
-        height: 165px;
+        height: 78px;
+        position: relative;
+        padding: 8px 17px;
+        background-color: #fff;
+        .sidebar{
+            list-style-type:none;
+            width:100%;
+            position:relative;
+            margin:0;
+            padding:0;
+            height:14px;
+            text-align:center;
+            li{
+                width:14.2857%;
+                display:inline-block;
+                float:left;
+                border-collapse:collapse;
+                font-size: 11px;
+                color: #222C38;
+                letter-spacing: 0px;
+                line-height: 13.5px;
+                &:first-child,&:last-child{
+                    color: #969FA9;
+                }
+            }
+        }
         .date-content{
             background:white;
+            list-style-type:none;
+            width:100%;
+            position:relative;
+            margin:0;
+            padding:0;
+            height:48px;
+            text-align:center;
+            div{
+                width:14.2857%;
+                display:inline-block;
+                border-collapse:collapse;
+                height:44px;
+                position: relative;
+                span{
+                    display: inline-block;
+                    width: 32px;
+                    height: 32px;
+                    line-height: 32px;
+                    border-radius: 50%;
+                    margin-top: 8px;
+                    margin-bottom: 4px;
+                    font-size: 16px;
+                    color: #222C38;
+                    letter-spacing: 0px;
+                    cursor: pointer;
+                }
+                &:first-child,&:last-child{
+                    span{
+                        color: #969FA9;
+                    }
+                }
+                ul{
+                    position: relative;
+                    line-height: 0px;
+                    height: 4px;
+                    padding: 0;
+                    margin: 0;
+                    li{
+                        background: #CCCCCC;
+                        width: 4px;
+                        height: 4px;
+                        border-radius: 50%;
+                        display: inline-block;
+                        margin: 0 2px;
+                    }
+                }
+
+            }
+            .active{
+                span{
+                    background: #5A626D;
+                    color: #fff;
+                }
+            }
+            .today{
+                span{
+                    color: #F7647F;
+                }
+            }
+            .todayActive{
+                span{
+                    background: #F7647F!important;
+                    color: #fff;
+                }
+            }
+        }
+        .arrowLeft{
+            display: inline-block;
+            position: absolute;
+            transform: translate(0,-50%);
+            top: 50%;
+            left: 0px;
+            height: 30px;
+            width: 17px;
+            cursor: pointer;
+            img{
+                width: 7px;
+                height: 12px;
+                display: inline-block;
+                position: absolute;
+                transform: translate(0,-50%);
+                top: 50%;
+                right: 0;
+            }
+        }
+        .arrowRight{
+            display: inline-block;
+            position: absolute;
+            transform: translate(0,-50%);
+            top: 50%;
+            right: 0px;
+            height: 30px;
+            width: 17px;
+            cursor: pointer;
+            img{
+                width: 7px;
+                height: 12px;
+                display: inline-block;
+                position: absolute;
+                transform: translate(0,-50%);
+                top: 50%;
+                left: 0;
+            }
         }
     }
 }
