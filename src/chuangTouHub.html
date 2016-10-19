@@ -20,8 +20,11 @@
     <script src="/components/purl/purl.js"></script>
 <!-- endbuild -->
 <script>
-    var type = purl(location.href).param('cid');
-    var param = purl(location.href).param('param');
+
+    var query = purl(location.href).attr('query');
+    query = query.replace('&fromWeixin=11',"");
+    query = query.replace('&fromWeixin=1',"");
+
     var fromWeixin = purl(location.href).param('fromWeixin');
     var appurl = 'krtou://home';
     var isAndroid = !!navigator.userAgent.match(/android/ig);
@@ -63,7 +66,7 @@
                  $('.mask').show();  //ios用safari打开
              }else if(isAndroid){
                 e.preventDefault();
-                startApp('krtou://'+ type + '/' + cid);
+                startApp('krtou://'+ query);
                 goYingyongbao('android');
              }else if(isIos){
                 startApp();
@@ -72,7 +75,7 @@
         })
         if (!isWeiXin&&(parseInt(fromWeixin) === 1)){
             if(userSystem.indexOf('Android') > -1){
-                startApp('krtou://'+ type + '/' + cid);
+                startApp('krtou://'+ query);
                 goYingyongbao('android');
             }else if(/iphone/i.test(userSystem)){
                 startApp();
