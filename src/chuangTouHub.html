@@ -22,8 +22,8 @@
 <script>
 
     var query = purl(location.href).attr('query');
-    query = query.replace('&fromWeixin=11',"");
-    query = query.replace('&fromWeixin=1',"");
+    query = query.replace('fromWeixin=1&',"");
+    query = query.replace('fromWeixin=11&',"");
 
     var fromWeixin = purl(location.href).param('fromWeixin');
     var appurl = 'krtou://home';
@@ -50,7 +50,7 @@
 
     function goYingyongbao(prefix){
         timeout = setTimeout(function(){
-            krtracker('trackEvent','按钮', prefix + '.' + type + '.' + param);
+            krtracker('trackEvent','按钮', prefix + '.' + query);
             setTimeout(function() {
                 document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
             },200)
