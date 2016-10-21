@@ -1,3 +1,30 @@
+<a name="1.10.0"></a>
+# [1.10.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.9.4...v1.10.0) (2016-10-21)
+
+
+### Bug Fixes
+
+* 二维码扫一扫落地页 ([1cdb518](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1cdb518))
+* 修复项目集密码无法使用问题 ([dba3c0b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/dba3c0b))
+* 修复项目集被删除错误弹窗bug ([408cef9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/408cef9))
+* 修改发现页h5打开新h5逻辑 ([43cae7e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/43cae7e))
+* 修改字段名 ([d293e0d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d293e0d))
+* 修改打包文件名 ([d47012d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d47012d))
+* 修改规则 ([2035b49](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/2035b49))
+* 发现页UI走查调整 ([16f7bf4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/16f7bf4))
+* 发现页跳转native ([88975ec](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/88975ec))
+* 增加替换规则 ([fec1c6b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/fec1c6b))
+* 扫一扫落地页完成 ([0ef7403](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0ef7403))
+* 隐藏发现页入口 ([08147dd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/08147dd))
+* 项目集唤醒app规则替换 ([7dc4eca](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7dc4eca))
+
+
+### Features
+
+* 创投app发现页改为H5 ([e369635](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e369635))
+
+
+
 <a name="1.9.4"></a>
 ## [1.9.4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.9.3...v1.9.4) (2016-10-09)
 
