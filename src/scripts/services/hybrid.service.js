@@ -32,7 +32,7 @@ angular.module('defaultApp.service').service('hybrid', function () {
 
         var versionTou = matchesTou && matchesTou[1] && parseFloat(matchesTou[1]);
         if (versionTou && versionTou > 2.5) {
-            call(buildUrl('/crmCompany/' + ccid + '?ktm_source=' + demosid));
+            call(buildUrl('/crmCompany/' + ccid + '?ktm_source=xiangmuji.native.' + demosid + '.' + ccid));
         } else if (versionTou && versionTou <= 2.5) {
             call(buildUrl('/company/' + id));
         }
