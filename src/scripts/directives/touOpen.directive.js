@@ -49,7 +49,7 @@ function touOpen(hybrid, loading, $timeout) {
         //     hybrid.open(path);
         // }
 
-        hybrid.open('addBottomViewInWeb/12986');
+        hybrid.open('/addBottomViewInWeb/12986');
     }
 
     function loadingUI(scope) {
