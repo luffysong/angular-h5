@@ -25,14 +25,14 @@ angular.module('defaultApp.service').service('hybrid', function () {
         call(buildUrl(path));
     }
 
-    function openProject(id, ccid) {
+    function openProject(id, ccid, demosid) {
 
         //安卓示例:36kr-Tou-Android/2.6  ios示例:36kr-Tou-iOS/2.6
         var matchesTou = navigator.userAgent.match(/36kr-Tou-[a-zA-Z]{3,7}\/([0-9]\.[0-9])/i);
 
         var versionTou = matchesTou && matchesTou[1] && parseFloat(matchesTou[1]);
         if (versionTou && versionTou > 2.5) {
-            call(buildUrl('/crmCompany/' + ccid));
+            call(buildUrl('/crmCompany/' + ccid + '?ktm_source=' + demosid));
         } else if (versionTou && versionTou <= 2.5) {
             call(buildUrl('/company/' + id));
         }

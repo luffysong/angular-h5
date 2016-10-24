@@ -41,9 +41,10 @@ function touOpen(hybrid, loading, $timeout) {
         var path = scope.path;
         var pid = scope.pid;
         var ccid = scope.ccid;
+        var demosid = scope.demosid;
         loadingUI(scope);
         if (pid && ccid) {
-            hybrid.openProject(pid, ccid);
+            hybrid.openProject(pid, ccid, demosid);
         } else {
             hybrid.open(path);
         }
