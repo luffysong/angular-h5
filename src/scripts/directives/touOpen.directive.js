@@ -37,7 +37,7 @@ function touOpen(hybrid, loading, $timeout) {
         }
     };
 
-    function addClickEvent(scope) {
+    function addClickEvent() {
         // var path = scope.path;
         // var pid = scope.pid;
         // var ccid = scope.ccid;
