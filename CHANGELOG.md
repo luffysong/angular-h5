@@ -1,3 +1,20 @@
+<a name="1.10.1"></a>
+## [1.10.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.10.0...v1.10.1) (2016-10-25)
+
+
+### Bug Fixes
+
+* jscs ([88cdb8c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/88cdb8c))
+* 发现页替换 ([6ba9f21](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6ba9f21))
+* 测试发现页重构 ([2a3f2c2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/2a3f2c2))
+* 落地页唤醒规则调整 ([c6a803f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c6a803f))
+* 项目集native唤醒埋点 ([cfd89eb](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cfd89eb))
+* 项目集临时替换 ([15e2f18](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/15e2f18))
+* 项目集内部唤醒增加埋点 ([daf90fd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/daf90fd))
+* 项目集改回原先逻辑 ([ff27e84](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/ff27e84))
+
+
+
 <a name="1.10.0"></a>
 # [1.10.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.9.4...v1.10.0) (2016-10-21)
 
