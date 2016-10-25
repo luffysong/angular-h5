@@ -25,6 +25,7 @@
     query = query.replace('fromWeixin=1&',"");
     query = query.replace('fromWeixin=11&',"");
     query = query.replace('=','/');
+    query = query.replace('&','?');
 
     var fromWeixin = purl(location.href).param('fromWeixin');
     var appurl = 'krtou://home';
