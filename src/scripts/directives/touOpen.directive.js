@@ -18,7 +18,7 @@ function touOpen(hybrid, loading, $timeout) {
         link: function (scope, element) {
             var pid = scope.pid;
             var demosid = scope.demosid;
-            element.click(function openApp() {
+            element.click(function openApp(e) {
                 if (!hybrid.isInApp) {
                     var userSystem = navigator.userAgent; //userAgent
                     if (userSystem.indexOf('Android') > -1) {
@@ -29,7 +29,7 @@ function touOpen(hybrid, loading, $timeout) {
                         krtracker('trackEvent', 'click', 'ios.h5.demoslist.download.' + demosid + '.' + pid);
                     }
                 } else {
-                    // e.preventDefault();
+                    e.preventDefault();
                     addClickEvent(scope);
                 }
             });
@@ -37,19 +37,17 @@ function touOpen(hybrid, loading, $timeout) {
         }
     };
 
-    function addClickEvent() {
-        // var path = scope.path;
-        // var pid = scope.pid;
-        // var ccid = scope.ccid;
-        // var demosid = scope.demosid;
-        // loadingUI(scope);
-        // if (pid && ccid) {
-        //     hybrid.openProject(pid, ccid, demosid);
-        // } else {
-        //     hybrid.open(path);
-        // }
-
-        hybrid.open('/addBottomViewInWeb/12986');
+    function addClickEvent(scope) {
+        var path = scope.path;
+        var pid = scope.pid;
+        var ccid = scope.ccid;
+        var demosid = scope.demosid;
+        loadingUI(scope);
+        if (pid && ccid) {
+            hybrid.openProject(pid, ccid, demosid);
+        } else {
+            hybrid.open(path);
+        }
     }
 
     function loadingUI(scope) {
