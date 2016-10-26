@@ -8,12 +8,7 @@ function FindIndexController(FindService, ErrorService, hybrid, loading, $interv
 
     //轮播图返回的数据
     vm.slides = [];
-
-    //轮播图唤醒内部页面
-    vm.openNativePage = openNativePage;
-
-    //轮播图唤醒url
-    vm.openUrl = openUrl;
+    vm.responseData = {};
 
     init();
     function init() {
@@ -21,55 +16,12 @@ function FindIndexController(FindService, ErrorService, hybrid, loading, $interv
             .then(function temp(response) {
                 vm.slides = angular.copy(response.data.data);
             })
-            .catch(error)
-            .finally(function () {
-                loading.hide('demos');
-            });
-
-        interval();
-    }
-
-    function openNativePage(path) {
-        if (hybrid.isInApp) {
-            hybrid.open(path);
-        }
-    }
-
-    function openUrl(url) {
-        var path = '/openEncryptionLink/' + encodeURIComponent(url);
-        openNativePage(path);
-    }
-
-    function interval() {
-        getFinanceNewStr();
-        getHasNew();
-
-        //2-5分钟随机时间
-        var time = parseInt(Math.random() * (300000 - 120000 + 1) + 120000);
-        window.getFinanceNewStr = $interval(getFinanceNewStr, time, 30);
-        window.getHasNew = $interval(getHasNew, time, 30);
-        $scope.$on('$destroy', function () {
-            $interval.cancel(window.getFinanceNewStr);
-            $interval.cancel(window.getHasNew);
-        });
-    }
-
-    //融资速递轮询
-    function getFinanceNewStr() {
-        FindService.getFinanceNewStr()
+            .catch(error);
+        FindService.filter()
             .then(function temp(response) {
-                vm.financeNewStr = response.data.str;
-            });
-    }
-
-    //项目集轮询
-    function getHasNew() {
-        var psts = vm.hasNewTime || 0;
-        FindService.getHasNew(psts)
-            .then(function temp(response) {
-                vm.hasNewTime = response.data.time;
-                vm.proSetCount = parseInt(response.data.proSetCount);
-            });
+                vm.responseData = angular.copy(response.data.group[0].beans);
+            })
+            .catch(error);
     }
 
     function error(err) {

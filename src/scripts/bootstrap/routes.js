@@ -177,27 +177,24 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
-    // //创投助手app---发现页
-    // $stateProvider.state('find', {
-    //     url:'/find',
-    //     controllerAs: 'vm',
-    //     controller: 'FindIndexController',
-    //     templateUrl: 'templates/find/index.html',
-    //     resolve: {
-    //         cover: loadFind
-    //     }
-    // });
-    //
-    // //创投助手app---近期路演
-    // $stateProvider.state('roadShow', {
-    //     url:'/roadShow',
-    //     controllerAs: 'vm',
-    //     controller: 'RoadShowController',
-    //     templateUrl: 'templates/find/roadShowList.html',
-    //     resolve: {
-    //         cover: loadFind
-    //     }
-    // });
+    //创投助手app---发现页
+    $stateProvider.state('find', {
+        url:'/find',
+        controllerAs: 'vm',
+        controller: 'FindIndexController',
+        templateUrl: 'templates/find/index.html'
+    });
+
+    //创投助手app---近期路演
+    $stateProvider.state('roadShow', {
+        url:'/roadShow',
+        controllerAs: 'vm',
+        controller: 'RoadShowController',
+        templateUrl: 'templates/find/roadShowList.html',
+        resolve: {
+            cover: loadFind
+        }
+    });
 
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
@@ -253,12 +250,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     }
 
-    // function loadFind($rootScope, loading) {
-    //
-    //     $rootScope.needLoading = true;
-    //     loading.show('demos');
-    //     $('ui-view')[0].innerHTML = '';
-    //
-    // }
+    function loadFind($rootScope, loading) {
+
+        $rootScope.needLoading = true;
+        loading.show('demos');
+        $('ui-view')[0].innerHTML = '';
+
+    }
 
 });

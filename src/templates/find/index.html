@@ -1,6 +1,4 @@
 <div  class="find-wrapper">
-    <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
-
     <div class="intro">
         <div ng-if="vm.slides.length" kr-swiper slides="vm.slides" class="swiper-container">
             <div class="swiper-wrapper">
@@ -8,7 +6,7 @@
                     <a href="javascript:" ng-show="item.action === 'web'" ng-click="vm.openUrl(item.location)">
                         <img ng-src="{{item.imgUrl}}"/>
                     </a>
-                    <a href="javascript:"  ng-show="item.action === 'native'" ng-click="vm.openNativePage(item.location)">
+                    <a href="javascript:"  ng-show="item.action === 'native'" ng-click="vm.openNativePage('/'+item.location)">
                         <img ng-src="{{item.imgUrl}}"/>
                     </a>
                 </div>
@@ -18,25 +16,32 @@
         </span>
         </div>
     </div>
-    <div class="section-one" ng-click="vm.openNativePage('/financeNews')">
+    <div class="section-one">
+        <div class="line-one">
+            <img src="/styles/images/find/collection@2x.png"/>
+            <span>路演日历</span>
+        </div>
         <div class="line-one">
             <img src="/styles/images/find/financing@2x.png"/>
+            <span>投资热点</span>
         </div>
-        <div class="line-two">融资速递</div>
-        <div class="line-three">{{vm.financeNewStr}}</div>
-        <img class="arrowRight" src="/styles/images/find/arrowRight@2x.png"/>
+        <div class="line-one">
+            <img src="/styles/images/find/activity@2x.png"/>
+            <span>每日报道</span>
+        </div>
     </div>
-    <div class="section-two" ng-click="vm.openNativePage('/projectList')">
-        <img class="section-icon" src="/styles/images/find/collection@2x.png"/>
-        <span class="section-name">项目集</span>
-        <span class="badge" ng-if="vm.proSetCount && vm.proSetCount <= 99">{{vm.proSetCount}}</span>
-        <span class="badge" ng-if="vm.proSetCount > 99">99+</span>
-        <img class="arrowRight" src="/styles/images/find/arrowRight@2x.png"/>
-    </div>
-    <div class="section-two" ng-click="vm.openNativePage('/discoveryAll')">
-        <img class="section-icon" src="/styles/images/find/activity@2x.png"/>
-        <span class="section-name">近期活动</span>
-        <img class="arrowRight" src="/styles/images/find/arrowRight@2x.png"/>
+    <div class="section-two">
+        <div class="line-top">
+            <img src="/styles/images/find/collection@2x.png"/>
+            <span>项目集</span>
+        </div>
+        <div class="line-middle" ng-repeat="item in vm.responseData">
+            <h4>{{item.name}}<span ng-repeat="innerItem in item.item" ng-style="{'background-color':innerItem.color}">{{innerItem.name}}</span></h4>
+            <p class="item-finance">{{item.finance}}</p>
+            <p class="item-investorStr">投资方：{{item.investorStr}}</p>
+            <div>联系创始人</div>
+        </div>
+        <p class="line-bottom">查看全部</p>
     </div>
 
 </div>

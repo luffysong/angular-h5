@@ -17,9 +17,9 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
         return $http.get('/api/mobi-investor/poll/hasNew?psts=' + psts);
     };
 
-    //标签分类创建
-    // this.createCate = function (request) {
-    //     return $http.post('/api/label/cate', request);
-    // };
+    //发现页项目集轮询
+    this.filter = function () {
+        return $http.get('/api/mobi-investor/company/finance-new/filter');
+    };
 
 });
