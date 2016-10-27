@@ -318,6 +318,7 @@
             padding: 14px;
             border-radius: 5px;
             margin-top: @cutter;
+            overflow: hidden;
             *{
                 user-select: none;
             }
@@ -326,7 +327,7 @@
             background: #f8f8f8;
         }
         .base-info-wrapper{
-            display: flex;
+            //display: flex;
         }
         .logo-wrapper{
             width: 64px;
@@ -338,6 +339,7 @@
             overflow: hidden;
             position: relative;
             margin-right: 8px;
+            float: left;
             img{
                 width: 100%;
                 position: absolute;
@@ -365,12 +367,17 @@
             color: rgb(90, 98, 109);
         }
         .invest-info-wrapper{
-            display: flex;
+            //display: flex;
             padding-top: 12px;
             margin-top: 12px;
             text-align: left;
             font-size: 14px;
             position: relative;
+            overflow: hidden;
+            text-align: center;
+            div{
+                display: inline-block;
+            }
             &:before{
                 content:"";
                 position: absolute;
@@ -383,14 +390,17 @@
             }
             & > div:first-child{
                 padding-left:16px;
+                float:left;
             }
             & > div:last-child{
                 padding-right:16px;
+                float:right;
             }
 
             & > div:nth-child(2){
-                flex: auto;
+                //flex: auto;
                 text-align: center;
+                width: 200px;
             }
         }
 
