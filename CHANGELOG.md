@@ -1,3 +1,14 @@
+<a name="1.10.2"></a>
+## [1.10.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.10.1...v1.10.2) (2016-10-27)
+
+
+### Bug Fixes
+
+* 修复css样式flex兼容问题 ([254cbda](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/254cbda))
+* 发现页改版 ([6b3267c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6b3267c))
+
+
+
 <a name="1.10.1"></a>
 ## [1.10.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.10.0...v1.10.1) (2016-10-25)
 
