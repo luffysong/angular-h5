@@ -75,8 +75,9 @@
                                 <p>{{item.brief}}</p>
                                 <p ng-if="item.tags" class="tags"><img src="/styles/images/company-share/tag.png"
                                     width="9" alt=""> {{item.tags}}</p>
-                                <p ng-if="item.advantage" class="hot"><img src="/styles/images/company-share/hot.png"
-                                    width="9" alt=""> {{item.advantage}}
+                                <p ng-if="item.advantage" class="hot">
+                                    <img src="/styles/images/company-share/hot.png" width="9" alt="">
+                                    <span>{{item.advantage}}</span>
                                 </p>
                             </div>
                         </div>
