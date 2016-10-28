@@ -1,3 +1,14 @@
+<a name="1.10.3"></a>
+## [1.10.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.10.2...v1.10.3) (2016-10-28)
+
+
+### Bug Fixes
+
+* 项目集样式修复 ([5374732](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5374732))
+* 项目集适应小屏 ([3f73ea9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/3f73ea9))
+
+
+
 <a name="1.10.2"></a>
 ## [1.10.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.10.1...v1.10.2) (2016-10-27)
 
