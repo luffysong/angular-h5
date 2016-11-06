@@ -39,7 +39,7 @@
     </div>
     <section  class="roadShow-content-wrapper" scroll callback="vm.scrollCallback(args)">
         <ul infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
-            <li ontouchstart="" kr-active="'active'" id="{{item.time}}"
+            <li ontouchstart="" kr-active="'active'" id="{{item.startAt}}"
                 ng-repeat="item in vm.responseData track
                     by $index">
                 <a class="roadShow-content-href"
