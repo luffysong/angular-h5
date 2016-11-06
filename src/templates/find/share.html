@@ -1,0 +1,39 @@
+<div  class="share-wrapper">
+    <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
+    <div  class="share-header-wrapper">
+        <div class="section-top">
+            <p ng-if="vm.type === 'hotspot'">发现投资热点，为你推荐同标签下优质项目</p>
+            <p ng-if="vm.type === 'roadShow'">足不出户，一览创投圈最热门路演</p>
+            <p>下载36氪创投助手，查看18个项目，一键约谈</p>
+        </div>
+        <p class="section-content">{{vm.data.content}}</p>
+    </div>
+    <div  class="share-content-wrapper" infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
+        <div class="section-top">
+            <img src="/styles/images/find/recommend@2x.png"/>
+            <span>推荐项目</span>
+        </div>
+        <ul >
+            <li ontouchstart="" kr-active="'active'" ng-repeat="item in vm.responseData track by $index">
+                <a class="share-content-href"
+                   href="http://36kr.com/company/{{item.cid}}?ktm_source=chuangtou.h5.xiangmuji.{{vm.id}}.{{item.cid}}"
+                   pid="item.cid" ccid="item.ccid" shareid="vm.id">
+                    <div class="base-info-detail">
+                        <div  class="logo-wrapper">
+                            <img ng-src="{{item.logo | image}}" alt="">
+                            <span ng-if="item.funding === 2">正在融资</span>
+                        </div>
+                        <div class="content-wrapper">
+                            <h3>{{item.name}}<span class="item-signs" ng-repeat="innerItem in item.signs" ng-style="{'background-color':innerItem.color}">{{innerItem.name}}</span><span class="item-pubdate">{{item.pubdate}}</span></h3>
+                            <p class="item-brief">{{item.brief}}</p>
+                            <p class="item-industry"><span class="span-first">行业</span><span class="span-second">{{item.industry1}}</span></p>
+                            <p class="item-advantage"><span class="span-first">亮点</span><span class="span-second">{{item.advantage}}</span></p>
+                        </div>
+
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <p class="footer">打开App查看全部项目(16)</p>
+</div>

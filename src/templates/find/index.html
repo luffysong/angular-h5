@@ -18,24 +18,33 @@
     </div>
     <div class="section-one">
         <div class="line-one">
-            <img src="/styles/images/find/collection@2x.png"/>
-            <span>路演日历</span>
+            <div>
+                <span class="line-point"></span>
+                <img src="/styles/images/find/video@2x.png"/>
+            </div>
+            <span class="line-info">路演日历</span>
         </div>
         <div class="line-one">
-            <img src="/styles/images/find/financing@2x.png"/>
-            <span>投资热点</span>
+            <div>
+                <span class="line-point"></span>
+                <img src="/styles/images/find/hotSpot@2x.png"/>
+            </div>
+            <span class="line-info">投资热点</span>
         </div>
         <div class="line-one">
-            <img src="/styles/images/find/activity@2x.png"/>
-            <span>每日报道</span>
+            <div>
+                <span class="line-point"></span>
+                <img src="/styles/images/find/dailyNews@2x.png"/>
+            </div>
+            <span class="line-info">每日报道</span>
         </div>
     </div>
     <div class="section-two">
         <div class="line-top">
-            <img src="/styles/images/find/collection@2x.png"/>
-            <span>项目集</span>
+            <img src="/styles/images/find/news@2x.png"/>
+            <span>融资速递</span>
         </div>
-        <div class="line-middle" ng-repeat="item in vm.responseData">
+        <div class="line-middle" ng-repeat="item in vm.responseData | limitTo:3">
             <h4>{{item.name}}<span ng-repeat="innerItem in item.item" ng-style="{'background-color':innerItem.color}">{{innerItem.name}}</span></h4>
             <p class="item-finance">{{item.finance}}</p>
             <p class="item-investorStr">投资方：{{item.investorStr}}</p>

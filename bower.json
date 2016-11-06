@@ -36,7 +36,8 @@
     "zepto": "^1.1.6",
     "purl": "^2.3.1",
     "ngInfiniteScroll": "^1.3.0",
-    "fullpage.js": "^2.8.2"
+    "fullpage.js": "^2.8.2",
+    "angular-scroll": "^1.0.0"
   },
   "devDependencies": {
     "angular-mocks": "1.3.8",

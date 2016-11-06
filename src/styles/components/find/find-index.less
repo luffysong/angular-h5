@@ -72,11 +72,29 @@
             display: inline-block;
             width: 33%;
             margin: 0 -1px;
-            img{
+            div{
                 width: 30px;
-                height:30px;
+                height: 30px;
+                position: relative;
+                margin: 0 auto;
+                img{
+                    width: 30px;
+                    height:30px;
+                }
+                .line-point{
+                    background: #F8627E;
+                    width: 6px;
+                    height: 6px;
+                    display: inline-block;
+                    border-radius: 50%;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    margin-right: -3px;
+                    margin-top: -3px;
+                }
             }
-            span{
+            .line-info{
                 display: block;
                 margin-top: 15px;
                 font-size: 15px;
@@ -107,6 +125,7 @@
                 line-height: 17px;
                 display: inline-block;
                 vertical-align: middle;
+                padding-top: 3px;
             }
         }
         .line-middle{
@@ -123,11 +142,12 @@
                 span{
                     font-size: 9px;
                     color: #FFFFFF;
-                    height: 17px;
+                    height: 16px;
                     margin-left: 8px;
-                    padding: 0px 4px 1px 4px;
+                    padding: 2px 4px 3px 4px;
                     border-radius: 2px;
                     display: inline-block;
+                    line-height: 15px;
                     vertical-align: top;
                 }
             }

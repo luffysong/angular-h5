@@ -1,52 +1,61 @@
 <div  class="roadShow-wrapper">
     <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
 
-    <div class="roadShow-intro">
-        <ul class="sidebar">
-            <li>日</li>
-            <li>一</li>
-            <li>二</li>
-            <li>三</li>
-            <li>四</li>
-            <li>五</li>
-            <li>六</li>
-        </ul>
-        <div class="date-content">
-            <div ng-repeat="item in vm.originDate" ng-click="vm.setActive(item)"
-                 ng-class="{active:(item.active == true),today:(item.today == true),todayActive:(item.today == true && item.active == true)}">
-                <span>{{item.day}}</span>
-                <ul ng-if="item.num">
-                    <!--<li ng-repeat="innerItem in item.num track by $index"></li>-->
-                    <li ng-if="item.num"></li>
+    <div class="roadShow-intro" swiper-origin slides="vm.originDateArray" class="swiper-container" callback="vm.onSlideChangeEnd(previousIndex,activeIndex)">
+        <div class="roadShow-intro-inner swiper-wrapper">
+            <div class="swiper-slide" ng-repeat="i in vm.originDateArray track by $index">
+                <ul class="sidebar">
+                    <li>日</li>
+                    <li>一</li>
+                    <li>二</li>
+                    <li>三</li>
+                    <li>四</li>
+                    <li>五</li>
+                    <li>六</li>
                 </ul>
+                <div class="date-content">
+                    <a ng-repeat="item in vm.originDateArray[$index]" href="#date{{item.year}}{{item.month}}{{item.day}}" du-smooth-scroll="" du-scrollspy="" offset="91"
+                       ng-class="{today:(item.today == true)}">
+                        <div class="item-active">
+                            <p class="item-day">{{item.day}}</p>
+                            <p class="item-month" ng-bind="item.month | month"></p>
+                        </div>
+                        <div class="item-notActive">{{item.day}}</div>
+                        <ul ng-if="item.num">
+                            <!--<li ng-repeat="innerItem in item.num track by $index"></li>-->
+                            <li ng-if="item.num"></li>
+                        </ul>
+                    </a>
+                </div>
             </div>
+
         </div>
-        <div class="arrowLeft" ng-click="vm.dateDel()">
+        <div class="arrowLeft">
             <img src="/styles/images/find/arrowLeft@2x.png"/>
         </div>
-        <div class="arrowRight" ng-click="vm.dateAdd()">
+        <div class="arrowRight">
             <img src="/styles/images/find/arrowRight@2x.png"/>
         </div>
     </div>
-    <section  class="roadShow-content-wrapper">
-        <ul infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
-            <li ontouchstart="" kr-active="'active'"
+    <section  class="roadShow-content-wrapper" scroll callback="vm.scrollCallback(args)">
+        <ul infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+            <li ontouchstart="" kr-active="'active'" id="{{item.time}}"
                 ng-repeat="item in vm.responseData track
                     by $index">
-                <a class="roadShow-content-href" href="http://36kr.com/company/{{item.cid}}?ktm_source=chuangtou.h5.xiangmuji.{{vm.id}}.{{item.cid}}"
+                <a class="roadShow-content-href"
                    pid="item.cid" ccid="item.ccid" roadShowid="vm.id">
                     <div class="base-info-wrapper">
-                        <img ng-src="{{item.logo | image}}" alt="">
+                        <img ng-src="{{item.imgUrl | image}}" alt="">
                     </div>
                     <div class="base-info-detail">
                         <h3>{{item.name}}</h3>
                         <div class="item-middle">
-                            <p>{{item.brief}}</p>
-                            <span class="item-more" href="javascript:" ng-click="vm.more(item, $event)">更多</span>
+                            <p>{{item.fetchCode}}</p>
+                            <span class="item-more" ng-click="vm.more(item, $event)">更多</span>
                         </div>
                        <div class="item-bottom">
-                           <span class="item-time">{{item.time}}</span>
-                           <span class="item-num">{{item.num}}个项目</span>
+                           <span class="item-time">{{item.startAt}}-{{item.endAt}}</span>
+                           <span class="item-num">{{item.proCount}}个项目</span>
                        </div>
                     </div>
                 </a>

@@ -1,10 +1,66 @@
 .roadShow-wrapper {
     background-color: rgb(242,244,245);
     .roadShow-intro{
-        height: 78px;
-        position: relative;
-        padding: 8px 17px;
+        background-color: rgb(242,244,245);
+        margin-bottom: 10px;
+        height: 91px;
+        width: 100%;
+        position:fixed;
+        top: 0;
+        z-index: 99;
+        .arrowLeft{
+            display: inline-block;
+            position: absolute;
+            transform: translate(0,-50%);
+            top: 50%;
+            left: 0px;
+            height: 30px;
+            width: 21px;
+            cursor: pointer;
+            margin-top: -5px;
+            z-index: 100;
+            img{
+                width: 7px;
+                height: 12px;
+                display: inline-block;
+                position: absolute;
+                transform: translate(0,-50%);
+                top: 50%;
+                left: 10px;
+            }
+        }
+        .arrowRight{
+            display: inline-block;
+            position: absolute;
+            transform: translate(0,-50%);
+            top: 50%;
+            right: 0px;
+            height: 30px;
+            width: 21px;
+            cursor: pointer;
+            margin-top: -5px;
+            z-index: 100;
+            img{
+                width: 7px;
+                height: 12px;
+                display: inline-block;
+                position: absolute;
+                transform: translate(0,-50%);
+                top: 50%;
+                right: 10px;
+            }
+        }
+        .swiper-button-disabled{
+            display: none;
+        }
+    }
+    .roadShow-intro-inner{
         background-color: #fff;
+        height: 81px;
+        .swiper-slide{
+            padding: 8px 17px;
+            background-color: #fff;
+        }
         .sidebar{
             list-style-type:none;
             width:100%;
@@ -13,6 +69,7 @@
             padding:0;
             height:14px;
             text-align:center;
+            background-color: #fff;
             li{
                 width:14.2857%;
                 display:inline-block;
@@ -36,27 +93,42 @@
             padding:0;
             height:48px;
             text-align:center;
-            div{
+            a{
                 width:14.2857%;
                 display:inline-block;
                 border-collapse:collapse;
                 height:44px;
                 position: relative;
-                span{
-                    display: inline-block;
-                    width: 32px;
-                    height: 32px;
-                    line-height: 32px;
+                div{
+                    width: 36px;
+                    height: 36px;
+                    line-height: 36px;
                     border-radius: 50%;
-                    margin-top: 8px;
+                    margin-top: 4px;
                     margin-bottom: 4px;
                     font-size: 16px;
                     color: #222C38;
                     letter-spacing: 0px;
                     cursor: pointer;
+                    display: inline-block;
+                    p{
+                        margin: 0;
+                    }
+                    .item-day{
+                        font-size: 16px;
+                        letter-spacing: 0px;
+                        line-height: 13.5px;
+                        margin-top: 6px;
+                    }
+                    .item-month{
+                        font-size: 9px;
+                        letter-spacing: 0px;
+                        line-height: 10px;
+                        margin-top: 2px;
+                    }
                 }
                 &:first-child,&:last-child{
-                    span{
+                    div{
                         color: #969FA9;
                     }
                 }
@@ -75,67 +147,42 @@
                         margin: 0 2px;
                     }
                 }
-
+                .item-active{
+                    display: none;
+                }
+                .item-notActive{
+                    display: inline-block;
+                }
             }
             .active{
-                span{
+                div{
                     background: #5A626D;
                     color: #fff;
                 }
+                .item-active{
+                    display: inline-block;
+                }
+                .item-notActive{
+                    display: none;
+                }
             }
             .today{
-                span{
+                div{
                     color: #F7647F;
                 }
             }
-            .todayActive{
-                span{
+            .active.today{
+                div{
                     background: #F7647F!important;
                     color: #fff;
                 }
             }
         }
-        .arrowLeft{
-            display: inline-block;
-            position: absolute;
-            transform: translate(0,-50%);
-            top: 50%;
-            left: 0px;
-            height: 30px;
-            width: 21px;
-            cursor: pointer;
-            img{
-                width: 7px;
-                height: 12px;
-                display: inline-block;
-                position: absolute;
-                transform: translate(0,-50%);
-                top: 50%;
-                left: 10px;
-            }
-        }
-        .arrowRight{
-            display: inline-block;
-            position: absolute;
-            transform: translate(0,-50%);
-            top: 50%;
-            right: 0px;
-            height: 30px;
-            width: 21px;
-            cursor: pointer;
-            img{
-                width: 7px;
-                height: 12px;
-                display: inline-block;
-                position: absolute;
-                transform: translate(0,-50%);
-                top: 50%;
-                right: 10px;
-            }
-        }
+
     }
+
     .roadShow-content-wrapper{
-        margin-top: 10px;
+        margin-top: 91px;
         font-size: 13px;
         p{
             line-height: 20px;
@@ -150,6 +197,9 @@
             }
             a{
                 display: block;
+            }
+            &:last-child .roadShow-content-href{
+                border-bottom:0;
             }
         }
         li.active{
@@ -243,6 +293,7 @@
                     float:right;
                 }
             }
+
         }
 
         footer{

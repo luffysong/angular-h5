@@ -43,7 +43,8 @@ var depModules = [
     'highcharts-ng',
     'MassAutoComplete',
     'permission',
-    'infinite-scroll'
+    'infinite-scroll',
+    'duScroll'
 ];
 
 if (window.MOCKMODE_ON) {

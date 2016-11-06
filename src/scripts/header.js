@@ -12,7 +12,11 @@
     }
 
     function allowRemoveHeader() {
-        return location.hash.indexOf('demos') > -1;
+        if (location.hash.indexOf('demos') > -1 || location.hash.indexOf('find') > -1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function allowReplaceBanner() {

@@ -56,7 +56,8 @@
         "src/components/swiper/dist/js/swiper.js",
         "src/components/checklist-model/checklist-model.js",
         "src/components/ngInfiniteScroll/build/ng-infinite-scroll.js",
-        "src/local_lib/hammer.min.js"
+        "src/local_lib/hammer.min.js",
+        "src/components/angular-scroll/angular-scroll.js"
     ],
     "angularUiTpls": [
     ],

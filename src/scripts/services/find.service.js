@@ -22,4 +22,14 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
         return $http.get('/api/mobi-investor/company/finance-new/filter');
     };
 
+    //每日报道
+    this.getDailyReport = function (ts) {
+        return $http.get('/api/mobi-investor/daily-report?ts=' + ts);
+    };
+
+    //投资热点项目集列表
+    this.getHotSpotList = function (request) {
+        return $http.get('/api/mobi-investor/proSetColumn/detail/hotspot/list?' + $.param(request));
+    };
+
 });

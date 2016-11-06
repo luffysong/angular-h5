@@ -1,7 +1,7 @@
 <div class="nativeAlert_pop">
     <h4>{{vm.item.name}}</h4>
-    <span>{{vm.item.time}}</span>
-    <p>{{vm.item.brief}}</p>
+    <span ng-if="vm.item.time">{{vm.item.time}}</span>
+    <p>{{vm.item.fetchCode}}</p>
     <div ng-click="vm.open()">立即查看项目({{vm.item.num}})</div>
     <img src="/styles/images/find/Close@2x.png" ng-click="vm.cancel()"/>
 </div>

@@ -179,18 +179,58 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---发现页
     $stateProvider.state('find', {
-        url:'/find',
+        url: '/find',
+        abstract: true,
+        template: '<div ui-view></div>'
+    });
+
+    //创投助手app---发现页首页
+    $stateProvider.state('find.index', {
+        url:'/index',
         controllerAs: 'vm',
         controller: 'FindIndexController',
         templateUrl: 'templates/find/index.html'
     });
 
     //创投助手app---近期路演
-    $stateProvider.state('roadShow', {
+    $stateProvider.state('find.roadShow', {
         url:'/roadShow',
         controllerAs: 'vm',
         controller: 'RoadShowController',
         templateUrl: 'templates/find/roadShowList.html',
+        resolve: {
+            cover: loadFind
+        }
+    });
+
+    //创投助手app---投资热点
+    $stateProvider.state('find.hotSpot', {
+        url:'/hotSpot',
+        controllerAs: 'vm',
+        controller: 'HotSpotController',
+        templateUrl: 'templates/find/HotSpotList.html',
+        resolve: {
+            cover: loadFind
+        }
+    });
+
+    //创投助手app---每日报道
+    $stateProvider.state('find.dailyNews', {
+        url:'/dailyNews',
+        controllerAs: 'vm',
+        controller: 'DailyNewsController',
+        templateUrl: 'templates/find/dailyNewsList.html',
+        resolve: {
+            cover: loadFind
+        }
+    });
+
+    //创投助手app---分享页(热点追踪|路演日历)
+    $stateProvider.state('find.share', {
+        url:'/share/:id?type',
+        controllerAs: 'vm',
+        controller: 'ShareController',
+        templateUrl: 'templates/find/share.html',
         resolve: {
             cover: loadFind
         }

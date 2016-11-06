@@ -17,9 +17,11 @@ function FindIndexController(FindService, ErrorService, hybrid, loading, $interv
                 vm.slides = angular.copy(response.data.data);
             })
             .catch(error);
+
         FindService.filter()
             .then(function temp(response) {
                 vm.responseData = angular.copy(response.data.group[0].beans);
+                vm.responseData = vm.responseData.concat(response.data.group[1].beans);
             })
             .catch(error);
     }

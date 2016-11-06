@@ -9,4 +9,5 @@ require('./WanNum');
 require('./WanText');
 require('./backgroundUrl.filter');
 require('./default');
+require('./month');
 require('./share');

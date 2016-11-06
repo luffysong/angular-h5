@@ -1,0 +1,150 @@
+.dailyNews-wrapper {
+    background-color: rgb(242,244,245);
+    .img-fixed{
+        width: 54px;
+        height:54px;
+        position: fixed;
+        right: 15px;
+        bottom: 21px;
+        z-index: 999;
+    }
+    .dailyNews-content-wrapper{
+        font-size: 13px;
+        .section-top{
+            p{
+                font-size: 14px;
+                color: #5A626D;
+                letter-spacing: 0px;
+                line-height: 16px;
+                padding: 15px 0;
+                margin: 0;
+                text-align: center;
+                &:before,&:after{
+                    content: '';
+                    width: 20px;
+                    height:1px;
+                    background: #CCCCCC;
+                    margin: 0 11px;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+            }
+        }
+        ul{
+            margin-bottom: 0!important;
+            li{
+                background: #fff;
+                padding: 0px;
+                overflow: hidden;
+                *{
+                    user-select: none;
+                }
+                a{
+                    display: block;
+                }
+                &:last-child{
+                    .base-info-detail{
+                        border-bottom: 0!important;
+                    }
+                }
+            }
+            li.active{
+                background: #f8f8f8;
+            }
+
+            .dailyNews-content-href{
+                width: 100%;
+                overflow: hidden;
+                display: inline-block;
+                vertical-align: middle;
+                .base-info-detail{
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin: 15px 0 0 4%;
+                    padding-right: 8%;
+                    padding-bottom:8px;
+                    position: relative;
+                    border-bottom: 1px solid #E7E7E7;
+                    width: 100%;
+                    h3{
+                        font-size: 15px;
+                        color: #222C38;
+                        letter-spacing: 0px;
+                        line-height: 18px;
+                        margin-top: 0;
+                        margin-bottom: 12px;
+                    }
+                    .item-left{
+                        position:relative;
+                        display: inline-block;
+                        height: 16px;
+                        line-height: 16px;
+                        top: -4px;
+                        img{
+                            width: 12px;
+                            height:12px;
+                            position: absolute;
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+                        span{
+                            font-size: 13px;
+                            color: #464E58;
+                            letter-spacing: 0px;
+                            line-height: 16px;
+                            margin-left: 17px;
+                        }
+                    }
+                    .item-center{
+                        position:relative;
+                        display: inline-block;
+                        margin-left: 20px;
+                        height: 16px;
+                        line-height: 16px;
+                        top: -4px;
+                        img{
+                            width: 14px;
+                            height:14px;
+                            position: absolute;
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+                        span{
+                            font-size: 13px;
+                            color: #464E58;
+                            letter-spacing: 0px;
+                            line-height: 16px;
+                            margin-left: 19px;
+                        }
+                    }
+                    .item-right{
+                        position: absolute;
+                        display: inline-block;
+                        right: 8%;
+                        height: 16px;
+                        line-height: 16px;
+                        img{
+                            width: 14px;
+                            height:14px;
+                            position: absolute;
+                            top: 50%;
+                            transform: translateY(-50%);
+                        }
+                        span{
+                            font-size: 13px;
+                            color: #6BA2FC;
+                            letter-spacing: 0px;
+                            line-height: 16px;
+                            margin-left: 19px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    footer{
+        margin: 5px 0;
+        line-height: 19px;
+        text-align: center;
+    }
+}
