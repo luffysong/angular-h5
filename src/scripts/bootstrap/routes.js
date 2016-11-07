@@ -166,7 +166,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
-    //项目集
+    // 项目集
     $stateProvider.state('demos', {
         url:'/demos/:id?type',
         controllerAs: 'vm',

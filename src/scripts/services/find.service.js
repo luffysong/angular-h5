@@ -32,4 +32,13 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
         return $http.get('/api/mobi-investor/proSetColumn/detail/hotspot/list?' + $.param(request));
     };
 
+    //项目列表
+    this.getProjectList = function (request) {
+        return $http.get('/api/mobi-investor/demoday/pro-set/v3?' + $.param(request));
+    };
+
+    //项目列表简介
+    this.getProjectColumn = function (request) {
+        return $http.get('/api/mobi-investor/demoday/pro-set-info?' + $.param(request));
+    };
 });

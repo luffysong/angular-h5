@@ -64,7 +64,7 @@ function DemosController(demosService, projectColumnService,
 
     function vadliateAndGetDemos() {
         vm.inputPwd = true;
-        demosService.getDemos($stateParams.id, vm.password)
+        demosService.getDemos($stateParams.id, vm.password, 1)
             .then(renderList)
             .catch(invalidate);
     }
@@ -94,7 +94,7 @@ function DemosController(demosService, projectColumnService,
     }
 
     function loadCollectionDetail(page) {
-        demosService.getDemos($stateParams.id, page)
+        demosService.getDemos($stateParams.id, '', page)
         .then(renderList)
         .catch(renderList);
     }
@@ -132,10 +132,9 @@ function DemosController(demosService, projectColumnService,
     }
 
     function renderCollectionDetail(data) {
-        var NOT_AUTHORIZE = 1;
-        if (data.code !== NOT_AUTHORIZE) {
+        if (data.valid) {
             vm.demos = vm.demos || [];
-            vm.demos = vm.demos.concat(data.data);
+            vm.demos = vm.demos.concat(data.data.cells);
             vm.invalid = false;
             if (vm.inputPwd) {
                 vm.needPwd = true;

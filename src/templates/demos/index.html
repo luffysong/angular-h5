@@ -64,28 +64,21 @@
                 <li ontouchstart="" kr-active="'active'"
                     ng-repeat="item in vm.demos track
                     by $index">
-                    <a class="demos-content-href" href="http://36kr.com/company/{{item.cid}}?ktm_source=chuangtou.h5.xiangmuji.{{vm.id}}.{{item.cid}}"
+                    <a class="projectList-content-href"
+                       href="http://36kr.com/company/{{item.cid}}?ktm_source=chuangtou.h5.xiangmuji.{{vm.id}}.{{item.cid}}"
                        pid="item.cid" ccid="item.ccid" demosid="vm.id" tou-open>
-                        <div class="base-info-wrapper">
+                        <div class="base-info-detail">
                             <div  class="logo-wrapper">
                                 <img ng-src="{{item.logo | image}}" alt="">
+                                <span ng-if="item.funding === 2">正在融资</span>
                             </div>
-                            <div>
-                                <h3>{{item.name}}</h3>
-                                <p>{{item.brief}}</p>
-                                <p ng-if="item.tags" class="tags"><img src="/styles/images/company-share/tag.png"
-                                    width="9" alt=""> {{item.tags}}</p>
-                                <p ng-if="item.advantage" class="hot">
-                                    <img src="/styles/images/company-share/hot.png" width="9" alt="">
-                                    <span>{{item.advantage}}</span>
-                                </p>
+                            <div class="content-wrapper">
+                                <h3>{{item.name}}<span class="item-signs" ng-repeat="innerItem in item.signs" ng-style="{'background-color':innerItem.color}">{{innerItem.name}}</span><span class="item-pubdate">{{item.pubdate}}</span></h3>
+                                <p class="item-brief">{{item.brief}}</p>
+                                <p class="item-industry" ng-if="item.industry1"><span class="span-first">行业</span><span class="span-second">{{item.industry1}}</span></p>
+                                <p class="item-advantage" ng-if="item.advantage"><span class="span-first">亮点</span><span class="span-second">{{item.advantage}}</span></p>
                             </div>
-                        </div>
-                        <div ng-if="item.finance_phase && item.invest && item.address "
-                            class="invest-info-wrapper">
-                            <div>{{item.finance_phase}}</div>
-                            <div>{{item.invest}}</div>
-                            <div>{{item.address}}</div>
+
                         </div>
                     </a>
                 </li>

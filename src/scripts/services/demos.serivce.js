@@ -27,9 +27,6 @@ function demosService(BasicService) {
 
     function getDemos(id, pwd, page) {
         var token = getToken(id);
-        if (typeof pwd === 'number') {
-            page = pwd;
-        }
 
         page = page || 1;
         return network.getDemos({
@@ -41,7 +38,7 @@ function demosService(BasicService) {
         }).$promise
         .then(function demosSuccess(data) {
             saveToken(id, data.idNum);
-            return data.data;
+            return data;
         });
     }
 
@@ -57,7 +54,7 @@ function createNetWork(BasicService) {
         getDemos: {
             method: 'GET',
             params: {
-                action: 'pro-set'
+                action: 'pro-set/v3'
             }
         }, getCount: {
             method: 'GET',

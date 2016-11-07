@@ -315,7 +315,6 @@
         };
         li{
             background: #fff;
-            padding: 14px;
             border-radius: 5px;
             margin-top: @cutter;
             overflow: hidden;
@@ -326,100 +325,12 @@
         li.active{
             background: #f8f8f8;
         }
-        .base-info-wrapper{
-            //display: flex;
-        }
-        .logo-wrapper{
-            width: 64px;
-            min-width: 64px;
-            height: 64px;
-            border: 1px solid @line-color;
-            text-align: center;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            margin-right: 8px;
-            float: left;
-
-            img{
-                width: 100%;
-                position: absolute;
-                left:0;
-                top: 50%;
-                transform: translateY(-50%);
-            }
-        }
-        .logo-wrapper + div{
-            margin-left: 72px;
-            h3{
-                font-size: 17px;
-                color: @black;
-                line-height: 22px;
-                flex: none;
-                display: table-cell;
-            }
-            img{
-                margin-right: 5px;
-            }
-            .hot{
-                color:@red;
-                position: relative;
-                img{
-                    position: absolute;
-                    top: 4px;
-                }
-                span{
-                    display: inline-block;
-                    vertical-align: middle;
-                    margin-left: 17px;
-                }
-            }
-        }
         .demos-content-href{
             color: rgb(90, 98, 109);
         }
-        .invest-info-wrapper{
-            //display: flex;
-            padding-top: 12px;
-            margin-top: 12px;
-            text-align: left;
-            font-size: 14px;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-            div{
-                display: inline-block;
-            }
-            &:before{
-                content:"";
-                position: absolute;
-                top:0;
-                left:0;
-                right:0;
-                height: 1px;
-                transform: scaleY(0.5);
-                background: @line-color;
-            }
-            & > div:first-child{
-                padding-left:16px;
-                float:left;
-            }
-            & > div:last-child{
-                padding-right:16px;
-                float:right;
-            }
-
-            & > div:nth-child(2){
-                //flex: auto;
-                text-align: center;
-                width: 100%;
-                position: absolute;
-                padding: 0 50px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
+        .base-info-detail .content-wrapper{
+            padding-left: 4%;
         }
-
         footer{
             margin: 5px 0;
             line-height: 19px;
