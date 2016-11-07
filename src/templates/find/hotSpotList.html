@@ -5,8 +5,7 @@
             <li ontouchstart="" kr-active="'active'" id="{{item.time}}"
                 ng-repeat="item in vm.responseData track
                     by $index">
-                <a class="roadShow-content-href"
-                   pid="item.cid" ccid="item.ccid" roadShowid="vm.id">
+                <a class="roadShow-content-href" href="javascript:" tou-open path="'/projectsSet/'+ item.proSetId + '?from=hot'">
                     <div class="base-info-wrapper">
                         <img ng-src="{{item.imgUrl | image}}" alt="">
                     </div>

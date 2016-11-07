@@ -3,7 +3,7 @@ var  angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('RoadShowController', RoadShowController);
 
-function RoadShowController(loading, $modal, $interval, $scope, $timeout) {
+function RoadShowController(loading, $modal, $interval, $scope, $timeout, hybrid) {
     var vm = this;
     vm.originDate = [];
     vm.originDateArray = [];
@@ -349,4 +349,5 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout) {
 
         vm.month = vm.month - 1;
     }
+
 }
