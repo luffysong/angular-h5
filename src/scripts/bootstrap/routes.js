@@ -209,7 +209,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url:'/hotSpot',
         controllerAs: 'vm',
         controller: 'HotSpotController',
-        templateUrl: 'templates/find/HotSpotList.html',
+        templateUrl: 'templates/find/hotSpotList.html',
 
         // resolve: {
         //     cover: loadFind
