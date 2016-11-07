@@ -198,9 +198,10 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'RoadShowController',
         templateUrl: 'templates/find/roadShowList.html',
-        resolve: {
-            cover: loadFind
-        }
+
+        // resolve: {
+        //     cover: loadFind
+        // }
     });
 
     //创投助手app---投资热点
@@ -209,9 +210,10 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'HotSpotController',
         templateUrl: 'templates/find/HotSpotList.html',
-        resolve: {
-            cover: loadFind
-        }
+
+        // resolve: {
+        //     cover: loadFind
+        // }
     });
 
     //创投助手app---每日报道
@@ -220,9 +222,10 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'DailyNewsController',
         templateUrl: 'templates/find/dailyNewsList.html',
-        resolve: {
-            cover: loadFind
-        }
+
+        // resolve: {
+        //     cover: loadFind
+        // }
     });
 
     //创投助手app---分享页(热点追踪|路演日历)
@@ -231,9 +234,10 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'ShareController',
         templateUrl: 'templates/find/share.html',
-        resolve: {
-            cover: loadFind
-        }
+
+        // resolve: {
+        //     cover: loadFind
+        // }
     });
 
     function checkClaimStatus(ClaimService, $stateParams) {
@@ -290,12 +294,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     }
 
-    function loadFind($rootScope, loading) {
-
-        $rootScope.needLoading = true;
-        loading.show('demos');
-        $('ui-view')[0].innerHTML = '';
-
-    }
+    // function loadFind($rootScope, loading) {
+    //
+    //     $rootScope.needLoading = true;
+    //     loading.show('demos');
+    //     $('ui-view')[0].innerHTML = '';
+    //
+    // }
 
 });
