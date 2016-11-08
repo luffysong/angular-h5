@@ -8,6 +8,8 @@ require('./UnitConversion');
 require('./WanNum');
 require('./WanText');
 require('./backgroundUrl.filter');
+require('./dateRoadShow');
+require('./dateRoadShowID');
 require('./default');
 require('./month');
 require('./share');

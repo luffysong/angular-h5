@@ -9,7 +9,7 @@
 	"undef": true,
 	"unused": true,
     "predef":["projectEnvConfig","_hmt","krtracker","kr","CITY_DATA","$clamp",
-        "DICTIONARY_DATA","DICTIONARY_CF_DATA","DICTIONARY_URL_DATA"],
+        "DICTIONARY_DATA","DICTIONARY_CF_DATA","DICTIONARY_URL_DATA","moment"],
 
     "loopfunc": true,
     "maxerr": 500,

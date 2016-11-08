@@ -41,4 +41,9 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
     this.getProjectColumn = function (request) {
         return $http.get('/api/mobi-investor/demoday/pro-set-info?' + $.param(request));
     };
+
+    //投资热点项目集列表
+    this.getCalendarList = function (request) {
+        return $http.get('/api/mobi-investor/proSetColumn/detail/calendar/list?' + $.param(request));
+    };
 });

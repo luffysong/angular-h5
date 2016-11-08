@@ -52,17 +52,17 @@
         "src/components/highcharts-ng/dist/highcharts-ng.min.js",
         "src/local_lib/angular-mass-autocomplete/massautocomplete.js",
         "src/components/angular-permission/dist/angular-permission.js",
-        "src/components/moment/min/moment.min.js",
         "src/components/swiper/dist/js/swiper.js",
         "src/components/checklist-model/checklist-model.js",
         "src/components/ngInfiniteScroll/build/ng-infinite-scroll.js",
         "src/local_lib/hammer.min.js",
-        "src/components/angular-scroll/angular-scroll.js"
+        "src/components/angular-scroll/angular-scroll.js",
+        "src/components/moment/min/moment.min.js",
+        "src/components/moment/locale/zh-cn.js"
     ],
     "angularUiTpls": [
     ],
     "mocks": [
-        "src/components/angular-mocks/angular-mocks.js",
         "src/scripts/mocks/**/*.js"
     ]
 }
