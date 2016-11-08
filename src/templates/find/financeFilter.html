@@ -1,0 +1,15 @@
+<div class="nativeAlert_pop financeAlert_pop">
+    <h4>筛选行业</h4>
+    <ul>
+        <li ng-repeat="item in vm.array" ng-click="vm.itemClick(item, $event)"
+            ng-class="{active:(item.active == true)}" >{{item.label}} <img src="/styles/images/find/tagClose@2x.png" /></li>
+    </ul>
+    <div class="pop-bottom">
+        <div class="pop-bottom-left" ng-click="vm.rollBack()">重置</div>
+        <div class="pop-bottom-right" ng-click="vm.submit()">
+            <p class="pop-bottom-right-top">完成</p>
+            <p class="pop-bottom-right-bottom">共筛选出{{vm.proNum}}个项目</p>
+        </div>
+    </div>
+    <img class="pop-close" src="/styles/images/find/close@2x.png" ng-click="vm.cancel()"/>
+</div>

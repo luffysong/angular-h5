@@ -228,6 +228,18 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         // }
     });
 
+    //创投助手app---融资速递
+    $stateProvider.state('find.finance', {
+        url:'/finance',
+        controllerAs: 'vm',
+        controller: 'FinanceController',
+        templateUrl: 'templates/find/financeList.html',
+
+        // resolve: {
+        //     cover: loadFind
+        // }
+    });
+
     //创投助手app---分享页(热点追踪|路演日历)
     $stateProvider.state('find.share', {
         url:'/share/:id',

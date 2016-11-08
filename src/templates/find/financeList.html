@@ -1,0 +1,26 @@
+<div  class="finance-wrapper">
+    <!--<loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>-->
+    <img class="img-fixed" src="/styles/images/find/filter@2x.png" ng-click="vm.filter($event)"/>
+    <div  class="finance-content-wrapper" infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+        <div ng-repeat="itemData in vm.responseData">
+            <div class="section-top">
+                <p>{{itemData.timestamp}}共 {{itemData.datas.length}} 条</p>
+            </div>
+            <ul >
+                <li ontouchstart="" kr-active="'active'" ng-repeat="item in itemData.datas track by $index">
+                    <a class="finance-content-href" href="javascript:">
+                        <div class="base-info-detail">
+                            <h4>{{item.name}}<span>{{item.industry1}}</span></h4>
+                            <p class="item-finance">{{item.phase}}<span></span>{{item.amount | financeAmount}}</p>
+                            <p class="item-investorStr" ng-if="item.investors">投资方：{{item.investors}}</p>
+                            <p class="item-link" ng-if="item.link"><img src="/styles/images/find/link@2x.png"/><span>{{item.website}}</span></p>
+                            <div>联系创始人</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <footer ng-if="vm.busy">加载更多...</footer>
+    </div>
+
+</div>

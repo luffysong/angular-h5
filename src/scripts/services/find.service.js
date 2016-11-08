@@ -46,4 +46,14 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
     this.getCalendarList = function (request) {
         return $http.get('/api/mobi-investor/proSetColumn/detail/calendar/list?' + $.param(request));
     };
+
+    //发现页最新融资速递
+    this.getFinanceList = function (request) {
+        return $http.get('/api/mobi-investor/company/finance-new/group/v2?' + $.param(request));
+    };
+
+    //融资速递查询项目数
+    this.getFilterCount = function (request) {
+        return $http.get('/api/mobi-investor/company/finance-new/filter/count?' + $.param(request));
+    };
 });

@@ -11,5 +11,6 @@ require('./backgroundUrl.filter');
 require('./dateRoadShow');
 require('./dateRoadShowID');
 require('./default');
+require('./finaceAmount');
 require('./month');
 require('./share');

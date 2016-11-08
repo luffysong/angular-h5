@@ -9,6 +9,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     vm.originDateArray = [];
     vm.responseData = [];
     vm.busy = true;
+    vm.hasMore = true;
 
     //当前选中日期
     vm.selectedDate;
@@ -215,6 +216,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 vm.busy = false;
                 vm.lastSat = response.data.lastSat;
                 vm.nextSat = response.data.nextSat;
+                vm.hasMore = response.data.hasMore;
                 initPoint();
             });
 
@@ -230,9 +232,16 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         FindService.getCalendarList(sendData)
             .then(function (response) {
                 vm.responseData = vm.responseData.concat(response.data.data);
-                vm.busy = false;
+
                 vm.lastSat = response.data.lastSat;
                 vm.nextSat = response.data.nextSat;
+                vm.hasMore = response.data.hasMore;
+                if (!vm.hasMore) {
+                    vm.busy = true;
+                } else {
+                    vm.busy = false;
+                }
+
                 initPoint();
             });
     }
@@ -264,7 +273,9 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     }
 
     function backTop() {
-        window.scrollTo(0, 0);
+        $('html, body').animate({
+            scrollTop: 0
+        }, 300);
     }
 
     function noDataClick(item) {
