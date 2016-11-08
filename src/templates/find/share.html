@@ -2,8 +2,8 @@
     <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
     <div  class="share-header-wrapper">
         <div class="section-top">
-            <p ng-if="vm.type === 'hotspot'">发现投资热点，为你推荐同标签下优质项目</p>
-            <p ng-if="vm.type === 'roadShow'">足不出户，一览创投圈最热门路演</p>
+            <p ng-if="vm.type === 'HOTSPOT'">发现投资热点，为你推荐同标签下优质项目</p>
+            <p ng-if="vm.type === 'CALENDAR'">足不出户，一览创投圈最热门路演</p>
             <p>下载36氪创投助手，查看18个项目，一键约谈</p>
         </div>
         <p class="section-content">{{vm.responseColumn.fetchCode}}</p>

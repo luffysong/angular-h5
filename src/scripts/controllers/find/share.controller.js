@@ -21,6 +21,7 @@ function ShareController(loading, $stateParams, FindService, ErrorService) {
             .then(function temp(response) {
                 vm.responseColumn = angular.copy(response.data);
                 document.title = response.data.proSetName;
+                vm.type = response.data.type;
             })
             .catch(error);
 

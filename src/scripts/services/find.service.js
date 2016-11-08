@@ -34,7 +34,7 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
 
     //项目列表
     this.getProjectList = function (request) {
-        return $http.get('/api/mobi-investor/demoday/pro-set/v3?' + $.param(request));
+        return $http.get('/api/mobi-investor/demoday/pro-set/share?' + $.param(request));
     };
 
     //项目列表简介
