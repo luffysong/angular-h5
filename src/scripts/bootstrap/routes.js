@@ -230,7 +230,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---分享页(热点追踪|路演日历)
     $stateProvider.state('find.share', {
-        url:'/share/:id?type',
+        url:'/share/:id',
         controllerAs: 'vm',
         controller: 'ShareController',
         templateUrl: 'templates/find/share.html',
