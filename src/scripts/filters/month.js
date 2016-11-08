@@ -6,6 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.filter').filter('month', function () {
     return function (input) {
+        input = parseInt(input);
         if (input === 1) {
             return '一月';
         } else if (input === 2) {

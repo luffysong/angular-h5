@@ -22,6 +22,8 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     vm.scrollCallback = scrollCallback;
     vm.onSlideChangeEnd = onSlideChangeEnd;
     vm.loadMore = loadMore;
+    vm.backTop = backTop;
+    vm.noDataClick = noDataClick;
 
     //选中日期
     // vm.setActive = setActive;
@@ -81,9 +83,10 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 tempDate = (i === 0 && j === 1 ? date : addDate(date, 1));
                 vm.originDate.push({
                     date: angular.copy(tempDate),
-                    day: tempDate.getDate(),
-                    month: tempDate.getMonth() + 1,
-                    year: tempDate.getFullYear(),
+                    dayInt: parseInt(moment(date).format('DD')),
+                    day: moment(date).format('DD'),
+                    month: moment(date).format('MM'),
+                    year: moment(date).format('YYYY'),
                     num: 0
                 });
             }
@@ -102,10 +105,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     //日期格式化
     function formatDate(date) {
-        var year = date.getFullYear() + '-';
-        var month = (date.getMonth() + 1) + '-';
-        var day = date.getDate();
-        return year + month + day;
+        return moment(date).format('YYYY-MM-DD');
     }
 
     // function setActive(item) {
@@ -215,38 +215,66 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 vm.busy = false;
                 vm.lastSat = response.data.lastSat;
                 vm.nextSat = response.data.nextSat;
+                initPoint();
             });
 
-        // initPoint();
     }
 
     function loadMore() {
-        // if (vm.busy)return;
-        // vm.busy = true;
-        //
-        // var sendData = {
-        //     date: moment(vm.currentFirstDate).format('YYYY-MM-DD HH:mm:ss'),
-        // };
-        // FindService.getCalendarList(sendData)
-        //     .then(function (response) {
-        //         if (vm.responseData) {
-        //             vm.responseData = vm.responseData.concat(response.data.data);
-        //         } else {
-        //             vm.responseData = response.data;
-        //         }
-        //
-        //         vm.busy = false;
-        //     });
+        if (vm.busy)return;
+        vm.busy = true;
 
-        // initPoint();
+        var sendData = {
+            date: moment(vm.lastSat).format('YYYY-MM-DD HH:mm:ss'),
+        };
+        FindService.getCalendarList(sendData)
+            .then(function (response) {
+                vm.responseData = vm.responseData.concat(response.data.data);
+                vm.busy = false;
+                vm.lastSat = response.data.lastSat;
+                vm.nextSat = response.data.nextSat;
+                initPoint();
+            });
     }
 
-    // function initPoint() {
-    //     for(var i=0;i < vm.originDateArray.length;i++){
-    //         for(var j = 0; j < 7 ; j++){
-    //             if (vm.originDateArray[i][j].id === )
-    //         }
-    //     }
-    // }
+    function initPoint() {
+        for (var i = vm.originDateArray.length; i > 0; i--) {
+            var arrayTemp = vm.originDateArray[i - 1];
+            if (formatDate(arrayTemp[6].date) === formatDate(vm.lastSat)) {
+                setPoint(i);
+                break;
+            }
+        }
+    }
+
+    function setPoint(index) {
+        var arrayTemp = vm.originDateArray[index];
+        var obj;
+        var keyDate = 'date';
+        var keyNum = 'num';
+        for (var i = 0; i < 7; i++) {
+            obj = arrayTemp[i];
+            for (var j = 0; j < vm.responseData.length; j++) {
+                if (formatDate(obj[keyDate]) === formatDate(vm.responseData[j].startAt)) {
+                    obj[keyNum] = 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    function backTop() {
+        window.scrollTo(0, 0);
+    }
+
+    function noDataClick(item) {
+        $('.active').removeClass('active');
+        item.active = true;
+        $('.null_today').fadeIn();
+        $timeout(function () {
+            $('.null_today').fadeOut();
+            $('.active').removeClass('active');
+        }, 3000);
+    }
 
 }

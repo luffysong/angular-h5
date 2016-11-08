@@ -1,6 +1,7 @@
 <div  class="roadShow-wrapper">
     <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
-
+    <img class="img-fixed" src="/styles/images/find/seeNewest@2x.png" ng-click="vm.backTop()"/>
+    <div class="null_today">今日没有路演活动</div>
     <div class="roadShow-intro" swiper-origin slides="vm.originDateArray" class="swiper-container" callback="vm.onSlideChangeEnd(previousIndex,activeIndex)">
         <div class="roadShow-intro-inner swiper-wrapper">
             <div class="swiper-slide" ng-repeat="i in vm.originDateArray track by $index">
@@ -14,13 +15,13 @@
                     <li>六</li>
                 </ul>
                 <div class="date-content">
-                    <a ng-repeat="item in vm.originDateArray[$index]" href="#date{{item.year}}{{item.month}}{{item.day}}" du-smooth-scroll="" du-scrollspy="" offset="91"
-                       ng-class="{today:(item.today == true)}">
+                    <a ng-repeat="item in vm.originDateArray[$index]" du-smooth-scroll="date{{item.year}}{{item.month}}{{item.day}}" du-scrollspy="" offset="91"
+                       ng-class="{today:(item.today == true), active:item.active}" ng-click="!item.num && vm.noDataClick(item)">
                         <div class="item-active">
-                            <p class="item-day">{{item.day}}</p>
+                            <p class="item-day">{{item.dayInt}}</p>
                             <p class="item-month" ng-bind="item.month | month"></p>
                         </div>
-                        <div class="item-notActive">{{item.day}}</div>
+                        <div class="item-notActive">{{item.dayInt}}</div>
                         <ul ng-if="item.num">
                             <!--<li ng-repeat="innerItem in item.num track by $index"></li>-->
                             <li ng-if="item.num"></li>
