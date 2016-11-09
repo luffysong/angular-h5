@@ -43,7 +43,7 @@
             <li ontouchstart="" kr-active="'active'" id="{{item.startAt | dateRoadShowID}}"
                 ng-repeat="item in vm.responseData track
                     by $index">
-                <a class="roadShow-content-href" href="javascript:" tou-open path="'/projectsSet/'+ item.id + '?from=calendar'">
+                <div class="roadShow-content-href" href="javascript:" tou-open path="'projectsSet/'+ item.id + '?from=calendar'">
                     <div class="base-info-wrapper">
                         <img ng-src="{{item.imgUrl | image}}" alt="">
                     </div>
@@ -59,7 +59,7 @@
                            <span class="item-num">{{item.proCount}}个项目</span>
                        </div>
                     </div>
-                </a>
+                </div>
             </li>
         </ul>
         <footer ng-if="vm.busy && vm.hasMore">加载更多...</footer>

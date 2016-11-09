@@ -3,7 +3,7 @@ var  angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('FinanceController', FinanceController);
 
-function FinanceController(loading, FindService, ErrorService, $modal) {
+function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
     var vm = this;
     vm.sendData;
 
@@ -12,6 +12,7 @@ function FinanceController(loading, FindService, ErrorService, $modal) {
     vm.filterLabelsAll;
     vm.filterLabelsArray = [];
     vm.busy = false;
+    vm.link = link;
 
     vm.loadMore = loadMore;
     vm.filter = filter;
@@ -220,7 +221,12 @@ function FinanceController(loading, FindService, ErrorService, $modal) {
         }
     }
 
-    function preventDefault() {
+    function link(ccid, link, event) {
         event.preventDefault();
+        event.stopPropagation();
+        hybrid.open('addBottomViewInWeb/' + ccid);
+        window.setTimeout(function () {
+            window.location.href = link;
+        }, 200);
     }
 }

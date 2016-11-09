@@ -120,6 +120,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     function more(item, e) {
         e.preventDefault();
+        e.stopPropagation();
         $modal.open({
             templateUrl: 'templates/find/nativeAlert.html',
             windowClass: 'nativeAlert_wrap',

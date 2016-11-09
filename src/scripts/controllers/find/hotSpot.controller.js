@@ -23,6 +23,7 @@ function HotSpotController(loading, $modal, FindService) {
 
     function more(item, e) {
         e.preventDefault();
+        e.stopPropagation();
         $modal.open({
             templateUrl: 'templates/find/nativeAlert.html',
             windowClass: 'nativeAlert_wrap',

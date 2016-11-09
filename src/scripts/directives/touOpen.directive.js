@@ -12,23 +12,10 @@ function touOpen(hybrid, loading, $timeout) {
         scope:{
             path: '=?',
             pid: '=?',
-            ccid: '=?',
-            demosid: '=?'
         },
         link: function (scope, element) {
-            var pid = scope.pid;
-            var demosid = scope.demosid;
             element.click(function openApp(e) {
-                if (!hybrid.isInApp) {
-                    var userSystem = navigator.userAgent; //userAgent
-                    if (userSystem.indexOf('Android') > -1) {
-                        addClickEvent(scope);
-                        krtracker('trackEvent', 'click', 'android.h5.demoslist.download.' + demosid + '.' + pid);
-                    }else if (/iphone/i.test(userSystem)) {
-                        loadingUI(scope);
-                        krtracker('trackEvent', 'click', 'ios.h5.demoslist.download.' + demosid + '.' + pid);
-                    }
-                } else {
+                if (hybrid.isInApp) {
                     e.preventDefault();
                     addClickEvent(scope);
                 }
@@ -38,16 +25,19 @@ function touOpen(hybrid, loading, $timeout) {
     };
 
     function addClickEvent(scope) {
-        var path = scope.path;
-        var pid = scope.pid;
-        var ccid = scope.ccid;
-        var demosid = scope.demosid;
         loadingUI(scope);
-        if (pid && ccid) {
-            hybrid.openProject(pid, ccid, demosid);
-        } else {
-            hybrid.open(path);
+
+        //安卓示例:36kr-Tou-Android/2.6  ios示例:36kr-Tou-iOS/2.6
+        var matchesTou = navigator.userAgent.match(/36kr-Tou-[a-zA-Z]{3,7}\/([0-9]\.[0-9])/i);
+
+        var versionTou = matchesTou && matchesTou[1] && parseFloat(matchesTou[1]);
+
+        if (versionTou && versionTou > 2.5) {
+            hybrid.open(scope.path);
+        } else if (versionTou && versionTou <= 2.5) {
+            hybrid.open('company/' + scope.pid);
         }
+
     }
 
     function loadingUI(scope) {
