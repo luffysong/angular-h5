@@ -3,7 +3,7 @@ var  angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('RoadShowController', RoadShowController);
 
-function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindService, hybrid) {
+function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindService) {
     var vm = this;
     vm.originDate = [];
     vm.originDateArray = [];
@@ -177,6 +177,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         }
 
         window.interval = $interval(function () {
+            target = $('a.active');
             if (!target.length) {
                 return;
             }
@@ -199,7 +200,33 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
         //向左翻页,加载数据
         if (previousIndex - activeIndex === 1) {
+            $('.active').removeClass('active');
             loadMore();
+            $timeout(function () {
+                var targetArray = vm.originDateArray[activeIndex];
+                for (var k = 6; k >= 0; k--) {
+                    if (targetArray[k].num) {
+                        var targetId = 'date' + targetArray[k].year + targetArray[k].month + targetArray[k].day;
+                        $('a[du-smooth-scroll=' + targetId + ']').click();
+                        break;
+                    }
+                }
+            }, 1000);
+        }
+
+        //向右翻页
+        if (activeIndex - previousIndex === 1) {
+            $('.active').removeClass('active');
+            $timeout(function () {
+                var targetArray = vm.originDateArray[activeIndex];
+                for (var k = 6; k >= 0; k--) {
+                    if (targetArray[k].num) {
+                        var targetId = 'date' + targetArray[k].year + targetArray[k].month + targetArray[k].day;
+                        $('a[du-smooth-scroll=' + targetId + ']').click();
+                        break;
+                    }
+                }
+            }, 1000);
         }
     }
 
