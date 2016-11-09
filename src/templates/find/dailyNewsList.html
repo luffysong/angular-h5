@@ -17,8 +17,7 @@
                             </div>
                             <div class="item-center">
                                 <img src="/styles/images/find/defualtArtical@2x.png"/>
-                                <span nf-if="item.source">{{item.source}}</span>
-                                <span nf-if="!item.source">媒体报道</span>
+                                <span>{{item.source| findDefault : '媒体报道'}}</span>
                             </div>
                             <div class="item-right">
                                 <img src="/styles/images/find/contact@2x.png"/>

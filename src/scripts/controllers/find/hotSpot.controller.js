@@ -53,9 +53,11 @@ function HotSpotController(loading, $modal, FindService) {
             $modalInstance.dismiss();
         }
 
-        function open(path) {
+        function open() {
+            var path = 'projectsSet/' + obj.id + '?ktm_source=hotSpot';
             if (hybrid.isInApp) {
                 hybrid.open(path);
+                $modalInstance.dismiss();
             }
         }
 

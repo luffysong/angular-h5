@@ -150,9 +150,11 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             $modalInstance.dismiss();
         }
 
-        function open(path) {
+        function open() {
+            var path = 'projectsSet/' + obj.id + '?ktm_source=roadShow';
             if (hybrid.isInApp) {
                 hybrid.open(path);
+                $modalInstance.dismiss();
             }
         }
 

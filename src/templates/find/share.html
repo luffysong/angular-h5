@@ -16,8 +16,7 @@
         <ul >
             <li ontouchstart="" kr-active="'active'" ng-repeat="item in vm.responseDetail track by $index">
                 <a class="projectList-content-href"
-                   href="http://36kr.com/company/{{item.cid}}?ktm_source=chuangtou.h5.xiangmuji.{{vm.id}}.{{item.cid}}"
-                   pid="item.cid" ccid="item.ccid" shareid="vm.id">
+                   href="http://36kr.com/company/{{item.rcid}}?ktm_source=find.share.{{vm.id}}.{{item.rcid}}">
                     <div class="base-info-detail">
                         <div  class="logo-wrapper">
                             <img ng-src="{{item.logo | image}}" alt="">
@@ -36,5 +35,5 @@
             </li>
         </ul>
     </div>
-    <p class="footer">打开App查看全部项目({{vm.totalCount}})</p>
+    <a class="footer" href="http://36kr.com/app/tou?companysetlist={{vm.id}}?ktm_source=find.share.{{vm.id}}">打开App查看全部项目({{vm.totalCount}})</a>
 </div>

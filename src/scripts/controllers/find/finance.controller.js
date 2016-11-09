@@ -12,8 +12,9 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
     vm.filterLabelsAll;
     vm.filterLabelsArray = [];
     vm.busy = false;
-    vm.link = link;
+    vm.sendArray = [];
 
+    vm.link = link;
     vm.loadMore = loadMore;
     vm.filter = filter;
 
@@ -26,32 +27,29 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
 
     function loadData() {
 
+        vm.sendArray = [];
         if (!vm.filterLabelsArray.length) {
             vm.sendData = {
                 date: '',
                 labels: ''
             };
         } else {
-            var sendArray = [];
             for (var j = 1; j < vm.filterLabelsArray.length; j++) {
                 if (vm.filterLabelsArray[j].active === true) {
-                    sendArray.push(vm.filterLabelsArray[j].label);
+                    vm.sendArray.push(vm.filterLabelsArray[j].label);
                 }
             }
 
             vm.sendData = {
                 date: '',
-                labels: sendArray.join(',')
+                labels: vm.sendArray.join(',')
             };
         }
 
         FindService.getFinanceList(vm.sendData)
             .then(function temp(response) {
                 vm.responseData = angular.copy(response.data.group);
-                if (!vm.filterLabelsArray.length) {
-                    setFilterLabels(response.data.filterLabels, 0);
-                }
-
+                setFilterLabels(response.data.filterLabels, 0);
                 vm.sendData.date = response.data.ts;
                 vm.busy = false;
                 loadMore();
@@ -81,6 +79,7 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
         //第一次初始化全部行业,else是在全部中筛选
         if (!time) {
             var object;
+
             vm.filterLabelsArray = [
                 {
                     active: true,
@@ -95,24 +94,40 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
                 vm.filterLabelsArray.push(object);
             }
 
+            //设置默认选中
+            if (vm.sendArray.length) {
+                vm.filterLabelsArray[0].active = false;
+                for (var m = 0; m < vm.sendArray.length; m++) {
+                    for (var n = 0; n < vm.filterLabelsArray.length; n++) {
+                        if (vm.sendArray[m] === vm.filterLabelsArray[n].label) {
+                            vm.filterLabelsArray[n].active = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
             vm.filterLabelsAll = angular.copy(vm.filterLabelsArray);
         } else {
             vm.filterLabelsArray = angular.copy(vm.filterLabelsAll);
-            if (!data) {
-                return;
-            }
 
-            vm.filterLabelsArray[0].active = false;
-            for (var j = 1; j < vm.filterLabelsAll.length; j++) {
-                for (var k = 0; k < data.length; k++) {
-                    if (vm.filterLabelsArray[j].label === data[k]) {
-                        vm.filterLabelsArray[j].active = true;
-                        break;
+            //筛选不为空
+            if (data.length) {
+                vm.filterLabelsArray[0].active = false;
+                for (var j = 1; j < vm.filterLabelsArray.length; j++) {
+                    for (var k = 0; k < data.length; k++) {
+                        if (vm.filterLabelsArray[j].label === data[k]) {
+                            vm.filterLabelsArray[j].active = true;
+                            break;
+                        }
+
+                        vm.filterLabelsArray[j].active = false;
                     }
-
-                    vm.filterLabelsArray[j].active = false;
                 }
+            } else {
+                vm.filterLabelsArray = [];
             }
+
         }
     }
 
@@ -217,6 +232,7 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
 
         function rollBack() {
             vm.array = angular.copy(obj);
+            vm.filterArray = [];
             init();
         }
     }
