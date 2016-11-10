@@ -4,7 +4,7 @@
     <div  class="finance-content-wrapper" infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
         <div ng-repeat="itemData in vm.responseData">
             <div class="section-top">
-                <p>{{itemData.timestamp}}共 {{itemData.datas.length}} 条</p>
+                <p>{{itemData.tsExpose}}共 {{itemData.datas.length}} 条</p>
             </div>
             <ul >
                 <li ontouchstart="" kr-active="'active'" ng-repeat="item in itemData.datas track by $index">
