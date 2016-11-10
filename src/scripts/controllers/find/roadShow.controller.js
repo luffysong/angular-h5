@@ -10,6 +10,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     vm.responseData = [];
     vm.busy = true;
     vm.hasMore = true;
+    vm.isLastSwiper = true;
 
     //当前选中日期
     vm.selectedDate;
@@ -213,6 +214,13 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     function onSlideChangeEnd(previousIndex, activeIndex) {
         // console.log(previousIndex + '-->' + activeIndex);
+
+        //最后一屏判断
+        if (window.mySwiper && (activeIndex === window.mySwiper.slides.length - 1)) {
+            vm.isLastSwiper = true;
+        } else {
+            vm.isLastSwiper = false;
+        }
 
         if (!vm.topArrow) {
             return;
