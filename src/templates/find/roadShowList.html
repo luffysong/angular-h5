@@ -31,10 +31,10 @@
             </div>
 
         </div>
-        <div class="arrowLeft">
+        <div class="arrowLeft" ng-click="vm.arrow('left')">
             <img src="/styles/images/find/arrowLeft@2x.png"/>
         </div>
-        <div class="arrowRight">
+        <div class="arrowRight" ng-if="vm.hasNextWeek" ng-click="vm.arrow('right')">
             <img src="/styles/images/find/arrowRight@2x.png"/>
         </div>
     </div>

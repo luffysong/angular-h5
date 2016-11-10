@@ -31,6 +31,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     //更多
     vm.more = more;
+    vm.arrow = arrow;
 
     init();
 
@@ -46,15 +47,30 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         document.title = '路演日历';
         loading.hide('demos');
         vm.selectedDate = angular.copy(new Date());
-
-        var startDate = new Date();
-        startDate.setDate(startDate.getDate() - (7 * 11));
-        setDate(startDate);
         loadData();
+    }
+
+    function arrow(value) {
+        vm.topArrow = true;
+        if (value === 'left') {
+            window.mySwiper.slidePrev();
+        }
+
+        if (value === 'right') {
+
+            //最后 一页才重新请求数据,其他页时正常翻页
+            if (window.mySwiper.slides.length - 1 === window.mySwiper.activeIndex) {
+                loadData(vm.nextSat);
+            } else {
+                window.mySwiper.slideNext();
+            }
+        }
+
     }
 
     function initSwiper() {
         // window.mySwiper.slideTo(window.mySwiper.slides.length - 1);
+        window.mySwiper.update();
         scrollCallback();
         vm.busy = false;
     }
@@ -77,7 +93,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         var week = date.getDay();
         date = addDate(date, week * -1);
         vm.currentFirstDate = new Date(date);
-
+        vm.originDateArray = [];
         for (var j = 1; j <= 12; j++) {
             for (var i = 0; i < 7; i++) {
                 var tempDate = new Date();
@@ -191,12 +207,16 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             } else {
                 $interval.cancel(window.interval);
             }
-        }, 1000, 10);
+        }, 1000, 15);
 
     }
 
     function onSlideChangeEnd(previousIndex, activeIndex) {
         // console.log(previousIndex + '-->' + activeIndex);
+
+        if (!vm.topArrow) {
+            return;
+        }
 
         //向左翻页,加载数据
         if (previousIndex - activeIndex === 1) {
@@ -228,26 +248,33 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 }
             }, 1000);
         }
+
+        vm.topArrow = false;
     }
 
-    function loadData() {
+    function loadData(time) {
+
+        var startDate = time ? new Date(time) : new Date();
+        startDate.setDate(startDate.getDate() - (7 * 11));
+        setDate(startDate);
+
+        if (!window.mySwiper) {
+            $timeout(initSwiper, 1000);
+        }
 
         var sendData = {
-            date: '',
+            date: time ? moment(time).format('YYYY-MM-DD HH:mm:ss') : '',
         };
         FindService.getCalendarList(sendData)
             .then(function (response) {
-                if (vm.responseData) {
-                    vm.responseData = vm.responseData.concat(response.data.data);
-                } else {
-                    vm.responseData = response.data.data;
-                }
-
+                vm.responseData = response.data.data;
                 vm.busy = false;
                 vm.lastSat = response.data.lastSat;
                 vm.nextSat = response.data.nextSat;
                 vm.hasMore = response.data.hasMore;
+                vm.hasNextWeek = response.data.hasNextWeek;
                 initPoint();
+                loadMore();
             });
 
     }
@@ -264,7 +291,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 vm.responseData = vm.responseData.concat(response.data.data);
 
                 vm.lastSat = response.data.lastSat;
-                vm.nextSat = response.data.nextSat;
                 vm.hasMore = response.data.hasMore;
                 if (!vm.hasMore) {
                     vm.busy = true;

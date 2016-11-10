@@ -29,8 +29,9 @@ angular.module('defaultApp.directive').directive('swiperOrigin',
                             freeMode: false,
                             longSwipesRatio:0.3,
                             resistanceRatio:0,
-                            prevButton:'.arrowLeft',
-                            nextButton:'.arrowRight',
+
+                            // prevButton:'.arrowLeft',
+                            // nextButton:'.arrowRight',
                             onSlideChangeEnd: function (swiper) {
                                 scope.callback(
                                     {
