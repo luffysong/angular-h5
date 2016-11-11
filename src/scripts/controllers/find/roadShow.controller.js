@@ -3,7 +3,7 @@ var  angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('RoadShowController', RoadShowController);
 
-function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindService) {
+function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindService, $document) {
     var vm = this;
     vm.originDate = [];
     vm.originDateArray = [];
@@ -22,6 +22,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     vm.dateAdd = dateAdd;
 
     vm.scrollCallback = scrollCallback;
+    vm.onSlideChangeStart = onSlideChangeStart;
     vm.onSlideChangeEnd = onSlideChangeEnd;
     vm.loadMore = loadMore;
     vm.backTop = backTop;
@@ -49,6 +50,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         loading.hide('demos');
         vm.selectedDate = angular.copy(new Date());
         loadData();
+
     }
 
     function arrow(value) {
@@ -126,15 +128,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         return moment(date).format('YYYY-MM-DD');
     }
 
-    // function setActive(item) {
-    //     vm.selectedDate = angular.copy(item.date);
-    //     for (var i = 0; i < vm.originDate.length; i++) {
-    //         vm.originDate[i].active = false;
-    //     }
-    //
-    //     item.active = true;
-    // }
-
     function more(item, e) {
         e.preventDefault();
         e.stopPropagation();
@@ -184,6 +177,18 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     function scrollCallback() {
 
+        if (vm.slideChange) {
+            return;
+        }
+
+        if (vm.topArrow) {
+            return;
+        }
+
+        if (vm.moving) {
+            return;
+        }
+
         var target = $('a.active');
         if (!target.length) {
             return;
@@ -193,27 +198,47 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             $interval.cancel(window.interval);
         }
 
-        window.interval = $interval(function () {
-            target = $('a.active');
-            if (!target.length) {
-                return;
-            }
+        if (!target.length) {
+            return;
+        }
 
-            if (target.offset().left < 0) {
-                window.mySwiper.slidePrev();
-                target = $('a.active');
-            } else if (target.offset().left > screen.width) {
-                window.mySwiper.slideNext();
-                target = $('a.active');
-            } else {
-                $interval.cancel(window.interval);
-            }
-        }, 1000, 15);
+        var left = target.offset().left;
+        var moveIndex;
 
+        if (left < 0) {
+            left = window.Math.abs(left);
+            moveIndex = parseInt(left / screen.width);
+            window.mySwiper.slideTo(window.mySwiper.activeIndex - moveIndex - 1, 500, false);
+            vm.moving = true;
+            $timeout(function () {
+                vm.moving = false;
+            }, 500);
+        } else {
+            moveIndex = parseInt(left / screen.width);
+            if (moveIndex) {
+                window.mySwiper.slideTo(window.mySwiper.activeIndex + moveIndex, 500, false);
+                vm.moving = true;
+                $timeout(function () {
+                    vm.moving = false;
+                }, 500);
+            }
+        }
+
+    }
+
+    function onSlideChangeStart() {
+        vm.slideChange = true;
+        vm.topArrow = true;
+
+        // console.log('vm.slideChange:' + vm.slideChange);
     }
 
     function onSlideChangeEnd(previousIndex, activeIndex) {
         // console.log(previousIndex + '-->' + activeIndex);
+
+        vm.slideChange = false;
+
+        // console.log('vm.slideChange:' + vm.slideChange);
 
         //最后一屏判断
         if (window.mySwiper && (activeIndex === window.mySwiper.slides.length - 1)) {
@@ -226,38 +251,41 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             return;
         }
 
+        var targetArray;
+        var targetId;
+
         //向左翻页,加载数据
         if (previousIndex - activeIndex === 1) {
             $('.active').removeClass('active');
-            loadMore();
-            $timeout(function () {
-                var targetArray = vm.originDateArray[activeIndex];
-                for (var k = 6; k >= 0; k--) {
-                    if (targetArray[k].num) {
-                        var targetId = 'date' + targetArray[k].year + targetArray[k].month + targetArray[k].day;
-                        $('a[du-smooth-scroll=' + targetId + ']').click();
-                        break;
-                    }
+
+            // loadMore();
+            targetArray = vm.originDateArray[activeIndex];
+            for (var i = 6; i >= 0; i--) {
+                if (targetArray[i].num) {
+                    targetId = 'date' + targetArray[i].year + targetArray[i].month + targetArray[i].day;
+                    $document.scrollTo($('#' + targetId)[0], 91, 300);
+                    break;
                 }
-            }, 1000);
+            }
         }
 
         //向右翻页
         if (activeIndex - previousIndex === 1) {
             $('.active').removeClass('active');
-            $timeout(function () {
-                var targetArray = vm.originDateArray[activeIndex];
-                for (var k = 6; k >= 0; k--) {
-                    if (targetArray[k].num) {
-                        var targetId = 'date' + targetArray[k].year + targetArray[k].month + targetArray[k].day;
-                        $('a[du-smooth-scroll=' + targetId + ']').click();
-                        break;
-                    }
+            targetArray = vm.originDateArray[activeIndex];
+            for (var k = 6; k >= 0; k--) {
+                if (targetArray[k].num) {
+                    targetId = 'date' + targetArray[k].year + targetArray[k].month + targetArray[k].day;
+                    $document.scrollTo($('#' + targetId)[0], 91, 300);
+                    break;
                 }
-            }, 1000);
+            }
         }
 
-        vm.topArrow = false;
+        $timeout(function () {
+            vm.topArrow = false;
+        }, 1000);
+
     }
 
     function loadData(time) {
@@ -282,7 +310,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 vm.hasMore = response.data.hasMore;
                 vm.hasNextWeek = response.data.hasNextWeek;
                 initPoint();
-                loadMore();
             });
 
     }
@@ -311,17 +338,15 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     }
 
     function initPoint() {
+
+        //3个月,12周
         for (var i = vm.originDateArray.length; i > 0; i--) {
-            var arrayTemp = vm.originDateArray[i - 1];
-            if (formatDate(arrayTemp[6].date) === formatDate(vm.lastSat)) {
-                setPoint(i);
-                break;
-            }
+            setPoint(i);
         }
     }
 
     function setPoint(index) {
-        var arrayTemp = vm.originDateArray[index];
+        var arrayTemp = vm.originDateArray[index - 1];
         var obj;
         var keyDate = 'date';
         var keyNum = 'num';
@@ -337,19 +362,29 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     }
 
     function backTop() {
+        vm.moving = 1;
         $('html, body').animate({
             scrollTop: 0
         }, 300);
+        window.mySwiper.slideTo(window.mySwiper.slides.length - 1);
+        $timeout(function () {
+            vm.moving = false;
+        }, 400);
     }
 
     function noDataClick(item) {
-        $('.active').removeClass('active');
-        item.active = true;
-        $('.null_today').fadeIn();
-        $timeout(function () {
-            $('.null_today').fadeOut();
+        if (!item.num) {
             $('.active').removeClass('active');
-        }, 3000);
+            item.active = true;
+            $('.null_today').fadeIn();
+            $timeout(function () {
+                $('.null_today').fadeOut();
+                $('.active').removeClass('active');
+            }, 3000);
+        } else {
+            item.active = true;
+        }
+
     }
 
 }

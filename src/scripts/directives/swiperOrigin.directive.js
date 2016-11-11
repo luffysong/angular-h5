@@ -12,7 +12,8 @@ angular.module('defaultApp.directive').directive('swiperOrigin',
             restrict: 'A',
             scope: {
                 slides:'=slides',
-                callback: '&'
+                changeStartCallBack: '=',
+                changeEndCallBack: '='
             },
             link: function (scope, element) {
                 scope.$watch('slides', function () {
@@ -32,14 +33,13 @@ angular.module('defaultApp.directive').directive('swiperOrigin',
 
                             // prevButton:'.arrowLeft',
                             // nextButton:'.arrowRight',
+                            onSlideChangeStart: function (swiper) {
+                                scope.changeStartCallBack(swiper.previousIndex, swiper.activeIndex);
+                            },
+
                             onSlideChangeEnd: function (swiper) {
-                                scope.callback(
-                                    {
-                                        previousIndex: swiper.previousIndex,
-                                        activeIndex: swiper.activeIndex
-                                    }
-                                );
-                            }
+                                scope.changeEndCallBack(swiper.previousIndex, swiper.activeIndex);
+                            },
                         });
                     }
 
