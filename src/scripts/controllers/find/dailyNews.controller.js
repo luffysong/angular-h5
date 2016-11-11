@@ -51,9 +51,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid) {
 
     function link(ccid, link) {
         hybrid.open('addBottomViewInWeb/' + ccid);
-        window.setTimeout(function () {
-            window.location.href = link;
-        }, 200);
+        window.location.href = link;
     }
 
 }

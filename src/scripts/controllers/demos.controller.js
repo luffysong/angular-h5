@@ -26,6 +26,7 @@ function DemosController(demosService, projectColumnService,
             loadColumnDetail(1);
         }else {
             if (cover.type !== 'NORMAL') {
+                vm.shareImgSave = cover.type;
                 cover.imgUrl = 'https://pic.36krcnd.com/avatar/201611/11051619/zesbckdrckkkgh27.jpg';
             }
 
@@ -42,7 +43,7 @@ function DemosController(demosService, projectColumnService,
         window.WEIXINSHARE = {
             shareTitle: data.name || data.proSetName,
             shareUrl: window.location.href,
-            shareImg: data.sharePic || 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
+            shareImg: data.sharePic || vm.shareImgSave  || 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '来「36氪创投助手」，发现最新最热优质项目！'
         };
         var obj = {};

@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.directive').directive('touOpen', touOpen);
 
-function touOpen(hybrid, loading, $timeout) {
+function touOpen(hybrid, loading, $timeout, versionService) {
     return {
         restrict: 'AE',
         scope:{
@@ -27,14 +27,12 @@ function touOpen(hybrid, loading, $timeout) {
     function addClickEvent(scope) {
         loadingUI(scope);
 
-        //安卓示例:36kr-Tou-Android/2.6  ios示例:36kr-Tou-iOS/2.6
-        var matchesTou = navigator.userAgent.match(/36kr-Tou-[a-zA-Z]{3,7}\/([0-9]\.[0-9])/i);
+        var versionTou = versionService.getVersionAndroid() || versionService.getVersionIOS();
 
-        var versionTou = matchesTou && matchesTou[1] && parseFloat(matchesTou[1]);
-
-        if (versionTou && versionTou > 2.5) {
+        //高于2.5版本
+        if (versionTou && versionService.cprVersion(versionTou, '2.5')) {
             hybrid.open(scope.path);
-        } else if (versionTou && versionTou <= 2.5) {
+        } else {
             hybrid.open('company/' + scope.pid);
         }
 
