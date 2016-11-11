@@ -4,7 +4,7 @@ angular.module('defaultApp.controller')
 .controller('DemosController', DemosController);
 
 function DemosController(demosService, projectColumnService,
-    $state, $stateParams, cover, loading) {
+    $state, $stateParams, cover, loading, ErrorService) {
     var vm = this;
     var COLUMN = 'column';
 
@@ -96,7 +96,7 @@ function DemosController(demosService, projectColumnService,
     function loadCollectionDetail(page) {
         demosService.getDemos($stateParams.id, '', page)
         .then(renderList)
-        .catch(renderList);
+        .catch(error);
     }
 
     function loadColumnDetail(page) {
@@ -171,5 +171,9 @@ function DemosController(demosService, projectColumnService,
         } else {
             loadCollectionDetail(++vm.page);
         }
+    }
+
+    function error(err) {
+        ErrorService.alert(err);
     }
 }
