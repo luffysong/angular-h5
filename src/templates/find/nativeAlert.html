@@ -1,7 +1,10 @@
 <div class="nativeAlert_pop">
     <h4>{{vm.item.name}}</h4>
-    <span class="pop-time" ng-if="vm.item.startAt">{{vm.item.startAt}}-{{item.endAt}}</span>
-    <p class="pop-content">{{vm.item.fetchCode}}</p>
+    <div class="pop-time" ng-if="vm.item.startAt">
+        <span>{{vm.item.startAt | dateRoadShow}}</span>
+        <span ng-if="vm.item.endAt">-{{vm.item.endAt | dateRoadShow}}</span>
+    </div>
+    <p class="pop-content" ng-bind-html="vm.item.fetchCode"></p>
     <div class="pop-open" ng-click="vm.open()">
         立即查看项目({{vm.item.proCount}})
     </div>

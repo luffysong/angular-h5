@@ -141,11 +141,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                     return item;
                 }
             }
-        }).result.then(allowScroll).catch(allowScroll);
-    }
-
-    function allowScroll() {
-        window.removeEventListener('touchmove', preventDefault, false);
+        });
     }
 
     modalController.$inject = ['$modalInstance', 'obj', 'hybrid'];
@@ -167,12 +163,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 $modalInstance.dismiss();
             }
         }
-
-        window.addEventListener('touchmove', preventDefault, false);
-    }
-
-    function preventDefault() {
-        event.preventDefault();
     }
 
     function scrollCallback() {

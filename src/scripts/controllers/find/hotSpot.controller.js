@@ -34,11 +34,7 @@ function HotSpotController(loading, $modal, FindService) {
                     return item;
                 }
             }
-        }).result.then(allowScroll).catch(allowScroll);
-    }
-
-    function allowScroll() {
-        window.removeEventListener('touchmove', preventDefault, false);
+        });
     }
 
     modalController.$inject = ['$modalInstance', 'obj', 'hybrid'];
@@ -60,12 +56,6 @@ function HotSpotController(loading, $modal, FindService) {
                 $modalInstance.dismiss();
             }
         }
-
-        window.addEventListener('touchmove', preventDefault, false);
-    }
-
-    function preventDefault() {
-        event.preventDefault();
     }
 
     function loadData() {

@@ -12,7 +12,7 @@
                     <div class="base-info-detail">
                         <h3>{{item.name}}</h3>
                         <div class="item-middle">
-                            <p>{{item.fetchCode}}</p>
+                            <p ng-bind="item.fetchCode | delHtmlTag"></p>
                             <span class="item-more" ng-click="vm.more(item, $event)">更多</span>
                         </div>
                        <div class="item-bottom">
