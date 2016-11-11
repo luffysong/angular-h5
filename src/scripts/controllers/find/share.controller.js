@@ -5,7 +5,6 @@ angular.module('defaultApp.controller')
 
 function ShareController(loading, $stateParams, FindService, ErrorService) {
     var vm = this;
-    vm.type = $stateParams.type;
     vm.id = $stateParams.id;
 
     init();

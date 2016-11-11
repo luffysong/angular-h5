@@ -25,6 +25,10 @@ function DemosController(demosService, projectColumnService,
         if (isColumn()) {
             loadColumnDetail(1);
         }else {
+            if (cover.type !== 'NORMAL') {
+                cover.imgUrl = 'https://pic.36krcnd.com/avatar/201611/11051619/zesbckdrckkkgh27.jpg';
+            }
+
             loadCollectionDetail(1);
         }
 

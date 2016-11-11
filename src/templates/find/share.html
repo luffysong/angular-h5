@@ -6,7 +6,15 @@
             <p ng-if="vm.type === 'CALENDAR'">足不出户，一览创投圈最热门路演</p>
             <p>下载36氪创投助手，查看18个项目，一键约谈</p>
         </div>
-        <p class="section-content">{{vm.responseColumn.fetchCode}}</p>
+        <!--<p class="section-content" ng-bind-html="vm.responseColumn.fetchCode"></p>-->
+        <div class="header-info" ng-if="vm.responseColumn.fetchCode">
+            <text-line-clamp line-clamp='8' text="vm.responseColumn.fetchCode">
+                <div class="text-container">
+                    <div class="text-content"></div>
+                </div>
+                <a class="text-toggle" href="javascript:void(0)" >展开</a>
+            </text-line-clamp>
+        </div>
     </div>
     <div  class="share-content-wrapper">
         <div class="section-top">
