@@ -25,6 +25,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid) {
                 vm.responseData = angular.copy(response.data.data);
                 vm.ts = response.data.ts;
                 vm.busy = false;
+                vm.hasInit = true;
             })
             .catch(error);
     }

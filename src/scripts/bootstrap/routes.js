@@ -211,9 +211,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controller: 'HotSpotController',
         templateUrl: 'templates/find/hotSpotList.html',
 
-        // resolve: {
-        //     cover: loadFind
-        // }
+        resolve: {
+            cover: loadFind
+        }
     });
 
     //创投助手app---每日报道
@@ -222,10 +222,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'DailyNewsController',
         templateUrl: 'templates/find/dailyNewsList.html',
-
-        // resolve: {
-        //     cover: loadFind
-        // }
+        resolve: {
+            cover: loadFind
+        }
     });
 
     //创投助手app---融资速递
@@ -235,9 +234,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controller: 'FinanceController',
         templateUrl: 'templates/find/financeList.html',
 
-        // resolve: {
-        //     cover: loadFind
-        // }
+        resolve: {
+            cover: loadFind
+        }
     });
 
     //创投助手app---分享页(热点追踪|路演日历)
@@ -306,12 +305,12 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     }
 
-    // function loadFind($rootScope, loading) {
-    //
-    //     $rootScope.needLoading = true;
-    //     loading.show('demos');
-    //     $('ui-view')[0].innerHTML = '';
-    //
-    // }
+    function loadFind($rootScope, loading) {
+
+        $rootScope.needLoading = true;
+        loading.show('demos');
+        $('ui-view')[0].innerHTML = '';
+
+    }
 
 });

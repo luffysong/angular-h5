@@ -20,6 +20,7 @@ function ShareController(loading, $stateParams, FindService, ErrorService) {
             .then(function temp(response) {
                 vm.responseColumn = angular.copy(response.data);
                 document.title = response.data.proSetName;
+                vm.proSetCount = response.data.proSetCount;
                 vm.type = response.data.type;
                 initWeixin(response.data);
             })
@@ -39,7 +40,7 @@ function ShareController(loading, $stateParams, FindService, ErrorService) {
     }
 
     function initWeixin(data) {
-        document.title = data.name;
+        document.title = data.proSetName;
         window.WEIXINSHARE = {
             shareTitle: data.proSetName,
             shareUrl: window.location.href,

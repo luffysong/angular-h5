@@ -11,7 +11,7 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
     vm.timestamp = '';
     vm.filterLabelsAll;
     vm.filterLabelsArray = [];
-    vm.busy = false;
+    vm.busy = true;
     vm.sendArray = [];
 
     vm.link = link;
@@ -52,7 +52,7 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
                 setFilterLabels(response.data.filterLabels, 0);
                 vm.sendData.date = response.data.ts;
                 vm.busy = false;
-                loadMore();
+                vm.hasInit = true;
             })
             .catch(error);
     }
@@ -232,6 +232,11 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
 
         function rollBack() {
             vm.array = angular.copy(obj);
+            for (var i = 1; i < vm.array.length; i++) {
+                vm.array[i].active = false;
+            }
+
+            vm.array[0].active = true;
             vm.filterArray = [];
             init();
         }

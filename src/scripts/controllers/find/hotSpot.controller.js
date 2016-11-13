@@ -68,6 +68,7 @@ function HotSpotController(loading, $modal, FindService) {
         };
         FindService.getHotSpotList(sendData)
         .then(function (response) {
+            vm.hasInit = true;
             if (vm.responseData) {
                 vm.responseData = vm.responseData.concat(response.data.data);
             } else {

@@ -1,34 +1,46 @@
 <div  class="dailyNews-wrapper">
-    <!--<loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>-->
-    <img class="img-fixed" src="/styles/images/find/projectOnly@2x.png" tou-open path="'taglist/媒体报道?ktm_source=find.dailyNews'" />
-    <div  class="dailyNews-content-wrapper" infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
-        <div ng-repeat="itemData in vm.responseData">
-            <div class="section-top">
-                <p>{{itemData.displayTimeStr}}共 {{itemData.reportCount}} 篇</p>
+    <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
+    <div ng-if="vm.responseData.length">
+        <img class="img-fixed" src="/styles/images/find/projectOnly@2x.png" tou-open path="'taglist/媒体报道?ktm_source=find.dailyNews'" />
+        <div  class="dailyNews-content-wrapper" infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+            <div ng-repeat="itemData in vm.responseData">
+                <div class="section-top">
+                    <p>{{itemData.displayTimeStr}}共 {{itemData.reportCount}} 篇</p>
+                </div>
+                <ul >
+                    <li ontouchstart="" kr-active="'active'" ng-repeat="item in itemData.reports track by $index">
+                        <a class="dailyNews-content-href" href="javascript:" ng-click="vm.link(item.ccid, item.link)">
+                            <div class="base-info-detail">
+                                <h3 class="header-info">
+                                    <text-line-clamp line-clamp='2' text="'['+ item.name + '] ' + item.title">
+                                        <div class="text-container">
+                                            <div class="text-content"></div>
+                                        </div>
+                                    </text-line-clamp>
+                                </h3>
+                                <div class="item-left">
+                                    <img src="/styles/images/find/tagDark@2x.png"/>
+                                    <span>{{item.industry1 | findDefault : '其他'}}</span>
+                                </div>
+                                <div class="item-center">
+                                    <img src="/styles/images/find/defualtArtical@2x.png"/>
+                                    <span>{{item.source| findDefault : '媒体报道'}}</span>
+                                </div>
+                                <div class="item-right">
+                                    <img src="/styles/images/find/contact@2x.png"/>
+                                    <span>联系创始人</span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <ul >
-                <li ontouchstart="" kr-active="'active'" ng-repeat="item in itemData.reports track by $index">
-                    <a class="dailyNews-content-href" href="javascript:" ng-click="vm.link(item.ccid, item.link)">
-                        <div class="base-info-detail">
-                            <h3>[{{item.name}}]{{item.title}}</h3>
-                            <div class="item-left">
-                                <img src="/styles/images/find/tagDark@2x.png"/>
-                                <span>{{item.industry1 | findDefault : '其他'}}</span>
-                            </div>
-                            <div class="item-center">
-                                <img src="/styles/images/find/defualtArtical@2x.png"/>
-                                <span>{{item.source| findDefault : '媒体报道'}}</span>
-                            </div>
-                            <div class="item-right">
-                                <img src="/styles/images/find/contact@2x.png"/>
-                                <span>联系创始人</span>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            </ul>
+            <footer ng-if="vm.busy && vm.responseData.length">加载更多...</footer>
         </div>
-        <footer ng-if="vm.busy">加载更多...</footer>
+    </div>
+    <div ng-if="!vm.responseData.length && vm.hasInit" class="find-no-data">
+        <img src="/styles/images/find/search@2x.png" >
+        <span>抱歉，没有找到您要的内容</span>
     </div>
 
 </div>
