@@ -15,6 +15,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid) {
     init();
     function init() {
         document.title = '每日报道';
+        $('head').append('<meta name="format-detection" content="telephone=no" />');
         loading.hide('findLoading');
         loadData();
     }

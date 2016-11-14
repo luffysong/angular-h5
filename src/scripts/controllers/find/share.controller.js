@@ -11,6 +11,7 @@ function ShareController(loading, $stateParams, FindService, ErrorService) {
     function init() {
 
         loading.hide('findLoading');
+        $('head').append('<meta name="format-detection" content="telephone=no" />');
 
         var sendData = {
             proSetId: vm.id

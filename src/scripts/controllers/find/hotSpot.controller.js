@@ -17,6 +17,7 @@ function HotSpotController(loading, $modal, FindService) {
 
     function init() {
         document.title = '投资热点';
+        $('head').append('<meta name="format-detection" content="telephone=no" />');
         loading.hide('findLoading');
         loadData();
     }

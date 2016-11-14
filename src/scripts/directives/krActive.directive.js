@@ -35,6 +35,7 @@ function krActive($parse) {
         element.on('click', function click() {
             clearTimeout(timeID);
             element.removeClass(className);
+            element.addClass('find-clicked');
         });
     }
 }

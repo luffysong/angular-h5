@@ -47,6 +47,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     function init() {
         document.title = '路演日历';
+        $('head').append('<meta name="format-detection" content="telephone=no" />');
         loading.hide('findLoading');
         vm.selectedDate = angular.copy(new Date());
         loadData();
@@ -214,6 +215,13 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             }
         }
 
+        //是否到达底部
+        if ($(document).scrollTop() - ($(document).height() - $(window).height()) > -30) {
+            $('.arrowLeft').hide();
+        } else {
+            $('.arrowLeft').show();
+        }
+
     }
 
     function onSlideChangeStart() {
@@ -367,12 +375,13 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     function noDataClick(item) {
         if (!item.num) {
-            $('.active').removeClass('active');
+            // $('.active').removeClass('active');
             item.active = true;
             $('.null_today').fadeIn();
             $timeout(function () {
                 $('.null_today').fadeOut();
-                $('.active').removeClass('active');
+
+                // $('.active').removeClass('active');
             }, 3000);
         } else {
             item.active = true;
