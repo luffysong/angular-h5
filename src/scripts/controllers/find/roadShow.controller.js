@@ -290,6 +290,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
         var sendData = {
             date: time ? moment(time).format('YYYY-MM-DD HH:mm:ss') : '',
+            weeks: 4
         };
         FindService.getCalendarList(sendData)
             .then(function (response) {
@@ -299,6 +300,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 vm.nextSat = response.data.nextSat;
                 vm.hasMore = response.data.hasMore;
                 vm.hasNextWeek = response.data.hasNextWeek;
+                vm.hasInit = true;
                 initPoint();
             });
 
@@ -310,6 +312,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
         var sendData = {
             date: moment(vm.lastSat).format('YYYY-MM-DD HH:mm:ss'),
+            weeks: 4
         };
         FindService.getCalendarList(sendData)
             .then(function (response) {

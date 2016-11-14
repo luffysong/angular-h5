@@ -25,8 +25,8 @@ function DemosController(demosService, projectColumnService,
         if (isColumn()) {
             loadColumnDetail(1);
         }else {
+            vm.shareImgSave = cover.imgUrl;
             if (cover.type !== 'NORMAL') {
-                vm.shareImgSave = cover.type;
                 cover.imgUrl = 'https://pic.36krcnd.com/avatar/201611/11051619/zesbckdrckkkgh27.jpg';
             }
 

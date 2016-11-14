@@ -16,7 +16,7 @@
             </text-line-clamp>
         </div>
     </div>
-    <div  class="share-content-wrapper">
+    <div  class="share-content-wrapper" ng-if="vm.responseDetail.length">
         <div class="section-top">
             <img src="/styles/images/find/recommend@2x.png"/>
             <span>推荐项目</span>
@@ -43,5 +43,5 @@
             </li>
         </ul>
     </div>
-    <a class="footer" href="http://36kr.com/app/tou?companysetlist={{vm.id}}?ktm_source=find.share.{{vm.id}}">打开App查看全部项目({{vm.totalCount}})</a>
+    <a ng-if="vm.responseDetail.length" class="footer" href="http://36kr.com/app/tou?companysetlist={{vm.id}}?ktm_source=find.share.{{vm.id}}">打开App查看全部项目({{vm.totalCount}})</a>
 </div>

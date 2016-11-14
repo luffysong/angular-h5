@@ -7,7 +7,7 @@ function HotSpotController(loading, $modal, FindService) {
     var vm = this;
     vm.responseData = [];
     vm.busy = false;
-    vm.page = 1;
+    vm.page = 0;
 
     //更多
     vm.more = more;
@@ -63,8 +63,8 @@ function HotSpotController(loading, $modal, FindService) {
         vm.busy = true;
 
         var sendData = {
-            page: vm.page,
-            pageSize: 10
+            page: vm.page + 1,
+            pageSize: 10 
         };
         FindService.getHotSpotList(sendData)
         .then(function (response) {

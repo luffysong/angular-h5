@@ -13,7 +13,10 @@
                             <div class="base-info-detail">
                                 <h4>{{item.name}}<span>{{item.industry1}}</span></h4>
                                 <p class="item-finance">{{item.phase}}<span></span>{{item.amount | findDefault : '未披露'}}</p>
-                                <p class="item-investorStr">投资方：{{item.investors | findDefault : '未披露'}}</p>
+                                <p class="item-investorStr">
+                                    <span class="span-first">投资方：</span>
+                                    <span class="span-second">{{item.investors | findDefault : '未披露'}}</span>
+                                </p>
                                 <p class="item-link" ng-if="item.link" ng-click="vm.link(item.ccid, item.link, $event)"><img src="/styles/images/find/link@2x.png"/><span>{{item.website | findDefault : '媒体报道'}}</span></p>
                                 <div>联系创始人</div>
                             </div>
