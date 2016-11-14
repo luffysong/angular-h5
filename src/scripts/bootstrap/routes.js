@@ -301,11 +301,19 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     }
 
-    function loadFind($rootScope, loading) {
+    function loadFind($rootScope, loading, $q, $timeout) {
 
         $rootScope.findNeedLoading = true;
         loading.show('findLoading');
         $('ui-view')[0].innerHTML = '';
+
+        var deferred = $q.defer();  //通过$q服务注册一个延迟对象 deferred
+        var promise = deferred.promise;  //通过deferred延迟对象，可以得到一个承诺promise，而promise会返回当前任务的完成结果
+        $timeout(function () {
+            deferred.resolve();
+        }, 10);
+
+        return promise;
 
     }
 
