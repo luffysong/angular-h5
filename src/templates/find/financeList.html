@@ -1,5 +1,4 @@
 <div  class="finance-wrapper">
-    <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
     <div ng-if="vm.responseData.length">
         <img class="img-fixed" src="/styles/images/find/filter@2x.png" ng-click="vm.filter($event)"/>
         <div  class="finance-content-wrapper" infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>

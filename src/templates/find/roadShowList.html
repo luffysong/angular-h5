@@ -1,5 +1,4 @@
 <div  class="roadShow-wrapper">
-    <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
     <img class="img-fixed" src="/styles/images/find/seeNewest@2x.png" ng-click="vm.backTop()"/>
     <div class="null_today">今日没有路演活动</div>
     <div class="roadShow-intro" swiper-origin slides="vm.originDateArray" class="swiper-container"
@@ -46,7 +45,7 @@
             <li ontouchstart="" kr-active="'active'" id="{{item.startAt | dateRoadShowID}}"
                 ng-repeat="item in vm.responseData track
                     by $index">
-                <div class="roadShow-content-href" href="javascript:" tou-open path="'projectsSet/'+ item.id + '?from=calendar'">
+                <div class="roadShow-content-href" href="javascript:" tou-open path="'projectsSet/'+ item.id + '?ktm_source=calendar'">
                     <div class="base-info-wrapper">
                         <img ng-src="{{item.imgUrl | image}}" alt="">
                     </div>
@@ -58,7 +57,7 @@
                         </div>
                        <div class="item-bottom">
                            <span class="item-time">{{item.startAt | dateRoadShow}}</span>
-                           <span class="item-time" ng-if="item.endAt">-{{item.endAt | dateRoadShow}}</span>
+                           <span class="item-time" ng-if="item.endAt && item.endAt !== item.startAt">-{{item.endAt | dateRoadShow}}</span>
                            <span class="item-num">{{item.proCount}}个项目</span>
                        </div>
                     </div>

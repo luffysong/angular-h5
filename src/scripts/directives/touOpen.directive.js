@@ -6,7 +6,7 @@ var angular = require('angular');
 
 angular.module('defaultApp.directive').directive('touOpen', touOpen);
 
-function touOpen(hybrid, loading, $timeout, versionService) {
+function touOpen(hybrid, loading, $timeout, versionService, $state) {
     return {
         restrict: 'AE',
         scope:{
@@ -29,9 +29,19 @@ function touOpen(hybrid, loading, $timeout, versionService) {
 
         var versionTou = versionService.getVersionAndroid() || versionService.getVersionIOS();
 
-        //高于2.5版本
-        if (versionTou && versionService.cprVersion(versionTou, '2.5')) {
+        //高于2.6版本
+        if (versionTou && (versionService.cprVersion(versionTou, '2.6') === 2)) {
             hybrid.open(scope.path);
+        } else if (versionTou && (versionService.cprVersion(versionTou, '2.6') === 1)) {
+            if (scope.path.substring(0, 11) === 'projectsSet') {
+                var endNum = scope.path.indexOf('?');
+                $state.go('demos', {
+                    id: parseInt(scope.path.substring(12, endNum)),
+                    type: 'projects'
+                }, { reload: true });
+            } else {
+                hybrid.open(scope.path);
+            }
         } else {
             hybrid.open('company/' + scope.pid);
         }

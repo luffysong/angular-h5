@@ -44,7 +44,7 @@ function ShareController(loading, $stateParams, FindService, ErrorService) {
         window.WEIXINSHARE = {
             shareTitle: data.proSetName,
             shareUrl: window.location.href,
-            shareImg: data.sharePic || vm.shareImgSave  || 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
+            shareImg: data.sharePic || data.imgUrl  || 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '来「36氪创投助手」，发现最新最热优质项目！'
         };
         var obj = {};

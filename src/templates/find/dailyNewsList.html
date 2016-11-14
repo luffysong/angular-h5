@@ -1,5 +1,4 @@
 <div  class="dailyNews-wrapper">
-    <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
     <div ng-if="vm.responseData.length">
         <img class="img-fixed" src="/styles/images/find/projectOnly@2x.png" tou-open path="'taglist/媒体报道?ktm_source=find.dailyNews'" />
         <div  class="dailyNews-content-wrapper" infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
