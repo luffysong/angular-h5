@@ -15,7 +15,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid) {
     init();
     function init() {
         document.title = '每日报道';
-        loading.hide('demos');
+        loading.hide('findLoading');
         loadData();
     }
 

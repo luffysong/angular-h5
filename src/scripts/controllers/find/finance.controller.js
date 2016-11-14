@@ -21,7 +21,7 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
     init();
     function init() {
         document.title = '融资速递';
-        loading.hide('demos');
+        loading.hide('findLoading');
         loadData();
     }
 

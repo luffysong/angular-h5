@@ -17,7 +17,7 @@ function HotSpotController(loading, $modal, FindService) {
 
     function init() {
         document.title = '投资热点';
-        loading.hide('demos');
+        loading.hide('findLoading');
         loadData();
     }
 

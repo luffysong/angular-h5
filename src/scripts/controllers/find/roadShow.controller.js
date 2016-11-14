@@ -47,7 +47,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     function init() {
         document.title = '路演日历';
-        loading.hide('demos');
+        loading.hide('findLoading');
         vm.selectedDate = angular.copy(new Date());
         loadData();
 

@@ -10,7 +10,7 @@ function ShareController(loading, $stateParams, FindService, ErrorService) {
     init();
     function init() {
 
-        loading.hide('demos');
+        loading.hide('findLoading');
 
         var sendData = {
             proSetId: vm.id
