@@ -43,19 +43,11 @@ function HotSpotController(loading, $modal, FindService) {
 
         var vm = this;
         vm.item = obj;
+        vm.ktm_source = 'hot_more';
         vm.cancel = cancel;
-        vm.open = open;
 
         function cancel() {
             $modalInstance.dismiss();
-        }
-
-        function open() {
-            var path = 'projectsSet/' + obj.id + '?ktm_source=hotSpot';
-            if (hybrid.isInApp) {
-                hybrid.open(path);
-                $modalInstance.dismiss();
-            }
         }
     }
 
@@ -65,7 +57,7 @@ function HotSpotController(loading, $modal, FindService) {
 
         var sendData = {
             page: vm.page + 1,
-            pageSize: 10 
+            pageSize: 10
         };
         FindService.getHotSpotList(sendData)
         .then(function (response) {

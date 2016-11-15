@@ -151,18 +151,10 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         var vm = this;
         vm.item = obj;
         vm.cancel = cancel;
-        vm.open = open;
+        vm.ktm_source = 'calendar_more';
 
         function cancel() {
             $modalInstance.dismiss();
-        }
-
-        function open() {
-            var path = 'projectsSet/' + obj.id + '?ktm_source=roadShow';
-            if (hybrid.isInApp) {
-                hybrid.open(path);
-                $modalInstance.dismiss();
-            }
         }
     }
 

@@ -5,7 +5,7 @@
         <span ng-if="vm.item.endAt">-{{vm.item.endAt | dateRoadShow}}</span>
     </div>
     <p class="pop-content" ng-bind-html="vm.item.fetchCode"></p>
-    <div class="pop-open" ng-click="vm.open()">
+    <div class="pop-open"  tou-open path="'projectsSet/'+ vm.item.id + '?ktm_source=' + vm.ktm_source" ng-click="vm.cancel()">
         立即查看项目({{vm.item.proCount}})
     </div>
     <img class="pop-close" src="/styles/images/find/close@2x.png" ng-click="vm.cancel()"/>
