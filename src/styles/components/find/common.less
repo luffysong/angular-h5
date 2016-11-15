@@ -19,6 +19,7 @@
             float: left;
             position: relative;
             width: 16%;
+            height: 55px;
             img{
                 width: 55px;
                 height:55px;
@@ -50,13 +51,24 @@
             padding-left: 3%;
         }
         h3{
-            font-size: 15px;
-            color: #222C38;
+
             letter-spacing: 0px;
             line-height: 18px;
             margin: 0;
             position: relative;
-            font-weight: 600;
+            font-size: 15px;
+            .item-name{
+                font-weight: 600;
+                font-size: 15px;
+                color: #222C38;
+                line-height: 18px;
+                vertical-align: top;
+                display: inline-block;
+                overflow: hidden;
+                text-overflow:ellipsis;
+                white-space: nowrap;
+                max-width: 140px;
+            }
             .item-signs{
                 margin-left: 3%;
                 display: inline-block;

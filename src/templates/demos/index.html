@@ -76,12 +76,11 @@
                        href="http://36kr.com/company/{{item.cid}}?ktm_source=chuangtou.h5.xiangmuji.{{vm.id}}.{{item.cid}}"
                        pid="item.rcid" tou-open path="'crmCompany/' + item.ccid + '?ktm_source=xiangmuji.native.' + vm.id + '.' + item.ccid">
                         <div class="base-info-detail">
-                            <div  class="logo-wrapper">
-                                <img ng-src="{{item.logo | image}}" alt="">
+                            <div  class="logo-wrapper" ng-style="{'background-image': (item.logo | image)}">
                                 <span ng-if="item.funding === 2">正在融资</span>
                             </div>
                             <div class="content-wrapper">
-                                <h3>{{item.name}}<span class="item-signs" ng-repeat="innerItem in item.signs" ng-style="{'background-color':innerItem.color}">{{innerItem.name}}</span><span class="item-pubdate">{{item.pubdate}}</span></h3>
+                                <h3><span class="item-name">{{item.name}}</span><span class="item-signs" ng-repeat="innerItem in item.signs" ng-style="{'background-color':innerItem.color}">{{innerItem.name}}</span><span class="item-pubdate">{{item.pubdate}}</span></h3>
                                 <p class="item-brief">{{item.brief}}</p>
                                 <p class="item-industry" ng-if="item.industry1"><span class="span-first">行业</span><span class="span-second">{{item.industry1}}</span></p>
                                 <p class="item-advantage" ng-if="item.advantage"><span class="span-first">亮点</span><span class="span-second">{{item.advantage}}</span></p>

@@ -62,12 +62,14 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
         if (value === 'right') {
 
-            //最后 一页才重新请求数据,其他页时正常翻页
-            if (window.mySwiper.slides.length - 1 === window.mySwiper.activeIndex) {
-                loadData(vm.nextSat);
-            } else {
-                window.mySwiper.slideNext();
-            }
+            // //最后 一页才重新请求数据,其他页时正常翻页
+            // if (window.mySwiper.slides.length - 1 === window.mySwiper.activeIndex) {
+            //     loadData(vm.nextSat);
+            // } else {
+            //     window.mySwiper.slideNext();
+            // }
+
+            window.mySwiper.slideNext();
         }
 
     }
@@ -77,6 +79,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         window.mySwiper.update();
         scrollCallback();
         vm.busy = false;
+        $timeout(scrollCallback, 1000);
     }
 
     function dateDel() {
@@ -98,7 +101,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         date = addDate(date, week * -1);
         vm.currentFirstDate = new Date(date);
         vm.originDateArray = [];
-        for (var j = 1; j <= 12; j++) {
+        for (var j = 1; j <= 24; j++) {
             for (var i = 0; i < 7; i++) {
                 var tempDate = new Date();
                 tempDate = (i === 0 && j === 1 ? date : addDate(date, 1));
@@ -145,8 +148,8 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         });
     }
 
-    modalController.$inject = ['$modalInstance', 'obj', 'hybrid'];
-    function modalController($modalInstance, obj, hybrid) {
+    modalController.$inject = ['$modalInstance', 'obj'];
+    function modalController($modalInstance, obj) {
 
         var vm = this;
         vm.item = obj;
@@ -289,17 +292,20 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         }
 
         var sendData = {
-            date: time ? moment(time).format('YYYY-MM-DD HH:mm:ss') : '',
-            weeks: 4
+            ts: time || 0,
+            pageSize: 30
         };
         FindService.getCalendarList(sendData)
             .then(function (response) {
                 vm.responseData = response.data.data;
                 vm.busy = false;
-                vm.lastSat = response.data.lastSat;
-                vm.nextSat = response.data.nextSat;
-                vm.hasMore = response.data.hasMore;
-                vm.hasNextWeek = response.data.hasNextWeek;
+
+                // vm.lastSat = response.data.lastSat;
+                // vm.nextSat = response.data.nextSat;
+                // vm.hasMore = response.data.hasMore;
+                // vm.hasNextWeek = response.data.hasNextWeek;
+                vm.ts = response.data.ts;
+                vm.hasMore  = response.data.data.length;
                 vm.hasInit = true;
                 initPoint();
             });
@@ -311,17 +317,20 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         vm.busy = true;
 
         var sendData = {
-            date: moment(vm.lastSat).format('YYYY-MM-DD HH:mm:ss'),
-            weeks: 4
+            ts: vm.ts,
+            pageSize: 30
         };
         FindService.getCalendarList(sendData)
             .then(function (response) {
                 vm.responseData = vm.responseData.concat(response.data.data);
 
-                vm.lastSat = response.data.lastSat;
-                vm.hasMore = response.data.hasMore;
+                // vm.lastSat = response.data.lastSat;
+                // vm.hasMore = response.data.hasMore;
+
+                vm.hasMore  = response.data.data.length;
                 if (!vm.hasMore) {
                     vm.busy = true;
+                    vm.ts = response.data.ts;
                 } else {
                     vm.busy = false;
                 }
@@ -355,11 +364,20 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     }
 
     function backTop() {
+
+
+        // $('html, body').animate({
+        //     scrollTop: 0
+        // }, 300);
+        // window.mySwiper.slideTo(window.mySwiper.slides.length - 1);
+
         vm.moving = 1;
-        $('html, body').animate({
-            scrollTop: 0
-        }, 300);
-        window.mySwiper.slideTo(window.mySwiper.slides.length - 1);
+
+        var time = vm.responseData[0].startAt;
+
+        var targetId = 'date' + targetArray[i].year + targetArray[i].month + targetArray[i].day;
+        $document.scrollTo($('#' + targetId)[0], 91, 300);
+
         $timeout(function () {
             vm.moving = false;
         }, 400);

@@ -23,7 +23,7 @@ angular.module('defaultApp.directive').directive('swiperOrigin',
 
                     function makeSwiper() {
                         window.mySwiper = new Swiper(element[0], {
-                            initialSlide: 100, //最后一个选中,100只是设置的比较大的数,理论上不会超过100个轮播
+                            initialSlide: 12,
                             loop: false,
                             speed: 500,
                             slidesPerView: 1,
