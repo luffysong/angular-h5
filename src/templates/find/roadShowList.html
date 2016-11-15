@@ -2,7 +2,7 @@
     <img class="img-fixed" src="/styles/images/find/seeNewest@2x.png" ng-click="vm.backTop()"/>
     <div class="null_today">今日没有路演活动</div>
     <div class="roadShow-intro" swiper-origin slides="vm.originDateArray" class="swiper-container"
-         change-End-Call-Back="vm.onSlideChangeEnd" change-Start-Call-Back="vm.onSlideChangeStart">
+         change-End-Call-Back="vm.onTransitionEnd" change-Start-Call-Back="vm.onTransitionStart">
         <div class="roadShow-intro-inner swiper-wrapper">
             <div class="swiper-slide" ng-repeat="i in vm.originDateArray track by $index">
                 <ul class="sidebar">

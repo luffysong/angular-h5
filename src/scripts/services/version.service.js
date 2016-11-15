@@ -10,7 +10,7 @@ angular.module('defaultApp.service').service('versionService', function () {
         //安卓示例:36kr-Tou-Android/2.6
         var versionTou;
         var matchesTou = navigator.userAgent.match(/36kr-Tou-Android\/([0-9.]+)/i);
-        if (matchesTou && matchesTou[1] && matchesTou[1].charAt(matchesTou[1].length - 1)) {
+        if (matchesTou && matchesTou[1] && (matchesTou[1].charAt(matchesTou[1].length - 1) === '.')) {
             versionTou = matchesTou[1].substr(0, matchesTou[1].length - 1);
             return versionTou;
         }
@@ -20,7 +20,7 @@ angular.module('defaultApp.service').service('versionService', function () {
         //ios示例:36kr-Tou-iOS/2.6
         var versionTou;
         var matchesTou = navigator.userAgent.match(/36kr-Tou-iOS\/([0-9.]+)/i);
-        if (matchesTou && matchesTou[1] && matchesTou[1].charAt(matchesTou[1].length - 1)) {
+        if (matchesTou && matchesTou[1] && (matchesTou[1].charAt(matchesTou[1].length - 1) === '.')) {
             versionTou = matchesTou[1].substr(0, matchesTou[1].length - 1);
             return versionTou;
         }

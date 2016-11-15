@@ -22,8 +22,8 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     vm.dateAdd = dateAdd;
 
     vm.scrollCallback = scrollCallback;
-    vm.onSlideChangeStart = onSlideChangeStart;
-    vm.onSlideChangeEnd = onSlideChangeEnd;
+    vm.onTransitionStart = onTransitionStart;
+    vm.onTransitionEnd = onTransitionEnd;
     vm.loadMore = loadMore;
     vm.backTop = backTop;
     vm.noDataClick = noDataClick;
@@ -75,11 +75,24 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     }
 
     function initSwiper() {
-        // window.mySwiper.slideTo(window.mySwiper.slides.length - 1);
-        window.mySwiper.update();
         scrollCallback();
         vm.busy = false;
-        $timeout(scrollCallback, 1000);
+        $timeout(function () {
+            var date;
+            for (var i = 0; i < vm.responseData.length; i++) {
+                date = vm.responseData[i].startAt;
+                if (date / 1000 > parseInt(moment().format('X'))) {
+                    continue;
+                } else {
+                    var targetId = 'date' + moment(date).format('YYYY') + moment(date).format('MM') + moment(date).format('DD');
+                    $document.scrollTo($('#' + targetId)[0], 91, 300);
+                    console.log(targetId);
+                    break;
+                }
+            }
+
+            $timeout(scrollCallback, 500);
+        }, 1000);
     }
 
     function dateDel() {
@@ -219,19 +232,19 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     }
 
-    function onSlideChangeStart() {
+    function onTransitionStart() {
         vm.slideChange = true;
         vm.topArrow = true;
 
-        // console.log('vm.slideChange:' + vm.slideChange);
+        console.log('onTransitionStart:' + vm.slideChange);
     }
 
-    function onSlideChangeEnd(previousIndex, activeIndex) {
+    function onTransitionEnd(previousIndex, activeIndex) {
         // console.log(previousIndex + '-->' + activeIndex);
 
         vm.slideChange = false;
 
-        // console.log('vm.slideChange:' + vm.slideChange);
+        console.log('onTransitionEnd:' + vm.slideChange);
 
         //最后一屏判断
         if (window.mySwiper && (activeIndex === window.mySwiper.slides.length - 1)) {
@@ -365,22 +378,15 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     function backTop() {
 
-
         // $('html, body').animate({
         //     scrollTop: 0
         // }, 300);
         // window.mySwiper.slideTo(window.mySwiper.slides.length - 1);
 
-        vm.moving = 1;
-
-        var time = vm.responseData[0].startAt;
-
-        var targetId = 'date' + targetArray[i].year + targetArray[i].month + targetArray[i].day;
+        var date = vm.responseData[0].startAt;
+        var targetId = 'date' + moment(date).format('YYYY') + moment(date).format('MM') + moment(date).format('DD');
         $document.scrollTo($('#' + targetId)[0], 91, 300);
 
-        $timeout(function () {
-            vm.moving = false;
-        }, 400);
     }
 
     function noDataClick(item) {

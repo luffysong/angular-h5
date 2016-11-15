@@ -23,7 +23,7 @@ angular.module('defaultApp.directive').directive('swiperOrigin',
 
                     function makeSwiper() {
                         window.mySwiper = new Swiper(element[0], {
-                            initialSlide: 12,
+                            initialSlide: 11,
                             loop: false,
                             speed: 500,
                             slidesPerView: 1,
@@ -33,11 +33,11 @@ angular.module('defaultApp.directive').directive('swiperOrigin',
 
                             // prevButton:'.arrowLeft',
                             // nextButton:'.arrowRight',
-                            onSlideChangeStart: function (swiper) {
+                            onTransitionStart: function (swiper) {
                                 scope.changeStartCallBack(swiper.previousIndex, swiper.activeIndex);
                             },
 
-                            onSlideChangeEnd: function (swiper) {
+                            onTransitionEnd: function (swiper) {
                                 scope.changeEndCallBack(swiper.previousIndex, swiper.activeIndex);
                             },
                         });
