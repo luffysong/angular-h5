@@ -76,7 +76,8 @@
                        href="http://36kr.com/company/{{item.cid}}?ktm_source=chuangtou.h5.xiangmuji.{{vm.id}}.{{item.cid}}"
                        pid="item.rcid" tou-open path="'crmCompany/' + item.ccid + '?ktm_source=xiangmuji.native.' + vm.id + '.' + item.ccid">
                         <div class="base-info-detail">
-                            <div  class="logo-wrapper" ng-style="{'background-image': (item.logo | image)}">
+                            <div  class="logo-wrapper" >
+                                <img ng-src="{{item.logo | image}}" alt="">
                                 <span ng-if="item.funding === 2">正在融资</span>
                             </div>
                             <div class="content-wrapper">
