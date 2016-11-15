@@ -16,7 +16,8 @@
                 </ul>
                 <div class="date-content">
                     <a ng-repeat="item in vm.originDateArray[$index]" scroll-index="$index" kr-scroll-click
-                       du-smooth-scroll  href="#date{{item.year}}{{item.month}}{{item.day}}" du-scrollspy="" offset="91"
+                       du-smooth-scroll  href="#date{{item.year}}{{item.month}}{{item.day}}"
+                       du-scrollspy="" offset="91" du-scroll-container="contentScroll"
                        ng-class="{today:(item.today == true), active:item.active}" ng-click="vm.noDataClick(item)">
                         <div class="item-active">
                             <p class="item-day">{{item.dayInt}}</p>
@@ -40,8 +41,12 @@
         </div>
     </div>
     <div ng-if="vm.responseData.length">
-        <section  class="roadShow-content-wrapper" scroll callback="vm.scrollCallback(args)">
-        <ul infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+        <section  class="roadShow-content-wrapper" callback="vm.scrollCallback(args)" scroll>
+        <ul infinite-scroll='vm.loadMore()'
+            infinite-scroll-disabled='vm.busy'
+            infinite-scroll-distance='0'
+            infinite-scroll-container="'#contentScroll'"
+            infinite-scrollUse-document-bottom="false">
             <li ontouchstart="" kr-active="'active'" id="{{item.startAt | dateRoadShowID}}"
                 ng-repeat="item in vm.responseData track
                     by $index">

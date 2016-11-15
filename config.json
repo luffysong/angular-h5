@@ -58,7 +58,9 @@
         "src/local_lib/hammer.min.js",
         "src/components/angular-scroll/angular-scroll.js",
         "src/components/moment/min/moment.min.js",
-        "src/components/moment/locale/zh-cn.js"
+        "src/components/moment/locale/zh-cn.js",
+        "src/components/perfect-scrollbar/js/perfect-scrollbar.jquery.js",
+        "src/components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js"
     ],
     "angularUiTpls": [
     ],

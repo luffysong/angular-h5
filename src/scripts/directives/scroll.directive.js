@@ -15,11 +15,11 @@ angular.module('defaultApp.directive').directive('scroll', [
             link: function (scope) {
                 //判断 上滚还是下滚
                 function scroll(fn) {
-                    var beforeScrollTop = $(window).scrollTop();
+                    var beforeScrollTop = $('#contentScroll')[0].scrollTop;
                     fn = fn || function () {};
 
-                    window.addEventListener('scroll', function () {
-                        var afterScrollTop = $(window).scrollTop();
+                    $('#contentScroll')[0].addEventListener('scroll', function () {
+                        var afterScrollTop = this.scrollTop;
                         var delta = afterScrollTop - beforeScrollTop;
 
                         //console.log(delta);

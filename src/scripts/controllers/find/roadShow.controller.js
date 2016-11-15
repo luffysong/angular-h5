@@ -45,6 +45,26 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     });
 
+    $(document).on('ps-y-reach-start', function () {
+        console.log('ps-y-reach-start');
+        $('.arrowRight').hide();
+        $('.img-fixed').hide();
+    });
+
+    $(document).on('ps-scroll-down', function () {
+        $('.arrowRight').show();
+        $('.img-fixed').show();
+    });
+
+    $(document).on('ps-y-reach-end', function () {
+        console.log('ps-y-reach-end');
+        $('.arrowLeft').hide();
+    });
+
+    $(document).on('ps-scroll-up', function () {
+        $('.arrowLeft').show();
+    });
+
     function init() {
         document.title = '路演日历';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
@@ -85,7 +105,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                     continue;
                 } else {
                     var targetId = 'date' + moment(date).format('YYYY') + moment(date).format('MM') + moment(date).format('DD');
-                    $document.scrollTo($('#' + targetId)[0], 91, 300);
+                    $('#contentScroll').scrollTo($('#' + targetId)[0], 91, 300);
                     console.log(targetId);
                     break;
                 }
@@ -205,6 +225,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         var moveIndex;
 
         if (left < 0) {
+
             left = window.Math.abs(left);
             moveIndex = parseInt(left / screen.width);
             window.mySwiper.slideTo(window.mySwiper.activeIndex - moveIndex - 1, 500, false);
@@ -223,12 +244,13 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             }
         }
 
-        //是否到达底部
-        if ($(document).scrollTop() - ($(document).height() - $(window).height()) > -30) {
-            $('.arrowLeft').hide();
-        } else {
-            $('.arrowLeft').show();
-        }
+        //
+        // //是否到达底部
+        // if ($('#contentScroll').scrollTop() - ($(document).height() - $(window).height()) > -30) {
+        //     $('.arrowLeft').hide();
+        // } else {
+        //     $('.arrowLeft').show();
+        // }
 
     }
 
@@ -269,7 +291,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             for (var i = 6; i >= 0; i--) {
                 if (targetArray[i].num) {
                     targetId = 'date' + targetArray[i].year + targetArray[i].month + targetArray[i].day;
-                    $document.scrollTo($('#' + targetId)[0], 91, 300);
+                    $('#contentScroll').scrollTo($('#' + targetId)[0], 91, 300);
                     break;
                 }
             }
@@ -282,7 +304,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             for (var k = 6; k >= 0; k--) {
                 if (targetArray[k].num) {
                     targetId = 'date' + targetArray[k].year + targetArray[k].month + targetArray[k].day;
-                    $document.scrollTo($('#' + targetId)[0], 91, 300);
+                    $('#contentScroll').scrollTo($('#' + targetId)[0], 91, 300);
                     break;
                 }
             }
@@ -385,8 +407,8 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
         var date = vm.responseData[0].startAt;
         var targetId = 'date' + moment(date).format('YYYY') + moment(date).format('MM') + moment(date).format('DD');
-        $document.scrollTo($('#' + targetId)[0], 91, 300);
-
+        $('#contentScroll').scrollTo($('#' + targetId)[0], 91, 300);
+        $('.img-fixed').hide();
     }
 
     function noDataClick(item) {

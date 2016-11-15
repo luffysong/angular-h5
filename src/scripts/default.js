@@ -44,7 +44,8 @@ var depModules = [
     'MassAutoComplete',
     'permission',
     'infinite-scroll',
-    'duScroll'
+    'duScroll',
+    'perfect_scrollbar'
 ];
 
 if (window.MOCKMODE_ON) {

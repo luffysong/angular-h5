@@ -54,11 +54,16 @@
         @@include('./scripts/header.js')
     </script>
 </head>
-<body class="download-show">
+<body class="download-show"  style="overflow: hidden" >
     <loading loading="demos" ng-if="needLoading"></loading>
     <loading loading="findLoading" ng-if="findNeedLoading"></loading>
-    <ui-view>
-    </ui-view>
+    <div style="height: 100%;overflow: hidden" perfect-scrollbar
+         wheel-propagation="true" wheel-speed="5" min-scrollbar-length="15"
+         id="contentScroll">
+        <ui-view>
+        </ui-view>
+    </div>
+
 
 	<!--<footer class="download" style="display: none" ng-if="!isInApp">
 		<div class="download-kr">打开“36氪”，查看更多</div>
