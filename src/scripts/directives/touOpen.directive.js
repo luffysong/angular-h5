@@ -29,10 +29,10 @@ function touOpen(hybrid, loading, $timeout, versionService, $state) {
 
         var versionTou = versionService.getVersionAndroid() || versionService.getVersionIOS();
 
-        //高于2.6版本
-        if (versionTou && (versionService.cprVersion(versionTou, '2.6') === 2)) {
+        //大于等于2.6.2版本
+        if (versionTou && versionService.cprVersion(versionTou, '2.6.2')) {
             hybrid.open(scope.path);
-        } else if (versionTou && (versionService.cprVersion(versionTou, '2.6') === 1)) {
+        } else if (versionTou && versionService.cprVersion(versionTou, '2.6')) {
             if (scope.path.substring(0, 11) === 'projectsSet') {
                 var endNum = scope.path.indexOf('?');
                 $state.go('demos', {
