@@ -13,6 +13,9 @@ angular.module('defaultApp.service').service('versionService', function () {
         if (matchesTou && matchesTou[1] && (matchesTou[1].charAt(matchesTou[1].length - 1) === '.')) {
             versionTou = matchesTou[1].substr(0, matchesTou[1].length - 1);
             return versionTou;
+        } else if (matchesTou && matchesTou[1]) {
+            versionTou = matchesTou[1];
+            return versionTou;
         }
     }
 
@@ -22,6 +25,9 @@ angular.module('defaultApp.service').service('versionService', function () {
         var matchesTou = navigator.userAgent.match(/36kr-Tou-iOS\/([0-9.]+)/i);
         if (matchesTou && matchesTou[1] && (matchesTou[1].charAt(matchesTou[1].length - 1) === '.')) {
             versionTou = matchesTou[1].substr(0, matchesTou[1].length - 1);
+            return versionTou;
+        }else if (matchesTou && matchesTou[1]) {
+            versionTou = matchesTou[1];
             return versionTou;
         }
     }
