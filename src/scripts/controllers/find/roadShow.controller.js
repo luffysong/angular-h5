@@ -49,20 +49,37 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         console.log('ps-y-reach-start');
         $('.arrowRight').hide();
         $('.img-fixed').hide();
+        if (window.mySwiper) {
+            $timeout(function () {
+                window.mySwiper.lockSwipeToNext();
+            }, 1000);
+        }
+
     });
 
     $(document).on('ps-scroll-down', function () {
         $('.arrowRight').show();
         $('.img-fixed').show();
+        window.mySwiper.unlockSwipeToNext();
     });
 
     $(document).on('ps-y-reach-end', function () {
         console.log('ps-y-reach-end');
         $('.arrowLeft').hide();
+        if (window.mySwiper) {
+            $timeout(function () {
+                window.mySwiper.lockSwipeToPrev();
+            }, 1000);
+        }
     });
 
     $(document).on('ps-scroll-up', function () {
         $('.arrowLeft').show();
+        window.mySwiper.unlockSwipeToPrev();
+    });
+
+    $(document).on('ps-scroll-y', function () {
+        scrollCallback();
     });
 
     function init() {
@@ -228,19 +245,19 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
             left = window.Math.abs(left);
             moveIndex = parseInt(left / screen.width);
-            window.mySwiper.slideTo(window.mySwiper.activeIndex - moveIndex - 1, 500, false);
+            window.mySwiper.slideTo(window.mySwiper.activeIndex - moveIndex - 1, 400, false);
             vm.moving = true;
             $timeout(function () {
                 vm.moving = false;
-            }, 500);
+            }, 400);
         } else {
             moveIndex = parseInt(left / screen.width);
             if (moveIndex) {
-                window.mySwiper.slideTo(window.mySwiper.activeIndex + moveIndex, 500, false);
+                window.mySwiper.slideTo(window.mySwiper.activeIndex + moveIndex, 400, false);
                 vm.moving = true;
                 $timeout(function () {
                     vm.moving = false;
-                }, 500);
+                }, 400);
             }
         }
 
