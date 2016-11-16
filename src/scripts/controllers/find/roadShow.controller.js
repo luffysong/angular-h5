@@ -46,36 +46,23 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     });
 
     $(document).on('ps-y-reach-start', function () {
-        console.log('ps-y-reach-start');
-        $('.arrowRight').hide();
+        // console.log('ps-y-reach-start');
         $('.img-fixed').hide();
-        if (window.mySwiper) {
-            $timeout(function () {
-                window.mySwiper.lockSwipeToNext();
-            }, 1000);
-        }
-
     });
 
     $(document).on('ps-scroll-down', function () {
         $('.arrowRight').show();
         $('.img-fixed').show();
-        window.mySwiper.unlockSwipeToNext();
+        checkSwiper();
     });
 
-    $(document).on('ps-y-reach-end', function () {
-        console.log('ps-y-reach-end');
-        $('.arrowLeft').hide();
-        if (window.mySwiper) {
-            $timeout(function () {
-                window.mySwiper.lockSwipeToPrev();
-            }, 1000);
-        }
-    });
+    // $(document).on('ps-y-reach-end', function () {
+    //     console.log('ps-y-reach-end');
+    // });
 
     $(document).on('ps-scroll-up', function () {
         $('.arrowLeft').show();
-        window.mySwiper.unlockSwipeToPrev();
+        checkSwiper();
     });
 
     $(document).on('ps-scroll-y', function () {
@@ -99,14 +86,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         }
 
         if (value === 'right') {
-
-            // //最后 一页才重新请求数据,其他页时正常翻页
-            // if (window.mySwiper.slides.length - 1 === window.mySwiper.activeIndex) {
-            //     loadData(vm.nextSat);
-            // } else {
-            //     window.mySwiper.slideNext();
-            // }
-
             window.mySwiper.slideNext();
         }
 
@@ -116,16 +95,22 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         scrollCallback();
         vm.busy = false;
         $timeout(function () {
+            $('.arrowRight').show();
+            $('.arrowLeft').show();
             var date;
             for (var i = 0; i < vm.responseData.length; i++) {
                 date = vm.responseData[i].startAt;
                 var sunday = moment().day(7).format('YYYYMMDD');
                 if (date / 1000 > parseInt(moment(sunday).format('X'))) {
+                    $('.img-fixed').show();
                     continue;
                 } else {
                     var targetId = 'date' + moment(date).format('YYYY') + moment(date).format('MM') + moment(date).format('DD');
                     $('#contentScroll').scrollTo($('#' + targetId)[0], 91, 300);
-                    console.log(targetId);
+                    if (i === 0) {
+                        $('.img-fixed').hide();
+                    }
+
                     break;
                 }
             }
@@ -250,6 +235,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             window.mySwiper.slideTo(window.mySwiper.activeIndex - moveIndex - 1, 400, false);
             vm.moving = true;
             $timeout(function () {
+                checkSwiper();
                 vm.moving = false;
             }, 400);
         } else {
@@ -258,41 +244,27 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 window.mySwiper.slideTo(window.mySwiper.activeIndex + moveIndex, 400, false);
                 vm.moving = true;
                 $timeout(function () {
+                    checkSwiper();
                     vm.moving = false;
                 }, 400);
             }
         }
-
-        //
-        // //是否到达底部
-        // if ($('#contentScroll').scrollTop() - ($(document).height() - $(window).height()) > -30) {
-        //     $('.arrowLeft').hide();
-        // } else {
-        //     $('.arrowLeft').show();
-        // }
-
     }
 
     function onTransitionStart() {
         vm.slideChange = true;
         vm.topArrow = true;
 
-        console.log('onTransitionStart:' + vm.slideChange);
+        // console.log('onTransitionStart:' + vm.slideChange);
     }
 
     function onTransitionEnd(previousIndex, activeIndex) {
-        // console.log(previousIndex + '-->' + activeIndex);
 
         vm.slideChange = false;
 
-        console.log('onTransitionEnd:' + vm.slideChange);
+        // console.log('onTransitionEnd:' + vm.slideChange);
 
-        //最后一屏判断
-        if (window.mySwiper && (activeIndex === window.mySwiper.slides.length - 1)) {
-            vm.isLastSwiper = true;
-        } else {
-            vm.isLastSwiper = false;
-        }
+        checkSwiper();
 
         if (!vm.topArrow) {
             return;
@@ -304,8 +276,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         //向左翻页,加载数据
         if (previousIndex - activeIndex === 1) {
             $('.active').removeClass('active');
-
-            // loadMore();
             targetArray = vm.originDateArray[activeIndex];
             for (var i = 6; i >= 0; i--) {
                 if (targetArray[i].num) {
@@ -397,7 +367,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     function initPoint() {
 
-        //3个月,12周
+        //6个月,24周
         for (var i = vm.originDateArray.length; i > 0; i--) {
             setPoint(i);
         }
@@ -413,6 +383,15 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             for (var j = 0; j < vm.responseData.length; j++) {
                 if (formatDate(obj[keyDate]) === formatDate(vm.responseData[j].startAt)) {
                     obj[keyNum] = 1;
+
+                    //标记最新一条数据所在周
+                    if (!vm.newDataWeekIndex) {
+                        vm.newDataWeekIndex = index;
+                    }
+
+                    //标记最旧一条数据所在周
+                    vm.oldDataWeekIndex = index;
+
                     break;
                 }
             }
@@ -445,6 +424,37 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             }, 3000);
         }
 
+    }
+
+    function checkSwiper() {
+
+        //最后一屏判断
+        if (window.mySwiper && vm.newDataWeekIndex && (window.mySwiper.activeIndex === vm.newDataWeekIndex - 1)) {
+            console.log(window.mySwiper.activeIndex);
+            $('.arrowRight').hide();
+            if (window.mySwiper) {
+                $timeout(function () {
+                    window.mySwiper.lockSwipeToNext();
+                }, 100);
+            }
+        } else if (window.mySwiper) {
+            window.mySwiper.unlockSwipeToNext();
+            $('.arrowRight').show();
+        }
+
+        //第一屏判断
+        if (window.mySwiper && vm.oldDataWeekIndex && (window.mySwiper.activeIndex === vm.oldDataWeekIndex - 1)) {
+            console.log(window.mySwiper.activeIndex);
+            $('.arrowLeft').hide();
+            if (window.mySwiper) {
+                $timeout(function () {
+                    window.mySwiper.lockSwipeToPrev();
+                }, 100);
+            }
+        } else if (window.mySwiper) {
+            window.mySwiper.unlockSwipeToPrev();
+            $('.arrowLeft').show();
+        }
     }
 
 }
