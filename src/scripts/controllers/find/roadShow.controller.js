@@ -119,7 +119,8 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             var date;
             for (var i = 0; i < vm.responseData.length; i++) {
                 date = vm.responseData[i].startAt;
-                if (date / 1000 > parseInt(moment().format('X'))) {
+                var sunday = moment().day(7).format('YYYYMMDD');
+                if (date / 1000 > parseInt(moment(sunday).format('X'))) {
                     continue;
                 } else {
                     var targetId = 'date' + moment(date).format('YYYY') + moment(date).format('MM') + moment(date).format('DD');
