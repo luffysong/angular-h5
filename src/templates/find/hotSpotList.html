@@ -1,6 +1,6 @@
 <div  class="roadShow-wrapper hotSpot-wrapper">
     <div ng-if="vm.responseData.length">
-        <section  class="roadShow-content-wrapper hotSpot-content-wrapper" scroll callback="vm.scrollCallback(args)">
+        <section  class="roadShow-content-wrapper hotSpot-content-wrapper" callback="vm.scrollCallback(args)">
             <ul infinite-scroll='vm.loadData()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
                 <li ontouchstart="" kr-active="'active'" id="{{item.time}}"
                     ng-repeat="item in vm.responseData track

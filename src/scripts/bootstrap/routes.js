@@ -193,7 +193,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     //创投助手app---近期路演
-    $stateProvider.state('find.roadShow', {
+    $stateProvider.state('roadShow', {
         url:'/roadShow',
         controllerAs: 'vm',
         controller: 'RoadShowController',

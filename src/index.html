@@ -54,15 +54,11 @@
         @@include('./scripts/header.js')
     </script>
 </head>
-<body class="download-show"  style="overflow: hidden" >
+<body class="download-show">
     <loading loading="demos" ng-if="needLoading"></loading>
     <loading loading="findLoading" ng-if="findNeedLoading"></loading>
-    <div style="height: 100%;overflow: hidden" perfect-scrollbar
-         wheel-propagation="true" wheel-speed="5" min-scrollbar-length="15"
-         id="contentScroll">
-        <ui-view>
-        </ui-view>
-    </div>
+    <ui-view>
+    </ui-view>
 
 
 	<!--<footer class="download" style="display: none" ng-if="!isInApp">
