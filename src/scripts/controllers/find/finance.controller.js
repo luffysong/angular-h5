@@ -54,6 +54,9 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
                 vm.sendData.date = response.data.ts;
                 vm.busy = false;
                 vm.hasInit = true;
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 200);
             })
             .catch(error);
     }
