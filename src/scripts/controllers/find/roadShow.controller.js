@@ -83,6 +83,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     });
 
     function init() {
+        $('body').css('overflow', 'hidden');
         document.title = '路演日历';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
         loading.hide('findLoading');
@@ -128,7 +129,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 }
             }
 
-            $timeout(scrollCallback, 500);
+            $timeout(scrollCallback, 1000);
         }, 1000);
     }
 
@@ -350,7 +351,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         FindService.getCalendarList(sendData)
             .then(function (response) {
                 vm.responseData = response.data.data;
-                vm.busy = false;
 
                 // vm.lastSat = response.data.lastSat;
                 // vm.nextSat = response.data.nextSat;
@@ -360,6 +360,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 vm.hasMore  = response.data.data.length;
                 vm.hasInit = true;
                 initPoint();
+                vm.busy = false;
             });
 
     }
@@ -367,6 +368,8 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     function loadMore() {
         if (vm.busy)return;
         vm.busy = true;
+
+        if (!vm.ts)return;
 
         var sendData = {
             ts: vm.ts,
@@ -378,7 +381,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
                 // vm.lastSat = response.data.lastSat;
                 // vm.hasMore = response.data.hasMore;
-
+                vm.ts = response.data.ts;
                 vm.hasMore  = response.data.data.length;
                 if (!vm.hasMore) {
                     vm.busy = true;
@@ -426,6 +429,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         var targetId = 'date' + moment(date).format('YYYY') + moment(date).format('MM') + moment(date).format('DD');
         $('#contentScroll').scrollTo($('#' + targetId)[0], 91, 300);
         $('.img-fixed').hide();
+        $timeout(scrollCallback, 500);
     }
 
     function noDataClick(item) {
@@ -438,8 +442,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
                 // $('.active').removeClass('active');
             }, 3000);
-        } else {
-            item.active = true;
         }
 
     }
