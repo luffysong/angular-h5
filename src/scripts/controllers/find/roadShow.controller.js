@@ -116,6 +116,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             }
 
             $timeout(scrollCallback, 1000);
+            $timeout(checkSwiper, 1200);
         }, 1000);
     }
 
