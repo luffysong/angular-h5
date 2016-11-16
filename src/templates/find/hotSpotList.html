@@ -5,7 +5,9 @@
                 <li ontouchstart="" kr-active="'active'" id="{{item.time}}"
                     ng-repeat="item in vm.responseData track
                     by $index">
-                    <div class="roadShow-content-href" href="javascript:" tou-open path="'projectsSet/'+ item.id + '?ktm_source=hot'">
+                    <a class="roadShow-content-href"
+                       href="http://36kr.com/app/tou?companysetlist={{item.id}}&ktm_source=find.hotSpot.{{item.id}}"
+                       tou-open path="'projectsSet/'+ item.id + '?ktm_source=hot'">
                         <div class="base-info-wrapper">
                             <img ng-src="{{item.imgUrl | image}}" alt="">
                         </div>
@@ -19,7 +21,7 @@
                                 <span class="item-time">{{item.proCount}}个项目</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </li>
             </ul>
             <footer ng-if="vm.busy && !vm.finish &&  vm.page">加载更多...</footer>
