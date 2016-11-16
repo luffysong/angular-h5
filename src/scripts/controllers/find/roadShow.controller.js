@@ -69,7 +69,18 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         scrollCallback();
     });
 
+    window.onscroll = function () {
+        if ($(window).scrollTop()) {
+            $(window).scrollTop(0);
+        }
+    };
+
+    document.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+    });
+
     function init() {
+        $('html').css('overflow', 'hidden');
         $('body').css('overflow', 'hidden');
         document.title = '路演日历';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
@@ -257,9 +268,13 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         vm.topArrow = true;
 
         // console.log('onTransitionStart:' + vm.slideChange);
+        // console.log('topArrow=' + vm.topArrow);
     }
 
     function onTransitionEnd(previousIndex, activeIndex) {
+
+        // console.log(previousIndex + '-->' + activeIndex);
+        // console.log('topArrow=' + vm.topArrow);
 
         vm.slideChange = false;
 
@@ -274,35 +289,31 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         var targetArray;
         var targetId;
 
-        //向左翻页,加载数据
-        if (previousIndex - activeIndex === 1) {
-            $('.active').removeClass('active');
-            targetArray = vm.originDateArray[activeIndex];
-            for (var i = 6; i >= 0; i--) {
-                if (targetArray[i].num) {
-                    targetId = 'date' + targetArray[i].year + targetArray[i].month + targetArray[i].day;
+        //翻页,加载数据
+
+        // console.log('翻页');
+        $('.active').removeClass('active');
+        targetArray = vm.originDateArray[activeIndex];
+        for (var i = 6; i >= 0; i--) {
+            if (targetArray[i].num) {
+                targetId = 'date' + targetArray[i].year + targetArray[i].month + targetArray[i].day;
+                $timeout(function () {
                     $('#contentScroll').scrollTo($('#' + targetId)[0], 91, 300);
-                    break;
-                }
+                    if ($('#' + targetId).offset().top === 91) {
+                        $('a[href=#' + targetId + ']').addClass('active');
+                    }
+
+                    $timeout(function () {
+                        vm.topArrow = false;
+
+                        // console.log('time out: topArrow=' + vm.topArrow);
+                    }, 500);
+                }, 100);
+
+                // console.log('翻页--触发:' + targetId);
+                break;
             }
         }
-
-        //向右翻页
-        if (activeIndex - previousIndex === 1) {
-            $('.active').removeClass('active');
-            targetArray = vm.originDateArray[activeIndex];
-            for (var k = 6; k >= 0; k--) {
-                if (targetArray[k].num) {
-                    targetId = 'date' + targetArray[k].year + targetArray[k].month + targetArray[k].day;
-                    $('#contentScroll').scrollTo($('#' + targetId)[0], 91, 300);
-                    break;
-                }
-            }
-        }
-
-        $timeout(function () {
-            vm.topArrow = false;
-        }, 1000);
 
     }
 
@@ -324,10 +335,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             .then(function (response) {
                 vm.responseData = response.data.data;
 
-                // vm.lastSat = response.data.lastSat;
-                // vm.nextSat = response.data.nextSat;
-                // vm.hasMore = response.data.hasMore;
-                // vm.hasNextWeek = response.data.hasNextWeek;
                 vm.ts = response.data.ts;
                 vm.hasMore  = response.data.data.length;
                 vm.hasInit = true;
@@ -351,8 +358,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             .then(function (response) {
                 vm.responseData = vm.responseData.concat(response.data.data);
 
-                // vm.lastSat = response.data.lastSat;
-                // vm.hasMore = response.data.hasMore;
                 vm.ts = response.data.ts;
                 vm.hasMore  = response.data.data.length;
                 if (!vm.hasMore) {
@@ -401,11 +406,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     function backTop() {
 
-        // $('html, body').animate({
-        //     scrollTop: 0
-        // }, 300);
-        // window.mySwiper.slideTo(window.mySwiper.slides.length - 1);
-
         var date = vm.responseData[0].startAt;
         var targetId = 'date' + moment(date).format('YYYY') + moment(date).format('MM') + moment(date).format('DD');
         $('#contentScroll').scrollTo($('#' + targetId)[0], 91, 300);
@@ -415,13 +415,10 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     function noDataClick(item) {
         if (!item.num) {
-            // $('.active').removeClass('active');
             item.active = true;
             $('.null_today').fadeIn();
             $timeout(function () {
                 $('.null_today').fadeOut();
-
-                // $('.active').removeClass('active');
             }, 3000);
         }
 
@@ -431,7 +428,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
         //最后一屏判断
         if (window.mySwiper && vm.newDataWeekIndex && (window.mySwiper.activeIndex === vm.newDataWeekIndex - 1)) {
-            console.log(window.mySwiper.activeIndex);
             $('.arrowRight').hide();
             if (window.mySwiper) {
                 $timeout(function () {
@@ -445,7 +441,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
         //第一屏判断
         if (window.mySwiper && vm.oldDataWeekIndex && (window.mySwiper.activeIndex === vm.oldDataWeekIndex - 1)) {
-            console.log(window.mySwiper.activeIndex);
             $('.arrowLeft').hide();
             if (window.mySwiper) {
                 $timeout(function () {
