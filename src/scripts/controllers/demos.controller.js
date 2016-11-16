@@ -23,14 +23,14 @@ function DemosController(demosService, projectColumnService,
     function init() {
 
         if (isColumn()) {
-            loadColumnDetail(1);
+            loadColumnDetail(0);
         }else {
             vm.shareImgSave = cover.imgUrl;
             if (cover.type !== 'NORMAL') {
                 cover.imgUrl = 'https://pic.36krcnd.com/avatar/201611/11051619/zesbckdrckkkgh27.jpg';
             }
 
-            loadCollectionDetail(1);
+            loadCollectionDetail(0);
         }
 
         renderCover(cover);
@@ -69,7 +69,7 @@ function DemosController(demosService, projectColumnService,
 
     function vadliateAndGetDemos() {
         vm.inputPwd = true;
-        demosService.getDemos($stateParams.id, vm.password, 1)
+        demosService.getDemos($stateParams.id, vm.password, 0)
             .then(renderList)
             .catch(invalidate);
     }
@@ -98,14 +98,14 @@ function DemosController(demosService, projectColumnService,
         return vm.type === COLUMN;
     }
 
-    function loadCollectionDetail(page) {
-        demosService.getDemos($stateParams.id, '', page)
+    function loadCollectionDetail(ts) {
+        demosService.getDemos($stateParams.id, '', ts)
         .then(renderList)
         .catch(error);
     }
 
-    function loadColumnDetail(page) {
-        projectColumnService.getDetail($stateParams.id, page)
+    function loadColumnDetail(ts) {
+        projectColumnService.getDetail($stateParams.id, ts)
             .then(renderList);
     }
 
@@ -120,16 +120,23 @@ function DemosController(demosService, projectColumnService,
 
         if (isColumn()) {
             renderColumnDetail(data);
+            if (data.totalPages) {
+                vm.page = data.page || 0;
+                if (data.totalPages !== vm.page) {
+                    vm.busy = false;
+                } else {
+                    vm.finish = true;
+                }
+            }
         }else {
             renderCollectionDetail(data);
-        }
-
-        if (data.totalPages) {
-            vm.page = data.page || 0;
-            if (data.totalPages !== vm.page) {
-                vm.busy = false;
-            } else {
-                vm.finish = true;
+            if (data.valid) {
+                vm.ts = data.ts || 0;
+                if (data.data.cells.length) {
+                    vm.busy = false;
+                } else {
+                    vm.finish = true;
+                }
             }
         }
 
@@ -174,7 +181,7 @@ function DemosController(demosService, projectColumnService,
         if (isColumn()) {
             loadColumnDetail(++vm.page);
         } else {
-            loadCollectionDetail(++vm.page);
+            loadCollectionDetail(vm.ts);
         }
     }
 

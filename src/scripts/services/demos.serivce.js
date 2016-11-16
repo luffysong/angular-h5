@@ -25,16 +25,16 @@ function demosService(BasicService) {
         return PWD_KEY_PREFIX + id;
     }
 
-    function getDemos(id, pwd, page) {
+    function getDemos(id, pwd, ts) {
         var token = getToken(id);
 
-        page = page || 1;
+        ts = ts || 0;
         return network.getDemos({
             proSetId: id,
             idNum: token,
             verifyCode: pwd,
             pageSize: 10,
-            page: page
+            ts: ts
         }).$promise
         .then(function demosSuccess(data) {
             saveToken(id, data.idNum);
