@@ -8,7 +8,9 @@
                 </div>
                 <ul >
                     <li ontouchstart="" kr-active="'active'" ng-repeat="item in itemData.datas track by $index">
-                        <div class="finance-content-href" href="javascript:" tou-open path="'crmCompany/' + item.ccid + '?ktm_source=find.finance.' + item.ccid">
+                        <a class="finance-content-href"
+                           href="http://36kr.com/app/tou?crmCompany={{item.ccid}}?ktm_source=find.finance.{{item.ccid}}"
+                           tou-open path="'crmCompany/' + item.ccid + '?ktm_source=find.finance.' + item.ccid">
                             <div class="base-info-detail">
                                 <h4>{{item.name}}<span>{{item.industry1}}</span></h4>
                                 <p class="item-finance">{{item.phase}}<span></span>{{item.amount | findDefault : '未披露'}}</p>
@@ -19,7 +21,7 @@
                                 <p class="item-link" ng-if="item.link" ng-click="vm.link(item.ccid, item.link, $event)"><img src="/styles/images/find/link@2x.png"/><span>{{item.website | findDefault : '媒体报道'}}</span></p>
                                 <div>联系创始人</div>
                             </div>
-                        </div>
+                        </a>
                     </li>
                 </ul>
             </div>

@@ -5,8 +5,10 @@
         <span ng-if="vm.item.endAt">-{{vm.item.endAt | dateRoadShow}}</span>
     </div>
     <p class="pop-content" ng-bind-html="vm.item.fetchCode"></p>
-    <div class="pop-open"  tou-open path="'projectsSet/'+ vm.item.id + '?ktm_source=' + vm.ktm_source" ng-click="vm.cancel()">
+    <a class="pop-open"
+       href="http://36kr.com/app/tou?companysetlist={{vm.item.id}}&ktm_source=find.more.{{vm.item.id}}"
+       tou-open path="'projectsSet/'+ vm.item.id + '?ktm_source=' + vm.ktm_source" ng-click="vm.cancel()">
         立即查看项目({{vm.item.proCount}})
-    </div>
+    </a>
     <img class="pop-close" src="/styles/images/find/close@2x.png" ng-click="vm.cancel()"/>
 </div>
