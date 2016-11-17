@@ -108,6 +108,8 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         $timeout(function () {
             $('.arrowRight').show();
             $('.arrowLeft').show();
+            window.mySwiper.unlockSwipeToNext();
+            window.mySwiper.unlockSwipeToPrev();
             var date;
             for (var i = 0; i < vm.responseData.length; i++) {
                 date = vm.responseData[i].startAt;
