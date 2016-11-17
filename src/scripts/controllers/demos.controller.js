@@ -21,12 +21,9 @@ function DemosController(demosService, projectColumnService,
     vm.loadMore = loadMore;
     init();
     function init() {
-        // document.removeEventListener('touchmove', function () {
-        //     console.log('touchmove');
-        // });
 
-        // $('html').css('overflow', 'auto');
-        // $('body').css('overflow', 'auto');
+        $('html').css('overflow', '');
+        $('body').css('overflow', '');
         if (isColumn()) {
             loadColumnDetail(0);
         }else {

@@ -79,14 +79,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         if (location.hash.indexOf('demos') > -1) {
             return;
         }
-
         e.preventDefault();
-    });
-
-    $scope.$on('$destroy', function () {
-        document.removeEventListener('touchmove', function () {
-            console.log('touchmove');
-        });
     });
 
     function init() {
