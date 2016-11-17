@@ -1,3 +1,72 @@
+<a name="1.11.0"></a>
+# [1.11.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.10.3...v1.11.0) (2016-11-17)
+
+
+### Bug Fixes
+
+* loading动画修复 ([268abe6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/268abe6))
+* logo ([f635b7a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f635b7a))
+* native唤醒规则调整 krtou ([bffeae0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bffeae0))
+* perfect-scrollbar优化 ([f0105cd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f0105cd))
+* UI走查，loading 加 promise ([345df28](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/345df28))
+* 优化初始化状态 ([de47be3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/de47be3))
+* 修复 iOS touchmove 问题 ([821646d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/821646d))
+* 修复bug ([478be0d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/478be0d))
+* 修复bug ([4a86309](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4a86309))
+* 修复bug ([ea2a56d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/ea2a56d))
+* 修复样式bug ([91ec131](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/91ec131))
+* 修复版本检测bug ([3fee0c4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/3fee0c4))
+* 修复版本检测bug ([ff4dc54](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/ff4dc54))
+* 修复路径地址 ([076a14f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/076a14f))
+* 修复部分bug ([b674253](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b674253))
+* 修改参数 ([901c711](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/901c711))
+* 修改大小写 ([e566c47](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e566c47))
+* 修改字段 ([dfcea61](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/dfcea61))
+* 修改项目集id ([da5b9dd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/da5b9dd))
+* 兼容2.6.1 ([c070d98](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c070d98))
+* 兼容2.6版本 ([5e40983](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5e40983))
+* 分享路径 ([c42cf57](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c42cf57))
+* 分享页完成 ([9dc56c6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9dc56c6))
+* 分享页接口替换 ([aae5aeb](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/aae5aeb))
+* 删除多余svg ([c9aba20](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c9aba20))
+* 去掉loading 动画 ([e6cbd25](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e6cbd25))
+* 发现页分享项目集增加分享描述 ([691ff54](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/691ff54))
+* 唤醒统一处理 ([0fa2b58](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0fa2b58))
+* 增加 perfect-scrollbar ([491fd9c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/491fd9c))
+* 增加moment库，项目集样式改版 ([3542abe](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/3542abe))
+* 增加点击后效果，修复ios 数字自动tel问题 ([170388c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/170388c))
+* 增加空白页、修改bug ([2954a5b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/2954a5b))
+* 完善 ([8729939](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8729939))
+* 样式调整 ([0d27a90](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0d27a90))
+* 移除无用css样式 ([586283d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/586283d))
+* 融资速递完成 ([e464222](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e464222))
+* 融资速递改字段 ([f5443ee](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f5443ee))
+* 路演增加假数据 ([cc73e96](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cc73e96))
+* 路演日历 perfect-scrollbar 调整内部使用 ([30529b6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/30529b6))
+* 路演日历、投资热点 分享后增加唤醒 ([6baee4f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6baee4f))
+* 路演日历优化 ([43a8498](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/43a8498))
+* 路演日历优化 ([f4a66af](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f4a66af))
+* 路演日历优化 ([7275349](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7275349))
+* 路演日历修复最新数据无法向前翻页问题 ([a847449](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a847449))
+* 路演日历增加翻页定位 ([fa72190](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/fa72190))
+* 路演日历完善 ([89a3dda](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/89a3dda))
+* 路演日历完成 ([889c81a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/889c81a))
+* 路演日历时间判断方式变更 ([6ac19fd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6ac19fd))
+* 路演日历更新 ([41593cd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/41593cd))
+* 项目集h5 样式调整 ([4653feb](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4653feb))
+* 项目集h5字段替换 ([bc8367a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bc8367a))
+* 项目集h5调整 ([1418df0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1418df0))
+* 项目集h5默认图修改 ([dbec374](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/dbec374))
+* 项目集内部唤醒 ([5941ea2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5941ea2))
+* 项目集错误提示 ([c8c8ad3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c8c8ad3))
+
+
+### Features
+
+* 发现页改版（路演日历、投资热点、每日报道、融资速递）部分完成 ([f2ebdd0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f2ebdd0))
+
+
+
 <a name="1.10.3"></a>
 ## [1.10.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.10.2...v1.10.3) (2016-10-28)
 
