@@ -441,11 +441,15 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
         //第一屏判断
         if (window.mySwiper && vm.oldDataWeekIndex && (window.mySwiper.activeIndex === vm.oldDataWeekIndex - 1)) {
-            $('.arrowLeft').hide();
-            if (window.mySwiper) {
-                $timeout(function () {
-                    window.mySwiper.lockSwipeToPrev();
-                }, 100);
+            if (!vm.busy && vm.hasMore) {
+                loadMore();
+            } else {
+                $('.arrowLeft').hide();
+                if (window.mySwiper) {
+                    $timeout(function () {
+                        window.mySwiper.lockSwipeToPrev();
+                    }, 100);
+                }
             }
         } else if (window.mySwiper) {
             window.mySwiper.unlockSwipeToPrev();
