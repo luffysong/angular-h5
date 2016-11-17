@@ -1,3 +1,13 @@
+<a name="1.11.3"></a>
+## [1.11.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.2...v1.11.3) (2016-11-17)
+
+
+### Bug Fixes
+
+* 修复路演日历后续页面无法 滑动问题 ([c137319](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c137319))
+
+
+
 <a name="1.11.2"></a>
 ## [1.11.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.1...v1.11.2) (2016-11-17)
 
