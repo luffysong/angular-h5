@@ -87,7 +87,19 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         loading.hide('findLoading');
         vm.selectedDate = angular.copy(new Date());
         loadData();
+        initWeixin();
+    }
 
+    function initWeixin() {
+        window.WEIXINSHARE = {
+            shareTitle: '路演日历',
+            shareUrl: window.location.href,
+            shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
+            shareDesc: '来「36氪创投助手」，发现最新最热优质项目！',
+            showShareButton: false
+        };
+        var obj = {};
+        window.InitWeixin(obj);
     }
 
     function arrow(value) {
@@ -277,6 +289,10 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
         // console.log(previousIndex + '-->' + activeIndex);
         // console.log('topArrow=' + vm.topArrow);
+
+        if ($('#contentScroll')[0].scrollTop) {
+            $('.img-fixed').show();
+        }
 
         vm.slideChange = false;
 
