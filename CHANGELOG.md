@@ -1,3 +1,13 @@
+<a name="1.11.6"></a>
+## [1.11.6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.5...v1.11.6) (2016-11-17)
+
+
+### Bug Fixes
+
+* 路演日历时间调整为前后3个月 ([98bceb6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/98bceb6))
+
+
+
 <a name="1.11.5"></a>
 ## [1.11.5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.4...v1.11.5) (2016-11-17)
 
