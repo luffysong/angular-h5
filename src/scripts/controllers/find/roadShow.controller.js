@@ -115,6 +115,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     }
 
     function initSwiper() {
+        vm.topArrow = false;
         scrollCallback();
         vm.busy = false;
         $timeout(function () {

@@ -22,6 +22,8 @@ function DemosController(demosService, projectColumnService,
     init();
     function init() {
 
+        $('html').css('overflow', 'auto');
+        $('body').css('overflow', 'auto');
         if (isColumn()) {
             loadColumnDetail(0);
         }else {
