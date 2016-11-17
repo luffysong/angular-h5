@@ -290,10 +290,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         // console.log(previousIndex + '-->' + activeIndex);
         // console.log('topArrow=' + vm.topArrow);
 
-        if ($('#contentScroll')[0].scrollTop) {
-            $('.img-fixed').show();
-        }
-
         vm.slideChange = false;
 
         // console.log('onTransitionEnd:' + vm.slideChange);
@@ -323,6 +319,11 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
                     $timeout(function () {
                         vm.topArrow = false;
+                        if ($('#contentScroll')[0].scrollTop) {
+                            $('.img-fixed').show();
+                        } else {
+                            $('.img-fixed').hide();
+                        }
 
                         // console.log('time out: topArrow=' + vm.topArrow);
                     }, 500);
