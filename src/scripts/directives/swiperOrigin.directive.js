@@ -23,7 +23,7 @@ angular.module('defaultApp.directive').directive('swiperOrigin',
 
                     function makeSwiper() {
                         window.mySwiper = new Swiper(element[0], {
-                            initialSlide: 11,
+                            initialSlide: 23,
                             loop: false,
                             speed: 500,
                             slidesPerView: 1,

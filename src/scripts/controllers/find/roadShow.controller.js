@@ -343,7 +343,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     function loadData(time) {
 
         var startDate = time ? new Date(time) : new Date();
-        startDate.setDate(startDate.getDate() - (7 * 11));
+        startDate.setDate(startDate.getDate() - (7 * 23));
         setDate(startDate);
 
         if (!window.mySwiper) {
