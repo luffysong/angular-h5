@@ -69,11 +69,15 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         scrollCallback();
     });
 
-    // window.onscroll = function () {
-    //     if ($(window).scrollTop()) {
-    //         $(window).scrollTop(0);
-    //     }
-    // };
+    window.onscroll = function () {
+        if (location.hash.indexOf('demos') > -1) {
+            return;
+        }
+
+        if ($(window).scrollTop()) {
+            $(window).scrollTop(0);
+        }
+    };
 
     document.addEventListener('touchmove', function (e) {
         if (location.hash.indexOf('demos') > -1) {
