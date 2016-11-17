@@ -19,6 +19,10 @@ function touOpen(hybrid, loading, $timeout, versionService, $state) {
                     e.preventDefault();
                     addClickEvent(scope);
                 }
+
+                document.removeEventListener('touchmove', function () {
+                    console.log('touchmove');
+                });
             });
 
         }

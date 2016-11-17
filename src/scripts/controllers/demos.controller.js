@@ -21,6 +21,9 @@ function DemosController(demosService, projectColumnService,
     vm.loadMore = loadMore;
     init();
     function init() {
+        document.removeEventListener('touchmove', function () {
+            console.log('touchmove');
+        });
 
         $('html').css('overflow', 'auto');
         $('body').css('overflow', 'auto');

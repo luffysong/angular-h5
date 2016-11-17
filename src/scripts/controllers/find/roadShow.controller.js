@@ -3,7 +3,7 @@ var  angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('RoadShowController', RoadShowController);
 
-function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindService, $document) {
+function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindService) {
     var vm = this;
     vm.originDate = [];
     vm.originDateArray = [];
@@ -76,7 +76,17 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     };
 
     document.addEventListener('touchmove', function (e) {
+        if (location.hash.indexOf('demos') > -1) {
+            return;
+        }
+
         e.preventDefault();
+    });
+
+    $scope.$on('$destroy', function () {
+        document.removeEventListener('touchmove', function () {
+            console.log('touchmove');
+        });
     });
 
     function init() {

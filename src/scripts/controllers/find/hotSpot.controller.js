@@ -34,7 +34,7 @@ function HotSpotController(loading, $modal, FindService) {
         var obj = {};
         window.InitWeixin(obj);
     }
-    
+
     function more(item, e) {
         e.preventDefault();
         e.stopPropagation();
