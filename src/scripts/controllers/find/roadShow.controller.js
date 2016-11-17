@@ -168,7 +168,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         date = addDate(date, week * -1);
         vm.currentFirstDate = new Date(date);
         vm.originDateArray = [];
-        for (var j = 1; j <= 24; j++) {
+        for (var j = 1; j <= 48; j++) {
             for (var i = 0; i < 7; i++) {
                 var tempDate = new Date();
                 tempDate = (i === 0 && j === 1 ? date : addDate(date, 1));
@@ -397,7 +397,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     function initPoint() {
 
-        //6个月,24周
+        //12个月,48周
         for (var i = vm.originDateArray.length; i > 0; i--) {
             setPoint(i);
         }
