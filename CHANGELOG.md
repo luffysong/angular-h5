@@ -1,3 +1,14 @@
+<a name="1.11.4"></a>
+## [1.11.4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.3...v1.11.4) (2016-11-17)
+
+
+### Bug Fixes
+
+* 去掉样式auto ([31d31ff](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/31d31ff))
+* 去掉注册事件 ([87e2e41](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/87e2e41))
+
+
+
 <a name="1.11.3"></a>
 ## [1.11.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.2...v1.11.3) (2016-11-17)
 
