@@ -16,7 +16,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid) {
     function init() {
         document.title = '每日报道';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
-        loading.hide('findLoading');
+
         loadData();
         initWeixin();
     }
@@ -40,6 +40,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid) {
                 vm.ts = response.data.ts;
                 vm.busy = false;
                 vm.hasInit = true;
+                loading.hide('findLoading');
             })
             .catch(error);
     }

@@ -88,7 +88,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         $('body').css('overflow', 'hidden');
         document.title = '路演日历';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
-        loading.hide('findLoading');
         vm.selectedDate = angular.copy(new Date());
         loadData();
         initWeixin();
@@ -357,6 +356,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         };
         FindService.getCalendarList(sendData)
             .then(function (response) {
+                loading.hide('findLoading');
                 vm.responseData = response.data.data;
 
                 vm.ts = response.data.ts;

@@ -22,7 +22,6 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
     function init() {
         document.title = '融资速递';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
-        loading.hide('findLoading');
         loadData();
         initWeixin();
     }
@@ -62,6 +61,7 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
 
         FindService.getFinanceList(vm.sendData)
             .then(function temp(response) {
+                loading.hide('findLoading');
                 vm.responseData = angular.copy(response.data.group);
                 setFilterLabels(response.data.filterLabels, 0);
                 vm.sendData.date = response.data.ts;

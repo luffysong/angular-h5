@@ -18,7 +18,6 @@ function HotSpotController(loading, $modal, FindService) {
     function init() {
         document.title = '投资热点';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
-        loading.hide('findLoading');
         loadData();
         initWeixin();
     }
@@ -74,6 +73,7 @@ function HotSpotController(loading, $modal, FindService) {
         };
         FindService.getHotSpotList(sendData)
         .then(function (response) {
+            loading.hide('findLoading');
             vm.hasInit = true;
             if (vm.responseData) {
                 vm.responseData = vm.responseData.concat(response.data.data);
