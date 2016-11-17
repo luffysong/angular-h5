@@ -1,3 +1,19 @@
+<a name="1.11.5"></a>
+## [1.11.5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.4...v1.11.5) (2016-11-17)
+
+
+### Bug Fixes
+
+* 增加唤醒 ([38d115c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/38d115c))
+* 更换https ([85e6279](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/85e6279))
+* 移除事件 ([541aa85](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/541aa85))
+* 调整日期 ([8ab9e73](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8ab9e73))
+* 路演日历时间调整为1年 ([67d9f68](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/67d9f68))
+* 路演日历跳转项目集h5 ([fcc7dd7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/fcc7dd7))
+* 进度条加载数据后消失 ([446e4b0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/446e4b0))
+
+
+
 <a name="1.11.4"></a>
 ## [1.11.4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.3...v1.11.4) (2016-11-17)
 
