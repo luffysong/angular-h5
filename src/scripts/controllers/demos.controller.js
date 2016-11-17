@@ -25,8 +25,8 @@ function DemosController(demosService, projectColumnService,
         //     console.log('touchmove');
         // });
 
-        $('html').css('overflow', 'auto');
-        $('body').css('overflow', 'auto');
+        // $('html').css('overflow', 'auto');
+        // $('body').css('overflow', 'auto');
         if (isColumn()) {
             loadColumnDetail(0);
         }else {
