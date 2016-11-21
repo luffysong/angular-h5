@@ -1,3 +1,13 @@
+<a name="1.11.8"></a>
+## [1.11.8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.7...v1.11.8) (2016-11-21)
+
+
+### Bug Fixes
+
+* 修复路演日历bug，增加公司无默认图显示 ([86322ab](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/86322ab))
+
+
+
 <a name="1.11.7"></a>
 ## [1.11.7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.6...v1.11.7) (2016-11-17)
 
