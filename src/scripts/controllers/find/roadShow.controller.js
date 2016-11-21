@@ -45,11 +45,13 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     });
 
+    $(document).off('ps-y-reach-start');
     $(document).on('ps-y-reach-start', function () {
         // console.log('ps-y-reach-start');
         $('.img-fixed').hide();
     });
 
+    $(document).off('ps-scroll-down');
     $(document).on('ps-scroll-down', function () {
         $('.arrowRight').show();
         $('.img-fixed').show();
@@ -60,12 +62,15 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     //     console.log('ps-y-reach-end');
     // });
 
+    $(document).off('ps-scroll-up');
     $(document).on('ps-scroll-up', function () {
         $('.arrowLeft').show();
         checkSwiper();
     });
 
+    $(document).off('ps-scroll-y');
     $(document).on('ps-scroll-y', function () {
+        console.log('ps-scroll-y');
         scrollCallback();
     });
 

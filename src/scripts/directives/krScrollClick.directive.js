@@ -28,7 +28,7 @@ angular.module('defaultApp.directive').directive('krScrollClick',
                             ele.addClass('active');
                         }
 
-                        $rootScope.root.hash = attr.href.replace('#', '');
+                        $rootScope.root.hash = attr.duSmoothScroll;
                         $rootScope.root.clickHash = $scope.root.hash;
                         $rootScope.root.activeClickEle = ele;
                     }, 400);

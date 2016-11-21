@@ -22,9 +22,11 @@
                         </ul>
                         <div class="date-content">
                             <a ng-repeat="item in vm.originDateArray[$index]" scroll-index="$index" kr-scroll-click
-                               du-smooth-scroll  href="#date{{item.year}}{{item.month}}{{item.day}}"
-                               du-scrollspy="" offset="91" du-scroll-container="contentScroll"
-                               ng-class="{today:(item.today == true), active:item.active}" ng-click="vm.noDataClick(item)">
+                               du-smooth-scroll="date{{item.year}}{{item.month}}{{item.day}}"
+                               du-scrollspy
+                               offset="91" du-scroll-container="contentScroll"
+                               ng-class="{today:(item.today == true), active:item.active}"
+                               ng-click="vm.noDataClick(item)">
                                 <div class="item-active">
                                     <p class="item-day">{{item.dayInt}}</p>
                                     <p class="item-month" ng-bind="item.month | month"></p>
@@ -57,7 +59,7 @@
                         ng-repeat="item in vm.responseData track
                             by $index">
                         <a class="roadShow-content-href"
-                           href="https://36kr.com/app/tou?companysetlist={{item.id}}&ktm_source=find.roadShow.{{item.id}}"
+                           href="http://rongtest-h5.local.36kr.com/#/demos/104?type=projects"
                            tou-open path="'projectsSet/'+ item.id + '?ktm_source=calendar'">
                             <div class="base-info-wrapper">
                                 <img ng-src="{{item.imgUrl | image}}" alt="">

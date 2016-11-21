@@ -27,8 +27,10 @@
                    href="https://36kr.com/company/{{item.rcid}}?ktm_source=find.share.{{vm.id}}.{{item.rcid}}">
                     <div class="base-info-detail">
                         <div  class="logo-wrapper">
-                            <img ng-src="{{item.logo | image}}" alt="">
-                            <span ng-if="item.funding === 2">正在融资</span>
+                            <img ng-src="{{item.logo | image}}" alt="" ng-if="item.logo">
+                            <img ng-style="{'background-color':(item.ccid | demoDefaultColor)}" ng-if="!item.logo">
+                            <span class="logo-name" ng-if="!item.logo">{{item.name | demoNameDufault}}</span>
+                            <span class="logo-funding" ng-if="item.funding === 2">正在融资</span>
                         </div>
                         <div class="content-wrapper">
                             <h3><span class="item-name">{{item.name}}</span><span class="item-signs" ng-repeat="innerItem in item.signs" ng-style="{'background-color':innerItem.color}">{{innerItem.name}}</span><span class="item-pubdate">{{item.pubdate}}</span></h3>

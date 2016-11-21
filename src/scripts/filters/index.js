@@ -12,6 +12,8 @@ require('./dateRoadShow');
 require('./dateRoadShowID');
 require('./default');
 require('./delHtmlTag');
+require('./demoDufaultColor');
+require('./demoNameDufault');
 require('./findDefault');
 require('./month');
 require('./share');
