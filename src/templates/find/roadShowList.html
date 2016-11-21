@@ -59,7 +59,7 @@
                         ng-repeat="item in vm.responseData track
                             by $index">
                         <a class="roadShow-content-href"
-                           href="http://rongtest-h5.local.36kr.com/#/demos/104?type=projects"
+                           href="https://36kr.com/app/tou?companysetlist={{item.id}}&ktm_source=find.roadShow.{{item.id}}"
                            tou-open path="'projectsSet/'+ item.id + '?ktm_source=calendar'">
                             <div class="base-info-wrapper">
                                 <img ng-src="{{item.imgUrl | image}}" alt="">
