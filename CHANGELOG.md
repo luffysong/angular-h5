@@ -1,3 +1,13 @@
+<a name="1.11.10"></a>
+## [1.11.10](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.9...v1.11.10) (2016-11-21)
+
+
+### Bug Fixes
+
+* 调整字号 ([e01d66b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e01d66b))
+
+
+
 <a name="1.11.9"></a>
 ## [1.11.9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.8...v1.11.9) (2016-11-21)
 
