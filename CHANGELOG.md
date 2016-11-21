@@ -1,3 +1,13 @@
+<a name="1.11.11"></a>
+## [1.11.11](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.10...v1.11.11) (2016-11-21)
+
+
+### Bug Fixes
+
+* 修复路演日历bug ([6cdf9b9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6cdf9b9))
+
+
+
 <a name="1.11.10"></a>
 ## [1.11.10](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.9...v1.11.10) (2016-11-21)
 
