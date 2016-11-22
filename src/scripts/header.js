@@ -9,6 +9,11 @@
         if (allowReplaceBanner()) {
             replaceBanner();
         }
+
+        if (location.hash.indexOf('findLogin') === -1) {
+            $('link[href*="login-theme"]').remove();
+        }
+
     }
 
     function allowRemoveHeader() {
