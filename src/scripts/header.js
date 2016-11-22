@@ -10,14 +10,19 @@
             replaceBanner();
         }
 
-        if (location.hash.indexOf('findLogin') === -1) {
+        if (location.hash.indexOf('findLogin') === -1 &&
+            location.hash.indexOf('findLoginSuccess') === -1 &&
+            location.hash.indexOf('findInvestor') === -1 &&
+            location.hash.indexOf('findInvestorSuccess') === -1) {
             $('link[href*="login-theme"]').remove();
         }
 
     }
 
     function allowRemoveHeader() {
-        if (location.hash.indexOf('demos') > -1 || location.hash.indexOf('find') > -1 || location.hash.indexOf('roadShow') > -1) {
+        if (location.hash.indexOf('demos') > -1 ||
+            location.hash.indexOf('find') > -1 ||
+            location.hash.indexOf('roadShow') > -1) {
             return true;
         } else {
             return false;
