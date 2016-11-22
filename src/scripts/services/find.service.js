@@ -56,4 +56,24 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
     this.getFilterCount = function (request) {
         return $http.get('/api/mobi-investor/company/finance-new/filter/count?' + $.param(request));
     };
+
+    //获取用户基本信息
+    this.getUserProfile = function () {
+        return $http.get('/api/mobi-investor/user/profile');
+    };
+
+    //修改栏目标题
+    this.editUserProfile = function (request) {
+        return $http.put('/api/mobi-investor/user/profile', request);
+    };
+
+    //提交活动报名
+    this.setActivity = function (request) {
+        return $http.post('/api/mobi-investor/op-activity/submit', request);
+    };
+
+    //查看是否参与过活动
+    this.getActivity = function (request) {
+        return $http.get('/api/mobi-investor/op-activity/submit?' + $.param(request));
+    };
 });

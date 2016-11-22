@@ -1,0 +1,338 @@
+.square(@size, @display:block){
+    width: @size;
+    height: @size;
+    display: @display;
+}
+.full-size(){
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    right: 0;
+    bottom: 0;
+}
+.inline-block() {
+    display: inline-block;
+}
+.absolute(){
+    position: absolute;
+}
+.h-center(){
+    position: absolute;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+}
+.circle(@size, @display:block){
+    .square(@size, @display);
+    border-radius: 50%;
+}
+.border(@size,@color){
+    border: @size solid @color;
+}
+.border-1(@color){
+    .border(1px, @color);
+}
+.border-2(@color){
+    .border(2px, @color);
+}
+.clearfix() {
+    *zoom: 1;
+    &:after {
+        content: '';
+        display: block;
+        clear: both;
+        height: 1px;
+    }
+}
+
+.common-form(){
+    .form-row {
+        @titleSize: 30px;
+        @slip: 2.5;
+        border:solid 1px @formBorder;
+        position: relative;
+        margin-top: @titleSize*2;
+        padding: 30px 100px;
+        h3 {
+            font-size: @font-md;
+            font-weight: 100;
+            background: @formBorder;
+            height: @titleSize;
+            line-height: @titleSize;
+            position: absolute;
+            top:-@titleSize;
+            left:@titleSize/@slip - 1px;
+            padding:0 @titleSize/@slip;
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                left: -@titleSize/@slip;
+                top:0;
+                border:solid;
+                border-color:transparent @formBorder transparent transparent;
+                border-width:@titleSize @titleSize/@slip 0 0;
+            }
+            &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                right: -@titleSize/@slip;
+                top:0;
+                border:solid;
+                border-color:@formBorder transparent transparent transparent;
+                border-width:@titleSize @titleSize/@slip 0 0;
+            }
+        }
+        @media (max-width: @screen-lg) {
+            border:0;
+            padding:20px 20px 0;
+            margin-top:0;
+            h3 {
+                position: relative;
+                top:0;
+                left:@titleSize/@slip;
+                display: inline-block;
+                margin-bottom: 30px;
+            }
+        }
+
+    }
+    .form-group {
+        @errorHeight: 30px;
+        @inputSize: 350px;
+        .form-label {
+            font-size:@font-sm;
+            margin-bottom:10px;
+            display: block;
+            span {
+                margin-left:4px;
+                color:@inputBorder;
+            }
+        }
+        .form-element {
+            & + .form-element {
+                margin-top: 10px;
+            }
+            .form-control {
+                -webkit-appearance: none;
+                border: solid 1px @inputBorder;
+                border-radius: 3px;
+                background: @inputBg;
+                padding:10px;
+                width: @inputSize;
+                color:@white;
+                font-size: @font-sm;
+                outline: 0 !important;
+                &:focus {
+                    background-color: @inputBgHighlight;
+                    border-color: @inputBorderHighlight;
+                    transition: all 0.4s;
+                }
+                &.ng-invalid.ng-dirty {
+                    border-color:@errorColor;
+                }
+
+                @media (max-width: @screen-lg) {
+                    width: 100%;
+                }
+            }
+            textarea.form-control {
+                @width: 570px;
+                width:@width;
+                resize: none;
+                & + .count {
+                    width: @width;
+                    text-align: right;
+                    margin-top:5px;
+                    font-size:@font-sm;
+                }
+                @media (max-width: @screen-lg) {
+                    width: 100%;
+                    & + .count {
+                        width: 100%;
+                    }
+                }
+            }
+            select.form-control,
+            select.form-control:focus {
+                background: url('../../images/select-arrow.png') @inputBg;
+                background-repeat: no-repeat;
+                background-position: 98% center;
+                background-size: 10px;
+            }
+
+            .radio-group {
+                .radio-item {
+                    @size: 12px;
+                    display: inline-block;
+                    white-space: nowrap;
+                    font-size: @font-sm;
+                    position: relative;
+                    padding-right:35px;
+                    cursor: pointer;
+                    &:before {
+                        content: '';
+                        display:inline-block;
+                        width: @size;
+                        height:@size;
+                        background: @inputBorder;
+                        margin-right:5px;
+                        box-shadow:0 0 0 1px @inputBorder inset, 0 0 0 @size/2 @bgColor inset;
+                        border-radius: @size/2;
+                        vertical-align: middle;
+                        position: relative;
+                        top:-1px;
+                        transition: all 0.4s;
+                    }
+                    &:hover {
+                        &:before {
+                            box-shadow:0 0 0 1px @inputBorderHighlight inset,
+                            0 0 0 @size/3 @bgColor inset,
+                            0 0 0 @size/2 fade(@inputBorderHighlight, 0.3) inset;
+                        }
+                        .clearfix
+                    }
+                    &.active {
+                        &:before {
+                            box-shadow:0 0 0 1px @inputBorderHighlight inset,
+                            0 0 0 @size/3 @bgColor inset,
+                            0 0 0 @size/2 @inputBorderHighlight inset;
+                        }
+                    }
+                }
+            }
+
+            .check-group {
+                .clearfix();
+                .check-item {
+                    float: left;
+                    font-size:@font-sm;
+                    padding:4px 10px;
+                    margin:10px 10px 0 0;
+                    border: solid 1px @inputBorder;
+                    border-radius: 2px;
+                    background: @inputBg;
+                    color:@white;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: darken(@inputBgHighlight, 10%);
+                        border-color: darken(@inputBorderHighlight, 10%);
+                        transition: all 0.4s;
+                    }
+                    &.active {
+                        background-color: @inputBgHighlight;
+                        border-color: @inputBorderHighlight;
+                        transition: all 0.4s;
+                    }
+                }
+            }
+
+            &.inline {
+                display: flex;
+                width: @inputSize;
+                align-items: center;
+                justify-content: space-between;
+                @media (max-width: @screen-lg) {
+                    width: 100%;
+                }
+                .col-4 {
+                    flex:4;
+                    &,
+                    &:focus{
+                        background-position: 93% center;
+                    }
+                }
+                .col-3 {
+                    flex:3;
+                    text-align: center;
+                }
+                .col-1 {
+                    flex:1;
+                    text-align: center;
+                }
+            }
+        }
+        .form-error {
+            min-height:@errorHeight;
+            line-height: @errorHeight;
+            font-size:@font-sm;
+            color:@errorColor;
+            display: block;
+        }
+        .form-tip {
+            min-height:@errorHeight;
+            line-height: @errorHeight;
+            font-size:@font-sm;
+            color:@white;
+            display: block;
+        }
+        .upload {
+            font-size:@font-sm;
+            margin-top:10px;
+            .button {
+                -webkit-appearance: none;
+                position: relative;
+                border: solid 1px @inputBorder;
+                border-radius: 3px;
+                background: @inputBg;
+                padding:4px 30px;
+                color:@white;
+                font-size: @font-sm;
+                vertical-align: middle;
+                margin-right:15px;
+                cursor: pointer;
+                outline: 0 !important;
+                &:hover {
+                    background-color: darken(@inputBgHighlight, 10%);
+                    border-color: darken(@inputBorderHighlight, 10%);
+                    transition: all 0.4s;
+                }
+                &:active {
+                    background-color: @inputBgHighlight;
+                    border-color: @inputBorderHighlight;
+                    transition: all 0s;
+                }
+                span{
+                    position: relative;
+                }
+                .progress{
+                    .full-size();
+                    background: @inputBorder;
+                }
+
+            }
+        }
+    }
+    .action-row {
+        margin-top: 40px;
+        text-align: center;
+
+        .button {
+            background: @buttonColor;
+            color:@bgColor;
+            font-size: @font-md;
+            padding: 10px 100px;
+            border:0;
+            border-radius: 3px;
+            box-shadow: 0 2px 0 rgba(0,0,0,0.5);
+            cursor: pointer;
+            outline: 0 !important;
+            &:hover {
+                background: darken(@buttonColor, 10%);
+            }
+            &:active {
+                box-shadow: 0 0 0;
+                transform: translate(0, 1px);
+            }
+        }
+        @media (max-width: @screen-lg) {
+            height: 20px;
+            .button {
+                width:100%;
+                border-radius: 0px;
+                padding:15px 0;
+            }
+        }
+    }
+}

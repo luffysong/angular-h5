@@ -184,14 +184,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         template: '<div ui-view></div>'
     });
 
-    //创投助手app---发现页首页
-    $stateProvider.state('find.index', {
-        url:'/index',
-        controllerAs: 'vm',
-        controller: 'FindIndexController',
-        templateUrl: 'templates/find/index.html'
-    });
-
     //创投助手app---近期路演
     $stateProvider.state('roadShow', {
         url:'/roadShow',
@@ -245,6 +237,46 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         resolve: {
             coverFind: loadFind
         }
+    });
+
+    //创投助手app---活动页(氪空间)
+    $stateProvider.state('findKrspace', {
+        url:'/findKrspace?ktm_source',
+        controller: 'KrspaceController',
+        controllerAs: 'vm',
+        templateUrl: 'templates/activity/krspace.html',
+    });
+
+    //创投助手app---活动页登陆
+    $stateProvider.state('findLogin', {
+        url:'/findLogin?ktm_source',
+        controller: 'LoginController',
+        controllerAs: 'vm',
+        templateUrl: 'templates/activity/login.html',
+    });
+
+    //创投助手app---活动页登陆成功
+    $stateProvider.state('findLoginSuccess', {
+        url:'/findLoginSuccess?ktm_source',
+        controller: 'LoginSuccessController',
+        controllerAs: 'vm',
+        templateUrl: 'templates/activity/loginSuccess.html',
+    });
+
+    //创投助手app---活动页投资人认证
+    $stateProvider.state('findInvestor', {
+        url:'/findInvestor?ktm_source',
+        controller: 'InvestorController',
+        controllerAs: 'vm',
+        templateUrl: 'templates/activity/investor.html',
+    });
+
+    //创投助手app---活动页投资人认证成功
+    $stateProvider.state('findInvestorSuccess', {
+        url:'/findInvestorSuccess?ktm_source',
+        controller: 'InvestorSuccessController',
+        controllerAs: 'vm',
+        templateUrl: 'templates/activity/investorSuccess.html',
     });
 
     function checkClaimStatus(ClaimService, $stateParams) {

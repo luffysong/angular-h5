@@ -1,0 +1,231 @@
+@import "vars.less";
+@import "function.less";
+
+header.common-header {
+    display: none;
+}
+footer.common-footer {
+    display: none;
+}
+body {
+    * {
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
+    @errorHeight: 30px;
+    padding-bottom:0 !important;
+    background-color: rgb(242,244,245);
+    .common-form {
+        padding:0px;
+        position: relative;
+        font-weight: 200;
+        margin-top: 160px;
+        .head-tip {
+            display: none;
+        }
+        legend {
+            margin:0;
+            padding:0px;
+            display: block;
+            box-sizing: content-box;
+            margin-bottom:35px;
+            border-bottom:0;
+            display: none;
+            h2 {
+                font-size: 18px;
+                font-weight: 600;
+                margin:0;
+                line-height: 38px;
+                border-bottom:0;
+                display: block;
+                text-align: center;
+                color:@white;
+            }
+        }
+        .form-group {
+            margin:0;
+            position: relative;
+            max-width: none;
+            label[class*=" icon-"],
+            label[class^="icon-"]{
+                position: absolute;
+                top:14px;
+                left:10px;
+                &:before {
+                    font-size:20px;
+                    color:fade(@white, 40);
+                    content:'';
+                }
+                &+input,
+                &~* input{
+                    padding-left:15px;
+                    font-size: 15px;
+                    color: #969FA9;
+                    letter-spacing: -0.07px;
+                }
+            }
+
+            label.normal-label {
+                position: relative;
+                font-weight: 600;
+                margin-bottom: 10px;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            .wrapicon {
+                position: relative;
+            }
+            .clearfix;
+            .left {
+                float: left;
+            }
+            .right {
+                float: right;
+            }
+            .error {
+                padding-top:10px;
+                span {
+                    display: block;
+                    list-style: circle;
+                    color:@errorColor;
+                }
+            }
+            a {
+                color:@inputBorder;
+                &:hover {
+                    color: @inputBorderHighlight;
+                }
+            }
+        }
+        .btn-primary,
+        .btn-primary:active{
+            display: block;
+            width:100%;
+            max-width:333px;
+            margin:0 auto 10px;
+            padding: 12px 0;
+            outline: 0 !important;
+            margin-top: 25px;
+            cursor: not-allowed;
+            opacity: 1;
+            box-shadow: none;
+            background: #6BA2FC;
+            border-radius: 4px;
+            color: #fff;
+            &[disabled]{
+                opacity: 0.5;
+            }
+        }
+        .col-input {
+            overflow: hidden;
+            a.txt{
+                padding: 10px 0 0 0;
+                display: inline-block;
+                margin-left: 15px;
+                //position: absolute;
+                //right: 0;
+            }
+            a.disabled{
+                color: #e7e7e7;
+                cursor: default;
+                &:hover{
+                    color: #e7e7e7;
+                }
+            }
+        }
+        .form-control {
+            -webkit-appearance: none;
+            //border: solid 1px @inputBorder;
+            background: #FFFFFF;
+            border-bottom: 0;
+            border-top: 0px;
+            border-left: 0px;
+            border-right: 0px;
+
+            border-radius: 0px;
+            //background: @inputBg;
+            padding:10px;
+            color:@white;
+            font-size: @font-sm;
+            outline: 0 !important;
+            box-shadow: none;
+            &:focus {
+                //background-color: @inputBgHighlight;
+                //border-color: @inputBorderHighlight;
+                //transition: all 0.4s;
+                outline: 0 !important;
+                box-shadow: none;
+            }
+            &.ng-invalid.ng-dirty.ng-touched {
+                border-color:@errorColor;
+            }
+        }
+        .col-actions {
+            position: absolute;
+            right: 0;
+            width: 120px;
+            text-align: right;
+            > a {
+                background: none;
+                border: 0px solid @inputBorder;
+                text-align: center;
+                margin-left:5px;
+                display: inline-block;
+                padding:0;
+                color: #008df3!important;
+            }
+        }
+        .count-down {
+            height: 50px;
+            line-height: 50px;
+            background: none;
+            text-align: center;
+            width:110px;
+            font-size: 15px;
+            color: #6BA2FC;
+            letter-spacing: -0.07px;
+            margin-left: 10px;
+        }
+    }
+    .error-wrapper .error {
+        //background: @inputBg;
+        span {
+            color:@errorColor;
+        }
+    }
+    .modal .modal-dialog {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        margin:0 !important;
+        background: fade(@bgColor, 30) !important;
+        display: flex;
+        align-items: center;
+        .modal-content {
+            border:0 !important;
+            //background: none !important;
+            margin:0 auto;
+        }
+    }
+    .modal .pop-form {
+        //color:#fff;
+    }
+}
+html, body {
+    overflow: hidden;
+    height: inherit;
+    min-height: inherit;
+}
+.index-bg {
+}
+.login-index-wrap {
+    .container {
+        .form-wrapper {
+            background-color: rgb(242,244,245)
+        }
+    }
+
+}
+.basic-info{
+    padding: 0!important;
+}
+
