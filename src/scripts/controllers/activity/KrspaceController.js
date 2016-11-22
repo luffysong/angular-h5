@@ -8,6 +8,13 @@ function KrspaceController($stateParams, FindService, $state, UserService) {
     vm.ktm_source = $stateParams.ktm_source;
     vm.start = start;
 
+    init();
+
+    function init() {
+        $('html').css('overflow', 'auto');
+        $('body').css('overflow', 'auto');
+    }
+
     //查看是否参与过活动
     function start() {
 

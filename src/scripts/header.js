@@ -10,7 +10,8 @@
             replaceBanner();
         }
 
-        if (location.hash.indexOf('findLogin') === -1 &&
+        if (location.hash.indexOf('findKrspace') === -1 &&
+            location.hash.indexOf('findLogin') === -1 &&
             location.hash.indexOf('findLoginSuccess') === -1 &&
             location.hash.indexOf('findInvestor') === -1 &&
             location.hash.indexOf('findInvestorSuccess') === -1) {
