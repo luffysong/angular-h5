@@ -17,7 +17,6 @@ angular.module('defaultApp.controller').controller('InvestorController',
 
             }
         };
-        $scope.investorValidateApply = {};
         $scope.ktm_source = $stateParams.ktm_source;
 
         checkUser();
@@ -234,7 +233,7 @@ angular.module('defaultApp.controller').controller('InvestorController',
             Error.hide();
 
             /*检查表单填写是否正确*/
-            if ($scope.investorValidateApply.status === 'new' && !checkForm('guideForm')) {
+            if (!checkForm('guideForm')) {
                 return false;
             }
 
@@ -257,35 +256,17 @@ angular.module('defaultApp.controller').controller('InvestorController',
 
             $scope.hasClick = true;
 
-            if ($scope.investorValidateApply.status === 'new') {
-                UserService.basic.update({
-                    id: $scope.user.id
-                }, {
-                    avatar: $scope.guideForm.avatar.uploaded || $scope.user.avatar,
-                    name: $scope.user.name,
-                    email: $scope.user.email,
-                    phone: $scope.getPhoneWithCountryCode(),
-                    smscode: $scope.user.smscode
-                }).$promise.then(send)
+            UserService.basic.update({
+                id: $scope.user.id
+            }, {
+                name: $scope.user.name,
+            }).$promise.then(send)
                 .catch(function (err) {
                     $scope.hasClick = false;
                     ErrorService.alert({
                         msg: err.msg
                     });
                 });
-            } else {
-                UserService.basic.update({
-                    id: $scope.user.id
-                }, {
-                    name: $scope.user.name,
-                }).$promise.then(send)
-                    .catch(function (err) {
-                        $scope.hasClick = false;
-                        ErrorService.alert({
-                            msg: err.msg
-                        });
-                    });
-            }
         };
 
         //发送投资人认证数据
@@ -323,11 +304,17 @@ angular.module('defaultApp.controller').controller('InvestorController',
                 if ($scope.detailHasChange) {
                     var link   = $scope.invest.pictures || $scope.investorValidateForm.pictures.uploaded;
                     editData.businessCardLink = link;
+                    if ($scope.user.investorRole === $scope.invest.investorRole && $scope.user.investorEntityId === $scope.organization.addForm.id) {
+                        setActivity();
+                        return;
+                    }
+
+                    FindService.editUserProfile(editData)
+                        .then(setActivity)
+                        .catch(error);
                 }
 
-                FindService.editUserProfile(editData)
-                    .then(setActivity)
-                    .catch(error);
+                setActivity();
             } else {
                 setActivity();
             }

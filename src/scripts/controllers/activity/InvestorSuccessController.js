@@ -3,11 +3,17 @@ var  angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('InvestorSuccessController', InvestorSuccessController);
 
-function InvestorSuccessController($stateParams, FindService, $state) {
+function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
     var vm = this;
     init();
 
     function init() {
+        $('html').css('overflow', 'auto');
+        $('body').css('overflow', 'auto');
+        if (hybrid.isInApp) {
+            $('.header-banner-wrapper').hide();
+        }
+
         vm.ktm_source = $stateParams.ktm_source;
 
         //日后活动直接根据ktm_source加载不同图片即可
