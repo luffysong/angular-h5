@@ -18,7 +18,7 @@ function loginIframe($sce) {
         },
         link: function (scope) {
             scope.loginSrc = $sce.trustAsResourceUrl(window.LOGIN_HOST + '/pages/?ok_url=' +
-                encodeURIComponent(location.href.replace(/\/[^\/]*?$/, '/findInvestor?ktm_source=' + window.ktm_source)) +
+                encodeURIComponent(location.href.replace(/\/[^\/]*?$/, '/findInvestor?activityName=' + window.activityName)) +
                 '&theme=' + encodeURIComponent(window.LOGIN_CSS) + '#/login-simple');
 
         }
