@@ -114,13 +114,6 @@ angular.module('defaultApp.controller').controller('InvestorController',
             window.scroll(0, 0);
         }, 0);
 
-        document.title = '36氪投资人认证申请';
-        window.WEIXINSHARE = {
-            shareTitle: '36氪投资人认证申请',
-            shareDesc: '投资人认证申请',
-            shareImg: 'https://pic.36krcnd.com/36kr_new_logo.jpg'
-        };
-        window.InitWeixin();
         /*错误信息提示*/
         $scope.error = {
             code:0, //0为不显示，非0显示错误信息
@@ -316,9 +309,10 @@ angular.module('defaultApp.controller').controller('InvestorController',
                     FindService.editUserProfile(editData)
                         .then(setActivity)
                         .catch(error);
+                } else {
+                    setActivity();
                 }
 
-                setActivity();
             } else {
                 setActivity();
             }

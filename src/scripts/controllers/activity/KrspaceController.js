@@ -21,7 +21,7 @@ function KrspaceController($stateParams, FindService, $state, UserService) {
 
     function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '氪空间第8期毕业礼·独家招募',
+            shareTitle: '【融资1V1暨氪空间9期项目抢先看】',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '来「36氪创投助手」，发现最新最热优质项目！',

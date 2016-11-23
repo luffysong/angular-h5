@@ -11,8 +11,9 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
         if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
             document.title = window.WEIXINSHARE.shareTitle;
         }
-        $('html').css('overflow', 'auto');
-        $('body').css('overflow', 'auto');
+
+        $('html').css('overflow', 'hidden');
+        $('body').css('overflow', 'hidden');
         if (hybrid.isInApp) {
             $('.header-banner-wrapper').hide();
         }
@@ -24,7 +25,11 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
             $('.img-front').attr('src', 'https://pic.36krcnd.com/avatar/201611/23051049/oj9ztizql3tsut3o.png');
         }
 
-        window.parent.initCss && window.parent.initCss();
+        if (window.parent) {
+            $('.header-banner-wrapper').hide();
+            window.parent.initCss && window.parent.initCss();
+            window.parent.initFooter && window.parent.initFooter();
+        }
 
         getActivity();
     }

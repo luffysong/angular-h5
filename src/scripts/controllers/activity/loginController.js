@@ -16,6 +16,7 @@ function LoginController(UserService, $state, $stateParams) {
         if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
             document.title = window.WEIXINSHARE.shareTitle;
         }
+
         if (UserService.getUID()) {
             console.log('已登陆');
             $state.go('findInvestor', {
@@ -46,6 +47,10 @@ function LoginController(UserService, $state, $stateParams) {
 
         window.initCss = function () {
             $('#activityInfoFirst').hide();
+        };
+
+        window.initFooter = function () {
+            $('.header-banner-wrapper').css('display', 'flex');
         };
     }
 
