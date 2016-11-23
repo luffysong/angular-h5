@@ -11,6 +11,10 @@ function KrspaceController($stateParams, FindService, $state, UserService) {
     init();
 
     function init() {
+        if (typeof (vm.ktm_source) !== 'string' && vm.ktm_source[0]) {
+            vm.ktm_source = vm.ktm_source[0];
+        }
+
         $('html').css('overflow', 'auto');
         $('body').css('overflow', 'auto');
         initWeixin();

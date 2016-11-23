@@ -12,20 +12,26 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
             document.title = window.WEIXINSHARE.shareTitle;
         }
 
-        $('html').css('overflow', 'hidden');
-        $('body').css('overflow', 'hidden');
+        $('.header-banner-wrapper').css('display', 'flex');
+        $('html').css('overflow', 'auto');
+        $('body').css('overflow', 'auto');
         if (hybrid.isInApp) {
             $('.header-banner-wrapper').hide();
         }
 
         vm.ktm_source = $stateParams.ktm_source;
+        if (typeof (vm.ktm_source) !== 'string' && vm.ktm_source[0]) {
+            vm.ktm_source = vm.ktm_source[0];
+        }
 
         //日后活动直接根据ktm_source加载不同图片即可
         if (vm.ktm_source === 'krspace1123') {
             $('.img-front').attr('src', 'https://pic.36krcnd.com/avatar/201611/23051049/oj9ztizql3tsut3o.png');
         }
 
-        if (window.parent) {
+        if (window.parent.initCss) {
+            $('html').css('overflow', 'hidden');
+            $('body').css('overflow', 'hidden');
             $('.header-banner-wrapper').hide();
             window.parent.initCss && window.parent.initCss();
             window.parent.initFooter && window.parent.initFooter();
