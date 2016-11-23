@@ -45,7 +45,7 @@ angular.module('defaultApp.controller').controller('InvestorController',
                         initUser();
                         $('html').css('overflow', 'hidden');
                         $('body').css('overflow', 'hidden');
-                        window.parent.test && window.parent.test();
+                        window.parent.initCss && window.parent.initCss();
                     } else {
                         $state.go('findInvestorSuccess', {
                             ktm_source: $scope.ktm_source

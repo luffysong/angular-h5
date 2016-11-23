@@ -41,8 +41,7 @@ function LoginController(UserService, $state, $stateParams) {
             });
         };
 
-        window.test = function () {
-            console.log('4');
+        window.initCss = function () {
             $('#activityInfoFirst').hide();
         };
     }

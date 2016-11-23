@@ -9,6 +9,14 @@ function InvestorSuccessController($stateParams, FindService, $state) {
 
     function init() {
         vm.ktm_source = $stateParams.ktm_source;
+
+        //日后活动直接根据ktm_source加载不同图片即可
+        if (vm.ktm_source === 'krspace1123') {
+            $('.img-front').attr('src', '/styles/images/activity/krspace/card.png');
+        }
+
+        window.parent.initCss && window.parent.initCss();
+
         getActivity();
     }
 

@@ -48,7 +48,7 @@
                         <div class="control icon-select pr-15">
                             <select ng-model="invest.investorRole"
                                     name="identity"
-                                    ng-change="detailHasChange = true"
+                                    ng-change="$parent.detailHasChange = true"
                                     class="fr" required
                                     ng-if="user.auditStatus !== 0">
                                 <option name="" value="">未选择</option>
