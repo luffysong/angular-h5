@@ -241,7 +241,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页(氪空间)
     $stateProvider.state('findKrspace', {
-        url:'/findKrspace?ktm_source',
+        url:'/findKrspace?activityName',
         controller: 'KrspaceController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/krspace.html',
@@ -249,7 +249,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页登陆
     $stateProvider.state('findLogin', {
-        url:'/findLogin?ktm_source',
+        url:'/findLogin?activityName',
         controller: 'LoginController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/login.html',
@@ -257,7 +257,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页登陆成功
     $stateProvider.state('findLoginSuccess', {
-        url:'/findLoginSuccess?ktm_source',
+        url:'/findLoginSuccess?activityName',
         controller: 'LoginSuccessController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/loginSuccess.html',
@@ -265,14 +265,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页投资人认证
     $stateProvider.state('findInvestor', {
-        url:'/findInvestor?ktm_source',
+        url:'/findInvestor?activityName',
         controller: 'InvestorController',
         templateUrl: 'templates/activity/investor.html',
     });
 
     //创投助手app---活动页投资人认证成功
     $stateProvider.state('findInvestorSuccess', {
-        url:'/findInvestorSuccess?ktm_source',
+        url:'/findInvestorSuccess?activityName',
         controller: 'InvestorSuccessController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/investorSuccess.html',

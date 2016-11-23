@@ -17,7 +17,7 @@ angular.module('defaultApp.controller').controller('InvestorController',
 
             }
         };
-        $scope.ktm_source = $stateParams.ktm_source;
+        $scope.activityName = $stateParams.activityName;
 
         checkUser();
 
@@ -29,7 +29,7 @@ angular.module('defaultApp.controller').controller('InvestorController',
             if (!UserService.getUID()) {
                 console.log('未登陆');
                 $state.go('findLogin', {
-                    ktm_source: $scope.ktm_source
+                    activityName: $scope.activityName
                 });
             } else {
                 getActivity();
@@ -39,7 +39,7 @@ angular.module('defaultApp.controller').controller('InvestorController',
         //查看是否参与过活动
         function getActivity() {
             var sendData = {
-                activityName:$scope.ktm_source
+                activityName:$scope.activityName
             };
             FindService.getActivity(sendData)
                 .then(function (response) {
@@ -51,7 +51,7 @@ angular.module('defaultApp.controller').controller('InvestorController',
                         window.parent.initCss && window.parent.initCss();
                     } else {
                         $state.go('findInvestorSuccess', {
-                            ktm_source: $scope.ktm_source
+                            activityName: $scope.activityName
                         });
                     }
                 })
@@ -238,14 +238,7 @@ angular.module('defaultApp.controller').controller('InvestorController',
                 return false;
             }
 
-            if ($scope.investorValidateForm.pictures.uploaded || $scope.invest.pictures) {
-                $scope.investorValidateForm.pictures.$setValidity('required', true);
-            } else {
-                $scope.investorValidateForm.pictures.$setValidity('required', false);
-                return false;
-            }
-
-            if ($scope.detailHasChange) {
+            if ($scope.detailHasChange || $scope.user.auditStatus === undefined || $scope.user.auditStatus === -1) {
                 if ($scope.investorValidateForm.pictures.uploaded || $scope.invest.pictures) {
                     $scope.investorValidateForm.pictures.$setValidity('required', true);
                 } else {
@@ -328,7 +321,7 @@ angular.module('defaultApp.controller').controller('InvestorController',
         //提交活动报名
         function setActivity() {
             var sendData = {
-                activityName:$scope.ktm_source,
+                activityName:$scope.activityName,
             };
             if ($scope.detailHasChange) {
                 var link   = $scope.invest.pictures || $scope.investorValidateForm.pictures.uploaded;
@@ -338,7 +331,7 @@ angular.module('defaultApp.controller').controller('InvestorController',
             FindService.setActivity(sendData)
                 .then(function temp() {
                     $state.go('findInvestorSuccess', {
-                        ktm_source: $scope.ktm_source
+                        activityName: $scope.activityName
                     });
                 })
                 .catch(error);

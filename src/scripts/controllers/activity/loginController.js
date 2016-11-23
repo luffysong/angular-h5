@@ -9,7 +9,7 @@ function LoginController(UserService, $state, $stateParams) {
     //轮播图返回的数据
     vm.slides = [];
     vm.responseData = {};
-    vm.ktm_source = $stateParams.ktm_source;
+    vm.activityName = $stateParams.activityName;
 
     init();
     function init() {
@@ -20,7 +20,7 @@ function LoginController(UserService, $state, $stateParams) {
         if (UserService.getUID()) {
             console.log('已登陆');
             $state.go('findInvestor', {
-                ktm_source: vm.ktm_source
+                activityName: vm.activityName
             });
         }
 
@@ -37,11 +37,11 @@ function LoginController(UserService, $state, $stateParams) {
 
         $('link[href*="login-theme"]').remove();
 
-        window.ktm_source = $stateParams.ktm_source;
+        window.activityName = $stateParams.activityName;
         window.closeLoginModal = function () {
             console.log('登陆成功!');
             $state.go('findInvestor', {
-                ktm_source: vm.ktm_source
+                activityName: vm.activityName
             });
         };
 

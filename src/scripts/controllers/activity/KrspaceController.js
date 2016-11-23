@@ -5,14 +5,14 @@ angular.module('defaultApp.controller')
 
 function KrspaceController($stateParams, FindService, $state, UserService) {
     var vm = this;
-    vm.ktm_source = $stateParams.ktm_source;
+    vm.activityName = $stateParams.activityName;
     vm.start = start;
 
     init();
 
     function init() {
-        if (typeof (vm.ktm_source) !== 'string' && vm.ktm_source[0]) {
-            vm.ktm_source = vm.ktm_source[0];
+        if (typeof (vm.activityName) !== 'string' && vm.activityName[0]) {
+            vm.activityName = vm.activityName[0];
         }
 
         $('html').css('overflow', 'auto');
@@ -40,7 +40,7 @@ function KrspaceController($stateParams, FindService, $state, UserService) {
         if (!UserService.getUID()) {
             console.log('未登陆');
             $state.go('findLogin', {
-                ktm_source: vm.ktm_source
+                activityName: vm.activityName
             });
         } else {
             getActivity();
@@ -49,18 +49,18 @@ function KrspaceController($stateParams, FindService, $state, UserService) {
 
     function getActivity() {
         var sendData = {
-            activityName: vm.ktm_source
+            activityName: vm.activityName
         };
         FindService.getActivity(sendData)
             .then(function (response) {
                 vm.hasSubmit = response.data.hasSubmit;
                 if (!vm.hasSubmit) {
                     $state.go('findInvestor', {
-                        ktm_source: vm.ktm_source
+                        activityName: vm.activityName
                     });
                 } else {
                     $state.go('findInvestorSuccess', {
-                        ktm_source: vm.ktm_source
+                        activityName: vm.activityName
                     });
                 }
             })
@@ -70,7 +70,7 @@ function KrspaceController($stateParams, FindService, $state, UserService) {
     function error(err) {
         if (err.code === 403) {
             $state.go('findLogin', {
-                ktm_source: vm.ktm_source
+                activityName: vm.activityName
             });
         }
     }

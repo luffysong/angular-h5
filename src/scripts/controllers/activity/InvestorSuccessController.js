@@ -19,9 +19,9 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
             $('.header-banner-wrapper').hide();
         }
 
-        vm.ktm_source = $stateParams.ktm_source;
-        if (typeof (vm.ktm_source) !== 'string' && vm.ktm_source[0]) {
-            vm.ktm_source = vm.ktm_source[0];
+        vm.activityName = $stateParams.activityName;
+        if (typeof (vm.activityName) !== 'string' && vm.activityName[0]) {
+            vm.activityName = vm.activityName[0];
         }
 
         if (window.parent.initCss) {
@@ -38,14 +38,14 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
     //查看是否参与过活动
     function getActivity() {
         var sendData = {
-            activityName: vm.ktm_source
+            activityName: vm.activityName
         };
         FindService.getActivity(sendData)
             .then(function (response) {
                 vm.hasSubmit = response.data.hasSubmit;
                 if (!vm.hasSubmit) {
                     $state.go('findLogin', {
-                        ktm_source: vm.ktm_source
+                        activityName: vm.activityName
                     });
                 }
             })
@@ -55,7 +55,7 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
     function error(err) {
         if (err.code === 403) {
             $state.go('findLogin', {
-                ktm_source: vm.ktm_source
+                activityName: vm.activityName
             });
         }
     }
