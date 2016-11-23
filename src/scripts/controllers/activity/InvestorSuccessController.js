@@ -24,11 +24,6 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
             vm.ktm_source = vm.ktm_source[0];
         }
 
-        //日后活动直接根据ktm_source加载不同图片即可
-        if (vm.ktm_source === 'krspace1123') {
-            $('.img-front').attr('src', 'https://pic.36krcnd.com/avatar/201611/23051049/oj9ztizql3tsut3o.png');
-        }
-
         if (window.parent.initCss) {
             $('html').css('overflow', 'hidden');
             $('body').css('overflow', 'hidden');
