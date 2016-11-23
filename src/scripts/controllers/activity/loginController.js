@@ -13,6 +13,9 @@ function LoginController(UserService, $state, $stateParams) {
 
     init();
     function init() {
+        if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
+            document.title = window.WEIXINSHARE.shareTitle;
+        }
         if (UserService.getUID()) {
             console.log('已登陆');
             $state.go('findInvestor', {

@@ -13,6 +13,21 @@ function KrspaceController($stateParams, FindService, $state, UserService) {
     function init() {
         $('html').css('overflow', 'auto');
         $('body').css('overflow', 'auto');
+        initWeixin();
+        if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
+            document.title = window.WEIXINSHARE.shareTitle;
+        }
+    }
+
+    function initWeixin() {
+        window.WEIXINSHARE = {
+            shareTitle: '氪空间第8期毕业礼·独家招募',
+            shareUrl: window.location.href,
+            shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
+            shareDesc: '来「36氪创投助手」，发现最新最热优质项目！',
+        };
+        var obj = {};
+        window.InitWeixin(obj);
     }
 
     //查看是否参与过活动

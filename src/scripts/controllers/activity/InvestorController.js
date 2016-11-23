@@ -22,6 +22,10 @@ angular.module('defaultApp.controller').controller('InvestorController',
         checkUser();
 
         function checkUser() {
+            if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
+                document.title = window.WEIXINSHARE.shareTitle;
+            }
+
             if (!UserService.getUID()) {
                 console.log('未登陆');
                 $state.go('findLogin', {

@@ -8,6 +8,9 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
     init();
 
     function init() {
+        if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
+            document.title = window.WEIXINSHARE.shareTitle;
+        }
         $('html').css('overflow', 'auto');
         $('body').css('overflow', 'auto');
         if (hybrid.isInApp) {
