@@ -1,3 +1,30 @@
+<a name="1.12.0"></a>
+# [1.12.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.11...v1.12.0) (2016-11-23)
+
+
+### Bug Fixes
+
+* ui走查 ([27df17a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/27df17a))
+* 修复bug ([cc94907](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cc94907))
+* 修复bug ([ecf0256](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/ecf0256))
+* 修改bug ([b5f3f29](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b5f3f29))
+* 修改bug ([cc9cf1c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cc9cf1c))
+* 修改图片地址 ([1dadc06](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1dadc06))
+* 修改文案 ([9aba1a6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9aba1a6))
+* 修改样式 ([f83c7fa](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f83c7fa))
+* 修改样式 ([04ca3a3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/04ca3a3))
+* 修改样式 ([cae8858](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cae8858))
+* 修改路径 ([51a40bd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/51a40bd))
+* 增加title ([1fe9730](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1fe9730))
+* 投资人拉新活动完成，上线 ([b31f8f6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b31f8f6))
+
+
+### Features
+
+* 投资人拉新下载激活活动完成 ([8736511](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8736511))
+
+
+
 <a name="1.11.11"></a>
 ## [1.11.11](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.11.10...v1.11.11) (2016-11-21)
 
