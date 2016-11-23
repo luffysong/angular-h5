@@ -200,7 +200,6 @@ angular.module('defaultApp.controller').controller('InvestorController',
                 $scope.organization.addForm.name = val;
                 $scope.organization.addForm.id = undefined;
                 $scope.organization.addForm.type = undefined;
-                $scope.suggestOrganizationObj.word = '';
                 if (val !== $scope.user.investorEntityName) {
                     $scope.detailHasChange = true;
                 }
