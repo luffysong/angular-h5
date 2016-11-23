@@ -267,7 +267,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('findInvestor', {
         url:'/findInvestor?ktm_source',
         controller: 'InvestorController',
-        controllerAs: 'vm',
         templateUrl: 'templates/activity/investor.html',
     });
 

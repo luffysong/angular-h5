@@ -60,6 +60,7 @@ angular.module('defaultApp.controller').controller('InvestorController',
 
         function initUser() {
             $scope.errorGroup = UserService.errorGroup;
+            $scope.investorErrorGroup = UserService.investorErrorGroup;
             $scope.user = {
                 id: UserService.getUID(),
             };
@@ -235,6 +236,13 @@ angular.module('defaultApp.controller').controller('InvestorController',
             }
 
             if (!checkForm('investorValidateForm') || $scope.hasClick) {
+                return false;
+            }
+
+            if ($scope.investorValidateForm.pictures.uploaded || $scope.invest.pictures) {
+                $scope.investorValidateForm.pictures.$setValidity('required', true);
+            } else {
+                $scope.investorValidateForm.pictures.$setValidity('required', false);
                 return false;
             }
 
