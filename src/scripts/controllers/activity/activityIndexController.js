@@ -3,7 +3,7 @@ var  angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('ActivityIndexController', ActivityIndexController);
 
-function ActivityIndexController($stateParams, FindService, $state, UserService) {
+function ActivityIndexController($stateParams, FindService, $state, UserService, ErrorService) {
     var vm = this;
     vm.activityName = $stateParams.activityName;
     vm.start = start;
@@ -81,6 +81,8 @@ function ActivityIndexController($stateParams, FindService, $state, UserService)
             $state.go('findLogin', {
                 activityName: vm.activityName
             });
+        } else {
+            ErrorService.alert(err);
         }
     }
 }

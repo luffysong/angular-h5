@@ -337,14 +337,16 @@ angular.module('defaultApp.controller').controller('InvestorController',
         }
 
         function getInvestorTypeNumber(type) {
-            var INVESTOR_TYPE_META = {
-                PERSONAL_INVESTOR: 1
-            };
-            if (type === 'PERSONAL_INVESTOR') {
-                return INVESTOR_TYPE_META[type];
+
+            // 投资人类型对应
+            // 个人投资人: investorRole =2 ,entityType=1
+            // 机构投资人: investorRole =0 ,entityType=2
+            if (parseInt(type) === 2) {
+                return 1;
             } else {
-                return $scope.organization.addForm.type;
+                return 2;
             }
+
         }
 
         function error(err) {
