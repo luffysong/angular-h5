@@ -293,7 +293,7 @@ angular.module('defaultApp.controller').controller('InvestorController',
                 });
             } else if ($scope.user.auditStatus === 1) {
                 var editData = {
-                    investorRole: $scope.invest.investorRole,
+                    investorRole: getInvestorTypeNumber($scope.invest.investorRole),
                     investorEntityName: $scope.organization.addForm.name,
                     investorEntityId: $scope.organization.addForm.id,
                 };
