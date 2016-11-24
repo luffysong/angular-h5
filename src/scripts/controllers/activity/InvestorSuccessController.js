@@ -10,6 +10,7 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
     function init() {
         if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
             document.title = window.WEIXINSHARE.shareTitle;
+
         }
 
         $('.header-banner-wrapper').css('display', 'flex');
@@ -22,6 +23,11 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
         vm.activityName = $stateParams.activityName;
         if (typeof (vm.activityName) !== 'string' && vm.activityName[0]) {
             vm.activityName = vm.activityName[0];
+
+        }
+
+        if (vm.activityName) {
+            $('#openApp').attr('href', 'https://36kr.com/app/tou?ktm_source=investorSuccess.' + vm.activityName);
         }
 
         if (window.parent.initCss) {

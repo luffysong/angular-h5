@@ -49,6 +49,9 @@ function LoginController(UserService, $state, $stateParams) {
 
         window.initFooter = function () {
             $('.header-banner-wrapper').css('display', 'flex');
+            if (vm.activityName) {
+                $('#openApp').attr('href', 'https://36kr.com/app/tou?ktm_source=investorSuccess.' + vm.activityName);
+            }
         };
     }
 
