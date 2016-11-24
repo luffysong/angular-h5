@@ -293,10 +293,14 @@ angular.module('defaultApp.controller').controller('InvestorController',
                 });
             } else if ($scope.user.auditStatus === 1) {
                 var editData = {
-                    investorRole: getInvestorTypeNumber($scope.invest.investorRole),
+                    investorRole: $scope.invest.investorRole,
                     investorEntityName: $scope.organization.addForm.name,
                     investorEntityId: $scope.organization.addForm.id,
                 };
+                if ($scope.organization.addForm.type) {
+                    editData.investorEntityType = $scope.organization.addForm.type;
+                }
+
                 if ($scope.detailHasChange) {
                     var link   = $scope.invest.pictures || $scope.investorValidateForm.pictures.uploaded;
                     editData.businessCardLink = link;
