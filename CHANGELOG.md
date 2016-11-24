@@ -1,3 +1,13 @@
+<a name="1.13.1"></a>
+## [1.13.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.13.0...v1.13.1) (2016-11-24)
+
+
+### Bug Fixes
+
+* 增加唤醒埋点 ([9201697](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9201697))
+
+
+
 <a name="1.13.0"></a>
 # [1.13.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.12.2...v1.13.0) (2016-11-24)
 
