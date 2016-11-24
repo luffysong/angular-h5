@@ -1,3 +1,22 @@
+<a name="1.13.0"></a>
+# [1.13.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.12.2...v1.13.0) (2016-11-24)
+
+
+### Bug Fixes
+
+* 修改投资人审核身份逻辑 ([5c11d67](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5c11d67))
+* 修改路径 ([fa20b37](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/fa20b37))
+* 修改身份 ([368ba01](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/368ba01))
+* 投资人类型对应 ([9af38f6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9af38f6))
+* 投资人认证方式回退 ([2850cb3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/2850cb3))
+
+
+### Features
+
+* 增加wise活动页 ([5c8c2f5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5c8c2f5))
+
+
+
 <a name="1.12.2"></a>
 ## [1.12.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.12.1...v1.12.2) (2016-11-23)
 
