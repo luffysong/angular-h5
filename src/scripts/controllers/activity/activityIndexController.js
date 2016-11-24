@@ -1,9 +1,9 @@
 
 var  angular = require('angular');
 angular.module('defaultApp.controller')
-    .controller('KrspaceController', KrspaceController);
+    .controller('ActivityIndexController', ActivityIndexController);
 
-function KrspaceController($stateParams, FindService, $state, UserService) {
+function ActivityIndexController($stateParams, FindService, $state, UserService) {
     var vm = this;
     vm.activityName = $stateParams.activityName;
     vm.start = start;
@@ -25,11 +25,21 @@ function KrspaceController($stateParams, FindService, $state, UserService) {
 
     function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '【融资1V1暨氪空间9期项目抢先看】',
+            shareTitle: '36氪融资',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '来「36氪创投助手」，发现最新最热优质项目！',
         };
+
+        //根据不同活动activityName设置不同title
+        if (vm.activityName === 'krspace20161123') {
+            window.WEIXINSHARE.shareTitle = '【融资1V1暨氪空间9期项目抢先看】';
+        }
+
+        if (vm.activityName === 'wise20161124') {
+            window.WEIXINSHARE.shareTitle = '【Wise*36氪创投助手  免费票 限量抢】';
+        }
+
         var obj = {};
         window.InitWeixin(obj);
     }
@@ -38,7 +48,6 @@ function KrspaceController($stateParams, FindService, $state, UserService) {
     function start() {
 
         if (!UserService.getUID()) {
-            console.log('未登陆');
             $state.go('findLogin', {
                 activityName: vm.activityName
             });

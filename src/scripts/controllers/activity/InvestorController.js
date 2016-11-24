@@ -27,7 +27,6 @@ angular.module('defaultApp.controller').controller('InvestorController',
             }
 
             if (!UserService.getUID()) {
-                console.log('未登陆');
                 $state.go('findLogin', {
                     activityName: $scope.activityName
                 });

@@ -18,7 +18,6 @@ function LoginController(UserService, $state, $stateParams) {
         }
 
         if (UserService.getUID()) {
-            console.log('已登陆');
             $state.go('findInvestor', {
                 activityName: vm.activityName
             });
@@ -39,7 +38,6 @@ function LoginController(UserService, $state, $stateParams) {
 
         window.activityName = $stateParams.activityName;
         window.closeLoginModal = function () {
-            console.log('登陆成功!');
             $state.go('findInvestor', {
                 activityName: vm.activityName
             });

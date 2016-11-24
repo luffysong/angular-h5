@@ -242,9 +242,17 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     //创投助手app---活动页(氪空间)
     $stateProvider.state('findKrspace', {
         url:'/findKrspace?activityName',
-        controller: 'KrspaceController',
+        controller: 'ActivityIndexController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/krspace.html',
+    });
+
+    //创投助手app---活动页(wise)
+    $stateProvider.state('findWise', {
+        url:'/findWise?activityName',
+        controller: 'ActivityIndexController',
+        controllerAs: 'vm',
+        templateUrl: 'templates/activity/wise.html',
     });
 
     //创投助手app---活动页登陆
