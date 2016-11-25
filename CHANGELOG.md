@@ -1,3 +1,13 @@
+<a name="1.14.0"></a>
+# [1.14.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.13.1...v1.14.0) (2016-11-25)
+
+
+### Features
+
+* 增加新活动 ([cff4c2e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cff4c2e))
+
+
+
 <a name="1.13.1"></a>
 ## [1.13.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.13.0...v1.13.1) (2016-11-24)
 
