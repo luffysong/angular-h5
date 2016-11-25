@@ -37,7 +37,7 @@ function ActivityIndexController($stateParams, FindService, $state, UserService,
         }
 
         if (vm.activityName === 'wise20161124') {
-            window.WEIXINSHARE.shareTitle = '【Wise*36氪创投助手  免费票 限量抢】';
+            window.WEIXINSHARE.shareTitle = '【WISE*36氪创投助手  免费票 限量抢】';
         }
 
         if (vm.activityName === 'ideaBank20161125') {
