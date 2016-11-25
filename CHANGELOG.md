@@ -1,3 +1,13 @@
+<a name="1.14.2"></a>
+## [1.14.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.14.1...v1.14.2) (2016-11-25)
+
+
+### Bug Fixes
+
+* 修改分享文案 ([8e11e9c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8e11e9c))
+
+
+
 <a name="1.14.1"></a>
 ## [1.14.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.14.0...v1.14.1) (2016-11-25)
 
