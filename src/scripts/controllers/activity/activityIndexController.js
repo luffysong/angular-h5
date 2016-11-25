@@ -40,6 +40,10 @@ function ActivityIndexController($stateParams, FindService, $state, UserService,
             window.WEIXINSHARE.shareTitle = '【Wise*36氪创投助手  免费票 限量抢】';
         }
 
+        if (vm.activityName === 'ideaBank20161125') {
+            window.WEIXINSHARE.shareTitle = '「创投助手 x 大学生创业大赛」';
+        }
+
         var obj = {};
         window.InitWeixin(obj);
     }

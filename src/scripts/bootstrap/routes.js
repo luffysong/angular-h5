@@ -255,6 +255,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/activity/wise.html',
     });
 
+    //创投助手app---活动页(ideaBank)
+    $stateProvider.state('findIdeaBank', {
+        url:'/findIdeaBank?activityName',
+        controller: 'ActivityIndexController',
+        controllerAs: 'vm',
+        templateUrl: 'templates/activity/ideaBank.html',
+    });
+
     //创投助手app---活动页登陆
     $stateProvider.state('findLogin', {
         url:'/findLogin?activityName',

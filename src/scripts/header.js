@@ -12,6 +12,7 @@
 
         if (location.hash.indexOf('findKrspace') === -1 &&
             location.hash.indexOf('findWise') === -1 &&
+            location.hash.indexOf('findIdeaBank') === -1 &&
             location.hash.indexOf('findLogin') === -1 &&
             location.hash.indexOf('findLoginSuccess') === -1 &&
             location.hash.indexOf('findInvestor') === -1 &&
