@@ -1,3 +1,13 @@
+<a name="1.14.1"></a>
+## [1.14.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.14.0...v1.14.1) (2016-11-25)
+
+
+### Bug Fixes
+
+* 修改活动页样式 ([d0ec9e0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d0ec9e0))
+
+
+
 <a name="1.14.0"></a>
 # [1.14.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.13.1...v1.14.0) (2016-11-25)
 
