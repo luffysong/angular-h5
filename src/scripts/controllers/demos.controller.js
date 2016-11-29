@@ -29,7 +29,7 @@ function DemosController(demosService, projectColumnService,
         }else {
             vm.shareImgSave = cover.imgUrl;
             if (cover.type !== 'NORMAL') {
-                cover.imgUrl = 'https://pic.36krcnd.com/avatar/201611/11051619/zesbckdrckkkgh27.jpg';
+                cover.imgUrl = cover.imgUrl ||  'https://pic.36krcnd.com/avatar/201611/11051619/zesbckdrckkkgh27.jpg';
             }
 
             loadCollectionDetail(0);
