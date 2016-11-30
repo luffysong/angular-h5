@@ -28,10 +28,6 @@ function DemosController(demosService, projectColumnService,
             loadColumnDetail(0);
         }else {
             vm.shareImgSave = cover.imgUrl;
-            if (cover.type !== 'NORMAL') {
-                cover.imgUrl = cover.imgUrl ||  'https://pic.36krcnd.com/avatar/201611/11051619/zesbckdrckkkgh27.jpg';
-            }
-
             loadCollectionDetail(0);
         }
 

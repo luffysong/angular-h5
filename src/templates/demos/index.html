@@ -13,7 +13,7 @@
     <!--</div>-->
 
     <div class="demos-header">
-        <div class="header-img" ng-style="{'background-image': (vm.cover.headPic | backgroundUrl)}">
+        <div class="header-img" ng-style="{'background-image': (vm.cover.imgUrl | backgroundUrl)}">
             <p>
                 <span class="header-name">{{vm.cover.name}}</span>
                 <span class="header-proSetCount" ng-if="vm.cover.proSetCount">共{{vm.cover.proSetCount}}个{{vm.getCollectionType()}}</span>
