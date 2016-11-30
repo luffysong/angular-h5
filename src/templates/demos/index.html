@@ -33,15 +33,7 @@
         <section ng-if="vm.isColumn()">
             <ul infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
                 <li ng-style="{'background-image': (item.imgUrl | backgroundUrl)}"
-                    ng-click="vm.goProjects(item.id)" ng-if="item.type === 'NORMAL'"
-                    ng-repeat="item in vm.collectionInfoList track by $index">
-                    <div>
-                        <h3>{{item.name}}</h3>
-                        <h4>共{{item.proCount}}个项目</h4>
-                    </div>
-                </li>
-                <li style="background-image:url('https://pic.36krcnd.com/avatar/201611/11051619/zesbckdrckkkgh27.jpg')"
-                    ng-click="vm.goProjects(item.id)" ng-if="item.type !== 'NORMAL'"
+                    ng-click="vm.goProjects(item.id)"
                     ng-repeat="item in vm.collectionInfoList track by $index">
                     <div>
                         <h3>{{item.name}}</h3>

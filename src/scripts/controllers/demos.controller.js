@@ -75,6 +75,8 @@ function DemosController(demosService, projectColumnService,
     function renderCover(cover) {
         if (!isColumn()) {
             cover = convertCover(cover);
+        } else {
+            cover.imgUrl = cover.headPic;
         }
 
         vm.cover = cover;
@@ -88,7 +90,8 @@ function DemosController(demosService, projectColumnService,
         coverCopy.proSetCount = cover.proSetCount;
         coverCopy.name = cover.proSetName;
         coverCopy.intro = cover.fetchCode;
-        coverCopy.headPic = cover.imgUrl;
+        coverCopy.headPic = cover.headPic;
+        coverCopy.imgUrl = cover.imgUrl;
         return coverCopy;
     }
 
