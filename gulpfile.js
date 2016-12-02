@@ -411,27 +411,9 @@ gulp.task('build:scripts', ['scripts:vendor', 'scripts:init', 'build:addTemplate
 // Build Images
 gulp.task('build:images', function () {
     return gulp.src(['src/styles/images/**/*'])
-        .pipe($.imagemin({
-            optimizationLevel: 3,
-            progressive: true,
-            interlaced: true,
-        }))
         .pipe(gulp.dest('.tmp/images'))
         .pipe($.size());
 });
-
-// gulp.task('build:images', function() {
-//     return gulp.src(['src/styles/images#<{(||)}>#*'])
-//         .pipe($.changed('.tmp-images/', { hasChanged: $.changed.compareSha1Digest }))
-//         .pipe(gulp.dest('.tmp-images/'))
-//         .pipe($.imagemin({
-//             optimizationLevel: 3,
-//             progressive: true,
-//             interlaced: true,
-//         }))
-//         .pipe(gulp.dest('.tmp/images'))
-//         .pipe($.size());
-// });
 
 // Build Html
 gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:scripts', 'build:images'], function () {
