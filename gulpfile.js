@@ -339,13 +339,11 @@ gulp.task('watch', function () {
     gulp.watch('src/styles/**/*.less', ['styles']);
     gulp.watch(['src/local_lib/**/*.js'], ['scripts:vendor']);
     gulp.watch(['src/scripts/**/*.js'], ['scripts:browserify']);
-    gulp.watch(['src/navigation/*.js', 'src/navigation/*.html', 'src/navigation/*.css'], ['header']);
 });
 
 // Build Assets
 gulp.task('build:assets', function () {
-    return gulp.src(['src/*.{ico,png,txt,xml}', 'src/*/dist/navigation.js'])
-        .pipe($['if']('*.js', $.uglify()))
+    return gulp.src(['src/*.{ico,png,txt,xml}'])
         .pipe(gulp.dest('dist'))
         .pipe($.size());
 });
@@ -444,7 +442,6 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
     return gulp.src(['.tmp/*.html'])
         .pipe($.replace('styles/images/', 'images/'))
         .pipe(assets)
-        .pipe($.debug())
         .pipe($['if']('*.css', $.cssnano({ safe:true })))
         .pipe($['if'](/.*krmin\.js/,
             $.uglify({ compress:{
