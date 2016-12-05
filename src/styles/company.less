@@ -50,6 +50,30 @@ h3:after{
    background:rgba(0,0,0,0.8);
    z-index: 999;
    display:none;
+   &.maskqrcode > div {
+       position: absolute;
+       width: 210px;
+       height: 240px;
+       left: 50%;
+       top: 50%;
+       margin-top: -120px;
+       margin-left: -105px;
+       background: #fff;
+       border-radius: 5px;
+       p {
+           font-size: 15px;
+           text-align: center;
+           color: #5A626D;
+           line-height: 25px;
+           margin-top: 15px;
+       }
+   }
+   .qrcode {
+       margin: 0 auto;
+       margin-top: 25px;
+       margin-bottom: 15px;
+   }
+
 }
 .arrow{
     overflow: hidden;
@@ -77,6 +101,10 @@ h3:after{
 .guide-desc > img{
     float: right;
     margin-right: 10px;
+}
+.qrcode {
+    width: 160px;
+    height: 160px;
 }
 .logo{
     .logo(18px, 85px);

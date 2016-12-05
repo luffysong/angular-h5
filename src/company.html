@@ -18,6 +18,7 @@
 <!-- build:js /scripts/zepto.min.js -->
     <script src="/components/zepto/zepto.min.js"></script>
     <script src="/components/purl/purl.js"></script>
+    <script src="/components/qrcodejs/qrcode.min.js"></script>
 <!-- endbuild -->
 <script>
     var cid = purl(location.href).segment(2);
@@ -45,6 +46,10 @@
         clearTimeout(timeout);
         window.removeEventListener('pagehide', preventPopup);
     }
+
+    function isWeb() {
+        return document.ontouchstart === undefined;
+    }
     function startApp(androidUrl){ //定义startApp函数
         var ifr = document.createElement('iframe');
         ifr.src = androidUrl || appurl;
@@ -55,6 +60,18 @@
             ifr = null;
         },500);
         window.addEventListener('pagehide', preventPopup);
+    }
+
+    function makeQrcode(url) {
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: url,
+            width: 160,
+            height: 160,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+        return qrcode;
     }
 
     function goYingyongbao(prefix){
@@ -69,6 +86,7 @@
     $.getJSON(API + cid + '/sharebasic/v3',function(data){
         if(data.code === SUCCESS){
             data = data.data;
+            makeQrcode('https://36kr.com/app/tou?ktm_source=comshareh5&crmCompany=' + data.ccid);
             var title = $('title').html();
             $('title').html(title+ '：'+ data.name);
             $(function(){
@@ -76,7 +94,7 @@
                 $('#logo').error(function(e) {
                     this.src = '//krplus-pic.b0.upaiyun.com/avatar/201606/27023623/g5zmv2gp7gacp0ly.png';
                 });
-
+                $('#downloadBtn').attr('href', 'http://rong.36kr.com/company/' + data.cid + '/universallink');
                 $('#name').html(data.name);
                 $('#brief').html(data.brief);
                 $('#tags').html(data.tags);
@@ -94,22 +112,35 @@
         window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
     }
 
+    function isWeixin() {
+        return /MicroMessenger/i.test(navigator.userAgent);
+    }
+
+    function isUniversalLink() {
+        return location.href.indexOf('universallink') > -1;
+    }
+
     $(function () {
         var userSystem=navigator.userAgent; //userAgent
-        $('a').click(function clickCb(e){
-            e.preventDefault();
-            if(/MicroMessenger/i.test(userSystem)){ //在微信中打开
-                 $('.mask').show();  //ios用safari打开
-             }else if(userSystem.indexOf('Android') > -1){
+
+        if(isUniversalLink() &&
+            isWeixin()
+        ) {
+            $('.masksafari').show();
+        }
+        $('#downloadBtn').click(function clickCb(e){
+            if (isWeb()) {
+                e.preventDefault();
+                $('.maskqrcode').show();
+                return;
+            }
+            if(userSystem.indexOf('Android') > -1){
                 e.preventDefault();
                 startApp('krtou://company/' + cid);
                 goYingyongbao('android');
-             }else if(/iphone/i.test(userSystem)){
-                startApp();
-                goYingyongbao('ios');
-             }
+            }
         })
-        if ((!(/MicroMessenger/i.test(userSystem)))&&(parseInt(fromWeixin) === 1)){
+        if (!isWeixin()&&(parseInt(fromWeixin) === 1)){
             if(userSystem.indexOf('Android') > -1){
                 startApp('krtou://company/' + cid);
                 goYingyongbao('android');
@@ -117,13 +148,22 @@
                 startApp();
                 goYingyongbao('ios');
             }
+        } else if(!isWeixin() && isUniversalLink()) {
+            startApp();
+            goYingyongbao('ios');
         }
     })
 
 </script>
 </head>
 <body>
-    <div class="mask">
+    <div class="mask maskqrcode">
+        <div>
+            <div id="qrcode" class="qrcode"></div>
+            <p>使用创投助手扫描二维码</p>
+        </div>
+    </div>
+    <div class="mask masksafari">
         <div class="arrow">
             <img width="36px" src="/styles/images/guide-ios-arrow.png" alt="">
         </div>
@@ -154,7 +194,7 @@
             </div>
         </div>
         <div>
-            <a id="downloadBtn" href="">查看项目详情</a>
+            <a id="downloadBtn" href="javascript:;">查看项目详情</a>
         </div>
 
     </div>
