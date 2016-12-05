@@ -263,6 +263,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/activity/ideaBank.html',
     });
 
+    //创投助手app---活动页(wonderland)
+    $stateProvider.state('wonderland', {
+        url:'/wonderland?activityName',
+        controller: 'ActivityIndexController',
+        controllerAs: 'vm',
+        templateUrl: 'templates/activity/wonderland.html',
+    });
+
     //创投助手app---活动页登陆
     $stateProvider.state('findLogin', {
         url:'/findLogin?activityName',

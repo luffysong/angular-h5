@@ -34,14 +34,12 @@ function ActivityIndexController($stateParams, FindService, $state, UserService,
         //根据不同活动activityName设置不同title
         if (vm.activityName === 'krspace20161123') {
             window.WEIXINSHARE.shareTitle = '【融资1V1暨氪空间9期项目抢先看】';
-        }
-
-        if (vm.activityName === 'wise20161124') {
+        } else if (vm.activityName === 'wise20161124') {
             window.WEIXINSHARE.shareTitle = '【WISE*36氪创投助手  免费票 限量抢】';
-        }
-
-        if (vm.activityName === 'ideaBank20161125') {
+        } else if (vm.activityName === 'ideaBank20161125') {
             window.WEIXINSHARE.shareTitle = '创投助手 x 赛石杯第三届IdeaBank全国泛大学生创业大赛';
+        } else if (vm.activityName === 'wonderland20161205') {
+            window.WEIXINSHARE.shareTitle = '36氪创投助手*WISE，来史上最炫娃娃机领取最搞怪“娃娃”！胆大者来！';
         }
 
         var obj = {};

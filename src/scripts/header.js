@@ -13,6 +13,7 @@
         if (location.hash.indexOf('findKrspace') === -1 &&
             location.hash.indexOf('findWise') === -1 &&
             location.hash.indexOf('findIdeaBank') === -1 &&
+            location.hash.indexOf('wonderland') === -1 &&
             location.hash.indexOf('findLogin') === -1 &&
             location.hash.indexOf('findLoginSuccess') === -1 &&
             location.hash.indexOf('findInvestor') === -1 &&
@@ -25,6 +26,7 @@
     function allowRemoveHeader() {
         if (location.hash.indexOf('demos') > -1 ||
             location.hash.indexOf('find') > -1 ||
+            location.hash.indexOf('wonderland') > -1 ||
             location.hash.indexOf('roadShow') > -1) {
             return true;
         } else {
