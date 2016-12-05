@@ -1,3 +1,14 @@
+<a name="1.16.0"></a>
+# [1.16.0](f2e/kr-rong-h5/compare/v1.15.0...v1.16.0) (2016-12-05)
+
+
+### Features
+
+* 压缩图片 ([87cac2e](f2e/kr-rong-h5/commits/87cac2e))
+* 新增wonderland20161205活动报名页 ([25997d4](f2e/kr-rong-h5/commits/25997d4))
+
+
+
 <a name="1.15.0"></a>
 # [1.15.0](f2e/kr-rong-h5/compare/v1.14.4...v1.15.0) (2016-12-01)
 
