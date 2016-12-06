@@ -8,7 +8,7 @@
         </div>
         <!-- 自定义错误信息 -->
     </div>
-    <div class="welcome validate-welcome-wrapper">
+    <div class="welcome validate-welcome-wrapper" ng-show="validate.step === 1">
         <div class="welcome-words"
              ng-show="investorValidateApply.status != 'success' && investorValidateApply.status !='checking'">
             <p>认证成为投资人,开启发现项目之旅</p>
@@ -23,7 +23,7 @@
                         <li style="background-image: url({{ guideForm.avatar.uploaded || user.avatar | image:70: 'avatar'}});"
                             class="pic-avatar">
                             <div ng-show="guideForm.avatar.uploading"
-                                ng-style="{height: guideForm.avatar.progress + '%'}" ></div>
+                                 ng-style="{height: guideForm.avatar.progress + '%'}" ></div>
                         </li>
                         <li ng-show='!guideForm.picture.uploading'>
                             <input class="input-file" type="file" name="avatar" accept="image/*"
@@ -99,7 +99,7 @@
                   class="form-container">
                 <div error-wrapper error-group="investorErrorGroup"></div>
 
-                <div>
+                <div ng-show="validate.step === 1">
 
                     <div class="line">
                         <label>投资身份</label>
@@ -121,8 +121,8 @@
                                 <label>机构</label>
                             </div>
                             <div kr-suggest type="comAndOrg" class="kr-fleft control"
-                                suggest-obj="suggestOrganizationObj" max-length="30" min-length="1"
-                                autocomplete-options="suggestOrganizationOption" placeholder="未填写" name="companyName"
+                                 suggest-obj="suggestOrganizationObj" max-length="30" min-length="1"
+                                 autocomplete-options="suggestOrganizationOption" placeholder="未填写" name="companyName"
                             > </div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                         <label>职位</label>
                         <div class="control">
                             <div kr-suggest type="position" class="kr-fleft control position"
-                                suggest-obj="positionSuggestObj" max-length="30" min-length="1"
+                                 suggest-obj="positionSuggestObj" max-length="30" min-length="1"
                                  placeholder="未填写" name="position"
                             > </div>
                         </div>
@@ -145,22 +145,82 @@
                     </div>
                 </div>
 
-                <div class="upload-wrapper">
-                    <!--上传名片-->
-                    <div class="line upload-pictures">
-                        <label for="pictures">上传名片<span class="tip">(仅供审核使用)</span></label>
-                        <div class="col-max">
-                            <div class="item">
-                                <div class="intro-pic-list icon-select">
-                                    <div class="pic-wrapper pic-input">
-                                        <div class="pic-wrapper" ng-show="investorValidateForm.pictures.uploaded || invest.pictures" style="background-image: url({{ investorValidateForm.pictures.uploaded || invest.pictures}});"></div>
-                                        <input ng-file-select
-                                               type="file" name="pictures" id="pictures" class="input-file" accept="image/*"
-                                               ng-file-change="imgFileSelected(investorValidateForm.pictures, $files)"
-                                               ng-click="androidUpload(investorValidateForm.pictures, $event, 0)"
-                                               ng-model="pictures" ng-multiple="false" resetOnClick="true"
-                                        />
-                                        <div ng-show="investorValidateForm.pictures.uploading" class="stick pic-stick" style="height:{{investorValidateForm.pictures.progress}}%;"></div>
+                <div ng-show="validate.step === 2">
+
+                    <div class="recommend-investor">
+                        <div class="recommend-tip">
+                            根据您填写的信息，系统判断您为知名投资人，已获取了您的公开信息，请选择与您匹配的信息（如都不匹配，请直接上传名片）：
+                        </div>
+                        <div class="recommend-container" ng-if="suggestInvestor.length">
+                            <img class="left-arrow" src="/styles/images/find/arrowLeft@2x.png" ng-if="suggestInvestor.length" />
+                            <img class="right-arrow" src="/styles/images/find/arrowRight@2x.png" ng-if="suggestInvestor.length" />
+                            <div class="recommend-slick">
+                                <slick slides-to-show="1" prev-arrow=".left-arrow" next-arrow=".right-arrow" infinite="true">
+                                    <div class="investor-container" ng-repeat="item in suggestInvestor" ng-class="{active: item.active}">
+                                        <div class="investor-item" ng-click="selectItem($index)" ng-class="{active: item.active}">
+                                            <span class="select-tag icon-app-selected"></span>
+                                            <div class="user-top">
+                                                <a href="" ui-sref="investorInfo({id:item.id})" target="_blank" ng-click="$event.stopPropagation();">
+                                                    <img ng-src="{{item.logo || '/images/investor-logo.png'}}" class="user-logo" alt="">
+                                                </a>
+                                                <div class="user-content">
+                                                    <a href="" class="user-name" ui-sref="investorInfo({id:item.id})" target="_blank" ng-click="$event.stopPropagation();">
+                                                        {{item.name}}
+                                                    </a>
+                                                    <section class="user-work">
+                                                        {{item.orgName}} <span ng-if="item.orgName && item.position">|</span> {{item.position}}
+                                                    </section>
+                                                    <section class="follow-industry">
+                                                        <img class="tag-img" src="/styles/images/investorValidate/follow.png" />
+                                                        <span ng-if="!item.industryEnumList.length">暂无</span>
+                                                        <span ng-repeat="obj in item.industryEnumList" ng-if="item.industryEnumList.length">
+                                                  <span>{{obj}}</span>
+                                                  <span ng-if="$index !== item.industryEnumList.length - 1"> · </span>
+                                                </span>
+                                                    </section>
+                                                    <section class="follow-industry">
+                                                        <img class="tag-img" src="/styles/images/investorValidate/phase.png" />
+                                                        <span ng-if="!item.phaseEnumList.length">暂无</span>
+                                                        <span class="follow-item" ng-repeat="obj in item.phaseEnumList" ng-if="item.phaseEnumList.length" ng-class="{'hidePoint' : $index === item.phaseEnumList.length-1}">
+                                              <span>{{obj}}</span>
+                                              <span class="list-point"> · </span>
+                                            </span>
+                                                    </section>
+                                                    <div class="user-bottom">
+                                                        已投：
+                                                        <span ng-if="!item.investCaseList.length">暂无</span>
+                                                        <span class="case-item" ng-repeat="obj in item.investCaseList" ng-if="item.investCaseList.length" ng-class="{'hidePoint' : $index === item.phaseEnumList.length-1}">
+                                                <span>{{obj.name}}</span>
+                                                <span class="list-point" ng-if="$index !== item.investCaseList.length - 1">、</span>
+                                                </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </slick>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="upload-wrapper">
+                        <!--上传名片-->
+                        <div class="line upload-pictures">
+                            <label for="pictures">上传名片<span class="tip">(仅供审核使用)</span></label>
+                            <div class="col-max">
+                                <div class="item">
+                                    <div class="intro-pic-list icon-select">
+                                        <div class="pic-wrapper pic-input">
+                                            <div class="pic-wrapper" ng-show="investorValidateForm.pictures.uploaded || invest.pictures" style="background-image: url({{ investorValidateForm.pictures.uploaded || invest.pictures}});"></div>
+                                            <input ng-file-select
+                                                   type="file" name="pictures" id="pictures" class="input-file" accept="image/*"
+                                                   ng-file-change="imgFileSelected(investorValidateForm.pictures, $files)"
+                                                   ng-click="androidUpload(investorValidateForm.pictures, $event, 0)"
+                                                   ng-model="pictures" ng-multiple="false" resetOnClick="true"
+                                            />
+                                            <div ng-show="investorValidateForm.pictures.uploading" class="stick pic-stick" style="height:{{investorValidateForm.pictures.progress}}%;"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -169,11 +229,14 @@
                 </div>
 
 
-                <div class="basic-info"></div>
-                <div class="form-submit">
-                    <a href="" class="btn btn-default btn-auth" ng-click="submitForm($event)" ng-disabled="hasClick">提交认证</a>
-                </div>
+                <!--<div class="basic-info"></div>-->
+
             </form>
+            <div class="next-step" ng-click="nextStep()" ng-if="validate.step === 1">还有一步，上传名片</div>
+            <div class="form-submit">
+                <a class="submit-btn" href="" ng-click="submitForm($event)" ng-disabled="hasClick" ng-if="validate.step === 2">提交认证</a>
+            </div>
+            <span class="prev-page" ng-click="validate.step = 1" ng-if="validate.step === 2">返回上一页</span>
         </div>
     </div>
     <!-- 申请成功 -->
@@ -202,9 +265,9 @@
 </div>
 
 <script type="text/ng-template" id="templates/util/pop-captcha.html">
-<div class="pop-form">
-    <div class="geetest-captcha">
-      <div geetest type="type" phone="phone" is-voice="isVoice" callback="callback"></div>
+    <div class="pop-form">
+        <div class="geetest-captcha">
+            <div geetest type="type" phone="phone" is-voice="isVoice" callback="callback"></div>
+        </div>
     </div>
-</div>
 </script>

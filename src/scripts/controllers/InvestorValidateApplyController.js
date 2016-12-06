@@ -13,6 +13,72 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         PopCaptcha) {
 
         $scope.positionSuggestObj = {};
+        $scope.validate = {
+            step: 2
+        };
+        $scope.currentIndex = 0;
+
+        $scope.selectItem = function (index) {
+            angular.forEach($scope.suggestInvestor, function (item, i) {
+                if (~~index === ~~i) {
+                    item.active = !item.active;
+                } else {
+                    item.active = false;
+                }
+            });
+        };
+
+        /*InvestorauditService.suggestInvestor({
+            name: '王',
+            orgName: '红杉'
+        }, function (data) {
+            console.log(data);
+        });*/
+
+        $scope.suggestInvestor = [
+            {
+                name: '周霄',
+                orgName: '红杉资本',
+                position: 'CEO',
+                industryEnumList: [],
+                investCaseList: [
+                    {
+                        id: 33952,
+                        investDate: 1306339200000,
+                        name: '伊美尔'
+                    }
+                ],
+                logo: 'https://krid-assets.b0.upaiyun.com/uploads/user/avatar/199022/5b646739-7ae2-4c48-b44b-fd4059995a54.jpeg!480'
+            },
+            {
+                name: '周',
+                orgName: '红杉资本',
+                position: 'CEO',
+                industryEnumList: [],
+                investCaseList: [
+                    {
+                        id: 33952,
+                        investDate: 1306339200000,
+                        name: '伊美尔'
+                    }
+                ],
+                logo: 'https://krid-assets.b0.upaiyun.com/uploads/user/avatar/199022/5b646739-7ae2-4c48-b44b-fd4059995a54.jpeg!480'
+            },
+            {
+                name: '霄',
+                orgName: '红杉资本',
+                position: 'CEO',
+                industryEnumList: [],
+                investCaseList: [
+                    {
+                        id: 33952,
+                        investDate: 1306339200000,
+                        name: '伊美尔'
+                    }
+                ],
+                logo: 'https://krid-assets.b0.upaiyun.com/uploads/user/avatar/199022/5b646739-7ae2-4c48-b44b-fd4059995a54.jpeg!480'
+            }
+        ];
         $scope.organization = {
             addForm: {
 
@@ -337,11 +403,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.intro = {};
 
         $scope.hasClick = false;
-        /*表单提交*/
-        $scope.submitForm = function () {
 
+        $scope.nextStep = function () {
             Error.hide();
-
             if ($scope.guideForm.avatar.uploaded || $scope.user.avatar) {
                 $scope.guideForm.avatar.$setValidity('required', true);
 
@@ -355,6 +419,15 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 return false;
             }
 
+            if (!checkForm('investorValidateForm') || $scope.hasClick) {
+                return false;
+            }
+
+            $scope.validate.step = 2;
+
+        };
+        /*表单提交*/
+        $scope.submitForm = function () {
             if (!checkForm('investorValidateForm') || $scope.hasClick) {
                 return false;
             }

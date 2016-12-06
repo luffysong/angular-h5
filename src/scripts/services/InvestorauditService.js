@@ -32,6 +32,16 @@ angular.module('defaultApp.service').service('InvestorauditService', [
                 }).catch(function (err) {
                     error && error(err);
                 });
+            },
+
+            //获取推荐投资人
+
+            suggestInvestor: function (data, callback, error) {
+                $http.get('/api/investor/auth?' + $.param(data)).success(function (response) {
+                    callback && callback(response);
+                }).catch(function (err) {
+                    error && error(err);
+                });
             }
 
         };
