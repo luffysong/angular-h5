@@ -1,3 +1,19 @@
+<a name="1.17.0"></a>
+# [1.17.0](f2e/kr-rong-h5/compare/v1.16.0...v1.17.0) (2016-12-06)
+
+
+### Bug Fixes
+
+* 音乐产业大会文案修改 ([dc17585](f2e/kr-rong-h5/commits/dc17585))
+
+
+### Features
+
+* 增加音乐产业大会报名 ([a6de3f3](f2e/kr-rong-h5/commits/a6de3f3))
+* 项目分享页优化 ([77d35ba](f2e/kr-rong-h5/commits/77d35ba))
+
+
+
 <a name="1.16.0"></a>
 # [1.16.0](f2e/kr-rong-h5/compare/v1.15.0...v1.16.0) (2016-12-05)
 
