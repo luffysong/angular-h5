@@ -5,7 +5,7 @@
     .section-content{
         .section-one{
             padding:4% 4% 0 4%;
-            h3{
+            h1, h3, h2{
                 font-size: 15px;
                 color: #222C38;
                 letter-spacing: -0.07px;
@@ -13,12 +13,22 @@
                 margin: 0 0 10px 0;
                 font-weight: 600;
             }
+            h1, h2 {
+                text-align: center;
+            }
+            h2 {
+                font-size: 13px;
+            }
             p{
                 font-size: 14px;
                 color: #5A626D;
                 letter-spacing: -0.07px;
                 line-height: 24px;
                 margin: 0;
+            }
+            li {
+                list-style-position: inside;
+                list-style-type: decimal;
             }
             .section-line{
                 font-size: 14px;
@@ -58,5 +68,8 @@
         position: fixed;
         bottom: 0;
         width: 100%;
+        &.disabled {
+            background: #ccc;
+        }
     }
 }
