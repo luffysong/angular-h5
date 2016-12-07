@@ -1,3 +1,13 @@
+<a name="1.17.1"></a>
+## [1.17.1](f2e/kr-rong-h5/compare/v1.17.0...v1.17.1) (2016-12-07)
+
+
+### Bug Fixes
+
+* js打包被覆盖 ([a5ec38a](f2e/kr-rong-h5/commits/a5ec38a))
+
+
+
 <a name="1.17.0"></a>
 # [1.17.0](f2e/kr-rong-h5/compare/v1.16.0...v1.17.0) (2016-12-06)
 
