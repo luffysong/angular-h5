@@ -1,3 +1,13 @@
+<a name="1.17.2"></a>
+## [1.17.2](f2e/kr-rong-h5/compare/v1.17.1...v1.17.2) (2016-12-08)
+
+
+### Bug Fixes
+
+* 音乐大会更改头图 文案 ([d0064bc](f2e/kr-rong-h5/commits/d0064bc))
+
+
+
 <a name="1.17.1"></a>
 ## [1.17.1](f2e/kr-rong-h5/compare/v1.17.0...v1.17.1) (2016-12-07)
 
