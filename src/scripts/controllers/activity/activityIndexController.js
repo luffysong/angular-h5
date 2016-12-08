@@ -40,8 +40,8 @@ function ActivityIndexController($stateParams, FindService, $state, UserService,
             window.WEIXINSHARE.shareTitle = '创投助手 x 赛石杯第三届IdeaBank全国泛大学生创业大赛';
         } else if (vm.activityName === 'wonderland20161205') {
             window.WEIXINSHARE.shareTitle = '36氪创投助手*WISE，来史上最炫娃娃机领取最搞怪“娃娃”！胆大者来！';
-        } else if (vm.activityName === 'musicRoadshow20161206') {
-            window.WEIXINSHARE.shareTitle = '第四届中国音乐产业大会投融资项目路演-36氪创投助手独家招募投资人';
+        } else if (vm.activityName.indexOf('musicRoadshow20161206') > -1) {
+            window.WEIXINSHARE.shareTitle = '第四届中国音乐产业大会投融资项目路演--36氪创投助手独家招募投资人与项目方';
         }
 
         var obj = {};
