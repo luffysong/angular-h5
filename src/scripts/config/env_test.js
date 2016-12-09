@@ -6,4 +6,5 @@ window.projectEnvConfig = {
     jrHost:'test01.36jr.com',
     ucHost: 'uctest01.36kr.com',
     helpHost: 'helptest01.36kr.com',
+    nrongHost: 'nrongtest01.36kr.com'
 };

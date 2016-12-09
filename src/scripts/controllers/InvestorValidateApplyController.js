@@ -14,8 +14,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
         $scope.positionSuggestObj = {};
         $scope.validate = {
-            step: 2
+            step: 1
         };
+        $scope.params = {};
         $scope.currentIndex = 0;
 
         $scope.selectItem = function (index) {
@@ -26,59 +27,38 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     item.active = false;
                 }
             });
+
+            $scope.getField();
         };
 
-        /*InvestorauditService.suggestInvestor({
-            name: '王',
-            orgName: '红杉'
-        }, function (data) {
-            console.log(data);
-        });*/
+        $scope.getField = function () {
+            angular.forEach($scope.suggestInvestor, function (item, index) {
+                if (item.active) {
+                    $scope.params.relatedId = angular.copy($scope.suggestInvestor[index].id);
+                    $scope.params.relatedEntityName = angular.copy($scope.suggestInvestor[index].orgName);
+                    $scope.params.relatedName = angular.copy($scope.suggestInvestor[index].name);
+                    $scope.params.relatedPosition = angular.copy($scope.suggestInvestor[index].position);
+                    $scope.params.singleInvestMin = angular.copy($scope.suggestInvestor[index].singleInvestMin);
+                    $scope.params.singleInvestMax = angular.copy($scope.suggestInvestor[index].singleInvestMax);
+                    $scope.params.singleInvestUnit = $scope.suggestInvestor[index].singleInvestUnit ? angular.copy($scope.suggestInvestor[index].singleInvestUnit) : 'CNY';
+                }
+            });
+        };
 
-        $scope.suggestInvestor = [
-            {
-                name: '周霄',
-                orgName: '红杉资本',
-                position: 'CEO',
-                industryEnumList: [],
-                investCaseList: [
-                    {
-                        id: 33952,
-                        investDate: 1306339200000,
-                        name: '伊美尔'
-                    }
-                ],
-                logo: 'https://krid-assets.b0.upaiyun.com/uploads/user/avatar/199022/5b646739-7ae2-4c48-b44b-fd4059995a54.jpeg!480'
-            },
-            {
-                name: '周',
-                orgName: '红杉资本',
-                position: 'CEO',
-                industryEnumList: [],
-                investCaseList: [
-                    {
-                        id: 33952,
-                        investDate: 1306339200000,
-                        name: '伊美尔'
-                    }
-                ],
-                logo: 'https://krid-assets.b0.upaiyun.com/uploads/user/avatar/199022/5b646739-7ae2-4c48-b44b-fd4059995a54.jpeg!480'
-            },
-            {
-                name: '霄',
-                orgName: '红杉资本',
-                position: 'CEO',
-                industryEnumList: [],
-                investCaseList: [
-                    {
-                        id: 33952,
-                        investDate: 1306339200000,
-                        name: '伊美尔'
-                    }
-                ],
-                logo: 'https://krid-assets.b0.upaiyun.com/uploads/user/avatar/199022/5b646739-7ae2-4c48-b44b-fd4059995a54.jpeg!480'
-            }
-        ];
+        $scope.getSuggestInvestor = function () {
+            var params = $scope.invest && $scope.invest.investorRole === 'COM_ORG' ? {
+                name: $scope.user.name
+            } : {
+                name: $scope.user.name,
+                orgName: $scope.organization.addForm.name
+            };
+
+            InvestorauditService.suggestInvestor(params, function (data) {
+                $scope.suggestInvestor = data;
+                console.log(data);
+            });
+        };
+
         $scope.organization = {
             addForm: {
 
@@ -253,23 +233,24 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
         initUser();
 
-        function initInvestor() {
+        /*function initInvestor() {
             $scope.investorErrorGroup = UserService.investorErrorGroup;
 
             $scope.investorValidateApply = {
                 status:''
             };
 
-            /*查询投资人认证申请状态*/
-            InvestorauditService.queryStatus({}, function (response) {
+            /!*查询投资人认证申请状态*!/
+            InvestorauditService.getStatus(function (response) {
+
                 //response.status = -1;
-                switch (response.status){
-                    /*审核中*/
-                    case 0:
+                switch (response.state){
+                    /!*审核中*!/
+                    case 'PENDING':
                         $scope.investorValidateApply.status = 'checking';
                         break;
-                    /*审核通过*/
-                    case 1 :
+                    /!*审核通过*!/
+                    case 'PASS':
                         $scope.investorValidateApply.status = 'success';
                         break;
                     default:
@@ -285,9 +266,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }
             });
 
-        }
+        }*/
 
-        initInvestor();
+        //initInvestor();
 
         $timeout(function () {
             window.scroll(0, 0);
@@ -390,9 +371,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             on_select: function (selected) {
                 $scope.organization.isAdd = false;
                 var organization = selected.obj;
-                $scope.organization.addForm.name = organization.name;
-                $scope.organization.addForm.id = organization.id;
+                $scope.organization.addForm.name = $scope.params.orgName = organization.name;
+                $scope.organization.addForm.id = $scope.params.orgId = organization.id;
                 $scope.organization.addForm.type = organization.type;
+                $scope.params.orgType = organization.entityType;
             }
         };
 
@@ -424,6 +406,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             }
 
             $scope.validate.step = 2;
+            $scope.getSuggestInvestor();
 
         };
         /*表单提交*/
@@ -480,15 +463,19 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         //发送投资人认证数据
         function send() {
             var businessCardLink   = $scope.invest.pictures || $scope.investorValidateForm.pictures.uploaded;
-            $scope.organization.addForm = $scope.organization.addForm;
-            InvestorauditService.save({
-                entityType: getInvestorTypeNumber($scope.invest.investorRole),
-                entityId:$scope.organization.addForm.id,
-                entityName:$scope.organization.addForm.name,
-                position: $scope.positionSuggestObj.word,
-                businessCardLink: businessCardLink,
-                weixin: $scope.user.weixin
-            }).then(function () {
+            $scope.params.avatar = $scope.guideForm.avatar.uploaded || $scope.user.avatar;
+            $scope.params.realName = $scope.user.name;
+            $scope.params.businessCard = businessCardLink;
+            $scope.params.investorRoleEnum = $scope.invest.investorRole;
+            if ($scope.getPhoneWithCountryCode()) {
+                $scope.params.phone = $scope.getPhoneWithCountryCode();
+            }
+
+            if ($scope.invest.investorRole === 'COM_ORG') {
+                $scope.params.position = $scope.positionSuggestObj.word;
+            }
+
+            InvestorauditService.submit($scope.params).then(function () {
                 try {
                     window.webkit.messageHandlers.investor.postMessage();
                     return;
@@ -502,7 +489,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             });
         }
 
-        function getInvestorTypeNumber(type) {
+        /*function getInvestorTypeNumber(type) {
             var INVESTOR_TYPE_META = {
                 PERSONAL_INVESTOR: 1
             };
@@ -511,6 +498,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             } else {
                 return $scope.organization.addForm.type;
             }
-        }
+        }*/
     }
 );

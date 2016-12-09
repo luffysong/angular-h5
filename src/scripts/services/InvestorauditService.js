@@ -34,13 +34,28 @@ angular.module('defaultApp.service').service('InvestorauditService', [
                 });
             },
 
-            //获取推荐投资人
-
-            suggestInvestor: function (data, callback, error) {
-                $http.get('/api/investor/auth?' + $.param(data)).success(function (response) {
+            getStatus: function (callback, error) {
+                $http.get('//' + projectEnvConfig.nrongHost + '/n/api/investor/auth/state').success(function (response) {
                     callback && callback(response);
                 }).catch(function (err) {
                     error && error(err);
+                });
+            },
+
+            //获取推荐投资人
+
+            suggestInvestor: function (data, callback, error) {
+                $http.get('//' + projectEnvConfig.nrongHost + '/n/api/investor/auth/suggest-investor?' + $.param(data)).success(function (response) {
+                    callback && callback(response);
+                }).catch(function (err) {
+                    error && error(err);
+                });
+            },
+
+            //提交认证H5
+            submit: function (data) {
+                return $http.post('//' + projectEnvConfig.nrongHost + '/n/api/investor/auth?action=h5', $.param(data, true)).success(function (response) {
+                    return response;
                 });
             }
 
