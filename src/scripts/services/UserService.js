@@ -623,7 +623,7 @@ angular.module('defaultApp.service').service('UserService', [
                 msg: '请输入合法手机号码'
             }, {
                 type: 'checked',
-                msg: '你输入的手机号已被占用'
+                msg: '该手机号被占用，可尝试直接用手机号登录'
             }]
         }, {
             field: 'name',
