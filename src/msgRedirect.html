@@ -1,0 +1,52 @@
+<!doctype html>
+<html class="no-js" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>36氪创投助手</title>
+    <script src="/components/purl/purl.js"></script>
+    <script>
+      //Android跳转：krtou://inmail/
+      //
+      var isAndroid = !!navigator.userAgent.match(/android/ig);
+      var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+      var query = purl(location.href).attr('query');
+      var androidUrl = 'krtou://inmail';
+      var ar = query.split('=');
+      androidUrl = androidUrl + '/' +ar[1];
+      var iosUrl = 'https://36kr.com/app/tou?' + query + '&ktm_source=h5';
+      var timeout;
+
+      function startApp(androidUrl){ //定义startApp函数
+          var ifr = document.createElement('iframe');
+          ifr.src = androidUrl || iosUrl;
+          alert(ifr.src );
+          ifr.style.display = 'none';
+          document.body.appendChild(ifr);
+          window.setTimeout(function () {
+              document.body.removeChild(ifr);
+              ifr = null;
+          }, 200);
+      }
+      function goYingyongbao(prefix){
+          timeout = setTimeout(function(){
+              document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
+          }, 1000);
+      }
+
+    (function(){
+      if(isIos){
+        //document.location = iosUrl;
+        startApp();
+        goYingyongbao();
+      } else if(isAndroid){
+        startApp(androidUrl);
+        goYingyongbao();
+      }
+    })();
+    </script>
+</head>
+<body>
+
+</body>
+</html>
