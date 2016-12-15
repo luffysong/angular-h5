@@ -19,8 +19,7 @@
 
       function startApp(androidUrl){ //定义startApp函数
           var ifr = document.createElement('iframe');
-          ifr.src = androidUrl || iosUrl;
-          alert(ifr.src );
+          ifr.src = androidUrl || iosUrl;         
           ifr.style.display = 'none';
           document.body.appendChild(ifr);
           window.setTimeout(function () {
