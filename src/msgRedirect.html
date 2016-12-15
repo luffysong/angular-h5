@@ -15,32 +15,29 @@
       var ar = query.split('=');
       androidUrl = androidUrl + '/' +ar[1];
       var iosUrl = 'https://36kr.com/app/tou?' + query + '&ktm_source=h5';
-      var timeout;
-
       function startApp(androidUrl){ //定义startApp函数
           var ifr = document.createElement('iframe');
-          ifr.src = androidUrl || iosUrl;         
+          ifr.src = androidUrl || iosUrl;
           ifr.style.display = 'none';
           document.body.appendChild(ifr);
-          window.setTimeout(function () {
+          window.setTimeout(function(){
               document.body.removeChild(ifr);
               ifr = null;
-          }, 200);
+          },500);
       }
-      function goYingyongbao(prefix){
-          timeout = setTimeout(function(){
-              document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
-          }, 1000);
-      }
+
 
     (function(){
       if(isIos){
-        //document.location = iosUrl;
         startApp();
-        goYingyongbao();
+        setTimeout(function(){
+            document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
+        }, 1000);
       } else if(isAndroid){
         startApp(androidUrl);
-        goYingyongbao();
+        setTimeout(function(){
+            document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
+        }, 1000);
       }
     })();
     </script>
