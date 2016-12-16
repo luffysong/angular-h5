@@ -1,3 +1,13 @@
+<a name="1.19.0"></a>
+# [1.19.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.18.0...v1.19.0) (2016-12-16)
+
+
+### Features
+
+* musicRoadshows 报名截止 ([db157fa](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/db157fa))
+
+
+
 <a name="1.18.0"></a>
 # [1.18.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.17.2...v1.18.0) (2016-12-16)
 
