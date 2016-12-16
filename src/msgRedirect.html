@@ -12,37 +12,44 @@
       var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
       var query = purl(location.href).attr('query');
       var androidUrl = 'krtou://inmail';
-      var ar = query.split('=');
-      androidUrl = androidUrl + '/' +ar[1];
+      if(query.indexOf('=') !== -1){
+        var ar = query.split('=');
+        androidUrl = androidUrl + '/' +ar[1];
+      }
       var iosUrl = 'https://36kr.com/app/tou?' + query + '&ktm_source=h5';
-      function startApp(androidUrl){ //定义startApp函数
+
+    var startApp = function(androidUrl){ //定义startApp函数
           var ifr = document.createElement('iframe');
           ifr.src = androidUrl || iosUrl;
           ifr.style.display = 'none';
+          alert(ifr.src);
           document.body.appendChild(ifr);
           window.setTimeout(function(){
               document.body.removeChild(ifr);
               ifr = null;
           },500);
       }
+    var cbtn = document.getElementById('cbtn');
 
-
-    (function(){
+    function  clickHandle(){
       if(isIos){
-        startApp();
-        setTimeout(function(){
-            document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
-        }, 1000);
-      } else if(isAndroid){
-        startApp(androidUrl);
-        setTimeout(function(){
-            document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
-        }, 1000);
+          cbtn.onclick=  startApp();
+      }else if(isAndroid){
+          cbtn.onclick=  startApp(androidUrl);
       }
-    })();
+    }
+    // window.setTimeout(function(){
+    //   document.
+    // },200);
+
+    document.location = 'krtou://inmail';
+
     </script>
 </head>
 <body>
+
+  <button type="button" id ="cbtn" onclick="clickHandle()">Click Me!</button>
+
 
 </body>
 </html>
