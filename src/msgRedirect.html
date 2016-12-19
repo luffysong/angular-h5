@@ -4,52 +4,92 @@
     <meta charset="utf-8">
     <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>36氪创投助手</title>
+
+    <link rel="stylesheet" href="/styles/chuangTouHub.css" >
+    <script src="/components/zepto/zepto.min.js"></script>
     <script src="/components/purl/purl.js"></script>
     <script>
       //Android跳转：krtou://inmail/
-      //
+      //11111111
       var isAndroid = !!navigator.userAgent.match(/android/ig);
       var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
       var query = purl(location.href).attr('query');
-      var androidUrl = 'krtou://inmail';
-      if(query.indexOf('=') !== -1){
-        var ar = query.split('=');
-        androidUrl = androidUrl + '/' +ar[1];
-      }
-      var iosUrl = 'https://36kr.com/app/tou?' + query + '&ktm_source=h5';
+          query = query.replace('=','/');
+          query = query.replace('&','|');
 
-    var startApp = function(androidUrl){ //定义startApp函数
+      var androidUrl = 'krtou://inmail/';
+      var iosUrl = 'krtou://message/';
+      var param ="";
+      var timeout;
+      function preventPopup() { //定义preventPopup函数
+          clearTimeout(timeout);
+          window.removeEventListener('pagehide', preventPopup);
+      }
+      if(query.indexOf('message') > -1){
+        if(query.indexOf('|') !== -1 ){
+            param = query.split('|')[0].split('/')[1];
+        } else {
+           param  = query.split('/')[1];
+        }
+      }
+      console.log(query,param);
+
+    function preventPopup() { //定义preventPopup函数
+          clearTimeout(timeout);
+          window.removeEventListener('pagehide', preventPopup);
+      }
+    var startApp = function(aiurl){ //定义startApp函数
           var ifr = document.createElement('iframe');
-          ifr.src = androidUrl || iosUrl;
+          ifr.src = aiurl;
           ifr.style.display = 'none';
-          alert(ifr.src);
           document.body.appendChild(ifr);
           window.setTimeout(function(){
               document.body.removeChild(ifr);
               ifr = null;
           },500);
+            window.addEventListener('pagehide', preventPopup);
       }
-    var cbtn = document.getElementById('cbtn');
+        function goYingyongbao(prefix){
+              timeout = setTimeout(function() {
+                  document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
+            },1200);
+             window.addEventListener('pagehide', preventPopup);
+          }
 
-    function  clickHandle(){
-      if(isIos){
-          cbtn.onclick=  startApp();
-      }else if(isAndroid){
-          cbtn.onclick=  startApp(androidUrl);
-      }
-    }
-    // window.setTimeout(function(){
-    //   document.
-    // },200);
-
-    document.location = 'krtou://inmail';
-
+    $(function(){
+          $('a').click(function(e){
+            if(isAndroid){
+               e.preventDefault();
+               startApp(androidUrl + param);
+               goYingyongbao('android');
+            }else if(isIos){
+               e.preventDefault();
+               startApp(iosUrl + param);
+               goYingyongbao('ios');
+            }
+          });
+    });
     </script>
 </head>
 <body>
 
-  <button type="button" id ="cbtn" onclick="clickHandle()">Click Me!</button>
-
+  <div class="mask">
+      <div class="arrow">
+          <img width="191px" src="/styles/images/chuangTou/Open@2x.png" alt="">
+      </div>
+  </div>
+  <div class="content">
+      <div class="content-top">
+          <img width="61px" src="/styles/images/chuangTou/Logo@2x.png" alt="">
+          <div class="content-info">
+              <p>最新最全项目</p>
+              <p>即时精准推送</p>
+              <p>高效联系创始人</p>
+          </div>
+      </div>
+      <img class="content-image" width="262px" src="/styles/images/chuangTou/Silver@2x.png" alt="">
+      <a class="content-href" href="javascript:" id ="btn">打开App，查看消息</a>
+  </div>
 
 </body>
 </html>
