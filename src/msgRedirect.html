@@ -4,95 +4,101 @@
     <meta charset="utf-8">
     <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>36氪创投助手</title>
-    <!-- build:css /styles/chuangTouHub.css -->
+    <script>
+        (function(i,s,o,g,r,a,m){i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//36kr.com/global/stat.js','krtracker');
+        krtracker('trackPageView', location.pathname+location.search);
+    </script>
+
+<!-- build:css /styles/chuangTouHub.css -->
     <link rel="stylesheet" href="/styles/chuangTouHub.css" >
-    <!-- endbuild -->
-    <!-- build:js /scripts/zepto.min.js -->
+<!-- endbuild -->
+<!-- build:js /scripts/zepto.min.js -->
     <script src="/components/zepto/zepto.min.js"></script>
     <script src="/components/purl/purl.js"></script>
-    <!-- endbuild -->
-    <script>
-      //Android跳转：krtou://inmail/
-      //11111111
-      var isAndroid = !!navigator.userAgent.match(/android/ig);
-      var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
-      var query = purl(location.href).attr('query');
-          query = query.replace('=','/');
-          query = query.replace('&','|');
+<!-- endbuild -->
+<script>
 
-      var androidUrl = 'krtou://inmail/';
-      var iosUrl = 'krtou://message/';
-      var param ="";
-      var timeout;
-      function preventPopup() { //定义preventPopup函数
-          clearTimeout(timeout);
-          window.removeEventListener('pagehide', preventPopup);
-      }
-      if(query.indexOf('message') > -1){
-        if(query.indexOf('|') !== -1 ){
-            param = query.split('|')[0].split('/')[1];
-        } else {
-           param  = query.split('/')[1];
-        }
-      }
-      console.log(query,param);
+    var query = purl(location.href).attr('query');
+    query = query.replace('=','/');
+    query = query.replace('&','?');
+    var  param ="";
+    if(query.indexOf('message') > -1){
+       if(query.indexOf('|') !== -1 ){
+           param = query.split('|')[0].split('/')[1];
+       } else {
+          param  = query.split('/')[1];
+       }
+     }
+
+    var androidUrl = 'krtou://inmail/';
+    var iosUrl = 'krtou://message';
+    var isAndroid = !!navigator.userAgent.match(/android/ig);
+    var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+    var timeout;
 
     function preventPopup() { //定义preventPopup函数
-          clearTimeout(timeout);
-          window.removeEventListener('pagehide', preventPopup);
-      }
-    var startApp = function(aiurl){ //定义startApp函数
-          var ifr = document.createElement('iframe');
-          ifr.src = aiurl;
-          ifr.style.display = 'none';
-          document.body.appendChild(ifr);
-          window.setTimeout(function(){
-              document.body.removeChild(ifr);
-              ifr = null;
-          },500);
-            window.addEventListener('pagehide', preventPopup);
-      }
-        function goYingyongbao(prefix){
-              timeout = setTimeout(function() {
-                  document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
-            },1200);
-             window.addEventListener('pagehide', preventPopup);
-          }
+        clearTimeout(timeout);
+        window.removeEventListener('pagehide', preventPopup);
+    }
+    function startApp(appurl){ //定义startApp函数
+        var ifr = document.createElement('iframe');
+        ifr.src = appurl;
+        ifr.style.display = 'none';
+        document.body.appendChild(ifr);
+        window.setTimeout(function(){
+            document.body.removeChild(ifr);
+            ifr = null;
+        },500);
+        window.addEventListener('pagehide', preventPopup);
+    }
 
-    $(function(){
-          $('a').click(function(e){
+    function goYingyongbao(prefix){
+        timeout = setTimeout(function(){
+            krtracker('trackEvent','按钮', prefix + '.' + query);
+            setTimeout(function() {
+                document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
+            },200)
+        }, 1000);
+         window.addEventListener('pagehide', preventPopup);
+    }
+
+    $(function () {
+        var userSystem=navigator.userAgent; //userAgent
+        $('a').click(function clickCb(e){
+            e.preventDefault();
             if(isAndroid){
-               e.preventDefault();
-               startApp(androidUrl + param);
-               goYingyongbao('android');
-            }else if(isIos){
-               e.preventDefault();
-               startApp(iosUrl + param);
-               goYingyongbao('ios');
-            }
-          });
-    });
-    </script>
+                e.preventDefault();
+                startApp(androidUrl + param);
+                goYingyongbao('android');
+             }else if(isIos){
+                startApp(iosUrl + '/' + param);
+                goYingyongbao('ios');
+             }
+        })
+    })
+
+</script>
 </head>
 <body>
-
-  <div class="mask">
-      <div class="arrow">
-          <img width="191px" src="/styles/images/chuangTou/Open@2x.png" alt="">
-      </div>
-  </div>
-  <div class="content">
-      <div class="content-top">
-          <img width="61px" src="/styles/images/chuangTou/Logo@2x.png" alt="">
-          <div class="content-info">
-              <p>最新最全项目</p>
-              <p>即时精准推送</p>
-              <p>高效联系创始人</p>
-          </div>
-      </div>
-      <img class="content-image" width="262px" src="/styles/images/chuangTou/Silver@2x.png" alt="">
-      <a class="content-href" href="javascript:" id ="btn">打开App，查看消息</a>
-  </div>
-
+    <div class="mask">
+        <div class="arrow">
+            <img width="191px" src="/styles/images/chuangTou/Open@2x.png" alt="">
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-top">
+            <img width="61px" src="/styles/images/chuangTou/Logo@2x.png" alt="">
+            <div class="content-info">
+                <p>最新最全项目</p>
+                <p>即时精准推送</p>
+                <p>高效联系创始人</p>
+            </div>
+        </div>
+        <img class="content-image" width="262px" src="/styles/images/chuangTou/Silver@2x.png" alt="">
+        <a class="content-href" href="javascript:">立即下载，查看项目</a>
+    </div>
 </body>
 </html>
