@@ -22,6 +22,7 @@
 <script>
 
     var query = purl(location.href).attr('query');
+    query = query.replace('fromWeixin=1&',"");
     query = query.replace('=','/');
     query = query.replace('&','|');
     var  param ="";
@@ -35,6 +36,7 @@
 
     var androidUrl = 'krtou://inmail/';
     var iosUrl = 'krtou://message';
+    //var iosUrl = "https://36kr.com/app/tou?message="
     var isAndroid = !!navigator.userAgent.match(/android/ig);
     var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
     var timeout;
@@ -74,7 +76,12 @@
                 startApp(androidUrl + param);
                 goYingyongbao('android');
              }else if(isIos){
-                startApp(iosUrl + '/' + param);
+               e.preventDefault();
+               if(param){
+                 startApp(iosUrl + '/' + param);
+               } else {
+                 startApp(iosUrl);
+               }
                 goYingyongbao('ios');
              }
         })
