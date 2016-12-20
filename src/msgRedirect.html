@@ -23,7 +23,7 @@
 
     var query = purl(location.href).attr('query');
     query = query.replace('=','/');
-    query = query.replace('&','?');
+    query = query.replace('&','|');
     var  param ="";
     if(query.indexOf('message') > -1){
        if(query.indexOf('|') !== -1 ){
