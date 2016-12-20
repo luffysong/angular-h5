@@ -1,3 +1,22 @@
+<a name="1.20.0"></a>
+# [1.20.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.19.0...v1.20.0) (2016-12-20)
+
+
+### Bug Fixes
+
+* 修改引入js的路径 ([e86b9b8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e86b9b8))
+* 修改时间 ([dc368c9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/dc368c9))
+* 短信跳转链接修改 ([88b3e78](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/88b3e78))
+* 短信页跳转重写 ([c6bda83](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c6bda83))
+
+
+### Features
+
+* 修改button 文案 ([4a89aa3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4a89aa3))
+* 修改链接 ([9754b6b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9754b6b))
+
+
+
 <a name="1.19.0"></a>
 # [1.19.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.18.0...v1.19.0) (2016-12-16)
 
