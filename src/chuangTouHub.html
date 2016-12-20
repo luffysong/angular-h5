@@ -27,6 +27,20 @@
     query = query.replace('=','/');
     query = query.replace('&','?');
 
+    var param="";
+    var flag = false;
+    if(query.indexOf('message') > -1){
+      flag = true;
+      if(query.indexOf('?') !== -1 ){
+        param = query.split('?')[0].split('/')[1];
+      } else {
+        param  = query.split('/')[1];
+      }
+    }
+    if(flag){
+      $('a').html('打开APP,查看消息');
+    }
+
     var fromWeixin = purl(location.href).param('fromWeixin');
     var appurl = 'krtou://home';
     var isAndroid = !!navigator.userAgent.match(/android/ig);
@@ -68,11 +82,23 @@
                  $('.mask').show();  //ios用safari打开
              }else if(isAndroid){
                 e.preventDefault();
-                startApp('krtou://'+ query);
-                goYingyongbao('android');
+                if(flag){
+                  startApp('krtou://inmail'+'/'+ param);
+                  goYingyongbao('android');
+                }else{
+                  startApp('krtou://'+ query);
+                  goYingyongbao('android');
+                }
+
              }else if(isIos){
-                startApp();
-                goYingyongbao('ios');
+               if(flag){
+                 startApp('krtou://message'+'/'+ param);
+                 goYingyongbao('ios');
+               }else{
+                 startApp();
+                 goYingyongbao('ios');
+               }
+
              }
         })
         if (!isWeiXin&&(parseInt(fromWeixin) === 1)){
