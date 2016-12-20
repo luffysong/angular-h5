@@ -1,3 +1,13 @@
+<a name="1.20.1"></a>
+## [1.20.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.20.0...v1.20.1) (2016-12-20)
+
+
+### Bug Fixes
+
+* 在创投页面直接短信跳转 ([0a9eb3c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0a9eb3c))
+
+
+
 <a name="1.20.0"></a>
 # [1.20.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.19.0...v1.20.0) (2016-12-20)
 
