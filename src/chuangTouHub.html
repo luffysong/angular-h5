@@ -37,10 +37,6 @@
         param  = query.split('/')[1];
       }
     }
-    if(flag){
-      $('a').html('打开APP,查看消息');
-    }
-
     var fromWeixin = purl(location.href).param('fromWeixin');
     var appurl = 'krtou://home';
     var isAndroid = !!navigator.userAgent.match(/android/ig);
@@ -135,5 +131,10 @@
         <img class="content-image" width="262px" src="/styles/images/chuangTou/Silver@2x.png" alt="">
         <a class="content-href" href="javascript:">立即下载，查看项目</a>
     </div>
+    <script>
+    if(flag){
+      $('a').html('打开APP,查看消息');
+    }
+    </script>
 </body>
 </html>
