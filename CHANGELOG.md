@@ -1,3 +1,13 @@
+<a name="1.20.4"></a>
+## [1.20.4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.20.3...v1.20.4) (2016-12-21)
+
+
+### Bug Fixes
+
+* 修改判断 ([d24fc25](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d24fc25))
+
+
+
 <a name="1.20.3"></a>
 ## [1.20.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.20.2...v1.20.3) (2016-12-21)
 
