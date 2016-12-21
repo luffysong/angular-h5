@@ -1,3 +1,13 @@
+<a name="1.20.3"></a>
+## [1.20.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.20.2...v1.20.3) (2016-12-21)
+
+
+### Bug Fixes
+
+* 过滤app/tou ([d51352d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d51352d))
+
+
+
 <a name="1.20.2"></a>
 ## [1.20.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.20.1...v1.20.2) (2016-12-20)
 
