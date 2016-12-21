@@ -31,6 +31,9 @@
     var flag = false;
     if(query.indexOf('message') > -1){
       flag = true;
+      query = query.replace('/app/tou?','');
+      query = query.replace('/app/tou','');
+
       if(query.indexOf('?') !== -1 ){
         param = query.split('?')[0].split('/')[1];
       } else {
