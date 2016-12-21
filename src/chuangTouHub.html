@@ -42,8 +42,11 @@
     }
     var fromWeixin = purl(location.href).param('fromWeixin');
     var appurl = 'krtou://home';
-    var isAndroid = !!navigator.userAgent.match(/android/ig);
-    var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+    var u = navigator.userAgent;
+    //var isAndroid = !!navigator.userAgent.match(/android/ig);
+    //var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isIos = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
     var isWeiXin = !!navigator.userAgent.match(/MicroMessenger/ig);
     var timeout;
 
@@ -102,11 +105,22 @@
         })
         if (!isWeiXin&&(parseInt(fromWeixin) === 1)){
             if(userSystem.indexOf('Android') > -1){
+              if(flag){
+                startApp('krtou://inmail'+'/'+ param);
+                goYingyongbao('android');
+              }else{
                 startApp('krtou://'+ query);
                 goYingyongbao('android');
+              }
+
             }else if(/iphone/i.test(userSystem)){
+              if(flag){
+                startApp('krtou://message'+'/'+ param);
+                goYingyongbao('ios');
+              }else{
                 startApp();
                 goYingyongbao('ios');
+              }
             }
         }
         if(isWeiXin){ //在微信中打开
