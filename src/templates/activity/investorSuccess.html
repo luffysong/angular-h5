@@ -9,9 +9,13 @@
         </div>
     </div>
     <div class="activity-card">
-        <img class="img-back" src="/styles/images/activity/krspace/whiteBack@2x.png"/>
-        <p>活动需审核，您可登录「36氪创投助手」App接收最终版邀请函</p>
-        <span>※ 活动当天需凭借邀请函入场 ※</span>
+        <img ng-show ='vm.ifShow' class="img-back" src="/styles/images/activity/krspace/whiteBack@2x.png"/>
+        <p ng-show ='vm.ifShow'>活动需审核，您可登录「36氪创投助手」App接收最终版邀请函</p>
+        <span ng-show ='vm.ifShow'>※ 活动当天需凭借邀请函入场 ※</span>
+
+        <img ng-show ='!vm.ifShow' class="img-back" src="/styles/images/activity/panda_.jpg"/>
+        <p ng-show ='!vm.ifShow'>感谢您的参加，我们将在 2017 年 1 月 4 日通过短信和邮件的方式与您取得联系，请您密切关注。</p>
+        <span ng-show ='!vm.ifShow'>※ 活动当天需凭借邀请函入场 ※</span>
     </div>
     <div class="header-banner-wrapper">
         <div>
@@ -26,4 +30,3 @@
         </div>
     </div>
 </div>
-

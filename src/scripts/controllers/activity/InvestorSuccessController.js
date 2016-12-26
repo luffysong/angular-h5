@@ -8,6 +8,7 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
     init();
 
     function init() {
+
         if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
             document.title = window.WEIXINSHARE.shareTitle;
 
@@ -36,6 +37,11 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
             $('.header-banner-wrapper').hide();
             window.parent.initCss && window.parent.initCss();
             window.parent.initFooter && window.parent.initFooter();
+        }
+        //增加firstWine的判断
+        vm.ifShow = true;
+        if(vm.activityName === 'firstWine20161228'){
+          vm.ifShow = false;
         }
 
         getActivity();

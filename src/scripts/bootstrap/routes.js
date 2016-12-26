@@ -263,6 +263,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/activity/ideaBank.html',
     });
 
+    //创投助手app---活动页(firstWine)元旦
+    $stateProvider.state('firstWine', {
+        url:'/firstWine?activityName',
+        controller: 'ActivityIndexController',
+        controllerAs: 'vm',
+        templateUrl: 'templates/activity/firstWine.html',
+    });
+
     //创投助手app---活动页(wonderland)
     $stateProvider.state('wonderland', {
         url:'/wonderland?activityName',

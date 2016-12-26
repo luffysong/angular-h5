@@ -10,6 +10,7 @@ function ActivityIndexController($stateParams, FindService, $state, UserService,
 
     init();
 
+
     function init() {
         if (typeof (vm.activityName) !== 'string' && vm.activityName[0]) {
             vm.activityName = vm.activityName[0];
@@ -43,7 +44,6 @@ function ActivityIndexController($stateParams, FindService, $state, UserService,
         } else if (vm.activityName.indexOf('musicRoadshow20161206') > -1) {
             window.WEIXINSHARE.shareTitle = '第四届中国音乐产业大会投融资项目路演--36氪创投助手独家招募投资人与项目方';
         }
-
         var obj = {};
         window.InitWeixin(obj);
     }
