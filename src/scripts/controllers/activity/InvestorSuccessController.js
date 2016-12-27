@@ -11,7 +11,6 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
 
         if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
             document.title = window.WEIXINSHARE.shareTitle;
-
         }
 
         $('.header-banner-wrapper').css('display', 'flex');
@@ -26,7 +25,9 @@ function InvestorSuccessController($stateParams, FindService, $state, hybrid) {
             vm.activityName = vm.activityName[0];
 
         }
-
+        if(vm.activityName.indexOf('firstWine20161228') > -1){
+          document.title = '投资一瓶酒的时间';
+        }
         if (vm.activityName) {
             $('#openApp').attr('href', 'https://36kr.com/app/tou?ktm_source=investorSuccess.' + vm.activityName);
         }
