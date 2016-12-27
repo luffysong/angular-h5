@@ -1,3 +1,14 @@
+<a name="1.21.0"></a>
+# [1.21.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.20.4...v1.21.0) (2016-12-27)
+
+
+### Features
+
+* 12月28号活动 ([8923a28](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8923a28))
+* 修改文案 ([761f03b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/761f03b))
+
+
+
 <a name="1.20.4"></a>
 ## [1.20.4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.20.3...v1.20.4) (2016-12-21)
 
