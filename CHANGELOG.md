@@ -1,3 +1,18 @@
+<a name="1.22.0"></a>
+# [1.22.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.21.0...v1.22.0) (2016-12-28)
+
+
+### Bug Fixes
+
+* 分享图标替换 ([9189ea1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9189ea1))
+
+
+### Features
+
+* 替换分享图标 ([382c53b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/382c53b))
+
+
+
 <a name="1.21.0"></a>
 # [1.21.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.20.4...v1.21.0) (2016-12-27)
 
