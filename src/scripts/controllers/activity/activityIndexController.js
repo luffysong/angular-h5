@@ -48,7 +48,7 @@ function ActivityIndexController($stateParams, FindService, $state, UserService,
             window.WEIXINSHARE.shareTitle = '第四届中国音乐产业大会投融资项目路演--36氪创投助手独家招募投资人与项目方';
         }else if (vm.activityName.indexOf('firstWine20161228') > -1) {
           window.WEIXINSHARE.shareImg =
-          'https://krplus-pic.b0.upaiyun.com/avatar/201612/28060714/qujehjiuzsxarqw7.jpg',
+          'https://krplus-pic.b0.upaiyun.com/avatar/201612/28060714/qujehjiuzsxarqw7.jpg';
           window.WEIXINSHARE.shareTitle =
             '36氪创投助手为投资人送上 2017 年的第一瓶酒，点击免费领取。今天宜喝酒，忌工作';
         }
