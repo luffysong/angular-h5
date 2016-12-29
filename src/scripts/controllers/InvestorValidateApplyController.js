@@ -17,7 +17,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             step: 1
         };
         $scope.params = {};
-        $scope.currentIndex = 0;
+        $scope.suggest = {
+            currentIndex: 0,
+        };
 
         $scope.selectItem = function (index) {
             angular.forEach($scope.suggestInvestor, function (item, i) {
@@ -30,6 +32,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
             $scope.getField();
         };
+
+        $scope.$watch('suggest.currentIndex', function (x) {
+            console.log(x);
+        });
 
         $scope.getField = function () {
             angular.forEach($scope.suggestInvestor, function (item, index) {

@@ -32,8 +32,7 @@
     "tag": "0.1.18",
     "commit": "4981bdcd0d2f2c7a231a366a0d14ca268d70e66e"
   },
-  "_source": "git://github.com/vasyabigi/angular-slick.git",
+  "_source": "https://github.com/vasyabigi/angular-slick.git",
   "_target": "~0.1.18",
-  "_originalSource": "angular-slick",
-  "_direct": true
+  "_originalSource": "angular-slick"
 }
