@@ -46,11 +46,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         };
 
         $scope.getSuggestInvestor = function () {
-            var params = $scope.invest && $scope.invest.investorRole === 'COM_ORG' ? {
-                name: $scope.user.name
-            } : {
+            var params = $scope.invest && $scope.invest.investorRole === 'ORG_INVESTOR' ? {
                 name: $scope.user.name,
                 orgName: $scope.organization.addForm.name
+            } : {
+                name: $scope.user.name
             };
 
             InvestorauditService.suggestInvestor(params, function (data) {
@@ -233,23 +233,23 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
         initUser();
 
-        /*function initInvestor() {
+        function initInvestor() {
             $scope.investorErrorGroup = UserService.investorErrorGroup;
 
             $scope.investorValidateApply = {
                 status:''
             };
 
-            /!*查询投资人认证申请状态*!/
+            /*查询投资人认证申请状态*/
             InvestorauditService.getStatus(function (response) {
 
                 //response.status = -1;
                 switch (response.state){
-                    /!*审核中*!/
+                    /*审核中*/
                     case 'PENDING':
                         $scope.investorValidateApply.status = 'checking';
                         break;
-                    /!*审核通过*!/
+                    /*审核通过*/
                     case 'PASS':
                         $scope.investorValidateApply.status = 'success';
                         break;
@@ -266,9 +266,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }
             });
 
-        }*/
+        }
 
-        //initInvestor();
+        initInvestor();
 
         $timeout(function () {
             window.scroll(0, 0);
@@ -471,8 +471,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 $scope.params.phone = $scope.getPhoneWithCountryCode();
             }
 
-            if ($scope.invest.investorRole === 'COM_ORG') {
-                $scope.params.position = $scope.positionSuggestObj.word;
+            if ($scope.invest.investorRole === 'ORG_INVESTOR') {
+                /*$scope.params.position = $scope.positionSuggestObj.word;*/
+                $scope.params.position = $scope.user.position;
             }
 
             InvestorauditService.submit($scope.params).then(function () {

@@ -108,12 +108,12 @@
                                     name="identity"
                                     class="fr" required>
                                 <option name="" value="">未选择</option>
-                                <option name="" value="PERSONAL_INVESTOR">个人投资者</option>
-                                <option name="" value="COM_ORG">任职机构</option>
+                                <option name="" value="PERSONAL_INVESTOR">个人投资人</option>
+                                <option name="" value="ORG_INVESTOR">机构投资人</option>
                             </select>
                         </div>
                     </div>
-                    <div class="i-body" ng-if="(invest.investorRole=='COM_ORG')">
+                    <div class="i-body" ng-if="(invest.investorRole=='ORG_INVESTOR')">
 
                         <!--新增机构-->
                         <div class="line content-list">
@@ -126,13 +126,11 @@
                             > </div>
                         </div>
                     </div>
-                    <div ng-if="(invest.investorRole=='COM_ORG')" class="line clearfix">
+                    <div ng-if="(invest.investorRole=='ORG_INVESTOR')" class="line clearfix">
                         <label>职位</label>
                         <div class="control">
-                            <div kr-suggest type="position" class="kr-fleft control position"
-                                 suggest-obj="positionSuggestObj" max-length="30" min-length="1"
-                                 placeholder="未填写" name="position"
-                            > </div>
+                            <input class="form-control" type="text" placeholder="" name="position" required
+                                   ng-model="user.position" />
                         </div>
                     </div>
 

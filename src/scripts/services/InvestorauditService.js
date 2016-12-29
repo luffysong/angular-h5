@@ -45,6 +45,7 @@ angular.module('defaultApp.service').service('InvestorauditService', [
             //获取推荐投资人
 
             suggestInvestor: function (data, callback, error) {
+                console.log(projectEnvConfig.nrongHost);
                 $http.get('//' + projectEnvConfig.nrongHost + '/n/api/investor/auth/suggest-investor?' + $.param(data)).success(function (response) {
                     callback && callback(response);
                 }).catch(function (err) {
