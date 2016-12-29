@@ -150,10 +150,10 @@
                             根据您填写的信息，系统判断您为知名投资人，已获取了您的公开信息，请选择与您匹配的信息（如都不匹配，请直接上传名片）：
                         </div>
                         <div class="recommend-container" ng-if="suggestInvestor.length">
-                            <img class="left-arrow" src="/styles/images/find/arrowLeft@2x.png" ng-if="suggestInvestor.length" />
-                            <img class="right-arrow" src="/styles/images/find/arrowRight@2x.png" ng-if="suggestInvestor.length" />
+                            <img class="left-arrow" src="/styles/images/find/arrowLeft@2x.png" ng-if="suggestInvestor.length > 1" />
+                            <img class="right-arrow" src="/styles/images/find/arrowRight@2x.png" ng-if="suggestInvestor.length > 1" />
                             <div class="recommend-slick">
-                                <slick slides-to-show="1" prev-arrow=".left-arrow" next-arrow=".right-arrow" infinite="true">
+                                <slick slides-to-show="1" prev-arrow=".left-arrow" next-arrow=".right-arrow" infinite="true" ng-if="suggestInvestor.length">
                                     <div class="investor-container" ng-repeat="item in suggestInvestor" ng-class="{active: item.active}">
                                         <div class="investor-item" ng-click="selectItem($index)" ng-class="{active: item.active}">
                                             <span class="select-tag icon-app-selected"></span>
