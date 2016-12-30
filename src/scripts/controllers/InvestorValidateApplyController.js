@@ -109,10 +109,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     delete $scope.user.phone;
                 }
 
-                if (data.email) {
+               /* if (data.email) {
                     $scope.user.hasEmail = true;
                     delete $scope.user.email;
-                }
+                }*/
 
                 /*基本信息*/
                 $scope.invest.name = data.name;
@@ -148,7 +148,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
             });
 
-            $scope.$watch('user.email', function (email) {
+            /*$scope.$watch('user.email', function (email) {
                 if (!email || $scope.guideForm.email.$error.email) {
                     return;
                 }
@@ -166,7 +166,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         $scope.guideForm.email.$setValidity('checked', false);
                     });
                 }, 800);
-            });
+            });*/
 
             $scope.getCode = function (e, voice) {
                 e && e.preventDefault();
@@ -440,7 +440,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }, {
                     avatar: $scope.guideForm.avatar.uploaded || $scope.user.avatar,
                     name: $scope.user.name,
-                    email: $scope.user.email,
+                    //email: $scope.user.email,
                     phone: $scope.getPhoneWithCountryCode(),
                     smscode: $scope.user.smscode
                 }).$promise.then(send)

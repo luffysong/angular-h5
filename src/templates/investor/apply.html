@@ -43,13 +43,13 @@
                                ng-model="user.name" ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" required/>
                     </div>
                 </div>
-                <div class="line" ng-if="!user.hasEmail">
+                <!--<div class="line" ng-if="!user.hasEmail">
                     <label>邮箱</label>
                     <div class="control">
                         <input class="form-control" type="email" placeholder="未填写" name="email"
                                ng-model="user.email" required/>
                     </div>
-                </div>
+                </div>-->
                 <div class="line" ng-if="!user.hasPhone">
                     <label>国家</label>
                     <div class="control icon-select">
@@ -113,18 +113,15 @@
                             </select>
                         </div>
                     </div>
-                    <div class="i-body" ng-if="(invest.investorRole=='ORG_INVESTOR')">
-
-                        <!--新增机构-->
-                        <div class="line content-list">
-                            <div>
-                                <label>机构</label>
-                            </div>
-                            <div kr-suggest type="comAndOrg" class="kr-fleft control"
-                                 suggest-obj="suggestOrganizationObj" max-length="30" min-length="1"
-                                 autocomplete-options="suggestOrganizationOption" placeholder="未填写" name="companyName"
-                            > </div>
+                    <!--新增机构-->
+                    <div class="line content-list" ng-if="(invest.investorRole=='ORG_INVESTOR')">
+                        <div>
+                            <label>机构</label>
                         </div>
+                        <div kr-suggest type="comAndOrg" class="kr-fleft control"
+                             suggest-obj="suggestOrganizationObj" max-length="30" min-length="1"
+                             autocomplete-options="suggestOrganizationOption" placeholder="未填写" name="companyName"
+                        > </div>
                     </div>
                     <div ng-if="(invest.investorRole=='ORG_INVESTOR')" class="line clearfix">
                         <label>职位</label>
