@@ -142,11 +142,11 @@
 
                 <div ng-show="validate.step === 2">
 
-                    <div class="recommend-investor">
+                    <div class="recommend-investor" ng-if="suggestInvestor.length">
                         <div class="recommend-tip">
                             根据您填写的信息，系统判断您为知名投资人，已获取了您的公开信息，请选择与您匹配的信息（如都不匹配，请直接上传名片）：
                         </div>
-                        <div class="recommend-container" ng-if="suggestInvestor.length">
+                        <div class="recommend-container">
                             <img class="left-arrow" src="/styles/images/find/arrowLeft@2x.png" ng-if="suggestInvestor.length > 1 && suggest.currentIndex != 0" />
                             <img class="right-arrow" src="/styles/images/find/arrowRight@2x.png" ng-if="suggestInvestor.length > 1 && suggest.currentIndex != suggestInvestor.length-1" />
                             <div class="recommend-slick">
@@ -197,7 +197,6 @@
                             </div>
 
                         </div>
-
                     </div>
                     <div class="upload-wrapper">
                         <!--上传名片-->
