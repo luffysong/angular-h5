@@ -109,11 +109,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     delete $scope.user.phone;
                 }
 
-               /* if (data.email) {
-                    $scope.user.hasEmail = true;
-                    delete $scope.user.email;
-                }*/
-
                 /*基本信息*/
                 $scope.invest.name = data.name;
                 $scope.invest.intro = data.intro;
@@ -440,7 +435,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }, {
                     avatar: $scope.guideForm.avatar.uploaded || $scope.user.avatar,
                     name: $scope.user.name,
-                    //email: $scope.user.email,
+                    /*email: $scope.user.email,*/
                     phone: $scope.getPhoneWithCountryCode(),
                     smscode: $scope.user.smscode
                 }).$promise.then(send)
