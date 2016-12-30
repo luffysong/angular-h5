@@ -177,6 +177,17 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
+    //前台活动展示h5页面
+    $stateProvider.state('fractivity', {
+        url:'/fractivity/:id?',
+        controllerAs: 'vm',
+        controller: 'FRActivityController',
+        templateUrl: 'templates/fractivity/index.html',
+        resolve: {
+            cover: loadCover
+        }
+    });
+
     //创投助手app---发现页
     $stateProvider.state('find', {
         url: '/find',

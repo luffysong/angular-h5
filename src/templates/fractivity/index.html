@@ -1,0 +1,166 @@
+<div  class="demos-wrapper">
+    <loading ng-init="loadingInst.openApp=false"  loading="openApp"></loading>
+    <!--- 头部 --->
+    <div class="demos-header">
+        <div class="header-img"
+        ng-style="{'background-image': (vm.cover.imgUrl | backgroundUrl)}">
+        <!--
+            <p>
+                <span class="header-name">{{vm.cover.name}}</span>
+                <span class="header-proSetCount" ng-if="vm.cover.proSetCount">共{{vm.cover.proSetCount}}个{{vm.getCollectionType()}}</span>
+            </p>
+          -->
+        </div>
+        <!--
+        <div class="header-info" ng-if="vm.cover.intro">
+            <text-line-clamp line-clamp='3' text="vm.cover.intro">
+                <div class="text-container">
+                    <div class="text-content"></div>
+                </div>
+                <a class="text-toggle" href="javascript:void(0)" >展开</a>
+            </text-line-clamp>
+        </div>
+      -->
+        <div class="header-info" ng-if="vm.cover.intro">
+          <div class="text-container">
+              <p class="text-content">
+                美国研究人员日前在《美国医学会杂志·内科学卷》发表报告，揭露美国糖业大约50年前通过收买研究人员、操控研究等手段，刻意淡化饮食中添加糖有导致心脏病的风险，同时强调胆固醇和高脂肪饮食是心脏病罪魁祸首。作者指出，这种观点影响了营养学认识和公共健康政策几十年。 上世纪50年代，美国心脏病死亡率激增，促使科学家探究引起心脏病的饮食原因。研究人员说，这些发现表明糖业影响联邦政策可能由来已久。(新华社)
+              </p>
+          </div>
+        </div>
+    </div>
+
+    <div class="column-detail-wrapper">
+        <a href="javascript:" >推荐项目</a>
+    </div>
+
+
+    <div  id="demosContent" >
+        <section  class="demos-content-wrapper">
+            <ul infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='3'>
+                <li ontouchstart="" kr-active="'active'"
+                    ng-repeat="item in vm.demos track
+                    by $index">
+                    <a class="projectList-content-href"
+                       href="http://36kr.com/company/{{item.rcid}}?ktm_source=chuangtou.h5.xiangmuji.{{vm.id}}.{{item.rcid}}"
+                       pid="item.rcid" tou-open path="'crmCompany/' + item.ccid + '?ktm_source=xiangmuji.native.' + vm.id + '.' + item.ccid">
+                        <div class="base-info-detail">
+                            <div  class="logo-wrapper" >
+                                <img ng-src="{{item.logo | image}}" alt="" ng-if="item.logo">
+                                <img ng-style="{'background-color':(item.ccid | demoDefaultColor)}" ng-if="!item.logo">
+                                <span class="logo-name" ng-if="!item.logo">{{item.name | demoNameDufault}}</span>
+                                <span class="logo-funding" ng-if="item.funding === 2">正在融资</span>
+                            </div>
+                            <div class="content-wrapper">
+                                <h3><span class="item-name">{{item.name}}</span><span class="item-signs" ng-repeat="innerItem in item.signs" ng-style="{'background-color':innerItem.color}">{{innerItem.name}}</span><span class="item-pubdate">{{item.pubdate}}</span></h3>
+                                <p class="item-brief">{{item.brief}}</p>
+                                <p class="item-industry" ng-if="item.industry1"><span class="span-first">行业</span><span class="span-second">{{item.industry1}}</span></p>
+                                <p class="item-advantage" ng-if="item.advantage"><span class="span-first">亮点</span><span class="span-second">{{item.advantage}}</span></p>
+                            </div>
+                        </div>
+                    </a>
+                    <span class="li-line" style=""></span>
+                </li>
+
+            </ul>
+        </section>
+          <span class="li-line" style=""></span>
+          <div class="more-btn">
+            <a href="javascript:">查看全部项目</a>
+          </div>
+    </div>
+
+    <div class="activty-process">
+      <div class="column-detail-wrapper">
+          <a href="javascript:" >活动流程</a>
+      </div>
+        <div class="sub-activity">
+            <ul>
+              <li>
+                <div class="out">
+                  <div class="inside">
+                  </div>
+                </div>
+
+              <p class="act-time">
+                14:45-15:00
+              </p>
+              <p class="act-info">
+                签到入场
+              </p>
+              </li>
+              <li>
+                <div class="out">
+                  <div class="inside">
+                  </div>
+                </div>
+                <p class="act-time">
+                  14:45-15:00
+                </p>
+                <p class="act-info">
+                  可抠门很关键可抠门很关键可抠门很关键可抠
+                </p>
+
+              </li>
+              <li>
+                <div class="out">
+                  <div class="inside">
+                  </div>
+                </div>
+                <p class="act-time">
+                  14:45-15:00
+                </p>
+                <p class="act-info">
+                第四期团队毕业
+                </p>
+              </li>
+              <li>
+                <div class="out">
+                  <div class="inside">
+                  </div>
+                </div>
+                <p class="act-time">
+                  14:45-15:00
+                </p>
+                <p class="act-info">
+                颁发毕业证及明星项目奖
+                </p>
+              </li>
+              <li>
+                <div class="out">
+                  <div class="inside">
+                  </div>
+                </div>
+                <p class="act-time">
+                  14:45-15:00
+                </p>
+                <p class="act-info">
+                  第五期团队名单公布
+                </p>
+              </li>
+              <li>
+                <div class="out">
+                  <div class="inside">
+                  </div>
+                </div>
+                <p class="act-time">
+                  14:45-15:00
+                </p>
+                <p class="act-info">
+                  自由交流
+                </p>
+              </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div>
+      <br /><br />
+    </div>
+
+  <div class="section-footer" ng-click="vm.start()">
+      <div>创业者报名</div>
+      <div>投资人报名</div>
+  </div>
+</div>
