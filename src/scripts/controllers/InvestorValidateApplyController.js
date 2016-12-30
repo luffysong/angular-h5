@@ -10,12 +10,13 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
     function (OrganizationService, CompanyService, $state, $scope, $rootScope, $stateParams, SuggestService, $q, SearchService,
         DictionaryService, ErrorService, DefaultService, $upload, checkForm, LoginService,
         $timeout, UserService, $location, InvestorauditService, monthOptions, yearOptions, AndroidUploadService,
-        PopCaptcha) {
+        PopCaptcha, loading) {
 
         $scope.positionSuggestObj = {};
         $scope.validate = {
             step: 1
         };
+        loading.show('applyLoading');
         $scope.params = {};
         $scope.suggest = {
             currentIndex: 0,
@@ -258,12 +259,14 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         $scope.investorValidateApply.status = 'basic';
                         break;
                 }
+                loading.hide('applyLoading');
             }, function (err) {
 
                 if (err.code !== 4031) {
                     ErrorService.alert(err);
                 } else {
                     $scope.investorValidateApply.status = 'new';
+                    loading.hide('applyLoading');
                 }
             });
 

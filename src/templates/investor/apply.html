@@ -1,4 +1,4 @@
-<div class="container investor-apply-wrapper">
+<div class="container investor-apply-wrapper" ng-show="!loadingInst.applyLoading">
     <div class="error-wrapper">
         <!--所有报错信息-->
         <!-- 自定义错误信息 -->
@@ -257,6 +257,8 @@
     </div>
 
 </div>
+
+<div loading="applyLoading"></div>
 
 <script type="text/ng-template" id="templates/util/pop-captcha.html">
     <div class="pop-form">
