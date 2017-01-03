@@ -469,6 +469,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             var businessCardLink   = $scope.invest.pictures || $scope.investorValidateForm.pictures.uploaded;
             $scope.params.avatar = $scope.guideForm.avatar.uploaded || $scope.user.avatar;
             $scope.params.realName = $scope.user.name;
+            $scope.params.weixin = $scope.user.weixin;
             $scope.params.businessCard = businessCardLink;
             $scope.params.investorRoleEnum = $scope.invest.investorRole;
             if ($scope.getPhoneWithCountryCode()) {
