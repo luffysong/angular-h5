@@ -751,6 +751,9 @@ angular.module('defaultApp.service').service('UserService', [
             define: [{
                 type: 'required',
                 msg: '请输入微信'
+            }, {
+                type: 'minlength',
+                msg: '微信号的长度为6-20位'
             }]
         }];
 
