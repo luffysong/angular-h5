@@ -678,7 +678,7 @@ angular.module('defaultApp.service').service('UserService', [
             field:'position',
             define: [{
                 type: 'required',
-                msg: '请选择职位'
+                msg: '请输入职位'
             }]
         }, {
             field:'companyName',
