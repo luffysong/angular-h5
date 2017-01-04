@@ -316,6 +316,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
                 scope.$setValidity('size', true);
+                ErrorService.alert({
+                    msg: '上传名片失败，图片文件不能超过5M'
+                });
                 return;
             }
 
