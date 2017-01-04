@@ -256,7 +256,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         $scope.investorValidateApply.status = 'success';
                         break;
                     default:
-                        $scope.investorValidateApply.status = 'basic';
+                        $scope.investorValidateApply.status = 'new';
                         break;
                 }
                 loading.hide('applyLoading');
