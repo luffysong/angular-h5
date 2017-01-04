@@ -111,11 +111,11 @@ function eachScriptDir(modulePath) {
         fs.readdirSync(modulePath).forEach(function (file) {
             if (file !== 'index.js' && /\.js$/.test(file)) {
                 scriptText += 'require(\'./' + modulePath + '/' + file.replace('.js', '') + '\');\n';
-            }else if (fs.statSync(modulePath + '/' + file).isDirectory()) {
+            } else if (fs.statSync(modulePath + '/' + file).isDirectory()) {
                 scriptText += eachScriptDir(modulePath + '/' + file);
             }
         });
-    }else {
+    } else {
         scriptText += 'require(\'./' + modulePath.replace('.js', '') + '\');\n';
     }
 
@@ -124,7 +124,9 @@ function eachScriptDir(modulePath) {
 
 function jsFixInit(modulesPath) {
     return gulp.src(modulesPath + '/*.js')
-        .pipe($.jscs({ fix: true }))
+        .pipe($.jscs({
+            fix: true
+        }))
         .pipe($.jscs.reporter())
         .pipe($.jscs.reporter('fail'))
         .pipe(gulp.dest(modulesPath));
@@ -132,10 +134,11 @@ function jsFixInit(modulesPath) {
 
 gulp.task('jshint', function () {
     return gulp.src(['src/scripts/controllers/*.js',
-        'src/scripts/bootstrap/*.js',
-        'src/scripts/services/*.js',
-        'src/scripts/filters/*.js',
-        'src/scripts/directives/*.js'])
+            'src/scripts/bootstrap/*.js',
+            'src/scripts/services/*.js',
+            'src/scripts/filters/*.js',
+            'src/scripts/directives/*.js'
+        ])
         .pipe($.jshint())
         .pipe($.jshint.reporter('default'))
         .pipe($.jshint.reporter('fail'));
@@ -163,11 +166,12 @@ gulp.task('jscs:bootstrap', function () {
 
 gulp.task('jscs', function () {
     return gulp.src(['src/scripts/bootstrap/*.js',
-        'src/scripts/bootstrap/*.js',
-        'src/scripts/controllers/*.js',
-        'src/scripts/services/*.js',
-        'src/scripts/filters/*.js',
-        'src/scripts/directives/*.js'])
+            'src/scripts/bootstrap/*.js',
+            'src/scripts/controllers/*.js',
+            'src/scripts/services/*.js',
+            'src/scripts/filters/*.js',
+            'src/scripts/directives/*.js'
+        ])
         .pipe($.jscs())
         .pipe($.jscs.reporter())
         .pipe($.jscs.reporter('fail'));
@@ -197,7 +201,8 @@ gulp.task('scripts:init', [
     'scripts:init:controllers',
     'scripts:init:directives',
     'scripts:init:filters',
-    'scripts:init:services']);
+    'scripts:init:services'
+]);
 
 // Scripts Ui Bootstrap Template
 gulp.task('scripts:ui:template', function () {
@@ -229,26 +234,28 @@ gulp.task('scripts:vendor', function () {
 // Scripts Browserify
 gulp.task('scripts:browserify', ['scripts:init'], function () {
     gulp.src(['src/scripts/*.js'])
-        .pipe($.plumber({ errorHandler: handler }))
+        .pipe($.plumber({
+            errorHandler: handler
+        }))
 
         // .pipe($.browserify({debug: true}))
-         .pipe(through2.obj(function (file, enc, next) {
-             var self = this;
-             browserify(file.path, {
-                 debug:true,
-             })
+        .pipe(through2.obj(function (file, enc, next) {
+            var self = this;
+            browserify(file.path, {
+                    debug: true,
+                })
 
-             // .transform(reactify)
-                 .bundle(function (err, res) {
-                     if (err) {
-                         console.log(err.stack);
-                     }
+                // .transform(reactify)
+                .bundle(function (err, res) {
+                    if (err) {
+                        console.log(err.stack);
+                    }
 
-                     file.contents = new Buffer(res);
-                     self.push(file);
-                     next();
-                 });
-         }))
+                    file.contents = new Buffer(res);
+                    self.push(file);
+                    next();
+                });
+        }))
         .pipe($.plumber.stop())
 
         //.pipe($.ngmin())
@@ -306,11 +313,11 @@ gulp.task('connect:remote', function () {
         root: ['.tmp', 'src'],
         port: 9001,
         livereload: false,
-        middleware: function () {
+        middleware: function() {
             var url = require('url');
             var proxy = require('./tasks/proxy.js');
 
-            var _proxy = function (path, source) {
+            var _proxy = function(path, source) {
                 var options = url.parse(source);
                 options.route = path;
                 return proxy(options);
@@ -318,7 +325,7 @@ gulp.task('connect:remote', function () {
 
             var map = [];
 
-            map = map.concat(_.map(config.proxys, function (proxy) {
+            map = map.concat(_.map(config.proxys, function(proxy) {
                 var source = proxy.source;
                 if (apiHost) {
                     source = source.replace('http://rong.dev.36kr.com', apiHost);
@@ -334,7 +341,7 @@ gulp.task('connect:remote', function () {
 });
 
 // Watch
-gulp.task('watch', function () {
+gulp.task('watch', function() {
     gulp.watch('src/**/*.html', ['header']);
     gulp.watch('src/styles/**/*.less', ['styles']);
     gulp.watch(['src/local_lib/**/*.js'], ['scripts:vendor']);
@@ -342,14 +349,14 @@ gulp.task('watch', function () {
 });
 
 // Build Assets
-gulp.task('build:assets', function () {
+gulp.task('build:assets', function() {
     return gulp.src(['src/*.{ico,png,txt,xml}'])
         .pipe(gulp.dest('dist'))
         .pipe($.size());
 });
 
 // Build Fonts
-gulp.task('build:fonts', function () {
+gulp.task('build:fonts', function() {
     return gulp.src(['src/**/*.{eot,svg,ttf,woff,woff2}'])
         .pipe($.flatten())
         .pipe(gulp.dest('.tmp/fonts'))
@@ -357,19 +364,19 @@ gulp.task('build:fonts', function () {
 });
 
 // Build Styles
-gulp.task('build:styles', function () {
+gulp.task('build:styles', function() {
     return gulp.src(['src/styles/*.less'])
         .pipe($.less())
         .pipe($.autoprefixer('last 2 version', 'safari 5', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
         .pipe(urlAdjuster({
-            replace:  [/(\.\..*?|^)(?=fonts|images)/, '../'],
+            replace: [/(\.\..*?|^)(?=fonts|images)/, '../'],
         }))
         .pipe(gulp.dest('.tmp/styles'))
         .pipe($.size());
 });
 
 // Build Angular Templates
-gulp.task('build:templates', function () {
+gulp.task('build:templates', function() {
     return gulp.src(['src/templates/**/*.html'])
         .pipe($.replace('styles/images/', 'images/'))
         .pipe($.angularTemplatecache({
@@ -379,44 +386,44 @@ gulp.task('build:templates', function () {
         .pipe($.size());
 });
 
-gulp.task('build:addTemplates', ['build:templates'], function () {
+gulp.task('build:addTemplates', ['build:templates'], function() {
     return gulp.src(['src/scripts/**/*.js'])
         .pipe($.replace(/\/\*##(.+)##\*\//, '$1'))
         .pipe(gulp.dest('.tmp/tmp-scripts'));
 });
 
 // Build Scripts
-gulp.task('build:scripts', ['scripts:vendor', 'scripts:init', 'build:addTemplates'], function () {
+gulp.task('build:scripts', ['scripts:vendor', 'scripts:init', 'build:addTemplates'], function() {
     return gulp.src(['.tmp/tmp-scripts/*.js'])
-		.pipe(through2.obj(function (file, enc, next) {
-    var self = this;
-    browserify(file.path)
-			.bundle(function (err, res) {
-    if (err) {
-        console.log(err.stack);
-    }
+        .pipe(through2.obj(function(file, enc, next) {
+            var self = this;
+            browserify(file.path)
+                .bundle(function(err, res) {
+                    if (err) {
+                        console.log(err.stack);
+                    }
 
-    file.contents = new Buffer(res);
-    self.push(file);
-    next();
-			});
-		}))
+                    file.contents = new Buffer(res);
+                    self.push(file);
+                    next();
+                });
+        }))
 
         // .pipe($.browserify())
-        .pipe($.ngAnnotate())  //处理angular依赖
+        .pipe($.ngAnnotate()) //处理angular依赖
         .pipe(gulp.dest('.tmp/scripts'))
         .pipe($.size());
 });
 
 // Build Images
-gulp.task('build:images', function () {
+gulp.task('build:images', function() {
     return gulp.src(['src/styles/images/**/*'])
         .pipe(gulp.dest('.tmp/images'))
         .pipe($.size());
 });
 
 // Build Html
-gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:scripts', 'build:images'], function () {
+gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:scripts', 'build:images'], function() {
     var assets = $.useref.assets({
         searchPath: ['.tmp', 'src'],
     });
@@ -424,10 +431,14 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
     return gulp.src(['.tmp/*.html'])
         .pipe($.replace('styles/images/', 'images/'))
         .pipe(assets)
-        .pipe($['if']('*.css', $.cssnano({ safe:true })))
+        .pipe($['if']('*.css', $.cssnano({
+            safe: true
+        })))
         .pipe($['if'](/.*krmin\.js/,
-            $.uglify({ compress:{
-				drop_console:true }
+            $.uglify({
+                compress: {
+                    drop_console: true
+                }
             })))
         .pipe(assets.restore())
         .pipe($.useref())
@@ -438,13 +449,13 @@ gulp.task('build:html', ['build:assets', 'build:fonts', 'build:styles', 'build:s
         .pipe($.size());
 });
 
-gulp.task('local:html', ['header'], function () {
+gulp.task('local:html', ['header'], function() {
     DEBUG = false;
     gulp.start('build:html');
 });
 
 // Build Rev
-gulp.task('build:rev', ['build:html'], function () {
+gulp.task('build:rev', ['build:html'], function() {
     return gulp.src(['.tmp/{fonts,images}/**', '.tmp/build/{styles,scripts}/**'])
         .pipe($.revAll({
             transformFilename: function (file, hash) {
@@ -453,7 +464,9 @@ gulp.task('build:rev', ['build:html'], function () {
             },
         }))
         .pipe(gulp.dest('dist'))
-        .pipe($.revAll.manifest({ fileName: 'manifest.json' }))
+        .pipe($.revAll.manifest({
+            fileName: 'manifest.json'
+        }))
         .pipe(gulp.dest('.tmp'));
 });
 
@@ -462,8 +475,8 @@ gulp.task('build:rev:replace', ['build:rev'], function () {
     var manifest = require('./.tmp/manifest.json');
     return gulp.src(['dist/**/*.{css,html}', 'dist/**/*scripts*'])
         .pipe($.fingerprint(manifest, {
-            verbose:true,
-            prefix:CDNPrefix,
+            verbose: true,
+            prefix: CDNPrefix,
             regex: /(?:url\(\\?["']?(.+?)\\?['"]?\)|src=\\?["'](.+?)\\?['"]|src=([^\s\>]+)(?:\>|\s)|href=\\?["'](.+?)\\?['"]|href=([^\s\>]+)(?:\>|\s))/g,
         }))
         .pipe(gulp.dest('dist'));
@@ -686,7 +699,7 @@ gulp.task('header', function () {
 
     return gulp.src(['src/*.html'])
         .pipe(fileinclude({
-            prefix:'@@'
+            prefix: '@@'
         }))
         .pipe($.replace('%%%headerSrc%%%', headers[buildMode]))
         .pipe(gulp.dest('.tmp'));

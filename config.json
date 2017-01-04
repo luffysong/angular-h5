@@ -60,7 +60,11 @@
         "src/components/moment/min/moment.min.js",
         "src/components/moment/locale/zh-cn.js",
         "src/components/perfect-scrollbar/js/perfect-scrollbar.jquery.js",
-        "src/components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js"
+        "src/components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js",
+        "src/components/showdown/src/showdown.js",
+        "src/components/angular-markdown-directive/markdown.js",
+        "src/components/to-markdown/dist/to-markdown.js",
+        "src/components/angular-markdown-text/dist/angular-markdown-text.min.js"
     ],
     "angularUiTpls": [
     ],

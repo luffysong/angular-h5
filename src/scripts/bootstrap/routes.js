@@ -177,17 +177,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
-    //前台活动展示h5页面
-    $stateProvider.state('fractivity', {
-        url:'/fractivity/:id?',
-        controllerAs: 'vm',
-        controller: 'FRActivityController',
-        templateUrl: 'templates/fractivity/index.html',
-        resolve: {
-            cover: loadCover
-        }
-    });
-
     //创投助手app---发现页
     $stateProvider.state('find', {
         url: '/find',
@@ -264,6 +253,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controller: 'ActivityIndexController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/wise.html',
+    });
+
+    //前台活动展示h5页面
+    $stateProvider.state('fractivity', {
+        url:'/fractivity?activityName',
+        controllerAs: 'vm',
+        controller: 'FrActivityController',
+        templateUrl: 'templates/fractivity/index.html',
     });
 
     //创投助手app---活动页(ideaBank)
