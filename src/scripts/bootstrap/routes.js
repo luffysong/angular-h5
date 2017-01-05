@@ -255,12 +255,45 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/activity/wise.html',
     });
 
+    //-----------------------
     //前台活动展示h5页面
     $stateProvider.state('fractivity', {
         url:'/fractivity?activityName',
         controllerAs: 'vm',
         controller: 'FrActivityController',
         templateUrl: 'templates/fractivity/index.html',
+    });
+
+    //投资人注册
+    $stateProvider.state('frInvestor', {
+        url:'/frInvestor?activityName',
+        controllerAs: 'vm',
+        controller: 'FrInvestorController',
+        templateUrl: 'templates/fractivity/investor.html',
+    });
+
+    //成功页面
+    $stateProvider.state('frInvestorSuccess', {
+        url:'/frInvestor?activityName',
+        controllerAs: 'vm',
+        controller: 'frInvestorSucessController',
+        templateUrl: 'templates/fractivity/investorSuccess.html',
+    });
+
+    //创业者注册
+    $stateProvider.state('findStartUp', {
+        url:'/findStartUp?activityName',
+        controllerAs: 'vm',
+        controller: 'startUpController',
+        templateUrl: 'templates/activity/startup.html',
+    });
+
+    //创业者成功
+    $stateProvider.state('findStartUpSuccess', {
+        url:'/findStartUpSuccess?activityName',
+        controllerAs: 'vm',
+        controller: 'startupSuccessController',
+        templateUrl: 'templates/activity/startupSuccess.html',
     });
 
     //创投助手app---活动页(ideaBank)
@@ -297,7 +330,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页登陆
     $stateProvider.state('findLogin', {
-        url:'/findLogin?activityName',
+        url:'/findLogin?activityName&type',
         controller: 'LoginController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/login.html',

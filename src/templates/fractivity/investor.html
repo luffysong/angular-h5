@@ -1,13 +1,4 @@
 <div class="container investor-apply-wrapper investor-wrapper">
-    <div class="error-wrapper">
-        <!--所有报错信息-->
-        <!-- 自定义错误信息 -->
-        <div class="error"
-             ng-if="error.code">
-            <span>{{error.msg}}</span>
-        </div>
-        <!-- 自定义错误信息 -->
-    </div>
     <div class="activity-info">
         <h3>本次活动对投资人和创业者开放</h3>
         <span class="activity-info-span">请认真填写您的信息</span>
@@ -26,7 +17,7 @@
                     <label>姓名</label>
                     <div class="control">
                         <input class="form-control" placeholder="未填写" type="text" name="name" maxlength="15"
-                               ng-model="user.name" ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" required/>
+                               ng-model="vm.investor.name" ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" required/>
                     </div>
                 </div>
             </div>
@@ -40,49 +31,40 @@
             <form ng-submit="$event.preventDefault()"
                   name="investorValidateForm"
                   class="form-container">
-                <div error-wrapper error-group="investorErrorGroup"></div>
-
                 <div>
 
                     <div class="line">
                         <label>身份</label>
                         <div class="control icon-select pr-15">
-                            <select ng-model="invest.investorRole"
+                            <select ng-model="vm.investor.investorRole"
                                     name="identity"
                                     ng-change="$parent.detailHasChange = true"
                                     class="fr" required
-                                    ng-if="user.auditStatus !== 0">
+                                    >
                                 <option name="" value="">未选择</option>
-                                <option name="" value="2">个人投资者</option>
-                                <option name="" value="0">任职机构</option>
-                            </select>
-                            <select ng-model="invest.investorRole"
-                                    name="identity"
-                                    class="fr"
-                                    ng-disabled="true"
-                                    ng-if="user.auditStatus === 0">
-                                <option name="" value="2">个人投资者(审核中)</option>
-                                <option name="" value="0">任职机构(审核中)</option>
+                                <option name="" value="INDIVIDUAL">个人</option>
+                                <option name="" value="ORGANIZATION">机构</option>
+                                <option name="" value="COMPANY">公司</option>
                             </select>
                         </div>
                     </div>
-                    <div class="i-body" ng-if="(invest.investorRole=='0')">
+                </div>
 
-                        <!--新增机构-->
-                        <div class="line content-list">
-                            <div>
-                                <label>机构名称</label>
-                            </div>
-                            <div kr-suggest type="comAndOrg" class="kr-fleft control" ng-if="user.auditStatus !== 0"
-                                 suggest-obj="suggestOrganizationObj" max-length="30" min-length="1"
-                                 autocomplete-options="suggestOrganizationOption" placeholder="未填写" name="companyName">
-                            </div>
-                            <div class="control suggestOrganizationObj" ng-if="user.auditStatus === 0"  ng-disabled="true"
-                                placeholder="未填写" name="companyName" ng-bind="suggestOrganizationObj.word + '(审核中)'">
-                            </div>
+                <div class="i-body" ng-if="(vm.investor.investorRole == 'ORGANIZATION')">
+
+                    <!--新增机构-->
+                    <div class="line content-list">
+                        <div>
+                            <label>机构名称</label>
+                        </div>
+                        <div kr-suggest type="comAndOrg" class="kr-fleft control" ng-if="user.auditStatus !== 0"
+                             suggest-obj="suggestOrganizationObj" max-length="30" min-length="1"
+                             autocomplete-options="suggestOrganizationOption" placeholder="未填写" name="companyName">
+                        </div>
+                        <div class="control suggestOrganizationObj" ng-if="user.auditStatus === 0"  ng-disabled="true"
+                            placeholder="未填写" name="companyName" ng-bind="suggestOrganizationObj.word + '(审核中)'">
                         </div>
                     </div>
-
                 </div>
 
                 <div class="upload-wrapper" ng-if="detailHasChange || user.auditStatus === undefined || user.auditStatus === -1">

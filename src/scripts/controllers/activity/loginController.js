@@ -10,6 +10,7 @@ function LoginController(UserService, $state, $stateParams) {
     vm.slides = [];
     vm.responseData = {};
     vm.activityName = $stateParams.activityName;
+    vm.type = $stateParams.type;
 
     init();
     function init() {
@@ -18,9 +19,19 @@ function LoginController(UserService, $state, $stateParams) {
         }
 
         if (UserService.getUID()) {
-            $state.go('findInvestor', {
-                activityName: vm.activityName
-            });
+            if (vm.type === 'startup') {
+                $state.go('findStartUp', {
+                    activityName: vm.activityName
+                });
+            } else if (vm.type === 'investor') {
+                $state.go('findInvestor', {
+                    activityName: vm.activityName
+                });
+            } else {
+                $state.go('findInvestor', {
+                    activityName: vm.activityName
+                });
+            }
         }
 
         window.LOGIN_HOST = '//passport.36kr.com';
@@ -38,14 +49,23 @@ function LoginController(UserService, $state, $stateParams) {
 
         window.activityName = $stateParams.activityName;
         window.closeLoginModal = function () {
-            $state.go('findInvestor', {
-                activityName: vm.activityName
-            });
+            console.log('0000000000000000', vm.type);
+            if (vm.type === 'startup') {
+                $state.go('findStartUp', {
+                    activityName: vm.activityName
+                });
+            } else if (vm.type === 'investor') {
+                $state.go('findInvestor', {
+                    activityName: vm.activityName
+                });
+            }
         };
 
         window.initCss = function () {
             $('#activityInfoFirst').hide();
         };
+
+        window.initCss();
 
         window.initFooter = function () {
             $('.header-banner-wrapper').css('display', 'flex');

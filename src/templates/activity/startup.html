@@ -1,0 +1,74 @@
+<div class="container investor-apply-wrapper investor-wrapper">
+    <div class="error-wrapper">
+        <!--所有报错信息-->
+        <!-- 自定义错误信息 -->
+        <div class="error"
+             ng-if="error.code">
+            <span>{{error.msg}}</span>
+        </div>
+        <!-- 自定义错误信息 -->
+    </div>
+    <div class="activity-info">
+        <h3>本次活动对投资人和创业者开放</h3>
+        <span class="activity-info-span">请认真填写您的信息</span>
+        <img src="/styles/images/activity/krspace/group2@2x.png"/>
+        <div>
+            <span class="activity-info-left">验证手机</span>
+            <span class="activity-info-middle">填写信息</span>
+            <span class="activity-info-right">发送BP</span>
+        </div>
+    </div>
+    <div class="welcome validate-welcome-wrapper">
+        <form class="form-container" name="guideForm" ng-submit="$event.preventDefault()">
+            <div error-wrapper error-group="errorGroup"></div>
+            <div class="welcome-form">
+                <div class="line">
+                    <label>姓名</label>
+                    <div class="control">
+                        <input class="form-control" placeholder="请填写真实姓名" type="text" name="name" maxlength="15"
+                               ng-model="vm.startup.realName" ng-pattern="/^[\u4E00-\u9FA5a-zA-Z\s]{0,15}$/" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="basic-info basic-info-cutter "></div>
+
+            <div class="welcome-form">
+                <div class="line">
+                    <label>项目名称</label>
+                    <div class="control">
+                        <input class="form-control" placeholder="请填写项目名称15字以内" type="text"
+                        name="projectName" maxlength="15"
+                               ng-model="vm.startup.projectName"  required/>
+                    </div>
+                </div>
+            </div>
+            <div class="basic-info basic-info-cutter "></div>
+
+            <div class="welcome-form">
+                <div class="line">
+                    <label>项目简介</label>
+                    <div class="control">
+                        <textarea rows="3" placeholder="请填写项目简介30字以内"
+                        name="projectIntro" style="color:#5a626d;width:100%;text-align:right;padding-right:15px"
+                          ng-model="vm.startup.projectIntro"    maxlength="30"  required>
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="basic-info basic-info-cutter "></div>
+            <div class="basic-info"></div>
+            <div class="form-submit">
+                <a href="" class="btn btn-default btn-auth" ng-click="vm.submitForm()" ng-disabled="hasClick">立即提交</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script type="text/ng-template" id="templates/util/pop-captcha.html">
+    <div class="pop-form">
+        <div class="geetest-captcha">
+            <div geetest type="type" phone="phone" is-voice="isVoice" callback="callback"></div>
+        </div>
+    </div>
+</script>

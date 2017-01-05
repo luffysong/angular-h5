@@ -46,13 +46,25 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
     }
 
     //查看是否参与过活动
-    function start() {
+    function start(param) {
         if (!UserService.getUID()) {
-            $state.go('findLogin', {
-                activityName: vm.activityName
-            });
+            if (param === 'startup') {
+                $state.go('findLogin', {
+                    activityName: vm.activityName,
+                    type: 'startup'
+                });
+            } else if (param === 'investor') {
+                $state.go('findLogin', {
+                    activityName: vm.activityName,
+                    type: 'investor'
+                });
+            }
         } else {
-            getActivity();
+            if (param === 'startup') {
+                startUpState();
+            } else if (param === 'investor') {
+                investorState();
+            }
         }
     }
 
@@ -80,7 +92,6 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
     }
 
     function signUp(param) {
-        console.log(param);
         if (param === 'startup') {
             startUpState();
         } else if (param === 'investor') {
@@ -108,11 +119,11 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
         ActivityService.investorState(vm.activityName)
             .then(function (response) {
                 if (!response.data.applied) {
-                    $state.go('findInvestor', {
+                    $state.go('frInvestor', {
                         activityName: vm.activityName
                     });
                 } else {
-                    $state.go('findInvestorSuccess', {
+                    $state.go('frInvestorSuccess', {
                         activityName: vm.activityName
                     });
                 }

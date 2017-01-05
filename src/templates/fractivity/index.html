@@ -33,7 +33,14 @@
                             <div class="content-wrapper">
                                 <h3><span class="item-name">{{item.name}}</span>
                                   <span class="item-signs" style="background-color: rgb(107, 162, 252);">
-                                    {{item.phase}}</span></h3>
+                                    {{item.phase}}</span>
+
+                                    <span ng-if="item.recommend" class="item-signs" style="background-color: #ffa546">
+                                      精</span>
+
+                                    <span ng-if="item.hot" class="item-signs" style="background-color: #f7647f">
+                                      热</span>
+                                  </h3>
 
                                 <p class="item-brief">{{item.intro}}</p>
                                 <p class="item-industry" ng-if="item.industry"><span class="span-first">行业</span><span class="span-second">{{item.industry}}</span></p>
@@ -78,14 +85,14 @@
     </div>
 
   <div class="section-footer" ng-if="vm.activity.applierType == 'INVESTOR' " >
-      <div class='all back' ng-click="vm.signUp('investor')">投资人报名</div>
+      <div class='all back' ng-click="vm.start('investor')">投资人报名</div>
   </div>
-  <div class="section-footer" ng-if="vm.activity.applierType == 'STARTUP' " ng-click="vm.signUp()">
-      <div class='all blue' ng-click="vm.signUp('startup')">创业者报名</div>
+  <div class="section-footer" ng-if="vm.activity.applierType == 'STARTUP' ">
+      <div class='all blue' ng-click="vm.start('startup')">创业者报名</div>
   </div>
 
-  <div class="section-footer" ng-if="vm.activity.applierType == 'BOTH' " ng-click="vm.start()">
-      <div class='half blue' ng-click="vm.signUp('startup')">创业者报名</div>
-      <div class='half back' ng-click="vm.signUp('investor')"> 投资人报名</div>
+  <div class="section-footer" ng-if="vm.activity.applierType == 'BOTH' " >
+      <div class='half blue' ng-click="vm.start('startup')">创业者报名</div>
+      <div class='half back' ng-click="vm.start('investor')"> 投资人报名</div>
   </div>
 </div>
