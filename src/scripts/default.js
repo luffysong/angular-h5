@@ -45,8 +45,7 @@ var depModules = [
     'permission',
     'infinite-scroll',
     'duScroll',
-    'perfect_scrollbar',
-    'markdown'
+    'perfect_scrollbar'
 ];
 
 if (window.MOCKMODE_ON) {
