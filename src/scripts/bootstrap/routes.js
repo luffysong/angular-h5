@@ -284,7 +284,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('findStartUp', {
         url:'/findStartUp?activityName',
         controllerAs: 'vm',
-        controller: 'startUpController',
+        controller: 'FrStartUpController',
         templateUrl: 'templates/activity/startup.html',
     });
 

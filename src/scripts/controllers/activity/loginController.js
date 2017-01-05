@@ -48,8 +48,8 @@ function LoginController(UserService, $state, $stateParams) {
         $('link[href*="login-theme"]').remove();
 
         window.activityName = $stateParams.activityName;
+        window.TYPE = vm.type;
         window.closeLoginModal = function () {
-            console.log('0000000000000000', vm.type);
             if (vm.type === 'startup') {
                 $state.go('findStartUp', {
                     activityName: vm.activityName
@@ -66,6 +66,9 @@ function LoginController(UserService, $state, $stateParams) {
         };
 
         window.initCss();
+        if (!UserService.getUID()) {
+            window.initCss();
+        }
 
         window.initFooter = function () {
             $('.header-banner-wrapper').css('display', 'flex');
