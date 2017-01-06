@@ -1,3 +1,37 @@
+<a name="1.23.0"></a>
+# [1.23.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.22.0...v1.23.0) (2017-01-06)
+
+
+### Bug Fixes
+
+* angular版本导致suggest失效fix ([0366e78](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0366e78))
+* api域名变更 ([ec90f18](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/ec90f18))
+* slick修复 ([d3b5700](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d3b5700))
+* 去掉markdown依赖 ([5517a0c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5517a0c))
+* 去掉邮箱，样式修改 ([62f155c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/62f155c))
+* 图片大小限制 ([e50e020](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e50e020))
+* 增加loading效果 ([380f93d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/380f93d))
+* 增加weixin ([596e4cd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/596e4cd))
+* 增加默认头像 ([67f81f9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/67f81f9))
+* 微信号长度校验 ([1c28a42](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1c28a42))
+* 报错调试 ([42a3c1e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/42a3c1e))
+* 文案修改 ([41b9d2c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/41b9d2c))
+* 文案显示隐藏 ([74fbd3b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/74fbd3b))
+* 样式修复 ([e4e3502](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e4e3502))
+* 认证提交fix ([7bf33f1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7bf33f1))
+* 轮播修改 ([29e211a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/29e211a))
+
+
+### Features
+
+* QRcode修改 ([51645ff](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/51645ff))
+* 投资人认证开发 ([4358e99](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4358e99))
+* 投资人认证开发 ([d7d168d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d7d168d))
+* 投资人认证开发 ([c13c3b7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c13c3b7))
+* 活动h5页面 ([c20d31f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c20d31f))
+
+
+
 <a name="1.22.0"></a>
 # [1.22.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.21.0...v1.22.0) (2016-12-28)
 
