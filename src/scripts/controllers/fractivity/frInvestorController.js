@@ -38,10 +38,7 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
 
         //查看是否参与过活动
         function getActivity() {
-            var sendData = {
-                actId:$scope.activityName
-            };
-            ActivityService.investorState(sendData)
+            ActivityService.investorState($scope.activityName)
                 .then(function (response) {
                     $scope.hasSubmit = response.data.applied;
                     if (!$scope.hasSubmit) {
@@ -50,7 +47,7 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
                         $('body').css('overflow', 'hidden');
                         window.parent.initCss && window.parent.initCss();
                     } else {
-                        $state.go('findInvestorSuccess', {
+                        $state.go('frInvestorSuccess', {
                             activityName: $scope.activityName
                         });
                     }
@@ -325,16 +322,20 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
         //提交活动报名
         function setActivity() {
             var sendData = {
-                activityName:$scope.activityName,
+                actId:$scope.activityName,
+                entityName:$scope.suggestOrganizationObj.word,
+                realName:$scope.user.name,
+                investorRole: getInvestorRole($scope.invest.investorRole),
+                entityType: entityType($scope.invest.investorRole)
             };
             if ($scope.detailHasChange) {
                 var link   = $scope.invest.pictures || $scope.investorValidateForm.pictures.uploaded;
                 sendData.bizCard = link;
             }
 
-            FindService.setActivity(sendData)
+            ActivityService.investorSignUp(sendData)
                 .then(function temp() {
-                    $state.go('findInvestorSuccess', {
+                    $state.go('frInvestorSuccess', {
                         activityName: $scope.activityName
                     });
                 })
@@ -349,6 +350,22 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
                 return INVESTOR_TYPE_META[type];
             } else {
                 return $scope.organization.addForm.type;
+            }
+        }
+
+        function entityType(type) {
+            if (type === 2) {
+                return 'INDIVIDUAL';
+            } else if (type === 0) {
+                return 'ORGANIZATION';
+            }
+        }
+
+        function getInvestorRole(type) {
+            if (type === 2) {
+                return 'PERSONAL_INVESTOR';
+            } else if (type === 0) {
+                return 'ORG_INVESTOR';
             }
         }
 

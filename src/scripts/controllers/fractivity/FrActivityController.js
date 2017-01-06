@@ -71,6 +71,7 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
     function getActivity() {
         ActivityService.actInfo(vm.activityName)
             .then(function (response) {
+                console.log(response);
                 vm.activity = response.data;
                 initWeixin();
             })

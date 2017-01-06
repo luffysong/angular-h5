@@ -1,8 +1,8 @@
 var angular = require('angular');
 angular.module('defaultApp.controller')
-    .controller('startUpController', startUpController);
+    .controller('FrStartUpController', FrStartUpController);
 
-function startUpController($stateParams, checkForm, ActivityService,
+function FrStartUpController($stateParams, checkForm, ActivityService,
     $state, UserService, ErrorService, $scope, FindService) {
     var vm = this;
     vm.activityName = $stateParams.activityName;
@@ -25,6 +25,11 @@ function startUpController($stateParams, checkForm, ActivityService,
 
     //先查看是否登录 在查看是否参加活动
     function initUser() {
+        vm.startup.actId = $stateParams.activityName;
+        console.log(vm.startup.actId);
+        $scope.user = {
+            id: UserService.getUID(),
+        };
         if (!UserService.getUID()) {
             $state.go('findLogin', {
                 activityName: vm.activityName,
@@ -40,8 +45,9 @@ function startUpController($stateParams, checkForm, ActivityService,
             .then(function (response) {
                 if (!response.data.applied) {
                     FindService.getUserProfile()
-                        .then(function (data) {
-                            console.log('999999', data);
+                        .then(function (response) {
+                            //vm.startup = angular.copy(response.data);
+                            vm.startup.realName = response.data.name;
                         })
                         .catch(error);
                 } else {
@@ -52,17 +58,6 @@ function startUpController($stateParams, checkForm, ActivityService,
             })
             .catch(error);
     }
-
-    var Error = {
-        show: function (msg) {
-            $scope.error.msg = msg;
-            $scope.error.code = 1;
-        },
-
-        hide: function () {
-            $scope.error.code = 0;
-        }
-    };
 
     function submitForm() {
         if (!vm.startup.realName) {
@@ -80,6 +75,22 @@ function startUpController($stateParams, checkForm, ActivityService,
             return;
         }
 
+        $scope.user.name = vm.startup.realName;
+
+        UserService.basic.update({
+                id: $scope.user.id
+            }, {
+                name: $scope.user.name,
+            }).$promise.then(setActivity)
+            .catch(function (err) {
+                $scope.hasClick = false;
+                ErrorService.alert({
+                    msg: err.msg
+                });
+            });
+    }
+
+    function setActivity() {
         ActivityService.startUpSignUp(vm.startup)
             .then(function success() {
                 $state.go('findStartUpSuccess', {
@@ -90,6 +101,7 @@ function startUpController($stateParams, checkForm, ActivityService,
     }
 
     function error(err) {
+        $scope.hasClick = false;
         ErrorService.alert(err);
     }
 }

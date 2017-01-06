@@ -84,6 +84,7 @@
       <br /><br />
     </div>
 
+<div class="section-footer" ng-if="vm.activity.status == 0">
   <div class="section-footer" ng-if="vm.activity.applierType == 'INVESTOR' " >
       <div class='all back' ng-click="vm.start('investor')">投资人报名</div>
   </div>
@@ -95,4 +96,14 @@
       <div class='half blue' ng-click="vm.start('startup')">创业者报名</div>
       <div class='half back' ng-click="vm.start('investor')"> 投资人报名</div>
   </div>
+  </div>
+
+<div class="section-footer" ng-if="vm.activity.status == 1">
+  <div class="section-footer disabled" >活动结束</div>
+</div>
+
+<div class="section-footer" ng-if="vm.activity.status == 2">
+  <div class="section-footer disabled" >停止报名</div>
+</div>
+
 </div>

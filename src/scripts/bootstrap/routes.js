@@ -276,7 +276,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('frInvestorSuccess', {
         url:'/frInvestor?activityName',
         controllerAs: 'vm',
-        controller: 'frInvestorSucessController',
+        controller: 'FrInvestorSucessController',
         templateUrl: 'templates/fractivity/investorSuccess.html',
     });
 
@@ -292,7 +292,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('findStartUpSuccess', {
         url:'/findStartUpSuccess?activityName',
         controllerAs: 'vm',
-        controller: 'startupSuccessController',
+        controller: 'FrStartupSuccessController',
         templateUrl: 'templates/activity/startupSuccess.html',
     });
 
