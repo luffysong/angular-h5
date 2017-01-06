@@ -26,9 +26,13 @@ angular.module('defaultApp.service').service('ErrorService', [
                     });
                 }else if (err) {
                     notify({
-                        message:'服务器端未知原因错误',
+                        message:JSON.stringify(err),
                         classes:className
                     });
+                    /*notify({
+                        message:'服务器端未知原因错误',
+                        classes:className
+                    });*/
                 }
             }
         };

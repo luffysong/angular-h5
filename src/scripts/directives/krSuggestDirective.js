@@ -51,9 +51,9 @@ angular.module('defaultApp.directive').directive('krSuggest',
                     var method = TYPE_TO_METHOD[$scope.type];
                     var deferred = $q.defer();
                     SuggestService[method]({
-                        wd: word
+                        kw: word
                     }, function (suggest) {
-                        deferred.resolve(makeSuggestListObjs(word, suggest.data));
+                        deferred.resolve(makeSuggestListObjs(word, suggest));
                     });
 
                     return deferred.promise;

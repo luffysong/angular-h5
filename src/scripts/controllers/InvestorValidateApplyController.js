@@ -10,9 +10,62 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
     function (OrganizationService, CompanyService, $state, $scope, $rootScope, $stateParams, SuggestService, $q, SearchService,
         DictionaryService, ErrorService, DefaultService, $upload, checkForm, LoginService,
         $timeout, UserService, $location, InvestorauditService, monthOptions, yearOptions, AndroidUploadService,
-        PopCaptcha) {
+        PopCaptcha, loading) {
 
         $scope.positionSuggestObj = {};
+        $scope.validate = {
+            step: 1
+        };
+        loading.show('applyLoading');
+        $scope.params = {};
+        $scope.suggest = {
+            currentIndex: 0,
+        };
+
+        $scope.selectItem = function (index) {
+            angular.forEach($scope.suggestInvestor, function (item, i) {
+                if (~~index === ~~i) {
+                    item.active = !item.active;
+                } else {
+                    item.active = false;
+                }
+            });
+
+            $scope.getField();
+        };
+
+        $scope.$watch('suggest.currentIndex', function (x) {
+            console.log(x);
+        });
+
+        $scope.getField = function () {
+            angular.forEach($scope.suggestInvestor, function (item, index) {
+                if (item.active) {
+                    $scope.params.relatedId = angular.copy($scope.suggestInvestor[index].id);
+                    $scope.params.relatedEntityName = angular.copy($scope.suggestInvestor[index].orgName);
+                    $scope.params.relatedName = angular.copy($scope.suggestInvestor[index].name);
+                    $scope.params.relatedPosition = angular.copy($scope.suggestInvestor[index].position);
+                    $scope.params.singleInvestMin = angular.copy($scope.suggestInvestor[index].singleInvestMin);
+                    $scope.params.singleInvestMax = angular.copy($scope.suggestInvestor[index].singleInvestMax);
+                    $scope.params.singleInvestUnit = $scope.suggestInvestor[index].singleInvestUnit ? angular.copy($scope.suggestInvestor[index].singleInvestUnit) : 'CNY';
+                }
+            });
+        };
+
+        $scope.getSuggestInvestor = function () {
+            var params = $scope.invest && $scope.invest.investorRole === 'ORG_INVESTOR' ? {
+                name: $scope.user.name,
+                orgName: $scope.organization.addForm.name
+            } : {
+                name: $scope.user.name
+            };
+
+            InvestorauditService.suggestInvestor(params, function (data) {
+                $scope.suggestInvestor = data;
+                console.log(data);
+            });
+        };
+
         $scope.organization = {
             addForm: {
 
@@ -57,11 +110,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                     delete $scope.user.phone;
                 }
 
-                if (data.email) {
-                    $scope.user.hasEmail = true;
-                    delete $scope.user.email;
-                }
-
                 /*基本信息*/
                 $scope.invest.name = data.name;
                 $scope.invest.intro = data.intro;
@@ -96,7 +144,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
             });
 
-            $scope.$watch('user.email', function (email) {
+            /*$scope.$watch('user.email', function (email) {
                 if (!email || $scope.guideForm.email.$error.email) {
                     return;
                 }
@@ -114,7 +162,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                         $scope.guideForm.email.$setValidity('checked', false);
                     });
                 }, 800);
-            });
+            });*/
 
             $scope.getCode = function (e, voice) {
                 e && e.preventDefault();
@@ -195,27 +243,30 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             };
 
             /*查询投资人认证申请状态*/
-            InvestorauditService.queryStatus({}, function (response) {
+            InvestorauditService.getStatus(function (response) {
+
                 //response.status = -1;
-                switch (response.status){
+                switch (response.state){
                     /*审核中*/
-                    case 0:
+                    case 'PENDING':
                         $scope.investorValidateApply.status = 'checking';
                         break;
                     /*审核通过*/
-                    case 1 :
+                    case 'PASS':
                         $scope.investorValidateApply.status = 'success';
                         break;
                     default:
-                        $scope.investorValidateApply.status = 'basic';
+                        $scope.investorValidateApply.status = 'new';
                         break;
                 }
+                loading.hide('applyLoading');
             }, function (err) {
 
                 if (err.code !== 4031) {
                     ErrorService.alert(err);
                 } else {
                     $scope.investorValidateApply.status = 'new';
+                    loading.hide('applyLoading');
                 }
             });
 
@@ -265,6 +316,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             var upyun = window.kr.upyun;
             if (files[0].size > 5 * 1024 * 1024) {
                 scope.$setValidity('size', true);
+                ErrorService.alert({
+                    msg: '上传名片失败，图片文件不能超过5M'
+                });
                 return;
             }
 
@@ -324,9 +378,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             on_select: function (selected) {
                 $scope.organization.isAdd = false;
                 var organization = selected.obj;
-                $scope.organization.addForm.name = organization.name;
-                $scope.organization.addForm.id = organization.id;
+                $scope.organization.addForm.name = $scope.params.orgName = organization.name;
+                $scope.organization.addForm.id = $scope.params.orgId = organization.id;
                 $scope.organization.addForm.type = organization.type;
+                $scope.params.orgType = organization.entityType;
             }
         };
 
@@ -337,11 +392,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.intro = {};
 
         $scope.hasClick = false;
-        /*表单提交*/
-        $scope.submitForm = function () {
 
+        $scope.nextStep = function () {
             Error.hide();
-
             if ($scope.guideForm.avatar.uploaded || $scope.user.avatar) {
                 $scope.guideForm.avatar.$setValidity('required', true);
 
@@ -355,6 +408,16 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 return false;
             }
 
+            if (!checkForm('investorValidateForm') || $scope.hasClick) {
+                return false;
+            }
+
+            $scope.validate.step = 2;
+            $scope.getSuggestInvestor();
+
+        };
+        /*表单提交*/
+        $scope.submitForm = function () {
             if (!checkForm('investorValidateForm') || $scope.hasClick) {
                 return false;
             }
@@ -378,7 +441,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 }, {
                     avatar: $scope.guideForm.avatar.uploaded || $scope.user.avatar,
                     name: $scope.user.name,
-                    email: $scope.user.email,
+                    /*email: $scope.user.email,*/
                     phone: $scope.getPhoneWithCountryCode(),
                     smscode: $scope.user.smscode
                 }).$promise.then(send)
@@ -407,15 +470,21 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         //发送投资人认证数据
         function send() {
             var businessCardLink   = $scope.invest.pictures || $scope.investorValidateForm.pictures.uploaded;
-            $scope.organization.addForm = $scope.organization.addForm;
-            InvestorauditService.save({
-                entityType: getInvestorTypeNumber($scope.invest.investorRole),
-                entityId:$scope.organization.addForm.id,
-                entityName:$scope.organization.addForm.name,
-                position: $scope.positionSuggestObj.word,
-                businessCardLink: businessCardLink,
-                weixin: $scope.user.weixin
-            }).then(function () {
+            $scope.params.avatar = $scope.guideForm.avatar.uploaded || $scope.user.avatar;
+            $scope.params.realName = $scope.user.name;
+            $scope.params.weixin = $scope.user.weixin;
+            $scope.params.businessCard = businessCardLink;
+            $scope.params.investorRoleEnum = $scope.invest.investorRole;
+            if ($scope.getPhoneWithCountryCode()) {
+                $scope.params.phone = $scope.getPhoneWithCountryCode();
+            }
+
+            if ($scope.invest.investorRole === 'ORG_INVESTOR') {
+                /*$scope.params.position = $scope.positionSuggestObj.word;*/
+                $scope.params.position = $scope.user.position;
+            }
+
+            InvestorauditService.submit($scope.params).then(function () {
                 try {
                     window.webkit.messageHandlers.investor.postMessage();
                     return;
@@ -429,7 +498,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             });
         }
 
-        function getInvestorTypeNumber(type) {
+        /*function getInvestorTypeNumber(type) {
             var INVESTOR_TYPE_META = {
                 PERSONAL_INVESTOR: 1
             };
@@ -438,6 +507,6 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             } else {
                 return $scope.organization.addForm.type;
             }
-        }
+        }*/
     }
 );
