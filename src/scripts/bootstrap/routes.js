@@ -276,7 +276,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('frInvestorSuccess', {
         url:'/frInvestor?activityName',
         controllerAs: 'vm',
-        controller: 'frInvestorSucessController',
+        controller: 'FrInvestorSucessController',
         templateUrl: 'templates/fractivity/investorSuccess.html',
     });
 
@@ -284,16 +284,16 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('findStartUp', {
         url:'/findStartUp?activityName',
         controllerAs: 'vm',
-        controller: 'startUpController',
-        templateUrl: 'templates/activity/startup.html',
+        controller: 'FrStartUpController',
+        templateUrl: 'templates/fractivity/startup.html',
     });
 
     //创业者成功
     $stateProvider.state('findStartUpSuccess', {
         url:'/findStartUpSuccess?activityName',
         controllerAs: 'vm',
-        controller: 'startupSuccessController',
-        templateUrl: 'templates/activity/startupSuccess.html',
+        controller: 'FrStartupSuccessController',
+        templateUrl: 'templates/fractivity/startupSuccess.html',
     });
 
     //创投助手app---活动页(ideaBank)

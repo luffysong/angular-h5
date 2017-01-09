@@ -17,13 +17,22 @@ function loginIframe($sce) {
 
         },
         link: function (scope) {
-            scope.loginSrc = $sce.trustAsResourceUrl(window.LOGIN_HOST + '/pages/?ok_url=' +
-                encodeURIComponent(location.href.replace(/\/[^\/]*?$/, '/findInvestor?activityName=' + window.activityName)) +
+            if (window.TYPE === 'startup') {
+                scope.loginSrc = $sce.trustAsResourceUrl(window.LOGIN_HOST + '/pages/?ok_url=' +
+                  encodeURIComponent(location.href.replace(/\/[^\/]*?$/, '/findStartUp?activityName=' + window.activityName)) +
+                  '&theme=' + encodeURIComponent(window.LOGIN_CSS) + '#/login-simple');
+            } else if (window.TYPE === 'investor') {
+                scope.loginSrc = $sce.trustAsResourceUrl(window.LOGIN_HOST + '/pages/?ok_url=' +
+                encodeURIComponent(location.href.replace(/\/[^\/]*?$/, '/frInvestor?activityName=' + window.activityName)) +
                 '&theme=' + encodeURIComponent(window.LOGIN_CSS) + '#/login-simple');
+            } else {
+                scope.loginSrc = $sce.trustAsResourceUrl(window.LOGIN_HOST + '/pages/?ok_url=' +
+                  encodeURIComponent(location.href.replace(/\/[^\/]*?$/, '/findInvestor?activityName=' + window.activityName)) +
+                  '&theme=' + encodeURIComponent(window.LOGIN_CSS) + '#/login-simple');
+            }
 
         }
 
     };
 
 }
-

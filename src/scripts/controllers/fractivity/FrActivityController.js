@@ -8,7 +8,11 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
     vm.activity;
     vm.activityName = $stateParams.activityName;
     vm.start = start;
-    vm.signUp = signUp;
+    vm.bothh3 = false;
+    vm.investorh3 = false;
+    vm.startuph3 = false;
+
+    //vm.signUp = signUp;
 
     init();
 
@@ -41,8 +45,13 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
             document.title = vm.activity.actName;
         }
 
+        if (vm.activity.applierType) {
+            document.applierType = vm.activity.applierType;
+        }
+
         var obj = {};
         window.InitWeixin(obj);
+        initH3();
     }
 
     //查看是否参与过活动
@@ -71,6 +80,7 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
     function getActivity() {
         ActivityService.actInfo(vm.activityName)
             .then(function (response) {
+                console.log(response);
                 vm.activity = response.data;
                 initWeixin();
             })
@@ -91,13 +101,13 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
         $('.common-header.J_commonHeaderWrapper').remove();
     }
 
-    function signUp(param) {
-        if (param === 'startup') {
-            startUpState();
-        } else if (param === 'investor') {
-            investorState();
-        }
-    }
+    // function signUp(param) {
+    //     if (param === 'startup') {
+    //         startUpState();
+    //     } else if (param === 'investor') {
+    //         investorState();
+    //     }
+    // }
 
     function startUpState() {
         ActivityService.startUpState(vm.activityName)
@@ -129,5 +139,9 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
                 }
             })
             .catch(error);
+    }
+
+    function initH3() {
+        vm[document.applierType.toLowerCase() + 'h3'] = true;
     }
 }
