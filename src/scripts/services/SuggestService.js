@@ -41,7 +41,7 @@ angular.module('defaultApp.service').service('SuggestService', [
          */
 
         //console.log(BasicService)
-        var service = BasicService('/api/suggest/:sub', {
+        var service = BasicService('//' + projectEnvConfig.nrongHost + '/n/api/suggest/:sub', {
             /**
              * @api {get} /api/suggest/field 联想结果(公司领域)
              * @apiName suggest field
@@ -107,8 +107,9 @@ angular.module('defaultApp.service').service('SuggestService', [
             },
             queryComAndOrg: {
                 params: {
-                    sub: 'com-org'
-                }
+                    sub: 'com-and-org',
+                },
+                isArray: true,
             },
             queryPosition: {
                 params: {

@@ -11,7 +11,7 @@
 
 }
 .investor-apply-wrapper{
-    background: #f7f7f7;
+    background: #F2F4F5;
     height:100%;
     .form-submit{
         a{
@@ -21,6 +21,159 @@
         }
         a:active,a:focus,a:hover{
             color: rgba(255,255,255,0.5) !important;
+        }
+    }
+}
+.recommend-investor {
+    padding:12px 22px 20px;
+    background-color: #f7f7f7;
+    .recommend-tip {
+        font-size: 14px;
+        color: #969FA9;
+        letter-spacing: 0;
+        line-height: 17px;
+        margin-bottom: 20px;
+    }
+    .recommend-container {
+        position: relative;
+        .left-arrow {
+            position: absolute;
+            display: block;
+            height:12px;
+            text-align: center;
+            left:-13px;
+            top:50%;
+            margin-top:-6px;
+            border-radius: 4px;
+            z-index:9;
+        }
+        .right-arrow {
+            position: absolute;
+            display: block;
+            height:12px;
+            text-align: center;
+            right:-13px;
+            top:50%;
+            margin-top:-6px;
+            border-radius: 4px;
+            z-index:9;
+        }
+        .recommend-slick {
+            max-height:170px;
+            overflow: hidden;
+        }
+    }
+    .investor-container {
+        position:relative;
+        float: left;
+        width:100%;
+    }
+    .investor-item {
+        position: relative;
+        float: left;
+        width:100%;
+        height:auto;
+        background: #FFFFFF;
+        border: 1px solid #E7E7E7;
+        padding:15px 15px 13px;
+        &.active {
+            .select-tag {
+                color:#36BEF1;
+            }
+        }
+        .select-tag {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            color: #ccc;
+            top: 10px;
+            right: 15px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 18px;
+        }
+        .user-top {
+            .user-logo {
+                float: left;
+                width:55px;
+                height:55px;
+                border: 1px solid #E7E7E7;
+                border-radius: 100px;
+                background: no-repeat center;
+                background-size: contain;
+            }
+            .user-content {
+                margin-left:68px;
+                .user-name {
+                    display: block;
+                    font-size: 15px;
+                    color: #222C38;
+                    line-height: 21px;
+                    margin-bottom:7px;
+                    font-weight:600;
+                }
+                .user-work {
+                    font-size: 13px;
+                    color: #222c38;
+                    line-height: 16px;
+                    margin-bottom:10px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .follow-industry {
+                    font-size: 12px;
+                    color: #969fa9;
+                    line-height: 18px;
+                    margin-bottom: 9px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    .tag-img {
+                        display: inline-block;
+                        width:28px;
+                        margin-right:4px;
+                    }
+                    .follow-tag {
+                        display: inline-block;
+                        width:28px;
+                        height: 15px;
+                        line-height:15px;
+                        border: 1px solid #6BA2FC;
+                        border-radius: 2px;
+                        font-size: 12px;
+                        color: #6BA2FC;
+                        letter-spacing: 0;
+                    }
+                    .follow-item {
+                        &.hidePoint {
+                            .list-point {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .user-bottom {
+            margin-top: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border-top: 1px dashed #DDDDDD;
+            padding-top: 12px;
+            font-size: 13px;
+            color: #5A626D;
+            letter-spacing: 0;
+            line-height: 16px;
+            .case-item {
+                &.hidePoint {
+                    .list-point {
+                        display: none;
+                    }
+                }
+            }
         }
     }
 }
@@ -126,6 +279,19 @@
         select{
             height: 24px;
         }
+    }
+    .next-step {
+        display: block;
+        width:214px;
+        height:48px;
+        line-height: 48px;
+        background-image: linear-gradient(-180deg, #606974 0%, #464E58 100%);
+        border-radius: 24px;
+        font-size: 16px;
+        color: #FFFFFF;
+        letter-spacing: 0;
+        text-align: center;
+        margin:40px auto 0;
     }
 }
 
@@ -261,8 +427,27 @@
 }
 
 .form-submit{
-    padding: 30px 0;
-    background: #f7f7f7;
+    >a.submit-btn {
+        display: block;
+        width:214px;
+        height:48px;
+        line-height: 48px;
+        background-image: linear-gradient(-180deg, #606974 0%, #464E58 100%);
+        border-radius: 24px;
+        font-size: 16px;
+        color: #FFFFFF;
+        letter-spacing: 0;
+        text-align: center;
+        margin:40px auto 0;
+    }
+}
+.prev-page {
+    display: block;
+    font-size: 14px;
+    color: #969FA9;
+    line-height: 17px;
+    margin:19px auto;
+    text-align: center;
 }
 
 /*审核中  审核成功*/
