@@ -285,7 +285,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url:'/findStartUp?activityName',
         controllerAs: 'vm',
         controller: 'FrStartUpController',
-        templateUrl: 'templates/activity/startup.html',
+        templateUrl: 'templates/fractivity/startup.html',
     });
 
     //创业者成功
@@ -293,7 +293,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url:'/findStartUpSuccess?activityName',
         controllerAs: 'vm',
         controller: 'FrStartupSuccessController',
-        templateUrl: 'templates/activity/startupSuccess.html',
+        templateUrl: 'templates/fractivity/startupSuccess.html',
     });
 
     //创投助手app---活动页(ideaBank)

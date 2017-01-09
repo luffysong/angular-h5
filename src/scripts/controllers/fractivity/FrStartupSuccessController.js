@@ -4,13 +4,16 @@ angular.module('defaultApp.controller')
 
 function FrStartupSuccessController($stateParams, FindService, $state, hybrid, ActivityService) {
     var vm = this;
+    vm.bothh3 = false;
+    vm.investorh3 = false;
+    vm.startuph3 = false;
     init();
 
     function init() {
 
-        if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
-            document.title = window.WEIXINSHARE.shareTitle;
-        }
+        // if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
+        //     document.title = window.WEIXINSHARE.shareTitle;
+        // }
 
         $('.header-banner-wrapper').css('display', 'flex');
         $('html').css('overflow', 'auto');
@@ -38,6 +41,7 @@ function FrStartupSuccessController($stateParams, FindService, $state, hybrid, A
         }
 
         getActivity();
+        initH3();
     }
 
     //查看是否参与过活动
@@ -60,5 +64,9 @@ function FrStartupSuccessController($stateParams, FindService, $state, hybrid, A
                 activityName: vm.activityName
             });
         }
+    }
+
+    function initH3() {
+        vm[document.title.toLowerCase() + 'h3'] = true;
     }
 }

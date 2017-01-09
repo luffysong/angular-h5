@@ -14,6 +14,9 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
         projectName: '',
         realName: ''
     };
+    vm.bothh3 = false;
+    vm.investorh3 = false;
+    vm.startuph3 = false;
 
     /*错误信息提示*/
     $scope.error = {
@@ -26,7 +29,6 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
     //先查看是否登录 在查看是否参加活动
     function initUser() {
         vm.startup.actId = $stateParams.activityName;
-        console.log(vm.startup.actId);
         $scope.user = {
             id: UserService.getUID(),
         };
@@ -38,6 +40,7 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
         } else {
             startUpState();
         }
+        initH3();
     }
 
     function startUpState() {
@@ -46,7 +49,6 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
                 if (!response.data.applied) {
                     FindService.getUserProfile()
                         .then(function (response) {
-                            //vm.startup = angular.copy(response.data);
                             vm.startup.realName = response.data.name;
                         })
                         .catch(error);
@@ -103,5 +105,9 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
     function error(err) {
         $scope.hasClick = false;
         ErrorService.alert(err);
+    }
+
+    function initH3() {
+        vm[document.title.toLowerCase() + 'h3'] = true;
     }
 }

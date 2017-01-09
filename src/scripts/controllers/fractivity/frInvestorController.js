@@ -11,6 +11,10 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
         DictionaryService, ErrorService, DefaultService, $upload, checkForm, LoginService,
         $timeout, UserService, $location, InvestorauditService, monthOptions,
         yearOptions, AndroidUploadService, FindService, ActivityService) {
+        var vm = this;
+        vm.bothh3 = false;
+        vm.investorh3 = false;
+        vm.startuph3 = false;
 
         $scope.positionSuggestObj = {};
         $scope.organization = {
@@ -23,10 +27,10 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
         checkUser();
 
         function checkUser() {
-            if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
-                document.title = window.WEIXINSHARE.shareTitle;
-            }
-
+            // if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
+            //     document.title = window.WEIXINSHARE.shareTitle;
+            // }
+            initH3();
             if (!UserService.getUID()) {
                 $state.go('findLogin', {
                     activityName: $scope.activityName
@@ -371,6 +375,10 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
 
         function error(err) {
             ErrorService.alert(err);
+        }
+
+        function initH3() {
+            vm[document.title.toLowerCase() + 'h3'] = true;
         }
     }
 );
