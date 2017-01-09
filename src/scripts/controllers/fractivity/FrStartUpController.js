@@ -6,7 +6,6 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
     $state, UserService, ErrorService, $scope, FindService) {
     var vm = this;
     vm.activityName = $stateParams.activityName;
-    vm.submitForm = submitForm;
     $scope.hasClick = false;
     vm.startup = {
         actId: $stateParams.activityName,
@@ -26,7 +25,7 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
 
     initUser();
 
-    //先查看是否登录 在查看是否参加活动
+    //先查看是否登录 再查看是否参加活动
     function initUser() {
         vm.startup.actId = $stateParams.activityName;
         $scope.user = {
@@ -41,6 +40,8 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
             startUpState();
         }
 
+        $('html').css('overflow', 'auto');
+        $('body').css('overflow', 'auto');
         initH3();
     }
 
@@ -62,7 +63,7 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
             .catch(error);
     }
 
-    function submitForm() {
+    $scope.submitBtn = function () {
         if (!vm.startup.realName) {
             ErrorService.alert('姓名必填');
             return;
@@ -91,7 +92,7 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
                     msg: err.msg
                 });
             });
-    }
+    };
 
     function setActivity() {
         ActivityService.startUpSignUp(vm.startup)

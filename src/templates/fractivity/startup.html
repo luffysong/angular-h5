@@ -50,17 +50,16 @@
                 <div class="line">
                     <label>项目简介</label>
                     <div class="control">
-                        <textarea rows="3" placeholder="请填写项目简介30字以内"
-                        name="projectIntro" style="color:#5a626d;width:100%;text-align:right;padding-right:15px"
-                          ng-model="vm.startup.projectIntro"    maxlength="30"  required>
-                        </textarea>
+                      <textarea name="brief" class="form-control" placeholder="请简要介绍下项目，5-30字以内" required
+                                ng-model="vm.startup.projectIntro"  ng-pattern="/^.{5,30}/"
+                                maxlength="30" style="color:#5a626d;width:100%;height:100px;padding-left:20px;border:none;"></textarea>
                     </div>
                 </div>
             </div>
             <div class="basic-info basic-info-cutter "></div>
             <div class="basic-info"></div>
             <div class="form-submit">
-                <a href="" class="btn btn-default btn-auth" ng-click="vm.submitForm()" ng-disabled="hasClick">立即提交</a>
+                <a href="" class="btn btn-default btn-auth" ng-click="submitBtn($event)" ng-disabled="hasClick">立即提交</a>
             </div>
         </form>
     </div>
