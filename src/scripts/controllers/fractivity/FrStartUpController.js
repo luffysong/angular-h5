@@ -35,11 +35,12 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
         if (!UserService.getUID()) {
             $state.go('findLogin', {
                 activityName: vm.activityName,
-                type: 'starup'
+                type: 'startup'
             });
         } else {
             startUpState();
         }
+
         initH3();
     }
 
@@ -108,6 +109,6 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
     }
 
     function initH3() {
-        vm[document.title.toLowerCase() + 'h3'] = true;
+        vm[document.applierType.toLowerCase() + 'h3'] = true;
     }
 }

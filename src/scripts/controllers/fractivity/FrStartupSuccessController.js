@@ -48,10 +48,11 @@ function FrStartupSuccessController($stateParams, FindService, $state, hybrid, A
     function getActivity() {
         ActivityService.startUpState(vm.activityName)
             .then(function (response) {
-                vm.hasSubmit = !response.data.applied;
+                vm.hasSubmit = response.data.applied;
                 if (!vm.hasSubmit) {
                     $state.go('findLogin', {
-                        activityName: vm.activityName
+                        activityName: vm.activityName,
+                        type: 'startup'
                     });
                 }
             })
@@ -61,12 +62,13 @@ function FrStartupSuccessController($stateParams, FindService, $state, hybrid, A
     function error(err) {
         if (err.code === 403) {
             $state.go('findLogin', {
-                activityName: vm.activityName
+                activityName: vm.activityName,
+                type: 'startup'
             });
         }
     }
 
     function initH3() {
-        vm[document.title.toLowerCase() + 'h3'] = true;
+        vm[document.applierType.toLowerCase() + 'h3'] = true;
     }
 }

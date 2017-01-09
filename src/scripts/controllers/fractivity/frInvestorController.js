@@ -378,7 +378,7 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
         }
 
         function initH3() {
-            vm[document.title.toLowerCase() + 'h3'] = true;
+            vm[document.applierType.toLowerCase() + 'h3'] = true;
         }
     }
 );

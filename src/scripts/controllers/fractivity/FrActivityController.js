@@ -46,7 +46,7 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
         }
 
         if (vm.activity.applierType) {
-            document.title = vm.activity.applierType;
+            document.applierType = vm.activity.applierType;
         }
 
         var obj = {};
@@ -142,6 +142,6 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
     }
 
     function initH3() {
-        vm[document.title.toLowerCase() + 'h3'] = true;
+        vm[document.applierType.toLowerCase() + 'h3'] = true;
     }
 }
