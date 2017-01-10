@@ -1,5 +1,5 @@
-<a name="1.23.0"></a>
-# [1.23.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.22.0...v1.23.0) (2017-01-06)
+<a name="1.24.0"></a>
+# [1.24.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.22.0...v1.24.0) (2017-01-10)
 
 
 ### Bug Fixes
@@ -12,6 +12,7 @@
 * 图片大小限制 ([e50e020](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e50e020))
 * 增加loading效果 ([380f93d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/380f93d))
 * 增加weixin ([596e4cd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/596e4cd))
+* 增加跳转的标识 ([029cda7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/029cda7))
 * 增加默认头像 ([67f81f9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/67f81f9))
 * 微信号长度校验 ([1c28a42](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1c28a42))
 * 报错调试 ([42a3c1e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/42a3c1e))
@@ -20,15 +21,20 @@
 * 样式修复 ([e4e3502](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e4e3502))
 * 认证提交fix ([7bf33f1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7bf33f1))
 * 轮播修改 ([29e211a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/29e211a))
+* 项目集页面多余空白 ([41c61cf](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/41c61cf))
 
 
 ### Features
 
+* markdown依赖 ([b802d52](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b802d52))
 * QRcode修改 ([51645ff](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/51645ff))
+* 修改跳转 ([b33a7df](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b33a7df))
+* 增加支持markdown语法 ([b416ec0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b416ec0))
 * 投资人认证开发 ([4358e99](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4358e99))
 * 投资人认证开发 ([d7d168d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d7d168d))
 * 投资人认证开发 ([c13c3b7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c13c3b7))
 * 活动h5页面 ([c20d31f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c20d31f))
+* 活动h5页面修改 ([d073205](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d073205))
 
 
 
