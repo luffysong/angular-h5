@@ -28,7 +28,6 @@ nbproject
 *.iml
 
 # bower components
-src/components
 src/test/components
 
 
