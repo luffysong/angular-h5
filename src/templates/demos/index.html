@@ -29,8 +29,8 @@
         </div>
     </div>
 
-    <div class="column-detail-wrapper">
-        <section ng-if="vm.isColumn()">
+    <div class="column-detail-wrapper" ng-if="vm.isColumn()">
+        <section >
             <ul infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
                 <li ng-style="{'background-image': (item.imgUrl | backgroundUrl)}"
                     ng-click="vm.goProjects(item.id)"
@@ -45,9 +45,7 @@
             <footer ng-if="vm.finish">全部内容加载完毕</footer>
         </section>
     </div>
-    <div>
 
-    </div>
     <div ng-if="!vm.isColumn()"  id="demosContent" >
         <div  ng-class="{'slide-up': vm.demos}" class="password-wrapper" ng-if="vm.needPwd">
             <section   class="password-content">
