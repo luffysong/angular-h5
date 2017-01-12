@@ -11,6 +11,9 @@ function LoginController(UserService, $state, $stateParams) {
     vm.responseData = {};
     vm.activityName = $stateParams.activityName;
     vm.type = $stateParams.type;
+    vm.bothh3 = false;
+    vm.investorh3 = false;
+    vm.startuph3 = false;
 
     function init() {
         // if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
@@ -82,6 +85,14 @@ function LoginController(UserService, $state, $stateParams) {
                 $('#openApp').attr('href', 'https://36kr.com/app/tou?ktm_source=investorSuccess.' + vm.activityName);
             }
         };
+
+        initH3();
+    }
+
+    function initH3() {
+        if (document.applierType) {
+            vm[document.applierType.toLowerCase() + 'h3'] = true;
+        }
     }
 
     init();

@@ -1,6 +1,8 @@
 <div  class="login-wrapper">
     <div class="activity-info" id="activityInfoFirst">
-        <h3>本次活动仅对投资人开放</h3>
+      <h3 ng-if="vm.bothh3">本次活动对投资人和创业者开放</h3>
+      <h3 ng-if="vm.investorh3">本次活动仅对对投资人开放</h3>
+      <h3 ng-if="vm.startuph3">本次活动仅对创业者开放</h3>
         <span class="activity-info-span">请认真填写您的信息</span>
         <img src="/styles/images/activity/krspace/group1@2x.png"/>
         <div>
