@@ -114,11 +114,13 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
             .then(function (response) {
                 if (!response.data.applied) {
                     $state.go('findStartUp', {
-                        activityName: vm.activityName
+                        activityName: vm.activityName,
+                        type: 'startup'
                     });
                 } else {
                     $state.go('findStartUpSuccess', {
-                        activityName: vm.activityName
+                        activityName: vm.activityName,
+                        type: 'startup'
                     });
                 }
             })
@@ -130,11 +132,13 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
             .then(function (response) {
                 if (!response.data.applied) {
                     $state.go('frInvestor', {
-                        activityName: vm.activityName
+                        activityName: vm.activityName,
+                        type: 'investor'
                     });
                 } else {
                     $state.go('frInvestorSuccess', {
-                        activityName: vm.activityName
+                        activityName: vm.activityName,
+                        type: 'investor'
                     });
                 }
             })
@@ -142,6 +146,8 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
     }
 
     function initH3() {
-        vm[document.applierType.toLowerCase() + 'h3'] = true;
+        if (document.applierType) {
+            vm[document.applierType.toLowerCase() + 'h3'] = true;
+        }
     }
 }

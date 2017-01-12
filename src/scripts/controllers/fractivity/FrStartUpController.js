@@ -110,6 +110,8 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
     }
 
     function initH3() {
-        vm[document.applierType.toLowerCase() + 'h3'] = true;
+        if (document.applierType) {
+            vm[document.applierType.toLowerCase() + 'h3'] = true;
+        }
     }
 }

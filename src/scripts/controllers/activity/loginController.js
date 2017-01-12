@@ -12,7 +12,6 @@ function LoginController(UserService, $state, $stateParams) {
     vm.activityName = $stateParams.activityName;
     vm.type = $stateParams.type;
 
-    init();
     function init() {
         // if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
         //     document.title = window.WEIXINSHARE.shareTitle;
@@ -37,6 +36,10 @@ function LoginController(UserService, $state, $stateParams) {
         window.LOGIN_HOST = '//passport.36kr.com';
 
         var href = $('link[href*="login-theme"]').attr('href');
+        if (!href) {
+            href = '/styles/login-theme.css';
+        }
+
         if (href) {
             if (href.match(/^http|^\/\//)) {
                 window.LOGIN_CSS =  href;
@@ -52,11 +55,13 @@ function LoginController(UserService, $state, $stateParams) {
         window.closeLoginModal = function () {
             if (vm.type === 'startup') {
                 $state.go('findStartUp', {
-                    activityName: vm.activityName
+                    activityName: vm.activityName,
+                    type:'startup'
                 });
             } else if (vm.type === 'investor') {
                 $state.go('findInvestor', {
-                    activityName: vm.activityName
+                    activityName: vm.activityName,
+                    type:'investor'
                 });
             }
         };
@@ -65,10 +70,10 @@ function LoginController(UserService, $state, $stateParams) {
             $('#activityInfoFirst').hide();
         };
 
-        window.initCss();
-        if (!UserService.getUID()) {
-            window.initCss();
-        }
+        // window.initCss();
+        // if (!UserService.getUID()) {
+        //     window.initCss();
+        // }
 
         window.initFooter = function () {
             $('.header-banner-wrapper').css('display', 'flex');
@@ -78,4 +83,5 @@ function LoginController(UserService, $state, $stateParams) {
         };
     }
 
+    init();
 }
