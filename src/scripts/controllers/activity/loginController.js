@@ -36,9 +36,10 @@ function LoginController(UserService, $state, $stateParams) {
         window.LOGIN_HOST = '//passport.36kr.com';
 
         var href = $('link[href*="login-theme"]').attr('href');
-        if (!href) {
-            href = '/styles/login-theme.css';
-        }
+
+        // if (!href) {
+        //     href = '/styles/login-theme.css';
+        // }
 
         if (href) {
             if (href.match(/^http|^\/\//)) {
