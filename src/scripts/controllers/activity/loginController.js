@@ -70,10 +70,10 @@ function LoginController(UserService, $state, $stateParams) {
             $('#activityInfoFirst').hide();
         };
 
-        window.initCss();
-        if (!UserService.getUID()) {
-            window.initCss();
-        }
+        // window.initCss();
+        // if (!UserService.getUID()) {
+        //     window.initCss();
+        // }
 
         window.initFooter = function () {
             $('.header-banner-wrapper').css('display', 'flex');

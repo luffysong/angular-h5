@@ -23,7 +23,8 @@
             location.hash.indexOf('frInvestor') === -1 &&
             location.hash.indexOf('frInvestorSuccess') === -1 &&
             location.hash.indexOf('findStartUp') === -1 &&
-            location.hash.indexOf('findStartUpSuccess') === -1) {
+            location.hash.indexOf('findStartUpSuccess') === -1 &&
+            location.hash.indexOf('fractivity') === -1) {
             $('link[href*="login-theme"]').remove();
         }
 
@@ -36,7 +37,8 @@
             location.hash.indexOf('roadShow') > -1 ||
             location.hash.indexOf('firstWine') > -1 ||
             location.hash.indexOf('frInvestor') > -1 ||
-            location.hash.indexOf('findStartUp') > -1
+            location.hash.indexOf('findStartUp') > -1 ||
+            location.hash.indexOf('fractivity') > -1
             ) {
             return true;
         } else {
