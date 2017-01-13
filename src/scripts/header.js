@@ -29,10 +29,6 @@
             $('link[href*="login-theme"]').remove();
         }
 
-        if (location.hash.indexOf('fractivity') > -1) {
-            $('link[href*="login-theme"]').remove();
-        }
-
     }
 
     function allowRemoveHeader() {
