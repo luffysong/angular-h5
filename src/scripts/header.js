@@ -25,6 +25,11 @@
             location.hash.indexOf('findStartUp') === -1 &&
             location.hash.indexOf('findStartUpSuccess') === -1 &&
             location.hash.indexOf('fractivity') === -1) {
+
+            $('link[href*="login-theme"]').remove();
+        }
+
+        if (location.hash.indexOf('fractivity') > -1) {
             $('link[href*="login-theme"]').remove();
         }
 
