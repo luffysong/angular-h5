@@ -87,6 +87,7 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
 
             FindService.getUserProfile()
                 .then(function temp(response) {
+                    console.log('-------', response);
                     angular.extend($scope.user, angular.copy(response.data));
                     $scope.responseData = angular.copy(response.data);
                     $scope.invest.name = $scope.responseData.name;
@@ -275,13 +276,25 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
             if ($scope.user.auditStatus === undefined || $scope.user.auditStatus === -1) {
                 var businessCardLink   = $scope.invest.pictures || $scope.investorValidateForm.pictures.uploaded;
                 var sendData = {
-                    entityType: getInvestorTypeNumber($scope.invest.investorRole),
+                    entityType: parseInt($scope.invest.investorRole),
                     entityId:$scope.organization.addForm.id,
                     entityName:$scope.organization.addForm.name,
                     businessCardLink: businessCardLink
                 };
 
-                InvestorauditService.save(sendData).then(function () {
+                var sendD = {
+                    investorRoleEnum: getInvestorRole($scope.invest.investorRole),
+                    orgId:$scope.organization.addForm.id,
+                    orgName:$scope.organization.addForm.name,
+                    businessCard: businessCardLink,
+                    realName: $scope.user.name,
+                };
+
+                // then(function () {
+                //     InvestorauditService.save(sendData);
+                // }).
+
+                InvestorauditService.submit(sendD).then(function () {
                     try {
                         window.webkit.messageHandlers.investor.postMessage();
                         return;
@@ -348,7 +361,8 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
 
         function getInvestorTypeNumber(type) {
             var INVESTOR_TYPE_META = {
-                PERSONAL_INVESTOR: 1
+                PERSONAL_INVESTOR: 1,
+                ORG_INVESTOR: 0
             };
             if (type === 'PERSONAL_INVESTOR') {
                 return INVESTOR_TYPE_META[type];
@@ -358,17 +372,17 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
         }
 
         function entityType(type) {
-            if (type === 2) {
+            if (type === 2 || type === '2') {
                 return 'INDIVIDUAL';
-            } else if (type === 0) {
+            } else if (type === 0 || type === '0') {
                 return 'ORGANIZATION';
             }
         }
 
         function getInvestorRole(type) {
-            if (type === 2) {
+            if (type === 2 || type === '2') {
                 return 'PERSONAL_INVESTOR';
-            } else if (type === 0) {
+            } else if (type === 0 || type === '0') {
                 return 'ORG_INVESTOR';
             }
         }

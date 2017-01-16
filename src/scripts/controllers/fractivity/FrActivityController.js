@@ -19,6 +19,8 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
     function init() {
         removeHeader();
         getActivity();
+        $('html').css('overflow', 'auto');
+        $('body').css('overflow', 'auto');
     }
 
     function initWeixin() {
