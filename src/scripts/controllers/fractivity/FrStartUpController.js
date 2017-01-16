@@ -31,6 +31,7 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
         $scope.user = {
             id: UserService.getUID(),
         };
+        getActInfo();
         if (!UserService.getUID()) {
             $state.go('findLogin', {
                 activityName: vm.activityName,
@@ -40,9 +41,10 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
             startUpState();
         }
 
+        window.parent.initCss && window.parent.initCss();
+        $('#activityInfoFirst').hide();
         $('html').css('overflow', 'auto');
         $('body').css('overflow', 'auto');
-        initH3();
     }
 
     function startUpState() {
@@ -59,6 +61,15 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
                         activityName: vm.activityName
                     });
                 }
+            })
+            .catch(error);
+    }
+
+    function getActInfo() {
+        ActivityService.actInfo($stateParams.activityName)
+            .then(function (response) {
+                document.applierType = response.data.applierType;
+                initH3();
             })
             .catch(error);
     }

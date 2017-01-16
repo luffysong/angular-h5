@@ -23,11 +23,13 @@ function LoginController(UserService, $state, $stateParams) {
         if (UserService.getUID()) {
             if (vm.type === 'startup') {
                 $state.go('findStartUp', {
-                    activityName: vm.activityName
+                    activityName: vm.activityName,
+                    type: 'startup'
                 });
             } else if (vm.type === 'investor') {
-                $state.go('findInvestor', {
-                    activityName: vm.activityName
+                $state.go('frInvestor', {
+                    activityName: vm.activityName,
+                    type:'investor'
                 });
             } else {
                 $state.go('findInvestor', {
@@ -63,7 +65,7 @@ function LoginController(UserService, $state, $stateParams) {
                     type:'startup'
                 });
             } else if (vm.type === 'investor') {
-                $state.go('findInvestor', {
+                $state.go('frInvestor', {
                     activityName: vm.activityName,
                     type:'investor'
                 });

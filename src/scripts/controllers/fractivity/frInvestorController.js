@@ -30,7 +30,7 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
             // if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
             //     document.title = window.WEIXINSHARE.shareTitle;
             // }
-            initH3();
+            getActInfo();
             if (!UserService.getUID()) {
                 $state.go('findLogin', {
                     activityName: $scope.activityName
@@ -55,6 +55,15 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
                             activityName: $scope.activityName
                         });
                     }
+                })
+                .catch(error);
+        }
+
+        function getActInfo() {
+            ActivityService.actInfo($scope.activityName)
+                .then(function (response) {
+                    document.applierType = response.data.applierType;
+                    initH3();
                 })
                 .catch(error);
         }
@@ -87,7 +96,6 @@ angular.module('defaultApp.controller').controller('FrInvestorController',
 
             FindService.getUserProfile()
                 .then(function temp(response) {
-                    console.log('-------', response);
                     angular.extend($scope.user, angular.copy(response.data));
                     $scope.responseData = angular.copy(response.data);
                     $scope.invest.name = $scope.responseData.name;
