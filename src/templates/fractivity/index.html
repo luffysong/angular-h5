@@ -13,12 +13,13 @@
         </div>
     </div>
 
-    <div class="column-detail-wrapper" ng-if="vm.activity.projects">
-        <a href="javascript:" ng-bind="vm.activity.projects.title"></a>
-    </div>
-
     <div  id="demosContent"  ng-if="vm.activity.projects.projects">
-        <section  class="demos-content-wrapper">
+
+      <div class="column-detail-wrapper" ng-if="vm.activity.projects">
+          <a href="javascript:" ng-bind="vm.activity.projects.title"></a>
+      </div>
+
+        <section  class="demos-content-wrapper" >
             <ul infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='3'>
                 <li ontouchstart="" kr-active="'active'"
                     ng-repeat="item in vm.activity.projects.projects">
@@ -50,7 +51,6 @@
                     </a>
                     <span class="li-line" style=""></span>
                 </li>
-
             </ul>
         </section>
           <span class="li-line" style=""></span>

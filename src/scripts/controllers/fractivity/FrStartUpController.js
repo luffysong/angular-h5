@@ -70,12 +70,12 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
         }
 
         if (!vm.startup.projectName) {
-            ErrorService.alert('项目名称');
+            ErrorService.alert('项目名称必填');
             return;
         }
 
         if (!vm.startup.projectIntro) {
-            ErrorService.alert('项目简介');
+            ErrorService.alert('项目简介至少5个字');
             return;
         }
 
