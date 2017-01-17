@@ -42,7 +42,6 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
         }
 
         window.parent.initCss && window.parent.initCss();
-        $('#activityInfoFirst').hide();
         $('html').css('overflow', 'auto');
         $('body').css('overflow', 'auto');
     }

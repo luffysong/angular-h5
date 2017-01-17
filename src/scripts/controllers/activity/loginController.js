@@ -3,7 +3,7 @@ var  angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('LoginController', LoginController);
 
-function LoginController(UserService, $state, $stateParams) {
+function LoginController(UserService, $state, $stateParams, ActivityService, ErrorService) {
     var vm = this;
 
     //轮播图返回的数据
@@ -88,13 +88,32 @@ function LoginController(UserService, $state, $stateParams) {
             }
         };
 
-        initH3();
+        if ($stateParams.activityName) {
+            getActInfo();
+        }
+    }
+
+    function getActInfo() {
+        ActivityService.actInfo($stateParams.activityName)
+            .then(function (response) {
+                document.applierType = response.data.applierType;
+                if (response.data.actName) {
+                    document.title = response.data.actName;
+                }
+
+                initH3();
+            })
+            .catch(error);
     }
 
     function initH3() {
         if (document.applierType) {
             vm[document.applierType.toLowerCase() + 'h3'] = true;
         }
+    }
+
+    function error(err) {
+        ErrorService.alert(err);
     }
 
     init();
