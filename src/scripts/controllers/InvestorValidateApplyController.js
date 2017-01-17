@@ -196,8 +196,8 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
 
             function codeRequestFailed() {
                 ErrorService.alert({
-                     msg:'发送失败!'
-                 });
+                        msg:'发送失败!'
+                    });
             }
 
             LoginService.getCountryDict({}, function (data) {

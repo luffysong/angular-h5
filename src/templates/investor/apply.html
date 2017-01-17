@@ -168,7 +168,7 @@
                                                     </section>
                                                     <section class="follow-industry">
                                                         <img class="tag-img" src="/styles/images/investorValidate/follow.png" />
-                                                        <span ng-if="!item.industryEnumList.length">暂无</span>
+                                                        <span ng-if="!item.industryEnumList.length">暂未披露</span>
                                                         <span ng-repeat="obj in item.industryEnumList" ng-if="item.industryEnumList.length">
                                                   <span>{{obj | dict_CompanyIndustry}}</span>
                                                   <span ng-if="$index !== item.industryEnumList.length - 1"> · </span>
@@ -176,7 +176,7 @@
                                                     </section>
                                                     <section class="follow-industry">
                                                         <img class="tag-img" src="/styles/images/investorValidate/phase.png" />
-                                                        <span ng-if="!item.phaseEnumList.length">暂无</span>
+                                                        <span ng-if="!item.phaseEnumList.length">暂未披露</span>
                                                         <span class="follow-item" ng-repeat="obj in item.phaseEnumList" ng-if="item.phaseEnumList.length" ng-class="{'hidePoint' : $index === item.phaseEnumList.length-1}">
                                               <span>{{obj | dict_CompanyFinancePhase}}</span>
                                               <span class="list-point"> · </span>
@@ -188,7 +188,7 @@
                                                             <span>{{obj.name}}</span>
                                                             <span class="list-point">、</span>
                                                         </span>
-                                                        <span ng-if="!item.investCaseList.length">暂无</span>
+                                                        <span ng-if="!item.investCaseList.length">暂未披露</span>
                                                     </div>
                                                 </div>
                                             </div>
