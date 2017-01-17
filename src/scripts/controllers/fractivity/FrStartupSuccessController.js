@@ -11,10 +11,6 @@ function FrStartupSuccessController($stateParams, FindService, $state, hybrid, A
 
     function init() {
 
-        // if (window.WEIXINSHARE && window.WEIXINSHARE.shareTitle) {
-        //     document.title = window.WEIXINSHARE.shareTitle;
-        // }
-
         $('.header-banner-wrapper').css('display', 'flex');
         $('html').css('overflow', 'auto');
         $('body').css('overflow', 'auto');
@@ -23,10 +19,6 @@ function FrStartupSuccessController($stateParams, FindService, $state, hybrid, A
         }
 
         vm.activityName = $stateParams.activityName;
-        if (typeof (vm.activityName) !== 'string' && vm.activityName[0]) {
-            vm.activityName = vm.activityName[0];
-
-        }
 
         if (vm.activityName) {
             $('#openApp').attr('href', 'https://36kr.com/app/tou?ktm_source=investorSuccess.' + vm.activityName);
@@ -41,7 +33,20 @@ function FrStartupSuccessController($stateParams, FindService, $state, hybrid, A
         }
 
         getActivity();
-        initH3();
+        getActInfo();
+    }
+
+    function getActInfo() {
+        ActivityService.actInfo($stateParams.activityName)
+            .then(function (response) {
+                document.applierType = response.data.applierType;
+                if (response.data.actName) {
+                    document.title = response.data.actName;
+                }
+
+                initH3();
+            })
+            .catch(error);
     }
 
     //查看是否参与过活动

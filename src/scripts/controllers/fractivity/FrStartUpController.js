@@ -109,7 +109,7 @@ function FrStartUpController($stateParams, checkForm, ActivityService,
         ActivityService.startUpSignUp(vm.startup)
             .then(function success() {
                 $state.go('findStartUpSuccess', {
-                    activityName: $scope.activityName
+                    activityName: vm.activityName
                 });
             })
             .catch(error);
