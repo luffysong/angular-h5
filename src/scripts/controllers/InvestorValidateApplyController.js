@@ -475,6 +475,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             $scope.params.weixin = $scope.user.weixin;
             $scope.params.businessCard = businessCardLink;
             $scope.params.investorRoleEnum = $scope.invest.investorRole;
+            $scope.params.orgName = $scope.organization.addForm.name;
             if ($scope.getPhoneWithCountryCode()) {
                 $scope.params.phone = $scope.getPhoneWithCountryCode();
             }
