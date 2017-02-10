@@ -1,3 +1,14 @@
+<a name="1.24.2"></a>
+## [1.24.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.24.1...v1.24.2) (2017-02-10)
+
+
+### Bug Fixes
+
+* 投资人认证增加orgName ([7bbe23e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7bbe23e))
+* 路演日历页面图片显示不完全 ([25cc02a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/25cc02a))
+
+
+
 <a name="1.24.1"></a>
 ## [1.24.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.24.0...v1.24.1) (2017-01-20)
 
