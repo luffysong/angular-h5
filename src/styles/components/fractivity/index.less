@@ -5,6 +5,9 @@
     overflow:hidden;
     h1,h2,h3,h4,h5,h6{
       color:black;
+      margin:0;
+      padding:0;
+      text-align: left;
     }
     a{
       color:@scheme;
@@ -322,4 +325,33 @@
     .demos-wrapper .section-footer{
       width:768px !important;
     }
+}
+
+@media screen and (max-width: 414px) {
+  div.text-container{
+    img{
+      width:374px;
+      margin: 0;
+      padding:0;
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+    div.text-container{
+      img{
+        width:335px;
+        margin: 0;
+        padding:0;
+      }
+    }
+}
+
+@media screen and (max-width: 320px) {
+      div.text-container{
+        img{
+          width:280px;
+          margin: 0 auto;
+        }
+      }
 }
