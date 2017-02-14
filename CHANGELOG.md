@@ -1,3 +1,13 @@
+<a name="1.24.3"></a>
+## [1.24.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.24.2...v1.24.3) (2017-02-14)
+
+
+### Bug Fixes
+
+* markdown图片和格式样式调整 ([9b1d2a4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9b1d2a4))
+
+
+
 <a name="1.24.2"></a>
 ## [1.24.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.24.1...v1.24.2) (2017-02-10)
 
