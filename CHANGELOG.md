@@ -1,3 +1,13 @@
+<a name="1.24.4"></a>
+## [1.24.4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.24.3...v1.24.4) (2017-02-15)
+
+
+### Bug Fixes
+
+* 路演日历title居中样式 ([93e79d4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/93e79d4))
+
+
+
 <a name="1.24.3"></a>
 ## [1.24.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.24.2...v1.24.3) (2017-02-14)
 
