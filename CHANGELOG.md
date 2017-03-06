@@ -1,3 +1,15 @@
+<a name="1.24.6"></a>
+## [1.24.6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.24.5...v1.24.6) (2017-03-06)
+
+
+### Bug Fixes
+
+* 图标样式 ([a03c05d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a03c05d))
+* 图标样式 ([369933d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/369933d))
+* 项目列表图标添加边框 ([1173383](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1173383))
+
+
+
 <a name="1.24.5"></a>
 ## [1.24.5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.24.4...v1.24.5) (2017-02-17)
 
