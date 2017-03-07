@@ -69,7 +69,7 @@
                             <div  class="logo-wrapper" >
                                 <img ng-src="{{item.logo | image}}" alt="" ng-if="item.logo">
                                 <img ng-style="{'background-color':(item.ccid | demoDefaultColor)}" ng-if="!item.logo">
-                                <span class="logo-name" ng-if="!item.logo">{{item.name | demoNameDufault}}</span>
+                                <span class="logo-name" ng-if="!item.logo" ng-style="{'background-color':(item.ccid | demoDefaultColor)}">{{item.name | demoNameDufault}}</span>
                                 <span class="logo-funding" ng-if="item.funding === 2">正在融资</span>
                             </div>
                             <div class="content-wrapper">
