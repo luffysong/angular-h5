@@ -1,3 +1,13 @@
+<a name="1.24.10"></a>
+## [1.24.10](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.24.9...v1.24.10) (2017-03-08)
+
+
+### Bug Fixes
+
+* 唤醒iosApp ([8b473aa](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8b473aa))
+
+
+
 <a name="1.24.9"></a>
 ## [1.24.9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.24.8...v1.24.9) (2017-03-08)
 
