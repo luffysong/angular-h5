@@ -75,13 +75,15 @@
     }
 
     function goYingyongbao(prefix){
-        timeout = setTimeout(function(){
+      krtracker('trackEvent','按钮', prefix + '.' + ktm_source);
+      //window.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
+         timeout = setTimeout(function(){
             krtracker('trackEvent','按钮', prefix + '.' + ktm_source);
             setTimeout(function() {
                 document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
-            },200)
-        }, 1000);
-         window.addEventListener('pagehide', preventPopup);
+          },200)
+        }, 500);
+        window.addEventListener('pagehide', preventPopup);
     }
     $.getJSON(API + cid + '/sharebasic/v3',function(data){
         if(data.code === SUCCESS){
@@ -94,7 +96,12 @@
                 $('#logo').error(function(e) {
                     this.src = '//krplus-pic.b0.upaiyun.com/avatar/201606/27023623/g5zmv2gp7gacp0ly.png';
                 });
-                $('#downloadBtn').attr('href', 'http://rong.36kr.com/company/' + data.cid + '/universallink');
+                if (fromWeixin) {
+                  $('#downloadBtn').attr('href', 'http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment');
+                }else {
+                  $('#downloadBtn').attr('href', 'http://rong.36kr.com/company/' + data.cid + '/universallink');
+                }
+                //$('#downloadBtn').attr('href', 'http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment');
                 $('#name').html(data.name);
                 $('#brief').html(data.brief);
                 $('#tags').html(data.tags);
@@ -148,11 +155,11 @@
                 startApp('krtou://company/' + cid);
                 goYingyongbao('android');
             }else if(/iphone/i.test(userSystem)){
-                startApp();
+                startApp('krtou://company/' + cid);
                 goYingyongbao('ios');
             }
         } else if(!isWeixin() && isUniversalLink()) {
-            startApp();
+            startApp('krtou://company/' + cid);
             goYingyongbao('ios');
         }
     })
