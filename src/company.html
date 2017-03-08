@@ -138,6 +138,9 @@
                 e.preventDefault();
                 startApp('krtou://company/' + cid);
                 goYingyongbao('android');
+            }else if(/iphone/i.test(userSystem)){
+              startApp();
+              goYingyongbao('ios');
             }
         })
         if (!isWeixin()&&(parseInt(fromWeixin) === 1)){
