@@ -34,14 +34,8 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
 
     //项目列表
     this.getProjectList = function (request) {
-        console.log('====', request);
-        if (request.hasOwnProperty('winzoom')) {
-            delete request.winzoom;
-        }
-
-        console.log(request);
-
-        return $http.get('/api/mobi-investor/demoday/pro-set/share?' + $.param(request));
+        //console.log(request);
+        return $http.get('/api/mobi-investor/demoday/pro-set/share?proSetId=' + request.proSetId + '&pageSize=' + request.pageSize);
     };
 
     //项目列表简介
