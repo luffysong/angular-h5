@@ -32,6 +32,21 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
         return $http.get('/api/mobi-investor/proSetColumn/detail/hotspot/list?' + $.param(request));
     };
 
+    //投资 最热列表
+    this.getHottestList = function (request) {
+        return $http.get('/api/mobi-investor/proSetColumn/detail/hottest/list?' + $.param(request));
+    };
+
+    //投资 最近列表
+    this.getLatestList = function (request) {
+        return $http.get('/api/mobi-investor/proSetColumn/detail/latest/list?' + $.param(request));
+    };
+
+    //投资 机构在融
+    this.getFundingList = function (request) {
+        return $http.get('/api/mobi-investor/proSetColumn/detail/funding/list?' + $.param(request));
+    };
+
     //项目列表
     this.getProjectList = function (request) {
         return $http.get('/api/mobi-investor/demoday/pro-set/share?' + $.param(request));

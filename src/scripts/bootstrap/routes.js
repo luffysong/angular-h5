@@ -206,6 +206,17 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
+    //创投助手app---投资热点tab分页
+    $stateProvider.state('find.hotSpotTab', {
+        url:'/hotSpotTab',
+        controllerAs: 'vm',
+        controller: 'HotSpotTabController',
+        templateUrl: 'templates/find/hotSpotTab.html',
+        resolve: {
+            coverFind: loadFind
+        }
+    });
+
     //创投助手app---每日报道
     $stateProvider.state('find.dailyNews', {
         url:'/dailyNews',

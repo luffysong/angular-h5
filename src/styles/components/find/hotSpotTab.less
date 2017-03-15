@@ -1,0 +1,190 @@
+.slide-tabs {
+    position: relative;
+    width:100%;
+    height:40px;
+    -webkit-font-smoothing: antialiased;
+    z-index: 1000;
+    .wrapper {
+        position: fixed;
+        top:0;
+        left:0;
+        height:40px;
+        width:100%;
+        background: #F2F4F5;
+        z-index: 1000;
+        border-bottom:solid 1px #F2F4F5;
+    }
+    .tab {
+        float: left;
+        height:40px;
+        text-align: center;
+        display: block;
+        overflow: hidden;
+        color:#222C38;
+        transition: all 0.3s ease 0.4s;
+        span {
+            display: inline-block;
+            font-size: 15px;
+            letter-spacing: 0px;
+            line-height: 40px;
+            // &:before
+            //   {
+            //   content:"\2022";
+            //   font-size:16px;
+            //   display:inline-block;
+            //   height:5px;
+            //   width:5px;
+            //   border-radius:50%;
+            //   margin-right:5px;
+            //   }
+        }
+        &:last-of-type{
+            float:none;
+        }
+        &.selected {
+            color:#6BA2FC;
+            // span:before{
+            //   content:"\2022";
+            //   font-size:16px;
+            //   display:inline-block;
+            //   height:5px;
+            //   width:5px;
+            //   border-radius:50%;
+            //   margin-right:5px;
+            // }
+        }
+     }
+    .bar {
+        position: absolute;
+        bottom:0;
+        left:0;
+        transition: transform 0.3s;
+        height:0.15rem;
+        background: #6BA2FC;
+    }
+}
+
+///主样式
+
+.hotSpotTab-wrapper {
+  .roadShow-tab-wrapper{
+      font-size: 13px;
+      margin-top: 2px;
+      p{
+          line-height: 20px;
+      };
+      ul{
+        list-style-type: none;
+      }
+      li{
+          background: #fff;
+          //height: 109px;
+          min-height:109px;
+          max-height: 131px;
+          overflow: hidden;
+          position: relative;
+          list-style-type: none;
+          *{
+              user-select: none;
+          }
+          a{
+            display: inline-block;
+            width: 100%;
+            margin-left: 4%;
+            border-bottom: 1px solid #E7E7E7;
+          }
+          &:last-child .roadShow-content-href{
+              border-bottom:0;
+          }
+      }
+      li.active{
+          background: #f8f8f8;
+      }
+
+      .pro-info,.pro-pic{
+        float:left;
+        height:100%;
+        padding: 10px;
+      }
+
+      .pro-info{
+        width: 75%;
+        margin-left: -15px;
+
+        .pro-title{
+          font-family: PingFangSC-Semibold;
+          font-size: 16px;
+          color: #222C38;
+          letter-spacing: 0px;
+          line-height: 22px;
+          margin: 0;
+          padding-left: 10px;
+        }
+        p{
+            font-size: 13px;
+            color: #969FA9;
+            letter-spacing: 0px;
+            line-height: 18px;
+            width: 83.8%;
+            text-overflow: ellipsis;
+            float: left;
+            margin-top: 8px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            padding-left: 10px;
+        }
+        .item-more{
+          // font-size: 13px;
+          // color: #6BA2FC;
+          // letter-spacing: 0px;
+          // line-height: 16px;
+          // float: left;
+          // position: absolute;
+          // bottom: 5px;
+          // left: 10px;
+          font-size: 13px;
+          color: #6BA2FC;
+          letter-spacing: 0px;
+          line-height: 16px;
+          float: left;
+          position: relative;
+          left: 0px;
+          padding: 10px;
+          top: -5px;
+        }
+      }
+      .pro-pic{
+        width:23%;
+        overflow: hidden;
+        text-align: center;
+        .pro-num{
+          width: 75px;
+          height: 75px;
+          background-size:75px 75px;
+          background-repeat:no-repeat;
+          margin-left: -10px;
+          overflow: hidden;
+          .item-num{
+            background: rgba(0,0,0,0.60);
+            height: 21px;
+            width: 75px;
+            display: inline-block;
+            font-size: 12px;
+            color: #FFFFFF;
+            letter-spacing: 0px;
+            line-height: 21px;
+            position: relative;
+            bottom: -54px;
+          }
+        }
+      }
+
+      footer{
+          margin: 5px 0;
+          line-height: 19px;
+          text-align: center;
+      }
+  }
+}
