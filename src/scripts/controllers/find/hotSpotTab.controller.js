@@ -30,8 +30,19 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
     function init() {
         document.title = '投资热点';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
+        vm.currPos = 'NEW';
         loadData();
         initWeixin();
+    }
+
+    function loadData() {
+        if (vm.currPos === 'NEW') {
+            loadLateData();
+        }else if (vm.currPos === 'FINANCING') {
+            loadFinancingData();
+        }else if (vm.currPos === 'HOT') {
+            loadHotData();
+        }
     }
 
     function initWeixin() {
@@ -47,13 +58,24 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
     }
 
     $scope.$on('tabClicked', function (e, item) {
-        console.log(item);
         if (item.value === 'HOT') {
-            loadData();
+            resetData(item.value);
+            loadHotData();
         }else if (item.value === 'FINANCING') {
-            loadData();
+            resetData(item.value);
+            loadFinancingData();
+        }else if (item.value === 'NEW') {
+            resetData(item.value);
+            loadLateData();
         }
     });
+
+    function resetData(curr) {
+        vm.responseData = [];
+        vm.page = 0;
+        vm.currPos = curr;
+        vm.busy = false;
+    }
 
     function more(item, e) {
         e.preventDefault();
@@ -84,7 +106,7 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
         }
     }
 
-    function loadData() {
+    function loadLateData() {
         if (vm.busy)return;
         vm.busy = true;
 
@@ -96,7 +118,7 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
         .then(function (response) {
             loading.hide('findLoading');
             vm.hasInit = true;
-            if (vm.responseData) {
+            if (vm.responseData && vm.currPos === 'NEW') {
                 vm.responseData = vm.responseData.concat(response.data.data);
             } else {
                 vm.responseData = response.data.data;
@@ -114,11 +136,61 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
     }
 
     function loadHotData() {
+        if (vm.busy)return;
+        vm.busy = true;
 
+        var sendData = {
+            page: vm.page + 1,
+            pageSize: 10
+        };
+
+        FindService.getHottestList(sendData)
+        .then(function (response) {
+            loading.hide('findLoading');
+            if (vm.responseData && vm.currPos === 'HOT') {
+                vm.responseData = vm.responseData.concat(response.data.data);
+            } else {
+                vm.responseData = response.data.data;
+            }
+
+            if (response.data.totalPages) {
+                vm.page = response.data.page || 0;
+                if (response.data.totalPages !== vm.page) {
+                    vm.busy = false;
+                } else {
+                    vm.finish = true;
+                }
+            }
+        });
     }
 
     function loadFinancingData() {
+        if (vm.busy)return;
+        vm.busy = true;
 
+        var sendData = {
+            page: vm.page + 1,
+            pageSize: 10
+        };
+
+        FindService.getFundingList(sendData)
+        .then(function (response) {
+            loading.hide('findLoading');
+            if (vm.responseData && vm.currPos === 'FINANCING') {
+                vm.responseData = vm.responseData.concat(response.data.data);
+            } else {
+                vm.responseData = response.data.data;
+            }
+
+            if (response.data.totalPages) {
+                vm.page = response.data.page || 0;
+                if (response.data.totalPages !== vm.page) {
+                    vm.busy = false;
+                } else {
+                    vm.finish = true;
+                }
+            }
+        });
     }
 
 }
