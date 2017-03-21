@@ -1,9 +1,8 @@
-
-var  angular = require('angular');
+var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('FinanceController', FinanceController);
 
-function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
+function FinanceController(loading, FindService, ErrorService, $modal, hybrid, $timeout) {
     var vm = this;
     vm.sendData;
 
@@ -19,6 +18,7 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
     vm.filter = filter;
 
     init();
+
     function init() {
         document.title = '融资速递';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
@@ -75,14 +75,16 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
     }
 
     function loadMore() {
-        if (vm.busy)return;
+        if (vm.busy) return;
         vm.busy = true;
 
         FindService.getFinanceList(vm.sendData)
             .then(function temp(response) {
-                vm.responseData = vm.responseData.concat(response.data.group);
-                vm.sendData.date = response.data.ts;
-                vm.busy = false;
+                $timeout(function() {
+                    vm.responseData = vm.responseData.concat(response.data.group);
+                    vm.sendData.date = response.data.ts;
+                    vm.busy = false;
+                }, 1000);
             })
             .catch(error);
     }
@@ -97,12 +99,10 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
         if (!time) {
             var object;
 
-            vm.filterLabelsArray = [
-                {
-                    active: true,
-                    label: '全部',
-                }
-            ];
+            vm.filterLabelsArray = [{
+                active: true,
+                label: '全部',
+            }];
             for (var i = 0; i < data.length; i++) {
                 object = {
                     active: false,
@@ -164,6 +164,7 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
     }
 
     modalController.$inject = ['$modalInstance', 'obj'];
+
     function modalController($modalInstance, obj) {
 
         var vm = this;
@@ -223,11 +224,11 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid) {
 
             if (!vm.filterArray.length) {
                 sendData = {
-                    labels:''
+                    labels: ''
                 };
             } else {
                 sendData = {
-                    labels:vm.filterArray.join(',')
+                    labels: vm.filterArray.join(',')
                 };
             }
 
