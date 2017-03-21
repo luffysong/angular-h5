@@ -1,9 +1,8 @@
 .dailyNews-wrapper {
-    //background-color: rgb(242,244,245);
-    .dailyNews-content-wrapper{
+    .dailyNews-content-wrapper {
         font-size: 13px;
-        .section-top{
-            p{
+        .section-top {
+            p {
                 font-size: 14px;
                 color: #5A626D;
                 letter-spacing: 0px;
@@ -11,10 +10,11 @@
                 padding: 15px 0;
                 margin: 0;
                 text-align: center;
-                &:before,&:after{
+                &:before,
+                &:after {
                     content: '';
                     width: 20px;
-                    height:1px;
+                    height: 1px;
                     background: #CCCCCC;
                     margin: 0 11px;
                     display: inline-block;
@@ -22,43 +22,42 @@
                 }
             }
         }
-        ul{
+        ul {
             margin-bottom: 0!important;
-            li{
+            li {
                 background: #fff;
                 padding: 0px;
                 overflow: hidden;
-                *{
+                * {
                     user-select: none;
                 }
-                a{
+                a {
                     display: block;
                 }
-                &:last-child{
-                    .base-info-detail{
+                &:last-child {
+                    .base-info-detail {
                         border-bottom: 0!important;
                     }
                 }
             }
-            li.active{
+            li.active {
                 background: #f8f8f8;
             }
-
-            .dailyNews-content-href{
+            .dailyNews-content-href {
                 width: 100%;
                 overflow: hidden;
                 display: inline-block;
                 vertical-align: middle;
-                .base-info-detail{
+                .base-info-detail {
                     display: inline-block;
                     vertical-align: middle;
                     margin: 15px 0 0 4%;
                     padding-right: 8%;
-                    padding-bottom:8px;
+                    padding-bottom: 8px;
                     position: relative;
                     border-bottom: 1px solid #E7E7E7;
                     width: 100%;
-                    h3{
+                    h3 {
                         font-size: 15px;
                         color: #222C38;
                         letter-spacing: 0px;
@@ -66,21 +65,22 @@
                         margin-top: 0;
                         margin-bottom: 12px;
                     }
-                    .header-info{
+                    .header-info {
                         text-align: center;
                         margin-top: 0;
                         margin-bottom: 12px;
-                        .text-toggle{
+                        .text-toggle {
                             color: #5A626D;
                             line-height: 45px;
                             display: block;
                             font-size: 14px;
                         }
                     }
-                    .text-container{
+                    .text-container {
                         position: relative;
-                        &:before,&:after{
-                            content:"";
+                        &:before,
+                        &:after {
+                            content: "";
                             display: block;
                             position: absolute;
                             height: 1px;
@@ -88,24 +88,23 @@
                             right: 0;
                             transform: scaleY(0.5);
                         }
-                        &:before{
+                        &:before {
                             top: 0;
                         }
-                        &:after{
+                        &:after {
                             bottom: 0;
                         }
-                        .text-content{
+                        .text-content {
                             text-align: left;
-                            overflow : hidden;
+                            overflow: hidden;
                             display: -webkit-box;
                             -webkit-box-orient: vertical;
                             line-height: 18px;
                             font-size: 15px;
                             color: #222C38;
                             letter-spacing: 0px;
-                            font-weight: 600;
-                            //使用after让浏览器重绘文字 使-webkit-line-clamp生效
-                            &:after{
+                            font-weight: 600; //使用after让浏览器重绘文字 使-webkit-line-clamp生效
+                            &:after {
                                 width: 0;
                                 height: 0;
                                 display: inline-block;
@@ -113,96 +112,95 @@
                                 content: attr(style);
                             }
                         }
-
                     }
-
-                    .item-left{
-                        position:relative;
+                    .item-left {
+                        position: relative;
                         display: inline-block;
                         height: 16px;
                         line-height: 16px;
                         vertical-align: middle;
-                        img{
+                        img {
                             width: 12px;
-                            height:12px;
+                            height: 12px;
                             position: absolute;
                             top: 50%;
                             transform: translateY(-50%);
                         }
-                        span{
+                        span {
                             font-size: 13px;
                             color: #464E58;
                             letter-spacing: 0px;
                             line-height: 16px;
                             margin-left: 19px;
                             overflow: hidden;
-                            text-overflow:ellipsis;
+                            text-overflow: ellipsis;
                             white-space: nowrap;
                             display: inline-block;
                         }
                     }
-                    .item-center{
-                        position:relative;
+                    .item-center {
+                        position: relative;
                         display: inline-block;
                         margin-left: 20px;
                         height: 16px;
                         line-height: 16px;
                         vertical-align: middle;
-                        img{
+                        img {
                             width: 14px;
-                            height:14px;
+                            height: 14px;
                             position: absolute;
                             top: 50%;
                             transform: translateY(-50%);
                         }
-                        span{
+                        span {
                             font-size: 13px;
                             color: #464E58;
                             letter-spacing: 0px;
                             line-height: 16px;
                             margin-left: 19px;
                             overflow: hidden;
-                            text-overflow:ellipsis;
+                            text-overflow: ellipsis;
                             white-space: nowrap;
                             max-width: 125px;
                             display: inline-block;
                         }
                     }
-                    .item-right{
+                    .item-right {
                         position: absolute;
                         display: inline-block;
                         height: 24px;
                         line-height: 24px;
                         right: 8%;
-                        div{
+                        div {
                             height: 16px;
                             line-height: 16px;
                             vertical-align: middle;
                             display: inline-block;
                             position: relative;
-                        }
-                        img{
-                            width: 14px;
-                            height:14px;
-                            position: absolute;
-                            top: 50%;
-                            transform: translateY(-50%);
-                        }
-                        span{
-                            font-size: 13px;
-                            color: #6BA2FC;
-                            letter-spacing: 0px;
-                            line-height: 16px;
-                            margin-left: 19px;
+                            color: #464E58;
                         }
                     }
                 }
             }
         }
     }
-    footer{
-        margin: 5px 0;
-        line-height: 19px;
+    .daily-news-load-more {
+        font-size: 16px;
+        color: #92979E;
+        letter-spacing: 0;
+        line-height: 30px;
         text-align: center;
+        margin: 15px 0;
+
+        p,
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0;
+        }
+
+        p {
+            margin-right: 8.8px;
+        }
     }
 }

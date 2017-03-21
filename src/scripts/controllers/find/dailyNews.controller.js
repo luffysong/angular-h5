@@ -1,9 +1,8 @@
-
-var  angular = require('angular');
+var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('DailyNewsController', DailyNewsController);
 
-function DailyNewsController(loading, FindService, ErrorService, hybrid) {
+function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout) {
     var vm = this;
 
     vm.responseData = [];
@@ -13,8 +12,9 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid) {
     vm.link = link;
 
     init();
+
     function init() {
-        document.title = '每日报道';
+        document.title = '媒体热议';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
 
         loadData();
@@ -46,7 +46,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid) {
     }
 
     function loadMore() {
-        if (vm.busy)return;
+        if (vm.busy) return;
         vm.busy = true;
         if (!vm.ts) {
             return;
@@ -54,9 +54,11 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid) {
 
         FindService.getDailyReport(vm.ts)
             .then(function temp(response) {
-                vm.responseData = vm.responseData.concat(response.data.data);
-                vm.ts = response.data.ts;
-                vm.busy = false;
+                $timeout(function() {
+                    vm.responseData = vm.responseData.concat(response.data.data);
+                    vm.ts = response.data.ts;
+                    vm.busy = false;
+                }, 500);
             })
             .catch(error);
     }
