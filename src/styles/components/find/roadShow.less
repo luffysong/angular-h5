@@ -1,33 +1,32 @@
 .roadShow-wrapper {
-    //background-color: rgb(242,244,245);
-    .null_today{
+    .null_today {
         width: 140px;
-        height:64px;
+        height: 64px;
         z-index: 999;
         padding: 22px 13px 22px 15px;
         font-size: 14px;
         color: #FFFFFF;
         letter-spacing: 0px;
-        background: rgba(0,0,0,0.85);
+        background: rgba(0, 0, 0, 0.85);
         border-radius: 4px;
         top: 160px;
-        left:50%;
+        left: 50%;
         transform: translateX(-50%);
         position: fixed;
         display: none;
     }
-    .roadShow-intro{
-        background-color: rgb(242,244,245);
+    .roadShow-intro {
+        background-color: rgb(242, 244, 245);
         margin-bottom: 10px;
         height: 91px;
         width: 100%;
-        position:fixed;
+        position: fixed;
         top: 0;
         z-index: 99;
-        .arrowLeft{
+        .arrowLeft {
             display: inline-block;
             position: absolute;
-            transform: translate(0,-50%);
+            transform: translate(0, -50%);
             top: 50%;
             left: 0px;
             height: 30px;
@@ -35,20 +34,20 @@
             cursor: pointer;
             margin-top: -5px;
             z-index: 100;
-            img{
+            img {
                 width: 7px;
                 height: 12px;
                 display: inline-block;
                 position: absolute;
-                transform: translate(0,-50%);
+                transform: translate(0, -50%);
                 top: 50%;
                 left: 10px;
             }
         }
-        .arrowRight{
+        .arrowRight {
             display: inline-block;
             position: absolute;
-            transform: translate(0,-50%);
+            transform: translate(0, -50%);
             top: 50%;
             right: 0px;
             height: 30px;
@@ -56,67 +55,68 @@
             cursor: pointer;
             margin-top: -5px;
             z-index: 100;
-            img{
+            img {
                 width: 7px;
                 height: 12px;
                 display: inline-block;
                 position: absolute;
-                transform: translate(0,-50%);
+                transform: translate(0, -50%);
                 top: 50%;
                 right: 10px;
             }
         }
-        .swiper-button-disabled{
+        .swiper-button-disabled {
             display: none;
         }
     }
-    .roadShow-intro-inner{
+    .roadShow-intro-inner {
         background-color: #fff;
         height: 81px;
-        .swiper-slide{
+        .swiper-slide {
             padding: 8px 17px;
             background-color: #fff;
         }
-        .sidebar{
-            list-style-type:none;
-            width:100%;
-            position:relative;
-            margin:0;
-            padding:0;
-            height:14px;
-            text-align:center;
+        .sidebar {
+            list-style-type: none;
+            width: 100%;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            height: 14px;
+            text-align: center;
             background-color: #fff;
-            li{
-                width:14.2857%;
-                display:inline-block;
-                float:left;
-                border-collapse:collapse;
+            li {
+                width: 14.2857%;
+                display: inline-block;
+                float: left;
+                border-collapse: collapse;
                 font-size: 11px;
                 color: #222C38;
                 letter-spacing: 0px;
                 line-height: 13.5px;
-                &:first-child,&:last-child{
+                &:first-child,
+                &:last-child {
                     color: #969FA9;
                 }
             }
         }
-        .date-content{
-            background:white;
-            list-style-type:none;
-            width:100%;
-            position:relative;
-            margin:0;
-            padding:0;
-            height:48px;
-            text-align:center;
-            a{
-                width:14.2857%;
-                display:inline-block;
-                border-collapse:collapse;
-                height:44px;
+        .date-content {
+            background: white;
+            list-style-type: none;
+            width: 100%;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            height: 48px;
+            text-align: center;
+            a {
+                width: 14.2857%;
+                display: inline-block;
+                border-collapse: collapse;
+                height: 44px;
                 position: relative;
                 vertical-align: middle;
-                div{
+                div {
                     width: 36px;
                     height: 36px;
                     line-height: 36px;
@@ -128,34 +128,35 @@
                     letter-spacing: 0px;
                     cursor: pointer;
                     display: inline-block;
-                    p{
+                    p {
                         margin: 0;
                     }
-                    .item-day{
+                    .item-day {
                         font-size: 16px;
                         letter-spacing: 0px;
                         line-height: 13.5px;
                         margin-top: 6px;
                     }
-                    .item-month{
+                    .item-month {
                         font-size: 9px;
                         letter-spacing: 0px;
                         line-height: 10px;
                         margin-top: 2px;
                     }
                 }
-                &:first-child,&:last-child{
-                    div{
+                &:first-child,
+                &:last-child {
+                    div {
                         //color: #969FA9;
                     }
                 }
-                ul{
+                ul {
                     position: relative;
                     line-height: 0px;
                     height: 4px;
                     padding: 0;
                     margin: 0;
-                    li{
+                    li {
                         background: #CCCCCC;
                         width: 4px;
                         height: 4px;
@@ -164,69 +165,64 @@
                         margin: 0 2px;
                     }
                 }
-                .item-active{
+                .item-active {
                     display: inline-block;
                 }
-                .item-notActive{
+                .item-notActive {
                     display: none;
                 }
             }
-            .active{
-                div{
+            .active {
+                div {
                     background: #5A626D;
                     color: #fff;
-                }
-                //.item-active{
+                } //.item-active{
                 //    display: inline-block;
                 //}
                 //.item-notActive{
                 //    display: none;
                 //}
             }
-            .today{
-                div{
+            .today {
+                div {
                     color: #F7647F;
                 }
             }
-            .active.today{
-                div{
+            .active.today {
+                div {
                     background: #F7647F!important;
                     color: #fff;
                 }
             }
         }
-
     }
-
-    .roadShow-content-wrapper{
+    .roadShow-content-wrapper {
         margin-top: 91px;
         font-size: 13px;
-        p{
+        p {
             line-height: 20px;
-        };
-        li{
+        }
+        ;
+        li {
             background: #fff;
-            height: 105px;
-            //padding: 0px 4%;
+            height: 105px; //padding: 0px 4%;
             overflow: hidden;
             position: relative;
-            *{
+            * {
                 user-select: none;
             }
-            a{
+            a {
                 display: block;
             }
-            &:last-child .roadShow-content-href{
-                border-bottom:0;
+            &:last-child .roadShow-content-href {
+                border-bottom: 0;
             }
         }
-        li.active{
+        li.active {
             background: #f8f8f8;
         }
-
-        .roadShow-content-href{
+        .roadShow-content-href {
             border-bottom: 1px solid #E7E7E7;
-
             width: 100%;
             overflow: hidden;
             display: inline-block;
@@ -235,7 +231,7 @@
             padding-right: 8%;
             margin-top: 0;
             position: absolute;
-            .base-info-wrapper{
+            .base-info-wrapper {
                 width: 30.4%;
                 height: 84px;
                 display: inline-block;
@@ -243,11 +239,11 @@
                 overflow: hidden;
                 float: left;
                 margin: 10px 0;
-                img{
+                img {
                     width: 100%;
                 }
             }
-            .base-info-detail{
+            .base-info-detail {
                 display: inline-block;
                 vertical-align: middle;
                 margin: 10px 0;
@@ -255,7 +251,7 @@
                 float: right;
                 height: 84px;
                 position: relative;
-                h3{
+                h3 {
                     font-size: 15px;
                     color: #222C38;
                     letter-spacing: 0px;
@@ -264,21 +260,22 @@
                     margin-bottom: 6px;
                     font-weight: 600;
                 }
-                .item-middle,.item-bottom{
-                    &:after{
+                .item-middle,
+                .item-bottom {
+                    &:after {
                         clear: both;
-                        content:".";
-                        display:block;
-                        height:0;
-                        visibility:hidden;
+                        content: ".";
+                        display: block;
+                        height: 0;
+                        visibility: hidden;
                     }
                 }
-                .item-bottom{
+                .item-bottom {
                     position: absolute;
                     bottom: 0;
                     width: 100%;
                 }
-                p{
+                p {
                     font-size: 13px;
                     color: #969FA9;
                     letter-spacing: 0px;
@@ -290,36 +287,34 @@
                     float: left;
                     margin-bottom: 10px;
                 }
-                .item-more{
+                .item-more {
                     font-size: 13px;
                     color: #6BA2FC;
                     letter-spacing: 0px;
                     line-height: 16px;
-                    float:right;
+                    float: right;
                     position: relative;
                     right: -11px;
                     padding: 10px;
                     top: -35px;
                 }
-                .item-time{
+                .item-time {
                     font-size: 13px;
                     color: #5A626D;
                     letter-spacing: 0px;
                     line-height: 16px;
-                    float:left;
+                    float: left;
                 }
-                .item-num{
+                .item-num {
                     font-size: 13px;
                     color: #5A626D;
                     letter-spacing: 0px;
                     line-height: 16px;
-                    float:right;
+                    float: right;
                 }
             }
-
         }
-
-        footer{
+        footer {
             margin: 5px 0;
             line-height: 19px;
             text-align: center;
