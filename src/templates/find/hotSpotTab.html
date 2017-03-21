@@ -13,7 +13,7 @@
                   href="https://36kr.com/app/tou?companysetlist={{item.id}}&ktm_source=find.hotSpot.{{item.id}}"
                   tou-open path="'projectsSet/'+ item.id + '?ktm_source=hot'">
                     <div class="pro-info">
-                        <div  class="pro-title" ng-if="item.name">[{{item.name}}]</div>
+                        <div  class="pro-title" ng-if="item.name">{{item.name}}</div>
                         <p ng-bind="item.fetchCode | delHtmlTag"></p>
                         <span class="item-more" ng-click="vm.more(item, $event)">更多</span>
                     </div>
