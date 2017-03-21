@@ -1,5 +1,4 @@
-
-var  angular = require('angular');
+var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('RoadShowController', RoadShowController);
 
@@ -58,10 +57,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         checkSwiper();
     });
 
-    // $(document).on('ps-y-reach-end', function () {
-    //     console.log('ps-y-reach-end');
-    // });
-
     $(document).off('ps-scroll-up');
     $(document).on('ps-scroll-up', function () {
         $('.arrowLeft').show();
@@ -70,7 +65,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     $(document).off('ps-scroll-y');
     $(document).on('ps-scroll-y', function () {
-        console.log('ps-scroll-y');
         scrollCallback();
     });
 
@@ -225,6 +219,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     }
 
     modalController.$inject = ['$modalInstance', 'obj'];
+
     function modalController($modalInstance, obj) {
 
         var vm = this;
@@ -293,20 +288,10 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     function onTransitionStart() {
         vm.slideChange = true;
         vm.topArrow = true;
-
-        // console.log('onTransitionStart:' + vm.slideChange);
-        // console.log('topArrow=' + vm.topArrow);
     }
 
     function onTransitionEnd(previousIndex, activeIndex) {
-
-        // console.log(previousIndex + '-->' + activeIndex);
-        // console.log('topArrow=' + vm.topArrow);
-
         vm.slideChange = false;
-
-        // console.log('onTransitionEnd:' + vm.slideChange);
-
         checkSwiper();
 
         if (!vm.topArrow) {
@@ -317,8 +302,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         var targetId;
 
         //翻页,加载数据
-
-        // console.log('翻页');
         $('.active').removeClass('active');
         targetArray = vm.originDateArray[activeIndex];
         for (var i = 6; i >= 0; i--) {
@@ -338,19 +321,15 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                             $('.img-fixed').hide();
                         }
 
-                        // console.log('time out: topArrow=' + vm.topArrow);
                     }, 500);
                 }, 100);
 
-                // console.log('翻页--触发:' + targetId);
                 break;
             }
         }
-
     }
 
     function loadData(time) {
-
         var startDate = time ? new Date(time) : new Date();
         startDate.setDate(startDate.getDate() - (7 * 11));
         setDate(startDate);
@@ -369,19 +348,18 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 vm.responseData = response.data.data;
 
                 vm.ts = response.data.ts;
-                vm.hasMore  = response.data.data.length;
+                vm.hasMore = response.data.data.length;
                 vm.hasInit = true;
                 initPoint();
                 vm.busy = false;
             });
-
     }
 
     function loadMore() {
-        if (vm.busy)return;
+        if (vm.busy) return;
         vm.busy = true;
 
-        if (!vm.ts)return;
+        if (!vm.ts) return;
 
         var sendData = {
             ts: vm.ts,
@@ -392,7 +370,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 vm.responseData = vm.responseData.concat(response.data.data);
 
                 vm.ts = response.data.ts;
-                vm.hasMore  = response.data.data.length;
+                vm.hasMore = response.data.data.length;
                 if (!vm.hasMore) {
                     vm.busy = true;
                     vm.ts = response.data.ts;
@@ -489,5 +467,4 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
             $('.arrowLeft').show();
         }
     }
-
 }
