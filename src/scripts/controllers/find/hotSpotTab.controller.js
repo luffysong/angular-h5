@@ -175,6 +175,7 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
 
         FindService.getFundingList(sendData)
         .then(function (response) {
+            //console.log('==', response);
             loading.hide('findLoading');
             if (vm.responseData && vm.currPos === 'FINANCING') {
                 vm.responseData = vm.responseData.concat(response.data.data);

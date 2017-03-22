@@ -50,7 +50,7 @@
         <div  ng-class="{'slide-up': vm.demos}" class="password-wrapper" ng-if="vm.needPwd">
             <section   class="password-content">
                 <span ng-if="vm.invalid" class="pwd-invalid">密码错误</span>
-                <p>查看该项目集需要密码 <br>请输入四位密码</p>
+                <p style="text-align:center;">查看该项目集需要密码 <br>请输入四位密码</p>
                 <input maxlength="4" type="text" ng-model="vm.password" />
                 <a ng-click="vm.vadliateAndGetDemos()" ng-class="{'pwd-active': vm.password.length === 4}"
                     href="javascript:">确定</a>
