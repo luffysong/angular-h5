@@ -31,7 +31,6 @@ function touOpen(hybrid, loading, $timeout, versionService, $state) {
 
         //大于等于2.6.2版本
         if (versionTou && versionService.cprVersion(versionTou, '2.6.2')) {
-            alert(scope.path);
             hybrid.open(scope.path);
         } else if (versionTou && versionService.cprVersion(versionTou, '2.6')) {
             if (scope.path.substring(0, 11) === 'projectsSet') {
@@ -41,11 +40,9 @@ function touOpen(hybrid, loading, $timeout, versionService, $state) {
                     type: 'projects'
                 }, { reload: true });
             } else {
-                alert(scope.path);
                 hybrid.open(scope.path);
             }
         } else {
-            alert('company/' + scope.pid);
             hybrid.open('company/' + scope.pid);
         }
 
