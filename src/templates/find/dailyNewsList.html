@@ -1,34 +1,37 @@
-<div  class="dailyNews-wrapper">
+<div class="dailyNews-wrapper">
     <div ng-if="vm.responseData.length">
-        <div  class="dailyNews-content-wrapper">
+        <div class="dailyNews-content-wrapper">
             <div ng-repeat="itemData in vm.responseData">
                 <div class="section-top">
-                    <p>{{itemData.displayTimeStr}} 共 {{itemData.reportCount}} 篇</p>
+                    <div class="section-top-split"></div>
+                    <div class="section-top-text">
+                        {{itemData.displayTimeStr}} 共 {{itemData.reportCount}} 篇
+                    </div>
+                    <div class="section-top-split"></div>
                 </div>
-                <ul >
+                <ul>
                     <li ontouchstart="" kr-active="'active'" ng-repeat="item in itemData.reports track by $index">
                         <a class="dailyNews-content-href" href="javascript:" ng-click="vm.link(item.ccid, item.link)">
                             <div class="base-info-detail">
                                 <h3 class="header-info">
                                     <text-line-clamp line-clamp='2' text="'['+ item.name + '] ' + item.title">
                                         <div class="text-container">
-                                            <div class="text-content"></div>
+                                            <div class="text-content" ng-class="{ 'with-tag hot-tag': ($index === 0 || $index === 1) }"></div>
                                         </div>
                                     </text-line-clamp>
                                 </h3>
                                 <div>
                                     <div class="item-left">
-                                        <img src="/styles/images/find/tagDark@2x.png"/>
+                                        <img src="/styles/images/find/White@3x.png" />
                                         <span>{{item.industry1 | findDefault : '其他'}}</span>
                                     </div>
                                     <div class="item-center">
-                                        <img src="/styles/images/find/defualtArtical@2x.png"/>
+                                        <img src="/styles/images/find/Logo@3x.png" />
                                         <span>{{item.source| findDefault : '媒体报道'}}</span>
                                     </div>
-                                    <div class="item-right">
-                                        <div>
-                                            <span>阅读数：0</span>
-                                        </div>
+                                    <div class="item-right clearfix">
+                                        <img src="/styles/images/find/Group 3@3x.png" />
+                                        <span>1234</span>
                                     </div>
                                 </div>
                             </div>
@@ -39,51 +42,12 @@
             <div scroll-load load-callback="vm.loadMore" boundary="100" ng-if="vm.hasInit && vm.responseData.length"></div>
             <div class="daily-news-load-more" ng-if="vm.hasInit && vm.responseData.length">
                 <p>加载更多··· </p>
-                <svg width='16px' height='16px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid"
-                    class="uil-default">
-                    <rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect>
-                    <rect x='46' y='40' width='8' height='20' rx='5' ry='5' fill='#939396' transform='rotate(0 50 50) translate(0 -40)'>
-                    <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0s' repeatCount='indefinite' />
-                    </rect>
-                    <rect x='46' y='40' width='8' height='20' rx='5' ry='5' fill='#939396' transform='rotate(30 50 50) translate(0 -40)'>
-                    <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.08333333333333333s' repeatCount='indefinite' />
-                    </rect>
-                    <rect x='46' y='40' width='8' height='20' rx='5' ry='5' fill='#939396' transform='rotate(60 50 50) translate(0 -40)'>
-                    <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.16666666666666666s' repeatCount='indefinite' />
-                    </rect>
-                    <rect x='46' y='40' width='8' height='20' rx='5' ry='5' fill='#939396' transform='rotate(90 50 50) translate(0 -40)'>
-                    <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.25s' repeatCount='indefinite' />
-                    </rect>
-                    <rect x='46' y='40' width='8' height='20' rx='5' ry='5' fill='#939396' transform='rotate(120 50 50) translate(0 -40)'>
-                    <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.3333333333333333s' repeatCount='indefinite' />
-                    </rect>
-                    <rect x='46' y='40' width='8' height='20' rx='5' ry='5' fill='#939396' transform='rotate(150 50 50) translate(0 -40)'>
-                    <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.4166666666666667s' repeatCount='indefinite' />
-                    </rect>
-                    <rect x='46' y='40' width='8' height='20' rx='5' ry='5' fill='#939396' transform='rotate(180 50 50) translate(0 -40)'>
-                    <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.5s' repeatCount='indefinite' />
-                    </rect>
-                    <rect x='46' y='40' width='8' height='20' rx='5' ry='5' fill='#939396' transform='rotate(210 50 50) translate(0 -40)'>
-                    <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.5833333333333334s' repeatCount='indefinite' />
-                    </rect>
-                    <rect x='46' y='40' width='8' height='20' rx='5' ry='5' fill='#939396' transform='rotate(240 50 50) translate(0 -40)'>
-                    <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.6666666666666666s' repeatCount='indefinite' />
-                    </rect>
-                    <rect x='46' y='40' width='8' height='20' rx='5' ry='5' fill='#939396' transform='rotate(270 50 50) translate(0 -40)'>
-                    <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.75s' repeatCount='indefinite' />
-                    </rect>
-                    <rect x='46' y='40' width='8' height='20' rx='5' ry='5' fill='#939396' transform='rotate(300 50 50) translate(0 -40)'>
-                    <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.8333333333333334s' repeatCount='indefinite' />
-                    </rect>
-                    <rect x='46' y='40' width='8' height='20' rx='5' ry='5' fill='#939396' transform='rotate(330 50 50) translate(0 -40)'>
-                    <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.9166666666666666s' repeatCount='indefinite' />
-                    </rect>
-                </svg>
+                <img src="/styles/images/loading.svg" alt="loading">
             </div>
         </div>
     </div>
     <div ng-if="!vm.responseData.length && vm.hasInit" class="find-no-data">
-        <img src="/styles/images/find/search@2x.png" >
+        <img src="/styles/images/find/search@2x.png">
         <span>抱歉，没有找到您要的内容</span>
     </div>
 </div>

@@ -1,0 +1,33 @@
+<div class="hot-focus-wrapper">
+    <ul class="hot-focus-filter top-filter">
+        <li class="filter-item active">
+            搜索
+        </li>
+        <li class="filter-item">
+            关注
+        </li>
+        <li class="filter-item">
+            约谈
+        </li>
+    </ul>
+    <ul class="hot-focus-filter bottom-filter">
+        <li class="filter-item">
+            昨天
+        </li>
+        <li class="filter-item active">
+            一周
+        </li>
+        <li class="filter-item">
+            一个月
+        </li>
+    </ul>
+    <div class="hot-focus-list">
+        <div class="hot-focus-list-item" ng-repeat="item in vm.hotFocusList">
+            <div class="item-top">{{item.origin}}</div>
+            <div class="item-bottom">
+                <div class="item-title">{{item.title}}</div>
+                <a ui-sref="find.hotFocusDetail({id: item.id})">查看详情&gt;&gt;</a>
+            </div>
+        </div>
+    </div>
+</div>

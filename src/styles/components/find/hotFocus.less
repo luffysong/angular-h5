@@ -1,0 +1,49 @@
+// 关注热点
+.hot-focus-wrapper {
+    // 关注热点过滤器
+    .hot-focus-filter {
+        display: flex;
+        justify-content: space-around;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        &.top-filter {
+            margin: 15px 0;
+        }
+
+        .filter-item {
+            width: 88px;
+            height: 30px;
+            line-height: 30px;
+            background: #464E58;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #fff;
+            text-align: center;
+
+            &.active {
+                background: #6BA2FC;
+            }
+        }
+    }
+    // 关注热点列表
+    .hot-focus-list {
+        background-color: #fff;
+        margin: 25px 0;
+        .hot-focus-list-item {
+            padding: 18px 15px;
+            border-top: 1px solid #e7e7e7;
+            border-bottom: 1px solid #e7e7e7;
+            margin-bottom: 15px;
+
+            &:first-child {
+                border-top: 0;
+            }
+
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+}

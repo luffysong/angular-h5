@@ -195,6 +195,28 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
+    // 创投助手app---关注热点
+    $stateProvider.state('find.hotFocus', {
+        url:'/hotFocus',
+        controllerAs: 'vm',
+        controller: 'HotFocusController',
+        templateUrl: 'templates/find/hotFocus.html',
+        resolve: {
+            coverFind: loadFind
+        }
+    });
+
+    // 创投助手app---热点详情
+    $stateProvider.state('find.hotFocusDetail', {
+        url:'/hotFocusDetail/:id',
+        controllerAs: 'vm',
+        controller: 'HotFocusDetailController',
+        templateUrl: 'templates/find/hotFocusDetail.html',
+        resolve: {
+            coverFind: loadFind
+        }
+    });
+
     //创投助手app---投资热点
     $stateProvider.state('find.hotSpot', {
         url:'/hotSpot',
@@ -217,7 +239,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
-    //创投助手app---每日报道
+    //创投助手app---媒体热议
     $stateProvider.state('find.dailyNews', {
         url:'/dailyNews',
         controllerAs: 'vm',
@@ -425,7 +447,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     }
 
     function loadFind($rootScope, loading, $q, $timeout) {
-
         $rootScope.findNeedLoading = true;
         loading.show('findLoading');
         $('ui-view')[0].innerHTML = '';
@@ -437,7 +458,5 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }, 10);
 
         return promise;
-
     }
-
 });

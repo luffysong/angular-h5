@@ -2,31 +2,30 @@
     .dailyNews-content-wrapper {
         font-size: 13px;
         .section-top {
-            p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &-text {
                 font-size: 14px;
                 color: #5A626D;
-                letter-spacing: 0px;
                 line-height: 16px;
                 padding: 15px 0;
                 margin: 0;
                 text-align: center;
-                &:before,
-                &:after {
-                    content: '';
-                    width: 20px;
-                    height: 1px;
-                    background: #CCCCCC;
-                    margin: 0 11px;
-                    display: inline-block;
-                    vertical-align: middle;
-                }
+            }
+            &-split {
+                width: 20px;
+                height: 1px;
+                background: #ccc;
+                margin: 0 11px;
+                vertical-align: middle;
             }
         }
         ul {
             margin-bottom: 0!important;
             li {
                 background: #fff;
-                padding: 0px;
+                padding: 0;
                 overflow: hidden;
                 * {
                     user-select: none;
@@ -53,16 +52,17 @@
                     vertical-align: middle;
                     margin: 15px 0 0 4%;
                     padding-right: 8%;
-                    padding-bottom: 8px;
+                    padding-bottom: 10px;
                     position: relative;
                     border-bottom: 1px solid #E7E7E7;
                     width: 100%;
                     h3 {
                         font-size: 15px;
                         color: #222C38;
-                        letter-spacing: 0px;
+                        letter-spacing: 0;
                         line-height: 18px;
                         margin-top: 0;
+                        font-weight: 600;
                         margin-bottom: 12px;
                     }
                     .header-info {
@@ -102,7 +102,7 @@
                             line-height: 18px;
                             font-size: 15px;
                             color: #222C38;
-                            letter-spacing: 0px;
+                            letter-spacing: 0;
                             font-weight: 600; //使用after让浏览器重绘文字 使-webkit-line-clamp生效
                             &:after {
                                 width: 0;
@@ -110,6 +110,30 @@
                                 display: inline-block;
                                 overflow: hidden;
                                 content: attr(style);
+                            }
+                            &.hot-tag {
+                                &:before {
+                                    content: '热';
+                                    background-color: #f7647f;
+                                }
+                            }
+                            &.recommend-tag {
+                                &:before {
+                                    content: '热';
+                                    background-color: #ffb446;
+                                }
+                            }
+                            &.with-tag {
+                                &:before {
+                                    display: inline-block;
+                                    height: 18px;
+                                    width: 18px;
+                                    margin-right: 3px;
+                                    font-size: 12px;
+                                    color: #fff;
+                                    line-height: 18px;
+                                    text-align: center;
+                                }
                             }
                         }
                     }
@@ -121,15 +145,14 @@
                         vertical-align: middle;
                         img {
                             width: 12px;
-                            height: 12px;
                             position: absolute;
                             top: 50%;
                             transform: translateY(-50%);
                         }
                         span {
                             font-size: 13px;
-                            color: #464E58;
-                            letter-spacing: 0px;
+                            color: #969FA9;
+                            letter-spacing: 0;
                             line-height: 16px;
                             margin-left: 19px;
                             overflow: hidden;
@@ -147,15 +170,14 @@
                         vertical-align: middle;
                         img {
                             width: 14px;
-                            height: 14px;
                             position: absolute;
                             top: 50%;
                             transform: translateY(-50%);
                         }
                         span {
                             font-size: 13px;
-                            color: #464E58;
-                            letter-spacing: 0px;
+                            color: #969FA9;
+                            letter-spacing: 0;
                             line-height: 16px;
                             margin-left: 19px;
                             overflow: hidden;
@@ -171,13 +193,19 @@
                         height: 24px;
                         line-height: 24px;
                         right: 8%;
-                        div {
+                        img {
+                            display: block;
+                            float: left;
+                            width: 20.8px;
+                            margin-right: 5px;
+                            margin-top: 1px;
+                        }
+                        span {
+                            display: block;
+                            float: right;
                             height: 16px;
                             line-height: 16px;
-                            vertical-align: middle;
-                            display: inline-block;
-                            position: relative;
-                            color: #464E58;
+                            color: #969FA9;
                         }
                     }
                 }
@@ -191,14 +219,12 @@
         line-height: 30px;
         text-align: center;
         margin: 15px 0;
-
         p,
         svg {
             display: inline-block;
             vertical-align: middle;
             margin: 0;
         }
-
         p {
             margin-right: 8.8px;
         }
