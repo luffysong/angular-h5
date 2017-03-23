@@ -12,21 +12,27 @@
     </ul>
     <ul class="hot-focus-filter bottom-filter">
         <li class="filter-item">
-            昨天
+            <span>昨天</span>
         </li>
         <li class="filter-item active">
-            一周
+            <span>一周</span>
         </li>
         <li class="filter-item">
-            一个月
+            <span>一月</span>
         </li>
     </ul>
     <div class="hot-focus-list">
         <div class="hot-focus-list-item" ng-repeat="item in vm.hotFocusList">
-            <div class="item-top">{{item.origin}}</div>
-            <div class="item-bottom">
-                <div class="item-title">{{item.title}}</div>
-                <a ui-sref="find.hotFocusDetail({id: item.id})">查看详情&gt;&gt;</a>
+            <div class="item-left">
+                <div class="item-title">
+                    [Google]Google近一周搜索量增长22%
+                </div>
+                <div class="item-desc">
+                    致力于服务创业者和投资人的平台
+                </div>
+            </div>
+            <div class="item-right">
+
             </div>
         </div>
     </div>

@@ -9,41 +9,91 @@
         padding: 0;
 
         &.top-filter {
-            margin: 15px 0;
+            padding: 12px 0;
+            background: #16191C;
+            box-shadow: 0 0 0 0 rgba(255,255,255,0.40);
+
+            .filter-item {
+                opacity: 0.5;
+                font-size: 15px;
+                color: #fff;
+                line-height: 18px;
+
+                &.active {
+                    opacity: 1;
+                }
+            }
         }
 
-        .filter-item {
-            width: 88px;
-            height: 30px;
-            line-height: 30px;
-            background: #464E58;
-            border-radius: 4px;
-            font-size: 14px;
-            color: #fff;
-            text-align: center;
+        &.bottom-filter {
+            padding-top: 15px;
+            background-color: #fff;
 
-            &.active {
-                background: #6BA2FC;
+            .filter-item {
+                width: 46px;
+                height: 25px;
+                line-height: 25px;
+                text-align: center;
+                border: 1px solid transparent;
+                border-radius: 99px;
+                color: rgba(34, 44, 56, 0.4);
+
+                &.active {
+                    border-color: rgba(107, 162, 252, 0.4);
+
+                    span {
+                        font-size: 13px;
+                        color: #6BA2FC;
+                    }
+                }
             }
         }
     }
     // 关注热点列表
     .hot-focus-list {
         background-color: #fff;
-        margin: 25px 0;
+        padding: 25px 0;
         .hot-focus-list-item {
-            padding: 18px 15px;
-            border-top: 1px solid #e7e7e7;
+            position: relative;
+            margin-left: 15px;
+            padding: 15px (44px + 15px * 2) 15px 0;
             border-bottom: 1px solid #e7e7e7;
-            margin-bottom: 15px;
-
-            &:first-child {
-                border-top: 0;
-            }
 
             &:last-child {
                 border-bottom: 0;
             }
+        }
+
+        .item-left {
+            .item-title {
+                font-size: 14px;
+                color: #232d38;
+                width: 100%;
+                margin-bottom: 10px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .item-desc {
+                font-size: 13px;
+                color: #969FA9;
+                line-height: 18px;
+                width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        .item-right {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 44px;
+            height: 44px;
+            border: 1px solid #E7E7E7;
+            border-radius: 5px;
         }
     }
 }

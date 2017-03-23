@@ -4,6 +4,7 @@ angular.module('defaultApp.controller')
 
 function HotFocusController(loading) {
     var vm = this;
+    document.title = '关注热点';
     loading.hide('findLoading');
     vm.hotFocusList = [
         {
