@@ -28,7 +28,7 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
     init();
 
     function init() {
-        document.title = '投资热点';
+        document.title = '项目专辑';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
         vm.currPos = 'NEW';
         loadData();
@@ -47,7 +47,7 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
 
     function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '投资热点',
+            shareTitle: '项目专辑',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '来「36氪创投助手」，发现最新最热优质项目！',

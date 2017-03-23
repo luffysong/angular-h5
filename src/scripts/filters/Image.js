@@ -9,7 +9,7 @@ var sizeArr = [20, 30, 50, 70, 100, 120, 200, 500, 640, 800];
 angular.module('defaultApp.filter').filter('image', function () {
     var defaults = {
         avatar: kr.defaultImg.defaultAvatarUrl,
-        logo: kr.defaultImg.defaultLogoUrl,
+        logo: kr.defaultImg.defaultNullUrl,
         user: kr.defaultImg.defaultUserUrl
     };
     return function (input, size, type) {
@@ -42,7 +42,7 @@ angular.module('defaultApp.filter').filter('image', function () {
 }).directive('img', function () {
     return function (scope, elem) {
         elem[0].onerror = function () {
-            elem[0].src = kr.defaultImg.defaultLogoUrl;
+            elem[0].src = kr.defaultImg.defaultNullUrl;
         };
     };
 });
