@@ -11,31 +11,29 @@
                         ng-repeat="item in itemData.datas track by $index"
                         ng-click="vm.link(item.ccid, item.link, $event)"
                     >
-                        <div class="item-top">
-                            <h4>{{item.name}}</h4>
-                            <a class="item-link"
-                                ng-if="item.link"
-                                href="https://36kr.com/app/tou?crmCompany={{item.ccid}}&ktm_source=find.finance.{{item.ccid}}"
-                                tou-open path="'crmCompany/' + item.ccid + '?ktm_source=find.finance.' + item.ccid"
-                            >
-                                <img src="images/find/link@2x.png" />
-                                <span>查看详情</span>
-                            </a>
-                        </div>
-                        <div class="item-bottom">
-                            <div class="item-industry-tag">
-                                {{item.industry1}}
-                            </div>
-                            <div class="item-location-tag">
-                                北京
-                            </div>
-                            <p class="item-investorStr">
-                                <span class="span-first">投资方：</span>
-                                <span class="span-second">{{item.investors | findDefault : '未披露'}}</span>
+                        <div class="item-left" ng-click="vm.link(item.ccid, item.link, $event)">
+                            <h4 ng-bind-html="item.structuredTitle | SimpleRender"></h4>
+                            <p class="item-investor-str" ng-if="item.investors">
+                                投资方：{{item.investors | findDefault : '未披露'}}
                             </p>
-                            <div class="item-expose-date">
-                                {{item.exposeDate}}
+                            <p class="item-brief" ng-if="item.brief">
+                                {{item.brief}}
+                            </p>
+                            <div class="item-extra-info">
+                                <div class="item-industry-tag">
+                                    {{item.industry1}}
+                                </div>
+                                <div class="item-location-tag" ng-if="item.address">
+                                    {{item.address}}
+                                </div>
+                                <div class="item-vertical-split"></div>
+                                <div class="item-expose-date">
+                                    {{item.structuredDate}}
+                                </div>
                             </div>
+                        </div>
+                        <div class="item-right" ng-click="vm.openNativePage('/crmCompany/'+item.ccid+'?ktm_source=find.home.' + item.ccid)">
+                            <div class="item-logo" ng-style="{backgroundImage: 'url(\'{{item.logo | image}}\')'}"></div>
                         </div>
                     </li>
                 </ul>

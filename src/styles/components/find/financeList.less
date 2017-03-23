@@ -24,11 +24,13 @@
         }
         ul {
             margin-bottom: 0!important;
+            background-color: #fff;
             li {
-                margin: 0;
-                border-bottom: 1px solid #E7E7E7;
-                padding: 0 15px 18px;
                 position: relative;
+                margin-left: 15px;
+                padding: 18px 110px 18px 0;
+                min-height: 116px;
+                border-bottom: 1px solid #E7E7E7;
                 overflow: hidden;
                 background-color: #fff;
                 * {
@@ -44,119 +46,82 @@
             li.active {
                 background: #f8f8f8;
             }
-            .item-top {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
+            .item-left {
                 h4 {
                     font-size: 15px;
                     color: #222C38;
                     letter-spacing: 0px;
-                    line-height: 18px;
-                    margin: 0;
-                    white-space: normal;
-                }
-                .item-link {
-                    height: 20px;
                     line-height: 20px;
-                    margin-bottom: 0;
-                    position: relative;
-                    align-self: flex-start;
-                    img {
-                        width: 14px;
-                        height: 14px;
-                        position: absolute;
-                        top: 50%;
-                        transform: translate(0, -50%);
-                        left: 0;
-                    }
-                    span {
-                        font-size: 13px;
-                        color: #6BA2FC;
-                        // color: #464E58;
-                        letter-spacing: 0px;
-                        line-height: 20px;
-                        margin-left: 19px;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        max-width: 110px;
-                        display: inline-block;
+                    margin: 0 0 3px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    font-weight: 600;
+                    span span {
+                        color: #FFA546;
                     }
                 }
-            }
-            .item-bottom {
-                position: relative;
-                display: flex;
-                margin-top: 10px;
-                align-items: center;
-                flex-wrap: nowrap;
+                .item-investor-str,
+                .item-brief {
+                    line-height: 18px;
+                    font-size: 13px;
+                    color: #969FA9;
+                    margin-bottom: 3px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    letter-spacing: 0;
+                }
+                .item-brief {
+                    margin-bottom: 3.5px;
+                }
+                .item-extra-info {
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: nowrap;
+                }
                 .item-industry-tag {
-                    font-size: 12px;
-                    color: #6BA2FC;
-                    margin-right: 8px;
-                    padding: 2px 4px;
-                    display: block;
-                    line-height: 14px;
-                    border: 1px solid #6BA2FC;
+                    padding: 0 4px;
+                    font-size: 10px;
+                    color: #fff;
+                    height: 15px;
+                    line-height: 15px;
+                    background: #6BA2FC;
                     border-radius: 2px;
                     white-space: nowrap;
                 }
                 .item-location-tag {
-                    height: 24px;
-                    line-height: 24px;
-                    font-size: 13px;
-                    color: #222C38;
-                    font-weight: 600;
                     margin-right: 8px;
+                    margin-left: 10px;
+                    font-size: 13px;
+                    color: #969FA9;
+                    line-height: 18px;
                     white-space: nowrap;
                 }
-                .item-expose-date {
-                    height: 24px;
-                    line-height: 24px;
-                    position: absolute;
-                    right: 0;
-                    white-space: nowrap;
-                }
-            }
-            .item-finance {
-                font-size: 13px;
-                color: #222C38;
-                letter-spacing: 0px;
-                line-height: 16px;
-                margin-top: 10px;
-                margin-bottom: 8px;
-                span {
-                    background: #E7E7E7;
+                .item-vertical-split {
                     width: 1px;
                     height: 12px;
-                    display: inline-block;
-                    margin: 0 10px;
-                    position: relative;
-                    top: 1px;
+                    background: #E7E7E7;
+                }
+                .item-expose-date {
+                    margin-left: 8px;
+                    font-size: 13px;
+                    color: #969FA9;
+                    line-height: 18px;
+                    white-space: nowrap;
                 }
             }
-            .item-investorStr {
-                height: 24px;
-                line-height: 24px;
-                font-size: 13px;
-                color: #5A626D;
-                letter-spacing: 0px;
-                margin-bottom: 0;
-                white-space: nowrap;
-                position: relative;
-                .span-first {
-                    display: inline-block;
-                    vertical-align: top;
-                    position: absolute;
-                }
-                .span-second {
-                    display: inline-block;
-                    margin-left: 50px;
-                    max-width: 70px;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
+            .item-right {
+                position: absolute;
+                top: 18px;
+                right: 15px;
+                width: 80px;
+                .item-logo {
+                    width: 80px;
+                    height: 80px;
+                    background: #E7E7E7 no-repeat center;
+                    background-size: cover;
+                    border: 1px solid #E7E7E7;
                 }
             }
         }

@@ -62,7 +62,17 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid, $
         FindService.getFinanceList(vm.sendData)
             .then(function temp(response) {
                 loading.hide('findLoading');
-                vm.responseData = angular.copy(response.data.group);
+                vm.responseData = response.data.group.map(function (item, index) {
+                    if (item.datas && item.datas.length) {
+                        item.datas = structureData(item.datas);
+                    }
+                    if (item.ts === moment().format('YYYY-MM-DD')) {
+                        item.structuredTs = '今天';
+                    } else {
+                        item.structuredTs = item.tsExpose;
+                    }
+                    return item;
+                });
                 setFilterLabels(response.data.filterLabels, 0);
                 vm.sendData.date = response.data.ts;
                 vm.busy = false;
@@ -81,12 +91,51 @@ function FinanceController(loading, FindService, ErrorService, $modal, hybrid, $
         FindService.getFinanceList(vm.sendData)
             .then(function temp(response) {
                 $timeout(function() {
-                    vm.responseData = vm.responseData.concat(response.data.group);
+                    var structuredData = response.data.group.map(function (item, index) {
+                        if (item.datas && item.datas.length) {
+                            item.datas = structureData(item.datas);
+                        }
+                        if (item.ts === moment().format('YYYY-MM-DD')) {
+                            item.structuredTs = '今天';
+                        } else {
+                            item.structuredTs = item.tsExpose;
+                        }
+                        return item;
+                    });
+                    vm.responseData = vm.responseData.concat(structuredData);
                     vm.sendData.date = response.data.ts;
                     vm.busy = false;
                 }, 1000);
             })
             .catch(error);
+    }
+
+    function structureData(data) {
+        return data.map(function (item) {
+            if (item.phase === '未融资') {
+                item.phase = '';
+            }
+            if (item.amount === '未披露') {
+                item.amount = '';
+            }
+            if (item.phase === '并购') {
+                item.structuredTitle = '<span>' + item.name + '</span>被' + item.investors + (item.amount ? '以' + item.amount : '') + '并购';
+            } else if (item.phase === '上市') {
+                item.structuredTitle = '<span>' + item.name + '</span>上市';
+            } else if (item.phase === '上市后') {
+                item.structuredTitle = '<span>' + item.name + '</span>定增' + item.amount;
+            } else if (item.phase === '新三板' || item.phase === '新四板') {
+                item.structuredTitle = '<span>' + item.name + '</span>挂牌' + item.phase;
+            } else {
+                item.structuredTitle = '<span>' + item.name + '</span>获' + item.phase + item.amount + '投资';
+            }
+            if (item.exposeDate === moment().format('YYYY-MM-DD')) {
+                item.structuredDate = '今天';
+            } else {
+                item.structuredDate = item.exposeDate;
+            }
+            return item;
+        });
     }
 
     function error(err) {
