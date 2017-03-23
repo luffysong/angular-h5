@@ -22,5 +22,35 @@ function HotFocusController(loading) {
             title: '京东搜索量减少30%',
             id: '3',
         },
+        {
+            origin: '36氪',
+            title: '36氪搜索量增长30%',
+            id: '1',
+        },
+        {
+            origin: '京东',
+            title: '京东搜索量减少10%',
+            id: '2',
+        },
+        {
+            origin: '京东',
+            title: '京东搜索量减少30%',
+            id: '3',
+        },
+        {
+            origin: '36氪',
+            title: '36氪搜索量增长30%',
+            id: '1',
+        },
+        {
+            origin: '京东',
+            title: '京东搜索量减少10%',
+            id: '2',
+        },
+        {
+            origin: '京东',
+            title: '京东搜索量减少30%',
+            id: '3',
+        },
     ];
 }
