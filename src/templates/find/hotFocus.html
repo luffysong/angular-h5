@@ -1,43 +1,39 @@
 <div class="hot-focus-wrapper">
-    <ul class="hot-focus-filter top-filter">
-        <li class="filter-item active">
+    <ul class="hot-focus-filter top-filter" ng-if="vm.focusList.length">
+        <li class="filter-item" ng-class="{'active': vm.params.eventEnum === 'SEARCH'}">
             搜索
         </li>
-        <li class="filter-item">
+        <li class="filter-item" ng-class="{'active': vm.params.eventEnum === 'FOCUS'}">
             关注
         </li>
-        <li class="filter-item">
+        <li class="filter-item" ng-class="{'active': vm.params.eventEnum === 'TALK'}">
             约谈
         </li>
     </ul>
-    <ul class="hot-focus-filter bottom-filter">
-        <li class="filter-item">
+    <ul class="hot-focus-filter bottom-filter" ng-if="vm.focusList.length">
+        <li class="filter-item" ng-class="{'active': vm.params.intervalEnum === 'DAY'}">
             <span>昨天</span>
         </li>
-        <li class="filter-item active">
+        <li class="filter-item" ng-class="{'active': vm.params.intervalEnum === 'WEEK'}">
             <span>一周</span>
         </li>
-        <li class="filter-item">
+        <li class="filter-item" ng-class="{'active': vm.params.intervalEnum === 'MONTH'}">
             <span>一月</span>
         </li>
     </ul>
-    <div class="hot-focus-list">
-        <div class="hot-focus-list-item" ng-repeat="item in vm.hotFocusList">
+    <div class="hot-focus-list" ng-if="vm.focusList.length">
+        <div class="hot-focus-list-item" ng-repeat="item in vm.focusList">
             <div class="item-left">
                 <div class="item-title">
-                    [Google]Google近一周搜索量增长22%
+                    [{{item.name}}]Google近一周搜索量增长22%
                 </div>
                 <div class="item-desc">
-                    致力于服务创业者和投资人的平台
+                    {{item.brief}}
                 </div>
             </div>
-            <div class="item-right">
+            <div class="item-right" ng-style="{'background-image': 'url({{item.logo | image}})'}">
 
             </div>
-        </div>
-        <div class="hot-focus-list-load-more">
-            <p>加载更多··· </p>
-            <img src="/styles/images/loading.svg" alt="loading">
         </div>
     </div>
 </div>

@@ -2,9 +2,8 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('HotFocusDetailController', HotFocusDetailController);
 
-function HotFocusDetailController(loading) {
+function HotFocusDetailController(loading, FindService, ErrorService, $stateParams) {
     var vm = this;
-    loading.hide('findLoading');
     // 页面 title
     document.title = '热点详情';
     // 图表 1 配置
@@ -91,10 +90,14 @@ function HotFocusDetailController(loading) {
         options: {
             chart: {
                 type: 'bar',
+                height: 250,
+            },
+            legend: {
+                enabled: false,
             },
         },
         title: {
-            text: '竞品搜索量排行',
+            text: null,
         },
         xAxis: {
             categories: ['36氪', '3W coffee', 'IT 橘子'],
@@ -108,4 +111,28 @@ function HotFocusDetailController(loading) {
             data: [10, 8, 6],
         },],
     };
+
+    // URL 信息
+    vm.params = {
+        id: $stateParams.id,
+        eventEnum: $stateParams.eventEnum,
+        intervalEnum: $stateParams.intervalEnum,
+    };
+
+    // 页面初始化
+    init();
+
+    function init() {
+        FindService.getHotFocusDetail(vm.params.id, {
+            eventEnum: vm.params.eventEnum,
+            intervalEnum: vm.params.intervalEnum,
+        }).then(function(response) {
+            loading.hide('findLoading');
+        }).catch(error);
+    }
+
+    function error(err) {
+        loading.hide('findLoading');
+        ErrorService.alert(err);
+    }
 }

@@ -197,7 +197,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     // 创投助手app---关注热点
     $stateProvider.state('find.hotFocus', {
-        url:'/hotFocus',
+        url:'/hotFocus?eventEnum&intervalEnum',
         controllerAs: 'vm',
         controller: 'HotFocusController',
         templateUrl: 'templates/find/hotFocus.html',
@@ -208,7 +208,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     // 创投助手app---热点详情
     $stateProvider.state('find.hotFocusDetail', {
-        url:'/hotFocusDetail/:id',
+        url:'/hotFocusDetail/:id?eventEnum&intervalEnum',
         controllerAs: 'vm',
         controller: 'HotFocusDetailController',
         templateUrl: 'templates/find/hotFocusDetail.html',

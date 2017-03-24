@@ -2,55 +2,37 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('HotFocusController', HotFocusController);
 
-function HotFocusController(loading) {
+function HotFocusController(loading, ErrorService, FindService, $stateParams) {
     var vm = this;
     document.title = '关注热点';
-    loading.hide('findLoading');
-    vm.hotFocusList = [
-        {
-            origin: '36氪',
-            title: '36氪搜索量增长30%',
-            id: '1',
-        },
-        {
-            origin: '京东',
-            title: '京东搜索量减少10%',
-            id: '2',
-        },
-        {
-            origin: '京东',
-            title: '京东搜索量减少30%',
-            id: '3',
-        },
-        {
-            origin: '36氪',
-            title: '36氪搜索量增长30%',
-            id: '1',
-        },
-        {
-            origin: '京东',
-            title: '京东搜索量减少10%',
-            id: '2',
-        },
-        {
-            origin: '京东',
-            title: '京东搜索量减少30%',
-            id: '3',
-        },
-        {
-            origin: '36氪',
-            title: '36氪搜索量增长30%',
-            id: '1',
-        },
-        {
-            origin: '京东',
-            title: '京东搜索量减少10%',
-            id: '2',
-        },
-        {
-            origin: '京东',
-            title: '京东搜索量减少30%',
-            id: '3',
-        },
-    ];
+
+    // URL 信息
+    vm.params = {
+        eventEnum: $stateParams.eventEnum || 'SEARCH',
+        intervalEnum: $stateParams.intervalEnum || 'DAY',
+    };
+
+    // 列表信息
+    vm.focusList = [];
+
+    // 页面初始化
+    init();
+
+    function init() {
+        FindService.getHotFocus({
+            eventEnum: vm.params.eventEnum,
+            intervalEnum: vm.params.intervalEnum,
+        }).then(function(response) {
+            loading.hide('findLoading');
+            if (response.data) {
+                vm.focusList = angular.copy(response.data);
+            }
+        }).catch(error);
+    }
+
+    function error(err) {
+        ErrorService.alert(err);
+        loading.hide('findLoading');
+    }
+
 }

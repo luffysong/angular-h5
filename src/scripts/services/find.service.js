@@ -92,4 +92,14 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
     this.getActivity = function (request) {
         return $http.get('/api/mobi-investor/op-activity/submit?' + $.param(request));
     };
+
+    // 关注热点列表
+    this.getHotFocus = function (params) {
+        return $http.get('/api/mobi-investor/focus-hot?' + $.param(params));
+    };
+
+    // 关注热点详情
+    this.getHotFocusDetail = function (id, params) {
+        return $http.get('/api/mobi-investor/focus-hot/' + id + '/detail?' + $.param(params));
+    };
 });
