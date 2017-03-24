@@ -13,6 +13,11 @@
         <div class="title-split"></div>
     </div>
     <div class="chart-2-area" ng-if="vm.detailData.companyCompetitors.length">
+        <ul class="company-competitors">
+            <li ng-repeat="item in vm.detailData.companyCompetitors">
+                <div class="company-logo" ng-style="{'background-image': 'url({{item.logo}})'}"></div>
+            </li>
+        </ul>
         <highchart id="chart-2" config="vm.chartConfig2"></highchart>
     </div>
 </div>
