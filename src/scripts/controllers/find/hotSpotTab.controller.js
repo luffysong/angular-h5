@@ -79,6 +79,7 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
         vm.currPos = curr;
         vm.busy = false;
         vm.hasInit = false;
+        vm.finish = false;
     }
 
     function more(item, e) {
