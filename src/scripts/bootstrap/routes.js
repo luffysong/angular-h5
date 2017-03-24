@@ -200,10 +200,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url:'/hotFocus?eventEnum&intervalEnum',
         controllerAs: 'vm',
         controller: 'HotFocusController',
-        templateUrl: 'templates/find/hotFocus.html',
-        resolve: {
-            coverFind: loadFind
-        }
+        templateUrl: 'templates/find/hotFocus.html'
     });
 
     // 创投助手app---热点详情
@@ -211,10 +208,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url:'/hotFocusDetail/:id?eventEnum&intervalEnum',
         controllerAs: 'vm',
         controller: 'HotFocusDetailController',
-        templateUrl: 'templates/find/hotFocusDetail.html',
-        resolve: {
-            coverFind: loadFind
-        }
+        templateUrl: 'templates/find/hotFocusDetail.html'
     });
 
     //创投助手app---投资热点
