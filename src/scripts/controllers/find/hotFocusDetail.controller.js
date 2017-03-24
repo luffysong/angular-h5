@@ -122,6 +122,15 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
         title: decodeURIComponent($stateParams.title),
     };
 
+    // 对应话术
+    var phrases = {
+        eventEnum: {
+            TALK: '约谈',
+            FOCUS: '关注',
+            SEARCH: '搜索',
+        },
+    };
+
     // 页面初始化
     init();
     loading.show('hotFocusDetailLoading');
@@ -140,6 +149,7 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
                 vm.detailData = angular.copy(response.data);
             }
         }).catch(error);
+        vm.event = phrases.eventEnum[vm.params.eventEnum];
     }
 
     function generateDates() {
