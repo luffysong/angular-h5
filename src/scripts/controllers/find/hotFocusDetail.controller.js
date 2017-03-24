@@ -68,23 +68,32 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
         },
         xAxis: {
             title: null,
-            lineColor: '#F2F4F5',
-            gridLineColor: '#F2F4F5',
-            gridLineDashStyle: 'dashed',
-            categories: ['二月', '三月', '四月', '五月', '六月', '七月', '八月'],
+            tickColor: '#5A626D',
+            tickPosition: 'inside',
+            tickLength: 4,
+            tickmarkPlacement: 'on',
+            categories: [],
         },
         yAxis: {
             title: null,
-            lineColor: '#F2F4F5',
+            min: 0,
             gridLineColor: '#F2F4F5',
-            gridLineDashStyle: 'dashed',
+            gridLineDashStyle: 'Long dashes',
+            plotLines:[{
+                value:450,
+                color: '#ff0000',
+                width:2,
+                zIndex:4,
+                label:{text:'goal'}
+            }]
         },
         series: [{
             type: 'area',
             name: '热度',
-            data: [10, 13, 25, 3, 8, 30, 15],
+            data: [],
         }],
     };
+
     // 图表 2 配置
     vm.chartConfig2 = {
         options: {
@@ -100,7 +109,7 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
             text: null,
         },
         xAxis: {
-            categories: ['36氪', '3W coffee', 'IT 橘子'],
+            categories: [],
             title: null,
         },
         yAxis: {
@@ -108,7 +117,7 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
         },
         series: [{
             name: '搜索量',
-            data: [10, 8, 6],
+            data: [],
         },],
     };
 
@@ -117,22 +126,39 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
         id: $stateParams.id,
         eventEnum: $stateParams.eventEnum,
         intervalEnum: $stateParams.intervalEnum,
+        title: decodeURIComponent($stateParams.title),
     };
 
     // 页面初始化
     init();
+    loading.show('hotFocusDetailLoading');
 
     function init() {
         FindService.getHotFocusDetail(vm.params.id, {
             eventEnum: vm.params.eventEnum,
             intervalEnum: vm.params.intervalEnum,
         }).then(function(response) {
-            loading.hide('findLoading');
+            loading.hide('hotFocusDetailLoading');
+            if (response.data) {
+                if (response.data.data) {
+                    vm.chartConfig1.series[0].data = response.data.data.slice(1).reverse();
+                }
+                vm.chartConfig1.xAxis.categories = generateDates();
+                vm.detailData = angular.copy(response.data);
+            }
         }).catch(error);
     }
 
+    function generateDates() {
+        var dateArr = [];
+        for (var i = 0; i < 6; i++) {
+            dateArr.push(moment().subtract(i, 'days').format('MM/DD'));
+        }
+        return dateArr.reverse();
+    }
+
     function error(err) {
-        loading.hide('findLoading');
+        loading.hide('hotFocusDetailLoading');
         ErrorService.alert(err);
     }
 }

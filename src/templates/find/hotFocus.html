@@ -40,7 +40,7 @@
         </li>
     </ul>
     <div class="hot-focus-list" ng-if="!loadingInst.hotFocus && vm.focusList.length">
-        <div class="hot-focus-list-item" ng-repeat="item in vm.focusList" ng-click="vm.goToDetail(item.cid)">
+        <div class="hot-focus-list-item" ng-repeat="item in vm.focusList" ng-click="vm.goToDetail(item.cid, item.structuredTitle)">
             <div class="item-left">
                 <div class="item-title">
                     [<span>{{item.name}}</span>]{{item.structuredTitle}}

@@ -205,7 +205,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     // 创投助手app---热点详情
     $stateProvider.state('find.hotFocusDetail', {
-        url:'/hotFocusDetail/:id?eventEnum&intervalEnum',
+        url:'/hotFocusDetail/:id?eventEnum&intervalEnum&title',
         controllerAs: 'vm',
         controller: 'HotFocusDetailController',
         templateUrl: 'templates/find/hotFocusDetail.html'

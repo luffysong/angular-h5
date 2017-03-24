@@ -1,10 +1,10 @@
-<div class="hot-focus-detail-wrapper">
+<div class="hot-focus-detail-wrapper" ng-if="!loadingInst.hotFocusDetailLoading">
     <div class="hot-focus-top-area">
-        <div class="hot-focus-company-logo"></div>
-        <h1 class="hot-focus-title">36氪搜索量增长30%</h1>
+        <div class="hot-focus-company-logo" ng-style="{'background-image': 'url({{vm.detailData.logo | image}})'}"></div>
+        <h1 class="hot-focus-title">{{vm.detailData.name + vm.params.title}}</h1>
     </div>
     <h2 class="chart-1-title">走势情况</h2>
-    <div class="chart-1-area">
+    <div class="chart-1-area" ng-if="vm.detailData">
         <highchart id="chart-1" config="vm.chartConfig1"></highchart>
     </div>
     <div class="chart-2-title">
@@ -16,3 +16,5 @@
         <highchart id="chart-2" config="vm.chartConfig2"></highchart>
     </div>
 </div>
+
+<div class="hot-focus-detail-loading" loading="hotFocusDetailLoading"></div>

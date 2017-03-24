@@ -72,8 +72,9 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
     }
 
     // 查看详情
-    function goToDetail(cid) {
+    function goToDetail(cid, title) {
         vm.params.id = cid;
+        vm.params.title = encodeURIComponent(title);
         $state.go('find.hotFocusDetail', vm.params);
     }
 
