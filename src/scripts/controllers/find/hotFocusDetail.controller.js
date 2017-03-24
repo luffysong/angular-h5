@@ -151,8 +151,23 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
 
     function generateDates() {
         var dateArr = [];
+        var interval = '';
+
+        switch (vm.params.intervalEnum) {
+            case 'DAY':
+                interval = 'days';
+                break;
+            case 'WEEK':
+                interval = 'weeks';
+                break;
+            case 'MONTH':
+                interval = 'months';
+                break;
+            default:
+                interval = 'days';
+        }
         for (var i = 0; i < 6; i++) {
-            dateArr.push(moment().subtract(i, 'days').format('MM/DD'));
+            dateArr.push(moment().subtract(i, interval).format('MM/DD'));
         }
         return dateArr.reverse();
     }
