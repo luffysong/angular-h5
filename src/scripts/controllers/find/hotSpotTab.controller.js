@@ -152,6 +152,7 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
         FindService.getHottestList(sendData)
         .then(function (response) {
             loading.hide('findLoading');
+            vm.hasInit = true;
             if (vm.responseData && vm.currPos === 'HOT') {
                 vm.responseData = vm.responseData.concat(response.data.data);
             } else {
@@ -180,7 +181,7 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
 
         FindService.getFundingList(sendData)
         .then(function (response) {
-            //console.log('==', response);
+            vm.hasInit = true;
             loading.hide('findLoading');
             if (vm.responseData && vm.currPos === 'FINANCING') {
                 vm.responseData = vm.responseData.concat(response.data.data);
@@ -195,6 +196,8 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
                 } else {
                     vm.finish = true;
                 }
+            } else {
+                vm.finish = true;
             }
         });
     }
