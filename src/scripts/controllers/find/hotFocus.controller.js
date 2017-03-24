@@ -12,6 +12,20 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
         intervalEnum: $stateParams.intervalEnum || 'DAY',
     };
 
+    // 对应话术
+    var phrases = {
+        eventEnum: {
+            TALK: '约谈',
+            FOCUS: '关注',
+            SEARCH: '搜索',
+        },
+        intervalEnum: {
+            DAY: '近一周',
+            WEEK: '近六周',
+            MONTH: '近半年',
+        },
+    };
+
     // 列表信息
     vm.focusList = [];
 
@@ -32,7 +46,11 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
         }).then(function(response) {
             loading.hide('hotFocus');
             if (response.data) {
-                vm.focusList = angular.copy(response.data);
+                var structuredData = response.data.map(function(item) {
+                    item.structuredTitle = generateTitle(item.name, item.signal);
+                    return item;
+                });
+                vm.focusList = structuredData;
             }
         }).catch(error);
     }
@@ -55,8 +73,32 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
 
     // 查看详情
     function goToDetail(cid) {
-        console.log(cid);
         vm.params.id = cid;
         $state.go('find.hotFocusDetail', vm.params);
+    }
+
+    // 根据信号生成标题
+    function generateTitle(name, signal) {
+        var title = '';
+        var extraData = JSON.parse(signal.extraData);
+        var signalType = signal.signalType.split('.');
+        var percent = 0;
+        var extra = '';
+
+        percent = (extraData.to * 100 / extraData.from).toFixed(2);
+        title += phrases.intervalEnum[vm.params.intervalEnum];
+        title += phrases.eventEnum[vm.params.eventEnum];
+
+        if (signalType[1] === 'great') {
+            extra = '增长量上涨' + percent + '%';
+        } else if (signalType[1] === 'increase') {
+            extra = '量达到' + extraData.to;
+        }
+
+        if (percent > 100) {
+            extra = '量暴增';
+        }
+
+        return title + extra;
     }
 }

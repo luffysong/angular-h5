@@ -43,7 +43,7 @@
         <div class="hot-focus-list-item" ng-repeat="item in vm.focusList" ng-click="vm.goToDetail(item.cid)">
             <div class="item-left">
                 <div class="item-title">
-                    [{{item.name}}]Google近一周搜索量增长22%
+                    [<span>{{item.name}}</span>]{{item.structuredTitle}}
                 </div>
                 <div class="item-desc">
                     {{item.brief}}
