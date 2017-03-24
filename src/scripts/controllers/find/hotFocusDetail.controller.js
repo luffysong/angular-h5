@@ -87,33 +87,6 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
         }],
     };
 
-    // 图表 2 配置
-    vm.chartConfig2 = {
-        options: {
-            chart: {
-                type: 'bar',
-                height: 250,
-            },
-            legend: {
-                enabled: false,
-            },
-        },
-        title: {
-            text: null,
-        },
-        xAxis: {
-            categories: [],
-            title: null,
-        },
-        yAxis: {
-            title: null,
-        },
-        series: [{
-            name: '搜索量',
-            data: [],
-        },],
-    };
-
     // URL 信息
     vm.params = {
         id: $stateParams.id,
