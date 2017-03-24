@@ -79,13 +79,6 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
             min: 0,
             gridLineColor: '#F2F4F5',
             gridLineDashStyle: 'Long dashes',
-            plotLines:[{
-                value:450,
-                color: '#ff0000',
-                width:2,
-                zIndex:4,
-                label:{text:'goal'}
-            }]
         },
         series: [{
             type: 'area',
