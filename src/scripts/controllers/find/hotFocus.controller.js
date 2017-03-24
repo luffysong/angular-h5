@@ -20,9 +20,9 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
             SEARCH: '搜索',
         },
         intervalEnum: {
-            DAY: '近一周',
-            WEEK: '近六周',
-            MONTH: '近半年',
+            DAY: '今天',
+            WEEK: '近一周',
+            MONTH: '近一个月',
         },
     };
 
