@@ -9,7 +9,7 @@ angular.module('defaultApp.directive').directive('slideTabs',
         return {
             require: '^ngModel',
             restrict: 'AE',
-            template: '<div class="slide-tabs" ng-if="tabs.length"><div class="wrapper"><a href="javascript:void(0)" class="tab" ng-repeat="tab in tabs" ng-click="setTab(tab)" ng-class="{selected:tab.selected}" ng-style="{width:(99.9/tabs.length)+\'%\'}"><span>{{tab.label}}</span></a><span class="bar" ng-style="{width:bar.width,transform:bar.transform}"></span></div></div>',
+            template: '<div class="slide-tabs" ng-if="tabs.length"><div class="wrapper"><a href="javascript:void(0)" class="tab" ng-repeat="tab in tabs" ng-click="setTab(tab)" ng-class="{selected:tab.selected}" }"><span>{{tab.label}}</span></a><span class="bar" ng-style="{width:bar.width,transform:bar.transform}"></span></div></div>',
             scope: {
                 tabs: '=slideTabs'
             },

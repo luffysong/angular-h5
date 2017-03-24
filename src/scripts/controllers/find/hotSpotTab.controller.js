@@ -59,12 +59,15 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
 
     $scope.$on('tabClicked', function (e, item) {
         if (item.value === 'HOT') {
+            loading.show('findLoading');
             resetData(item.value);
             loadHotData();
         }else if (item.value === 'FINANCING') {
+            loading.show('findLoading');
             resetData(item.value);
             loadFinancingData();
         }else if (item.value === 'NEW') {
+            loading.show('findLoading');
             resetData(item.value);
             loadLateData();
         }
@@ -75,6 +78,7 @@ function HotSpotTabController(loading, $modal, FindService, $scope) {
         vm.page = 0;
         vm.currPos = curr;
         vm.busy = false;
+        vm.hasInit = false;
     }
 
     function more(item, e) {
