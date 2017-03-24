@@ -24,19 +24,19 @@
             ng-class="{'active': vm.params.intervalEnum === 'DAY'}"
             ng-click="vm.goToSee({intervalEnum: 'DAY'})"
         >
-            <span>昨天</span>
+            <span>按天</span>
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.intervalEnum === 'WEEK'}"
             ng-click="vm.goToSee({intervalEnum: 'WEEK'})"
         >
-            <span>一周</span>
+            <span>按周</span>
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.intervalEnum === 'MONTH'}"
             ng-click="vm.goToSee({intervalEnum: 'MONTH'})"
         >
-            <span>一月</span>
+            <span>按月</span>
         </li>
     </ul>
     <div class="hot-focus-list" ng-if="!loadingInst.hotFocus && vm.focusList.length">
