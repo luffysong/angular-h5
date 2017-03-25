@@ -118,6 +118,7 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
             if (response.data) {
                 if (response.data.data) {
                     vm.chartConfig1.series[0].data = response.data.data.reverse().slice(1);
+                    vm.chartConfig1.series[0].name = phrases.eventEnum[vm.params.eventEnum];
                 }
                 vm.chartConfig1.xAxis.categories = generateDates();
                 vm.detailData = angular.copy(response.data);
