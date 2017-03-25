@@ -35,6 +35,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     vm.arrow = arrow;
 
     init();
+    loading.show('roadShowLoading');
 
     //页面load后回调
     $scope.$on('$viewContentLoaded', function () {
@@ -343,7 +344,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         };
         FindService.getCalendarList(sendData)
             .then(function (response) {
-                loading.hide('findLoading');
+                loading.hide('roadShowLoading');
                 vm.responseData = response.data.data;
 
                 vm.ts = response.data.ts;

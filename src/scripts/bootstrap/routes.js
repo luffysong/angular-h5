@@ -208,9 +208,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'RoadShowController',
         templateUrl: 'templates/find/roadShowList.html',
-        resolve: {
-            coverFind: loadFind,
-        }
     });
 
     //创投助手app---项目专辑---机构在融 + HUNTING+ + 限时首发
