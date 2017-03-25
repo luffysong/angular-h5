@@ -69,7 +69,9 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     });
 
     window.onscroll = function () {
-        if (location.hash.indexOf('demos') > -1) {
+        if (location.hash.indexOf('demos') > -1
+            || location.hash.indexOf('find/projectAlbum') > -1
+        ) {
             return;
         }
 
@@ -79,7 +81,9 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     };
 
     document.addEventListener('touchmove', function (e) {
-        if (location.hash.indexOf('demos') > -1) {
+        if (location.hash.indexOf('demos') > -1
+            || location.hash.indexOf('find/projectAlbum') > -1
+        ) {
             return;
         }
 

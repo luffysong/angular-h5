@@ -2,8 +2,9 @@
 .project-album-normal {
     .project-album-banner {
         height: 140.6px;
-        background-color: rgba(66, 133, 244, 0.6);
         overflow: hidden;
+        background: rgba(66, 133, 244, 0.6) no-repeat center;
+        background-size: cover;
 
         .banner-total {
             margin-top: 46px;
@@ -92,6 +93,15 @@
             }
         }
     }
+
+    .project-album-list {
+        padding-bottom: 100px;
+        background-color: #fff;
+    }
+
+    .loading-wrap {
+        background-color: #fff;
+    }
 }
 
 // 项目专辑底部菜单栏
@@ -109,7 +119,7 @@
     list-style: none;
     align-items: center;
     justify-content: space-around;
-    box-shadow: 0 0 0 0.5px rgba(0,0,0,0.15);
+    box-shadow: 0 3px 10px #747171;
 
     &-item {
         position: relative;
