@@ -214,7 +214,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('find.projectAlbum.normal', {
         url:'/:type',
         controllerAs: 'vm',
-        controller: 'RoadShowController',
+        controller: 'ProjectAlbumController',
         templateUrl: 'templates/find/projectAlbumNormal.html',
     });
 
