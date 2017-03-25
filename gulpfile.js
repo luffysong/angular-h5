@@ -493,6 +493,7 @@ gulp.task('build:test', ['clean'], function () {
 });
 
 gulp.task('build:test2', ['clean'], function () {
+    DEBUG = false;
     buildMode = 'test2';
     CDNPrefix = '/m';
     gulp.start('build');
