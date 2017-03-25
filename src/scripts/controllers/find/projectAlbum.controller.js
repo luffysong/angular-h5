@@ -34,7 +34,14 @@ function ProjectAlbumController(demosService, projectColumnService, $state, $sta
 
     var COLUMN = 'column';
     var dataPromise;
-
+    vm.busy = true;
+    vm.demos = [];
+    vm.type = $stateParams.type;
+    vm.needPwd = false;
+    vm.isColumn = isColumn;
+    vm.goProjects = goProjects;
+    vm.getCollectionType = getCollectionType;
+    vm.loadMore = loadMore;
     init();
 
     function init() {
@@ -140,7 +147,6 @@ function ProjectAlbumController(demosService, projectColumnService, $state, $sta
         if (data.valid) {
             vm.demos = vm.demos || [];
             vm.demos = vm.demos.concat(data.data.cells);
-            vm.invalid = false;
             if (vm.inputPwd) {
                 vm.needPwd = true;
             } else {
@@ -157,10 +163,6 @@ function ProjectAlbumController(demosService, projectColumnService, $state, $sta
     function renderColumnDetail(data) {
         vm.collectionInfoList = vm.collectionInfoList || [];
         vm.collectionInfoList = vm.collectionInfoList.concat(data.data);
-    }
-
-    function invalidate() {
-        vm.invalid = true;
     }
 
     function getCollectionType() {
