@@ -45,6 +45,7 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
                 series: {
                     marker: {
                         fillColor: '#5A626D',
+                        lineWidth: 1,
                     },
                 },
             },
@@ -78,7 +79,7 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
             title: null,
             min: 0,
             gridLineColor: '#F2F4F5',
-            gridLineDashStyle: 'Long dashes',
+            gridLineDashStyle: 'longdashdot',
         },
         series: [{
             type: 'area',
