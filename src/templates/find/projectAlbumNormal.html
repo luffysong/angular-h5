@@ -1,4 +1,22 @@
 <div class="project-album-normal">
-
+    <div class="project-album-banner">
+        <div class="banner-total">
+            <div class="banner-split"></div>
+            <div class="banner-text">共10个项目</div>
+            <div class="banner-split"></div>
+        </div>
+        <h1>{{vm.title}}</h1>
+    </div>
+    <div class="project-album-desc">
+        <text-line-clamp line-clamp='2' text="vm.text">
+            <div class="text-container">
+                <div class="text-content"></div>
+            </div>
+            <a class="text-toggle" href="javascript:void(0)" >展开</a>
+        </text-line-clamp>
+    </div>
+    <div class="project-album-list">
+    </div>
+    <div loading="projectAlbumLoading"></div>
 </div>
 <div ng-include="'templates/find/projectAlbumBottomBar.html'"></div>

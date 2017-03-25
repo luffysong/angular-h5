@@ -1,6 +1,97 @@
 // 项目专辑页面
 .project-album-normal {
+    .project-album-banner {
+        height: 140.6px;
+        background-color: rgba(66, 133, 244, 0.6);
+        overflow: hidden;
 
+        .banner-total {
+            margin-top: 46px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner-split {
+            width: 20px;
+            height: 1px;
+            background-color: #fff;
+            margin: 0 6px;
+        }
+
+        .banner-text {
+            font-size: 13px;
+            color: #fff;
+            letter-spacing: 0;
+            line-height: 17px;
+        }
+
+        h1 {
+            font-size: 30px;
+            color: #fff;
+            letter-spacing: 0;
+            line-height: 30px;
+            text-align: center;
+            margin: 0;
+            font-weight: 600;
+        }
+    }
+
+    .project-album-desc {
+        padding: 12px 15px;
+        font-size: 14px;
+        color: #5A626D;
+        letter-spacing: 0;
+        line-height: 22px;
+
+        .text-toggle{
+            color: #5A626D;
+            line-height: 45px;
+            display: block;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .text-container {
+            padding: 15px 0;
+            position: relative;
+
+            &:after {
+                content:"";
+                display: block;
+                position: absolute;
+                height: 1px;
+                left: 0;
+                background: #E7E7E7;
+                right: 0;
+                transform: scaleY(0.5);
+            }
+
+            &:after {
+                bottom: 0;
+            }
+
+            .text-content {
+                text-align: left;
+                overflow : hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                line-height: 22px;
+                font-size: 15px;
+                color: #5A626D;
+                letter-spacing: 0px;
+
+                &:after {
+                    width: 0;
+                    height: 0;
+                    display: inline-block;
+                    overflow: hidden;
+                    content: attr(style);
+                }
+            }
+        }
+    }
 }
 
 // 项目专辑底部菜单栏
