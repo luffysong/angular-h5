@@ -199,18 +199,26 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('find.projectAlbum', {
         url:'/projectAlbum',
         abstract: true,
-        templateUrl: 'templates/find/projectAlbum.html',
+        template: '<div ui-view></div>'
     });
 
     //创投助手app---项目专辑---路演日历
-    $stateProvider.state('find.projectAlbum.roadShow', {
+    $stateProvider.state('roadShow', {
         url:'/roadShow',
         controllerAs: 'vm',
         controller: 'RoadShowController',
         templateUrl: 'templates/find/roadShowList.html',
         resolve: {
-            cover: loadFind
+            coverFind: loadFind,
         }
+    });
+
+    //创投助手app---项目专辑---机构在融 + HUNTING+ + 限时首发
+    $stateProvider.state('find.projectAlbum.normal', {
+        url:'/:type',
+        controllerAs: 'vm',
+        controller: 'RoadShowController',
+        templateUrl: 'templates/find/projectAlbumNormal.html',
     });
 
     // 创投助手app---关注热点

@@ -41,7 +41,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
         if (!window.mySwiper) {
             $timeout(initSwiper, 1000);
         }
-
     });
 
     $(document).off('ps-y-reach-start');
@@ -416,7 +415,6 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     }
 
     function backTop() {
-
         var date = vm.responseData[0].startAt;
         var targetId = 'date' + moment(date).format('YYYY') + moment(date).format('MM') + moment(date).format('DD');
         $('#contentScroll').scrollTo($('#' + targetId)[0], 91, 300);
@@ -432,11 +430,9 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
                 $('.null_today').fadeOut();
             }, 3000);
         }
-
     }
 
     function checkSwiper() {
-
         //最后一屏判断
         if (window.mySwiper && vm.newDataWeekIndex && (window.mySwiper.activeIndex === vm.newDataWeekIndex - 1)) {
             $('.arrowRight').hide();
