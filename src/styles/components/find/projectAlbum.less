@@ -18,11 +18,17 @@
         position: relative;
         width: 25%;
         height: 49px;
-        padding-top: 7.5px;
+        padding-top: 5px;
 
         img {
-            display: block;
             margin: 0 auto 2px;
+            &.inactive-image {
+                display: block;
+            }
+
+            &.active-image {
+                display: none;
+            }
         }
 
         div {
@@ -41,6 +47,16 @@
         &.item-active {
             div {
                 color: #4285F4;
+            }
+
+            img {
+                &.inactive-image {
+                    display: none;
+                }
+
+                &.active-image {
+                    display: block;
+                }
             }
         }
 
