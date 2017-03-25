@@ -184,8 +184,26 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         template: '<div ui-view></div>'
     });
 
-    //创投助手app---近期路演
-    $stateProvider.state('roadShow', {
+    //创投助手app---媒体热议
+    $stateProvider.state('find.dailyNews', {
+        url:'/dailyNews',
+        controllerAs: 'vm',
+        controller: 'DailyNewsController',
+        templateUrl: 'templates/find/dailyNewsList.html',
+        resolve: {
+            coverFind: loadFind
+        }
+    });
+
+    // 创投助手app---项目专辑
+    $stateProvider.state('find.projectAlbum', {
+        url:'/projectAlbum',
+        abstract: true,
+        template: '<div ui-view></div>'
+    });
+
+    //创投助手app---项目专辑---路演日历
+    $stateProvider.state('find.projectAlbum.roadShow', {
         url:'/roadShow',
         controllerAs: 'vm',
         controller: 'RoadShowController',
@@ -228,17 +246,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'HotSpotTabController',
         templateUrl: 'templates/find/hotSpotTab.html',
-        resolve: {
-            coverFind: loadFind
-        }
-    });
-
-    //创投助手app---媒体热议
-    $stateProvider.state('find.dailyNews', {
-        url:'/dailyNews',
-        controllerAs: 'vm',
-        controller: 'DailyNewsController',
-        templateUrl: 'templates/find/dailyNewsList.html',
         resolve: {
             coverFind: loadFind
         }

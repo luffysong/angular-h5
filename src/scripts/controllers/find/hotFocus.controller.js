@@ -87,7 +87,6 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
         var extra = '';
 
         percent = ((extraData.to - extraData.from) * 100 / extraData.from).toFixed(2);
-        console.log(extraData.to, extraData.from);
         title += phrases.intervalEnum[vm.params.intervalEnum];
         title += phrases.eventEnum[vm.params.eventEnum];
 

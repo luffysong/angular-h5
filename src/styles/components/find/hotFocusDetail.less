@@ -41,6 +41,7 @@
         position: relative;
         display: block;
         padding-left: 15px;
+        padding-right: 15px;
         font-size: 16px;
         color: #222C38;
         line-height: 19.5px;
@@ -56,6 +57,11 @@
             height: 14px;
             background: #6BA2FC;
         }
+    }
+
+    // 图表1区域
+    .chart-1-area {
+        padding-right: 5px;
     }
 
     // 图表2标题
@@ -79,11 +85,22 @@
         }
     }
 
+    // 图表2区域
+    .chart-2-area {
+        position: relative;
+    }
+
     // 竞品排行
     .company-competitors {
-        position: relative;
-        height: 44px + 10px * 2;
-        padding: (15px + 44px + 10px) 10px 0;
+        margin: 0;
+        padding: 0 30px 0 0;
+        list-style: none;
+
+        li {
+            position: relative;
+            padding: 10px 0 10px (15px + 44px + 10px);
+            height: 44px + 10px * 2;
+        }
 
         .company-logo {
             position: absolute;
@@ -98,14 +115,51 @@
         }
 
         .company-name {
+            margin: 0;
+            height: 24px;
+            line-height: 24px;
             font-size: 16px;
             color: #939ca5;
         }
+    }
+
+    .company-competitors-chart {
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        align-items: middle;
+
+        .chart-left {
+            padding-left: 15px + 44px + 10px;
+        }
+
+        .chart-right {
+            flex: auto;
+            padding-right: 30px;
+        }
 
         .company-data {
+            padding-top: 10px + 24px + 3px;
             font-size: 13px;
+            height: 44px + 10px * 2;
+            line-height: 18px;
             color: #6BA2FC;
             line-height: 18px;
+        }
+
+        .company-bar-area {
+            padding-top: 10px + 24px + 9px;
+            height: 44px + 10px * 2;
+            margin-left: 5px;
+
+            .company-bar {
+                height: 4px;
+                background: #6BA2FC;
+                border-radius: 4px;
+                transition: width 0.8s ease;
+            }
         }
     }
 }

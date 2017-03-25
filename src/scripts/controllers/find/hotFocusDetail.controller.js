@@ -120,6 +120,7 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
                 }
                 vm.chartConfig1.xAxis.categories = generateDates();
                 vm.detailData = angular.copy(response.data);
+                vm.detailData.companyCompetitors = generatePercents(response.data.companyCompetitors);
             }
         }).catch(error);
         vm.event = phrases.eventEnum[vm.params.eventEnum];
@@ -146,6 +147,24 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
             dateArr.push(moment().subtract(i, interval).format('MM/DD'));
         }
         return dateArr.reverse();
+    }
+
+    function generatePercents(competitors) {
+        var max = 0;
+        var percent = 0;
+
+        for (var i = 0, len = competitors.length; i < len; i++) {
+            var dataSum = competitors[i].dataSum;
+            if (dataSum > max) {
+                max = dataSum;
+            }
+        }
+
+        return competitors.map(function(item) {
+            percent = (item.dataSum * 100 / max + 2).toFixed(2);
+            item.percent = item.dataSum > 0 ? percent : 2;
+            return item;
+        });
     }
 
     function error(err) {
