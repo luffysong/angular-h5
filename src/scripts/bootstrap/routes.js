@@ -199,7 +199,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('find.projectAlbum', {
         url:'/projectAlbum',
         abstract: true,
-        template: '<div ui-view></div>'
+        templateUrl: 'templates/find/projectAlbum.html',
     });
 
     //创投助手app---项目专辑---路演日历
