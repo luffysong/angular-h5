@@ -74,6 +74,10 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
             tickLength: 4,
             tickmarkPlacement: 'on',
             categories: [],
+            crosshair: {
+                width: 2,
+                color: '#5A626D',
+            },
         },
         yAxis: {
             title: null,
