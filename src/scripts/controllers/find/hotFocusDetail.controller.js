@@ -81,7 +81,7 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
             gridLineColor: '#F2F4F5',
             gridLineDashStyle: 'longdashdot',
             labels: {
-                format: "{value}%",
+                format: "{value}",
             },
         },
         series: [{
