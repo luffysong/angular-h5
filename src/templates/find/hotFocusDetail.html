@@ -1,5 +1,5 @@
 <div class="hot-focus-detail-wrapper" ng-if="!loadingInst.hotFocusDetailLoading">
-    <div class="hot-focus-top-area" ng-click="vm.openNativePage('/crmCompany/' + vm.detailData.cid + '?ktm_source=find.focusDetail.' + vm.detailData.cid)">
+    <div class="hot-focus-top-area" ng-click="vm.openNativePage('crmCompany/' + vm.detailData.cid + '?ktm_source=find.focusDetail.' + vm.detailData.cid)">
         <div class="hot-focus-company-logo" ng-style="{'background-image': 'url({{vm.detailData.logo | image}})'}"></div>
         <h1 class="hot-focus-title">{{vm.detailData.name + vm.params.title}}</h1>
     </div>
