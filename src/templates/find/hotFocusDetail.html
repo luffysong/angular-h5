@@ -16,7 +16,7 @@
         <ul class="company-competitors">
             <li
                 ng-repeat="item in vm.detailData.companyCompetitors"
-                ng-click="vm.openNativePage('/crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid)"
+                ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid)"
             >
                 <div class="company-logo" ng-style="{'background-image': 'url({{item.logo | image}})'}"></div>
                 <h2 class="company-name">{{item.name}}</h2>
@@ -26,13 +26,13 @@
             <div class="chart-left">
                 <div class="company-data"
                     ng-repeat="item in vm.detailData.companyCompetitors"
-                    ng-click="vm.openNativePage('/crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid)"
+                    ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid)"
                 >搜索量：{{item.dataSum}}</div>
             </div>
             <div class="chart-right">
                 <div class="company-bar-area"
                     ng-repeat="item in vm.detailData.companyCompetitors"
-                    ng-click="vm.openNativePage('/crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid)"
+                    ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid)"
                 >
                     <div class="company-bar" style="width: {{item.percent}}%;"></div>
                 </div>
