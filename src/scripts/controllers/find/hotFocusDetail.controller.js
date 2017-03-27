@@ -80,6 +80,9 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
             min: 0,
             gridLineColor: '#F2F4F5',
             gridLineDashStyle: 'longdashdot',
+            labels: {
+                format: "{value}%",
+            },
         },
         series: [{
             type: 'area',
