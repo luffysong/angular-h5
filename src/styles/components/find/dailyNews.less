@@ -24,6 +24,7 @@
         ul {
             margin-bottom: 0!important;
             li {
+                position: relative;
                 background: #fff;
                 padding: 0;
                 overflow: hidden;
@@ -34,27 +35,23 @@
                     display: block;
                 }
                 &:last-child {
-                    .base-info-detail {
-                        border-bottom: 0!important;
-                    }
+                    border-bottom: 0!important;
                 }
             }
             li.active {
                 background: #f8f8f8;
             }
             .dailyNews-content-href {
-                width: 100%;
+                position: relative;
+                min-height: 92px;
                 overflow: hidden;
-                display: inline-block;
-                vertical-align: middle;
+                padding: 15px 80px 15px 0;
+                border-bottom: 1px solid #E7E7E7;
+                margin-left: 15px;
+
                 .base-info-detail {
                     display: inline-block;
                     vertical-align: middle;
-                    margin: 15px 0 0 4%;
-                    padding-right: 8%;
-                    padding-bottom: 10px;
-                    position: relative;
-                    border-bottom: 1px solid #E7E7E7;
                     width: 100%;
                     h3 {
                         font-size: 15px;
@@ -68,13 +65,22 @@
                     .header-info {
                         text-align: center;
                         margin-top: 0;
-                        margin-bottom: 12px;
+                        margin-bottom: 4px;
                         .text-toggle {
                             color: #5A626D;
                             line-height: 45px;
                             display: block;
                             font-size: 14px;
                         }
+                    }
+                    .company-info {
+                        font-size: 13px;
+                        color: #969FA9;
+                        line-height: 18px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        margin-bottom: 6px;
                     }
                     .text-container {
                         position: relative;
@@ -209,6 +215,17 @@
                             color: #969FA9;
                         }
                     }
+                }
+
+                .basic-info-logo {
+                    position: absolute;
+                    top: 17px;
+                    right: 15px;
+                    width: 55px;
+                    height: 55px;
+                    border: 1px solid #E7E7E7;
+                    border-radius: 5px;
+                    background-size: cover;
                 }
             }
         }

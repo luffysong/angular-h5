@@ -11,15 +11,18 @@
                 </div>
                 <ul>
                     <li ontouchstart="" kr-active="'active'" ng-repeat="item in itemData.reports track by $index">
-                        <a class="dailyNews-content-href" href="javascript:" ng-click="vm.link(item.ccid, item.link)">
+                        <div class="dailyNews-content-href" ng-click="vm.link(item.ccid, item.link)">
                             <div class="base-info-detail">
                                 <h3 class="header-info">
-                                    <text-line-clamp line-clamp='2' text="'['+ item.name + '] ' + item.title">
+                                    <text-line-clamp line-clamp='2' text="item.title">
                                         <div class="text-container">
                                             <div class="text-content"></div>
                                         </div>
                                     </text-line-clamp>
                                 </h3>
+                                <p class="company-info">
+                                    [{{item.name}}]{{item.brief}}
+                                </p>
                                 <div>
                                     <div class="item-left">
                                         <img src="/styles/images/find/White@3x.png" />
@@ -31,7 +34,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                            <div class="basic-info-logo" style="background-image: url({{item.logo}});"></div>
+                        </div>
                     </li>
                 </ul>
             </div>
