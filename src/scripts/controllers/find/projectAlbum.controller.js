@@ -12,19 +12,19 @@ function ProjectAlbumController(demosService, projectColumnService, $state, $sta
 
     // 页面 title
     switch (vm.params.type) {
-        case 'rong':
+        case 'latest':
+            document.title = '最新';
+            vm.title = '最新';
+            vm.id = 160;
+            break;
+        case 'hotest':
+            document.title = '最热';
+            vm.title = '最热';
+            vm.id = 160;
+            break;
+        case 'funding':
             document.title = '机构在融';
             vm.title = '机构在融';
-            vm.id = 160;
-            break;
-        case 'hunting':
-            document.title = 'HUNTING+';
-            vm.title = 'HUNTING+';
-            vm.id = 160;
-            break;
-        case 'timer':
-            document.title = '限时首发';
-            vm.title = '限时首发';
             vm.id = 160;
             break;
     }

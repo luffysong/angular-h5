@@ -11,6 +11,8 @@
         margin: 0 15px;
         background: #fff;
         box-shadow: 0 0 5px 0 rgba(150,159,169,0.40);
+        display: flex;
+        align-items: center;
 
         .hot-focus-company-logo {
             position: absolute;
@@ -26,13 +28,15 @@
 
         .hot-focus-title {
             width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
             font-size: 17px;
             color: #222C38;
             margin: 0;
-            line-height: 70px;
+            line-height: 24px;
+            max-height: 48px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
     }
 
