@@ -15,7 +15,7 @@ function MainController(loading, $stateParams, ActivityService, $state, UserServ
         $('html').css('overflow', 'auto');
         $('body').css('overflow', 'auto');
         //console.log(UserService.getUID());
-        start();
+        //start();
     }
 
     function start() {
