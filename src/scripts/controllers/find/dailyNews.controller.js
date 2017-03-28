@@ -37,13 +37,29 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     function loadData() {
         FindService.getDailyReport(vm.ts)
             .then(function temp(response) {
-                vm.responseData = angular.copy(response.data.data);
+                vm.responseData = generateTime(response.data.data);
                 vm.ts = response.data.ts;
                 vm.busy = false;
                 vm.hasInit = true;
                 loading.hide('findLoading');
             })
             .catch(error);
+    }
+
+    function generateTime(data) {
+        return data.map(function (item) {
+            var displayTimeStr = item.displayTimeStr;
+            var displayTime = '';
+            var arr = displayTimeStr.split('/');
+            if (arr.length > 1) {
+                displayTime += arr[0].replace(/^0/, '') + '月';
+                displayTime += arr[1].replace(/^0/, '') + '日';
+            } else {
+                displayTime = displayTimeStr;
+            }
+            item.displayTime = displayTime;
+            return item;
+        });
     }
 
     function loadMore() {
@@ -56,7 +72,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
         FindService.getDailyReport(vm.ts)
             .then(function temp(response) {
                 $timeout(function() {
-                    vm.responseData = vm.responseData.concat(response.data.data);
+                    vm.responseData = vm.responseData.concat(generateTime(response.data.data));
                     vm.ts = response.data.ts;
                     vm.busy = false;
                 }, 500);
