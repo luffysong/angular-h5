@@ -1,0 +1,86 @@
+
+<div>
+  <br /><br />
+    <button class="open-app" id ="open-app">打开APP</button>
+</div>
+<div class="timer" id="timer">
+
+</div>
+<script type='text/javascript'>
+  var u = navigator.userAgent;
+  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+  var isIos = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+  var isWeiXin = !!navigator.userAgent.match(/MicroMessenger/ig);
+
+  function preventPopup() { //定义preventPopup函数
+      clearTimeout(timeout);
+      window.removeEventListener('pagehide', preventPopup);
+  }
+
+  function startApp(androidUrl){ //定义startApp函数
+      var ifr = document.createElement('iframe');
+      ifr.src = androidUrl || appurl;
+      ifr.style.display = 'none';
+      document.body.appendChild(ifr);
+      window.setTimeout(function(){
+          document.body.removeChild(ifr);
+          ifr = null;
+      },500);
+      window.addEventListener('pagehide', preventPopup);
+  }
+
+  function goYingyongbao(prefix){
+      timeout = setTimeout(function(){
+          setTimeout(function() {
+              document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
+          },200)
+      }, 1000);
+       window.addEventListener('pagehide', preventPopup);
+  }
+
+  $(function(){
+    $('#open-app').click(function(e){
+      e.preventDefault();
+      if(isAndroid){
+        startApp('krtou://');
+        goYingyongbao('android');
+      }else if(isIos){
+        startApp('krtou://');
+        goYingyongbao('ios');
+      }
+    });
+  })
+</script>
+<!--接入美洽客服系统-->
+<script type='text/javascript'>
+    (function(m, ei, q, i, a, j, s) {
+        m[i] = m[i] || function() {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        j = ei.createElement(q),
+            s = ei.getElementsByTagName(q)[0];
+        j.async = true;
+        j.charset = 'UTF-8';
+        j.src = '//static.meiqia.com/dist/meiqia.js';
+        s.parentNode.insertBefore(j, s);
+    })(window, document, 'script', '_MEIQIA');
+    _MEIQIA('entId', 48706);
+</script>
+<script language="javascript" type="text/javascript">
+  var interval = 1000;
+  function ShowCountDown(year,month,day,divname)
+  {
+    var now = new Date();
+    var endDate = new Date(year, month-1, day);
+    var leftTime=endDate.getTime()-now.getTime();
+    var leftsecond = parseInt(leftTime/1000);
+    //var day1=parseInt(leftsecond/(24*60*60*6));
+    var day1=Math.floor(leftsecond/(60*60*24));
+    var hour=Math.floor((leftsecond-day1*24*60*60)/3600);
+    var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60);
+    var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);
+    var cc = document.getElementById(divname);
+    cc.innerHTML = "距离"+year+"年"+month+"月"+day+"日还有："+day1+"天"+hour+"小时"+minute+"分"+second+"秒";
+  }
+  window.setInterval(function(){ShowCountDown(2017,4,6,'timer');}, interval);
+</script>

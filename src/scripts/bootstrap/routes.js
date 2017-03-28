@@ -388,6 +388,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
+    //普通登录
+    $stateProvider.state('normalLogin', {
+        url:'/normalLogin?',
+        controller: 'NormalLoginController',
+        controllerAs: 'vm',
+        templateUrl: 'templates/activity/login.html',
+    });
+
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
     }
