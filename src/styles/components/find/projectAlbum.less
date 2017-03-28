@@ -96,8 +96,134 @@
 
     .project-album-list {
         padding-bottom: 60px;
-        background-color: #fff;
+        //background-color: #fff;
+        //wy
+        .roadShow-tab-wrapper{
+            font-size: 13px;
+            margin-top: 2px;
+            p{
+                line-height: 20px;
+            };
+            ul{
+                list-style-type: none;
+            }
+            li{
+                background: #fff;
+                height: auto;
+                overflow: hidden;
+                position: relative;
+                list-style-type: none;
+                *{
+                    user-select: none;
+                }
+                a{
+                    //max-height: 131px;
+                    height: auto;
+                    display: inline-block;
+                    width: 100%;
+                    margin-left: 4%;
+                    border-bottom: 1px solid #E7E7E7;
+                    //padding:15px;
+                }
+                &:last-child .roadShow-content-href{
+                    border-bottom:0;
+                }
+            }
+            li.active{
+                background: #f8f8f8;
+            }
+            li:first-child{
+                a{
+                    margin-top:10px;
+                }
+            }
 
+            .pro-info,.pro-pic{
+                float:left;
+                height:100%;
+                margin-top:-15px;
+                //padding: 10px;
+            }
+
+            .pro-info{
+                width: 73%;
+                margin-left: -25px;
+                height: auto;
+                padding: 15px;
+
+                .pro-title{
+                    font-family: PingFangSC-Semibold;
+                    font-size: 16px;
+                    color: #222C38;
+                    letter-spacing: 0px;
+                    line-height: 22px;
+                    //margin-top: -10px;
+                    padding-left: 10px;
+                    width: 98%;
+                }
+                p{
+                    font-size: 13px;
+                    color: #969FA9;
+                    letter-spacing: 0px;
+                    line-height: 18px;
+                    width: 98%;
+                    text-overflow: ellipsis;
+                    float: left;
+                    margin-top: 8px;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
+                    padding-left: 10px;
+                }
+                .item-more{
+                    font-size: 13px;
+                    color: #6BA2FC;
+                    letter-spacing: 0px;
+                    line-height: 16px;
+                    width:26px;
+                    height: 18px;
+                    position: relative;
+                    left: 10px;
+                    bottom:5px;
+                    //clear: both;
+                }
+            }
+            .pro-pic{
+                width:28%;
+                overflow: hidden;
+                text-align: center;
+                margin-bottom: 10px;
+                .pro-num{
+                    width: 75px;
+                    height: 75px;
+                    background-size:75px 75px;
+                    background-repeat:no-repeat;
+                    //margin-left: -10px;
+                    margin-left: 10px;
+                    overflow: hidden;
+                    margin-top: 14px;
+                    .item-num{
+                        background: rgba(0,0,0,0.60);
+                        height: 21px;
+                        width: 75px;
+                        display: inline-block;
+                        font-size: 12px;
+                        color: #FFFFFF;
+                        letter-spacing: 0px;
+                        line-height: 20px;
+                        position: relative;
+                        bottom: -54px;
+                    }
+                }
+            }
+
+            footer{
+                margin: 5px 0;
+                line-height: 19px;
+                text-align: center;
+            }
+        }
         footer {
             font-size: 14px;
             color: #92979E;

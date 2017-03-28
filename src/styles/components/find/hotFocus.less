@@ -70,7 +70,7 @@
         .hot-focus-list-item {
             position: relative;
             margin-left: 15px;
-            padding: 15px (44px + 15px * 2) 15px 0;
+            padding: 15px (100px + 15px * 2) 15px 0;
             border-bottom: 1px solid #e7e7e7;
 
             &:last-child {
@@ -83,21 +83,40 @@
                 font-size: 14px;
                 color: #232d38;
                 width: 100%;
-                margin-bottom: 10px;
+                margin-bottom: 4px;
+                line-height: 18px;
                 white-space: nowrap;
                 overflow: hidden;
                 font-weight: 600;
                 text-overflow: ellipsis;
             }
-
             .item-desc {
                 font-size: 13px;
                 color: #969FA9;
                 line-height: 18px;
                 width: 100%;
+                margin-bottom: 4px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+            }
+            .item-industry {
+                line-height:16px;
+                .item-industry-title{
+                    font-size: 10px;
+                    color: #6BA2FC;
+                    border: 1px solid #6BA2FC;
+                    line-height: 10px;
+                    border-radius: 2px;
+                    padding: 1px 2px;
+                }
+                .item-industry-cont{
+                    font-size: 13px;
+                    line-height: 16px;
+                    white-space: nowrap;
+                    color: #5A626D;
+                    margin-left: 10px;
+                }
             }
         }
 
@@ -105,8 +124,8 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            width: 44px;
-            height: 44px;
+            width: 100px;
+            height: 60px;
             border: 1px solid #E7E7E7;
             border-radius: 5px;
             background: no-repeat center;

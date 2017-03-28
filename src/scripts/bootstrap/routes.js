@@ -210,7 +210,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/find/roadShowList.html',
     });
 
-    //创投助手app---项目专辑---机构在融 + HUNTING+ + 限时首发
+    //创投助手app---项目专辑---机构在融 + 最新＋ 最热
     $stateProvider.state('find.projectAlbum.normal', {
         url:'/:type',
         controllerAs: 'vm',
