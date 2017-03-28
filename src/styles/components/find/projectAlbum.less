@@ -132,11 +132,82 @@
             li.active{
                 background: #f8f8f8;
             }
-            li:first-child{
+            li{
                 a{
-                    margin-top:10px;
+                    min-height: 105px;
                 }
             }
+            .box{
+                position: relative;
+                padding: 15px 0 15px (75px + 2*15px);
+                .pro-info1{
+                    .pro-title{
+                        font-family: PingFangSC-Semibold;
+                        font-size: 16px;
+                        color: #222C38;
+                        letter-spacing: 0px;
+                        line-height: 22px;
+                        width: 98%;
+                    }
+                    p{
+                        font-size: 13px;
+                        color: #969FA9;
+                        letter-spacing: 0px;
+                        line-height: 18px;
+                        width: 98%;
+                        text-overflow: ellipsis;
+                        float: left;
+                        margin-top: 8px;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        overflow: hidden;
+                    }
+                    .item-more{
+                        font-size: 13px;
+                        color: #6BA2FC;
+                        letter-spacing: 0px;
+                        line-height: 16px;
+                        width:26px;
+                        height: 18px;
+                        position: relative;
+                        left: 0px;
+                        bottom:5px;
+                        //clear: both;
+                    }
+                }
+                .pro-pic1{
+                    width: 75px;
+                    height: 75px;
+                    background-size:75px 75px;
+                    background-repeat:no-repeat;
+                    position: absolute;
+                    top: 15px;
+                    left: 15px;
+
+                    .pro-num{
+                        width: 75px;
+                        height: 75px;
+                        background-size:75px 75px;
+                        background-repeat:no-repeat;
+                        overflow: hidden;
+                        .item-num{
+                            background: rgba(0,0,0,0.60);
+                            height: 21px;
+                            width: 75px;
+                            display: inline-block;
+                            font-size: 12px;
+                            color: #FFFFFF;
+                            letter-spacing: 0px;
+                            line-height: 20px;
+                            position: relative;
+                            bottom: -54px;
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+
 
             .pro-info,.pro-pic{
                 float:left;

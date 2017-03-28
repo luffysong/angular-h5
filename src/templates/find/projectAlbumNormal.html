@@ -1,20 +1,4 @@
 <div class="project-album-normal">
-    <!--<div class="project-album-banner" ng-style="{'background-image': (vm.cover.imgUrl | backgroundUrl)}">-->
-        <!--<div class="banner-total">-->
-            <!--<div class="banner-split"></div>-->
-            <!--<div class="banner-text">共{{vm.cover.proSetCount}}个项目</div>-->
-            <!--<div class="banner-split"></div>-->
-        <!--</div>-->
-        <!--<h1>{{vm.title}}</h1>-->
-    <!--</div>-->
-    <!--<div class="project-album-desc" ng-if="vm.cover.intro">-->
-        <!--<text-line-clamp line-clamp='3' text="vm.cover.intro">-->
-            <!--<div class="text-container">-->
-                <!--<div class="text-content"></div>-->
-            <!--</div>-->
-            <!--<a class="text-toggle" href="javascript:void(0)" >展开</a>-->
-        <!--</text-line-clamp>-->
-    <!--</div>-->
     <div class="project-album-list">
         <!---内容区---->
         <section  class="roadShow-tab-wrapper"
@@ -23,15 +7,15 @@
                 <li ontouchstart="" kr-active="'active'" id="{{item.time}}"
                     ng-repeat="item in vm.responseData track
                   by $index">
-                    <a
+                    <a class="box"
                         href="https://36kr.com/app/tou?companysetlist={{item.id}}&ktm_source=find.hotSpot.{{item.id}}"
                         tou-open path="'projectsSet/'+ item.id + '?ktm_source=hot'">
-                        <div class="pro-pic">
+                        <div class="pro-pic1">
                             <div class="pro-num" ng-style="{'background-image':'url({{item.headPic | image}})'}">
                                 <span class="item-num">{{item.proCount}}个项目</span>
                             </div>
                         </div>
-                        <div class="pro-info">
+                        <div class="pro-info1">
                             <div  class="pro-title" ng-if="item.name">{{item.name}}</div>
                             <p ng-bind="item.fetchCode | delHtmlTag"></p>
                             <div class="item-more" ng-click="vm.more(item, $event)">更多</div>
