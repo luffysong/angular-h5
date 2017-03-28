@@ -11,8 +11,8 @@
                 </div>
                 <ul>
                     <li ontouchstart="" kr-active="'active'" ng-repeat="item in itemData.reports track by $index">
-                        <div class="dailyNews-content-href" ng-click="vm.link(item.ccid, item.link)">
-                            <div class="base-info-detail">
+                        <div class="dailyNews-content-href">
+                            <div class="base-info-detail" ng-click="vm.link(item.ccid, item.link)">
                                 <h3 class="header-info">
                                     <text-line-clamp line-clamp='2' text="item.title">
                                         <div class="text-container">
@@ -34,7 +34,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="basic-info-logo" style="background-image: url({{item.logo | image}});"></div>
+                            <div class="basic-info-logo"
+                                style="background-image: url({{item.logo | image}});"
+                                ng-click="vm.openNativePage('crmCompany/' + item.ccid + '?ktm_source=find.dailyNews.' + item.ccid)"
+                            ></div>
                         </div>
                     </li>
                 </ul>

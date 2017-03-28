@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('DailyNewsController', DailyNewsController);
 
-function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout) {
+function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService) {
     var vm = this;
 
     vm.responseData = [];
@@ -10,6 +10,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     vm.busy = false;
     vm.loadMore = loadMore;
     vm.link = link;
+    vm.openNativePage = openNativePage;
 
     init();
 
@@ -72,4 +73,18 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
         window.location.href = link;
     }
 
+    function openNativePage(path) {
+        if (hybrid.isInApp) {
+            if (path.substring(1, 11) === 'crmCompany') {
+                //2.6.2以下版本兼容
+                var versionTou = versionService.getVersionAndroid() || versionService.getVersionIOS();
+                if (versionTou && (versionService.cprVersion(versionTou, '2.6.2') === 0)) {
+                    var satrtNum = path.indexOf('?');
+                    path = path.replace(path.substring(satrtNum), '');
+                }
+            }
+
+            hybrid.open(path);
+        }
+    }
 }
