@@ -388,6 +388,36 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }
     });
 
+    $stateProvider.state('rongzi.organization', {
+        url:'/organization',
+        controllerAs: 'vm',
+        controller: 'OrganizationController',
+        templateUrl: 'templates/rongzi/organization.html',
+        resolve: {
+            coverFind: loadFind
+        }
+    });
+
+    $stateProvider.state('rongzi.community', {
+        url:'/community',
+        controllerAs: 'vm',
+        controller: 'CommunityController',
+        templateUrl: 'templates/rongzi/community.html',
+        resolve: {
+            coverFind: loadFind
+        }
+    });
+
+    $stateProvider.state('rongzi.investor', {
+        url:'/investor',
+        controllerAs: 'vm',
+        controller: 'InvestorController',
+        templateUrl: 'templates/rongzi/investor.html',
+        resolve: {
+            coverFind: loadFind
+        }
+    });
+
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
     }
