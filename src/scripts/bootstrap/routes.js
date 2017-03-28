@@ -370,6 +370,24 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/activity/investorSuccess.html',
     });
 
+    //-----------------------
+    //融资季活动
+    $stateProvider.state('rongzi', {
+        url: '/rongzi',
+        abstract: true,
+        template: '<div ui-view></div>'
+    });
+
+    $stateProvider.state('rongzi.main', {
+        url:'/main',
+        controllerAs: 'vm',
+        controller: 'MainController',
+        templateUrl: 'templates/rongzi/main.html',
+        resolve: {
+            coverFind: loadFind
+        }
+    });
+
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
     }
