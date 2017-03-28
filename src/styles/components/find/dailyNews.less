@@ -143,11 +143,14 @@
                             }
                         }
                     }
-                    .item-left {
-                        position: relative;
-                        display: inline-block;
+                    .item-wrapper {
                         height: 16px;
                         line-height: 16px;
+                    }
+                    .item-left {
+                        height: 16px;
+                        position: relative;
+                        display: inline-block;
                         vertical-align: middle;
                         img {
                             display: block;
@@ -169,11 +172,10 @@
                         }
                     }
                     .item-center {
+                        height: 16px;
                         position: relative;
                         display: inline-block;
                         margin-left: 20px;
-                        height: 16px;
-                        line-height: 16px;
                         vertical-align: middle;
                         img {
                             width: 14px;
@@ -192,27 +194,6 @@
                             white-space: nowrap;
                             max-width: 125px;
                             display: inline-block;
-                        }
-                    }
-                    .item-right {
-                        position: absolute;
-                        display: inline-block;
-                        height: 24px;
-                        line-height: 24px;
-                        right: 8%;
-                        img {
-                            display: block;
-                            float: left;
-                            width: 20.8px;
-                            margin-right: 5px;
-                            margin-top: 1px;
-                        }
-                        span {
-                            display: block;
-                            float: right;
-                            height: 16px;
-                            line-height: 16px;
-                            color: #969FA9;
                         }
                     }
                 }
