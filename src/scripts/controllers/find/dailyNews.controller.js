@@ -51,9 +51,13 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
             var displayTimeStr = item.displayTimeStr;
             var displayTime = '';
             var arr = displayTimeStr.split('/');
-            if (arr.length > 1) {
+            if (arr.length == 2) {
                 displayTime += arr[0].replace(/^0/, '') + '月';
                 displayTime += arr[1].replace(/^0/, '') + '日';
+            } else if (arr.length == 3) {
+                displayTime += arr[0].replace(/^0/, '') + '年';
+                displayTime += arr[1].replace(/^0/, '') + '月';
+                displayTime += arr[2].replace(/^0/, '') + '日';
             } else {
                 displayTime = displayTimeStr;
             }
