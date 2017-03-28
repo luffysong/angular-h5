@@ -127,7 +127,11 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
             loading.hide('hotFocusDetailLoading');
             if (response.data) {
                 if (response.data.data) {
-                    vm.chartConfig1.series[0].data = response.data.data.reverse().slice(1);
+                    if (vm.params.intervalEnum === 'DAY') {
+                        vm.chartConfig1.series[0].data = response.data.data.reverse();
+                    } else {
+                        vm.chartConfig1.series[0].data = response.data.data.reverse().slice(1);
+                    }
                     vm.chartConfig1.series[0].name = phrases.eventEnum[vm.params.eventEnum];
                 }
                 vm.chartConfig1.xAxis.categories = generateDates();
@@ -141,21 +145,26 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
     function generateDates() {
         var dateArr = [];
         var interval = '';
+        var interTimes = 0;
 
         switch (vm.params.intervalEnum) {
             case 'DAY':
                 interval = 'days';
+                interTimes = 7;
                 break;
             case 'WEEK':
                 interval = 'weeks';
+                interTimes = 6;
                 break;
             case 'MONTH':
                 interval = 'months';
+                interTimes = 6;
                 break;
             default:
                 interval = 'days';
+                interTimes = 7;
         }
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < interTimes; i++) {
             dateArr.push(moment().subtract(i, interval).format('MM/DD'));
         }
         return dateArr.reverse();
@@ -164,6 +173,7 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
     function generatePercents(competitors) {
         var max = 0;
         var percent = 0;
+        var arr = [];
 
         for (var i = 0, len = competitors.length; i < len; i++) {
             var dataSum = competitors[i].dataSum;
@@ -173,11 +183,27 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
         }
 
         return competitors.map(function(item) {
+            if (vm.params.intervalEnum === 'DAY') {
+                arr = item.data.reverse();
+            } else {
+                arr = item.data.reverse().slice(1);
+            }
+
             percent = (item.dataSum * 100 / max + 2).toFixed(2);
             item.percent = item.dataSum > 0 ? percent : 2;
+            item.sum = getSum(arr);
             return item;
         });
     }
+
+    function getSum(arr) {
+        var sum = 0;
+        for (var i = 0, len = arr.length; i < len; i++) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+
 
     function error(err) {
         loading.hide('hotFocusDetailLoading');
