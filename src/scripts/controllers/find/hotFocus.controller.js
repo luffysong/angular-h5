@@ -6,6 +6,8 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
     var vm = this;
     document.title = '关注热点';
 
+    window.WEIXINSHARE = '';
+
     // URL 信息
     vm.params = {
         eventEnum: $stateParams.eventEnum || 'SEARCH',
