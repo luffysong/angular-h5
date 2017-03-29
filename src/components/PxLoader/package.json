@@ -1,0 +1,39 @@
+{
+  "name": "pxloader",
+  "version": "1.1.2",
+  "description": "PxLoader is a simple JavaScript library for creating preloaders and resource downloaders for HTML5 apps",
+  "main": "PxLoader.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thinkpixellab/PxLoader.git"
+  },
+  "keywords": [
+    "PxLoader",
+    "loader",
+    "preloader",
+    "loading",
+    "preloading"
+  ],
+  "author": {
+    "name": "Pixel Lab",
+    "url": "http://thinkpixellab.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thinkpixellab/PxLoader/issues"
+  },
+  "homepage": "http://thinkpixellab.com/PxLoader",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~1.0.1",
+    "grunt-contrib-uglify": "~1.0.1",
+    "grunt-contrib-jshint": "~1.0.0",
+    "grunt-contrib-watch": "~1.0.0",
+    "grunt-contrib-concat": "~1.0.1",
+    "grunt-contrib-copy": "~1.0.0",
+    "grunt-contrib-clean": "~1.0.0"
+  }
+}

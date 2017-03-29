@@ -3,19 +3,24 @@ var  angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('MainController', MainController);
 
-function MainController(loading, $stateParams, ActivityService, $state, UserService, ErrorService) {
+function MainController(loading, $scope, $stateParams, ActivityService, $state, UserService, ErrorService) {
     var vm = this;
-
+    vm.subscribe = subscribe;
     init();
 
     function init() {
-        loading.hide('findLoading');
+        var loader = new PxLoader(),
+        backgroundImg = loader.addImage('images/rongzi/backg.png');
+        loader.start();
+        loading.show('findLoading');
+        console.log('==', backgroundImg);
         removeHeader();
         initTitle();
-        $('html').css('overflow', 'auto');
-        $('body').css('overflow', 'auto');
+        //$('html').css('overflow', 'auto');
+        //$('body').css('overflow', 'auto');
         //console.log(UserService.getUID());
         //start();
+
     }
 
     function start() {
@@ -38,4 +43,12 @@ function MainController(loading, $stateParams, ActivityService, $state, UserServ
     if (!UserService.getUID()) {
         window.initCss();
     }
+
+    function subscribe() {
+
+    }
+
+    $scope.$watch('$viewContentLoaded', function () {
+        loading.hide('findLoading');
+    });
 }

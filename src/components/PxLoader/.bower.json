@@ -1,0 +1,27 @@
+{
+  "name": "pxloader",
+  "main": "PxLoader.js",
+  "version": "1.1.2",
+  "homepage": "http://thinkpixellab.com/pxloader/",
+  "authors": [
+    "Pixel Lab"
+  ],
+  "description": "PxLoader is a simple JavasScript library for creating preloaders and resource downloaders for HTML5 apps",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "1.1.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.1.2",
+    "commit": "5193f95bd63001419f559ffba21bfd62a1faf094"
+  },
+  "_source": "https://github.com/thinkpixellab/PxLoader.git",
+  "_target": "1.1.2",
+  "_originalSource": "PxLoader"
+}

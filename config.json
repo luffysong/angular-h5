@@ -64,7 +64,9 @@
         "src/components/showdown/src/showdown.js",
         "src/components/angular-markdown-directive/markdown.js",
         "src/components/to-markdown/dist/to-markdown.js",
-        "src/components/angular-markdown-text/dist/angular-markdown-text.min.js"
+        "src/components/angular-markdown-text/dist/angular-markdown-text.min.js",
+        "src/components/PxLoader/dist/pxloader-all.min.js",
+        "src/components/PxLoader/dist/pxloader-images.min.js"
     ],
     "angularUiTpls": [
     ],

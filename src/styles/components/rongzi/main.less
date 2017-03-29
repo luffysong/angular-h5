@@ -1,10 +1,152 @@
 .rongzi-wrapper{
-  background-color: red;
+//  background-color: red;
   height: auto;
   width: 100%;
+  margin: 0 auto;
+  position: relative;
+  max-width: 768px;
+  background: url('https://krplus-pic.b0.upaiyun.com/avatar/201703/29111017/6eb7xehuovd83hxl.png') no-repeat center;
+  background-color: #000000;
+  .btn{
+    background-color: #ef0021;
+    color: white;
+    height: 37px;
+    border-radius:15px;
+    text-align: center;
+  }
+
+  .rongzi{
+    height: 300px;
+    border: 1px dotted white;
+  }
+  .fblock{
+    margin-top: 20px;
+  }
 
   .rongzi-block{
-    height: 40px;
+    height: 45px;
     width: 100%;
+    overflow: hidden;
+
+    .rongzi-invest-arrow-left{
+      img{
+        width: 85px;
+        height: 24px;
+        margin-top: 10px;
+      }
+    }
+    .rongzi-invest-icon{
+      float: right;
+      height: 40px;
+      width: 33px;
+      img{
+        margin-top: -47px;
+      }
+    }
+    .rongzi-invest-icon-left{
+      img{
+        margin-top: -2px;
+      }
+    }
+    .rongzi-invest-arrow-right{
+      float: right;
+      img{
+        width: 85px;
+        height: 24px;
+        margin-top: -60px;
+      }
+    }
+  }
+  .rongzi-top-wrapper{
+    height: 560px;
+    background: url('images/rongzi/top3.png') no-repeat center;
+    position: relative;
+    .rong-timer{
+      background: url('images/rongzi/timer.png') no-repeat center;
+      background-size: cover;
+      height: 73px;
+      width: 100%;
+      position: relative;
+      top:343px;
+
+      .rong-num{
+        width:54px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: #FFD64E;
+        font-weight: bold;
+        font-size: 40px;
+        position: absolute;
+        left: 42%;
+        top:4px;
+      }
+    }
+  .subscribe{
+      width: 100%;
+      position: absolute;
+      top:430px;
+      margin: 0 auto;
+      text-align: center;
+
+      .subscribe-btn{
+        width: 276px;
+        font-size:16px;
+        font-weight: bold;
+      }
+    }
+    .rongzi-text{
+      width: 100%;
+      position: absolute;
+      top:475px;
+      font-size:14px;
+      color:#e06a20;
+      text-align: left;
+      p{
+        font-weight: bold;
+        width: 90%;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+    body,html {
+        width:768px !important;
+        margin:0 auto;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    .demos-wrapper .section-footer{
+      width:768px !important;
+    }
+}
+
+@media screen and (max-width: 414px) {
+  .rongzi-wrapper{
+    background-size: 414px 100%;
+    .rongzi-top-wrapper{
+        background-size: 414px 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+    .rongzi-wrapper{
+      background-size: 375px 100%;
+      .rongzi-top-wrapper{
+          background-size: 375px 100%;
+      }
+    }
+}
+
+@media screen and (max-width: 320px) {
+  .rongzi-wrapper{
+    background-size: 320px 100%;
+    .rongzi-top-wrapper{
+        background-size: 320px 100%;
+    }
   }
 }
