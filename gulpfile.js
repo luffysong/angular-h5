@@ -257,8 +257,8 @@ gulp.task('scripts:browserify', ['scripts:init'], function () {
                 });
         }))
         .pipe($.plumber.stop())
-        .pipe($.ngmin())
-        .pipe($.uglify())
+        // .pipe($.ngmin())
+        // .pipe($.uglify())
         //.pipe($.sourcemaps.write())
         .pipe(gulp.dest('.tmp/scripts'))
         .pipe($.size())
@@ -487,6 +487,7 @@ gulp.task('build', ['header'], function () {
 });
 
 gulp.task('build:test', ['clean'], function () {
+    DEBUG = false;
     buildMode = 'test';
     CDNPrefix = '/m';
     gulp.start('build');
