@@ -1,10 +1,10 @@
 
-<div>
+<!-- <div>
   <br /><br />
     <button class="open-app" id ="open-app">打开APP</button>
 </div>
 <div class="timer" id="timer">
-</div>
+</div> -->
 
 <script type='text/javascript'>
   var u = navigator.userAgent;
@@ -79,8 +79,8 @@
     var hour=Math.floor((leftsecond-day1*24*60*60)/3600);
     var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60);
     var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);
-    var cc = document.getElementById(divname);
-    cc.innerHTML = "距离"+year+"年"+month+"月"+day+"日还有："+day1+"天"+hour+"小时"+minute+"分"+second+"秒";
+    //var cc = document.getElementById(divname);
+  //  cc.innerHTML = "距离"+year+"年"+month+"月"+day+"日还有："+day1+"天"+hour+"小时"+minute+"分"+second+"秒";
   }
-  window.setInterval(function(){ShowCountDown(2017,4,6,'timer');}, interval);
+//  window.setInterval(function(){ShowCountDown(2017,4,6,'timer');}, interval);
 </script>
