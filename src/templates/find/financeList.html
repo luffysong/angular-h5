@@ -20,7 +20,7 @@
                                 {{item.brief}}
                             </p>
                             <div class="item-extra-info">
-                                <div class="item-industry-tag">
+                                <div class="item-industry-tag" ng-if="item.industry1&&item.industry1!='其它'">
                                     {{item.industry1}}
                                 </div>
                                 <div class="item-location-tag" ng-if="item.address">

@@ -24,9 +24,10 @@
                                     [{{item.name}}] {{item.brief}}
                                 </p>
                                 <div class="item-wrapper">
-                                    <div class="item-left">
-                                        <img src="/styles/images/find/White@3x.png" />
-                                        <span>{{item.industry1 | findDefault : '其他'}}</span>
+                                    <div class="item-left" ng-show="item.industry1">
+                                        <!--<img src="/styles/images/find/White@3x.png" />-->
+                                        <!--<span>{{item.industry1 | findDefault : '其他'}}</span>-->
+                                        <span>{{item.industry1}}</span>
                                     </div>
                                     <div class="item-center">
                                         <img src="/styles/images/find/Logo@3x.png" />

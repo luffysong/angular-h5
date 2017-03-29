@@ -51,9 +51,9 @@
                 <div class="item-desc">
                     {{item.brief}}
                 </div>
-                <div class="item-industry">
-                    <span class="item-industry-title">行业</span>
-                    <span class="item-industry-cont">{{item.industryStr}}</span>
+                <div class="item-industry" ng-show="item.industryStr">
+                    <span class="item-industry-title">{{item.industryStr}}</span>
+                    <!--<span class="item-industry-cont">{{item.industryStr}}</span>-->
                 </div>
             </div>
             <div class="item-right" ng-style="{'background-image': 'url({{item.logo | image}})'}"></div>
