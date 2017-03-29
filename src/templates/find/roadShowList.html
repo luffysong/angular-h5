@@ -5,7 +5,7 @@
          wheel-speed="1"
          id="contentScroll">
         <div  class="roadShow-wrapper">
-            <img class="img-fixed" src="/styles/images/find/seeNewest@2x.png" ng-click="vm.backTop()"/>
+            <!--<img class="img-fixed" src="/styles/images/find/seeNewest@2x.png" ng-click="vm.backTop()"/>-->
             <div class="null_today">今日没有路演活动</div>
             <div class="roadShow-intro" swiper-origin slides="vm.originDateArray" class="swiper-container"
                  change-End-Call-Back="vm.onTransitionEnd" change-Start-Call-Back="vm.onTransitionStart">
@@ -50,6 +50,7 @@
             </div>
             <div ng-if="vm.responseData.length">
                 <section  class="roadShow-content-wrapper">
+
                 <ul infinite-scroll='vm.loadMore()'
                     infinite-scroll-disabled='vm.busy'
                     infinite-scroll-distance='0.1'
@@ -61,24 +62,53 @@
                         <a class="roadShow-content-href"
                            href="https://36kr.com/app/tou?companysetlist={{item.id}}&ktm_source=find.roadShow.{{item.id}}"
                            tou-open path="'projectsSet/'+ item.id + '?ktm_source=calendar'">
-                            <div class="base-info-wrapper">
-                                <img ng-src="{{item.headPic | image}}" alt="">
-                            </div>
-                            <div class="base-info-detail">
-                                <h3>{{item.name}}</h3>
-                                <div class="item-middle">
-                                    <p ng-bind="item.fetchCode | delHtmlTag"></p>
-                                    <span class="item-more" ng-click="vm.more(item, $event)">更多</span>
+                            <div class="pro-pic">
+                                <div class="pro-num" ng-style="{'background-image':'url({{item.headPic | image}})'}">
+                                    <span class="item-num">{{item.proCount}}个项目</span>
                                 </div>
-                               <div class="item-bottom">
-                                   <span class="item-time">{{item.startAt | dateRoadShow}}</span>
-                                   <span class="item-time" ng-if="item.endAt && item.endAt !== item.startAt">-{{item.endAt | dateRoadShow}}</span>
-                                   <span class="item-num">{{item.proCount}}个项目</span>
-                               </div>
+                            </div>
+                            <div class="pro-info">
+                                <div  class="pro-title" ng-if="item.name">{{item.name}}</div>
+                                <p ng-bind="item.fetchCode | delHtmlTag"></p>
+                                <div class="item-bottom">
+                                    <span class="item-time">{{item.startAt | dateRoadShow}}</span>
+                                    <span class="item-time" ng-if="item.endAt && item.endAt !== item.startAt">-{{item.endAt | dateRoadShow}}</span>
+                                </div>
+                                <!--<div class="item-more" ng-click="vm.more(item, $event)">更多</div>-->
                             </div>
                         </a>
                     </li>
                 </ul>
+
+                <!--<ul infinite-scroll='vm.loadMore()'-->
+                    <!--infinite-scroll-disabled='vm.busy'-->
+                    <!--infinite-scroll-distance='0.1'-->
+                    <!--infinite-scroll-container="'#contentScroll'"-->
+                    <!--infinite-scrollUse-document-bottom="false">-->
+                    <!--<li ontouchstart="" kr-active="'active'" id="{{item.startAt | dateRoadShowID}}"-->
+                        <!--ng-repeat="item in vm.responseData track-->
+                            <!--by $index">-->
+                        <!--<a class="roadShow-content-href"-->
+                           <!--href="https://36kr.com/app/tou?companysetlist={{item.id}}&ktm_source=find.roadShow.{{item.id}}"-->
+                           <!--tou-open path="'projectsSet/'+ item.id + '?ktm_source=calendar'">-->
+                            <!--<div class="base-info-wrapper">-->
+                                <!--<img ng-src="{{item.headPic | image}}" alt="">-->
+                                <!--<span class="item-num">{{item.proCount}}个项目</span>-->
+                            <!--</div>-->
+                            <!--<div class="base-info-detail">-->
+                                <!--<h3>{{item.name}}</h3>-->
+                                <!--<div class="item-middle">-->
+                                    <!--<p ng-bind="item.fetchCode | delHtmlTag"></p>-->
+                                    <!--&lt;!&ndash;<span class="item-more" ng-click="vm.more(item, $event)">更多</span>&ndash;&gt;-->
+                                <!--</div>-->
+                               <!--<div class="item-bottom">-->
+                                   <!--<span class="item-time">{{item.startAt | dateRoadShow}}</span>-->
+                                   <!--<span class="item-time" ng-if="item.endAt && item.endAt !== item.startAt">-{{item.endAt | dateRoadShow}}</span>-->
+                               <!--</div>-->
+                            <!--</div>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
                 <footer ng-if="!vm.busy && vm.hasMore">
                     <p>加载更多··· </p>
                     <img src="/styles/images/loading.svg" alt="loading">

@@ -209,7 +209,8 @@
         ;
         li {
             background: #fff;
-            height: 105px; //padding: 0px 4%;
+            //height: 105px;
+            //padding: 0px 4%;
             overflow: hidden;
             position: relative;
             * {
@@ -225,46 +226,19 @@
         li.active {
             background: #f8f8f8;
         }
-        .roadShow-content-href {
+        .roadShow-content-href{
+            position: relative;
+            padding: 15px 0 15px (75px + 2*15px);
             border-bottom: 1px solid #E7E7E7;
-            width: 100%;
-            overflow: hidden;
-            display: inline-block;
-            vertical-align: middle;
-            margin-left: 4%;
-            padding-right: 8%;
-            margin-top: 0;
-            position: absolute;
-            .base-info-wrapper {
-                width: 30.4%;
-                height: 84px;
-                display: inline-block;
-                vertical-align: middle;
-                overflow: hidden;
-                float: left;
-                margin: 10px 0;
-                img {
-                    width: 100%;
-                }
-            }
-            .base-info-detail {
-                display: inline-block;
-                vertical-align: middle;
-                margin: 10px 0;
-                width: 65.2%;
-                float: right;
-                height: 84px;
-                position: relative;
-                h3 {
-                    font-size: 15px;
+            .pro-info{
+                .pro-title{
+                    font-family: PingFangSC-Semibold;
+                    font-size: 16px;
                     color: #222C38;
                     letter-spacing: 0px;
-                    line-height: 18px;
-                    margin-top: 0;
-                    margin-bottom: 6px;
-                    font-weight: 600;
+                    line-height: 22px;
+                    width: 95%;
                 }
-                .item-middle,
                 .item-bottom {
                     &:after {
                         clear: both;
@@ -273,51 +247,165 @@
                         height: 0;
                         visibility: hidden;
                     }
+                    .item-time {
+                        font-size: 13px;
+                        color: #5A626D;
+                        letter-spacing: 0px;
+                        line-height: 16px;
+                        float: left;
+                    }
                 }
-                .item-bottom {
-                    position: absolute;
-                    bottom: 0;
-                    width: 100%;
-                }
-                p {
+                p{
                     font-size: 13px;
                     color: #969FA9;
                     letter-spacing: 0px;
-                    line-height: 16px;
-                    width: 83.8%;
-                    overflow: hidden;
-                    white-space: nowrap;
+                    line-height: 18px;
+                    width: 95%;
                     text-overflow: ellipsis;
                     float: left;
-                    margin-bottom: 10px;
+                    margin-top: 8px;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
                 }
-                .item-more {
+                .item-more{
                     font-size: 13px;
                     color: #6BA2FC;
                     letter-spacing: 0px;
                     line-height: 16px;
-                    float: right;
+                    width:26px;
+                    height: 18px;
                     position: relative;
-                    right: -11px;
-                    padding: 10px;
-                    top: -35px;
+                    left: 0px;
+                    bottom:5px;
+                    //clear: both;
                 }
-                .item-time {
-                    font-size: 13px;
-                    color: #5A626D;
-                    letter-spacing: 0px;
-                    line-height: 16px;
-                    float: left;
-                }
-                .item-num {
-                    font-size: 13px;
-                    color: #5A626D;
-                    letter-spacing: 0px;
-                    line-height: 16px;
-                    float: right;
+            }
+            .pro-pic{
+                width: 75px;
+                height: 75px;
+                background-size:75px 75px;
+                background-repeat:no-repeat;
+                position: absolute;
+                top: 15px;
+                left: 15px;
+
+                .pro-num{
+                    width: 75px;
+                    height: 75px;
+                    background-size:75px 75px;
+                    background-repeat:no-repeat;
+                    overflow: hidden;
+                    .item-num{
+                        background: rgba(0,0,0,0.60);
+                        height: 21px;
+                        width: 75px;
+                        display: inline-block;
+                        font-size: 12px;
+                        color: #FFFFFF;
+                        letter-spacing: 0px;
+                        line-height: 20px;
+                        position: relative;
+                        bottom: -54px;
+                        text-align: center;
+                    }
                 }
             }
         }
+        //.roadShow-content-href {
+        //    border-bottom: 1px solid #E7E7E7;
+        //    width: 100%;
+        //    overflow: hidden;
+        //    display: inline-block;
+        //    vertical-align: middle;
+        //    margin-left: 4%;
+        //    padding-right: 8%;
+        //    margin-top: 0;
+        //    position: absolute;
+        //    .base-info-wrapper {
+        //        width: 30.4%;
+        //        height: 84px;
+        //        display: inline-block;
+        //        vertical-align: middle;
+        //        overflow: hidden;
+        //        float: left;
+        //        margin: 10px 0;
+        //        img {
+        //            width: 100%;
+        //        }
+        //    }
+        //    .base-info-detail {
+        //        display: inline-block;
+        //        vertical-align: middle;
+        //        margin: 10px 0;
+        //        width: 65.2%;
+        //        float: right;
+        //        height: 84px;
+        //        position: relative;
+        //        h3 {
+        //            font-size: 15px;
+        //            color: #222C38;
+        //            letter-spacing: 0px;
+        //            line-height: 18px;
+        //            margin-top: 0;
+        //            margin-bottom: 6px;
+        //            font-weight: 600;
+        //        }
+        //        .item-middle,
+        //        .item-bottom {
+        //            &:after {
+        //                clear: both;
+        //                content: ".";
+        //                display: block;
+        //                height: 0;
+        //                visibility: hidden;
+        //            }
+        //        }
+        //        .item-bottom {
+        //            position: absolute;
+        //            bottom: 0;
+        //            width: 100%;
+        //        }
+        //        p {
+        //            font-size: 13px;
+        //            color: #969FA9;
+        //            letter-spacing: 0px;
+        //            line-height: 16px;
+        //            width: 83.8%;
+        //            overflow: hidden;
+        //            white-space: nowrap;
+        //            text-overflow: ellipsis;
+        //            float: left;
+        //            margin-bottom: 10px;
+        //        }
+        //        .item-more {
+        //            font-size: 13px;
+        //            color: #6BA2FC;
+        //            letter-spacing: 0px;
+        //            line-height: 16px;
+        //            float: right;
+        //            position: relative;
+        //            right: -11px;
+        //            padding: 10px;
+        //            top: -35px;
+        //        }
+        //        .item-time {
+        //            font-size: 13px;
+        //            color: #5A626D;
+        //            letter-spacing: 0px;
+        //            line-height: 16px;
+        //            float: left;
+        //        }
+        //        .item-num {
+        //            font-size: 13px;
+        //            color: #5A626D;
+        //            letter-spacing: 0px;
+        //            line-height: 16px;
+        //            float: right;
+        //        }
+        //    }
+        //}
         footer {
             font-size: 14px;
             color: #92979E;
