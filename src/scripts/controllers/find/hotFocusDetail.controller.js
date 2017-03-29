@@ -107,7 +107,7 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
     var phrases = {
         eventEnum: {
             TALK: '约谈',
-            FOCUS: '关注',
+            FOCUS: '收藏',
             SEARCH: '搜索',
         },
     };

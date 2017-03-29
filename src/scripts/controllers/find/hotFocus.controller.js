@@ -16,7 +16,7 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
     var phrases = {
         eventEnum: {
             TALK: '约谈',
-            FOCUS: '关注',
+            FOCUS: '收藏',
             SEARCH: '搜索',
         },
         intervalEnum: {
@@ -86,7 +86,7 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
         var percent = 0;
         var extra = '';
 
-        percent = ((extraData.to - extraData.from) * 100 / extraData.from).toFixed(2);
+        percent = parseInt(((extraData.to - extraData.from) * 100 / extraData.from));
         title += phrases.intervalEnum[vm.params.intervalEnum];
         title += phrases.eventEnum[vm.params.eventEnum];
 
@@ -96,7 +96,7 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
             extra = '增长量上涨' + percent + '%';
         }
 
-        if (percent > 100) {
+        if (percent >= 100) {
             extra = '量暴增';
         }
 
