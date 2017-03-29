@@ -85,21 +85,17 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
         var title = '';
         var extraData = JSON.parse(signal.extraData);
         var signalType = signal.signalType.split('.');
-        var percent = 0;
+        var increase = 0;
         var extra = '';
 
-        percent = parseInt(((extraData.to - extraData.from) * 100 / extraData.from));
+        increase = extraData.to - extraData.from;
         title += phrases.intervalEnum[vm.params.intervalEnum];
         title += phrases.eventEnum[vm.params.eventEnum];
 
         if (signalType.indexOf('great') > -1) {
             extra = '量达到' + extraData.to;
         } else if (signalType.indexOf('increase') > -1) {
-            extra = '增长量上涨' + percent + '%';
-        }
-
-        if (percent >= 100) {
-            extra = '量暴增';
+            extra = '增长量上涨' + increase + '次';
         }
 
         return title + extra;
