@@ -294,6 +294,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/activity/wise.html',
     });
 
+    //创投助手app---引导页
+    $stateProvider.state('find/guide', {
+        url:'/find-guide',
+        controllerAs: 'vm',
+        templateUrl: 'templates/find/guide.html',
+    });
+
     //-----------------------
     //前台活动展示h5页面
     $stateProvider.state('fractivity', {
