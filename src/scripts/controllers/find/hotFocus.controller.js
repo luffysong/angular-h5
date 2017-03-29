@@ -95,7 +95,7 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
         if (signalType.indexOf('great') > -1) {
             extra = '量达到' + extraData.to;
         } else if (signalType.indexOf('increase') > -1) {
-            extra = '增长量上涨' + increase + '次';
+            extra = '增加' + increase + '次';
         }
 
         return title + extra;
