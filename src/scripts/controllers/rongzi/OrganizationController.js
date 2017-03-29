@@ -7,8 +7,12 @@ function OrganizationController(loading, $stateParams, ActivityService, $state, 
   init();
   function init() {
     loading.hide('findLoading');
-
+    removeHeader();
     console.log(UserService.getUID());
+  }
+
+  function removeHeader() {
+      $('.common-header.J_commonHeaderWrapper').remove();
   }
 }
 
