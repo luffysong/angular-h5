@@ -257,8 +257,8 @@ gulp.task('scripts:browserify', ['scripts:init'], function () {
                 });
         }))
         .pipe($.plumber.stop())
-        // .pipe($.ngmin())
-        // .pipe($.uglify())
+        .pipe($.ngmin())
+        .pipe($.uglify())
         //.pipe($.sourcemaps.write())
         .pipe(gulp.dest('.tmp/scripts'))
         .pipe($.size())
