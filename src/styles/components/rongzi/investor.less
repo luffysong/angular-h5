@@ -5,41 +5,78 @@
 
   .investor-content {
     .investor-list {
-      border-radius: 10px;
-      background-color: #d1c0a5;
-      padding: 2px;
+      padding: 0 5px;
+      .investor-item {
+        margin-bottom: 10px;
+        background-color: #d1c0a5;
+        border-radius: 10px;
+        padding: 3px;
+      }
       .list-border {
         border: 1px dashed #02866f;
         border-radius: 10px;
+        padding-bottom: 10px;
         .avatar {
           text-align: left;
           display: inline-block;
           background: #fff no-repeat 50%;
           background-size: contain;
-          margin: 15px auto 5px;
-          width: 160px;
-          height: 210px;
+          margin: 15px auto;
+          width: 135px;
+          height: 175px;
           border: 1px solid #02866f;
           margin-left: 10px;
+          vertical-align:top;
+        }
+        @media (max-width: 380px) {
+          .avatar {
+            width: 115px;
+            height: 155px;
+          }
+        }
+        @media (max-width: 325px) {
+          .avatar {
+            width: 100px;
+            height: 135px;
+          }
         }
         .investor-info {
-          float: right;
+          display: inline-block;
           position: relative;
           top: 15px;
-          width: 55%;
+          left: 5px;
+          width: 60%;
+          vertical-align:top;
           .name {
             display: inline-block;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: bold;
             color: #f8ebd6;
-            background-color: #02866f
+            div {
+              padding: 4px;
+              display: inline-block;
+              border-radius: 45px;
+              margin-right: 1px;
+              background: url('/styles/images/rongzi/font-bg.png') no-repeat;
+              background-size: contain;
+            }
+          }
+          @media (max-width: 380px) {
+            .name {
+              font-size: 20px;
+            }
+          }
+           @media (max-width: 325px) {
+            .name {
+              font-size: 16px;
+            }
           }
           .arrows {
-            position: relative;
-            top: -25px;
-            right: -130px;
+            position: absolute;
+            right: -90px;
+            top: 7px;
             img {
-              width: 13%;
+              width: 15%;
               position: relative;
               bottom: 5px;
             }
@@ -50,26 +87,64 @@
               right: 10px;
             }
           }
+          @media (max-width: 380px) {
+            .arrows {
+              right: -100px;
+              img {
+                width: 15%;
+              }
+            }
+          }
+          @media (max-width: 325px) {
+            .arrows {
+              right: -105px;
+              img {
+                width: 13%;
+              }
+            }
+          }
           .content {
             color: #02866f;
-            width: 210px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             position: relative;
-            bottom: 25px;
+            margin: 5px 0;
+          }
+          @media (max-width: 380px) {
+            .content {
+              font-size: 15px;
+            }
+          }
+          @media (max-width: 325px) {
+            .content {
+              font-size: 14px;
+            }
           }
           .time {
             background-color: #02866f;
             color: #f8ebd6;
-            float: right;
             border-radius: 15px;
-            width: 180px;
+            width: 70%;
             text-align: center;
-            font-size: 18px;
-            line-height: 30px;
+            font-size: 16px;
+            line-height: 26px;
             position: relative;
-            bottom: 20px;
-            right: 13px;
+            left: 28%;
+            margin-bottom: 10px;
+          }
+          @media (max-width: 380px) {
+            .time {
+              width: 75%;
+              left: 25%;
+              margin-bottom: 15px;
+            }
+          }
+          @media (max-width: 325px) {
+            .time {
+              width: 88%;
+              left: 10%;
+              margin-bottom: 15px;
+            }
           }
         }
       }
