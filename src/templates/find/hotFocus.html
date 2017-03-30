@@ -42,9 +42,10 @@
     <div class="hot-focus-list" ng-if="!loadingInst.hotFocus && vm.focusList.length">
         <div class="hot-focus-list-item"
             ng-repeat="item in vm.focusList"
-            ng-click="vm.goToDetail(item.cid, item.structuredTitle)"
         >
-            <div class="item-left">
+            <div class="item-left"
+                ng-click="vm.goToDetail(item.cid, item.structuredTitle)"
+            >
                 <div class="item-title">
                     [<span>{{item.name}}</span>] {{item.structuredTitle}}
                 </div>
@@ -56,7 +57,10 @@
                     <!--<span class="item-industry-cont">{{item.industryStr}}</span>-->
                 </div>
             </div>
-            <div class="item-right" ng-style="{'background-image': 'url({{item.logo | image}})'}"></div>
+            <div class="item-right"
+                ng-style="{'background-image': 'url({{item.logo | image}})'}"
+                ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusList.' + item.cid)"
+            ></div>
         </div>
     </div>
     <div class="hot-focus-list-empty" ng-if="!loadingInst.hotFocus && !vm.focusList.length">

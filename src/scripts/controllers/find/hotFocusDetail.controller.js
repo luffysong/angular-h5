@@ -198,8 +198,8 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
                 arr = item.data.reverse().slice(1);
             }
 
-            percent = (item.dataSum * 100 / max + 2).toFixed(2);
-            item.percent = item.dataSum > 0 ? percent : 2;
+            percent = (item.dataSum * 100 / max).toFixed(2);
+            item.percent = percent;
             item.sum = getSum(arr);
             return item;
         });

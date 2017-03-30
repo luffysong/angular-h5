@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('HotFocusController', HotFocusController);
 
-function HotFocusController(loading, ErrorService, FindService, $stateParams, $state) {
+function HotFocusController(loading, ErrorService, FindService, $stateParams, $state, hybrid, versionService) {
     var vm = this;
     document.title = '关注热点';
     $('body').css({
@@ -39,6 +39,9 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
 
     // 查看详情
     vm.goToDetail = goToDetail;
+
+    // 打开公司页
+    vm.openNativePage = openNativePage;
 
     // 页面初始化
     loading.show('hotFocus');
@@ -102,5 +105,20 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
         }
 
         return title + extra;
+    }
+
+    function openNativePage(path) {
+        if (hybrid.isInApp) {
+            if (path.substring(1, 11) === 'crmCompany') {
+                //2.6.2以下版本兼容
+                var versionTou = versionService.getVersionAndroid() || versionService.getVersionIOS();
+                if (versionTou && (versionService.cprVersion(versionTou, '2.6.2') === 0)) {
+                    var satrtNum = path.indexOf('?');
+                    path = path.replace(path.substring(satrtNum), '');
+                }
+            }
+
+            hybrid.open(path);
+        }
     }
 }
