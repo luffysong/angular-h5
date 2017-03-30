@@ -27,7 +27,7 @@
                 <div class="company-data"
                     ng-repeat="item in vm.detailData.companyCompetitors"
                     ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid)"
-                >搜索量：{{item.sum}}</div>
+                >{{vm.event}}量：{{item.sum}}</div>
             </div>
             <div class="chart-right">
                 <div class="company-bar-area"
