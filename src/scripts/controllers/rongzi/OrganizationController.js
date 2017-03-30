@@ -17,7 +17,22 @@ function OrganizationController(loading, $stateParams, RongziService, $state, Us
         RongziService.getOrg({ id: $stateParams.id })
             .then(function setCommunity(data) {
                     vm.result = data.data.data;
-                    console.log(data);
+                    vm.beforeA = [];
+                    vm.afterA = [];
+
+                    angular.forEach(data.data.data.sessions,
+                      function (dt, index, array) {
+                        if (dt.projectCategory === 1) {
+                            vm.afterA.push(dt);
+                        } else if (dt.projectCategory === 0) {
+                            vm.beforeA.push(dt);
+                        }
+                    });
+                    // if (data.data.data.projectCategory === 0) {
+                    //     vm.beforeA = data.data.data.sessions;
+                    // } else {
+                    //     vm.afterA = data.data.data.sessions;
+                    // }
                     initTitle(vm.result.title);
                 }).catch((err) => {
                         fail(err);

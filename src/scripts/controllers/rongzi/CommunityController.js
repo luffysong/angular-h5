@@ -21,6 +21,17 @@ function CommunityController(loading, $stateParams, RongziService, $state, UserS
             .then(function setCommunity(data) {
                     vm.result = data.data.data;
                     console.log(data);
+                    vm.corUni = [];
+                    vm.other = [];
+                    angular.forEach(data.data.data.sessions,
+                      function (dt, index, array) {
+                        if (dt.projectCategory === 1) {
+                            vm.other.push(dt);
+                        } else if (dt.projectCategory === 0) {
+                            vm.corUni.push(dt);
+                        }
+                    });
+
                     initTitle(vm.result.title);
                 }).catch((err) => {
                         fail(err);

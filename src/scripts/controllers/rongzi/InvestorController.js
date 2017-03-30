@@ -18,9 +18,14 @@ function InvestorController(loading, $stateParams, RongziService, $state, UserSe
             .then(function setCommunity(data) {
                     vm.result = data.data.data;
                     console.log(data);
+                    initTitle(vm.result.title);
                 }).catch((err) => {
                         fail(err);
                     });
+    }
+
+    function initTitle(t) {
+        document.title = t;
     }
 
     function fail(err) {
