@@ -148,26 +148,30 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
         var dateArr = [];
         var interval = '';
         var interTimes = 0;
+        var format = 'MM/DD';
 
         switch (vm.params.intervalEnum) {
             case 'DAY':
                 interval = 'days';
                 interTimes = 7;
+                format = 'MM/DD';
                 break;
             case 'WEEK':
                 interval = 'weeks';
                 interTimes = 6;
+                format = 'MM/DD';
                 break;
             case 'MONTH':
                 interval = 'months';
                 interTimes = 6;
+                format = 'MM月';
                 break;
             default:
                 interval = 'days';
                 interTimes = 7;
         }
         for (var i = 0; i < interTimes; i++) {
-            dateArr.push(moment().subtract(i, interval).format('MM/DD'));
+            dateArr.push(moment().subtract(i, interval).format(format));
         }
         return dateArr.reverse();
     }
