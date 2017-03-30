@@ -4,7 +4,9 @@ angular.module('defaultApp.controller')
 
 function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindService) {
     var vm = this;
-    $('body').css({backgroundColor: '#fff'});
+    $('body').css({
+        backgroundColor: '#fff'
+    });
     vm.originDate = [];
     vm.originDateArray = [];
     vm.responseData = [];

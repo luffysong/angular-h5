@@ -4,7 +4,9 @@ angular.module('defaultApp.controller')
 
 function ProjectAlbumController(demosService, projectColumnService, $state, $stateParams, loading, ErrorService, FindService, $modal) {
     var vm = this;
-    $('body').css({backgroundColor: '#fff'});
+    $('body').css({
+        backgroundColor: '#fff'
+    });
     // URL 参数
     vm.params = {
         type: $stateParams.type,

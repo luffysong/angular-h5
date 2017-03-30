@@ -59,9 +59,10 @@
                     <li ontouchstart="" kr-active="'active'" id="{{item.startAt | dateRoadShowID}}"
                         ng-repeat="item in vm.responseData track
                             by $index">
-                        <a class="roadShow-content-href"
+                        <!--<a class="roadShow-content-href"
                            href="https://36kr.com/app/tou?companysetlist={{item.id}}&ktm_source=find.roadShow.{{item.id}}"
-                           tou-open path="'projectsSet/'+ item.id + '?ktm_source=calendar'">
+                           tou-open path="'projectsSet/'+ item.id + '?ktm_source=calendar'">-->
+                        <a href="javascript:void(0);" ui-sref="demos({id: item.id})" class="roadShow-content-href">
                             <div class="pro-pic">
                                 <div class="pro-num" ng-style="{'background-image':'url({{item.headPic | image}})'}">
                                     <span class="item-num">{{item.proCount}}个项目</span>
