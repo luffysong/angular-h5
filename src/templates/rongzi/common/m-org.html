@@ -20,7 +20,8 @@
           <div class="org-name"><span ng-if="obj.name">{{obj.name}}</span></div>
         </div>
       <div class="special-info-btn">
-        <button class="btn"><b>查看详情</b></button>
+        <!--ng-click="vm.detail(vm.org.id, 'org')"-->
+        <button class="btn" ui-sref="rongzi.organization({id: vm.org.id})" ><b>查看详情</b></button>
         </div>
     </div>
   </div>

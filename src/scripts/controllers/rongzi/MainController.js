@@ -7,6 +7,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
     $state, UserService, RongziService, ErrorService) {
     var vm = this;
     vm.subscribe = subscribe;
+    vm.detail = moreDetail;
     init();
 
     function init() {
@@ -14,11 +15,22 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         loading.show('findLoading');
         removeHeader();
         initTitle();
-        console.log(UserService.getUID());
+        //console.log(UserService.getUID());
     }
 
     function start() {
         $state.go('normalLogin');
+    }
+
+    function moreDetail(id, type) {
+        console.log(id, type);
+        if (type === 'org') {
+            $state.go('rongzi.org', { id: id });
+        } else if (type === 'investor') {
+            $state.go('rongzi.investor', { id: id });
+        }else if (type === 'community') {
+            $state.go('rongzi.community', { id: id });
+        }
     }
 
     function initTitle() {

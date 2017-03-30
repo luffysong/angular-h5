@@ -383,9 +383,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'MainController',
         templateUrl: 'templates/rongzi/main.html',
-        resolve: {
-            coverFind: loadFind
-        }
     });
 
     //普通登录
@@ -397,33 +394,24 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('rongzi.organization', {
-        url:'/organization',
+        url:'/organization?id',
         controllerAs: 'vm',
         controller: 'OrganizationController',
         templateUrl: 'templates/rongzi/organization.html',
-        resolve: {
-            coverFind: loadFind
-        }
     });
 
     $stateProvider.state('rongzi.community', {
-        url:'/community',
+        url:'/community?id',
         controllerAs: 'vm',
         controller: 'CommunityController',
         templateUrl: 'templates/rongzi/community.html',
-        resolve: {
-            coverFind: loadFind
-        }
     });
 
     $stateProvider.state('rongzi.investor', {
-        url:'/investor',
+        url:'/investor?id',
         controllerAs: 'vm',
         controller: 'InvestorController',
         templateUrl: 'templates/rongzi/investor.html',
-        resolve: {
-            coverFind: loadFind
-        }
     });
 
     function checkClaimStatus(ClaimService, $stateParams) {
