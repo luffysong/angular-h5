@@ -5,6 +5,7 @@ angular.module('defaultApp.controller')
 function HotFocusController(loading, ErrorService, FindService, $stateParams, $state) {
     var vm = this;
     document.title = '关注热点';
+    $('body').css({backgroundColor: '#fff'});
 
     window.WEIXINSHARE = '';
 

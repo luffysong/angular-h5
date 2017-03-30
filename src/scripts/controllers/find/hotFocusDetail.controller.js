@@ -4,6 +4,7 @@ angular.module('defaultApp.controller')
 
 function HotFocusDetailController(loading, FindService, ErrorService, $stateParams, hybrid, versionService) {
     window.WEIXINSHARE = '';
+    $('body').css({backgroundColor: '#fff'});
 
     var vm = this;
     // 页面 title
