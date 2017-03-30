@@ -6,6 +6,9 @@ angular.module('defaultApp.controller')
 function DemosController(demosService, projectColumnService,
     $state, $stateParams, cover, loading, ErrorService) {
     var vm = this;
+    $('body').css({
+        backgroundColor: '#fff'
+    });
     var COLUMN = 'column';
 
     vm.id = $stateParams.id;

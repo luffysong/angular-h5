@@ -4,7 +4,9 @@ angular.module('defaultApp.controller')
 
 function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService) {
     var vm = this;
-    $('body').css({backgroundColor: '#fff'});
+    $('body').css({
+        backgroundColor: '#fff'
+    });
 
     vm.responseData = [];
     vm.ts = '';
