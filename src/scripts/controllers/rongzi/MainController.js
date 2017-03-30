@@ -4,19 +4,13 @@ angular.module('defaultApp.controller')
     .controller('MainController', MainController);
 
 function MainController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, ErrorService) {
+    $state, UserService, RongziService, ErrorService) {
     var vm = this;
     vm.subscribe = subscribe;
     init();
 
     function init() {
-        //var loader = new PxLoader(),
-        //backgroundImg = loader.addImage('images/rongzi/backg.png');
-        //loader.start();
-        //$('html').css('overflow', 'auto');
-        //$('body').css('overflow', 'auto');
-        //console.log('==', backgroundImg);
-        //start();
+        initData();
         loading.show('findLoading');
         removeHeader();
         initTitle();
@@ -75,4 +69,32 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
     $scope.$watch('$viewContentLoaded', function () {
         loading.hide('findLoading');
     });
+
+    function initData() {
+        RongziService.getHome()
+            .then(function setHomeData(data) {
+                    vm.result = data.data.data;
+                    vm.starList = data.data.data.startupProjectVoList;
+                    if (vm.result.sessionCustomVoList) {
+                        if (vm.result.sessionCustomVoList.length > 0) {
+                            angular.forEach(vm.result.sessionCustomVoList,
+                              function (dt, index, array) {
+                                if (dt.category === -1) {
+                                    vm.org = dt;
+                                } else if (dt.category === 0) {
+                                    vm.community = dt;
+                                } else {
+                                    vm.investor = dt;
+                                }
+                            });
+                        }
+                    }
+                }).catch((err) => {
+                        fail(err);
+                    });
+    }
+
+    function fail(err) {
+        ErrorService.alert(err.err.msg);
+    }
 }
