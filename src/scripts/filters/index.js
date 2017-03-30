@@ -14,6 +14,7 @@ require('./default');
 require('./delHtmlTag');
 require('./demoDufaultColor');
 require('./demoNameDufault');
+require('./demoNameDufault2');
 require('./findDefault');
 require('./month');
 require('./share');

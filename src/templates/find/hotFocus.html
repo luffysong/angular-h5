@@ -41,7 +41,7 @@
     </ul>
     <div class="hot-focus-list" ng-if="!loadingInst.hotFocus && vm.focusList.length">
         <div class="hot-focus-list-item"
-            ng-repeat="item in vm.focusList"
+            ng-repeat="(index, item) in vm.focusList"
         >
             <div class="item-left"
                 ng-click="vm.goToDetail(item.cid, item.structuredTitle)"
@@ -58,9 +58,9 @@
                 </div>
             </div>
             <div class="item-right"
-                ng-style="{'background-image': 'url({{item.logo | image}})'}"
+                ng-style="item.logo==''?{'color':'#fff','font-size': '25px','line-height':'60px','text-align':'center','background-color':'{{item.cid | demoDefaultColor}}'}:{'background-image': 'url({{item.logo}})'}"
                 ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusList.' + item.cid)"
-            ></div>
+            >{{item.logo==''?(item.name | demoNameDufault2):''}}</div>
         </div>
     </div>
     <div class="hot-focus-list-empty" ng-if="!loadingInst.hotFocus && !vm.focusList.length">

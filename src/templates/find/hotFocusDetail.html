@@ -1,6 +1,10 @@
 <div class="hot-focus-detail-wrapper" ng-if="!loadingInst.hotFocusDetailLoading">
     <div class="hot-focus-top-area" ng-click="vm.openNativePage('crmCompany/' + vm.detailData.cid + '?ktm_source=find.focusDetail.' + vm.detailData.cid)">
-        <div class="hot-focus-company-logo" ng-style="{'background-image': 'url({{vm.detailData.logo | image}})'}"></div>
+        <div class="hot-focus-company-logo"
+             ng-style="vm.detailData.logo==''?{'color':'#fff','font-size': '20px','line-height':'44px','text-align':'center','background-color':'{{vm.detailData.cid | demoDefaultColor}}'}:{'background-image': 'url({{vm.detailData.logo}})'}">
+            {{vm.detailData.logo==''?(vm.detailData.name | demoNameDufault2):''}}
+        </div>
+        <!--<div class="hot-focus-company-logo" ng-style="{'background-image': 'url({{vm.detailData.logo | image}})'}"></div>-->
         <h1 class="hot-focus-title">{{vm.detailData.name + vm.params.title}}</h1>
     </div>
     <h2 class="chart-1-title">走势情况</h2>
@@ -15,10 +19,14 @@
     <div class="chart-2-area" ng-if="vm.detailData.companyCompetitors.length">
         <ul class="company-competitors">
             <li
-                ng-repeat="item in vm.detailData.companyCompetitors"
+                ng-repeat="(index, item) in vm.detailData.companyCompetitors"
                 ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid)"
             >
-                <div class="company-logo" ng-style="{'background-image': 'url({{item.logo | image}})'}"></div>
+                <!--<div class="company-logo" ng-style="{'background-image': 'url({{item.logo | image}})'}"></div>-->
+                <div class="company-logo"
+                     ng-style="item.logo==''?{'color':'#fff','font-size': '20px','line-height':'44px','text-align':'center','background-color':'{{item.cid | demoDefaultColor}}'}:{'background-image': 'url({{item.logo}})'}">
+                    {{item.logo==''?(item.name | demoNameDufault2):''}}
+                </div>
                 <h2 class="company-name">{{item.name}}</h2>
             </li>
         </ul>
