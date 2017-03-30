@@ -99,7 +99,7 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
         title += phrases.eventEnum[vm.params.eventEnum];
 
         if (signalType.indexOf('great') > -1) {
-            extra = '量达到' + extraData.to;
+            extra = '量达到' + extraData.to  + '次';
         } else if (signalType.indexOf('increase') > -1) {
             extra = '增加' + increase + '次';
         }
