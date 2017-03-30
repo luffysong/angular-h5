@@ -1,0 +1,46 @@
+<div class="rongzi-common-top">
+
+  <div class="rongzi-common-logo">
+  </div>
+
+  <div class="rongzi-common-textbtn-community" ng-if="topdata === 'community' ">
+  </div>
+  <div class="rongzi-common-textbtn-org" ng-if="topdata === 'org'">
+  </div>
+  <div class="rongzi-common-textbtn-investor" ng-if="topdata === 'investor'">
+  </div>
+
+  <div class="rongzi-common-pushtext" ng-if="topdata !== 'investor'">
+      <b >不可错过的顶级机构项目</b>
+  </div>
+
+  <div class="rongzi-common-pushtext-investor" ng-if="topdata === 'investor'">
+      <b >不可错过的明星投资人</b>
+  </div>
+
+  <div class="rongzi-common-text">
+      <p ng-if="topdata == 'org'">
+        自4月17日起，顶级机构在融项目触手可得！接下来8周，每周一、四会推出两场顶级机构专场，融资季共计20场。
+        本专场集合合作机构80%在融项目，并按项目轮次分为A轮前，A轮后，对接项目产生数据将计入机构实时榜单，
+        快来对接项目，为你认可的机构助威吧！
+      </p>
+
+      <p ng-if="topdata == 'community'">
+        自4月17日起，顶级机构在融项目触手可得！接下来8周，每周一、四会推出两场顶级机构专场，融资季共计20场。
+        本专场集合合作机构80%在融项目，并按项目轮次分为A轮前，A轮后，对接项目产生数据将计入机构实时榜单，
+        快来对接项目，为你认可的机构助威吧！
+      </p>
+
+      <p ng-if="topdata == 'investor'">
+        投资圈冉冉升起的明星们，或锋芒初露，或成名已久他们融合了对趋势的判断、对市场的把握、对创业者的观察、对项目的理解
+        形成了自己独有的投资哲学。自4月17日起，每周邀请/筛选四位具有标杆意义的明星投资人携被投项目加入投资人专场，
+        每周二、三各更新两场，总计40场。
+      </p>
+  </div>
+
+  <div class="rongzi-common-btn">
+        <button class="star-btn" ng-if="topdata == 'community'"><b>订阅社群专场</b></button>
+        <button class="org-btn" ng-if="topdata == 'org'"><b>订阅机构专场</b></button>
+        <button class="org-btn" ng-if="topdata == 'investor'"><b>订阅投资人专场</b></button>
+  </div>
+</div>

@@ -3,24 +3,24 @@ var  angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('MainController', MainController);
 
-function MainController(loading, $scope, $stateParams, ActivityService, $state, UserService, ErrorService) {
+function MainController(loading, $scope, $modal, $stateParams, FindService,
+    $state, UserService, ErrorService) {
     var vm = this;
     vm.subscribe = subscribe;
     init();
 
     function init() {
-        var loader = new PxLoader(),
-        backgroundImg = loader.addImage('images/rongzi/backg.png');
-        loader.start();
-        loading.show('findLoading');
-        console.log('==', backgroundImg);
-        removeHeader();
-        initTitle();
+        //var loader = new PxLoader(),
+        //backgroundImg = loader.addImage('images/rongzi/backg.png');
+        //loader.start();
         //$('html').css('overflow', 'auto');
         //$('body').css('overflow', 'auto');
-        //console.log(UserService.getUID());
+        //console.log('==', backgroundImg);
         //start();
-
+        loading.show('findLoading');
+        removeHeader();
+        initTitle();
+        console.log(UserService.getUID());
     }
 
     function start() {
@@ -44,8 +44,32 @@ function MainController(loading, $scope, $stateParams, ActivityService, $state, 
         window.initCss();
     }
 
-    function subscribe() {
+    function subscribe(item, e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $modal.open({
+            templateUrl: 'templates/rongzi/remindAlert.html',
+            windowClass: 'nativeAlert_wrap',
+            controller: modalController,
+            controllerAs: 'vm',
+            resolve: {
+                obj: function () {
+                    return item;
+                }
+            }
+        });
+    }
 
+    function modalController($modalInstance, obj, hybrid) {
+
+        var vm = this;
+        vm.item = obj;
+        vm.ktm_source = 'hot_more';
+        vm.cancel = cancel;
+
+        function cancel() {
+            $modalInstance.dismiss();
+        }
     }
 
     $scope.$watch('$viewContentLoaded', function () {

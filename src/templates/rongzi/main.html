@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="subscribe">
-        <button class="btn subscribe-btn" ng-click="vm.subscribe"><b>融资季专场，开场提醒订阅</b></button>
+        <button class="btn subscribe-btn" ng-click="vm.subscribe(item, $event)"><b>融资季专场，开场提醒订阅</b></button>
       </div>
       <div class="rongzi-text">
           <p>
@@ -47,7 +47,7 @@
   </div>
 
   <div class="rongzi rongzi-investor-wrapper">
-    <div ng-include="'templates/rongzi/mainSpecial.html'"></div>
+    <div ng-include="'templates/rongzi/mainSpecial.html'" ng-init="myObject = myCtrl.myObject; myOtherObject=myCtrl.myOtherObject"></div>
   </div>
   <div class="rongzi-block">
     <div class="rongzi-invest-arrow-left">
@@ -71,9 +71,8 @@
   </div>
 
   <div class="rongzi rongzi-list-wrapper">
-    <div ng-include="'templates/rongzi/mainSpecial.html'"></div>
+    <div ng-include="'templates/rongzi/mainSpecial.html'" ng-init="myObject = myCtrl.myObject; myOtherObject=myCtrl.myOtherObject"></div>
   </div>
-
 
   <div ng-include="'templates/rongzi/meiqia.html'"></div>
 </div>

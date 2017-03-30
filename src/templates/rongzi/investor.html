@@ -1,11 +1,14 @@
-<div class="investor-wrapper">
-  <div class="top">
-    <h1>明星投资人专场</h1>
+<div class="rongzi-common-backg investor-wrapper">
+  <div  ng-include="'templates/rongzi/common/top.html'" ng-init=" topdata = 'investor' ">
   </div>
-  <div class="content">
 
+  <div class="investor-content">
   </div>
-  <div class="footer">
 
+  <div class="investor-vacancy">
+      <b>虚位以待，请联系客服</b>
+  </div>
+
+  <div ng-include="'templates/rongzi/common/bottom.html'" ng-init="item = 'investor'">
   </div>
 </div>

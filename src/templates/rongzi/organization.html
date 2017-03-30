@@ -1,11 +1,15 @@
-<div class="organization-wrapper">
-  <div class="top">
-    <h1>顶级机构专场</h1>
+<div class="rongzi-common-backg organization-wrapper">
+  <div  ng-include="'templates/rongzi/common/top.html'" ng-init=" topdata = 'org'">
   </div>
-  <div class="content">
 
+  <div class="organization-content">
   </div>
-  <div class="footer">
 
+  <div class="organization-vacancy">
+      <b>虚位以待，请联系客服</b>
   </div>
+
+  <div ng-include="'templates/rongzi/common/bottom.html'" ng-init="item = 'org'">
+  </div>
+
 </div>

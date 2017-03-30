@@ -15,4 +15,3 @@ function OrganizationController(loading, $stateParams, ActivityService, $state, 
       $('.common-header.J_commonHeaderWrapper').remove();
   }
 }
-
