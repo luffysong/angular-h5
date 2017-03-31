@@ -3,7 +3,9 @@ angular.module('defaultApp.controller')
     .controller('HotFocusDetailController', HotFocusDetailController);
 
 function HotFocusDetailController(loading, FindService, ErrorService, $stateParams, hybrid, versionService) {
-    window.WEIXINSHARE = '';
+    window.WEIXINSHARE = {
+        shareButton: 'hide'
+    };
     $('body').css({
         backgroundColor: '#fff'
     });

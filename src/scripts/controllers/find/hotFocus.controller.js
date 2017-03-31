@@ -9,7 +9,9 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
         backgroundColor: '#fff'
     });
 
-    window.WEIXINSHARE = '';
+    window.WEIXINSHARE = {
+        shareButton: 'hide'
+    };
 
     // URL 信息
     vm.params = {
