@@ -16,9 +16,10 @@ function BestListController(loading, $stateParams, RongziService, $state, UserSe
     }
 
     function initData() {
-        RongziService.getProList({ page:1, pageSize:100 })
+        RongziService.getProList({ page:1, pageSize:10 })
             .then(function setProList(data) {
                     console.log(data);
+                    vm.prolist = data.data;
                 }).catch((err) => {
                         fail(err);
                     });

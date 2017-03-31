@@ -1,10 +1,14 @@
 
-<!-- <div>
-  <br /><br />
-    <button class="open-app" id ="open-app">打开APP</button>
+ <div style="height:40px; width:100px;background-color:red;color:white">
+    <center>
+      <a href="#" id ="open-app">打开App</a>
+    </center>
 </div>
-<div class="timer" id="timer">
-</div> -->
+
+<br />
+<br />
+<br />
+
 
 <script type='text/javascript'>
   var u = navigator.userAgent;
@@ -83,4 +87,28 @@
   //  cc.innerHTML = "距离"+year+"年"+month+"月"+day+"日还有："+day1+"天"+hour+"小时"+minute+"分"+second+"秒";
   }
 //  window.setInterval(function(){ShowCountDown(2017,4,6,'timer');}, interval);
+</script>
+<script>
+  var krdata = {};
+  krdata.type = "test";
+  //krdata.ios_custom_url = "krtou://";
+  //krdata.android_custom_url = "krtou://";
+  //console.log(window.linkedme);
+  krdata.params = '{"openlink":"Kr36"}';
+
+  window.linkedme.init("3a89d6c23e6988e0e600d63ca3c70636", {type: "test"}, function (err, res){
+    if (err) {
+        return;
+    }
+    window.linkedme.link(krdata, function(err, data) {
+      if (err) {
+        // 生成深度链接失败，返回错误对象err
+      } else {
+        // 生成深度链接成功，深度链接可以通过data.url得到
+        console.log(data.url);
+        $('#open-app').attr('href',data.url);
+      }
+    },false);
+  });
+
 </script>

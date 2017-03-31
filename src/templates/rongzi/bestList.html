@@ -15,39 +15,43 @@
           </p>
       </div>
   </div>
-
   <div class="bestlist-middle">
-      <div class="top3">
-
-      </div>
-      <div class="top3">
-
-      </div>
-      <div class="top3">
-
-      </div>
+      <span>上榜规则&nbsp;></span>
   </div>
-
   <div class="bestlist-content">
       <ul>
-          <li>
+          <li  class="dot" ng-style="{border-color: ($index <= 3)?'#ffb933':'#ef411d'}" ng-if="vm.prolist.data" ng-repeat=" item in vm.prolist.data track by $index" >
               <div class="content">
                   <div>
-                    <label>01</label>
+                    <label ng-if="$index < 9">0{{$index + 1}}</label>
+                    <label ng-if="$index >= 9">{{$index + 1}}</label>
                   </div>
-                    <div class="logo">
+                    <div ng-if="!item.logo" class="mg logo">
                     </div>
-                    <div>
+                    <div ng-if="item.logo" class="mg logo" style="background-image: url('{{item.logo}}')">
+                    </div>
+                    <div class="mg text">
                       <p>
-                        <h4>创投助手</h4>
+                        <span ng-if="item.name">{{item.name}}</span>
+                        <span ng-if="item.phase">{{item.phase}}</span>
                       </p>
-                        
+                      <p>
+                        {{item.brief}}
+                      </p>
+                    </div>
+                    <div class="mg praise">
+                          <span class="num" >
+                              {{item.rank}}
+                          </span>
+                          <div class="praise-btn">
+                                点赞
+                          </div>
                     </div>
               </div>
           </li>
       </ul>
   </div>
-
+  <div ng-include="'templates/rongzi/meiqia.html'"></div>
   <div class="bestlist-bottom">
     <div>
       返回融资季
