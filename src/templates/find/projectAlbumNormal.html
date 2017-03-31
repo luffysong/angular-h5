@@ -24,12 +24,17 @@
                     </a>
                 </li>
             </ul>
-            <footer ng-if="vm.busy && !vm.finish &&  vm.page">
-                    加载更多...
-                <img src="/styles/images/loading.svg" alt="loading">
-            </footer>
-            <footer ng-if="vm.responseData.length&&vm.finish">全部内容加载完毕</footer>
+            <!--<footer ng-if="vm.busy && !vm.finish &&  vm.page">-->
+                    <!--加载更多...-->
+                <!--<img src="/styles/images/loading.svg" alt="loading">-->
+            <!--</footer>-->
         </section>
+
+        <div class="daily-news-load-more" ng-if="vm.busy && !vm.finish &&  vm.page">
+            <p>加载更多··· </p>
+            <img src="/styles/images/loading.svg" alt="loading">
+        </div>
+        <footer ng-if="vm.responseData.length&&vm.finish">全部内容加载完毕</footer>
 
         <div ng-if="!vm.responseData.length&& vm.hasInit" class="find-no-data">
             <img src="/styles/images/find/search@2x.png" >
