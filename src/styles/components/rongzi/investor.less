@@ -166,11 +166,35 @@
   }
 
   .investor-vacancy {
-    width: 100%;
-    height: 78px;
-    color: white;
-    text-align: center;
-    font-size: 16px;
+      padding: 0 5px;
+    .investor-item {
+      margin-bottom: 10px;
+      background-color: #d1c0a5;
+      border-radius: 10px;
+      padding: 3px;
+      .list-border {
+        border: 1px dashed #02866f;
+        border-radius: 10px;
+        padding-bottom: 10px;
+        .site {
+          text-align: center;
+          background-color: #02866f;
+          color: #f8ebd6;
+          width: 80%;
+          margin: 0 auto;
+          line-height: 35px;
+          font-size: 22px;
+          font-weight: bold;
+          margin-top: 10px;
+          border-radius: 15px;
+        }
+        @media (max-width: 325px) {
+          .site {
+            font-size: 20px;
+          }
+        }
+      }
+    }
   }
 
 }
