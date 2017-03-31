@@ -15,7 +15,14 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         loading.show('findLoading');
         removeHeader();
         initTitle();
-        //console.log(UserService.getUID());
+        vm.pass = false;
+
+        if (UserService.getUID()) {
+            vm.pass = true;
+            vm.pwd = UserService.getUID();
+        }
+
+        console.log();
     }
 
     function start() {
@@ -101,9 +108,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
                             });
                         }
                     }
-                }).catch((err) => {
-                        fail(err);
-                    });
+                }).catch(fail);
     }
 
     function fail(err) {

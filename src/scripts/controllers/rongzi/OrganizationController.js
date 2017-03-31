@@ -28,15 +28,9 @@ function OrganizationController(loading, $stateParams, RongziService, $state, Us
                             vm.beforeA.push(dt);
                         }
                     });
-                    // if (data.data.data.projectCategory === 0) {
-                    //     vm.beforeA = data.data.data.sessions;
-                    // } else {
-                    //     vm.afterA = data.data.data.sessions;
-                    // }
+
                     initTitle(vm.result.title);
-                }).catch((err) => {
-                        fail(err);
-                    });
+                }).catch(fail);
 
     }
 

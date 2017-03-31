@@ -33,9 +33,7 @@ function CommunityController(loading, $stateParams, RongziService, $state, UserS
                     });
 
                     initTitle(vm.result.title);
-                }).catch((err) => {
-                        fail(err);
-                    });
+                }).catch(fail);
     }
 
     function initTitle(t) {

@@ -20,9 +20,7 @@ function BestListController(loading, $stateParams, RongziService, $state, UserSe
             .then(function setProList(data) {
                     console.log(data);
                     vm.prolist = data.data;
-                }).catch((err) => {
-                        fail(err);
-                    });
+                }).catch(fail);
     }
 
     function initTitle(t) {

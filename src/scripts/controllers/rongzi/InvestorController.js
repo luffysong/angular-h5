@@ -26,9 +26,7 @@ function InvestorController(loading, $stateParams, RongziService, $state, UserSe
                     });
 
                     initTitle(vm.result.title);
-                }).catch((err) => {
-                        fail(err);
-                    });
+                }).catch(fail);
     }
 
     function initTitle(t) {
