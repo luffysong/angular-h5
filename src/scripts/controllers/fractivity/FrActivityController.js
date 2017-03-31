@@ -28,7 +28,7 @@ function FrActivityController($stateParams, ActivityService, $state, UserService
             shareTitle: '36氪融资',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: '来「36氪创投助手」，发现最新最热优质项目！',
+            shareDesc: '来「创投助手」，发现最新最热优质项目！',
         };
 
         if (vm.activity.wxShareDesc) {
