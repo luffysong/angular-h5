@@ -1,4 +1,4 @@
-
+<!--
  <div style="height:40px; width:100px;background-color:red;color:white">
     <center>
       <a href="#" id ="open-app">打开App</a>
@@ -7,54 +7,8 @@
 
 <br />
 <br />
-<br />
+<br /> -->
 
-
-<script type='text/javascript'>
-  var u = navigator.userAgent;
-  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-  var isIos = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-  var isWeiXin = !!navigator.userAgent.match(/MicroMessenger/ig);
-
-  function preventPopup() { //定义preventPopup函数
-      clearTimeout(timeout);
-      window.removeEventListener('pagehide', preventPopup);
-  }
-
-  function startApp(androidUrl){ //定义startApp函数
-      var ifr = document.createElement('iframe');
-      ifr.src = androidUrl || appurl;
-      ifr.style.display = 'none';
-      document.body.appendChild(ifr);
-      window.setTimeout(function(){
-          document.body.removeChild(ifr);
-          ifr = null;
-      },500);
-      window.addEventListener('pagehide', preventPopup);
-  }
-
-  function goYingyongbao(prefix){
-      timeout = setTimeout(function(){
-          setTimeout(function() {
-              document.location = "http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment";
-          },200)
-      }, 1000);
-       window.addEventListener('pagehide', preventPopup);
-  }
-
-  $(function(){
-    $('#open-app').click(function(e){
-      e.preventDefault();
-      if(isAndroid){
-        startApp('krtou://');
-        goYingyongbao('android');
-      }else if(isIos){
-        startApp('krtou://');
-        goYingyongbao('ios');
-      }
-    });
-  })
-</script>
 <!--接入美洽客服系统-->
 <script type='text/javascript'>
     (function(m, ei, q, i, a, j, s) {
@@ -105,7 +59,7 @@
         // 生成深度链接失败，返回错误对象err
       } else {
         // 生成深度链接成功，深度链接可以通过data.url得到
-        console.log(data.url);
+        //console.log(data.url);
         $('#open-app').attr('href',data.url);
       }
     },false);
