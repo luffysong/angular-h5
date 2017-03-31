@@ -21,7 +21,7 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
 
     //获取投资人专场界面内容
     this.getInvestor = function (request) {
-        return $http.get(BASE_URL + '/session/investor' + $.param(request));
+        return $http.get(BASE_URL + '/session/investor?' + $.param(request));
     };
 
     //获取顶级机构专场界面内容

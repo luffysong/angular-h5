@@ -17,7 +17,14 @@ function InvestorController(loading, $stateParams, RongziService, $state, UserSe
         RongziService.getInvestor({ id: $stateParams.id })
             .then(function setCommunity(data) {
                     vm.result = data.data.data;
-                    console.log(data);
+                    vm.investors = [];
+                    angular.forEach(data.data.data.sessions,
+                      function (dt, index, array) {
+                        var nameArr = dt.name.split('');
+                        dt.nameArr = nameArr;
+                        vm.investors.push(dt);
+                    });
+
                     initTitle(vm.result.title);
                 }).catch((err) => {
                         fail(err);

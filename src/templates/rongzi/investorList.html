@@ -1,4 +1,30 @@
 <div class="investor-list">
+
+
+  <div class="investor-item" ng-if="vm.result.sessions" ng-repeat=" item in vm.investors">
+    <div class="list-border">
+      <div class="avatar"
+      style="background-image: url('{{item.logo}}')"></div>
+      <div class="investor-info">
+        <div class="name" >
+          <div ng-repeat="obj in item.nameArr"><span>{{obj}}</span></div>
+        </div>
+        <div class="arrows">
+          <img class="arr-l" src="/styles/images/rongzi/arrow.png"/>
+          <img src="/styles/images/rongzi/arrow.png"/>
+          <img class="arr-r" src="/styles/images/rongzi/arrow.png"/>
+        </div>
+        <div class="content" ng-bind="item.intro">
+          红杉资本全球执行合伙人，携程旅行网和如家连锁酒店创始人。榜单中排名第一的华人投资者。投资案例：奇虎360、阿里巴巴、陌陌、今日头条等。
+        </div>
+        <div class="time" ng-bind="item.startAt">
+          4月18日 AM 10：30
+        </div>
+      </div>
+    </div>
+  </div>
+<!--
+
   <div class="investor-item">
     <div class="list-border">
       <div class="avatar" style="background-image: url('https://krplus-pic.b0.upaiyun.com/org_logo/%E7%BB%8F%E7%BA%AC%E4%B8%AD%E5%9B%BD.jpg')"></div>
@@ -41,25 +67,6 @@
       </div>
     </div>
   </div>
-  <div class="investor-item">
-    <div class="list-border">
-      <div class="avatar" style="background-image: url('https://krplus-pic.b0.upaiyun.com/org_logo/%E7%BB%8F%E7%BA%AC%E4%B8%AD%E5%9B%BD.jpg')"></div>
-      <div class="investor-info">
-        <div class="name">
-          <div>胡</div><div>海</div><div>泉</div><div>专</div><div>场</div>
-        </div>
-        <div class="arrows">
-          <img class="arr-l" src="/styles/images/rongzi/arrow.png"/>
-          <img src="/styles/images/rongzi/arrow.png"/>
-          <img class="arr-r" src="/styles/images/rongzi/arrow.png"/>
-        </div>
-        <div class="content">
-          红杉资本全球执行合伙人，携程旅行网和如家连锁酒店创始人。榜单中排名第一的华人投资者。投资案例：奇虎360、阿里巴巴、陌陌、今日头条等。
-        </div>
-        <div class="time">
-          4月18日 AM 10：30
-        </div>
-      </div>
-    </div>
-  </div>
+
+-->
 </div>
