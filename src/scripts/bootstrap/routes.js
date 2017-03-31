@@ -414,6 +414,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/rongzi/investor.html',
     });
 
+    $stateProvider.state('rongzi.share', {
+        url:'/share?id',
+        controllerAs: 'vm',
+        controller: 'ShareController',
+        templateUrl: 'templates/rongzi/share.html',
+    });
+
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
     }
