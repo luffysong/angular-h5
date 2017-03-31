@@ -414,6 +414,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/rongzi/investor.html',
     });
 
+    $stateProvider.state('rongzi.bestlist', {
+        url:'/bestlist?id',
+        controllerAs: 'vm',
+        controller: 'BestListController',
+        templateUrl: 'templates/rongzi/bestlist.html',
+    });
+
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
     }
