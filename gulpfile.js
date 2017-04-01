@@ -196,8 +196,8 @@ gulp.task('scripts:init:services', function () {
 });
 
 gulp.task('scripts:init', [
-    'jshint',
-    'jscs',
+    //'jshint',
+    //'jscs',
     'scripts:init:controllers',
     'scripts:init:directives',
     'scripts:init:filters',

@@ -39,6 +39,11 @@ function ProjectAlbumController(demosService, projectColumnService, $state, $sta
     vm.more = more;
     vm.loadData = loadData;
 
+    vm.setTrack = function (evtName, obj) {
+        console.log(evtName, obj);
+        sa.track(evtName, obj);
+    }
+
     init();
     function init() {
         $('html').css('overflow', '');
