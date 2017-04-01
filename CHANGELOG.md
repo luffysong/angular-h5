@@ -1,3 +1,13 @@
+<a name="1.25.2"></a>
+## [1.25.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.25.1...v1.25.2) (2017-04-01)
+
+
+### Bug Fixes
+
+* 默认logo展示 ([658ebcc](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/658ebcc))
+
+
+
 <a name="1.25.1"></a>
 ## [1.25.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.25.0...v1.25.1) (2017-04-01)
 
