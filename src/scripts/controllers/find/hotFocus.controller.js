@@ -51,6 +51,48 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
     // 打开公司页
     vm.openNativePage = openNativePage;
 
+    //筛选项操作事件
+    vm.selectTrack = function (evtName, item) {
+        vm.goToSee(item);
+        var obj = {select: ''};
+        if (vm.params.eventEnum === 'SEARCH') {
+            if (vm.params.intervalEnum === 'DAY') {
+                obj.select = 'search_day';
+            } else if (vm.params.intervalEnum === 'WEEK') {
+                obj.select = 'search_week';
+            } else {
+                obj.select = 'search_month';
+            }
+        }
+        if (vm.params.eventEnum === 'FOCUS') {
+            if (vm.params.intervalEnum === 'DAY') {
+                obj.select = 'workbench_day';
+            } else if (vm.params.intervalEnum === 'WEEK') {
+                obj.select = 'workbench_week';
+            } else {
+                obj.select = 'workbench_month';
+            }
+        }
+        if (vm.params.eventEnum === 'TALK') {
+            if (vm.params.intervalEnum === 'DAY') {
+                obj.select = 'contact_day';
+            } else if (vm.params.intervalEnum === 'WEEK') {
+                obj.select = 'contact_week';
+            } else {
+                obj.select = 'contact_month';
+            }
+        }
+        sa.track(evtName, obj);
+        console.log(evtName, obj);
+    };
+
+    //跳转到走势页面事件 obj:sa对象，item跳转参数对象
+    vm.trendTrack = function (evtName, obj, item) {
+        vm.goToDetail(item.cid, item.structuredTitle);
+        sa.track(evtName, obj);
+        console.log(evtName, obj);
+    }
+
     function init() {
         FindService.getHotFocus({
             eventEnum: vm.params.eventEnum,

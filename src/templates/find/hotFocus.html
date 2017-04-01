@@ -2,19 +2,19 @@
     <ul class="hot-focus-filter top-filter">
         <li class="filter-item"
             ng-class="{'active': vm.params.eventEnum === 'SEARCH'}"
-            ng-click="vm.goToSee({eventEnum: 'SEARCH'})"
+            ng-click="vm.selectTrack('ClickHotspot', {eventEnum: 'SEARCH'})"
         >
             搜索
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.eventEnum === 'FOCUS'}"
-            ng-click="vm.goToSee({eventEnum: 'FOCUS'})"
+            ng-click="vm.selectTrack('ClickHotspot', {eventEnum: 'FOCUS'})"
         >
             收藏
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.eventEnum === 'TALK'}"
-            ng-click="vm.goToSee({eventEnum: 'TALK'})"
+            ng-click="vm.selectTrack('ClickHotspot', {eventEnum: 'TALK'})"
         >
             约谈
         </li>
@@ -22,19 +22,19 @@
     <ul class="hot-focus-filter bottom-filter">
         <li class="filter-item"
             ng-class="{'active': vm.params.intervalEnum === 'DAY'}"
-            ng-click="vm.goToSee({intervalEnum: 'DAY'})"
+            ng-click="vm.selectTrack('ClickHotspot', {intervalEnum: 'DAY'})"
         >
             <span>按天</span>
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.intervalEnum === 'WEEK'}"
-            ng-click="vm.goToSee({intervalEnum: 'WEEK'})"
+            ng-click="vm.selectTrack('ClickHotspot', {intervalEnum: 'WEEK'})"
         >
             <span>按周</span>
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.intervalEnum === 'MONTH'}"
-            ng-click="vm.goToSee({intervalEnum: 'MONTH'})"
+            ng-click="vm.selectTrack('ClickHotspot', {intervalEnum: 'MONTH'})"
         >
             <span>按月</span>
         </li>
@@ -44,7 +44,7 @@
             ng-repeat="(index, item) in vm.focusList"
         >
             <div class="item-left"
-                ng-click="vm.goToDetail(item.cid, item.structuredTitle)"
+                ng-click="vm.trendTrack('ClickHotspot', { target: 'trend', hotspot_id: item.cid, company_id: item.cid, hotspot_index: $index }, item)"
             >
                 <div class="item-title">
                     [<span>{{item.name}}</span>] {{item.structuredTitle}}

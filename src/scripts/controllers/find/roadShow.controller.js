@@ -40,7 +40,7 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
     vm.calendarDateTrack = function (evtName, obj, item) {
         console.log(evtName, obj);
-        vm.noDataClick(item)
+        vm.noDataClick(item);
         sa.track(evtName, obj);
     };
 
