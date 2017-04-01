@@ -428,6 +428,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/rongzi/share.html',
     });
 
+    $stateProvider.state('rongzi.enroll', {
+        url:'/enroll?id',
+        controllerAs: 'vm',
+        controller: 'EnrollController',
+        templateUrl: 'templates/rongzi/enroll.html',
+    });
+
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
     }
