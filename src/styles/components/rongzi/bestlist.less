@@ -16,7 +16,7 @@
 
     .bestlist-btn{
       width:100%;
-      height: 50px;
+      height: 55px;
       background: url('images/rongzi/bestlist-txt1.png') no-repeat center;
     }
 
@@ -54,11 +54,10 @@
       padding: 0;
       width: 100%;
       .yew-dot{
-        //border: 2px dotted #ffb933;
+        border: 2px dotted #ffb933;
       }
-      .dot{
-        border-style:dotted;
-        border-width: 2px;
+      .red-dot{
+        border: 2px dotted #ef411d;
       }
       li{
         margin: 0 auto;
@@ -88,11 +87,47 @@
             color: white;
             line-height: 60px;
           }
-          .logo{
+          .b-logo{
             height: 60px;
             width: 60px;
+            position: relative;
             border-radius: 5px;
             background: url('https://krplus-pic.b0.upaiyun.com/avatar/201703/23114734/4chxz1sl9cwqe7h7.png') no-repeat center;
+            .crown{
+              position: absolute;
+              height: 25px;
+              width: 25px;
+              margin-left: -15px;
+              margin-top: -15px;
+            }
+            .gold{
+              background-size: contain;
+              background: url('images/rongzi/gold.png') no-repeat center;
+              @media screen and (max-width: 375px){
+                  background-size: cover;
+              }
+              @media screen and (max-width: 320px){
+                  background-size: cover;
+              }
+            }
+            .silver{
+              background: url('images/rongzi/silver.png') no-repeat center;
+              @media screen and (max-width: 375px){
+                  background-size: cover;
+              }
+              @media screen and (max-width: 320px){
+                  background-size: cover;
+              }
+            }
+            .copper{
+              background: url('images/rongzi/copper.png') no-repeat center;
+              @media screen and (max-width: 375px){
+                  background-size: cover;
+              }
+              @media screen and (max-width: 320px){
+                  background-size: cover;
+              }
+            }
           }
           .text{
             width: 50%;
@@ -158,13 +193,19 @@
           }
         }
       }
+      li:last-child{
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        color:#ffeecf;
+      }
     }
   }
 
   .bestlist-bottom{
     background-color: #ef411d;
     height: 40px;
-    font-size: 18px;
+    font-size: 16px;
     color:#ffeecf;
     font-weight: bold;
     div{

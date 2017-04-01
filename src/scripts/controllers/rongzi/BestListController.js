@@ -4,6 +4,9 @@ angular.module('defaultApp.controller')
 
 function BestListController(loading, $stateParams, RongziService, $state, UserService, ErrorService) {
     var vm = this;
+    vm.displayMore = displayMore;
+    vm.page = 0;
+    vm.prolist = [];
     init();
     function init() {
         removeHeader();
@@ -16,11 +19,30 @@ function BestListController(loading, $stateParams, RongziService, $state, UserSe
     }
 
     function initData() {
-        RongziService.getProList({ page:1, pageSize:10 })
-            .then(function setProList(data) {
-                    console.log(data);
-                    vm.prolist = data.data;
+        console.log('===', vm.page);
+        var sendata = {
+            page: vm.page + 1,
+            pageSize:10,
+        };
+        console.log(sendata);
+        RongziService.getProList(sendata)
+            .then(function setProList(response) {
+                    console.log(response.data);
+                    vm.prolist = vm.prolist.concat(response.data.data);
+
+                    if (response.data.totalPages) {
+                        vm.page = response.data.page || 0;
+                        if (response.data.totalPages !== vm.page) {
+                            vm.busy = false;
+                        } else {
+                            vm.finish = true;
+                        }
+                    }
                 }).catch(fail);
+    }
+
+    function displayMore() {
+        initData();
     }
 
     function initTitle(t) {

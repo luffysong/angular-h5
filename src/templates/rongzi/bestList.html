@@ -20,16 +20,23 @@
   </div>
   <div class="bestlist-content">
       <ul>
-          <li  class="dot" ng-style="{border-color: ($index <= 3)?'#ffb933':'#ef411d'}" ng-if="vm.prolist.data" ng-repeat=" item in vm.prolist.data track by $index" >
+          <li   ng-class="{true:'yew-dot',false:'red-dot'}[$index <= 2]" ng-if="vm.prolist" ng-repeat=" item in vm.prolist track by $index" >
               <div class="content">
                   <div>
                     <label ng-if="$index < 9">0{{$index + 1}}</label>
                     <label ng-if="$index >= 9">{{$index + 1}}</label>
                   </div>
-                    <div ng-if="!item.logo" class="mg logo">
+                    <div ng-if="!item.logo" class="mg b-logo">
                     </div>
-                    <div ng-if="item.logo" class="mg logo" style="background-image: url('{{item.logo}}')">
+                    <div ng-if="item.logo" class="mg b-logo" style="background-image: url('{{item.logo}}')">
+                      <div class="crown" ng-class="{true:'gold',false:''}[$index == 0]">
+                      </div>
+                      <div class="crown" ng-class="{true:'silver',false:''}[$index == 1]">
+                      </div>
+                      <div class="crown" ng-class="{true:'copper',false:''}[$index == 2]">
+                      </div>
                     </div>
+
                     <div class="mg text">
                       <p>
                         <span ng-if="item.name">{{item.name}}</span>
@@ -49,9 +56,13 @@
                     </div>
               </div>
           </li>
+          <li class="more" ng-click="vm.displayMore()">
+            查看更多
+          </li>
       </ul>
   </div>
-  <div ng-include="'templates/rongzi/meiqia.html'"></div>
+
+
   <div class="bestlist-bottom">
     <div>
       返回融资季
