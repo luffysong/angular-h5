@@ -26,7 +26,7 @@
                                du-scrollspy
                                offset="91" du-scroll-container="contentScroll"
                                ng-class="{today:(item.today == true), active:item.active}"
-                               ng-click="vm.noDataClick(item)">
+                               ng-click="vm.calendarDateTrack('ClickSet',{target:'calendar_date'},item)">
                                 <div class="item-active">
                                     <p class="item-day">{{item.dayInt}}</p>
                                     <p class="item-month" ng-bind="item.month | month"></p>

@@ -37,6 +37,13 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     vm.more = more;
     vm.arrow = arrow;
 
+
+    vm.calendarDateTrack = function (evtName, obj, item) {
+        console.log(evtName, obj);
+        vm.noDataClick(item)
+        sa.track(evtName, obj);
+    };
+
     init();
     loading.show('roadShowLoading');
 
