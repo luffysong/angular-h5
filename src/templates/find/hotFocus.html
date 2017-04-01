@@ -63,6 +63,9 @@
             >{{!item.logo ? (item.name | demoNameDufault2) : ''}}</div>
         </div>
     </div>
+    <div class="hot-focus-list-nomore" ng-if="!loadingInst.hotFocus && vm.focusList.length">
+        <p>全部内容加载完毕</p>
+    </div>
     <div class="hot-focus-list-empty" ng-if="!loadingInst.hotFocus && !vm.focusList.length">
         <img src="/styles/images/find/empty.png" alt="数据为空">
         <p>暂无相关数据</p>
