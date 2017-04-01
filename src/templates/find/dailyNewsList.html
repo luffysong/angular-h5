@@ -12,7 +12,7 @@
                 <ul>
                     <li ontouchstart="" kr-active="'active'" ng-repeat="item in itemData.reports track by $index">
                         <div class="dailyNews-content-href">
-                            <div class="base-info-detail" ng-click="vm.link(item.ccid, item.link)">
+                            <div class="base-info-detail" ng-click="vm.sensorsTrack('ClickNews', { target: 'news', company_id: item.ccid, news_id: item.id, news_url: item.link, news_index: $index })">
                                 <h3 class="header-info">
                                     <text-line-clamp line-clamp='2' text="item.title">
                                         <div class="text-container">
