@@ -8,6 +8,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
     var vm = this;
     vm.subscribe = subscribe;
     vm.detail = moreDetail;
+    vm.needApp = true;
     init();
 
     function init() {
@@ -15,15 +16,10 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         loading.show('findLoading');
         removeHeader();
         initTitle();
-        initLinkme();
-        vm.pass = false;
-
-        if (UserService.getUID()) {
-            vm.pass = true;
-            vm.pwd = UserService.getUID();
+        if (!hybrid.isInApp) {
+            initLinkme();
+            vm.needApp = false;
         }
-
-        console.log();
     }
 
     function start() {
@@ -82,9 +78,14 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         vm.item = obj;
         vm.ktm_source = 'hot_more';
         vm.cancel = cancel;
+        init();
 
         function cancel() {
             $modalInstance.dismiss();
+        }
+
+        function init() {
+
         }
     }
 
@@ -96,6 +97,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         RongziService.getHome()
             .then(function setHomeData(data) {
                     vm.result = data.data.data;
+                    vm.remind = data.data.data.remind;
                     vm.starList = data.data.data.startupProjectVoList;
                     if (vm.result.sessionCustomVoList) {
                         if (vm.result.sessionCustomVoList.length > 0) {
@@ -132,7 +134,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
                         } else {
                             // 生成深度链接成功，深度链接可以通过data.url得到
                             console.log(data.url);
-                            $('#main-open').attr('href', krdata.url);
+                            $('#main-open').attr('href', data.url);
                         }
                     }, false);
             });

@@ -8,9 +8,16 @@
         </div>
       </div>
       <div class="subscribe">
-        <!-- <button  ></button> -->
           <a href="javascript:void(0)" id ="main-open" class="btn subscribe-btn"
-          ng-click="vm.subscribe(item, $event)"><b>融资季专场，开场提醒订阅</b></a>
+           ng-show="!vm.needApp">
+           <b ng-if="vm.remind === 1">融资季专场，开场提醒订阅</b>
+           <b ng-if="vm.remind === 0">取消提醒订阅</b>
+         </a>
+          <a  id ="main-open" class="btn subscribe-btn"
+          ng-click="vm.subscribe(item, $event)" ng-show="vm.needApp">
+          <b ng-if="vm.remind === 1">融资季专场，开场提醒订阅</b>
+          <b ng-if="vm.remind === 0">取消提醒订阅</b>
+        </a>
       </div>
       <div class="rongzi-text">
           <p>

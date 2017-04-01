@@ -5,8 +5,18 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
     var BASE_URL = '/api/mobi-investor/activity/funding_season';
 
     //取消开场提醒
-    this.cancelRemind = function (request) {
+    this.cancelSubscribe = function (request) {
         return $http.put(BASE_URL + '/session/remind?' +  $.param(request));
+    };
+
+    //设置开场提醒
+    this.setSubscribe = function (request) {
+        return $http.post(BASE_URL + '/subscibe?' + $.param(request));
+    };
+
+    //设置Email
+    this.setEmail = function (request) {
+        return $http.put(BASE_URL + '/subscibe/email?' + $.param(request));
     };
 
     //设置开场提醒
@@ -58,4 +68,5 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
     this.getProDetail = function (id) {
         return $http.get(BASE_URL + '/startup_project/' + id);
     };
+
 });
