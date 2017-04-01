@@ -12,7 +12,7 @@
                         tou-open path="'projectsSet/'+ item.id + '?ktm_source=hot'">-->
                     <a href="javascript:void(0);" ui-sref="demos({id: item.id})" class="box">
                         <div class="pro-pic">
-                            <div class="pro-num" ng-style="{'background-image':'url({{item.headPic | image}})'}">
+                            <div class="pro-num" ng-style="{'background-image':'url({{item.headPic | image:200}})'}">
                                 <span class="item-num">{{item.proCount}}个项目</span>
                             </div>
                         </div>

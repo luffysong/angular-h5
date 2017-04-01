@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="item-right" ng-class="{nopic: item.logo==''}"
-                ng-style="item.logo==''?{'background-color':'{{item.cid | demoDefaultColor}}'}:{'background-image': 'url({{item.logo}})'}"
+                ng-style="item.logo==''?{'background-color':'{{item.cid | demoDefaultColor}}'}:{'background-image': 'url({{item.logo | image:120}})'}"
                 ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusList.' + item.cid)"
             >{{item.logo==''?(item.name | demoNameDufault2):''}}</div>
         </div>
