@@ -1,3 +1,13 @@
+<a name="1.25.1"></a>
+## [1.25.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.25.0...v1.25.1) (2017-04-01)
+
+
+### Bug Fixes
+
+* default logo ([5ecf8ad](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5ecf8ad))
+
+
+
 <a name="1.25.0"></a>
 # [1.25.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.24.12...v1.25.0) (2017-04-01)
 
