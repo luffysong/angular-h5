@@ -1,3 +1,13 @@
+<a name="1.25.4"></a>
+## [1.25.4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.25.3...v1.25.4) (2017-04-01)
+
+
+### Bug Fixes
+
+* 关注热点页面加载更多 ([08862ef](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/08862ef))
+
+
+
 <a name="1.25.3"></a>
 ## [1.25.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.25.2...v1.25.3) (2017-04-01)
 
