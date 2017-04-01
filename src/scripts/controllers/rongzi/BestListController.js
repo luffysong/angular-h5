@@ -1,19 +1,22 @@
 var angular = require('angular');
 angular.module('defaultApp.controller')
   .controller('BestListController', BestListController);
-
-function BestListController(loading, $stateParams, RongziService, $state, UserService, ErrorService) {
+function BestListController(loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid, $timeout) {
     var vm = this;
     vm.displayMore = displayMore;
     vm.page = 0;
     vm.prolist = [];
     vm.more = false;
+    vm.like = like;
 
     init();
     function init() {
         removeHeader();
         loading.hide('findLoading');
         initData();
+        if (!hybrid.isInApp) {
+            initLinkdme();
+        }
     }
 
     function removeHeader() {
@@ -38,6 +41,39 @@ function BestListController(loading, $stateParams, RongziService, $state, UserSe
                         }
                     }
                 }).catch(fail);
+    }
+
+    function like() {
+        if(!UserService.getUID()){
+            window.location.href = 'https://passport.36kr.com/pages';
+        }
+    }
+
+    function initLinkdme() {
+        var krdata = {};
+        krdata.type = 'test';
+        krdata.params =
+        '{"openlink":"http://local.rongh5.36kr.com/#/rongzi/bestlist","currentRoom":"1","weburl":"http://local.rongh5.36kr.com/#/rongzi/bestlist"}';
+        window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
+        { type: 'test' }, function (err, res) {
+                if (err) {
+                    return;
+                }
+
+                window.linkedme.link(krdata, function (err, data) {
+                        if (err) {
+                            // 生成深度链接失败，返回错误对象err
+                            console.log(err);
+                        } else {
+                            // 生成深度链接成功，深度链接可以通过data.url得到
+                            $timeout(function () {
+                                $('#like-btn').attr('href', data.url);
+                            }, 1000);
+
+
+                        }
+                    }, false);
+            });
     }
 
     function displayMore() {
