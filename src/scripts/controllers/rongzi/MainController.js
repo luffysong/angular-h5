@@ -4,7 +4,7 @@ angular.module('defaultApp.controller')
     .controller('MainController', MainController);
 
 function MainController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, RongziService, ErrorService) {
+    $state, UserService, RongziService, ErrorService, hybrid) {
     var vm = this;
     vm.subscribe = subscribe;
     vm.detail = moreDetail;
@@ -15,6 +15,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         loading.show('findLoading');
         removeHeader();
         initTitle();
+        initLinkme();
         vm.pass = false;
 
         if (UserService.getUID()) {
@@ -60,17 +61,19 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
     function subscribe(item, e) {
         e.preventDefault();
         e.stopPropagation();
-        $modal.open({
-            templateUrl: 'templates/rongzi/common/remindAlert.html',
-            windowClass: 'nativeAlert_wrap',
-            controller: modalController,
-            controllerAs: 'vm',
-            resolve: {
-                obj: function () {
-                    return item;
+        if (hybrid.isInApp && UserService.getUID()) {
+            $modal.open({
+                templateUrl: 'templates/rongzi/common/remindAlert.html',
+                windowClass: 'nativeAlert_wrap',
+                controller: modalController,
+                controllerAs: 'vm',
+                resolve: {
+                    obj: function () {
+                        return item;
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     function modalController($modalInstance, obj, hybrid) {
@@ -109,6 +112,30 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
                         }
                     }
                 }).catch(fail);
+    }
+
+    function initLinkme() {
+        var krdata = {};
+        krdata.type = 'test';
+        krdata.params =
+        '{"openlink":"http://rongh5.local.36kr.com/#/rongzi/main","currentRoom":"1","weburl":"http://rongh5.local.36kr.com/#/rongzi/main"}';
+        window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
+        { type: 'test' }, function (err, res) {
+                if (err) {
+                    return;
+                }
+
+                window.linkedme.link(krdata, function (err, data) {
+                        if (err) {
+                            // 生成深度链接失败，返回错误对象err
+                            console.log(err);
+                        } else {
+                            // 生成深度链接成功，深度链接可以通过data.url得到
+                            console.log(data.url);
+                            $('#main-open').attr('href', krdata.url);
+                        }
+                    }, false);
+            });
     }
 
     function fail(err) {

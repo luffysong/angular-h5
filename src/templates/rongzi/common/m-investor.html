@@ -1,12 +1,14 @@
 <div class="main-special">
   <div class="outer-border">
     <div class="inner-border">
-      <div class="special-title">
+      <div class="m-title special-title ">
         <span >{{vm.investor.secondTitle}}</span>
       </div>
       <div class="split-border"></div>
-      <div class="special-content">
-        <span ng-model="vm.investor.ruleDescription" ng-if="vm.investor.ruleDescription">每日24：00统计更新，创业者自主投递项目参选，根据24小时内对接数取前三名展示，展示时长24小时。</span>
+      <div class="m-txt special-content ">
+        <span ng-bind="vm.investor.ruleDescription"
+        ng-if="vm.investor.ruleDescription">
+        </span>
       </div>
       <div class="split-border"></div>
       <div class="special-logo">

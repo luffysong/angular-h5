@@ -45,8 +45,8 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
     };
 
     //获取创业项目榜单列表
-    this.getProList = function () {
-        return $http.get(BASE_URL + '/startup_project/list?');
+    this.getProList = function (request) {
+        return $http.get(BASE_URL + '/startup_project/list?' + $.param(request));
     };
 
     //获取当前管理的项目

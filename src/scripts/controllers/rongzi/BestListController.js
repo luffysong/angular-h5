@@ -7,6 +7,8 @@ function BestListController(loading, $stateParams, RongziService, $state, UserSe
     vm.displayMore = displayMore;
     vm.page = 0;
     vm.prolist = [];
+    vm.more = false;
+
     init();
     function init() {
         removeHeader();
@@ -19,23 +21,20 @@ function BestListController(loading, $stateParams, RongziService, $state, UserSe
     }
 
     function initData() {
-        console.log('===', vm.page);
         var sendata = {
             page: vm.page + 1,
             pageSize:10,
         };
-        console.log(sendata);
         RongziService.getProList(sendata)
             .then(function setProList(response) {
-                    console.log(response.data);
                     vm.prolist = vm.prolist.concat(response.data.data);
-
                     if (response.data.totalPages) {
                         vm.page = response.data.page || 0;
                         if (response.data.totalPages !== vm.page) {
                             vm.busy = false;
                         } else {
                             vm.finish = true;
+                            vm.more = true;
                         }
                     }
                 }).catch(fail);

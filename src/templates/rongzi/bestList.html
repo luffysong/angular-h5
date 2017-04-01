@@ -47,16 +47,18 @@
                       </p>
                     </div>
                     <div class="mg praise">
-                          <span class="num" >
-                              {{item.rank}}
-                          </span>
+                      <div>
+                        <span class="num" >
+                            {{item.rank}}
+                        </span>
+                      </div>
                           <div class="praise-btn">
-                                点赞
+                            <button>点赞</button>
                           </div>
                     </div>
               </div>
           </li>
-          <li class="more" ng-click="vm.displayMore()">
+          <li class="more" ng-click="vm.displayMore()" ng-show="!vm.more">
             查看更多
           </li>
       </ul>
@@ -64,13 +66,13 @@
 
 
   <div class="bestlist-bottom">
-    <div>
+    <div ui-sref="rongzi.main">
       返回融资季
     </div>
-    <div>
+    <div id ="signup" ui-sref="rongzi.enroll">
       我要报名
     </div>
-    <div>
+    <div id ="signup">
       助力创业者
     </div>
   </div>
