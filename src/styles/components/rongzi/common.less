@@ -143,6 +143,95 @@
 }
 
 
+
+.nativeAlert_wrap {
+    background: rgba(0,0,0,0.60);
+    overflow: visible;
+
+    .modal-dialog {
+        margin-top: 65px;
+        //margin-left: 7.5%;
+        //margin-right: 7.5%;
+    }
+    .modal-content {
+        padding-bottom: 0;
+        overflow: visible;
+    }
+    .modal-content {
+        border: none 0;
+        width:80%;
+        margin: 0 auto;
+        background-color: rgba(252,73,30,1);
+    }
+    .remindAlert_pop {
+        position: relative;
+        overflow: visible;
+        padding-top: 15px;
+        border-radius: 10px;
+
+        h4 {
+            text-align: center;
+            margin: 0 30px;
+            font-size: 16px;
+            color: @pushTxt;
+            letter-spacing: 0px;
+            line-height: 19.5px;
+            font-weight: 600;
+        }
+        .pop-content{
+          position: relative;
+          min-height: 300px;
+          height: auto;
+          text-align: center;
+          p{
+            margin: 0 auto;
+            width:80%;
+            text-align: left;
+            color:#FFF;
+            font-size: 12px;
+            line-height: 20px;
+            margin-top:10px;
+            input{
+                width: 80%;
+            }
+          }
+        }
+        .pop-bottom{
+          width: 100%;
+          min-height: 40px;
+          height: auto;
+          font-size: 15px;
+          position: absolute;
+          bottom:0px;
+          background-color: rgba(252,73,30,1);
+          color: @pushTxt;
+          //border-top: 1px dotted @pushTxt;
+          div{
+            width: 100%;
+            border-top: 1px dotted @pushTxt;
+          }
+          .pop-investor{
+              display: inline-block;
+              width: 100%;
+              text-align: center;
+              color: #f8f5ae;
+              font-weight: bold;
+              font-size: 12px;
+              height: 30px;
+              line-height: 30px;
+          }
+          h4{
+            text-align: center;
+            width: 100%;
+            display: inline-block;
+            line-height: 40px;
+            margin: 0 auto;
+          }
+        }
+    }
+}
+
+
 @media screen and (max-width: 414px) {
   .rongzi-common-top{
       background-size: 414px 100%;

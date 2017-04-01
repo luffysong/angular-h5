@@ -61,7 +61,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         e.preventDefault();
         e.stopPropagation();
         $modal.open({
-            templateUrl: 'templates/rongzi/remindAlert.html',
+            templateUrl: 'templates/rongzi/common/remindAlert.html',
             windowClass: 'nativeAlert_wrap',
             controller: modalController,
             controllerAs: 'vm',
