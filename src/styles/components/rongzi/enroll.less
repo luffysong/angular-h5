@@ -1,19 +1,105 @@
 .enroll-wrapper {
-
+  padding: 0 10px;
   .organization-content {
     .enroll-list {
       .enroll-item {
         border: 1px dashed #ff4800;
+        padding: 10px 0px 10px 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
         .logo {
+          vertical-align:top;
           display: inline-block;
           border-radius: 5px;
-          width: 80px;
-          height: 80px;
+          width: 70px;
+          height: 70px;
           background: #fff no-repeat 50%;
           background-size: contain;
         }
+        @media (max-width: 380px) {
+          .logo {
+            width: 65px;
+            height: 65px;
+          }
+        }
+        @media (max-width: 325px) {
+          .logo {
+            width: 60px;
+            height: 60px;
+          }
+        }
         .enroll-info {
+          vertical-align:top;
           display: inline-block;
+          width: 53%;
+          margin-left: 15px;
+          .name {
+            display: inline-block;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffb400;
+          }
+          .phase {
+            display: inline-block;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffb400;
+            margin-left: 40px;
+          }
+          @media (max-width: 325px) {
+            .name, .phase {
+              font-size: 16px;
+            }
+          }
+          .intro {
+            font-size: 16px;
+            color: #d1c5aa;
+          }
+          @media (max-width: 380px) {
+            .intro {
+              font-size: 14px;
+            }
+          }
+          @media (max-width: 325px) {
+            .intro {
+              line-height: 20px;
+            }
+          }
+        }
+        @media (max-width: 325px) {
+          .enroll-info {
+            width: 50%;
+            margin-left: 5px;
+          }
+        }
+        .enrool-btn {
+          vertical-align:top;
+          padding-top: 10px;
+          text-align: center;
+          display: inline-block;
+          background-color: #cd0010;
+          width: 70px;
+          height: 70px;
+          border-radius: 5px;
+          font-size: 18px;
+          font-weight: bold;
+          color: #FFF;
+        }
+        @media (max-width: 380px) {
+          .enrool-btn {
+            padding-top: 8px;
+            width: 65px;
+            height: 65px;
+            font-size: 18px;
+          }
+        }
+        @media (max-width: 325px) {
+          .enrool-btn {
+            width: 60px;
+            height: 60px;
+            font-size: 16px;
+            padding-top: 5px;
+          }
         }
       }
     }
