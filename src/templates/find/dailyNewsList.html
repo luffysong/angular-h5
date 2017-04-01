@@ -35,10 +35,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="basic-info-logo"
-                                style="background-image: url({{item.logo | image:120}});"
+                            <div class="basic-info-logo" ng-class="{nopic: !item.logo}"
+                                ng-style="!item.logo ? {'background-color': '{{item.ccid | demoDefaultColor}}'} : {'background-image': 'url({{item.logo | image:120}})'}"
                                 ng-click="vm.openNativePage('crmCompany/' + item.ccid + '?ktm_source=find.dailyNews.' + item.ccid)"
-                            ></div>
+                            >
+                                {{!item.logo ? (item.name | demoNameDufault2) : ''}}
+                            </div>
                         </div>
                     </li>
                 </ul>
