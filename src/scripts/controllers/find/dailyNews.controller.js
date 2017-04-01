@@ -31,7 +31,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
 
     function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '每日报道',
+            shareTitle: '媒体热议',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '来「36氪创投助手」，发现最新最热优质项目！',
