@@ -1,6 +1,9 @@
 <div class="rongzi-common-top">
 
-  <div class="rongzi-common-logo">
+  <div class="rongzi-common-logo" ng-if="topdata !== 'enroll' ">
+  </div>
+
+  <div class="rongzi-common-logo-enroll" ng-if="topdata === 'enroll' ">
   </div>
 
   <div class="rongzi-common-textbtn-community" ng-if="topdata === 'community' ">
@@ -8,6 +11,31 @@
   <div class="rongzi-common-textbtn-org" ng-if="topdata === 'org'">
   </div>
   <div class="rongzi-common-textbtn-investor" ng-if="topdata === 'investor'">
+  </div>
+  <div class="rongzi-common-textbtn-enroll" ng-if="topdata === 'enroll'">
+  </div>
+  <div class="rongzi-enroll-text" ng-if="topdata === 'enroll'">
+      <p>
+            以下就是你的梦想(项目)合集啦，点选项目右侧“报名融资季”立刻让朋友们为你的梦想点赞吧！
+            找到与你最Match的投资人！
+      </p>
+      <ul>
+        <li>
+            创建/认领新项目将在两个工作日内审核，结果通过短信告知，请保持关注；
+        </li>
+        <li>
+            未报名项目，点击“报名融资季” 即可参与报名；
+        </li>
+        <li>
+            已报名项目，点击“查看分享页” 获取该项目点赞分享页面；
+        </li>
+        <li>
+            若项目信息完善，有完整的BP，会更受投资人青睐哦；
+        </li>
+      </ul>
+  </div>
+  <div class="rongzi-enroll-btn" ng-if="topdata === 'enroll'">
+      <button>管理项目（4）</button>
   </div>
 
   <div class="rongzi-common-pushtext" ng-if="topdata === 'org'">
