@@ -57,10 +57,10 @@
                     <!--<span class="item-industry-cont">{{item.industryStr}}</span>-->
                 </div>
             </div>
-            <div class="item-right" ng-class="{nopic: item.logo==''}"
-                ng-style="item.logo==''?{'background-color':'{{item.cid | demoDefaultColor}}'}:{'background-image': 'url({{item.logo | image:120}})'}"
+            <div class="item-right" ng-class="{nopic: !item.logo}"
+                ng-style="!item.logo ? {'background-color': '{{item.cid | demoDefaultColor}}'} : {'background-image': 'url({{item.logo | image:120}})'}"
                 ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusList.' + item.cid)"
-            >{{item.logo==''?(item.name | demoNameDufault2):''}}</div>
+            >{{!item.logo ? (item.name | demoNameDufault2) : ''}}</div>
         </div>
     </div>
     <div class="hot-focus-list-empty" ng-if="!loadingInst.hotFocus && !vm.focusList.length">
