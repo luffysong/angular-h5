@@ -16,9 +16,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     vm.openNativePage = openNativePage;
 
     vm.sensorsTrack = function(evtName, obj) {
-        console.log(evtName, obj);
         vm.link(obj.company_id, obj.news_url);
-        sa.track(evtName, obj);
     };
 
     init();
