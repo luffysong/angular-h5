@@ -12,6 +12,7 @@ function BestListController($modal, loading, $stateParams, FindService,
     vm.needApp = true;
     vm.investRole = false;
     vm.signUp = signUp;
+    vm.like = like;
 
     init();
     function init() {
@@ -133,23 +134,6 @@ function BestListController($modal, loading, $stateParams, FindService,
         }
     }
 
-    function like(id) {
-        if (!vm.inApp) {
-            return;
-        } else if (!UserService.getUID()) {
-            window.location.href = 'https://passport.36kr.com/pages';
-        } else {
-            RongziService.like(id)
-            .then(data => {
-                angular.forEach(this.prolist, o => {
-                  if (o.id === id) {
-                    o.likes = data.data.curCount;
-                    o.liked = true;
-                  }
-                }
-            }
-        }
-    }
 
     function outInitLinkme() {
         var krdata = {};
@@ -173,5 +157,24 @@ function BestListController($modal, loading, $stateParams, FindService,
                         }
                     }, false);
             });
+    }
+
+
+    function like(id) {
+        if (!vm.inApp) {
+            return;
+        } else if (!UserService.getUID()) {
+            window.location.href = 'https://passport.36kr.com/pages';
+        } else {
+            RongziService.like(id)
+            .then(data => {
+                angular.forEach(this.prolist, o => {
+                    if (o.id === id) {
+                        o.likes = data.data.curCount;
+                        o.liked = true;
+                    }
+                });
+            });
+        }
     }
 }
