@@ -49,11 +49,12 @@
                     <div class="mg praise">
                       <div>
                         <span class="num" >
-                            {{item.rank}}
+                            {{item.likes}}
                         </span>
                       </div>
                           <div class="praise-btn">
-                            <button>点赞</button>
+                            <a href="" class="like-btn" ng-click="vm.like(item.id)" ng-if="!item.liked"><button>点赞</button></a>
+                            <button class="liked" ng-if="item.liked">已点赞</button>
                           </div>
                     </div>
               </div>
