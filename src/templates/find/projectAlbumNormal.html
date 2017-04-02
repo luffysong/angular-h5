@@ -1,16 +1,13 @@
 <div class="project-album-normal">
     <div class="project-album-list">
-        <!---内容区---->
-        <section  class="roadShow-tab-wrapper"
-                  callback="vm.scrollCallback(args)">
+        <section class="roadShow-tab-wrapper"
+            callback="vm.scrollCallback(args)"
+        >
             <ul infinite-scroll='vm.loadData()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
                 <li ontouchstart="" kr-active="'active'" id="{{item.time}}"
-                    ng-repeat="item in vm.responseData track
-                  by $index" ng-click="vm.setTrack('ClickSet',{target:'set',sets_id:item.id,sets_index:$index})">
-                    <!--<a class="box"
-                        href="https://36kr.com/app/tou?companysetlist={{item.id}}&ktm_source=find.hotSpot.{{item.id}}"
-                        tou-open path="'projectsSet/'+ item.id + '?ktm_source=hot'">-->
-                    <a href="javascript:void(0);" ui-sref="demos({id: item.id})" class="box" >
+                    ng-repeat="item in vm.responseData track by $index"
+                >
+                    <a href="javascript:void(0);" ng-click="vm.goToAlbum(item, $index)" class="box">
                         <div class="pro-pic">
                             <div class="pro-num" ng-style="{'background-image':'url({{item.headPic | image:200}})'}">
                                 <span class="item-num">{{item.proCount}}个项目</span>
@@ -19,7 +16,6 @@
                         <div class="pro-info">
                             <div  class="pro-title" ng-if="item.name">{{item.name}}</div>
                             <p ng-bind="item.fetchCode | delHtmlTag"></p>
-                            <!--<div class="item-more" ng-click="vm.more(item, $event)">更多</div>-->
                         </div>
                     </a>
                 </li>

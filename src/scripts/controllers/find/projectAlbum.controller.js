@@ -39,9 +39,15 @@ function ProjectAlbumController(demosService, projectColumnService, $state, $sta
     vm.more = more;
     vm.loadData = loadData;
 
-    vm.setTrack = function (evtName, obj) {
-        console.log(evtName, obj);
-        sa.track(evtName, obj);
+    vm.goToAlbum = function (item, index) {
+        $state.go('demos', {
+            id: item.id,
+        });
+        sa.track('ClickSet', {
+            target: vm.params.type === 'funding' ? 'organization_financing' : vm.params.type,
+            set_id: item.id,
+            set_index: index,
+        });
     }
 
     init();
@@ -105,6 +111,12 @@ function ProjectAlbumController(demosService, projectColumnService, $state, $sta
         }
     }
 
+    function trackLoadMore() {
+        sa.track('More', {
+            page: vm.params.type === 'funding' ? 'organization_financing' : vm.params.type,
+        });
+    }
+
     function loadLateData() {
         if (vm.busy)return;
         vm.busy = true;
@@ -132,6 +144,9 @@ function ProjectAlbumController(demosService, projectColumnService, $state, $sta
                     }
                 }
             });
+        if (vm.page > 0) {
+            trackLoadMore();
+        }
     }
 
     function loadHotData() {
@@ -162,6 +177,9 @@ function ProjectAlbumController(demosService, projectColumnService, $state, $sta
                     }
                 }
             });
+        if (vm.page > 0) {
+            trackLoadMore();
+        }
     }
 
     function loadFinancingData() {
@@ -194,6 +212,9 @@ function ProjectAlbumController(demosService, projectColumnService, $state, $sta
                     vm.finish = true;
                 }
             });
+        if (vm.page > 0) {
+            trackLoadMore();
+        }
     }
 
 }

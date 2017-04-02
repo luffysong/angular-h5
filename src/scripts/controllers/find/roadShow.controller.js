@@ -37,11 +37,12 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     vm.more = more;
     vm.arrow = arrow;
 
-
-    vm.calendarDateTrack = function (evtName, obj, item) {
-        console.log(evtName, obj);
-        vm.noDataClick(item);
-        sa.track(evtName, obj);
+    vm.clickSetTrack = function (evtName, item, index) {
+        sa.track(evtName, {
+            target: 'ClickSet',
+            set_id: item.id,
+            set_index: index,
+        });
     };
 
     init();
@@ -394,6 +395,9 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
                 initPoint();
             });
+        sa.track('More', {
+            page: 'calendar',
+        });
     }
 
     function initPoint() {

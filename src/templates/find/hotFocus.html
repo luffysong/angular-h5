@@ -44,7 +44,7 @@
             ng-repeat="(index, item) in vm.focusList"
         >
             <div class="item-left"
-                ng-click="vm.trendTrack('ClickHotspot', { target: 'trend', hotspot_id: item.cid, company_id: item.cid, hotspot_index: $index }, item)"
+                ng-click="vm.trendTrack('ClickHotspot', item, $index)"
             >
                 <div class="item-title">
                     [<span>{{item.name}}</span>] {{item.structuredTitle}}
@@ -54,13 +54,14 @@
                 </div>
                 <div class="item-industry" ng-show="item.industryStr">
                     <span class="item-industry-title">{{item.industryStr}}</span>
-                    <!--<span class="item-industry-cont">{{item.industryStr}}</span>-->
                 </div>
             </div>
             <div class="item-right" ng-class="{nopic: !item.logo}"
                 ng-style="!item.logo ? {'background-color': '{{item.cid | demoDefaultColor}}'} : {'background-image': 'url({{item.logo | image:120}})'}"
                 ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusList.' + item.cid)"
-            >{{!item.logo ? (item.name | demoNameDufault2) : ''}}</div>
+            >
+                {{!item.logo ? (item.name | demoNameDufault2) : ''}}
+            </div>
         </div>
     </div>
     <div class="hot-focus-list-nomore" ng-if="!loadingInst.hotFocus && vm.focusList.length">
