@@ -4,6 +4,8 @@ angular.module('defaultApp.controller')
 
 function EnrollController(loading, $stateParams, RongziService, $state, UserService, ErrorService) {
     var vm = this;
+    vm.projectList = [];
+    vm.enrollEvent = enrollEvent;
     init();
     function init() {
         removeHeader();
@@ -16,23 +18,24 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
     }
 
     function initData() {
-        RongziService.getCommunity({ id: $stateParams.id })
-            .then(function setCommunity(data) {
-                    vm.result = data.data.data;
-                    console.log(data);
-                    vm.corUni = [];
-                    vm.other = [];
-                    angular.forEach(data.data.data.sessions,
-                      function (dt, index, array) {
-                        if (dt.projectCategory === 1) {
-                            vm.other.push(dt);
-                        } else if (dt.projectCategory === 0) {
-                            vm.corUni.push(dt);
-                        }
-                    });
+        RongziService.getManagedProjects()
+            .then(data => {
+                vm.projectList = data.data.data;
+            }).catch(fail);
+    }
 
-                    initTitle(vm.result.title);
-                }).catch(fail);
+    function enrollEvent(ccid) {
+        params = {
+            ccid: ccid
+        }
+        RongziService.enroll(params)
+            .then(data => {
+                angular.forEach(this.projectList, o => {
+                  if (o.ccid === ccid) {
+                    o.projectId = data.data.projectId;
+                  }
+                });
+            }).catch(fail);
     }
 
     function initTitle(t) {

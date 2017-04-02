@@ -1,38 +1,38 @@
 <div class="enroll-list">
-  <div class="enroll-item">
-    <div class="logo" style="background-image: url('https://krplus-pic.b0.upaiyun.com/org_logo/%E7%BB%8F%E7%BA%AC%E4%B8%AD%E5%9B%BD.jpg')"></div>
+  <div class="enroll-item" ng-class="{notApplied: !item.applied}" ng-repeat="item in vm.projectList" ng-if="vm.projectList">
+    <div class="logo" style="background-image: url({{item.logo}})"></div>
     <div class="enroll-info">
-      <div class="name">创投助手</div>
-      <div class="phase">A轮</div>
-      <div class="intro">顶级机构的项目触手可得！在接下来为期8周的融资季</div>
+      <div class="name">{{item.name}}</div>
+      <div class="phase">{{item.phase}}</div>
+      <div class="intro">{{item.brief}}</div>
     </div>
-    <div class="enroll-btn">
+    <div class="enroll-btn" ng-if="!item.applied">
+      <span>等&nbsp;&nbsp;&nbsp;待</span><br/>
+      <span>审核中</span>
+    </div>
+    <div class="enroll-btn" ng-click="vm.enrollEvent(item.ccid)" ng-if="!item.projectId && item.applied">
       <span>报&nbsp;&nbsp;&nbsp;名</span><br/>
       <span>融资季</span>
     </div>
-  </div>
-  <div class="enroll-item">
-    <div class="logo" style="background-image: url('https://krplus-pic.b0.upaiyun.com/org_logo/%E7%BB%8F%E7%BA%AC%E4%B8%AD%E5%9B%BD.jpg')"></div>
-    <div class="enroll-info">
-      <div class="name">创投助手</div>
-      <div class="phase">A轮</div>
-      <div class="intro">顶级机构的项目触手可得！在接下来为期8周的融资季</div>
-    </div>
-    <div class="enroll-btn">
-      <span>报&nbsp;&nbsp;&nbsp;名</span><br/>
-      <span>融资季</span>
+    <div class="enroll-btn" ui-sref="rongzi.share({id: item.projectId})" ng-if="item.projectId && item.applied">
+      <span>查&nbsp;&nbsp;&nbsp;看</span><br/>
+      <span>分享页</span>
     </div>
   </div>
-  <div class="enroll-item">
-    <div class="logo" style="background-image: url('https://krplus-pic.b0.upaiyun.com/org_logo/%E7%BB%8F%E7%BA%AC%E4%B8%AD%E5%9B%BD.jpg')"></div>
-    <div class="enroll-info">
-      <div class="name">创投助手</div>
-      <div class="phase">A轮</div>
-      <div class="intro">顶级机构的项目触手可得！在接下来为期8周的融资季</div>
+
+  <!-- <div class="enroll-vacancy" ng-if="!item.applied">
+    <div class="enroll-item">
+      <div class="logo" style="background-image: url(item.logo)"></div>
+      <div class="enroll-info">
+        <div class="name">{{item.name}}</div>
+        <div class="phase">{{item.phase}}</div>
+        <div class="intro">{{item.brief}}</div>
+      </div>
+      <div class="enroll-btn">
+        <span>等&nbsp;&nbsp;&nbsp;待</span><br/>
+        <span>审核中</span>
+      </div>
     </div>
-    <div class="enroll-btn">
-      <span>报&nbsp;&nbsp;&nbsp;名</span><br/>
-      <span>融资季</span>
-    </div>
-  </div>
+  </div> -->
+
 </div>

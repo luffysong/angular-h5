@@ -4,6 +4,7 @@ angular.module('defaultApp.controller')
 
 function ShareController(loading, $stateParams, RongziService, $state, UserService, ErrorService) {
     var vm = this;
+    vm.project = [];
     init();
 
     function init() {
@@ -13,7 +14,12 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
     }
 
     function initData() {
-
+        console.log($stateParams.id);
+        RongziService.shareInfo($stateParams.id)
+            .then(data => {
+                console.log(data.data);
+                vm.project = data.data;
+            }).catch(fail);
     }
 
     function shareCompany() {
