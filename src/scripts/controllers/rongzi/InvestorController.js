@@ -55,7 +55,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         var krdata = {};
         krdata.type = 'test';
         krdata.params =
-        '{"openlink":"http://rongh5.local.36kr.com/#/rongzi/investor?' + $stateParams.id + '","currentRoom":"1"}';
+        '{"openlink":"' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investor?' + $stateParams.id + '","currentRoom":"1"}';
         window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
         { type: 'test' }, function (err, res) {
                 if (err) {
