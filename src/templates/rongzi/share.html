@@ -5,27 +5,27 @@
   <div class="share-content">
     <div class="share-logo">
       <img class="logo-bg" src="/styles/images/rongzi/share-logo.png">
-      <div class="logo" style="background-image: url('https://krplus-pic.b0.upaiyun.com/201703/23/3983cf9542615d7077e258d0c35a0b2a.jpg')"></div>
+      <div class="logo" style="background-image: url({{vm.project.logo}})"></div>
     </div>
-    <div class="name">叉叉创投助手</div>
-    <div class="industry">企业服务</div>
-    <div class="intro">做最专业的机器人社区</div>
+    <div class="name">{{vm.project.name}}</div>
+    <div class="industry">{{vm.project.industry}}</div>
+    <div class="intro">{{vm.project.brief}}</div>
     <div class="content">
-      顶级机构的项目触手可得！在接下来为期8周的融资季，我们会举办20场顶级机构专场，每周一周四各有一场在接下来为期8周的融资季，我们会举办20场顶级机构专场，每周一周四个有一场。
+      {{vm.project.intro}}
     </div>
     <div class="rank">
-      <div class="rank-num">当前排名：<span>388</span>名</div>
+      <div class="rank-num">当前排名：<span>{{vm.project.rank}}</span>名</div>
       <div class="like-num">距离上榜还差：<span>788</span>赞</div>
     </div>
     <div class="like">
-      赞（666）
+      赞（{{vm.project.likes}}）
     </div>
     <div class="share">
       <span>邀好友为梦想点赞！</span>
     </div>
   </div>
   <div class="share-fotter">
-    <div class="back-list">返回号召力榜单</div>
-    <div class="go-rzj">进入融资季</div>
+    <div class="back-list" ui-sref="rongzi.bestlist()">返回号召力榜单</div>
+    <div class="go-rzj" ui-sref="rongzi.main()">进入融资季</div>
   </div>
 </div>

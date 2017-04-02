@@ -74,4 +74,20 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
         return $http.post(BASE_URL + '/startup_project/' + id + '/like');
     };
 
+    //获取当前管理的项目
+    this.getManagedProjects = function () {
+        return $http.get(BASE_URL + '/managed_projects');
+    };
+
+    //活动报名
+    this.enroll = function (request) {
+        return $http.post(BASE_URL + '/startup_project/apply?' + $.param(request));
+    };
+
+    //分享详情
+    this.shareInfo = function (id) {
+        console.log(id);
+        return $http.get(BASE_URL + '/startup_project/' + id);
+    };
+
 });

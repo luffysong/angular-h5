@@ -128,7 +128,26 @@ function BestListController($modal, loading, $stateParams, FindService,
                                 $('#open-App').attr('href', data.url);
                             }
                         }, false);
+
                 });
+        }
+    }
+
+    function like(id) {
+        if (!vm.inApp) {
+            return;
+        } else if (!UserService.getUID()) {
+            window.location.href = 'https://passport.36kr.com/pages';
+        } else {
+            RongziService.like(id)
+            .then(data => {
+                angular.forEach(this.prolist, o => {
+                  if (o.id === id) {
+                    o.likes = data.data.curCount;
+                    o.liked = true;
+                  }
+                }
+            }
         }
     }
 
