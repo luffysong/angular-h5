@@ -8,6 +8,7 @@ function BestListController(loading, $stateParams, RongziService, $state, UserSe
     vm.prolist = [];
     vm.more = false;
     vm.like = like;
+    vm.inApp = true;
 
     init();
     function init() {
@@ -16,6 +17,7 @@ function BestListController(loading, $stateParams, RongziService, $state, UserSe
         initData();
         if (!hybrid.isInApp) {
             initLinkdme();
+            vm.inApp = false;
         }
     }
 
@@ -31,6 +33,7 @@ function BestListController(loading, $stateParams, RongziService, $state, UserSe
         RongziService.getProList(sendata)
             .then(function setProList(response) {
                     vm.prolist = vm.prolist.concat(response.data.data);
+                    console.log(vm.prolist);
                     if (response.data.totalPages) {
                         vm.page = response.data.page || 0;
                         if (response.data.totalPages !== vm.page) {
@@ -43,9 +46,22 @@ function BestListController(loading, $stateParams, RongziService, $state, UserSe
                 }).catch(fail);
     }
 
-    function like() {
-        if(!UserService.getUID()){
+    function like(id) {
+        if (!vm.inApp) {
+            return;
+        } else if (!UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
+        } else {
+            RongziService.like(id)
+            .then(data => {
+                console.log(data);
+                angular.forEach(this.prolist, o => {
+                  if (o.id === id) {
+                    o.likes = data.data.curCount;
+                    o.liked = true;
+                  }
+                });
+            }).catch(fail);
         }
     }
 
@@ -67,7 +83,7 @@ function BestListController(loading, $stateParams, RongziService, $state, UserSe
                         } else {
                             // 生成深度链接成功，深度链接可以通过data.url得到
                             $timeout(function () {
-                                $('#like-btn').attr('href', data.url);
+                                $('.like-btn').attr('href', data.url);
                             }, 1000);
 
 

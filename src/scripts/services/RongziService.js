@@ -69,4 +69,9 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
         return $http.get(BASE_URL + '/startup_project/' + id);
     };
 
+    //榜单点赞
+    this.like = function (id) {
+        return $http.post(BASE_URL + '/startup_project/' + id + '/like');
+    };
+
 });
