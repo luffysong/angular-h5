@@ -3,7 +3,7 @@ angular.module('defaultApp.controller')
   .controller('BestListController', BestListController);
 
 function BestListController($modal, loading, $stateParams, FindService,
-  RongziService, $state, UserService, ErrorService, hybrid) {
+  RongziService, $state, UserService, ErrorService, hybrid, $timeout) {
     var vm = this;
     vm.displayMore = displayMore;
     vm.page = 0;
@@ -68,6 +68,10 @@ function BestListController($modal, loading, $stateParams, FindService,
 
     function displayMore() {
         initData();
+        $timeout(function () {
+            console.log(1111);
+            outInitLinkme();
+        }, 1000);
     }
 
     function initTitle(t) {
