@@ -69,11 +69,19 @@
     <div ui-sref="rongzi.main">
       返回融资季
     </div>
-    <div id ="signup" ui-sref="rongzi.enroll">
+    <div id ="signup" ui-sref="rongzi.enroll" ng-if="!vm.needApp">
       我要报名
     </div>
-    <div id ="signup">
+    <div id ="signup" ng-click="vm.signUp()" ng-if="vm.needApp">
+      我要报名
+    </div>
+    <div  ng-if="!vm.investRole">
+      <a href="" id ="support" style="color: #ffeecf;">助力创业者</a>
+    </div>
+    <!--
+    <div id ="support" ng-if="vm.investRole">
       助力创业者
     </div>
+  -->
   </div>
 </div>

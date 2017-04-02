@@ -1,19 +1,14 @@
 <div class="investor-list">
 
 
-  <div class="investor-item" ng-if="vm.result.sessions" ng-repeat=" item in vm.investors">
+  <div class="investor-item" ng-if="vm.result.sessions" ng-repeat="item in vm.investors">
     <div class="list-border">
       <div class="avatar"
       style="background-image: url('{{item.logo}}')"></div>
       <div class="investor-info">
         <div class="name" >
-          <div ng-repeat="obj in item.nameArr"><span>{{obj}}</span></div>
+          <div ng-repeat="obj in item.nameArr track by $index"><span>{{obj}}</span></div>
         </div>
-          <!--
-        <div class="name">
-          <div><span>胡</span></div><div><span>海</span></div><div><span>泉</span></div><div><span>专</span></div><div><span>场</span></div>
-        </div>
-      -->
         <div class="arrows">
           <img class="arr-l" src="/styles/images/rongzi/arrow.png"/>
           <img src="/styles/images/rongzi/arrow.png"/>

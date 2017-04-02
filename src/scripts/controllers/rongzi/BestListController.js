@@ -2,18 +2,26 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
   .controller('BestListController', BestListController);
 
-function BestListController(loading, $stateParams, RongziService, $state, UserService, ErrorService) {
+function BestListController($modal, loading, $stateParams, FindService,
+  RongziService, $state, UserService, ErrorService, hybrid) {
     var vm = this;
     vm.displayMore = displayMore;
     vm.page = 0;
     vm.prolist = [];
     vm.more = false;
+    vm.needApp = true;
+    vm.investRole = false;
+    vm.signUp = signUp;
 
     init();
     function init() {
         removeHeader();
         loading.hide('findLoading');
         initData();
+        initSignUp();
+        outInitLinkme();
+        console.log('==', projectEnvConfig.rongHost);
+        console.log('==', window.kr.H5_PATH);
     }
 
     function removeHeader() {
@@ -40,6 +48,23 @@ function BestListController(loading, $stateParams, RongziService, $state, UserSe
                 }).catch(fail);
     }
 
+    function initUserInfo() {
+        FindService.getUserProfile()
+            .then(function temp(response) {
+                if (response.data) {
+                    if (response.data.investor) {
+                        vm.investRole = true;
+                    }
+                }
+            });
+    }
+
+    function initSignUp() {
+        if (hybrid.isInApp) {
+            vm.needApp = false;
+        }
+    }
+
     function displayMore() {
         initData();
     }
@@ -50,5 +75,84 @@ function BestListController(loading, $stateParams, RongziService, $state, UserSe
 
     function fail(err) {
         ErrorService.alert(err.err.msg);
+    }
+
+    function signUp() {
+        //e.preventDefault();
+        //e.stopPropagation();
+        if (!hybrid.isInApp && UserService.getUID()) {
+            $modal.open({
+                templateUrl: 'templates/rongzi/common/signUp.html',
+                windowClass: 'nativeAlert_wrap',
+                controller: modalController,
+                controllerAs: 'vm',
+            });
+        }
+    }
+
+    modalController.$inject = ['$modalInstance', 'hybrid'];
+    function modalController($modalInstance, hybrid) {
+
+        var vm = this;
+        vm.cancelModal = cancelModal;
+        vm.isInSubscribe = false;
+        init();
+
+        function cancelModal() {
+            $modalInstance.dismiss();
+        }
+
+        function init() {
+            initLinkme();
+        }
+
+        function initLinkme() {
+            var krdata = {};
+            krdata.type = 'test';
+            krdata.params =
+            '{"openlink":"//#/rongzi/bestlist","currentRoom":"1"}';
+
+            window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
+            { type: 'test' }, function (err, res) {
+                    if (err) {
+                        return;
+                    }
+
+                    window.linkedme.link(krdata, function (err, data) {
+                            if (err) {
+                                // 生成深度链接失败，返回错误对象err
+                                console.log(err);
+                            } else {
+                                // 生成深度链接成功，深度链接可以通过data.url得到
+                                console.log(data.url);
+                                $('#open-App').attr('href', data.url);
+                            }
+                        }, false);
+                });
+        }
+    }
+
+    function outInitLinkme() {
+        var krdata = {};
+        krdata.type = 'test';
+        krdata.params =
+        '{"openlink":"http://rongh5.local.36kr.com/#/investor/apply"}';
+
+        window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
+        { type: 'test' }, function (err, res) {
+                if (err) {
+                    return;
+                }
+
+                window.linkedme.link(krdata, function (err, data) {
+                        if (err) {
+                            // 生成深度链接失败，返回错误对象err
+                            console.log(err);
+                        } else {
+                            // 生成深度链接成功，深度链接可以通过data.url得到
+                            $('#support').attr('href', data.url);
+                        }
+                    }, false);
+            });
     }
 }

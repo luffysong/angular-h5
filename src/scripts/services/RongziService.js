@@ -6,17 +6,17 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
 
     //取消开场提醒
     this.cancelSubscribe = function (request) {
-        return $http.put(BASE_URL + '/session/remind?' +  $.param(request));
+        return $http.post(BASE_URL + '/session/unsubscibe?' +  $.param(request));
     };
 
     //设置开场提醒
     this.setSubscribe = function (request) {
-        return $http.post(BASE_URL + '/subscibe?' + $.param(request));
+        return $http.post(BASE_URL + '/session/subscibe?' + $.param(request));
     };
 
     //设置Email
     this.setEmail = function (request) {
-        return $http.put(BASE_URL + '/subscibe/email?' + $.param(request));
+        return $http.put(BASE_URL + '/session/subscibe/email?', request);
     };
 
     //设置开场提醒

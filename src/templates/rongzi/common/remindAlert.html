@@ -1,23 +1,31 @@
 <div class="remindAlert_pop">
   <div class="pop-content">
-        <h4>设置开场提醒成功！</h4>
-        <p>
-            点击下面按钮直接下载或者打开“创投助手”
+        <h4  ng-if="vm.title">{{vm.title}}</h4>
+        <h4  ng-if="!vm.title">设置开场提醒成功！</h4>
+
+        <p ng-if="!vm.cancelRemindtxt && !vm.hasEmail">
+            当“融资季”任一专场开始时，您将会收到App的推送、短信提醒你。
         </p>
-        <p>
-            当融资季任意专场开始时，您将会收到App的推送、短信提醒你。
+        <p ng-if="!vm.cancelRemindtxt && vm.hasEmail">
+            当“融资季”任一专场开始时，您将会收到App的推送、短信和邮件提醒，确保您不会错过任一专场。
         </p>
-        <p>
+        <p ng-if="!vm.hasEmail">
           <label for="">邮箱</label>
-          <input type="text"  />
+          <input  ng-model="vm.emailInput" style="color:black"
+          class="form-control" type="email" placeholder="请填写邮箱" name="email" maxlength="50"/>
+        </p>
+        <p ng-if="vm.cancelRemindtxt">
+          {{vm.cancelRemindtxt}}
         </p>
   </div>
   <div class="pop-bottom">
-    <div>
-      <span class="pop-investor">认证成为投资人可浏览更多项目信息</span>
+    <div ng-if="!vm.investRole">
+      <a href="http://rongh5.local.36kr.com/#/investor/apply" class="pop-investor">
+        认证成为投资人可浏览更多项目信息</a>
     </div>
     <div>
-      <h4><span>打开创投助手</span></h4>
+      <h4 ng-if="vm.hasEmail" ng-click="vm.cancelModal()"><span >确定</span></h4>
+      <h4 ng-if="!vm.hasEmail" ng-click="vm.addEmail()"><span >确定</span></h4>
     </div>
   </div>
 </div>
