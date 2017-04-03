@@ -184,7 +184,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
 
     function modalOpen(item) {
         $modal.open({
-            templateUrl: 'templates/rongzi/common/remindAlert.html',
+            templateUrl: 'templates/rongzi/rongzi-common/remindAlert.html',
             windowClass: 'nativeAlert_wrap',
             controller: modalController,
             controllerAs: 'vm',

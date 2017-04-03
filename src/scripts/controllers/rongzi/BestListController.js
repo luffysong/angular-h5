@@ -84,7 +84,7 @@ function BestListController($modal, loading, $stateParams, FindService,
         //e.stopPropagation();
         if (!hybrid.isInApp && UserService.getUID()) {
             $modal.open({
-                templateUrl: 'templates/rongzi/common/signUp.html',
+                templateUrl: 'templates/rongzi-common/common/signUp.html',
                 windowClass: 'nativeAlert_wrap',
                 controller: modalController,
                 controllerAs: 'vm',
