@@ -19,6 +19,7 @@ function BestListController($modal, loading, $stateParams, FindService,
     init();
     function init() {
         removeHeader();
+        outInitLinkme();
         loading.hide('findLoading');
         initData();
         initSignUp();
