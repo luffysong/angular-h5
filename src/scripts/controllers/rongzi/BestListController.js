@@ -21,6 +21,7 @@ function BestListController($modal, loading, $stateParams, FindService,
         initData();
         initSignUp();
         outInitLinkme();
+        console.log(window.projectEnvConfig.rongHost);
     }
 
     function removeHeader() {
@@ -112,7 +113,7 @@ function BestListController($modal, loading, $stateParams, FindService,
             var krdata = {};
             krdata.type = 'test';
             krdata.params =
-            '{"openlink":"' + window.projectEnvConfig.rongHost + '/m/#/rongzi/bestlist", "currentRoom" : "1"}';
+            '{"openlink":"https' + window.projectEnvConfig.rongHost + '/m/#/rongzi/bestlist", "currentRoom" : "1"}';
 
             window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
             { type: 'test' }, function (err, res) {
@@ -138,7 +139,7 @@ function BestListController($modal, loading, $stateParams, FindService,
         var krdata = {};
         krdata.type = 'test';
         krdata.params =
-        '{"openlink":"' + window.projectEnvConfig.rongHost + '/m/#/investor/apply"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/investor/apply"}';
 
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {

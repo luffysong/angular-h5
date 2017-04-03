@@ -69,7 +69,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
                 cancelSubscribeAction(item);
             }
         } else {
-            window.projectEnvConfig.passportHost + '/pages/#/login';
+            window.location.href = window.projectEnvConfig.passportHost + '/pages/#/login';
         }
     }
 
@@ -193,7 +193,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         var krdata = {};
         krdata.type = 'test';
         krdata.params =
-        '{"openlink":"' + window.projectEnvConfig.rongHost + '/m/#/rongzi/main","currentRoom":"1"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/main","currentRoom":"1"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {
                 if (err) {
