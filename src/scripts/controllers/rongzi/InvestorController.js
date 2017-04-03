@@ -9,6 +9,10 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
     vm.investRole = false;
     vm.hasEmail = false;
     vm.openAppUrl;
+    vm.page = 0;
+    vm.more = false;
+    vm.displayMore = displayMore;
+    vm.investors = [];
     init();
 
     function init() {
@@ -20,17 +24,29 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
     }
 
     function initData() {
-        RongziService.getInvestor({ id: $stateParams.id })
+        var request = {
+            id: $stateParams.id,
+            page: vm.page += 1,
+            pageSize:3,
+        };
+        console.log(request);
+        RongziService.getInvestor(request)
             .then(function setCommunity(data) {
                     if (data.data) {
                         vm.result = data.data.data;
-                        vm.investors = [];
                         angular.forEach(data.data.data.sessions,
                           function (dt, index, array) {
                             var nameArr = dt.name.split('');
                             dt.nameArr = nameArr;
                             vm.investors.push(dt);
                         });
+
+                        if (data.data.totalPages) {
+                            vm.page = data.data.page || 0;
+                            if (data.data.totalPages === vm.page) {
+                                vm.more = true;
+                            }
+                        }
 
                         initTitle(vm.result.title);
                     }
@@ -195,6 +211,10 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
                 }
             }
         });
+    }
+
+    function displayMore() {
+        initData();
     }
 
 }
