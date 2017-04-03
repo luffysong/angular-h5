@@ -13,6 +13,7 @@ function BestListController($modal, loading, $stateParams, FindService,
     vm.investRole = false;
     vm.signUp = signUp;
     vm.like = like;
+    vm.openUrl;
 
     init();
     function init() {
@@ -153,6 +154,7 @@ function BestListController($modal, loading, $stateParams, FindService,
                             console.log(err);
                         } else {
                             // 生成深度链接成功，深度链接可以通过data.url得到
+                            vm.openUrl = data.url;
                             $timeout(function () {
                                 $('.like-btn').attr('href', data.url);
                             }, 1000);
@@ -162,11 +164,12 @@ function BestListController($modal, loading, $stateParams, FindService,
     }
 
     function like(id) {
-        if (!vm.inApp) {
-            return;
+        if (!hybrid.isInApp) {
+            //return;
+            window.location.href = vm.openUrl;
         } else if (!UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
-        } else {
+        } else if (UserService.getUID() && hybrid.isInApp) {
             RongziService.like(id)
             .then(function (response) {
                 angular.forEach(vm.prolist, function (o) {
