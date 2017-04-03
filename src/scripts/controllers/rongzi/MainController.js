@@ -148,7 +148,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
 
     function modalOpen(item) {
         $modal.open({
-            templateUrl: 'templates/rongzi-common/common/remindAlert.html',
+            templateUrl: 'templates/rongzi-common/remindAlert.html',
             windowClass: 'nativeAlert_wrap',
             controller: modalController,
             controllerAs: 'vm',
