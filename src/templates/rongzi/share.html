@@ -15,7 +15,7 @@
     </div>
     <div class="rank">
       <div class="rank-num">当前排名：<span>{{vm.project.rank}}</span>名</div>
-      <div class="like-num">距离上榜还差：<span>788</span>赞</div>
+      <div class="like-num">距离上榜还差：<span>{{vm.project.on_rank_likes_left}}</span>赞</div>
     </div>
     <div class="like" ng-click="vm.like(vm.project.id)" ng-class="{liked: vm.project.liked}">
       <span ng-show="!vm.project.liked">赞</span><span ng-show="vm.project.liked">已点赞</span>（{{vm.project.likes}}）
