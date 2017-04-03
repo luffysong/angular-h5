@@ -1,3 +1,4 @@
+
 .rongzi-wrapper{
   height: auto;
   width: 100%;
@@ -64,18 +65,29 @@
     }
   }
   .rongzi-top-wrapper{
-    height: 560px;
-    background: url('https://krplus-pic.b0.upaiyun.com/avatar/201703/29130556/pmhc5uarusnxvmez.png') no-repeat center;
+    height: auto;
+    //background: url('https://krplus-pic.b0.upaiyun.com/avatar/201703/29130556/pmhc5uarusnxvmez.png') no-repeat center;
     position: relative;
+    .subscribe,.rongzi-text{
+      margin-top:15px;
+    }
+
+    .m-logo{
+      margin: 0 auto;
+      width: 80%;
+      img{
+          width:100%;
+      }
+    }
     .rong-timer{
-      background: url('images/rongzi/timer.png') no-repeat center;
+      //background: url('images/rongzi/timer.png') no-repeat center;
+      //top: 380px;
       background-size: cover;
-      height: 73px;
+      height: auto;
       width: 100%;
       position: relative;
-      top:343px;
-      @media screen and (max-width: 414px) {
-        height: 83px;
+      img{
+        width: 100%;
       }
       .rong-num{
         width:54px;
@@ -85,20 +97,35 @@
         color: #FFD64E;
         font-weight: bold;
         font-size: 40px;
-        position: absolute;
         left: 42%;
         top:4px;
-        @media screen and (max-width: 414px) {
-          left: 43%;
-          top:6px;
+        position: absolute;
+        @media screen and (max-width: 320px) {
+          left: 41%;
+          top:4px;
+        }
+        // 屏幕宽度小于767个象素时应用的CSS样式
+        @media (min-width: 321px) and (max-width: 767px) {
+           //CSS代码
+           font-size: 40px;
+           left: 42%;
+           top:10px;
+        }
+        // 屏幕宽度在767和991象素之间的CSS样式
+        @media (min-width: 768px) and (max-width: 991px) {
+           //CSS代码
+            font-size: 90px;
+            top: 40px;
+            left: 43%;
         }
       }
     }
+
   .subscribe{
       width: 100%;
-      position: absolute;
-      top:430px;
-      margin: 0 auto;
+      position: relative;
+      //top:20px;
+      //margin: 0 auto;
       text-align: center;
 
       .subscribe-btn{
@@ -109,8 +136,9 @@
     }
     .rongzi-text{
       width: 100%;
-      position: absolute;
-      top:475px;
+      position: relative;
+      //top: 523px;
+      //top:40px;
       font-size:14px;
       color:#e06a20;
       text-align: left;
@@ -120,16 +148,19 @@
         margin: 0 auto;
       }
     }
-  }
 
-  .rongzi-institute-wrapper{
-
+    .rongzi-arrow{
+      position: absolute;
+      right: 0px;
+      top: 30%;
+      width:10%;
+      text-align: center;
+      img{
+        width:60%;
+      }
+    }
   }
 }
-
-
-
-
 
 .rongzi-wrapper{
   .main-special {
@@ -288,7 +319,6 @@
   }
 }
 
-
 @media screen and (min-width: 768px) {
     body,html {
         width:768px !important;
@@ -298,43 +328,23 @@
     }
     .rongzi-wrapper{
       background-size: 768px 100%;
-      .rongzi-top-wrapper{
-          background-size: 768px 100%;
-      }
     }
 }
 
 @media screen and (max-width: 414px) {
   .rongzi-wrapper{
     background-size: 414px 100%;
-    .rongzi-top-wrapper{
-        background-size: 414px 100%;
-    }
   }
 }
 
 @media screen and (max-width: 375px) {
     .rongzi-wrapper{
       background-size: 375px 100%;
-      .rongzi-top-wrapper{
-          background-size: 375px 100%;
-      }
     }
 }
 
 @media screen and (max-width: 320px) {
   .rongzi-wrapper{
     background-size: 320px 100%;
-    .rongzi-top-wrapper{
-        background-size: 320px 100%;
-        .rong-timer{
-          .rong-num{
-            left:41%;
-          }
-        }
-    }
-    .rongzi-block{
-      height:40px;
-    }
   }
 }

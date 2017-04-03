@@ -3,21 +3,27 @@
   width: 100%;
   margin: 0 auto;
   position: relative;
-  max-width: 768px;
-  background: url('https://krplus-pic.b0.upaiyun.com/avatar/201703/29111017/6eb7xehuovd83hxl.png') no-repeat center;
+  //max-width: 768px;
+  //background: url('https://krplus-pic.b0.upaiyun.com/avatar/201703/29111017/6eb7xehuovd83hxl.png') no-repeat center;
   background-color: #000000;
 
   .bestlist-top-wrapper{
     .bestlist-logo{
       width:100%;
-      height: 264px;
-      background: url('images/rongzi/bestlist-logo1.png') no-repeat center;
+      height: auto;
+      //background: url('images/rongzi/bestlist-logo1.png') no-repeat center;
+      img{
+        width:100%;
+      }
     }
 
     .bestlist-btn{
       width:100%;
-      height: 55px;
-      background: url('images/rongzi/bestlist-txt1.png') no-repeat center;
+      //height: auto;
+      img{
+        width:100%;
+      }
+      //background: url('images/rongzi/bestlist-txt1.png') no-repeat center;
     }
 
     .bestlist-text{
@@ -104,38 +110,48 @@
             .gold{
               background-size: contain;
               background: url('images/rongzi/gold.png') no-repeat center;
-              @media screen and (max-width: 375px){
-                  background-size: cover;
+              @media screen and (max-width: 320px) {
+                background-size: cover;
               }
-              @media screen and (max-width: 320px){
-                  background-size: cover;
+              // 屏幕宽度小于767个象素时应用的CSS样式
+              @media (min-width: 321px) and (max-width: 767px) {
+                 //CSS代码
+                background-size: cover;
               }
-              @media screen and (max-width: 414px){
-                  background-size: cover;
+              // 屏幕宽度在767和991象素之间的CSS样式
+              @media (min-width: 768px) and (max-width: 991px) {
+                 //CSS代码
+                background-size: cover;
               }
             }
             .silver{
               background: url('images/rongzi/silver.png') no-repeat center;
-              @media screen and (max-width: 375px){
-                  background-size: cover;
+              @media screen and (max-width: 320px) {
+                background-size: cover;
               }
-              @media screen and (max-width: 320px){
-                  background-size: cover;
+              @media (min-width: 321px) and (max-width: 767px) {
+                 //CSS代码
+                background-size: cover;
               }
-              @media screen and (max-width: 414px){
-                  background-size: cover;
+              // 屏幕宽度在767和991象素之间的CSS样式
+              @media (min-width: 768px) and (max-width: 991px) {
+                 //CSS代码
+                background-size: cover;
               }
             }
             .copper{
               background: url('images/rongzi/copper.png') no-repeat center;
-              @media screen and (max-width: 375px){
-                  background-size: cover;
+              @media screen and (max-width: 320px) {
+                background-size: cover;
               }
-              @media screen and (max-width: 320px){
-                  background-size: cover;
+              @media (min-width: 321px) and (max-width: 767px) {
+                 //CSS代码
+                background-size: cover;
               }
-              @media screen and (max-width: 414px){
-                  background-size: cover;
+              // 屏幕宽度在767和991象素之间的CSS样式
+              @media (min-width: 768px) and (max-width: 991px) {
+                 //CSS代码
+                background-size: cover;
               }
             }
           }
@@ -179,6 +195,16 @@
             text-align: center;
             line-height:30px;
             vertical-align:middle;
+            @media (max-width: 767px) {
+               //CSS代码
+              width: 15%;
+            }
+            // 屏幕宽度在767和991象素之间的CSS样式
+            @media (min-width: 768px) and (max-width: 991px) {
+               //CSS代码
+              width: 30%;
+              text-align: right;
+            }
             div{
               width: 100%;
               height: 45%;
@@ -213,7 +239,6 @@
                   border: 1px solid #6f6f6f;
                 }
             }
-
           }
         }
       }
