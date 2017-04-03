@@ -34,17 +34,15 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
     }
 
     function like(id) {
-        // if (!hybrid.isInApp) {
-        //     //return;
-        //     window.location.href = vm.openUrl;
-        // } else if (!UserService.getUID()) {
-        //     window.location.href = 'https://passport.36kr.com/pages';
-        // } else if (UserService.getUID() && hybrid.isInApp) {
-
-        // }
-        RongziService.like(id)
-            .then(function (response) {
-                vm.project.like = response.data.curCount;
-            });
+        if (!hybrid.isInApp) {
+            window.location.href = vm.openUrl;
+        } else if (!UserService.getUID()) {
+            window.location.href = 'https://passport.36kr.com/pages';
+        } else if (UserService.getUID() && hybrid.isInApp) {
+            RongziService.like(id)
+                .then(function (response) {
+                    vm.project.like = response.data.curCount;
+                });
+        }
     }
 }
