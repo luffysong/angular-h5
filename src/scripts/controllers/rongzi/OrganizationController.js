@@ -106,7 +106,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
         }else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
             cancelSubscribeAction(item);
         } else {
-            window.location.href = window.projectEnvConfig.passportHost + '/pages/#/login';
+            window.location.href = 'https://passport.36kr.com/pages';
         }
     }
 

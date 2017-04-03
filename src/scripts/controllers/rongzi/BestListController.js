@@ -165,7 +165,7 @@ function BestListController($modal, loading, $stateParams, FindService,
         if (!vm.inApp) {
             return;
         } else if (!UserService.getUID()) {
-            window.location.href = window.projectEnvConfig.passportHost + '/pages/#/login';
+            window.location.href = 'https://passport.36kr.com/pages';
         } else {
             RongziService.like(id)
             .then(function (response) {

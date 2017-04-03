@@ -69,7 +69,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
                 cancelSubscribeAction(item);
             }
         } else {
-            window.location.href = window.projectEnvConfig.passportHost + '/pages/#/login';
+            window.location.href = 'https://passport.36kr.com/pages';
         }
     }
 
