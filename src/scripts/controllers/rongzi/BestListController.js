@@ -111,7 +111,7 @@ function BestListController($modal, loading, $stateParams, FindService,
             var krdata = {};
             krdata.type = 'test';
             krdata.params =
-            '{"openlink":"https' + window.projectEnvConfig.rongHost + '/m/#/rongzi/bestlist", "currentRoom" : "1"}';
+            '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/enroll", "currentRoom" : "1"}';
 
             window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
             { type: 'test' }, function (err, res) {

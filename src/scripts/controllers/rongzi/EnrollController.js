@@ -30,22 +30,20 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
     }
 
     function enrollEvent(ccid) {
-                vm.modalOpen();
+        vm.modalOpen();
 
         params = {
             ccid: ccid
-        }
+        };
         RongziService.enroll(params)
             .then(function (response) {
                 console.log(ccid);
                 angular.forEach(vm.projectList, function (o) {
-                  if (o.ccid === ccid) {
-                    console.log(o);
-                    o.projectId = response.data.projectId;
-                    o.applied = true;
-                    console.log(o);
-                    console.log('=====================');
-                  }
+                    if (o.ccid === ccid) {
+                        console.log(o);
+                        o.projectId = response.data.projectId;
+                        o.applied = true;
+                    }
                 });
             }).catch(fail);
     }
