@@ -62,10 +62,14 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         item = item ? item : {};
         item.investRole = vm.investRole;
         item.hasEmail = vm.hasEmail;
-        if (vm.remind === 1 && UserService.getUID()) {
-            subscribeAction(item);
-        }else {
-            cancelSubscribeAction(item);
+        if (UserService.getUID()) {
+            if (vm.remind === 1) {
+                subscribeAction(item);
+            }else {
+                cancelSubscribeAction(item);
+            }
+        } else {
+            window.projectEnvConfig.passportHost + '/pages/#/login';
         }
     }
 

@@ -104,8 +104,10 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
             document.location.href = vm.openAppUrl;
         } else if (hybrid.isInApp && vm.result.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
-        }else if (UserService.getUID() && vm.result.remind === 0) {
+        }else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
             cancelSubscribeAction(item);
+        } else {
+            window.projectEnvConfig.passportHost + '/pages/#/login';
         }
     }
 
