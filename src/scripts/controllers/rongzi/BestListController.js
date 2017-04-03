@@ -12,6 +12,7 @@ function BestListController($modal, loading, $stateParams, FindService,
     vm.needApp = true;
     vm.investRole = false;
     vm.signUp = signUp;
+    vm.supporter = supporter;
     vm.like = like;
     vm.openUrl;
 
@@ -140,7 +141,7 @@ function BestListController($modal, loading, $stateParams, FindService,
         var krdata = {};
         krdata.type = 'test';
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/investor/apply"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/investor/apply","currentRoom":"2"}';
 
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {
@@ -179,6 +180,12 @@ function BestListController($modal, loading, $stateParams, FindService,
                     }
                 });
             });
+        }
+    }
+
+    function supporter() {
+        if (!hybrid.isInApp) {
+            window.location.href = vm.openUrl;
         }
     }
 }
