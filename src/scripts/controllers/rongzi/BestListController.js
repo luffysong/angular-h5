@@ -21,8 +21,6 @@ function BestListController($modal, loading, $stateParams, FindService,
         initData();
         initSignUp();
         outInitLinkme();
-        console.log('==', projectEnvConfig.rongHost);
-        console.log('==', window.kr.H5_PATH);
     }
 
     function removeHeader() {
@@ -170,7 +168,7 @@ function BestListController($modal, loading, $stateParams, FindService,
         } else {
             RongziService.like(id)
             .then(function (response) {
-                angular.forEach(this.prolist, function (o) {
+                angular.forEach(vm.prolist, function (o) {
                     if (o.id === id) {
                         o.likes = response.data.curCount;
                         o.liked = true;
