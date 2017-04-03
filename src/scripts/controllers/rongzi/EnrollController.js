@@ -19,8 +19,8 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
 
     function initData() {
         RongziService.getManagedProjects()
-            .then(data => {
-                vm.projectList = data.data.data;
+            .then(function (response) {
+                vm.projectList = response.data.data;
             }).catch(fail);
     }
 
@@ -29,10 +29,10 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
             ccid: ccid
         }
         RongziService.enroll(params)
-            .then(data => {
-                angular.forEach(this.projectList, o => {
+            .then(function (response) {
+                angular.forEach(this.projectList, function (o) {
                   if (o.ccid === ccid) {
-                    o.projectId = data.data.projectId;
+                    o.projectId = response.data.projectId;
                   }
                 });
             }).catch(fail);

@@ -14,23 +14,10 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
     }
 
     function initData() {
-        console.log($stateParams.id);
         RongziService.shareInfo($stateParams.id)
-            .then(data => {
-                console.log(data.data);
-                vm.project = data.data;
+            .then(function (response) {
+                vm.project = response.data;
             }).catch(fail);
-    }
-
-    function shareCompany() {
-        // RongziService.share({ id: $stateParams.id })
-        //     .then(function setCommunity(data) {
-        //         vm.result = data.data.data;
-        //         console.log(data);
-        //         initTitle(vm.result.title);
-        //     }).catch((err) => {
-        //         fail(err);
-        //     });
     }
 
     function initTitle(t) {
