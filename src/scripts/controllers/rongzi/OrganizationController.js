@@ -188,7 +188,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
 
     function modalOpen(item) {
         $modal.open({
-            templateUrl: 'templates/rongzi/rongzi-common/remindAlert.html',
+            templateUrl: 'templates/rongzi-common/remindAlert.html',
             windowClass: 'nativeAlert_wrap',
             controller: modalController,
             controllerAs: 'vm',
