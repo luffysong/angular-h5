@@ -418,7 +418,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url:'/bestlist?id',
         controllerAs: 'vm',
         controller: 'BestListController',
-        templateUrl: 'templates/rongzi/bestlist.html',
+        templateUrl: 'templates/rongzi/bestList.html',
     });
 
     $stateProvider.state('rongzi.share', {
