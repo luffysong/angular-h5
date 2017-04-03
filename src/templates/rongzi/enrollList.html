@@ -1,16 +1,16 @@
 <div class="enroll-list">
-  <div class="enroll-item" ng-class="{notApplied: !item.applied}" ng-repeat="item in vm.projectList" ng-if="vm.projectList">
+  <div class="enroll-item" ng-class="{notApplied: !item.canApply}" ng-repeat="item in vm.projectList" ng-if="vm.projectList">
     <div class="logo" style="background-image: url({{item.logo}})"></div>
     <div class="enroll-info">
       <div class="name">{{item.name}}</div>
       <div class="phase">{{item.phase}}</div>
       <div class="intro">{{item.brief}}</div>
     </div>
-    <div class="enroll-btn" ng-if="!item.applied">
+    <div class="enroll-btn" ng-if="!item.canApply">
       <span>等&nbsp;&nbsp;&nbsp;待</span><br/>
       <span>审核中</span>
     </div>
-    <div class="enroll-btn" ng-click="vm.enrollEvent(item.ccid)" ng-if="!item.projectId && item.applied">
+    <div class="enroll-btn" ng-click="vm.enrollEvent(item.ccid)" ng-if="!item.projectId && item.canApply">
       <span>报&nbsp;&nbsp;&nbsp;名</span><br/>
       <span>融资季</span>
     </div>
