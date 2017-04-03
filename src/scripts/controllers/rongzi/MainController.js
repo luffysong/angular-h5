@@ -10,6 +10,8 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
     vm.needApp = true;
     vm.investRole = false;
     vm.hasEmail = false;
+    vm.openApp = openApp;
+    vm.openAppUrl;
     init();
 
     function init() {
@@ -206,6 +208,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
                             console.log(err);
                         } else {
                             // 生成深度链接成功，深度链接可以通过data.url得到
+                            vm.openAppUrl = data.url;
                             $('#main-open').attr('href', data.url);
                         }
                     }, false);
@@ -214,5 +217,11 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
 
     function fail(err) {
         ErrorService.alert(err.err.msg);
+    }
+
+    function openApp() {
+        if (!hybrid.isInApp) {
+            window.location.href = vm.openAppUrl;
+        }
     }
 }

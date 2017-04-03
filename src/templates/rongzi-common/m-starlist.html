@@ -13,7 +13,7 @@
         <div class="item" ng-repeat="obj in vm.starList">
           <div class="border-bg">
             <div class="logo-border" ng-if="obj.logo">
-              <div class="logo"
+              <div class="logo" ng-click="vm.openApp()"
               style="background-image: url({{obj.logo}})"
               ></div>
             </div>

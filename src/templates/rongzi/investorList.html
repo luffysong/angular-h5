@@ -4,9 +4,9 @@
   <div class="investor-item" ng-if="vm.result.sessions" ng-repeat="item in vm.investors">
     <div class="list-border">
       <div class="avatar"
-      style="background-image: url('{{item.logo}}')"></div>
+      style="background-image: url('{{item.logo}}')" ng-click="vm.openApp()"></div>
       <div class="investor-info">
-        <div class="name" >
+        <div class="name" ng-click="vm.openApp()">
           <div ng-repeat="obj in item.nameArr track by $index"><span>{{obj}}</span></div>
         </div>
         <div class="arrows">

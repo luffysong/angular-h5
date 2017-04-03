@@ -9,6 +9,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     vm.needApp = true;
     vm.investRole = false;
     vm.hasEmail = false;
+    vm.openApp = openApp;
     vm.openAppUrl;
 
     init();
@@ -201,5 +202,11 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
                 }
             }
         });
+    }
+
+    function openApp() {
+        if (!hybrid.isInApp) {
+            window.location.href = vm.openAppUrl;
+        }
     }
 }

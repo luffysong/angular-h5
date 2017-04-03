@@ -8,6 +8,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     vm.needApp = true;
     vm.investRole = false;
     vm.hasEmail = false;
+    vm.openApp = openApp;
     vm.openAppUrl;
     init();
     function init() {
@@ -199,6 +200,12 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
                 }
             }
         });
+    }
+
+    function openApp() {
+        if (!hybrid.isInApp) {
+            window.location.href = vm.openAppUrl;
+        }
     }
 
 }

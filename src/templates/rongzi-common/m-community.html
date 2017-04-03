@@ -15,7 +15,7 @@
         <div class="item" ng-repeat="obj in vm.community.sessions">
           <div class="border-bg">
             <div class="logo-border">
-              <div class="logo" ng-if="obj.logo" style="background-image: url({{obj.logo}})"></div>
+              <div class="logo" ng-click="vm.openApp()" ng-if="obj.logo" style="background-image: url({{obj.logo}})"></div>
             </div>
           </div>
           <div class="org-name"><span ng-if="obj.name">{{obj.name}}</span></div>

@@ -8,6 +8,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
     vm.needApp = true;
     vm.investRole = false;
     vm.hasEmail = false;
+    vm.openApp = openApp;
     vm.openAppUrl;
     vm.page = 0;
     vm.more = false;
@@ -215,6 +216,12 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
 
     function displayMore() {
         initData();
+    }
+
+    function openApp() {
+        if (!hybrid.isInApp) {
+            window.location.href = vm.openAppUrl;
+        }
     }
 
 }
