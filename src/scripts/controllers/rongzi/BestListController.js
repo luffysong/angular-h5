@@ -22,8 +22,6 @@ function BestListController($modal, loading, $stateParams, FindService,
         loading.hide('findLoading');
         initData();
         initSignUp();
-        outInitLinkme();
-        console.log(window.projectEnvConfig.rongHost);
     }
 
     function removeHeader() {
@@ -69,9 +67,6 @@ function BestListController($modal, loading, $stateParams, FindService,
 
     function displayMore() {
         initData();
-        $timeout(function () {
-            outInitLinkme();
-        }, 1000);
     }
 
     function initTitle(t) {
@@ -156,9 +151,6 @@ function BestListController($modal, loading, $stateParams, FindService,
                         } else {
                             // 生成深度链接成功，深度链接可以通过data.url得到
                             vm.openUrl = data.url;
-                            $timeout(function () {
-                                $('.like-btn').attr('href', data.url);
-                            }, 1000);
                         }
                     }, false);
             });
