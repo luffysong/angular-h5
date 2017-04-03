@@ -41,7 +41,8 @@
       </ul>
   </div>
   <div class="rongzi-enroll-btn" ng-if="topdata === 'enroll'">
-      <button>管理项目（4）</button>
+      <button ng-if="vm.projectList.length">管理项目（{{vm.projectList.length}}）</button>
+      <button ng-if="!vm.projectList.length">管理项目（{{vm.projectList.length}}）</button>
   </div>
 
   <div class="rongzi-common-pushtext" ng-if="topdata === 'org'">
