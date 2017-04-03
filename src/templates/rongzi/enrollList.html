@@ -3,7 +3,7 @@
     <div class="logo" style="background-image: url({{item.logo}})"></div>
     <div class="enroll-info">
       <div class="name">{{item.name}}</div>
-      <div class="phase">{{item.phase}}</div>
+      <div class="phase" ng-if="item.phase">{{item.phase}}</div>
       <div class="intro">{{item.brief}}</div>
     </div>
     <div class="enroll-btn" ng-if="!item.canApply">
