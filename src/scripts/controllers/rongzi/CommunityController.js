@@ -13,11 +13,11 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
 
     init();
     function init() {
+        initLinkmeComm();
         removeHeader();
         loading.hide('findLoading');
         initUser();
         initData();
-        initLinkmeComm();
     }
 
     function removeHeader() {
@@ -42,6 +42,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
                         });
 
                         initTitle(vm.result.title);
+
                     }
                 }).catch(fail);
     }
@@ -73,7 +74,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         var krdata = {};
         krdata.type = 'test';
         krdata.params =
-        '{"openlink":"' + window.projectEnvConfig.rongHost + '/m/#/rongzi/community?' + $stateParams.id + '","currentRoom":"1"}';
+        '{"openlink":"' + window.projectEnvConfig.rongHost + '/m/#/rongzi/community?id=' + $stateParams.id + '","currentRoom":"1"}';
         window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
         { type: 'test' }, function (err, res) {
                 if (err) {
@@ -107,7 +108,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         }else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
             cancelSubscribeAction(item);
         } else {
-            window.projectEnvConfig.passportHost + '/pages/#/login';
+            window.location.href = window.projectEnvConfig.passportHost + '/pages/#/login';
         }
     }
 

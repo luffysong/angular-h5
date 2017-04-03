@@ -13,6 +13,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     function init() {
         loading.hide('findLoading');
         removeHeader();
+        initLinkmeInvestor();
         initData();
         initUser();
     }
@@ -105,7 +106,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
         }else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
             cancelSubscribeAction(item);
         } else {
-            window.projectEnvConfig.passportHost + '/pages/#/login';
+            window.location.href = window.projectEnvConfig.passportHost + '/pages/#/login';
         }
     }
 

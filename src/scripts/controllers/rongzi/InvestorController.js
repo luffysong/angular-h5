@@ -12,6 +12,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
     init();
 
     function init() {
+        initLinkmeInvestor();
         removeHeader();
         initData();
         initUser();
@@ -89,7 +90,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         }else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
             cancelSubscribeAction(item);
         } else {
-            window.projectEnvConfig.passportHost + '/pages/#/login';
+            window.location.href = window.projectEnvConfig.passportHost + '/pages/#/login';
         }
     }
 
