@@ -114,7 +114,7 @@ function BestListController($modal, loading, $stateParams, FindService,
             var krdata = {};
             krdata.type = 'test';
             krdata.params =
-            '{"openlink":"//#/rongzi/bestlist","currentRoom":"1"}';
+            '{"openlink":' + window.projectEnvConfig.rongHost + '/m/#/rongzi/bestlist","currentRoom":"1"}';
 
             window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
             { type: 'test' }, function (err, res) {
@@ -136,12 +136,11 @@ function BestListController($modal, loading, $stateParams, FindService,
         }
     }
 
-
     function outInitLinkme() {
         var krdata = {};
         krdata.type = 'test';
         krdata.params =
-        '{"openlink":"http://rongh5.local.36kr.com/#/investor/apply"}';
+        '{"openlink":"' + window.projectEnvConfig.rongHost + '/m/#/investor/apply"}';
 
         window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
         { type: 'test' }, function (err, res) {
@@ -162,7 +161,6 @@ function BestListController($modal, loading, $stateParams, FindService,
                     }, false);
             });
     }
-
 
     function like(id) {
         if (!vm.inApp) {
