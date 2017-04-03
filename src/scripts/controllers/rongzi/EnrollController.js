@@ -6,11 +6,15 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
     var vm = this;
     vm.projectList = [];
     vm.enrollEvent = enrollEvent;
+    vm.isLogin = false;
     init();
     function init() {
         removeHeader();
         loading.hide('findLoading');
         initData();
+        if(UserService.getUID()) {
+            vm.isLogin = true;
+        }
     }
 
     function removeHeader() {
