@@ -81,7 +81,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     }
 
     function initTitle(t) {
-        document.title = t;
+        document.title = '融资季 · 创业社群专场';
     }
 
     function fail(err) {

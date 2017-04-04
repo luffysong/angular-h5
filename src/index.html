@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="telephone=no" name="format-detection" />
     <script>
         if(location.hash.indexOf('demos') === -1){
             document.title = '创投助手';
@@ -65,10 +66,10 @@
     </ui-view>
 
 
-	<!--<footer class="download" style="display: none" ng-if="!isInApp">
-		<div class="download-kr">打开“36氪”，查看更多</div>
-		<a href="#" class="closed">&times;</a>
-	</footer>-->
+    <!--<footer class="download" style="display: none" ng-if="!isInApp">
+        <div class="download-kr">打开“36氪”，查看更多</div>
+        <a href="#" class="closed">&times;</a>
+    </footer>-->
     <script>
         window.WEIXINSHARE = {
             shareTitle: '36氪融资',
@@ -88,55 +89,55 @@
     <script src="/scripts/weixin.js"></script>
     <!-- endbuild -->
 <script>
-	window.onload = function(){
+    window.onload = function(){
         if(!navigator.userAgent.match(/36kr/)){
             $(".download").show();
         }else{
             $('body.download-show').removeClass('download-show')
         }
-		$('.download-kr').click(function(e) {
-			e.stopPropagation();
+        $('.download-kr').click(function(e) {
+            e.stopPropagation();
 
-			var str = window.location.hash;
-			var cid;
-			var type;
-			var uid;
-			var url;
+            var str = window.location.hash;
+            var cid;
+            var type;
+            var uid;
+            var url;
 
-			if(str.indexOf('company') != -1) {
-				cid = str.substr(10);
-				if(cid.indexOf('?')) {
-					var num = cid.indexOf('?');
-					cid = cid.substr(0,num);
-				}
+            if(str.indexOf('company') != -1) {
+                cid = str.substr(10);
+                if(cid.indexOf('?')) {
+                    var num = cid.indexOf('?');
+                    cid = cid.substr(0,num);
+                }
 
-				if(str.indexOf('?') != -1) {
-					var num = str.indexOf('?');
-					type = str.substr(num + 1);
-				}
-				url = 'hub.html?id=' + cid + '&' + type;
-			}
+                if(str.indexOf('?') != -1) {
+                    var num = str.indexOf('?');
+                    type = str.substr(num + 1);
+                }
+                url = 'hub.html?id=' + cid + '&' + type;
+            }
 
 
 
-			if(str.indexOf('user') != -1) {
-				uid = str.substr(7);
-				url = 'hub.html?id=' + uid + '&type=4';
-			}
+            if(str.indexOf('user') != -1) {
+                uid = str.substr(7);
+                url = 'hub.html?id=' + uid + '&type=4';
+            }
 
-			window.location.href = 'http://asset.36tr.com/m/hub.html';
-		});
+            window.location.href = 'http://asset.36tr.com/m/hub.html';
+        });
 
-		$('.closed').click(function(e) {
-			e.preventDefault();
-			$('.download').hide();
-			$('body').removeClass('download-show');
-		});
+        $('.closed').click(function(e) {
+            e.preventDefault();
+            $('.download').hide();
+            $('body').removeClass('download-show');
+        });
 
         $('body').delegate('textarea, input', 'focus', function(){
             $('.download').hide();
         });
-	}
+    }
 
 </script>
 </body>

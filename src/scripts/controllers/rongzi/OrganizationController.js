@@ -75,7 +75,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     function initTitle(t) {
-        document.title = t;
+        document.title = '融资季 · 顶级机构专场';
     }
 
     function fail(err) {
