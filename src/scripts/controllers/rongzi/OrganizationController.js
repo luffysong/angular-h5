@@ -14,7 +14,11 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     function init() {
         loading.hide('findLoading');
         removeHeader();
-        initLinkmeInvestor();
+        if (!hybrid.isInApp) {
+            initLinkmeInvestor();
+            vm.needApp = false;
+        }
+
         initData();
         initUser();
         initWeixin();
@@ -130,7 +134,6 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
         var vm = this;
         vm.item = obj;
         vm.cancelModal = cancelModal;
-        vm.needApp = true;
         vm.title = obj.title;
         vm.investRole = obj.investRole;
         vm.hasEmail = obj.hasEmail;

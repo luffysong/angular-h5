@@ -12,6 +12,7 @@ function BestListController($modal, loading, $stateParams, FindService,
     vm.needApp = true;
     vm.signUp = signUp;
     vm.supporter = supporter;
+    vm.openApp = openApp;
     vm.like = like;
     vm.rule = addRule;
     vm.openUrl;
@@ -20,11 +21,13 @@ function BestListController($modal, loading, $stateParams, FindService,
     function init() {
         initUserInfo();
         removeHeader();
-        outInitLinkme();
         loading.hide('findLoading');
         initData();
-        initSignUp();
         initWeixin();
+        if (!hybrid.isInApp) {
+            outInitLinkme();
+            vm.needApp = false;
+        }
     }
 
     function initWeixin() {
@@ -210,6 +213,12 @@ function BestListController($modal, loading, $stateParams, FindService,
 
         function cancelModal() {
             $modalInstance.dismiss();
+        }
+    }
+
+    function openApp() {
+        if (!hybrid.isInApp) {
+            window.location.href = vm.openUrl;
         }
     }
 }

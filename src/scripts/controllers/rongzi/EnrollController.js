@@ -79,11 +79,9 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
 
     }
 
-
     function initTitle(t) {
         document.title = t;
     }
-
 
     function fail(err) {
         ErrorService.alert(err.err.msg);

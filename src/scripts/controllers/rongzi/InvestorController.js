@@ -17,7 +17,11 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
     init();
 
     function init() {
-        initLinkmeInvestor();
+        if (!hybrid.isInApp) {
+            initLinkmeInvestor();
+            vm.needApp = false;
+        }
+
         removeHeader();
         initData();
         initUser();
@@ -136,7 +140,6 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         vm.hasEmail = obj.hasEmail;
         vm.cancelMainRemind = obj.cancelMainRemind;
         vm.cancelRemindtxt = obj.cancelRemindtxt;
-        vm.needApp = true;
         vm.setEmailState = false;
         vm.addEmail = addEmail;
 

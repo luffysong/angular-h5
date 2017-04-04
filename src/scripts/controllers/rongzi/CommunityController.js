@@ -14,7 +14,11 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
 
     init();
     function init() {
-        initLinkmeComm();
+        if (!hybrid.isInApp) {
+            initLinkmeComm();
+            vm.needApp = false;
+        }
+
         removeHeader();
         loading.hide('findLoading');
         initUser();

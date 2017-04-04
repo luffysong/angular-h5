@@ -8,12 +8,17 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
     vm.liked = false;
     vm.like = like;
     vm.share = share;
+    vm.needApp = true;
     init();
 
     function init() {
-        outInitLinkme();
         removeHeader();
         initData();
+        if (!hybrid.isInApp) {
+            outInitLinkme();
+            vm.needApp = false;
+        }
+
         loading.hide('findLoading');
     }
 
