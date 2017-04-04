@@ -12,6 +12,8 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
     vm.openApp = openApp;
     init();
     function init() {
+        initTitle();
+        removeHeader();
         loading.hide('findLoading');
         initData();
         if (UserService.getUID()) {
