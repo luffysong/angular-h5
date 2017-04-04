@@ -71,7 +71,9 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         item = item ? item : {};
         item.investRole = vm.investRole;
         item.hasEmail = vm.hasEmail;
-        if (UserService.getUID()) {
+        if (!hybrid.isInApp) {
+            defaultModal();
+        }else if (UserService.getUID()) {
             if (vm.remind === 1) {
                 subscribeAction(item);
             }else {
@@ -228,7 +230,37 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
 
     function openApp() {
         if (!hybrid.isInApp) {
-            window.location.href = vm.openAppUrl;
+            //window.location.href = vm.openAppUrl;
+            defaultModal();
         }
     }
+
+    function defaultModal(item) {
+        item = item ? item : {};
+        item.openUrl = vm.openAppUrl;
+        $modal.open({
+            templateUrl: 'templates/rongzi-common/downloadApp.html',
+            windowClass: 'nativeAlert_wrap',
+            controller: defaultController,
+            controllerAs: 'vm',
+            resolve: {
+                obj: function () {
+                    return item;
+                }
+            }
+        });
+    }
+
+    defaultController.$inject = ['$modalInstance', 'obj'];
+    function defaultController($modalInstance, obj) {
+
+        var vm = this;
+        vm.openUrl = obj.openUrl;
+        vm.cancelModal = cancelModal;
+
+        function cancelModal() {
+            $modalInstance.dismiss();
+        }
+    }
+
 }

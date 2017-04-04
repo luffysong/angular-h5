@@ -14,13 +14,15 @@
         </div>
       </div>
       <div class="subscribe">
+        <!--
           <a href="javascript:void(0)" id ="main-open" class="btn subscribe-btn"
            ng-show="!vm.needApp">
            <b ng-if="vm.remind === 1">融资季专场，开场提醒订阅</b>
            <b ng-if="vm.remind === 0">取消提醒订阅</b>
          </a>
+       -->
           <a  id ="main-open" class="btn subscribe-btn"
-          ng-click="vm.subscribe(item, $event)" ng-show="vm.needApp">
+          ng-click="vm.subscribe(item, $event)">
           <b ng-if="vm.remind === 1">融资季专场，开场提醒订阅</b>
           <b ng-if="vm.remind === 0">取消提醒订阅</b>
         </a>

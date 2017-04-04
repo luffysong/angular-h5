@@ -182,7 +182,8 @@ function BestListController($modal, loading, $stateParams, FindService,
     function like(id) {
         if (!hybrid.isInApp) {
             //return;
-            window.location.href = vm.openUrl;
+            // window.location.href = vm.openUrl;
+            defaultModal();
         } else if (!UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
         } else if (UserService.getUID() && hybrid.isInApp) {
@@ -200,7 +201,8 @@ function BestListController($modal, loading, $stateParams, FindService,
 
     function supporter() {
         if (!hybrid.isInApp) {
-            window.location.href = vm.openUrl;
+            //window.location.href = vm.openUrl;
+            defaultModal();
         }else if (hybrid.isInApp && !vm.investRole) {
             window.location.href =  'https://' + window.projectEnvConfig.rongHost + '/m/#/investor/apply';
         }
@@ -217,8 +219,37 @@ function BestListController($modal, loading, $stateParams, FindService,
     }
 
     function openApp() {
-        if (!hybrid.isInApp) {
-            window.location.href = vm.openUrl;
+        // if (!hybrid.isInApp) {
+        //     window.location.href = vm.openUrl;
+        // }
+        defaultModal();
+    }
+
+    function defaultModal(item) {
+        item = item ? item : {};
+        item.openUrl = vm.openUrl;
+        $modal.open({
+            templateUrl: 'templates/rongzi-common/downloadApp.html',
+            windowClass: 'nativeAlert_wrap',
+            controller: defaultController,
+            controllerAs: 'vm',
+            resolve: {
+                obj: function () {
+                    return item;
+                }
+            }
+        });
+    }
+
+    defaultController.$inject = ['$modalInstance', 'obj'];
+    function defaultController($modalInstance, obj) {
+
+        var vm = this;
+        vm.openUrl = obj.openUrl;
+        vm.cancelModal = cancelModal;
+
+        function cancelModal() {
+            $modalInstance.dismiss();
         }
     }
 }

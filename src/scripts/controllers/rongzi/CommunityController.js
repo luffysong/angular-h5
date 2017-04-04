@@ -119,7 +119,8 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         item.investRole = vm.investRole;
         item.hasEmail = vm.hasEmail;
         if (!hybrid.isInApp) {
-            document.location.href = vm.openAppUrl;
+            //document.location.href = vm.openAppUrl;
+            defaultModal();
         } else if (hybrid.isInApp && vm.result.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
         }else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
@@ -221,8 +222,37 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     }
 
     function openApp() {
-        if (!hybrid.isInApp) {
-            window.location.href = vm.openAppUrl;
+        // if (!hybrid.isInApp) {
+        //     window.location.href = vm.openAppUrl;
+        // }
+        defaultModal();
+    }
+
+    function defaultModal(item) {
+        item = item ? item : {};
+        item.openUrl = vm.openAppUrl;
+        $modal.open({
+            templateUrl: 'templates/rongzi-common/downloadApp.html',
+            windowClass: 'nativeAlert_wrap',
+            controller: defaultController,
+            controllerAs: 'vm',
+            resolve: {
+                obj: function () {
+                    return item;
+                }
+            }
+        });
+    }
+
+    defaultController.$inject = ['$modalInstance', 'obj'];
+    function defaultController($modalInstance, obj) {
+
+        var vm = this;
+        vm.openUrl = obj.openUrl;
+        vm.cancelModal = cancelModal;
+
+        function cancelModal() {
+            $modalInstance.dismiss();
         }
     }
 }

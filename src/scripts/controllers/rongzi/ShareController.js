@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
   .controller('ShareController', ShareController);
 
-function ShareController(loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid) {
+function ShareController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid) {
     var vm = this;
     vm.project = [];
     vm.liked = false;
@@ -60,7 +60,8 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
 
     function like(id) {
         if (!hybrid.isInApp) {
-            window.location.href = vm.openUrl;
+            //window.location.href = vm.openUrl;
+            defaultModal();
         } else if (!UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
         } else if (UserService.getUID() && hybrid.isInApp) {
@@ -73,9 +74,10 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
     }
 
     function share() {
-        if (!hybrid.isInApp) {
-            window.location.href = vm.openUrl;
-        }
+        // if (!hybrid.isInApp) {
+        //     window.location.href = vm.openUrl;
+        // }
+        defaultModal();
     }
 
     function outInitLinkme() {
@@ -100,5 +102,33 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
                         }
                     }, false);
             });
+    }
+
+    function defaultModal(item) {
+        item = item ? item : {};
+        item.openUrl = vm.openUrl;
+        $modal.open({
+            templateUrl: 'templates/rongzi-common/downloadApp.html',
+            windowClass: 'nativeAlert_wrap',
+            controller: defaultController,
+            controllerAs: 'vm',
+            resolve: {
+                obj: function () {
+                    return item;
+                }
+            }
+        });
+    }
+
+    defaultController.$inject = ['$modalInstance', 'obj'];
+    function defaultController($modalInstance, obj) {
+
+        var vm = this;
+        vm.openUrl = obj.openUrl;
+        vm.cancelModal = cancelModal;
+
+        function cancelModal() {
+            $modalInstance.dismiss();
+        }
     }
 }
