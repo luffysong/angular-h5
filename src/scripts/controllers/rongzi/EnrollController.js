@@ -81,7 +81,7 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
 
 
     function initTitle(t) {
-        document.title = t;
+        document.title = '融资季 · 我要报名';
     }
 
 

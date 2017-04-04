@@ -41,7 +41,7 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
     }
 
     function initTitle(t) {
-        document.title = t;
+        document.title = '融资季 · 创业项目号召力榜';
     }
 
     function fail(err) {

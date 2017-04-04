@@ -85,7 +85,7 @@ function BestListController($modal, loading, $stateParams, FindService,
     }
 
     function initTitle(t) {
-        document.title = t;
+        document.title = '融资季 · 创业项目号召力榜';
     }
 
     function fail(err) {
