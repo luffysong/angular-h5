@@ -79,16 +79,12 @@ function BestListController($modal, loading, $stateParams, FindService,
     }
 
     function signUp() {
-        //e.preventDefault();
-        //e.stopPropagation();
-        if (!hybrid.isInApp && UserService.getUID()) {
-            $modal.open({
-                templateUrl: 'templates/rongzi-common/signUp.html',
-                windowClass: 'nativeAlert_wrap',
-                controller: modalController,
-                controllerAs: 'vm',
-            });
-        }
+        $modal.open({
+            templateUrl: 'templates/rongzi-common/signUp.html',
+            windowClass: 'nativeAlert_wrap',
+            controller: modalController,
+            controllerAs: 'vm',
+        });
     }
 
     modalController.$inject = ['$modalInstance', 'hybrid'];
