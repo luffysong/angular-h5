@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
   .controller('EnrollController', EnrollController);
 
-function EnrollController(loading, $stateParams, RongziService, $state, UserService, ErrorService, $modal) {
+function EnrollController(loading, $stateParams, RongziService, $state, UserService, ErrorService, $modal, hybrid) {
     var vm = this;
     vm.projectList = [];
     vm.enrollEvent = enrollEvent;
@@ -92,6 +92,8 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
     function openApp() {
         if (!UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
+        }else {
+            hybrid.open('krtou://signUp');
         }
     }
 }
