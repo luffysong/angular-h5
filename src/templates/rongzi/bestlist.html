@@ -67,8 +67,24 @@
 
 
   <div class="bestlist-bottom">
-    <div ui-sref="rongzi.main">
+
+    <a href="javascript:void(0)" ui-sref="rongzi.main" ng-class="{true:'w3',false:'w5'}[!vm.investRole]">
       返回融资季
+    </a>
+
+    <a ng-class="{true:'w3',false:'w5'}[!vm.investRole]" href="javascript:void(0)" ui-sref="rongzi.enroll" ng-if="!vm.needApp">
+      我要报名
+    </a>
+
+    <a ng-class="{true:'w3',false:'w5'}[!vm.investRole]" href="javascript:void(0)" ui-sref="rongzi.enroll" ng-if="vm.needApp">
+      我要报名
+    </a>
+
+    <a ng-class="{true:'w3',false:'w5'}[!vm.investRole]" ng-if="!vm.investRole" href="javascript:void(0)" ng-click="vm.supporter()"
+        id ="support" style="color: #ffeecf;">助力创业者</a>
+
+<!--
+    <div ui-sref="rongzi.main">
     </div>
     <div id ="signup" ui-sref="rongzi.enroll" ng-if="!vm.needApp">
       我要报名
@@ -77,7 +93,9 @@
       我要报名
     </div>
     <div  ng-if="!vm.investRole">
-      <a href="javascript:void(0)" ng-click="vm.supporter()" id ="support" style="color: #ffeecf;">助力创业者</a>
+      <a href="javascript:void(0)" ng-click="vm.supporter()"
+          id ="support" style="color: #ffeecf;">助力创业者</a>
     </div>
+  -->
   </div>
 </div>

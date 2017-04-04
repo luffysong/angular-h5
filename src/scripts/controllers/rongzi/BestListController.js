@@ -10,7 +10,6 @@ function BestListController($modal, loading, $stateParams, FindService,
     vm.prolist = [];
     vm.more = false;
     vm.needApp = true;
-    vm.investRole = false;
     vm.signUp = signUp;
     vm.supporter = supporter;
     vm.like = like;
@@ -18,12 +17,12 @@ function BestListController($modal, loading, $stateParams, FindService,
 
     init();
     function init() {
+        initUserInfo();
         removeHeader();
         outInitLinkme();
         loading.hide('findLoading');
         initData();
         initSignUp();
-        initUserInfo();
     }
 
     function removeHeader() {
