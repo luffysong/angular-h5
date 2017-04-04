@@ -190,7 +190,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         var krdata = {};
         krdata.type = 'test';
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/main","currentRoom":"1"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/main","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {
                 if (err) {

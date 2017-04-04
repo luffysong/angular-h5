@@ -75,7 +75,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         var krdata = {};
         krdata.type = 'test';
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/community?id=' + $stateParams.id + '","currentRoom":"1"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/community?id=' + $stateParams.id + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {
                 if (err) {
