@@ -19,6 +19,19 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         loading.hide('findLoading');
         initUser();
         initData();
+        initWeixin();
+    }
+
+    function initWeixin() {
+        window.WEIXINSHARE = {
+            shareTitle: '【创投助手·融资季】创业圈“黄埔军校”输出，为认可的创业基因助威。',
+            shareUrl: window.location.href,
+            shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
+            shareDesc: '每周2个创业者社群精品项目选送，名企名校类及其他社群类，快来对接项目！',
+        };
+
+        var obj = {};
+        window.InitWeixin(obj);
     }
 
     function removeHeader() {

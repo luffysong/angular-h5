@@ -17,6 +17,19 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
         initLinkmeInvestor();
         initData();
         initUser();
+        initWeixin();
+    }
+
+    function initWeixin() {
+        window.WEIXINSHARE = {
+            shareTitle: '【创投助手·融资季】紧跟TOP机构不掉队，顶级机构在融项目触手可得！',
+            shareUrl: window.location.href,
+            shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
+            shareDesc: '为认可的机构品牌助威，每周一、四各更新两场，点击订阅顶级机构专场，不要错过！',
+        };
+
+        var obj = {};
+        window.InitWeixin(obj);
     }
 
     function initData() {

@@ -13,7 +13,7 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
         removeHeader();
         loading.hide('findLoading');
         initData();
-        if(UserService.getUID()) {
+        if (UserService.getUID()) {
             vm.isLogin = true;
         }
     }

@@ -24,6 +24,19 @@ function BestListController($modal, loading, $stateParams, FindService,
         loading.hide('findLoading');
         initData();
         initSignUp();
+        initWeixin();
+    }
+
+    function initWeixin() {
+        window.WEIXINSHARE = {
+            shareTitle: '【创投助手·融资季】参加即可上榜！让每一个好项目都不被辜负。',
+            shareUrl: window.location.href,
+            shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
+            shareDesc: '每日24：00更新当日对接最火热三甲，数万投资人同行帮你甄选，你离好项目只差一步！',
+        };
+
+        var obj = {};
+        window.InitWeixin(obj);
     }
 
     function removeHeader() {

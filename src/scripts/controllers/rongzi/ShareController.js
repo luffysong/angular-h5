@@ -17,10 +17,26 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
         loading.hide('findLoading');
     }
 
+    function initWeixin(name, desc) {
+        window.WEIXINSHARE = {
+            shareTitle: '【创投助手·融资季】我的项目' + name + '正在打榜，最有号召力的项目需要你的点赞！',
+            shareUrl: window.location.href,
+            shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
+            shareDesc: '' + desc,
+        };
+
+        var obj = {};
+        window.InitWeixin(obj);
+    }
+
     function initData() {
         RongziService.shareInfo($stateParams.id)
             .then(function (response) {
                 vm.project = response.data;
+                console.log(vm.project);
+                if (vm.project.name && vm.project.intro) {
+                    initWeixin(vm.project.name, vm.project.intro);
+                }
             }).catch(fail);
     }
 
@@ -50,7 +66,7 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
         }
     }
 
-    function share(){
+    function share() {
         if (!hybrid.isInApp) {
             window.location.href = vm.openUrl;
         }

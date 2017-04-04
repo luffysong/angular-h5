@@ -19,10 +19,23 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         removeHeader();
         initTitle();
         initUser();
+        initWeixin();
         if (!hybrid.isInApp) {
             initLinkme();
             vm.needApp = false;
         }
+    }
+
+    function initWeixin() {
+        window.WEIXINSHARE = {
+            shareTitle: '上创投助手融资季，瞅准机会，干一票大的！',
+            shareUrl: window.location.href,
+            shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
+            shareDesc: '持续60天，每天5分钟，一年只要8小时，看遍顶级机构、明星大佬、创业社群2000+好项目。',
+        };
+
+        var obj = {};
+        window.InitWeixin(obj);
     }
 
     function initTitle() {
