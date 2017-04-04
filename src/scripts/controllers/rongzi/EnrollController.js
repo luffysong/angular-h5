@@ -93,7 +93,7 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
         if (!UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
         }else {
-            hybrid.open('krtou://signUp');
+            hybrid.open('signUp');
         }
     }
 }
