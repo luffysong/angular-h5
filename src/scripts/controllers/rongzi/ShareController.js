@@ -7,6 +7,7 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
     vm.project = [];
     vm.liked = false;
     vm.like = like;
+    vm.share = share;
     init();
 
     function init() {
@@ -46,6 +47,12 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
                     vm.project.likes = response.data.curCount;
                     vm.project.liked = true;
                 });
+        }
+    }
+
+    function share(){
+        if (!hybrid.isInApp) {
+            window.location.href = vm.openUrl;
         }
     }
 
