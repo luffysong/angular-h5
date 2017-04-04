@@ -6,7 +6,7 @@
     <div ng-include="'templates/rongzi/enrollList.html'"></div>
   </div>
 
-  <div class="enroll-content" ng-if="!vm.projectList || !vm.isLogin">
+  <div class="enroll-content" ng-if="!vm.projectList.length || !vm.isLogin">
     <div ng-include="'templates/rongzi/enrollNoProject.html'"></div>
   </div>
 </div>
