@@ -16,7 +16,6 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
     function init() {
         initData();
         loading.show('findLoading');
-        removeHeader();
         initTitle();
         initUser();
         initWeixin();

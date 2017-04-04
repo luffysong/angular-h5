@@ -14,7 +14,6 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
     function init() {
         initTitle();
         outInitLinkme();
-        removeHeader();
         initData();
         if (!hybrid.isInApp) {
             outInitLinkme();

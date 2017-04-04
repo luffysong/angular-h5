@@ -20,7 +20,6 @@ function BestListController($modal, loading, $stateParams, FindService,
     init();
     function init() {
         initUserInfo();
-        removeHeader();
         loading.hide('findLoading');
         initData();
         initWeixin();

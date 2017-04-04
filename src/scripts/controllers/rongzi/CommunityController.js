@@ -19,7 +19,6 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
             vm.needApp = false;
         }
 
-        removeHeader();
         loading.hide('findLoading');
         initUser();
         initData();
