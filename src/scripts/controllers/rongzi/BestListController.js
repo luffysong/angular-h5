@@ -23,6 +23,7 @@ function BestListController($modal, loading, $stateParams, FindService,
         loading.hide('findLoading');
         initData();
         initSignUp();
+        initUserInfo();
     }
 
     function removeHeader() {
@@ -179,6 +180,8 @@ function BestListController($modal, loading, $stateParams, FindService,
     function supporter() {
         if (!hybrid.isInApp) {
             window.location.href = vm.openUrl;
+        }else if (hybrid.isInApp && !vm.investRole) {
+            window.location.href =  'https://' + window.projectEnvConfig.rongHost + '/m/#/investor/apply';
         }
     }
 }
