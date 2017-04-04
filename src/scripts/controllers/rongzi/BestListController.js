@@ -133,7 +133,7 @@ function BestListController($modal, loading, $stateParams, FindService,
         var krdata = {};
         krdata.type = 'test';
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/investor/apply","currentRoom":"0"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/bestlist","currentRoom":"0"}';
 
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {

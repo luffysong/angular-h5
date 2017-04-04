@@ -10,6 +10,7 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
     init();
 
     function init() {
+        outInitLinkme();
         removeHeader();
         initData();
         loading.hide('findLoading');
@@ -36,18 +37,39 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
 
     function like(id) {
         if (!hybrid.isInApp) {
-            console.log(111111);
             window.location.href = vm.openUrl;
         } else if (!UserService.getUID()) {
-            console.log(2222222);
             window.location.href = 'https://passport.36kr.com/pages';
         } else if (UserService.getUID() && hybrid.isInApp) {
-            console.log(33333333);
             RongziService.like(id)
                 .then(function (response) {
                     vm.project.likes = response.data.curCount;
                     vm.project.liked = true;
                 });
         }
+    }
+
+    function outInitLinkme() {
+        var krdata = {};
+        krdata.type = 'test';
+        krdata.params =
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/share?id=' + $stateParams.id + '","currentRoom":"0"}';
+
+        window.linkedme.init(window.projectEnvConfig.linkmeKey,
+        { type: window.projectEnvConfig.linkmeType }, function (err, res) {
+                if (err) {
+                    return;
+                }
+
+                window.linkedme.link(krdata, function (err, data) {
+                        if (err) {
+                            // 生成深度链接失败，返回错误对象err
+                            console.log(err);
+                        } else {
+                            // 生成深度链接成功，深度链接可以通过data.url得到
+                            vm.openUrl = data.url;
+                        }
+                    }, false);
+            });
     }
 }
