@@ -8,7 +8,7 @@
     <div class="org-item" ng-if="vm.beforeA" ng-repeat="item in vm.beforeA">
       <div class="logo" style="background-image: url('{{item.logo}}')" ng-click="vm.openApp()"></div>
       <div class="name" ng-click="vm.openApp()">{{item.name}}</div>
-      <div class="time">{{item.startAt | date:'h:mm:ss a'}}</div>
+      <div class="time">{{item.startAt | date:'MM月dd日 a hh:mm'}}</div>
     </div>
 <!--
     <div class="org-item">
