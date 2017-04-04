@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
   .controller('ShareController', ShareController);
 
-function ShareController(loading, $stateParams, RongziService, $state, UserService, ErrorService) {
+function ShareController(loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid) {
     var vm = this;
     vm.project = [];
     vm.liked = false;
@@ -36,10 +36,13 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
 
     function like(id) {
         if (!hybrid.isInApp) {
+            console.log(111111);
             window.location.href = vm.openUrl;
         } else if (!UserService.getUID()) {
+            console.log(2222222);
             window.location.href = 'https://passport.36kr.com/pages';
         } else if (UserService.getUID() && hybrid.isInApp) {
+            console.log(33333333);
             RongziService.like(id)
                 .then(function (response) {
                     vm.project.likes = response.data.curCount;
