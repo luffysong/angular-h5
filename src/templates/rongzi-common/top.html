@@ -17,10 +17,10 @@
   <div class="rongzi-common-textbtn-investor" ng-if="topdata === 'investor'">
     <img src="/styles/images/rongzi/investor-text.png" />
   </div>
-  <div class="rongzi-common-textbtn-enroll" ng-if="topdata === 'enroll'">
+  <div class="rongzi-common-textbtn-enroll" ng-if=" topdata === 'enroll' ">
     <img src="/styles/images/rongzi/enroll-txt.png" />
   </div>
-  <div class="rongzi-enroll-text" ng-if="topdata === 'enroll'">
+  <div class="rongzi-enroll-text" ng-if=" topdata === 'enroll' ">
       <ul>
         <li>
           以下就是你的梦想(项目)合集啦，点选项目右侧“报名融资季”立刻让朋友们为你的梦想点赞吧！
@@ -72,7 +72,7 @@
       </p>
   </div>
 
-  <div class="rongzi-common-btn" id ="" ng-if="topdata !== 'enroll">
+  <div class="rongzi-common-btn" id ="" ng-if="topdata !== 'enroll' ">
     <a href="javascript:void(0)" class="star-btn" ng-click="vm.subscribe(i,$event)"
         id="comm-openApp" ng-if="topdata === 'community'">
       <b ng-if="vm.result.remind === 1">订阅社群专场</b>

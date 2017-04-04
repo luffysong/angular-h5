@@ -13,6 +13,7 @@ function BestListController($modal, loading, $stateParams, FindService,
     vm.signUp = signUp;
     vm.supporter = supporter;
     vm.like = like;
+    vm.rule = addRule;
     vm.openUrl;
 
     init();
@@ -76,6 +77,15 @@ function BestListController($modal, loading, $stateParams, FindService,
 
     function fail(err) {
         ErrorService.alert(err.err.msg);
+    }
+
+    function addRule() {
+        $modal.open({
+            templateUrl: 'templates/rongzi-common/ruleHtml.html',
+            windowClass: 'nativeAlert_wrap',
+            controller: ruleController,
+            controllerAs: 'vm',
+        });
     }
 
     function signUp() {
@@ -177,6 +187,16 @@ function BestListController($modal, loading, $stateParams, FindService,
             window.location.href = vm.openUrl;
         }else if (hybrid.isInApp && !vm.investRole) {
             window.location.href =  'https://' + window.projectEnvConfig.rongHost + '/m/#/investor/apply';
+        }
+    }
+
+    ruleController.$inject = ['$modalInstance', 'hybrid'];
+    function ruleController($modalInstance, hybrid) {
+        var vm = this;
+        vm.cancelModal = cancelModal;
+
+        function cancelModal() {
+            $modalInstance.dismiss();
         }
     }
 }

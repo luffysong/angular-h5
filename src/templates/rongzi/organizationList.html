@@ -17,8 +17,8 @@
     <div class="phase-title"><h2>A轮后</h2></div>
 
     <div class="org-item" ng-if="vm.afterA" ng-repeat="item in vm.afterA">
-      <div class="logo" style="background-image: url('{{item.logo}}')"></div>
-      <div class="name">{{item.name}}</div>
+      <div class="logo" ng-click="vm.openApp()" style="background-image: url('{{item.logo}}')"></div>
+      <div class="name" ng-click="vm.openApp()" >{{item.name}}</div>
       <div class="time">{{item.startAt | date:'yyyy-MM-dd HH:mm:ss'}}</div>
     </div>
 
