@@ -72,11 +72,11 @@
       返回融资季
     </a>
 
-    <a ng-class="{true:'w3',false:'w5'}[!vm.investRole]" href="javascript:void(0)" ui-sref="rongzi.enroll" ng-if="!vm.needApp">
+    <a id ="signup" ng-class="{true:'w3',false:'w5'}[!vm.investRole]"  ui-sref="rongzi.enroll" ng-if="!vm.needApp">
       我要报名
     </a>
 
-    <a ng-class="{true:'w3',false:'w5'}[!vm.investRole]" href="javascript:void(0)" ui-sref="rongzi.enroll" ng-if="vm.needApp">
+    <a id ="signup" ng-class="{true:'w3',false:'w5'}[!vm.investRole]" ng-click="vm.signUp()"  ng-if="vm.needApp">
       我要报名
     </a>
 
