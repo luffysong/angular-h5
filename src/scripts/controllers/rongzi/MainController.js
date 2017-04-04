@@ -8,7 +8,6 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
     var vm = this;
     vm.subscribe = subscribe;
     vm.needApp = true;
-    vm.investRole = false;
     vm.hasEmail = false;
     vm.openApp = openApp;
     vm.openAppUrl;
@@ -50,10 +49,6 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
                     if (response.data.investor) {
                         vm.investRole = true;
                     }
-
-                    // if (response.data.commonEmail) {
-                    //     vm.hasEmail = true;
-                    // }
                 }
             });
     }
