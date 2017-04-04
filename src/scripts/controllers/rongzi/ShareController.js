@@ -6,6 +6,7 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
     var vm = this;
     vm.project = [];
     vm.liked = false;
+    vm.like = like;
     init();
 
     function init() {
@@ -41,7 +42,8 @@ function ShareController(loading, $stateParams, RongziService, $state, UserServi
         } else if (UserService.getUID() && hybrid.isInApp) {
             RongziService.like(id)
                 .then(function (response) {
-                    vm.project.like = response.data.curCount;
+                    vm.project.likes = response.data.curCount;
+                    vm.project.liked = true;
                 });
         }
     }
