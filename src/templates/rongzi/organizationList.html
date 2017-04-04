@@ -19,7 +19,7 @@
     <div class="org-item" ng-if="vm.afterA" ng-repeat="item in vm.afterA">
       <div class="logo" ng-click="vm.openApp()" style="background-image: url('{{item.logo}}')"></div>
       <div class="name" ng-click="vm.openApp()" >{{item.name}}</div>
-      <div class="time">{{item.startAt | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+      <div class="time">{{item.startAt | date:'MM月dd日 a hh:mm'}}</div>
     </div>
 
   </div>
