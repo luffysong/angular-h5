@@ -255,7 +255,7 @@
           //   }
           // }
           .logo-border {
-            padding: 2px;
+            padding: 3px;
             border: 1px dashed #f2690c;
             border-radius: 100px;
           }
@@ -267,30 +267,39 @@
             height: 80px;
             background: #fff no-repeat 50%;
             background-size: contain;
+            margin: 0 auto;
             // background-size:cover;
           }
           .defaultLogo{
             background: url('images/rongzi/default-logo.png') no-repeat center;
             background-size: cover;
           }
-          @media (max-width: 355px) {
-            .logo {
-              width: 70px;
-              height: 70px;
-            }
-          }
-          @media (min-width: 413px) {
-            .logo {
-              width: 99px;
-              height: 99px;
-            }
-          }
+
+          // @media (min-width: 413px) {
+          //   .logo {
+          //     width: 99px;
+          //     height: 99px;
+          //   }
+          // }
           .org-name {
             color: #ff4800;
             font-size: 14px;
             font-weight: bold;
             line-height: 20px;
             margin-top: 5px;
+            margin: 0 auto;
+          }
+          @media (max-width: 360px) {
+            .logo {
+              width: 70px;
+              height: 70px;
+            }
+            .org-name {
+              width: 80%;
+            }
+            .border-bg {
+              width: 88%;
+            }
           }
         }
         .mg-l {

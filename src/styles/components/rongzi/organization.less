@@ -65,6 +65,7 @@
         }
       }
       .org-item {
+        vertical-align:top;
         width: 46%;
         border: 2px solid #fe731f;
         border-radius: 10px;
@@ -95,6 +96,11 @@
           margin: 15px 0;
           line-height: 25px;
         }
+        @media (max-width: 354px) {
+          .time {
+            line-height: 16px;
+          }
+        }
       }
     }
   }
@@ -110,6 +116,7 @@
       padding: 0 10px;
       display: inline-block;
       margin: 5px 5px;
+      vertical-align:top;
       .logo {
         font-size: 16px;
         font-weight: bold;
@@ -136,6 +143,11 @@
         margin: 15px auto;
         line-height: 25px;
         text-align: center;
+      }
+      @media (max-width: 354px) {
+        .time {
+          line-height: 16px;
+        }
       }
     }
   }
