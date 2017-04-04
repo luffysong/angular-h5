@@ -170,17 +170,35 @@
               font-size: 14px;
               font-weight: bold;
               height: 10px;
-              span:nth-of-type(1){
-                width: 80px;
-                display: inline;
+              position: relative;
+
+              .w8{
+                display: inline-block;
+                overflow: hidden;
+                white-space:nowrap;
+                text-overflow: ellipsis;
+                width: 50%;
+              }
+              .w1{
+                display: inline-block;
+                overflow: hidden;
+                white-space:nowrap;
+                text-overflow: ellipsis;
+                width: 80%;
+              }
+              .p-name{
+                display: inline-block;
                 overflow: hidden;
                 white-space:nowrap;
                 text-overflow: ellipsis;
               }
-            span:nth-of-type(2){
-                display: inline;
+            .p-phase{
+                display: inline-block;
                 margin-left: 10px;
+                position: absolute;
               }
+
+
             }
             p:nth-of-type(2){
               font-size: 12px;

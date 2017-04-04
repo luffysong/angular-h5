@@ -7,7 +7,9 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
     vm.projectList = [];
     vm.enrollEvent = enrollEvent;
     vm.isLogin = false;
+    vm.needApp = true;
     vm.modalOpen = modalOpen;
+    vm.openApp = openApp;
     init();
     function init() {
         removeHeader();
@@ -85,5 +87,11 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
 
     function fail(err) {
         ErrorService.alert(err.err.msg);
+    }
+
+    function openApp() {
+        if (!UserService.getUID()) {
+            window.location.href = 'https://passport.36kr.com/pages';
+        }
     }
 }
