@@ -1,3 +1,13 @@
+<a name="1.26.2"></a>
+## [1.26.2](f2e/kr-rong-h5/compare/v1.26.1...v1.26.2) (2017-04-05)
+
+
+### Bug Fixes
+
+* 调整首页名称样式 ([ba736f3](f2e/kr-rong-h5/commits/ba736f3))
+
+
+
 <a name="1.26.1"></a>
 ## [1.26.1](f2e/kr-rong-h5/compare/v1.26.0...v1.26.1) (2017-04-05)
 
