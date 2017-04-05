@@ -398,6 +398,71 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/activity/investorSuccess.html',
     });
 
+    //-----------------------
+    //融资季活动
+    $stateProvider.state('rongzi', {
+        url: '/rongzi',
+        abstract: true,
+        template: '<div ui-view></div>'
+    });
+
+    $stateProvider.state('rongzi.main', {
+        url:'/main',
+        controllerAs: 'vm',
+        controller: 'MainController',
+        templateUrl: 'templates/rongzi/main.html',
+    });
+
+    //普通登录
+    $stateProvider.state('normalLogin', {
+        url:'/normalLogin?',
+        controller: 'NormalLoginController',
+        controllerAs: 'vm',
+        templateUrl: 'templates/activity/login.html',
+    });
+
+    $stateProvider.state('rongzi.organization', {
+        url:'/organization?id',
+        controllerAs: 'vm',
+        controller: 'OrganizationController',
+        templateUrl: 'templates/rongzi/organization.html',
+    });
+
+    $stateProvider.state('rongzi.community', {
+        url:'/community?id',
+        controllerAs: 'vm',
+        controller: 'CommunityController',
+        templateUrl: 'templates/rongzi/community.html',
+    });
+
+    $stateProvider.state('rongzi.investor', {
+        url:'/investor?id',
+        controllerAs: 'vm',
+        controller: 'InvestorController',
+        templateUrl: 'templates/rongzi/investor.html',
+    });
+
+    $stateProvider.state('rongzi.bestlist', {
+        url:'/bestlist?id',
+        controllerAs: 'vm',
+        controller: 'BestListController',
+        templateUrl: 'templates/rongzi/bestlist.html',
+    });
+
+    $stateProvider.state('rongzi.share', {
+        url:'/share?id',
+        controllerAs: 'vm',
+        controller: 'ShareController',
+        templateUrl: 'templates/rongzi/share.html',
+    });
+
+    $stateProvider.state('rongzi.enroll', {
+        url:'/enroll?id',
+        controllerAs: 'vm',
+        controller: 'EnrollController',
+        templateUrl: 'templates/rongzi/enroll.html',
+    });
+
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
     }

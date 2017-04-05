@@ -1,0 +1,33 @@
+<div class="rongzi-common-backg community-wrapper" ng-class="{true:'paddTopBar',false:''}[!vm.needApp]">
+  <div  ng-include="'templates/rongzi-common/top.html'"
+      ng-init=" topdata = 'community' ">
+  </div>
+
+  <div class="community-content">
+    <div ng-include="'templates/rongzi/communityList.html'"></div>
+  </div>
+
+  <div class="community-vacancy">
+    <div class="org-item">
+      <div class="logo">
+        <div class="site">
+          <span>虚位以待</span>
+          <span>联系客服</span>
+        </div>
+      </div>
+    </div>
+    <div class="org-item">
+      <div class="logo">
+        <div class="site">
+          <span>虚位以待</span>
+          <span>联系客服</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-include="'templates/rongzi-common/bottom.html'" ng-init="item = 'community'">
+  </div>
+
+  <div ng-include="'templates/rongzi/meiqia.html'"></div>
+</div>

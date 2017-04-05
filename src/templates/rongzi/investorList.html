@@ -1,0 +1,28 @@
+<div class="investor-list">
+
+
+  <div class="investor-item" ng-if="vm.result.sessions" ng-repeat="item in vm.investors">
+    <div class="list-border">
+      <div class="avatar"
+      style="background-image: url('{{item.logo}}')" ng-click="vm.openApp()"></div>
+      <div class="investor-info">
+        <div class="name" ng-click="vm.openApp()">
+          <div ng-repeat="obj in item.nameArr track by $index"><span>{{obj}}</span></div>
+        </div>
+        <div class="arrows">
+          <img class="arr-l" src="/styles/images/rongzi/arrow.png"/>
+          <img src="/styles/images/rongzi/arrow.png"/>
+          <img class="arr-r" src="/styles/images/rongzi/arrow.png"/>
+        </div>
+        <div class="content" ng-bind="item.intro">
+          红杉资本全球执行合伙人，携程旅行网和如家连锁酒店创始人。榜单中排名第一的华人投资者。投资案例：奇虎360、阿里巴巴、陌陌、今日头条等。
+        </div>
+        <div class="time" ng-bind="item.startAt | date:'MM月dd日 a hh:mm'">
+          4月18日 AM 10：30
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="more" ng-click="vm.displayMore()" ng-show="!vm.more">查看更多</div>
+
+</div>

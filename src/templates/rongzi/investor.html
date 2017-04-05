@@ -1,0 +1,17 @@
+<div class="rongzi-common-backg investor-wrapper" ng-class="{true:'paddTopBar',false:''}[!vm.needApp]">
+  <div  ng-include="'templates/rongzi-common/top.html'" ng-init=" topdata = 'investor' ">
+  </div>
+
+  <div class="investor-content">
+  <div ng-include="'templates/rongzi/investorList.html'"></div>
+  </div>
+
+  <div class="investor-vacancy">
+      <div class="site">虚位以待，请联系客服</div>
+  </div>
+
+  <div ng-include="'templates/rongzi-common/bottom.html'" ng-init="item = 'investor'">
+  </div>
+</div>
+
+<div ng-include="'templates/rongzi/meiqia.html'"></div>

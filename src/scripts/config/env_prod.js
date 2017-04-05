@@ -7,4 +7,6 @@ window.projectEnvConfig = {
     ucHost: 'uc.36kr.com',
     helpHost: 'help.36kr.com',
     nrongHost: 'rong.36kr.com',
+    linkmeKey: '3a89d6c23e6988e0e600d63ca3c70636',
+    linkmeType: 'live'
 };

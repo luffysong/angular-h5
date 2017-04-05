@@ -1,0 +1,29 @@
+<div class="main-special">
+  <div class="outer-border">
+    <div class="inner-border">
+      <div class="special-title m-red-title">
+        <span >{{vm.community.secondTitle}}</span>
+      </div>
+      <div class="split-border"></div>
+      <div class="special-content m-red-txt">
+        <span ng-bind="vm.community.ruleDescription" ng-if="vm.community.ruleDescription">
+          </span>
+      </div>
+      <div class="split-border"></div>
+      <div class="special-logo">
+
+        <div class="item" ng-repeat="obj in vm.community.sessions">
+          <div class="border-bg">
+            <div class="logo-border">
+              <div class="logo" ng-click="vm.openApp()" ng-if="obj.logo" style="background-image: url({{obj.logo}})"></div>
+            </div>
+          </div>
+          <div class="org-name"><span ng-if="obj.name">{{obj.name}}</span></div>
+        </div>
+        <div class="special-info-btn">
+          <button class="btn" ui-sref="rongzi.community({id: vm.community.id})" ><b>查看详情</b></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

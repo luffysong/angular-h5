@@ -1,0 +1,60 @@
+<div class="main-special">
+  <div class="outer-border">
+    <div class="inner-border">
+      <div class="special-title m-title">
+        <span style="letter-spacing: 2px;">创业项目号召力榜单</span>
+      </div>
+      <div class="split-border"></div>
+      <div class="special-content m-txt">
+        <span >每日24：00统计更新，创业者自主投递项目参选，根据24小时内对接数取前三名展示，展示时长24小时。</span>
+      </div>
+      <div class="split-border"></div>
+      <div class="special-logo">
+        <div class="item" ng-repeat="obj in vm.starList" ng-if="vm.starList.length">
+          <div class="border-bg">
+            <div class="logo-border" ng-if="obj.logo">
+              <div class="logo" ng-click="vm.openApp()"
+              style="background-image: url({{obj.logo}})"
+              ></div>
+            </div>
+            <div class="logo defaultLogo" ng-if="!obj.logo"
+            ></div>
+          </div>
+          <div class="org-name">
+            <span ng-if="obj.name">{{obj.name}}</span>
+            <span ng-if="!obj.name">虚位以待</span>
+          </div>
+        </div>
+        <div class="default-item" ng-if="!vm.starList.length">
+          <div class="item">
+            <div class="border-bg">
+              <div class="logo defaultLogo"></div>
+            </div>
+            <div class="org-name">
+              <span>虚位以待</span>
+            </div>
+          </div>
+          <div class="item">
+            <div class="border-bg">
+              <div class="logo defaultLogo"></div>
+            </div>
+            <div class="org-name">
+              <span>虚位以待</span>
+            </div>
+          </div>
+          <div class="item">
+            <div class="border-bg">
+              <div class="logo defaultLogo"></div>
+            </div>
+            <div class="org-name">
+              <span>虚位以待</span>
+            </div>
+          </div>
+          <div class="special-info-btn">
+            <button class="btn" ui-sref="rongzi.bestlist" ><b>查看详情</b></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

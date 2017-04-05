@@ -39,7 +39,8 @@
             location.hash.indexOf('firstWine') > -1 ||
             location.hash.indexOf('frInvestor') > -1 ||
             location.hash.indexOf('findStartUp') > -1 ||
-            location.hash.indexOf('fractivity') > -1
+            location.hash.indexOf('fractivity') > -1 ||
+            location.hash.indexOf('rongzi') > -1
             ) {
             return true;
         } else {

@@ -1,0 +1,39 @@
+<div class="enroll-list">
+  <div class="enroll-item" ng-class="{notApplied: !item.canApply}" ng-repeat="item in vm.projectList" ng-if="vm.projectList">
+    <div class="logo" ng-if="item.logo" style="background-image: url({{item.logo}})"></div>
+    <div class="logo" ng-if="!item.logo" style="background-image: url('/styles/images/rongzi/df-logo.png')"></div>
+    <div class="enroll-info">
+      <div class="name">{{item.name}}</div>
+      <div class="phase" ng-if="item.phase">{{item.phase}}</div>
+      <div class="intro">{{item.brief}}</div>
+    </div>
+    <div class="enroll-btn" ng-if="!item.canApply">
+      <span>等&nbsp;&nbsp;&nbsp;待</span><br/>
+      <span>审核中</span>
+    </div>
+    <div class="enroll-btn" ng-click="vm.enrollEvent(item.ccid)" ng-if="!item.projectId && item.canApply">
+      <span>报&nbsp;&nbsp;&nbsp;名</span><br/>
+      <span>融资季</span>
+    </div>
+    <div class="enroll-btn" ui-sref="rongzi.share({id: item.projectId})" ng-if="item.projectId && item.applied">
+      <span>查&nbsp;&nbsp;&nbsp;看</span><br/>
+      <span>分享页</span>
+    </div>
+  </div>
+
+  <!-- <div class="enroll-vacancy" ng-if="!item.applied">
+    <div class="enroll-item">
+      <div class="logo" style="background-image: url(item.logo)"></div>
+      <div class="enroll-info">
+        <div class="name">{{item.name}}</div>
+        <div class="phase">{{item.phase}}</div>
+        <div class="intro">{{item.brief}}</div>
+      </div>
+      <div class="enroll-btn">
+        <span>等&nbsp;&nbsp;&nbsp;待</span><br/>
+        <span>审核中</span>
+      </div>
+    </div>
+  </div> -->
+
+</div>

@@ -1,0 +1,106 @@
+<div class="bestlist-wrapper" ng-class="{true:'paddTopBar',false:''}[!vm.needApp]">
+
+  <div class="bestlist-top-wrapper">
+
+      <div class="bestlist-logo">
+          <img src="/styles/images/rongzi/bestlist-logo1.png"/>
+      </div>
+      <div class="bestlist-btn">
+          <img src="/styles/images/rongzi/bestlist-txt1.png"/>
+      </div>
+      <div class="bestlist-text">
+          <p>
+            覆盖市面80%的在融项目，史上最大的投融对接狂欢季，
+           Top20机构专场、40明星投资人专场、20社群专场，周周放送。
+          </p>
+      </div>
+  </div>
+  <div class="bestlist-middle">
+      <span ng-click="vm.rule()">上榜规则&nbsp;></span>
+  </div>
+  <div class="bestlist-content">
+      <ul>
+          <li   ng-class="{true:'yew-dot',false:'red-dot'}[$index <= 2]" ng-if="vm.prolist" ng-repeat=" item in vm.prolist track by $index" >
+              <div class="content">
+                  <div>
+                    <label ng-if="$index < 9">0{{$index + 1}}</label>
+                    <label ng-if="$index >= 9">{{$index + 1}}</label>
+                  </div>
+                    <div ng-if="!item.logo" style="background-image: url('/styles/images/rongzi/df-logo.png')" class="mg b-logo" ui-sref="rongzi.share({id: item.id})">
+                    </div>
+                    <div ng-if="item.logo" class="mg b-logo" style="background-image: url('{{item.logo}}')" ui-sref="rongzi.share({id: item.id})">
+                      <div class="crown" ng-class="{true:'gold',false:''}[$index == 0]">
+                      </div>
+                      <div class="crown" ng-class="{true:'silver',false:''}[$index == 1]">
+                      </div>
+                      <div class="crown" ng-class="{true:'copper',false:''}[$index == 2]">
+                      </div>
+                    </div>
+
+                    <div class="mg text">
+                      <p>
+                        <span  ng-class="{true:'w1',false:'w8'}[!item.phase]" ng-if="item.name" ui-sref="rongzi.share({id: item.id})">{{item.name}}</span>
+                        <span class="p-phase" ng-if="item.phase">{{item.phase}}</span>
+                      </p>
+                      <p>
+                        {{item.brief}}
+                      </p>
+                    </div>
+                    <div class="mg praise">
+                      <div>
+                        <span class="num" >
+                            {{item.likes}}
+                        </span>
+                      </div>
+                          <div class="praise-btn">
+                            <a href="" class="like-btn" ng-click="vm.like(item.id)" ng-if="!item.liked"><button>点赞</button></a>
+                            <button class="liked" ng-if="item.liked">已点赞</button>
+                          </div>
+                    </div>
+              </div>
+          </li>
+          <!--
+          <li class="more" ng-click="vm.displayMore()" ng-show="!vm.more">
+            查看更多
+          </li>
+        -->
+      </ul>
+      <footer ng-if="vm.busy && !vm.finish &&  vm.page">正在加载更多...</footer>
+      <footer class="more" ng-click="vm.displayMore()" ng-if="!vm.more && !vm.busy">查看更多</footer>
+  </div>
+
+
+  <div class="bestlist-bottom">
+
+    <a href="javascript:void(0)" ui-sref="rongzi.main" ng-class="{true:'w3',false:'w5'}[!vm.investRole]">
+      返回融资季
+    </a>
+
+    <a id ="signup" ng-class="{true:'w3',false:'w5'}[!vm.investRole]"  ui-sref="rongzi.enroll" ng-if="vm.needApp">
+      我要报名
+    </a>
+
+    <a id ="signup" ng-class="{true:'w3',false:'w5'}[!vm.investRole]" ng-click="vm.signUp()"  ng-if="!vm.needApp">
+      我要报名
+    </a>
+
+    <a ng-class="{true:'w3',false:'w5'}[!vm.investRole]" ng-if="!vm.investRole" href="javascript:void(0)" ng-click="vm.supporter()"
+        id ="support" style="color: #ffeecf;">助力创业者</a>
+
+<!--
+    <div ui-sref="rongzi.main">
+    </div>
+    <div id ="signup" ui-sref="rongzi.enroll" ng-if="!vm.needApp">
+      我要报名
+    </div>
+    <div id ="signup" ng-click="vm.signUp()" ng-if="vm.needApp">
+      我要报名
+    </div>
+    <div  ng-if="!vm.investRole">
+      <a href="javascript:void(0)" ng-click="vm.supporter()"
+          id ="support" style="color: #ffeecf;">助力创业者</a>
+    </div>
+  -->
+  </div>
+  <div ng-include="'templates/rongzi/meiqia.html'"></div>
+</div>

@@ -1,0 +1,94 @@
+<div class="rongzi-common-top">
+
+  <div class="rongzi-common-logo" ng-if="topdata !== 'enroll' ">
+    <img src="/styles/images/rongzi/rongzi-logo.png" />
+  </div>
+
+  <div class="rongzi-common-logo-enroll" ng-if="topdata === 'enroll' ">
+    <img src="/styles/images/rongzi/enroll-logo1.png" />
+  </div>
+
+  <div class="rongzi-common-textbtn-community" ng-if="topdata === 'community' ">
+    <img src="/styles/images/rongzi/community-text.png" />
+  </div>
+  <div class="rongzi-common-textbtn-org" ng-if="topdata === 'org'">
+    <img src="/styles/images/rongzi/org-text.png" />
+  </div>
+  <div class="rongzi-common-textbtn-investor" ng-if="topdata === 'investor'">
+    <img src="/styles/images/rongzi/investor-text.png" />
+  </div>
+  <div class="rongzi-common-textbtn-enroll" ng-if=" topdata === 'enroll' ">
+    <img src="/styles/images/rongzi/enroll-txt.png" />
+  </div>
+  <div class="rongzi-enroll-text" ng-if=" topdata === 'enroll' ">
+      <ul>
+        <li>
+          以下就是你的梦想(项目)合集啦，点选项目右侧“报名融资季”立刻让朋友们为你的梦想点赞吧！
+          找到与你最Match的投资人！
+        </li>
+
+        <li>
+            创建/认领新项目将在两个工作日内审核，结果通过短信告知，请保持关注；
+        </li>
+        <li>
+            未报名项目，点击“报名融资季” 即可参与报名；
+        </li>
+        <li>
+            已报名项目，点击“查看分享页” 获取该项目点赞分享页面；
+        </li>
+        <li>
+            若项目信息完善，有完整的BP，会更受投资人青睐哦；
+        </li>
+      </ul>
+  </div>
+  <div class="rongzi-enroll-btn" ng-if="topdata === 'enroll'">
+      <button ng-if="vm.projectList.length">管理项目（{{vm.projectList.length}}）</button>
+      <button ng-if="!vm.projectList.length">管理项目（{{vm.projectList.length}}）</button>
+  </div>
+
+  <div class="rongzi-common-pushtext" ng-if="topdata === 'org'">
+      <b ng-if="!vm.result.secondTitle">不可错过的顶级机构项目</b>
+      <b ng-if="vm.result.secondTitle">{{vm.result.secondTitle}}</b>
+  </div>
+
+  <div class="rongzi-common-pushtext" ng-if="topdata === 'community'">
+      <b ng-if="!vm.result.secondTitle">不可错过的顶级机构项目</b>
+      <b ng-if="vm.result.secondTitle">{{vm.result.secondTitle}}</b>
+  </div>
+
+  <div class="rongzi-common-pushtext-investor" ng-if="topdata === 'investor'">
+      <b ng-if="!vm.result.secondTitle">不可错过的明星投资人</b>
+      <b ng-if="vm.result.secondTitle">{{vm.result.secondTitle}}</b>
+  </div>
+
+  <div class="rongzi-common-text">
+      <p ng-if="topdata === 'org'" ng-bind="vm.result.ruleDescription">
+      </p>
+
+      <p ng-if="topdata === 'community'" ng-bind="vm.result.ruleDescription">
+      </p>
+
+      <p ng-if="topdata === 'investor'" ng-bind="vm.result.ruleDescription">
+      </p>
+  </div>
+
+  <div class="rongzi-common-btn" id ="" ng-if="topdata !== 'enroll' ">
+    <a href="javascript:void(0)" class="star-btn" ng-click="vm.subscribe(i,$event)"
+        id="comm-openApp" ng-if="topdata === 'community'">
+      <b ng-if="vm.result.remind === 1">订阅社群专场</b>
+      <b ng-if="vm.result.remind === 0">取消订阅社群专场</b>
+    </a>
+
+    <a href="javascript:void(0)" class="org-btn" id="org-openApp" ng-if="topdata === 'org'"
+        ng-click="vm.subscribe(i,$event)">
+      <b ng-if="vm.result.remind === 1">订阅机构专场</b>
+      <b ng-if="vm.result.remind === 0">取消订阅机构专场</b>
+    </a>
+
+    <a href="javascript:void(0)" class="org-btn" id="investor-openApp" ng-if="topdata === 'investor'"
+    ng-click="vm.subscribe(i,$event)">
+      <b ng-if="vm.result.remind === 1">订阅明星投资人专场</b>
+      <b ng-if="vm.result.remind === 0">取消订阅明星投资人专场</b>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="rongzi-common-backg enroll-wrapper" ng-class="{true:'paddTopBar',false:''}[!vm.needApp]">
+  <div  ng-include="'templates/rongzi-common/top.html'" ng-init=" topdata = 'enroll'">
+  </div>
+
+  <div class="enroll-content">
+    <div ng-include="'templates/rongzi/enrollList.html'"></div>
+  </div>
+
+  <div class="enroll-content" ng-if="!vm.projectList.length || !vm.isLogin">
+    <div ng-include="'templates/rongzi/enrollNoProject.html'"></div>
+  </div>
+</div>
+
+<div class="share-fotter">
+  <div class="back-list" ui-sref="rongzi.bestlist()">返回号召力榜单</div>
+  <div class="go-rzj" ui-sref="rongzi.main()">进入融资季</div>
+</div>
+
+<div ng-include="'templates/rongzi/meiqia.html'"></div>

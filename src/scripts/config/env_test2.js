@@ -6,5 +6,7 @@ window.projectEnvConfig = {
     jrHost:'test02.36jr.com',
     ucHost: 'uctest02.36kr.com',
     helpHost: 'helptest02.36kr.com',
-    nrongHost: 'nrongtest02.36kr.com'
+    nrongHost: 'nrongtest02.36kr.com',
+    linkmeKey: '3a89d6c23e6988e0e600d63ca3c70636',
+    linkmeType: 'test'
 };

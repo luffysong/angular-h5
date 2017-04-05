@@ -1,0 +1,483 @@
+@mainCor:#ef0021;
+@orgCor:#ff4620;
+@pushTxt:#ffe438;
+@commBtn:#007a4f;
+@starTxt:#139f8d;
+@btmBtn:#ffb331;
+@mTitle:#00aa59;
+@mTxt:#00aa83;
+@mRedTitle:#ff5000;
+@mRedTxt:#ff8a00;
+
+.paddTopBar{
+  padding-top:55px;
+  @media screen and (min-width: 768px) {
+    padding-top:95px;
+  }
+}
+
+
+.m-red-title{
+  color:@mRedTitle;
+  border: solid 1px #ff8a00;
+  border: solid 1px #ff8a00;
+  box-shadow: 0 0 5px rgba(255, 138, 0, 1);
+  -webkit-box-shadow: 0 0 5px rgba(255, 138, 0, 1);
+  -moz-box-shadow: 0 0 5px rgba(255, 138, 0, 1);
+  span{
+    text-shadow: 0 0 2px #ff8a00, 0 0 2px #ff8a00;
+  }
+}
+
+.m-red-txt{
+  color:@mRedTxt;
+}
+
+.m-title{
+  color:@mTitle;
+  border: solid 1px @mTxt;
+  border: solid 1px #mTxt;
+  box-shadow: 0 0 5px rgba(0, 170, 131, 1);
+  -webkit-box-shadow: 0 0 5px rgba(0, 170, 131, 1);
+  -moz-box-shadow: 0 0 5px rgba(0, 170, 131, 1);
+  span{
+    text-shadow: 0 0 2px @mTxt, 0 0 2px @mTxt;
+  }
+}
+
+.fixDownloadBar{
+  min-height: 45px;
+  max-width: 768px;
+  height: auto;
+  width: 100%;
+  background-color: #fc491e;
+  line-height: 40px;
+  position: fixed;
+  top:0px;
+  overflow: hidden;
+  text-align: center;
+  .innerDiv{
+    height: auto;
+    min-height: 45px;
+    margin: 5px 5px;
+    border: 1px dashed #fd8f25;
+    @media screen and (min-width: 768px) {
+      height: 85px;
+    }
+    div{
+      width: 33%;
+      float: left;
+      min-height: 45px;
+      height: auto;
+      img{
+        width: 100%;
+      }
+    }
+    div:nth-of-type(1){
+        img{
+          margin-top: 5px;
+          width: 80%;
+        }
+    }
+    div:nth-of-type(2){
+      font-size: 16px;
+      color: #fff4e5;
+      font-weight: bold;
+      letter-spacing: 1px;
+      line-height: 45px;
+      @media screen and (max-width: 320px) {
+        letter-spacing: 0px;
+        font-size: 14px;
+      }
+      @media screen and (min-width: 768px) {
+        font-size: 25px;
+        line-height: 85px;
+        // img{
+        //   transform: translateY(50%);
+        // }
+      }
+    }
+    div:nth-of-type(3){
+        img{
+          width: 70%;
+        }
+    }
+  }
+}
+
+.m-txt{
+  color:@mTxt;
+}
+
+.btn{
+  background-color: @mainCor;
+  color: white;
+  height: 37px;
+  border-radius:15px;
+  text-align: center;
+}
+
+.org-btn{
+  background-color: @orgCor;
+  color: white;
+  height: 30px;
+  line-height: 30px;
+  border-radius:15px;
+  text-align: center;
+  border: @orgCor;
+}
+
+.star-btn{
+  background-color: @commBtn;
+  color: white;
+  height: 30px;
+  line-height: 30px;
+  border-radius:15px;
+  text-align: center;
+  border: @commBtn;
+}
+
+.rongzi-common-backg{
+  position: relative;
+  max-width: 768px;
+  background: url('images/rongzi/second-backg.png') no-repeat center;
+  background-color: #000000;
+}
+
+
+.rongzi-common-bottom{
+  height: 48px;
+  width: 100%;
+  text-align: center;
+  line-height: 48px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: @orgCor;
+  color: white;
+}
+
+.rongzi-common-bottom-comm{
+  height: 48px;
+  width: 100%;
+  text-align: center;
+  line-height: 48px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: @btmBtn;
+  color: white;
+}
+
+.rongzi-common-top{
+  width: 100%;
+  height: auto;
+  min-height: 360px;
+  position: relative;
+  padding-bottom: 20px;
+  //background: url('images/rongzi/org-top1.png');
+
+  .rongzi-common-logo{
+    img{
+      width: 100%;
+    }
+    //height: 100px;
+    //background: url('images/rongzi/rongzi-logo.png');
+  }
+
+  .rongzi-common-logo-enroll{
+    img{
+      width: 100%;
+    }
+    // width: 100%;
+    // height: 70px;
+    // background: url('images/rongzi/enroll-logo1.png');
+  }
+
+  .rongzi-common-textbtn-org{
+    img{
+      width: 100%;
+    }
+  //  height: 55px;
+  //  background: url('images/rongzi/org-text.png');
+  }
+
+  .rongzi-common-textbtn-community{
+    img{
+      width: 100%;
+    }
+    // width: 100%;
+    // height: 55px;
+    // background: url('images/rongzi/community-text.png');
+  }
+
+  .rongzi-common-textbtn-investor{
+    img{
+      width: 100%;
+    }
+    // width: 100%;
+    // height: 55px;
+    // background: url('images/rongzi/investor-text.png');
+  }
+
+  .rongzi-common-textbtn-enroll{
+    img{
+      width: 100%;
+    }
+    // width: 100%;
+    // height: 55px;
+    // background: url('images/rongzi/enroll-txt.png');
+  }
+   .rongzi-enroll-btn{
+     height: 40px;
+     width: 100%;
+     button{
+       background-color: #ef0021;
+       width: 40%;
+       height: 33px;
+       border-radius: 15px;
+       line-height: 20px;
+       color:#ffe69a;
+       font-size: 16px;
+       font-weight: bold;
+       text-align: center;
+       border: 1px solid #ffe69a;
+       margin-left: 20px;
+     }
+   }
+
+  .rongzi-enroll-text{
+    color: #e4a48f;
+    font-size:14px;
+    width:100%;
+    padding: 10px 0px;
+    p{
+      width: 90%;
+      font-weight: 900;
+      text-align: left;
+      margin: 0 auto;
+    }
+    ul{
+      margin: 0;
+      padding:0;
+
+      li{
+        color: #e4a48f;
+        //font-weight: bold;
+        margin: 0 auto;
+        width: 90%;
+        text-align: left;
+      }
+
+      li:first-child{
+        font-weight: 900;
+        text-align: left;
+        list-style-type: none;
+      }
+    }
+  }
+
+  .rongzi-common-pushtext{
+    color: @pushTxt;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .rongzi-common-pushtext-investor{
+    color: @starTxt;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .rongzi-common-text{
+    text-align: left;
+    height: auto;
+    p{
+      color: #fff6e4;
+      font-size:14px;
+      margin: 0 auto;
+      font-weight: bold;
+      width:90%;
+      line-height: 18px;
+    }
+  }
+
+  .rongzi-common-btn{
+    width: 100%;
+    margin-top: 15px;
+    text-align: center;
+    height: 40px;
+    button{
+      margin: 0 auto;
+      height: 30px;
+      line-height: 15px;
+      width: 210px;
+      font-size: 16px;
+      font-weight: 900;
+    }
+    a{
+      height: 35px;
+      line-height: 35px;
+      font-size: 16px;
+      width: 60%;
+      color: white;
+      display: inline-block;
+    }
+  }
+}
+
+
+
+.nativeAlert_wrap {
+    background: rgba(0,0,0,0.60);
+    overflow: visible;
+
+    .modal-dialog {
+        margin-top: 65px;
+        //margin-left: 7.5%;
+        //margin-right: 7.5%;
+    }
+    .modal-content {
+        padding-bottom: 0;
+        overflow: visible;
+    }
+    .modal-content {
+        border: none 0;
+        width:80%;
+        margin: 0 auto;
+        background-color: rgba(252,73,30,1);
+    }
+    .remindAlert_pop {
+        position: relative;
+        overflow: visible;
+        padding-top: 15px;
+        border-radius: 10px;
+
+        h4 {
+            text-align: center;
+            margin: 0 30px;
+            font-size: 16px;
+            color: @pushTxt;
+            letter-spacing: 0px;
+            line-height: 19.5px;
+            font-weight: 600;
+        }
+        .pop-content{
+          position: relative;
+          min-height: 200px;
+          height: auto;
+          text-align: center;
+          p{
+            margin: 0 auto;
+            width:80%;
+            text-align: left;
+            color:#FFF;
+            font-size: 12px;
+            line-height: 20px;
+            margin-top:10px;
+            input{
+                width: 80%;
+            }
+          }
+          ul{
+            padding: 0;
+            margin: 0;
+            li{
+              list-style-type: none;
+              font-size: 12px;
+              color: #f8f5ae;
+              margin-top: 10px;
+            }
+          }
+        }
+        .enroll-msg {
+          min-height: 120px;
+        }
+        .pop-bottom{
+          width: 100%;
+          min-height: 40px;
+          height: auto;
+          font-size: 15px;
+          position: absolute;
+          bottom:0px;
+          background-color: rgba(252,73,30,1);
+          color: @pushTxt;
+          //border-top: 1px dotted @pushTxt;
+          div{
+            width: 100%;
+            border-top: 1px dotted @pushTxt;
+          }
+          .pop-investor{
+              display: inline-block;
+              width: 100%;
+              text-align: center;
+              color: #f8f5ae;
+              font-weight: bold;
+              font-size: 12px;
+              height: 30px;
+              line-height: 30px;
+          }
+          h4{
+            text-align: center;
+            width: 100%;
+            display: inline-block;
+            line-height: 40px;
+            margin: 0 auto;
+          }
+        }
+    }
+}
+
+
+@media screen and (max-width: 414px) {
+  .rongzi-common-top{
+      background-size: 414px 100%;
+      .rongzi-common-logo,.rongzi-common-textbtn-org,
+      .rongzi-common-textbtn-investor,
+      .rongzi-common-logo-enroll,
+      .rongzi-common-textbtn-enroll,
+      .rongzi-common-textbtn-community{
+        background-size: 414px 100%;
+      }
+  }
+  .rongzi-common-backg{
+    background-size: 414px 100%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+      .rongzi-common-top{
+          background-size: 375px 100%;
+          .rongzi-common-logo,.rongzi-common-textbtn-org,
+          .rongzi-common-textbtn-investor,
+          .rongzi-common-logo-enroll,
+          .rongzi-common-textbtn-enroll,
+          .rongzi-common-textbtn-community{
+            background-size: 375px 100%;
+          }
+      }
+      .rongzi-common-backg{
+        background-size: 375px 100%;
+      }
+}
+
+@media screen and (max-width: 320px) {
+    .rongzi-common-top{
+        background-size: 320px 100%;
+        .rongzi-common-logo,.rongzi-common-textbtn-org,
+        .rongzi-common-textbtn-investor,
+        .rongzi-common-logo-enroll,
+        .rongzi-common-textbtn-enroll,
+        .rongzi-common-textbtn-community{
+          background-size: 320px 100%;
+        }
+    }
+    .rongzi-common-backg{
+      background-size: 320px 100%;
+    }
+}
