@@ -9,6 +9,13 @@
 @mRedTitle:#ff5000;
 @mRedTxt:#ff8a00;
 
+.paddTopBar{
+  padding-top:55px;
+  @media screen and (min-width: 768px) {
+    padding-top:95px;
+  }
+}
+
 
 .m-red-title{
   color:@mRedTitle;
@@ -73,7 +80,18 @@
         }
     }
     div:nth-of-type(2){
+      font-size: 16px;
+      color: #fff4e5;
+      font-weight: bold;
+      letter-spacing: 1px;
+      line-height: 45px;
+      @media screen and (max-width: 320px) {
+        letter-spacing: 0px;
+        font-size: 14px;
+      }
       @media screen and (min-width: 768px) {
+        font-size: 30px;
+        line-height: 85px;
         img{
           transform: translateY(50%);
         }
