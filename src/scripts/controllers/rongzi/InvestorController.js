@@ -57,7 +57,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         var request = {
             id: $stateParams.id,
             page: vm.page += 1,
-            pageSize:3,
+            pageSize:4,
         };
         console.log(request);
         RongziService.getInvestor(request)
