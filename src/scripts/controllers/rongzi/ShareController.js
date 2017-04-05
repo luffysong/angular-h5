@@ -9,6 +9,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
     vm.like = like;
     vm.share = share;
     vm.needApp = true;
+    vm.openApp = openApp;
     init();
 
     function init() {
@@ -142,6 +143,12 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
 
         function cancelModal() {
             $modalInstance.dismiss();
+        }
+    }
+
+    function openApp() {
+        if (!hybrid.isInApp) {
+            defaultModal();
         }
     }
 }

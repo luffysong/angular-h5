@@ -74,7 +74,8 @@ function BestListController($modal, loading, $stateParams, FindService,
                     vm.prolist = vm.prolist.concat(response.data.data);
                     if (response.data.totalPages) {
                         vm.page = response.data.page || 0;
-                        if (response.data.totalPages !== vm.page) {
+
+                        if (response.data.totalPages !== vm.page && vm.page <= 9) {
                             vm.busy = false;
                         } else {
                             vm.finish = true;

@@ -235,10 +235,9 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     }
 
     function openApp() {
-        // if (!hybrid.isInApp) {
-        //     window.location.href = vm.openAppUrl;
-        // }
-        defaultModal();
+        if (!hybrid.isInApp) {
+            defaultModal();
+        }
     }
 
     function defaultModal(item) {
