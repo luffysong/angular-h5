@@ -7,7 +7,7 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
     vm.projectList = [];
     vm.enrollEvent = enrollEvent;
     vm.isLogin = false;
-    vm.needApp = false;
+    vm.needApp = true;
     vm.modalOpen = modalOpen;
     vm.openApp = openApp;
     vm.openAppUrl;

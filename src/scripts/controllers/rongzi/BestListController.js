@@ -16,6 +16,7 @@ function BestListController($modal, loading, $stateParams, FindService,
     vm.like = like;
     vm.rule = addRule;
     vm.openUrl;
+    vm.busy = false;
 
     init();
     function init() {
@@ -61,6 +62,9 @@ function BestListController($modal, loading, $stateParams, FindService,
     }
 
     function initData() {
+        if (vm.busy)return;
+        vm.busy = true;
+
         var sendata = {
             page: vm.page + 1,
             pageSize:10,
