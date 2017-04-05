@@ -102,7 +102,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
 
     function initLinkmeComm() {
         var krdata = {};
-        krdata.type = 'test';
+        krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
         '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/community?id=' + $stateParams.id + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,

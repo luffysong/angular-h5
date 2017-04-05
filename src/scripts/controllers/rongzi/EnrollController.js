@@ -7,24 +7,26 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
     vm.projectList = [];
     vm.enrollEvent = enrollEvent;
     vm.isLogin = false;
-    vm.needApp = true;
+    vm.needApp = false;
     vm.modalOpen = modalOpen;
     vm.openApp = openApp;
+    vm.openAppUrl;
     init();
     function init() {
         initTitle();
-        removeHeader();
+        initWeixin();
         loading.hide('findLoading');
         initData();
         if (UserService.getUID()) {
             vm.isLogin = true;
         }
 
-        initPxLoader();
-    }
+        if (!hybrid.isInApp) {
+            initLinkmeInvestor();
+            vm.needApp = false;
+        }
 
-    function removeHeader() {
-        $('.common-header.J_commonHeaderWrapper').remove();
+        initPxLoader();
     }
 
     function initPxLoader() {
@@ -44,6 +46,18 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
             .then(function (response) {
                 vm.projectList = response.data.data;
             }).catch(fail);
+    }
+
+    function initWeixin() {
+        window.WEIXINSHARE = {
+            shareTitle: '【创投助手·融资季】参加即可上榜！让每一个好项目都不被辜负。',
+            shareUrl: window.location.href,
+            shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
+            shareDesc: '每日24：00更新当日对接最火热三甲，数万投资人同行帮你甄选，你离好项目只差一步！',
+        };
+
+        var obj = {};
+        window.InitWeixin(obj);
     }
 
     function enrollEvent(ccid) {
@@ -105,10 +119,64 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
     }
 
     function openApp() {
-        if (!UserService.getUID()) {
+        if (!hybrid.isInApp) {
+            defaultModal();
+        } else if (hybrid.isInApp && !UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
         }else {
             hybrid.open('signUp');
         }
     }
+
+    function initLinkmeInvestor() {
+        var krdata = {};
+        krdata.type =  window.projectEnvConfig.linkmeType;
+        krdata.params =
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/enroll","currentRoom":"1"}';
+        window.linkedme.init(window.projectEnvConfig.linkmeKey,
+        { type: window.projectEnvConfig.linkmeType }, function (err, res) {
+                if (err) {
+                    return;
+                }
+
+                window.linkedme.link(krdata, function (err, data) {
+                        if (err) {
+                            // 生成深度链接失败，返回错误对象err
+                            console.log(err);
+                        } else {
+                            // 生成深度链接成功，深度链接可以通过data.url得到
+                            vm.openAppUrl = data.url;
+                        }
+                    }, false);
+            });
+    }
+
+    function defaultModal(item) {
+        item = item ? item : {};
+        item.openUrl = vm.openAppUrl;
+        $modal.open({
+            templateUrl: 'templates/rongzi-common/downloadApp.html',
+            windowClass: 'nativeAlert_wrap',
+            controller: defaultController,
+            controllerAs: 'vm',
+            resolve: {
+                obj: function () {
+                    return item;
+                }
+            }
+        });
+    }
+
+    defaultController.$inject = ['$modalInstance', 'obj'];
+    function defaultController($modalInstance, obj) {
+
+        var vm = this;
+        vm.openUrl = obj.openUrl;
+        vm.cancelModal = cancelModal;
+
+        function cancelModal() {
+            $modalInstance.dismiss();
+        }
+    }
+
 }

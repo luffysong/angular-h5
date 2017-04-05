@@ -145,7 +145,7 @@ function BestListController($modal, loading, $stateParams, FindService,
 
         function initLinkme() {
             var krdata = {};
-            krdata.type = 'test';
+            krdata.type =  window.projectEnvConfig.linkmeType;
             krdata.params =
             '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/enroll", "currentRoom" : "1"}';
 
@@ -171,7 +171,7 @@ function BestListController($modal, loading, $stateParams, FindService,
 
     function outInitLinkme() {
         var krdata = {};
-        krdata.type = 'test';
+        krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
         '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/bestlist","currentRoom":"0"}';
 

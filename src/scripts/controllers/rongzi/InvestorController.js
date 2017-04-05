@@ -100,7 +100,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
 
     function initLinkmeInvestor() {
         var krdata = {};
-        krdata.type = 'test';
+        krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
         '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investor?id=' + $stateParams.id + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,

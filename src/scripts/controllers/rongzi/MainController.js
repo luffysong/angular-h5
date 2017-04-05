@@ -216,7 +216,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
 
     function initLinkme(params) {
         var krdata = {};
-        krdata.type = 'test';
+        krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
         '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/main","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,

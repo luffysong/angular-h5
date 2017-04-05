@@ -95,7 +95,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
 
     function outInitLinkme() {
         var krdata = {};
-        krdata.type = 'test';
+        krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
         '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/share?id=' + $stateParams.id + '","currentRoom":"0"}';
 
