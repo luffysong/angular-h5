@@ -40,7 +40,6 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
         var loader = new PxLoader();
         var imgArr = document.getElementsByTagName('img');
         for (var i = 0; i < imgArr.length; i++) {
-            console.log('====', imgArr[i].src);
             var pxImage = new PxLoaderImage(imgArr[i].src);
             pxImage.imageNumber = i + 1;
             loader.add(pxImage);

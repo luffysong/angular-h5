@@ -40,6 +40,7 @@
 
 .fixDownloadBar{
   min-height: 45px;
+  max-width: 768px;
   height: auto;
   width: 100%;
   background-color: #fc491e;
@@ -48,32 +49,41 @@
   top:0px;
   overflow: hidden;
   text-align: center;
-  div{
-    width: 33%;
-    float: left;
-    min-height: 45px;
+  .innerDiv{
     height: auto;
-    img{
-      width: 100%;
-    }
-  }
-  div:nth-of-type(1){
-      img{
-        margin-top: 5px;
-        width: 80%;
-      }
-  }
-  div:nth-of-type(2){
+    min-height: 45px;
+    margin: 5px 5px;
+    border: 1px dashed #fd8f25;
     @media screen and (min-width: 768px) {
+      height: 85px;
+    }
+    div{
+      width: 33%;
+      float: left;
+      min-height: 45px;
+      height: auto;
       img{
-        transform: translateY(50%);
+        width: 100%;
       }
     }
-  }
-  div:nth-of-type(3){
-      img{
-        width: 70%;
+    div:nth-of-type(1){
+        img{
+          margin-top: 5px;
+          width: 80%;
+        }
+    }
+    div:nth-of-type(2){
+      @media screen and (min-width: 768px) {
+        img{
+          transform: translateY(50%);
+        }
       }
+    }
+    div:nth-of-type(3){
+        img{
+          width: 70%;
+        }
+    }
   }
 }
 
@@ -122,7 +132,7 @@
   width: 100%;
   text-align: center;
   line-height: 48px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   background-color: @orgCor;
   color: white;
@@ -133,7 +143,7 @@
   width: 100%;
   text-align: center;
   line-height: 48px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
   background-color: @btmBtn;
   color: white;
