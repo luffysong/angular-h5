@@ -233,10 +233,9 @@ function BestListController($modal, loading, $stateParams, FindService,
     }
 
     function openApp() {
-        // if (!hybrid.isInApp) {
-        //     window.location.href = vm.openUrl;
-        // }
-        defaultModal();
+        if (!hybrid.isInApp) {
+            defaultModal();
+        }
     }
 
     function defaultModal(item) {

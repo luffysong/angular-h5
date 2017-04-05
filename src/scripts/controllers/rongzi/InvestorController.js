@@ -248,10 +248,10 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
     }
 
     function openApp() {
-        // if (!hybrid.isInApp) {
-        //     window.location.href = vm.openAppUrl;
-        // }
-        defaultModal();
+        if (!hybrid.isInApp) {
+            defaultModal();
+        }
+
     }
 
     function defaultModal(item) {
