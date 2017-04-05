@@ -1,3 +1,13 @@
+<a name="1.26.3"></a>
+## [1.26.3](f2e/kr-rong-h5/compare/v1.26.2...v1.26.3) (2017-04-05)
+
+
+### Bug Fixes
+
+* 调整榜单序号样式 ([9db28c7](f2e/kr-rong-h5/commits/9db28c7))
+
+
+
 <a name="1.26.2"></a>
 ## [1.26.2](f2e/kr-rong-h5/compare/v1.26.1...v1.26.2) (2017-04-05)
 
