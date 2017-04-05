@@ -288,17 +288,21 @@
             line-height: 20px;
             margin-top: 5px;
             margin: 0 auto;
+            max-width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
-          @media (max-width: 375px) {
+          @media (max-width: 380px) {
             .logo {
               width: 70px;
               height: 70px;
             }
-            .org-name {
-              width: 80%;
-            }
+            // .org-name {
+            //   width: 80%;
+            // }
             .border-bg {
-              // width: 88%;
+              width: 90%;
             }
           }
         }
