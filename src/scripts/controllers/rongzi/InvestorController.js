@@ -22,6 +22,8 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
             vm.needApp = false;
         }
 
+        console.log(vm.needApp);
+
         initData();
         initUser();
         initWeixin();

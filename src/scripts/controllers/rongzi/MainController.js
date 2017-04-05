@@ -4,18 +4,18 @@ angular.module('defaultApp.controller')
     .controller('MainController', MainController);
 
 function MainController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, RongziService, ErrorService, hybrid) {
+    $state, UserService, RongziService, ErrorService, hybrid, $rootScope, $timeout) {
     var vm = this;
     vm.subscribe = subscribe;
     vm.needApp = true;
     vm.hasEmail = false;
     vm.openApp = openApp;
     vm.openAppUrl;
+    vm.databackState = false;
+    vm.picState = false;
     init();
 
     function init() {
-        initData();
-        loading.show('findLoading');
         initTitle();
         initUser();
         initWeixin();
@@ -24,7 +24,16 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             vm.needApp = false;
         }
 
+        initData();
         initPxLoader();
+    }
+
+    function BackState() {
+        Promise
+            .all([initData(), initPxLoader()])
+            .then(function (results) {
+                loading.hide('rongziLoading');
+            });
     }
 
     function initPxLoader() {
@@ -35,6 +44,13 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             pxImage.imageNumber = i + 1;
             loader.add(pxImage);
         }
+
+        loader.addProgressListener(function (e) {
+        });
+
+        loader.addCompletionListener(function (e) {
+            vm.picState = true;
+        });
 
         loader.start();
     }
@@ -185,13 +201,10 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         });
     }
 
-    $scope.$watch('$viewContentLoaded', function () {
-        loading.hide('findLoading');
-    });
-
     function initData() {
         RongziService.getHome()
             .then(function setHomeData(data) {
+                    loading.hide('rongziLoading');
                     if (data.data) {
                         vm.result = data.data.data;
                         vm.remind = data.data.data.remind;
@@ -239,6 +252,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
     }
 
     function fail(err) {
+        loading.hide('rongziLoading');
         ErrorService.alert(err.err.msg);
     }
 

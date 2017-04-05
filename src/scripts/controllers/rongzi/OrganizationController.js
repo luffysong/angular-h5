@@ -12,7 +12,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     vm.openAppUrl;
     init();
     function init() {
-        loading.show('findLoading');
+        loading.hide('findLoading');
         if (!hybrid.isInApp) {
             initLinkmeInvestor();
             vm.needApp = false;

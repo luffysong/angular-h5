@@ -1,101 +1,104 @@
 
 <div class="rongzi-wrapper" ng-class="{true:'paddTopBar',false:''}[!vm.needApp]">
-
-  <div class="rongzi-top-wrapper">
-      <div class="m-logo">
-        <img src="/styles/images/rongzi/m-top.png"/>
-      </div>
-
-      <div class="rong-timer" >
-        <img src="/styles/images/rongzi/timer_2.png"/>
-        <!--
-          <img src="/styles/images/rongzi/timer.png"/>-->
-
-        <div class="rong-num" id ="timer" ng-if="vm.result.fundingSeasonActivityInfo">
-                {{vm.result.fundingSeasonActivityInfo.leftDays}}
+  <div ng-if="!loadingInst.rongziLoading">
+    <div class="rongzi-top-wrapper">
+        <div class="m-logo">
+          <img src="/styles/images/rongzi/m-top.png"/>
         </div>
+
+        <div class="rong-timer" >
+          <img src="/styles/images/rongzi/timer_2.png"/>
+          <!--
+            <img src="/styles/images/rongzi/timer.png"/>-->
+
+          <div class="rong-num" id ="timer" ng-if="vm.result.fundingSeasonActivityInfo">
+                  {{vm.result.fundingSeasonActivityInfo.leftDays}}
+          </div>
+        </div>
+        <div class="subscribe">
+          <!--
+            <a href="javascript:void(0)" id ="main-open" class="btn subscribe-btn"
+             ng-show="!vm.needApp">
+             <b ng-if="vm.remind === 1">融资季专场，开场提醒订阅</b>
+             <b ng-if="vm.remind === 0">取消提醒订阅</b>
+           </a>
+         -->
+            <a  id ="main-open" class="btn subscribe-btn"
+            ng-click="vm.subscribe(item, $event)">
+            <b ng-if="vm.remind === 1">融资季专场，开场提醒订阅</b>
+            <b ng-if="vm.remind === 0">取消提醒订阅</b>
+          </a>
+        </div>
+        <div class="rongzi-text">
+            <p>
+              融资季&nbsp;|&nbsp;错过再等一年！
+            </p>
+            <p>
+              覆盖市面80%的在融项目，史上最大的投融对接狂欢季，
+              Top20机构专场、40明星投资人专场、20社群专场，周周放送。
+            </p>
+        </div>
+
+        <div class="rongzi-arrow">
+          <img src="/styles/images/rongzi/vertical-arrow.png" />
+        </div>
+    </div>
+
+    <div class="rongzi-block fblock">
+      <div class="rongzi-invest-arrow-left">
+        <img class="kr36" width="33" src="/styles/images/rongzi/arrow-left.png" />
       </div>
-      <div class="subscribe">
-        <!--
-          <a href="javascript:void(0)" id ="main-open" class="btn subscribe-btn"
-           ng-show="!vm.needApp">
-           <b ng-if="vm.remind === 1">融资季专场，开场提醒订阅</b>
-           <b ng-if="vm.remind === 0">取消提醒订阅</b>
-         </a>
-       -->
-          <a  id ="main-open" class="btn subscribe-btn"
-          ng-click="vm.subscribe(item, $event)">
-          <b ng-if="vm.remind === 1">融资季专场，开场提醒订阅</b>
-          <b ng-if="vm.remind === 0">取消提醒订阅</b>
-        </a>
+      <div class="rongzi-invest-icon">
+        <img class="kr36" width="33" src="/styles/images/rongzi/invest.png" />
       </div>
-      <div class="rongzi-text">
-          <p>
-            融资季&nbsp;|&nbsp;错过再等一年！
-          </p>
-          <p>
-            覆盖市面80%的在融项目，史上最大的投融对接狂欢季，
-            Top20机构专场、40明星投资人专场、20社群专场，周周放送。
-          </p>
+    </div>
+
+    <div class="rongzi rongzi-institute-wrapper">
+      <div ng-include="'templates/rongzi-common/m-org.html'"></div>
+    </div>
+
+    <div class="rongzi-block">
+
+      <div class="rongzi-invest-icon-left">
+        <img class="kr36" width="33" src="/styles/images/rongzi/tou.png" />
       </div>
 
-      <div class="rongzi-arrow">
-        <img src="/styles/images/rongzi/vertical-arrow.png" />
+      <div class="rongzi-invest-arrow-right">
+        <img class="kr36" width="33" src="/styles/images/rongzi/arrow-right.png" />
       </div>
-  </div>
-
-  <div class="rongzi-block fblock">
-    <div class="rongzi-invest-arrow-left">
-      <img class="kr36" width="33" src="/styles/images/rongzi/arrow-left.png" />
-    </div>
-    <div class="rongzi-invest-icon">
-      <img class="kr36" width="33" src="/styles/images/rongzi/invest.png" />
-    </div>
-  </div>
-
-  <div class="rongzi rongzi-institute-wrapper">
-    <div ng-include="'templates/rongzi-common/m-org.html'"></div>
-  </div>
-
-  <div class="rongzi-block">
-
-    <div class="rongzi-invest-icon-left">
-      <img class="kr36" width="33" src="/styles/images/rongzi/tou.png" />
     </div>
 
-    <div class="rongzi-invest-arrow-right">
-      <img class="kr36" width="33" src="/styles/images/rongzi/arrow-right.png" />
+    <div class="rongzi rongzi-investor-wrapper">
+      <div ng-include="'templates/rongzi-common/m-investor.html'" ></div>
     </div>
+
+    <div class="rongzi-block">
+      <div class="rongzi-invest-arrow-left">
+        <img class="kr36" width="33" src="/styles/images/rongzi/arrow-left.png" />
+      </div>
+      <div class="rongzi-invest-icon">
+        <img class="kr36" width="33" src="/styles/images/rongzi/help.png" />
+      </div>
+    </div>
+
+    <div class="rongzi rongzi-startup-wrapper">
+      <div ng-include="'templates/rongzi-common/m-community.html'"></div>
+    </div>
+    <div class="rongzi-block">
+      <div class="rongzi-invest-icon-left">
+        <img class="kr36" width="33" src="/styles/images/rongzi/hand.png" />
+      </div>
+      <div class="rongzi-invest-arrow-right">
+        <img class="kr36" width="33" src="/styles/images/rongzi/arrow-right.png" />
+      </div>
+    </div>
+
+    <div class="rongzi rongzi-list-wrapper">
+      <div ng-include="'templates/rongzi-common/m-starlist.html'"></div>
+    </div>
+
+    <div ng-include="'templates/rongzi/meiqia.html'"></div>
   </div>
 
-  <div class="rongzi rongzi-investor-wrapper">
-    <div ng-include="'templates/rongzi-common/m-investor.html'" ></div>
-  </div>
-
-  <div class="rongzi-block">
-    <div class="rongzi-invest-arrow-left">
-      <img class="kr36" width="33" src="/styles/images/rongzi/arrow-left.png" />
-    </div>
-    <div class="rongzi-invest-icon">
-      <img class="kr36" width="33" src="/styles/images/rongzi/help.png" />
-    </div>
-  </div>
-
-  <div class="rongzi rongzi-startup-wrapper">
-    <div ng-include="'templates/rongzi-common/m-community.html'"></div>
-  </div>
-  <div class="rongzi-block">
-    <div class="rongzi-invest-icon-left">
-      <img class="kr36" width="33" src="/styles/images/rongzi/hand.png" />
-    </div>
-    <div class="rongzi-invest-arrow-right">
-      <img class="kr36" width="33" src="/styles/images/rongzi/arrow-right.png" />
-    </div>
-  </div>
-
-  <div class="rongzi rongzi-list-wrapper">
-    <div ng-include="'templates/rongzi-common/m-starlist.html'"></div>
-  </div>
-
-  <div ng-include="'templates/rongzi/meiqia.html'"></div>
+  <loading loading="rongziLoading"></loading>
 </div>
