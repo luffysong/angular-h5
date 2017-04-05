@@ -22,7 +22,7 @@
       <ul>
           <li   ng-class="{true:'yew-dot',false:'red-dot'}[$index <= 2]" ng-if="vm.prolist" ng-repeat=" item in vm.prolist track by $index" >
               <div class="content">
-                  <div>
+                  <div class="index-num">
                     <label ng-if="$index < 9">0{{$index + 1}}</label>
                     <label ng-if="$index >= 9">{{$index + 1}}</label>
                   </div>
