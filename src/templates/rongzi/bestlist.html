@@ -28,7 +28,7 @@
                   </div>
                     <div ng-if="!item.logo" class="mg b-logo" ui-sref="rongzi.share({id: item.id})">
                     </div>
-                    <div ng-if="item.logo" class="mg b-logo" style="background-image: url('{{item.logo}}')" ui-sref="rongzi.share({id: item.id})">
+                    <div ng-if="item.logo" class="mg b-logo" style="background-image: url('{{item.logo || '/styles/images/rongzi/df-logo.png'}}')" ui-sref="rongzi.share({id: item.id})">
                       <div class="crown" ng-class="{true:'gold',false:''}[$index == 0]">
                       </div>
                       <div class="crown" ng-class="{true:'silver',false:''}[$index == 1]">
