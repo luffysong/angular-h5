@@ -1,3 +1,13 @@
+<a name="1.26.4"></a>
+## [1.26.4](f2e/kr-rong-h5/compare/v1.26.3...v1.26.4) (2017-04-05)
+
+
+### Bug Fixes
+
+* 修改投资人专场展示数据量 ([63e7fe5](f2e/kr-rong-h5/commits/63e7fe5))
+
+
+
 <a name="1.26.3"></a>
 ## [1.26.3](f2e/kr-rong-h5/compare/v1.26.2...v1.26.3) (2017-04-05)
 
