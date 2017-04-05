@@ -28,6 +28,8 @@ function BestListController($modal, loading, $stateParams, FindService,
             outInitLinkme();
             vm.needApp = false;
         }
+
+        initPxLoader();
     }
 
     function initWeixin() {
@@ -40,6 +42,19 @@ function BestListController($modal, loading, $stateParams, FindService,
 
         var obj = {};
         window.InitWeixin(obj);
+    }
+
+    function initPxLoader() {
+        var loader = new PxLoader();
+        var imgArr = document.getElementsByTagName('img');
+        for (var i = 0; i < imgArr.length; i++) {
+            console.log('====', imgArr[i].src);
+            var pxImage = new PxLoaderImage(imgArr[i].src);
+            pxImage.imageNumber = i + 1;
+            loader.add(pxImage);
+        }
+
+        loader.start();
     }
 
     function removeHeader() {

@@ -19,10 +19,25 @@ function EnrollController(loading, $stateParams, RongziService, $state, UserServ
         if (UserService.getUID()) {
             vm.isLogin = true;
         }
+        
+        initPxLoader();
     }
 
     function removeHeader() {
         $('.common-header.J_commonHeaderWrapper').remove();
+    }
+
+    function initPxLoader() {
+        var loader = new PxLoader();
+        var imgArr = document.getElementsByTagName('img');
+        for (var i = 0; i < imgArr.length; i++) {
+            console.log('====', imgArr[i].src);
+            var pxImage = new PxLoaderImage(imgArr[i].src);
+            pxImage.imageNumber = i + 1;
+            loader.add(pxImage);
+        }
+
+        loader.start();
     }
 
     function initData() {
