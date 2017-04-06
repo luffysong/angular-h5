@@ -4,7 +4,7 @@ angular.module('defaultApp.controller')
     .controller('MainController', MainController);
 
 function MainController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, RongziService, ErrorService, hybrid, $rootScope, $timeout) {
+    $state, UserService, RongziService, ErrorService, hybrid, $rootScope, $timeout, LinkedmeService) {
     var vm = this;
     vm.subscribe = subscribe;
     vm.needApp = true;
@@ -227,28 +227,13 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
                 }).catch(fail);
     }
 
-    function initLinkme(params) {
-        var krdata = {};
-        krdata.type =  window.projectEnvConfig.linkmeType;
-        krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/main","currentRoom":"0"}';
-        window.linkedme.init(window.projectEnvConfig.linkmeKey,
-        { type: window.projectEnvConfig.linkmeType }, function (err, res) {
-                if (err) {
-                    return;
-                }
-
-                window.linkedme.link(krdata, function (err, data) {
-                        if (err) {
-                            // 生成深度链接失败，返回错误对象err
-                            console.log(err);
-                        } else {
-                            // 生成深度链接成功，深度链接可以通过data.url得到
-                            vm.openAppUrl = data.url;
-                            $('#main-open').attr('href', data.url);
-                        }
-                    }, false);
-            });
+    function initLinkme() {
+        var params =
+        '{"openlink": "https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/main", "currentRoom": "0" }';
+        LinkedmeService.getLinkedmeUrl(params, function (data) {
+            vm.openAppUrl =  data;
+            console.log('======', data);
+        });
     }
 
     function fail(err) {
