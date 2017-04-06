@@ -8,7 +8,7 @@
       <div class="logo" ng-if="vm.project.logo" style="background-image: url({{vm.project.logo}})"></div>
       <div class="logo" ng-if="!vm.project.logo" style="background-image: url('/styles/images/rongzi/df-logo.png')"></div>
     </div>
-    <div class="name">{{vm.project.name}}</div>
+    <div class="name" ng-click="vm.openApp()">{{vm.project.name}}</div>
     <div class="industry">{{vm.project.industry}}</div>
     <div class="intro">{{vm.project.brief}}</div>
     <div class="content">
