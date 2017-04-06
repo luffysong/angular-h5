@@ -70,7 +70,6 @@ angular.module('defaultApp')
             }
 
             $modal.closeAll();
-            window.scrollTo(0, 0);
 
             if (window.ga) {
                 window.ga('send', 'pageview', $location.url());
@@ -99,7 +98,21 @@ angular.module('defaultApp')
             if (window.CommonHeader) {
                 window.CommonHeader.setNavActive(type);
             }
+        });
 
+        $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from) {
+            if (
+                to.name === 'find.hotFocus' && from.name === 'find.hotFocusDetail' ||
+                to.name === 'find.projectAlbum.normal' && from.name === 'demos'
+            ) {
+                $rootScope.notToReload = true;
+            } else {
+                $rootScope.notToReload = false;
+            }
+
+            if (!$rootScope.notToReload) {
+                window.scrollTo(0, 0);
+            }
         });
     }).run(function ($http, $rootScope, $location, $state, notify, Permission, UserService, $q, CredentialService) {
         //Define Roles
