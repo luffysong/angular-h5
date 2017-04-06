@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('HotFocusController', HotFocusController);
 
-function HotFocusController(loading, ErrorService, FindService, $stateParams, $state, hybrid, versionService) {
+function HotFocusController(loading, ErrorService, FindService, $stateParams, $state, hybrid, versionService, $rootScope) {
     var vm = this;
     document.title = '关注热点';
     $('body').css({
@@ -33,8 +33,14 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
         },
     };
 
-    // 列表信息
-    vm.focusList = [];
+    if ($rootScope.notToReload && localStorage.getItem) {
+        vm.focusList = JSON.parse(localStorage.getItem('findFocusList'));
+    } else {
+        vm.focusList = [];
+        // 页面初始化
+        loading.show('hotFocus');
+        init();
+    }
 
     // 筛选
     vm.goToSee = goToSee;
@@ -44,10 +50,6 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
 
     // 打开公司页
     vm.openNativePage = openNativePage;
-
-    // 页面初始化
-    loading.show('hotFocus');
-    init();
 
     function init() {
         FindService.getHotFocus({
@@ -61,6 +63,7 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
                     return item;
                 });
                 vm.focusList = structuredData;
+                localStorage.setItem && localStorage.setItem('findFocusList', JSON.stringify(vm.focusList));
             }
         }).catch(error);
     }
