@@ -1,3 +1,17 @@
+<a name="1.26.8"></a>
+## [1.26.8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.7...v1.26.8) (2017-04-06)
+
+
+### Bug Fixes
+
+* 修改分享文案 ([cd6bcc9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cd6bcc9))
+* 关注热点页面加载逻辑 ([683852d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/683852d))
+* 解决分享页渲染两次页面的问题 ([d087733](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d087733))
+* 调整榜单列表页样式 ([16c2bd0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/16c2bd0))
+* 首页社群专场改为静态内容 ([de341ec](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/de341ec))
+
+
+
 <a name="1.26.7"></a>
 ## [1.26.7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.6...v1.26.7) (2017-04-06)
 
