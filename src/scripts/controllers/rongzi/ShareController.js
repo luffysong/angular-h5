@@ -27,7 +27,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
 
     function initWeixin(name, desc) {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】我的项目' + name + '正在打榜，最有号召力的项目需要你的点赞！',
+            shareTitle: '【创投助手·融资季】' + name + '正在参与最有号召力创业项目评选，请投我一票！',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '' + desc,

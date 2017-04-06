@@ -29,7 +29,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
             shareTitle: '【创投助手·融资季】紧跟TOP机构不掉队，顶级机构在融项目触手可得！',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: '为认可的机构品牌助威，每周一、四各更新两场，点击订阅顶级机构专场，不要错过！',
+            shareDesc: '为认可的顶级机构助威，20家顶级机构最热在融项目一键直约，不要错过！',
         };
 
         var obj = {};

@@ -36,7 +36,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
             shareTitle: '【创投助手·融资季】明星投资人奉上独家项目集，等你来约谈！',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: '明星投资人携被投项目加入，每周二、三各更新两场，点击订阅明星投资人专场，不要错过！',
+            shareDesc: '40位明星投资人被投在融项目一键直约，不要错过！',
         };
 
         var obj = {};

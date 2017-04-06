@@ -464,15 +464,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'EnrollController',
         templateUrl: 'templates/rongzi/enroll.html',
-        resolve:{
-            user:function () {
-                return {
-                    name:'perter',
-                    email:'826415551@qq.com',
-                    age:'18'
-                };
-            }
-        }
     });
 
     function checkClaimStatus(ClaimService, $stateParams) {
