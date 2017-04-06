@@ -52,7 +52,8 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
     function initData() {
         vm.project = projectInfo.data;
         if (vm.project.name && vm.project.intro) {
-            initWeixin(vm.project.name, vm.project.intro);
+
+            initWeixin(vm.project.name, vm.project.brief);
         }
     }
 
