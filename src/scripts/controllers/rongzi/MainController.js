@@ -232,7 +232,6 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         '{"openlink": "https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/main", "currentRoom": "0" }';
         LinkedmeService.getLinkedmeUrl(params, function (data) {
             vm.openAppUrl =  data;
-            console.log('======', data);
         });
     }
 

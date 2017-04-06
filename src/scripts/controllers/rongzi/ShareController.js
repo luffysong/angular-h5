@@ -64,10 +64,6 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
         ErrorService.alert(err.err.msg);
     }
 
-    function removeHeader() {
-        $('.common-header.J_commonHeaderWrapper').remove();
-    }
-
     function like(id) {
         if (!hybrid.isInApp) {
             //window.location.href = vm.openUrl;
@@ -145,6 +141,8 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
     function openApp() {
         if (!hybrid.isInApp) {
             defaultModal();
+        }else {
+            hybrid.open('crmCompany/' + vm.project.ccid);
         }
     }
 }
