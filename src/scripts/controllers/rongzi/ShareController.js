@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
   .controller('ShareController', ShareController);
 
-function ShareController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid) {
+function ShareController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid, projectInfo) {
     var vm = this;
     vm.project = [];
     vm.liked = false;
@@ -50,14 +50,10 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
     }
 
     function initData() {
-        RongziService.shareInfo($stateParams.id)
-            .then(function (response) {
-                vm.project = response.data;
-                console.log(vm.project);
-                if (vm.project.name && vm.project.intro) {
-                    initWeixin(vm.project.name, vm.project.intro);
-                }
-            }).catch(fail);
+        vm.project = projectInfo.data;
+        if (vm.project.name && vm.project.intro) {
+            initWeixin(vm.project.name, vm.project.intro);
+        }
     }
 
     function initTitle(t) {

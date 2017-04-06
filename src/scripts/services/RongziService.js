@@ -86,7 +86,6 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
 
     //分享详情
     this.shareInfo = function (id) {
-        console.log(id);
         return $http.get(BASE_URL + '/startup_project/' + id);
     };
 

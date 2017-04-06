@@ -454,6 +454,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'ShareController',
         templateUrl: 'templates/rongzi/share.html',
+        resolve: {
+            projectInfo: getProjectInfo
+        }
     });
 
     $stateProvider.state('rongzi.enroll', {
@@ -461,6 +464,15 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'EnrollController',
         templateUrl: 'templates/rongzi/enroll.html',
+        resolve:{
+            user:function () {
+                return {
+                    name:'perter',
+                    email:'826415551@qq.com',
+                    age:'18'
+                };
+            }
+        }
     });
 
     function checkClaimStatus(ClaimService, $stateParams) {
@@ -529,5 +541,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         }, 10);
 
         return promise;
+    }
+
+    function getProjectInfo(RongziService, $stateParams) {
+        return RongziService.shareInfo($stateParams.id);
     }
 });

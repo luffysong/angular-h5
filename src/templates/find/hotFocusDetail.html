@@ -12,7 +12,9 @@
     </div>
     <div class="chart-2-title" ng-if="vm.detailData.companyCompetitors.length">
         <div class="title-split"></div>
-        <h2>竞品{{vm.event}}情况</h2>
+        <h2 ng-if="vm.params.intervalEnum === 'DAY'">近七天竞品{{vm.event}}情况</h2>
+        <h2 ng-if="vm.params.intervalEnum === 'WEEK'">近六周竞品{{vm.event}}情况</h2>
+        <h2 ng-if="vm.params.intervalEnum === 'MONTH'">近半年竞品{{vm.event}}情况</h2>
         <div class="title-split"></div>
     </div>
     <div class="chart-2-area" ng-if="vm.detailData.companyCompetitors.length">
