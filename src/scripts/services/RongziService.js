@@ -89,4 +89,9 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
         return $http.get(BASE_URL + '/startup_project/' + id);
     };
 
+    //获取已完结的数据，根据参数不同，获取不同类型的数据
+    this.getFinishedData = function (id, request) {
+        return $http.get(BASE_URL + '/session/' + id + '/finished?' + $.param(request));
+    };
+
 });

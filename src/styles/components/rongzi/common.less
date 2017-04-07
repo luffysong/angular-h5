@@ -10,6 +10,8 @@
 @mRedTxt:#ff8a00;
 @redStart:#ff4800;
 @grayEnd:#a0a0a0;
+@investorGreen: #00856e;
+@orange: #ff4800;
 
 .paddTopBar{
   padding-top:55px;
@@ -20,6 +22,10 @@
 
 .loading-wrap{
   min-height: 1000px;
+}
+
+.bg-green {
+  background-color: @investorGreen !important;
 }
 
 .m-red-title{
@@ -65,21 +71,28 @@
   padding: 0px;
   height: 60px;
   width: 100%;
-  border: 1px solid white;
+  text-align: center;
 }
 
 //tag条
 .rongzi-tag{
-  width:40%;
+  width:25%;
   height: 30px;
   color:#fffbdd;
   left: 0px;
   margin-left: 0px;
   margin-top: 15px;
   line-height: 30px;
-  background-color: #ff4800;
   border-top-right-radius:15px;
   border-bottom-right-radius: 15px;
+}
+
+.tag-oncome{
+  background-color: @redStart;
+}
+
+.tag-end{
+  background-color: @grayEnd;
 }
 
 .m-red-txt{
@@ -374,12 +387,13 @@
       font-weight: 900;
     }
     a{
-      height: 35px;
-      line-height: 35px;
+      height: auto;
+      line-height: 40px;
       font-size: 16px;
       width: 60%;
       color: white;
       display: inline-block;
+      border-radius: 25px;
     }
   }
 }
@@ -533,4 +547,78 @@
     .rongzi-common-backg{
       background-size: 320px 100%;
     }
+}
+
+.special-item {
+  border: 2px solid;
+  border-radius: 12px;
+  padding: 2px;
+  position: relative;
+  .special-list-border {
+    border: 1px dashed;
+    border-radius: 8px;
+  }
+  .special-logo {
+    border: 1px solid;
+    border-radius: 5px;
+    display: inline-block;
+    width: 110px;
+    height: 110px;
+    background: #fff no-repeat 50%;
+    background-size: cover;
+    margin: 10px;
+  }
+  .special-info {
+    vertical-align:top;
+    display: inline-block;
+    margin: 10px 0;
+    width: 57%;
+    .special-name {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .special-arrow {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 10px solid @orange;
+    }
+    .special-content {
+      font-size: 12px;
+      color: #ffdbac;
+      line-height: 18px;
+    }
+    .special-time {
+      border: 1px dashed;
+      text-align: center;
+      width: 70%;
+      font-size:12px;
+      margin-top: 5px;
+      position: relative;
+      float: right;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+  }
+  @media (max-width: 341px) {
+    .special-logo {
+      width: 100px;
+      height: 100px;
+    }
+    .special-info {
+      width: 55%;
+      .special-time {
+        width: 85%;
+      }
+    }
+  }
+}
+
+.green-color {
+  color: @investorGreen;
+}
+.orange-color {
+  color: @orange;
 }
