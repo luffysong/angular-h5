@@ -8,6 +8,8 @@
 @mTxt:#00aa83;
 @mRedTitle:#ff5000;
 @mRedTxt:#ff8a00;
+@redStart:#ff4800;
+@grayEnd:#a0a0a0;
 
 .paddTopBar{
   padding-top:55px;
@@ -20,7 +22,6 @@
   min-height: 1000px;
 }
 
-
 .m-red-title{
   color:@mRedTitle;
   border: solid 1px #ff8a00;
@@ -31,6 +32,54 @@
   span{
     text-shadow: 0 0 2px #ff8a00, 0 0 2px #ff8a00;
   }
+}
+
+//tab标签样式
+.rongzi-tab{
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 35px;
+  color:white;
+  width: 95%;
+  margin: 0 auto;
+  border:1px solid #ff4800;
+  position: relative;
+  height: 35px;
+  overflow: hidden;
+  a{
+    color:white;
+    width: 50%;
+    float:left;
+  }
+}
+
+//选中样式
+.tab-selected{
+  background-color: #ff4800;
+  color:#fffbdd;
+}
+
+//已完结 和正在进行
+.rongzi-split-block{
+  padding: 0px;
+  height: 60px;
+  width: 100%;
+  border: 1px solid white;
+}
+
+//tag条
+.rongzi-tag{
+  width:40%;
+  height: 30px;
+  color:#fffbdd;
+  left: 0px;
+  margin-left: 0px;
+  margin-top: 15px;
+  line-height: 30px;
+  background-color: #ff4800;
+  border-top-right-radius:15px;
+  border-bottom-right-radius: 15px;
 }
 
 .m-red-txt{

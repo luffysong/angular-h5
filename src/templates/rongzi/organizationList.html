@@ -1,7 +1,22 @@
-<div class="list-tab">
-  <a href="#/rongzi/organization?id={{vm.result.id}}#a-before"><div class="tab-before">A轮及以前</div></a>
-  <a href="#/rongzi/organization?id={{vm.result.id}}#a-after"><div class="tab-after">A轮后</div></a>
+<div class="rongzi-tab" >
+  <a ng-click="vm.tabChange($event)" class="tab-selected" id ="a-before"  href="#/rongzi/organization?id={{vm.result.id}}#a-before">
+    <b>A轮及以前</b>
+    <!--
+    <div class="tab-before"></div>-->
+  </a>
+  <a ng-click="vm.tabChange($event)" id ="a-after"   href="#/rongzi/organization?id={{vm.result.id}}#a-after" >
+    <b>A轮后</b>
+    <!--
+    <div class="tab-after tab-selected"></div>-->
+  </a>
 </div>
+
+<div class="rongzi-split-block" >
+  <div class="rongzi-tag">
+    正在进行
+  </div>
+</div>
+
 <div class="org-list">
   <div class="a-before" id="a-before">
     <div class="phase-title"><h2>A轮及以前</h2></div>
@@ -10,7 +25,6 @@
       <div class="name" ng-click="vm.openApp()">{{item.name}}</div>
       <div class="time">{{item.startAt | date:'MM月dd日 a hh:mm'}}</div>
     </div>
-
   </div>
 
   <div class="a-after" id="a-after">

@@ -10,6 +10,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     vm.hasEmail = false;
     vm.openApp = openApp;
     vm.openAppUrl;
+    vm.tabChange = tabChange;
     init();
     function init() {
         loading.hide('findLoading');
@@ -22,6 +23,12 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
         initUser();
         initWeixin();
         initPxLoader();
+    }
+
+    function tabChange(e) {
+      var p = angular.element(e.currentTarget);
+      p.parent().children().removeClass('tab-selected');
+      p.addClass('tab-selected');
     }
 
     function initWeixin() {
