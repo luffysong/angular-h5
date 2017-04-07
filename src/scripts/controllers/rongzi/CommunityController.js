@@ -11,6 +11,9 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     vm.hasEmail = false;
     vm.openApp = openApp;
     vm.openAppUrl;
+    vm.tabChange = tabChange;
+    vm.Aafter = false;
+    vm.Abefore = true;
 
     init();
     function init() {
@@ -38,8 +41,18 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         window.InitWeixin(obj);
     }
 
-    function removeHeader() {
-        $('.common-header.J_commonHeaderWrapper').remove();
+    function tabChange(e) {
+      var obj = angular.element(e.currentTarget);
+      var id = obj.attr('id');
+      obj.parent().children().removeClass('tab-comm-selected');
+      obj.addClass('tab-comm-selected');
+      if (('a-after')=== id) {
+          vm.Aafter = true;
+          vm.Abefore = false;
+      }else if (('a-before')=== id) {
+        vm.Aafter = false;
+        vm.Abefore = true;
+      }
     }
 
     function initPxLoader() {

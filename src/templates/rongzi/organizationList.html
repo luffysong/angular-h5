@@ -1,47 +1,99 @@
-<div class="rongzi-tab" >
-  <a ng-click="vm.tabChange($event)" class="tab-selected" id ="a-before"  href="#/rongzi/organization?id={{vm.result.id}}#a-before">
+<div class="rongzi-tab tab-org-border" >
+  <a ng-click="vm.tabChange($event)" class="tab-org-selected" id ="a-before"
+  href="javascript:void(0)">
     <b>A轮及以前</b>
-    <!--
-    <div class="tab-before"></div>-->
   </a>
-  <a ng-click="vm.tabChange($event)" id ="a-after"   href="#/rongzi/organization?id={{vm.result.id}}#a-after" >
+  <a ng-click="vm.tabChange($event)" id ="a-after"   href="javascript:void(0)" >
     <b>A轮后</b>
-    <!--
-    <div class="tab-after tab-selected"></div>-->
   </a>
 </div>
 
-<div class="rongzi-split-block" >
-  <div class="rongzi-tag tag-oncome">
-    <b>即将开始</b>
+<div class="org-a-before" ng-show="vm.Abefore">
+  <div class="rongzi-split-block" >
   </div>
-  
-</div>
 
-<div class="org-list">
-  <div class="a-before" id="a-before">
-    <div class="phase-title"><h2>A轮及以前</h2></div>
-    <div class="org-item" ng-if="vm.beforeA" ng-repeat="item in vm.beforeA">
-      <div class="logo" style="background-image: url('{{item.logo}}')" ng-click="vm.openApp()"></div>
-      <div class="name" ng-click="vm.openApp()">{{item.name}}</div>
-      <div class="time">{{item.startAt | date:'MM月dd日 a hh:mm'}}</div>
+  <div class="special-item yellow-color">
+    <div class="special-list-border orange-color">
+      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05093313/fzo1epnn95opm68j.png)"></div>
+      <div class="special-info">
+        <div class="special-name orange-color">
+          <b>红杉资本专场</b>
+        </div>
+        <div class="special-arrow"></div>
+        <div class="special-content">
+          红杉资本全球执行合伙人，携程旅行网和如家连锁酒店创始人。榜单中排名第一的华人投资者。
+        </div>
+        <div class="special-start">
+            <span class="yellow-color"><b>正在进行</b></span>&nbsp;&nbsp;&nbsp;
+            <span class="orange-color"><b>查看详情 ></b></span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="a-after" id="a-after">
-    <div class="phase-title"><h2>A轮后</h2></div>
-
-    <div class="org-item" ng-if="vm.afterA" ng-repeat="item in vm.afterA">
-      <div class="logo" ng-click="vm.openApp()" style="background-image: url('{{item.logo}}')"></div>
-      <div class="name" ng-click="vm.openApp()" >{{item.name}}</div>
-      <div class="time">{{item.startAt | date:'MM月dd日 a hh:mm'}}</div>
+  <div class="rongzi-split-block" >
+    <div class="rongzi-tag tag-org-oncome">
+      <b>即将开始</b>
     </div>
+    <div class="rongzi-favorite">
+      投资人最喜爱的顶级机构排行榜>>
+    </div>
+  </div>
 
+  <div class="special-item yellow-color">
+    <div class="special-list-border orange-color">
+      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05093313/fzo1epnn95opm68j.png)"></div>
+      <div class="special-info">
+        <div class="special-name orange-color">
+          红杉资本专场
+        </div>
+        <div class="special-arrow"></div>
+        <div class="special-content">
+          红杉资本全球执行合伙人，携程旅行网和如家连锁酒店创始人。榜单中排名第一的华人投资者。
+        </div>
+        <div class="special-time yellow-color">
+          4月18日 AM 10:30
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="organization-vacancy">
+    虚位以待，请联系客服。
+  </div>
+
+  <div class="rongzi-split-block" >
+    <div class="rongzi-tag tag-end">
+      <b>已完结</b>
+    </div>
+  </div>
+
+  <div class="special-item yellow-color">
+    <div class="special-list-border orange-color">
+      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05093313/fzo1epnn95opm68j.png)"></div>
+      <div class="special-info">
+        <div class="special-name gray-color">
+          红杉资本专场
+        </div>
+        <div class="special-arrow"></div>
+        <div class="special-content">
+          红杉资本全球执行合伙人，携程旅行网和如家连锁酒店创始人。榜单中排名第一的华人投资者。
+        </div>
+        <div class="special-end">
+          <span class="gray-color"><b>4月18日</b></span>&nbsp;&nbsp;&nbsp;
+          <span class="orange-color"><b>查看详情 ></b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rongzi-split-block" >
   </div>
 </div>
 
-<div class="rongzi-split-block" >
-  <div class="rongzi-tag tag-end">
-    <b>已完结</b>
+
+<div class="org-a-after" ng-show="vm.Aafter">
+  <div class="rongzi-split-block" >
+    暂无数据
   </div>
+
 </div>

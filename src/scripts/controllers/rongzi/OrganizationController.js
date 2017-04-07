@@ -11,6 +11,8 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     vm.openApp = openApp;
     vm.openAppUrl;
     vm.tabChange = tabChange;
+    vm.Aafter = false;
+    vm.Abefore = true;
     init();
     function init() {
         loading.hide('findLoading');
@@ -26,9 +28,17 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     function tabChange(e) {
-      var p = angular.element(e.currentTarget);
-      p.parent().children().removeClass('tab-selected');
-      p.addClass('tab-selected');
+      var obj = angular.element(e.currentTarget);
+      var id = obj.attr('id');
+      obj.parent().children().removeClass('tab-org-selected');
+      obj.addClass('tab-org-selected');
+      if (('a-after')=== id) {
+          vm.Aafter = true;
+          vm.Abefore = false;
+      }else if (('a-before')=== id) {
+        vm.Aafter = false;
+        vm.Abefore = true;
+      }
     }
 
     function initWeixin() {
@@ -99,10 +109,6 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
 
     function fail(err) {
         ErrorService.alert(err.err.msg);
-    }
-
-    function removeHeader() {
-        $('.common-header.J_commonHeaderWrapper').remove();
     }
 
     function initLinkmeInvestor() {
