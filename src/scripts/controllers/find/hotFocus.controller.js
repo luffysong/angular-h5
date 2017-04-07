@@ -43,7 +43,7 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
     }
 
     // 筛选
-    vm.goToSee = goToSee;
+    vm.selectTrack = selectTrack;
 
     // 查看详情
     vm.goToDetail = goToDetail;
@@ -88,7 +88,7 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
     vm.trendTrack = function (evtName, item, index) {
         vm.goToDetail(item.cid, item.structuredTitle);
         var select = getSelectedFilter();
-        sa.track(evtName, {
+        sa && sa.track(evtName, {
             select: select,
             target: 'hotspot',
             hotspot_id: item.cid,
@@ -120,7 +120,7 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
     }
 
     // 条件筛选
-    function goToSee(params) {
+    function selectTrack(params) {
         if (params.eventEnum) {
             vm.params.eventEnum = params.eventEnum;
         }

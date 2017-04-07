@@ -61,7 +61,7 @@
             <ul infinite-scroll='vm.loadMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='3'>
                 <li ontouchstart="" kr-active="'active'"
                     ng-repeat="item in vm.demos track
-                    by $index" ng-click="vm.companyTrack('ClickSet',{target:'company',company_id:item.rcid,sets_id:vm.id,sets_index:$index})">
+                    by $index" ng-click="vm.companyTrack('ClickSet',{target:'company',company_id:item.rcid,set_id:vm.id,set_index:$index})">
                     <a class="projectList-content-href"
                        href="http://36kr.com/company/{{item.rcid}}?ktm_source=chuangtou.h5.xiangmuji.{{vm.id}}.{{item.rcid}}"
                        pid="item.rcid" tou-open path="'crmCompany/' + item.ccid + '?ktm_source=xiangmuji.native.' + vm.id + '.' + item.ccid">

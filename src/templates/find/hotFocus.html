@@ -2,19 +2,19 @@
     <ul class="hot-focus-filter top-filter">
         <li class="filter-item"
             ng-class="{'active': vm.params.eventEnum === 'SEARCH'}"
-            ng-click="vm.selectTrack('ClickHotspot', {eventEnum: 'SEARCH'})"
+            ng-click="vm.selectTrack({eventEnum: 'SEARCH'})"
         >
             搜索
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.eventEnum === 'FOCUS'}"
-            ng-click="vm.selectTrack('ClickHotspot', {eventEnum: 'FOCUS'})"
+            ng-click="vm.selectTrack({eventEnum: 'FOCUS'})"
         >
             收藏
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.eventEnum === 'TALK'}"
-            ng-click="vm.selectTrack('ClickHotspot', {eventEnum: 'TALK'})"
+            ng-click="vm.selectTrack({eventEnum: 'TALK'})"
         >
             约谈
         </li>
@@ -22,19 +22,19 @@
     <ul class="hot-focus-filter bottom-filter">
         <li class="filter-item"
             ng-class="{'active': vm.params.intervalEnum === 'DAY'}"
-            ng-click="vm.selectTrack('ClickHotspot', {intervalEnum: 'DAY'})"
+            ng-click="vm.selectTrack({intervalEnum: 'DAY'})"
         >
             <span>按天</span>
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.intervalEnum === 'WEEK'}"
-            ng-click="vm.selectTrack('ClickHotspot', {intervalEnum: 'WEEK'})"
+            ng-click="vm.selectTrack({intervalEnum: 'WEEK'})"
         >
             <span>按周</span>
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.intervalEnum === 'MONTH'}"
-            ng-click="vm.selectTrack('ClickHotspot', {intervalEnum: 'MONTH'})"
+            ng-click="vm.selectTrack({intervalEnum: 'MONTH'})"
         >
             <span>按月</span>
         </li>
