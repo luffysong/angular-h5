@@ -4,7 +4,7 @@ angular.module('defaultApp.controller')
     .controller('MainController', MainController);
 
 function MainController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, RongziService, ErrorService, hybrid, $rootScope, $timeout, LinkedmeService) {
+    $state, UserService, RongziService, ErrorService, hybrid, $rootScope, $timeout) {
     var vm = this;
     vm.subscribe = subscribe;
     vm.needApp = true;
