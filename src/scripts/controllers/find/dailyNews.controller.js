@@ -15,7 +15,13 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     vm.link = link;
     vm.openNativePage = openNativePage;
 
-    vm.sensorsTrack = function(evtName, obj) {
+    vm.clickNews = function(evtName, obj) {
+        sa.track('ClickNews', {
+            target: 'news',
+            company_id: obj.company_id,
+            news_id: obj.news_id,
+            news_url: obj.news_url,
+        });
         vm.link(obj.company_id, obj.news_url);
     };
 
@@ -89,6 +95,10 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
                 }, 500);
             })
             .catch(error);
+
+        sa.track('More', {
+            page: 'news_list',
+        });
     }
 
     function error(err) {
