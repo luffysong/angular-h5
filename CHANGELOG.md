@@ -1,3 +1,13 @@
+<a name="1.26.14"></a>
+## [1.26.14](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.13...v1.26.14) (2017-04-07)
+
+
+### Bug Fixes
+
+* 神策链接改成 https ([0f54d89](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0f54d89))
+
+
+
 <a name="1.26.13"></a>
 ## [1.26.13](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.12...v1.26.13) (2017-04-07)
 
