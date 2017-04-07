@@ -10,9 +10,14 @@
 @mRedTxt:#ff8a00;
 @redStart:#ff4800;
 @grayEnd:#a0a0a0;
-@investorGreen: #00856e;
+
+@green: #00856e;
 @orange: #ff4800;
 @yellowBorder:#ff982e;
+// @gray: #808080;
+@meat: #ffdbac;
+@yellow: #ffb14a;
+
 
 .paddTopBar{
   padding-top:55px;
@@ -26,7 +31,7 @@
 }
 
 .bg-green {
-  background-color: @investorGreen !important;
+  background-color: @green !important;
 }
 
 .m-red-title{
@@ -65,7 +70,7 @@
 }
 
 .tab-comm-border{
-  border:1px solid @investorGreen;
+  border:1px solid @green;
 }
 
 //选中样式
@@ -74,7 +79,7 @@
 }
 
 .tab-comm-selected{
-  background-color: @investorGreen;
+  background-color: @green;
   //color:#fffbdd;
 }
 
@@ -125,7 +130,7 @@
 }
 
 .tag-org-oncome{
-  background-color: @investorGreen;
+  background-color: @green;
 }
 
 .tag-end{
@@ -273,14 +278,16 @@
 .rongzi-common-top{
   width: 100%;
   height: auto;
-  min-height: 360px;
+  // min-height: 360px;
   position: relative;
-  padding-bottom: 20px;
+  // padding-bottom: 20px;
   //background: url('images/rongzi/org-top1.png');
 
   .rongzi-common-logo{
     img{
-      width: 100%;
+      width: 30%;
+      float: right;
+      margin-right: 10px;
     }
     //height: 100px;
     //background: url('images/rongzi/rongzi-logo.png');
@@ -610,6 +617,7 @@
     display: inline-block;
     margin: 10px 0;
     width: 57%;
+    font-size: 12px;
     .special-name {
       font-size: 14px;
       font-weight: bold;
@@ -620,19 +628,39 @@
       top: 20px;
       border-left: 6px solid transparent;
       border-right: 6px solid transparent;
-
+      border-top: 10px solid @orange;
     }
     .orange-arrow{
       border-top: 10px solid @orange;
     }
-
     .green-arrow{
-      border-top: 10px solid @investorGreen;
+      border-top: 10px solid @green;
+    }
+    .special-arrow-meat {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 10px solid @meat;
+    }
+    .special-phase {
+      .phase-item {
+        border: 1px solid;
+        display: inline-block;
+        margin: 2px;
+        padding: 0px 3px;
+        font-size: 12px;
+        line-height: 18px;
+        border-radius: 3px;
+        font-weight: bold;
+      }
     }
     .special-content {
       font-size: 12px;
-      color: #ffdbac;
+      color: @meat;
       line-height: 18px;
+      font-weight: bold;
     }
     .special-time {
       border: 1px dashed;
@@ -658,15 +686,19 @@
     .special-start,.special-end{
       text-align: center;
       width: 70%;
+    }
+    .show-info {
+      text-align: center;
       font-size:12px;
       margin-top: 5px;
       position: relative;
       float: right;
       font-weight: 600;
-      margin-right: 10px;
+      margin-right: 2%;
     }
-
-
+    .light {
+      font-weight: bold;
+    }
   }
   @media (max-width: 341px) {
     .special-logo {
@@ -675,16 +707,51 @@
     }
     .special-info {
       width: 55%;
+      .special-arrow {
+        right: 10px;
+      }
       .special-time {
         width: 85%;
       }
     }
   }
+  @media (min-width: 412px) {
+    .special-info {
+      width: 60%;
+    }
+  }
+}
+.site {
+  margin: 10px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: @orange;
+}
+.special-state {
+  border: 1px dashed;
+  margin: 20px auto;
+  text-align: center;
+  width: 30%;
+  border-radius: 25px;
+  font-weight: bold;
+}
+.investor-remind-btn {
+  color: #fff;
+  background-color: @green;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 auto;
+  width: 55%;
+  line-height: 40px;
+  border-radius: 25px;
+  margin-top: 20px;
 }
 
 //外围边框以及字体的颜色设置；
 .green-color {
-  color: @investorGreen;
+  color: @green;
 }
 .orange-color {
   color: @orange;
@@ -700,4 +767,16 @@
 
 .gray-color{
   color:@grayEnd;
+}
+.meat-color {
+  color: @meat;
+}
+.yellow-color {
+  color: @yellow;
+}
+.mg-t {
+  margin-top: 10px;
+}
+.mg-l {
+  margin-left: 10px;
 }

@@ -442,6 +442,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/rongzi/investor.html',
     });
 
+    $stateProvider.state('rongzi.investorInfo', {
+        url:'/investorInfo?id',
+        controllerAs: 'vm',
+        controller: 'InvestorInfoController',
+        templateUrl: 'templates/rongzi/investorInfo.html',
+    });
+
     $stateProvider.state('rongzi.bestlist', {
         url:'/bestlist?id',
         controllerAs: 'vm',
