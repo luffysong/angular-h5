@@ -466,6 +466,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/rongzi/enroll.html',
     });
 
+    $stateProvider.state('rongzi.ocdetail', {
+        url:'/ocdetail?id',
+        controllerAs: 'vm',
+        controller: 'OrgDetailController',
+        templateUrl: 'templates/rongzi/org-detail.html',
+    });
+
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
     }
