@@ -1,3 +1,13 @@
+<a name="1.26.13"></a>
+## [1.26.13](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.12...v1.26.13) (2017-04-07)
+
+
+### Bug Fixes
+
+* 埋点问题修正 ([d481152](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d481152))
+
+
+
 <a name="1.26.12"></a>
 ## [1.26.12](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.11...v1.26.12) (2017-04-07)
 
