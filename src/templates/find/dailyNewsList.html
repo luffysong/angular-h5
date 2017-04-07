@@ -12,7 +12,7 @@
                 <ul>
                     <li ontouchstart="" kr-active="'active'" ng-repeat="item in itemData.reports track by $index">
                         <div class="dailyNews-content-href">
-                            <div class="base-info-detail" ng-click="vm.sensorsTrack('ClickNews', { target: 'news', company_id: item.ccid, news_id: item.id, news_url: item.link, news_index: $index })">
+                            <div class="base-info-detail" ng-click="vm.clickNews('ClickNews', { target: 'news', company_id: item.ccid, news_id: item.id, news_url: item.link, news_index: $index })">
                                 <h3 class="header-info">
                                     <text-line-clamp line-clamp='2' text="item.title">
                                         <div class="text-container">
@@ -25,12 +25,9 @@
                                 </p>
                                 <div class="item-wrapper">
                                     <div class="item-left" ng-show="item.industry1">
-                                        <!--<img src="/styles/images/find/White@3x.png" />-->
-                                        <!--<span>{{item.industry1 | findDefault : '其他'}}</span>-->
                                         <span>{{item.industry1}}</span>
                                     </div>
                                     <div class="item-center">
-                                        <!--<img src="/styles/images/find/Logo@3x.png" />-->
                                         <span>{{item.source| findDefault : '媒体报道'}}</span>
                                     </div>
                                 </div>

@@ -1,27 +1,27 @@
 <ul class="project-album-bottom-bar">
     <li class="project-album-bottom-bar-item item-timer"
-        ui-sref="find.projectAlbum.normal({type: 'latest'})" ui-sref-active="item-active"
+        ui-sref="find.projectAlbum.normal({type: 'latest'})" ui-sref-active="item-active" onclick="sa.track('ClickSet',{target:'latest'})"
     >
         <img class="inactive-image" src="/styles/images/find/timer.png" alt="最新">
         <img class="active-image" src="/styles/images/find/timer-active.png" alt="最新">
         <div>最新</div>
     </li>
     <li class="project-album-bottom-bar-item item-hunting"
-        ui-sref="find.projectAlbum.normal({type: 'hotest'})" ui-sref-active="item-active"
+        ui-sref="find.projectAlbum.normal({type: 'hotest'})" ui-sref-active="item-active" onclick="sa.track('ClickSet',{target:'hottest'})"
     >
         <img class="inactive-image" src="/styles/images/find/hot.png" alt="最热">
         <img class="active-image" src="/styles/images/find/hot-active.png" alt="最热">
         <div>最热</div>
     </li>
     <li class="project-album-bottom-bar-item item-rong"
-        ui-sref="find.projectAlbum.normal({type: 'funding'})" ui-sref-active="item-active"
+        ui-sref="find.projectAlbum.normal({type: 'funding'})" ui-sref-active="item-active" onclick="sa.track('ClickSet',{target:'organization_financing'})"
     >
         <img class="inactive-image" src="/styles/images/find/rong.png" alt="机构在融">
         <img class="active-image" src="/styles/images/find/rong-active.png" alt="机构在融">
         <div>机构在融</div>
     </li>
     <li class="project-album-bottom-bar-item item-calendar"
-        ui-sref="roadShow" ui-sref-active="item-active"
+        ui-sref="roadShow" ui-sref-active="item-active" onclick="sa.track('ClickSet',{target:'calendar'})"
     >
         <img class="inactive-image" src="/styles/images/find/calendar.png" alt="路演日历">
         <img class="active-image" src="/styles/images/find/calendar-active.png" alt="路演日历">

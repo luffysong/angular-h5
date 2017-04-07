@@ -2,19 +2,19 @@
     <ul class="hot-focus-filter top-filter">
         <li class="filter-item"
             ng-class="{'active': vm.params.eventEnum === 'SEARCH'}"
-            ng-click="vm.goToSee({eventEnum: 'SEARCH'})"
+            ng-click="vm.selectTrack({eventEnum: 'SEARCH'})"
         >
             搜索
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.eventEnum === 'FOCUS'}"
-            ng-click="vm.goToSee({eventEnum: 'FOCUS'})"
+            ng-click="vm.selectTrack({eventEnum: 'FOCUS'})"
         >
             收藏
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.eventEnum === 'TALK'}"
-            ng-click="vm.goToSee({eventEnum: 'TALK'})"
+            ng-click="vm.selectTrack({eventEnum: 'TALK'})"
         >
             约谈
         </li>
@@ -22,19 +22,19 @@
     <ul class="hot-focus-filter bottom-filter">
         <li class="filter-item"
             ng-class="{'active': vm.params.intervalEnum === 'DAY'}"
-            ng-click="vm.goToSee({intervalEnum: 'DAY'})"
+            ng-click="vm.selectTrack({intervalEnum: 'DAY'})"
         >
             <span>按天</span>
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.intervalEnum === 'WEEK'}"
-            ng-click="vm.goToSee({intervalEnum: 'WEEK'})"
+            ng-click="vm.selectTrack({intervalEnum: 'WEEK'})"
         >
             <span>按周</span>
         </li>
         <li class="filter-item"
             ng-class="{'active': vm.params.intervalEnum === 'MONTH'}"
-            ng-click="vm.goToSee({intervalEnum: 'MONTH'})"
+            ng-click="vm.selectTrack({intervalEnum: 'MONTH'})"
         >
             <span>按月</span>
         </li>
@@ -44,7 +44,7 @@
             ng-repeat="(index, item) in vm.focusList"
         >
             <div class="item-left"
-                ng-click="vm.goToDetail(item.cid, item.structuredTitle)"
+                ng-click="vm.trendTrack('ClickHotspot', item, $index)"
             >
                 <div class="item-title">
                     [<span>{{item.name}}</span>] {{item.structuredTitle}}
@@ -54,13 +54,14 @@
                 </div>
                 <div class="item-industry" ng-show="item.industryStr">
                     <span class="item-industry-title">{{item.industryStr}}</span>
-                    <!--<span class="item-industry-cont">{{item.industryStr}}</span>-->
                 </div>
             </div>
             <div class="item-right" ng-class="{nopic: !item.logo}"
                 ng-style="!item.logo ? {'background-color': '{{item.cid | demoDefaultColor}}'} : {'background-image': 'url({{item.logo | image:120}})'}"
                 ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusList.' + item.cid)"
-            >{{!item.logo ? (item.name | demoNameDufault2) : ''}}</div>
+            >
+                {{!item.logo ? (item.name | demoNameDufault2) : ''}}
+            </div>
         </div>
     </div>
     <div class="hot-focus-list-nomore" ng-if="!loadingInst.hotFocus && vm.focusList.length">

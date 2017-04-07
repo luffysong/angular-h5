@@ -37,6 +37,14 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
     vm.more = more;
     vm.arrow = arrow;
 
+    vm.clickSetTrack = function (evtName, item, index) {
+        sa.track(evtName, {
+            target: 'ClickSet',
+            set_id: item.id,
+            set_index: index,
+        });
+    };
+
     init();
     loading.show('roadShowLoading');
 
@@ -387,6 +395,9 @@ function RoadShowController(loading, $modal, $interval, $scope, $timeout, FindSe
 
                 initPoint();
             });
+        sa.track('More', {
+            page: 'calendar',
+        });
     }
 
     function initPoint() {

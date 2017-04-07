@@ -1,5 +1,5 @@
 <div class="hot-focus-detail-wrapper" ng-if="!loadingInst.hotFocusDetailLoading">
-    <div class="hot-focus-top-area" ng-click="vm.openNativePage('crmCompany/' + vm.detailData.cid + '?ktm_source=find.focusDetail.' + vm.detailData.cid)">
+    <div class="hot-focus-top-area" ng-click="vm.openNativePage('crmCompany/' + vm.detailData.cid + '?ktm_source=find.focusDetail.' + vm.detailData.cid, vm.detailData.cid)">
         <div class="hot-focus-company-logo" ng-class="{nopic: !vm.detailData.logo}"
              ng-style="!vm.detailData.logo ? {'background-color':'{{vm.detailData.cid | demoDefaultColor}}'} : {'background-image': 'url({{vm.detailData.logo | image:120}})'}">
             {{!vm.detailData.logo ? (vm.detailData.name | demoNameDufault2) : ''}}
@@ -21,7 +21,7 @@
         <ul class="company-competitors">
             <li
                 ng-repeat="(index, item) in vm.detailData.companyCompetitors"
-                ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid)"
+                ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid, item.cid)"
             >
                 <div class="company-logo" ng-class="{nopic: !item.logo}"
                      ng-style="!item.logo ? {'background-color':'{{item.cid | demoDefaultColor}}'} : {'background-image': 'url({{item.logo | image:120}})'}">
@@ -34,13 +34,13 @@
             <div class="chart-left">
                 <div class="company-data"
                     ng-repeat="item in vm.detailData.companyCompetitors"
-                    ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid)"
+                    ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid, item.cid)"
                 >{{vm.event}}量：{{item.sum}}</div>
             </div>
             <div class="chart-right">
                 <div class="company-bar-area"
                     ng-repeat="item in vm.detailData.companyCompetitors"
-                    ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid)"
+                    ng-click="vm.openNativePage('crmCompany/' + item.cid + '?ktm_source=find.focusDetail.' + item.cid, item.cid)"
                 >
                     <div class="company-bar" style="width: {{item.percent}}%;"></div>
                 </div>

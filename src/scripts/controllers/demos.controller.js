@@ -22,6 +22,12 @@ function DemosController(demosService, projectColumnService,
     vm.getCollectionType = getCollectionType;
     vm.vadliateAndGetDemos = vadliateAndGetDemos;
     vm.loadMore = loadMore;
+
+    vm.companyTrack = function (evtName, obj) {
+        console.log(evtName, obj);
+        sa.track(evtName, obj);
+    };
+
     init();
     function init() {
 
