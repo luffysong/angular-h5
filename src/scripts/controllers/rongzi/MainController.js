@@ -206,23 +206,23 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             .then(function setHomeData(data) {
                     loading.hide('rongziLoading');
                     if (data.data) {
-                        vm.result = data.data.data;
-                        vm.remind = data.data.data.remind;
-                        vm.starList = data.data.data.startupProjectVoList;
-                        if (vm.result.sessionCustomVoList) {
-                            if (vm.result.sessionCustomVoList.length > 0) {
-                                angular.forEach(vm.result.sessionCustomVoList,
-                                  function (dt, index, array) {
-                                    if (dt.category === -1) {
-                                        vm.org = dt;
-                                    } else if (dt.category === 0) {
-                                        vm.community = dt;
-                                    } else {
-                                        vm.investor = dt;
-                                    }
-                                });
-                            }
-                        }
+                        console.log(data.data);
+                        vm.result = data.data;
+                        vm.remind = data.data.remind;
+                        vm.starList = data.data.startupProjectVoList;
+                        vm.sessions = data.data.sessions;
+                        // if (vm.result.sessions.length > 0) {
+                        //     angular.forEach(vm.result.sessions,
+                        //       function (dt, index, array) {
+                        //         if (dt.category === -1) {
+                        //             vm.org = dt;
+                        //         } else if (dt.category === 0) {
+                        //             vm.community = dt;
+                        //         } else {
+                        //             vm.investor = dt;
+                        //         }
+                        //     });
+                        // }
                     }
                 }).catch(fail);
     }

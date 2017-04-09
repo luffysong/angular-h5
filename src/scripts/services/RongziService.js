@@ -94,4 +94,9 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
         return $http.get(BASE_URL + '/session/' + id + '/finished?' + $.param(request));
     };
 
+    //获取投资人专场详情
+    this.getInvestorInfo = function (category, id) {
+        return $http.get(BASE_URL + '/session/' + category + '/' + id);
+    };
+
 });
