@@ -9,12 +9,9 @@
 </div>
 
 <div class="org-a-before" ng-show="vm.Abefore">
-  <div class="rongzi-split-block" >
-  </div>
-
   <div class="special-item yellow-color" ng-if="vm.ABefore.goingSessions" ng-repeat=" item in vm.ABefore.goingSessions">
     <div class="special-list-border orange-color">
-      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05093313/fzo1epnn95opm68j.png)"></div>
+      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
         <div class="special-name orange-color">
           {{item.name}}
@@ -68,7 +65,7 @@
 
   <div class="special-item yellow-color" ng-if="vm.end" ng-repeat=" item in vm.end">
     <div class="special-list-border orange-color">
-      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05093313/fzo1epnn95opm68j.png)"></div>
+      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
         <div class="special-name gray-color">
           {{item.name}}
@@ -98,7 +95,7 @@
 
   <div class="special-item yellow-color" ng-if="vm.AAfter.goingSessions" ng-repeat=" item in vm.AAfter.goingSessions">
     <div class="special-list-border orange-color">
-      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05093313/fzo1epnn95opm68j.png)"></div>
+      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
         <div class="special-name orange-color">
           {{item.name}}
@@ -115,7 +112,7 @@
     </div>
   </div>
 
-  <div class="rongzi-split-block" >
+  <div class="rongzi-split-block" ng-if="vm.AAfter.startSessions">
     <div class="rongzi-tag tag-org-oncome">
       <b>即将开始</b>
     </div>
@@ -152,7 +149,7 @@
 
   <div class="special-item yellow-color" ng-if="vm.end" ng-repeat=" item in vm.end">
     <div class="special-list-border orange-color">
-      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05093313/fzo1epnn95opm68j.png)"></div>
+      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
         <div class="special-name gray-color">
           {{item.name}}

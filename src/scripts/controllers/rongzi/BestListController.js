@@ -22,7 +22,6 @@ function BestListController($modal, loading, $stateParams, FindService,
     function init() {
         initUserInfo();
         loading.hide('findLoading');
-        initData();
         initWeixin();
         initTitle();
         if (!hybrid.isInApp) {
@@ -71,6 +70,14 @@ function BestListController($modal, loading, $stateParams, FindService,
         };
         RongziService.getProList(sendata)
             .then(function setProList(response) {
+                    if (!vm.top3) {
+                        var spliArr = response.data.data.splice(0, 3);
+                        vm.top3 = [];
+                        vm.top3[0] = spliArr[1];
+                        vm.top3[1] = spliArr[0];
+                        vm.top3[2] = spliArr[2];
+                    }
+
                     vm.prolist = vm.prolist.concat(response.data.data);
                     if (response.data.totalPages) {
                         vm.page = response.data.page || 0;

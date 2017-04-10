@@ -18,6 +18,25 @@
   <div class="bestlist-middle">
       <span ng-click="vm.rule()">上榜规则&nbsp;></span>
   </div>
+  <div class="bestlist-top3">
+    <!-- <div class="hot-title">
+      <span class="text">今日热门项目</span>
+    </div> -->
+      <div ng-if="vm.top3" ng-repeat="item in vm.top3 track by $index" class="out-div"  >
+        <div class="in-div" style="background-image: url('{{item.logo}}')">
+          <div class="in-text">
+              {{item.name}}
+          </div>
+          <div class="crown" ng-class="{true:'gold',false:''}[$index == 1]">
+          </div>
+          <div class="crown" ng-class="{true:'silver',false:''}[$index == 0]">
+          </div>
+          <div class="crown" ng-class="{true:'copper',false:''}[$index == 2]">
+          </div>
+        </div>
+
+      </div>
+  </div>
   <div class="bestlist-content">
       <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
           <li   ng-class="{true:'yew-dot',false:'red-dot'}[$index <= 2]" ng-if="vm.prolist" ng-repeat=" item in vm.prolist track by $index" >
@@ -29,12 +48,17 @@
                     <div ng-if="!item.logo" style="background-image: url('/styles/images/rongzi/df-logo.png')" class="mg b-logo" ui-sref="rongzi.share({id: item.id})">
                     </div>
                     <div ng-if="item.logo" class="mg b-logo" style="background-image: url('{{item.logo}}')" ui-sref="rongzi.share({id: item.id})">
+                      <!--
                       <div class="crown" ng-class="{true:'gold',false:''}[$index == 0]">
                       </div>
                       <div class="crown" ng-class="{true:'silver',false:''}[$index == 1]">
                       </div>
                       <div class="crown" ng-class="{true:'copper',false:''}[$index == 2]">
                       </div>
+                    -->
+                    <div class="past-hot">
+                          往期热门
+                    </div>
                     </div>
 
                     <div class="mg text">

@@ -7,7 +7,7 @@
 
     <div class="rongzi-common-textbtn-org">
       <div class="namearr">
-        <label ng-repeat="item in vm.nameArr track by $index">{{item}}</label>
+        <label class="org-orange" ng-repeat="item in vm.nameArr track by $index">{{item}}</label>
       </div>
       <img src="/styles/images/rongzi/orgdetail-text.png" />
     </div>
@@ -29,8 +29,17 @@
 
   </div>
 
-  <div class="organization-content">
-    <div ng-include="'templates/rongzi/organizationList.html'"></div>
+  <div class="detail-content">
+    <div class="rongzi-tab tab-org-border" >
+      <a ng-click="vm.tabChange($event)" class="tab-org-selected" id ="ABefore"
+        href="javascript:void(0)">
+        <b>A轮及以前</b>
+      </a>
+      <a ng-click="vm.tabChange($event)" id ="AAfter"   href="javascript:void(0)" >
+        <b>A轮后</b>
+      </a>
+    </div>
+    <div ng-include="'templates/rongzi-common/list-template.html'"></div>
   </div>
 
 <div class="detail-bottom">
