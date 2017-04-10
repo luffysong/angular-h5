@@ -156,7 +156,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //机构页
     $stateProvider.state('organization', {
-        url:'/org/:id',
+        url:'/org/:id?',
         controllerAs: 'vm',
         controller: 'OrganizationDetailController',
         templateUrl: 'templates/organization/index.html',
@@ -422,14 +422,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('rongzi.organization', {
-        url:'/organization?id',
+        url:'/organization?category',
         controllerAs: 'vm',
         controller: 'OrganizationController',
         templateUrl: 'templates/rongzi/organization.html',
     });
 
     $stateProvider.state('rongzi.community', {
-        url:'/community?id',
+        url:'/community?category',
         controllerAs: 'vm',
         controller: 'CommunityController',
         templateUrl: 'templates/rongzi/community.html',
@@ -473,8 +473,8 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/rongzi/enroll.html',
     });
 
-    $stateProvider.state('rongzi.ocdetail', {
-        url:'/ocdetail?id',
+    $stateProvider.state('rongzi.orgdetail', {
+        url:'/orgdetail?id&{name}&{category}',
         controllerAs: 'vm',
         controller: 'OrgDetailController',
         templateUrl: 'templates/rongzi/org-detail.html',

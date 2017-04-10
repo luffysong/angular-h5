@@ -24,6 +24,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
 
         loading.hide('findLoading');
         initUser();
+        getFinishedData();
         initData();
         initWeixin();
         initPxLoader();
@@ -42,17 +43,19 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     }
 
     function tabChange(e) {
-      var obj = angular.element(e.currentTarget);
-      var id = obj.attr('id');
-      obj.parent().children().removeClass('tab-comm-selected');
-      obj.addClass('tab-comm-selected');
-      if (('a-after')=== id) {
-          vm.Aafter = true;
-          vm.Abefore = false;
-      }else if (('a-before')=== id) {
-        vm.Aafter = false;
-        vm.Abefore = true;
-      }
+        var obj = angular.element(e.currentTarget);
+        var id = obj.attr('id');
+        obj.parent().children().removeClass('tab-comm-selected');
+        obj.addClass('tab-comm-selected');
+        if ('AAfter' === id) {
+            vm.Aafter = true;
+            vm.Abefore = false;
+            getFinishedData('1');
+        } else if (('ABefore') === id) {
+            vm.Aafter = false;
+            vm.Abefore = true;
+            getFinishedData('0');
+        }
     }
 
     function initPxLoader() {
@@ -68,24 +71,28 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     }
 
     function initData() {
-        RongziService.getCommunity({ id: $stateParams.id })
+        RongziService.getCommunity({ category: parseInt($stateParams.category) })
             .then(function setCommunity(data) {
                     if (data.data) {
-                        vm.result = data.data.data;
+                        vm.result = data.data;
                         vm.remind = vm.result.remind;
-                        vm.corUni = [];
-                        vm.other = [];
-                        angular.forEach(data.data.data.sessions,
-                          function (dt, index, array) {
-                            if (dt.projectCategory === 1) {
-                                vm.other.push(dt);
-                            } else if (dt.projectCategory === 0) {
-                                vm.corUni.push(dt);
-                            }
-                        });
+                        if (data.data.sessions) {
+                            vm.goodSchoolCompany = data.data.sessions.goodSchoolCompany;
+                            vm.workAssociation = data.data.sessions.workAssociation;
+                        }
+                    }
+                }).catch(fail);
+    }
 
-                        initTitle(vm.result.title);
-
+    function getFinishedData(projectCategory) {
+        var senddata = {
+            category: parseInt($stateParams.category),
+            projectCategory: projectCategory ? projectCategory : 0,
+        };
+        RongziService.getFinishedData(senddata)
+            .then(function setCommunity(data) {
+                    if (data.data) {
+                        vm.end = data.data.data;
                     }
                 }).catch(fail);
     }

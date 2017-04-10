@@ -13,6 +13,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     vm.tabChange = tabChange;
     vm.Aafter = false;
     vm.Abefore = true;
+    vm.category = $stateParams.category;
     init();
     function init() {
         loading.hide('findLoading');
@@ -22,23 +23,26 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
         }
 
         initData();
+        getFinishedData();
         initUser();
         initWeixin();
         initPxLoader();
     }
 
     function tabChange(e) {
-      var obj = angular.element(e.currentTarget);
-      var id = obj.attr('id');
-      obj.parent().children().removeClass('tab-org-selected');
-      obj.addClass('tab-org-selected');
-      if (('a-after')=== id) {
-          vm.Aafter = true;
-          vm.Abefore = false;
-      }else if (('a-before')=== id) {
-        vm.Aafter = false;
-        vm.Abefore = true;
-      }
+        var obj = angular.element(e.currentTarget);
+        var id = obj.attr('id');
+        obj.parent().children().removeClass('tab-org-selected');
+        obj.addClass('tab-org-selected');
+        if ('AAfter' === id) {
+            vm.Aafter = true;
+            vm.Abefore = false;
+            getFinishedData('1');
+        } else if (('ABefore') === id) {
+            vm.Aafter = false;
+            vm.Abefore = true;
+            getFinishedData('0');
+        }
     }
 
     function initWeixin() {
@@ -66,26 +70,32 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     function initData() {
-        RongziService.getOrg({ id: $stateParams.id })
+        RongziService.getOrg({ category: parseInt($stateParams.category) })
             .then(function setCommunity(data) {
                     if (data.data) {
-                        vm.result = data.data.data;
-                        vm.beforeA = [];
-                        vm.afterA = [];
+                        vm.result = data.data;
+                        if (data.data.sessions) {
+                            vm.ABefore = data.data.sessions.ABefore;
+                            vm.AAfter = data.data.sessions.AAfter;
+                        }
 
-                        angular.forEach(data.data.data.sessions,
-                          function (dt, index, array) {
-                            if (dt.projectCategory === 1) {
-                                vm.afterA.push(dt);
-                            } else if (dt.projectCategory === 0) {
-                                vm.beforeA.push(dt);
-                            }
-                        });
-
-                        initTitle(vm.result.title);
+                        initTitle('融资季 · 顶级机构专场');
                     }
                 }).catch(fail);
 
+    }
+
+    function getFinishedData(projectCategory) {
+        var senddata = {
+            category: parseInt($stateParams.category),
+            projectCategory: projectCategory ? projectCategory : 0,
+        };
+        RongziService.getFinishedData(senddata)
+            .then(function setCommunity(data) {
+                    if (data.data) {
+                        vm.end = data.data.data;
+                    }
+                }).catch(fail);
     }
 
     function initUser() {
@@ -95,10 +105,6 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
                     if (response.data.investor) {
                         vm.investRole = true;
                     }
-
-                    // if (response.data.commonEmail) {
-                    //     vm.hasEmail = true;
-                    // }
                 }
             });
     }

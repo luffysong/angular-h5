@@ -206,11 +206,13 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             .then(function setHomeData(data) {
                     loading.hide('rongziLoading');
                     if (data.data) {
-                        console.log(data.data);
                         vm.result = data.data;
                         vm.remind = data.data.remind;
                         vm.starList = data.data.startupProjectVoList;
                         vm.sessions = data.data.sessions;
+                        vm.org = vm.sessions.org;
+                        vm.community = vm.sessions.assc;
+                        vm.investor = vm.sessions.investor;
                         // if (vm.result.sessions.length > 0) {
                         //     angular.forEach(vm.result.sessions,
                         //       function (dt, index, array) {

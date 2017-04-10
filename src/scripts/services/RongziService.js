@@ -90,13 +90,17 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
     };
 
     //获取已完结的数据，根据参数不同，获取不同类型的数据
-    this.getFinishedData = function (id, request) {
-        return $http.get(BASE_URL + '/session/' + id + '/finished?' + $.param(request));
+    this.getFinishedData = function (request) {
+        return $http.get(BASE_URL + '/session/finished?' + $.param(request));
     };
 
     //获取投资人专场详情
     this.getInvestorInfo = function (category, id) {
         return $http.get(BASE_URL + '/session/' + category + '/' + id);
+    };
+
+    this.getDetail = function (id) {
+        return $http.get(BASE_URL + '/session/' + id);
     };
 
 });

@@ -1,9 +1,9 @@
 <div class="rongzi-tab tab-comm-border">
-  <a ng-click="vm.tabChange($event)" class="tab-comm-selected" id ="a-before"
+  <a ng-click="vm.tabChange($event)" class="tab-comm-selected" id ="ABefore"
   href="javascript:void(0)">
     <b>名企名校</b>
   </a>
-  <a ng-click="vm.tabChange($event)" id ="a-after"   href="javascript:void(0)" >
+  <a ng-click="vm.tabChange($event)" id ="AAfter"   href="javascript:void(0)" >
     <b>其他创业社群</b>
   </a>
 
@@ -13,19 +13,19 @@
   <div class="rongzi-split-block" >
   </div>
 
-  <div class="special-item green-color">
+  <div class="special-item green-color" ng-if="vm.goodSchoolCompany.goingSessions" ng-repeat=" item in vm.goodSchoolCompany.goingSessions">
     <div class="special-list-border yellowdotted-color">
-      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05093313/fzo1epnn95opm68j.png)"></div>
+      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
         <div class="special-name yellowdotted-color">
-          <b>红杉资本专场</b>
+          {{item.name}}
         </div>
         <div class="special-arrow green-arrow"></div>
         <div class="special-content">
-          红杉资本全球执行合伙人，携程旅行网和如家连锁酒店创始人。榜单中排名第一的华人投资者。
+          {{item.intro}}
         </div>
-        <div class="special-type yellowdotted-color">
-            孵化器
+        <div class="special-type yellowdotted-color" ng-if="item.sessionType">
+            {{item.sessionType}}
         </div>
         <div class="special-start">
             <span class="yellowdotted-color"><b>正在进行</b></span>&nbsp;&nbsp;&nbsp;
@@ -35,8 +35,8 @@
     </div>
   </div>
 
-  <div class="rongzi-split-block" >
-    <div class="rongzi-tag tag-org-oncome">
+  <div class="rongzi-split-block" ng-if="vm.goodSchoolCompany.startSessions">
+    <div class="rongzi-tag tag-comm-oncome">
       <b>即将开始</b>
     </div>
     <div class="rongzi-favorite">
@@ -44,19 +44,18 @@
     </div>
   </div>
 
-  <div class="special-item green-color">
+  <div class="special-item green-color"  ng-if="vm.goodSchoolCompany.startSessions" ng-repeat=" item in vm.goodSchoolCompany.startSessions">
     <div class="special-list-border yellowdotted-color">
-      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05093313/fzo1epnn95opm68j.png)"></div>
+      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
         <div class="special-name yellowdotted-color">
-          红杉资本专场
+          {{item.name}}
         </div>
         <div class="special-arrow green-arrow"></div>
         <div class="special-content">
-          红杉资本全球执行合伙人，携程旅行网和如家连锁酒店创始人。榜单中排名第一的华人投资者。
+          {{item.intro}}
         </div>
-        <div class="special-time green-color">
-          4月18日 AM 10:30
+        <div class="special-time green-color" ng-bind="item.startAt | date:'MM月dd日'">
         </div>
       </div>
     </div>
@@ -66,24 +65,24 @@
   </div>
 
   <div class="rongzi-split-block" >
-    <div class="rongzi-tag tag-end">
+    <div class="rongzi-tag tag-end" ng-if="vm.end.length > 0">
       <b>已完结</b>
     </div>
   </div>
 
-  <div class="special-item green-color">
+  <div class="special-item green-color" ng-if="vm.end.length > 0" ng-repeat="item in vm.end">
     <div class="special-list-border yellowdotted-color">
-      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05093313/fzo1epnn95opm68j.png)"></div>
+      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
         <div class="special-name gray-color">
-          红杉资本专场
+          {{item.name}}
         </div>
         <div class="special-arrow green-arrow"></div>
         <div class="special-content">
-          红杉资本全球执行合伙人，携程旅行网和如家连锁酒店创始人。榜单中排名第一的华人投资者。
+          {{item.intro}}
         </div>
         <div class="special-end">
-          <span class="gray-color"><b>4月18日</b></span>&nbsp;&nbsp;&nbsp;
+          <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日'"></b></span>&nbsp;&nbsp;&nbsp;
           <span class="green-color"><b>查看详情 ></b></span>
         </div>
       </div>
@@ -95,11 +94,90 @@
 </div>
 
 
+<!---其他创业社群-->
+
 <div class="org-a-after" ng-show="vm.Aafter">
   <div class="rongzi-split-block" >
-    暂无数据
   </div>
 
+  <div class="special-item green-color" ng-if="vm.workAssociation.goingSessions" ng-repeat=" item in vm.workAssociation.goingSessions">
+    <div class="special-list-border yellowdotted-color">
+      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+      <div class="special-info">
+        <div class="special-name yellowdotted-color">
+          {{item.name}}
+        </div>
+        <div class="special-arrow green-arrow"></div>
+        <div class="special-content">
+          {{item.intro}}
+        </div>
+        <div class="special-type yellowdotted-color" ng-if="item.sessionType">
+            {{item.sessionType}}
+        </div>
+        <div class="special-start">
+            <span class="yellowdotted-color"><b>正在进行</b></span>&nbsp;&nbsp;&nbsp;
+            <span class="green-color"><b>查看详情 ></b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rongzi-split-block" ng-if="vm.workAssociation.startSessions">
+    <div class="rongzi-tag tag-comm-oncome">
+      <b>即将开始</b>
+    </div>
+    <div class="rongzi-favorite">
+      投资人最喜爱的顶级机构排行榜>>
+    </div>
+  </div>
+
+  <div class="special-item green-color"  ng-if="vm.workAssociation.startSessions" ng-repeat=" item in vm.workAssociation.startSessions">
+    <div class="special-list-border yellowdotted-color">
+      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+      <div class="special-info">
+        <div class="special-name yellowdotted-color">
+          {{item.name}}
+        </div>
+        <div class="special-arrow green-arrow"></div>
+        <div class="special-content">
+          {{item.intro}}
+        </div>
+        <div class="special-time green-color" ng-bind="item.startAt | date:'MM月dd日'">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rongzi-vacancy">
+    虚位以待，请联系客服。
+  </div>
+
+  <div class="rongzi-split-block" >
+    <div class="rongzi-tag tag-end" ng-if="vm.end.length > 0">
+      <b>已完结</b>
+    </div>
+  </div>
+
+  <div class="special-item green-color" ng-if="vm.end.length > 0" ng-repeat="item in vm.end">
+    <div class="special-list-border yellowdotted-color">
+      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+      <div class="special-info">
+        <div class="special-name gray-color">
+          {{item.name}}
+        </div>
+        <div class="special-arrow green-arrow"></div>
+        <div class="special-content">
+          {{item.intro}}
+        </div>
+        <div class="special-end">
+          <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日'"></b></span>&nbsp;&nbsp;&nbsp;
+          <span class="green-color"><b>查看详情 ></b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rongzi-split-block" >
+  </div>
 </div>
 
 
