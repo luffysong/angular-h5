@@ -4,6 +4,70 @@
   margin: 0 auto;
   overflow-x:hidden;
 
+  .rongzi-enroll-text{
+    color:#fff3e1;
+  }
+
+
+  .rongzi-common-textbtn-org{
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    img{
+      margin: 0 auto;
+      width: 80%;
+    }
+    .namearr{
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      bottom: 10px;
+      label{
+        font-size:18px;
+        display: inline-block;
+        padding: 5px;
+        height: 35px;
+        width: 35px;
+        line-height: 25px;
+        border-radius: 17.5px;
+        color: #ffdbac;
+        margin:0 2px;
+        font-weight: bold;
+      }
+      .org-orange{
+          background-color: @orange;
+      }
+      .com-yellow{
+          background: url('images/rongzi/comdetail-txtbg.png') no-repeat center;
+      }
+      @media screen and (max-width: 320px) {
+        bottom: 8px;
+        label{
+          height: 30px;
+          width: 30px;
+          line-height: 20px;
+          border-radius: 15px;
+        }
+      }
+      @media (min-width: 321px) and (max-width: 375px) {
+        bottom: 10px;
+      }
+      @media (min-width: 376px) and (max-width: 414px) {
+        bottom: 12px;
+      }
+      @media screen and (min-width: 768px) {
+        bottom: 20px;
+        label{
+          font-size:25px;
+          height: 70px;
+          width: 70px;
+          border-radius: 35px;
+          line-height: 60px;
+        }
+      }
+    }
+  }
+
   .special-item{
     width: 90%;
     margin: 0 auto;

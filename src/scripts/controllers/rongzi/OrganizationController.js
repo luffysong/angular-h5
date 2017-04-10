@@ -13,7 +13,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     vm.tabChange = tabChange;
     vm.Aafter = false;
     vm.Abefore = true;
-    vm.category = $stateParams.category;
+    
     init();
     function init() {
         loading.hide('findLoading');

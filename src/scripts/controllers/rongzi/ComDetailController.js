@@ -1,8 +1,8 @@
 var angular = require('angular');
 angular.module('defaultApp.controller')
-  .controller('OrgDetailController', OrgDetailController);
+  .controller('ComDetailController', ComDetailController);
 
-function OrgDetailController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid) {
+function ComDetailController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid) {
     var vm = this;
     vm.tabChange = tabChange;
     vm.Aafter = false;

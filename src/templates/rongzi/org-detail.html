@@ -6,7 +6,10 @@
     </div>
 
     <div class="rongzi-common-textbtn-org">
-      <img src="/styles/images/rongzi/org-text.png" />
+      <div class="namearr">
+        <label ng-repeat="item in vm.nameArr track by $index">{{item}}</label>
+      </div>
+      <img src="/styles/images/rongzi/orgdetail-text.png" />
     </div>
 
       <div class="rongzi-enroll-text">
@@ -15,6 +18,15 @@
            Top20机构专场、40明星投资人专场、20社群专场，周周放送。
           </p>
       </div>
+
+      <div class="rongzi-common-btn">
+        <a href="javascript:void(0)" class="org-btn" id="org-openApp"
+            ng-click="vm.subscribe(i,$event)">
+          <b >开场提醒</b>
+          <b ng-if="vm.result.remind === 0">取消开场提醒</b>
+        </a>
+      </div>
+
   </div>
 
   <div class="organization-content">

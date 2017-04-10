@@ -480,6 +480,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/rongzi/org-detail.html',
     });
 
+    $stateProvider.state('rongzi.comdetail', {
+        url:'/comdetail?id&{name}&{category}',
+        controllerAs: 'vm',
+        controller: 'ComDetailController',
+        templateUrl: 'templates/rongzi/com-detail.html',
+    });
+
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
     }

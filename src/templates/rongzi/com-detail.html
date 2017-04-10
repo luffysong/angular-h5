@@ -1,9 +1,36 @@
 <div class="rongzi-common-backg detail-wrapper">
 
-<div class="detail-top">
+  <div class="rongzi-common-top">
+    <div class="rongzi-common-logo" >
+      <img src="/styles/images/rongzi/rongzi-logo.png" />
+    </div>
 
-  
-</div>
+    <div class="rongzi-common-textbtn-org">
+      <div class="namearr">
+        <label class="com-yellow" ng-repeat="item in vm.nameArr track by $index">{{item}}</label>
+      </div>
+      <img src="/styles/images/rongzi/comdetail-txt.png" />
+    </div>
+
+    <div class="">
+
+    </div>
+
+      <div class="rongzi-enroll-text">
+          <p>
+            覆盖市面80%的在融项目，史上最大的投融对接狂欢季，
+           Top20机构专场、40明星投资人专场、20社群专场，周周放送。
+          </p>
+      </div>
+
+      <div class="rongzi-common-btn">
+        <a href="javascript:void(0)" class="org-btn" id="org-openApp"
+            ng-click="vm.subscribe(i,$event)">
+          <b >开场提醒</b>
+          <b ng-if="vm.result.remind === 0">取消开场提醒</b>
+        </a>
+      </div>
+  </div>
 
   <div class="detail-content">
     <div ng-include="'templates/rongzi-common/list-template.html'"></div>
