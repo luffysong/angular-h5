@@ -48,7 +48,7 @@ angular.module('defaultApp')
             });
         };
 
-    }).run(function ($modal, $rootScope, $location) {
+    }).run(function ($modal, $rootScope, $location, UserService) {
         var iframe = $('<iframe src="about:blank" style="display: none"></iframe>').appendTo('body');
 
         function androidVersion4() {
@@ -81,6 +81,13 @@ angular.module('defaultApp')
 
             if (window.krtracker) {
                 window.krtracker('trackPageView', $location.url());
+            }
+
+            if (window.sa) {
+                var uid = UserService.getUID();
+                if (uid) {
+                    sa.login(uid);
+                }
             }
         });
     })
