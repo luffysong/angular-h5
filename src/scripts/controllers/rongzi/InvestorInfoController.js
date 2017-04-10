@@ -56,14 +56,13 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     function initData() {
-        var request = {
-            id: $stateParams.id,
-            page: vm.page += 1,
-            pageSize:4,
-        };
-        console.log(request);
-        RongziService.getInvestor(request)
-            .then(function setCommunity(data) {
+        // var request = {
+        //     page: vm.page += 1,
+        //     pageSize:4,
+        //     category: $stateParams.category,
+        // };
+        RongziService.getInvestorInfo($stateParams.id)
+            .then(function (data) {
                     if (data.data) {
                         vm.result = data.data.data;
                         angular.forEach(data.data.data.sessions,

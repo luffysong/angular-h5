@@ -422,28 +422,28 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('rongzi.organization', {
-        url:'/organization?id',
+        url:'/organization?{category}',
         controllerAs: 'vm',
         controller: 'OrganizationController',
         templateUrl: 'templates/rongzi/organization.html',
     });
 
     $stateProvider.state('rongzi.community', {
-        url:'/community?id',
+        url:'/community?{category}',
         controllerAs: 'vm',
         controller: 'CommunityController',
         templateUrl: 'templates/rongzi/community.html',
     });
 
     $stateProvider.state('rongzi.investor', {
-        url:'/investor?id',
+        url:'/investor?{category}',
         controllerAs: 'vm',
         controller: 'InvestorController',
         templateUrl: 'templates/rongzi/investor.html',
     });
 
     $stateProvider.state('rongzi.investorInfo', {
-        url:'/investorInfo?id',
+        url:'/investorInfo?{category}&{id}',
         controllerAs: 'vm',
         controller: 'InvestorInfoController',
         templateUrl: 'templates/rongzi/investorInfo.html',

@@ -4,7 +4,7 @@
       <!-- <div class="special-title m-red-title">
         <span>顶级机构专场</span>
       </div> -->
-      <div class="special-title">
+      <div class="special-title" ui-sref="rongzi.investor({category: vm.sessions.org.category})">
         <img src="/styles/images/rongzi/org-title.png"/>
         <span class="orange">查看详情 >></span>
       </div>
@@ -15,7 +15,7 @@
       <div class="split-border"></div>
       <div class="special-logo">
 
-        <div class="item" ng-repeat="obj in vm.sessions.org">
+        <div class="item" ng-repeat="obj in vm.sessions.org.list">
           <div class="border-bg">
             <div class="logo-border-yellow">
               <div class="logo" ng-click="vm.openApp()" ng-if="obj.logo" style="background-image: url({{obj.logo}})"></div>
@@ -25,7 +25,7 @@
         </div>
         <div class="special-info-btn">
         <!--ng-click="vm.detail(vm.org.id, 'org')"-->
-          <button class="btn-yellow" ui-sref="rongzi.organization({id: vm.org.id})" ><b>查看详情</b></button>
+          <button class="btn-yellow" ui-sref="rongzi.investor({category: vm.sessions.org.category})"><b>查看详情</b></button>
         </div>
       </div>
     </div>

@@ -53,7 +53,7 @@
     .rongzi-invest-arrow-right{
       float: right;
       margin-right: 10px;
-      margin-top: 20px;
+      margin-top: 10px;
       img{
         width: 85px;
         height: 24px;
@@ -64,6 +64,7 @@
     height: auto;
     //background: url('https://krplus-pic.b0.upaiyun.com/avatar/201703/29130556/pmhc5uarusnxvmez.png') no-repeat center;
     position: relative;
+    margin-bottom: 10px;
     .subscribe,.rongzi-text{
       margin-top:15px;
     }
@@ -200,12 +201,15 @@
 
     }
     .outer-border {
-      border: solid 3px #fcba08;
+      border: solid 3px #f04400;
       border-radius: 14px;
       width: 95%;
       padding: 4px;
       margin: 0 auto;
       line-height: 30px;
+      box-shadow: 0 0 1px 2px #fcba08;
+      -webkit-box-shadow: 0 0 1px 2px #fcba08;
+      -moz-box-shadow: 0 0 1px 2px #fcba08;
       .inner-border {
         border: 1px dashed #f04400;
         border-radius: 7px;
@@ -274,6 +278,7 @@
             margin: 0 auto;
             // background-size:cover;
           }
+
           .defaultLogo{
             background: url('images/rongzi/df-logo.png') no-repeat center;
             background-size: cover;
@@ -298,11 +303,23 @@
           // }
           @media (max-width: 341px) {
             .logo {
-              width: 60px;
-              height: 60px;
+              width: 70px;
+              height: 70px;
             }
             .org-name {
               max-width: 70px;
+            }
+          }
+          @media (max-width: 360px) {
+            .logo {
+              width: 80px;
+              height: 80px;
+            }
+          }
+          @media (min-width: 414px) {
+            .logo {
+              width: 95px;
+              height: 95px;
             }
           }
         }

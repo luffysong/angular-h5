@@ -57,30 +57,26 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
 
     function initData() {
         var request = {
-            id: $stateParams.id,
             page: vm.page += 1,
             pageSize:4,
+            category: $stateParams.category
         };
-        console.log(request);
         RongziService.getInvestor(request)
             .then(function setCommunity(data) {
                     if (data.data) {
-                        vm.result = data.data.data;
-                        angular.forEach(data.data.data.sessions,
-                          function (dt, index, array) {
-                            var nameArr = dt.name.split('');
-                            dt.nameArr = nameArr;
-                            vm.investors.push(dt);
-                        });
-
+                        vm.result = data.data;
+                    }
+                }).catch(fail);
+        RongziService.getFinished(request)
+            .then(function setCommunity(data) {
+                    if (data.data) {
+                        vm.finished = data.data.data;
                         if (data.data.totalPages) {
                             vm.page = data.data.page || 0;
                             if (data.data.totalPages === vm.page) {
                                 vm.more = true;
                             }
                         }
-
-                        initTitle(vm.result.title);
                     }
                 }).catch(fail);
     }
@@ -180,8 +176,8 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         }
     }
 
-    function initTitle(t) {
-        document.title = t;
+    function initTitle() {
+        document.title = '明星投资人专场';
     }
 
     function fail(err) {
