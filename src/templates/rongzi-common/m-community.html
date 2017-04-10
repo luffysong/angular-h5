@@ -4,7 +4,7 @@
       <!-- <div class="special-title m-red-title">
         <span>创业社群专场</span>
       </div> -->
-      <div class="special-title">
+      <div class="special-title" ui-sref="rongzi.investor({category: vm.sessions.assc.category})">
         <img src="/styles/images/rongzi/com-title.png"/>
         <span class="orange">查看详情 >></span>
       </div>
@@ -14,7 +14,7 @@
       </div>
       <div class="split-border"></div>
       <div class="special-logo">
-        <div class="item" ng-repeat="obj in vm.sessions.assc">
+        <div class="item" ng-repeat="obj in vm.sessions.assc.list">
           <div class="border-bg">
             <div class="logo-border-yellow">
               <div class="logo" ng-click="vm.openApp()" ng-if="obj.logo" style="background-image: url({{obj.logo}})"></div>
@@ -49,7 +49,11 @@
           <div class="org-name"><span>腾讯系专场</span></div>
         </div> -->
         <div class="special-info-btn">
+<<<<<<< HEAD
           <button class="btn-yellow" ui-sref="rongzi.community({category: vm.community.category})" ><b>查看详情</b></button>
+=======
+          <button class="btn-yellow" ui-sref="rongzi.investor({category: vm.sessions.assc.category})"><b>查看详情</b></button>
+>>>>>>> e8db2bdaa36b4d9be41f98a4e734265f9c89d452
         </div>
       </div>
     </div>
