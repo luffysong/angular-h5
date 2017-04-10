@@ -48,7 +48,7 @@ angular.module('defaultApp')
             });
         };
 
-    }).run(function ($modal, $rootScope, $location) {
+    }).run(function ($modal, $rootScope, $location, UserService) {
         var iframe = $('<iframe src="about:blank" style="display: none"></iframe>').appendTo('body');
 
         function androidVersion4() {
@@ -82,6 +82,13 @@ angular.module('defaultApp')
             if (window.krtracker) {
                 window.krtracker('trackPageView', $location.url());
             }
+
+            if (window.sa) {
+                var uid = UserService.getUID();
+                if (uid) {
+                    sa.login(uid);
+                }
+            }
         });
     })
     .run(function ($rootScope, $location) {
@@ -113,6 +120,46 @@ angular.module('defaultApp')
             if (!$rootScope.notToReload) {
                 window.scrollTo(0, 0);
             }
+
+            function getPage(path, type) {
+                var track = false;
+                var visitingPage = '';
+                if (path.indexOf('/find/dailyNews') > -1) {
+                    visitingPage = 'news_list';
+                    track = true;
+                } else if (path.indexOf('/projectAlbum/latest') > -1) {
+                    visitingPage = 'latest';
+                    track = true;
+                } else if (path.indexOf('/projectAlbum/hotest') > -1) {
+                    visitingPage = 'hottest';
+                    track = true;
+                } else if (path.indexOf('/projectAlbum/funding') > -1) {
+                    visitingPage = 'organization_financing';
+                    track = true;
+                } else if (path.indexOf('/roadShow') > -1) {
+                    visitingPage = 'calendar';
+                    track = true;
+                } else if (path.indexOf('/demos/') > -1) {
+                    visitingPage = 'set';
+                    track = true;
+                } else if (path.indexOf('/hotFocusDetail') > -1) {
+                    visitingPage = 'hotspot_page';
+                    track = true;
+                } else if (path.indexOf('/hotFocus') > -1) {
+                    visitingPage = 'hotspot_select_list';
+                    track = true;
+                }
+                if (type === 'name') {
+                    return visitingPage;
+                } else {
+                    return track;
+                }
+            }
+
+            getPage(to.url) && sa.track('ViewPage', {
+                source: getPage(from.url, 'name'),
+                page: getPage(to.url, 'name'),
+            });
         });
     }).run(function ($http, $rootScope, $location, $state, notify, Permission, UserService, $q, CredentialService) {
         //Define Roles

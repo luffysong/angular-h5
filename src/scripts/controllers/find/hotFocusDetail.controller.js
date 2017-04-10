@@ -221,9 +221,17 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
         ErrorService.alert(err);
     }
 
-    function openNativePage(path) {
+    function openNativePage(path, cid) {
+        if (path.substring(0, 10) === 'crmCompany') {
+            // 埋点统计
+            sa.track('ViewCom', {
+                source: 'hotspot_page',
+                company_id: cid,
+            });
+        }
+
         if (hybrid.isInApp) {
-            if (path.substring(1, 11) === 'crmCompany') {
+            if (path.substring(0, 10) === 'crmCompany') {
                 //2.6.2以下版本兼容
                 var versionTou = versionService.getVersionAndroid() || versionService.getVersionIOS();
                 if (versionTou && (versionService.cprVersion(versionTou, '2.6.2') === 0)) {

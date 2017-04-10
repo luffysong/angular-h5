@@ -43,13 +43,59 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
     }
 
     // 筛选
-    vm.goToSee = goToSee;
+    vm.selectTrack = selectTrack;
 
     // 查看详情
     vm.goToDetail = goToDetail;
 
     // 打开公司页
     vm.openNativePage = openNativePage;
+
+    //筛选项操作事件
+    function getSelectedFilter () {
+        var select = '';
+        if (vm.params.eventEnum === 'SEARCH') {
+            if (vm.params.intervalEnum === 'DAY') {
+                select = 'search_day';
+            } else if (vm.params.intervalEnum === 'WEEK') {
+                select = 'search_week';
+            } else {
+                select = 'search_month';
+            }
+        }
+        if (vm.params.eventEnum === 'FOCUS') {
+            if (vm.params.intervalEnum === 'DAY') {
+                select = 'workbench_day';
+            } else if (vm.params.intervalEnum === 'WEEK') {
+                select = 'workbench_week';
+            } else {
+                select = 'workbench_month';
+            }
+        }
+        if (vm.params.eventEnum === 'TALK') {
+            if (vm.params.intervalEnum === 'DAY') {
+                select = 'contact_day';
+            } else if (vm.params.intervalEnum === 'WEEK') {
+                select = 'contact_week';
+            } else {
+                select = 'contact_month';
+            }
+        }
+        return select;
+    };
+
+    //跳转到走势页面事件 obj:sa对象，item跳转参数对象
+    vm.trendTrack = function (evtName, item, index) {
+        vm.goToDetail(item.cid, item.structuredTitle);
+        var select = getSelectedFilter();
+        sa && sa.track(evtName, {
+            select: select,
+            target: 'hotspot',
+            hotspot_id: item.cid,
+            company_id: item.cid,
+            hotspot_index: index,
+        });
+    }
 
     function init() {
         FindService.getHotFocus({
@@ -74,7 +120,7 @@ function HotFocusController(loading, ErrorService, FindService, $stateParams, $s
     }
 
     // 条件筛选
-    function goToSee(params) {
+    function selectTrack(params) {
         if (params.eventEnum) {
             vm.params.eventEnum = params.eventEnum;
         }

@@ -1,3 +1,33 @@
+<a name="1.26.20"></a>
+## [1.26.20](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.17...v1.26.20) (2017-04-10)
+
+
+### Bug Fixes
+
+* demos 页面样式修复 ([d93aa21](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d93aa21))
+* 神策埋点用户 ID 关联 ([189b194](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/189b194))
+
+
+
+<a name="1.26.17"></a>
+## [1.26.17](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.16...v1.26.17) (2017-04-07)
+
+
+
+<a name="1.26.16"></a>
+## [1.26.16](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.11...v1.26.16) (2017-04-07)
+
+
+### Bug Fixes
+
+* 埋点问题修正 ([d481152](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d481152))
+* 更换统计脚本为线上版本 ([c4bb9ff](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c4bb9ff))
+* 神策链接改成 https ([0f54d89](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0f54d89))
+* 调整分享页logo样式 ([f15c2d2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f15c2d2))
+* 页面浏览量统计 ([58c7c8f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/58c7c8f))
+
+
+
 <a name="1.26.11"></a>
 ## [1.26.11](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.10...v1.26.11) (2017-04-07)
 
