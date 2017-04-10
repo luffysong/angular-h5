@@ -1,3 +1,13 @@
+<a name="1.26.19"></a>
+## [1.26.19](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.18...v1.26.19) (2017-04-10)
+
+
+### Bug Fixes
+
+* 神策埋点用户 ID 关联 ([189b194](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/189b194))
+
+
+
 <a name="1.26.18"></a>
 ## [1.26.18](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.17...v1.26.18) (2017-04-10)
 
