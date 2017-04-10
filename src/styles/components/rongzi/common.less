@@ -759,6 +759,41 @@
           filter: blur(3px);
 }
 
+.rongzi-common-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(19,19,20,.9);
+  text-align: center;
+  z-index: 101;
+  color: #f8ebd6;
+  font-weight: bold;
+  padding-top: 50%;
+  font-size: 16px;
+  display: none;
+  p {
+    margin: 0;
+  }
+  .weixin, .investor {
+    background-color: @orange;
+    border-radius: 25px;
+    line-height: 35px;
+    width: 55%;
+    margin: 20px auto;
+  }
+  .or {
+    color: @orange;
+    margin: 30px auto;
+    border: solid 1px @orange;
+    border-radius: 100px;
+    width: 8%;
+    padding: 2px;
+
+  }
+}
+
 
 //外围边框以及字体的颜色设置；
 .green-color {
