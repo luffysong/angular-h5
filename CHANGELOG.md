@@ -1,11 +1,35 @@
+<a name="1.26.21"></a>
+## [1.26.21](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.20...v1.26.21) (2017-04-10)
+
+
+### Bug Fixes
+
+* 埋点问题修正 ([bed21a8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bed21a8))
+
+
+
 <a name="1.26.20"></a>
-## [1.26.20](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.17...v1.26.20) (2017-04-10)
+## [1.26.20](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.19...v1.26.20) (2017-04-10)
+
+
+
+<a name="1.26.19"></a>
+## [1.26.19](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.18...v1.26.19) (2017-04-10)
+
+
+### Bug Fixes
+
+* 神策埋点用户 ID 关联 ([189b194](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/189b194))
+
+
+
+<a name="1.26.18"></a>
+## [1.26.18](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.17...v1.26.18) (2017-04-10)
 
 
 ### Bug Fixes
 
 * demos 页面样式修复 ([d93aa21](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d93aa21))
-* 神策埋点用户 ID 关联 ([189b194](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/189b194))
 
 
 
@@ -15,15 +39,47 @@
 
 
 <a name="1.26.16"></a>
-## [1.26.16](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.11...v1.26.16) (2017-04-07)
+## [1.26.16](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.15...v1.26.16) (2017-04-07)
+
+
+
+<a name="1.26.15"></a>
+## [1.26.15](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.14...v1.26.15) (2017-04-07)
+
+
+### Bug Fixes
+
+* 调整分享页logo样式 ([f15c2d2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f15c2d2))
+
+
+
+<a name="1.26.14"></a>
+## [1.26.14](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.13...v1.26.14) (2017-04-07)
+
+
+### Bug Fixes
+
+* 神策链接改成 https ([0f54d89](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0f54d89))
+
+
+
+<a name="1.26.13"></a>
+## [1.26.13](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.12...v1.26.13) (2017-04-07)
 
 
 ### Bug Fixes
 
 * 埋点问题修正 ([d481152](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d481152))
+
+
+
+<a name="1.26.12"></a>
+## [1.26.12](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.11...v1.26.12) (2017-04-07)
+
+
+### Bug Fixes
+
 * 更换统计脚本为线上版本 ([c4bb9ff](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c4bb9ff))
-* 神策链接改成 https ([0f54d89](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0f54d89))
-* 调整分享页logo样式 ([f15c2d2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f15c2d2))
 * 页面浏览量统计 ([58c7c8f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/58c7c8f))
 
 
@@ -39,139 +95,127 @@
 
 
 <a name="1.26.9"></a>
-## [1.26.9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.5...v1.26.9) (2017-04-06)
+## [1.26.9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.8...v1.26.9) (2017-04-06)
 
 
 ### Bug Fixes
 
 * 修改分享文案 ([1de3cbf](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1de3cbf))
+
+
+
+<a name="1.26.8"></a>
+## [1.26.8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.7...v1.26.8) (2017-04-06)
+
+
+### Bug Fixes
+
 * 修改分享文案 ([cd6bcc9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cd6bcc9))
-* 关注热点文案修改 ([e14c309](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e14c309))
 * 关注热点页面加载逻辑 ([683852d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/683852d))
-* 打开分享页app端入口 ([318ac16](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/318ac16))
-* 打开分享页进入app端入口 ([5d0d3bc](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5d0d3bc))
 * 解决分享页渲染两次页面的问题 ([d087733](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d087733))
 * 调整榜单列表页样式 ([16c2bd0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/16c2bd0))
 * 首页社群专场改为静态内容 ([de341ec](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/de341ec))
 
 
 
+<a name="1.26.7"></a>
+## [1.26.7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.6...v1.26.7) (2017-04-06)
+
+
+### Bug Fixes
+
+* 关注热点文案修改 ([e14c309](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e14c309))
+* 打开分享页app端入口 ([318ac16](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/318ac16))
+
+
+
+<a name="1.26.6"></a>
+## [1.26.6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.5...v1.26.6) (2017-04-05)
+
+
+### Bug Fixes
+
+* 打开分享页进入app端入口 ([5d0d3bc](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5d0d3bc))
+
+
+
 <a name="1.26.5"></a>
-## [1.26.5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.0...v1.26.5) (2017-04-05)
+## [1.26.5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.4...v1.26.5) (2017-04-05)
+
+
+
+<a name="1.26.4"></a>
+## [1.26.4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.2...v1.26.4) (2017-04-05)
 
 
 ### Bug Fixes
 
 * 修改投资人专场展示数据量 ([63e7fe5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/63e7fe5))
-* 调整logo样式 ([7f5e8d2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7f5e8d2))
 * 调整榜单序号样式 ([9db28c7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9db28c7))
-* 调整首页名称样式 ([ba736f3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/ba736f3))
 
 
 
-<a name="1.26.0"></a>
-# [1.26.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.24.12...v1.26.0) (2017-04-05)
+<a name="1.26.2"></a>
+## [1.26.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.1...v1.26.2) (2017-04-05)
 
 
 ### Bug Fixes
 
-* default logo ([5ecf8ad](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5ecf8ad))
-* highcharts 图表 ([bf2b324](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bf2b324))
-* little updates ([02ce35a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/02ce35a))
-* logo style ([0b9d283](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0b9d283))
-* style ([bbb385f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bbb385f))
-* title 和加载更多逻辑 ([823b881](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/823b881))
+* 调整首页名称样式 ([ba736f3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/ba736f3))
+
+
+
+<a name="1.26.1"></a>
+## [1.26.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.0...v1.26.1) (2017-04-05)
+
+
+### Bug Fixes
+
+* 调整logo样式 ([7f5e8d2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7f5e8d2))
+
+
+
+<a name="1.26.0"></a>
+# [1.26.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.25.5...v1.26.0) (2017-04-05)
+
+
+### Bug Fixes
+
 * 专场列表名称做截断处理 ([b17dfe4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b17dfe4))
 * 使用es5语法 ([2823232](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/2823232))
-* 修复点击竞对logo无反应问题 ([a9be141](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a9be141))
 * 修改passport地址 ([a75ed44](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a75ed44))
 * 修改title ([60732f8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/60732f8))
-* 修改分享文案 ([468dcce](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/468dcce))
 * 修改分享页文案 ([5bb9bee](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5bb9bee))
 * 修改报名列表title ([f555190](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f555190))
 * 修改报名逻辑判断 ([3a4b754](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/3a4b754))
-* 修改文案 ([58b12a0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/58b12a0))
-* 修改样式 ([0bce971](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0bce971))
 * 修改榜单没有logo不展示默认logo问题 ([d738183](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d738183))
 * 修改没有认领项目的提示文案 ([dd351ac](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/dd351ac))
-* 修改竞品数量显示 ([99bd8b3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/99bd8b3))
-* 修改项目专辑底部图标 ([9d7ffa6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9d7ffa6))
-* 修正背景样式 ([57cea31](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/57cea31))
-* 关注热点和关注热点详情页去掉分享 ([eceb971](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/eceb971))
-* 关注热点详情 ([2051dfe](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/2051dfe))
-* 关注热点详情文案 ([fe25f19](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/fe25f19))
-* 关注热点详情跳转 ([9c77a40](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9c77a40))
-* 关注热点页样式 ([696188d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/696188d))
-* 关注热点页面加载更多 ([08862ef](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/08862ef))
-* 关注热点页面打开公司详情 ([8287954](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8287954))
-* 关注详情文案 ([7644c86](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7644c86))
-* 分享 fix ([a61c419](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a61c419))
 * 分享页根据排名展示页面内容 ([01c688f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/01c688f))
 * 分享页添加默认logo ([9439664](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9439664))
-* 压缩 JS ([bdda409](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bdda409))
-* 压缩文件 ([6c9228d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6c9228d))
-* 去掉分享按钮 ([1991b8f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1991b8f))
-* 发现页完善 ([9684b6d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9684b6d))
 * 取消分享页跳转app ([7c9ed8c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7c9ed8c))
 * 取消报名列表页跳转 ([8ceb65b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8ceb65b))
-* 图标1样式调整 ([31d260b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/31d260b))
-* 图片大小限定 ([d081416](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d081416))
-* 图表fix ([dc3021e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/dc3021e))
-* 图表修复 ([29960c5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/29960c5))
-* 图表修改 ([7c88813](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7c88813))
-* 图表显示格式 ([6bcdc38](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6bcdc38))
-* 媒体热议样式修改 ([caf430f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/caf430f))
-* 媒体热议样式修改 ([8377f35](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8377f35))
-* 媒体热议样式标题换行 ([cb9ce0c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cb9ce0c))
 * 引用错误 ([caf7c17](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/caf7c17))
-* 打包fix ([fc36950](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/fc36950))
-* 打包压缩 ([8c35aa7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8c35aa7))
 * 投资人专场关闭左右滑动 ([4822b63](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4822b63))
 * 投资人专场添加展示更多按钮 ([7828b69](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7828b69))
 * 报名页未登录显示暂无项目 ([6299f12](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6299f12))
-* 文案fix ([6f7be92](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6f7be92))
-* 文案修改 ([374bfb8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/374bfb8))
-* 文案修改 ([545f2e7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/545f2e7))
-* 文案修改 ([cbdc82d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cbdc82d))
-* 文案修正 ([8659892](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8659892))
-* 新闻热点跳转fix ([d20e5fc](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d20e5fc))
-* 新闻详情 style ([4458446](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4458446))
-* 日期显示格式等 ([01b205d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/01b205d))
-* 时间格式修改 ([ea1f8af](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/ea1f8af))
-* 暂时去掉 sa track 测试 ([8bab898](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8bab898))
 * 替换默认logo ([326da9a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/326da9a))
-* 样式跳转修改 ([7152ae2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7152ae2))
-* 根据原型添加图标 ([677b0fc](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/677b0fc))
 * 榜单页项目名及logo添加分享页链接 ([e0fbb36](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e0fbb36))
-* 添加埋点示例 ([bd84c8c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bd84c8c))
 * 添加文案 ([62b330f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/62b330f))
-* 添加空格 ([29c531a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/29c531a))
 * 添加缺少的字符 ([634acf0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/634acf0))
-* 热点详情修改 ([51aaf7c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/51aaf7c))
-* 热点详情纵轴格式修改 ([278f0c5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/278f0c5))
-* 热点详情页标题显示修改 ([30b9c3c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/30b9c3c))
 * 禁用数字当手机号功能 ([649a9f2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/649a9f2))
-* 细节修改 ([5551b0e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5551b0e))
-* 背景样式修正 ([8404c9e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8404c9e))
 * 解决冲突 ([eb48cf9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/eb48cf9))
 * 解决分享页无法点赞问题 ([b18275f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b18275f))
 * 解决报名列表页空数据时没有展示相应提示内容 ([48b27bd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/48b27bd))
-* 详情 ([959d39e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/959d39e))
-* 详情页修改 ([0deb438](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0deb438))
 * 调整分享页样式 ([809ea35](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/809ea35))
-* 调整分享页样式 ([4acbfcc](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4acbfcc))
-* 调整投资人专场样式 ([8119a9a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8119a9a))
 * 调整投资人专场样式 ([73049b6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/73049b6))
 * 调整投资人专场联系客服样式 ([a9fe27f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a9fe27f))
-* 调整投资人名称样式 ([701711a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/701711a))
 * 调整报名列表样式 ([8ba0793](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8ba0793))
 * 调整报名成功提示样式 ([e7a2a19](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e7a2a19))
-* 调整报名页样式 ([309ff2c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/309ff2c))
-* 调整报名页样式 ([51756d3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/51756d3))
 * 调整报名页样式 ([74dc197](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/74dc197))
-* 调整报名页样式 ([a271378](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a271378))
-* 调整报名页样式 ([115050e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/115050e))
 * 调整报名页样式 ([0a92dca](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0a92dca))
+* 调整报名页样式 ([a271378](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a271378))
+* 调整报名页样式 ([309ff2c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/309ff2c))
+* 调整报名页样式 ([115050e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/115050e))
 * 调整日期格式化 ([9eaad61](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9eaad61))
 * 调整机构专场样式 ([fc8c879](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/fc8c879))
 * 调整机构和社群专场样式 ([717fe9a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/717fe9a))
@@ -181,27 +225,163 @@
 * 调整项目报名列表样式 ([1e41ca1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1e41ca1))
 * 调整首页专场名称样式 ([808ffe5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/808ffe5))
 * 调整首页专场样式 ([803fcba](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/803fcba))
-* 调整首页专场样式 ([c53b9cd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c53b9cd))
 * 调整首页专场样式 ([0a4847f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0a4847f))
 * 调整首页专场样式 ([9a0528a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9a0528a))
-* 调整首页专场样式 ([a0a5b61](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a0a5b61))
-* 调整首页专场样式 ([6fcc1a4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6fcc1a4))
 * 调整首页榜单默认logo ([20767c3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/20767c3))
 * 调整默认logo ([a4d551f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a4d551f))
 * 调整默认logo展示 ([6544d4a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6544d4a))
 * 调试bug ([8c313eb](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8c313eb))
+* 隐藏社群专场类型标识 ([3483246](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/3483246))
+* 项目列表及榜单添加默认logo ([f4f7205](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f4f7205))
+* 首页榜单没数据时展示虚位以待 ([942bc7f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/942bc7f))
+
+
+### Features
+
+* 分享页接入数据 ([5e945f8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5e945f8))
+* 分享页添加点赞功能 ([611ab70](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/611ab70))
+* 添加报名成功提示框 ([bc9a679](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bc9a679))
+* 添加点赞功能 ([d1c8c01](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d1c8c01))
+* 添加点赞的前置验证 ([0d39e4b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0d39e4b))
+
+
+
+<a name="1.25.5"></a>
+## [1.25.5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.25.4...v1.25.5) (2017-04-01)
+
+
+### Bug Fixes
+
+* 文案修正 ([8659892](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8659892))
+
+
+### Features
+
+* 添加报名暂无项目页 ([97945bd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/97945bd))
+
+
+
+<a name="1.25.4"></a>
+## [1.25.4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.25.3...v1.25.4) (2017-04-01)
+
+
+### Bug Fixes
+
+* 关注热点页面加载更多 ([08862ef](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/08862ef))
+
+
+
+<a name="1.25.3"></a>
+## [1.25.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.25.2...v1.25.3) (2017-04-01)
+
+
+### Bug Fixes
+
+* 修改分享文案 ([468dcce](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/468dcce))
+* 调整分享页样式 ([4acbfcc](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4acbfcc))
+* 调整报名页样式 ([51756d3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/51756d3))
+* 调整首页专场样式 ([6fcc1a4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6fcc1a4))
+
+
+
+<a name="1.25.2"></a>
+## [1.25.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.25.1...v1.25.2) (2017-04-01)
+
+
+### Bug Fixes
+
+* 默认logo展示 ([658ebcc](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/658ebcc))
+
+
+
+<a name="1.25.1"></a>
+## [1.25.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.25.0...v1.25.1) (2017-04-01)
+
+
+### Bug Fixes
+
+* default logo ([5ecf8ad](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5ecf8ad))
+
+
+### Features
+
+* 报名页添加待审核样式 ([174196e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/174196e))
+* 添加报名页项目列表样式 ([e84ab82](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e84ab82))
+
+
+
+<a name="1.25.0"></a>
+# [1.25.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.24.12...v1.25.0) (2017-04-01)
+
+
+### Bug Fixes
+
+* highcharts 图表 ([bf2b324](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bf2b324))
+* little updates ([02ce35a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/02ce35a))
+* logo style ([0b9d283](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0b9d283))
+* style ([bbb385f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bbb385f))
+* title 和加载更多逻辑 ([823b881](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/823b881))
+* 修复点击竞对logo无反应问题 ([a9be141](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a9be141))
+* 修改文案 ([58b12a0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/58b12a0))
+* 修改样式 ([0bce971](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0bce971))
+* 修改竞品数量显示 ([99bd8b3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/99bd8b3))
+* 修改项目专辑底部图标 ([9d7ffa6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9d7ffa6))
+* 修正背景样式 ([57cea31](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/57cea31))
+* 关注热点和关注热点详情页去掉分享 ([eceb971](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/eceb971))
+* 关注热点详情 ([2051dfe](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/2051dfe))
+* 关注热点详情文案 ([fe25f19](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/fe25f19))
+* 关注热点详情跳转 ([9c77a40](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9c77a40))
+* 关注热点页样式 ([696188d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/696188d))
+* 关注热点页面打开公司详情 ([8287954](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8287954))
+* 关注详情文案 ([7644c86](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7644c86))
+* 分享 fix ([a61c419](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a61c419))
+* 压缩 JS ([bdda409](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bdda409))
+* 压缩文件 ([6c9228d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6c9228d))
+* 去掉分享按钮 ([1991b8f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1991b8f))
+* 发现页完善 ([9684b6d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9684b6d))
+* 图标1样式调整 ([31d260b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/31d260b))
+* 图片大小限定 ([d081416](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d081416))
+* 图表fix ([dc3021e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/dc3021e))
+* 图表修复 ([29960c5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/29960c5))
+* 图表修改 ([7c88813](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7c88813))
+* 图表显示格式 ([6bcdc38](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6bcdc38))
+* 媒体热议样式修改 ([8377f35](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8377f35))
+* 媒体热议样式修改 ([caf430f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/caf430f))
+* 媒体热议样式标题换行 ([cb9ce0c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cb9ce0c))
+* 打包fix ([fc36950](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/fc36950))
+* 打包压缩 ([8c35aa7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8c35aa7))
+* 文案fix ([6f7be92](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6f7be92))
+* 文案修改 ([545f2e7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/545f2e7))
+* 文案修改 ([374bfb8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/374bfb8))
+* 文案修改 ([cbdc82d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cbdc82d))
+* 新闻热点跳转fix ([d20e5fc](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d20e5fc))
+* 新闻详情 style ([4458446](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4458446))
+* 日期显示格式等 ([01b205d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/01b205d))
+* 时间格式修改 ([ea1f8af](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/ea1f8af))
+* 暂时去掉 sa track 测试 ([8bab898](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8bab898))
+* 样式跳转修改 ([7152ae2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7152ae2))
+* 根据原型添加图标 ([677b0fc](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/677b0fc))
+* 添加埋点示例 ([bd84c8c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bd84c8c))
+* 添加空格 ([29c531a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/29c531a))
+* 热点详情修改 ([51aaf7c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/51aaf7c))
+* 热点详情纵轴格式修改 ([278f0c5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/278f0c5))
+* 热点详情页标题显示修改 ([30b9c3c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/30b9c3c))
+* 细节修改 ([5551b0e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5551b0e))
+* 背景样式修正 ([8404c9e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8404c9e))
+* 详情 ([959d39e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/959d39e))
+* 详情页修改 ([0deb438](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0deb438))
+* 调整投资人专场样式 ([8119a9a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8119a9a))
+* 调整投资人名称样式 ([701711a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/701711a))
+* 调整首页专场样式 ([c53b9cd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c53b9cd))
+* 调整首页专场样式 ([a0a5b61](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a0a5b61))
 * 路演loading ([9877861](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9877861))
 * 路演日历 ([58e4deb](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/58e4deb))
 * 部分图标数据接入 ([e5cb9f1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e5cb9f1))
-* 隐藏社群专场类型标识 ([3483246](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/3483246))
 * 页面 title ([a1176ee](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a1176ee))
 * 页面 title 修改 ([9dfde33](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9dfde33))
 * 项目专辑菜单栏状态 ([9f2f63d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9f2f63d))
 * 项目专辑页面 ([49f8178](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/49f8178))
-* 项目列表及榜单添加默认logo ([f4f7205](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f4f7205))
 * 项目集展示改成H5展示 ([16a283e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/16a283e))
-* 首页榜单没数据时展示虚位以待 ([942bc7f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/942bc7f))
-* 默认logo展示 ([658ebcc](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/658ebcc))
 * 默认图标 ([2cb7037](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/2cb7037))
 
 
@@ -211,25 +391,17 @@
 * 专场页添加锚点 ([99e1779](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/99e1779))
 * 关注列表页 ([a83f9f5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a83f9f5))
 * 关注热点列表页样式 ([cc9820c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cc9820c))
-* 分享页接入数据 ([5e945f8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/5e945f8))
-* 分享页添加点赞功能 ([611ab70](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/611ab70))
 * 创建专场模块 ([6b9c7c8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/6b9c7c8))
 * 去掉阅读数 ([d56dcaf](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d56dcaf))
 * 发现页改版 ([57c7d17](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/57c7d17))
 * 发现页改版 - 媒体热议 ([d947ed0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d947ed0))
 * 媒体热议页面修改 ([cebece1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cebece1))
-* 报名页添加待审核样式 ([174196e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/174196e))
 * 新增分享页 ([b9a7dcd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b9a7dcd))
 * 新增报名模块 ([cadda4a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cadda4a))
 * 新增首页专场模板 ([c3c1e3c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c3c1e3c))
 * 机构在融样式 ([4939a6d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4939a6d))
 * 添加投资人专场样式 ([d94c177](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d94c177))
-* 添加报名成功提示框 ([bc9a679](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bc9a679))
-* 添加报名暂无项目页 ([97945bd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/97945bd))
-* 添加报名页项目列表样式 ([e84ab82](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/e84ab82))
 * 添加机构社群专场样式 ([acaef8b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/acaef8b))
-* 添加点赞功能 ([d1c8c01](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d1c8c01))
-* 添加点赞的前置验证 ([0d39e4b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0d39e4b))
 * 添加空数据页面 ([d1d881c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d1d881c))
 * 热点列表页面 ([9b7fb86](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9b7fb86))
 * 热点详情页初步样式 ([fd7b0d3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/fd7b0d3))
