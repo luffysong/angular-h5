@@ -27,7 +27,7 @@
              <b ng-if="vm.remind === 0">取消提醒订阅</b>
            </a>
          -->
-            <a  id ="main-open" class="btn subscribe-btn"
+          <a id="main-open" class="btn subscribe-btn btn-height"
             ng-click="vm.subscribe(item, $event)">
             <b ng-if="vm.remind === 1">融资季专场，开场提醒</b>
             <b ng-if="vm.remind === 0">取消提醒订阅</b>
@@ -54,8 +54,8 @@
       </div>
     </div>
 
-    <div class="rongzi rongzi-institute-wrapper">
-      <div ng-include="'templates/rongzi-common/m-org.html'"></div>
+    <div class="rongzi rongzi-list-wrapper">
+      <div ng-include="'templates/rongzi-common/m-starlist.html'"></div>
     </div>
 
     <div class="rongzi-block">
@@ -64,8 +64,8 @@
       </div>
     </div>
 
-    <div class="rongzi rongzi-investor-wrapper">
-      <div ng-include="'templates/rongzi-common/m-investor.html'" ></div>
+    <div class="rongzi rongzi-institute-wrapper">
+      <div ng-include="'templates/rongzi-common/m-org.html'"></div>
     </div>
 
     <div class="rongzi-block">
@@ -74,8 +74,8 @@
       </div>
     </div>
 
-    <div class="rongzi rongzi-startup-wrapper">
-      <div ng-include="'templates/rongzi-common/m-community.html'"></div>
+    <div class="rongzi rongzi-investor-wrapper">
+      <div ng-include="'templates/rongzi-common/m-investor.html'" ></div>
     </div>
 
     <div class="rongzi-block">
@@ -84,8 +84,8 @@
       </div>
     </div>
 
-    <div class="rongzi rongzi-list-wrapper">
-      <div ng-include="'templates/rongzi-common/m-starlist.html'"></div>
+    <div class="rongzi rongzi-startup-wrapper">
+      <div ng-include="'templates/rongzi-common/m-community.html'"></div>
     </div>
 
     <div ng-include="'templates/rongzi/meiqia.html'"></div>

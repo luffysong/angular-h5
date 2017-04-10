@@ -24,8 +24,7 @@
   </div>
   <div class="more" ng-click="vm.displayMore()" ng-show="!vm.more">查看更多</div> -->
 
-  <div class="special-state orange-color">进行中</div>
-  <div class="special-item green-color" ng-repeat="item in vm.result.sessions.investors.goingSessions">
+  <div class="special-item green-color mg-t-2" ng-repeat="item in vm.result.sessions.investors.goingSessions">
     <div class="special-list-border orange-color">
       <div class="special-logo green-color" ng-if="item.logo" ng-click="vm.openApp()"
       style="background-image: url({{item.logo}})"

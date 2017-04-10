@@ -617,7 +617,7 @@
   .special-info {
     vertical-align:top;
     display: inline-block;
-    margin: 10px 0;
+    margin: 5px 0;
     width: 57%;
     font-size: 12px;
     .special-name {
@@ -628,9 +628,9 @@
       position: absolute;
       right: 20px;
       top: 20px;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-top: 10px solid @orange;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 8px solid @orange;
     }
     .special-provider{
       position: absolute;
@@ -665,9 +665,9 @@
       position: absolute;
       right: 20px;
       top: 20px;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-top: 10px solid @meat;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 8px solid @meat;
     }
     .special-phase {
       .phase-item {
@@ -723,6 +723,7 @@
     }
     .light {
       font-weight: bold;
+      line-height: 16px;
     }
   }
   @media (max-width: 341px) {
@@ -774,6 +775,49 @@
   margin-top: 20px;
 }
 
+.blur {
+  -webkit-filter: blur(3px); /* Chrome, Opera */
+     -moz-filter: blur(3px);
+      -ms-filter: blur(3px);
+          filter: blur(3px);
+}
+
+.rongzi-common-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(19,19,20,.9);
+  text-align: center;
+  z-index: 101;
+  color: #f8ebd6;
+  font-weight: bold;
+  padding-top: 50%;
+  font-size: 16px;
+  display: none;
+  p {
+    margin: 0;
+  }
+  .weixin, .investor {
+    background-color: @orange;
+    border-radius: 25px;
+    line-height: 35px;
+    width: 55%;
+    margin: 20px auto;
+  }
+  .or {
+    color: @orange;
+    margin: 30px auto;
+    border: solid 1px @orange;
+    border-radius: 100px;
+    width: 8%;
+    padding: 2px;
+
+  }
+}
+
+
 //外围边框以及字体的颜色设置；
 .green-color {
   color: @green;
@@ -804,4 +848,7 @@
 }
 .mg-l {
   margin-left: 10px;
+}
+.mg-t-2 {
+  margin-top: 20px;
 }
