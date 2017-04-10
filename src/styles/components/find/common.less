@@ -1,39 +1,32 @@
-.projectList-content-href{
+.projectList-content-href {
     width: 100%;
     overflow: hidden;
     display: inline-block;
     vertical-align: middle;
-    .base-info-detail{
+    .base-info-detail {
+        position: relative;
         display: inline-block;
         vertical-align: middle;
         margin: 15px 0 0 0;
-        padding-left: 4%;
-        padding-right: 4%;
-        padding-bottom:8px;
-        position: relative;
-        //border-bottom: 1px solid #E7E7E7;
+        padding: 0 15px 8px 73px;
         width: 100%;
-        .logo-wrapper{
-            float: left;
-            position: relative;
-            width: 18%;
+        .logo-wrapper {
+            position: absolute;
+            left: 15px;
+            top: 0;
+            width: 58px;
             height: 58px;
             border: 1px solid #E7E7E7;
             border-radius: 5px;
             line-height: 55px;
             overflow: hidden;
             text-align: center;
-            //display: inline-block;
-            //vertical-align: top;
-            img{
+            img {
                 width: 98%;
                 height: auto;
                 border-radius: 5px;
-                /*border: 1px solid #E7E7E7;
-                border-radius: 5px;
-                width: 100%;*/
             }
-            .logo-funding{
+            .logo-funding {
                 position: absolute;
                 bottom: 0;
                 left: 0;
@@ -45,39 +38,36 @@
                 padding-top: 4px;
                 padding-bottom: 4px;
                 width: 100%;
-                background-color: rgba(34,44,56,0.5);
+                background-color: rgba(34, 44, 56, 0.5);
                 border-radius: 0 0 5px 5px;
                 border-left: 1px solid #E7E7E7;
                 border-right: 1px solid #E7E7E7;
                 border-bottom: 1px solid #E7E7E7;
             }
-            .logo-name{
+            .logo-name {
                 position: absolute;
                 text-align: center;
                 color: #fff;
-                //height: 55px;
                 height: 100%;
                 line-height: 55px;
                 left: 0;
                 font-size: 15px;
-                //width: 55px;
                 width: 100%;
-                top:0;
+                top: 0;
             }
         }
-        .content-wrapper{
+        .content-wrapper {
             display: inline-block;
-            width: 82%;
-            padding-left: 3%;
+            width: 100%;
+            padding-left: 4%;
         }
-        h3{
-
+        h3 {
             letter-spacing: 0px;
             line-height: 18px;
             margin: 0;
             position: relative;
             font-size: 15px;
-            .item-name{
+            .item-name {
                 font-weight: 600;
                 font-size: 15px;
                 color: #222C38;
@@ -85,11 +75,11 @@
                 vertical-align: top;
                 display: inline-block;
                 overflow: hidden;
-                text-overflow:ellipsis;
+                text-overflow: ellipsis;
                 white-space: nowrap;
                 max-width: 140px;
             }
-            .item-signs{
+            .item-signs {
                 margin-left: 3%;
                 display: inline-block;
                 padding: 1px 4px 0px 4px;
@@ -101,7 +91,7 @@
                 vertical-align: top;
                 height: 14px;
             }
-            .item-pubdate{
+            .item-pubdate {
                 font-size: 12px;
                 color: #969FA9;
                 letter-spacing: 0px;
@@ -113,20 +103,20 @@
                 right: 0;
             }
         }
-        .item-brief{
+        .item-brief {
             margin-top: 6px;
-            margin-bottom:10px;
+            margin-bottom: 10px;
             font-size: 13px;
             color: #969FA9;
             letter-spacing: 0px;
             line-height: 16px;
         }
-        .item-industry{
-            margin-bottom: 8px;
+        .item-industry {
+            margin-bottom: 5px;
             position: relative;
             line-height: 15px;
-            height: 15px;
-            .span-first{
+            min-height: 18px;
+            .span-first {
                 border: 1px solid #6BA2FC;
                 border-radius: 2px;
                 font-size: 10px;
@@ -140,7 +130,7 @@
                 transform: translateY(-50%);
                 top: 50%;
             }
-            .span-second{
+            .span-second {
                 font-size: 13px;
                 color: #5A626D;
                 letter-spacing: 0px;
@@ -149,12 +139,12 @@
                 margin-left: 36px;
             }
         }
-        .item-advantage{
+        .item-advantage {
             margin: 0;
             position: relative;
             line-height: 15px;
-            height: 15px;
-            .span-first{
+            min-height: 18px;
+            .span-first {
                 border: 1px solid #F7647F;
                 border-radius: 2px;
                 font-size: 10px;
@@ -166,7 +156,7 @@
                 vertical-align: top;
                 position: absolute;
             }
-            .span-second{
+            .span-second {
                 font-size: 13px;
                 color: #5A626D;
                 letter-spacing: 0px;
@@ -177,18 +167,19 @@
         }
     }
 }
-.img-fixed{
+
+.img-fixed {
     width: 54px;
-    height:54px;
+    height: 54px;
     position: fixed;
     right: 15px;
     bottom: 21px;
     z-index: 999;
 }
-.nativeAlert_wrap {
-    background: rgba(0,0,0,0.60);
-    overflow: visible;
 
+.nativeAlert_wrap {
+    background: rgba(0, 0, 0, 0.60);
+    overflow: visible;
     .modal-dialog {
         margin-top: 65px;
         margin-left: 7.5%;
@@ -214,8 +205,7 @@
             line-height: 19.5px;
             font-weight: 600;
         }
-
-        .pop-time{
+        .pop-time {
             margin: 15px auto 0 auto;
             font-size: 14px;
             color: #5A626D;
@@ -225,8 +215,7 @@
             display: inline-block;
             width: 100%;
         }
-
-        .pop-content{
+        .pop-content {
             font-size: 14px;
             color: #5A626D;
             letter-spacing: 0px;
@@ -236,8 +225,7 @@
             overflow: auto;
             margin-top: 15px;
         }
-
-        .pop-open{
+        .pop-open {
             background: #6BA2FC;
             text-align: center;
             padding: 14px;
@@ -249,7 +237,7 @@
             display: inline-block;
             width: 100%;
         }
-        .pop-close{
+        .pop-close {
             position: absolute;
             bottom: -56px;
             width: 36px;
@@ -257,20 +245,19 @@
             transform: translate(-50%, 0);
             left: 50%;
         }
-        .finance-header{
+        .finance-header {
             margin-top: 25px;
         }
-
     }
-    .financeAlert_pop{
+    .financeAlert_pop {
         padding-top: 25px;
-        ul{
+        ul {
             padding: 0 6.4%;
             height: 285px;
             overflow: auto;
             margin-top: 18px;
-            li{
-                list-style-type:none;
+            li {
+                list-style-type: none;
                 display: inline-block;
                 width: 29.3%;
                 height: 30px;
@@ -284,9 +271,9 @@
                 letter-spacing: 0px;
                 position: relative;
                 overflow: hidden;
-                text-overflow:ellipsis;
+                text-overflow: ellipsis;
                 white-space: nowrap;
-                img{
+                img {
                     width: 20px;
                     height: 20px;
                     position: absolute;
@@ -295,21 +282,21 @@
                     display: none;
                 }
             }
-            .active{
+            .active {
                 background: #6BA2FC;
                 color: #fff;
-                img{
+                img {
                     display: inline-block;
                 }
             }
         }
     }
-    .pop-bottom{
+    .pop-bottom {
         width: 100%;
         height: 49px;
         border-radius: 0 0px 5px 5px;
         background: #464E58;
-        .pop-bottom-left{
+        .pop-bottom-left {
             width: 35.5%;
             display: inline-block;
             background: #F3F3F3;
@@ -318,20 +305,20 @@
             border-radius: 0 0 0 5px;
             color: #5a626d;
         }
-        .pop-bottom-right{
+        .pop-bottom-right {
             width: 63%;
             display: inline-block;
             vertical-align: middle;
-            .pop-bottom-right-top{
+            .pop-bottom-right-top {
                 text-align: center;
                 font-size: 16px;
                 color: #FFFFFF;
                 letter-spacing: 0px;
                 line-height: 19.5px;
                 margin-top: 1px;
-                margin-bottom:0;
+                margin-bottom: 0;
             }
-            .pop-bottom-right-bottom{
+            .pop-bottom-right-bottom {
                 text-align: center;
                 opacity: 0.5;
                 font-size: 12px;
@@ -339,19 +326,20 @@
                 letter-spacing: 0px;
                 line-height: 14.5px;
                 margin-top: 2px;
-                margin-bottom:0;
+                margin-bottom: 0;
             }
         }
     }
 }
-.find-no-data{
+
+.find-no-data {
     text-align: center;
     padding-top: 56px;
-    img{
+    img {
         width: 100px;
         height: 100px;
     }
-    span{
+    span {
         display: inline-block;
         margin-top: 15px;
         font-size: 16px;
@@ -361,12 +349,15 @@
         width: 100%;
     }
 }
-.find-no-data-roadShow{
+
+.find-no-data-roadShow {
     margin-top: 50px;
 }
-.find-clicked{
-    h3, h4, .text-content{
+
+.find-clicked {
+    h3,
+    h4,
+    .text-content {
         color: #969FA9!important;
     }
-
 }
