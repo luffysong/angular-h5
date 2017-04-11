@@ -68,7 +68,7 @@ function HotFocusDetailController(loading, FindService, ErrorService, $statePara
                 },
                 padding: 14,
                 shadow: false,
-                useHTML: true,
+                useHTML: false,
             },
         },
         title: {

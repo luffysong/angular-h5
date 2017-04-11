@@ -211,8 +211,22 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     //创投助手app---项目专辑---机构在融 + 最新＋ 最热
-    $stateProvider.state('find.projectAlbum.normal', {
-        url:'/:type',
+    $stateProvider.state('find.projectAlbum.funding', {
+        url:'/funding',
+        controllerAs: 'vm',
+        controller: 'ProjectAlbumController',
+        templateUrl: 'templates/find/projectAlbumNormal.html',
+    });
+
+    $stateProvider.state('find.projectAlbum.latest', {
+        url:'/latest',
+        controllerAs: 'vm',
+        controller: 'ProjectAlbumController',
+        templateUrl: 'templates/find/projectAlbumNormal.html',
+    });
+
+    $stateProvider.state('find.projectAlbum.hotest', {
+        url:'/hotest',
         controllerAs: 'vm',
         controller: 'ProjectAlbumController',
         templateUrl: 'templates/find/projectAlbumNormal.html',

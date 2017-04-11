@@ -121,31 +121,31 @@ angular.module('defaultApp')
                 window.scrollTo(0, 0);
             }
 
-            function getPage(path, type) {
+            function getPage(name, type) {
                 var track = false;
                 var visitingPage = '';
-                if (path.indexOf('/find/dailyNews') > -1) {
+                if (name === 'find.dailyNews') {
                     visitingPage = 'news_list';
                     track = true;
-                } else if (path.indexOf('/projectAlbum/latest') > -1) {
+                } else if (name === 'find.projectAlbum.latest') {
                     visitingPage = 'latest';
                     track = true;
-                } else if (path.indexOf('/projectAlbum/hotest') > -1) {
+                } else if (name === 'find.projectAlbum.hotest') {
                     visitingPage = 'hottest';
                     track = true;
-                } else if (path.indexOf('/projectAlbum/funding') > -1) {
+                } else if (name === 'find.projectAlbum.funding') {
                     visitingPage = 'organization_financing';
                     track = true;
-                } else if (path.indexOf('/roadShow') > -1) {
+                } else if (name === 'roadShow') {
                     visitingPage = 'calendar';
                     track = true;
-                } else if (path.indexOf('/demos/') > -1) {
+                } else if (name === 'demos') {
                     visitingPage = 'set';
                     track = true;
-                } else if (path.indexOf('/hotFocusDetail') > -1) {
+                } else if (name === 'find.hotFocusDetail') {
                     visitingPage = 'hotspot_page';
                     track = true;
-                } else if (path.indexOf('/hotFocus') > -1) {
+                } else if (name === 'find.hotFocus') {
                     visitingPage = 'hotspot_select_list';
                     track = true;
                 }
@@ -156,9 +156,9 @@ angular.module('defaultApp')
                 }
             }
 
-            getPage(to.url) && sa.track('ViewPage', {
-                source: getPage(from.url, 'name'),
-                page: getPage(to.url, 'name'),
+            getPage(to.name) && sa.track('ViewPage', {
+                source: getPage(from.name, 'name'),
+                page: getPage(to.name, 'name'),
             });
         });
     }).run(function ($http, $rootScope, $location, $state, notify, Permission, UserService, $q, CredentialService) {

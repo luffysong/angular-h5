@@ -2,16 +2,16 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('ProjectAlbumController', ProjectAlbumController);
 
-function ProjectAlbumController(demosService, projectColumnService, $state, $stateParams, loading, ErrorService, FindService, $modal) {
+function ProjectAlbumController(demosService, projectColumnService, $state, loading, ErrorService, FindService, $modal) {
     var vm = this;
     $('body').css({
         backgroundColor: '#fff'
     });
     // URL 参数
     vm.params = {
-        type: $stateParams.type,
+        type: $state.current.url.split('/')[1],
     };
-    vm.type = $stateParams.type;
+    vm.type = $state.current.url.split('/')[1];
     // 页面 title
     switch (vm.params.type) {
         case 'latest':
@@ -56,7 +56,6 @@ function ProjectAlbumController(demosService, projectColumnService, $state, $sta
         $('body').css('overflow', '');
         document.title = vm.title;
         $('head').append('<meta name="format-detection" content="telephone=no" />');
-        vm.type = $stateParams.type;
         loadData();
         initWeixin();
     }
