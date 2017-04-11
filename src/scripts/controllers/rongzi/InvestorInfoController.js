@@ -61,17 +61,13 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
             .then(function (data) {
                     if (data.data) {
                         vm.result = data.data;
-                        vm.projects = data.data.projects;
                         vm.names = data.data.name.split('');
-                        vm.noData = false;
+                        if(data.data,projects) {
+                            vm.projects = data.data.projects;
+                            vm.noData = false;
+                        }
                     }
-                }).catch(function(data){
-                    if (data.data) {
-                        vm.result = data.data;
-                        vm.names = data.data.name.split('');
-                        console.log(names);
-                    }
-                });
+                }).catch(fail);
     }
 
     function initUser() {
@@ -213,7 +209,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
             item.cancelMainRemind = true;
             item.title = '取消开场提醒成功！';
             item.hasEmail = true;
-            item.cancelRemindtxt = '后续新上的明星投资人专场将不会有专场提醒，现已有排期的专场仍会提醒！';
+            item.cancelRemindtxt = '后续新上的' + $stateParams.name + '将不会有专场提醒，现已有排期的专场仍会提醒！';
             modalOpen(item);
             vm.result.remind = 1;
         })
