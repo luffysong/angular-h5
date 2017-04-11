@@ -1,9 +1,17 @@
 <div class="rongzi-common-mask">
-  <div class="share-weixin">
+  <div class="share-weixin" ng-if="vm.canWeChatShare">
     <p>分享本页面</p>
     <p>可提前三天查看本专场页面</p>
     <div class="weixin" ng-click="vm.shareWechat()">分享至微信</div>
   </div>
+
+  <div class="share-weixin" ng-if="!vm.canWeChatShare">
+    <p>专场未开始</p>
+    <p>订阅本专场，开场提醒不错过好项目</p>
+    <!--
+    <div class="weixin" ng-click="vm.shareWechat()">分享至微信</div>-->
+  </div>
+
   <!--
   <div class="or">或</div>
   <div class="share-investor">

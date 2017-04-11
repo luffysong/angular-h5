@@ -1,4 +1,4 @@
-<div class="rongzi-common-backg detail-wrapper">
+<div class="rongzi-common-backg detail-wrapper" ng-class="{true:'paddTopBar',false:''}[!vm.needApp]">
 
   <div class="rongzi-common-top">
     <div class="rongzi-common-logo" >
@@ -54,5 +54,5 @@
     返回融资季主会场
   </div>
 </div>
-
+<div ng-include="'templates/rongzi/meiqia.html'"></div>
 </div>
