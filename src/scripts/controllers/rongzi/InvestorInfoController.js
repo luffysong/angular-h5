@@ -29,6 +29,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         initWeixin();
         initPxLoader();
         initTitle('融资季·' + $stateParams.name);
+        vm.state = $stateParams.state;
         loading.hide('findLoading');
     }
 
@@ -62,6 +63,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
                     if (data.data) {
                         vm.result = data.data;
                         vm.names = data.data.name.split('');
+                        vm.canWeChatShare = data.data.canWeChatShare;
                         if(data.data.projects) {
                             vm.projects = data.data.projects;
                             vm.noData = false;
