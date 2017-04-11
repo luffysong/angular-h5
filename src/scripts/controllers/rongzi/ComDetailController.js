@@ -9,6 +9,7 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
     vm.Aafter = false;
     vm.Abefore = true;
     vm.category = $stateParams.category;
+    vm.state = $stateParams.state;
     vm.name = $stateParams.name;
     vm.nameArr = [];
     vm.subscribe = subscribe;

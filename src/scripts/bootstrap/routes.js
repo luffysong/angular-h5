@@ -474,14 +474,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('rongzi.orgdetail', {
-        url:'/orgdetail?id&{name}&{category}',
+        url:'/orgdetail?id&{name}&{category}&{state}',
         controllerAs: 'vm',
         controller: 'OrgDetailController',
         templateUrl: 'templates/rongzi/org-detail.html',
     });
 
     $stateProvider.state('rongzi.comdetail', {
-        url:'/comdetail?id&{name}&{category}',
+        url:'/comdetail?id&{name}&{category}&{state}',
         controllerAs: 'vm',
         controller: 'ComDetailController',
         templateUrl: 'templates/rongzi/com-detail.html',

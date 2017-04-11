@@ -80,11 +80,11 @@
       <div class="special-item green-color" >
         <div class="special-list-border yellowdotted-color">
           <div class="special-logo green-color"
-            ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"
+            ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'end'})"
             style="background-image: url({{item.logo}})"></div>
           <div class="special-info">
             <div class="special-name gray-color"
-            ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})">
+            ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'end'})">
               {{item.name}}
             </div>
             <div class="special-arrow green-arrow"></div>
@@ -93,7 +93,7 @@
             </div>
             <div class="special-end">
               <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日'"></b></span>&nbsp;&nbsp;
-              <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"><b>查看详情 ></b></span>
+              <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'end'})"><b>查看详情 ></b></span>
             </div>
           </div>
         </div>
@@ -177,7 +177,7 @@
       <div class="special-item green-color" >
         <div class="special-list-border yellowdotted-color">
           <div class="special-logo green-color"
-          ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})" style="background-image: url({{item.logo}})"></div>
+          ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'end'})" style="background-image: url({{item.logo}})"></div>
           <div class="special-info">
             <div class="special-name gray-color">
               {{item.name}}
@@ -188,7 +188,7 @@
             </div>
             <div class="special-end">
               <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日'"></b></span>&nbsp;&nbsp;
-              <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"><b>查看详情 ></b></span>
+              <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'end'})"><b>查看详情 ></b></span>
             </div>
           </div>
         </div>
