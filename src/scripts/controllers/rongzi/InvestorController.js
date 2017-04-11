@@ -12,8 +12,10 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
     vm.openAppUrl;
     vm.page = 0;
     vm.more = false;
-    vm.displayMore = displayMore;
-    vm.investors = [];
+    vm.busy = false;
+    vm.moreFinishedData = moreFinishedData;
+    vm.finished = [];
+
     init();
 
     function init() {
@@ -57,8 +59,6 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
 
     function initData() {
         var request = {
-            page: vm.page += 1,
-            pageSize:4,
             category: $stateParams.category
         };
         RongziService.getInvestor(request)
@@ -67,18 +67,30 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
                         vm.result = data.data;
                     }
                 }).catch(fail);
+    }
+
+    function moreFinishedData() {
+        if (vm.busy)return;
+        vm.busy = true;
+        var request = {
+            page: vm.page += 1,
+            pageSize: 2,
+            category: $stateParams.category
+        };
         RongziService.getFinished(request)
             .then(function setCommunity(data) {
-                    if (data.data) {
-                        vm.finished = data.data.data;
-                        if (data.data.totalPages) {
-                            vm.page = data.data.page || 0;
-                            if (data.data.totalPages === vm.page) {
-                                vm.more = true;
-                            }
+                if (data.data) {
+                    vm.finished = vm.finished.concat(data.data.data);
+                    if (data.data.totalPages) {
+                        vm.page = data.data.page || 0;
+                        if (data.data.totalPages !== vm.page) {
+                            vm.busy = false;
+                        } else {
+                            vm.finish = true;
                         }
                     }
-                }).catch(fail);
+                }
+            }).catch(fail);
     }
 
     function initUser() {

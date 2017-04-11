@@ -1,4 +1,4 @@
-<div class="investor-list">
+<div class="investor-list" infinite-scroll='vm.moreFinishedData()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
 
   <!-- <div class="investor-item" ng-if="vm.result.sessions" ng-repeat="item in vm.investors">
     <div class="list-border">
@@ -95,5 +95,6 @@
       </div>
     </div>
   </div>
-
 </div>
+  <footer ng-if="vm.busy && vm.page && !vm.finish">正在加载更多...</footer>
+  <footer>全部内容加载完毕</footer>

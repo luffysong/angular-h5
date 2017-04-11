@@ -56,30 +56,11 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     function initData() {
-        // var request = {
-        //     page: vm.page += 1,
-        //     pageSize:4,
-        //     category: $stateParams.category,
-        // };
         RongziService.getInvestorInfo($stateParams.id)
             .then(function (data) {
                     if (data.data) {
-                        vm.result = data.data.data;
-                        angular.forEach(data.data.data.sessions,
-                          function (dt, index, array) {
-                            var nameArr = dt.name.split('');
-                            dt.nameArr = nameArr;
-                            vm.investors.push(dt);
-                        });
-
-                        if (data.data.totalPages) {
-                            vm.page = data.data.page || 0;
-                            if (data.data.totalPages === vm.page) {
-                                vm.more = true;
-                            }
-                        }
-
-                        initTitle(vm.result.title);
+                        vm.result = data.data;
+                        vm.projects = data.data.projects;
                     }
                 }).catch(fail);
     }
