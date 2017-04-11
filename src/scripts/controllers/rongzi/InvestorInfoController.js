@@ -14,6 +14,9 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     vm.more = false;
     vm.displayMore = displayMore;
     vm.investors = [];
+    vm.names = [];
+    vm.noData = true;
+    vm.shareWechat = shareWechat;
     init();
 
     function init() {
@@ -21,13 +24,11 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
             initLinkmeInvestor();
             vm.needApp = false;
         }
-
-        console.log(vm.needApp);
-
         initData();
         initUser();
         initWeixin();
         initPxLoader();
+        initTitle('融资季·' + $stateParams.name);
         loading.hide('findLoading');
     }
 
@@ -60,7 +61,11 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
             .then(function (data) {
                     if (data.data) {
                         vm.result = data.data;
-                        vm.projects = data.data.projects;
+                        vm.names = data.data.name.split('');
+                        if(data.data,projects) {
+                            vm.projects = data.data.projects;
+                            vm.noData = false;
+                        }
                     }
                 }).catch(fail);
     }
@@ -84,7 +89,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         var krdata = {};
         krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investor?id=' + $stateParams.id + '","currentRoom":"0"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investor?id=' + $stateParams.id + '&name=' + $stateParams.name + '&category=' + $stateParams.category + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {
                 if (err) {
@@ -204,7 +209,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
             item.cancelMainRemind = true;
             item.title = '取消开场提醒成功！';
             item.hasEmail = true;
-            item.cancelRemindtxt = '后续新上的明星投资人专场将不会有专场提醒，现已有排期的专场仍会提醒！';
+            item.cancelRemindtxt = '后续新上的' + $stateParams.name + '将不会有专场提醒，现已有排期的专场仍会提醒！';
             modalOpen(item);
             vm.result.remind = 1;
         })
@@ -261,6 +266,16 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
 
         function cancelModal() {
             $modalInstance.dismiss();
+        }
+    }
+
+    function shareWechat() {
+        if (!hybrid.isInApp) {
+            defaultModal();
+        }else if (hybrid.isInApp && !UserService.getUID()) {
+            window.location.href = 'https://passport.36kr.com/pages';
+        } else if (hybrid.isInApp && UserService.getUID()) {
+            hybrid.open('weChatShare/' + $stateParams.id);
         }
     }
 

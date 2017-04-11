@@ -294,7 +294,7 @@
     img{
       width: 30%;
       float: right;
-      margin-right: 10px;
+      margin: 10px;
     }
     //height: 100px;
     //background: url('images/rongzi/rongzi-logo.png');
@@ -336,9 +336,15 @@
   }
 
   .rongzi-common-textbtn-investor{
+    position: relative;
+    text-align: center;
     img{
       width: 100%;
     }
+    .wd-80 {
+      width: 80%;
+    }
+
     // width: 100%;
     // height: 55px;
     // background: url('images/rongzi/investor-text.png');
@@ -796,6 +802,9 @@
   line-height: 40px;
   border-radius: 25px;
   margin-top: 20px;
+  a {
+    color: #FFF;
+  }
 }
 
 .blur {
@@ -808,7 +817,7 @@
 .rongzi-common-mask {
   position: fixed;
   width: 100%;
-  height: 100%;
+  height: 90%;
   left: 0;
   top: 0;
   background-color: rgba(19,19,20,.9);
@@ -818,7 +827,7 @@
   font-weight: bold;
   padding-top: 50%;
   font-size: 14px;
-  //display: none;
+  // display: none;
   p {
     margin: 0;
   }
@@ -874,4 +883,26 @@
 }
 .mg-t-2 {
   margin-top: 20px;
+}
+
+.top-name {
+  position: relative;
+  bottom: 45px;
+}
+.name-bg-green {
+  font-size: 22px;
+  display: inline-block;
+  padding: 5px;
+  height: 35px;
+  width: 35px;
+  line-height: 25px;
+  border-radius: 25px;
+  color: #ffdbac;
+  margin: 0 1%;
+  font-weight: bold;
+  text-align: center;
+  background-color: @green;
+}
+.noData {
+  height: 230px;
 }
