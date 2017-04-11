@@ -278,9 +278,9 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             window.scroll(0, 0);
         }, 0);
 
-        document.title = '36氪投资人认证申请';
+        document.title = '投资人认证申请';
         window.WEIXINSHARE = {
-            shareTitle: '36氪投资人认证申请',
+            shareTitle: '投资人认证申请',
             shareDesc: '投资人认证申请',
             shareImg: 'https://pic.36krcnd.com/36kr_new_logo.jpg'
         };

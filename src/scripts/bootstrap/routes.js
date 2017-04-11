@@ -487,6 +487,20 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/rongzi/com-detail.html',
     });
 
+    $stateProvider.state('rongzi.comlike', {
+        url:'/comlike?id&{name}&{category}',
+        controllerAs: 'vm',
+        controller: 'ComLikeController',
+        templateUrl: 'templates/rongzi/com-like.html',
+    });
+
+    $stateProvider.state('rongzi.orglike', {
+        url:'/orglike?id&{name}&{category}',
+        controllerAs: 'vm',
+        controller: 'OrgLikeController',
+        templateUrl: 'templates/rongzi/org-like.html',
+    });
+
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
     }

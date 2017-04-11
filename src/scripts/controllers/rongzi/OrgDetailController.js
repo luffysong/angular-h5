@@ -253,7 +253,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         }else if (hybrid.isInApp && !UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
         } else if (hybrid.isInApp && UserService.getUID()) {
-            hybrid.open('weChatShare');
+            hybrid.open('weChatShare/' + $stateParams.id);
         }
     }
 }

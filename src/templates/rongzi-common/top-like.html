@@ -1,0 +1,39 @@
+<div class="rongzi-common-top">
+
+  <div class="rongzi-common-logo" ng-if="topdata !== 'enroll' ">
+    <img src="/styles/images/rongzi/rongzi-logo.png" />
+  </div>
+
+  <div class="rongzi-common-logo-enroll" ng-if="topdata === 'enroll' ">
+    <img src="/styles/images/rongzi/enroll-logo1.png" />
+  </div>
+
+  <div class="rongzi-common-textbtn-community" ng-if="topdata === 'community' ">
+    <img src="/styles/images/rongzi/community-text.png" />
+  </div>
+  <div class="rongzi-common-textbtn-org" ng-if="topdata === 'org'">
+    <img src="/styles/images/rongzi/org-text.png" />
+  </div>
+  <div class="rongzi-common-textbtn-investor" ng-if="topdata === 'investor'">
+    <img src="/styles/images/rongzi/investor-text.png" />
+  </div>
+  <div class="rongzi-common-textbtn-enroll" ng-if=" topdata === 'enroll' ">
+    <img src="/styles/images/rongzi/enroll-txt.png" />
+  </div>
+
+  <div class="rongzi-common-text">
+      <p ng-if="topdata === 'org'" ng-bind="vm.result.ruleDescription">
+      </p>
+
+      <p ng-if="topdata === 'community'" ng-bind="vm.result.ruleDescription">
+      </p>
+
+      <p ng-if="topdata === 'investor' && vm.result.ruleDescription" ng-bind="vm.result.ruleDescription">
+      </p>
+      <p ng-if="topdata === 'investor' && !vm.result.ruleDescription">
+        投资圈中冉冉升起的明星们，或锋芒初露，或成名已久，他们融合了对趋势的判断、对市场的把握、对创业者的观察、对项目的理解……形成了自己独有的投资哲学。
+        自4月17日起，每周邀请/筛选四位具有标杆意义的明星投资人携被投项目加入投资人专场，每周二、三各更新两场，总计40场。
+      </p>
+  </div>
+
+</div>
