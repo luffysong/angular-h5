@@ -28,18 +28,19 @@ function ComLikeController($document, $timeout, $scope, $modal, loading, $stateP
         if ('AAfter' === id) {
             vm.Aafter = true;
             vm.Abefore = false;
-            resetData();
-            getFinishedData('1');
+            initData('1');
         } else if (('ABefore') === id) {
             vm.Aafter = false;
             vm.Abefore = true;
-            resetData();
-            getFinishedData('0');
+            initData('0');
         }
     }
 
-    function initData() {
-        RongziService.getComLike()
+    function initData(projectCategory) {
+        var senddata = {
+            projectCategory:projectCategory ? parseInt(projectCategory) : 0,
+        };
+        RongziService.getComLike(senddata)
             .then(function setCommunity(data) {
                     if (data.data) {
                         vm.result = data.data;

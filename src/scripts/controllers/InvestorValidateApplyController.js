@@ -278,11 +278,12 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             window.scroll(0, 0);
         }, 0);
 
-        document.title = '投资人认证申请';
+        document.title = '认证投资人';
         window.WEIXINSHARE = {
-            shareTitle: '投资人认证申请',
-            shareDesc: '投资人认证申请',
-            shareImg: 'https://pic.36krcnd.com/36kr_new_logo.jpg'
+            shareTitle: '认证投资人',
+            shareDesc: '认证投资人',
+            shareImg: 'https://pic.36krcnd.com/36kr_new_logo.jpg',
+            shareButton: 'hide'
         };
         window.InitWeixin();
         /*错误信息提示*/

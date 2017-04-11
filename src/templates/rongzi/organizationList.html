@@ -11,9 +11,9 @@
 <div class="org-a-before" ng-show="vm.Abefore">
   <div class="special-item yellow-color" ng-if="vm.ABefore.goingSessions" ng-repeat=" item in vm.ABefore.goingSessions">
     <div class="special-list-border orange-color">
-      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+      <div class="special-logo yellow-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
-        <div class="special-name orange-color">
+        <div class="special-name orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})">
           {{item.name}}
         </div>
         <div class="special-arrow"></div>
@@ -39,9 +39,9 @@
 
   <div class="special-item yellow-color" ng-if="vm.ABefore.startSessions.length >0" ng-repeat=" item in vm.ABefore.startSessions">
     <div class="special-list-border orange-color">
-      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+      <div class="special-logo yellow-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
-        <div class="special-name orange-color">
+        <div class="special-name orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})">
           {{item.name}}
         </div>
         <div class="special-arrow"></div>
@@ -66,9 +66,9 @@
   <li  ng-if="vm.end" ng-repeat=" item in vm.end track by $index" >
     <div class="special-item yellow-color">
       <div class="special-list-border orange-color">
-        <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+        <div class="special-logo yellow-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})" style="background-image: url({{item.logo}})"></div>
         <div class="special-info">
-          <div class="special-name gray-color">
+          <div class="special-name gray-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})">
             {{item.name}}
           </div>
           <div class="special-arrow"></div>
@@ -99,9 +99,9 @@
 
   <div class="special-item yellow-color" ng-if="vm.AAfter.goingSessions" ng-repeat=" item in vm.AAfter.goingSessions">
     <div class="special-list-border orange-color">
-      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+      <div class="special-logo yellow-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
-        <div class="special-name orange-color">
+        <div class="special-name orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})">
           {{item.name}}
         </div>
         <div class="special-arrow"></div>
@@ -127,9 +127,9 @@
 
   <div class="special-item yellow-color" ng-if="vm.AAfter.startSessions" ng-repeat=" item in vm.AAfter.startSessions">
     <div class="special-list-border orange-color">
-      <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+      <div class="special-logo yellow-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
-        <div class="special-name orange-color">
+        <div class="special-name orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})">
           {{item.name}}
         </div>
         <div class="special-arrow"></div>
@@ -155,9 +155,9 @@
     <li  ng-if="vm.end" ng-repeat=" item in vm.end track by $index" >
       <div class="special-item yellow-color" ng-if="vm.end" ng-repeat=" item in vm.end">
         <div class="special-list-border orange-color">
-          <div class="special-logo yellow-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+          <div class="special-logo yellow-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})" style="background-image: url({{item.logo}})"></div>
           <div class="special-info">
-            <div class="special-name gray-color">
+            <div class="special-name gray-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})">
               {{item.name}}
             </div>
             <div class="special-arrow"></div>

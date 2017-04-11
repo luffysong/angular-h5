@@ -21,7 +21,11 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
     function init() {
         loading.hide('findLoading');
         initData();
-        initLinkme();
+        if (!hybrid.isInApp) {
+            initLinkme();
+            vm.needApp = false;
+        }
+
         initWeixin();
         initTitle('融资季·' + $stateParams.name);
         vm.nameArr = vm.name.split('');
@@ -43,10 +47,10 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
 
     function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】创业圈“黄埔军校”输出，为认可的创业基因助威。',
+            shareTitle: '【创投助手·融资季】' + $stateParams.name + '在融项目提前看，紧跟TOP机构不掉队！',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: '机构详情机构详情机构详情机构详情机构详情机构详情机构详情机构详情',
+            shareDesc: '20家顶级投资机构被投项目在融，每周一周四更新，好项目触手可得！',
         };
 
         var obj = {};
@@ -59,6 +63,8 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
                 .then(function setDetail(data) {
                         if (data.data) {
                             vm.result = data.data;
+                            vm.hasPermission = data.data.hasPermission;
+                            vm.canWeChatShare = data.data.canWeChatShare;
                             if (data.data.projects) {
                                 vm.ABefore = data.data.projects.ABefore;
                                 vm.AAfter = data.data.projects.AAfter;
@@ -139,7 +145,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         var senddata = {
             id:vm.result.id,
             category:vm.result.category,
-            subscibeType:0,
+            subscibeType:1,
         };
         RongziService.setSubscribe(senddata)
         .then(function setSussess(data) {
@@ -160,7 +166,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         var senddata = {
             id:vm.result.id,
             category:vm.result.category,
-            subscibeType:0,
+            subscibeType:1,
         };
         RongziService.cancelSubscribe(senddata)
         .then(function setSussess() {
