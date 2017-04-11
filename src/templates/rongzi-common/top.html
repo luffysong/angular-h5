@@ -75,19 +75,22 @@
   <div class="rongzi-common-btn" id ="" ng-if="topdata !== 'enroll' ">
     <a href="javascript:void(0)" class="star-btn" ng-click="vm.subscribe(i,$event)"
         id="comm-openApp" ng-if="topdata === 'community'">
-      <b ng-if="vm.result.remind === 1">订阅社群专场</b>
+      <b ng-if="vm.result.remind === 1 && !vm.needApp">下载创投助手，参加融资季</b>
+      <b ng-if="vm.result.remind === 1 && vm.needApp">订阅社群专场</b>
       <b ng-if="vm.result.remind === 0">取消订阅社群专场</b>
     </a>
 
     <a href="javascript:void(0)" class="org-btn" id="org-openApp" ng-if="topdata === 'org'"
         ng-click="vm.subscribe(i,$event)">
-      <b ng-if="vm.result.remind === 1">订阅机构专场</b>
+        <b ng-if="vm.result.remind === 1 && !vm.needApp">下载创投助手，参加融资季</b>
+        <b ng-if="vm.result.remind === 1 && vm.needApp">订阅机构专场</b>
       <b ng-if="vm.result.remind === 0">取消订阅机构专场</b>
     </a>
 
     <a href="javascript:void(0)" class="org-btn" id="investor-openApp" ng-if="topdata === 'investor'"
     ng-click="vm.subscribe(i,$event)">
-      <b ng-if="vm.result.remind === 1">订阅明星投资人专场</b>
+      <b ng-if="vm.result.remind === 1 && !vm.needApp">下载创投助手，参加融资季</b>
+      <b ng-if="vm.result.remind === 1 && vm.needApp">订阅明星投资人专场</b>
       <b ng-if="vm.result.remind === 0">取消订阅明星投资人专场</b>
     </a>
   </div>
