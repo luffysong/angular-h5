@@ -1,3 +1,13 @@
+<a name="1.26.24"></a>
+## [1.26.24](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.23...v1.26.24) (2017-04-11)
+
+
+### Bug Fixes
+
+* 修改统计 url 地址 ([b82a19c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b82a19c))
+
+
+
 <a name="1.26.23"></a>
 ## [1.26.23](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.22...v1.26.23) (2017-04-10)
 
