@@ -29,7 +29,8 @@
          -->
           <a id="main-open" class="btn subscribe-btn btn-height"
             ng-click="vm.subscribe(item, $event)">
-            <b ng-if="vm.remind === 1">融资季专场，开场提醒</b>
+            <b ng-if="vm.remind === 1 && !vm.needApp">下载创投助手，参加融资季</b>
+            <b ng-if="vm.remind === 1 && vm.needApp">开启融资季开场提醒</b>
             <b ng-if="vm.remind === 0">取消提醒订阅</b>
           </a>
         </div>

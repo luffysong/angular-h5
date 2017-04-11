@@ -121,12 +121,17 @@ function BestListController($modal, loading, $stateParams, FindService,
         ErrorService.alert(err.err.msg);
     }
 
-    function addRule() {
+    function addRule(p) {
         $modal.open({
             templateUrl: 'templates/rongzi-common/ruleHtml.html',
             windowClass: 'nativeAlert_wrap',
             controller: ruleController,
             controllerAs: 'vm',
+            resolve: {
+                obj: function () {
+                    return p;
+                }
+            }
         });
     }
 
@@ -233,9 +238,10 @@ function BestListController($modal, loading, $stateParams, FindService,
         }
     }
 
-    ruleController.$inject = ['$modalInstance', 'hybrid'];
-    function ruleController($modalInstance, hybrid) {
+    ruleController.$inject = ['$modalInstance', 'hybrid','obj'];
+    function ruleController($modalInstance, hybrid, obj) {
         var vm = this;
+        vm.p = obj;
         vm.cancelModal = cancelModal;
 
         function cancelModal() {
