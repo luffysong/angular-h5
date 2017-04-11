@@ -26,6 +26,7 @@
 
 
   <div class="investor-content" ng-class="{noData: vm.noData}">
+    <div ng-include="'templates/rongzi-common/mask.html'" ng-if="!vm.hasPermission"></div>
     <div class="investor-list" ng-show="!vm.noData">
       <div class="special-state orange-color">已投项目</div>
       <div class="special-item green-color" ng-repeat="item in vm.projects.invested">
@@ -82,5 +83,4 @@
   </div>
 </div>
 
-<div ng-include="'templates/rongzi-common/mask.html'" ng-if="!vm.hasPermission"></div>
 <div ng-include="'templates/rongzi/meiqia.html'"></div>
