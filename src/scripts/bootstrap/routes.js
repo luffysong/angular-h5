@@ -436,14 +436,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('rongzi.investor', {
-        url:'/investor?{category}',
+        url:'/investor?{category}&{name}',
         controllerAs: 'vm',
         controller: 'InvestorController',
         templateUrl: 'templates/rongzi/investor.html',
     });
 
     $stateProvider.state('rongzi.investorInfo', {
-        url:'/investorInfo?{category}&{id}&{debug}',
+        url:'/investorInfo?{category}&{id}&{debug}&{name}',
         controllerAs: 'vm',
         controller: 'InvestorInfoController',
         templateUrl: 'templates/rongzi/investorInfo.html',
