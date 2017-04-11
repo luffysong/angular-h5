@@ -142,7 +142,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     }
 
     function fail(err) {
-        ErrorService.alert(err.err.msg);
+        ErrorService.alert(err.msg);
     }
 
     function initLinkmeComm() {

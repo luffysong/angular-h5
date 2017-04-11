@@ -140,7 +140,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     function fail(err) {
-        ErrorService.alert(err.err.msg);
+        ErrorService.alert(err.msg);
     }
 
     function initLinkmeInvestor() {

@@ -5,6 +5,7 @@ angular.module('defaultApp.controller')
 function OrgDetailController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid) {
     var vm = this;
     vm.tabChange = tabChange;
+    vm.shareWechat = shareWechat;
     vm.Aafter = false;
     vm.Abefore = true;
     vm.category = $stateParams.category;
@@ -21,6 +22,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         loading.hide('findLoading');
         initData();
         initLinkme();
+        initWeixin();
         initTitle('融资季·' + $stateParams.name);
         vm.nameArr = vm.name.split('');
     }
@@ -39,17 +41,31 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         }
     }
 
+    function initWeixin() {
+        window.WEIXINSHARE = {
+            shareTitle: '【创投助手·融资季】创业圈“黄埔军校”输出，为认可的创业基因助威。',
+            shareUrl: window.location.href,
+            shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
+            shareDesc: '机构详情机构详情机构详情机构详情机构详情机构详情机构详情机构详情',
+        };
+
+        var obj = {};
+        window.InitWeixin(obj);
+    }
+
     function initData() {
-        RongziService.getDetail(parseInt($stateParams.id))
-            .then(function setDetail(data) {
-                    if (data.data) {
-                        vm.result = data.data;
-                        if (data.data.projects) {
-                            vm.ABefore = data.data.projects.ABefore;
-                            vm.AAfter = data.data.projects.AAfter;
+        if (parseInt($stateParams.id) && UserService.getUID()) {
+            RongziService.getDetail(parseInt($stateParams.id))
+                .then(function setDetail(data) {
+                        if (data.data) {
+                            vm.result = data.data;
+                            if (data.data.projects) {
+                                vm.ABefore = data.data.projects.ABefore;
+                                vm.AAfter = data.data.projects.AAfter;
+                            }
                         }
-                    }
-                }).catch(fail);
+                    }).catch(fail);
+        }
     }
 
     function initTitle(t) {
@@ -57,7 +73,11 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
     }
 
     function fail(err) {
-        ErrorService.alert(err.err.msg);
+        if (err.code === '403') {
+            console.log(err.msg);
+        } else if (err.code === '1') {
+            ErrorService.alert(err.msg);
+        }
     }
 
     function subscribe(item, e) {
@@ -225,5 +245,15 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
                         }
                     }, false);
             });
+    }
+
+    function shareWechat() {
+        if (!hybrid.isInApp) {
+            defaultModal();
+        }else if (hybrid.isInApp && !UserService.getUID()) {
+            window.location.href = 'https://passport.36kr.com/pages';
+        } else if (hybrid.isInApp && UserService.getUID()) {
+            hybrid.open('weChatShare');
+        }
     }
 }
