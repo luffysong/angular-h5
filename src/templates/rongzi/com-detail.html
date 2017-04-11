@@ -12,35 +12,37 @@
       <img src="/styles/images/rongzi/comdetail-txt.png" />
     </div>
 
-    <div class="rongzi-detail-type">
-        <span>孵化器</span>
+    <div class="rongzi-detail-type" ng-if="vm.result.sessionType">
+        <span ng-bind="vm.result.sessionType">孵化器</span>
     </div>
 
       <div class="rongzi-enroll-text">
-          <p>
-            覆盖市面80%的在融项目，史上最大的投融对接狂欢季，
-           Top20机构专场、40明星投资人专场、20社群专场，周周放送。
+          <p ng-bind="vm.result.intro">
           </p>
       </div>
 
       <div class="rongzi-common-btn">
         <a href="javascript:void(0)" class="star-btn" id="org-openApp"
             ng-click="vm.subscribe(i,$event)">
-          <b >开场提醒</b>
+          <b ng-if="vm.result.remind === 1">开场提醒</b>
           <b ng-if="vm.result.remind === 0">取消开场提醒</b>
         </a>
       </div>
   </div>
 
-  <div class="detail-content">
+  <div class="detail-content" ng-if="vm.hasPermission">
     <div ng-include="'templates/rongzi-common/list-template.html'"></div>
   </div>
 
+  <div class="detail-content" ng-if="!vm.hasPermission">
+    <div ng-include="'templates/rongzi-common/mask.html'"></div>
+  </div>
+
 <div class="detail-bottom">
-  <div>
+  <div ui-sref="rongzi.community({category:vm.category})">
     返回社群专场
   </div>
-  <div>
+  <div ui-sref="rongzi.main">
     返回融资季主会场
   </div>
 </div>

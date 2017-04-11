@@ -13,23 +13,20 @@
     </div>
 
       <div class="rongzi-enroll-text">
-          <p>
-            覆盖市面80%的在融项目，史上最大的投融对接狂欢季，
-           Top20机构专场、40明星投资人专场、20社群专场，周周放送。
+          <p ng-bind="vm.result.intro">
           </p>
       </div>
 
       <div class="rongzi-common-btn">
         <a href="javascript:void(0)" class="org-btn" id="org-openApp"
             ng-click="vm.subscribe(i,$event)">
-          <b >开场提醒</b>
+          <b ng-if="vm.result.remind === 1">开场提醒</b>
           <b ng-if="vm.result.remind === 0">取消开场提醒</b>
         </a>
       </div>
-
   </div>
 
-  <div class="detail-content">
+  <div class="detail-content" ng-if="vm.hasPermission">
     <div class="rongzi-tab tab-org-border" >
       <a ng-click="vm.tabChange($event)" class="tab-org-selected" id ="ABefore"
         href="javascript:void(0)">
@@ -39,7 +36,13 @@
         <b>A轮后</b>
       </a>
     </div>
-    <div ng-include="'templates/rongzi-common/list-template.html'"></div>
+  <div ng-include="'templates/rongzi-common/list-template.html'">
+  </div>
+  </div>
+
+  <div class="detail-content" ng-if="!vm.hasPermission">
+    <div ng-include="'templates/rongzi-common/mask.html'">
+    </div>
   </div>
 
 <div class="detail-bottom">

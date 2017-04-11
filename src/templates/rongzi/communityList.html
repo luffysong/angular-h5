@@ -67,25 +67,30 @@
     </div>
   </div>
 
-  <div class="special-item green-color" ng-if="vm.end.length > 0" ng-repeat="item in vm.end">
-    <div class="special-list-border yellowdotted-color">
-      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
-      <div class="special-info">
-        <div class="special-name gray-color">
-          {{item.name}}
-        </div>
-        <div class="special-arrow green-arrow"></div>
-        <div class="special-content">
-          {{item.intro}}
-        </div>
-        <div class="special-end">
-          <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日'"></b></span>&nbsp;&nbsp;&nbsp;
-          <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"><b>查看详情 ></b></span>
+  <ul infinite-scroll='vm.getFinishedData(0)' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+    <li  ng-if="vm.end" ng-repeat=" item in vm.end track by $index" >
+      <div class="special-item green-color" >
+        <div class="special-list-border yellowdotted-color">
+          <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+          <div class="special-info">
+            <div class="special-name gray-color">
+              {{item.name}}
+            </div>
+            <div class="special-arrow green-arrow"></div>
+            <div class="special-content">
+              {{item.intro}}
+            </div>
+            <div class="special-end">
+              <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日'"></b></span>&nbsp;&nbsp;&nbsp;
+              <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"><b>查看详情 ></b></span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-
+      </li>
+    </ul>
+    <footer ng-if="vm.busy && !vm.finish &&  vm.page">加载更多...</footer>
+    <footer ng-if="vm.finish">全部内容加载完毕</footer>
   <div class="rongzi-split-block" >
   </div>
 </div>
@@ -154,25 +159,30 @@
     </div>
   </div>
 
-  <div class="special-item green-color" ng-if="vm.end.length > 0" ng-repeat="item in vm.end">
-    <div class="special-list-border yellowdotted-color">
-      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
-      <div class="special-info">
-        <div class="special-name gray-color">
-          {{item.name}}
-        </div>
-        <div class="special-arrow green-arrow"></div>
-        <div class="special-content">
-          {{item.intro}}
-        </div>
-        <div class="special-end">
-          <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日'"></b></span>&nbsp;&nbsp;&nbsp;
-          <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"><b>查看详情 ></b></span>
+  <ul infinite-scroll='vm.getFinishedData(1)' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+    <li  ng-if="vm.end" ng-repeat=" item in vm.end track by $index" >
+      <div class="special-item green-color" >
+        <div class="special-list-border yellowdotted-color">
+          <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+          <div class="special-info">
+            <div class="special-name gray-color">
+              {{item.name}}
+            </div>
+            <div class="special-arrow green-arrow"></div>
+            <div class="special-content">
+              {{item.intro}}
+            </div>
+            <div class="special-end">
+              <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日'"></b></span>&nbsp;&nbsp;&nbsp;
+              <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"><b>查看详情 ></b></span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-
+  </li>
+  </ul>
+  <footer ng-if="vm.busy && !vm.finish &&  vm.page">加载更多...</footer>
+  <footer ng-if="vm.finish">全部内容加载完毕</footer>
   <div class="rongzi-split-block" >
   </div>
 </div>

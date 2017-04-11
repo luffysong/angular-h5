@@ -43,10 +43,10 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         RongziService.getDetail(parseInt($stateParams.id))
             .then(function setDetail(data) {
                     if (data.data) {
-                        vm.result = data.data.data;
-                        if (data.data.sessions) {
-                            vm.ABefore = data.data.sessions.ABefore;
-                            vm.AAfter = data.data.sessions.AAfter;
+                        vm.result = data.data;
+                        if (data.data.projects) {
+                            vm.ABefore = data.data.projects.ABefore;
+                            vm.AAfter = data.data.projects.AAfter;
                         }
                     }
                 }).catch(fail);

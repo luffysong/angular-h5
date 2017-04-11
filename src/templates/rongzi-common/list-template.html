@@ -1,22 +1,75 @@
-<div class="special-item green-color">
-  <div class="special-list-border green-color">
-    <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05093313/fzo1epnn95opm68j.png)"></div>
-    <div class="special-info">
-      <div class="special-name green-color">
-        红杉资本专场
-      </div>
-      <!--
-      <div class="special-arrow"></div>-->
-      <div class="special-provider">前程会提供</div>
-      <div class="special-phaseType green-color">
-        <span>A轮</span>&nbsp;&nbsp;<span>企业服务</span>
-      </div>
-      <div class="special-content">
-        红杉资本全球执行合伙人，携程旅行网和如家连锁酒店创始人。榜单中排名第一的华人投资者。
-      </div>
-      <div class="special-highlight">
-        亮点&nbsp;&nbsp;2万+企业及用户 食品行业经验丰富
+
+<div class="org-a-before" ng-show="vm.Abefore">
+  <div class="special-item green-color" ng-if="vm.ABefore" ng-repeat="item in vm.ABefore">
+    <div class="special-list-border green-color">
+      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+      <div class="special-info">
+        <div class="special-name green-color">
+          {{item.name}}
+        </div>
+        <div class="special-provider" ng-if="item.provider">{{item.provider}}&nbsp;提供</div>
+        <div class="special-phaseType green-color">
+          <span ng-if="item.phase">{{item.phase}}</span>&nbsp;&nbsp;
+          <span ng-if="item.industry">{{item.industry}}</span>
+        </div>
+        <div class="special-content">
+          {{item.brief}}
+        </div>
+        <div class="special-highlight" ng-if="item.advantage">
+          亮点&nbsp;{{item.advantage}}
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+
+<div class="org-a-before" ng-show="vm.Aafter">
+  <div class="special-item green-color" ng-if="vm.AAfter" ng-repeat="item in vm.AAfter">
+    <div class="special-list-border green-color">
+      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+      <div class="special-info">
+        <div class="special-name green-color">
+          {{item.name}}
+        </div>
+        <div class="special-provider" ng-if="item.provider">{{item.provider}}&nbsp;提供</div>
+        <div class="special-phaseType green-color">
+          <span ng-if="item.phase">{{item.phase}}</span>&nbsp;&nbsp;
+          <span ng-if="item.industry">{{item.industry}}</span>
+        </div>
+        <div class="special-content">
+          {{item.brief}}
+        </div>
+        <div class="special-highlight" ng-if="item.advantage">
+          亮点&nbsp;{{item.advantage}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="special-item green-color" ng-if="vm.associations" ng-repeat="item in vm.associations">
+    <div class="special-list-border green-color">
+      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+      <div class="special-info">
+        <div class="special-name green-color">
+          {{item.name}}
+        </div>
+        <div class="special-provider" ng-if="item.provider">{{item.provider}}&nbsp;提供</div>
+        <div class="special-phaseType green-color">
+          <span ng-if="item.phase">{{item.phase}}</span>&nbsp;&nbsp;
+          <span ng-if="item.industry">{{item.industry}}</span>
+        </div>
+        <div class="special-content">
+          {{item.brief}}
+        </div>
+        <div class="special-highlight" ng-if="item.advantage">
+          亮点&nbsp;{{item.advantage}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail-nodata" ng-show="!vm.AAfter || !vm.ABefore || !vm.associations">
+      虚位以待，请联系客服。
+  </div>

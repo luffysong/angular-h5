@@ -6,6 +6,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
   RongziService, FindService, $state, UserService, ErrorService, hybrid) {
     var vm = this;
     vm.subscribe = subscribe;
+    vm.getFinishedData = getFinishedData;
     vm.needApp = true;
     vm.investRole = false;
     vm.hasEmail = false;
@@ -14,6 +15,11 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     vm.tabChange = tabChange;
     vm.Aafter = false;
     vm.Abefore = true;
+
+    //分页处理
+    vm.page = 0;
+    vm.busy = false;
+    vm.end = [];
 
     init();
     function init() {
@@ -24,7 +30,6 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
 
         loading.hide('findLoading');
         initUser();
-        getFinishedData();
         initData();
         initWeixin();
         initPxLoader();
@@ -50,12 +55,20 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         if ('AAfter' === id) {
             vm.Aafter = true;
             vm.Abefore = false;
+            resetData();
             getFinishedData('1');
         } else if (('ABefore') === id) {
             vm.Aafter = false;
             vm.Abefore = true;
+            resetData();
             getFinishedData('0');
         }
+    }
+
+    function resetData() {
+        vm.page = 0;
+        vm.busy = false;
+        vm.end = [];
     }
 
     function initPxLoader() {
@@ -85,14 +98,26 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     }
 
     function getFinishedData(projectCategory) {
+        if (vm.busy)return;
+        vm.busy = true;
         var senddata = {
             category: parseInt($stateParams.category),
             projectCategory: projectCategory ? projectCategory : 0,
+            page: vm.page + 1,
+            pageSize:5,
         };
         RongziService.getFinishedData(senddata)
-            .then(function setCommunity(data) {
-                    if (data.data) {
-                        vm.end = data.data.data;
+            .then(function setCommunity(response) {
+                    vm.end = vm.end.concat(response.data.data);
+                    if (response.data.totalPages) {
+                        vm.page = response.data.page || 0;
+
+                        if (response.data.totalPages !== vm.page) {
+                            vm.busy = false;
+                        } else {
+                            vm.finish = true;
+                            vm.more = true;
+                        }
                     }
                 }).catch(fail);
     }
