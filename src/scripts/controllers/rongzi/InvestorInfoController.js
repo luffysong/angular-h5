@@ -14,6 +14,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     vm.more = false;
     vm.displayMore = displayMore;
     vm.investors = [];
+    vm.names = [];
     init();
 
     function init() {
@@ -61,6 +62,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
                     if (data.data) {
                         vm.result = data.data;
                         vm.projects = data.data.projects;
+                        vm.names = data.data.name.split('');
                     }
                 }).catch(fail);
     }

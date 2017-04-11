@@ -4,11 +4,14 @@
       <img src="/styles/images/rongzi/rongzi-logo.png">
     </div>
     <div class="rongzi-common-textbtn-investor">
-      <img src="/styles/images/rongzi/investor-text.png" />
+      <img src="/styles/images/rongzi/top-name-bg.png" class="wd-80">
+      <div class="top-name">
+        <span ng-repeat="item in vm.names" class="name-bg-green">{{item}}</span>
+      </div>
     </div>
 
-    <div class="rongzi-common-text mg-t">
-      <p ng-if="vm.result.ruleDescription" ng-bind="vm.result.ruleDescription">
+    <div class="rongzi-common-text">
+      <p ng-if="vm.result.intro" ng-bind="vm.result.intro">
       </p>
       <p ng-if="!vm.result.ruleDescription">
         投资圈中冉冉升起的明星们，或锋芒初露，或成名已久，他们融合了对趋势的判断、对市场的把握、对创业者的观察、对项目的理解……形成了自己独有的投资哲学。
@@ -17,7 +20,11 @@
     </div>
 
     <div class="investor-remind-btn">
-      开场提醒
+      <a href="javascript:void(0)" id="investor-openApp"
+          ng-click="vm.subscribe(i,$event)">
+        <b ng-if="vm.result.remind === 1">开场提醒</b>
+        <b ng-if="vm.result.remind === 0">取消开场提醒</b>
+      </a>
     </div>
   </div>
 

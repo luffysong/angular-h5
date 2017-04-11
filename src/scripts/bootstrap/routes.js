@@ -443,7 +443,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('rongzi.investorInfo', {
-        url:'/investorInfo?{category}&{id}',
+        url:'/investorInfo?{category}&{id}&{debug}',
         controllerAs: 'vm',
         controller: 'InvestorInfoController',
         templateUrl: 'templates/rongzi/investorInfo.html',
