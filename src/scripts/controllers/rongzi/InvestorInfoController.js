@@ -36,7 +36,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         window.WEIXINSHARE = {
             shareTitle: '【创投助手·融资季】明星投资人方爱之独家项目集，等你来掐尖儿。',
             shareUrl: window.location.href,
-            shareImg: vm.result.logo,
+            shareImg: '{vm.result.logo}',
             shareDesc: '明星携被投项目加入，每周二、三更新两场。',
         };
 
@@ -62,7 +62,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
                     if (data.data) {
                         vm.result = data.data;
                         vm.names = data.data.name.split('');
-                        if(data.data,projects) {
+                        if(data.data.projects) {
                             vm.projects = data.data.projects;
                             vm.noData = false;
                         }
