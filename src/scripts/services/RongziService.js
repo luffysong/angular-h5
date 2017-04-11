@@ -108,4 +108,12 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
         return $http.get(BASE_URL + '/session/' + id);
     };
 
+    this.getOrgLike = function () {
+        return $http.get(BASE_URL + '/ranking_list/org?');
+    };
+
+    this.getComLike = function () {
+        return $http.get(BASE_URL + '/ranking_list/startup_project?');
+    };
+
 });

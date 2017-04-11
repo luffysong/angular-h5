@@ -1,0 +1,17 @@
+<div class="rongzi-common-backg community-wrapper" ng-class="{true:'paddTopBar',false:''}[!vm.needApp]">
+  <div  ng-include="'templates/rongzi-common/top-like.html'"
+      ng-init=" topdata = 'org' ">
+  </div>
+
+  <div class="organization-content">
+    <div ng-include="'templates/rongzi-common/like-list.html'"></div>
+  </div>
+
+  <div class="rongzi-split-block">
+    </div>
+
+  <div ng-include="'templates/rongzi-common/bottom.html'" ng-init="item = 'org'">
+  </div>
+
+  <div ng-include="'templates/rongzi/meiqia.html'"></div>
+</div>

@@ -15,6 +15,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     vm.tabChange = tabChange;
     vm.Aafter = false;
     vm.Abefore = true;
+    vm.category = $stateParams.category;
 
     //分页处理
     vm.page = 0;
