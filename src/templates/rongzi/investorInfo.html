@@ -31,9 +31,9 @@
       <div class="special-state orange-color">已投项目</div>
       <div class="special-item green-color" ng-repeat="item in vm.projects.invested">
         <div class="special-list-border orange-color">
-          <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+          <div class="special-logo green-color" ng-click="vm.openApp(item.ccid)" style="background-image: url({{item.logo}})"></div>
           <div class="special-info">
-            <div class="special-name orange-color" ng-click="vm.openApp()">
+            <div class="special-name orange-color" ng-click="vm.openApp(item.ccid)">
               {{item.name}}
             </div>
             <div class="special-arrow"></div>
@@ -54,9 +54,9 @@
       <div class="special-state green-color">推荐项目</div>
       <div class="special-item meat-color" ng-repeat="item in vm.projects.invested">
         <div class="special-list-border green-color">
-          <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+          <div class="special-logo green-color" ng-click="vm.openApp(item.ccid)" style="background-image: url({{item.logo}})"></div>
           <div class="special-info">
-            <div class="special-name green-color">
+            <div class="special-name green-color" ng-click="vm.openApp(item.ccid)">
               {{item.name}}
             </div>
             <div class="special-arrow-meat"></div>

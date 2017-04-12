@@ -194,9 +194,11 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
         });
     }
 
-    function openApp() {
+    function openApp(ccid) {
         if (!hybrid.isInApp) {
             defaultModal();
+        } else if (hybrid.isInApp && UserService.getUID() && ccid) {
+            hybrid.open('crmCompany/' + ccid);
         }
 
     }

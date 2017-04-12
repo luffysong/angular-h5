@@ -2,9 +2,9 @@
 <div class="org-a-before" ng-show="vm.Abefore">
   <div class="special-item green-color" ng-if="vm.ABefore" ng-repeat="item in vm.ABefore">
     <div class="special-list-border green-color">
-      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+      <div class="special-logo green-color" ng-click="vm.openApp(item.ccid)" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
-        <div class="special-name green-color">
+        <div class="special-name green-color" ng-click="vm.openApp(item.ccid)">
           {{item.name}}
         </div>
         <div class="special-provider" ng-if="item.provider">{{item.provider}}&nbsp;提供</div>
@@ -27,9 +27,9 @@
 <div class="org-a-before" ng-show="vm.Aafter">
   <div class="special-item green-color" ng-if="vm.AAfter" ng-repeat="item in vm.AAfter">
     <div class="special-list-border green-color">
-      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+      <div class="special-logo green-color" ng-click="vm.openApp(item.ccid)" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
-        <div class="special-name green-color">
+        <div class="special-name green-color" ng-click="vm.openApp(item.ccid)">
           {{item.name}}
         </div>
         <div class="special-provider" ng-if="item.provider">{{item.provider}}&nbsp;提供</div>
@@ -50,9 +50,9 @@
 
   <div class="special-item green-color" ng-if="vm.associations" ng-repeat="item in vm.associations">
     <div class="special-list-border green-color">
-      <div class="special-logo green-color" ng-click="vm.openApp()" style="background-image: url({{item.logo}})"></div>
+      <div class="special-logo green-color" ng-click="vm.openApp(item.ccid)" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
-        <div class="special-name green-color">
+        <div class="special-name green-color" ng-click="vm.openApp(item.ccid)">
           {{item.name}}
         </div>
         <div class="special-provider" ng-if="item.provider">{{item.provider}}&nbsp;提供</div>
