@@ -574,7 +574,7 @@
       .rongzi-common-textbtn-investor,
       .rongzi-common-logo-enroll,
       .rongzi-common-textbtn-enroll,
-      .rongzi-common-textbtn-community{
+      .rongzi-common-textbtn-community,.rongzi-common-mask{
         background-size: 414px 100%;
       }
   }
@@ -590,7 +590,7 @@
           .rongzi-common-textbtn-investor,
           .rongzi-common-logo-enroll,
           .rongzi-common-textbtn-enroll,
-          .rongzi-common-textbtn-community{
+          .rongzi-common-textbtn-community,.rongzi-common-mask{
             background-size: 375px 100%;
           }
       }
@@ -606,7 +606,7 @@
         .rongzi-common-textbtn-investor,
         .rongzi-common-logo-enroll,
         .rongzi-common-textbtn-enroll,
-        .rongzi-common-textbtn-community{
+        .rongzi-common-textbtn-community,.rongzi-common-mask{
           background-size: 320px 100%;
         }
     }
@@ -817,10 +817,12 @@
 .rongzi-common-mask {
   position: fixed;
   width: 100%;
-  height: 90%;
+  height: 600px;
   left: 0;
   top: 0;
-  background-color: rgba(19,19,20,.9);
+  //background-color: rgba(19,19,20,.9);
+  background: url('images/rongzi/maskbg.jpg') no-repeat center;
+  background-size: 100% 100%;
   text-align: center;
   z-index: 101;
   color: #f8ebd6;
