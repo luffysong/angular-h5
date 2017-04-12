@@ -49,11 +49,11 @@
   <div class="special-item green-color"  ng-if="vm.goodSchoolCompany.startSessions" ng-repeat=" item in vm.goodSchoolCompany.startSessions">
     <div class="special-list-border yellowdotted-color">
       <div class="special-logo green-color"
-        ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"
+        ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'start'})"
       style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
         <div class="special-name yellowdotted-color"
-        ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})">
+        ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'start'})">
           {{item.name}}
         </div>
         <div class="special-arrow green-arrow"></div>

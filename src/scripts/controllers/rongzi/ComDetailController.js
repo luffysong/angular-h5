@@ -77,6 +77,7 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
                     }
                     vm.canWeChatShare = data.data.canWeChatShare;
                     vm.hasPermission = data.data.hasPermission;
+                    vm.remind = data.data.remind;
                 }).catch(fail);
         }
     }

@@ -52,13 +52,13 @@
     <div class="special-list-border orange-color">
       <div class="special-logo green-color" ng-if="item.logo"
       style="background-image: url({{item.logo}})"
-       ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name})"></div>
+       ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name, state: 'start'})"></div>
 
       <div class="special-logo green-color" ng-if="!item.logo"
        style="background-image: url('/styles/images/rongzi/df-logo.png')"
-        ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name})"></div>
+        ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name, state: 'start'})"></div>
       <div class="special-info">
-        <div class="special-name orange-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name})">
+        <div class="special-name orange-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name, state: 'start'})">
           {{item.name}}
         </div>
         <div class="special-arrow"></div>

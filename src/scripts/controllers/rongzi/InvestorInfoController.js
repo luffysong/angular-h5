@@ -64,6 +64,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
             .then(function (data) {
                     if (data.data) {
                         vm.result = data.data;
+                        vm.name = data.data.name;
                         vm.names = data.data.name.split('');
                     }
                 }).catch(fail);
@@ -76,6 +77,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
                     }
                     vm.canWeChatShare = data.data.canWeChatShare;
                     vm.hasPermission = data.data.hasPermission;
+                    vm.remind = data.data.remind;
                 }).catch(fail);
         }
     }
