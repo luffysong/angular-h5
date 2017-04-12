@@ -50,6 +50,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         window.WEIXINSHARE = {
             shareTitle: '【创投助手·融资季】' + $stateParams.name + '在融项目提前看，紧跟TOP机构不掉队！',
             shareUrl: window.location.href,
+            krtou: 'weChatShare/' + $stateParams.id,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '20家顶级投资机构被投项目在融，每周一周四更新，好项目触手可得！',
         };

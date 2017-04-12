@@ -50,6 +50,7 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
         window.WEIXINSHARE = {
             shareTitle: '【创投助手·融资季】' + $stateParams.name + '优质项目输出，提前来对接！',
             shareUrl: window.location.href,
+            krtou: 'weChatShare/' + $stateParams.id,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '每周2个创业社群精品项目选送，等你来约谈。',
         };
