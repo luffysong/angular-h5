@@ -60,18 +60,22 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     function initData() {
-        RongziService.getInvestorInfo($stateParams.id)
+        RongziService.getBaseInfo($stateParams.id)
             .then(function (data) {
                     if (data.data) {
                         vm.result = data.data;
                         vm.names = data.data.name.split('');
-                        vm.canWeChatShare = data.data.canWeChatShare;
-                        if(data.data.projects) {
-                            vm.projects = data.data.projects;
-                            vm.noData = false;
-                        }
                     }
                 }).catch(fail);
+        if (UserService.getUID()){
+            RongziService.getProjectList($stateParams.id)
+                .then(function (data) {
+                    vm.projects = data.data.projects;
+                    vm.canWeChatShare = data.data.canWeChatShare;
+                    vm.noData = false;
+                    vm.hasPermission = data.data.hasPermission;
+                }).catch(fail);
+        }
     }
 
     function initUser() {

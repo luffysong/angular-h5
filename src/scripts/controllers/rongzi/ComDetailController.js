@@ -60,18 +60,24 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
     }
 
     function initData() {
-        if (parseInt($stateParams.id) && UserService.getUID()) {
-            RongziService.getDetail(parseInt($stateParams.id))
+        if (parseInt($stateParams.id)) {
+            RongziService.getBaseInfo($stateParams.id)
                 .then(function setDetail(data) {
                         if (data.data) {
                             vm.result = data.data;
-                            vm.hasPermission = data.data.hasPermission;
-                            vm.canWeChatShare = data.data.canWeChatShare;
-                            if (data.data.projects) {
-                                vm.associations = data.data.projects.associations;
-                            }
                         }
                     }).catch(fail);
+        }
+
+        if (UserService.getUID()){
+            RongziService.getProjectList($stateParams.id)
+                .then(function (data) {
+                    if (data.data.projects) {
+                        vm.associations = data.data.projects.associations;
+                    }
+                    vm.canWeChatShare = data.data.canWeChatShare;
+                    vm.hasPermission = data.data.hasPermission;
+                }).catch(fail);
         }
     }
 
