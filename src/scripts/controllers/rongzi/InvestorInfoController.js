@@ -248,7 +248,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         if (!hybrid.isInApp) {
             defaultModal();
         } else if (hybrid.isInApp && UserService.getUID() && ccid) {
-            hybrid.open('investor/' + ccid);
+            hybrid.open('crmCompany/' + ccid);
         }
 
     }
