@@ -102,9 +102,9 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
         item.hasEmail = vm.hasEmail;
         if (!hybrid.isInApp) {
             defaultModal();
-        }else if (hybrid.isInApp && vm.result.remind === 1 && UserService.getUID()) {
+        }else if (hybrid.isInApp && vm.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
-        }else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
+        }else if (UserService.getUID() && vm.remind === 0 && UserService.getUID()) {
             cancelSubscribeAction(item);
         } else {
             window.location.href = 'https://passport.36kr.com/pages';
@@ -164,7 +164,7 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
             item.cancelMainRemind = false;
             item.title = '设置开场提醒成功！';
             modalOpen(item);
-            vm.result.remind = 0;
+            vm.remind = 0;
         })
         .catch(fail);
     }
@@ -182,7 +182,7 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
             item.hasEmail = true;
             item.cancelRemindtxt = '后续新上的' + $stateParams.name + '专场将不会有专场提醒，现已有排期的专场仍会提醒！';
             modalOpen(item);
-            vm.result.remind = 1;
+            vm.remind = 1;
         })
         .catch(fail);
     }
