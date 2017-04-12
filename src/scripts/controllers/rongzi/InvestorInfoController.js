@@ -70,9 +70,11 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         if (UserService.getUID()){
             RongziService.getProjectList($stateParams.id)
                 .then(function (data) {
-                    vm.projects = data.data.projects;
+                    if(data.data.projects) {
+                        vm.projects = data.data.projects;
+                        vm.noData = false;
+                    }
                     vm.canWeChatShare = data.data.canWeChatShare;
-                    vm.noData = false;
                     vm.hasPermission = data.data.hasPermission;
                 }).catch(fail);
         }
