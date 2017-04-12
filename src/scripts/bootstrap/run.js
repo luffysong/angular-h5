@@ -86,7 +86,7 @@ angular.module('defaultApp')
             if (window.sa) {
                 var uid = UserService.getUID();
                 if (uid) {
-                    sa.login(uid);
+                    sa.identify(uid);
                 }
             }
         });
