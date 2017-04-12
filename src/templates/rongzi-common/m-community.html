@@ -17,7 +17,7 @@
         <div class="item" ng-repeat="obj in vm.sessions.assc.list">
           <div class="border-bg">
             <div class="logo-border-yellow">
-              <div class="logo" ng-click="vm.openApp()" ng-if="obj.logo" style="background-image: url({{obj.logo}})"></div>
+              <div class="logo" ng-if="obj.logo" ui-sref="rongzi.comdetail({id: obj.id, name: obj.name,category: obj.category})" style="background-image: url({{obj.logo}})"></div>
             </div>
           </div>
           <div class="org-name yellow"><span ng-if="obj.name">{{obj.name}}</span></div>
