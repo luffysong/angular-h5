@@ -1,6 +1,15 @@
 <a name="1.26.27"></a>
 ## [1.26.27](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.25...v1.26.27) (2017-04-12)
 
+### Bug Fixes
+
+* 首页推荐项目添加详情页链接 ([b4ede21](f2e/kr-rong-h5/commits/b4ede21))
+
+
+
+<a name="1.26.26"></a>
+## [1.26.26](f2e/kr-rong-h5/compare/v1.26.25...v1.26.26) (2017-04-11)
+
 
 ### Bug Fixes
 
@@ -1317,6 +1326,3 @@
 * 添加机构无数据时的提示 ([20b2922](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/20b2922))
 * 输入框使用右对齐的方式 ([dd8b4a9](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/dd8b4a9))
 * 邮箱存在则不展示 ([80346d5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/80346d5))
-
-
-

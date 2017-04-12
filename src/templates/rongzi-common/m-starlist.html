@@ -13,7 +13,7 @@
         <div class="item" ng-repeat="obj in vm.starList" ng-if="vm.starList.length">
           <div class="border-bg">
             <div class="logo-border" ng-if="obj.logo">
-              <div class="logo" ng-click="vm.openApp()"
+              <div class="logo" ui-sref="rongzi.share({id: obj.id})"
               style="background-image: url({{obj.logo}});background-size: contain;"
               ></div>
             </div>
@@ -21,7 +21,7 @@
             ></div>
           </div>
           <div class="org-name">
-            <span ng-if="obj.name">{{obj.name}}</span>
+            <span ng-if="obj.name" ui-sref="rongzi.share({id: obj.id})">{{obj.name}}</span>
             <span ng-if="!obj.name">虚位以待</span>
           </div>
         </div>
