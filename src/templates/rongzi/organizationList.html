@@ -76,7 +76,7 @@
             {{item.intro}}
           </div>
           <div class="special-end">
-            <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日'"></b></span>&nbsp;&nbsp;&nbsp;
+            <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日 a hh:mm'"></b></span>&nbsp;&nbsp;&nbsp;
             <span class="orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category,state:'end'})"><b>查看详情 ></b></span>
           </div>
         </div>
