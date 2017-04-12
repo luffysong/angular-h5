@@ -24,8 +24,8 @@
       <div class="rongzi-common-btn" ng-if="vm.state === 'start'">
         <a href="javascript:void(0)" class="star-btn" id="org-openApp"
             ng-click="vm.subscribe(i,$event)">
-            <b ng-if="vm.remind === 1 && vm.needApp">下载创投助手，订阅{{vm.name}}</b>
-            <b ng-if="vm.remind === 1 && !vm.needApp">订阅{{vm.name}}</b>
+            <b ng-if="vm.needApp">下载创投助手，订阅{{vm.name}}</b>
+            <b ng-if="!vm.needApp">订阅{{vm.name}}</b>
           <b ng-if="vm.remind === 0">取消开场提醒</b>
         </a>
       </div>
