@@ -36,7 +36,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
 
     function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】明星投资人方爱之独家项目集，等你来掐尖儿。',
+            shareTitle: '【创投助手·融资季】明星投资人'+ $stateParams.name +'独家项目集，等你来掐尖儿。',
             shareUrl: window.location.href,
             krtou: 'weChatShare/' + $stateParams.id,
             shareImg: '{vm.result.logo}',
@@ -128,10 +128,8 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         item = item ? item : {};
         item.investRole = vm.investRole;
         item.hasEmail = vm.hasEmail;
-        if (!hybrid.isInApp) {
-            //document.location.href = vm.openAppUrl;
-            defaultModal();
-        }else if (hybrid.isInApp && vm.remind === 1 && UserService.getUID()) {
+        console.log()
+        if (vm.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
         }else if (UserService.getUID() && vm.remind === 0 && UserService.getUID()) {
             cancelSubscribeAction(item);
