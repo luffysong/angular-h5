@@ -97,4 +97,4 @@
   </div>
 </div>
   <footer ng-if="vm.busy && vm.page && !vm.finish">正在加载更多...</footer>
-  <footer>全部内容加载完毕</footer>
+  <footer ng-if="vm.finish">全部内容加载完毕</footer>

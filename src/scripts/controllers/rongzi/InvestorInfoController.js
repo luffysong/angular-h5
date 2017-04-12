@@ -128,7 +128,6 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         item = item ? item : {};
         item.investRole = vm.investRole;
         item.hasEmail = vm.hasEmail;
-        console.log()
         if (vm.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
         }else if (UserService.getUID() && vm.remind === 0 && UserService.getUID()) {
