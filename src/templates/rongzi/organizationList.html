@@ -96,7 +96,7 @@
 <!--a轮后-->
 
 <div class="org-a-after" ng-show="vm.Aafter">
-  <div class="rongzi-split-block" >
+  <div class="rongzi-split-block" ng-if="vm.AAfter.goingSessions.length > 0">
   </div>
 
   <div class="special-item yellow-color" ng-if="vm.AAfter.goingSessions.length" ng-repeat=" item in vm.AAfter.goingSessions">
