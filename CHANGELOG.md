@@ -1,3 +1,13 @@
+<a name="1.28.2"></a>
+## [1.28.2](f2e/kr-rong-h5/compare/v1.28.1...v1.28.2) (2017-04-13)
+
+
+### Bug Fixes
+
+* 专场状态标签添加展示判断 ([3a4b1c8](f2e/kr-rong-h5/commits/3a4b1c8))
+
+
+
 <a name="1.28.1"></a>
 ## [1.28.1](f2e/kr-rong-h5/compare/v1.28.0...v1.28.1) (2017-04-13)
 
