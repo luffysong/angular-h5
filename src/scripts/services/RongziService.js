@@ -107,7 +107,7 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
     //获取详情页项目列表
     this.getProjectList = function (id) {
         // return $http.get(BASE_URL + '/session/' + id + '/projects');
-        return $http.get(BASE_URL + '/session/' + id + '/projects' + '?debug=true');
+        return $http.get(BASE_URL + '/session/' + id + '/projects');
     };
 
     this.getOrgLike = function () {
