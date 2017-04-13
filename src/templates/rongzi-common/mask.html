@@ -17,15 +17,11 @@
     <div class="weixin" ng-click="vm.shareWechat()">分享至微信</div>
   </div>
 
-  <div class="share-weixin" ng-if="!vm.needApp && vm.canWeChatShare && vm.state === 'end'">
+  <div class="share-weixin" ng-if="!vm.needApp">
     <p>请下载/打开创投助手</p>
     <p>立刻查看所有优质项目</p>
-    <div class="weixin" id="downloadMask">下载/打开创投助手</div>
+    <div class="weixin" ng-click="vm.downloadMask()">下载/打开创投助手</div>
   </div>
-<script>
-
-
-</script>
   <!--
   <div class="or">或</div>
   <div class="share-investor">

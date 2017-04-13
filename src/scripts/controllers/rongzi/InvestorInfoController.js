@@ -17,6 +17,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     vm.names = [];
     vm.noData = true;
     vm.shareWechat = shareWechat;
+    vm.downloadMask = downloadMask;
     init();
 
     function init() {
@@ -293,6 +294,10 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         } else if (hybrid.isInApp && UserService.getUID()) {
             hybrid.open('weChatShare/' + $stateParams.id);
         }
+    }
+
+    function downloadMask() {
+        window.location.href = vm.openAppUrl;
     }
 
 }

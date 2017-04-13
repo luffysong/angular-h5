@@ -16,6 +16,7 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
     vm.hasEmail = false;
     vm.openApp = openApp;
     vm.openAppUrl;
+    vm.downloadMask = downloadMask;
     init();
 
     function init() {
@@ -274,5 +275,9 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
         } else if (hybrid.isInApp && UserService.getUID()) {
             hybrid.open('weChatShare/' + $stateParams.id);
         }
+    }
+
+    function downloadMask() {
+        window.location.href = vm.openAppUrl;
     }
 }
