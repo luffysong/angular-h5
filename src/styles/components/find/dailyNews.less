@@ -33,7 +33,7 @@
     }
 
     .dailyNews-select-bg {
-        transition: display ease .3s;
+        transition: display linear .3s;
         z-index: 1000;
         background: #000;
         opacity: 0.5;
@@ -45,7 +45,7 @@
         left: 0;
     }
     .dailyNews-select-box {
-        transition: right ease-in .3s;
+        transition: right linear .3s;
         position: fixed;
         top: 0;
         right: 0;
@@ -58,7 +58,7 @@
             background-color: #fff;
             padding: 18px 10px 49px;
             height: 100%;
-            overflow: scroll;
+            overflow-y: scroll;
             .dailyNews-select-line {
                 height: 1px;
                 width: 100%;
@@ -132,7 +132,7 @@
             }
         }
         .pop-bottom {
-            transition: right ease-in .3s;
+            transition: right linear .3s;
             width: 84%;
             height: 49px;
             background: #464E58;
