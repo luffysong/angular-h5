@@ -46,7 +46,7 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
 
     function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】' + vm.name + '优质项目输出，马上来对接！',
+            shareTitle: '【创投助手·融资季】' + '{vm.name}' + '优质项目输出，马上来对接！',
             shareUrl: window.location.href,
             krtou: 'weChatShare/' + $stateParams.id,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',

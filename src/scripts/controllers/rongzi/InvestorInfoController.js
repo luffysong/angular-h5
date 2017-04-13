@@ -36,10 +36,10 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
 
     function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】明星投资人' + vm.name + '独家项目集，等你来掐尖儿。',
+            shareTitle: '【创投助手·融资季】明星投资人' + '{vm.name}' + '独家项目集，等你来掐尖儿。',
             shareUrl: window.location.href,
             krtou: 'weChatShare/' + $stateParams.id,
-            shareImg: '{vm.result.logo}',
+            shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '明星携被投项目加入，每周二、三更新两场。',
         };
 
