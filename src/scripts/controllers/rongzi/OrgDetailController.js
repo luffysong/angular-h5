@@ -14,6 +14,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
     vm.subscribe = subscribe;
     vm.needApp = true;
     vm.hasEmail = false;
+    vm.isDisplayTab = true;
     vm.openApp = openApp;
     vm.openAppUrl;
     init();
@@ -76,6 +77,10 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
                     if (data.data.projects) {
                         vm.ABefore = data.data.projects.ABefore;
                         vm.AAfter = data.data.projects.AAfter;
+                        if (vm.ABefore.length === 0 ||
+                            vm.AAfter.length === 0) {
+                            vm.isDisplayTab = false;
+                        }
                     }
 
                     vm.canWeChatShare = data.data.canWeChatShare;
