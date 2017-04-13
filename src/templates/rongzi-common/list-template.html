@@ -70,15 +70,15 @@
     </div>
   </div>
 
-  <div class="detail-nodata" ng-show="vm.Abefore && vm.Abefore.length < 0">
+  <div class="detail-nodata" ng-show="vm.Abefore.length <= 0">
       虚位以待，请联系客服。
   </div>
 
 
-  <div class="detail-nodata" ng-show="vm.Aafter && vm.AAfter.length < 0">
+  <div class="detail-nodata" ng-show="vm.AAfter.length <= 0">
       虚位以待，请联系客服。
   </div>
 
-  <div class="detail-nodata" ng-show="!vm.associations && !vm.Abefore && !vm.Aafter">
+  <div class="detail-nodata" ng-show="vm.associations.length <= 0">
       虚位以待，请联系客服。
   </div>
