@@ -47,7 +47,7 @@
       </div>
     </div>
   </div>
-  <div class="special-state orange-color">即将开始</div>
+  <div class="special-state orange-color" ng-show="vm.result.sessions.investors.startSessions.length">即将开始</div>
   <div class="special-item green-color" ng-repeat="item in vm.result.sessions.investors.startSessions">
     <div class="special-list-border orange-color">
       <div class="special-logo green-color" ng-if="item.logo"
@@ -69,8 +69,8 @@
       </div>
     </div>
   </div>
-  <div class="site">虚位以待，请联系客服</div>
-  <div class="special-state">已完结</div>
+  <div class="site" ng-show="vm.result.sessions.investors.startSessions.length">虚位以待，请联系客服</div>
+  <div class="special-state" ng-show="vm.finished.length">已完结</div>
 
   <div class="special-item green-color" ng-repeat="item in vm.finished">
     <div class="special-list-border gray-color">
@@ -96,5 +96,4 @@
     </div>
   </div>
 </div>
-  <footer ng-if="vm.busy && vm.page && !vm.finish">正在加载更多...</footer>
   <footer ng-if="vm.finish">全部内容加载完毕</footer>
