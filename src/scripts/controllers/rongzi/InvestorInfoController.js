@@ -102,7 +102,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         var krdata = {};
         krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investor?id=' + $stateParams.id + '&category=' + $stateParams.category + '","currentRoom":"0"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investorInfo?id=' + $stateParams.id + '&category=' + $stateParams.category + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {
                 if (err) {
