@@ -18,8 +18,8 @@
     <div class="investor-remind-btn" ng-if="vm.state === 'start'">
       <a href="javascript:void(0)" id="investor-openApp"
           ng-click="vm.subscribe(i,$event)">
-          <b ng-if="!vm.needApp && vm.remind">下载创投助手，订阅{{vm.name}}</b>
-          <b ng-if="vm.needApp && vm.remind">订阅{{vm.name}}</b>
+          <b ng-if="!vm.needApp && vm.remind !== 0">下载创投助手，订阅{{vm.name}}</b>
+          <b ng-if="vm.needApp && vm.remind !== 0">订阅{{vm.name}}</b>
           <b ng-if="vm.remind === 0">取消开场提醒</b>
       </a>
     </div>
