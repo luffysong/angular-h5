@@ -52,7 +52,7 @@
   font-size: 14px;
   font-weight: bold;
   line-height: 35px;
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
   color:#fffbdd;
   position: relative;
@@ -93,13 +93,14 @@
 
 //tag条
 .rongzi-tag{
-  width:25%;
-  height: 30px;
+  width:20%;
+  height: 25px;
   color:#fffbdd;
   left: 0px;
+  font-size: 12px;
   margin-left: 0px;
-  margin-top: 15px;
-  line-height: 30px;
+  margin-top: 18px;
+  line-height: 25px;
   border-top-right-radius:15px;
   border-bottom-right-radius: 15px;
 }
@@ -661,17 +662,22 @@
     .special-provider{
       right: 20px;
       top: 13px;
-      color: #ffcc55;
+      color: @yellowBorder;
       font-size: 12px;
       font-weight: bold;
     }
     .special-phaseType{
       span{
         display: inline-block;
-        border: 1px solid @green;
-        padding: 0 10px;
+        padding: 0 5px;
         font-weight: bold;
         border-radius: 5px;
+      }
+      .border-green{
+          border: 1px solid @green;
+      }
+      .border-orange{
+        border: 1px solid @yellowBorder;
       }
     }
     .special-highlight{
@@ -735,7 +741,7 @@
 
     .special-start,.special-end{
       text-align: center;
-      width: 70%;
+      width: 100%;
     }
 
     .special-end{

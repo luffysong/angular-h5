@@ -47,7 +47,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
 
     function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】' + vm.name + '在融项目提前看，紧跟TOP机构不掉队！',
+            shareTitle: '【创投助手·融资季】' + vm.name + '专场所有在融项目正在融资季',
             shareUrl: window.location.href,
             krtou: 'weChatShare/' + $stateParams.id,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
@@ -83,9 +83,9 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
                         }
                     }
 
+                    vm.remind = data.data.remind;
                     vm.canWeChatShare = data.data.canWeChatShare;
                     vm.hasPermission = data.data.hasPermission;
-                    vm.remind = data.data.remind;
                 }).catch(fail);
         }
     }
@@ -191,7 +191,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
             item.cancelMainRemind = true;
             item.title = '取消开场提醒成功！';
             item.hasEmail = true;
-            item.cancelRemindtxt = '后续新上的' + vm.name + '专场将不会有专场提醒，现已有排期的专场仍会提醒！';
+            item.cancelRemindtxt = '本专场开始前不会有开场提醒';
             modalOpen(item);
             vm.remind = 1;
         })

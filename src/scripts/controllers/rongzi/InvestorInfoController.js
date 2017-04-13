@@ -223,7 +223,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
             item.cancelMainRemind = true;
             item.title = '取消开场提醒成功！';
             item.hasEmail = true;
-            item.cancelRemindtxt = '后续新上的' + $stateParams.name + '将不会有专场提醒，现已有排期的专场仍会提醒！';
+            item.cancelRemindtxt = '本专场开始前不会有开场提醒！';
             modalOpen(item);
             vm.remind = 1;
         })

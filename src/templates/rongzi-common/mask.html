@@ -1,22 +1,31 @@
 <div class="rongzi-common-mask">
-  <div class="share-weixin" ng-if="vm.canWeChatShare && vm.state !== 'end'">
-    <p>分享本页面</p>
-    <p>可提前三天查看本专场页面</p>
+  <div class="share-weixin" ng-if="vm.needApp && vm.canWeChatShare && vm.state !== 'end'">
+    <p>分享当前专场页面</p>
+    <p>立即获得提前三天查看项目权限</p>
     <div class="weixin" ng-click="vm.shareWechat()">分享至微信</div>
   </div>
 
-  <div class="share-weixin" ng-if="!vm.canWeChatShare && vm.state !== 'end'">
+  <div class="share-weixin" ng-if="vm.needApp && !vm.canWeChatShare && vm.state !== 'end'">
     <p>专场未开始</p>
-    <p>订阅本专场，开场提醒不错过好项目</p>
+    <p>订阅本专场，开场提醒不会错过好项目</p>
   </div>
 
-  <div class="share-weixin" ng-if="vm.canWeChatShare && vm.state === 'end'">
+  <div class="share-weixin" ng-if="vm.needApp && vm.canWeChatShare && vm.state === 'end'">
     <div class="state-end">已结束</div>
-    <p>分享本页面</p>
-    <p>可永久查看本专场页面</p>
+    <p>分享当前页面</p>
+    <p>可再次开启本专场项目查看权限</p>
     <div class="weixin" ng-click="vm.shareWechat()">分享至微信</div>
   </div>
 
+  <div class="share-weixin" ng-if="!vm.needApp && vm.canWeChatShare && vm.state === 'end'">
+    <p>请下载/打开创投助手</p>
+    <p>立刻查看所有优质项目</p>
+    <div class="weixin" id="downloadMask">下载/打开创投助手</div>
+  </div>
+<script>
+
+
+</script>
   <!--
   <div class="or">或</div>
   <div class="share-investor">
