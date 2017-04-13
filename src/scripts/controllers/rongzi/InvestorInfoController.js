@@ -28,7 +28,6 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
 
         initData();
         initUser();
-        initWeixin(vm.name);
         initPxLoader();
         vm.state = $stateParams.state;
         loading.hide('findLoading');
@@ -65,6 +64,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
                     if (data.data) {
                         vm.result = data.data;
                         vm.name = data.data.name;
+                        initWeixin(vm.name);
                         vm.names = data.data.name.split('');
                         initTitle('融资季·' + data.data.name);
                     }
