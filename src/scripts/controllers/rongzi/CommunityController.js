@@ -229,8 +229,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
 
     function subscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
-            category:vm.result.category,
+            category: 0,
             subscibeType:0,
         };
         RongziService.setSubscribe(senddata)
@@ -250,8 +249,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
 
     function cancelSubscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
-            category:vm.result.category,
+            category: 0,
             subscibeType:0,
         };
         RongziService.cancelSubscribe(senddata)

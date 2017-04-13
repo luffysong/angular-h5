@@ -226,8 +226,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
 
     function subscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
-            category:vm.result.category,
+            category: -1,
             subscibeType:0,
         };
         RongziService.setSubscribe(senddata)
@@ -247,8 +246,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
 
     function cancelSubscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
-            category:vm.result.category,
+            category: -1,
             subscibeType:0,
         };
         RongziService.cancelSubscribe(senddata)
