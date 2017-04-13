@@ -394,6 +394,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
         $scope.hasClick = false;
 
         $scope.nextStep = function () {
+            sa && sa.track('ApplyInvestor', {
+                target: 'apply_investor_2',
+                status: $scope.investorValidateApply && $scope.investorValidateApply.status,
+            });
             Error.hide();
             if ($scope.guideForm.avatar.uploaded || $scope.user.avatar) {
                 $scope.guideForm.avatar.$setValidity('required', true);
@@ -434,6 +438,11 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             window.localStorage && localStorage.setItem('invest', JSON.stringify($scope.invest));
 
             $scope.hasClick = true;
+
+            sa && sa.track('ApplyInvestor', {
+                target: 'apply_investor_3',
+                status: $scope.investorValidateApply && $scope.investorValidateApply.status,
+            });
 
             if ($scope.investorValidateApply.status === 'new') {
                 UserService.basic.update({
