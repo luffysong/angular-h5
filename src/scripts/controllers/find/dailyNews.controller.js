@@ -53,7 +53,18 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     function init() {
         document.title = '媒体热议';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
-
+        if (localStorage.getItem('dailyNewsTime') && localStorage.getItem('dailyNewsTime') !== 'undefined') {
+            var nowTime = (new Date()).getTime();
+            var interval =  nowTime - localStorage.getItem('dailyNewsTime');
+            if (interval > 5*60*1000) {
+                localStorage.setItem('dailyNewsTime','');
+                localStorage.setItem('dailyNewsData','');
+            }
+            //console.log(nowTime);
+        } else {
+            localStorage.setItem && localStorage.setItem('dailyNewsTime', JSON.stringify((new Date()).getTime()));
+            //console.log('test');
+        }
         if (localStorage.getItem('dailyNewsData') && localStorage.getItem('dailyNewsData') !== 'undefined') {
             vm.sendSourceArray = JSON.parse(localStorage.getItem('dailyNewsData')).sendSourceArray;
             vm.sendflagArray = JSON.parse(localStorage.getItem('dailyNewsData')).sendflagArray;
