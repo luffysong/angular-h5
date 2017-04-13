@@ -128,12 +128,12 @@
 
     function initLinkme() {
         var krdata = {};
-        krdata.type =  'test';
+        krdata.type =  'live';
         krdata.params =
         '{"openlink":"https://' + HOST + '/m/company.html?cid='+cid+'","krtou":"krtou://company/'+cid+'"  }';
 
         window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
-        { type: 'test' }, function (err, res) {
+        { type: 'live' }, function (err, res) {
                 if (err) {
                     return;
                 }
