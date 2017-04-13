@@ -53,20 +53,145 @@
     overflow: hidden;
     font-size: 14px;
     font-weight: bold;
-    color:#fcc45b;
+    //color:#fcc45b;
+    color:#ff5000;
+    margin-top: 10px;
+    // span{
+    //   float: right;
+    //   margin-right: 10px;
+    // }
+    // span:nth-of-type(2){
+    //   //float: right;
+    //   margin-right: 10px;
+    // }
+    // span:nth-of-type(1){
+    //   //float: left;
+    //   margin-left: 10px;
+    // }
     span{
+        float: right;
+        margin-right: 10px;
+    }
+    span:nth-of-type(2){
       float: right;
       margin-right: 10px;
     }
-    span:nth-of-type(2){
-      //float: right;
-      margin-right: 10px;
-    }
     span:nth-of-type(1){
-      //float: left;
+      float: left;
       margin-left: 10px;
     }
   }
+
+  .bestlist-top3{
+    width: 95%;
+    height: auto;
+    min-height: 160px;
+    //border: 1px solid #ffb933;
+    background: url('images/rongzi/hotdaily-title.png') no-repeat center;
+    //background-size: cover;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    .out-div{
+      width: 33.3%;
+      height: 150px;
+      display: inline-block;
+      overflow: hidden;
+      line-height: 150px;
+      padding-top: 25px;
+      text-align: center;
+      .in-div{
+          margin: 0 auto;
+          background-size: contain;
+          background-repeat: no-repeat;
+          width: 100px;
+          position: relative;
+          height: auto;
+          border-radius: 50px;
+          border: 1px solid #ffb933;
+          .in-text{
+              color: #ffb933;
+              font-size: 14px;
+              margin-top:35px;
+              font-weight: bold;
+          }
+
+          @media screen and (max-width: 320px) {
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+          }
+          // 屏幕宽度小于767个象素时应用的CSS样式
+          @media (min-width: 321px) and (max-width: 767px) {
+            width: 90px;
+            height: 90px;
+            border-radius: 45px;
+          }
+          // 屏幕宽度在767和991象素之间的CSS样式
+          @media (min-width: 768px) and (max-width: 991px) {
+            width: 90px;
+            height: 90px;
+            border-radius: 45px;
+          }
+
+          .crown{
+            position: absolute;
+            height: 25px;
+            width: 25px;
+            margin-left: -10px;
+            margin-top: -180px;
+          }
+          .gold{
+            background-size: contain;
+            background: url('images/rongzi/gold.png') no-repeat center;
+            @media screen and (max-width: 320px) {
+              background-size: cover;
+            }
+            // 屏幕宽度小于767个象素时应用的CSS样式
+            @media (min-width: 321px) and (max-width: 767px) {
+               //CSS代码
+              background-size: cover;
+            }
+            // 屏幕宽度在767和991象素之间的CSS样式
+            @media (min-width: 768px) and (max-width: 991px) {
+               //CSS代码
+              background-size: cover;
+            }
+          }
+          .silver{
+            background: url('images/rongzi/silver.png') no-repeat center;
+            @media screen and (max-width: 320px) {
+              background-size: cover;
+            }
+            @media (min-width: 321px) and (max-width: 767px) {
+               //CSS代码
+              background-size: cover;
+            }
+            // 屏幕宽度在767和991象素之间的CSS样式
+            @media (min-width: 768px) and (max-width: 991px) {
+               //CSS代码
+              background-size: cover;
+            }
+          }
+          .copper{
+            background: url('images/rongzi/copper.png') no-repeat center;
+            @media screen and (max-width: 320px) {
+              background-size: cover;
+            }
+            @media (min-width: 321px) and (max-width: 767px) {
+               //CSS代码
+              background-size: cover;
+            }
+            // 屏幕宽度在767和991象素之间的CSS样式
+            @media (min-width: 768px) and (max-width: 991px) {
+               //CSS代码
+              background-size: cover;
+            }
+          }
+      }
+    }
+  }
+
   .bestlist-content{
     min-height: 740px;
     height: auto;
@@ -135,6 +260,21 @@
             background: #fff no-repeat 50%;
             background-size: contain;
             // background: url('https://krplus-pic.b0.upaiyun.com/avatar/201703/23114734/4chxz1sl9cwqe7h7.png') no-repeat 50%;
+            .past-hot{
+              height: 20px;
+              line-height: 20px;
+              font-size: 12px;
+              color: white;
+              background-color: #ef411d;
+              width: 100%;
+              text-align: center;
+              position: absolute;
+              bottom: 0px;
+              font-weight: bold;
+              border-bottom-left-radius: 5px;
+              border-bottom-right-radius: 5px;
+
+            }
             .crown{
               position: absolute;
               height: 25px;
@@ -325,6 +465,7 @@
     width: 100%;
     position: fixed;
     bottom: 0px;
+    max-width: 768px;
     .w3{
         width: 33%;
       }

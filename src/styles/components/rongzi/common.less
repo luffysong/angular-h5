@@ -8,6 +8,16 @@
 @mTxt:#00aa83;
 @mRedTitle:#ff5000;
 @mRedTxt:#ff8a00;
+@redStart:#ff4800;
+@grayEnd:#a0a0a0;
+
+@green: #00856e;
+@orange: #ff4800;
+@yellowBorder:#ff982e;
+// @gray: #808080;
+@meat: #ffdbac;
+@yellow: #ffb14a;
+
 
 .paddTopBar{
   padding-top:55px;
@@ -20,6 +30,9 @@
   min-height: 1000px;
 }
 
+.bg-green {
+  background-color: @green !important;
+}
 
 .m-red-title{
   color:@mRedTitle;
@@ -31,6 +44,99 @@
   span{
     text-shadow: 0 0 2px #ff8a00, 0 0 2px #ff8a00;
   }
+}
+
+//tab标签样式
+.rongzi-tab{
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 35px;
+  width: 100%;
+  margin: 0 auto;
+  color:#fffbdd;
+  position: relative;
+  height: 35px;
+  overflow: hidden;
+  a{
+    color:#fffbdd;
+    width: 50%;
+    float:left;
+  }
+}
+
+.tab-org-border{
+  border:1px solid @orange;
+}
+
+.tab-comm-border{
+  border:1px solid @green;
+}
+
+//选中样式
+.tab-org-selected{
+  background-color: @orange;
+}
+
+.tab-comm-selected{
+  background-color: @green;
+  //color:#fffbdd;
+}
+
+//已完结 和正在进行
+.rongzi-split-block{
+  padding: 0px;
+  height: 60px;
+  width: 100%;
+  text-align: center;
+}
+
+//tag条
+.rongzi-tag{
+  width:20%;
+  height: 25px;
+  color:#fffbdd;
+  left: 0px;
+  font-size: 12px;
+  margin-left: 0px;
+  margin-top: 18px;
+  line-height: 25px;
+  border-top-right-radius:15px;
+  border-bottom-right-radius: 15px;
+}
+
+.rongzi-favorite{
+  color: #ff982e;
+  float: right;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: -25px;
+  margin-right: 30px;
+}
+
+//虚位以待
+.rongzi-vacancy{
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffd200;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+}
+
+.tag-comm-oncome{
+  //background-color: @redStart;
+    background-color: @green;
+}
+
+.tag-org-oncome{
+  background-color: @redStart;
+}
+
+.tag-end{
+  background-color: @grayEnd;
 }
 
 .m-red-txt{
@@ -60,6 +166,7 @@
   top:0px;
   overflow: hidden;
   text-align: center;
+  z-index: 101;
   .innerDiv{
     height: auto;
     min-height: 45px;
@@ -145,7 +252,7 @@
 .rongzi-common-backg{
   position: relative;
   max-width: 768px;
-  background: url('images/rongzi/second-backg.png') no-repeat center;
+  background: url('images/rongzi/second-bg.jpg') no-repeat center;
   background-color: #000000;
 }
 
@@ -159,6 +266,9 @@
   font-weight: bold;
   background-color: @orgCor;
   color: white;
+    position: fixed;
+    bottom: 0;
+    max-width: 768px;
 }
 
 .rongzi-common-bottom-comm{
@@ -170,23 +280,29 @@
   font-weight: bold;
   background-color: @btmBtn;
   color: white;
+  position: fixed;
+  bottom: 0;
+  max-width: 768px;
 }
 
 .rongzi-common-top{
   width: 100%;
   height: auto;
-  min-height: 360px;
+  // min-height: 360px;
   position: relative;
-  padding-bottom: 20px;
+  // padding-bottom: 20px;
   //background: url('images/rongzi/org-top1.png');
 
   .rongzi-common-logo{
     img{
-      width: 100%;
+      width: 30%;
+      float: right;
+      margin: 10px;
     }
     //height: 100px;
     //background: url('images/rongzi/rongzi-logo.png');
   }
+
 
   .rongzi-common-logo-enroll{
     img{
@@ -195,6 +311,14 @@
     // width: 100%;
     // height: 70px;
     // background: url('images/rongzi/enroll-logo1.png');
+  }
+
+  .rongzi-common-likes{
+    text-align: center;
+    img{
+      width: 80%;
+      margin: 0 auto;
+    }
   }
 
   .rongzi-common-textbtn-org{
@@ -215,9 +339,15 @@
   }
 
   .rongzi-common-textbtn-investor{
+    position: relative;
+    text-align: center;
     img{
       width: 100%;
     }
+    .wd-80 {
+      width: 80%;
+    }
+
     // width: 100%;
     // height: 55px;
     // background: url('images/rongzi/investor-text.png');
@@ -304,7 +434,7 @@
     height: auto;
     p{
       color: #fff6e4;
-      font-size:14px;
+      font-size:13px;
       margin: 0 auto;
       font-weight: bold;
       width:90%;
@@ -326,12 +456,16 @@
       font-weight: 900;
     }
     a{
-      height: 35px;
-      line-height: 35px;
+      height: auto;
+      line-height: 40px;
       font-size: 16px;
-      width: 60%;
+      width: 65%;
       color: white;
       display: inline-block;
+      border-radius: 25px;
+      word-break:keep-all;
+      //word-wrap:normal;
+      //white-space:pre;
     }
   }
 }
@@ -396,7 +530,8 @@
               list-style-type: none;
               font-size: 12px;
               color: #f8f5ae;
-              margin-top: 10px;
+              line-height: 20px;
+              margin-top: 5px;
             }
           }
         }
@@ -446,7 +581,7 @@
       .rongzi-common-textbtn-investor,
       .rongzi-common-logo-enroll,
       .rongzi-common-textbtn-enroll,
-      .rongzi-common-textbtn-community{
+      .rongzi-common-textbtn-community,.rongzi-common-mask{
         background-size: 414px 100%;
       }
   }
@@ -462,7 +597,7 @@
           .rongzi-common-textbtn-investor,
           .rongzi-common-logo-enroll,
           .rongzi-common-textbtn-enroll,
-          .rongzi-common-textbtn-community{
+          .rongzi-common-textbtn-community,.rongzi-common-mask{
             background-size: 375px 100%;
           }
       }
@@ -478,11 +613,358 @@
         .rongzi-common-textbtn-investor,
         .rongzi-common-logo-enroll,
         .rongzi-common-textbtn-enroll,
-        .rongzi-common-textbtn-community{
+        .rongzi-common-textbtn-community,.rongzi-common-mask{
           background-size: 320px 100%;
         }
     }
     .rongzi-common-backg{
       background-size: 320px 100%;
     }
+}
+
+.special-item {
+  border: 2px solid;
+  border-radius: 12px;
+  padding: 2px;
+  position: relative;
+  margin-bottom: 10px;
+  .special-list-border {
+    border: 1px dashed;
+    border-radius: 8px;
+    padding-top: 10px;
+  }
+  .special-logo {
+    border: 1px solid;
+    border-radius: 5px;
+    display: inline-block;
+    width: 110px;
+    height: 110px;
+    background: #fff no-repeat 50%;
+    background-size: cover;
+    margin: 10px;
+  }
+  .special-info {
+    vertical-align:top;
+    display: inline-block;
+    margin: 10px 0;
+    width: 57%;
+    font-size: 12px;
+    .special-name {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .special-phase {
+      position: relative;
+      bottom: 2px;
+    }
+    .special-arrow {
+      position: absolute;
+      right: 20px;
+      top: 25px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 8px solid @orange;
+    }
+    .special-provider{
+      right: 20px;
+      top: 13px;
+      color: @yellowBorder;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .special-phaseType{
+      span{
+        display: inline-block;
+        padding: 0 5px;
+        font-weight: bold;
+        border-radius: 5px;
+      }
+      .border-green{
+          border: 1px solid @green;
+      }
+      .border-orange{
+        border: 1px solid @yellowBorder;
+      }
+    }
+    .special-highlight{
+      color: #ffcc55;
+      font-size: 12px;
+      font-weight: bold;
+
+    }
+    .orange-arrow{
+      border-top: 10px solid @orange;
+    }
+    .green-arrow{
+      border-top: 10px solid @green;
+    }
+    .special-arrow-meat {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 8px solid @meat;
+    }
+    .special-phase {
+      .phase-item {
+        border: 1px solid;
+        display: inline-block;
+        margin: 2px;
+        padding: 0px 3px;
+        font-size: 12px;
+        line-height: 18px;
+        border-radius: 3px;
+        font-weight: bold;
+      }
+    }
+    .special-content {
+      font-size: 12px;
+      color: @meat;
+      line-height: 16px;
+      font-weight: bold;
+      text-overflow: ellipsis;
+      width: 98%;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .special-time {
+      border: 1px dashed;
+      text-align: center;
+      width: 70%;
+      font-size:12px;
+      margin-top: 10px;
+      position: relative;
+      float: right;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+    .special-type{
+      //margin-top: 5px;
+      position: relative;
+      float: left;
+      border: 1px dashed;
+      font-size: 12px;
+      border-radius: 10%;
+      padding: 0 5px;
+    }
+
+    .special-start,.special-end{
+      text-align: center;
+      width: 100%;
+    }
+
+    .special-end{
+      span:nth-of-type(2){
+        display: inline-block;
+      }
+    }
+
+    .show-info {
+      text-align: center;
+      font-size:12px;
+      margin-top: 5px;
+      position: relative;
+      float: right;
+      font-weight: 600;
+      margin-right: 2%;
+    }
+    .light {
+      font-weight: bold;
+      line-height: 16px;
+    }
+  }
+  @media (max-width: 341px) {
+    .special-logo {
+      width: 100px;
+      height: 100px;
+    }
+    .special-info {
+      width: 55%;
+      .special-arrow {
+        right: 10px;
+      }
+      .special-time {
+        width: 85%;
+      }
+    }
+  }
+  @media (min-width: 412px) {
+    .special-info {
+      width: 60%;
+    }
+  }
+}
+.site {
+  margin: 10px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: @orange;
+}
+.special-state {
+  border: 1px dashed;
+  margin: 20px auto;
+  text-align: center;
+  width: 30%;
+  border-radius: 25px;
+  font-weight: bold;
+}
+.investor-remind-btn {
+  color: #fff;
+  background-color: @green;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 auto;
+  width: 68%;
+  line-height: 40px;
+  border-radius: 25px;
+  margin-top: 20px;
+  a {
+    color: #FFF;
+  }
+}
+
+.blur {
+  -webkit-filter: blur(3px); /* Chrome, Opera */
+     -moz-filter: blur(3px);
+      -ms-filter: blur(3px);
+          filter: blur(3px);
+}
+
+.rongzi-common-mask {
+  position: fixed;
+  width: 100%;
+  height: 600px;
+  left: 0;
+  top: 0;
+  //background-color: rgba(19,19,20,.9);
+  background: url('images/rongzi/maskbg.jpg') no-repeat center;
+  background-size: 100% 100%;
+  text-align: center;
+  z-index: 101;
+  color: #f8ebd6;
+  font-weight: bold;
+  padding-top: 50%;
+  font-size: 14px;
+  // display: none;
+  p {
+    margin: 0;
+  }
+  .weixin, .investor {
+    background-color: @orange;
+    border-radius: 25px;
+    line-height: 35px;
+    width: 55%;
+    margin: 20px auto;
+  }
+  .or {
+    color: @orange;
+    margin: 30px auto;
+    border: solid 1px @orange;
+    border-radius: 100px;
+    width: 8%;
+    padding: 2px;
+
+  }
+  .state-end {
+    position: absolute;
+    right: 20px;
+    top: -20px;
+    font-size: 18px;
+    color: red;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.investor-content {
+  .rongzi-common-mask {
+    position: relative;
+    padding-top: 30%;
+  }
+}
+
+//外围边框以及字体的颜色设置；
+.green-color {
+  color: @green;
+}
+.orange-color {
+  color: @orange;
+}
+
+.yellow-color {
+  color: @yellowBorder;
+}
+
+.yellowdotted-color {
+  color: @pushTxt;
+}
+
+.gray-color{
+  color:@grayEnd;
+}
+.meat-color {
+  color: @meat;
+}
+.yellow-color {
+  color: @yellow;
+}
+.mg-t {
+  margin-top: 10px;
+}
+.mg-l {
+  margin-left: 10px;
+}
+.mg-t-2 {
+  margin-top: 20px;
+}
+
+.top-name {
+  position: relative;
+  bottom: 45px;
+}
+.name-bg-green {
+  font-size: 22px;
+  display: inline-block;
+  padding: 5px;
+  height: 35px;
+  width: 35px;
+  line-height: 25px;
+  border-radius: 25px;
+  color: #ffeed2;
+  margin: 0 1%;
+  font-weight: 900;
+  text-align: center;
+  background-color: @green;
+  box-shadow: 0 0 5px #ffeed2;
+  text-shadow: 0 0 6px rgba(255,255,255,.24), 0 3px 2px rgba(6,0,1,.52);
+  box-shadow: 0 0 6px 2px rgba(255,255,255,.24), inset 0 5px 3px rgba(79,3,1,.51);
+}
+@media (max-width: 360px) {
+  .top-name {
+    bottom: 40px;
+  }
+  .name-bg-green {
+    height: 32px;
+    width: 32px;
+    font-size: 20px;
+  }
+}
+@media (min-width: 390px) {
+  .top-name {
+    bottom: 47px;
+  }
+  .name-bg-green {
+    height: 38px;
+    width: 38px;
+    font-size: 24px;
+    padding: 7px;
+  }
+}
+.noData {
+  height: 230px;
 }

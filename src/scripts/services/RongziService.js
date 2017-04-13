@@ -89,4 +89,33 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
         return $http.get(BASE_URL + '/startup_project/' + id);
     };
 
+    //获取已完结的数据，根据参数不同，获取不同类型的数据
+    this.getFinishedData = function (request) {
+        return $http.get(BASE_URL + '/session/finished?' + $.param(request));
+    };
+
+    //获取已完结专场
+    this.getFinished = function (request) {
+        return $http.get(BASE_URL + '/session/finished?' + $.param(request));
+    };
+
+    //获取详情页基本信息
+    this.getBaseInfo = function (id) {
+        return $http.get(BASE_URL + '/session/' + id);
+    };
+
+    //获取详情页项目列表
+    this.getProjectList = function (id) {
+        // return $http.get(BASE_URL + '/session/' + id + '/projects');
+        return $http.get(BASE_URL + '/session/' + id + '/projects');
+    };
+
+    this.getOrgLike = function () {
+        return $http.get(BASE_URL + '/ranking_list/org?');
+    };
+
+    this.getComLike = function (request) {
+        return $http.get(BASE_URL + '/ranking_list/startup_project?' + $.param(request));
+    };
+
 });

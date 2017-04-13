@@ -7,15 +7,16 @@
   max-width: 768px;
   background: url('images/rongzi/backg.png') no-repeat center;
   background-color: #000000;
-  //padding-bottom: 20px;
+  padding-bottom: 20px;
 
-  .rongzi-btn{
+  .rongzi-main-btn{
     background-color: #ef0021;
     border:1px solid #ef0021;
     color: white;
     height: 37px;
-    border-radius:20px;
+    border-radius:25px;
     text-align: center;
+    display: inline-block;
   }
   .rongzi{
     min-height: 320px;
@@ -29,15 +30,13 @@
     max-height: 42px;
     height: auto;
     width: 100%;
-    overflow: hidden;
     position: relative;
-
+    display: inline-block;
     .rongzi-invest-arrow-left{
+      margin: 10px;
       img{
         width: 85px;
         height: 24px;
-        margin-top: 10px;
-        margin-left: 15px;
       }
     }
     .rongzi-invest-icon{
@@ -45,9 +44,6 @@
       height: 40px;
       width: 33px;
       margin-right: 10px;
-      img{
-        margin-top: -51px;
-      }
     }
     .rongzi-invest-icon-left{
       img{
@@ -59,10 +55,10 @@
     .rongzi-invest-arrow-right{
       float: right;
       margin-right: 10px;
+      margin-top: 10px;
       img{
         width: 85px;
         height: 24px;
-        margin-top: -60px;
       }
     }
   }
@@ -70,6 +66,7 @@
     height: auto;
     //background: url('https://krplus-pic.b0.upaiyun.com/avatar/201703/29130556/pmhc5uarusnxvmez.png') no-repeat center;
     position: relative;
+    margin-bottom: 10px;
     .subscribe,.rongzi-text{
       margin-top:15px;
     }
@@ -145,11 +142,15 @@
       //top:20px;
       //margin: 0 auto;
       text-align: center;
-
-      .subscribe-btn{
-        width: 276px;
+      .subscribe-btn {
+        width: 60%;
         font-size:16px;
         font-weight: bold;
+      }
+      @media (max-width: 354px){
+        .subscribe-btn {
+          width: 70%;
+        }
       }
     }
     .rongzi-text{
@@ -157,13 +158,16 @@
       position: relative;
       //top: 523px;
       //top:40px;
-      font-size:14px;
-      color:#e06a20;
+      padding: 0px 20px;
+      font-size: 14px;
+      color: #ffa44b;
       text-align: left;
+      font-weight: bold;
+      margin: 0 auto 15px;
+      line-height: 20px;
       p{
         font-weight: bold;
         width: 90%;
-        line-height: 20px;
         margin: 0 auto;
       }
     }
@@ -203,40 +207,52 @@
 
     }
     .outer-border {
-      border: solid 3px #ef4a27;
+      border: solid 3px #f04400;
       border-radius: 14px;
       width: 95%;
       padding: 4px;
       margin: 0 auto;
       line-height: 30px;
+      box-shadow: 0 0 1px 2px #fcba08;
+      -webkit-box-shadow: 0 0 1px 2px #fcba08;
+      -moz-box-shadow: 0 0 1px 2px #fcba08;
       .inner-border {
-        border: 1px dashed #278a67;
+        border: 1px dashed #f04400;
         border-radius: 7px;
         padding: 15px 10px;
       }
       .special-title {
         //border: solid 1px #ff8a00;
-        border-radius: 7px;
-        font-size: 18px;
-        font-weight: bold;
-        height: 28px;
-        line-height: 28px;
-        //color: #ff5000;
-        padding: 0px 5px;
-        letter-spacing: 5px;
-        display: inline-block;
+        // border-radius: 7px;
+        // font-size: 18px;
+        // font-weight: bold;
+        // height: 28px;
+        // line-height: 28px;
+        // padding: 0px 5px;
+        // letter-spacing: 5px;
+        // display: inline-block;
         // box-shadow: 0 0 5px rgba(255, 138, 0, 1);
         // -webkit-box-shadow: 0 0 5px rgba(255, 138, 0, 1);
         // -moz-box-shadow: 0 0 5px rgba(255, 138, 0, 1);
         // span {
         //   text-shadow: 0 0 2px #ff8a00, 0 0 2px #ff8a00;
         // }
+        img {
+          width: 35%;
+        }
+        .inv-title {
+          width: 40%;
+        }
+        span {
+          font-weight: bold;
+          float: right;
+        }
       }
       .special-content {
         //height: 50px;
         font-size: 14px;
         font-weight: bold;
-        //color: #ff8a00;
+        color: #ffc580;
         line-height: 20px;
       }
       .special-logo {
@@ -246,15 +262,15 @@
           text-align: center;
           vertical-align:top;
           margin: 3px 2%;
-          .border-bg {
-            background-color: #370206;
-            border-radius: 100px;
-            padding: 3px;
-          }
 
-          .logo-border {
+          .logo-border-yellow {
             padding: 3px;
-            border: 1px dashed #f2690c;
+            border: 1px dashed #fdba06;
+            border-radius: 100px;
+          }
+          .logo-border-orange {
+            padding: 3px;
+            border: 1px dashed #ff4800;
             border-radius: 100px;
           }
           .logo {
@@ -268,13 +284,13 @@
             margin: 0 auto;
             // background-size:cover;
           }
+
           .defaultLogo{
-            background: url('images/rongzi/default-logo.png') no-repeat center;
+            background: url('images/rongzi/df-logo.png') no-repeat center;
             background-size: cover;
           }
 
           .org-name {
-            color: #ff4800;
             font-size: 14px;
             font-weight: bold;
             line-height: 20px;
@@ -285,21 +301,40 @@
             // text-overflow: ellipsis;
             // white-space: nowrap;
           }
-          @media (max-width: 380px) {
+          // @media (max-width: 380px) {
+          //   .logo {
+          //     width: 70px;
+          //     height: 70px;
+          //   }
+          // }
+          @media (max-width: 353px){
             .logo {
               width: 70px;
               height: 70px;
-            }
-          }
-          @media (max-width: 341px) {
-            .logo {
-              width: 60px;
-              height: 60px;
             }
             .org-name {
               max-width: 70px;
             }
           }
+
+          @media (min-width: 354px) and (max-width: 371px) {
+            .logo {
+              width: 80px;
+              height: 80px;
+            }
+          }
+          @media (min-width: 412px) {
+            .logo {
+              width: 95px;
+              height: 95px;
+            }
+            .org-name {
+              max-width: 100px;
+            }
+          }
+        }
+        .star-mg {
+          margin: 3px 3%;
         }
         .mg-l {
           margin-left: 3%;
@@ -313,13 +348,20 @@
         font-weight: bold;
         margin: auto;
         text-align: center;
-        height: 28px;
+        height: auto;
         button{
-            height: 28px;
-            color: #FFF;
-            border-radius: 22px;
-            line-height: 10px;
-            width: 30%;
+          height: auto;
+          color: #FFF;
+          border-radius: 22px;
+          border: 0;
+          line-height: 35px;
+          width: 38%;
+        }
+        .btn-yellow {
+          background-color: #ffba00;
+        }
+        .btn-orange {
+          background-color: #ff4800;
         }
       }
       .split-border {
@@ -328,6 +370,16 @@
       }
     }
   }
+  .btn-height {
+    height: auto;
+    line-height: 30px;
+  }
+}
+.orange {
+  color: #ff4800;
+}
+.yellow {
+  color: #ffba00
 }
 
 @media screen and (min-width: 768px) {

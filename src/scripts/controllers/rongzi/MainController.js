@@ -129,6 +129,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         vm.needApp = true;
         vm.setEmailState = false;
         vm.addEmail = addEmail;
+        vm.remindText = '“融资季”全场任一专场';
 
         function cancelModal() {
             $modalInstance.dismiss();
@@ -142,6 +143,8 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
                 RongziService.setEmail(senddata)
                 .then(function setSussess() {
                     vm.title = '添加邮件提醒成功！';
+                    vm.cancelRemindtxt = '当“融资季”全场任一专场开始时，您将会包括邮件在内的所有提醒，' +
+                       '确保您不会错过任意专场';
                     vm.setEmailState = true;
                     vm.hasEmail = true;
                 })
@@ -206,23 +209,25 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             .then(function setHomeData(data) {
                     loading.hide('rongziLoading');
                     if (data.data) {
-                        vm.result = data.data.data;
-                        vm.remind = data.data.data.remind;
-                        vm.starList = data.data.data.startupProjectVoList;
-                        if (vm.result.sessionCustomVoList) {
-                            if (vm.result.sessionCustomVoList.length > 0) {
-                                angular.forEach(vm.result.sessionCustomVoList,
-                                  function (dt, index, array) {
-                                    if (dt.category === -1) {
-                                        vm.org = dt;
-                                    } else if (dt.category === 0) {
-                                        vm.community = dt;
-                                    } else {
-                                        vm.investor = dt;
-                                    }
-                                });
-                            }
-                        }
+                        vm.result = data.data;
+                        vm.remind = data.data.remind;
+                        vm.starList = data.data.startupProjectVoList;
+                        vm.sessions = data.data.sessions;
+                        vm.org = vm.sessions.org;
+                        vm.community = vm.sessions.assc;
+                        vm.investor = vm.sessions.investor;
+                        // if (vm.result.sessions.length > 0) {
+                        //     angular.forEach(vm.result.sessions,
+                        //       function (dt, index, array) {
+                        //         if (dt.category === -1) {
+                        //             vm.org = dt;
+                        //         } else if (dt.category === 0) {
+                        //             vm.community = dt;
+                        //         } else {
+                        //             vm.investor = dt;
+                        //         }
+                        //     });
+                        // }
                     }
                 }).catch(fail);
     }

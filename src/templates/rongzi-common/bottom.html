@@ -3,6 +3,17 @@
   <b>返回主会场</b>
 </div>
 
-<div class="rongzi-common-bottom-comm" ng-if=" item === 'community'" ui-sref="rongzi.main">
+<div class="rongzi-common-bottom-comm" ng-if=" item === 'community' && item !== 'detail'" ui-sref="rongzi.main">
   <b>返回主会场</b>
+</div>
+
+
+<div class="rongzi-common-comm" ng-if=" item === 'detail'">
+  <div>
+    返回创业社群专场
+  </div>
+
+  <div>
+    返回主会场
+  </div>
 </div>

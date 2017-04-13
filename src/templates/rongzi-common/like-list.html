@@ -1,0 +1,23 @@
+
+<div class="special-item orange-color" ng-if="vm.result"  ng-repeat="item in vm.result">
+  <div class="special-list-border orange-color">
+    <div class="special-logo orange-color" ng-click="vm.openApp()" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05093313/fzo1epnn95opm68j.png)"></div>
+    <div class="special-info">
+      <div class="special-name orange-color" ng-click="vm.openApp()">
+        {{item.sname}}
+      </div>
+      <div class="special-arrow"></div>
+      <div class="special-content">
+          前五项目约谈量：{{item.askCount}}次
+      </div>
+      <div class="special-content">
+          共有项目：{{item.projectCount}}个
+      </div>
+      <div class="show-info"
+       ui-sref="rongzi.orgdetail({id: item.sid, name: item.sname,category:vm.category})">
+        <span class="yellow-color">{{item.startAt | date:'MM月dd日'}}</span>
+        <span class="orange-color mg-l">查看详情 ></span>
+      </div>
+    </div>
+  </div>
+</div>

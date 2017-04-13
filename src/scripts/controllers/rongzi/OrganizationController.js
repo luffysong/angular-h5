@@ -5,11 +5,22 @@ angular.module('defaultApp.controller')
 function OrganizationController(loading, $scope, $modal, $stateParams, RongziService, $state, UserService, ErrorService, FindService, hybrid) {
     var vm = this;
     vm.subscribe = subscribe;
+    vm.getFinishedData = getFinishedData;
     vm.needApp = true;
     vm.investRole = false;
     vm.hasEmail = false;
     vm.openApp = openApp;
     vm.openAppUrl;
+    vm.tabChange = tabChange;
+    vm.Aafter = false;
+    vm.Abefore = true;
+    vm.category = $stateParams.category;
+
+    //分页处理
+    vm.page = 0;
+    vm.busy = false;
+    vm.end = [];
+
     init();
     function init() {
         loading.hide('findLoading');
@@ -22,6 +33,30 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
         initUser();
         initWeixin();
         initPxLoader();
+    }
+
+    function tabChange(e) {
+        var obj = angular.element(e.currentTarget);
+        var id = obj.attr('id');
+        obj.parent().children().removeClass('tab-org-selected');
+        obj.addClass('tab-org-selected');
+        if ('AAfter' === id) {
+            vm.Aafter = true;
+            vm.Abefore = false;
+            resetData(1);
+        } else if (('ABefore') === id) {
+            vm.Aafter = false;
+            vm.Abefore = true;
+            resetData(0);
+        }
+    }
+
+    function resetData(n) {
+        vm.page = 0;
+        vm.busy = false;
+        vm.end = [];
+        vm.projectCategory = n;
+        getFinishedData();
     }
 
     function initWeixin() {
@@ -49,26 +84,45 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     function initData() {
-        RongziService.getOrg({ id: $stateParams.id })
+        RongziService.getOrg({ category: parseInt($stateParams.category) })
             .then(function setCommunity(data) {
                     if (data.data) {
-                        vm.result = data.data.data;
-                        vm.beforeA = [];
-                        vm.afterA = [];
+                        vm.result = data.data;
+                        if (data.data.sessions) {
+                            vm.ABefore = data.data.sessions.ABefore;
+                            vm.AAfter = data.data.sessions.AAfter;
+                        }
 
-                        angular.forEach(data.data.data.sessions,
-                          function (dt, index, array) {
-                            if (dt.projectCategory === 1) {
-                                vm.afterA.push(dt);
-                            } else if (dt.projectCategory === 0) {
-                                vm.beforeA.push(dt);
-                            }
-                        });
-
-                        initTitle(vm.result.title);
+                        initTitle('融资季 · 顶级机构专场');
                     }
                 }).catch(fail);
 
+    }
+
+    function getFinishedData() {
+        if (vm.busy)return;
+        vm.busy = true;
+
+        var senddata = {
+            category: parseInt($stateParams.category),
+            projectCategory: vm.projectCategory ? vm.projectCategory : 0,
+            page: vm.page + 1,
+            pageSize:5,
+        };
+        RongziService.getFinishedData(senddata)
+            .then(function setCommunity(response) {
+                    vm.end = vm.end.concat(response.data.data);
+                    if (response.data.totalPages) {
+                        vm.page = response.data.page || 0;
+
+                        if (response.data.totalPages !== vm.page) {
+                            vm.busy = false;
+                        } else {
+                            vm.finish = true;
+                            vm.more = true;
+                        }
+                    }
+                }).catch(fail);
     }
 
     function initUser() {
@@ -78,10 +132,6 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
                     if (response.data.investor) {
                         vm.investRole = true;
                     }
-
-                    // if (response.data.commonEmail) {
-                    //     vm.hasEmail = true;
-                    // }
                 }
             });
     }
@@ -91,18 +141,14 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     function fail(err) {
-        ErrorService.alert(err.err.msg);
-    }
-
-    function removeHeader() {
-        $('.common-header.J_commonHeaderWrapper').remove();
+        ErrorService.alert(err.msg);
     }
 
     function initLinkmeInvestor() {
         var krdata = {};
         krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/organization?id=' + $stateParams.id + '","currentRoom":"0"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/organization?id=' + $stateParams.id + '&category=' + $stateParams.category + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {
                 if (err) {
@@ -155,6 +201,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
         vm.needApp = true;
         vm.setEmailState = false;
         vm.addEmail = addEmail;
+        vm.remindText = '顶级机构专场任一专场';
 
         function cancelModal() {
             $modalInstance.dismiss();
@@ -168,6 +215,8 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
                 RongziService.setEmail(senddata)
                 .then(function setSussess() {
                     vm.title = '添加邮件提醒成功！';
+                    vm.cancelRemindtxt = '当顶级机构专场任一专场开始时，您将会包括邮件在内的所有提醒，' +
+                       '确保您不会错过任一机构专场';
                     vm.setEmailState = true;
                     vm.hasEmail = true;
                 })
@@ -180,8 +229,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
 
     function subscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
-            category:vm.result.category,
+            category: -1,
             subscibeType:0,
         };
         RongziService.setSubscribe(senddata)
@@ -201,8 +249,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
 
     function cancelSubscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
-            category:vm.result.category,
+            category: -1,
             subscibeType:0,
         };
         RongziService.cancelSubscribe(senddata)

@@ -11,7 +11,7 @@
         })(window,document,'script','//36kr.com/global/stat.js','krtracker');
         krtracker('trackPageView', location.pathname+location.search);
     </script>
-
+<script src="https://lkme.cc/js/linkedme.min.js" ></script>
 <!-- build:css /styles/company.css -->
     <link rel="stylesheet" href="/styles/company.css" >
 <!-- endbuild -->
@@ -40,7 +40,6 @@
     HOST = hostMap[HOST] || HOST;
     var API = '//' +  HOST + '/api/mobi-investor/company/';
     var isDesktop = !navigator.userAgent.toLowerCase().match(/(iphone|android)/);
-
 
     function preventPopup() { //定义preventPopup函数
         clearTimeout(timeout);
@@ -96,11 +95,11 @@
                 $('#logo').error(function(e) {
                     this.src = '//krplus-pic.b0.upaiyun.com/avatar/201606/27023623/g5zmv2gp7gacp0ly.png';
                 });
-                if (fromWeixin) {
-                  $('#downloadBtn').attr('href', 'http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment');
-                }else {
-                  $('#downloadBtn').attr('href', 'http://rong.36kr.com/company/' + data.cid + '/universallink');
-                }
+                //if (fromWeixin) {
+                //  $('#downloadBtn').attr('href', 'http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment');
+              //  }else {
+                  //$('#downloadBtn').attr('href', 'http://rong.36kr.com/company/' + data.cid + '/universallink');
+                //}
                 //$('#downloadBtn').attr('href', 'http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment');
                 $('#name').html(data.name);
                 $('#brief').html(data.brief);
@@ -127,29 +126,52 @@
         return location.href.indexOf('universallink') > -1;
     }
 
-    $(function () {
-        var userSystem=navigator.userAgent; //userAgent
+    function initLinkme() {
+        var krdata = {};
+        krdata.type =  'test';
+        krdata.params =
+        '{"openlink":"https://' + HOST + '/m/company.html?cid='+cid+'","krtou":"krtou://company/'+cid+'"  }';
 
+        window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
+        { type: 'test' }, function (err, res) {
+                if (err) {
+                    return;
+                }
+
+                window.linkedme.link(krdata, function (err, data) {
+                        if (err) {
+                            // 生成深度链接失败，返回错误对象err
+                            console.log(err);
+                        } else {
+                            // 生成深度链接成功，深度链接可以通过data.url得到
+                            $('#downloadBtn').attr('data-href',data.url);
+                        }
+                    }, false);
+            });
+    }
+
+    $(function () {
+        var isInApp = !!navigator.userAgent.match(/36kr/) || window.isAppAgent;
+        var userSystem=navigator.userAgent; //userAgent;
+        if(!isInApp) {
+            initLinkme();
+        }
         if(isUniversalLink() &&
             isWeixin()
         ) {
             $('.masksafari').show();
         }
+
         $('#downloadBtn').click(function clickCb(e){
-            if (isWeb()) {
-                e.preventDefault();
-                $('.maskqrcode').show();
-                return;
-            }
-            if(userSystem.indexOf('Android') > -1){
-                e.preventDefault();
-                startApp('krtou://company/' + cid);
-                goYingyongbao('android');
-            }else if(/iphone/i.test(userSystem)){
+          e.preventDefault();
+          var hf = $(this).attr('data-href');
+          if (!isInApp){
+              window.location = hf;
+          }else {
               startApp('krtou://company/' + cid);
-              goYingyongbao('ios');
-            }
-        })
+          }
+
+        });
         if (!isWeixin()&&(parseInt(fromWeixin) === 1)){
             if(userSystem.indexOf('Android') > -1){
                 startApp('krtou://company/' + cid);

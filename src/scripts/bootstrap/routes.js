@@ -156,7 +156,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //机构页
     $stateProvider.state('organization', {
-        url:'/org/:id',
+        url:'/org/:id?',
         controllerAs: 'vm',
         controller: 'OrganizationDetailController',
         templateUrl: 'templates/organization/index.html',
@@ -436,24 +436,31 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('rongzi.organization', {
-        url:'/organization?id',
+        url:'/organization?{category}',
         controllerAs: 'vm',
         controller: 'OrganizationController',
         templateUrl: 'templates/rongzi/organization.html',
     });
 
     $stateProvider.state('rongzi.community', {
-        url:'/community?id',
+        url:'/community?{category}',
         controllerAs: 'vm',
         controller: 'CommunityController',
         templateUrl: 'templates/rongzi/community.html',
     });
 
     $stateProvider.state('rongzi.investor', {
-        url:'/investor?id',
+        url:'/investor?{category}&{name}&{state}',
         controllerAs: 'vm',
         controller: 'InvestorController',
         templateUrl: 'templates/rongzi/investor.html',
+    });
+
+    $stateProvider.state('rongzi.investorInfo', {
+        url:'/investorInfo?{category}&{id}&{debug}&{name}&{state}',
+        controllerAs: 'vm',
+        controller: 'InvestorInfoController',
+        templateUrl: 'templates/rongzi/investorInfo.html',
     });
 
     $stateProvider.state('rongzi.bestlist', {
@@ -478,6 +485,34 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'EnrollController',
         templateUrl: 'templates/rongzi/enroll.html',
+    });
+
+    $stateProvider.state('rongzi.orgdetail', {
+        url:'/orgdetail?id&{name}&{category}&{state}',
+        controllerAs: 'vm',
+        controller: 'OrgDetailController',
+        templateUrl: 'templates/rongzi/org-detail.html',
+    });
+
+    $stateProvider.state('rongzi.comdetail', {
+        url:'/comdetail?id&{name}&{category}&{state}',
+        controllerAs: 'vm',
+        controller: 'ComDetailController',
+        templateUrl: 'templates/rongzi/com-detail.html',
+    });
+
+    $stateProvider.state('rongzi.comlike', {
+        url:'/comlike?id&{name}&{category}',
+        controllerAs: 'vm',
+        controller: 'ComLikeController',
+        templateUrl: 'templates/rongzi/com-like.html',
+    });
+
+    $stateProvider.state('rongzi.orglike', {
+        url:'/orglike?id&{name}&{category}',
+        controllerAs: 'vm',
+        controller: 'OrgLikeController',
+        templateUrl: 'templates/rongzi/org-like.html',
     });
 
     function checkClaimStatus(ClaimService, $stateParams) {

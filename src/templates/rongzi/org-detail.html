@@ -1,0 +1,59 @@
+<div class="rongzi-common-backg detail-wrapper" ng-class="{true:'paddTopBar',false:''}[!vm.needApp]">
+
+  <div class="rongzi-common-top">
+    <div class="rongzi-common-logo" >
+      <img src="/styles/images/rongzi/rongzi-logo.png" />
+    </div>
+
+    <div class="rongzi-common-textbtn-org">
+      <div class="namearr">
+        <label class="org-orange" ng-repeat="item in vm.nameArr track by $index">{{item}}</label>
+      </div>
+      <img src="/styles/images/rongzi/top-name-bg.png" />
+    </div>
+
+      <div class="rongzi-enroll-text">
+          <p ng-bind="vm.result.intro">
+          </p>
+      </div>
+
+      <div class="rongzi-common-btn" ng-if="vm.state === 'start' || vm.status === 'TO_START'">
+        <a href="javascript:void(0)" class="org-btn" id="org-openApp"
+            ng-click="vm.subscribe(i,$event)">
+
+          <b ng-if="!vm.needApp && vm.remind !== 0">下载创投助手，订阅本专场</b>
+          <b ng-if="vm.needApp && vm.remind !== 0">订阅{{vm.name}}</b>
+          <b ng-if="vm.remind === 0">取消开场提醒</b>
+        </a>
+      </div>
+  </div>
+
+  <div class="detail-content" ng-if="vm.hasPermission">
+    <div class="rongzi-tab tab-org-border"  ng-if="vm.isDisplayTab">
+      <a ng-click="vm.tabChange($event)" class="tab-org-selected" id ="ABefore"
+        href="javascript:void(0)">
+        <b>A轮及以前</b>
+      </a>
+      <a ng-click="vm.tabChange($event)" id ="AAfter"   href="javascript:void(0)" >
+        <b>A轮后</b>
+      </a>
+    </div>
+    <div ng-include="'templates/rongzi-common/list-template.html'">
+    </div>
+  </div>
+
+  <div class="detail-content" ng-if="!vm.hasPermission">
+    <div ng-include="'templates/rongzi-common/mask.html'">
+    </div>
+  </div>
+
+<div class="detail-bottom">
+  <div ui-sref="rongzi.organization({category:vm.category})">
+    返回机构专场
+  </div>
+  <div ui-sref="rongzi.main">
+    返回融资季主会场
+  </div>
+</div>
+<div ng-include="'templates/rongzi/meiqia.html'"></div>
+</div>

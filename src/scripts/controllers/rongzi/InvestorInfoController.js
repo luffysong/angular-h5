@@ -1,75 +1,49 @@
 var angular = require('angular');
 angular.module('defaultApp.controller')
-  .controller('CommunityController', CommunityController);
+  .controller('InvestorInfoController', InvestorInfoController);
 
-function CommunityController($document, $timeout, $scope, $modal, loading, $stateParams,
-  RongziService, FindService, $state, UserService, ErrorService, hybrid) {
+function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziService, $state, UserService, ErrorService, FindService, hybrid) {
     var vm = this;
     vm.subscribe = subscribe;
-    vm.getFinishedData = getFinishedData;
     vm.needApp = true;
     vm.investRole = false;
     vm.hasEmail = false;
     vm.openApp = openApp;
     vm.openAppUrl;
-    vm.tabChange = tabChange;
-    vm.Aafter = false;
-    vm.Abefore = true;
-    vm.category = $stateParams.category;
-
-    //分页处理
     vm.page = 0;
-    vm.busy = false;
-    vm.end = [];
-
+    vm.more = false;
+    vm.displayMore = displayMore;
+    vm.investors = [];
+    vm.names = [];
+    vm.noData = true;
+    vm.shareWechat = shareWechat;
+    vm.downloadMask = downloadMask;
     init();
+
     function init() {
         if (!hybrid.isInApp) {
-            initLinkmeComm();
+            initLinkmeInvestor();
             vm.needApp = false;
         }
 
-        loading.hide('findLoading');
-        initUser();
         initData();
-        initWeixin();
+        initUser();
         initPxLoader();
+        vm.state = $stateParams.state;
+        loading.hide('findLoading');
     }
 
-    function initWeixin() {
+    function initWeixin(name) {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】创业圈“黄埔军校”输出，为认可的创业基因助威。',
+            shareTitle: '【创投助手·融资季】明星投资人' + name + '独家项目集，等你来掐尖儿。',
             shareUrl: window.location.href,
+            krtou: 'weChatShare/' + $stateParams.id,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: '每周2个创业者社群精品项目选送，名企名校类及其他社群类，快来对接项目！',
+            shareDesc: '明星携被投项目加入，每周二、三更新两场。',
         };
 
         var obj = {};
         window.InitWeixin(obj);
-    }
-
-    function tabChange(e) {
-        var obj = angular.element(e.currentTarget);
-        var id = obj.attr('id');
-        obj.parent().children().removeClass('tab-comm-selected');
-        obj.addClass('tab-comm-selected');
-        if ('AAfter' === id) {
-            vm.Aafter = true;
-            vm.Abefore = false;
-            resetData(1);
-        } else if (('ABefore') === id) {
-            vm.Aafter = false;
-            vm.Abefore = true;
-            resetData(0);
-        }
-    }
-
-    function resetData(n) {
-        vm.page = 0;
-        vm.busy = false;
-        vm.end = [];
-        vm.projectCategory = n;
-        getFinishedData();
     }
 
     function initPxLoader() {
@@ -85,43 +59,30 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     }
 
     function initData() {
-        RongziService.getCommunity({ category: parseInt($stateParams.category) })
-            .then(function setCommunity(data) {
+        RongziService.getBaseInfo($stateParams.id)
+            .then(function (data) {
                     if (data.data) {
                         vm.result = data.data;
-                        vm.remind = vm.result.remind;
-                        if (data.data.sessions) {
-                            vm.goodSchoolCompany = data.data.sessions.goodSchoolCompany;
-                            vm.workAssociation = data.data.sessions.workAssociation;
-                        }
+                        vm.name = data.data.name;
+                        vm.status = vm.result.status;
+                        initWeixin(vm.name);
+                        vm.names = data.data.name.split('');
+                        initTitle('融资季·' + data.data.name);
                     }
                 }).catch(fail);
-    }
-
-    function getFinishedData() {
-        if (vm.busy)return;
-        vm.busy = true;
-
-        var senddata = {
-            category: parseInt($stateParams.category),
-            projectCategory: vm.projectCategory ? vm.projectCategory : 0,
-            page: vm.page + 1,
-            pageSize:5,
-        };
-        RongziService.getFinishedData(senddata)
-            .then(function setCommunity(response) {
-                    vm.end = vm.end.concat(response.data.data);
-                    if (response.data.totalPages) {
-                        vm.page = response.data.page || 0;
-
-                        if (response.data.totalPages !== vm.page) {
-                            vm.busy = false;
-                        } else {
-                            vm.finish = true;
-                            vm.more = true;
-                        }
+        if (UserService.getUID()) {
+            RongziService.getProjectList($stateParams.id)
+                .then(function (data) {
+                    if (data.data.projects) {
+                        vm.projects = data.data.projects;
+                        vm.noData = false;
                     }
+
+                    vm.canWeChatShare = data.data.canWeChatShare;
+                    vm.hasPermission = data.data.hasPermission;
+                    vm.remind = data.data.remind;
                 }).catch(fail);
+        }
     }
 
     function initUser() {
@@ -139,19 +100,11 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
             });
     }
 
-    function initTitle(t) {
-        document.title = '融资季 · 创业社群专场';
-    }
-
-    function fail(err) {
-        ErrorService.alert(err.msg);
-    }
-
-    function initLinkmeComm() {
+    function initLinkmeInvestor() {
         var krdata = {};
         krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/community?id=' + $stateParams.id + '&category=' + $stateParams.category + '","currentRoom":"0"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investorInfo?id=' + $stateParams.id + '&category=' + $stateParams.category + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {
                 if (err) {
@@ -178,12 +131,12 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         item = item ? item : {};
         item.investRole = vm.investRole;
         item.hasEmail = vm.hasEmail;
+        item.remindText = vm.name;
         if (!hybrid.isInApp) {
-            //document.location.href = vm.openAppUrl;
             defaultModal();
-        } else if (hybrid.isInApp && vm.result.remind === 1 && UserService.getUID()) {
+        }else if (hybrid.isInApp && vm.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
-        }else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
+        }else if (UserService.getUID() && vm.remind === 0) {
             cancelSubscribeAction(item);
         } else {
             window.location.href = 'https://passport.36kr.com/pages';
@@ -202,10 +155,9 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         vm.hasEmail = obj.hasEmail;
         vm.cancelMainRemind = obj.cancelMainRemind;
         vm.cancelRemindtxt = obj.cancelRemindtxt;
-        vm.needApp = true;
         vm.setEmailState = false;
         vm.addEmail = addEmail;
-        vm.remindText = '创业社群专场任一专场';
+        vm.remindText = obj.remindText;
 
         function cancelModal() {
             $modalInstance.dismiss();
@@ -219,8 +171,8 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
                 RongziService.setEmail(senddata)
                 .then(function setSussess() {
                     vm.title = '添加邮件提醒成功！';
-                    vm.cancelRemindtxt = '当创业社群专场任一专场开始时，您将会包括邮件在内的所有提醒，' +
-                       '确保您不会错过任一社群专场';
+                    vm.cancelRemindtxt = '当' + vm.remindText + '专场开始时，您将会收到包括邮件在内的所有提醒，' +
+                       '确保您不会错过本专场';
                     vm.setEmailState = true;
                     vm.hasEmail = true;
                 })
@@ -231,10 +183,22 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         }
     }
 
+    function initTitle(t) {
+        document.title = t;
+    }
+
+    function fail(err) {
+        ErrorService.alert(err.err.msg);
+    }
+
+    function removeHeader() {
+        $('.common-header.J_commonHeaderWrapper').remove();
+    }
+
     function subscribeAction(item) {
         var senddata = {
-            category: 0,
-            subscibeType:0,
+            id:vm.result.id,
+            subscibeType: 1,
         };
         RongziService.setSubscribe(senddata)
         .then(function setSussess(data) {
@@ -246,24 +210,24 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
             item.cancelMainRemind = false;
             item.title = '设置开场提醒成功！';
             modalOpen(item);
-            vm.result.remind = 0;
+            vm.remind = 0;
         })
         .catch(fail);
     }
 
     function cancelSubscribeAction(item) {
         var senddata = {
-            category: 0,
-            subscibeType:0,
+            id:vm.result.id,
+            subscibeType:1,
         };
         RongziService.cancelSubscribe(senddata)
         .then(function setSussess() {
             item.cancelMainRemind = true;
             item.title = '取消开场提醒成功！';
             item.hasEmail = true;
-            item.cancelRemindtxt = '后续新上的社群专场将不会有专场提醒，现已有排期的专场仍会提醒！';
+            item.cancelRemindtxt = '本专场开始前不会有开场提醒！';
             modalOpen(item);
-            vm.result.remind = 1;
+            vm.remind = 1;
         })
         .catch(fail);
     }
@@ -282,10 +246,17 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         });
     }
 
-    function openApp() {
+    function displayMore() {
+        initData();
+    }
+
+    function openApp(ccid) {
         if (!hybrid.isInApp) {
             defaultModal();
+        } else if (hybrid.isInApp && UserService.getUID() && ccid) {
+            hybrid.open('crmCompany/' + ccid);
         }
+
     }
 
     function defaultModal(item) {
@@ -315,4 +286,19 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
             $modalInstance.dismiss();
         }
     }
+
+    function shareWechat() {
+        if (!hybrid.isInApp) {
+            defaultModal();
+        }else if (hybrid.isInApp && !UserService.getUID()) {
+            window.location.href = 'https://passport.36kr.com/pages';
+        } else if (hybrid.isInApp && UserService.getUID()) {
+            hybrid.open('weChatShare/' + $stateParams.id);
+        }
+    }
+
+    function downloadMask() {
+        window.location.href = vm.openAppUrl;
+    }
+
 }

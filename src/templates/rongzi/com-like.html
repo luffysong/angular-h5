@@ -1,0 +1,31 @@
+<div class="rongzi-common-backg community-wrapper" ng-class="{true:'paddTopBar',false:''}[!vm.needApp]">
+  <div  ng-include="'templates/rongzi-common/top-like.html'"
+      ng-init=" topdata = 'community' ">
+  </div>
+  <div class="rongzi-split-block">
+    </div>
+
+  <div class="rongzi-tab tab-comm-border">
+    <a ng-click="vm.tabChange($event)" class="tab-comm-selected" id ="ABefore"
+    href="javascript:void(0)">
+      <b>名企名校</b>
+    </a>
+    <a ng-click="vm.tabChange($event)" id ="AAfter"   href="javascript:void(0)" >
+      <b>其他创业社群</b>
+    </a>
+
+  </div>
+
+  <div class="community-content">
+    <div ng-include="'templates/rongzi-common/like-list.html'"></div>
+  </div>
+
+  <div class="rongzi-split-block">
+    </div>
+
+  <div ng-include="'templates/rongzi-common/bottom.html'" ng-init="item = 'community'">
+  </div>
+
+
+  <div ng-include="'templates/rongzi/meiqia.html'"></div>
+</div>

@@ -1,26 +1,29 @@
 <div class="main-special">
   <div class="outer-border">
     <div class="inner-border">
-      <div class="special-title m-red-title">
-        <span >{{vm.community.secondTitle}}</span>
+      <!-- <div class="special-title m-red-title">
+        <span>创业社群专场</span>
+      </div> -->
+      <div class="special-title" ui-sref="rongzi.community({category: vm.sessions.assc.category})">
+        <img src="/styles/images/rongzi/com-title.png"/>
+        <span class="orange">查看详情 >></span>
       </div>
       <div class="split-border"></div>
-      <div class="special-content m-red-txt">
-        <span ng-bind="vm.community.ruleDescription" ng-if="vm.community.ruleDescription">
-          </span>
+      <div class="special-content">
+        <span>每日24：00统计更新，创业者自助投递项目参选，根据24小时内对接数取前三名展示，展示时长24小时。 </span>
       </div>
       <div class="split-border"></div>
       <div class="special-logo">
-        <!-- <div class="item" ng-repeat="obj in vm.community.sessions">
+        <div class="item" ng-repeat="obj in vm.sessions.assc.list">
           <div class="border-bg">
-            <div class="logo-border">
-              <div class="logo" ng-click="vm.openApp()" ng-if="obj.logo" style="background-image: url({{obj.logo}})"></div>
+            <div class="logo-border-yellow">
+              <div class="logo" ng-if="obj.logo" ui-sref="rongzi.comdetail({id: obj.id, name: obj.name,category: obj.category})" style="background-image: url({{obj.logo}})"></div>
             </div>
           </div>
-          <div class="org-name"><span ng-if="obj.name">{{obj.name}}</span></div>
-        </div> -->
+          <div class="org-name yellow"><span ng-if="obj.name">{{obj.name}}</span></div>
+        </div>
 
-        <div class="item">
+        <!-- <div class="item">
           <div class="border-bg">
             <div class="logo-border">
               <div class="logo" ng-click="vm.openApp()" style="background-image: url('https://pic.36krcnd.com/avatar/201704/05093225/aecdmbd7zmon2u08.png')"></div>
@@ -44,9 +47,12 @@
             </div>
           </div>
           <div class="org-name"><span>腾讯系专场</span></div>
-        </div>
+        </div> -->
         <div class="special-info-btn">
-          <button class="rongzi-btn" ui-sref="rongzi.community({id: vm.community.id})" ><b>查看详情</b></button>
+          <button class="btn-yellow" ui-sref="rongzi.community({category: vm.community.category})" ><b>查看详情</b></button>
+<!--
+          <button class="btn-yellow" ui-sref="rongzi.investor({category: vm.sessions.assc.category})"><b>查看详情</b></button>
+-->
         </div>
       </div>
     </div>

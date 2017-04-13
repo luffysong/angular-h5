@@ -12,8 +12,10 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
     vm.openAppUrl;
     vm.page = 0;
     vm.more = false;
-    vm.displayMore = displayMore;
-    vm.investors = [];
+    vm.busy = false;
+    vm.moreFinishedData = moreFinishedData;
+    vm.finished = [];
+
     init();
 
     function init() {
@@ -22,12 +24,11 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
             vm.needApp = false;
         }
 
-        console.log(vm.needApp);
-
         initData();
         initUser();
         initWeixin();
         initPxLoader();
+        initTitle('融资季·明星投资人专场');
         loading.hide('findLoading');
     }
 
@@ -57,32 +58,38 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
 
     function initData() {
         var request = {
-            id: $stateParams.id,
-            page: vm.page += 1,
-            pageSize:4,
+            category: $stateParams.category
         };
-        console.log(request);
         RongziService.getInvestor(request)
             .then(function setCommunity(data) {
                     if (data.data) {
-                        vm.result = data.data.data;
-                        angular.forEach(data.data.data.sessions,
-                          function (dt, index, array) {
-                            var nameArr = dt.name.split('');
-                            dt.nameArr = nameArr;
-                            vm.investors.push(dt);
-                        });
-
-                        if (data.data.totalPages) {
-                            vm.page = data.data.page || 0;
-                            if (data.data.totalPages === vm.page) {
-                                vm.more = true;
-                            }
-                        }
-
-                        initTitle(vm.result.title);
+                        vm.result = data.data;
                     }
                 }).catch(fail);
+    }
+
+    function moreFinishedData() {
+        if (vm.busy)return;
+        vm.busy = true;
+        var request = {
+            page: vm.page += 1,
+            pageSize: 2,
+            category: $stateParams.category
+        };
+        RongziService.getFinished(request)
+            .then(function setCommunity(data) {
+                if (data.data) {
+                    vm.finished = vm.finished.concat(data.data.data);
+                    if (data.data.totalPages) {
+                        vm.page = data.data.page || 0;
+                        if (data.data.totalPages !== vm.page) {
+                            vm.busy = false;
+                        } else {
+                            vm.finish = true;
+                        }
+                    }
+                }
+            }).catch(fail);
     }
 
     function initUser() {
@@ -104,7 +111,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         var krdata = {};
         krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investor?id=' + $stateParams.id + '","currentRoom":"0"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investor?category=' + $stateParams.category + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {
                 if (err) {
@@ -157,6 +164,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         vm.cancelRemindtxt = obj.cancelRemindtxt;
         vm.setEmailState = false;
         vm.addEmail = addEmail;
+        vm.remindText = '明星投资人专场任一专场';
 
         function cancelModal() {
             $modalInstance.dismiss();
@@ -170,6 +178,8 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
                 RongziService.setEmail(senddata)
                 .then(function setSussess() {
                     vm.title = '添加邮件提醒成功！';
+                    vm.cancelRemindtxt = '当明星投资人专场任一专场开始时，您将会收到包括邮件在内的所有提醒，' +
+                       '确保您不会错过任一投资人专场';
                     vm.setEmailState = true;
                     vm.hasEmail = true;
                 })
@@ -194,8 +204,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
 
     function subscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
-            category:vm.result.category,
+            category: 1,
             subscibeType:0,
         };
         RongziService.setSubscribe(senddata)
@@ -215,8 +224,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
 
     function cancelSubscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
-            category:vm.result.category,
+            category: 1,
             subscibeType:0,
         };
         RongziService.cancelSubscribe(senddata)

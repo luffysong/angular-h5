@@ -1,7 +1,209 @@
-<div class="list-tab">
-  <a href="#/rongzi/community?id={{vm.result.id}}#famous"><div class="tab-before">名企名校</div></a>
-  <a href="#/rongzi/community?id={{vm.result.id}}#other"><div class="tab-after">其他创业社群</div></a>
+<div class="rongzi-tab tab-comm-border">
+  <a ng-click="vm.tabChange($event)" class="tab-comm-selected" id ="ABefore"
+  href="javascript:void(0)">
+    <b>名企名校</b>
+  </a>
+  <a ng-click="vm.tabChange($event)" id ="AAfter"   href="javascript:void(0)" >
+    <b>其他创业社群</b>
+  </a>
+
 </div>
+
+<div class="org-a-before" ng-show="vm.Abefore">
+  <div class="special-item green-color" ng-if="vm.goodSchoolCompany.goingSessions" ng-repeat=" item in vm.goodSchoolCompany.goingSessions">
+    <div class="special-list-border yellowdotted-color">
+      <!--ng-click="vm.openApp()"-->
+      <div class="special-logo green-color"
+        ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"
+       style="background-image: url({{item.logo}})"></div>
+      <div class="special-info">
+        <div class="special-name yellowdotted-color"
+        ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"
+        >
+          {{item.name}}
+        </div>
+        <div class="special-arrow green-arrow"></div>
+        <div class="special-content">
+          {{item.intro}}
+        </div>
+        <div class="special-type yellowdotted-color" ng-if="item.sessionType">
+            {{item.sessionType}}
+        </div>
+        <div class="show-info">
+            <span class="yellowdotted-color"><b>正在进行</b></span>&nbsp;&nbsp;&nbsp;
+            <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"><b>查看详情 ></b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rongzi-split-block" ng-if="vm.goodSchoolCompany.startSessions">
+    <div class="rongzi-tag tag-comm-oncome">
+      <b>即将开始</b>
+    </div>
+    <div class="rongzi-favorite" ui-sref="rongzi.comlike({category:vm.category})">
+      投资人最喜爱的社群排行榜>>
+    </div>
+  </div>
+
+  <div class="special-item green-color"  ng-if="vm.goodSchoolCompany.startSessions" ng-repeat=" item in vm.goodSchoolCompany.startSessions">
+    <div class="special-list-border yellowdotted-color">
+      <div class="special-logo green-color"
+        ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'start'})"
+      style="background-image: url({{item.logo}})"></div>
+      <div class="special-info">
+        <div class="special-name yellowdotted-color"
+        ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'start'})">
+          {{item.name}}
+        </div>
+        <div class="special-arrow green-arrow"></div>
+        <div class="special-content">
+          {{item.intro}}
+        </div>
+        <div class="special-time yellowdotted-color" ng-bind="item.startAt | date:'MM月dd日 a hh:mm'">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rongzi-vacancy">
+    虚位以待，请联系客服。
+  </div>
+
+  <div class="rongzi-split-block" >
+    <div class="rongzi-tag tag-end" ng-if="vm.end.length > 0">
+      <b>已完结</b>
+    </div>
+  </div>
+
+  <ul infinite-scroll='vm.getFinishedData(0)' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+    <li  ng-if="vm.end" ng-repeat=" item in vm.end track by $index" >
+      <div class="special-item green-color" >
+        <div class="special-list-border yellowdotted-color">
+          <div class="special-logo green-color"
+            ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'end'})"
+            style="background-image: url({{item.logo}})"></div>
+          <div class="special-info">
+            <div class="special-name gray-color"
+            ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'end'})">
+              {{item.name}}
+            </div>
+            <div class="special-arrow green-arrow"></div>
+            <div class="special-content">
+              {{item.intro}}
+            </div>
+            <div class="show-info">
+              <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日'"></b></span>&nbsp;&nbsp;
+              <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'end'})"><b>查看详情 ></b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      </li>
+    </ul>
+    <footer ng-if="vm.busy && !vm.finish &&  vm.page">加载更多...</footer>
+    <footer ng-if="vm.finish">全部内容加载完毕</footer>
+  <div class="rongzi-split-block" >
+  </div>
+</div>
+
+
+<!---其他创业社群-->
+
+<div class="org-a-after" ng-show="vm.Aafter">
+  <div class="rongzi-split-block" >
+  </div>
+
+  <div class="special-item green-color" ng-if="vm.workAssociation.goingSessions" ng-repeat=" item in vm.workAssociation.goingSessions">
+    <div class="special-list-border yellowdotted-color">
+      <div class="special-logo green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})" style="background-image: url({{item.logo}})"></div>
+      <div class="special-info">
+        <div class="special-name yellowdotted-color"
+        ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})">
+          {{item.name}}
+        </div>
+        <div class="special-arrow green-arrow"></div>
+        <div class="special-content">
+          {{item.intro}}
+        </div>
+        <div class="special-type yellowdotted-color" ng-if="item.sessionType">
+            {{item.sessionType}}
+        </div>
+        <div class="show-info">
+            <span class="yellowdotted-color"><b>正在进行</b></span>&nbsp;&nbsp;
+            <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"><b>查看详情 ></b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rongzi-split-block" ng-if="vm.workAssociation.startSessions">
+    <div class="rongzi-tag tag-comm-oncome">
+      <b>即将开始</b>
+    </div>
+    <div class="rongzi-favorite" ui-sref="rongzi.comlike({category:vm.category})">
+      投资人最喜爱的社群排行榜>>
+    </div>
+  </div>
+
+  <div class="special-item green-color"  ng-if="vm.workAssociation.startSessions" ng-repeat=" item in vm.workAssociation.startSessions">
+    <div class="special-list-border yellowdotted-color">
+      <div class="special-logo green-color"
+      ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'start'})" style="background-image: url({{item.logo}})"></div>
+      <div class="special-info">
+        <div class="special-name yellowdotted-color">
+          {{item.name}}
+        </div>
+        <div class="special-arrow green-arrow"></div>
+        <div class="special-content">
+          {{item.intro}}
+        </div>
+        <div class="special-time yellowdotted-color" ng-bind="item.startAt | date:'MM月dd日 a hh:mm'">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rongzi-vacancy">
+    虚位以待，请联系客服。
+  </div>
+
+  <div class="rongzi-split-block" >
+    <div class="rongzi-tag tag-end" ng-if="vm.end.length > 0">
+      <b>已完结</b>
+    </div>
+  </div>
+
+  <ul infinite-scroll='vm.getFinishedData(1)' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+    <li  ng-if="vm.end" ng-repeat=" item in vm.end track by $index" >
+      <div class="special-item green-color" >
+        <div class="special-list-border yellowdotted-color">
+          <div class="special-logo green-color"
+          ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'end'})" style="background-image: url({{item.logo}})"></div>
+          <div class="special-info">
+            <div class="special-name gray-color">
+              {{item.name}}
+            </div>
+            <div class="special-arrow green-arrow"></div>
+            <div class="special-content">
+              {{item.intro}}
+            </div>
+            <div class="show-info">
+              <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日'"></b></span>&nbsp;&nbsp;
+              <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'end'})"><b>查看详情 ></b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+  </li>
+  </ul>
+  <footer ng-if="vm.busy && !vm.finish && vm.page">加载更多...</footer>
+  <footer ng-if="vm.finish">全部内容加载完毕</footer>
+  <div class="rongzi-split-block" >
+  </div>
+</div>
+
+
+
+<!--
 <div class="org-list">
   <div class="a-before" id="famous">
     <div class="phase-title"><h2>名企名校</h2></div>
@@ -16,7 +218,7 @@
     <div class="phase-title"><h2>其他创业社群</h2></div>
 
     <div class="org-item" ng-if="vm.other" ng-repeat="item in vm.other">
-      <!-- <div class="fa">F A</div> -->
+      <!-- <div class="fa">F A</div>
       <div class="logo" ng-click="vm.openApp()" style="background-image: url('{{item.logo}}')"></div>
       <div class="name" ng-click="vm.openApp()">{{item.name}}</div>
       <div class="time">{{item.startAt | date:'MM月dd日 a hh:mm'}}</div>
@@ -24,3 +226,4 @@
 
   </div>
 </div>
+-->

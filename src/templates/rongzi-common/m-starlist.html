@@ -1,25 +1,27 @@
 <div class="main-special">
   <div class="outer-border">
     <div class="inner-border">
-      <div class="special-title m-title">
+      <!-- <div class="special-title m-title">
         <span style="letter-spacing: 2px;">创业项目号召力榜单</span>
+      </div> -->
+      <div class="special-title" ui-sref="rongzi.bestlist" >
+        <img src="/styles/images/rongzi/hot-title.png"/>
+        <span class="yellow">查看完整号召力榜单 >></span>
       </div>
       <div class="split-border"></div>
-      <div class="special-content m-txt">
+      <div class="special-content">
         <span>创业者自荐项目打榜，选出2017Q2最具号召力的创业项目！417前榜单实时变动，417后每三日选择TOP3次日首屏展示3天，与数万投资人同行进行甄选，让每一个好项目都不被辜负！</span>
       </div>
       <div class="split-border"></div>
       <div class="special-logo">
-        <div class="item" ng-repeat="obj in vm.starList" ng-if="vm.starList.length">
-          <div class="border-bg">
-            <div class="logo-border" ng-if="obj.logo">
-              <div class="logo" ui-sref="rongzi.share({id: obj.id})"
-              style="background-image: url({{obj.logo}});background-size: contain;"
-              ></div>
-            </div>
-            <div class="logo defaultLogo" ng-if="!obj.logo"
+        <div class="item star-mg" ng-repeat="obj in vm.starList" ng-if="vm.starList.length">
+          <div class="logo-border" ng-if="obj.logo">
+            <div class="logo" ui-sref="rongzi.share({id: obj.id})"
+            style="background-image: url({{obj.logo}})"
             ></div>
           </div>
+          <div class="logo defaultLogo" ng-if="!obj.logo"
+          ></div>
           <div class="org-name">
             <span ng-if="obj.name" ui-sref="rongzi.share({id: obj.id})">{{obj.name}}</span>
             <span ng-if="!obj.name">虚位以待</span>
@@ -43,15 +45,19 @@
             </div>
           </div>
           <div class="item">
+        <div class="default-item" ng-if="!vm.starList.length">
+          <div class="item" ng-repeat="obj in vm.sessions.investor.list">
             <div class="border-bg">
-              <div class="logo defaultLogo"></div>
+              <div class="logo-border-orange">
+                <div class="logo defaultLogo"></div>
+              </div>
             </div>
-            <div class="org-name">
+            <div class="org-name orange">
               <span>虚位以待</span>
             </div>
           </div> -->
           <div class="special-info-btn">
-            <button class="rongzi-btn" ui-sref="rongzi.bestlist" ><b>查看详情</b></button>
+            <button class="btn-orange" ui-sref="rongzi.bestlist" ><b>查看详情</b></button>
           </div>
         </div>
       </div>

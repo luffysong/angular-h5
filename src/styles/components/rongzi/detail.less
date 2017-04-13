@@ -1,0 +1,175 @@
+.detail-wrapper{
+  height: auto;
+  width: 100%;
+  margin: 0 auto;
+  overflow-x:hidden;
+
+  .rongzi-enroll-text{
+    color:#fff3e1;
+  }
+
+  .rongzi-detail-type{
+    width: 100%;
+    color: @commBtn;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-top:10px;
+    span{
+      display: inline-block;
+      border: 1px solid @commBtn;
+      padding:5px 10px;
+      border-radius: 5px;
+    }
+  }
+
+  .rongzi-common-textbtn-org{
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    img{
+      margin: 0 auto;
+      width: 90%;
+    }
+    .namearr{
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      bottom: 10px;
+      padding-bottom: 3px;
+      label{
+        font-size: 22px;
+        display: inline-block;
+        padding: 5px;
+        height: 35px;
+        width: 35px;
+        line-height: 25px;
+        border-radius: 25px;
+        color: #ffeed2;
+        margin: 0 1%;
+        font-weight: 900;
+        text-align: center;
+        color: #ffdbac;
+        box-shadow: 0 0 5px #ffeed2;
+        text-shadow: 0 0 6px rgba(255,255,255,.24), 0 3px 2px rgba(6,0,1,.52);
+        box-shadow: 0 0 6px 2px rgba(255,255,255,.24), inset 0 5px 3px rgba(79,3,1,.51);
+      }
+
+      .org-orange{
+          background-color: @orange;
+      }
+      .com-yellow{
+          background: url('images/rongzi/comdetail-txtbg.png') no-repeat center;
+      }
+      @media screen and (max-width: 320px) {
+        bottom: 10px;
+        label{
+          height: 28px;
+          width: 28px;
+          line-height: 18px;
+          border-radius: 15px;
+          font-size: 18px;
+        }
+      }
+      @media (min-width: 321px) and (max-width: 375px) {
+        bottom: 10px;
+      }
+      @media (min-width: 376px) and (max-width: 414px) {
+        bottom: 12px;
+      }
+      @media screen and (min-width: 768px) {
+        bottom: 20px;
+        label{
+          font-size:25px;
+          height: 70px;
+          width: 70px;
+          border-radius: 35px;
+          line-height: 60px;
+        }
+      }
+    }
+  }
+
+  .detail-content{
+    margin-top: 50px;
+    margin-bottom: 30px;
+    min-height: 400px;
+    height: auto;
+    .rongzi-common-mask{
+      padding-bottom: 60px;
+      position: relative;
+      .share-weixin{
+        margin: 0 auto;
+        margin-top: -100px;
+      }
+    }
+  }
+
+  .detail-nodata{
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffd200;
+    position: relative;
+    height: 100px;
+    line-height: 100px;
+  }
+
+  .special-item{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 15px;
+  }
+
+  .detail-wrapper{
+    .detail-logo{
+      width:100%;
+      height: auto;
+      img{
+        width:100%;
+      }
+    }
+
+    .detail-btn{
+      width:100%;
+      img{
+        width:100%;
+      }
+    }
+
+    .detail-text{
+      width: 100%;
+      text-align: left;
+      font-size:14px;
+      color:#fcc45b;
+      font-weight: bold;
+      line-height: 20px;
+      margin-top: 10px;
+      p{
+        margin: 0 auto;
+        width: 90%;
+      }
+    }
+  }
+
+  .detail-bottom{
+    height: 48px;
+    width: 100%;
+    text-align: center;
+    line-height: 48px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid @orgCor;
+    color: white;
+    bottom: 0px;
+    div{
+      float: left;
+      width: 49%;
+    }
+    div:first-child{
+      background-color: @orgCor;
+      border-left: 1px solid black;
+    }
+  }
+}

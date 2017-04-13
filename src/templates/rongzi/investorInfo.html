@@ -1,0 +1,87 @@
+<div class="rongzi-common-backg investor-wrapper" ng-class="{true:'paddTopBar',false:''}[!vm.needApp]">
+  <div class="rongzi-common-top">
+    <div class="rongzi-common-logo ng-scope">
+      <img src="/styles/images/rongzi/rongzi-logo.png">
+    </div>
+    <div class="rongzi-common-textbtn-investor">
+      <img src="/styles/images/rongzi/top-name-bg.png" class="wd-80">
+      <div class="top-name">
+        <span ng-repeat="item in vm.names track by $index" class="name-bg-green">{{item}}</span>
+      </div>
+    </div>
+
+    <div class="rongzi-common-text">
+      <p ng-if="vm.result.intro" ng-bind="vm.result.intro">
+      </p>
+    </div>
+
+    <div class="investor-remind-btn" ng-if="vm.state === 'start' || vm.status === 'TO_START'">
+      <a href="javascript:void(0)" id="investor-openApp"
+          ng-click="vm.subscribe(i,$event)">
+          <b ng-if="!vm.needApp && vm.remind !== 0">下载创投助手，订阅本专场</b>
+          <b ng-if="vm.needApp && vm.remind !== 0">订阅{{vm.name}}</b>
+          <b ng-if="vm.remind === 0">取消开场提醒</b>
+      </a>
+    </div>
+  </div>
+
+
+  <div class="investor-content" ng-class="{noData: vm.noData}">
+    <div ng-include="'templates/rongzi-common/mask.html'" ng-if="!vm.hasPermission"></div>
+    <div class="investor-list" ng-show="!vm.noData">
+      <div class="special-state orange-color" ng-if="vm.projects.invested.length">已投项目</div>
+      <div class="special-item green-color" ng-repeat="item in vm.projects.invested">
+        <div class="special-list-border orange-color">
+          <div class="special-logo green-color" ng-click="vm.openApp(item.ccid)" style="background-image: url({{item.logo}})"></div>
+          <div class="special-info">
+            <div class="special-name orange-color" ng-click="vm.openApp(item.ccid)">
+              {{item.name}}
+            </div>
+            <div class="special-arrow"></div>
+            <div class="special-phase">
+              <div class="phase-item orange-color">{{item.phase}}</div>
+              <div class="phase-item orange-color">{{item.industry}}</div>
+            </div>
+            <div class="special-content">
+              {{item.brief}}
+            </div>
+            <div class="light">
+              <span class="green-color">亮点</span><span class="green-color mg-l">{{item.advantage}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="special-state green-color" ng-if="vm.projects.recommend.length">推荐项目</div>
+      <div class="special-item meat-color" ng-repeat="item in vm.projects.recommend">
+        <div class="special-list-border green-color">
+          <div class="special-logo green-color" ng-click="vm.openApp(item.ccid)" style="background-image: url({{item.logo}})"></div>
+          <div class="special-info">
+            <div class="special-name green-color" ng-click="vm.openApp(item.ccid)">
+              {{item.name}}
+            </div>
+            <div class="special-arrow-meat"></div>
+            <div class="special-phase">
+              <div class="phase-item green-color">{{item.phase}}</div>
+              <div class="phase-item green-color">{{item.industry}}</div>
+            </div>
+            <div class="special-content">
+              {{item.brief}}
+            </div>
+            <div class="light yellow-color">
+              <span>亮点</span><span class="mg-l">{{item.advantage}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="share-fotter">
+    <div class="back-list" ui-sref="rongzi.investor({category: vm.result.category})">返回明星投资人专场</div>
+    <div class="go-rzj" ui-sref="rongzi.main()">返回主会场</div>
+  </div>
+</div>
+
+<div ng-include="'templates/rongzi/meiqia.html'"></div>
