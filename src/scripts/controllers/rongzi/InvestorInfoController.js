@@ -128,9 +128,11 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         item = item ? item : {};
         item.investRole = vm.investRole;
         item.hasEmail = vm.hasEmail;
-        if (vm.remind === 1 && UserService.getUID()) {
+        if (!hybrid.isInApp) {
+            defaultModal();
+        }else if (hybrid.isInApp && vm.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
-        }else if (UserService.getUID() && vm.remind === 0 && UserService.getUID()) {
+        }else if (UserService.getUID() && vm.remind === 0) {
             cancelSubscribeAction(item);
         } else {
             window.location.href = 'https://passport.36kr.com/pages';
@@ -189,8 +191,8 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     function subscribeAction(item) {
         var senddata = {
             id:vm.result.id,
-            category:vm.result.category,
-            subscibeType:0,
+            category: 100,
+            subscibeType: 1,
         };
         RongziService.setSubscribe(senddata)
         .then(function setSussess(data) {
@@ -210,8 +212,8 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     function cancelSubscribeAction(item) {
         var senddata = {
             id:vm.result.id,
-            category:vm.result.category,
-            subscibeType:0,
+            category: 100,
+            subscibeType:1,
         };
         RongziService.cancelSubscribe(senddata)
         .then(function setSussess() {
