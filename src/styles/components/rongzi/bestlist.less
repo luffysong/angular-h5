@@ -53,17 +53,20 @@
     overflow: hidden;
     font-size: 14px;
     font-weight: bold;
-    color:#fcc45b;
-    span{
-        float: right;
-        margin-right: 10px;
+    color:#ff5000;
+    margin-top: 10px;
+    // span{
+    //     float: right;
+    //     margin-right: 10px;
+    // }
+    span:nth-of-type(2){
+      float: right;
+      margin-right: 10px;
     }
-    // span:nth-of-type(2){
-    //   margin-right: 10px;
-    // }
-    // span:nth-of-type(1){
-    //   margin-left: 10px;
-    // }
+    span:nth-of-type(1){
+      float: left;
+      margin-left: 10px;
+    }
   }
 
   .bestlist-top3{
@@ -107,15 +110,15 @@
           }
           // 屏幕宽度小于767个象素时应用的CSS样式
           @media (min-width: 321px) and (max-width: 767px) {
-            width: 100px;
-            height: 100px;
-            border-radius: 50px;
+            width: 90px;
+            height: 90px;
+            border-radius: 45px;
           }
           // 屏幕宽度在767和991象素之间的CSS样式
           @media (min-width: 768px) and (max-width: 991px) {
-            width: 100px;
-            height: 100px;
-            border-radius: 50px;
+            width: 90px;
+            height: 90px;
+            border-radius: 45px;
           }
 
           .crown{

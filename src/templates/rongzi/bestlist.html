@@ -16,8 +16,8 @@
       </div>
   </div>
   <div class="bestlist-middle">
-      <span ng-click="vm.rule()">上榜规则&nbsp;></span>
-      <span ng-click="vm.rule('w')">上榜福利&nbsp;></span>
+    <span ng-click="vm.rule('w')"><&nbsp;上榜福利</span>
+    <span ng-click="vm.rule()">上榜规则&nbsp;></span>
   </div>
   <div class="bestlist-top3">
     <!-- <div class="hot-title">
@@ -40,7 +40,7 @@
   </div>
   <div class="bestlist-content">
       <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
-          <li   ng-class="{true:'yew-dot',false:'red-dot'}[$index <= 2]" ng-if="vm.prolist" ng-repeat=" item in vm.prolist track by $index" >
+          <li   class="red-dot" ng-if="vm.prolist" ng-repeat=" item in vm.prolist track by $index" >
               <div class="content">
                   <div class="index-num">
                     <label ng-if="$index < 9">0{{$index + 1}}</label>
