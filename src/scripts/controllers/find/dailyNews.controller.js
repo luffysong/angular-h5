@@ -112,7 +112,6 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
         if (!vm.ts) {
             return;
         }
-        console.log('tesy');
         FindService.getDailyReport(vm.sendData)
             .then(function temp(response) {
                 $timeout(function() {
