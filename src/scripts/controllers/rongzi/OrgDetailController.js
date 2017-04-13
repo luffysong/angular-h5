@@ -80,6 +80,12 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
                         vm.AAfter = data.data.projects.AAfter;
                         if (vm.ABefore.length === 0 ||
                             vm.AAfter.length === 0) {
+                            if (vm.ABefore.length === 0) {
+                                vm.Aafter = true;
+                            } else if (vm.AAfter.length === 0) {
+                                vm.Abefore = true;
+                            }
+
                             vm.isDisplayTab = false;
                         }
                     }
