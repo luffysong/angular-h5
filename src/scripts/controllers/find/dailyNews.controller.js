@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('DailyNewsController', DailyNewsController);
 
-function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService, $modal) {
+function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService) {
     var vm = this;
     $('body').css({
         backgroundColor: '#fff'
@@ -206,10 +206,12 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     function filterDismiss(e) {
         e.preventDefault();
         vm.displayFlag = false;
-        if(!vm.sendflagArray.length && !vm.sendSourceArray.length) {
-            loadData();
-        }
-        $('html, body').css({overflow: ''});
+        $timeout(function () {
+            if(!vm.sendflagArray.length && !vm.sendSourceArray.length) {
+                loadData();
+            }
+            $('html, body').css({overflow: ''});
+        },300);
     }
 
     function rollBack() {
