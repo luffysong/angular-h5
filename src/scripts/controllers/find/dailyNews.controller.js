@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('DailyNewsController', DailyNewsController);
 
-function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService) {
+function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService, $modal) {
     var vm = this;
     $('body').css({
         backgroundColor: '#fff'
@@ -15,6 +15,28 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     vm.link = link;
     vm.openNativePage = openNativePage;
 
+    vm.sendData = {
+        industrys: '',
+        websites: '',
+        ts: ''
+    };
+    vm.filter = filter;
+    vm.filterDismiss = filterDismiss;
+    vm.rollBack = rollBack;
+    vm.submit = submit;
+    vm.displayFlag = false;
+
+    vm.itemFlagClick = itemFlagClick;
+    vm.setShowFlag = setShowFlag;
+    vm.showMoreFlag = 8;
+    vm.sendflagArray = [];
+
+    vm.itemSourceClick = itemSourceClick;
+    vm.setShowSource = setShowSource;
+    vm.showMoreSource = 8;
+    vm.sendSourceArray = [];
+    vm.sourceArray = [];
+
     vm.clickNews = function(evtName, obj) {
         sa.track('ClickNews', {
             target: 'news',
@@ -26,13 +48,14 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     };
 
     init();
-
     function init() {
         document.title = '媒体热议';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
 
         loadData();
         initWeixin();
+        getFlagData(); //页面加载获得接口标签
+        getSourceData(); //页面加载获得接口来源
     }
 
     function initWeixin() {
@@ -48,12 +71,16 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     }
 
     function loadData() {
-        FindService.getDailyReport(vm.ts)
+        loading.show('findLoading');
+        setSendData();
+        FindService.getDailyReport(vm.sendData)
             .then(function temp(response) {
                 vm.responseData = generateTime(response.data.data);
                 vm.ts = response.data.ts;
+                vm.sendData.ts = response.data.ts;
                 vm.busy = false;
                 vm.hasInit = true;
+                loadMore();
                 loading.hide('findLoading');
             })
             .catch(error);
@@ -85,17 +112,17 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
         if (!vm.ts) {
             return;
         }
-
-        FindService.getDailyReport(vm.ts)
+        console.log('tesy');
+        FindService.getDailyReport(vm.sendData)
             .then(function temp(response) {
                 $timeout(function() {
                     vm.responseData = vm.responseData.concat(generateTime(response.data.data));
                     vm.ts = response.data.ts;
+                    vm.sendData.ts = response.data.ts;
                     vm.busy = false;
                 }, 500);
             })
             .catch(error);
-
         sa.track('More', {
             page: 'news_list',
         });
@@ -124,4 +151,180 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
             hybrid.open(path);
         }
     }
+
+
+    function getFlagData() {
+        FindService.getIndustry()
+            .then(function temp(response) {
+                vm.flagArray = response.data.industrys;
+                var object;
+                vm.flagArrayAll = [{
+                    active: true,
+                    label: '全部',
+                    id: 0
+                }];
+                for (var i = 0; i < vm.flagArray.length; i++) {
+                    object = {
+                        active: false,
+                        label: vm.flagArray[i].name,
+                        id: vm.flagArray[i].id,
+                    };
+                    vm.flagArrayAll.push(object);
+                }
+            })
+            .catch(error);
+    }
+
+    function getSourceData() {
+        FindService.getWebsite()
+            .then(function temp(response) {
+                vm.sourceArray = response.data.websites;
+                var object;
+                vm.sourceArrayAll = [{
+                    active: true,
+                    label: '全部',
+                    id: 0
+                }];
+                for (var i = 0; i < vm.sourceArray.length; i++) {
+                    object = {
+                        active: false,
+                        label: vm.sourceArray[i].name,
+                        id: vm.sourceArray[i].id
+                    };
+                    vm.sourceArrayAll.push(object);
+                }
+            })
+            .catch(error);
+    }
+
+    function filter(e) {
+        e.preventDefault();
+        vm.displayFlag = true;
+        $('html, body').css({overflow: 'hidden'});
+        filterCount();
+    }
+
+    function filterDismiss(e) {
+        e.preventDefault();
+        vm.displayFlag = false;
+        if(!vm.sendflagArray.length && !vm.sendSourceArray.length) {
+            loadData();
+        }
+        $('html, body').css({overflow: ''});
+    }
+
+    function rollBack() {
+        for (var i = 1; i < vm.flagArrayAll.length; i++) {
+            vm.flagArrayAll[i].active = false;
+        }
+        vm.flagArrayAll[0].active = true;
+        vm.sendflagArray = [];
+
+        for (var i = 1; i < vm.sourceArrayAll.length; i++) {
+            vm.sourceArrayAll[i].active = false;
+        }
+        vm.sourceArrayAll[0].active = true;
+        vm.sendSourceArray = [];
+        filterCount();
+    }
+
+    function submit() {
+        $('html, body').css({overflow: ''});
+        vm.displayFlag = false;
+        loadData();
+    }
+
+    function setSendData() {
+        if (!vm.sendflagArray.length && !vm.sendSourceArray.length) {
+            vm.sendData = {
+                industrys: '',
+                websites: '',
+                ts: ''
+            };
+        } else if (!vm.sendflagArray.length && vm.sendSourceArray.length) {
+            vm.sendData = {
+                industrys: '',
+                websites: vm.sendSourceArray.join(','),
+                ts: ''
+            };
+        } else if (vm.sendflagArray.length && !vm.sendSourceArray.length) {
+            vm.sendData = {
+                industrys: vm.sendflagArray.join(','),
+                websites: '',
+                ts: ''
+            };
+        } else {
+            vm.sendData = {
+                industrys: vm.sendflagArray.join(','),
+                websites: vm.sendSourceArray.join(','),
+                ts: ''
+            };
+        }
+    }
+    //筛选数目统计
+    function filterCount() {
+        setSendData();
+        FindService.getFilterSourceFlagCount(vm.sendData)
+            .then(function temp(response) {
+                vm.proNum = response.data.data;
+            })
+            .catch(error);
+    }
+
+    function itemFlagClick(item, e) {
+        vm.sendflagArray = [];
+        e.preventDefault();
+        if (item.label === '全部') { 
+            for (var i = 1; i < vm.flagArrayAll.length; i++) { 
+                vm.flagArrayAll[i].active = false; 
+            } 
+            vm.flagArrayAll[0].active = true; 
+        } else { 
+            vm.flagArrayAll[0].active = false; 
+            item.active = !item.active; 
+            for (var j = 0; j < vm.flagArrayAll.length; j++) { 
+                if (vm.flagArrayAll[j].active === true) {
+                    vm.sendflagArray.push(vm.flagArrayAll[j].id);
+                } 
+            }  
+            if (!vm.sendflagArray.length) { 
+                vm.flagArrayAll[0].active = true; 
+            } 
+        } 
+        filterCount();
+     }
+
+    function setShowFlag() {
+        vm.showMoreFlag = vm.showMoreFlag == 8 ? vm.flagArrayAll.length : 8;
+    }
+
+    function itemSourceClick(item, e) {
+        vm.sendSourceArray = [];
+        e.preventDefault();
+        if (item.label === '全部') {
+            for (var i = 1; i < vm.sourceArrayAll.length; i++) {
+                vm.sourceArrayAll[i].active = false;
+            }
+            vm.sourceArrayAll[0].active = true;
+        } else {
+            vm.sourceArrayAll[0].active = false;
+            item.active = !item.active;
+            for (var j = 0; j < vm.sourceArrayAll.length; j++) {
+                if (vm.sourceArrayAll[j].active === true) {
+                    vm.sendSourceArray.push(vm.sourceArrayAll[j].id);
+                    //vm.sendSourceArray.push(j);
+                }
+            }
+            if (!vm.sendSourceArray.length) {
+                vm.sourceArrayAll[0].active = true;
+            }
+        }
+        filterCount();
+    }
+
+    function setShowSource() {
+        vm.showMoreSource = vm.showMoreSource == 8 ? vm.sourceArrayAll.length : 8;
+    }
+
+
 }
