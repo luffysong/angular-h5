@@ -30,6 +30,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         initUser();
         initWeixin();
         initPxLoader();
+        initTitle('融资季·明星投资人专场');
         loading.hide('findLoading');
     }
 
@@ -188,8 +189,8 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         }
     }
 
-    function initTitle() {
-        document.title = '明星投资人专场';
+    function initTitle(t) {
+        document.title = t;
     }
 
     function fail(err) {
