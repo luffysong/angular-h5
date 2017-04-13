@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('DailyNewsController', DailyNewsController);
 
-function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService) {
+function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService, $rootScope) {
     var vm = this;
     $('body').css({
         backgroundColor: '#fff'
@@ -30,11 +30,13 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     vm.setShowFlag = setShowFlag;
     vm.showMoreFlag = 8;
     vm.sendflagArray = [];
+    vm.flagArrayAll = [];
 
     vm.itemSourceClick = itemSourceClick;
     vm.setShowSource = setShowSource;
     vm.showMoreSource = 8;
     vm.sendSourceArray = [];
+    vm.sourceArrayAll = [];
     vm.sourceArray = [];
 
     vm.clickNews = function(evtName, obj) {
@@ -52,10 +54,16 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
         document.title = '媒体热议';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
 
+        if (localStorage.getItem('dailyNewsData') && localStorage.getItem('dailyNewsData') !== 'undefined') {
+            vm.sendSourceArray = JSON.parse(localStorage.getItem('dailyNewsData')).sendSourceArray;
+            vm.sendflagArray = JSON.parse(localStorage.getItem('dailyNewsData')).sendflagArray;
+            vm.sourceArrayAll = JSON.parse(localStorage.getItem('dailyNewsData')).sourceArrayAll;
+            vm.flagArrayAll = JSON.parse(localStorage.getItem('dailyNewsData')).flagArrayAll;
+        }
         loadData();
         initWeixin();
-        getFlagData(); //页面加载获得接口标签
-        getSourceData(); //页面加载获得接口来源
+        getFlagData(vm.flagArrayAll); //页面加载获得接口标签
+        getSourceData(vm.sourceArrayAll); //页面加载获得接口来源
     }
 
     function initWeixin() {
@@ -73,6 +81,13 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     function loadData() {
         loading.show('findLoading');
         setSendData();
+        vm.dailyNewsData = {
+            sendSourceArray: vm.sendSourceArray,
+            sendflagArray: vm.sendflagArray,
+            sourceArrayAll: vm.sourceArrayAll,
+            flagArrayAll: vm.flagArrayAll
+        }
+        localStorage.setItem && localStorage.setItem('dailyNewsData', JSON.stringify(vm.dailyNewsData));
         FindService.getDailyReport(vm.sendData)
             .then(function temp(response) {
                 vm.responseData = generateTime(response.data.data);
@@ -152,54 +167,62 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     }
 
 
-    function getFlagData() {
-        FindService.getIndustry()
-            .then(function temp(response) {
-                vm.flagArray = response.data.industrys;
-                var object;
-                vm.flagArrayAll = [{
-                    active: true,
-                    label: '全部',
-                    id: 0
-                }];
-                for (var i = 0; i < vm.flagArray.length; i++) {
-                    object = {
-                        active: false,
-                        label: vm.flagArray[i].name,
-                        id: vm.flagArray[i].id,
-                    };
-                    vm.flagArrayAll.push(object);
-                }
-            })
-            .catch(error);
+    function getFlagData(arr) {
+        if (!arr.length) {
+            FindService.getIndustry()
+                .then(function temp(response) {
+                    vm.flagArray = response.data.industrys;
+                    var object;
+                    vm.flagArrayAll = [{
+                        active: true,
+                        label: '全部',
+                        id: 0
+                    }];
+                    for (var i = 0; i < vm.flagArray.length; i++) {
+                        object = {
+                            active: false,
+                            label: vm.flagArray[i].name,
+                            id: vm.flagArray[i].id,
+                        };
+                        vm.flagArrayAll.push(object);
+                    }
+                })
+                .catch(error);
+        }
     }
 
-    function getSourceData() {
-        FindService.getWebsite()
-            .then(function temp(response) {
-                vm.sourceArray = response.data.websites;
-                var object;
-                vm.sourceArrayAll = [{
-                    active: true,
-                    label: '全部',
-                    id: 0
-                }];
-                for (var i = 0; i < vm.sourceArray.length; i++) {
-                    object = {
-                        active: false,
-                        label: vm.sourceArray[i].name,
-                        id: vm.sourceArray[i].id
-                    };
-                    vm.sourceArrayAll.push(object);
-                }
-            })
-            .catch(error);
+    function getSourceData(arr) {
+        if (!arr.length) {
+            FindService.getWebsite()
+                .then(function temp(response) {
+                    vm.sourceArray = response.data.websites;
+                    var object;
+                    vm.sourceArrayAll = [{
+                        active: true,
+                        label: '全部',
+                        id: 0
+                    }];
+                    for (var i = 0; i < vm.sourceArray.length; i++) {
+                        object = {
+                            active: false,
+                            label: vm.sourceArray[i].name,
+                            id: vm.sourceArray[i].id
+                        };
+                        vm.sourceArrayAll.push(object);
+                    }
+                })
+                .catch(error);
+        }
     }
 
     function filter(e) {
         e.preventDefault();
         vm.displayFlag = true;
         $('html, body').css({overflow: 'hidden'});
+        //if (localStorage.getItem('dailyNewsData') && localStorage.getItem('dailyNewsData') !== 'undefined') {
+        //    vm.sourceArrayAll = JSON.parse(localStorage.getItem('dailyNewsData')).sourceArrayAll;
+        //    vm.flagArrayAll = JSON.parse(localStorage.getItem('dailyNewsData')).flagArrayAll;
+        //}
         filterCount();
     }
 
@@ -210,8 +233,8 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
             if(!vm.sendflagArray.length && !vm.sendSourceArray.length) {
                 loadData();
             }
-            $('html, body').css({overflow: ''});
         },300);
+        $('html, body').css({overflow: ''});
     }
 
     function rollBack() {
