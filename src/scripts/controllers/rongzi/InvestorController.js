@@ -203,8 +203,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
 
     function subscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
-            category: 100,
+            category: 1,
             subscibeType:0,
         };
         RongziService.setSubscribe(senddata)
@@ -224,8 +223,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
 
     function cancelSubscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
-            category: 100,
+            category: 1,
             subscibeType:0,
         };
         RongziService.cancelSubscribe(senddata)
