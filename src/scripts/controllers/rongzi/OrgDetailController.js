@@ -10,7 +10,6 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
     vm.Abefore = true;
     vm.category = $stateParams.category;
     vm.state = $stateParams.state;
-    vm.name = $stateParams.name;
     vm.nameArr = [];
     vm.subscribe = subscribe;
     vm.needApp = true;
@@ -28,8 +27,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         }
 
         initWeixin();
-        initTitle('融资季·' + $stateParams.name);
-        vm.nameArr = vm.name.split('');
+
     }
 
     function tabChange(e) {
@@ -65,17 +63,21 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
                 .then(function setDetail(data) {
                         if (data.data) {
                             vm.result = data.data;
+                            vm.name = vm.result.name;
+                            initTitle('融资季·' + vm.result.name);
+                            vm.nameArr = vm.name.split('');
                         }
                     }).catch(fail);
         }
 
-        if (UserService.getUID()){
+        if (UserService.getUID()) {
             RongziService.getProjectList($stateParams.id)
                 .then(function (data) {
                     if (data.data.projects) {
                         vm.ABefore = data.data.projects.ABefore;
                         vm.AAfter = data.data.projects.AAfter;
                     }
+
                     vm.canWeChatShare = data.data.canWeChatShare;
                     vm.hasPermission = data.data.hasPermission;
                     vm.remind = data.data.remind;
@@ -244,7 +246,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         var krdata = {};
         krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/orgdetail?id=' + $stateParams.id + '&name=' + $stateParams.name + '&category=' + $stateParams.category + '","currentRoom":"0"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/orgdetail?id=' + $stateParams.id + '&category=' + $stateParams.category + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {
                 if (err) {

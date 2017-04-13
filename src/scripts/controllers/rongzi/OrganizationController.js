@@ -43,20 +43,20 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
         if ('AAfter' === id) {
             vm.Aafter = true;
             vm.Abefore = false;
-            resetData();
-            getFinishedData('1');
+            resetData(1);
         } else if (('ABefore') === id) {
             vm.Aafter = false;
             vm.Abefore = true;
-            resetData();
-            getFinishedData('0');
+            resetData(0);
         }
     }
 
-    function resetData() {
+    function resetData(n) {
         vm.page = 0;
         vm.busy = false;
         vm.end = [];
+        vm.projectCategory = n;
+        getFinishedData();
     }
 
     function initWeixin() {
@@ -99,13 +99,13 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
 
     }
 
-    function getFinishedData(projectCategory) {
+    function getFinishedData() {
         if (vm.busy)return;
         vm.busy = true;
 
         var senddata = {
             category: parseInt($stateParams.category),
-            projectCategory: projectCategory ? projectCategory : 0,
+            projectCategory: vm.projectCategory ? vm.projectCategory : 0,
             page: vm.page + 1,
             pageSize:5,
         };

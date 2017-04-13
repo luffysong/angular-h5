@@ -10,7 +10,6 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
     vm.Abefore = true;
     vm.category = $stateParams.category;
     vm.state = $stateParams.state;
-    vm.name = $stateParams.name;
     vm.nameArr = [];
     vm.subscribe = subscribe;
     vm.needApp = true;
@@ -28,8 +27,6 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
         }
 
         initWeixin();
-        initTitle('融资季·' + $stateParams.name);
-        vm.nameArr = vm.name.split('');
     }
 
     function tabChange(e) {
@@ -65,16 +62,21 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
                 .then(function setDetail(data) {
                         if (data.data) {
                             vm.result = data.data;
+                            vm.name = data.data.name;
+
+                            initTitle('融资季·' + data.data.name);
+                            vm.nameArr = vm.name.split('');
                         }
                     }).catch(fail);
         }
 
-        if (UserService.getUID()){
+        if (UserService.getUID()) {
             RongziService.getProjectList($stateParams.id)
                 .then(function (data) {
                     if (data.data.projects) {
                         vm.associations = data.data.projects.associations;
                     }
+
                     vm.canWeChatShare = data.data.canWeChatShare;
                     vm.hasPermission = data.data.hasPermission;
                     vm.remind = data.data.remind;
@@ -180,7 +182,7 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
             item.cancelMainRemind = true;
             item.title = '取消开场提醒成功！';
             item.hasEmail = true;
-            item.cancelRemindtxt = '后续新上的' + $stateParams.name + '专场将不会有专场提醒，现已有排期的专场仍会提醒！';
+            item.cancelRemindtxt = '后续新上的' + $stateParams.name + '将不会有专场提醒，现已有排期的专场仍会提醒！';
             modalOpen(item);
             vm.remind = 1;
         })
@@ -242,7 +244,7 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
         var krdata = {};
         krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/orgdetail?id=' + $stateParams.id + '&name=' + $stateParams.name + '&category=' + $stateParams.category + '","currentRoom":"0"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/comdetail?id=' + $stateParams.id + '&category=' + $stateParams.category + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {
                 if (err) {

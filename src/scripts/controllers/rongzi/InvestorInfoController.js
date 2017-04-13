@@ -29,7 +29,6 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         initUser();
         initWeixin();
         initPxLoader();
-        initTitle('融资季·' + $stateParams.name);
         vm.state = $stateParams.state;
         loading.hide('findLoading');
     }
@@ -66,15 +65,17 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
                         vm.result = data.data;
                         vm.name = data.data.name;
                         vm.names = data.data.name.split('');
+                        initTitle('融资季·' + data.data.name);
                     }
                 }).catch(fail);
-        if (UserService.getUID()){
+        if (UserService.getUID()) {
             RongziService.getProjectList($stateParams.id)
                 .then(function (data) {
-                    if(data.data.projects) {
+                    if (data.data.projects) {
                         vm.projects = data.data.projects;
                         vm.noData = false;
                     }
+
                     vm.canWeChatShare = data.data.canWeChatShare;
                     vm.hasPermission = data.data.hasPermission;
                     vm.remind = data.data.remind;
@@ -101,7 +102,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         var krdata = {};
         krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investor?id=' + $stateParams.id + '&name=' + $stateParams.name + '&category=' + $stateParams.category + '","currentRoom":"0"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investor?id=' + $stateParams.id + '&category=' + $stateParams.category + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {
                 if (err) {
