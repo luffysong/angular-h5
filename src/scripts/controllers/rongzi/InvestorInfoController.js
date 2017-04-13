@@ -28,15 +28,15 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
 
         initData();
         initUser();
-        initWeixin();
+        initWeixin(vm.name);
         initPxLoader();
         vm.state = $stateParams.state;
         loading.hide('findLoading');
     }
 
-    function initWeixin() {
+    function initWeixin(name) {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】明星投资人' + '{vm.name}' + '独家项目集，等你来掐尖儿。',
+            shareTitle: '【创投助手·融资季】明星投资人' + name + '独家项目集，等你来掐尖儿。',
             shareUrl: window.location.href,
             krtou: 'weChatShare/' + $stateParams.id,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',

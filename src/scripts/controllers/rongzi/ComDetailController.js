@@ -27,7 +27,7 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
             vm.needApp = false;
         }
 
-        initWeixin();
+        initWeixin(vm.name);
     }
 
     function tabChange(e) {
@@ -44,9 +44,9 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
         }
     }
 
-    function initWeixin() {
+    function initWeixin(name) {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】' + '{vm.name}' + '优质项目输出，马上来对接！',
+            shareTitle: '【创投助手·融资季】' + name + '优质项目输出，马上来对接！',
             shareUrl: window.location.href,
             krtou: 'weChatShare/' + $stateParams.id,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
