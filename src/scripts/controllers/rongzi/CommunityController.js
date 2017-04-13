@@ -205,6 +205,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         vm.needApp = true;
         vm.setEmailState = false;
         vm.addEmail = addEmail;
+        vm.remindText = '创业社群专场任一专场';
 
         function cancelModal() {
             $modalInstance.dismiss();
@@ -218,6 +219,8 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
                 RongziService.setEmail(senddata)
                 .then(function setSussess() {
                     vm.title = '添加邮件提醒成功！';
+                    vm.cancelRemindtxt = '当创业社群专场任一专场开始时，您将会包括邮件在内的所有提醒，' +
+                       '确保您不会错过任一社群专场';
                     vm.setEmailState = true;
                     vm.hasEmail = true;
                 })

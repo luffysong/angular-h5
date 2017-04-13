@@ -47,7 +47,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
 
     function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】' + $stateParams.name + '在融项目提前看，紧跟TOP机构不掉队！',
+            shareTitle: '【创投助手·融资季】' + vm.name + '在融项目提前看，紧跟TOP机构不掉队！',
             shareUrl: window.location.href,
             krtou: 'weChatShare/' + $stateParams.id,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
@@ -108,6 +108,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         item = item ? item : {};
         item.investRole = vm.investRole;
         item.hasEmail = vm.hasEmail;
+        item.remindText = vm.name;
         if (!hybrid.isInApp) {
             //document.location.href = vm.openAppUrl;
             defaultModal();
@@ -134,6 +135,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         vm.needApp = true;
         vm.setEmailState = false;
         vm.addEmail = addEmail;
+        vm.remindText = obj.remindText;
 
         function cancelModal() {
             $modalInstance.dismiss();
@@ -147,6 +149,8 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
                 RongziService.setEmail(senddata)
                 .then(function setSussess() {
                     vm.title = '添加邮件提醒成功！';
+                    vm.cancelRemindtxt = '当' + vm.remindText + '专场开始时，您将会收到包括邮件在内的所有提醒，' +
+                       '确保您不会错过本专场';
                     vm.setEmailState = true;
                     vm.hasEmail = true;
                 })
@@ -187,7 +191,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
             item.cancelMainRemind = true;
             item.title = '取消开场提醒成功！';
             item.hasEmail = true;
-            item.cancelRemindtxt = '后续新上的' + $stateParams.name + '专场将不会有专场提醒，现已有排期的专场仍会提醒！';
+            item.cancelRemindtxt = '后续新上的' + vm.name + '专场将不会有专场提醒，现已有排期的专场仍会提醒！';
             modalOpen(item);
             vm.remind = 1;
         })

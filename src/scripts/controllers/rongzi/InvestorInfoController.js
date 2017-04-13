@@ -35,7 +35,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
 
     function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】明星投资人'+ $stateParams.name +'独家项目集，等你来掐尖儿。',
+            shareTitle: '【创投助手·融资季】明星投资人' + vm.name + '独家项目集，等你来掐尖儿。',
             shareUrl: window.location.href,
             krtou: 'weChatShare/' + $stateParams.id,
             shareImg: '{vm.result.logo}',
@@ -129,6 +129,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         item = item ? item : {};
         item.investRole = vm.investRole;
         item.hasEmail = vm.hasEmail;
+        item.remindText = vm.name;
         if (!hybrid.isInApp) {
             defaultModal();
         }else if (hybrid.isInApp && vm.remind === 1 && UserService.getUID()) {
@@ -154,6 +155,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         vm.cancelRemindtxt = obj.cancelRemindtxt;
         vm.setEmailState = false;
         vm.addEmail = addEmail;
+        vm.remindText = obj.remindText;
 
         function cancelModal() {
             $modalInstance.dismiss();
@@ -167,6 +169,8 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
                 RongziService.setEmail(senddata)
                 .then(function setSussess() {
                     vm.title = '添加邮件提醒成功！';
+                    vm.cancelRemindtxt = '当' + vm.remindText + '专场开始时，您将会收到包括邮件在内的所有提醒，' +
+                       '确保您不会错过本专场';
                     vm.setEmailState = true;
                     vm.hasEmail = true;
                 })

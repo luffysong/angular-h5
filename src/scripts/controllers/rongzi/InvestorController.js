@@ -24,8 +24,6 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
             vm.needApp = false;
         }
 
-        console.log(vm.needApp);
-
         initData();
         initUser();
         initWeixin();
@@ -113,7 +111,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         var krdata = {};
         krdata.type =  window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investor?id=' + $stateParams.id + '","currentRoom":"0"}';
+        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investor?category=' + $stateParams.category + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey,
         { type: window.projectEnvConfig.linkmeType }, function (err, res) {
                 if (err) {
@@ -166,6 +164,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         vm.cancelRemindtxt = obj.cancelRemindtxt;
         vm.setEmailState = false;
         vm.addEmail = addEmail;
+        vm.remindText = '明星投资人专场任一专场';
 
         function cancelModal() {
             $modalInstance.dismiss();
@@ -179,6 +178,8 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
                 RongziService.setEmail(senddata)
                 .then(function setSussess() {
                     vm.title = '添加邮件提醒成功！';
+                    vm.cancelRemindtxt = '当明星投资人专场任一专场开始时，您将会收到包括邮件在内的所有提醒，' +
+                       '确保您不会错过任一投资人专场';
                     vm.setEmailState = true;
                     vm.hasEmail = true;
                 })

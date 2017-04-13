@@ -4,10 +4,10 @@
         <h4  ng-if="!vm.title">设置开场提醒成功！</h4>
 
         <p ng-if="!vm.cancelRemindtxt && !vm.hasEmail">
-            当“融资季”任一专场开始时，您将会收到App的推送、短信提醒你。
+            当{{vm.remindText}}开始时，您将会收到App的推送、手机短信提醒你。
         </p>
         <p ng-if="!vm.cancelRemindtxt && vm.hasEmail">
-            当“融资季”任一专场开始时，您将会收到App的推送、短信和邮件提醒，确保您不会错过任一专场。
+            当{{vm.remindText}}开始时，您将会收到App的推送、手机短信和邮件提醒，确保您不会错过任一专场。
         </p>
         <p ng-if="!vm.hasEmail">
           <label for="">邮箱</label>

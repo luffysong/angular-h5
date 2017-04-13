@@ -129,6 +129,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         vm.needApp = true;
         vm.setEmailState = false;
         vm.addEmail = addEmail;
+        vm.remindText = '“融资季”全场任一专场';
 
         function cancelModal() {
             $modalInstance.dismiss();
@@ -142,6 +143,8 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
                 RongziService.setEmail(senddata)
                 .then(function setSussess() {
                     vm.title = '添加邮件提醒成功！';
+                    vm.cancelRemindtxt = '当“融资季”全场任一专场开始时，您将会包括邮件在内的所有提醒，' +
+                       '确保您不会错过任意专场';
                     vm.setEmailState = true;
                     vm.hasEmail = true;
                 })
