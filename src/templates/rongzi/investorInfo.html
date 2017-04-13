@@ -6,7 +6,7 @@
     <div class="rongzi-common-textbtn-investor">
       <img src="/styles/images/rongzi/top-name-bg.png" class="wd-80">
       <div class="top-name">
-        <span ng-repeat="item in vm.names" class="name-bg-green">{{item}}</span>
+        <span ng-repeat="item in vm.names track by $index" class="name-bg-green">{{item}}</span>
       </div>
     </div>
 

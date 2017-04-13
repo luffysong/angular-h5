@@ -28,13 +28,13 @@
     <div class="special-list-border orange-color">
       <div class="special-logo green-color" ng-if="item.logo"
       style="background-image: url({{item.logo}})"
-       ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name})"></div>
+       ui-sref="rongzi.investorInfo({category: item.category, id: item.id})"></div>
 
       <div class="special-logo green-color" ng-if="!item.logo"
       style="background-image: url('/styles/images/rongzi/df-logo.png')"
-       ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name})"></div>
+       ui-sref="rongzi.investorInfo({category: item.category, id: item.id})"></div>
       <div class="special-info">
-        <div class="special-name orange-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name})">
+        <div class="special-name orange-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id})">
           {{item.name}}
         </div>
         <div class="special-arrow"></div>
@@ -42,7 +42,7 @@
           {{item.intro}}
         </div>
         <div class="show-info">
-          <span class="orange-color">正在进行</span><span class="green-color mg-l" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name})">查看详情 ></span>
+          <span class="orange-color">正在进行</span><span class="green-color mg-l" ui-sref="rongzi.investorInfo({category: item.category, id: item.id})">查看详情 ></span>
         </div>
       </div>
     </div>
@@ -52,13 +52,13 @@
     <div class="special-list-border orange-color">
       <div class="special-logo green-color" ng-if="item.logo"
       style="background-image: url({{item.logo}})"
-       ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name, state: 'start'})"></div>
+       ui-sref="rongzi.investorInfo({category: item.category, id: item.id, state: 'start'})"></div>
 
       <div class="special-logo green-color" ng-if="!item.logo"
        style="background-image: url('/styles/images/rongzi/df-logo.png')"
-        ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name, state: 'start'})"></div>
+        ui-sref="rongzi.investorInfo({category: item.category, id: item.id, state: 'start'})"></div>
       <div class="special-info">
-        <div class="special-name orange-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name, state: 'start'})">
+        <div class="special-name orange-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, state: 'start'})">
           {{item.name}}
         </div>
         <div class="special-arrow"></div>
@@ -76,20 +76,20 @@
     <div class="special-list-border gray-color">
       <div class="special-logo green-color" ng-if="item.logo"
         style="background-image: url({{item.logo}})"
-        ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name, state: 'end'})"></div>
+        ui-sref="rongzi.investorInfo({category: item.category, id: item.id, state: 'end'})"></div>
 
       <div class="special-logo green-color" ng-if="!item.logo"
        style="background-image: url('/styles/images/rongzi/df-logo.png')"
-        ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name, state: 'end'})"></div>
+        ui-sref="rongzi.investorInfo({category: item.category, id: item.id, state: 'end'})"></div>
       <div class="special-info">
-        <div class="special-name gray-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name, state: 'end'})">
+        <div class="special-name gray-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, state: 'end'})">
           {{item.name}}
         </div>
         <div class="special-arrow"></div>
         <div class="special-content">
           {{item.intro}}
         </div>
-        <div class="show-info" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name, state: 'end'})">
+        <div class="show-info" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, state: 'end'})">
           <span class="gray-color">{{item.startAt | date:'MM月dd日'}}</span><span class="green-color mg-l">查看详情 ></span>
         </div>
       </div>
