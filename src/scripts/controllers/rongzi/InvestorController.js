@@ -30,6 +30,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         initUser();
         initWeixin();
         initPxLoader();
+        initTitle('融资季·明星投资人专场');
         loading.hide('findLoading');
     }
 
@@ -188,8 +189,8 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         }
     }
 
-    function initTitle() {
-        document.title = '明星投资人专场';
+    function initTitle(t) {
+        document.title = t;
     }
 
     function fail(err) {
@@ -202,8 +203,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
 
     function subscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
-            category:vm.result.category,
+            category: 1,
             subscibeType:0,
         };
         RongziService.setSubscribe(senddata)
@@ -223,8 +223,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
 
     function cancelSubscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
-            category:vm.result.category,
+            category: 1,
             subscibeType:0,
         };
         RongziService.cancelSubscribe(senddata)

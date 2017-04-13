@@ -153,7 +153,6 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
     function subscribeAction(item) {
         var senddata = {
             id:vm.result.id,
-            category:vm.result.category,
             subscibeType:1,
         };
         RongziService.setSubscribe(senddata)
@@ -174,7 +173,6 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
     function cancelSubscribeAction(item) {
         var senddata = {
             id:vm.result.id,
-            category:vm.result.category,
             subscibeType:1,
         };
         RongziService.cancelSubscribe(senddata)

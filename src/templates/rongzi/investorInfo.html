@@ -18,8 +18,8 @@
     <div class="investor-remind-btn" ng-if="vm.state === 'start'">
       <a href="javascript:void(0)" id="investor-openApp"
           ng-click="vm.subscribe(i,$event)">
-          <b ng-if="!vm.needApp">下载创投助手，订阅本专场</b>
-          <b ng-if="vm.needApp">订阅{{vm.name}}</b>
+          <b ng-if="!vm.needApp && vm.remind !== 0">下载创投助手，订阅本专场</b>
+          <b ng-if="vm.needApp && vm.remind !== 0">订阅{{vm.name}}</b>
           <b ng-if="vm.remind === 0">取消开场提醒</b>
       </a>
     </div>
@@ -29,7 +29,7 @@
   <div class="investor-content" ng-class="{noData: vm.noData}">
     <div ng-include="'templates/rongzi-common/mask.html'" ng-if="!vm.hasPermission"></div>
     <div class="investor-list" ng-show="!vm.noData">
-      <div class="special-state orange-color">已投项目</div>
+      <div class="special-state orange-color" ng-if="vm.projects.invested.length">已投项目</div>
       <div class="special-item green-color" ng-repeat="item in vm.projects.invested">
         <div class="special-list-border orange-color">
           <div class="special-logo green-color" ng-click="vm.openApp(item.ccid)" style="background-image: url({{item.logo}})"></div>
@@ -52,8 +52,8 @@
         </div>
       </div>
 
-      <div class="special-state green-color">推荐项目</div>
-      <div class="special-item meat-color" ng-repeat="item in vm.projects.invested">
+      <div class="special-state green-color" ng-if="vm.projects.recommend.length">推荐项目</div>
+      <div class="special-item meat-color" ng-repeat="item in vm.projects.recommend">
         <div class="special-list-border green-color">
           <div class="special-logo green-color" ng-click="vm.openApp(item.ccid)" style="background-image: url({{item.logo}})"></div>
           <div class="special-info">
