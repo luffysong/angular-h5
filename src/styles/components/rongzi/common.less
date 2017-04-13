@@ -722,13 +722,19 @@
       color: @meat;
       line-height: 16px;
       font-weight: bold;
+      text-overflow: ellipsis;
+      width: 98%;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     .special-time {
       border: 1px dashed;
       text-align: center;
       width: 70%;
       font-size:12px;
-      margin-top: 5px;
+      margin-top: 10px;
       position: relative;
       float: right;
       font-weight: 600;

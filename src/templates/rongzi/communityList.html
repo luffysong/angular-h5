@@ -29,7 +29,7 @@
         <div class="special-type yellowdotted-color" ng-if="item.sessionType">
             {{item.sessionType}}
         </div>
-        <div class="special-start">
+        <div class="show-info">
             <span class="yellowdotted-color"><b>正在进行</b></span>&nbsp;&nbsp;&nbsp;
             <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"><b>查看详情 ></b></span>
         </div>
@@ -91,8 +91,8 @@
             <div class="special-content">
               {{item.intro}}
             </div>
-            <div class="special-end">
-              <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日 a hh:mm'"></b></span>&nbsp;&nbsp;
+            <div class="show-info">
+              <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日'"></b></span>&nbsp;&nbsp;
               <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'end'})"><b>查看详情 ></b></span>
             </div>
           </div>
@@ -128,7 +128,7 @@
         <div class="special-type yellowdotted-color" ng-if="item.sessionType">
             {{item.sessionType}}
         </div>
-        <div class="special-start">
+        <div class="show-info">
             <span class="yellowdotted-color"><b>正在进行</b></span>&nbsp;&nbsp;
             <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category})"><b>查看详情 ></b></span>
         </div>
@@ -186,8 +186,8 @@
             <div class="special-content">
               {{item.intro}}
             </div>
-            <div class="special-end">
-              <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日 a hh:mm'"></b></span>&nbsp;&nbsp;
+            <div class="show-info">
+              <span class="gray-color"><b ng-bind="item.startAt | date:'MM月dd日'"></b></span>&nbsp;&nbsp;
               <span class="green-color" ui-sref="rongzi.comdetail({id: item.id, name: item.name,category:item.category,state:'end'})"><b>查看详情 ></b></span>
             </div>
           </div>
