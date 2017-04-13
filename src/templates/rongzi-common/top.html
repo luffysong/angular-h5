@@ -62,10 +62,14 @@
   </div>
 
   <div class="rongzi-common-text">
-      <p ng-if="topdata === 'org'" ng-bind="vm.result.ruleDescription">
+      <p ng-if="topdata === 'org'">
+        汇集顶级机构被投项目！每周一、四会推出两场顶级机构专场，融资季共计20场。对接项目产生数据将计入机构实时榜单，
+        快来为你认可的机构助威吧！
       </p>
 
-      <p ng-if="topdata === 'community'" ng-bind="vm.result.ruleDescription">
+      <p ng-if="topdata === 'community'" >
+        甄选素有“黄埔军校”特质的创业社群合作，每周五推出在融项目专场，总计40场，
+        对接项目产生数据将计入社群组织实时榜单，快来为你认可的创业基因助威吧！
       </p>
 
       <p ng-if="topdata === 'investor' && vm.result.ruleDescription" ng-bind="vm.result.ruleDescription">
