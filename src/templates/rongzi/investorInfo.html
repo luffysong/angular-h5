@@ -15,7 +15,7 @@
       </p>
     </div>
 
-    <div class="investor-remind-btn" ng-if="vm.state === 'start'">
+    <div class="investor-remind-btn" ng-if="vm.state === 'start' || vm.status === 'TO_START'">
       <a href="javascript:void(0)" id="investor-openApp"
           ng-click="vm.subscribe(i,$event)">
           <b ng-if="!vm.needApp && vm.remind !== 0">下载创投助手，订阅本专场</b>

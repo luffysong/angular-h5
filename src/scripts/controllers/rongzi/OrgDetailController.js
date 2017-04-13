@@ -64,6 +64,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
                         if (data.data) {
                             vm.result = data.data;
                             vm.name = vm.result.name;
+                            vm.status = vm.result.status;
                             initWeixin(vm.name);
                             initTitle('融资季·' + vm.result.name);
                             vm.nameArr = vm.name.split('');

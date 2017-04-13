@@ -64,6 +64,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
                     if (data.data) {
                         vm.result = data.data;
                         vm.name = data.data.name;
+                        vm.status = vm.result.status;
                         initWeixin(vm.name);
                         vm.names = data.data.name.split('');
                         initTitle('融资季·' + data.data.name);

@@ -17,7 +17,7 @@
           </p>
       </div>
 
-      <div class="rongzi-common-btn" ng-if="vm.state === 'start'">
+      <div class="rongzi-common-btn" ng-if="vm.state === 'start' || vm.status === 'TO_START'">
         <a href="javascript:void(0)" class="org-btn" id="org-openApp"
             ng-click="vm.subscribe(i,$event)">
 

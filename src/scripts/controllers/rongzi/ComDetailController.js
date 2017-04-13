@@ -62,6 +62,7 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
                         if (data.data) {
                             vm.result = data.data;
                             vm.name = data.data.name;
+                            vm.status = vm.result.status;
                             initWeixin(vm.name);
                             initTitle('融资季·' + data.data.name);
                             vm.nameArr = vm.name.split('');
