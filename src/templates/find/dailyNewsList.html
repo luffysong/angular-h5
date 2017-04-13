@@ -1,4 +1,15 @@
 <div class="dailyNews-wrapper">
+    <div class="dailyNews-select">
+        <div class="dailyNews-select-left">
+            看你想看的媒体时讯
+        </div>
+        <div class="dailyNews-select-right" ng-click="vm.filter($event)">
+            <i>
+                <img src="/styles/images/find/Black@2x.png" alt="">
+            </i>
+            筛选
+        </div>
+    </div>
     <div ng-if="vm.responseData.length">
         <div class="dailyNews-content-wrapper">
             <div ng-repeat="itemData in vm.responseData">
@@ -43,14 +54,59 @@
                 </ul>
             </div>
             <div scroll-load load-callback="vm.loadMore" boundary="100" ng-if="vm.hasInit && vm.responseData.length"></div>
-            <div class="daily-news-load-more" ng-if="vm.hasInit && vm.responseData.length">
+            <div class="daily-news-load-more" ng-if="vm.hasInit && vm.responseData.length && vm.ts">
                 <p>加载更多··· </p>
                 <img src="/styles/images/loading.svg" alt="loading">
+            </div>
+            <div div class="daily-news-load-more" ng-if="vm.responseData.length && !vm.ts">
+                全部内容加载完毕
             </div>
         </div>
     </div>
     <div ng-if="!vm.responseData.length && vm.hasInit" class="find-no-data">
         <img src="/styles/images/find/search@2x.png">
         <span>抱歉，没有找到您要的内容</span>
+    </div>
+
+    <div class="dailyNews-select-bg" ng-style="{'display':vm.displayFlag==true?'block':'none'}" ng-click="vm.filterDismiss($event)"></div>
+    <div class="dailyNews-select-box" ng-style="{'right':vm.displayFlag==true?'0':'-400px'}">
+        <div class="dailyNews-select-modal">
+            <div class="dailyNews-select-title">
+                <div class="dailyNews-select-title-l">
+                    标签
+                </div>
+                <span class="dailyNews-select-title-r" ng-click="vm.setShowFlag()" ng-style="{'transform':vm.showMoreFlag==8?'rotate(135deg)':'rotate(-45deg)'}">
+                </span>
+            </div>
+            <div class="dailyNews-select-option">
+                <span ng-repeat="item in vm.flagArrayAll" ng-click="vm.itemFlagClick(item, $event)" ng-class="{'flag-active':(item.active == true)}" ng-show="$index <= vm.showMoreFlag">
+                    {{item.label | dict_InvestorFollowedIndustry}}
+                    <img src="/styles/images/find/tagClose@2x.png" />
+                </span>
+            </div>
+            <div class="dailyNews-select-line"></div>
+            <div class="dailyNews-select-title">
+                <div class="dailyNews-select-title-l">
+                    来源
+                </div>
+                <span class="dailyNews-select-title-r" ng-click="vm.setShowSource()" ng-style="{'transform':vm.showMoreSource==8?'rotate(135deg)':'rotate(-45deg)'}">
+                </span>
+            </div>
+            <div class="dailyNews-select-option">
+                <span ng-repeat="item in vm.sourceArrayAll" ng-click="vm.itemSourceClick(item, $event)" ng-class="{'source-active':(item.active == true)}" ng-show="$index <= vm.showMoreSource">
+                    {{item.label}}
+                    <img src="/styles/images/find/tagClose@2x.png" />
+                </span>
+            </div>
+        </div>
+        <div class="pop-bottom" ng-style="{'right':vm.displayFlag==true?'0':'-400px'}">
+            <div class="pop-bottom-left" ng-click="vm.rollBack()">
+                重置
+            </div>
+            <div class="pop-bottom-right" ng-click="vm.submit()">
+                <p class="pop-bottom-right-top">完成</p>
+                <p class="pop-bottom-right-bottom">共筛选出{{vm.proNum}}个项目</p>
+            </div>
+        </div>
     </div>
 </div>
