@@ -136,7 +136,7 @@
             width: 84%;
             height: 49px;
             //background: #f3f3f3;
-            padding: 6px 0;
+            //padding: 6px 0;
             font-size: 16px;
             z-index: 1000;
             position: fixed;
@@ -145,24 +145,30 @@
             .pop-bottom-left {
                 width: 36%;
                 background: #F3F3F3;
-                line-height: 49px;
+                //line-height: 49px;
                 height: 49px;
                 text-align: center;
                 color: #5a626d;
                 float: left;
+                div {
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
             }
             .pop-bottom-right {
                 width: 64%;
                 height: 49px;
                 background: #464e58;
                 float: left;
+                padding: 6px 0;
                 .pop-bottom-right-top {
                     text-align: center;
                     font-size: 16px;
                     color: #FFFFFF;
                     letter-spacing: 0px;
                     line-height: 19.5px;
-                    margin-top: 6px;
+                    //margin-top: 6px;
                     margin-bottom: 0;
                 }
                 .pop-bottom-right-bottom {
@@ -173,7 +179,7 @@
                     letter-spacing: 0px;
                     line-height: 14.5px;
                     margin-top: 2px;
-                    margin-bottom: 6px;
+                    //margin-bottom: 6px;
                 }
             }
         }
