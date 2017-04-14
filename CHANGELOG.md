@@ -1,3 +1,8 @@
+<a name="1.28.13"></a>
+## [1.28.13](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.28.12...v1.28.13) (2017-04-14)
+
+
+
 <a name="1.28.12"></a>
 ## [1.28.12](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.28.11...v1.28.12) (2017-04-14)
 
@@ -176,16 +181,6 @@
 
 ### Bug Fixes
 
-* 首页榜单logo样式调整 ([11e19ab](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/11e19ab))
-
-
-
-<a name="1.26.25"></a>
-## [1.26.25](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.26.24...v1.26.25) (2017-04-11)
-
-
-### Bug Fixes
-
 * 修改分享文案 ([0982a25](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0982a25))
 * 修改投资人分享logo ([59071c5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/59071c5))
 * 修改投资人分享文案 ([d3ee3a1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d3ee3a1))
@@ -197,7 +192,7 @@
 * 调整首页样式 ([056f534](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/056f534))
 * 首页样式及数据调整 ([bd64cd0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bd64cd0))
 * 首页样式调整 ([273166f](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/273166f))
-* 首页榜单展示真实数据 ([918221c](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/918221c))
+* 首页榜单logo样式调整 ([11e19ab](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/11e19ab))
 * 首页添加榜单跳转链接 ([9fcbfca](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9fcbfca))
 
 
