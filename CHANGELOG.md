@@ -1,3 +1,23 @@
+<a name="1.28.8"></a>
+## [1.28.8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.28.7...v1.28.8) (2017-04-14)
+
+
+### Bug Fixes
+
+* 调整样式 ([a244894](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a244894))
+
+
+
+<a name="1.28.7"></a>
+## [1.28.7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.28.5...v1.28.7) (2017-04-14)
+
+
+### Bug Fixes
+
+* 修改样式 ([f82465a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/f82465a))
+
+
+
 <a name="1.28.5"></a>
 ## [1.28.5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.28.4...v1.28.5) (2017-04-13)
 

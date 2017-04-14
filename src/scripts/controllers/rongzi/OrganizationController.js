@@ -12,8 +12,8 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
     vm.openApp = openApp;
     vm.openAppUrl;
     vm.tabChange = tabChange;
-    vm.Aafter = false;
-    vm.Abefore = true;
+    vm.Aafter = true;
+    vm.Abefore = false;
     vm.category = $stateParams.category;
 
     //分页处理

@@ -6,8 +6,8 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
     var vm = this;
     vm.tabChange = tabChange;
     vm.shareWechat = shareWechat;
-    vm.Aafter = false;
-    vm.Abefore = true;
+    vm.Aafter = true;
+    vm.Abefore = false;
     vm.category = $stateParams.category;
     vm.state = $stateParams.state;
     vm.nameArr = [];
