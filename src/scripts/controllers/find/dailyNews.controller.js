@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('DailyNewsController', DailyNewsController);
 
-function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService, $rootScope) {
+function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService, $rootScope, $timeout) {
     var vm = this;
     $('body').css({
         backgroundColor: '#fff'
@@ -234,7 +234,9 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
         //    vm.sourceArrayAll = JSON.parse(localStorage.getItem('dailyNewsData')).sourceArrayAll;
         //    vm.flagArrayAll = JSON.parse(localStorage.getItem('dailyNewsData')).flagArrayAll;
         //}
-        //filterCount();
+        $timeout(function () {
+            filterCount();
+        }, 0);
     }
 
     function filterDismiss(e) {
