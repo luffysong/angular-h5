@@ -30,13 +30,16 @@
 
   <div class="detail-content" ng-if="vm.hasPermission">
     <div class="rongzi-tab tab-org-border"  ng-if="vm.isDisplayTab">
-      <a ng-click="vm.tabChange($event)" class="tab-org-selected" id ="ABefore"
+
+      <a ng-click="vm.tabChange($event)" id ="AAfter" class="tab-org-selected"  href="javascript:void(0)" >
+        <b>A轮后</b>
+      </a>
+
+      <a ng-click="vm.tabChange($event)"  id ="ABefore"
         href="javascript:void(0)">
         <b>A轮及以前</b>
       </a>
-      <a ng-click="vm.tabChange($event)" id ="AAfter"   href="javascript:void(0)" >
-        <b>A轮后</b>
-      </a>
+
     </div>
     <div ng-include="'templates/rongzi-common/list-template.html'">
     </div>
