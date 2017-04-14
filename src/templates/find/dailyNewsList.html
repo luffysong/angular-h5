@@ -69,7 +69,7 @@
     </div>
 
     <div class="dailyNews-select-bg" ng-style="{'display':vm.displayFlag==true?'block':'none'}" ng-click="vm.filterDismiss($event)"></div>
-    <div class="dailyNews-select-box" ng-style="{'right':vm.displayFlag==true?'0':'-400px'}">
+    <div class="dailyNews-select-box" ng-style="{'transform':vm.displayFlag==true?'translateX(0px)':'translateX(400px)'}">
         <div class="dailyNews-select-modal">
             <div class="dailyNews-select-title">
                 <div class="dailyNews-select-title-l">
@@ -99,7 +99,7 @@
                 </span>
             </div>
         </div>
-        <div class="pop-bottom" ng-style="{'right':vm.displayFlag==true?'0':'-400px'}">
+        <div class="pop-bottom" ng-style="{'transform':vm.displayFlag==true?'translateX(0px)':'translateX(400px)'}">
             <div class="pop-bottom-left" ng-click="vm.rollBack()">
                 <div>重置</div>
             </div>
