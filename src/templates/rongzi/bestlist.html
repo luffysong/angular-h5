@@ -22,18 +22,21 @@
     <!-- <div class="hot-title">
       <span class="text">今日热门项目</span>
     </div> -->
-      <div ng-if="vm.top3" ng-repeat="item in vm.top3 track by $index" class="out-div"  >
+      <div ng-if="vm.top3" ng-repeat="item in vm.top3 track by $index" class="out-div" >
         <div class="in-div"
             style="background-image: url('{{item.logo}}')" ui-sref="rongzi.share({id: item.id})" >
-          <div class="in-text">
-              {{item.name}}
-          </div>
         </div>
         <div class="crown" ng-class="{true:'gold',false:'dis'}[$index == 0]">
         </div>
         <div class="crown" ng-class="{true:'silver',false:'dis'}[$index == 1]">
         </div>
         <div class="crown" ng-class="{true:'copper',false:'dis'}[$index == 2]">
+        </div>
+
+        <div class="pname">
+          <span class="in-text">
+              {{item.name}}
+          </span>
         </div>
       </div>
   </div>
