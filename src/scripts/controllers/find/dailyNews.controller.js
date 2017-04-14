@@ -234,7 +234,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
         //    vm.sourceArrayAll = JSON.parse(localStorage.getItem('dailyNewsData')).sourceArrayAll;
         //    vm.flagArrayAll = JSON.parse(localStorage.getItem('dailyNewsData')).flagArrayAll;
         //}
-        filterCount();
+        //filterCount();
     }
 
     function filterDismiss(e) {
