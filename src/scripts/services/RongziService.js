@@ -118,4 +118,14 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
         return $http.get(BASE_URL + '/ranking_list/startup_project?' + $.param(request));
     };
 
+    //获取邀请码
+    this.getRecCode = function () {
+        return $http.get('/api/investor/auth/get-recommend-code?');
+    };
+
+    //获取邀请次数
+    this.getRecCount = function () {
+        return $http.get('/api/investor/auth/get-recommendsuc-count?');
+    };
+
 });
