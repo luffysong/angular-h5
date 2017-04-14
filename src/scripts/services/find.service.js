@@ -23,8 +23,26 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
     };
 
     //每日报道
-    this.getDailyReport = function (ts) {
-        return $http.get('/api/mobi-investor/daily-report?ts=' + ts);
+    //this.getDailyReport = function (ts) {
+    //    return $http.get('/api/mobi-investor/daily-report?ts=' + ts);
+    //};
+    this.getDailyReport = function (request) {
+        return $http.get('/api/mobi-investor/daily-report-condition?' + $.param(request));
+    };
+
+
+    //报道行业
+    this.getIndustry = function () {
+        return $http.get('/api/mobi-investor/get-industry');
+    };
+
+    //报道来源
+    this.getWebsite = function () {
+        return $http.get('/api/mobi-investor/get-website');
+    };
+    //媒体热议查询项目数
+    this.getFilterSourceFlagCount = function (request) {
+        return $http.get('/api/mobi-investor/daily-report-count-condition?' + $.param(request));
     };
 
     //投资热点项目集列表
