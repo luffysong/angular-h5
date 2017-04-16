@@ -6,6 +6,8 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
     var vm = this;
     vm.needApp = true;
     vm.openApp = openApp;
+    vm.type = $stateParams.type;
+    vm.inviteAction = inviteAction;
     init();
 
     function init() {
@@ -46,6 +48,9 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
     }
 
     function initData() {
+        RongziService.getRecCode().then(function setData(data) {
+            console.log('00000');
+        }).catch(fail);
     }
 
     function initTitle(t) {
@@ -114,5 +119,9 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
         }else {
             hybrid.open('crmCompany/' + vm.project.ccid);
         }
+    }
+
+    function inviteAction() {
+        $state.go('rongzi.authInvestor', { type: 'orange' });
     }
 }

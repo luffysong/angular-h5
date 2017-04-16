@@ -4,27 +4,42 @@
       <div class="top-logo ng-scope">
         <img src="/styles/images/rongzi/rongzi-logo.png">
       </div>
-      <div class="invite-title">
+      <div class="invite-title" ng-if="vm.type === 'orange'">
+        <img src="/styles/images/rongzi/invitation-orange.png"/>
+      </div>
+      <div class="invite-title" ng-if="vm.type === 'green'">
         <img src="/styles/images/rongzi/invite-top.png"/>
       </div>
     </div>
-    <div class="invite-tag invite-bg-green">邀请规则</div>
+    <div class="invite-tag "
+    ng-class="{true:'invite-bg-orange',false:'invite-bg-green'}[vm.type === 'orange']" >邀请规则</div>
     <div class="invite-rule">
       <span>我可以获得</span><br/>
       <span> 1.微信分享活动至朋友圈，邀请一个成功认证投资人用户则获得所有专场提前三天查看权限。</span><br/>
       <span> 2.邀请两个成功认证投资人用户则获得所有专场永久查看权限</span>
     </div>
     <div class="invite-code">
-      <span class="invite-color-green">您的专属邀请码：</span><span class="code-bg code-color-green">45w2</span>
+      <span
+      ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">
+      您的专属邀请码：</span>
+      <span class="code-bg"
+        ng-class="{true:'code-color-orange',false:'code-color-green'}[vm.type === 'orange']">
+      45w2</span>
     </div>
     <div class="invite-info">
       <div class="invite-one">
         <p class="invite-color-white">您已成功邀请<span class="invite-num">1</span>人，</p>
-        <p class="invite-color-green">获得所有专长提前三天查看权限，</p>
-        <p class="invite-color-green">永久权限就差一步！</p>
+        <p
+          ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">
+          获得所有专长提前三天查看权限，</p>
+        <p
+          ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">
+          永久权限就差一步！</p>
       </div>
     </div>
-    <div class="invite-btn invite-bg-green">马上邀请投资人</div>
+    <div class="invite-btn"
+    ng-class="{true:'invite-bg-orange',false:'invite-bg-green'}[vm.type === 'orange']"
+    ng-click="vm.inviteAction()">马上邀请投资人</div>
     <div class="rongzi-common-bottom" ui-sref="rongzi.main">
       返回主会场
     </div>

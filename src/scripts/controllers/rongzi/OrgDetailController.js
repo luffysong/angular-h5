@@ -296,7 +296,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
     }
 
     function inviteInvestor() {
-        $state.go('rongzi.inviteInvestor');
+        $state.go('rongzi.inviteInvestor', { type: 'orange' });
 
         // if (!hybrid.isInApp) {
         //     defaultModal();
