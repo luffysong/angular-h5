@@ -518,14 +518,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     $stateProvider.state('rongzi.inviteInvestor', {
         url:'/inviteInvestor',
         controllerAs: 'vm',
-        controller: 'inviteInvestorController',
+        controller: 'InviteInvestorController',
         templateUrl: 'templates/rongzi/inviteInvestor.html',
     });
 
     $stateProvider.state('rongzi.authInvestor', {
         url:'/authInvestor',
         controllerAs: 'vm',
-        controller: 'authInvestorController',
+        controller: 'AuthInvestorController',
         templateUrl: 'templates/rongzi/authInvestor.html',
     });
 

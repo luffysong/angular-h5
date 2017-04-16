@@ -11,7 +11,8 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
     function init() {
         initTitle();
         outInitLinkme();
-        initData();
+        getInviteCode();
+        getInviteCount();
         if (!hybrid.isInApp) {
             outInitLinkme();
             vm.needApp = false;
@@ -19,11 +20,29 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
 
         initPxLoader();
         loading.hide('findLoading');
+        vm.inviteCode = '45w2';
+        vm.inviteCount = 2;
+    }
+
+    function getInviteCode() {
+        RongziService.getRecCode()
+        .then(function (response){
+            console.log(response);
+            // vm.inviteCode = response.code;
+        }).catch(fail);
+    }
+
+    function getInviteCount() {
+        RongziService.getRecCount()
+        .then(function (response){
+            console.log(response);
+            // vm.inviteCount = response.data.count;
+        });
     }
 
     function initWeixin(name, desc) {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】' + name + '正在参与最有号召力创业项目评选，请投我一票！',
+            shareTitle: '邀请认证投资人得特权',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '' + desc,
@@ -45,11 +64,8 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
         loader.start();
     }
 
-    function initData() {
-    }
-
     function initTitle(t) {
-        document.title = '融资季 · 创业项目号召力榜';
+        document.title = '融资季 · 邀请认证投资人';
     }
 
     function fail(err) {

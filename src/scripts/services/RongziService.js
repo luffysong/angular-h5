@@ -120,12 +120,12 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
 
     //获取邀请码
     this.getRecCode = function () {
-        return $http.get('/api/investor/auth/get-recommend-code?');
+        return $http.post('/api/investor/auth/get-recommend-code');
     };
 
     //获取邀请次数
     this.getRecCount = function () {
-        return $http.get('/api/investor/auth/get-recommendsuc-count?');
+        return $http.get('/api/investor/auth/get-recommendsuc-count');
     };
 
 });
