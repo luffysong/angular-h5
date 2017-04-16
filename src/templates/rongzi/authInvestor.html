@@ -25,7 +25,7 @@
       <span
       ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">认证投资人邀请码：</span>
       <span class="code-bg "
-        ng-class="{true:'code-color-orange',false:'code-color-green'}[vm.type === 'orange']">45w2</span>
+        ng-class="{true:'code-color-orange',false:'code-color-green'}[vm.type === 'orange']">{{vm.code}}</span>
     </div>
     <div class="invite-btn  auth-btn-mgt"
     ng-class="{true:'invite-bg-orange',false:'invite-bg-green'}[vm.type === 'orange']">马上认证投资人</div>

@@ -22,23 +22,19 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
 
         initPxLoader();
         loading.hide('findLoading');
-        vm.inviteCode = '45w2';
-        vm.inviteCount = 2;
     }
 
     function getInviteCode() {
         RongziService.getRecCode()
-        .then(function (response){
-            console.log(response);
-            // vm.inviteCode = response.code;
+        .then(function (response) {
+            vm.inviteCode = response.data.code;
         }).catch(fail);
     }
 
     function getInviteCount() {
         RongziService.getRecCount()
-        .then(function (response){
-            console.log(response);
-            // vm.inviteCount = response.data.count;
+        .then(function (response) {
+            vm.inviteCount = response.data.count;
         });
     }
 
