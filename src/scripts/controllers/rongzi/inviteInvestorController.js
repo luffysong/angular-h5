@@ -22,6 +22,9 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
 
         initPxLoader();
         loading.hide('findLoading');
+        vm.inviteCode = '45w2';
+        vm.inviteCount = 2;
+        getType();
     }
 
     function getInviteCode() {
@@ -36,6 +39,14 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
         .then(function (response) {
             vm.inviteCount = response.data.count;
         });
+    }
+
+    function getType(){
+        if($stateParams.category < 0){
+            vm.type = 'orange';
+        } else {
+            vm.type = 'green';
+        }
     }
 
     function initWeixin(name, desc) {

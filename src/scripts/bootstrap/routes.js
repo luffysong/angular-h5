@@ -516,7 +516,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('rongzi.inviteInvestor', {
-        url:'/inviteInvestor?type',
+        url:'/inviteInvestor?{category}',
         controllerAs: 'vm',
         controller: 'InviteInvestorController',
         templateUrl: 'templates/rongzi/inviteInvestor.html',
