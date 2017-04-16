@@ -7,18 +7,18 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
     vm.needApp = true;
     vm.openApp = openApp;
     vm.type = $stateParams.type;
-    vm.code = $stateParams.code;
+    vm.code = $stateParams.inviteCode;
     init();
 
     function init() {
         initTitle();
         outInitLinkme();
-        initData();
         if (!hybrid.isInApp) {
             outInitLinkme();
             vm.needApp = false;
         }
 
+        vm.inviteCode = $stateParams.inviteCode;
         initPxLoader();
         loading.hide('findLoading');
     }
@@ -45,9 +45,6 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
         }
 
         loader.start();
-    }
-
-    function initData() {
     }
 
     function initTitle(t) {
