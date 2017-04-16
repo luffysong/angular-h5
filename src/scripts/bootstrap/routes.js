@@ -522,6 +522,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         templateUrl: 'templates/rongzi/inviteInvestor.html',
     });
 
+    $stateProvider.state('rongzi.authInvestor', {
+        url:'/authInvestor',
+        controllerAs: 'vm',
+        controller: 'authInvestorController',
+        templateUrl: 'templates/rongzi/authInvestor.html',
+    });
+
     function checkClaimStatus(ClaimService, $stateParams) {
         return ClaimService.check($stateParams.id);
     }
