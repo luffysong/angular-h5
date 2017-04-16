@@ -41,8 +41,8 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
         });
     }
 
-    function getType(){
-        if($stateParams.category < 0){
+    function getType() {
+        if ($stateParams.category < 0) {
             vm.type = 'orange';
         } else {
             vm.type = 'green';
