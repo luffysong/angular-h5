@@ -18,28 +18,42 @@
       <span> 1.微信分享活动至朋友圈，邀请一个成功认证投资人用户则获得所有专场提前三天查看权限。</span><br/>
       <span> 2.邀请两个成功认证投资人用户则获得所有专场永久查看权限</span>
     </div>
+
     <div class="invite-code">
       <span
       ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">
       您的专属邀请码：</span>
       <span class="code-bg"
         ng-class="{true:'code-color-orange',false:'code-color-green'}[vm.type === 'orange']">
-      45w2</span>
+      {{vm.inviteCode}}</span>
     </div>
+
+
     <div class="invite-info">
-      <div class="invite-one">
-        <p class="invite-color-white">您已成功邀请<span class="invite-num">1</span>人，</p>
+      <div class="invite-count" ng-if="vm.inviteCount === 0">
+        <p class="invite-color-white">您已成功邀请<span class="invite-num">{{vm.inviteCount}}</span>人，
+          <span class="orange-color">暂无查看权限</span></p>
+      </div>
+      <div class="invite-count" ng-if="vm.inviteCount === 1">
+        <p class="invite-color-white">您已成功邀请<span class="invite-num">{{vm.inviteCount}}</span>人，</p>
         <p
-          ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">
-          获得所有专长提前三天查看权限，</p>
+        ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">获得所有专场提前三天查看权限，</p>
         <p
-          ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">
-          永久权限就差一步！</p>
+        ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">永久权限就差一步！</p>
+      </div>
+      <div class="invite-count" ng-if="vm.inviteCount > 1">
+        <p class="invite-color-white">您已成功邀请<span class="invite-num">{{vm.inviteCount}}</span>人，</p>
+        <p
+        ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">获得所有专场永久查看权限，</p>
+        <p
+        ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">真是羡煞旁人。</p>
       </div>
     </div>
+
+
     <div class="invite-btn"
     ng-class="{true:'invite-bg-orange',false:'invite-bg-green'}[vm.type === 'orange']"
-    ng-click="vm.inviteAction()">马上邀请投资人</div>
+    ui-sref="rongzi.authInvestor({type:vm.type})">马上邀请投资人</div>
     <div class="rongzi-common-bottom" ui-sref="rongzi.main">
       返回主会场
     </div>
