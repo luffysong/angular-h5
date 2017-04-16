@@ -85,7 +85,7 @@
   .bestlist-top3{
     width: 95%;
     height: auto;
-    min-height: 160px;
+    min-height: 180px;
     //border: 1px solid #ffb933;
     background: url('images/rongzi/hotdaily-title.png') no-repeat center;
     //background-size: cover;
@@ -96,12 +96,22 @@
       width: 33.3%;
       max-height: 180px;
       height: auto;
-      display: inline-block;
-      overflow: hidden;
-      line-height: 150px;
-      padding-top: 28px;
+
+// <<<<<<< HEAD
+//       display: inline-block;
+//       overflow: hidden;
+//       line-height: 150px;
+//       padding-top: 28px;
+// =======
+      float: left;
+      //overflow: hidden;
+      line-height: 160px;
+      padding-top: 25px;
+
       text-align: center;
       position: relative;
+      margin-top: 0px;
+      top:0px;
       .in-div{
           margin: 0 auto;
           background-size: contain;
@@ -109,7 +119,7 @@
           background-color: #fff;
           background-repeat: no-repeat;
           width: 100px;
-          //position: relative;
+          position: relative;
           height: auto;
           border-radius: 50px;
           border: 1px solid #ffb933;
@@ -134,14 +144,17 @@
 
       .pname{
           width: 100%;
-          margin-top: -60px;
           text-align: center;
-          padding-top: 20%;
           border-bottom: 10px;
+          position: relative;
+          line-height: 20px;
+          color: #ffb933;
+          height: auto;
+          font-size: 14px;
+          font-weight: bold;
+          margin-top: 5px;
         .in-text{
             color: #ffb933;
-            font-size: 14px;
-            font-weight: bold;
             line-height: 20px;
             height: auto;
             text-align: center;
@@ -162,9 +175,19 @@
         background: url('images/rongzi/gold.png') no-repeat center;
         @media screen and (max-width: 320px) {
           background-size: cover;
+          margin-left: 6px;
+          margin-top: -80px;
         }
+
+        @media (min-width: 321px) and (max-width: 414px) {
+           //CSS代码
+          background-size: cover;
+          margin-left: 6px;
+          margin-top: -85px;
+        }
+
         // 屏幕宽度小于767个象素时应用的CSS样式
-        @media (min-width: 321px) and (max-width: 767px) {
+        @media (min-width: 415px) and (max-width: 767px) {
            //CSS代码
           background-size: cover;
           //margin-top: -330px;
@@ -179,8 +202,18 @@
         background: url('images/rongzi/silver.png') no-repeat center;
         @media screen and (max-width: 320px) {
           background-size: cover;
+          margin-left: 6px;
+          margin-top: -80px;
         }
-        @media (min-width: 321px) and (max-width: 767px) {
+
+        @media (min-width: 321px) and (max-width: 414px) {
+           //CSS代码
+          background-size: cover;
+          margin-left: 6px;
+          margin-top: -85px;
+        }
+
+        @media (min-width: 415px) and (max-width: 767px) {
            //CSS代码
           background-size: cover;
         }
@@ -194,8 +227,18 @@
         background: url('images/rongzi/copper.png') no-repeat center;
         @media screen and (max-width: 320px) {
           background-size: cover;
+          margin-left: 6px;
+          margin-top: -80px;
         }
-        @media (min-width: 321px) and (max-width: 767px) {
+
+        @media (min-width: 321px) and (max-width: 414px) {
+           //CSS代码
+          background-size: cover;
+          margin-left: 6px;
+          margin-top: -85px;
+        }
+
+        @media (min-width: 415px) and (max-width: 767px) {
            //CSS代码
           background-size: cover;
         }

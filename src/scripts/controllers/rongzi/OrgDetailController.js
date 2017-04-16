@@ -18,6 +18,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
     vm.openApp = openApp;
     vm.openAppUrl;
     vm.downloadMask = downloadMask;
+    vm.inviteInvestor = inviteInvestor;
     init();
 
     function init() {
@@ -292,5 +293,17 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
 
     function downloadMask() {
         window.location.href = vm.openAppUrl;
+    }
+
+    function inviteInvestor() {
+        $state.go('rongzi.inviteInvestor');
+
+        // if (!hybrid.isInApp) {
+        //     defaultModal();
+        // } else if (hybrid.isInApp && !UserService.getUID()) {
+        //     window.location.href = 'https://passport.36kr.com/pages';
+        // } else if (hybrid.isInApp && UserService.getUID()) {
+        //     state.go('rongzi.inviteInvestor');
+        // }
     }
 }
