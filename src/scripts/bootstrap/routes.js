@@ -528,7 +528,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('rongzi.authInvestor', {
-        url:'/authInvestor?type',
+        url:'/authInvestor?{type}&{inviteCode}',
         controllerAs: 'vm',
         controller: 'AuthInvestorController',
         templateUrl: 'templates/rongzi/authInvestor.html',

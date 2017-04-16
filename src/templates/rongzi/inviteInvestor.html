@@ -49,11 +49,15 @@
         ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">真是羡煞旁人。</p>
       </div>
     </div>
+<<<<<<< HEAD
 
 
     <div class="invite-btn"
     ng-class="{true:'invite-bg-orange',false:'invite-bg-green'}[vm.type === 'orange']"
     ui-sref="rongzi.authInvestor({type:vm.type})">马上邀请投资人</div>
+=======
+    <div class="invite-btn invite-bg-green" ui-sref="rongzi.authInvestor({inviteCode: vm.inviteCode})">马上邀请投资人</div>
+>>>>>>> feat: 邀请投资人添加邀请码参数
     <div class="rongzi-common-bottom" ui-sref="rongzi.main">
       返回主会场
     </div>
