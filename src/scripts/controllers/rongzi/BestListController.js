@@ -239,7 +239,7 @@ function BestListController($modal, loading, $stateParams, FindService,
         }
     }
 
-    ruleController.$inject = ['$modalInstance', 'hybrid','obj'];
+    ruleController.$inject = ['$modalInstance', 'hybrid', 'obj'];
     function ruleController($modalInstance, hybrid, obj) {
         var vm = this;
         vm.p = obj;
