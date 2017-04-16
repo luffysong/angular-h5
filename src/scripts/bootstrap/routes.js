@@ -516,17 +516,27 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('rongzi.inviteInvestor', {
-        url:'/inviteInvestor',
+        url:'/inviteInvestor?type',
         controllerAs: 'vm',
         controller: 'InviteInvestorController',
         templateUrl: 'templates/rongzi/inviteInvestor.html',
+        data:{
+            permissions: {
+                only: ['login'],
+            },
+        },
     });
 
     $stateProvider.state('rongzi.authInvestor', {
-        url:'/authInvestor',
+        url:'/authInvestor?type',
         controllerAs: 'vm',
         controller: 'AuthInvestorController',
         templateUrl: 'templates/rongzi/authInvestor.html',
+        data:{
+            permissions: {
+                only: ['login'],
+            },
+        },
     });
 
     function checkClaimStatus(ClaimService, $stateParams) {

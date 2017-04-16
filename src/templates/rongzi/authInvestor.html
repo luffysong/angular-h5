@@ -4,11 +4,17 @@
       <div class="top-logo ng-scope">
         <img src="/styles/images/rongzi/rongzi-logo.png">
       </div>
-      <div class="invite-title">
+
+      <div class="invite-title" ng-if="vm.type==='green'">
         <img src="/styles/images/rongzi/auth-top.png"/>
       </div>
+
+      <div class="invite-title" ng-if="vm.type==='orange'">
+        <img src="/styles/images/rongzi/auth-orange.png"/>
+      </div>
     </div>
-    <div class="invite-tag invite-bg-green auth-tag-width">认证投资人权益</div>
+    <div class="invite-tag  auth-tag-width"
+      ng-class="{true:'invite-bg-orange',false:'invite-bg-green'}[vm.type === 'orange']">认证投资人权益</div>
     <div class="invite-rule invite-color-white">
       <span> 1. 拥有自己专属工作台，根据不同阶段工作流跟进项目，实时了解项目动态及相关行业动态，再也不用担心错过项目消息。</span><br/>
       <span> 2. 关注项目，查看联系方式，项目BP，一键约谈项目负责人，想约就约随时约！</span><br/>
@@ -16,9 +22,13 @@
       <span> 4. 根据约谈走势了解项目热度，对比竞品，一目了然。</span>
     </div>
     <div class="invite-code">
-      <span class="invite-color-green">认证投资人邀请码：</span><span class="code-bg code-color-green">45w2</span>
+      <span
+      ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">认证投资人邀请码：</span>
+      <span class="code-bg "
+        ng-class="{true:'code-color-orange',false:'code-color-green'}[vm.type === 'orange']">45w2</span>
     </div>
-    <div class="invite-btn invite-bg-green auth-btn-mgt">马上认证投资人</div>
+    <div class="invite-btn  auth-btn-mgt"
+    ng-class="{true:'invite-bg-orange',false:'invite-bg-green'}[vm.type === 'orange']">马上认证投资人</div>
     <div class="rongzi-common-bottom" ui-sref="rongzi.main">
       返回主会场
     </div>

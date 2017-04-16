@@ -6,6 +6,7 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
     var vm = this;
     vm.needApp = true;
     vm.openApp = openApp;
+    vm.type = $stateParams.type;
     init();
 
     function init() {
