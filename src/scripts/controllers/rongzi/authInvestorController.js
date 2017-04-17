@@ -57,7 +57,7 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
     }
 
     function initTitle(t) {
-        document.title = '融资季 · 创业项目号召力榜';
+        document.title = '融资季 · 邀请认证投资人';
     }
 
     function fail(err) {
