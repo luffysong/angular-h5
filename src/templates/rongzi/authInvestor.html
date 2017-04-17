@@ -30,7 +30,7 @@
 
     <div class="invite-btn  auth-btn-mgt"
       ng-class="{true:'invite-bg-orange',false:'invite-bg-green'}[vm.type === 'orange']"
-      ng-click="vm.verifyInvestor()" ng-if="vm.isInviteCode">
+      ng-click="vm.verifyInvestor()" >
       <span ng-if="vm.isInviteCode">点击右上角邀请好友</span>
       <span ng-if="!vm.isInviteCode">马上认证投资人</span>
     </div>
