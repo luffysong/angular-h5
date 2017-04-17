@@ -1,6 +1,6 @@
 var angular = require('angular');
 angular.module('defaultApp.controller')
-  .controller('ShareController', ShareController);
+    .controller('ShareController', ShareController);
 
 function ShareController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid, projectInfo) {
     var vm = this;
@@ -25,11 +25,11 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
         loading.hide('findLoading');
     }
 
-    function initWeixin(name, desc) {
+    function initWeixin(name, desc, logo) {
         window.WEIXINSHARE = {
             shareTitle: '【创投助手·融资季】' + name + '正在参与最有号召力创业项目评选，请投我一票！',
             shareUrl: window.location.href,
-            shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
+            shareImg: logo,
             shareDesc: '' + desc,
         };
 
@@ -53,7 +53,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
         vm.project = projectInfo.data;
         if (vm.project.name && vm.project.intro) {
 
-            initWeixin(vm.project.name, vm.project.brief);
+            initWeixin(vm.project.name, vm.project.brief, vm.project.logo);
         }
     }
 
@@ -73,7 +73,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
             window.location.href = 'https://passport.36kr.com/pages';
         } else if (UserService.getUID() && hybrid.isInApp) {
             RongziService.like(id)
-                .then(function (response) {
+                .then(function(response) {
                     vm.project.likes = response.data.curCount;
                     vm.project.liked = true;
                 });
@@ -89,26 +89,27 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
 
     function outInitLinkme() {
         var krdata = {};
-        krdata.type =  window.projectEnvConfig.linkmeType;
+        krdata.type = window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/share?id=' + $stateParams.id + '","currentRoom":"0"}';
+            '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/share?id=' + $stateParams.id + '","currentRoom":"0"}';
 
-        window.linkedme.init(window.projectEnvConfig.linkmeKey,
-        { type: window.projectEnvConfig.linkmeType }, function (err, res) {
+        window.linkedme.init(window.projectEnvConfig.linkmeKey, {
+            type: window.projectEnvConfig.linkmeType
+        }, function(err, res) {
+            if (err) {
+                return;
+            }
+
+            window.linkedme.link(krdata, function(err, data) {
                 if (err) {
-                    return;
+                    // 生成深度链接失败，返回错误对象err
+                    console.log(err);
+                } else {
+                    // 生成深度链接成功，深度链接可以通过data.url得到
+                    vm.openUrl = data.url;
                 }
-
-                window.linkedme.link(krdata, function (err, data) {
-                        if (err) {
-                            // 生成深度链接失败，返回错误对象err
-                            console.log(err);
-                        } else {
-                            // 生成深度链接成功，深度链接可以通过data.url得到
-                            vm.openUrl = data.url;
-                        }
-                    }, false);
-            });
+            }, false);
+        });
     }
 
     function defaultModal(item) {
@@ -120,7 +121,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
             controller: defaultController,
             controllerAs: 'vm',
             resolve: {
-                obj: function () {
+                obj: function() {
                     return item;
                 }
             }
@@ -128,6 +129,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
     }
 
     defaultController.$inject = ['$modalInstance', 'obj'];
+
     function defaultController($modalInstance, obj) {
 
         var vm = this;
@@ -142,7 +144,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
     function openApp() {
         if (!hybrid.isInApp) {
             defaultModal();
-        }else {
+        } else {
             hybrid.open('crmCompany/' + vm.project.ccid);
         }
     }

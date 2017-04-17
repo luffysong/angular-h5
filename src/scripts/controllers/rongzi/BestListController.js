@@ -1,9 +1,9 @@
 var angular = require('angular');
 angular.module('defaultApp.controller')
-  .controller('BestListController', BestListController);
+    .controller('BestListController', BestListController);
 
 function BestListController($modal, loading, $stateParams, FindService,
-  RongziService, $state, UserService, ErrorService, hybrid, $timeout) {
+    RongziService, $state, UserService, ErrorService, hybrid, $timeout) {
     var vm = this;
     vm.displayMore = displayMore;
     vm.page = 0;
@@ -19,6 +19,7 @@ function BestListController($modal, loading, $stateParams, FindService,
     vm.busy = false;
 
     init();
+
     function init() {
         initUserInfo();
         loading.hide('findLoading');
@@ -61,36 +62,36 @@ function BestListController($modal, loading, $stateParams, FindService,
     }
 
     function initData() {
-        if (vm.busy)return;
+        if (vm.busy) return;
         vm.busy = true;
 
         var sendata = {
             page: vm.page + 1,
-            pageSize:10,
+            pageSize: 10,
         };
         RongziService.getProList(sendata)
             .then(function setProList(response) {
-                    vm.prolist = vm.prolist.concat(response.data.data);
-                    if (!vm.top3) {
-                        vm.top3 = response.data.data.splice(0, 3);
+                vm.prolist = vm.prolist.concat(response.data.data);
+                if (!vm.top3) {
+                    vm.top3 = response.data.data.splice(0, 3);
 
-                        // vm.top3 = [];
-                        // vm.top3[0] = spliArr[1];
-                        // vm.top3[1] = spliArr[0];
-                        // vm.top3[2] = spliArr[2];
+                    // vm.top3 = [];
+                    // vm.top3[0] = spliArr[1];
+                    // vm.top3[1] = spliArr[0];
+                    // vm.top3[2] = spliArr[2];
+                }
+
+                if (response.data.totalPages) {
+                    vm.page = response.data.page || 0;
+
+                    if (response.data.totalPages !== vm.page) {
+                        vm.busy = false;
+                    } else {
+                        vm.finish = true;
+                        vm.more = true;
                     }
-
-                    if (response.data.totalPages) {
-                        vm.page = response.data.page || 0;
-
-                        if (response.data.totalPages !== vm.page && vm.page <= 9) {
-                            vm.busy = false;
-                        } else {
-                            vm.finish = true;
-                            vm.more = true;
-                        }
-                    }
-                }).catch(fail);
+                }
+            }).catch(fail);
     }
 
     function initUserInfo() {
@@ -129,7 +130,7 @@ function BestListController($modal, loading, $stateParams, FindService,
             controller: ruleController,
             controllerAs: 'vm',
             resolve: {
-                obj: function () {
+                obj: function() {
                     return p;
                 }
             }
@@ -146,6 +147,7 @@ function BestListController($modal, loading, $stateParams, FindService,
     }
 
     modalController.$inject = ['$modalInstance', 'hybrid'];
+
     function modalController($modalInstance, hybrid) {
 
         var vm = this;
@@ -163,52 +165,54 @@ function BestListController($modal, loading, $stateParams, FindService,
 
         function initLinkme() {
             var krdata = {};
-            krdata.type =  window.projectEnvConfig.linkmeType;
+            krdata.type = window.projectEnvConfig.linkmeType;
             krdata.params =
-            '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/enroll", "currentRoom" : "1"}';
+                '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/enroll", "currentRoom" : "1"}';
 
-            window.linkedme.init(window.projectEnvConfig.linkmeKey,
-            { type: window.projectEnvConfig.linkmeType }, function (err, res) {
+            window.linkedme.init(window.projectEnvConfig.linkmeKey, {
+                type: window.projectEnvConfig.linkmeType
+            }, function(err, res) {
+                if (err) {
+                    return;
+                }
+
+                window.linkedme.link(krdata, function(err, data) {
                     if (err) {
-                        return;
+                        // 生成深度链接失败，返回错误对象err
+                        console.log(err);
+                    } else {
+                        // 生成深度链接成功，深度链接可以通过data.url得到
+                        $('#open-App').attr('href', data.url);
                     }
+                }, false);
 
-                    window.linkedme.link(krdata, function (err, data) {
-                            if (err) {
-                                // 生成深度链接失败，返回错误对象err
-                                console.log(err);
-                            } else {
-                                // 生成深度链接成功，深度链接可以通过data.url得到
-                                $('#open-App').attr('href', data.url);
-                            }
-                        }, false);
-
-                });
+            });
         }
     }
 
     function outInitLinkme() {
         var krdata = {};
-        krdata.type =  window.projectEnvConfig.linkmeType;
+        krdata.type = window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/bestlist","currentRoom":"0"}';
+            '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/bestlist","currentRoom":"0"}';
 
-        window.linkedme.init(window.projectEnvConfig.linkmeKey,
-        { type: window.projectEnvConfig.linkmeType }, function (err, res) {
+        window.linkedme.init(window.projectEnvConfig.linkmeKey, {
+            type: window.projectEnvConfig.linkmeType
+        }, function(err, res) {
+            if (err) {
+                return;
+            }
+
+            window.linkedme.link(krdata, function(err, data) {
                 if (err) {
-                    return;
+                    // 生成深度链接失败，返回错误对象err
+                    console.log(err);
+                } else {
+                    // 生成深度链接成功，深度链接可以通过data.url得到
+                    vm.openUrl = data.url;
                 }
-
-                window.linkedme.link(krdata, function (err, data) {
-                        if (err) {
-                            // 生成深度链接失败，返回错误对象err
-                            console.log(err);
-                        } else {
-                            // 生成深度链接成功，深度链接可以通过data.url得到
-                            vm.openUrl = data.url;
-                        }
-                    }, false);
-            });
+            }, false);
+        });
     }
 
     function like(id) {
@@ -220,26 +224,27 @@ function BestListController($modal, loading, $stateParams, FindService,
             window.location.href = 'https://passport.36kr.com/pages';
         } else if (UserService.getUID() && hybrid.isInApp) {
             RongziService.like(id)
-            .then(function (response) {
-                angular.forEach(vm.prolist, function (o) {
-                    if (o.id === id) {
-                        o.likes = response.data.curCount;
-                        o.liked = true;
-                    }
+                .then(function(response) {
+                    angular.forEach(vm.prolist, function(o) {
+                        if (o.id === id) {
+                            o.likes = response.data.curCount;
+                            o.liked = true;
+                        }
+                    });
                 });
-            });
         }
     }
 
     function supporter() {
         if (!hybrid.isInApp) {
             defaultModal();
-        }else if (hybrid.isInApp && !vm.investRole) {
-            window.location.href =  'https://' + window.projectEnvConfig.rongHost + '/m/#/investor/apply';
+        } else if (hybrid.isInApp && !vm.investRole) {
+            window.location.href = 'https://' + window.projectEnvConfig.rongHost + '/m/#/investor/apply';
         }
     }
 
     ruleController.$inject = ['$modalInstance', 'hybrid', 'obj'];
+
     function ruleController($modalInstance, hybrid, obj) {
         var vm = this;
         vm.p = obj;
@@ -265,7 +270,7 @@ function BestListController($modal, loading, $stateParams, FindService,
             controller: defaultController,
             controllerAs: 'vm',
             resolve: {
-                obj: function () {
+                obj: function() {
                     return item;
                 }
             }
@@ -273,6 +278,7 @@ function BestListController($modal, loading, $stateParams, FindService,
     }
 
     defaultController.$inject = ['$modalInstance', 'obj'];
+
     function defaultController($modalInstance, obj) {
 
         var vm = this;
