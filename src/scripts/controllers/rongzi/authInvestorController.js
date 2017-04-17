@@ -76,8 +76,10 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
     }
 
     function verifyInvestor() {
+        var HOST = location.host;
+        var url = 'https://' + location.host + '/m/#/investor/apply?code=' + vm.inviteCode;
         if (!UserService.getUID() && !hybrid.isInApp) {
-            CredentialService.directToLoginSimple();
+            CredentialService.directToLoginSimple(url);
         } else if (hybrid.isInApp && !UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
         } else {
