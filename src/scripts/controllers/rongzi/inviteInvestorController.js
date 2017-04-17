@@ -63,7 +63,6 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '偷偷告诉你，这是顶级机构的省时法宝，你也来试试！',
-            shareButton: 'hide',
         };
 
         var obj = {};
