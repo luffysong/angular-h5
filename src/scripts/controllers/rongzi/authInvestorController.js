@@ -8,6 +8,7 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
     vm.type = $stateParams.type;
     vm.code = $stateParams.inviteCode;
     vm.verifyInvestor = verifyInvestor;
+    vm.isInviteCode = false;
     init();
 
     function init() {
@@ -54,7 +55,7 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
         };
         RongziService.isInviteCode(senddata)
             .then(function setUserData(data) {
-                vm.isInviteCode = data.data.dat;
+                vm.isInviteCode = data.data.data;
             }).catch(fail);
     }
 
