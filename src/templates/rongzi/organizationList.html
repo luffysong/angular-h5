@@ -10,6 +10,7 @@
 </div>
 
 <div class="org-a-before" ng-show="vm.Abefore">
+
   <div class="special-item yellow-color" ng-if="vm.ABefore.goingSessions" ng-repeat=" item in vm.ABefore.goingSessions">
     <div class="special-list-border orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})" >
       <div class="special-logo yellow-color" style="background-image: url({{item.logo}})"></div>
@@ -97,8 +98,10 @@
 <!--a轮后-->
 
 <div class="org-a-after" ng-show="vm.Aafter">
+  <!--
   <div class="rongzi-split-block" ng-if="vm.AAfter.goingSessions.length > 0">
   </div>
+-->
 
   <div class="special-item yellow-color" ng-if="vm.AAfter.goingSessions.length" ng-repeat=" item in vm.AAfter.goingSessions">
     <div class="special-list-border orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})">
