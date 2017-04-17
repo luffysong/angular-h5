@@ -77,7 +77,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     /*投资人认证申请*/
     $stateProvider.state('investorValidateApply', {
-        url: '/investor/apply',
+        url: '/investor/apply?{inviteCode}',
         templateUrl: 'templates/investor/apply.html',
         controller: 'InvestorValidateApplyController',
         data:{
@@ -532,11 +532,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'AuthInvestorController',
         templateUrl: 'templates/rongzi/authInvestor.html',
-        data:{
-            permissions: {
-                only: ['login'],
-            },
-        },
     });
 
     function checkClaimStatus(ClaimService, $stateParams) {

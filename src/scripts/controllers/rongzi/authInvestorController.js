@@ -2,12 +2,13 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
   .controller('AuthInvestorController', AuthInvestorController);
 
-function AuthInvestorController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid) {
+function AuthInvestorController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid, FindService) {
     var vm = this;
     vm.needApp = true;
     vm.openApp = openApp;
     vm.type = $stateParams.type;
     vm.code = $stateParams.inviteCode;
+    vm.verifyInvestor = verifyInvestor;
     init();
 
     function init() {
@@ -21,6 +22,7 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
         vm.inviteCode = $stateParams.inviteCode;
         initPxLoader();
         loading.hide('findLoading');
+        initUserData();
     }
 
     function initWeixin(name, desc) {
@@ -45,6 +47,13 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
         }
 
         loader.start();
+    }
+
+    function initUserData() {
+        FindService.getUserProfile()
+            .then(function setUserData(data) {
+                vm.investorState = data.data.investor;
+            }).catch(fail);
     }
 
     function initTitle(t) {
@@ -113,5 +122,9 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
         }else {
             hybrid.open('crmCompany/' + vm.project.ccid);
         }
+    }
+
+    function verifyInvestor() {
+        $state.go('investorValidateApply', { inviteCode: vm.code });
     }
 }

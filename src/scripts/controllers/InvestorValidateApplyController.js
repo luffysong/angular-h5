@@ -78,6 +78,10 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 id: UserService.getUID(),
             };
 
+            if ($stateParams.inviteCode) {
+                $scope.user.recommendCode = $stateParams.inviteCode;
+            }
+
             /*投资人认证申请*/
             var invest = localStorage && JSON.parse(localStorage.getItem('invest')) || {};
 
@@ -91,6 +95,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
                 investorFocusIndustrys:'',/*关注领域*/
                 mainCurrency:'',/*主投币种 CNY:人民币 USD:美元*/
                 businessCardLink:'',/*名片*/
+                recommendCode: '',/*邀请码选填*/
             };
             /*关注领域*/
             $scope.invest.investorFocusIndustrys = DictionaryService.getDict('InvestorFollowedIndustry');
@@ -483,6 +488,7 @@ angular.module('defaultApp.controller').controller('InvestorValidateApplyControl
             $scope.params.avatar = $scope.guideForm.avatar.uploaded || $scope.user.avatar;
             $scope.params.realName = $scope.user.name;
             $scope.params.weixin = $scope.user.weixin;
+            $scope.params.recommendCode = $scope.user.recommendCode;
             $scope.params.businessCard = businessCardLink;
             $scope.params.investorRoleEnum = $scope.invest.investorRole;
             $scope.params.orgName = $scope.organization.addForm.name;
