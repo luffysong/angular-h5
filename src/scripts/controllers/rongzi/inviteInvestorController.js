@@ -88,6 +88,10 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
     }
 
     function inviteAction() {
-        $state.go('rongzi.authInvestor', { type: 'orange' });
+        var HOST = location.host;
+        var url = '//' + HOST + '/m/#/rongzi/authInvestor?type=' + vm.type + '&inviteCode=' + vm.inviteCode;
+        window.location.href = url;
+
+        //$state.go('rongzi.authInvestor', { type: 'orange' });
     }
 }
