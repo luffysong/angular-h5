@@ -25,6 +25,15 @@
     </div>
 
     <div class="invite-btn  auth-btn-mgt"
+      ng-class="{true:'invite-bg-orange',false:'invite-bg-green'}[vm.type === 'orange']"
+      ng-click="vm.verifyInvestor()" ng-if="!vm.isInviteCode">
+        马上认证投资人
+    </div>
+
+    <div ng-if="vm.isInviteCode" class="invite-txt  auth-btn-mgt">
+        点击右上角邀请好友
+    </div>
+
     <div class="rongzi-common-bottom" ui-sref="rongzi.main">
       返回主会场
     </div>
