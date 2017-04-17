@@ -128,4 +128,9 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
         return $http.get('//' + projectEnvConfig.nrongHost + '/n/api/investor/auth/get-recommendsuc-count');
     };
 
+    //是否我发出的邀请码
+    this.isInviteCode = function (request) {
+        return $http.get('//' + projectEnvConfig.nrongHost + '/n/api/investor/auth//check-recommendcode-user?' + $.param(request));
+    };
+
 });
