@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
   .controller('InviteInvestorController', InviteInvestorController);
 
-function InviteInvestorController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid) {
+function InviteInvestorController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid, CredentialService) {
     var vm = this;
     vm.needApp = true;
     vm.openApp = openApp;
@@ -15,6 +15,8 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
         outInitLinkme();
         getInviteCode();
         getInviteCount();
+        initWeixin();
+        initUser();
         if (!hybrid.isInApp) {
             outInitLinkme();
             vm.needApp = false;
@@ -22,9 +24,15 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
 
         initPxLoader();
         loading.hide('findLoading');
-        vm.inviteCode = '45w2';
-        vm.inviteCount = 2;
         getType();
+    }
+
+    function initUser() {
+        if (!UserService.getUID() && !hybrid.isInApp) {
+            CredentialService.directToLoginSimple();
+        } else if (hybrid.isInApp && !UserService.getUID()) {
+            window.location.href = 'https://passport.36kr.com/pages';
+        }
     }
 
     function getInviteCode() {
@@ -49,12 +57,13 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
         }
     }
 
-    function initWeixin(name, desc) {
+    function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '邀请认证投资人得特权',
+            shareTitle: '邀你共度神秘八小时！',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: '' + desc,
+            shareDesc: '偷偷告诉你，这是顶级机构的省时法宝，你也来试试！',
+            shareButton: 'hide',
         };
 
         var obj = {};

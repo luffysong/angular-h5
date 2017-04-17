@@ -520,11 +520,6 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'InviteInvestorController',
         templateUrl: 'templates/rongzi/inviteInvestor.html',
-        data:{
-            permissions: {
-                only: ['login'],
-            },
-        },
     });
 
     $stateProvider.state('rongzi.authInvestor', {

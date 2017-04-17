@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
   .controller('AuthInvestorController', AuthInvestorController);
 
-function AuthInvestorController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid, FindService) {
+function AuthInvestorController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid, FindService, CredentialService) {
     var vm = this;
     vm.needApp = true;
     vm.openApp = openApp;
@@ -24,12 +24,12 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
         initUserData();
     }
 
-    function initWeixin(name, desc) {
+    function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】' + name + '正在参与最有号召力创业项目评选，请投我一票！',
+            shareTitle: '邀你共度神秘八小时！ ',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: '' + desc,
+            shareDesc: '偷偷告诉你，这是顶级机构的省时法宝，你也来试试！',
         };
 
         var obj = {};
@@ -124,6 +124,12 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
     }
 
     function verifyInvestor() {
-        $state.go('investorValidateApply', { inviteCode: vm.code });
+        if (!UserService.getUID() && !hybrid.isInApp) {
+            CredentialService.directToLoginSimple();
+        } else if (hybrid.isInApp && !UserService.getUID()) {
+            window.location.href = 'https://passport.36kr.com/pages';
+        } else {
+            $state.go('investorValidateApply', { inviteCode: vm.code });
+        }
     }
 }
