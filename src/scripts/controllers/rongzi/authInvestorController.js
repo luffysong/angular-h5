@@ -48,14 +48,16 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
 
     function isInviteCode() {
         var uuid = UserService.getUID();
-        var senddata = {
-            code:vm.inviteCode,
-            uid:uuid,
-        };
-        RongziService.isInviteCode(senddata)
-            .then(function setUserData(data) {
-                vm.isInviteCode = data.data.data;
-            }).catch(fail);
+        if (vm.inviteCode && UserService.getUID()) {
+            var senddata = {
+                code:vm.inviteCode,
+                uid:uuid,
+            };
+            RongziService.isInviteCode(senddata)
+                .then(function setUserData(data) {
+                    vm.isInviteCode = data.data.data;
+                }).catch(fail);
+        }
     }
 
     function initUserData() {
