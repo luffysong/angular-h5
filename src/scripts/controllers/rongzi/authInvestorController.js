@@ -77,7 +77,7 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
 
     function verifyInvestor() {
         var HOST = location.host;
-        var url = 'https://' + location.host + '/m/#/investor/apply?code=' + vm.inviteCode;
+        var url = '//' + HOST + '/m/#/investor/apply?inviteCode=' + vm.inviteCode;
         if (!UserService.getUID() && !hybrid.isInApp) {
             CredentialService.directToLoginSimple(url);
         } else if (hybrid.isInApp && !UserService.getUID()) {
