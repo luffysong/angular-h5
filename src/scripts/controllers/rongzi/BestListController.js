@@ -25,6 +25,7 @@ function BestListController($modal, loading, $stateParams, FindService,
         loading.hide('findLoading');
         initWeixin();
         initTitle();
+        getTop3();
         if (!hybrid.isInApp) {
             outInitLinkme();
             vm.needApp = false;
@@ -61,6 +62,14 @@ function BestListController($modal, loading, $stateParams, FindService,
         $('.common-header.J_commonHeaderWrapper').remove();
     }
 
+    function getTop3() {
+        RongziService.getTop3()
+        .then(function setData(data) {
+            vm.top3 = data.data;
+        })
+        .catch(fail);
+    }
+
     function initData() {
         if (vm.busy) return;
         vm.busy = true;
@@ -72,14 +81,15 @@ function BestListController($modal, loading, $stateParams, FindService,
         RongziService.getProList(sendata)
             .then(function setProList(response) {
                 vm.prolist = vm.prolist.concat(response.data.data);
-                if (!vm.top3) {
-                    vm.top3 = response.data.data.splice(0, 3);
 
-                    // vm.top3 = [];
-                    // vm.top3[0] = spliArr[1];
-                    // vm.top3[1] = spliArr[0];
-                    // vm.top3[2] = spliArr[2];
-                }
+                // if (!vm.top3) {
+                //     vm.top3 = response.data.data.splice(0, 3);
+                //
+                //     // vm.top3 = [];
+                //     // vm.top3[0] = spliArr[1];
+                //     // vm.top3[1] = spliArr[0];
+                //     // vm.top3[2] = spliArr[2];
+                // }
 
                 if (response.data.totalPages) {
                     vm.page = response.data.page || 0;

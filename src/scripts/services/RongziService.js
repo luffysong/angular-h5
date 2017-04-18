@@ -133,4 +133,9 @@ angular.module('defaultApp.service').service('RongziService', function (BasicSer
         return $http.get('//' + projectEnvConfig.nrongHost + '/n/api/investor/auth//check-recommendcode-user?' + $.param(request));
     };
 
+    //榜单列表前三
+    this.getTop3 = function () {
+        return $http.get(BASE_URL + '/startup_project/top?');
+    };
+
 });
