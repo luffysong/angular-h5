@@ -22,6 +22,10 @@
       <span> 4. 根据约谈走势了解项目热度，对比竞品，一目了然。</span>
     </div>
     <div class="invite-code">
+      <span
+      ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">认证投资人邀请码：</span>
+      <span class="code-bg "
+        ng-class="{true:'code-color-orange',false:'code-color-green'}[vm.type === 'orange']">{{vm.inviteCode}}</span>
     </div>
 
     <div class="invite-btn  auth-btn-mgt"

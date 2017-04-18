@@ -16,6 +16,7 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
         if (!hybrid.isInApp) {
             vm.needApp = false;
         }
+
         vm.inviteCode = $stateParams.inviteCode;
         initPxLoader();
         isInviteCode();
