@@ -32,7 +32,7 @@
       <div class="special-state orange-color" ng-if="vm.projects.invested.length">已投项目</div>
       <div class="special-item green-color" ng-repeat="item in vm.projects.invested">
         <div class="special-list-border orange-color">
-          <div class="special-logo green-color" ng-click="vm.openApp(item.ccid)" style="background-image: url({{item.logo}})"></div>
+          <div class="special-logo green-color bg-contain" ng-click="vm.openApp(item.ccid)" style="background-image: url({{item.logo}})"></div>
           <div class="special-info">
             <div class="special-name orange-color" ng-click="vm.openApp(item.ccid)">
               {{item.name}}
