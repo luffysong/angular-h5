@@ -1,6 +1,6 @@
 var angular = require('angular');
 angular.module('defaultApp.controller')
-  .controller('AuthInvestorController', AuthInvestorController);
+    .controller('AuthInvestorController', AuthInvestorController);
 
 function AuthInvestorController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid, FindService, CredentialService) {
     var vm = this;
@@ -29,6 +29,7 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '偷偷告诉你，这是顶级机构的省时法宝，你也来试试！',
+            shareButton: 'show'
         };
 
         var obj = {};
@@ -51,8 +52,8 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
         var uuid = UserService.getUID();
         if (vm.inviteCode && UserService.getUID()) {
             var senddata = {
-                code:vm.inviteCode,
-                uid:uuid,
+                code: vm.inviteCode,
+                uid: uuid,
             };
             RongziService.isInviteCode(senddata)
                 .then(function setUserData(data) {
@@ -84,7 +85,9 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
         } else if (hybrid.isInApp && !UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
         } else {
-            $state.go('investorValidateApply', { inviteCode: vm.code });
+            $state.go('investorValidateApply', {
+                inviteCode: vm.code
+            });
         }
     }
 }
