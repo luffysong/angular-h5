@@ -58,7 +58,7 @@
                     </div>
                     </div>
 
-                    <div class="mg text">
+                    <div class="mg text"  ui-sref="rongzi.share({id: item.id})">
                       <p>
                         <span  ng-class="{true:'w1',false:'w8'}[!item.phase]" ng-if="item.name" ui-sref="rongzi.share({id: item.id})">{{item.name}}</span>
                         <span class="p-phase" ng-if="item.phase">{{item.phase}}</span>
