@@ -20,6 +20,7 @@ function AuthInvestorController($modal, loading, $stateParams, RongziService, $s
         vm.inviteCode = $stateParams.inviteCode;
         initPxLoader();
         isInviteCode();
+        initWeixin();
         loading.hide('findLoading');
     }
 
