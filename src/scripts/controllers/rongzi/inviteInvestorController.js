@@ -1,6 +1,6 @@
 var angular = require('angular');
 angular.module('defaultApp.controller')
-  .controller('InviteInvestorController', InviteInvestorController);
+    .controller('InviteInvestorController', InviteInvestorController);
 
 function InviteInvestorController($modal, loading, $stateParams, RongziService, $state, UserService, ErrorService, hybrid, CredentialService) {
     var vm = this;
@@ -34,16 +34,16 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
 
     function getInviteCode() {
         RongziService.getRecCode()
-        .then(function (response) {
-            vm.inviteCode = response.data.code;
-        }).catch(fail);
+            .then(function(response) {
+                vm.inviteCode = response.data.code;
+            }).catch(fail);
     }
 
     function getInviteCount() {
         RongziService.getRecCount()
-        .then(function (response) {
-            vm.inviteCount = response.data.count;
-        });
+            .then(function(response) {
+                vm.inviteCount = response.data.count;
+            });
     }
 
     function getType() {
@@ -60,6 +60,7 @@ function InviteInvestorController($modal, loading, $stateParams, RongziService, 
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '偷偷告诉你，这是顶级机构的省时法宝，你也来试试！',
+            shareButton: 'hide'
         };
 
         var obj = {};
