@@ -161,7 +161,7 @@
 
 <ul infinite-scroll='vm.getFinishedData(1)' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
     <li  ng-if="vm.end" ng-repeat=" item in vm.end track by $index" >
-      <div class="special-item yellow-color" ng-if="vm.end" ng-repeat=" item in vm.end">
+      <div class="special-item yellow-color" >
         <div class="special-list-border orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category,state:'end'})">
           <div class="special-logo yellow-color"  style="background-image: url({{item.logo}})"></div>
           <div class="special-info">
