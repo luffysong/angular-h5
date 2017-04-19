@@ -1,8 +1,9 @@
 var angular = require('angular');
 angular.module('defaultApp.controller')
-  .controller('InvestorInfoController', InvestorInfoController);
+    .controller('InvestorInfoController', InvestorInfoController);
 
-function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziService, $state, UserService, ErrorService, FindService, hybrid) {
+function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziService, $state, UserService,
+    ErrorService, FindService, hybrid, baseInfo, pojrectList) {
     var vm = this;
     vm.subscribe = subscribe;
     vm.needApp = true;
@@ -59,29 +60,22 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     function initData() {
-        RongziService.getBaseInfo($stateParams.id)
-            .then(function (data) {
-                    if (data.data) {
-                        vm.result = data.data;
-                        vm.name = data.data.name;
-                        vm.status = vm.result.status;
-                        initWeixin(vm.name);
-                        vm.names = data.data.name.split('');
-                        initTitle('融资季·' + data.data.name);
-                    }
-                }).catch(fail);
+        if (baseInfo.data) {
+            vm.result = baseInfo.data;
+            vm.name = baseInfo.data.name;
+            vm.status = vm.result.status;
+            initWeixin(vm.name);
+            vm.names = baseInfo.data.name.split('');
+            initTitle('融资季·' + baseInfo.data.name);
+        }
         if (UserService.getUID()) {
-            RongziService.getProjectList($stateParams.id)
-                .then(function (data) {
-                    if (data.data.projects) {
-                        vm.projects = data.data.projects;
-                        vm.noData = false;
-                    }
-
-                    vm.canWeChatShare = data.data.canWeChatShare;
-                    vm.hasPermission = data.data.hasPermission;
-                    vm.remind = data.data.remind;
-                }).catch(fail);
+            if (pojrectList.data.projects) {
+                vm.projects = pojrectList.data.projects;
+                vm.noData = false;
+            }
+            vm.canWeChatShare = pojrectList.data.canWeChatShare;
+            vm.hasPermission = pojrectList.data.hasPermission;
+            vm.remind = pojrectList.data.remind;
         }
     }
 
@@ -102,27 +96,28 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
 
     function initLinkmeInvestor() {
         var krdata = {};
-        krdata.type =  window.projectEnvConfig.linkmeType;
+        krdata.type = window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investorInfo?id=' + $stateParams.id + '&category=' + $stateParams.category + '","currentRoom":"0"}';
-        window.linkedme.init(window.projectEnvConfig.linkmeKey,
-        { type: window.projectEnvConfig.linkmeType }, function (err, res) {
-                if (err) {
-                    return;
-                }
+            '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investorInfo?id=' + $stateParams.id + '&category=' + $stateParams.category + '","currentRoom":"0"}';
+        window.linkedme.init(window.projectEnvConfig.linkmeKey, {
+            type: window.projectEnvConfig.linkmeType
+        }, function(err, res) {
+            if (err) {
+                return;
+            }
 
-                window.linkedme.link(krdata, function (err, data) {
-                        if (err) {
-                            // 生成深度链接失败，返回错误对象err
-                            console.log(err);
-                        } else {
-                            // 生成深度链接成功，深度链接可以通过data.url得到
-                            //console.log(data.url,   $('#comm-openApp11').attr('href'));
-                            vm.openAppUrl = data.url;
-                            $('#comm-openApp').attr('href', data.url);
-                        }
-                    }, false);
-            });
+            window.linkedme.link(krdata, function(err, data) {
+                if (err) {
+                    // 生成深度链接失败，返回错误对象err
+                    console.log(err);
+                } else {
+                    // 生成深度链接成功，深度链接可以通过data.url得到
+                    //console.log(data.url,   $('#comm-openApp11').attr('href'));
+                    vm.openAppUrl = data.url;
+                    $('#comm-openApp').attr('href', data.url);
+                }
+            }, false);
+        });
     }
 
     function subscribe(item, e) {
@@ -134,9 +129,9 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         item.remindText = vm.name;
         if (!hybrid.isInApp) {
             defaultModal();
-        }else if (hybrid.isInApp && vm.remind === 1 && UserService.getUID()) {
+        } else if (hybrid.isInApp && vm.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
-        }else if (UserService.getUID() && vm.remind === 0) {
+        } else if (UserService.getUID() && vm.remind === 0) {
             cancelSubscribeAction(item);
         } else {
             window.location.href = 'https://passport.36kr.com/pages';
@@ -144,6 +139,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     modalController.$inject = ['$modalInstance', 'obj', 'hybrid'];
+
     function modalController($modalInstance, obj, hybrid) {
 
         var vm = this;
@@ -169,14 +165,14 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
             };
             if (vm.emailInput) {
                 RongziService.setEmail(senddata)
-                .then(function setSussess() {
-                    vm.title = '添加邮件提醒成功！';
-                    vm.cancelRemindtxt = '当' + vm.remindText + '专场开始时，您将会收到包括邮件在内的所有提醒，' +
-                       '确保您不会错过本专场';
-                    vm.setEmailState = true;
-                    vm.hasEmail = true;
-                })
-              .catch(fail);
+                    .then(function setSussess() {
+                        vm.title = '添加邮件提醒成功！';
+                        vm.cancelRemindtxt = '当' + vm.remindText + '专场开始时，您将会收到包括邮件在内的所有提醒，' +
+                            '确保您不会错过本专场';
+                        vm.setEmailState = true;
+                        vm.hasEmail = true;
+                    })
+                    .catch(fail);
             } else {
                 $modalInstance.dismiss();
             }
@@ -197,39 +193,39 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
 
     function subscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
+            id: vm.result.id,
             subscibeType: 1,
         };
         RongziService.setSubscribe(senddata)
-        .then(function setSussess(data) {
-            if (data.data.data) {
-                vm.hasEmail = true;
-            }
+            .then(function setSussess(data) {
+                if (data.data.data) {
+                    vm.hasEmail = true;
+                }
 
-            item.hasEmail = vm.hasEmail;
-            item.cancelMainRemind = false;
-            item.title = '设置开场提醒成功！';
-            modalOpen(item);
-            vm.remind = 0;
-        })
-        .catch(fail);
+                item.hasEmail = vm.hasEmail;
+                item.cancelMainRemind = false;
+                item.title = '设置开场提醒成功！';
+                modalOpen(item);
+                vm.remind = 0;
+            })
+            .catch(fail);
     }
 
     function cancelSubscribeAction(item) {
         var senddata = {
-            id:vm.result.id,
-            subscibeType:1,
+            id: vm.result.id,
+            subscibeType: 1,
         };
         RongziService.cancelSubscribe(senddata)
-        .then(function setSussess() {
-            item.cancelMainRemind = true;
-            item.title = '取消开场提醒成功！';
-            item.hasEmail = true;
-            item.cancelRemindtxt = '本专场开始前不会有开场提醒！';
-            modalOpen(item);
-            vm.remind = 1;
-        })
-        .catch(fail);
+            .then(function setSussess() {
+                item.cancelMainRemind = true;
+                item.title = '取消开场提醒成功！';
+                item.hasEmail = true;
+                item.cancelRemindtxt = '本专场开始前不会有开场提醒！';
+                modalOpen(item);
+                vm.remind = 1;
+            })
+            .catch(fail);
     }
 
     function modalOpen(item) {
@@ -239,7 +235,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
             controller: modalController,
             controllerAs: 'vm',
             resolve: {
-                obj: function () {
+                obj: function() {
                     return item;
                 }
             }
@@ -268,7 +264,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
             controller: defaultController,
             controllerAs: 'vm',
             resolve: {
-                obj: function () {
+                obj: function() {
                     return item;
                 }
             }
@@ -276,6 +272,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     defaultController.$inject = ['$modalInstance', 'obj'];
+
     function defaultController($modalInstance, obj) {
 
         var vm = this;
@@ -290,7 +287,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     function shareWechat() {
         if (!hybrid.isInApp) {
             defaultModal();
-        }else if (hybrid.isInApp && !UserService.getUID()) {
+        } else if (hybrid.isInApp && !UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
         } else if (hybrid.isInApp && UserService.getUID()) {
             hybrid.open('weChatShare/' + $stateParams.id);

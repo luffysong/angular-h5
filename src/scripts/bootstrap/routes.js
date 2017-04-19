@@ -1,6 +1,5 @@
-
 var angular = require('angular');
-angular.module('defaultApp').config(function ($locationProvider, $stateProvider, $urlRouterProvider, $provide, $sceDelegateProvider) {
+angular.module('defaultApp').config(function($locationProvider, $stateProvider, $urlRouterProvider, $provide, $sceDelegateProvider) {
 
     $sceDelegateProvider.resourceUrlWhitelist([
         'self',
@@ -68,7 +67,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url: '/welcome?{from}',
         templateUrl: 'templates/guide/welcome.html',
         controller: 'GuideWelcomeController',
-        data:{
+        data: {
             permissions: {
                 only: ['login'],
             },
@@ -80,7 +79,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url: '/investor/apply?{inviteCode}',
         templateUrl: 'templates/investor/apply.html',
         controller: 'InvestorValidateApplyController',
-        data:{
+        data: {
             permissions: {
                 only: ['login'],
             },
@@ -92,7 +91,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url: '/company_create?{from}',
         templateUrl: 'templates/company/create.html',
         controller: 'CreateCompanyController',
-        data:{
+        data: {
             permissions: {
                 only: ['valid'],
             },
@@ -110,7 +109,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url: '/my_company?{from}',
         templateUrl: 'templates/company/my-company.html',
         controller: 'MyCompanyController',
-        data:{
+        data: {
             permissions: {
                 only: ['valid'],
             },
@@ -128,7 +127,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         url: '/join/{id}',
         controller: 'ExtremeIndexController',
         templateUrl: 'templates/extreme/investor-join.html',
-        onEnter: function (DeviceService, $stateParams) {
+        onEnter: function(DeviceService, $stateParams) {
             document.title = '极速融资2.0|投资人报名';
             if (!DeviceService.isMobile()) {
                 location.href = PC_BASE_URL + 'extreme/join/' + $stateParams.id;
@@ -145,7 +144,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //快速认领
     $stateProvider.state('fastClaim', {
-        url:'/claim/:id',
+        url: '/claim/:id',
         controller: 'ClaimController',
         controllerAs: 'vm',
         templateUrl: 'templates/claim/index.html',
@@ -156,7 +155,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //机构页
     $stateProvider.state('organization', {
-        url:'/org/:id?',
+        url: '/org/:id?',
         controllerAs: 'vm',
         controller: 'OrganizationDetailController',
         templateUrl: 'templates/organization/index.html',
@@ -168,7 +167,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     // 项目集
     $stateProvider.state('demos', {
-        url:'/demos/:id?type',
+        url: '/demos/:id?type',
         controllerAs: 'vm',
         controller: 'DemosController',
         templateUrl: 'templates/demos/index.html',
@@ -186,7 +185,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---媒体热议
     $stateProvider.state('find.dailyNews', {
-        url:'/dailyNews',
+        url: '/dailyNews',
         controllerAs: 'vm',
         controller: 'DailyNewsController',
         templateUrl: 'templates/find/dailyNewsList.html',
@@ -197,14 +196,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     // 创投助手app---项目专辑
     $stateProvider.state('find.projectAlbum', {
-        url:'/projectAlbum',
+        url: '/projectAlbum',
         abstract: true,
         template: '<div ui-view></div>'
     });
 
     //创投助手app---项目专辑---路演日历
     $stateProvider.state('roadShow', {
-        url:'/roadShow',
+        url: '/roadShow',
         controllerAs: 'vm',
         controller: 'RoadShowController',
         templateUrl: 'templates/find/roadShowList.html',
@@ -212,21 +211,21 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---项目专辑---机构在融 + 最新＋ 最热
     $stateProvider.state('find.projectAlbum.funding', {
-        url:'/funding',
+        url: '/funding',
         controllerAs: 'vm',
         controller: 'ProjectAlbumController',
         templateUrl: 'templates/find/projectAlbumNormal.html',
     });
 
     $stateProvider.state('find.projectAlbum.latest', {
-        url:'/latest',
+        url: '/latest',
         controllerAs: 'vm',
         controller: 'ProjectAlbumController',
         templateUrl: 'templates/find/projectAlbumNormal.html',
     });
 
     $stateProvider.state('find.projectAlbum.hotest', {
-        url:'/hotest',
+        url: '/hotest',
         controllerAs: 'vm',
         controller: 'ProjectAlbumController',
         templateUrl: 'templates/find/projectAlbumNormal.html',
@@ -234,7 +233,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     // 创投助手app---关注热点
     $stateProvider.state('find.hotFocus', {
-        url:'/hotFocus?eventEnum&intervalEnum',
+        url: '/hotFocus?eventEnum&intervalEnum',
         controllerAs: 'vm',
         controller: 'HotFocusController',
         templateUrl: 'templates/find/hotFocus.html'
@@ -242,7 +241,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     // 创投助手app---热点详情
     $stateProvider.state('find.hotFocusDetail', {
-        url:'/hotFocusDetail/:id?eventEnum&intervalEnum&title',
+        url: '/hotFocusDetail/:id?eventEnum&intervalEnum&title',
         controllerAs: 'vm',
         controller: 'HotFocusDetailController',
         templateUrl: 'templates/find/hotFocusDetail.html'
@@ -250,7 +249,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---投资热点
     $stateProvider.state('find.hotSpot', {
-        url:'/hotSpot',
+        url: '/hotSpot',
         controllerAs: 'vm',
         controller: 'HotSpotController',
         templateUrl: 'templates/find/hotSpotList.html',
@@ -261,7 +260,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---投资热点tab分页
     $stateProvider.state('find.hotSpotTab', {
-        url:'/hotSpotTab',
+        url: '/hotSpotTab',
         controllerAs: 'vm',
         controller: 'HotSpotTabController',
         templateUrl: 'templates/find/hotSpotTab.html',
@@ -272,7 +271,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---融资速递
     $stateProvider.state('find.finance', {
-        url:'/finance',
+        url: '/finance',
         controllerAs: 'vm',
         controller: 'FinanceController',
         templateUrl: 'templates/find/financeList.html',
@@ -283,7 +282,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---分享页(热点追踪|路演日历)
     $stateProvider.state('find.share', {
-        url:'/share/:id',
+        url: '/share/:id',
         controllerAs: 'vm',
         controller: 'ShareController',
         templateUrl: 'templates/find/share.html',
@@ -294,7 +293,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页(氪空间)
     $stateProvider.state('findKrspace', {
-        url:'/findKrspace?activityName',
+        url: '/findKrspace?activityName',
         controller: 'ActivityIndexController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/krspace.html',
@@ -302,7 +301,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页(wise)
     $stateProvider.state('findWise', {
-        url:'/findWise?activityName',
+        url: '/findWise?activityName',
         controller: 'ActivityIndexController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/wise.html',
@@ -311,7 +310,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     //-----------------------
     //前台活动展示h5页面
     $stateProvider.state('fractivity', {
-        url:'/fractivity?activityName',
+        url: '/fractivity?activityName',
         controllerAs: 'vm',
         controller: 'FrActivityController',
         templateUrl: 'templates/fractivity/index.html',
@@ -319,7 +318,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //投资人注册
     $stateProvider.state('frInvestor', {
-        url:'/frInvestor?activityName',
+        url: '/frInvestor?activityName',
         controllerAs: 'vm',
         controller: 'FrInvestorController',
         templateUrl: 'templates/fractivity/investor.html',
@@ -327,7 +326,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //成功页面
     $stateProvider.state('frInvestorSuccess', {
-        url:'/frInvestor?activityName',
+        url: '/frInvestor?activityName',
         controllerAs: 'vm',
         controller: 'FrInvestorSucessController',
         templateUrl: 'templates/fractivity/investorSuccess.html',
@@ -335,7 +334,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创业者注册
     $stateProvider.state('findStartUp', {
-        url:'/findStartUp?activityName',
+        url: '/findStartUp?activityName',
         controllerAs: 'vm',
         controller: 'FrStartUpController',
         templateUrl: 'templates/fractivity/startup.html',
@@ -343,7 +342,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创业者成功
     $stateProvider.state('findStartUpSuccess', {
-        url:'/findStartUpSuccess?activityName',
+        url: '/findStartUpSuccess?activityName',
         controllerAs: 'vm',
         controller: 'FrStartupSuccessController',
         templateUrl: 'templates/fractivity/startupSuccess.html',
@@ -351,7 +350,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页(ideaBank)
     $stateProvider.state('findIdeaBank', {
-        url:'/findIdeaBank?activityName',
+        url: '/findIdeaBank?activityName',
         controller: 'ActivityIndexController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/ideaBank.html',
@@ -359,7 +358,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页(firstWine)元旦
     $stateProvider.state('firstWine', {
-        url:'/firstWine?activityName',
+        url: '/firstWine?activityName',
         controller: 'ActivityIndexController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/firstWine.html',
@@ -367,7 +366,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页(wonderland)
     $stateProvider.state('wonderland', {
-        url:'/wonderland?activityName',
+        url: '/wonderland?activityName',
         controller: 'ActivityIndexController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/wonderland.html',
@@ -375,7 +374,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页(wonderland)
     $stateProvider.state('findMusicRoadshow', {
-        url:'/findMusicRoadshow?activityName',
+        url: '/findMusicRoadshow?activityName',
         controller: 'ActivityIndexController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/musicRoadshow.html',
@@ -383,7 +382,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页登陆
     $stateProvider.state('findLogin', {
-        url:'/findLogin?activityName&type',
+        url: '/findLogin?activityName&type',
         controller: 'LoginController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/login.html',
@@ -391,7 +390,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页登陆成功
     $stateProvider.state('findLoginSuccess', {
-        url:'/findLoginSuccess?activityName',
+        url: '/findLoginSuccess?activityName',
         controller: 'LoginSuccessController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/loginSuccess.html',
@@ -399,14 +398,14 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //创投助手app---活动页投资人认证
     $stateProvider.state('findInvestor', {
-        url:'/findInvestor?activityName',
+        url: '/findInvestor?activityName',
         controller: 'InvestorController',
         templateUrl: 'templates/activity/investor.html',
     });
 
     //创投助手app---活动页投资人认证成功
     $stateProvider.state('findInvestorSuccess', {
-        url:'/findInvestorSuccess?activityName',
+        url: '/findInvestorSuccess?activityName',
         controller: 'InvestorSuccessController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/investorSuccess.html',
@@ -421,7 +420,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('rongzi.main', {
-        url:'/main',
+        url: '/main',
         controllerAs: 'vm',
         controller: 'MainController',
         templateUrl: 'templates/rongzi/main.html',
@@ -429,49 +428,53 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     //普通登录
     $stateProvider.state('normalLogin', {
-        url:'/normalLogin?',
+        url: '/normalLogin?',
         controller: 'NormalLoginController',
         controllerAs: 'vm',
         templateUrl: 'templates/activity/login.html',
     });
 
     $stateProvider.state('rongzi.organization', {
-        url:'/organization?{category}',
+        url: '/organization?{category}',
         controllerAs: 'vm',
         controller: 'OrganizationController',
         templateUrl: 'templates/rongzi/organization.html',
     });
 
     $stateProvider.state('rongzi.community', {
-        url:'/community?{category}',
+        url: '/community?{category}',
         controllerAs: 'vm',
         controller: 'CommunityController',
         templateUrl: 'templates/rongzi/community.html',
     });
 
     $stateProvider.state('rongzi.investor', {
-        url:'/investor?{category}&{name}&{state}',
+        url: '/investor?{category}&{name}&{state}',
         controllerAs: 'vm',
         controller: 'InvestorController',
         templateUrl: 'templates/rongzi/investor.html',
     });
 
     $stateProvider.state('rongzi.investorInfo', {
-        url:'/investorInfo?{category}&{id}&{debug}&{name}&{state}',
+        url: '/investorInfo?{category}&{id}&{debug}&{name}&{state}',
         controllerAs: 'vm',
         controller: 'InvestorInfoController',
         templateUrl: 'templates/rongzi/investorInfo.html',
+        resolve: {
+            baseInfo: getInvestorInfo,
+            pojrectList: getInvestorProjectList
+        }
     });
 
     $stateProvider.state('rongzi.bestlist', {
-        url:'/bestlist?id',
+        url: '/bestlist?id',
         controllerAs: 'vm',
         controller: 'BestListController',
         templateUrl: 'templates/rongzi/bestlist.html',
     });
 
     $stateProvider.state('rongzi.share', {
-        url:'/share?id',
+        url: '/share?id',
         controllerAs: 'vm',
         controller: 'ShareController',
         templateUrl: 'templates/rongzi/share.html',
@@ -481,49 +484,49 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('rongzi.enroll', {
-        url:'/enroll?id',
+        url: '/enroll?id',
         controllerAs: 'vm',
         controller: 'EnrollController',
         templateUrl: 'templates/rongzi/enroll.html',
     });
 
     $stateProvider.state('rongzi.orgdetail', {
-        url:'/orgdetail?id&{name}&{category}&{state}',
+        url: '/orgdetail?id&{name}&{category}&{state}',
         controllerAs: 'vm',
         controller: 'OrgDetailController',
         templateUrl: 'templates/rongzi/org-detail.html',
     });
 
     $stateProvider.state('rongzi.comdetail', {
-        url:'/comdetail?id&{name}&{category}&{state}',
+        url: '/comdetail?id&{name}&{category}&{state}',
         controllerAs: 'vm',
         controller: 'ComDetailController',
         templateUrl: 'templates/rongzi/com-detail.html',
     });
 
     $stateProvider.state('rongzi.comlike', {
-        url:'/comlike?id&{name}&{category}',
+        url: '/comlike?id&{name}&{category}',
         controllerAs: 'vm',
         controller: 'ComLikeController',
         templateUrl: 'templates/rongzi/com-like.html',
     });
 
     $stateProvider.state('rongzi.orglike', {
-        url:'/orglike?id&{name}&{category}',
+        url: '/orglike?id&{name}&{category}',
         controllerAs: 'vm',
         controller: 'OrgLikeController',
         templateUrl: 'templates/rongzi/org-like.html',
     });
 
     $stateProvider.state('rongzi.inviteInvestor', {
-        url:'/inviteInvestor?{category}',
+        url: '/inviteInvestor?{category}',
         controllerAs: 'vm',
         controller: 'InviteInvestorController',
         templateUrl: 'templates/rongzi/inviteInvestor.html',
     });
 
     $stateProvider.state('rongzi.authInvestor', {
-        url:'/authInvestor?{type}&{inviteCode}',
+        url: '/authInvestor?{type}&{inviteCode}',
         controllerAs: 'vm',
         controller: 'AuthInvestorController',
         templateUrl: 'templates/rongzi/authInvestor.html',
@@ -541,10 +544,10 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     function loadOrgInvestments(OrganizationService, $stateParams) {
         return OrganizationService['past-investment'].get({
-                id: $stateParams.id,
-                page: 1,
-                pageSize: 20
-            }).$promise;
+            id: $stateParams.id,
+            page: 1,
+            pageSize: 20
+        }).$promise;
     }
 
     function loadCover(demosService, projectColumnService, $stateParams, $rootScope, loading) {
@@ -588,9 +591,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         loading.show('findLoading');
         $('ui-view')[0].innerHTML = '';
 
-        var deferred = $q.defer();  //通过$q服务注册一个延迟对象 deferred
-        var promise = deferred.promise;  //通过deferred延迟对象，可以得到一个承诺promise，而promise会返回当前任务的完成结果
-        $timeout(function () {
+        var deferred = $q.defer(); //通过$q服务注册一个延迟对象 deferred
+        var promise = deferred.promise; //通过deferred延迟对象，可以得到一个承诺promise，而promise会返回当前任务的完成结果
+        $timeout(function() {
             deferred.resolve();
         }, 10);
 
@@ -599,5 +602,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     function getProjectInfo(RongziService, $stateParams) {
         return RongziService.shareInfo($stateParams.id);
+    }
+
+    function getInvestorInfo(RongziService, $stateParams) {
+        return RongziService.getBaseInfo($stateParams.id);
+    }
+
+    function getInvestorProjectList(RongziService, $stateParams) {
+        return RongziService.getProjectList($stateParams.id);
     }
 });

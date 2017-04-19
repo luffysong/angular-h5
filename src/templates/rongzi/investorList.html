@@ -25,7 +25,7 @@
   <div class="more" ng-click="vm.displayMore()" ng-show="!vm.more">查看更多</div> -->
 
   <div class="special-item green-color mg-t-2" ng-repeat="item in vm.result.sessions.investors.goingSessions">
-    <div class="special-list-border orange-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name})">
+    <div class="special-list-border orange-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id})">
       <div class="special-logo green-color" ng-if="item.logo" style="background-image: url({{item.logo}})"></div>
 
       <div class="special-logo green-color" ng-if="!item.logo" style="background-image: url('/styles/images/rongzi/df-logo.png')"></div>
@@ -45,7 +45,7 @@
   </div>
   <div class="special-state orange-color" ng-show="vm.result.sessions.investors.startSessions.length">即将开始</div>
   <div class="special-item green-color" ng-repeat="item in vm.result.sessions.investors.startSessions">
-    <div class="special-list-border orange-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name, state: 'start'})">
+    <div class="special-list-border orange-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, state: 'start'})">
       <div class="special-logo green-color" ng-if="item.logo" style="background-image: url({{item.logo}})"></div>
 
       <div class="special-logo green-color" ng-if="!item.logo" style="background-image: url('/styles/images/rongzi/df-logo.png')"></div>
@@ -65,7 +65,7 @@
   <div class="special-state" ng-show="vm.finished.length">已完结</div>
 
   <div class="special-item green-color" ng-repeat="item in vm.finished">
-    <div class="special-list-border gray-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, name: item.name, state: 'end'})">
+    <div class="special-list-border gray-color" ui-sref="rongzi.investorInfo({category: item.category, id: item.id, state: 'end'})">
       <div class="special-logo green-color" ng-if="item.logo" style="background-image: url({{item.logo}})"></div>
 
       <div class="special-logo green-color" ng-if="!item.logo" style="background-image: url('/styles/images/rongzi/df-logo.png')"></div>
