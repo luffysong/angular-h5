@@ -194,6 +194,13 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         }
     });
 
+    $stateProvider.state('find.newsDetail', {
+        url:'/newsDetail/:id',
+        controllerAs: 'vm',
+        controller: 'NewsDetailController',
+        templateUrl: 'templates/find/newsDetail.html'
+    });
+
     // 创投助手app---项目专辑
     $stateProvider.state('find.projectAlbum', {
         url: '/projectAlbum',

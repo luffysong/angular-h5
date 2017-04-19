@@ -1,0 +1,126 @@
+.find-news-detail {
+    .find-news-content {
+        padding: 0 15px;
+    }
+
+    font-family: 'PingFang SC', 'Lantinghei SC','Helvetica Neue', 'Helvetica',  'Arial','Microsoft YaHei','微软雅黑','STHeitiSC-Light','simsun','宋体' ,'WenQuanYi Zen Hei','WenQuanYi Micro Hei','sans-serif';
+    line-height: 28px;
+    font-size: 15px;
+    color: #333;
+    @media screen and (max-width: 820px) {
+        font-size: round(30rem/20px, 3);
+        line-height: 30px;
+        text-align: justify;
+    }
+    @media screen and (min-width: 1450px) {
+        line-height: 30px;
+        font-size: 16px;
+    }
+    h2,
+    h1 {
+        @media screen and (max-width: 820px) {
+            font-size: round(34rem/20px, 3);
+        }
+        font-size: 16px;
+        margin: 30px 0 14px 0;
+    }
+    h3 {
+        font-size: 15px;
+        margin: 40px 0 14px 0;
+        position: relative;
+        padding-left: 14px;
+        line-height: 23px;
+        position: relative;
+        &:before {
+            position: absolute;
+            top: 4px;
+            bottom: 4px;
+            left: 0;
+            width: 4px;
+            background: #4285f4;
+            display: block;
+            content: '';
+        }
+        @media screen and (max-width: 820px) {
+            font-size: 18px;
+            line-height: 26px;
+        }
+    }
+    p {
+        margin-bottom: 26px;
+        a {
+            color: #333;
+            border-style: solid;
+            border-width: 0 0 1px 0;
+            border-color: #999;
+            padding: 0px 0px 1px 0;
+        }
+        a:hover {
+            color: #4285f4;
+            border-color: #4285f4;
+        }
+    }
+    ol,
+    ul {
+        padding: 0 0 0 20px;
+        margin-bottom: 22px;
+        @media screen and (max-width: 820px) {
+            padding-left: 1.5em;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+    }
+    ul {
+        li {
+            list-style-type: square;
+        }
+    }
+    img,
+    iframe {
+        display: block;
+        max-width: 100%;
+        margin: 10px auto;
+    }
+    blockquote {
+        padding: 6px 0 6px 55px;
+        position: relative;
+        margin: 30px 0;
+        color: #333;
+        font-family: 'PingFang SC', 'Lantinghei SC','Helvetica Neue', 'Helvetica',  'Arial','Microsoft YaHei','微软雅黑','STHeitiSC-Light','simsun','宋体' ,'WenQuanYi Zen Hei','WenQuanYi Micro Hei','sans-serif';
+        border: 0;
+        @media screen and (max-width: 340px) {
+            padding: 6px 0 6px 35px;
+        }
+        &:before {
+            display: block;
+            width: 23px;
+            height: 17px;
+            background: url('https://pic.36krcnd.com/avatar/201610/09084833/pvg7ixf711zmv9bk.png') no-repeat 0 0;
+            background-size: contain;
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            left: 15px;
+            @media screen and (max-width: 340px) {
+                width: 18px;
+                height: 14px;
+                left: 10px;
+            }
+        }
+    }
+    blockquote p {
+        margin-bottom: 0;
+        padding: 6px 10px;
+    }
+    b,
+    strong {
+        font-weight: 600;
+    }
+    em,
+    i {
+        font-style: normal;
+        color: #999;
+    }
+}
