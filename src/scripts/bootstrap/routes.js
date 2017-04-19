@@ -440,7 +440,7 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controller: 'OrganizationController',
         templateUrl: 'templates/rongzi/organization.html',
         resolve: {
-            orgList: getOrgtList
+            orgList: getOrgList
         }
     });
 
@@ -449,6 +449,9 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controllerAs: 'vm',
         controller: 'CommunityController',
         templateUrl: 'templates/rongzi/community.html',
+        resolve: {
+            comList: getComList
+        }
     });
 
     $stateProvider.state('rongzi.investor', {
@@ -623,8 +626,14 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         return RongziService.getProjectList($stateParams.id);
     }
 
-    function getOrgtList(RongziService, $stateParams) {
+    function getOrgList(RongziService, $stateParams) {
         return RongziService.getOrg({
+            category: parseInt($stateParams.category)
+        });
+    }
+
+    function getComList(RongziService, $stateParams) {
+        return RongziService.getCommunity({
             category: parseInt($stateParams.category)
         });
     }

@@ -1,9 +1,9 @@
 var angular = require('angular');
 angular.module('defaultApp.controller')
-  .controller('CommunityController', CommunityController);
+    .controller('CommunityController', CommunityController);
 
 function CommunityController($document, $timeout, $scope, $modal, loading, $stateParams,
-  RongziService, FindService, $state, UserService, ErrorService, hybrid) {
+    RongziService, FindService, $state, UserService, ErrorService, hybrid, comList) {
     var vm = this;
     vm.subscribe = subscribe;
     vm.getFinishedData = getFinishedData;
@@ -23,6 +23,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     vm.end = [];
 
     init();
+
     function init() {
         if (!hybrid.isInApp) {
             initLinkmeComm();
@@ -85,43 +86,40 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     }
 
     function initData() {
-        RongziService.getCommunity({ category: parseInt($stateParams.category) })
-            .then(function setCommunity(data) {
-                    if (data.data) {
-                        vm.result = data.data;
-                        vm.remind = vm.result.remind;
-                        if (data.data.sessions) {
-                            vm.goodSchoolCompany = data.data.sessions.goodSchoolCompany;
-                            vm.workAssociation = data.data.sessions.workAssociation;
-                        }
-                    }
-                }).catch(fail);
+        if (comList.data) {
+            vm.result = comList.data;
+            vm.remind = vm.result.remind;
+            if (comList.data.sessions) {
+                vm.goodSchoolCompany = comList.data.sessions.goodSchoolCompany;
+                vm.workAssociation = comList.data.sessions.workAssociation;
+            }
+        }
     }
 
     function getFinishedData() {
-        if (vm.busy)return;
+        if (vm.busy) return;
         vm.busy = true;
 
         var senddata = {
             category: parseInt($stateParams.category),
             projectCategory: vm.projectCategory ? vm.projectCategory : 0,
             page: vm.page + 1,
-            pageSize:5,
+            pageSize: 5,
         };
         RongziService.getFinishedData(senddata)
             .then(function setCommunity(response) {
-                    vm.end = vm.end.concat(response.data.data);
-                    if (response.data.totalPages) {
-                        vm.page = response.data.page || 0;
+                vm.end = vm.end.concat(response.data.data);
+                if (response.data.totalPages) {
+                    vm.page = response.data.page || 0;
 
-                        if (response.data.totalPages !== vm.page) {
-                            vm.busy = false;
-                        } else {
-                            vm.finish = true;
-                            vm.more = true;
-                        }
+                    if (response.data.totalPages !== vm.page) {
+                        vm.busy = false;
+                    } else {
+                        vm.finish = true;
+                        vm.more = true;
                     }
-                }).catch(fail);
+                }
+            }).catch(fail);
     }
 
     function initUser() {
@@ -149,27 +147,28 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
 
     function initLinkmeComm() {
         var krdata = {};
-        krdata.type =  window.projectEnvConfig.linkmeType;
+        krdata.type = window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/community?id=' + $stateParams.id + '&category=' + $stateParams.category + '","currentRoom":"0"}';
-        window.linkedme.init(window.projectEnvConfig.linkmeKey,
-        { type: window.projectEnvConfig.linkmeType }, function (err, res) {
-                if (err) {
-                    return;
-                }
+            '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/community?id=' + $stateParams.id + '&category=' + $stateParams.category + '","currentRoom":"0"}';
+        window.linkedme.init(window.projectEnvConfig.linkmeKey, {
+            type: window.projectEnvConfig.linkmeType
+        }, function(err, res) {
+            if (err) {
+                return;
+            }
 
-                window.linkedme.link(krdata, function (err, data) {
-                        if (err) {
-                            // 生成深度链接失败，返回错误对象err
-                            console.log(err);
-                        } else {
-                            // 生成深度链接成功，深度链接可以通过data.url得到
-                            //console.log(data.url,   $('#comm-openApp11').attr('href'));
-                            vm.openAppUrl = data.url;
-                            $('#comm-openApp').attr('href', data.url);
-                        }
-                    }, false);
-            });
+            window.linkedme.link(krdata, function(err, data) {
+                if (err) {
+                    // 生成深度链接失败，返回错误对象err
+                    console.log(err);
+                } else {
+                    // 生成深度链接成功，深度链接可以通过data.url得到
+                    //console.log(data.url,   $('#comm-openApp11').attr('href'));
+                    vm.openAppUrl = data.url;
+                    $('#comm-openApp').attr('href', data.url);
+                }
+            }, false);
+        });
     }
 
     function subscribe(item, e) {
@@ -183,7 +182,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
             defaultModal();
         } else if (hybrid.isInApp && vm.result.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
-        }else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
+        } else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
             cancelSubscribeAction(item);
         } else {
             window.location.href = 'https://passport.36kr.com/pages';
@@ -191,6 +190,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     }
 
     modalController.$inject = ['$modalInstance', 'obj', 'hybrid'];
+
     function modalController($modalInstance, obj, hybrid) {
 
         var vm = this;
@@ -217,14 +217,14 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
             };
             if (vm.emailInput) {
                 RongziService.setEmail(senddata)
-                .then(function setSussess() {
-                    vm.title = '添加邮件提醒成功！';
-                    vm.cancelRemindtxt = '当创业社群专场任一专场开始时，您将会包括邮件在内的所有提醒，' +
-                       '确保您不会错过任一社群专场';
-                    vm.setEmailState = true;
-                    vm.hasEmail = true;
-                })
-              .catch(fail);
+                    .then(function setSussess() {
+                        vm.title = '添加邮件提醒成功！';
+                        vm.cancelRemindtxt = '当创业社群专场任一专场开始时，您将会包括邮件在内的所有提醒，' +
+                            '确保您不会错过任一社群专场';
+                        vm.setEmailState = true;
+                        vm.hasEmail = true;
+                    })
+                    .catch(fail);
             } else {
                 $modalInstance.dismiss();
             }
@@ -234,38 +234,38 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     function subscribeAction(item) {
         var senddata = {
             category: 0,
-            subscibeType:0,
+            subscibeType: 0,
         };
         RongziService.setSubscribe(senddata)
-        .then(function setSussess(data) {
-            if (data.data.data) {
-                vm.hasEmail = true;
-            }
+            .then(function setSussess(data) {
+                if (data.data.data) {
+                    vm.hasEmail = true;
+                }
 
-            item.hasEmail = vm.hasEmail;
-            item.cancelMainRemind = false;
-            item.title = '设置开场提醒成功！';
-            modalOpen(item);
-            vm.result.remind = 0;
-        })
-        .catch(fail);
+                item.hasEmail = vm.hasEmail;
+                item.cancelMainRemind = false;
+                item.title = '设置开场提醒成功！';
+                modalOpen(item);
+                vm.result.remind = 0;
+            })
+            .catch(fail);
     }
 
     function cancelSubscribeAction(item) {
         var senddata = {
             category: 0,
-            subscibeType:0,
+            subscibeType: 0,
         };
         RongziService.cancelSubscribe(senddata)
-        .then(function setSussess() {
-            item.cancelMainRemind = true;
-            item.title = '取消开场提醒成功！';
-            item.hasEmail = true;
-            item.cancelRemindtxt = '后续新上的社群专场将不会有专场提醒，现已有排期的专场仍会提醒！';
-            modalOpen(item);
-            vm.result.remind = 1;
-        })
-        .catch(fail);
+            .then(function setSussess() {
+                item.cancelMainRemind = true;
+                item.title = '取消开场提醒成功！';
+                item.hasEmail = true;
+                item.cancelRemindtxt = '后续新上的社群专场将不会有专场提醒，现已有排期的专场仍会提醒！';
+                modalOpen(item);
+                vm.result.remind = 1;
+            })
+            .catch(fail);
     }
 
     function modalOpen(item) {
@@ -275,7 +275,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
             controller: modalController,
             controllerAs: 'vm',
             resolve: {
-                obj: function () {
+                obj: function() {
                     return item;
                 }
             }
@@ -297,7 +297,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
             controller: defaultController,
             controllerAs: 'vm',
             resolve: {
-                obj: function () {
+                obj: function() {
                     return item;
                 }
             }
@@ -305,6 +305,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     }
 
     defaultController.$inject = ['$modalInstance', 'obj'];
+
     function defaultController($modalInstance, obj) {
 
         var vm = this;
