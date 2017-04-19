@@ -461,8 +461,8 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controller: 'InvestorInfoController',
         templateUrl: 'templates/rongzi/investorInfo.html',
         resolve: {
-            baseInfo: getInvestorInfo,
-            pojrectList: getInvestorProjectList
+            baseInfo: getBaseInfo,
+            pojrectList: getProjectList
         }
     });
 
@@ -495,6 +495,10 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controllerAs: 'vm',
         controller: 'OrgDetailController',
         templateUrl: 'templates/rongzi/org-detail.html',
+        resolve: {
+            baseInfo: getBaseInfo,
+            pojrectList: getProjectList
+        }
     });
 
     $stateProvider.state('rongzi.comdetail', {
@@ -502,6 +506,10 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controllerAs: 'vm',
         controller: 'ComDetailController',
         templateUrl: 'templates/rongzi/com-detail.html',
+        resolve: {
+            baseInfo: getBaseInfo,
+            pojrectList: getProjectList
+        }
     });
 
     $stateProvider.state('rongzi.comlike', {
@@ -604,11 +612,12 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         return RongziService.shareInfo($stateParams.id);
     }
 
-    function getInvestorInfo(RongziService, $stateParams) {
+    function getBaseInfo(RongziService, $stateParams) {
         return RongziService.getBaseInfo($stateParams.id);
     }
 
-    function getInvestorProjectList(RongziService, $stateParams) {
+    function getProjectList(RongziService, $stateParams) {
         return RongziService.getProjectList($stateParams.id);
     }
+
 });
