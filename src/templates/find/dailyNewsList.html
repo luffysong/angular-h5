@@ -1,4 +1,4 @@
-<div class="dailyNews-wrapper">
+<div class="dailyNews-wrapper" ng-show="!loadingInst.dailyNewsLoading">
     <div class="dailyNews-select">
         <div class="dailyNews-select-left">
             看你想看的媒体时讯
@@ -31,7 +31,7 @@
                 <ul>
                     <li ontouchstart="" kr-active="'active'" ng-repeat="item in itemData.reports track by $index">
                         <div class="dailyNews-content-href">
-                            <div class="base-info-detail" ng-click="vm.clickNews('ClickNews', { target: 'news', company_id: item.ccid, news_id: item.id, news_url: item.link, news_index: $index })">
+                            <div class="base-info-detail" ng-click="vm.clickNews('ClickNews', { news_index: $index }, item)">
                                 <h3 class="header-info">
                                     <text-line-clamp line-clamp='2' text="item.title">
                                         <div class="text-container">
@@ -118,3 +118,5 @@
         </div>
     </div>
 </div>
+
+<div loading="dailyNewsLoading"></div>

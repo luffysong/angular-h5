@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('DailyNewsController', DailyNewsController);
 
-function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService, $rootScope, $timeout) {
+function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService, $rootScope, $timeout, $state) {
     var vm = this;
     $('body').css({
         backgroundColor: '#fff'
@@ -39,14 +39,21 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     vm.sourceArrayAll = [];
     vm.sourceArray = [];
 
-    vm.clickNews = function(evtName, obj) {
+    vm.clickNews = function(evtName, obj, item) {
         sa.track('ClickNews', {
             target: 'news',
-            company_id: obj.company_id,
-            news_id: obj.news_id,
-            news_url: obj.news_url,
+            company_id: item.ccid,
+            news_id: item.id,
+            news_url: item.link,
+            news_index: obj.news_index
         });
-        vm.link(obj.company_id, obj.news_url);
+        if (item.hasContent) {
+            $state.go('find.newsDetail', {
+                id: item.id
+            });
+        } else {
+            vm.link(item.ccid, item.link);
+        }
     };
 
     init();
@@ -108,6 +115,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
                 vm.hasInit = true;
                 loadMore();
                 loading.hide('findLoading');
+                loading.hide('dailyNewsLoading');
             })
             .catch(error);
     }

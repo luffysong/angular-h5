@@ -188,10 +188,7 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         url: '/dailyNews',
         controllerAs: 'vm',
         controller: 'DailyNewsController',
-        templateUrl: 'templates/find/dailyNewsList.html',
-        resolve: {
-            coverFind: loadFind
-        }
+        templateUrl: 'templates/find/dailyNewsList.html'
     });
 
     $stateProvider.state('find.newsDetail', {
