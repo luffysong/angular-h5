@@ -459,6 +459,9 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controllerAs: 'vm',
         controller: 'InvestorController',
         templateUrl: 'templates/rongzi/investor.html',
+        resolve: {
+            investorList: getInvestorList
+        }
     });
 
     $stateProvider.state('rongzi.investorInfo', {
@@ -634,6 +637,12 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
 
     function getComList(RongziService, $stateParams) {
         return RongziService.getCommunity({
+            category: parseInt($stateParams.category)
+        });
+    }
+
+    function getInvestorList(RongziService, $stateParams) {
+        return RongziService.getInvestor({
             category: parseInt($stateParams.category)
         });
     }

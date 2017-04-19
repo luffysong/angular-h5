@@ -1,8 +1,9 @@
 var angular = require('angular');
 angular.module('defaultApp.controller')
-  .controller('InvestorController', InvestorController);
+    .controller('InvestorController', InvestorController);
 
-function InvestorController(loading, $scope, $modal, $stateParams, RongziService, $state, UserService, ErrorService, FindService, hybrid) {
+function InvestorController(loading, $scope, $modal, $stateParams, RongziService, $state, UserService,
+    ErrorService, FindService, hybrid, investorList) {
     var vm = this;
     vm.subscribe = subscribe;
     vm.needApp = true;
@@ -57,19 +58,13 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
     }
 
     function initData() {
-        var request = {
-            category: $stateParams.category
-        };
-        RongziService.getInvestor(request)
-            .then(function setCommunity(data) {
-                    if (data.data) {
-                        vm.result = data.data;
-                    }
-                }).catch(fail);
+        if (investorList.data) {
+            vm.result = investorList.data;
+        }
     }
 
     function moreFinishedData() {
-        if (vm.busy)return;
+        if (vm.busy) return;
         vm.busy = true;
         var request = {
             page: vm.page += 1,
@@ -109,27 +104,28 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
 
     function initLinkmeInvestor() {
         var krdata = {};
-        krdata.type =  window.projectEnvConfig.linkmeType;
+        krdata.type = window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investor?category=' + $stateParams.category + '","currentRoom":"0"}';
-        window.linkedme.init(window.projectEnvConfig.linkmeKey,
-        { type: window.projectEnvConfig.linkmeType }, function (err, res) {
-                if (err) {
-                    return;
-                }
+            '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/investor?category=' + $stateParams.category + '","currentRoom":"0"}';
+        window.linkedme.init(window.projectEnvConfig.linkmeKey, {
+            type: window.projectEnvConfig.linkmeType
+        }, function(err, res) {
+            if (err) {
+                return;
+            }
 
-                window.linkedme.link(krdata, function (err, data) {
-                        if (err) {
-                            // 生成深度链接失败，返回错误对象err
-                            console.log(err);
-                        } else {
-                            // 生成深度链接成功，深度链接可以通过data.url得到
-                            //console.log(data.url,   $('#comm-openApp11').attr('href'));
-                            vm.openAppUrl = data.url;
-                            $('#comm-openApp').attr('href', data.url);
-                        }
-                    }, false);
-            });
+            window.linkedme.link(krdata, function(err, data) {
+                if (err) {
+                    // 生成深度链接失败，返回错误对象err
+                    console.log(err);
+                } else {
+                    // 生成深度链接成功，深度链接可以通过data.url得到
+                    //console.log(data.url,   $('#comm-openApp11').attr('href'));
+                    vm.openAppUrl = data.url;
+                    $('#comm-openApp').attr('href', data.url);
+                }
+            }, false);
+        });
     }
 
     function subscribe(item, e) {
@@ -141,9 +137,9 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         if (!hybrid.isInApp) {
             //document.location.href = vm.openAppUrl;
             defaultModal();
-        }else if (hybrid.isInApp && vm.result.remind === 1 && UserService.getUID()) {
+        } else if (hybrid.isInApp && vm.result.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
-        }else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
+        } else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
             cancelSubscribeAction(item);
         } else {
             window.location.href = 'https://passport.36kr.com/pages';
@@ -151,6 +147,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
     }
 
     modalController.$inject = ['$modalInstance', 'obj', 'hybrid'];
+
     function modalController($modalInstance, obj, hybrid) {
 
         var vm = this;
@@ -176,14 +173,14 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
             };
             if (vm.emailInput) {
                 RongziService.setEmail(senddata)
-                .then(function setSussess() {
-                    vm.title = '添加邮件提醒成功！';
-                    vm.cancelRemindtxt = '当明星投资人专场任一专场开始时，您将会收到包括邮件在内的所有提醒，' +
-                       '确保您不会错过任一投资人专场';
-                    vm.setEmailState = true;
-                    vm.hasEmail = true;
-                })
-              .catch(fail);
+                    .then(function setSussess() {
+                        vm.title = '添加邮件提醒成功！';
+                        vm.cancelRemindtxt = '当明星投资人专场任一专场开始时，您将会收到包括邮件在内的所有提醒，' +
+                            '确保您不会错过任一投资人专场';
+                        vm.setEmailState = true;
+                        vm.hasEmail = true;
+                    })
+                    .catch(fail);
             } else {
                 $modalInstance.dismiss();
             }
@@ -205,38 +202,38 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
     function subscribeAction(item) {
         var senddata = {
             category: 1,
-            subscibeType:0,
+            subscibeType: 0,
         };
         RongziService.setSubscribe(senddata)
-        .then(function setSussess(data) {
-            if (data.data.data) {
-                vm.hasEmail = true;
-            }
+            .then(function setSussess(data) {
+                if (data.data.data) {
+                    vm.hasEmail = true;
+                }
 
-            item.hasEmail = vm.hasEmail;
-            item.cancelMainRemind = false;
-            item.title = '设置开场提醒成功！';
-            modalOpen(item);
-            vm.result.remind = 0;
-        })
-        .catch(fail);
+                item.hasEmail = vm.hasEmail;
+                item.cancelMainRemind = false;
+                item.title = '设置开场提醒成功！';
+                modalOpen(item);
+                vm.result.remind = 0;
+            })
+            .catch(fail);
     }
 
     function cancelSubscribeAction(item) {
         var senddata = {
             category: 1,
-            subscibeType:0,
+            subscibeType: 0,
         };
         RongziService.cancelSubscribe(senddata)
-        .then(function setSussess() {
-            item.cancelMainRemind = true;
-            item.title = '取消开场提醒成功！';
-            item.hasEmail = true;
-            item.cancelRemindtxt = '后续新上的明星投资人专场将不会有专场提醒，现已有排期的专场仍会提醒！';
-            modalOpen(item);
-            vm.result.remind = 1;
-        })
-        .catch(fail);
+            .then(function setSussess() {
+                item.cancelMainRemind = true;
+                item.title = '取消开场提醒成功！';
+                item.hasEmail = true;
+                item.cancelRemindtxt = '后续新上的明星投资人专场将不会有专场提醒，现已有排期的专场仍会提醒！';
+                modalOpen(item);
+                vm.result.remind = 1;
+            })
+            .catch(fail);
     }
 
     function modalOpen(item) {
@@ -246,7 +243,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
             controller: modalController,
             controllerAs: 'vm',
             resolve: {
-                obj: function () {
+                obj: function() {
                     return item;
                 }
             }
@@ -273,7 +270,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
             controller: defaultController,
             controllerAs: 'vm',
             resolve: {
-                obj: function () {
+                obj: function() {
                     return item;
                 }
             }
@@ -281,6 +278,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
     }
 
     defaultController.$inject = ['$modalInstance', 'obj'];
+
     function defaultController($modalInstance, obj) {
 
         var vm = this;
