@@ -439,6 +439,9 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controllerAs: 'vm',
         controller: 'OrganizationController',
         templateUrl: 'templates/rongzi/organization.html',
+        resolve: {
+            orgList: getOrgtList
+        }
     });
 
     $stateProvider.state('rongzi.community', {
@@ -618,6 +621,12 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
 
     function getProjectList(RongziService, $stateParams) {
         return RongziService.getProjectList($stateParams.id);
+    }
+
+    function getOrgtList(RongziService, $stateParams) {
+        return RongziService.getOrg({
+            category: parseInt($stateParams.category)
+        });
     }
 
 });
