@@ -8,6 +8,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     $('body').css({
         backgroundColor: '#fff'
     });
+    window.scrollTo(0, 0);
 
     vm.responseData = [];
     vm.ts = '';
