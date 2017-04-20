@@ -119,6 +119,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
                 loadMore();
                 loading.hide('findLoading');
                 loading.hide('dailyNewsLoading');
+                window.scrollTo(0, 0);
             })
             .catch(error);
     }
