@@ -625,8 +625,12 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         return RongziService.getBaseInfo($stateParams.id);
     }
 
-    function getProjectList(RongziService, $stateParams) {
-        return RongziService.getProjectList($stateParams.id);
+    function getProjectList(UserService, RongziService, $stateParams) {
+        if (UserService.getUID()) {
+            return RongziService.getProjectList($stateParams.id);
+        }else {
+            return '';
+        }
     }
 
     function getOrgList(RongziService, $stateParams) {
