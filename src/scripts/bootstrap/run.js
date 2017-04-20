@@ -1,6 +1,10 @@
 
 var angular = require('angular');
 
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
 angular.module('defaultApp')
     .run(function ($rootScope) {
         $rootScope.REGEXP = $rootScope.REGEXP || {};
