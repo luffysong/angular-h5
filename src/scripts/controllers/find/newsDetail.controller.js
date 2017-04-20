@@ -6,13 +6,14 @@ function NewsDetailController(FindService, ErrorService, loading, $stateParams) 
     var vm = this;
     vm.news = {
         id: $stateParams.id || 0,
-        content: ''
+        data: {}
     };
 
     FindService.getNewsDetail(vm.news.id).then(function (data) {
         loading.hide('newsDetailLoading');
-        if (data && data.data && data.data.content) {
-            vm.news.content = data.data.content;
+        if (data && data.data && data.data) {
+            vm.news.data = data.data;
+            vm.news.data.ts = moment(vm.news.data.ts).format('YYYY年MM月DD日');
         }
     }).catch(function (err) {
         loading.hide('newsDetailLoading');
