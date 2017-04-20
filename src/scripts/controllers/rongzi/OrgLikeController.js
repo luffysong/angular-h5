@@ -16,6 +16,24 @@ function OrgLikeController($document, $timeout, $scope, $modal, loading, $stateP
         }
 
         initData();
+        initTitle();
+        initWeixin();
+    }
+
+    function initTitle() {
+        document.title = '融资季 · 投资人最喜爱的机构排行榜';
+    }
+
+    function initWeixin() {
+        window.WEIXINSHARE = {
+            shareTitle: '投资人最喜爱的机构排行榜',
+            shareUrl: window.location.href,
+            shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
+            shareDesc: '投资人最喜爱的机构排行榜',
+        };
+
+        var obj = {};
+        window.InitWeixin(obj);
     }
 
     function initData() {
