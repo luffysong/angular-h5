@@ -14,6 +14,7 @@ function NewsDetailController(FindService, ErrorService, loading, $stateParams) 
         if (data && data.data && data.data) {
             vm.news.data = data.data;
             vm.news.data.ts = moment(vm.news.data.ts).format('YYYY年MM月DD日');
+            document.title = vm.news.data.title;
         }
     }).catch(function (err) {
         loading.hide('newsDetailLoading');
