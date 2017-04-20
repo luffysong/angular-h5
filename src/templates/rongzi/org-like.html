@@ -2,15 +2,16 @@
   <div  ng-include="'templates/rongzi-common/top-like.html'"
       ng-init=" topdata = 'org' ">
   </div>
-
-  <div class="organization-content">
-    <div ng-include="'templates/rongzi-common/like-list.html'"></div>
+  <div class="rongzi-split-block">
+    </div>
+  <div class="organization-content" >
+    <div ng-include="'templates/rongzi-common/like-list.html'" ng-init="mark = 'org'"></div>
   </div>
 
   <div class="rongzi-split-block">
     </div>
 
-  <div ng-include="'templates/rongzi-common/bottom.html'" ng-init="item = 'org'">
+  <div ng-include="'templates/rongzi-common/bottom.html'" ng-init="btm = 'orglike'">
   </div>
 
   <div ng-include="'templates/rongzi/meiqia.html'"></div>

@@ -106,12 +106,15 @@
 }
 
 .rongzi-favorite{
-  color: #ff982e;
+  width: 100%;
+  text-align: center;
+  color: #ffd200;
   float: right;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
   margin-top: -25px;
-  margin-right: 30px;
+  //margin-right: 30px;
+  margin-bottom: 15px;
 }
 
 //虚位以待
@@ -283,6 +286,30 @@
   position: fixed;
   bottom: 0;
   max-width: 768px;
+}
+
+.rongzi-common-bottom-sdiv{
+  height: 48px;
+  width: 100%;
+  text-align: center;
+  line-height: 48px;
+  font-size: 14px;
+  font-weight: bold;
+  border: 1px solid @orgCor;
+  color: white;
+  bottom: 0px;
+  position: fixed;
+  bottom: 0px;
+  z-index: 999;
+  div{
+    float: left;
+    width: 49%;
+    //background-color: black;
+  }
+  div:first-child{
+    background-color: @orgCor;
+    border-left: 1px solid black;
+  }
 }
 
 .rongzi-common-top{
@@ -986,4 +1013,3 @@
   bottom: 0px;
   z-index: 999;
 }
-

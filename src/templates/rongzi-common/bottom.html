@@ -1,19 +1,34 @@
-
-<div class="rongzi-common-bottom" ng-if=" item !== 'community'" ui-sref="rongzi.main">
+<div class="rongzi-common-bottom" ng-if=" item !== 'community' && btm !== 'orglike' && btm !== 'comlike'" ui-sref="rongzi.main">
   <b>返回主会场</b>
 </div>
 
-<div class="rongzi-common-bottom-comm" ng-if=" item === 'community' && item !== 'detail'" ui-sref="rongzi.main">
+<div class="rongzi-common-bottom-comm" ng-if=" item === 'community' && item !== 'detail' && btm !== 'orglike' && btm !== 'comlike'" ui-sref="rongzi.main">
   <b>返回主会场</b>
 </div>
 
 
-<div class="rongzi-common-comm" ng-if=" item === 'detail'">
+<div class="rongzi-common-comm" ng-if=" item === 'detail' && btm !== 'orglike' && btm !== 'comlike'">
   <div>
     返回创业社群专场
   </div>
 
   <div>
     返回主会场
+  </div>
+</div>
+
+
+
+<div class="rongzi-common-bottom-sdiv" ng-if=" btm === 'orglike' || btm === 'comlike'">
+  <div ng-if=" btm === 'comlike' " ui-sref="rongzi.community({category:vm.category})">
+    返回创业社群专场
+  </div>
+
+  <div ng-if="btm === 'orglike'" ui-sref="rongzi.organization({category:vm.category})">
+    返回顶级机构专场
+  </div>
+
+  <div ui-sref="rongzi.main">
+    返回融资季主会场
   </div>
 </div>
