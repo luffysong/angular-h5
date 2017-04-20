@@ -50,9 +50,8 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
             news_index: obj.news_index
         });
         if (item.hasContent) {
-            $state.go('find.newsDetail', {
-                id: item.id
-            });
+            var link = $rootScope.rongHost + '/m/#/find/newsDetail/' + item.id;
+            vm.link(item.ccid, link)
         } else {
             vm.link(item.ccid, item.link);
         }
