@@ -102,7 +102,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
 
         var senddata = {
             category: parseInt($stateParams.category),
-            projectCategory: vm.projectCategory ? vm.projectCategory : 0,
+            projectCategory: angular.isUndefined(vm.projectCategory) ? 0 : vm.projectCategory,
             page: vm.page + 1,
             pageSize: 5,
         };

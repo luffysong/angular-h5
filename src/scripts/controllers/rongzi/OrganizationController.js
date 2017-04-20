@@ -58,6 +58,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
         vm.busy = false;
         vm.end = [];
         vm.projectCategory = n;
+        console.log('===', vm.projectCategory);
         getFinishedData();
     }
 
@@ -104,10 +105,11 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
 
         var senddata = {
             category: parseInt($stateParams.category),
-            projectCategory: vm.projectCategory ? vm.projectCategory : 1,
+            projectCategory: angular.isUndefined(vm.projectCategory) ? 1 : vm.projectCategory,
             page: vm.page + 1,
             pageSize: 5,
         };
+        console.log(senddata);
         RongziService.getFinishedData(senddata)
             .then(function setCommunity(response) {
                 vm.end = vm.end.concat(response.data.data);
