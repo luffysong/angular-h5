@@ -104,7 +104,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
 
         var senddata = {
             category: parseInt($stateParams.category),
-            projectCategory: vm.projectCategory ? vm.projectCategory : 0,
+            projectCategory: vm.projectCategory ? vm.projectCategory : 1,
             page: vm.page + 1,
             pageSize: 5,
         };
