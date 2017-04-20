@@ -28,10 +28,10 @@ function ComLikeController($document, $timeout, $scope, $modal, loading, $stateP
 
     function initWeixin() {
         window.WEIXINSHARE = {
-            shareTitle: '投资人最喜爱的社群排行榜',
+            shareTitle: '【创投助手 · 融资季】项目的名义！融资季最受欢迎创业社群！',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: '投资人最喜爱的社群排行榜',
+            shareDesc: '创投助手融资季 “投资人最喜爱的社群排行榜”火热出炉！',
         };
 
         var obj = {};
