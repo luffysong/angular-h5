@@ -1,5 +1,4 @@
-
-var  angular = require('angular');
+var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('MainController', MainController);
 
@@ -31,7 +30,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
     function BackState() {
         Promise
             .all([initData(), initPxLoader()])
-            .then(function (results) {
+            .then(function(results) {
                 loading.hide('rongziLoading');
             });
     }
@@ -45,10 +44,9 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             loader.add(pxImage);
         }
 
-        loader.addProgressListener(function (e) {
-        });
+        loader.addProgressListener(function(e) {});
 
-        loader.addCompletionListener(function (e) {
+        loader.addCompletionListener(function(e) {
             vm.picState = true;
         });
 
@@ -75,7 +73,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         $('.common-header.J_commonHeaderWrapper').remove();
     }
 
-    window.initCss = function () {
+    window.initCss = function() {
         $('#activityInfoFirst').hide();
     };
 
@@ -95,7 +93,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             });
     }
 
-    function subscribe(item, e) {
+    function subscribe(item, e, event, source) {
         e.preventDefault();
         e.stopPropagation();
         item = item ? item : {};
@@ -103,10 +101,11 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         item.hasEmail = vm.hasEmail;
         if (!hybrid.isInApp) {
             defaultModal();
-        }else if (UserService.getUID()) {
+            clickSetTrack('SeasonDownloadClick', 'main_download');
+        } else if (UserService.getUID()) {
             if (vm.remind === 1) {
                 subscribeAction(item);
-            }else {
+            } else {
                 cancelSubscribeAction(item);
             }
         } else {
@@ -115,6 +114,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
     }
 
     modalController.$inject = ['$modalInstance', 'obj', 'hybrid'];
+
     function modalController($modalInstance, obj, hybrid) {
 
         var vm = this;
@@ -141,14 +141,14 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             };
             if (vm.emailInput) {
                 RongziService.setEmail(senddata)
-                .then(function setSussess() {
-                    vm.title = '添加邮件提醒成功！';
-                    vm.cancelRemindtxt = '当“融资季”全场任一专场开始时，您将会包括邮件在内的所有提醒，' +
-                       '确保您不会错过任意专场';
-                    vm.setEmailState = true;
-                    vm.hasEmail = true;
-                })
-                .catch(fail);
+                    .then(function setSussess() {
+                        vm.title = '添加邮件提醒成功！';
+                        vm.cancelRemindtxt = '当“融资季”全场任一专场开始时，您将会包括邮件在内的所有提醒，' +
+                            '确保您不会错过任意专场';
+                        vm.setEmailState = true;
+                        vm.hasEmail = true;
+                    })
+                    .catch(fail);
             } else {
                 $modalInstance.dismiss();
             }
@@ -157,37 +157,37 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
 
     function subscribeAction(item) {
         var senddata = {
-            subscibeType:-1,
+            subscibeType: -1,
         };
         RongziService.setSubscribe(senddata)
-        .then(function setSussess(data) {
-            if (data.data.data) {
-                vm.hasEmail = true;
-            }
+            .then(function setSussess(data) {
+                if (data.data.data) {
+                    vm.hasEmail = true;
+                }
 
-            item.hasEmail = vm.hasEmail;
-            item.cancelMainRemind = false;
-            item.title = '设置开场提醒成功！';
-            modalOpen(item);
-            vm.remind = 0;
-        })
-        .catch(fail);
+                item.hasEmail = vm.hasEmail;
+                item.cancelMainRemind = false;
+                item.title = '设置开场提醒成功！';
+                modalOpen(item);
+                vm.remind = 0;
+            })
+            .catch(fail);
     }
 
     function cancelSubscribeAction(item) {
         var senddata = {
-            subscibeType:-1,
+            subscibeType: -1,
         };
         RongziService.cancelSubscribe(senddata)
-        .then(function setSussess() {
-            item.cancelMainRemind = true;
-            item.hasEmail = true;
-            item.title = '取消开场提醒成功！';
-            item.cancelRemindtxt = '后续新上的所有专场将不会有专场提醒，现已有排期的专场仍会提醒！';
-            modalOpen(item);
-            vm.remind = 1;
-        })
-        .catch(fail);
+            .then(function setSussess() {
+                item.cancelMainRemind = true;
+                item.hasEmail = true;
+                item.title = '取消开场提醒成功！';
+                item.cancelRemindtxt = '后续新上的所有专场将不会有专场提醒，现已有排期的专场仍会提醒！';
+                modalOpen(item);
+                vm.remind = 1;
+            })
+            .catch(fail);
     }
 
     function modalOpen(item) {
@@ -197,7 +197,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             controller: modalController,
             controllerAs: 'vm',
             resolve: {
-                obj: function () {
+                obj: function() {
                     return item;
                 }
             }
@@ -207,52 +207,53 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
     function initData() {
         RongziService.getHome()
             .then(function setHomeData(data) {
-                    loading.hide('rongziLoading');
-                    if (data.data) {
-                        vm.result = data.data;
-                        vm.remind = data.data.remind;
-                        vm.starList = data.data.startupProjectVoList;
-                        vm.sessions = data.data.sessions;
-                        vm.org = vm.sessions.org;
-                        vm.community = vm.sessions.assc;
-                        vm.investor = vm.sessions.investor;
-                        // if (vm.result.sessions.length > 0) {
-                        //     angular.forEach(vm.result.sessions,
-                        //       function (dt, index, array) {
-                        //         if (dt.category === -1) {
-                        //             vm.org = dt;
-                        //         } else if (dt.category === 0) {
-                        //             vm.community = dt;
-                        //         } else {
-                        //             vm.investor = dt;
-                        //         }
-                        //     });
-                        // }
-                    }
-                }).catch(fail);
+                loading.hide('rongziLoading');
+                if (data.data) {
+                    vm.result = data.data;
+                    vm.remind = data.data.remind;
+                    vm.starList = data.data.startupProjectVoList;
+                    vm.sessions = data.data.sessions;
+                    vm.org = vm.sessions.org;
+                    vm.community = vm.sessions.assc;
+                    vm.investor = vm.sessions.investor;
+                    // if (vm.result.sessions.length > 0) {
+                    //     angular.forEach(vm.result.sessions,
+                    //       function (dt, index, array) {
+                    //         if (dt.category === -1) {
+                    //             vm.org = dt;
+                    //         } else if (dt.category === 0) {
+                    //             vm.community = dt;
+                    //         } else {
+                    //             vm.investor = dt;
+                    //         }
+                    //     });
+                    // }
+                }
+            }).catch(fail);
     }
 
     function initLinkme() {
         var krdata = {};
-        krdata.type =  window.projectEnvConfig.linkmeType;
+        krdata.type = window.projectEnvConfig.linkmeType;
         krdata.params =
-        '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/main","currentRoom":"0"}';
-        window.linkedme.init(window.projectEnvConfig.linkmeKey,
-        { type: window.projectEnvConfig.linkmeType }, function (err, res) {
-                if (err) {
-                    return;
-                }
+            '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/main","currentRoom":"0"}';
+        window.linkedme.init(window.projectEnvConfig.linkmeKey, {
+            type: window.projectEnvConfig.linkmeType
+        }, function(err, res) {
+            if (err) {
+                return;
+            }
 
-                window.linkedme.link(krdata, function (err, data) {
-                        if (err) {
-                            // 生成深度链接失败，返回错误对象err
-                            console.log(err);
-                        } else {
-                            // 生成深度链接成功，深度链接可以通过data.url得到
-                            vm.openAppUrl = data.url;
-                        }
-                    }, false);
-            });
+            window.linkedme.link(krdata, function(err, data) {
+                if (err) {
+                    // 生成深度链接失败，返回错误对象err
+                    console.log(err);
+                } else {
+                    // 生成深度链接成功，深度链接可以通过data.url得到
+                    vm.openAppUrl = data.url;
+                }
+            }, false);
+        });
     }
 
     function fail(err) {
@@ -260,10 +261,11 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         ErrorService.alert(err.err.msg);
     }
 
-    function openApp() {
+    function openApp(event, source) {
         if (!hybrid.isInApp) {
             //window.location.href = vm.openAppUrl;
             defaultModal();
+            clickSetTrack(event, source);
         }
     }
 
@@ -276,7 +278,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             controller: defaultController,
             controllerAs: 'vm',
             resolve: {
-                obj: function () {
+                obj: function() {
                     return item;
                 }
             }
@@ -284,6 +286,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
     }
 
     defaultController.$inject = ['$modalInstance', 'obj'];
+
     function defaultController($modalInstance, obj) {
 
         var vm = this;
@@ -294,5 +297,13 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             $modalInstance.dismiss();
         }
     }
+
+    function clickSetTrack(event, source) {
+        var params = {
+            source: source,
+            client: 'H5',
+        }
+        sa.track(event, params);
+    };
 
 }
