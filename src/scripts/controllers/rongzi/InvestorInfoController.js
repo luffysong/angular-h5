@@ -298,4 +298,12 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         window.location.href = vm.openAppUrl;
     }
 
+    vm.clickSetTrack = function() {
+        sa.track('SeasonDownloadClick', {
+            source: 'season_set_download',
+            client: 'H5',
+            season_set_id: 'investorInfor' + $stateParams.id,
+        });
+    };
+
 }
