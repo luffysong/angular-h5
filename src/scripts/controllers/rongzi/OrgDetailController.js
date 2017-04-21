@@ -332,8 +332,16 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
             source: source,
             client: 'H5',
             season_set_id: season_set_id,
-            company_id: company_id
-        }
+            company_id: parseInt(company_id)
+        };
         sa.track(event, params);
+    }
+
+    vm.clickSetTrack = function (event) {
+        sa.track(event, {
+            source: 'season_set_download',
+            client: 'H5',
+            season_set_id: 'orgdetail' + $stateParams.id,
+        });
     };
 }
