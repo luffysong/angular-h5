@@ -279,7 +279,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             controller: defaultController,
             controllerAs: 'vm',
             resolve: {
-                obj: function() {
+                obj: function () {
                     return item;
                 }
             }

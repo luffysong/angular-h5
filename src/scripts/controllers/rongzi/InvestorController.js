@@ -272,7 +272,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
             controller: defaultController,
             controllerAs: 'vm',
             resolve: {
-                obj: function() {
+                obj: function () {
                     return item;
                 }
             }

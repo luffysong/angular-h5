@@ -3,22 +3,22 @@ angular.module('defaultApp.controller')
     .controller('ComDetailController', ComDetailController);
 
 function ComDetailController($modal, loading, $stateParams, RongziService, $state, UserService,
-    ErrorService, hybrid, baseInfo, pojrectList) {
-    var vm = this;
-    vm.tabChange = tabChange;
-    vm.shareWechat = shareWechat;
-    vm.Aafter = false;
-    vm.Abefore = true;
-    vm.category = $stateParams.category;
-    vm.state = $stateParams.state;
-    vm.nameArr = [];
-    vm.subscribe = subscribe;
-    vm.needApp = true;
-    vm.hasEmail = false;
-    vm.openApp = openApp;
-    vm.openAppUrl;
-    vm.downloadMask = downloadMask;
-    init();
+	ErrorService, hybrid, baseInfo, pojrectList) {
+	var vm = this;
+	vm.tabChange = tabChange;
+	vm.shareWechat = shareWechat;
+	vm.Aafter = false;
+	vm.Abefore = true;
+	vm.category = $stateParams.category;
+	vm.state = $stateParams.state;
+	vm.nameArr = [];
+	vm.subscribe = subscribe;
+	vm.needApp = true;
+	vm.hasEmail = false;
+	vm.openApp = openApp;
+	vm.openAppUrl;
+	vm.downloadMask = downloadMask;
+	vm.inviteInvestor = inviteInvestor;
 
     function init() {
         loading.hide('findLoading');
@@ -324,5 +324,8 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
 				category: vm.category
 		});
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> fix:前端埋点
 }
