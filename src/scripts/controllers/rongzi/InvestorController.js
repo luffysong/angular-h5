@@ -16,6 +16,7 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
     vm.busy = false;
     vm.moreFinishedData = moreFinishedData;
     vm.finished = [];
+    vm.goDetail = goDetail;
 
     init();
 
@@ -288,6 +289,32 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
         function cancelModal() {
             $modalInstance.dismiss();
         }
+    }
+
+    function goDetail(id, name, category, state) {
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+
+        sa.track('SeasonSetClick',
+          {
+            season_set_id:'investorInfo' + id,
+            branch_id:'investorInfo',
+            source:'branch_session',
+            client:client,
+        });
+
+        $state.go('rongzi.investorInfo', {
+            category: category,
+            id: id,
+            name: name,
+            state: state
+        });
     }
 
 }

@@ -16,11 +16,15 @@
       </div>
       <div class="split-border"></div>
       <div class="special-logo">
-
+<!--
+ui-sref="rongzi.investorInfo({category: obj.category, id: obj.id, name: obj.name})"
+-->
         <div class="item" ng-repeat="obj in vm.sessions.investor.list">
           <div class="border-bg">
             <div class="logo-border-orange">
-              <div class="logo" ng-if="obj.logo" ui-sref="rongzi.investorInfo({category: obj.category, id: obj.id, name: obj.name})" style="background-image: url({{obj.logo}})"></div>
+              <div class="logo" ng-if="obj.logo"
+                ng-click="vm.goDetail('investorInfo', obj.id,obj.name, obj.category)"
+               style="background-image: url({{obj.logo}})"></div>
             </div>
           </div>
           <div class="org-name orange"><span ng-if="obj.name">{{obj.name}}</span></div>

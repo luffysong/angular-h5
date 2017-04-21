@@ -15,9 +15,13 @@
 </div>
 
 <div class="org-a-before" ng-show="vm.Abefore">
-
+<!--
+ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})"
+-->
   <div class="special-item yellow-color" ng-if="vm.ABefore.goingSessions" ng-repeat=" item in vm.ABefore.goingSessions">
-    <div class="special-list-border orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})" >
+    <div class="special-list-border orange-color"
+      ng-click="vm.goDetail(item.id, item.name, item.category)">
+
       <div class="special-logo yellow-color" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
         <div class="special-name orange-color">
@@ -45,9 +49,12 @@
     </div>
   -->
   </div>
-
+<!--
+ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category,state:'start'})"
+-->
   <div class="special-item yellow-color" ng-if="vm.ABefore.startSessions.length >0" ng-repeat=" item in vm.ABefore.startSessions">
-    <div class="special-list-border orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category,state:'start'})">
+    <div class="special-list-border orange-color"
+    ng-click="vm.goDetail(item.id, item.name, item.category,'start')">
       <div class="special-logo yellow-color" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
         <div class="special-name orange-color">
@@ -71,10 +78,16 @@
       <b>已完结</b>
     </div>
   </div>
+
+  <!---
+  ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category,state:'end'})"
+  -->
 <ul infinite-scroll='vm.getFinishedData(0)' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
   <li  ng-if="vm.end" ng-repeat=" item in vm.end track by $index" >
     <div class="special-item yellow-color">
-      <div class="special-list-border orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category,state:'end'})">
+      <div class="special-list-border orange-color"
+      ng-click="vm.goDetail(item.id, item.name, item.category,'end')"
+      >
         <div class="special-logo yellow-color" style="background-image: url({{item.logo}})"></div>
         <div class="special-info">
           <div class="special-name gray-color">
@@ -106,10 +119,13 @@
   <!--
   <div class="rongzi-split-block" ng-if="vm.AAfter.goingSessions.length > 0">
   </div>
+  ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})"
 -->
 
   <div class="special-item yellow-color" ng-if="vm.AAfter.goingSessions.length" ng-repeat=" item in vm.AAfter.goingSessions">
-    <div class="special-list-border orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category})">
+    <div class="special-list-border orange-color"
+      ng-click="vm.goDetail(item.id, item.name, item.category)"
+    >
       <div class="special-logo yellow-color" style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
         <div class="special-name orange-color">
@@ -135,11 +151,13 @@
     <div class="rongzi-favorite"   ui-sref="rongzi.orglike({category:vm.category})">
       投资人最喜爱的顶级机构排行榜>>
     </div>
+    ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category,state:'start'})"
   -->
   </div>
 
   <div class="special-item yellow-color" ng-if="vm.AAfter.startSessions" ng-repeat=" item in vm.AAfter.startSessions">
-    <div class="special-list-border orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category,state:'start'})">
+    <div class="special-list-border orange-color"
+      ng-click="vm.goDetail(item.id, item.name, item.category, 'start')">
       <div class="special-logo yellow-color"  style="background-image: url({{item.logo}})"></div>
       <div class="special-info">
         <div class="special-name orange-color">
@@ -164,10 +182,15 @@
     </div>
   </div>
 
+  <!--
+  ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category,state:'end'})"
+  -->
+
 <ul infinite-scroll='vm.getFinishedData(1)' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
     <li  ng-if="vm.end" ng-repeat=" item in vm.end track by $index" >
       <div class="special-item yellow-color" >
-        <div class="special-list-border orange-color" ui-sref="rongzi.orgdetail({id: item.id, name: item.name,category:item.category,state:'end'})">
+        <div class="special-list-border orange-color"
+        ng-click="vm.goDetail(item.id, item.name, item.category, 'end')">
           <div class="special-logo yellow-color"  style="background-image: url({{item.logo}})"></div>
           <div class="special-info">
             <div class="special-name gray-color">

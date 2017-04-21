@@ -18,6 +18,7 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
 	vm.openApp = openApp;
 	vm.openAppUrl;
 	vm.downloadMask = downloadMask;
+	vm.inviteInvestor = inviteInvestor;
 	init();
 
 	function init() {
@@ -264,6 +265,17 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
 	}
 
 	function shareWechat() {
+		var _ab= 'before';
+		if(vm.status === 'GOING' || vm.status === 'END') {
+			_ab = 'after';
+		};
+		sa.track('SeasonShare', {
+				target: 'share_wechat',
+				befor_after: _ab,
+				season_set_id: 'comdetail' + $stateParams.id,
+				branch_id: 'comdetail',
+		});
+
 		if (!hybrid.isInApp) {
 			defaultModal();
 		} else if (hybrid.isInApp && !UserService.getUID()) {
@@ -284,4 +296,22 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
 			season_set_id: 'comdetail' + $stateParams.id,
 		});
 	};
+
+	function inviteInvestor() {
+		var _ab= 'before';
+		if(vm.status === 'GOING' || vm.status === 'END') {
+			_ab = 'after';
+		};
+		sa.track('SeasonShare',
+			{
+				target:'invite_investor',
+				befor_after:_ab,
+				season_set_id:'comdetail' + $stateParams.id,
+				branch_id:'comdetail'
+			});
+
+		$state.go('rongzi.inviteInvestor', {
+				category: vm.category
+		});
+	}
 }

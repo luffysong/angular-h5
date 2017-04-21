@@ -12,6 +12,7 @@ function ComLikeController($document, $timeout, $scope, $modal, loading, $stateP
     vm.category = $stateParams.category;
     vm.openApp = openApp;
     vm.openAppUrl;
+    vm.goDetail = goDetail;
 
     init();
 
@@ -131,5 +132,30 @@ function ComLikeController($document, $timeout, $scope, $modal, loading, $stateP
         function cancelModal() {
             $modalInstance.dismiss();
         }
+    }
+
+    function goDetail(id, name, category) {
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+
+        sa.track('SeasonSetClick',
+          {
+            season_set_id:'comdetail' + id,
+            branch_id:'comdetail',
+            source:'top_list',
+            client:client,
+        });
+
+        $state.go('rongzi.orgdetail', {
+            category: category,
+            id: id,
+            name: name
+        });
     }
 }
