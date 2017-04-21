@@ -3,7 +3,7 @@ angular.module('defaultApp.controller')
   .controller('ComLikeController', ComLikeController);
 
 function ComLikeController($document, $timeout, $scope, $modal, loading, $stateParams,
-  RongziService, FindService, $state, UserService, ErrorService, hybrid) {
+  RongziService, FindService, $state, UserService, ErrorService, hybrid, comLikeSchoolList, comLikeOtherList) {
     var vm = this;
     vm.needApp = true;
     vm.tabChange = tabChange;
@@ -16,13 +16,15 @@ function ComLikeController($document, $timeout, $scope, $modal, loading, $stateP
     init();
 
     function init() {
-        initData();
+        //initData();
         initWeixin();
         initTitle();
         if (!hybrid.isInApp) {
             initLinkme();
             vm.needApp = false;
         }
+
+        vm.result = comLikeSchoolList.data;
     }
 
     function initTitle() {
@@ -49,11 +51,13 @@ function ComLikeController($document, $timeout, $scope, $modal, loading, $stateP
         if ('AAfter' === id) {
             vm.Aafter = true;
             vm.Abefore = false;
-            initData('1');
+            //initData('1');
+            vm.result = comLikeOtherList.data;
         } else if (('ABefore') === id) {
             vm.Aafter = false;
             vm.Abefore = true;
-            initData('0');
+            //initData('0');
+            vm.result = comLikeSchoolList.data;
         }
     }
 

@@ -3,7 +3,7 @@ angular.module('defaultApp.controller')
   .controller('OrgLikeController', OrgLikeController);
 
 function OrgLikeController($document, $timeout, $scope, $modal, loading, $stateParams,
-  RongziService, FindService, $state, UserService, ErrorService, hybrid) {
+  RongziService, FindService, $state, UserService, ErrorService, hybrid, orgLikeList) {
     var vm = this;
     vm.needApp = true;
     vm.category = $stateParams.category;
@@ -63,12 +63,16 @@ function OrgLikeController($document, $timeout, $scope, $modal, loading, $stateP
     }
 
     function initData() {
-        RongziService.getOrgLike()
-            .then(function setCommunity(data) {
-                    if (data.data) {
-                        vm.result = data.data;
-                    }
-                }).catch(fail);
+        if (orgLikeList) {
+            vm.result = orgLikeList.data;
+        }
+
+        // RongziService.getOrgLike()
+        //     .then(function setCommunity(data) {
+        //             if (data.data) {
+        //                 vm.result = data.data;
+        //             }
+        //         }).catch(fail);
     }
 
     function fail(err) {

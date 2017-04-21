@@ -530,6 +530,10 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controllerAs: 'vm',
         controller: 'ComLikeController',
         templateUrl: 'templates/rongzi/com-like.html',
+        resolve: {
+            comLikeSchoolList: getComLikeSchoolList,
+            comLikeOtherList: getComLikeOtherList,
+        }
     });
 
     $stateProvider.state('rongzi.orglike', {
@@ -537,6 +541,9 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controllerAs: 'vm',
         controller: 'OrgLikeController',
         templateUrl: 'templates/rongzi/org-like.html',
+        resolve: {
+            orgLikeList: getOrgLike,
+        }
     });
 
     $stateProvider.state('rongzi.inviteInvestor', {
@@ -647,6 +654,18 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         return RongziService.getCommunity({
             category: parseInt($stateParams.category)
         });
+    }
+
+    function getOrgLike(RongziService, $stateParams) {
+        return RongziService.getOrgLike();
+    }
+
+    function getComLikeSchoolList(RongziService, $stateParams) {
+        return RongziService.getComLike({ projectCategory:0 });
+    }
+
+    function getComLikeOtherList(RongziService, $stateParams) {
+        return RongziService.getComLike({ projectCategory:1 });
     }
 
     function getInvestorList(RongziService, $stateParams) {
