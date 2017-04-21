@@ -1,3 +1,8 @@
+<a name="1.33.1"></a>
+## [1.33.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.33.0...v1.33.1) (2017-04-21)
+
+
+
 <a name="1.33.0"></a>
 # [1.33.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.31.3...v1.33.0) (2017-04-21)
 
