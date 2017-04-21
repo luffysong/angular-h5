@@ -2,11 +2,13 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('DailyNewsController', DailyNewsController);
 
-function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService, $rootScope, $timeout) {
+function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeout, versionService, $rootScope, $timeout,
+    $state) {
     var vm = this;
     $('body').css({
         backgroundColor: '#fff'
     });
+    window.scrollTo(0, 0);
 
     vm.responseData = [];
     vm.ts = '';
@@ -39,26 +41,33 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     vm.sourceArrayAll = [];
     vm.sourceArray = [];
 
-    vm.clickNews = function(evtName, obj) {
+    vm.clickNews = function (evtName, obj, item) {
         sa.track('ClickNews', {
             target: 'news',
-            company_id: obj.company_id,
-            news_id: obj.news_id,
-            news_url: obj.news_url,
+            company_id: item.ccid,
+            news_id: item.id,
+            news_url: item.link,
+            news_index: obj.news_index
         });
-        vm.link(obj.company_id, obj.news_url);
+        if (item.hasContent) {
+            var link = $rootScope.rongHost + '/m/#/find/newsDetail/' + item.id;
+            vm.link(item.ccid, link)
+        } else {
+            vm.link(item.ccid, item.link);
+        }
     };
 
     init();
+
     function init() {
         document.title = '媒体热议';
         $('head').append('<meta name="format-detection" content="telephone=no" />');
         if (localStorage.getItem('dailyNewsTime') && localStorage.getItem('dailyNewsTime') !== 'undefined') {
             var nowTime = (new Date()).getTime();
-            var interval =  nowTime - localStorage.getItem('dailyNewsTime');
-            if (interval > 5*60*1000) {
-                localStorage.setItem('dailyNewsTime','');
-                localStorage.setItem('dailyNewsData','');
+            var interval = nowTime - localStorage.getItem('dailyNewsTime');
+            if (interval > 5 * 60 * 1000) {
+                localStorage.setItem('dailyNewsTime', '');
+                localStorage.setItem('dailyNewsData', '');
             }
             //console.log(nowTime);
         } else {
@@ -108,6 +117,8 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
                 vm.hasInit = true;
                 loadMore();
                 loading.hide('findLoading');
+                loading.hide('dailyNewsLoading');
+                window.scrollTo(0, 0);
             })
             .catch(error);
     }
@@ -140,7 +151,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
         }
         FindService.getDailyReport(vm.sendData)
             .then(function temp(response) {
-                $timeout(function() {
+                $timeout(function () {
                     vm.responseData = vm.responseData.concat(generateTime(response.data.data));
                     vm.ts = response.data.ts;
                     vm.sendData.ts = response.data.ts;
@@ -229,7 +240,9 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     function filter(e) {
         e.preventDefault();
         vm.displayFlag = true;
-        $('html, body').css({overflow: 'hidden'});
+        $('html, body').css({
+            overflow: 'hidden'
+        });
         //if (localStorage.getItem('dailyNewsData') && localStorage.getItem('dailyNewsData') !== 'undefined') {
         //    vm.sourceArrayAll = JSON.parse(localStorage.getItem('dailyNewsData')).sourceArrayAll;
         //    vm.flagArrayAll = JSON.parse(localStorage.getItem('dailyNewsData')).flagArrayAll;
@@ -243,11 +256,13 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
         e.preventDefault();
         vm.displayFlag = false;
         $timeout(function () {
-            if(!vm.sendflagArray.length && !vm.sendSourceArray.length) {
+            if (!vm.sendflagArray.length && !vm.sendSourceArray.length) {
                 loadData();
             }
-        },300);
-        $('html, body').css({overflow: ''});
+        }, 300);
+        $('html, body').css({
+            overflow: ''
+        });
     }
 
     function rollBack() {
@@ -266,7 +281,9 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     }
 
     function submit() {
-        $('html, body').css({overflow: ''});
+        $('html, body').css({
+            overflow: ''
+        });
         vm.displayFlag = false;
         loadData();
     }
@@ -311,25 +328,25 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     function itemFlagClick(item, e) {
         vm.sendflagArray = [];
         e.preventDefault();
-        if (item.label === '全部') { 
-            for (var i = 1; i < vm.flagArrayAll.length; i++) { 
-                vm.flagArrayAll[i].active = false; 
-            } 
-            vm.flagArrayAll[0].active = true; 
-        } else { 
-            vm.flagArrayAll[0].active = false; 
-            item.active = !item.active; 
-            for (var j = 0; j < vm.flagArrayAll.length; j++) { 
+        if (item.label === '全部') {
+            for (var i = 1; i < vm.flagArrayAll.length; i++) {
+                vm.flagArrayAll[i].active = false;
+            }
+            vm.flagArrayAll[0].active = true;
+        } else {
+            vm.flagArrayAll[0].active = false;
+            item.active = !item.active;
+            for (var j = 0; j < vm.flagArrayAll.length; j++) {
                 if (vm.flagArrayAll[j].active === true) {
                     vm.sendflagArray.push(vm.flagArrayAll[j].id);
-                } 
-            }  
-            if (!vm.sendflagArray.length) { 
-                vm.flagArrayAll[0].active = true; 
-            } 
-        } 
+                }
+            }
+            if (!vm.sendflagArray.length) {
+                vm.flagArrayAll[0].active = true;
+            }
+        }
         filterCount();
-     }
+    }
 
     function setShowFlag() {
         vm.showMoreFlag = vm.showMoreFlag == 8 ? vm.flagArrayAll.length : 8;
@@ -362,6 +379,4 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
     function setShowSource() {
         vm.showMoreSource = vm.showMoreSource == 8 ? vm.sourceArrayAll.length : 8;
     }
-
-
 }

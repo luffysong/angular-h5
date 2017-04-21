@@ -1,0 +1,17 @@
+<div class="find-news-detail">
+    <h1 class="find-news-title">{{vm.news.data.title}}</h1>
+    <div class="find-news-info">
+        <div class="find-news-info-time">
+            日期：{{vm.news.data.ts}}
+        </div>
+        <div class="find-news-info-source">
+            来源：{{vm.news.data.source}}
+        </div>
+    </div>
+    <div class="find-news-source">
+        原文链接：
+        <a href="{{vm.news.data.link}}" target="_blank">{{vm.news.data.link}}</a>
+    </div>
+    <div class="find-news-content" dynamic-html="vm.news.data.content"></div>
+    <loading loading="newsDetailLoading"></loading>
+</div>

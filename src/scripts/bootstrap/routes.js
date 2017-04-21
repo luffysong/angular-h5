@@ -188,10 +188,14 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         url: '/dailyNews',
         controllerAs: 'vm',
         controller: 'DailyNewsController',
-        templateUrl: 'templates/find/dailyNewsList.html',
-        resolve: {
-            coverFind: loadFind
-        }
+        templateUrl: 'templates/find/dailyNewsList.html'
+    });
+
+    $stateProvider.state('find.newsDetail', {
+        url:'/newsDetail/:id',
+        controllerAs: 'vm',
+        controller: 'NewsDetailController',
+        templateUrl: 'templates/find/newsDetail.html'
     });
 
     // 创投助手app---项目专辑
