@@ -332,5 +332,4 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             state: state
         });
     }
-
 }

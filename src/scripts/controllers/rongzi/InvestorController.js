@@ -326,5 +326,4 @@ function InvestorController(loading, $scope, $modal, $stateParams, RongziService
             state: state
         });
     }
-
 }

@@ -297,7 +297,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
             controller: defaultController,
             controllerAs: 'vm',
             resolve: {
-                obj: function() {
+                obj: function () {
                     return item;
                 }
             }
@@ -322,7 +322,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
             source: source,
             client: 'H5',
             branch_id: branch_id
-        }
+        };
         sa.track(event, params);
     };
 
@@ -351,5 +351,4 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
             state: state
         });
     }
-
 }

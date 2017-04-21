@@ -30,7 +30,7 @@
            </a>
          -->
             <a  id ="main-open" class="rongzi-main-btn subscribe-btn btn-height"
-            ng-click="vm.subscribe(item, $event)" onclick="sa.track('SeasonDownloadClick',{source:'main_download', client:'H5'})">
+            ng-click="vm.subscribe(item, $event)">
             <b ng-if="vm.result.remind === 1 && !vm.needApp">下载创投助手，参加融资季</b>
             <b ng-if="vm.remind === 1 && vm.needApp">开启融资季开场提醒</b>
             <b ng-if="vm.remind === 0">取消提醒订阅</b>
