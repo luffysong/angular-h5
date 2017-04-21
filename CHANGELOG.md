@@ -1,20 +1,11 @@
-<a name="1.32.1"></a>
-## [1.32.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.32.0...v1.32.1) (2017-04-21)
-
-
-### Bug Fixes
-
-* 新闻列表标题显示问题 ([978f73d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/978f73d))
-
-
-
-<a name="1.32.0"></a>
-# [1.32.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.31.3...v1.32.0) (2017-04-21)
+<a name="1.33.0"></a>
+# [1.33.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.31.3...v1.33.0) (2017-04-21)
 
 
 ### Bug Fixes
 
 * 修正详情页显示公司卡片 ([2d58f2b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/2d58f2b))
+* 新闻列表标题显示问题 ([978f73d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/978f73d))
 * 新闻列表滚动到顶部 ([32ca214](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/32ca214))
 * 新闻列表页跳转本地化页面 ([a3c08aa](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a3c08aa))
 * 滚动位置优化 ([d9b9dba](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d9b9dba))
