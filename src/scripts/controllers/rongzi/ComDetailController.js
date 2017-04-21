@@ -3,22 +3,22 @@ angular.module('defaultApp.controller')
     .controller('ComDetailController', ComDetailController);
 
 function ComDetailController($modal, loading, $stateParams, RongziService, $state, UserService,
-    ErrorService, hybrid, baseInfo, pojrectList) {
-    var vm = this;
-    vm.tabChange = tabChange;
-    vm.shareWechat = shareWechat;
-    vm.Aafter = false;
-    vm.Abefore = true;
-    vm.category = $stateParams.category;
-    vm.state = $stateParams.state;
-    vm.nameArr = [];
-    vm.subscribe = subscribe;
-    vm.needApp = true;
-    vm.hasEmail = false;
-    vm.openApp = openApp;
-    vm.openAppUrl;
-    vm.downloadMask = downloadMask;
-    init();
+	ErrorService, hybrid, baseInfo, pojrectList) {
+	var vm = this;
+	vm.tabChange = tabChange;
+	vm.shareWechat = shareWechat;
+	vm.Aafter = false;
+	vm.Abefore = true;
+	vm.category = $stateParams.category;
+	vm.state = $stateParams.state;
+	vm.nameArr = [];
+	vm.subscribe = subscribe;
+	vm.needApp = true;
+	vm.hasEmail = false;
+	vm.openApp = openApp;
+	vm.openAppUrl;
+	vm.downloadMask = downloadMask;
+	vm.inviteInvestor = inviteInvestor;
 
     function init() {
         loading.hide('findLoading');
@@ -264,15 +264,28 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
         });
     }
 
-    function shareWechat() {
-        if (!hybrid.isInApp) {
-            defaultModal();
-        } else if (hybrid.isInApp && !UserService.getUID()) {
-            window.location.href = 'https://passport.36kr.com/pages';
-        } else if (hybrid.isInApp && UserService.getUID()) {
-            hybrid.open('weChatShare/' + $stateParams.id);
-        }
-    }
+	function shareWechat() {
+
+		var _ab= 'before';
+		if(vm.status === 'GOING' || vm.status === 'END') {
+			_ab = 'after';
+		};
+
+		sa.track('SeasonShare', {
+				target: 'share_wechat',
+				befor_after: _ab,
+				season_set_id: 'comdetail' + $stateParams.id,
+				branch_id: 'comdetail',
+		});
+
+		if (!hybrid.isInApp) {
+			defaultModal();
+		} else if (hybrid.isInApp && !UserService.getUID()) {
+			window.location.href = 'https://passport.36kr.com/pages';
+		} else if (hybrid.isInApp && UserService.getUID()) {
+			hybrid.open('weChatShare/' + $stateParams.id);
+		}
+	}
 
     function downloadMask() {
         clickSetTrack('SeasonDownloadClick', 'season_set_download', 'comdetail' + $stateParams.id);
@@ -287,4 +300,30 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
         }
         sa.track(event, params);
     };
+
+	vm.clickSetTrack = function() {
+		sa.track('SeasonDownloadClick', {
+			source: 'season_set_download',
+			client: 'H5',
+			season_set_id: 'comdetail' + $stateParams.id,
+		});
+	};
+
+	function inviteInvestor() {
+		var _ab= 'before';
+		if(vm.status === 'GOING' || vm.status === 'END') {
+			_ab = 'after';
+		};
+		sa.track('SeasonShare',
+			{
+				target:'invite_investor',
+				befor_after:_ab,
+				season_set_id:'comdetail' + $stateParams.id,
+				branch_id:'comdetail'
+			});
+
+		$state.go('rongzi.inviteInvestor', {
+				category: vm.category
+		});
+	}
 }

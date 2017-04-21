@@ -12,6 +12,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
     vm.openAppUrl;
     vm.databackState = false;
     vm.picState = false;
+    vm.goDetail = goDetail;
     init();
 
     function init() {
@@ -278,7 +279,7 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
             controller: defaultController,
             controllerAs: 'vm',
             resolve: {
-                obj: function() {
+                obj: function () {
                     return item;
                 }
             }
@@ -302,8 +303,34 @@ function MainController(loading, $scope, $modal, $stateParams, FindService,
         var params = {
             source: source,
             client: 'H5',
-        }
+        };
         sa.track(event, params);
     };
+
+    function goDetail(type, id, name, category, state) {
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+
+        sa.track('SeasonSetClick',
+          {
+            season_set_id:type + id,
+            branch_id:type,
+            source:'main_session',
+            client:client,
+        });
+
+        $state.go('rongzi.' + type + '', {
+            category: category,
+            id: id,
+            name: name,
+            state: state
+        });
+    }
 
 }
