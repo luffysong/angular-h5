@@ -306,4 +306,12 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         //     state.go('rongzi.inviteInvestor');
         // }
     }
+
+    vm.clickSetTrack = function(event) {
+        sa.track(event, {
+            source: 'season_set_download',
+            client: 'H5',
+            season_set_id: 'orgdetail' + $stateParams.id,
+        });
+    };
 }
