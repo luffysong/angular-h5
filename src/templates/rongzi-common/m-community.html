@@ -14,12 +14,17 @@
           甄选素有“黄埔军校”特质的创业社群合作，每周五推出在融项目专场，总计40场，
           对接项目产生数据将计入社群组织实时榜单，快来为你认可的创业基因助威吧！ </span>
       </div>
+      <!--
+      ui-sref="rongzi.comdetail({id: obj.id, name: obj.name,category: obj.category})"
+      -->
       <div class="split-border"></div>
       <div class="special-logo">
         <div class="item" ng-repeat="obj in vm.sessions.assc.list">
           <div class="border-bg">
             <div class="logo-border-yellow">
-              <div class="logo" ng-if="obj.logo" ui-sref="rongzi.comdetail({id: obj.id, name: obj.name,category: obj.category})" style="background-image: url({{obj.logo}})"></div>
+              <div class="logo" ng-if="obj.logo"
+                ng-click="vm.goDetail('comdetail', obj.id,obj.name, obj.category)"
+              style="background-image: url({{obj.logo}})"></div>
             </div>
           </div>
           <div class="org-name yellow"><span ng-if="obj.name">{{obj.name}}</span></div>

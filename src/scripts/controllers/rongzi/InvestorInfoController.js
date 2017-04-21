@@ -19,6 +19,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     vm.noData = true;
     vm.shareWechat = shareWechat;
     vm.downloadMask = downloadMask;
+    vm.inviteInvestor = inviteInvestor;
     init();
 
     function init() {
@@ -286,6 +287,18 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     function shareWechat() {
+        var _ab = 'before';
+        if (vm.status === 'GOING' || vm.status === 'END') {
+            _ab = 'after';
+        };
+
+        sa.track('SeasonShare', {
+            target: 'share_wechat',
+            befor_after: _ab,
+            season_set_id: 'investorInfo' + $stateParams.id,
+            branch_id: 'investorInfo',
+        });
+
         if (!hybrid.isInApp) {
             defaultModal();
         } else if (hybrid.isInApp && !UserService.getUID()) {
@@ -308,5 +321,23 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         }
         sa.track(event, params);
     };
+
+    function inviteInvestor() {
+  		var _ab= 'before';
+  		if(vm.status === 'GOING' || vm.status === 'END') {
+  			_ab = 'after';
+  		};
+  		sa.track('SeasonShare',
+  			{
+  				target:'invite_investor',
+  				befor_after:_ab,
+          season_set_id:'investorInfo' + $stateParams.id,
+  				branch_id:'investorInfo'
+  			});
+
+  		$state.go('rongzi.inviteInvestor', {
+  				category: vm.category
+  		});
+  	}
 
 }

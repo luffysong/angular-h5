@@ -263,12 +263,12 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
             '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/rongzi/orgdetail?id=' + $stateParams.id + '&category=' + $stateParams.category + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey, {
             type: window.projectEnvConfig.linkmeType
-        }, function(err, res) {
+        }, function (err, res) {
             if (err) {
                 return;
             }
 
-            window.linkedme.link(krdata, function(err, data) {
+            window.linkedme.link(krdata, function (err, data) {
                 if (err) {
                     // 生成深度链接失败，返回错误对象err
                     console.log(err);
@@ -282,6 +282,18 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
     }
 
     function shareWechat() {
+        var _ab = 'before';
+        if (vm.status === 'GOING' || vm.status === 'END') {
+            _ab = 'after';
+        };
+
+        sa.track('SeasonShare', {
+            target: 'share_wechat',
+            befor_after: _ab,
+            season_set_id: 'orgdetail' + $stateParams.id,
+            branch_id: 'orgdetail',
+        });
+
         if (!hybrid.isInApp) {
             defaultModal();
         } else if (hybrid.isInApp && !UserService.getUID()) {
@@ -297,17 +309,22 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
     }
 
     function inviteInvestor() {
-        $state.go('rongzi.inviteInvestor', {
-            type: 'orange'
+        var _ab = 'before';
+        if (vm.status === 'GOING' || vm.status === 'END') {
+            _ab = 'after';
+        };
+
+        sa.track('SeasonShare',
+          {
+            target:'invite_investor',
+            befor_after:_ab,
+            season_set_id:'orgdetail' + $stateParams.id,
+            branch_id:'orgdetail'
         });
 
-        // if (!hybrid.isInApp) {
-        //     defaultModal();
-        // } else if (hybrid.isInApp && !UserService.getUID()) {
-        //     window.location.href = 'https://passport.36kr.com/pages';
-        // } else if (hybrid.isInApp && UserService.getUID()) {
-        //     state.go('rongzi.inviteInvestor');
-        // }
+        $state.go('rongzi.inviteInvestor', {
+            category: vm.category
+        });
     }
 
     function clickSetTrack(event, source, season_set_id, company_id) {

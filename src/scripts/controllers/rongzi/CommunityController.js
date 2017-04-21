@@ -16,6 +16,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
     vm.Aafter = false;
     vm.Abefore = true;
     vm.category = $stateParams.category;
+    vm.goDetail = goDetail;
 
     //分页处理
     vm.page = 0;
@@ -323,7 +324,34 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
             source: source,
             client: 'H5',
             branch_id: branch_id
-        }
+        };
         sa.track(event, params);
     };
+
+    function goDetail(id, name, category, state) {
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+
+        sa.track('SeasonSetClick',
+          {
+            season_set_id:'comdetail' + id,
+            branch_id:'comdetail',
+            source:'branch_session',
+            client:client,
+        });
+
+        $state.go('rongzi.comdetail', {
+            category: category,
+            id: id,
+            name: name,
+            state: state
+        });
+    }
+
 }

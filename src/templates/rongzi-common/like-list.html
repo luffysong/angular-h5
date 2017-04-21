@@ -1,7 +1,11 @@
 
+<!--
+ui-sref="rongzi.comdetail({id: item.sid, name: item.sname,category:vm.category})"
+-->
 <div class="special-item green-color" ng-if="vm.result && mark === 'com'"  ng-repeat="item in vm.result">
   <div class="special-list-border yellowdotted-color"
-  ui-sref="rongzi.comdetail({id: item.sid, name: item.sname,category:vm.category})">
+  ng-click="vm.goDetail(item.sid,item.sname, vm.category)"
+  >
     <div class="special-logo green-color"  style="background-image: url({{item.logo}})"></div>
     <div class="special-info">
       <div class="special-name yellowdotted-color" >
@@ -23,11 +27,13 @@
   </div>
 </div>
 
-
+<!--
+ui-sref="rongzi.orgdetail({id: item.sid, name: item.sname,category:vm.category})"
+-->
 <div class="special-item orange-color" ng-if="vm.result && mark === 'org'"
   ng-repeat="item in vm.result">
   <div class="special-list-border orange-color"
-    ui-sref="rongzi.orgdetail({id: item.sid, name: item.sname,category:vm.category})">
+      ng-click="vm.goDetail(item.sid,item.sname, vm.category)">
 
     <div class="special-logo orange-color"  style="background-image: url({{item.logo}})"></div>
     <div class="special-info">
