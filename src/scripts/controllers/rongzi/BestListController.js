@@ -64,10 +64,10 @@ function BestListController($modal, loading, $stateParams, FindService,
 
     function getTop3() {
         RongziService.getTop3()
-        .then(function setData(data) {
-            vm.top3 = data.data;
-        })
-        .catch(fail);
+            .then(function setData(data) {
+                vm.top3 = data.data;
+            })
+            .catch(fail);
     }
 
     function initData() {
@@ -230,6 +230,7 @@ function BestListController($modal, loading, $stateParams, FindService,
             //return;
             // window.location.href = vm.openUrl;
             defaultModal();
+            clickSetTrack('SeasonDownloadClick', 'company_favour_download', $stateParams.id);
         } else if (!UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
         } else if (UserService.getUID() && hybrid.isInApp) {
@@ -299,4 +300,13 @@ function BestListController($modal, loading, $stateParams, FindService,
             $modalInstance.dismiss();
         }
     }
+
+    function clickSetTrack(event, source, company_id) {
+        var params = {
+            source: source,
+            client: 'H5',
+            company_id: company_id
+        }
+        sa.track(event, params);
+    };
 }

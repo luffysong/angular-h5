@@ -130,6 +130,7 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
         item.remindText = vm.name;
         if (!hybrid.isInApp) {
             defaultModal();
+            clickSetTrack('SeasonDownloadClick', 'season_set_download', 'investorInfo' + $stateParams.id);
         } else if (hybrid.isInApp && vm.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
         } else if (UserService.getUID() && vm.remind === 0) {
@@ -308,15 +309,17 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
     }
 
     function downloadMask() {
+        clickSetTrack('SeasonDownloadClick', 'season_set_download', 'investorInfo' + $stateParams.id);
         window.location.href = vm.openAppUrl;
     }
 
-    vm.clickSetTrack = function() {
-        sa.track('SeasonDownloadClick', {
-            source: 'season_set_download',
+    function clickSetTrack(event, source, season_set_id) {
+        var params = {
+            source: source,
             client: 'H5',
-            season_set_id: 'investorInfor' + $stateParams.id,
-        });
+            season_set_id: season_set_id
+        }
+        sa.track(event, params);
     };
 
     function inviteInvestor() {

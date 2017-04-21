@@ -115,6 +115,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         if (!hybrid.isInApp) {
             //document.location.href = vm.openAppUrl;
             defaultModal();
+            clickSetTrack('SeasonDownloadClick', 'season_set_download', 'orgdetail' + $stateParams.id);
         } else if (hybrid.isInApp && vm.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
         } else if (UserService.getUID() && vm.remind === 0 && UserService.getUID()) {
@@ -219,6 +220,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
     function openApp(ccid) {
         if (!hybrid.isInApp) {
             defaultModal();
+            clickSetTrack('SeasonDownloadClick', 'season_set_company_download', '', $stateParams.id);
         } else if (hybrid.isInApp && UserService.getUID() && ccid) {
             hybrid.open('crmCompany/' + ccid);
         }
@@ -302,6 +304,7 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
     }
 
     function downloadMask() {
+        clickSetTrack('SeasonDownloadClick', 'season_set_download', 'orgdetail' + $stateParams.id);
         window.location.href = vm.openAppUrl;
     }
 
@@ -324,11 +327,13 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         });
     }
 
-    vm.clickSetTrack = function(event) {
-        sa.track(event, {
-            source: 'season_set_download',
+    function clickSetTrack(event, source, season_set_id, company_id) {
+        var params = {
+            source: source,
             client: 'H5',
-            season_set_id: 'orgdetail' + $stateParams.id,
-        });
+            season_set_id: season_set_id,
+            company_id: company_id
+        }
+        sa.track(event, params);
     };
 }

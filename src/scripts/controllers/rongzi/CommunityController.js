@@ -181,6 +181,7 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         if (!hybrid.isInApp) {
             //document.location.href = vm.openAppUrl;
             defaultModal();
+            clickSetTrack('SeasonDownloadClick', 'branch_download', 'comdetail');
         } else if (hybrid.isInApp && vm.result.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
         } else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
@@ -344,4 +345,13 @@ function CommunityController($document, $timeout, $scope, $modal, loading, $stat
         });
     }
 
+    function clickSetTrack(event, source, branch_id) {
+        var params = {
+            source: source,
+            client: 'H5',
+            branch_id: branch_id
+        };
+
+        sa.track(event, params);
+    };
 }

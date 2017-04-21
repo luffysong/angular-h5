@@ -179,6 +179,7 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
         if (!hybrid.isInApp) {
             //document.location.href = vm.openAppUrl;
             defaultModal();
+            clickSetTrack('SeasonDownloadClick', 'branch_download', 'orgdetail');
         } else if (hybrid.isInApp && vm.result.remind === 1 && UserService.getUID()) {
             subscribeAction(item);
         } else if (UserService.getUID() && vm.result.remind === 0 && UserService.getUID()) {
@@ -341,5 +342,15 @@ function OrganizationController(loading, $scope, $modal, $stateParams, RongziSer
             state: state
         });
     }
+
+    function clickSetTrack(event, source, branch_id) {
+        var params = {
+            source: source,
+            client: 'H5',
+            branch_id: branch_id
+        };
+
+        sa.track(event, params);
+    };
 
 }

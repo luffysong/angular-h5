@@ -69,6 +69,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
         if (!hybrid.isInApp) {
             //window.location.href = vm.openUrl;
             defaultModal();
+            clickSetTrack('SeasonDownloadClick', 'company_favour_download', $stateParams.id);
         } else if (!UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
         } else if (UserService.getUID() && hybrid.isInApp) {
@@ -141,11 +142,23 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
         }
     }
 
-    function openApp() {
+    function openApp(type) {
         if (!hybrid.isInApp) {
             defaultModal();
+            if (type === 'logo') {
+                clickSetTrack('SeasonDownloadClick', 'company_logo_download', $stateParams.id);
+            }
         } else {
             hybrid.open('crmCompany/' + vm.project.ccid);
         }
     }
+
+    function clickSetTrack(event, source, company_id) {
+        var params = {
+            source: source,
+            client: 'H5',
+            company_id: company_id
+        }
+        sa.track(event, params);
+    };
 }
