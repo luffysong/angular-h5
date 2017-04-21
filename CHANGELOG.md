@@ -1,3 +1,13 @@
+<a name="1.32.1"></a>
+## [1.32.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.32.0...v1.32.1) (2017-04-21)
+
+
+### Bug Fixes
+
+* 新闻列表标题显示问题 ([978f73d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/978f73d))
+
+
+
 <a name="1.32.0"></a>
 # [1.32.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.31.3...v1.32.0) (2017-04-21)
 
