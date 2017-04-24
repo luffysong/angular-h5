@@ -309,13 +309,16 @@ function BestListController($modal, loading, $stateParams, FindService,
         var params = {
             source: source,
             client: 'H5',
-            company_id: company_id
+            company_id: parseInt(company_id)
         };
         sa.track(event, params);
     };
 
     function interActApp(id) {
-        if (versionService.getVersionAndroid()) {
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+
+        if (isAndroid) {
             if (!window.kr36 || !window.kr36.thumbsUp) {
                 return function () {};
             }else {
@@ -326,7 +329,7 @@ function BestListController($modal, loading, $stateParams, FindService,
                     }
                 }, 100);
             }
-        } else if (versionService.getVersionIOS()) {
+        } else if (isIos) {
             if (!window.KrWebViewObject || !window.KrWebViewObject.thumbsUp) {
                 return function () {};
             } else {

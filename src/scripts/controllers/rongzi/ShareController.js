@@ -166,9 +166,10 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
     };
 
     function interActApp(id) {
-        alert(id);
-        alert(versionService.getVersionIOS());
-        if (versionService.getVersionAndroid()) {
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+
+        if (isAndroid) {
             if (!window.kr36 || !window.kr36.thumbsUp) {
                 return function () {};
             }else {
@@ -179,7 +180,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
                     }
                 }, 100);
             }
-        } else if (versionService.getVersionIOS()) {
+        } else if (isIos) {
             alert(window.KrWebViewObject);
             alert(window.KrWebViewObject.thumbsUp());
             if (!window.KrWebViewObject || !window.KrWebViewObject.thumbsUp) {
