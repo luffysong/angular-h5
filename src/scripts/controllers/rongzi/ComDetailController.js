@@ -3,22 +3,23 @@ angular.module('defaultApp.controller')
     .controller('ComDetailController', ComDetailController);
 
 function ComDetailController($modal, loading, $stateParams, RongziService, $state, UserService,
-ErrorService, hybrid, baseInfo, pojrectList) {
-    var vm = this;
-    vm.tabChange = tabChange;
-    vm.shareWechat = shareWechat;
-    vm.Aafter = false;
-    vm.Abefore = true;
-    vm.category = $stateParams.category;
-    vm.state = $stateParams.state;
-    vm.nameArr = [];
-    vm.subscribe = subscribe;
-    vm.needApp = true;
-    vm.hasEmail = false;
-    vm.openApp = openApp;
-    vm.openAppUrl;
-    vm.downloadMask = downloadMask;
-    init();
+	ErrorService, hybrid, baseInfo, pojrectList) {
+	var vm = this;
+	vm.tabChange = tabChange;
+	vm.shareWechat = shareWechat;
+	vm.Aafter = false;
+	vm.Abefore = true;
+	vm.category = $stateParams.category;
+	vm.state = $stateParams.state;
+	vm.nameArr = [];
+	vm.subscribe = subscribe;
+	vm.needApp = true;
+	vm.hasEmail = false;
+	vm.openApp = openApp;
+	vm.openAppUrl;
+	vm.downloadMask = downloadMask;
+	vm.inviteInvestor = inviteInvestor;
+	init();
 
     function init() {
         loading.hide('findLoading');
@@ -265,12 +266,10 @@ ErrorService, hybrid, baseInfo, pojrectList) {
     }
 
 	function shareWechat() {
-
 		var _ab= 'before';
 		if(vm.status === 'GOING' || vm.status === 'END') {
 			_ab = 'after';
 		};
-
 		sa.track('SeasonShare', {
 				target: 'share_wechat',
 				befor_after: _ab,
