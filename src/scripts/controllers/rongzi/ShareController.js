@@ -166,6 +166,8 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
     };
 
     function interActApp(id) {
+        alert(id);
+        alert(versionService.getVersionIOS());
         if (versionService.getVersionAndroid()) {
             if (!window.kr36 || !window.kr36.thumbsUp) {
                 return function () {};
