@@ -73,11 +73,14 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
         } else if (!UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
         } else if (UserService.getUID() && hybrid.isInApp) {
-            RongziService.like(id)
-                .then(function(response) {
-                    vm.project.likes = response.data.curCount;
-                    vm.project.liked = true;
-                });
+            if (id) {
+                interActApp(id);
+            }
+
+            //     .then(function (response) {
+            //         vm.project.likes = response.data.curCount;
+            //         vm.project.liked = true;
+            //     });
         }
     }
 
@@ -96,12 +99,12 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
 
         window.linkedme.init(window.projectEnvConfig.linkmeKey, {
             type: window.projectEnvConfig.linkmeType
-        }, function(err, res) {
+        }, function (err, res) {
             if (err) {
                 return;
             }
 
-            window.linkedme.link(krdata, function(err, data) {
+            window.linkedme.link(krdata, function (err, data) {
                 if (err) {
                     // 生成深度链接失败，返回错误对象err
                     console.log(err);
@@ -122,7 +125,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
             controller: defaultController,
             controllerAs: 'vm',
             resolve: {
-                obj: function() {
+                obj: function () {
                     return item;
                 }
             }

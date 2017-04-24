@@ -140,7 +140,7 @@ function BestListController($modal, loading, $stateParams, FindService,
             controller: ruleController,
             controllerAs: 'vm',
             resolve: {
-                obj: function() {
+                obj: function () {
                     return p;
                 }
             }
@@ -234,15 +234,19 @@ function BestListController($modal, loading, $stateParams, FindService,
         } else if (!UserService.getUID()) {
             window.location.href = 'https://passport.36kr.com/pages';
         } else if (UserService.getUID() && hybrid.isInApp) {
-            RongziService.like(id)
-                .then(function(response) {
-                    angular.forEach(vm.prolist, function(o) {
-                        if (o.id === id) {
-                            o.likes = response.data.curCount;
-                            o.liked = true;
-                        }
-                    });
-                });
+            if (id) {
+                interActApp(id);
+            }
+
+            // RongziService.like(id)
+            //     .then(function(response) {
+            //         angular.forEach(vm.prolist, function(o) {
+            //             if (o.id === id) {
+            //                 o.likes = response.data.curCount;
+            //                 o.liked = true;
+            //             }
+            //         });
+            //     });
         }
     }
 
