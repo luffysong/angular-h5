@@ -158,7 +158,49 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
             source: source,
             client: 'H5',
             company_id: company_id
-        }
+        };
         sa.track(event, params);
     };
+
+    function interActApp(id) {
+        if (versionService.getVersionAndroid()) {
+            if (!window.kr36 || !window.kr36.thumbsUp) {
+                return function () {};
+            }else {
+                setTimeout(function () {
+                    var sig = window.kr36.thumbsUp();
+                    if (sig) {
+                        likeWithSig(id, sig);
+                    }
+                }, 100);
+            }
+        } else if (versionService.getVersionIOS()) {
+            if (!window.KrWebViewObject || !window.KrWebViewObject.thumbsUp) {
+                return function () {};
+            } else {
+                setTimeout(function () {
+                    var sig = window.KrWebViewObject.thumbsUp();
+                    if (sig) {
+                        likeWithSig(id, sig);
+                    }
+                }, 100);
+            }
+        }
+    }
+
+    function likeWithSig(id, sig) {
+        var sendata = {
+            sig: sig
+        };
+        RongziService.likeWithSig(id, sendata)
+            .then(function (response) {
+                angular.forEach(vm.prolist, function (o) {
+                    if (o.id === id) {
+                        o.likes = response.data.curCount;
+                        o.liked = true;
+                    }
+                });
+            })
+            .catch(fail);
+    }
 }
