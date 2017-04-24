@@ -292,12 +292,33 @@ function BestListController($modal, loading, $stateParams, FindService,
         });
     }
 
+    function upgrade(item, up) {
+        item = item ? item : {};
+        item.openUrl = vm.openUrl;
+        if (up) {
+            item.upgrade = true;
+        };
+
+        $modal.open({
+            templateUrl: 'templates/rongzi-common/downloadApp.html',
+            windowClass: 'nativeAlert_wrap',
+            controller: defaultController,
+            controllerAs: 'vm',
+            resolve: {
+                obj: function() {
+                    return item;
+                }
+            }
+        });
+    }
+
     defaultController.$inject = ['$modalInstance', 'obj'];
 
     function defaultController($modalInstance, obj) {
 
         var vm = this;
         vm.openUrl = obj.openUrl;
+        vm.upgrade = obj.upgrade;
         vm.cancelModal = cancelModal;
 
         function cancelModal() {
@@ -320,6 +341,7 @@ function BestListController($modal, loading, $stateParams, FindService,
 
         if (isAndroid) {
             if (!window.kr36 || !window.kr36.thumbsUp) {
+                upgrade('', 'upgrade');
                 return function () {};
             }else {
                 setTimeout(function () {
@@ -331,6 +353,7 @@ function BestListController($modal, loading, $stateParams, FindService,
             }
         } else if (isIos) {
             if (!window.KrWebViewObject || !window.KrWebViewObject.thumbsUp) {
+                upgrade('', 'upgrade');
                 return function () {};
             } else {
                 setTimeout(function () {

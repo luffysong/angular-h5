@@ -1,7 +1,11 @@
 <div class="remindAlert_pop">
   <div class="pop-content" style="min-height:130px;">
-        <p style="font-size:14px;">
+        <p style="font-size:14px;" ng-if="!vm.upgrade">
           立即下载或者打开创投助手参与融资季
+        </p>
+
+        <p style="font-size:14px;" ng-if="vm.upgrade">
+          App版本太低，请升级至最新版点赞
         </p>
   </div>
   <div class="pop-bottom">
