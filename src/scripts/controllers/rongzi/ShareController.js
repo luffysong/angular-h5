@@ -160,7 +160,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
         var params = {
             source: source,
             client: 'H5',
-            company_id: company_id
+            company_id: parseInt(company_id)
         };
         sa.track(event, params);
     };
