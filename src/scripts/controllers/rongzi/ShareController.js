@@ -132,6 +132,26 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
         });
     }
 
+    function upgrade(item, up) {
+        item = item ? item : {};
+        item.openUrl = vm.openUrl;
+        if (up) {
+            item.upgrade = true;
+        };
+
+        $modal.open({
+            templateUrl: 'templates/rongzi-common/downloadApp.html',
+            windowClass: 'nativeAlert_wrap',
+            controller: defaultController,
+            controllerAs: 'vm',
+            resolve: {
+                obj: function () {
+                    return item;
+                }
+            }
+        });
+    }
+
     defaultController.$inject = ['$modalInstance', 'obj'];
 
     function defaultController($modalInstance, obj) {
@@ -171,6 +191,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
 
         if (isAndroid) {
             if (!window.kr36 || !window.kr36.thumbsUp) {
+                upgrade('', 'upgrade');
                 return function () {};
             }else {
                 setTimeout(function () {
@@ -182,6 +203,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
             }
         } else if (isIos) {
             if (!window.KrWebViewObject || !window.KrWebViewObject.thumbsUp) {
+                upgrade('', 'upgrade');
                 return function () {};
             } else {
                 setTimeout(function () {
