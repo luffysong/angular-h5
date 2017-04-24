@@ -61,6 +61,7 @@ function DailyNewsController(loading, FindService, ErrorService, hybrid, $timeou
 
     function init() {
         document.title = '媒体热议';
+        loading.show('dailyNewsLoading');
         $('head').append('<meta name="format-detection" content="telephone=no" />');
         if (localStorage.getItem('dailyNewsTime') && localStorage.getItem('dailyNewsTime') !== 'undefined') {
             var nowTime = (new Date()).getTime();
