@@ -15,8 +15,7 @@
     ng-class="{true:'invite-bg-orange',false:'invite-bg-green'}[vm.type === 'orange']" >邀请规则</div>
     <div class="invite-rule">
       <span>我可以获得</span><br/>
-      <span> 1.微信分享活动至朋友圈，邀请一个成功认证投资人用户则获得所有专场提前三天查看权限。</span><br/>
-      <span> 2.邀请两个成功认证投资人用户则获得所有专场永久查看权限</span>
+      <span>微信分享活动至朋友圈，邀请一个成功认证投资人用户则获得所有专场提前三天查看权限。</span><br/>
     </div>
 
     <div class="invite-code">
@@ -37,17 +36,17 @@
       <div class="invite-count" ng-if="vm.inviteCount === 1">
         <p class="invite-color-white">您已成功邀请<span class="invite-num">{{vm.inviteCount}}</span>人，</p>
         <p
-        ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">获得所有专场提前三天查看权限，</p>
+        ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">获得所有专场永久查看权限，</p>
         <p
-        ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">永久权限就差一步！</p>
+        ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">真是羡煞旁人。</p>
       </div>
-      <div class="invite-count" ng-if="vm.inviteCount > 1">
+      <!-- <div class="invite-count" ng-if="vm.inviteCount > 1">
         <p class="invite-color-white">您已成功邀请<span class="invite-num">{{vm.inviteCount}}</span>人，</p>
         <p
         ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">获得所有专场永久查看权限，</p>
         <p
         ng-class="{true:'invite-color-orange',false:'invite-color-green'}[vm.type === 'orange']">真是羡煞旁人。</p>
-      </div>
+      </div> -->
     </div>
 
 <!--ui-sref="rongzi.authInvestor({type:vm.type,inviteCode: vm.inviteCode})"
