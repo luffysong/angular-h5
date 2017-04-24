@@ -181,8 +181,6 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
                 }, 100);
             }
         } else if (isIos) {
-            alert(window.KrWebViewObject);
-            alert(window.KrWebViewObject.thumbsUp());
             if (!window.KrWebViewObject || !window.KrWebViewObject.thumbsUp) {
                 return function () {};
             } else {
@@ -202,12 +200,8 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
         };
         RongziService.likeWithSig(id, sendata)
             .then(function (response) {
-                angular.forEach(vm.prolist, function (o) {
-                    if (o.id === id) {
-                        o.likes = response.data.curCount;
-                        o.liked = true;
-                    }
-                });
+                vm.project.likes = response.data.curCount;
+                vm.project.liked = true;
             })
             .catch(fail);
     }
