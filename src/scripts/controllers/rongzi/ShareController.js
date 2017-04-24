@@ -178,6 +178,8 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
                 }, 100);
             }
         } else if (versionService.getVersionIOS()) {
+            alert(window.KrWebViewObject);
+            alert(window.KrWebViewObject.thumbsUp());
             if (!window.KrWebViewObject || !window.KrWebViewObject.thumbsUp) {
                 return function () {};
             } else {
