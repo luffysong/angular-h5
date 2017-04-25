@@ -325,8 +325,4 @@ function ComDetailController($modal, loading, $stateParams, RongziService, $stat
 				category: vm.category
 		});
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> 0e783d2ee59c364ec754dd5d9c130bb6c9510006
 }
