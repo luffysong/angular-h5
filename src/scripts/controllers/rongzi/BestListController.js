@@ -26,6 +26,7 @@ function BestListController($modal, loading, $stateParams, FindService,
         initWeixin();
         initTitle();
         getTop3();
+        outInitLinkme();
         if (!hybrid.isInApp) {
             outInitLinkme();
             vm.needApp = false;
