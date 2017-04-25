@@ -336,8 +336,8 @@ function BestListController($modal, loading, $stateParams, FindService,
     };
 
     function interActApp(id) {
-        var isAndroid = !!navigator.userAgent.match(/android/ig);
-        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var isAndroid = !!navigator.userAgent.match(/android/ig) || navigator.userAgent.match(/36kr-Tou-Android\/([0-9.]+)/i);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig) || navigator.userAgent.match(/36kr-Tou-iOS\/([0-9.]+)/i);
 
         if (isAndroid) {
             if (!window.kr36 || !window.kr36.thumbsUp) {
