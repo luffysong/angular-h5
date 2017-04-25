@@ -324,8 +324,5 @@ ErrorService, hybrid, baseInfo, pojrectList) {
 				category: vm.category
 		});
 	}
-<<<<<<< HEAD
 
-=======
->>>>>>> fix:前端埋点
 }
