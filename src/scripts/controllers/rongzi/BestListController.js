@@ -277,7 +277,7 @@ function BestListController($modal, loading, $stateParams, FindService,
     }
 
     function defaultModal(item) {
-        item = item ? item : {};
+        item = item === '' ? item : {};
         item.openUrl = vm.openUrl;
         $modal.open({
             templateUrl: 'templates/rongzi-common/downloadApp.html',
@@ -285,7 +285,7 @@ function BestListController($modal, loading, $stateParams, FindService,
             controller: defaultController,
             controllerAs: 'vm',
             resolve: {
-                obj: function() {
+                obj: function () {
                     return item;
                 }
             }
@@ -293,7 +293,7 @@ function BestListController($modal, loading, $stateParams, FindService,
     }
 
     function upgrade(item, up) {
-        item = item ? item : {};
+        item = item === '' ? item : {};
         item.openUrl = vm.openUrl;
         if (up) {
             item.upgrade = true;
@@ -341,7 +341,7 @@ function BestListController($modal, loading, $stateParams, FindService,
 
         if (isAndroid) {
             if (!window.kr36 || !window.kr36.thumbsUp) {
-                upgrade(null, 'upgrade');
+                upgrade('', 'upgrade');
                 return function () {};
             }else {
                 setTimeout(function () {
@@ -353,7 +353,7 @@ function BestListController($modal, loading, $stateParams, FindService,
             }
         } else if (isIos) {
             if (!window.KrWebViewObject || !window.KrWebViewObject.thumbsUp) {
-                upgrade(null, 'upgrade');
+                upgrade('', 'upgrade');
                 return function () {};
             } else {
                 setTimeout(function () {
