@@ -1,21 +1,44 @@
+<a name="1.34.1"></a>
+## [1.34.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.34.0...v1.34.1) (2017-04-25)
+
+
+
 <a name="1.34.0"></a>
-# [1.34.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.33.1...v1.34.0) (2017-04-25)
-
-
-### Bug Fixes
-
-* daily news 加载 ([03d2aa0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/03d2aa0))
-* 修改邀请投资人文案 ([35ec022](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/35ec022))
+# [1.34.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.33.3...v1.34.0) (2017-04-25)
 
 
 ### Features
 
 * 添加下载唤醒埋点 ([71bece7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/71bece7))
 * 添加下载唤醒埋点 ([1f991bf](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1f991bf))
-* 添加下载唤醒埋点 ([72b1f6d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/72b1f6d))
 * 添加下载唤醒按钮埋点 ([c66aab0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/c66aab0))
 * 添加下载唤醒按钮埋点 ([d22c6ee](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d22c6ee))
+
+
+
+<a name="1.33.3"></a>
+## [1.33.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.33.2...v1.33.3) (2017-04-24)
+
+
+### Bug Fixes
+
+* 修改邀请投资人文案 ([35ec022](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/35ec022))
+
+
+### Features
+
+* 添加下载唤醒埋点 ([72b1f6d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/72b1f6d))
 * 添加下载唤醒按钮埋点 ([cf53f69](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cf53f69))
+
+
+
+<a name="1.33.2"></a>
+## [1.33.2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.33.1...v1.33.2) (2017-04-24)
+
+
+### Bug Fixes
+
+* daily news 加载 ([03d2aa0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/03d2aa0))
 
 
 
@@ -25,13 +48,32 @@
 
 
 <a name="1.33.0"></a>
-# [1.33.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.31.3...v1.33.0) (2017-04-21)
+# [1.33.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.32.1...v1.33.0) (2017-04-21)
+
+
+
+<a name="1.32.1"></a>
+## [1.32.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.32.0...v1.32.1) (2017-04-21)
+
+
+### Bug Fixes
+
+* 新闻列表标题显示问题 ([978f73d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/978f73d))
+
+
+### Features
+
+* 添加下载唤醒按钮埋点 ([880559e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/880559e))
+
+
+
+<a name="1.32.0"></a>
+# [1.32.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.31.3...v1.32.0) (2017-04-21)
 
 
 ### Bug Fixes
 
 * 修正详情页显示公司卡片 ([2d58f2b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/2d58f2b))
-* 新闻列表标题显示问题 ([978f73d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/978f73d))
 * 新闻列表滚动到顶部 ([32ca214](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/32ca214))
 * 新闻列表页跳转本地化页面 ([a3c08aa](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a3c08aa))
 * 滚动位置优化 ([d9b9dba](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d9b9dba))
@@ -42,7 +84,6 @@
 ### Features
 
 * 添加下载唤醒埋点 ([bcf6eae](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/bcf6eae))
-* 添加下载唤醒按钮埋点 ([880559e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/880559e))
 * 添加抓取新闻详情页面 ([79f73ab](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/79f73ab))
 * 添加抓取结果详情页 ([fddb787](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/fddb787))
 
