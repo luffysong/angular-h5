@@ -318,7 +318,11 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
             source: source,
             client: 'H5',
             season_set_id: season_set_id
+<<<<<<< HEAD
         };
+=======
+        }
+>>>>>>> 0e783d2ee59c364ec754dd5d9c130bb6c9510006
         sa.track(event, params);
     };
 
@@ -339,4 +343,8 @@ function InvestorInfoController(loading, $scope, $modal, $stateParams, RongziSer
   				category: vm.category
   		});
   	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0e783d2ee59c364ec754dd5d9c130bb6c9510006
 }

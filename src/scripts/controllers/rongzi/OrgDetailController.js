@@ -336,4 +336,5 @@ function OrgDetailController($modal, loading, $stateParams, RongziService, $stat
         };
         sa.track(event, params);
     }
+
 }
