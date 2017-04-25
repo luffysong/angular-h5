@@ -74,6 +74,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
             window.location.href = 'https://passport.36kr.com/pages';
         } else if (UserService.getUID() && hybrid.isInApp) {
             if (id) {
+                alert(id);
                 interActApp(id);
             }
 
@@ -189,7 +190,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
     function interActApp(id) {
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
-
+        alert(isIos);
         if (isAndroid) {
             if (!window.kr36 || !window.kr36.thumbsUp) {
                 upgrade(null, 'upgrade');
