@@ -203,9 +203,11 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
                 }, 100);
             }
         } else if (isIos) {
+            alert(window.KrWebViewObject);
             if (!window.KrWebViewObject || !window.KrWebViewObject.thumbsUp) {
+              alert('00');
                 upgrade(null, 'upgrade');
-                return function () {};
+                return;
             } else {
                 setTimeout(function () {
                     var sig = window.KrWebViewObject.thumbsUp();
