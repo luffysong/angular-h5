@@ -190,6 +190,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
     function interActApp(id) {
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        alert(navigator.userAgent);
         alert(isIos);
         if (isAndroid) {
             if (!window.kr36 || !window.kr36.thumbsUp) {
