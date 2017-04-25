@@ -156,7 +156,7 @@ function ComLikeController($document, $timeout, $scope, $modal, loading, $stateP
             client:client,
         });
 
-        $state.go('rongzi.orgdetail', {
+        $state.go('rongzi.comdetail', {
             category: category,
             id: id,
             name: name
