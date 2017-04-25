@@ -133,7 +133,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
     }
 
     function upgrade(item, up) {
-        item = item === '' ? item : {};
+        item = item ? item : {};
         item.openUrl = vm.openUrl;
         if (up) {
             item.upgrade = true;
@@ -158,6 +158,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
 
         var vm = this;
         vm.openUrl = obj.openUrl;
+        vm.upgrade = obj.upgrade;
         vm.cancelModal = cancelModal;
 
         function cancelModal() {
@@ -191,7 +192,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
 
         if (isAndroid) {
             if (!window.kr36 || !window.kr36.thumbsUp) {
-                upgrade('', 'upgrade');
+                upgrade(null, 'upgrade');
                 return function () {};
             }else {
                 setTimeout(function () {
@@ -203,7 +204,7 @@ function ShareController($modal, loading, $stateParams, RongziService, $state, U
             }
         } else if (isIos) {
             if (!window.KrWebViewObject || !window.KrWebViewObject.thumbsUp) {
-                upgrade('', 'upgrade');
+                upgrade(null, 'upgrade');
                 return function () {};
             } else {
                 setTimeout(function () {
