@@ -2,12 +2,16 @@ var  angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('NewsDetailController', NewsDetailController);
 
-function NewsDetailController(FindService, ErrorService, loading, $stateParams) {
+function NewsDetailController(FindService, ErrorService, loading, $stateParams, hybrid) {
     var vm = this;
     vm.news = {
         id: $stateParams.id || 0,
         data: {}
     };
+
+    if($stateParams.ccid) {
+        hybrid.open('addBottomViewInWeb/' + $stateParams.ccid);
+    }
 
     FindService.getNewsDetail(vm.news.id).then(function (data) {
         loading.hide('newsDetailLoading');
