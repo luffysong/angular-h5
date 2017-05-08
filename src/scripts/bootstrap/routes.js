@@ -432,14 +432,14 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
     $stateProvider.state('bangdan.orgbdDetail', {
         url: '/orgbddetail',
         controllerAs: 'vm',
-        controller: 'BandanOrgDetailController',
+        controller: 'BangdanOrgDetailController',
         templateUrl: 'templates/bangdan/bdorgdetail.html',
     });
 
     $stateProvider.state('bangdan.bdshare', {
         url: '/bdshare',
         controllerAs: 'vm',
-        controller: 'BandanShareDetailController',
+        controller: 'BangdanShareDetailController',
         templateUrl: 'templates/bangdan/bdshare.html',
     });
 
