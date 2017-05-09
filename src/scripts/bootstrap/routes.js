@@ -434,9 +434,9 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controllerAs: 'vm',
         controller: 'BangdanOrgDetailController',
         templateUrl: 'templates/bangdan/bdorgdetail.html',
-        // resolve: {
-        //     orgInfo: getBangdanOrgInfo,
-        // }
+        resolve: {
+            orgInfo: getBangdanOrgInfo,
+        }
     });
 
     $stateProvider.state('bangdan.bdshare', {
@@ -706,7 +706,7 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
     }
 
     function getBangdanOrgInfo(BangDanService, $stateParams) {
-        return BangDanService.getOrgRank($stateParams.id);
+        return BangDanService.getSingleOrgInfo($stateParams.id);
     }
 
 });

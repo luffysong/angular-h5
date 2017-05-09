@@ -2,28 +2,28 @@
     <section class="bd-orgdetail-head bd-detail-bgp">
             <div class="bd-orgdetail-logo">
                 <div class="bd-orgdetail-img">
-                    <img src="https://krplus-pic.b0.upaiyun.com/com_logo_v3/logo_1531.jpg" />
+                    <img ng-src="{{vm.orgInfo.logo}}" />
                 </div>
                 <div class="bd-belt bd-gold-belt">
                 </div>
-                <span>红杉资本</span>
+                <span>{{vm.orgInfo.name}}</span>
             </div>
             <div class="bd-orgdetail-rank">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>第一名</span><span>/本季度</span>
             </div>
             <div class="bd-orgdetail-sta">
                     <div class="bd-sta">
-                        <div class="num">28</div>
+                        <div class="num">{{vm.orgInfo.projectCount}}</div>
                         <div class="txt">机构项目数</div>
                     </div>
                     <div class="split-line"></div>
                     <div class="bd-sta">
-                        <div class="num">687</div>
+                        <div class="num">{{vm.orgInfo.interviewCount}}</div>
                         <div class="txt">Q2总约谈数</div>
                     </div>
                     <div class="split-line"></div>
                     <div class="bd-sta">
-                        <div class="num">3528</div>
+                        <div class="num">{{vm.orgInfo.accessCount}}</div>
                         <div class="txt">Q2总浏览数</div>
                     </div>
             </div>
@@ -33,73 +33,48 @@
                 </div>
                 <div class="push-right" ng-click="vm.joinpro()">
                         <div>转发支持</div>
-                        <div>已有5000人转发</div>
+                        <div>已有{{vm.orgInfo.forwardCount}}人转发</div>
                 </div>
             </div>
     </section>
     <section class="bd-orgdetail-content">
-        <ul>
-            <li>
+        <ul infinite-scroll='' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+            <li ng-if="vm.prolist" ng-repeat="item in vm.prolist track  by $index">
                 <div class="icon-left">
-                    <div class="metal bd-gold-metal">
+                    <div class="metal bd-gold-metal" ng-if="$index === 0" >
+                    </div>
+
+                    <div class="metal bd-silver-metal" ng-if="$index === 1">
+                    </div>
+
+                    <div class="metal bd-copper-metal" ng-if="$index === 2">
+                    </div>
+                    <div class="metal " ng-if="$index > 2">
+                        <span>{{$index + 1}}</span>
                     </div>
                 </div>
-                <div class="txt-right">
+                <div class="txt-right" ng-click="vm.goProDetail(item.ccid)">
                     <div class="left-logo">
-                        <div class="logo-outer bd-gold-border">
-                            <img src='https://krplus-pic.b0.upaiyun.com/com_logo_v3/logo_off_161770.jpg' />
+                        <div class="logo-outer bd-gold-border" >
+                            <img ng-src='{{item.logo}}' />
                         </div>
                     </div>
                     <div class="txt-middle">
                         <div class="bd-txt-title">
-                                膜拜单车
+                                {{item.name}}
                         </div>
                         <div class="bd-txt-brief">
-                            无妆只能共享平抬
+                            {{item.brief}}
                         </div>
                         <div class="bd-txt-phase">
-                            <span>C轮</span>
+                            <span>{{item.phase}}</span>
                             <span class="bd-dot bd-dot-gray"></span>
-                            <span>汽车交通</span>
+                            <span>{{item.industry}}</span>
                         </div>
                     </div>
                     <div class="sta-right">
                             <div class="sta-num">
-                                    93
-                            </div>
-                            <div class="sta-txt">
-                                    约谈量
-                            </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="icon-left">
-                    <div class="metal bd-silver-metal">
-                    </div>
-                </div>
-                <div class="txt-right">
-                    <div class="left-logo">
-                        <div class="logo-outer bd-silver-border">
-                            <img src='https://krplus-pic.b0.upaiyun.com/201511/18/9a2ec45be2f14168a81bf3464211604b.jpg' />
-                        </div>
-                    </div>
-                    <div class="txt-middle">
-                        <div class="bd-txt-title">
-                                膜拜单车
-                        </div>
-                        <div class="bd-txt-brief">
-                            无妆只能共享平抬
-                        </div>
-                        <div class="bd-txt-phase">
-                            <span>C轮</span>
-                            <span class="bd-dot bd-dot-gray"></span>
-                            <span>汽车交通</span>
-                        </div>
-                    </div>
-                    <div class="sta-right">
-                            <div class="sta-num">
-                                    256
+                                    {{item.accessCount}}
                             </div>
                             <div class="sta-txt">
                                     约谈量
@@ -108,75 +83,9 @@
                 </div>
             </li>
 
-            <li>
-                <div class="icon-left">
-                    <div class="metal bd-copper-metal">
-                    </div>
-                </div>
-                <div class="txt-right">
-                    <div class="left-logo">
-                        <div class="logo-outer bd-copper-border">
-                            <img src='https://krplus-pic.b0.upaiyun.com/201511/18/9a2ec45be2f14168a81bf3464211604b.jpg' />
-                        </div>
-                    </div>
-                    <div class="txt-middle">
-                        <div class="bd-txt-title">
-                                膜拜单车
-                        </div>
-                        <div class="bd-txt-brief">
-                            无妆只能共享平抬
-                        </div>
-                        <div class="bd-txt-phase">
-                            <span>C轮</span>
-                            <span class="bd-dot bd-dot-gray"></span>
-                            <span>汽车交通</span>
-                        </div>
-                    </div>
-                    <div class="sta-right">
-                            <div class="sta-num">
-                                    256
-                            </div>
-                            <div class="sta-txt">
-                                    约谈量
-                            </div>
-                    </div>
-                </div>
-            </li>
-
-            <li>
-                <div class="icon-left">
-                    <div class="metal">
-                        <span>5</span>
-                    </div>
-                </div>
-                <div class="txt-right">
-                    <div class="left-logo">
-                        <div class="logo-outer bd-gold-border">
-                            <img src='https://krplus-pic.b0.upaiyun.com/201511/18/9a2ec45be2f14168a81bf3464211604b.jpg' />
-                        </div>
-                    </div>
-                    <div class="txt-middle">
-                        <div class="bd-txt-title">
-                                膜拜单车
-                        </div>
-                        <div class="bd-txt-brief">
-                            无妆只能共享平抬
-                        </div>
-                        <div class="bd-txt-phase">
-                            汽车交通
-                        </div>
-                    </div>
-                    <div class="sta-right">
-                            <div class="sta-num">
-                                    256
-                            </div>
-                            <div class="sta-txt">
-                                    约谈量
-                            </div>
-                    </div>
-                </div>
-            </li>
         </ul>
+        <footer ng-if="vm.busy && !vm.finish &&  vm.page">正在加载更多...</footer>
+        <footer ng-if="vm.finish">已无更多数据</footer>
     </section>
 
     <footer>
