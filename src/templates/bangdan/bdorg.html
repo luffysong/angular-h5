@@ -4,181 +4,35 @@
       * 按本季度截止今日，各机构项目被约谈总量排序，每日更新
     </div>
   </div>
-  <div class="orgbd-list">
-    <div class="org-item">
+  <div class="orgbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+    <div class="org-item" ng-repeat="item in vm.list track by $index">
       <div class="org-number">
-        <img src="/styles/images/bangdan/top1.png">
+        <img src="/styles/images/bangdan/top1.png" ng-if="$index === 0">
+        <img src="/styles/images/bangdan/top2.png" ng-if="$index === 1">
+        <img src="/styles/images/bangdan/top3.png" ng-if="$index === 2">
+        <span ng-if="$index > 2">{{$index + 1}}</span>
+        <div class="up-arrow" ng-if="item.rise > 0"></div>
+        <div class="down-arrow" ng-if="item.rise < 0"></div>
+        <div class="number-change" ng-if="item.rise != 0">{{vm.rise}}</div>
       </div>
       <div class="org-info">
-        <div class="org-logo top1-logo" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05092912/hmk2hd28ra787pzh.png)"></div>
+        <div class="org-logo top1-logo" ng-if="$index === 0" style="background-image: url({{item.logo}})"></div>
+        <div class="org-logo top2-logo" ng-if="$index === 1" style="background-image: url({{item.logo}})"></div>
+        <div class="org-logo top3-logo" ng-if="$index === 2" style="background-image: url({{item.logo}})"></div>
+        <div class="org-logo" ng-if="$index > 2" style="background-image: url({{item.logo}})"></div>
         <div class="org-name">
-          <div class="top3-color">红杉资本</div>
-          <div>浏览量 <span>11768</span></div>
+          <div class="top3-color">{{item.name}}</div>
+          <div>浏览量 <span>{{item.accessCount}}</span></div>
         </div>
         <div class="interview-num">
-          <div class="top3-color">1647</div>
-          <div>约谈量</div>
-        </div>
-      </div>
-    </div>
-    <div class="org-item">
-      <div class="org-number">
-        <img src="/styles/images/bangdan/top2.png">
-      </div>
-      <div class="org-info">
-        <div class="org-logo top2-logo" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05092912/hmk2hd28ra787pzh.png)"></div>
-        <div class="org-name">
-          <div class="top3-color">红杉资本</div>
-          <div>浏览量 <span>11768</span></div>
-        </div>
-        <div class="interview-num">
-          <div class="top3-color">1647</div>
-          <div>约谈量</div>
-        </div>
-      </div>
-    </div>
-    <div class="org-item">
-      <div class="org-number">
-        <img src="/styles/images/bangdan/top3.png">
-      </div>
-      <div class="org-info">
-        <div class="org-logo top3-logo" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05092912/hmk2hd28ra787pzh.png)"></div>
-        <div class="org-name">
-          <div class="top3-color">红杉资本</div>
-          <div>浏览量 <span>11768</span></div>
-        </div>
-        <div class="interview-num">
-          <div class="top3-color">1647</div>
-          <div>约谈量</div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="org-item">
-      <div class="org-number">4</div>
-      <div class="org-info">
-        <div class="org-logo" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05092912/hmk2hd28ra787pzh.png)"></div>
-        <div class="org-name">
-          <div>红杉资本</div>
-          <div>浏览量 <span>11768</span></div>
-        </div>
-        <div class="interview-num">
-          <div>1647</div>
-          <div>约谈量</div>
-        </div>
-      </div>
-    </div>
-    <div class="org-item">
-      <div class="org-number">
-        <span>5</span>
-        <div class="up-arrow"></div>
-        <div class="number-change">1</div>
-      </div>
-      <div class="org-info">
-        <div class="org-logo" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05092912/hmk2hd28ra787pzh.png)"></div>
-        <div class="org-name">
-          <div>红杉资本</div>
-          <div>浏览量 <span>11768</span></div>
-        </div>
-        <div class="interview-num">
-          <div>1647</div>
-          <div>约谈量</div>
-        </div>
-      </div>
-    </div>
-    <div class="org-item">
-      <div class="org-number">
-        <span>6</span>
-        <div class="down-arrow"></div>
-        <div class="number-change">2</div>
-      </div>
-      <div class="org-info">
-        <div class="org-logo" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05092912/hmk2hd28ra787pzh.png)"></div>
-        <div class="org-name">
-          <div>红杉资本</div>
-          <div>浏览量 <span>11768</span></div>
-        </div>
-        <div class="interview-num">
-          <div>1647</div>
-          <div>约谈量</div>
-        </div>
-      </div>
-    </div>
-    <div class="org-item">
-      <div class="org-number">
-        <span>6</span>
-        <div class="down-arrow"></div>
-        <div class="number-change">2</div>
-      </div>
-      <div class="org-info">
-        <div class="org-logo" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05092912/hmk2hd28ra787pzh.png)"></div>
-        <div class="org-name">
-          <div>红杉资本</div>
-          <div>浏览量 <span>11768</span></div>
-        </div>
-        <div class="interview-num">
-          <div>1647</div>
-          <div>约谈量</div>
-        </div>
-      </div>
-    </div>
-    <div class="org-item">
-      <div class="org-number">
-        <span>6</span>
-        <div class="down-arrow"></div>
-        <div class="number-change">2</div>
-      </div>
-      <div class="org-info">
-        <div class="org-logo" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05092912/hmk2hd28ra787pzh.png)"></div>
-        <div class="org-name">
-          <div>红杉资本</div>
-          <div>浏览量 <span>11768</span></div>
-        </div>
-        <div class="interview-num">
-          <div>1647</div>
-          <div>约谈量</div>
-        </div>
-      </div>
-    </div>
-    <div class="org-item">
-      <div class="org-number">
-        <span>6</span>
-        <div class="down-arrow"></div>
-        <div class="number-change">2</div>
-      </div>
-      <div class="org-info">
-        <div class="org-logo" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05092912/hmk2hd28ra787pzh.png)"></div>
-        <div class="org-name">
-          <div>红杉资本</div>
-          <div>浏览量 <span>11768</span></div>
-        </div>
-        <div class="interview-num">
-          <div>1647</div>
-          <div>约谈量</div>
-        </div>
-      </div>
-    </div>
-    <div class="org-item">
-      <div class="org-number">
-        <span>6</span>
-        <div class="down-arrow"></div>
-        <div class="number-change">2</div>
-      </div>
-      <div class="org-info">
-        <div class="org-logo" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05092912/hmk2hd28ra787pzh.png)"></div>
-        <div class="org-name">
-          <div>红杉资本</div>
-          <div>浏览量 <span>11768</span></div>
-        </div>
-        <div class="interview-num">
-          <div>1647</div>
+          <div class="top3-color">{{item.interviewCount}}</div>
           <div>约谈量</div>
         </div>
       </div>
     </div>
   </div>
-
+  <footer ng-if="vm.busy && !vm.finish && vm.page">正在加载更多...</footer>
+  <footer ng-if="vm.finish">全部内容加载完毕</footer>
   <div class="orgbd-footer">
     <div>
       <span>榜上无名，30秒入驻</span>
