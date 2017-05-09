@@ -430,10 +430,13 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
     });
 
     $stateProvider.state('bangdan.orgbdDetail', {
-        url: '/orgbddetail',
+        url: '/orgbddetail?id',
         controllerAs: 'vm',
         controller: 'BangdanOrgDetailController',
         templateUrl: 'templates/bangdan/bdorgdetail.html',
+        // resolve: {
+        //     orgInfo: getBangdanOrgInfo,
+        // }
     });
 
     $stateProvider.state('bangdan.bdshare', {
@@ -700,6 +703,10 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         return RongziService.getInvestor({
             category: parseInt($stateParams.category)
         });
+    }
+
+    function getBangdanOrgInfo(BangDanService, $stateParams) {
+        return BangDanService.getOrgRank($stateParams.id);
     }
 
 });
