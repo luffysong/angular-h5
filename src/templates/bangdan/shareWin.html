@@ -1,11 +1,22 @@
 <div class="nativeAlert_pop">
     <div class="bd-share-logo">
-        <div class="bd-share-img">
+        <div class="bd-share-img bd-gold-border" ng-if="vm.orgInfo.rank === 1">
             <img ng-src="{{vm.orgInfo.logo}}" />
         </div>
-        <div class="bd-belt bd-gold-belt" ng-if="vm.orgInfo.rank === '1'"></div>
-        <div class="bd-belt bd-cilver-belt" ng-if="vm.orgInfo.rank === '2'"></div>
-        <div class="bd-belt bd-copper-belt" ng-if="vm.orgInfo.rank === '3'"></div>
+        <div class="bd-share-img bd-silver-border" ng-if="vm.orgInfo.rank === 2">
+            <img ng-src="{{vm.orgInfo.logo}}" />
+        </div>
+
+        <div class="bd-share-img bd-copper-border" ng-if="vm.orgInfo.rank === 3">
+            <img ng-src="{{vm.orgInfo.logo}}" />
+        </div>
+        <div class="bd-share-img bd-normal-border" ng-if="vm.orgInfo.rank > 3">
+            <img ng-src="{{vm.orgInfo.logo}}" />
+        </div>
+
+        <div class="bd-belt bd-gold-belt" ng-if="vm.orgInfo.rank === 1"></div>
+        <div class="bd-belt bd-cilver-belt" ng-if="vm.orgInfo.rank === 2"></div>
+        <div class="bd-belt bd-copper-belt" ng-if="vm.orgInfo.rank === 3"></div>
         <div class="bd-belt " ng-if="vm.orgInfo.rank >3"></div>
         <span>{{vm.orgInfo.name}}</span>
     </div>
@@ -23,7 +34,7 @@
     </div>
     <div class="bd-share-promote">
         <div class="center-div">
-            我是红杉资本家族成员为Ta站台
+            我是{{vm.orgInfo.name}}家族成员为Ta站台
         </div>
     </div>
     <div class="bd-share-app">

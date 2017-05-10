@@ -20,9 +20,13 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     function init() {
         vm.orgInfo = orgInfo.data;
         initTitle(vm.orgInfo.name);
-        initWeixin();
         getProList();
         getQ();
+        var HOST = location.host;
+        var shareUrl =
+        '//' + HOST + '/#/m/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
+        initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.rank, shareUrl);
+        console.log(window.location.href, shareUrl);
     }
 
     function getQ() {
@@ -69,18 +73,17 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                 hybrid.open('crmCompany/' + ccid);
             }else {
                 var HOST = location.host;
-                window.location.href = 'https://' + HOST + '/m/company.html?cid=' + ccid + '';
+                window.location.href = '//' + HOST + '/m/company.html?cid=' + ccid + '';
             }
         }
     }
 
-    function initWeixin(name) {
+    function initWeixin(name, count, q, rank, url) {
         window.WEIXINSHARE = {
-            shareTitle: vm.orgInfo.name + '[机构]排名第' + vm.rank + '|2017' + + '风口机构排行榜',
-            shareUrl: window.location.href,
-            krtou: 'weChatShare/' + $stateParams.id,
+            shareTitle: name + '[机构]排名第' + rank + '|2017' + q + '风口机构排行榜',
+            shareUrl: url,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: vm.orgInfo.name + '[机构]' + vm.orgInfo.projectCount + '个投资项目都在这里',
+            shareDesc: name + '[机构]' + count + '个投资项目都在这里',
         };
 
         var obj = {};
@@ -93,7 +96,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
 
     function joinpro() {
         var item = orgInfo.data;
-        item.rank = vm.rank;
+        item.rank = parseInt(vm.rank);
         item.currQuarter = vm.currQuarter;
         $modal.open({
                 templateUrl: 'templates/bangdan/shareWin.html',
@@ -109,12 +112,16 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     }
 
     function shareWechat(p) {
-        if (p === 'f') {
-            if (hybrid.isInApp) {
-                hybrid.open('weChatShare/' + $stateParams.id);
+        if (hybrid.isInApp) {
+            if (p === 'f') {
+                hybrid.open('weChatShareMoments');
+            }else {
+                hybrid.open('weChatShareFriend');
             }
-        }else {
-            hybrid.open('weChatShare/' + $stateParams.id);
+
+            $timeout(function () {
+                window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
+            }, 2000);
         }
     }
 
