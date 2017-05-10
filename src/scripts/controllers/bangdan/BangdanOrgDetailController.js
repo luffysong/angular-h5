@@ -72,7 +72,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                 hybrid.open('crmCompany/' + ccid);
             }else {
                 var HOST = location.host;
-                window.location.href = 'https://' + HOST + '/m/company.html?cid=' + ccid + '';
+                window.location.href = 'https://' + HOST + '/m/company.html?ccid=' + ccid + '';
             }
         }
     }
