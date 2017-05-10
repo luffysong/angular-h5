@@ -13,7 +13,7 @@
         <span ng-if="$index > 2">{{$index + 1}}</span>
         <div class="up-arrow" ng-if="item.rise > 0"></div>
         <div class="down-arrow" ng-if="item.rise < 0"></div>
-        <div class="number-change" ng-if="item.rise != 0">{{vm.rise}}</div>
+        <div class="number-change" ng-if="item.rise != 0">{{abs(item.rise)}}</div>
       </div>
       <div class="org-info">
         <div class="org-logo top1-logo" ng-if="$index === 0" style="background-image: url({{item.logo}})"></div>

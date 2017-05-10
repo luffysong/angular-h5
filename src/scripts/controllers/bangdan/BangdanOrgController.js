@@ -47,11 +47,14 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     }
 
     function displayMore() {
-        console.log(1111111);
         getOrgRank();
     }
 
     function fail(err) {
         ErrorService.alert(err.err.msg);
     }
+
+    $scope.abs = function (number) {
+        return Math.abs(number);
+    };
 }

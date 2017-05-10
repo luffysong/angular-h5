@@ -119,7 +119,6 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         vm.cancelModal = cancelModal;
         vm.shareWechat = shareWechat;
         vm.orgInfo = obj;
-        console.log('==', vm.orgInfo);
 
         function cancelModal() {
             $modalInstance.dismiss();
