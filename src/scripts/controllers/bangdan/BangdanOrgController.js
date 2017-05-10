@@ -49,4 +49,8 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     function fail(err) {
         ErrorService.alert(err.err.msg);
     }
+
+    $scope.abs = function(number) {
+        return Math.abs(number);
+    };
 }
