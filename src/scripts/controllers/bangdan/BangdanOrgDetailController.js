@@ -11,14 +11,25 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     vm.prolist = [];
     vm.more = false;
     vm.goProDetail = goProDetail;
+    vm.displayMore = displayMore;
+    vm.rank = $stateParams.rank;
+    vm.shareWechat = shareWechat;
 
     init();
 
     function init() {
         vm.orgInfo = orgInfo.data;
         initTitle(vm.orgInfo.name);
-        //initWeixin();
+        initWeixin();
         getProList();
+        getQ();
+    }
+
+    function getQ() {
+        var myDate = new Date();
+        var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
+        var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
+        vm.currQuarter = currQuarter;
     }
 
     function getProList() {
@@ -48,6 +59,10 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         .catch(fail);
     }
 
+    function displayMore() {
+        getProList();
+    }
+
     function goProDetail(ccid) {
         if (ccid) {
             if (hybrid.isInApp) {
@@ -61,11 +76,11 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
 
     function initWeixin(name) {
         window.WEIXINSHARE = {
-            shareTitle: '【创投助手·融资季】明星投资人' + name + '独家项目集，等你来掐尖儿。',
+            shareTitle: vm.orgInfo.name + '[机构]排名第' + vm.rank + '|2017' + + '风口机构排行榜',
             shareUrl: window.location.href,
             krtou: 'weChatShare/' + $stateParams.id,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: '明星携被投项目加入，每周二、三更新两场。',
+            shareDesc: vm.orgInfo.name + '[机构]' + vm.orgInfo.projectCount + '个投资项目都在这里',
         };
 
         var obj = {};
@@ -76,8 +91,10 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         document.title = t;
     }
 
-    function joinpro(item) {
-        item = item ? item : {};
+    function joinpro() {
+        var item = orgInfo.data;
+        item.rank = vm.rank;
+        item.currQuarter = vm.currQuarter;
         $modal.open({
                 templateUrl: 'templates/bangdan/shareWin.html',
                 windowClass: 'bd-nativeAlert_wrap',
@@ -91,12 +108,23 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
             });
     }
 
+    function shareWechat(p) {
+        if (p === 'f') {
+            if (hybrid.isInApp) {
+                hybrid.open('weChatShare/' + $stateParams.id);
+            }
+        }else {
+            hybrid.open('weChatShare/' + $stateParams.id);
+        }
+    }
+
     defaultController.$inject = ['$modalInstance', 'obj'];
 
     function defaultController($modalInstance, obj) {
 
         var vm = this;
         vm.cancelModal = cancelModal;
+        vm.orgInfo = obj;
 
         function cancelModal() {
             $modalInstance.dismiss();

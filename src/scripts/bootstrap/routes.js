@@ -430,7 +430,7 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
     });
 
     $stateProvider.state('bangdan.orgbdDetail', {
-        url: '/orgbddetail?id',
+        url: '/orgbddetail?id{rank}',
         controllerAs: 'vm',
         controller: 'BangdanOrgDetailController',
         templateUrl: 'templates/bangdan/bdorgdetail.html',

@@ -1,16 +1,19 @@
 <div class="nativeAlert_pop">
     <div class="bd-share-logo">
         <div class="bd-share-img">
-            <img src="https://krplus-pic.b0.upaiyun.com/com_logo_v3/logo_1531.jpg" />
+            <img ng-src="{{vm.orgInfo.logo}}" />
         </div>
-        <div class="bd-belt bd-gold-belt"></div>
-        <span>红杉资本</span>
+        <div class="bd-belt bd-gold-belt" ng-if="vm.orgInfo.rank === '1'"></div>
+        <div class="bd-belt bd-cilver-belt" ng-if="vm.orgInfo.rank === '2'"></div>
+        <div class="bd-belt bd-copper-belt" ng-if="vm.orgInfo.rank === '3'"></div>
+        <div class="bd-belt " ng-if="vm.orgInfo.rank >3"></div>
+        <span>{{vm.orgInfo.name}}</span>
     </div>
     <div class="bd-share-rank">
         <div class="rank-num">
                 <span class="h-line">-</span>
                 <span class="txt">第</span>
-                <span class="num"><b>1</b></span>
+                <span class="num"><b>{{vm.orgInfo.rank}}</b></span>
                 <span class="txt">名</span>
                 <span class="h-line">-</span>
         </div>
@@ -24,13 +27,13 @@
         </div>
     </div>
     <div class="bd-share-app">
-            <div class="share-app bd-share-wechat"></div>
+            <div class="share-app bd-share-wechat" ng-click="vm.shareWechat()"></div>
             <div class="split-block"> </div>
-            <div class="share-app bd-share-webo"></div>
+            <div class="share-app bd-share-webo" ng-click="vm.shareWechat('f')"></div>
     </div>
 
     <div class="bd-share-txt">
-        <span>2017Q2</span>
+        <span>2017Q{{vm.orgInfo.currQuarter}}</span>
         <span class="bd-dot bd-dot-yel"></span>
         <span>风口机构排行榜</span>
     </div>
