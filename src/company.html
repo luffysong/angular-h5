@@ -161,8 +161,14 @@
     function initLinkme() {
         var krdata = {};
         krdata.type =  'live';
-        krdata.params =
-        '{"openlink":"https://' + HOST + '/m/company.html?cid='+cid+'","krtou":"krtou://company/'+cid+'"  }';
+        if (cid) {
+            krdata.params =
+            '{"openlink":"https://' + HOST + '/m/company.html?cid='+cid+'","krtou":"krtou://company/'+cid+'"  }';
+        }
+        if(ccid){
+            krdata.params =
+            '{"openlink":"https://' + HOST + '/m/company.html?ccid='+ccid+'","krtou":"krtou://company/'+ccid+'"  }';
+        }
 
         window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
         { type: 'live' }, function (err, res) {
