@@ -1,26 +1,66 @@
 .find-news-detail {
     .find-news-title {
-        font-size: 16px;
+        font-size: 20px;
         margin: 30px 15px 14px;
-        color: #000;
-        line-height: 22px;
+        line-height: 28px;
+        color: #222c38;
     }
 
     .find-news-info {
-        display: flex;
+        //display: flex;
         justify-content: space-between;
-        margin: 16px 15px 15px;
-        font-size: 12px;
+        margin: 20px 15px;
+        font-size: 13px;
+        line-height: 18px;
+        .find-news-info-source {
+            color: #5A626D;
+            margin-right: 6px;
+        }
+        .find-news-info-time {
+            color: #969FA9;
+        }
+        .find-news-info-invest{
+            color: #5A626D;
+            position: relative;
+            padding-left: 10px;
+            line-height: 18px;
+            height: 18px;
+        }
+        .find-news-info-invest:before {
+            position: absolute;
+            top: 3px;
+            bottom: 3px;
+            left: 0;
+            width: 4px;
+            height:13px;
+            background: #5A626D;
+            display: block;
+            content: '';
+        }
+        .find-news-info-invest-con {
+            font-size: 16px;
+            color: #222C38;
+            line-height: 22px;
+            padding-left: 10px;
+        }
     }
 
-    .find-news-source {
-        margin: 15px;
-        font-size: 12px;
-        word-break: break-all;
+    .source-margin {
+        margin: 20px 15px 25px;
+    }
+
+    .find-news-info-line {
+        background: #E7E7E7;
+        width: 60px;
+        height: 2px;
+        margin: 20px 15px 30px;
     }
 
     .find-news-content {
         padding: 0 15px;
+        font-size: 17px;
+        color: #222C38;
+        line-height: 26px;
     }
 
     font-family: 'PingFang SC', 'Lantinghei SC','Helvetica Neue', 'Helvetica',  'Arial','Microsoft YaHei','微软雅黑','STHeitiSC-Light','simsun','宋体' ,'WenQuanYi Zen Hei','WenQuanYi Micro Hei','sans-serif';
