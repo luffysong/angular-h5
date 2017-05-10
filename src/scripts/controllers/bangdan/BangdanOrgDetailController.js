@@ -11,6 +11,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     vm.prolist = [];
     vm.more = false;
     vm.goProDetail = goProDetail;
+    vm.rank = $stateParams.rank;
 
     init();
 
