@@ -17,8 +17,13 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
 
     function getSingleOrgInfo(id) {
         BangDanService.getSingleOrgInfo(id)
-            .then(function(response) {
+            .then(function (response) {
                 vm.data = response.data;
+                initTitle(vm.data.name);
             });
+    }
+
+    function initTitle(t) {
+        document.title = t;
     }
 }
