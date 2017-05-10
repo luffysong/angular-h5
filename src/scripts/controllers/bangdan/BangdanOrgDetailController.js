@@ -23,9 +23,8 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         getQ();
         var HOST = location.host;
         var shareUrl =
-        '//' + HOST + '/#/m/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
+        'https://' + HOST + '/#/m/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
         initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.rank, shareUrl);
-        console.log(window.location.href, shareUrl);
     }
 
     function getQ() {
@@ -72,7 +71,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                 hybrid.open('crmCompany/' + ccid);
             }else {
                 var HOST = location.host;
-                window.location.href = '//' + HOST + '/m/company.html?cid=' + ccid + '';
+                window.location.href = 'https://' + HOST + '/m/company.html?cid=' + ccid + '';
             }
         }
     }
@@ -120,12 +119,14 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         vm.cancelModal = cancelModal;
         vm.shareWechat = shareWechat;
         vm.orgInfo = obj;
+        console.log('==', vm.orgInfo);
 
         function cancelModal() {
             $modalInstance.dismiss();
         }
 
         function shareWechat(p) {
+            forwardCount();
             if (hybrid.isInApp) {
                 if (p === 'f') {
                     hybrid.open('weChatShareMoments');
@@ -137,6 +138,13 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                     window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
                 }, 2000);
             }
+        }
+
+        function forwardCount() {
+            BangDanService.forwardCount(vm.orgInfo.orgId)
+            .then(function setdata(response) {
+            })
+            .catch(fail);
         }
     }
 

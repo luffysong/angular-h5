@@ -21,6 +21,6 @@ angular.module('defaultApp.service').service('BangDanService', function(BasicSer
 
     //转发次数
     this.forwardCount = function (id) {
-        return $http.get(BASE_URL + '/org/' + id + '/forwardCount');
+        return $http.put(BASE_URL + '/org/' + id + '/forwardCount');
     };
 });
