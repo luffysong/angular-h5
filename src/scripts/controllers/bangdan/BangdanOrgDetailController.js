@@ -13,7 +13,6 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     vm.goProDetail = goProDetail;
     vm.displayMore = displayMore;
     vm.rank = $stateParams.rank;
-    vm.shareWechat = shareWechat;
 
     init();
 
@@ -98,6 +97,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         var item = orgInfo.data;
         item.rank = parseInt(vm.rank);
         item.currQuarter = vm.currQuarter;
+        vm.shareWechat = shareWechat;
         $modal.open({
                 templateUrl: 'templates/bangdan/shareWin.html',
                 windowClass: 'bd-nativeAlert_wrap',
