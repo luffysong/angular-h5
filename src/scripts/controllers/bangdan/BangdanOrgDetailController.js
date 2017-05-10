@@ -94,10 +94,11 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     }
 
     function joinpro() {
+        var vm = this;
         var item = orgInfo.data;
         item.rank = parseInt(vm.rank);
         item.currQuarter = vm.currQuarter;
-        vm.shareWechat = shareWechat;
+
         $modal.open({
                 templateUrl: 'templates/bangdan/shareWin.html',
                 windowClass: 'bd-nativeAlert_wrap',
@@ -111,30 +112,31 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
             });
     }
 
-    function shareWechat(p) {
-        if (hybrid.isInApp) {
-            if (p === 'f') {
-                hybrid.open('weChatShareMoments');
-            }else {
-                hybrid.open('weChatShareFriend');
-            }
-
-            $timeout(function () {
-                window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
-            }, 2000);
-        }
-    }
-
     defaultController.$inject = ['$modalInstance', 'obj'];
 
     function defaultController($modalInstance, obj) {
 
         var vm = this;
         vm.cancelModal = cancelModal;
+        vm.shareWechat = shareWechat;
         vm.orgInfo = obj;
 
         function cancelModal() {
             $modalInstance.dismiss();
+        }
+
+        function shareWechat(p) {
+            if (hybrid.isInApp) {
+                if (p === 'f') {
+                    hybrid.open('weChatShareMoments');
+                }else {
+                    hybrid.open('weChatShareFriend');
+                }
+
+                $timeout(function () {
+                    window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
+                }, 2000);
+            }
         }
     }
 
