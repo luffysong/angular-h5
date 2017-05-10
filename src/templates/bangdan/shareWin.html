@@ -1,17 +1,25 @@
 <div class="nativeAlert_pop">
     <div class="bd-share-logo">
-        <div class="bd-share-img bd-gold-border" ng-if="vm.orgInfo.rank === 1">
-            <img ng-src="{{vm.orgInfo.logo}}" />
+        <div class="bd-share-img bd-gold-border" ng-if="vm.orgInfo.rank === 1"
+        style="background-image: url({{vm.orgInfo.logo}})">
+        <!--
+            <img ng-src="{{vm.orgInfo.logo}}" />-->
         </div>
-        <div class="bd-share-img bd-silver-border" ng-if="vm.orgInfo.rank === 2">
-            <img ng-src="{{vm.orgInfo.logo}}" />
+        <div class="bd-share-img bd-silver-border" ng-if="vm.orgInfo.rank === 2"
+        style="background-image: url({{vm.orgInfo.logo}})">
+        <!--
+            <img ng-src="{{vm.orgInfo.logo}}" />-->
         </div>
 
-        <div class="bd-share-img bd-copper-border" ng-if="vm.orgInfo.rank === 3">
-            <img ng-src="{{vm.orgInfo.logo}}" />
+        <div class="bd-share-img bd-copper-border" ng-if="vm.orgInfo.rank === 3"
+        style="background-image: url({{vm.orgInfo.logo}})">
+        <!--
+            <img ng-src="{{vm.orgInfo.logo}}" />-->
         </div>
-        <div class="bd-share-img bd-normal-border" ng-if="vm.orgInfo.rank > 3">
-            <img ng-src="{{vm.orgInfo.logo}}" />
+        <div class="bd-share-img bd-normal-border" ng-if="vm.orgInfo.rank > 3"
+            style="background-image: url({{vm.orgInfo.logo}})">
+            <!--
+            <img ng-src="{{vm.orgInfo.logo}}" />-->
         </div>
 
         <div class="bd-belt bd-gold-belt" ng-if="vm.orgInfo.rank === 1"></div>
