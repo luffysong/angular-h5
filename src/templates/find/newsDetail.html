@@ -1,17 +1,24 @@
 <div class="find-news-detail">
     <h1 class="find-news-title">{{vm.news.data.title}}</h1>
-    <div class="find-news-info">
-        <div class="find-news-info-time">
-            日期：{{vm.news.data.ts}}
-        </div>
-        <div class="find-news-info-source">
-            来源：{{vm.news.data.source}}
+    <div class="find-news-info source-margin">
+        <span class="find-news-info-source">
+            <a href="{{vm.news.data.link}}" target="_blank">{{vm.news.data.source}}</a>
+        </span>
+        <span class="find-news-info-time">{{vm.news.data.ts}}</span>
+    </div>
+    <div class="find-news-info" ng-show="vm.news.investors">
+        <div class="find-news-info-invest">投资方</div>
+        <div class="find-news-info-invest-con">
+            {{vm.news.investors}}
         </div>
     </div>
-    <div class="find-news-source">
-        原文链接：
-        <a href="{{vm.news.data.link}}" target="_blank">{{vm.news.data.link}}</a>
+    <div class="find-news-info" ng-show="vm.news.amount">
+        <div class="find-news-info-invest">投资金额</div>
+        <div class="find-news-info-invest-con">
+            {{vm.news.amount}}
+        </div>
     </div>
+    <div class="find-news-info-line"></div>
     <div class="find-news-content" dynamic-html="vm.news.data.content"></div>
     <loading loading="newsDetailLoading"></loading>
 </div>
