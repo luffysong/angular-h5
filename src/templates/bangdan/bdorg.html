@@ -21,11 +21,11 @@
         <div class="org-logo top3-logo" ng-if="$index === 2" style="background-image: url({{item.logo}})"></div>
         <div class="org-logo" ng-if="$index > 2" style="background-image: url({{item.logo}})"></div>
         <div class="org-name">
-          <div class="top3-color">{{item.name}}</div>
+          <div ng-class="{top3Color: $index < 3}">{{item.name}}</div>
           <div>浏览量 <span>{{item.accessCount}}</span></div>
         </div>
         <div class="interview-num">
-          <div class="top3-color">{{item.interviewCount}}</div>
+          <div ng-class="{top3Color: $index < 3}">{{item.interviewCount}}</div>
           <div>约谈量</div>
         </div>
       </div>

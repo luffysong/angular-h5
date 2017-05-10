@@ -24,7 +24,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         vm.busy = true;
         var request = {
             page: vm.page + 1,
-            pageSize: 7,
+            pageSize: 10,
         };
         BangDanService.getOrgRank(request)
             .then(function(response) {
