@@ -440,7 +440,7 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
     });
 
     $stateProvider.state('bangdan.bdshare', {
-        url: '/bdshare',
+        url: '/bdshare?{id}&{rank}',
         controllerAs: 'vm',
         controller: 'BangdanShareDetailController',
         templateUrl: 'templates/bangdan/bdshare.html',

@@ -26,18 +26,19 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             page: vm.page + 1,
             pageSize: 7,
         };
-        BangDanService.getOrgRank(request).then(function(response) {
-            vm.list = vm.list.concat(response.data.data);
-            if (response.data.totalPages) {
-                vm.page = response.data.page || 0;
-                if (response.data.totalPages !== vm.page && response.data.data.length > 0) {
-                    vm.busy = false;
-                } else {
-                    vm.finish = true;
-                    vm.more = true;
+        BangDanService.getOrgRank(request)
+            .then(function(response) {
+                vm.list = vm.list.concat(response.data.data);
+                if (response.data.totalPages) {
+                    vm.page = response.data.page || 0;
+                    if (response.data.totalPages !== vm.page && response.data.data.length > 0) {
+                        vm.busy = false;
+                    } else {
+                        vm.finish = true;
+                        vm.more = true;
+                    }
                 }
-            }
-        }).catch(fail);
+            }).catch(fail);
     }
 
     function displayMore() {

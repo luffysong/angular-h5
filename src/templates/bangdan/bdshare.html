@@ -1,10 +1,12 @@
 <div class="orgbd-share-wapper">
-  <div class="logo" style="background-image: url(https://pic.36krcnd.com/avatar/201704/05092912/hmk2hd28ra787pzh.png)"></div>
-  <div class="riband"><img src="/styles/images/bangdan/top1-riband.png" /></div>
-  <div class="name">红杉资本</div>
+  <div class="logo" style="background-image: url({{vm.data.logo}})"></div>
+  <div class="riband" ng-if="vm.rank == 1"><img src="/styles/images/bangdan/top1-riband.png" /></div>
+  <div class="riband" ng-if="vm.rank == 2"><img src="/styles/images/bangdan/top2-riband.png" /></div>
+  <div class="riband" ng-if="vm.rank == 3"><img src="/styles/images/bangdan/top3-riband.png" /></div>
+  <div class="name" ng-class="{mgt: vm.rank > 3}">{{vm.data.name}}</div>
   <div class="number">
     <div class="num-line"></div>
-    <div class="num">第<span>1</span>名</div>
+    <div class="num">第<span>{{vm.rank}}</span>名</div>
     <div class="num-line"></div>
     <div class="num-text">
       <span>2017Q2 · 风口机构排行榜</span><br/>
@@ -13,22 +15,22 @@
   </div>
   <div class="info">
     <div class="counts">
-      <div>28</div>
+      <div>{{vm.data.projectCount}}</div>
       <div>机构项目数</div>
     </div>
     <div class="counts count-border">
-      <div>634</div>
+      <div>{{vm.data.interviewCount}}</div>
       <div>Q2总约谈数</div>
     </div>
     <div class="counts">
-      <div>3578</div>
+      <div>{{vm.data.accessCount}}</div>
       <div>Q2总浏览数</div>
     </div>
   </div>
   <div class="member">
-    <p>我是<span>红杉资本</span>家族成员</p>
+    <p>我是<span>{{vm.data.name}}</span>家族成员</p>
     <p>为Ta站台</p>
   </div>
-  <div class="go-btn go-list">风口机构榜</div>
-  <div class="go-btn go-detail"><span>红杉资本</span>详情</div>
+  <div class="go-btn go-list" ui-sref="bangdan.orgbd">风口机构榜</div>
+  <div class="go-btn go-detail" ui-sref="bangdan.orgbdDetail({id: vm.id})"><span>红杉资本</span>详情</div>
 </div>
