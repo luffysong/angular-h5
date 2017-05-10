@@ -24,8 +24,8 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         var HOST = location.host;
         var shareUrl =
         'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
-        initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.rank, shareUrl);
-        console.log(shareUrl);
+        initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.rank, shareUrl, vm.orgInfo.logo);
+        console.log(vm.orgInfo);
     }
 
     function getQ() {
@@ -77,12 +77,12 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         }
     }
 
-    function initWeixin(name, count, q, rank, url) {
+    function initWeixin(name, count, q, rank, url, logo) {
         window.WEIXINSHARE = {
-            shareTitle: name + '[机构]排名第' + rank + '|2017Q' + q + '风口机构排行榜',
+            shareTitle: name + '排名第' + rank + '|2017Q' + q + '风口机构排行榜',
             shareUrl: url,
-            shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: name + '[机构]' + count + '个投资项目都在这里',
+            shareImg: '' + logo + '',
+            shareDesc: name + '' + count + '个投资项目都在这里',
         };
 
         var obj = {};
