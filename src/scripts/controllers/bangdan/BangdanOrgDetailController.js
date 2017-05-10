@@ -18,14 +18,15 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
 
     function init() {
         vm.orgInfo = orgInfo.data;
-        initTitle(vm.orgInfo.name);
+
+        //initTitle(vm.orgInfo.name);
         getProList();
         getQ();
         var HOST = location.host;
         var shareUrl =
         'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
         initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.rank, shareUrl, vm.orgInfo.logo);
-        console.log(vm.orgInfo);
+        //console.log(vm.orgInfo);
     }
 
     function getQ() {
@@ -33,6 +34,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
+        initTitle('2017Q' + vm.currQuarter + '·风口机构排行榜');
     }
 
     function getProList() {

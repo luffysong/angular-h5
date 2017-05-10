@@ -13,6 +13,15 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
     function init() {
         $('.J_commonHeaderWrapper').remove();
         getSingleOrgInfo(vm.id);
+        getQ();
+    }
+
+    function getQ() {
+        var myDate = new Date();
+        var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
+        var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
+        vm.currQuarter = currQuarter;
+        initTitle('2017Q' + vm.currQuarter + '·风口机构排行榜');
     }
 
     function getSingleOrgInfo(id) {
