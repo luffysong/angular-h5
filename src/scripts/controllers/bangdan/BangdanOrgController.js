@@ -17,6 +17,11 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     function init() {
         $('.J_commonHeaderWrapper').remove();
         getOrgRank();
+        initTitle('机构榜单');
+    }
+
+    function initTitle(t) {
+        document.title = t;
     }
 
     function getOrgRank() {

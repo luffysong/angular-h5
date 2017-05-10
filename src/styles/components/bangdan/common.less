@@ -70,11 +70,12 @@
     background: rgba(0, 0, 0, 0.60);
     overflow: visible;
     .modal-dialog {
-        margin-top: 65px;
+        margin-top: 35px;
         margin-left: 7.5%;
         margin-right: 7.5%;
     }
     .modal-content {
+        width: 95%;
         padding-bottom: 0;
         overflow: visible;
     }
@@ -85,9 +86,10 @@
         position: relative;
         overflow: visible;
         padding-top: 30px;
-        width: 320px;
+        //width: 320px;
         height: 510px;
         background: url('images/bangdan/bd-share-bgp.png') no-repeat center;
+        background-size: 100% 510px;
         .pop-close {
             position: absolute;
             bottom: -56px;
@@ -206,6 +208,9 @@
             position: absolute;
             width: 100%;
             text-align: center;
+            @media screen and (max-width: 320px) {
+                    bottom: 15px;
+            }
             span{
                 font-family: PingFangSC-Regular;
                 font-size: 12px;
