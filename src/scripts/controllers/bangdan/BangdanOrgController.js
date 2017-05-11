@@ -129,7 +129,6 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
           {
             source:'org_top_list',
             target:'join_org_top_list',
-            org_id:id,
             client:client,
         });
         window.location.href = 'http://cn.mikecrm.com/70INKZM';
