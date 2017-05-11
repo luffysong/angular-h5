@@ -1,3 +1,4 @@
+<div ng-if="!loadingInst.bangdanLoading" style="">
 <div class="bd-org-detail">
     <section class="bd-orgdetail-head bd-detail-bgp">
             <div class="bd-orgdetail-logo">
@@ -145,3 +146,6 @@
 </div>
 
  <div ng-include="'templates/bangdan/common/downloadApp.html'"></div>
+ </div>
+
+ <loading loading="bangdanLoading"></loading>

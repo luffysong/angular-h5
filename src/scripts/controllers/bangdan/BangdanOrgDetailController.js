@@ -52,6 +52,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
 
         BangDanService.getOrgProRank($stateParams.id, params)
         .then(function setdata(response) {
+            loading.hide('bangdanLoading');
             vm.prolist = vm.prolist.concat(response.data.data);
             if (response.data.totalPages) {
                 vm.page = response.data.page || 0;
@@ -111,7 +112,9 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
 
         var obj = {};
         obj.timelineSuccess = function timelineSuccess() {
+            alert('===');
             if (!hybrid.isInApp && vm.h5Href) {
+                alert('===');
                 window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
             }
         };
@@ -317,6 +320,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     }
 
     function fail(err) {
+        loading.hide('bangdanLoading');
         if (err.code === '403') {
             console.log(err.msg);
         } else if (err.code === '1') {

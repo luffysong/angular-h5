@@ -68,6 +68,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         };
         BangDanService.getOrgRank(request)
             .then(function (response) {
+                loading.hide('bangdanLoading');
                 vm.list = vm.list.concat(response.data.data);
                 if (!vm.total) {
                     vm.total = response.data.totalCount;
@@ -121,6 +122,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     }
 
     function fail(err) {
+        loading.hide('bangdanLoading');
         ErrorService.alert(err.err.msg);
     }
 

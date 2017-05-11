@@ -1,3 +1,4 @@
+<div ng-if="!loadingInst.bangdanLoading" style="">
 <div class="orgbd-wapper">
   <div class="orgdb-top">
     <div class="org-brief">
@@ -47,5 +48,6 @@
     </div>
   </div>
 </div>
-
- <div ng-include="'templates/bangdan/common/downloadApp.html'"></div>
+<div ng-include="'templates/bangdan/common/downloadApp.html'"></div>
+</div>
+<loading loading="bangdanLoading"></loading>
