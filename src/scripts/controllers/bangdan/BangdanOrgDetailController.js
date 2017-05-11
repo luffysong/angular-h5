@@ -207,14 +207,19 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                     hybrid.open('weChatShareFriend');
                 }
 
+                var timer = $timeout(function () {
+                    window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
+                }, 2000);
+
                 if (obj.f && obj.f === 'forward') {
                     $modalInstance.dismiss();
-                } else {
-                    $timeout(function () {
-                        window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
-                    }, 2000);
+                    $timeout.cancel(timer);
                 }
             }
+        }
+
+        function shareWechatNoForward() {
+
         }
 
         function forwardCount() {
