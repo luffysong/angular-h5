@@ -13,14 +13,16 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     vm.goProDetail = goProDetail;
     vm.displayMore = displayMore;
     vm.rank = $stateParams.rank;
-    vm.inApp = false;
     vm.h5Href = true;
+    vm.inApp = true;
+    vm.downloadApp = downloadApp;
     init();
 
     function init() {
         vm.orgInfo = orgInfo.data;
-        if (hybrid.isInApp) {
-            vm.inApp = true;
+        if (!hybrid.isInApp) {
+            initLinkme();
+            vm.inApp = false;
         }
 
         getProList();
@@ -319,6 +321,35 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
             console.log(err.msg);
         } else if (err.code === '1') {
             ErrorService.alert(err.msg);
+        }
+    }
+
+    function initLinkme() {
+        var krdata = {};
+        krdata.type = window.projectEnvConfig.linkmeType;
+        krdata.params =
+            '{"openlink":"https://' + window.projectEnvConfig.rongHost +
+            '/m/#/bangdan/orgbddetail?id=' + $stateParams.id + '&rank=' + $stateParams.rank + '","currentRoom":"0"}';
+        window.linkedme.init(window.projectEnvConfig.linkmeKey, {
+            type: window.projectEnvConfig.linkmeType
+        }, function (err, res) {
+            if (err) {
+                return;
+            }
+            window.linkedme.link(krdata, function (err, data) {
+                if (err) {
+                    // 生成深度链接失败，返回错误对象err
+                    console.log(err);
+                } else {
+                    vm.openAppUrl = data.url;
+                }
+            }, false);
+        });
+    }
+
+    function downloadApp() {
+        if (!vm.inApp) {
+            window.location.href = vm.openAppUrl;
         }
     }
 
