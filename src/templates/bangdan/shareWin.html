@@ -46,10 +46,17 @@
             为Ta站台
         </div>
     </div>
-    <div class="bd-share-app">
+    <div class="bd-share-text share-txt-top2" ng-if="vm.inApp">
+        [分享成功后入住]
+    </div>
+    <div class="bd-share-app" ng-if="vm.inApp">
             <div class="share-app bd-share-wechat" ng-click="vm.shareWechat()"></div>
             <div class="split-block"> </div>
             <div class="share-app bd-share-webo" ng-click="vm.shareWechat('f')"></div>
+    </div>
+
+    <div class="bd-share-text share-txt-top1" ng-if="!vm.inApp">
+        [点击右上角转发后入驻]
     </div>
 
     <div class="bd-share-txt">

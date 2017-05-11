@@ -13,7 +13,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     vm.goProDetail = goProDetail;
     vm.displayMore = displayMore;
     vm.rank = $stateParams.rank;
-
+    vm.inApp = false;
     init();
 
     function init() {
@@ -24,6 +24,10 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
             });
 
         vm.orgInfo = orgInfo.data;
+        if (hybrid.isInApp) {
+            vm.inApp = true;
+        }
+
         getProList();
         getQ();
         var HOST = location.host;
@@ -120,7 +124,11 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         var item = orgInfo.data;
         item.rank = parseInt(vm.rank);
         item.currQuarter = vm.currQuarter;
-        if (f) {item.f = f;}
+        item.inApp = vm.inApp;
+        var tg = 'join_org';
+        if (f) {
+            item.f = f;tg = 'support';
+        }
 
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
@@ -134,7 +142,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         sa.track('OrgTopListClick',
           {
             source:'organization',
-            target:'join_org',
+            target: tg,
             org_id: orgInfo.data.orgId + '',
             client:client,
         });
@@ -158,7 +166,13 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
 
         var vm = this;
         vm.cancelModal = cancelModal;
-        vm.shareWechat = shareWechat;
+        vm.inApp = obj.inApp;
+        if (obj.f && obj.f === 'forward') {
+            vm.shareWechat = shareWechatNoForm;
+        } else {
+            vm.shareWechat = shareWechat;
+        }
+
         vm.orgInfo = obj;
 
         init();
@@ -207,19 +221,46 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                     hybrid.open('weChatShareFriend');
                 }
 
-                var timer = $timeout(function () {
+                $timeout(function () {
                     window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
                 }, 2000);
-
-                if (obj.f && obj.f === 'forward') {
-                    $modalInstance.dismiss();
-                    $timeout.cancel(timer);
-                }
             }
         }
 
-        function shareWechatNoForward() {
+        function shareWechatNoForm(p) {
+            var isAndroid = !!navigator.userAgent.match(/android/ig);
+            var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+            var client = 'H5';
+            if (isAndroid) {
+                client = 'Android';
+            }else if (isIos) {
+                client = 'iOS';
+            }
 
+            forwardCount();
+            if (hybrid.isInApp) {
+                if (p === 'f') {
+                    sa.track('OrgTopListClick',
+                      {
+                        source:'organization',
+                        target:'moments',
+                        org_id: vm.orgInfo.orgId + '',
+                        client:client,
+                    });
+                    hybrid.open('weChatShareMoments');
+                }else {
+                    sa.track('OrgTopListClick',
+                      {
+                        source:'organization',
+                        target:'wechat',
+                        org_id: vm.orgInfo.orgId + '',
+                        client:client,
+                    });
+                    hybrid.open('weChatShareFriend');
+                }
+
+                $modalInstance.dismiss();
+            }
         }
 
         function forwardCount() {
