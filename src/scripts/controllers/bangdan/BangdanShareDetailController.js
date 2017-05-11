@@ -10,9 +10,14 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
     vm.rank = $stateParams.rank;
     vm.bangdanOrg = bangdanOrg;
     vm.bangdanOrgDetail = bangdanOrgDetail;
+    vm.inApp = false;
     init();
 
     function init() {
+        if (hybrid.isInApp) {
+            vm.inApp = true;
+        }
+
         sa.track('ViewPage', {
                 source: 'share_page',
                 org_id: $stateParams.id + '',

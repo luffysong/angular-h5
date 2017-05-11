@@ -13,11 +13,16 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.displayMore = displayMore;
     vm.goOrgDetail = goOrgDetail;
     vm.joinOrg = joinOrg;
+    vm.inApp = false;
     vm.total;
 
     init();
 
     function init() {
+        if (hybrid.isInApp) {
+            vm.inApp = true;
+        }
+
         sa.track('ViewPage', {
                 source: 'org_top_list',
                 page: 'org_top_list',
