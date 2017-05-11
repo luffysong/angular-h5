@@ -146,33 +146,43 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
             org_id: orgInfo.data.orgId + '',
             client:client,
         });
-
-        $modal.open({
-                templateUrl: 'templates/bangdan/shareWin.html',
-                windowClass: 'bd-nativeAlert_wrap',
-                controller: defaultController,
-                controllerAs: 'vm',
-                resolve: {
-                    obj: function () {
-                        return item;
+        if (f) {
+            $modal.open({
+                    templateUrl: 'templates/bangdan/shareWin.html',
+                    windowClass: 'bd-nativeAlert_wrap',
+                    controller: defaultControllerNoForm,
+                    controllerAs: 'vm',
+                    resolve: {
+                        obj: function () {
+                            return item;
+                        }
                     }
-                }
-            });
+                });
+        }else {
+            $modal.open({
+                    templateUrl: 'templates/bangdan/shareWin.html',
+                    windowClass: 'bd-nativeAlert_wrap',
+                    controller: defaultController,
+                    controllerAs: 'vm',
+                    resolve: {
+                        obj: function () {
+                            return item;
+                        }
+                    }
+                });
+        }
+
     }
 
     defaultController.$inject = ['$modalInstance', 'obj'];
+    defaultControllerNoForm.$inject = ['$modalInstance', 'obj'];
 
     function defaultController($modalInstance, obj) {
 
         var vm = this;
         vm.cancelModal = cancelModal;
         vm.inApp = obj.inApp;
-        if (obj.f && obj.f === 'forward') {
-            vm.shareWechat = shareWechatNoForm;
-        } else {
-            vm.shareWechat = shareWechat;
-        }
-
+        vm.shareWechat = shareWechat;
         vm.orgInfo = obj;
 
         init();
@@ -225,6 +235,36 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                     window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
                 }, 2000);
             }
+        }
+
+        function forwardCount() {
+            BangDanService.forwardCount(vm.orgInfo.orgId)
+            .then(function setdata(response) {
+            })
+            .catch(fail);
+        }
+    }
+
+    function defaultControllerNoForm($modalInstance, obj) {
+
+        var vm = this;
+        vm.cancelModal = cancelModal;
+        vm.inApp = obj.inApp;
+        vm.shareWechat = shareWechatNoForm;
+        vm.orgInfo = obj;
+
+        init();
+
+        function init() {
+            sa.track('ViewPage', {
+                    source: 'org_share',
+                    org_id: vm.orgInfo.orgId + '',
+                    page: 'org_share',
+                });
+        }
+
+        function cancelModal() {
+            $modalInstance.dismiss();
         }
 
         function shareWechatNoForm(p) {

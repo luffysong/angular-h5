@@ -34,7 +34,7 @@
             </div>
             <div class="bd-orgdetail-sta">
                     <div class="bd-sta">
-                        <div class="num">{{vm.orgInfo.projectCount}}</div>
+                        <div class="num" >{{vm.orgInfo.projectCount}}</div>
                         <div class="txt">机构项目数</div>
                     </div>
                     <div class="split-line"></div>
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <div class="txt-middle">
-                        <div class="bd-txt-title">
+                        <div class="bd-txt-title" ng-class="{true:'top-3Color',false:''}[$index < 3]">
                                 {{item.name}}
                         </div>
                         <div class="bd-txt-brief">
@@ -118,7 +118,7 @@
                         </div>
                     </div>
                     <div class="sta-right">
-                            <div class="sta-num">
+                            <div class="sta-num" ng-class="{true:'top-3Color',false:''}[$index < 3]">
                                     {{item.interviewCount}}
                             </div>
                             <div class="sta-txt">
