@@ -94,6 +94,12 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             client = 'iOS';
         }
 
+        sa.track('ViewPage', {
+                source: 'org_top_list',
+                org_id: $stateParams.id + '',
+                page: 'organization',
+            });
+
         sa.track('OrgTopListClick',
           {
             source: 'org_top_list',

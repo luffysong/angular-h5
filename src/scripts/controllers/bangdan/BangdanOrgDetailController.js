@@ -14,15 +14,10 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     vm.displayMore = displayMore;
     vm.rank = $stateParams.rank;
     vm.inApp = false;
+    vm.h5Href = true;
     init();
 
     function init() {
-        sa.track('ViewPage', {
-                source: 'organization',
-                org_id: $stateParams.id + '',
-                page: 'organization',
-            });
-
         vm.orgInfo = orgInfo.data;
         if (hybrid.isInApp) {
             vm.inApp = true;
@@ -113,6 +108,12 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         };
 
         var obj = {};
+        obj.timelineSuccess = function timelineSuccess() {
+            if (!hybrid.isInApp && vm.h5Href) {
+                window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
+            }
+        };
+
         window.InitWeixin(obj);
     }
 
@@ -128,6 +129,8 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         var tg = 'join_org';
         if (f) {
             item.f = f;tg = 'support';
+        }else {
+            vm.h5Href = true;
         }
 
         var isAndroid = !!navigator.userAgent.match(/android/ig);
@@ -214,7 +217,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                 if (p === 'f') {
                     sa.track('OrgTopListClick',
                       {
-                        source:'organization',
+                        source:'org_share',
                         target:'moments',
                         org_id: vm.orgInfo.orgId + '',
                         client:client,
@@ -223,7 +226,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                 }else {
                     sa.track('OrgTopListClick',
                       {
-                        source:'organization',
+                        source:'org_share',
                         target:'wechat',
                         org_id: vm.orgInfo.orgId + '',
                         client:client,
@@ -282,7 +285,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                 if (p === 'f') {
                     sa.track('OrgTopListClick',
                       {
-                        source:'organization',
+                        source:'org_share',
                         target:'moments',
                         org_id: vm.orgInfo.orgId + '',
                         client:client,
@@ -291,7 +294,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                 }else {
                     sa.track('OrgTopListClick',
                       {
-                        source:'organization',
+                        source:'org_share',
                         target:'wechat',
                         org_id: vm.orgInfo.orgId + '',
                         client:client,

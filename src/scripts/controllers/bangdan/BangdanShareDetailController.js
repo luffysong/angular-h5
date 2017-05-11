@@ -29,6 +29,18 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
         getQ();
     }
 
+    function initWeixin(name, count, q, rank, logo) {
+        window.WEIXINSHARE = {
+            shareTitle: name + '排名第' + rank + '|2017Q' + q + '风口机构排行榜',
+            shareUrl: window.location.href,
+            shareImg: '' + logo + '',
+            shareDesc: name + '' + count + '个投资项目都在这里',
+        };
+
+        var obj = {};
+        window.InitWeixin(obj);
+    }
+
     function getQ() {
         var myDate = new Date();
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
@@ -68,6 +80,12 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
             client = 'iOS';
         }
 
+        sa.track('ViewPage', {
+                source: 'share_page',
+                org_id: $stateParams.id + '',
+                page: 'organization',
+            });
+
         sa.track('OrgTopListClick',
           {
             source:'share_page',
@@ -85,6 +103,7 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
         BangDanService.getSingleOrgInfo(id)
             .then(function (response) {
                 vm.data = response.data;
+                initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.rank, vm.data.logo);
             });
     }
 
