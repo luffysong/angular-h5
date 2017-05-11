@@ -27,12 +27,11 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
 
         getProList();
         getQ();
-        initH5();
+
         var HOST = location.host;
         var shareUrl =
         'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
         initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.rank, shareUrl, vm.orgInfo.logo);
-
     }
 
     function getQ() {
@@ -114,6 +113,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
 
         var obj = {};
         window.InitWeixin(obj);
+        initH5();
     }
 
     function initTitle(t) {
