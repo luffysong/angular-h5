@@ -17,6 +17,8 @@ function NewsDetailController(FindService, ErrorService, loading, $stateParams, 
     }
     if($stateParams.investors) {
         vm.news.investors = decodeURIComponent($stateParams.investors);
+        var investorsArr = vm.news.investors.split('·');
+        vm.news.investors = investorsArr.join('，');
     }
     if($stateParams.amount) {
         vm.news.amount = decodeURIComponent($stateParams.amount);
