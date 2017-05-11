@@ -17,16 +17,19 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     init();
 
     function init() {
-        vm.orgInfo = orgInfo.data;
+        sa.track('ViewPage', {
+                source: 'organization',
+                org_id: $stateParams.id,
+                page: 'organization',
+            });
 
-        //initTitle(vm.orgInfo.name);
+        vm.orgInfo = orgInfo.data;
         getProList();
         getQ();
         var HOST = location.host;
         var shareUrl =
         'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
         initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.rank, shareUrl, vm.orgInfo.logo);
-        //console.log(vm.orgInfo);
     }
 
     function getQ() {
@@ -69,6 +72,24 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     }
 
     function goProDetail(ccid) {
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+
+        sa.track('OrgTopListClick',
+          {
+            source:'organization',
+            target:'company',
+            org_id:$stateParams.id,
+            company_id:ccid,
+            client:client,
+        });
+
         if (ccid) {
             if (hybrid.isInApp) {
                 hybrid.open('crmCompany/' + ccid);
@@ -96,10 +117,26 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     }
 
     function joinpro() {
-        var vm = this;
         var item = orgInfo.data;
         item.rank = parseInt(vm.rank);
         item.currQuarter = vm.currQuarter;
+
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+
+        sa.track('OrgTopListClick',
+          {
+            source:'organization',
+            target:'join_org',
+            org_id:orgInfo.data.orgId,
+            client:client,
+        });
 
         $modal.open({
                 templateUrl: 'templates/bangdan/shareWin.html',
@@ -123,16 +160,49 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         vm.shareWechat = shareWechat;
         vm.orgInfo = obj;
 
+        init();
+
+        function init() {
+            sa.track('ViewPage', {
+                    source: 'org_share',
+                    org_id: vm.orgInfo.orgId,
+                    page: 'org_share',
+                });
+        }
+
         function cancelModal() {
             $modalInstance.dismiss();
         }
 
         function shareWechat(p) {
+            var isAndroid = !!navigator.userAgent.match(/android/ig);
+            var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+            var client = 'H5';
+            if (isAndroid) {
+                client = 'Android';
+            }else if (isIos) {
+                client = 'iOS';
+            }
+
             forwardCount();
             if (hybrid.isInApp) {
                 if (p === 'f') {
+                    sa.track('OrgTopListClick',
+                      {
+                        source:'organization',
+                        target:'moments',
+                        org_id:vm.orgInfo.orgId,
+                        client:client,
+                    });
                     hybrid.open('weChatShareMoments');
                 }else {
+                    sa.track('OrgTopListClick',
+                      {
+                        source:'organization',
+                        target:'wechat',
+                        org_id:vm.orgInfo.orgId,
+                        client:client,
+                    });
                     hybrid.open('weChatShareFriend');
                 }
 
