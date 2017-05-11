@@ -10,12 +10,14 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
     vm.rank = $stateParams.rank;
     vm.bangdanOrg = bangdanOrg;
     vm.bangdanOrgDetail = bangdanOrgDetail;
-    vm.inApp = false;
+    vm.inApp = true;
+    vm.downloadApp = downloadApp;
     init();
 
     function init() {
-        if (hybrid.isInApp) {
-            vm.inApp = true;
+        if (!hybrid.isInApp) {
+            initLinkme();
+            vm.inApp = false;
         }
 
         sa.track('ViewPage', {
@@ -91,4 +93,34 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
     function initTitle(t) {
         document.title = t;
     }
+
+    function initLinkme() {
+        var krdata = {};
+        krdata.type = window.projectEnvConfig.linkmeType;
+        krdata.params =
+            '{"openlink":"https://' + window.projectEnvConfig.rongHost +
+            '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank + '","currentRoom":"0"}';
+        window.linkedme.init(window.projectEnvConfig.linkmeKey, {
+            type: window.projectEnvConfig.linkmeType
+        }, function (err, res) {
+            if (err) {
+                return;
+            }
+            window.linkedme.link(krdata, function (err, data) {
+                if (err) {
+                    // 生成深度链接失败，返回错误对象err
+                    console.log(err);
+                } else {
+                    vm.openAppUrl = data.url;
+                }
+            }, false);
+        });
+    }
+
+    function downloadApp() {
+        if (!vm.inApp) {
+            window.location.href = vm.openAppUrl;
+        }
+    }
+
 }

@@ -13,14 +13,16 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.displayMore = displayMore;
     vm.goOrgDetail = goOrgDetail;
     vm.joinOrg = joinOrg;
-    vm.inApp = false;
+    vm.inApp = true;
     vm.total;
+    vm.downloadApp = downloadApp;
 
     init();
 
     function init() {
-        if (hybrid.isInApp) {
-            vm.inApp = true;
+        if (!hybrid.isInApp) {
+            initLinkme();
+            vm.inApp = false;
         }
 
         sa.track('ViewPage', {
@@ -137,5 +139,33 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             client:client,
         });
         window.location.href = 'http://cn.mikecrm.com/70INKZM';
+    }
+
+    function initLinkme() {
+        var krdata = {};
+        krdata.type = window.projectEnvConfig.linkmeType;
+        krdata.params =
+            '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/bangdan/orgbd' + '","currentRoom":"0"}';
+        window.linkedme.init(window.projectEnvConfig.linkmeKey, {
+            type: window.projectEnvConfig.linkmeType
+        }, function (err, res) {
+            if (err) {
+                return;
+            }
+            window.linkedme.link(krdata, function (err, data) {
+                if (err) {
+                    // 生成深度链接失败，返回错误对象err
+                    console.log(err);
+                } else {
+                    vm.openAppUrl = data.url;
+                }
+            }, false);
+        });
+    }
+
+    function downloadApp() {
+        if (!vm.inApp) {
+            window.location.href = vm.openAppUrl;
+        }
     }
 }
