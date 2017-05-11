@@ -19,7 +19,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     function init() {
         sa.track('ViewPage', {
                 source: 'organization',
-                org_id: $stateParams.id,
+                org_id: $stateParams.id + '',
                 page: 'organization',
             });
 
@@ -85,7 +85,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
           {
             source:'organization',
             target:'company',
-            org_id:$stateParams.id,
+            org_id: $stateParams.id + '',
             company_id:ccid,
             client:client,
         });
@@ -116,10 +116,11 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         document.title = t;
     }
 
-    function joinpro() {
+    function joinpro(f) {
         var item = orgInfo.data;
         item.rank = parseInt(vm.rank);
         item.currQuarter = vm.currQuarter;
+        if (f) {item.f = f;}
 
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
@@ -134,7 +135,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
           {
             source:'organization',
             target:'join_org',
-            org_id:orgInfo.data.orgId,
+            org_id: orgInfo.data.orgId + '',
             client:client,
         });
 
@@ -165,7 +166,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         function init() {
             sa.track('ViewPage', {
                     source: 'org_share',
-                    org_id: vm.orgInfo.orgId,
+                    org_id: vm.orgInfo.orgId + '',
                     page: 'org_share',
                 });
         }
@@ -191,7 +192,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                       {
                         source:'organization',
                         target:'moments',
-                        org_id:vm.orgInfo.orgId,
+                        org_id: vm.orgInfo.orgId + '',
                         client:client,
                     });
                     hybrid.open('weChatShareMoments');
@@ -200,15 +201,19 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                       {
                         source:'organization',
                         target:'wechat',
-                        org_id:vm.orgInfo.orgId,
+                        org_id: vm.orgInfo.orgId + '',
                         client:client,
                     });
                     hybrid.open('weChatShareFriend');
                 }
 
-                $timeout(function () {
-                    window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
-                }, 2000);
+                if (obj.f && obj.f === 'forward') {
+                    $modalInstance.dismiss();
+                } else {
+                    $timeout(function () {
+                        window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
+                    }, 2000);
+                }
             }
         }
 

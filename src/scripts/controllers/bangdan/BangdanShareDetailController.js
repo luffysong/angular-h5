@@ -15,7 +15,7 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
     function init() {
         sa.track('ViewPage', {
                 source: 'share_page',
-                org_id: $stateParams.id,
+                org_id: $stateParams.id + '',
                 page: 'share_page',
             });
 
@@ -46,7 +46,7 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
           {
             source:'share_page',
             target:'org_top_list',
-            org_id:$stateParams.id,
+            org_id: $stateParams.id + '',
             client:client,
         });
         $state.go('bangdan.orgbd', {
@@ -67,7 +67,7 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
           {
             source:'share_page',
             target:'organization',
-            org_id:id,
+            org_id: id + '',
             client:client,
         });
         $state.go('bangdan.orgbdDetail', {

@@ -91,10 +91,10 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
 
         sa.track('OrgTopListClick',
           {
-            source:'org_top_list',
-            target:'organization',
-            org_id:id,
-            client:client,
+            source: 'org_top_list',
+            target: 'organization',
+            org_id: id + '',
+            client: client,
         });
 
         $state.go('bangdan.orgbdDetail', {
