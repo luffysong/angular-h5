@@ -166,7 +166,7 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
 
                 wx.onMenuShareTimeline({
                     title: WEIXINSHARE.shareTitle, // 分享标题
-                    link: location.href, // 分享链接
+                    link: WEIXINSHARE.shareUrl, // 分享链接
                     imgUrl: WEIXINSHARE.shareImg || 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png', // 分享图标
                     success: function () {
                         // 用户确认分享后执行的回调函数
@@ -180,7 +180,7 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
                 wx.onMenuShareAppMessage({
                     title: WEIXINSHARE.shareTitle, // 分享标题
                     desc: WEIXINSHARE.shareDesc, // 分享描述
-                    link: location.href, // 分享链接
+                    link: WEIXINSHARE.shareUrl, // 分享链接
                     imgUrl: WEIXINSHARE.shareImg || 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png', // 分享图标
                     type: 'link', // 分享类型,music、video或link，不填默认为link
                     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空

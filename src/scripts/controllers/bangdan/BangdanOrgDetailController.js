@@ -375,7 +375,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
 
                 wx.onMenuShareTimeline({
                     title: WEIXINSHARE.shareTitle, // 分享标题
-                    link: location.href, // 分享链接
+                    link: WEIXINSHARE.shareUrl, // 分享链接
                     imgUrl: WEIXINSHARE.shareImg || 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png', // 分享图标
                     success: function () {
                         // 用户确认分享后执行的回调函数
@@ -395,7 +395,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
                 wx.onMenuShareAppMessage({
                     title: WEIXINSHARE.shareTitle, // 分享标题
                     desc: WEIXINSHARE.shareDesc, // 分享描述
-                    link: location.href, // 分享链接
+                    link: WEIXINSHARE.shareUrl, // 分享链接
                     imgUrl: WEIXINSHARE.shareImg || 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png', // 分享图标
                     type: 'link', // 分享类型,music、video或link，不填默认为link
                     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
@@ -416,7 +416,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
             });
 
             wx.error(function (res) {
-                alert(JSON.stringify(res, null, 4));
+                //alert(JSON.stringify(res, null, 4));
 
                 // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
 
