@@ -79,28 +79,28 @@
                     <div class="left-logo">
                         <div class="logo-outer bd-gold-border" ng-if="$index === 0" >
                             <img ng-src='{{item.logo}}' />
-                            <div class="funding" ng-if="item.isUnderFinancing">
+                            <div class="funding" ng-if="item.isUnderFinancing && vm.investRole">
                                 正在融资
                             </div>
                         </div>
 
                         <div class="logo-outer bd-silver-border" ng-if="$index === 1" >
                             <img ng-src='{{item.logo}}' />
-                            <div class="funding" ng-if="item.isUnderFinancing">
+                            <div class="funding" ng-if="item.isUnderFinancing && vm.investRole">
                                 正在融资
                             </div>
                         </div>
 
                         <div class="logo-outer bd-copper-border" ng-if="$index === 2" >
                             <img ng-src='{{item.logo}}' />
-                            <div class="funding" ng-if="item.isUnderFinancing">
+                            <div class="funding" ng-if="item.isUnderFinancing && vm.investRole">
                                 正在融资
                             </div>
                         </div>
 
                         <div class="logo-outer bd-normal-border" ng-if="$index > 2" >
                             <img ng-src='{{item.logo}}' />
-                            <div class="funding" ng-if="item.isUnderFinancing">
+                            <div class="funding" ng-if="item.isUnderFinancing && vm.investRole">
                                 正在融资
                             </div>
                         </div>
@@ -113,8 +113,8 @@
                             {{item.brief}}
                         </div>
                         <div class="bd-txt-phase">
-                            <span>{{item.phase}}</span>
-                            <span class="bd-dot bd-dot-gray"></span>
+                            <span ng-if="vm.investRole">{{item.phase}}</span>
+                            <span class="bd-dot bd-dot-gray" ng-if="vm.investRole"></span>
                             <span>{{item.industry}}</span>
                         </div>
                     </div>

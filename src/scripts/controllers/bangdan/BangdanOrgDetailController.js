@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('BangdanOrgDetailController', BangdanOrgDetailController);
 
-function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
+function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindService,
     $state, UserService, BangDanService, ErrorService, hybrid, $rootScope, $timeout, orgInfo) {
     var vm = this;
     vm.joinpro = joinpro;
@@ -16,6 +16,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
     vm.h5Href = true;
     vm.inApp = true;
     vm.downloadApp = downloadApp;
+    vm.investRole = false;
     init();
 
     function init() {
@@ -26,12 +27,24 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,
         }
 
         getProList();
+        initUser();
         getQ();
 
         var HOST = location.host;
         var shareUrl =
         'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
         initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.rank, shareUrl, vm.orgInfo.logo);
+    }
+
+    function initUser() {
+        FindService.getUserProfile()
+            .then(function temp(response) {
+                if (response.data) {
+                    if (response.data.investor) {
+                        vm.investRole = true;
+                    }
+                }
+            });
     }
 
     function getQ() {
