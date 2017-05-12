@@ -161,10 +161,10 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
     }
 
     function goProDetail(ccid, e) {
-        var obj = angular.element(e.currentTarget);
-        $timeout(function () {
-            obj.css('background-color', 'white');
-        }, 200);
+        // var obj = angular.element(e.currentTarget);
+        // $timeout(function () {
+        //     obj.css('background-color', 'white');
+        // }, 200);
 
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);

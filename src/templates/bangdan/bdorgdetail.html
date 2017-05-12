@@ -62,7 +62,7 @@
     <section class="bd-orgdetail-content">
         <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
             <li ng-if="vm.prolist" ng-repeat="item in vm.prolist track  by $index"
-            ng-click="vm.goProDetail(item.ccid, $event)" ng-mouseover="vm.hoverFunction($event)">
+            ng-click="vm.goProDetail(item.ccid, $event)" >
                 <div class="icon-left">
                     <div class="metal " ng-if="$index === 0" >
                         <img src="/styles/images/bangdan/top1.png" />
