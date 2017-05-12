@@ -66,7 +66,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
 
         BangDanService.getOrgProRank($stateParams.id, params)
         .then(function setdata(response) {
-            loading.hide('bangdanLoading');
+            loading.hide('bangdanDetailLoading');
             vm.prolist = vm.prolist.concat(response.data.data);
             if (response.data.totalPages) {
                 vm.page = response.data.page || 0;
@@ -118,7 +118,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
 
     function initWeixin(name, count, q, rank, url, logo) {
         window.WEIXINSHARE = {
-            shareTitle: name + '排名第' + rank + '|2017Q' + q + '风口机构排行榜',
+            shareTitle: name + '为第' + rank + '名 | 2017Q' + q + ' · 风口机构排行榜',
             shareUrl: url,
             shareImg: '' + logo + '',
             shareDesc: name + '' + count + '个投资项目都在这里',
@@ -327,7 +327,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
     }
 
     function fail(err) {
-        loading.hide('bangdanLoading');
+        loading.hide('bangdanDetailLoading');
         if (err.code === '403') {
             console.log(err.msg);
         } else if (err.code === '1') {

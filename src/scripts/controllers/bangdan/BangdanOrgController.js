@@ -45,10 +45,10 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
 
     function initWeixin(q, count) {
         window.WEIXINSHARE = {
-            shareTitle: '2017Q' + q + '风口机构排行榜，已有' + count + '家机构加入',
+            shareTitle: '【2017Q' + q + '· 风口机构排行榜】已有' + count + '家机构加入',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: '所有机构被投项目都在这里',
+            shareDesc: '所有机构的被投项目都在这里',
         };
 
         var obj = {};
