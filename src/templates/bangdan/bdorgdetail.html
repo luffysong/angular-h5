@@ -62,7 +62,7 @@
     <section class="bd-orgdetail-content">
         <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
             <li ng-if="vm.prolist" ng-repeat="item in vm.prolist track  by $index"
-            ng-click="vm.goProDetail(item.ccid)" >
+            ng-click="vm.goProDetail(item.ccid, $event)" ng-mouseover="vm.hoverFunction($event)">
                 <div class="icon-left">
                     <div class="metal " ng-if="$index === 0" >
                         <img src="/styles/images/bangdan/top1.png" />
@@ -150,6 +150,11 @@
             <img src="/styles/images/bangdan/loading.svg" alt="loading">
         </div>
         <div class="no-more" ng-if="vm.finish">已无更多数据</div>
+    </section>
+
+    <section class="bd-orgdetail-content-start" ng-if="vm.startloading" >
+        正在加载数据...&nbsp;
+        <img src="/styles/images/bangdan/loading.svg" alt="loading">
     </section>
 
     <footer>

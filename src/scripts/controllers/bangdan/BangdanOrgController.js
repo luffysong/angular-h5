@@ -10,6 +10,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.page = 0;
     vm.more = false;
     vm.busy = false;
+    vm.startloading = true;
     vm.displayMore = displayMore;
     vm.goOrgDetail = goOrgDetail;
     vm.joinOrg = joinOrg;
@@ -88,6 +89,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         };
         BangDanService.getOrgRank(request)
             .then(function (response) {
+                vm.startloading = false;
                 loading.hide('bangdanLoading');
                 vm.list = vm.list.concat(response.data.data);
                 if (!vm.total) {
@@ -138,7 +140,33 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     }
 
     function displayMore() {
-        getOrgRank();
+        if (vm.busy) return;
+        vm.busy = true;
+        var request = {
+            page: vm.page + 1,
+            pageSize: 10,
+        };
+        BangDanService.getOrgRank(request)
+            .then(function (response) {
+                $timeout(function () {
+                    vm.list = vm.list.concat(response.data.data);
+                    if (!vm.total) {
+                        vm.total = response.data.totalCount;
+                        initWeixin(vm.currQuarter, vm.total);
+                    }
+
+                    if (response.data.totalPages) {
+                        vm.page = response.data.page || 0;
+                        if (response.data.totalPages !== vm.page && response.data.data.length > 0) {
+                            vm.busy = false;
+                        } else {
+                            vm.finish = true;
+                            vm.more = true;
+                        }
+                    }
+                }, 500);
+
+            }).catch(fail);
     }
 
     function fail(err) {

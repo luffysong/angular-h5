@@ -17,6 +17,8 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
     vm.inApp = true;
     vm.downloadApp = downloadApp;
     vm.investRole = false;
+    vm.hoverFunction = hoverFunction;
+    vm.startloading = true;
     init();
 
     function init() {
@@ -25,6 +27,10 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
             initLinkme();
             vm.inApp = false;
         }
+
+        // $timeout(function () {
+        //     vm.startloading = false;
+        // }, 500);
 
         getProList();
         initUser();
@@ -101,6 +107,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
 
         BangDanService.getOrgProRank($stateParams.id, params)
         .then(function setdata(response) {
+            vm.startloading = false;
             loading.hide('bangdanDetailLoading');
             vm.prolist = vm.prolist.concat(response.data.data);
             if (response.data.totalPages) {
@@ -119,10 +126,46 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
     }
 
     function displayMore() {
-        getProList();
+        if (vm.busy) return;
+        vm.busy = true;
+
+        var params = {
+            page: vm.page + 1,
+            pageSize: 10,
+        };
+
+        BangDanService.getOrgProRank($stateParams.id, params)
+        .then(function setdata(response) {
+            $timeout(function () {
+
+                vm.prolist = vm.prolist.concat(response.data.data);
+                if (response.data.totalPages) {
+                    vm.page = response.data.page || 0;
+
+                    if (response.data.totalPages !== vm.page && response.data.data.length > 0) {
+                        vm.busy = false;
+                    } else {
+                        vm.finish = true;
+                        vm.more = true;
+                    }
+                }
+            }, 500);
+
+        })
+        .catch(fail);
     }
 
-    function goProDetail(ccid) {
+    function hoverFunction(e) {
+        var obj = angular.element(e.currentTarget);
+        obj.css('background-color', '#dfdfdf');
+    }
+
+    function goProDetail(ccid, e) {
+        var obj = angular.element(e.currentTarget);
+        $timeout(function () {
+            obj.css('background-color', 'white');
+        }, 200);
+
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
         var client = 'H5';

@@ -8,6 +8,11 @@
   <!--
   ui-sref="bangdan.orgbdDetail({id: item.orgId, rank: $index + 1})"
   -->
+  <div class="orgbd-list-content" ng-if="vm.startloading">
+      正在加载数据...&nbsp;
+      <img src="/styles/images/bangdan/loading.svg" alt="loading">
+  </div>
+
   <div class="orgbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
     <div class="org-item" ng-repeat="item in vm.list track by $index"
      ng-click="vm.goOrgDetail(item.orgId, $index + 1)">
