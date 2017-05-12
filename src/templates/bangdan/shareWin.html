@@ -50,9 +50,13 @@
         [分享成功后入驻]
     </div>
     <div class="bd-share-app" ng-if="vm.inApp">
-            <div class="share-app bd-share-wechat" ng-click="vm.shareWechat()"></div>
+            <div class="share-app" ng-click="vm.shareWechat()">
+                <img src="/styles/images/bangdan/wechat-f.png" />
+            </div>
             <div class="split-block"> </div>
-            <div class="share-app bd-share-webo" ng-click="vm.shareWechat('f')"></div>
+            <div class="share-app" ng-click="vm.shareWechat('f')">
+                <img src="/styles/images/bangdan/wechat-friends.png" />
+            </div>
     </div>
 
     <div class="bd-share-text share-txt-top1" ng-if="!vm.inApp">
