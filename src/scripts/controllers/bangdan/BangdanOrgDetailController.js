@@ -13,7 +13,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
     vm.goProDetail = goProDetail;
     vm.displayMore = displayMore;
     vm.rank = $stateParams.rank;
-    vm.h5Href = true;
+    vm.h5Href = false;
     vm.inApp = true;
     vm.downloadApp = downloadApp;
     vm.investRole = false;
