@@ -145,7 +145,10 @@
             </li>
 
         </ul>
-        <div class="more" ng-if="vm.busy && !vm.finish &&  vm.page">正在加载更多...</div>
+        <div class="more" ng-if="vm.busy && !vm.finish &&  vm.page">
+            正在加载更多...&nbsp;
+            <img src="/styles/images/bangdan/loading.svg" alt="loading">
+        </div>
         <div class="no-more" ng-if="vm.finish">已无更多数据</div>
     </section>
 
