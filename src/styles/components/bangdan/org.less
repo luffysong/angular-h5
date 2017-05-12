@@ -22,11 +22,19 @@
   }
   .orgbd-list {
     .org-item {
+        * {
+            user-select: none;
+        }
       margin-top: 14px;
       overflow: hidden;
-    //   &:hover{
-    //       background-color:#969FA9;
-    //   }
+      &:hover{
+          background-color:#C5CEDA;
+          .org-info {
+              .org-name{
+                  color: white;
+              }
+          }
+      }
       .org-number {
         display: inline-block;
         font-size: 20px;

@@ -151,14 +151,29 @@
             padding: 0;
             list-style-type: none;
             li{
+                * {
+                    user-select: none;
+                }
                 list-style-type: none;
                 height: auto;
                 overflow: hidden;
                 background-color: white;
-                // &:hover{
-                //     background-color:#969FA9;
-                //     color: white;
-                // }
+                &:hover{
+                    background-color:#C5CEDA;
+                    .txt-right{
+                        .txt-middle{
+                            .bd-txt-title,.bd-txt-brief,.bd-txt-phase{
+                                color: white;
+                            }
+                        }
+                        .sta-right{
+                            .sta-num,
+                            .sta-txt{
+                                color: white;
+                            }
+                        }
+                    }
+                }
                 .icon-left,.txt-right{
                     float: left;
                     height: 100%;
