@@ -13,8 +13,8 @@
       <img src="/styles/images/bangdan/loading.svg" alt="loading">
   </div>
 
-  <div class="orgbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
-    <div class="org-item" ng-repeat="item in vm.list track by $index"
+  <ul class="orgbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+    <li class="org-item" ng-repeat="item in vm.list track by $index"
      ng-click="vm.goOrgDetail(item.orgId, $index + 1)">
       <div class="org-number">
         <img src="/styles/images/bangdan/top1.png" ng-if="$index === 0">
@@ -41,8 +41,9 @@
           <div>约谈量</div>
         </div>
       </div>
-    </div>
-  </div>
+  </li>
+</ul>
+
   <footer ng-if="vm.busy && !vm.finish && vm.page">
       正在加载更多...&nbsp;
       <img src="/styles/images/bangdan/loading.svg" alt="loading">
