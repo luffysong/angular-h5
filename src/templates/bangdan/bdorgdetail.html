@@ -63,13 +63,16 @@
         <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
             <li ng-if="vm.prolist" ng-repeat="item in vm.prolist track  by $index">
                 <div class="icon-left">
-                    <div class="metal bd-gold-metal" ng-if="$index === 0" >
+                    <div class="metal " ng-if="$index === 0" >
+                        <img src="/styles/images/bangdan/top1.png" />
                     </div>
 
-                    <div class="metal bd-silver-metal" ng-if="$index === 1">
+                    <div class="metal " ng-if="$index === 1">
+                        <img src="/styles/images/bangdan/top2.png" />
                     </div>
 
-                    <div class="metal bd-copper-metal" ng-if="$index === 2">
+                    <div class="metal " ng-if="$index === 2">
+                        <img src="/styles/images/bangdan/top3.png" />
                     </div>
                     <div class="metal " ng-if="$index > 2">
                         <span>{{$index + 1}}</span>
