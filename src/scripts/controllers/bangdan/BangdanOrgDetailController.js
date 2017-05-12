@@ -204,7 +204,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
 
         function init() {
             sa.track('ViewPage', {
-                    source: 'org_share',
+                    source: 'organization',
                     org_id: vm.orgInfo.orgId + '',
                     page: 'org_share',
                 });
@@ -272,7 +272,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
 
         function init() {
             sa.track('ViewPage', {
-                    source: 'org_share',
+                    source: 'organization',
                     org_id: vm.orgInfo.orgId + '',
                     page: 'org_share',
                 });

@@ -20,11 +20,11 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
             vm.inApp = false;
         }
 
-        sa.track('ViewPage', {
-                source: 'share_page',
-                org_id: $stateParams.id + '',
-                page: 'share_page',
-            });
+        // sa.track('ViewPage', {
+        //         source: 'share_page',
+        //         org_id: $stateParams.id + '',
+        //         page: 'share_page',
+        //     });
 
         $('.J_commonHeaderWrapper').remove();
         getSingleOrgInfo(vm.id);
@@ -82,11 +82,11 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
             client = 'iOS';
         }
 
-        sa.track('ViewPage', {
-                source: 'share_page',
-                org_id: $stateParams.id + '',
-                page: 'organization',
-            });
+        // sa.track('ViewPage', {
+        //         source: 'share_page',
+        //         org_id: $stateParams.id + '',
+        //         page: 'organization',
+        //     });
 
         sa.track('OrgTopListClick',
           {

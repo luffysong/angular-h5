@@ -152,17 +152,40 @@ angular.module('defaultApp')
                 } else if (name === 'find.hotFocus') {
                     visitingPage = 'hotspot_select_list';
                     track = true;
+                }else if (name === 'bangdan.orgbdDetail') {
+                    visitingPage = 'organization';
+                    track = true;
+                }else if (name === 'bangdan.orgbd') {
+                    visitingPage = 'org_top_list';
+                    track = true;
+                }else if (name === 'bangdan.bdshare') {
+                    visitingPage = 'share_page';
+                    track = true;
                 }
+
                 if (type === 'name') {
                     return visitingPage;
                 } else {
                     return track;
                 }
+
+            }
+
+            function getOrgId(name, type) {
+                var _orgid = '';
+                if (name === 'bangdan.orgbdDetail'
+                    || name === 'bangdan.bdshare'
+                    || name === 'bangdan.orgbd') {
+                    _orgid = toParams.id;
+                }
+
+                return _orgid;
             }
 
             getPage(to.name) && sa.track('ViewPage', {
                 source: getPage(from.name, 'name'),
                 page: getPage(to.name, 'name'),
+                org_id: getOrgId(from.name, 'name'),
             });
         });
     }).run(function ($http, $rootScope, $location, $state, notify, Permission, UserService, $q, CredentialService) {

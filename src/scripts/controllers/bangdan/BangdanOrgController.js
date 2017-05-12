@@ -25,10 +25,10 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             vm.inApp = false;
         }
 
-        sa.track('ViewPage', {
-                source: 'org_top_list',
-                page: 'org_top_list',
-            });
+        // sa.track('ViewPage', {
+        //         source: 'org_top_list',
+        //         page: 'org_top_list',
+        //     });
 
         $('.J_commonHeaderWrapper').remove();
         getQ();
@@ -97,11 +97,11 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             client = 'iOS';
         }
 
-        sa.track('ViewPage', {
-                source: 'org_top_list',
-                org_id: $stateParams.id + '',
-                page: 'organization',
-            });
+        // sa.track('ViewPage', {
+        //         source: 'org_top_list',
+        //         org_id: $stateParams.id + '',
+        //         page: 'organization',
+        //     });
 
         sa.track('OrgTopListClick',
           {
