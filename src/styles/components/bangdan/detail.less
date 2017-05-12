@@ -1,0 +1,342 @@
+.bd-org-detail{
+    width: 100%;
+    height: auto;
+    max-width:768px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+
+    .bd-orgdetail-head{
+        .bd-orgdetail-logo,
+        .bd-orgdetail-rank,
+        .bd-orgdetail-sta,
+        .bd-orgdetail-push{
+            width: 100%;
+            position: relative;
+        }
+        .bd-orgdetail-logo{
+            top: 20px;
+            text-align: center;
+            .bd-orgdetail-img{
+                width: 60px;
+                height: 60px;
+                //border: 1px solid #E2B250;
+                border-radius: 3.5px;
+                margin: 0 auto;
+                text-align: center;
+                overflow: hidden;
+                background: #fff no-repeat 50%;
+                background-size: contain;
+                img{
+                    width: 60px;
+                    height: 60px;
+                }
+            }
+            .bd-belt{
+                position: relative;
+                top:-15px;
+                margin: 0 auto;
+                width: 110px;
+                height: 18px;
+            }
+            span{
+                top:-10px;
+                position: relative;
+                font-family: PingFangSC-Regular;
+                font-size: 16px;
+                color: #E2B250;
+                letter-spacing: 0;
+                text-shadow: 0 0 6px rgba(0,0,0,0.80);
+                margin: 0 auto;
+                display: inline-block;
+            }
+        }
+        .bd-orgdetail-rank{
+            top:20px;
+            font-family: PingFangSC-Semibold;
+            font-size: 22px;
+            color: #FFCB60;
+            letter-spacing: 0;
+            text-align: center;
+            span:nth-child(2){
+                font-family: PingFangSC-Regular;
+                font-size: 12px;
+                color: rgba(255,227,168,0.70);
+                letter-spacing: 0;
+            }
+        }
+        .bd-orgdetail-sta{
+            top:26px;
+            .bd-sta{
+                width: 33%;
+                margin: 0 auto;
+                text-align: center;
+                float: left;
+                .num{
+                    font-size: 20px;
+                    color: #E2B250;
+                    letter-spacing: 0;
+                }
+                .txt{
+                    font-size: 12px;
+                    color: rgba(255,227,168,0.70);
+                    letter-spacing: 0;
+                    line-height: 14px;
+                }
+            }
+            .split-line{
+                float: left;
+                width:1px;
+                height: 25px;
+                margin-top:10px;
+                background-color: rgba(255,227,168,0.70);
+            }
+
+        }
+        .bd-orgdetail-push{
+            top:36px;
+            .push-left,.push-right{
+                float: left;
+            }
+
+            .push-left{
+                width: 70%;
+                height: 38px;
+                font-size: 12px;
+                color: rgba(255,227,168,0.70);
+                letter-spacing: 0;
+                line-height: 38px;
+                padding-left: 10px;
+
+                @media screen and (max-width: 320px) {
+                        width: 65%;
+                        line-height: 19px;
+                }
+            }
+            .push-right{
+                height: 38px;
+                width: 30%;
+                right: 0px;
+                //float:right;
+                //margin-top: -25px;
+                border-top-left-radius: 20px;
+                border-bottom-left-radius: 20px;
+                background-image: linear-gradient(90deg, rgba(226,178,80,0.80) 0%, #E2B250 100%);
+                div{
+                    width: 100%;
+                    font-size: 11px;
+                    color: #000000;
+                    letter-spacing: 0;
+                    line-height: 13px;
+                    line-height: 17px;
+                    text-align: center;
+                }
+                div:first-child{
+                    margin-top:2px;
+                }
+                @media screen and (max-width: 320px) {
+                        width: 35%;
+                }
+            }
+        }
+    }
+
+    .bd-orgdetail-content{
+        position: relative;
+        //padding: 0 10px;
+        background-color: white;
+        width: 100%;
+        height: auto;
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            li{
+                list-style-type: none;
+                height: auto;
+                overflow: hidden;
+                background-color: white;
+                .icon-left,.txt-right{
+                    float: left;
+                    height: 100%;
+                }
+                .icon-left{
+                    width: 13%;
+                     display:table;
+                     padding: 12px 0px;
+                    .metal{
+                        display:table-cell;
+                        vertical-align:middle;
+                        width: 30px;
+                        height: 30px;
+                        background-size: 30px 30px;
+                        top: 17.5px;
+                        position: relative;
+                        text-align: center;
+                        img{
+                            width: 30px;
+                        }
+                        span{
+                            font-size: 20px;
+                            color: #C5CEDA;
+                            letter-spacing: 0;
+                            line-height: 22px;
+                            margin: 0 auto;
+                        }
+                    }
+                }
+                .txt-right{
+                    width:87%;
+                    padding: 12px 0px;
+                    border-bottom: 1px solid #F2F4F5;
+                    .left-logo,.txt-middle,.sta-right{
+                        float: left;
+                    }
+                    .left-logo{
+                        width:20%;
+                        .logo-outer{
+                            border-radius: 5px;
+                            text-align: center;
+                            overflow: hidden;
+                            height: 55px;
+                            width: 55px;
+                            position: relative;
+                            img{
+                                border-radius: 5px;
+                                height: 55px;
+                                width: 55px;
+                            }
+                            .funding{
+                                position: absolute;
+                                text-align: center;
+                                height: 18px;
+                                width: 55px;
+                                font-size: 10px;
+                                color: #FFFFFF;
+                                letter-spacing: 0;
+                                line-height: 18px;
+                                background-color: black;
+                                opacity: 0.4;
+                                margin-top: -18px;
+                            }
+                        }
+                    }
+                    .txt-middle{
+                        width:60%;
+                        padding-left: 4px;
+                        .bd-txt-title,
+                        .bd-txt-brief,
+                        .bd-txt-phase{
+                            padding: 2px 0px;
+                        }
+                        .bd-txt-title{
+                            font-size: 16px;
+                            //color: #CF9D3E;
+                            letter-spacing: 0;
+                            line-height: 16px;
+                            color: #222C38;
+                            font-weight: bold;
+                        }
+                        .bd-txt-brief{
+                            font-size: 13px;
+                            color: #969FA9;
+                            letter-spacing: 0;
+                            line-height: 16px;
+                        }
+                        .bd-txt-phase{
+                            font-size: 13px;
+                            color: #969FA9;
+                            letter-spacing: 0;
+                            line-height: 16px;
+                        }
+                    }
+                    .sta-right{
+                        width: 20%;
+                        text-align: center;
+                        margin-top:14px;
+                        .sta-num{
+                            font-family: PingFangSC-Semibold;
+                            font-size: 23px;
+                            color: #CF9D3E;
+                            color: #222C38;
+                            letter-spacing: 0;
+                            line-height: 24px;
+                        }
+                        .sta-txt{
+                            font-family: PingFangSC-Regular;
+                            font-size: 12px;
+                            color: #969FA9;
+                            letter-spacing: 0;
+                            line-height: 14px;
+                        }
+                    }
+                }
+            }
+        }
+        .more,.no-more{
+             background-color: white;
+              text-align: center;
+              color: #888;
+              font-size: 14px;
+              height: 40px;
+              line-height: 40px;
+        }
+
+    }
+
+
+    footer{
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        height: 49px;
+        border-top: 1px solid #E7E7E7;
+        background-color: #FFF;
+        //background-color: white;
+        //background: rgba(255,255,255,0.90);
+        box-shadow: 0 0 0 0 rgba(0,0,0,0.15);
+        .left,.right{
+            float: left;
+        }
+        .left{
+            width:60%;
+            line-height: 49px;
+            span{
+                margin-left: 20px;
+                font-family: PingFangSC-Regular;
+                font-size: 15px;
+                color: #5A626D;
+                letter-spacing: 0;
+                line-height: 22px;
+            }
+            @media screen and (max-width: 320px) {
+                    width:50%;
+            }
+        }
+        .right{
+            width:40%;
+            .join-btn{
+                margin-top: 7px;
+                //margin-right: 10px;
+                right:3px;
+                position: relative;
+                width:138px;
+                height: 32px;
+                background: #6BA2FC;
+                border-radius: 4px;
+                line-height: 32px;
+                text-align: center;
+                cursor: pointer;
+                span{
+                    font-family: PingFangSC-Regular;
+                    font-size: 15px;
+                    color: #FFFFFF;
+                    letter-spacing: 0;
+                    line-height: 18px;
+                }
+            }
+            @media screen and (max-width: 320px) {
+                    width:50%;
+            }
+        }
+    }
+}

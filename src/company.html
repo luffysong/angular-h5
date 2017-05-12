@@ -22,11 +22,17 @@
 <!-- endbuild -->
 <script>
     var cid = purl(location.href).segment(2);
+    var ccid = purl(location.href).segment(2);
 
     //线上环境使用nginx代理 此处为方便本地测试
     if(!parseInt(cid)){
         cid = purl(location.href).param('cid');
     }
+
+    if(!parseInt(ccid)){
+        ccid = purl(location.href).param('ccid');
+    }
+
     var fromWeixin = purl(location.href).param('fromWeixin');
     var fromMailEDM = purl(location.href).param('fromMailEDM');
     var ktm_source = purl(location.href).param('ktm_source');
@@ -84,34 +90,60 @@
         }, 500);
         window.addEventListener('pagehide', preventPopup);
     }
-    $.getJSON(API + cid + '/sharebasic/v3',function(data){
-        if(data.code === SUCCESS){
-            data = data.data;
-            makeQrcode('https://36kr.com/app/tou?ktm_source=comshareh5&crmCompany=' + data.ccid);
-            var title = $('title').html();
-            $('title').html(title+ '：'+ data.name);
-            $(function(){
-                $('#logo').attr('src', data.logo + '?v');
-                $('#logo').error(function(e) {
-                    this.src = '//krplus-pic.b0.upaiyun.com/avatar/201606/27023623/g5zmv2gp7gacp0ly.png';
-                });
-                //if (fromWeixin) {
-                //  $('#downloadBtn').attr('href', 'http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment');
-              //  }else {
-                  //$('#downloadBtn').attr('href', 'http://rong.36kr.com/company/' + data.cid + '/universallink');
-                //}
-                //$('#downloadBtn').attr('href', 'http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment');
-                $('#name').html(data.name);
-                $('#brief').html(data.brief);
-                $('#tags').html(data.tags);
-                $('#hot').html(data.advantage);
-                if(!data.advantage){
-                    $('.hot').hide();
+    if (cid) {
+        $.getJSON(API + cid + '/sharebasic/v3',function(data){
+            if(data.code === SUCCESS){
+                data = data.data;
+                if(data){
+                    makeQrcode('https://36kr.com/app/tou?ktm_source=comshareh5&crmCompany=' + data.ccid);
+                    var title = $('title').html();
+                    $('title').html(title+ '：'+ data.name);
+                    $(function(){
+                        $('#logo').attr('src', data.logo + '?v');
+                        $('#logo').error(function(e) {
+                            this.src = '//krplus-pic.b0.upaiyun.com/avatar/201606/27023623/g5zmv2gp7gacp0ly.png';
+                        });
+                        $('#name').html(data.name);
+                        $('#brief').html(data.brief);
+                        $('#tags').html(data.tags);
+                        $('#hot').html(data.advantage);
+                        if(!data.advantage){
+                            $('.hot').hide();
+                        }
+                    });
+                }else {
+                    ifCcid();
                 }
-            });
+            }
+        });
+    } else if(ccid) {
+        ifCcid();
+    }
 
-        }
-    });
+    function ifCcid(){
+        $.getJSON(API + ccid + '/sharebasic/v3?id=ccid',function(data){
+            if(data.code === SUCCESS){
+                data = data.data;
+                makeQrcode('https://36kr.com/app/tou?ktm_source=comshareh5&crmCompany=' + data.ccid);
+                var title = $('title').html();
+                $('title').html(title+ '：'+ data.name);
+                $(function(){
+                    $('#logo').attr('src', data.logo + '?v');
+                    $('#logo').error(function(e) {
+                        this.src = '//krplus-pic.b0.upaiyun.com/avatar/201606/27023623/g5zmv2gp7gacp0ly.png';
+                    });
+                    //$('#downloadBtn').attr('href', 'http://a.app.qq.com/o/simple.jsp?pkgname=com.android36kr.investment');
+                    $('#name').html(data.name);
+                    $('#brief').html(data.brief);
+                    $('#tags').html(data.tags);
+                    $('#hot').html(data.advantage);
+                    if(!data.advantage){
+                        $('.hot').hide();
+                    }
+                });
+            }
+        });
+    }
 
     //EDM中来的请求自动跳转到应用宝下载
     if(fromMailEDM){
@@ -129,8 +161,14 @@
     function initLinkme() {
         var krdata = {};
         krdata.type =  'live';
-        krdata.params =
-        '{"openlink":"https://' + HOST + '/m/company.html?cid='+cid+'","krtou":"krtou://company/'+cid+'"  }';
+        if (cid) {
+            krdata.params =
+            '{"openlink":"https://' + HOST + '/m/company.html?cid='+cid+'","krtou":"krtou://company/'+cid+'"  }';
+        }
+        if(ccid){
+            krdata.params =
+            '{"openlink":"https://' + HOST + '/m/company.html?ccid='+ccid+'","krtou":"krtou://crmCompany/'+ccid+'"  }';
+        }
 
         window.linkedme.init('3a89d6c23e6988e0e600d63ca3c70636',
         { type: 'live' }, function (err, res) {

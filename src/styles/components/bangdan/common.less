@@ -1,0 +1,303 @@
+/* 定义属性或者类名 要加上bd榜单前缀*/
+
+@bdBgrColor:black;
+
+
+//详情页面背景
+.bd-detail-bgp{
+    background: url('images/bangdan/bddetailhead.png') no-repeat center;
+    height: 256px;
+    width: 100%;
+}
+.bd-gold-belt{
+    background: url('images/bangdan/bd-gold-belt.png') no-repeat center;
+}
+.bd-cilver-belt{
+    background: url('images/bangdan/bd-cilver-belt.png') no-repeat center;
+}
+.bd-copper-belt{
+    background: url('images/bangdan/bd-copper-belt.png') no-repeat center;
+}
+
+.bd-gold-metal{
+    background: url('images/bangdan/bd-gold-metal.png') no-repeat center;
+}
+.bd-silver-metal{
+    background: url('images/bangdan/bd-silver-metal.png') no-repeat center;
+}
+.bd-copper-metal{
+    background: url('images/bangdan/bd-copper-metal.png') no-repeat center;
+}
+.bd-share-wechat{
+    background: url('images/bangdan/wechat-f.png') no-repeat center;
+}
+.bd-share-webo{
+    background: url('images/bangdan/wechat-friends.png') no-repeat center;
+}
+.bd-gold-border{
+    border:1px solid #CF9D3E;
+}
+
+.bd-silver-border{
+    border:1px solid #D9D6CE ;
+}
+
+.bd-copper-border{
+    border:1px solid #D99557;
+}
+
+.bd-normal-border{
+    border:1px solid #E7E7E7;
+}
+
+.bd-dot{
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.bd-downloadApp{
+    position: fixed;
+    width: 92px;
+    height: 52px;
+    right: 15px;
+    bottom: 69px;
+    z-index: 11111;
+    background: url('images/bangdan/bd-download-logo.png') no-repeat center;
+    //box-shadow: 0 3px 5px 0 rgba(34,44,56,0.30);
+    background-size: 92px 52px;
+    // img{
+    //     width: 92px;
+    //     height: 52px;
+    //     //box-shadow: 0 3px 5px 0 rgba(34,44,56,0.30);
+    // }
+}
+
+.top-3Color {
+  color: #CF9D3E !important;
+}
+
+.bd-dot-gray{
+    background: #969FA9;
+}
+
+.bd-dot-yel{
+    background: rgba(255,227,168,0.70);;
+}
+
+.bd-nativeAlert_wrap {
+    background: rgba(0, 0, 0, 0.60);
+    overflow: visible;
+    .modal-dialog {
+        margin-top: 15px;
+        margin-left: 7.5%;
+        margin-right: 7.5%;
+    }
+    .modal-content {
+        width: 100%;
+        padding-bottom: 0;
+        overflow: visible;
+    }
+    .modal-content {
+        border: none 0;
+    }
+    .nativeAlert_pop {
+        position: relative;
+        overflow: visible;
+        padding-top: 30px;
+        //width: 320px;
+        height: 510px;
+        background: url('images/bangdan/bd-share-bgp.png') no-repeat center;
+        background-size: 100% 510px;
+        .pop-close {
+            position: absolute;
+            bottom: -56px;
+            width: 36px;
+            height: 36px;
+            transform: translate(-50%, 0);
+            left: 50%;
+        }
+        .bd-share-logo{
+            top:30px;
+            position: relative;
+            text-align: center;
+            .bd-share-img{
+                width: 70px;
+                height: 70px;
+                //border: 1px solid #E2B250;
+                border-radius: 3.5px;
+                margin: 0 auto;
+                text-align: center;
+                overflow: hidden;
+                background: #fff no-repeat 50%;
+                background-size: contain;
+                img{
+                    width: 70px;
+                    height: 70px;
+                }
+            }
+            .bd-belt{
+                position: relative;
+                top:-15px;
+                margin: 0 auto;
+                width: 110px;
+                height: 18px;
+            }
+            span{
+                top:-5px;
+                position: relative;
+                font-family: PingFangSC-Regular;
+                font-size: 18px;
+                color: #E2B250;
+                letter-spacing: 0;
+                text-shadow: 0 0 6px rgba(0,0,0,0.80);
+                margin: 0 auto;
+                display: inline-block;
+            }
+        }
+        .bd-share-rank{
+            height: 40px;
+            text-align: center;
+            margin-top:35px;
+            .rank-num{
+                span{
+                    display: inline-block;
+                    padding: 5px;
+                }
+                .h-line{
+                    //width: 10px;
+                    //height: 1px;
+                    color: #FFC244;
+                    font-weight: 600;
+                    //background-color: #FFC244;
+                }
+                .num{
+                    font-size: 65px;
+                    color: #FFC244;
+                    letter-spacing: 0;
+                    line-height: 80px;
+                    font-style:italic;
+                    top: 10px;
+                    position: relative;
+                    left:-5px;
+                }
+                .txt{
+                    font-size: 22px;
+                    color: #E2B250;
+                    letter-spacing: 0;
+                }
+            }
+            .total-rank{
+                font-family: PingFangSC-Regular;
+                font-size: 14px;
+                color: rgba(255,227,168,0.70);
+                letter-spacing: 0;
+                line-height: 20px;
+            }
+        }
+        .bd-share-promote{
+            width: 100%;
+            text-align: center;
+            margin-top:100px;
+            .center-div{
+                width: 80%;
+                font-size: 16px;
+                color: #FFC244;
+                letter-spacing: 0;
+                line-height: 30px;
+                margin: 0 auto;
+            }
+        }
+        .bd-share-text{
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255,227,168,0.50);
+            letter-spacing: 0;
+        }
+        .share-txt-top1{
+            margin-top: 30px;
+        }
+        .share-txt-top2{
+            margin-top: 10px;
+        }
+
+        .bd-share-app{
+            width: 100%;
+            margin-top:10px;
+            text-align: center;
+            .share-app{
+                display: inline-block;
+                height: 30px;
+                width: 30px;
+                background-size: 30px 30px;
+            }
+            .split-block{
+                display: inline-block;
+                width:70px;
+            }
+        }
+
+        .bd-share-txt{
+            bottom: 30px;
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            @media screen and (max-width: 320px) {
+                    bottom: 15px;
+            }
+            span{
+                font-family: PingFangSC-Regular;
+                font-size: 12px;
+                color: rgba(255,227,168,0.70);
+                letter-spacing: 0;
+                line-height: 14px;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+    .bd-detail-bgp{
+      background-size: 768px 100%;
+    }
+}
+
+@media screen and (max-width: 414px) {
+  .bd-detail-bgp{
+    background-size: 414px 100%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+      .bd-detail-bgp{
+        background-size: 375px 100%;
+      }
+}
+
+@media screen and (max-width: 320px) {
+    .bd-detail-bgp{
+      background-size: 320px 100%;
+    }
+}

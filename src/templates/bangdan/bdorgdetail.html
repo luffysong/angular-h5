@@ -1,0 +1,154 @@
+<div ng-if="!loadingInst.bangdanLoading" style="">
+<div class="bd-org-detail">
+    <section class="bd-orgdetail-head bd-detail-bgp">
+            <div class="bd-orgdetail-logo">
+                <div class="bd-orgdetail-img bd-gold-border"
+                ng-if="vm.rank === '1'" style="background-image: url({{vm.orgInfo.logo}})">
+                <!--
+                    <img ng-src="{{vm.orgInfo.logo}}" />-->
+                </div>
+                <div class="bd-orgdetail-img bd-silver-border" ng-if="vm.rank === '2'"
+                style="background-image: url({{vm.orgInfo.logo}})">
+                <!--
+                    <img ng-src="{{vm.orgInfo.logo}}" />-->
+                </div>
+
+                <div class="bd-orgdetail-img bd-copper-border" ng-if="vm.rank === '3'"
+                style="background-image: url({{vm.orgInfo.logo}})">
+                <!--
+                    <img ng-src="{{vm.orgInfo.logo}}" />-->
+                </div>
+                <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.rank > 3"
+                    style="background-image: url({{vm.orgInfo.logo}})">
+                    <!--
+                    <img ng-src="{{vm.orgInfo.logo}}" />-->
+                </div>
+
+                <div class="bd-belt bd-gold-belt" ng-if="vm.rank === '1'"></div>
+                <div class="bd-belt bd-cilver-belt" ng-if="vm.rank === '2'"></div>
+                <div class="bd-belt bd-copper-belt" ng-if="vm.rank === '3'"></div>
+                <div class="bd-belt " ng-if="vm.rank >3"></div>
+                <span>{{vm.orgInfo.name}}</span>
+            </div>
+            <div class="bd-orgdetail-rank">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>第&nbsp;{{vm.rank}}&nbsp;名</span><span>/本季度</span>
+            </div>
+            <div class="bd-orgdetail-sta">
+                    <div class="bd-sta">
+                        <div class="num" >{{vm.orgInfo.projectCount}}</div>
+                        <div class="txt">机构项目数</div>
+                    </div>
+                    <div class="split-line"></div>
+                    <div class="bd-sta">
+                        <div class="num">{{vm.orgInfo.interviewCount}}</div>
+                        <div class="txt">Q{{vm.currQuarter}}总约谈数</div>
+                    </div>
+                    <div class="split-line"></div>
+                    <div class="bd-sta">
+                        <div class="num">{{vm.orgInfo.accessCount}}</div>
+                        <div class="txt">Q{{vm.currQuarter}}总浏览数</div>
+                    </div>
+            </div>
+            <div class="bd-orgdetail-push">
+                <div class="push-left">
+                    * 以下项目按本季度被约谈量排序，实时更新
+                </div>
+                <div class="push-right" ng-click="vm.joinpro('forward')">
+                        <div>转发支持</div>
+                        <div>已有{{vm.orgInfo.forwardCount}}人转发</div>
+                </div>
+            </div>
+    </section>
+    <section class="bd-orgdetail-content">
+        <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+            <li ng-if="vm.prolist" ng-repeat="item in vm.prolist track  by $index">
+                <div class="icon-left">
+                    <div class="metal " ng-if="$index === 0" >
+                        <img src="/styles/images/bangdan/top1.png" />
+                    </div>
+
+                    <div class="metal " ng-if="$index === 1">
+                        <img src="/styles/images/bangdan/top2.png" />
+                    </div>
+
+                    <div class="metal " ng-if="$index === 2">
+                        <img src="/styles/images/bangdan/top3.png" />
+                    </div>
+                    <div class="metal " ng-if="$index > 2">
+                        <span>{{$index + 1}}</span>
+                    </div>
+                </div>
+                <div class="txt-right" ng-click="vm.goProDetail(item.ccid)">
+                    <div class="left-logo">
+                        <div class="logo-outer bd-gold-border" ng-if="$index === 0" >
+                            <img ng-src='{{item.logo}}' />
+                            <div class="funding" ng-if="item.isUnderFinancing && vm.investRole">
+                                正在融资
+                            </div>
+                        </div>
+
+                        <div class="logo-outer bd-silver-border" ng-if="$index === 1" >
+                            <img ng-src='{{item.logo}}' />
+                            <div class="funding" ng-if="item.isUnderFinancing && vm.investRole">
+                                正在融资
+                            </div>
+                        </div>
+
+                        <div class="logo-outer bd-copper-border" ng-if="$index === 2" >
+                            <img ng-src='{{item.logo}}' />
+                            <div class="funding" ng-if="item.isUnderFinancing && vm.investRole">
+                                正在融资
+                            </div>
+                        </div>
+
+                        <div class="logo-outer bd-normal-border" ng-if="$index > 2" >
+                            <img ng-src='{{item.logo}}' />
+                            <div class="funding" ng-if="item.isUnderFinancing && vm.investRole">
+                                正在融资
+                            </div>
+                        </div>
+                    </div>
+                    <div class="txt-middle">
+                        <div class="bd-txt-title" ng-class="{true:'top-3Color',false:''}[$index < 3]">
+                                {{item.name}}
+                        </div>
+                        <div class="bd-txt-brief">
+                            {{item.brief}}
+                        </div>
+                        <div class="bd-txt-phase">
+                            <span >{{item.phase}}</span>
+                            <span class="bd-dot bd-dot-gray" ></span>
+                            <span>{{item.industry}}</span>
+                        </div>
+                    </div>
+                    <div class="sta-right">
+                            <div class="sta-num" ng-class="{true:'top-3Color',false:''}[$index < 3]">
+                                    {{item.interviewCount}}
+                            </div>
+                            <div class="sta-txt">
+                                    约谈量
+                            </div>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+        <div class="more" ng-if="vm.busy && !vm.finish &&  vm.page">正在加载更多...</div>
+        <div class="no-more" ng-if="vm.finish">已无更多数据</div>
+    </section>
+
+    <footer>
+        <div class="left">
+                <span>你的项目没上榜吗？</span>
+        </div>
+        <div class="right">
+            <div class="join-btn" ng-click="vm.joinpro()">
+                <span>立即加入</span></div>
+        </div>
+    </footer>
+</div>
+
+ <div ng-include="'templates/bangdan/common/downloadApp.html'"></div>
+ </div>
+
+ <loading loading="bangdanLoading"></loading>

@@ -415,6 +415,37 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         templateUrl: 'templates/activity/investorSuccess.html',
     });
 
+    //榜单--页面相关------------
+    $stateProvider.state('bangdan', {
+        url: '/bangdan',
+        abstract: true,
+        template: '<div ui-view></div>'
+    });
+
+    $stateProvider.state('bangdan.orgbd', {
+        url: '/orgbd',
+        controllerAs: 'vm',
+        controller: 'BangdanOrgController',
+        templateUrl: 'templates/bangdan/bdorg.html',
+    });
+
+    $stateProvider.state('bangdan.orgbdDetail', {
+        url: '/orgbddetail?{id}&{rank}',
+        controllerAs: 'vm',
+        controller: 'BangdanOrgDetailController',
+        templateUrl: 'templates/bangdan/bdorgdetail.html',
+        resolve: {
+            orgInfo: getBangdanOrgInfo,
+        }
+    });
+
+    $stateProvider.state('bangdan.bdshare', {
+        url: '/bdshare?{id}&{rank}',
+        controllerAs: 'vm',
+        controller: 'BangdanShareDetailController',
+        templateUrl: 'templates/bangdan/bdshare.html',
+    });
+
     //-----------------------
     //融资季活动
     $stateProvider.state('rongzi', {
@@ -672,6 +703,10 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         return RongziService.getInvestor({
             category: parseInt($stateParams.category)
         });
+    }
+
+    function getBangdanOrgInfo(BangDanService, $stateParams) {
+        return BangDanService.getSingleOrgInfo($stateParams.id);
     }
 
 });
