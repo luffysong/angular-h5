@@ -6,7 +6,7 @@ angular.module('defaultApp.service').service('BangDanService', function(BasicSer
 
     //机构排行
     this.getOrgRank = function (request) {
-        return $http.get(BASE_URL + '/org?' + $.param(request));
+        return $http.get(BASE_URL + '/org/list?' + $.param(request));
     };
 
     //单个机构详情

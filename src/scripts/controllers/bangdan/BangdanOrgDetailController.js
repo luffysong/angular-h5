@@ -392,6 +392,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
                     imgUrl: WEIXINSHARE.shareImg || 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png', // 分享图标
                     success: function () {
                         // 用户确认分享后执行的回调函数
+                        shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
                             window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
                         }
@@ -399,6 +400,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
 
                     cancel: function () {
                         // 用户取消分享后执行的回调函数
+                        shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
                             window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
                         }
@@ -414,6 +416,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
                     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                     success: function () {
                         // 用户确认分享后执行的回调函数
+                        shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
                             window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
                         }
@@ -421,6 +424,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
 
                     cancel: function () {
                         // 用户取消分享后执行的回调函数
+                        shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
                             window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
                         }
@@ -436,6 +440,25 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
             });
 
         }, 'jsonp');
+    }
+
+    function shareSA() {
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+
+        sa.track('OrgTopListClick',
+          {
+            source:'organization',
+            target:'share',
+            org_id: $stateParams.id + '',
+            client:client,
+        });
     }
 
 }
