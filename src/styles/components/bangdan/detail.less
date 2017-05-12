@@ -158,9 +158,18 @@
                 height: auto;
                 overflow: hidden;
                 background-color: white;
+
                 &:hover{
                     background-color:#C5CEDA;
+                    .icon-left{
+                        .metal{
+                            span{
+                                color: white;
+                            }
+                        }
+                    }
                     .txt-right{
+                        border-bottom: 1px solid #C5CEDA;
                         .txt-middle{
                             .bd-txt-title,.bd-txt-brief,.bd-txt-phase{
                                 color: white;
@@ -177,11 +186,13 @@
                 .icon-left,.txt-right{
                     float: left;
                     height: 100%;
+                    overflow: hidden;
                 }
                 .icon-left{
                     width: 13%;
                      display:table;
                      padding: 12px 0px;
+
                     .metal{
                         display:table-cell;
                         vertical-align:middle;

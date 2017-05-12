@@ -61,7 +61,8 @@
     </section>
     <section class="bd-orgdetail-content">
         <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
-            <li ng-if="vm.prolist" ng-repeat="item in vm.prolist track  by $index">
+            <li ng-if="vm.prolist" ng-repeat="item in vm.prolist track  by $index"
+            ng-click="vm.goProDetail(item.ccid)" >
                 <div class="icon-left">
                     <div class="metal " ng-if="$index === 0" >
                         <img src="/styles/images/bangdan/top1.png" />
@@ -78,7 +79,7 @@
                         <span>{{$index + 1}}</span>
                     </div>
                 </div>
-                <div class="txt-right" ng-click="vm.goProDetail(item.ccid)">
+                <div class="txt-right" >
                     <div class="left-logo">
                         <div class="logo-outer bd-gold-border" ng-if="$index === 0"
                         style="background-image: url({{item.logo}})"
