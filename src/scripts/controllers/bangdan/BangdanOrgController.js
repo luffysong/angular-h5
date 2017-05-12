@@ -33,6 +33,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         $('.J_commonHeaderWrapper').remove();
         getQ();
         getOrgRank();
+        initPxLoader();
     }
 
     function getQ() {
@@ -41,6 +42,24 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
         initTitle('2017Q' + vm.currQuarter + '·风口机构排行榜');
+    }
+
+    function initPxLoader() {
+        var loader = new PxLoader();
+        var imgArr = document.getElementsByTagName('img');
+        for (var i = 0; i < imgArr.length; i++) {
+            var pxImage = new PxLoaderImage(imgArr[i].src);
+            pxImage.imageNumber = i + 1;
+            loader.add(pxImage);
+        }
+
+        loader.addProgressListener(function (e) {});
+
+        loader.addCompletionListener(function (e) {
+            vm.picState = true;
+        });
+
+        loader.start();
     }
 
     function initWeixin(q, count) {

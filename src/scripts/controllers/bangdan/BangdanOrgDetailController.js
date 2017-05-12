@@ -29,11 +29,28 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
         getProList();
         initUser();
         getQ();
+        initPxLoader();
 
         var HOST = location.host;
         var shareUrl =
         'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
         initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.rank, shareUrl, vm.orgInfo.logo);
+    }
+
+    function finish() {
+        var p1 = new Promise(function (resolve) {
+            initPxLoader();
+        });
+
+        var p2 = new Promise(function (resolve) {
+            getProList();
+        });
+
+        var p = Promise.all([p1, p2]).then(function (result) {
+            loading.hide('bangdanDetailLoading');
+        }).catch(function () {
+            loading.hide('bangdanDetailLoading');
+        });
     }
 
     function initUser() {
@@ -53,6 +70,24 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
         initTitle('2017Q' + vm.currQuarter + '·风口机构排行榜');
+    }
+
+    function initPxLoader() {
+        var loader = new PxLoader();
+        var imgArr = document.getElementsByTagName('img');
+        for (var i = 0; i < imgArr.length; i++) {
+            var pxImage = new PxLoaderImage(imgArr[i].src);
+            pxImage.imageNumber = i + 1;
+            loader.add(pxImage);
+        }
+
+        loader.addProgressListener(function (e) {});
+
+        loader.addCompletionListener(function (e) {
+            vm.picState = true;
+        });
+
+        loader.start();
     }
 
     function getProList() {
