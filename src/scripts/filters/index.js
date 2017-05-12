@@ -18,3 +18,4 @@ require('./demoNameDufault2');
 require('./findDefault');
 require('./month');
 require('./share');
+require('./splitName');

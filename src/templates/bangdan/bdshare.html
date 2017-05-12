@@ -28,7 +28,7 @@
     </div>
   </div>
   <div class="member">
-    <p>我是<span>{{vm.data.name}}</span>家族成员</p>
+    <p>我是<span>{{vm.data.name | splitName: 10}}</span>家族成员</p>
     <p>为Ta站台</p>
   </div>
   <!--
@@ -36,7 +36,9 @@
   ui-sref="bangdan.orgbd"
   -->
   <div class="go-btn go-list"  ng-click="vm.bangdanOrg()">风口机构榜</div>
-  <div class="go-btn go-detail"  ng-click="vm.bangdanOrgDetail(vm.id, vm.rank)"><span>{{vm.data.name}}</span>详情</div>
+  <div class="go-btn go-detail"  ng-click="vm.bangdanOrgDetail(vm.id, vm.rank)">
+      <span>{{vm.data.name | splitName: 4}}</span>详情
+  </div>
 </div>
 <!--
  <div ng-include="'templates/bangdan/common/downloadApp.html'"></div>
