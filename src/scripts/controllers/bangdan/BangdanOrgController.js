@@ -87,6 +87,8 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             page: vm.page + 1,
             pageSize: 10,
         };
+        if (!vm.inApp) {request.pageSize = 20; };
+
         BangDanService.getOrgRank(request)
             .then(function (response) {
                 vm.startloading = false;
@@ -140,6 +142,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     }
 
     function displayMore() {
+        if (!vm.inApp) return;
         if (vm.busy) return;
         vm.busy = true;
         var request = {

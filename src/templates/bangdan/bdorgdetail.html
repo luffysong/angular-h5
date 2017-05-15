@@ -157,7 +157,7 @@
         <img src="/styles/images/bangdan/loading.svg" alt="loading">
     </section>
 
-    <footer>
+    <footer ng-if="vm.inApp">
         <div class="left">
                 <span>你的项目没上榜吗？</span>
         </div>
@@ -166,6 +166,9 @@
                 <span>立即加入</span></div>
         </div>
     </footer>
+    <div class="bd-out-fixdiv bd-txt-center animated bounceInUp">
+             <a  ng-click="vm.downloadApp()">创投助手内打开</a>
+    </div>
 </div>
 
  <div ng-include="'templates/bangdan/common/downloadApp.html'"></div>

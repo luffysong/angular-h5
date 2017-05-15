@@ -270,25 +270,64 @@
     }
 }
 
+.bd-txt-center{
+    text-align: center;
+}
+.download-btn-app{
+    background: #6ba2fc;
+    width: 120px;
+    height: 30px;
+    display: inline-block;
+    line-height: 30px;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+}
+.bd-out-fixdiv{
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    font-size: 13px;
+    height: 49px;
+    a{
+    .download-btn-app;
+    }
+}
 
+@keyframes popup{
+       0%   { bottom: -30px; }
+       100% {bottom:0px;}
+}
 
+//app外下载提示
+.bd-out-app{
+    .bd-out-fixdiv;
+    background-color: white;
+    color: black;
+     div{
+        float: left;
+        width: 50%;
+        overflow: hidden;
+        height: 100%;
+    }
+    div:first-child{
+        padding-left: 20px;
+        p{
+            margin-top: 6.5px;
+            line-height: 18px;
+        }
+    }
+    div:nth-child(2){
+        text-align: right;
+        a{
+                .download-btn-app;
+                position: relative;
+                right: 20px;
+                top:8.5px;
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 @media screen and (max-width: 768px) {
     .bd-detail-bgp{

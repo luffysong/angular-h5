@@ -2,7 +2,7 @@ var angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('BangdanOrgDetailController', BangdanOrgDetailController);
 
-function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindService,
+function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindService,
     $state, UserService, BangDanService, ErrorService, hybrid, $rootScope, $timeout, orgInfo) {
     var vm = this;
     vm.joinpro = joinpro;
@@ -28,12 +28,11 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
             vm.inApp = false;
         }
 
-        // $timeout(function () {
-        //     vm.startloading = false;
-        // }, 500);
-
         getProList();
-        initUser();
+        if (UserService.getUID()) {
+            initUser();
+        }
+
         getQ();
         initPxLoader();
 
@@ -41,22 +40,6 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
         var shareUrl =
         'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
         initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.rank, shareUrl, vm.orgInfo.logo);
-    }
-
-    function finish() {
-        var p1 = new Promise(function (resolve) {
-            initPxLoader();
-        });
-
-        var p2 = new Promise(function (resolve) {
-            getProList();
-        });
-
-        var p = Promise.all([p1, p2]).then(function (result) {
-            loading.hide('bangdanDetailLoading');
-        }).catch(function () {
-            loading.hide('bangdanDetailLoading');
-        });
     }
 
     function initUser() {
@@ -105,6 +88,8 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
             pageSize: 10,
         };
 
+        if (!vm.inApp) {params.pageSize = 2;};
+
         BangDanService.getOrgProRank($stateParams.id, params)
         .then(function setdata(response) {
             vm.startloading = false;
@@ -126,6 +111,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams,FindSe
     }
 
     function displayMore() {
+        if (!vm.inApp) return;
         if (vm.busy) return;
         vm.busy = true;
 
