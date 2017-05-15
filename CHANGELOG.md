@@ -1,3 +1,13 @@
+<a name="1.35.1"></a>
+## [1.35.1](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.35.0...v1.35.1) (2017-05-15)
+
+
+### Bug Fixes
+
+* 调整机构榜单首页样式 ([d5a6cba](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d5a6cba))
+
+
+
 <a name="1.35.0"></a>
 # [1.35.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.34.2...v1.35.0) (2017-05-12)
 
