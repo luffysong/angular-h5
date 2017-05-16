@@ -22,15 +22,12 @@
 <!-- endbuild -->
 <script>
     var cid = purl(location.href).segment(2);
-    var ccid = purl(location.href).segment(2);
+    var ccid;
+    ccid = purl(location.href).param('ccid');
 
     //线上环境使用nginx代理 此处为方便本地测试
-    if(!parseInt(cid)){
+    if(cid && !parseInt(cid)){
         cid = purl(location.href).param('cid');
-    }
-
-    if(!parseInt(ccid)){
-        ccid = purl(location.href).param('ccid');
     }
 
     var fromWeixin = purl(location.href).param('fromWeixin');
