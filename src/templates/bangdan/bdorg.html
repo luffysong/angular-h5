@@ -42,12 +42,17 @@
         </div>
       </div>
   </li>
+  <li ng-if="vm.busy && !vm.finish && vm.page">
+      正在加载更多...&nbsp;
+      <img src="/styles/images/bangdan/loading.svg" alt="loading">
+  </li>
 </ul>
 
   <footer ng-if="vm.busy && !vm.finish && vm.page">
       正在加载更多...&nbsp;
       <img src="/styles/images/bangdan/loading.svg" alt="loading">
   </footer>
+
   <footer ng-if="vm.finish">已无更多数据</footer>
 
   <div class="orgbd-footer" ng-if="vm.inApp">
