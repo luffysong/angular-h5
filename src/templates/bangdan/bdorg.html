@@ -56,11 +56,15 @@
     </div>
   </div>
 
-  <div class="bd-out-app animated bounceInUp" ng-if="!vm.inApp">
+  <div class="bd-out-fixdiv bd-txt-center animated bounceInUp" ng-if="!vm.inApp && !vm.isBtm">
+           <a  ng-click="vm.downloadApp()">创投助手内打开</a>
+  </div>
+
+  <div class="bd-out-app animated bounceInUp" ng-if="!vm.inApp && vm.isBtm">
       <div>
           <p>
-              还想查看20家排名？<br />
-              想要入住排行榜
+              还想查看{{vm.result.totalCount}}家排名？<br />
+              想要入驻排行榜
           </p>
       </div>
       <div>
@@ -69,6 +73,7 @@
   </div>
 
 </div>
-<div ng-include="'templates/bangdan/common/downloadApp.html'"></div>
+<!--
+<div ng-include="'templates/bangdan/common/downloadApp.html'"></div>-->
 </div>
 <loading loading="bangdanLoading"></loading>

@@ -11,6 +11,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.more = false;
     vm.busy = false;
     vm.startloading = true;
+    vm.isBtm = false;
     vm.displayMore = displayMore;
     vm.goOrgDetail = goOrgDetail;
     vm.joinOrg = joinOrg;
@@ -26,15 +27,27 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             vm.inApp = false;
         }
 
-        // sa.track('ViewPage', {
-        //         source: 'org_top_list',
-        //         page: 'org_top_list',
-        //     });
-
-        $('.J_commonHeaderWrapper').remove();
         getQ();
         getOrgRank();
         initPxLoader();
+        addAnimate();
+    }
+
+    function addAnimate() {
+        angular.element(window).bind('scroll', function () {
+            var windowHeight = $(this).height();
+            var scrollTop = $(this).scrollTop();
+            var scrollHeight = $(document).height();
+            if ((windowHeight +  scrollTop) === scrollHeight) {
+                vm.isBtm = true;
+
+                //console.log('Scrolled below header.');
+            } else {
+                vm.isBtm = false;
+
+                //console.log('Header is in view.');
+            }
+        });
     }
 
     function getQ() {
@@ -93,6 +106,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             .then(function (response) {
                 vm.startloading = false;
                 loading.hide('bangdanLoading');
+                vm.result = response.data;
                 vm.list = vm.list.concat(response.data.data);
                 if (!vm.total) {
                     vm.total = response.data.totalCount;
