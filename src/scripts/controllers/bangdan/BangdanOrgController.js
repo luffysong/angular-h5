@@ -3,7 +3,7 @@ angular.module('defaultApp.controller')
     .controller('BangdanOrgController', BangdanOrgController);
 
 function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window) {
+    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window, $document) {
 
     var vm = this;
     vm.list = [];
@@ -39,17 +39,15 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             var scrollTop = $(this).scrollTop();
             var scrollHeight = $(document).height();
             if ((windowHeight +  scrollTop) === scrollHeight) {
+                var queryResult = $document[0].getElementById('div-open-app');
+                $(queryResult).css('height', '80px');
                 if (!vm.isBottom) {
                     vm.isBottom = true;
                 }
-
-                console.log('Scrolled below header.', windowHeight, scrollTop, scrollHeight);
             } else {
                 if (vm.isBottom) {
                     vm.isBottom = false;
                 }
-
-                console.log('Header is in view.');
             }
         });
 

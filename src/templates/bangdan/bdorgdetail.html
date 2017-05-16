@@ -166,17 +166,18 @@
                 <span>立即加入</span></div>
         </div>
     </footer>
-<div class="bd-out-app animated bounceInUp" ng-if="!vm.inApp">
-    <div>
-        <p>
-            还想查看{{vm.orgInfo.projectCount}}家排名？<br />
-            想要入驻排行榜
-        </p>
+
+    <div class="bd-out-app animated fadeInUp" ng-if="!vm.inApp">
+        <div>
+            <p>
+                还想查看更多项目？<br />
+                你是该机构创业者？
+            </p>
+        </div>
+        <div>
+            <a  ng-click="vm.downloadApp()" >创投助手内打开</a>
+        </div>
     </div>
-    <div>
-        <a  ng-click="vm.downloadApp()">创投助手内打开</a>
-    </div>
-</div>
 </div>
 <!--
  <div ng-include="'templates/bangdan/common/downloadApp.html'"></div>-->
