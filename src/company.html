@@ -25,7 +25,7 @@
     var ccid;
 
     //线上环境使用nginx代理 此处为方便本地测试
-    if(!cid && parseInt(cid)){
+    if(!cid && !parseInt(cid)){
         cid = purl(location.href).param('cid');
         if (!parseInt(cid)) {
             cid="";
