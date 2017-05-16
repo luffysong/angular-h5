@@ -3,7 +3,7 @@ angular.module('defaultApp.controller')
     .controller('BangdanOrgController', BangdanOrgController);
 
 function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService) {
+    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window) {
 
     var vm = this;
     vm.list = [];
@@ -11,7 +11,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.more = false;
     vm.busy = false;
     vm.startloading = true;
-    vm.isBtm = false;
+    vm.isBottom = false;
     vm.displayMore = displayMore;
     vm.goOrgDetail = goOrgDetail;
     vm.joinOrg = joinOrg;
@@ -34,26 +34,47 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     }
 
     function addAnimate() {
-        // angular.element(window).bind('scroll', function () {
-        //     var windowHeight = $(this).height();
-        //     var scrollTop = $(this).scrollTop();
-        //     var scrollHeight = $(document).height();
-        //     if ((windowHeight +  scrollTop) == scrollHeight) {
-        //         vm.isBtm = true;
-        //         console.log('Scrolled below header.', windowHeight, scrollTop, scrollHeight);
-        //     } else {
-        //         vm.isBtm = false;
-        //         console.log('Header is in view.');
-        //     }
-        // });
+        angular.element(window).bind('scroll', function () {
+            var windowHeight = $(this).height();
+            var scrollTop = $(this).scrollTop();
+            var scrollHeight = $(document).height();
+            if ((windowHeight +  scrollTop) === scrollHeight) {
+                if (!vm.isBottom) {
+                    vm.isBottom = true;
+                }
 
-        $(window).scroll(function () {
-            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-                vm.isBtm = true;
-            }else {
-                vm.isBtm = false;
+                console.log('Scrolled below header.', windowHeight, scrollTop, scrollHeight);
+            } else {
+                if (vm.isBottom) {
+                    vm.isBottom = false;
+                }
+
+                console.log('Header is in view.');
             }
         });
+
+        // $window.onscroll = function () {
+        //     console.log('==');
+        //     console.log($(window).scrollTop(), $(window).height(), $(document).height());
+        //     var t = $(window).scrollTop();
+        //     var h = $(window).height();
+        //     var dh = $(document).height();
+        //     if ((t + h) == dh) {
+        //         vm.isBottom = true;
+        //         console.log('111');
+        //
+        //     }else {
+        //         vm.isBottom = false;
+        //     }
+        // };
+
+        // $(window).scroll(function () {
+        //     if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+        //         vm.isBtm = true;
+        //     }else {
+        //         vm.isBtm = false;
+        //     }
+        // });
     }
 
     function getQ() {

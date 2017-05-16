@@ -56,11 +56,11 @@
     </div>
   </div>
 
-  <div class="bd-out-fixdiv bd-txt-center animated bounceInUp" ng-if="!vm.inApp && !vm.isBtm">
+  <div class="bd-out-fixdiv bd-txt-center animated bounceInUp" ng-if="!vm.inApp && !vm.isBottom">
            <a  ng-click="vm.downloadApp()">创投助手内打开</a>
   </div>
 
-  <div class="bd-out-app animated bounceInUp" ng-if="!vm.inApp && vm.isBtm">
+  <div class="bd-out-app animated bounceInUp" ng-if="!vm.inApp && vm.isBottom">
       <div>
           <p>
               还想查看{{vm.result.totalCount}}家排名？<br />
