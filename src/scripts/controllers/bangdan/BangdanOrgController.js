@@ -34,18 +34,24 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     }
 
     function addAnimate() {
-        angular.element(window).bind('scroll', function () {
-            var windowHeight = $(this).height();
-            var scrollTop = $(this).scrollTop();
-            var scrollHeight = $(document).height();
-            if ((windowHeight +  scrollTop) === scrollHeight) {
+        // angular.element(window).bind('scroll', function () {
+        //     var windowHeight = $(this).height();
+        //     var scrollTop = $(this).scrollTop();
+        //     var scrollHeight = $(document).height();
+        //     if ((windowHeight +  scrollTop) == scrollHeight) {
+        //         vm.isBtm = true;
+        //         console.log('Scrolled below header.', windowHeight, scrollTop, scrollHeight);
+        //     } else {
+        //         vm.isBtm = false;
+        //         console.log('Header is in view.');
+        //     }
+        // });
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() == $(document).height()) {
                 vm.isBtm = true;
-
-                //console.log('Scrolled below header.');
-            } else {
+            }else {
                 vm.isBtm = false;
-
-                //console.log('Header is in view.');
             }
         });
     }
