@@ -63,16 +63,20 @@
            <a  ng-click="vm.downloadApp()">创投助手内打开</a>
   </div>
 -->
-  <div class="bd-out-app-ani animated fadeInUp" ng-if="!vm.inApp" id="div-open-app">
+<section class="bdorg-section-footer" ng-if="vm.isBottom">
+  <div class="bd-out-app-ani" ng-if="!vm.inApp" id="div-open-app">
       <div >
-          <p ng-if="vm.isBottom">
-              还想查看{{vm.result.totalCount}}家排名？想要入驻排行榜？
+          <p >
+              不错过所有一线机构的投资动态
           </p>
       </div>
-      <div>
-          <a  ng-click="vm.downloadApp()" class="btn-open-app" id="btn-open-app">创投助手内打开</a>
-      </div>
   </div>
+</section>
+
+<div class="bdorg-div-pop-in animated fadeInUp">
+    <a  ng-click="vm.downloadApp()"
+      class="btn-open-app " id="btn-open-app">点击查看更多 </a>
+</div>
 
 </div>
 <!--

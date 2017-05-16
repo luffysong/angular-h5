@@ -74,12 +74,39 @@
     // }
 }
 
+.bdorg-div-pop-in{
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    a{
+        .download-btn-app;
+    }
+}
+
+.bdorg-section-footer{
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    height: 178px;
+    background: url('images/bangdan/bdorg-shadow.png') no-repeat center;
+    background-size: 100% 178px;
+    background-image: linear-gradient(-180deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,1.00) 57%, #FFFFFF 100%);
+}
+
 .bd-item-hover{
     background-color:#dfdfdf;
 }
 
 .bd-item-out{
     background-color:white;
+}
+
+.bd-footer-blur{
+    background: url('images/bangdan/detail-overlap-btm.png') no-repeat center;
+    background-size: 100% cover;
+    background-image: linear-gradient(-180deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,1.00) 57%, #FFFFFF 100%);
 }
 
 .top-3Color {
@@ -97,8 +124,20 @@
     background: url('images/bangdan/detail-overlap.png') no-repeat center;
     width: 100%;
     height: 350px;
-    background-size: 100% 350px;
+    background-size: 100% 340px;
     background-color: white;
+
+    @media screen and (max-width: 414px) {
+            height: 130px;
+    }
+
+    @media screen and (max-width: 375px) {
+            height: 130px;
+    }
+
+    @media screen and (max-width: 320px) {
+            height: 50px;
+    }
 }
 
 .bd-nativeAlert_wrap {
@@ -286,9 +325,12 @@
     height: 30px;
     display: inline-block;
     line-height: 30px;
-    border-radius: 15px;
     color: white;
     text-align: center;
+    background: #6BA2FC;
+    box-shadow: 0 2px 5px 0 rgba(43,80,141,0.40);
+    border-radius: 19px;
+    font-size: 14px;
 }
 .bd-out-fixdiv{
     position: fixed;
@@ -357,6 +399,8 @@
         color: black;
         text-align: center;
         padding-left: 10px;
+        font-size: 15px;
+        line-height: 40px;
     }
     a{
         .download-btn-app;
