@@ -1,3 +1,8 @@
+<a name="1.35.4"></a>
+## [1.35.4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.35.3...v1.35.4) (2017-05-16)
+
+
+
 <a name="1.35.3"></a>
 ## [1.35.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.35.2...v1.35.3) (2017-05-15)
 
@@ -19,16 +24,30 @@
 
 
 <a name="1.35.0"></a>
-# [1.35.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.34.2...v1.35.0) (2017-05-12)
+# [1.35.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.34.4...v1.35.0) (2017-05-12)
+
+
+### Bug Fixes
+
+* 调整分享页样式 ([4fd54e5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4fd54e5))
+* 调整机构榜单首页样式 ([84a3469](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/84a3469))
+* 调整机构榜单首页样式 ([ac858d2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/ac858d2))
+
+
+### Features
+
+* 添加悬浮层app下载 ([a5a1f63](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a5a1f63))
+
+
+
+<a name="1.34.4"></a>
+## [1.34.4](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.34.3...v1.34.4) (2017-05-11)
 
 
 ### Bug Fixes
 
 * 修改榜单排名改变显示不正确问题 ([9a0ef65](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9a0ef65))
 * 修改榜单首页样式 ([9699aa8](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/9699aa8))
-* 调整分享页样式 ([4fd54e5](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4fd54e5))
-* 调整机构榜单首页样式 ([84a3469](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/84a3469))
-* 调整机构榜单首页样式 ([ac858d2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/ac858d2))
 * 调整榜单首页样式 ([78c52fd](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/78c52fd))
 
 
@@ -36,9 +55,13 @@
 
 * 机构排行榜首页接入数据 ([93f8c9d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/93f8c9d))
 * 机构详情页添加名次参数 ([b7ab545](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b7ab545))
-* 添加悬浮层app下载 ([a5a1f63](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/a5a1f63))
 * 添加机构榜单首页和分享页 ([3d8dc48](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/3d8dc48))
 * 添加页面之间的关联 ([1ef262a](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1ef262a))
+
+
+
+<a name="1.34.3"></a>
+## [1.34.3](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.34.2...v1.34.3) (2017-05-08)
 
 
 
