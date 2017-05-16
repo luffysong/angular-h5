@@ -44,7 +44,7 @@
           </div>
       </li>
     </ul>
-    <footer>
+    <footer ng-if="vm.busy && !vm.finish &&  vm.page">
           正在加载更多...&nbsp;
           <img src="/styles/images/bangdan/loading.svg" alt="loading">
     </footer>
