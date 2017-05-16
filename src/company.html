@@ -25,12 +25,18 @@
     var ccid;
 
     //线上环境使用nginx代理 此处为方便本地测试
-    if(parseInt(cid)){
+    if(!cid && parseInt(cid)){
         cid = purl(location.href).param('cid');
+        if (!parseInt(cid)) {
+            cid="";
+        }
     }
 
-    if(!parseInt(cid)) {
+    if(!cid && !parseInt(cid)) {
         ccid = purl(location.href).param('ccid');
+        if (!parseInt(ccid)) {
+            ccid="";
+        }
     }
 
     var fromWeixin = purl(location.href).param('fromWeixin');
