@@ -63,7 +63,7 @@
            <a  ng-click="vm.downloadApp()">创投助手内打开</a>
   </div>
 -->
-<section class="bdorg-section-footer" ng-if="vm.isBottom">
+<section class="bdorg-section-footer" ng-if="!vm.inApp && vm.isBottom">
   <div class="bd-out-app-ani" ng-if="!vm.inApp" id="div-open-app">
       <div >
           <p >
@@ -73,7 +73,7 @@
   </div>
 </section>
 
-<div class="bdorg-div-pop-in animated fadeInUp" ng-if="!vm.isBottom">
+<div class="bdorg-div-pop-in animated fadeInUp" ng-if="!vm.inApp ">
     <a  ng-click="vm.downloadApp()"
       class="btn-open-app " id="btn-open-app">点击查看更多 </a>
 </div>
