@@ -3,7 +3,7 @@ angular.module('defaultApp.controller')
     .controller('BangdanOrgController', BangdanOrgController);
 
 function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService) {
+    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window, $document) {
 
     var vm = this;
     vm.list = [];
@@ -11,6 +11,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.more = false;
     vm.busy = false;
     vm.startloading = true;
+    vm.isBottom = false;
     vm.displayMore = displayMore;
     vm.goOrgDetail = goOrgDetail;
     vm.joinOrg = joinOrg;
@@ -26,15 +27,52 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             vm.inApp = false;
         }
 
-        // sa.track('ViewPage', {
-        //         source: 'org_top_list',
-        //         page: 'org_top_list',
-        //     });
-
-        $('.J_commonHeaderWrapper').remove();
         getQ();
         getOrgRank();
         initPxLoader();
+        addAnimate();
+    }
+
+    function addAnimate() {
+        angular.element(window).bind('scroll', function () {
+            var windowHeight = $(this).height();
+            var scrollTop = $(this).scrollTop();
+            var scrollHeight = $(document).height();
+            if ((windowHeight +  scrollTop) === scrollHeight) {
+                var queryResult = $document[0].getElementById('div-open-app');
+                $(queryResult).css('height', '80px');
+                if (!vm.isBottom) {
+                    vm.isBottom = true;
+                }
+            } else {
+                if (vm.isBottom) {
+                    vm.isBottom = false;
+                }
+            }
+        });
+
+        // $window.onscroll = function () {
+        //     console.log('==');
+        //     console.log($(window).scrollTop(), $(window).height(), $(document).height());
+        //     var t = $(window).scrollTop();
+        //     var h = $(window).height();
+        //     var dh = $(document).height();
+        //     if ((t + h) == dh) {
+        //         vm.isBottom = true;
+        //         console.log('111');
+        //
+        //     }else {
+        //         vm.isBottom = false;
+        //     }
+        // };
+
+        // $(window).scroll(function () {
+        //     if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+        //         vm.isBtm = true;
+        //     }else {
+        //         vm.isBtm = false;
+        //     }
+        // });
     }
 
     function getQ() {
@@ -87,10 +125,13 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             page: vm.page + 1,
             pageSize: 10,
         };
+        if (!vm.inApp) {request.pageSize = 20; };
+
         BangDanService.getOrgRank(request)
             .then(function (response) {
                 vm.startloading = false;
                 loading.hide('bangdanLoading');
+                vm.result = response.data;
                 vm.list = vm.list.concat(response.data.data);
                 if (!vm.total) {
                     vm.total = response.data.totalCount;
@@ -140,6 +181,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     }
 
     function displayMore() {
+        if (!vm.inApp) return;
         if (vm.busy) return;
         vm.busy = true;
         var request = {

@@ -74,12 +74,39 @@
     // }
 }
 
+.bdorg-div-pop-in{
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    a{
+        .download-btn-app;
+    }
+}
+
+.bdorg-section-footer{
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    height: 178px;
+    background: url('images/bangdan/bdorg-shadow.png') no-repeat center;
+    background-size: 100% 178px;
+    background-image: linear-gradient(-180deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,1.00) 57%, #FFFFFF 100%);
+}
+
 .bd-item-hover{
     background-color:#dfdfdf;
 }
 
 .bd-item-out{
-    background-color:white;
+    background-color:rgba(255,255,255,1.00);
+}
+
+.bd-footer-blur{
+    background: url('images/bangdan/detail-overlap-btm.png') no-repeat center;
+    background-size: 100% cover;
+    background-image: linear-gradient(-180deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,1.00) 57%, #FFFFFF 100%);
 }
 
 .top-3Color {
@@ -92,6 +119,25 @@
 
 .bd-dot-yel{
     background: rgba(255,227,168,0.70);;
+}
+.bd-outapp-overlap{
+    background: url('images/bangdan/detail-overlap.png') no-repeat center;
+    width: 100%;
+    height: 350px;
+    background-size: 100% 340px;
+    background-color: white;
+
+    @media screen and (max-width: 414px) {
+            height: 130px;
+    }
+
+    @media screen and (max-width: 375px) {
+            height: 130px;
+    }
+
+    @media screen and (max-width: 320px) {
+            height: 50px;
+    }
 }
 
 .bd-nativeAlert_wrap {
@@ -270,25 +316,97 @@
     }
 }
 
+.bd-txt-center{
+    text-align: center;
+}
+.download-btn-app{
+    background: #6ba2fc;
+    width: 120px;
+    height: 30px;
+    display: inline-block;
+    line-height: 30px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 2px 5px 0 rgba(43,80,141,0.40);
+    border-radius: 19px;
+    font-size: 14px;
+}
+.bd-out-fixdiv{
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    font-size: 13px;
+    height: 49px;
+    a{
+    .download-btn-app;
+    }
+}
+.div-within-btn{
+    width: 100%;
+    text-align: center;
+}
 
+@keyframes popup{
+       0%   { bottom: -30px; }
+       100% {bottom:0px;}
+}
 
+//app外下载提示
+.bd-out-app{
+    .bd-out-fixdiv;
+    background-color: white;
+    color: black;
+     div{
+        float: left;
+        width: 50%;
+        overflow: hidden;
+        height: 100%;
+    }
+    div:first-child{
+        padding-left: 20px;
+        p{
+            margin-top: 6.5px;
+            line-height: 18px;
+            height: 30px;
+        }
+    }
+    div:nth-child(2){
+        text-align: right;
+        a{
+                .download-btn-app;
+                position: relative;
+                right: 20px;
+                top:8.5px;
+        }
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.bd-out-app-ani{
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    font-size: 13px;
+    height:80px;
+    text-align: center;
+    div{
+        height: 40px;
+        width: 100%;
+        overflow: hidden;
+    }
+    p{
+        width: 100%;
+        color: #3D495C;
+        letter-spacing: 0;
+        text-align: center;
+        padding-left: 10px;
+        font-size: 15px;
+        line-height: 40px;
+    }
+    a{
+        .download-btn-app;
+        position: relative;
+    }
+}
 
 @media screen and (max-width: 768px) {
     .bd-detail-bgp{

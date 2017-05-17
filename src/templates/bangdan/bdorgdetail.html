@@ -143,7 +143,6 @@
                     </div>
                 </div>
             </li>
-
         </ul>
         <div class="more" ng-if="vm.busy && !vm.finish &&  vm.page">
             正在加载更多...&nbsp;
@@ -152,12 +151,16 @@
         <div class="no-more" ng-if="vm.finish">已无更多数据</div>
     </section>
 
+    <section class="bd-outapp-overlap" ng-if="!vm.inApp">
+
+    </section>
+
     <section class="bd-orgdetail-content-start" ng-if="vm.startloading" >
         正在加载数据...&nbsp;
         <img src="/styles/images/bangdan/loading.svg" alt="loading">
     </section>
 
-    <footer>
+    <footer ng-if="vm.inApp">
         <div class="left">
                 <span>你的项目没上榜吗？</span>
         </div>
@@ -166,9 +169,23 @@
                 <span>立即加入</span></div>
         </div>
     </footer>
-</div>
 
- <div ng-include="'templates/bangdan/common/downloadApp.html'"></div>
+    <section class="section-detail-footer" ng-if="!vm.inApp">
+        <div class="bd-out-app-ani bd-item-out animated fadeInUp" >
+            <div>
+                <p>
+                    不错过所有一线机构的投后项目
+                </p>
+            </div>
+            <div>
+                <a  ng-click="vm.downloadApp()" >点击查看更多</a>
+            </div>
+        </div>
+    </section>
+
+</div>
+<!--
+ <div ng-include="'templates/bangdan/common/downloadApp.html'"></div>-->
  </div>
 
  <loading loading="bangdanDetailLoading"></loading>
