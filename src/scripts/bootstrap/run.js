@@ -179,6 +179,14 @@ angular.module('defaultApp')
                     _orgid = toParams.id;
                 }
 
+                if (!_orgid) {
+                    if ((location + '').indexOf('bangdan/bdshare')
+                || (location + '').indexOf('bangdan/orgbd')
+                || (location + '').indexOf('bangdan/orgbddetail')) {
+                        _orgid = toParams.id;
+                    }
+                }
+
                 return _orgid;
             }
 
