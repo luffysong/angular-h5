@@ -1,3 +1,14 @@
+.bd-detail-common{
+    * {
+        user-select: none;
+    }
+    width: 100%;
+    height: auto;
+    max-width:768px;
+    margin: 0 auto;
+    padding-bottom: 49px;
+}
+
 .bd-org-detail{
     * {
         user-select: none;
@@ -400,5 +411,86 @@
                     width:50%;
             }
         }
+    }
+}
+
+.bd-investor-detail{
+    background-color: #E7E7E7;
+    .bd-detail-common;
+    .bd-investor-info{
+        width: 100%;
+        height: auto;
+        padding: 15px;
+
+        .investor-info{
+            width: 100%;
+            height: auto;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 0 rgba(0,0,0,0.15);
+            border-radius: 2px;
+            padding: 20px;
+            .info-content{
+                font-size: 15px;
+                color: #5A626D;
+                letter-spacing: 0;
+                line-height: 20px;
+                .info{
+                    border-bottom: 1px solid #f2f4f5;
+                }
+                .industry{
+                    margin-top: 8px;
+                }
+            }
+        }
+    }
+    .bd-investor-pro{
+        width: 100%;
+        background-color: #FFFFFF;
+        height: auto;
+        min-height: 300px;
+        .pro-top{
+                width: 100%;
+                text-align: left;
+                padding: 0px;
+                height: 30px;
+                line-height: 30px;
+                position: relative;
+                top: 20px;
+                span{
+                    display: inline-block;
+                    background-color: #FFFFFF;
+                }
+
+            .h-line{
+                background: #CF9D3E;
+                height: 16px;
+                width: 4px;
+            }
+            .p-title{
+                font-size: 15px;
+                color: #222C38;
+                letter-spacing: 0;
+                margin-left: 10px;
+            }
+        }
+        .pro-num{
+            height: 64px;
+            width: 100%;
+            padding: 15px;
+            position: relative;
+            top:20px;
+            .rank-num{
+                height: 64px;
+                width: 100%;
+                background: #F9F9F9;
+                border-radius: 4px;
+            }
+        }
+    }
+    .bd-investor-org{
+        margin-top: 10px;
+        height: 200px;
+        width: 100%;
+        background-color: #FFFFFF;
     }
 }
