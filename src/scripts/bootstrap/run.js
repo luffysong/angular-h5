@@ -161,6 +161,12 @@ angular.module('defaultApp')
                 }else if (name === 'bangdan.bdshare') {
                     visitingPage = 'share_page';
                     track = true;
+                }else if (name === 'bangdan.investorbd') {
+                    visitingPage = 'investor_top_list';
+                    track = true;
+                }else if (name === 'bangdan.investorbddetail') {
+                    visitingPage = 'investor';
+                    track = true;
                 }
 
                 if (type === 'name') {
@@ -182,7 +188,9 @@ angular.module('defaultApp')
                 if (!_orgid) {
                     if ((location + '').indexOf('bangdan/bdshare')
                 || (location + '').indexOf('bangdan/orgbd')
-                || (location + '').indexOf('bangdan/orgbddetail')) {
+                || (location + '').indexOf('bangdan/orgbddetail')
+                || (location + '').indexOf('bangdan/investorbddetail')
+                || (location + '').indexOf('bangdan/investorbd')) {
                         _orgid = toParams.id;
                     }
                 }

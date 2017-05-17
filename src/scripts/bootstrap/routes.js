@@ -439,6 +439,20 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         }
     });
 
+    $stateProvider.state('bangdan.investorbd', {
+        url: '/investorbd',
+        controllerAs: 'vm',
+        controller: 'BangdanInvestorController',
+        templateUrl: 'templates/bangdan/bdinvestor.html',
+    });
+
+    $stateProvider.state('bangdan.investorbddetail', {
+        url: '/investorbddetail?{id}&{rank}',
+        controllerAs: 'vm',
+        controller: 'BangdanInvestorDetailController',
+        templateUrl: 'templates/bangdan/bdinvestordetail.html',
+    });
+
     $stateProvider.state('bangdan.bdshare', {
         url: '/bdshare?{id}&{rank}',
         controllerAs: 'vm',
