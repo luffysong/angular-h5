@@ -453,6 +453,13 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         templateUrl: 'templates/bangdan/bdinvestordetail.html',
     });
 
+    $stateProvider.state('bangdan.investorshare', {
+        url: '/investorshare?{id}&{rank}',
+        controllerAs: 'vm',
+        controller: 'BangdanInvestorShareController',
+        templateUrl: 'templates/bangdan/investorShare.html',
+    });
+
     $stateProvider.state('bangdan.bdshare', {
         url: '/bdshare?{id}&{rank}',
         controllerAs: 'vm',

@@ -1,0 +1,75 @@
+<div class="nativeAlert_pop">
+    <div class="bd-investor-share-logo">
+        <div class="bd-investor-logo bd-gold-border" ng-if="vm.orgInfo.rank === 1"
+        style="background-image: url({{vm.orgInfo.logo}})">
+        <!--
+            <img ng-src="{{vm.orgInfo.logo}}" />-->
+        </div>
+        <div class="bd-investor-logo bd-silver-border" ng-if="vm.orgInfo.rank === 2"
+        style="background-image: url({{vm.orgInfo.logo}})">
+        <!--
+            <img ng-src="{{vm.orgInfo.logo}}" />-->
+        </div>
+
+        <div class="bd-investor-logo bd-copper-border" ng-if="vm.orgInfo.rank === 3"
+        style="background-image: url({{vm.orgInfo.logo}})">
+        <!--
+            <img ng-src="{{vm.orgInfo.logo}}" />-->
+        </div>
+        <div class="bd-investor-logo bd-normal-copper" ng-if="vm.orgInfo.rank > 3"
+            style="background-image: url({{vm.orgInfo.logo}})">
+            <!--
+            <img ng-src="{{vm.orgInfo.logo}}" />-->
+        </div>
+
+        <div class="bd-crown" ng-if="vm.orgInfo.rank === 1"><img src="/styles/images/bangdan/crown-golden.png" /></div>
+        <div class="bd-crown" ng-if="vm.orgInfo.rank === 2"><img src="/styles/images/bangdan/crown-silver.png" /></div>
+        <div class="bd-crown" ng-if="vm.orgInfo.rank === 3"><img src="/styles/images/bangdan/crown-copper.png" /></div>
+        <div class="bd-crown" ng-if="vm.orgInfo.rank >3"></div>
+        <div class="bd-investor-name">方爱之</div>
+        <div class="bd-investor-position">
+            <span class="orgName">真格基金</span> · <span class="positionName">合伙人</span>
+        </div>
+    </div>
+    <div class="bd-investor-share-rank">
+        <div class="rank-num">
+                <span class="h-line">-</span>
+                <span class="txt">第</span>
+                <span class="num"><b>{{vm.orgInfo.rank}}</b></span>
+                <span class="txt">名</span>
+                <span class="h-line">-</span>
+        </div>
+        <div class="total-rank">
+            共{{vm.orgInfo.totalOrgCount}}家机构排名
+        </div>
+    </div>
+    <div class="bd-investor-share-promote">
+        <div class="center-div">
+            我为「<span>{{vm.orgInfo.name}}</span>」助力
+        </div>
+    </div>
+    <div class="bd-share-text share-txt-top2" ng-if="vm.inApp">
+        [分享成功后入驻]
+    </div>
+    <div class="bd-investor-share-app" ng-if="vm.inApp">
+            <div class="share-app" ng-click="vm.shareWechat()">
+                <img src="/styles/images/bangdan/wechat-logo.png" />
+            </div>
+            <div class="split-block"> </div>
+            <div class="share-app" ng-click="vm.shareWechat('f')">
+                <img src="/styles/images/bangdan/moments-logo.png" />
+            </div>
+    </div>
+
+    <div class="bd-share-text share-txt-top1" ng-if="!vm.inApp">
+        [点击右上角转发后入驻]
+    </div>
+
+    <div class="bd-share-txt">
+        <span>2017Q{{vm.orgInfo.currQuarter}}</span>
+        <span class="bd-dot bd-dot-yel"></span>
+        <span>风口机构排行榜</span>
+    </div>
+
+    <img class="pop-close" src="/styles/images/find/close@2x.png" ng-click="vm.cancelModal()"/>
+</div>
