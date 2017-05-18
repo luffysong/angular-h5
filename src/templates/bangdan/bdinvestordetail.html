@@ -41,17 +41,29 @@
                             <p class="text-content">
                             </p>
                         </div>
-                        <a class="text-toggle" href="javascript:void(0)" >展开</a>
                     </text-line-clamp>
                 </div>
                 <div class="industry">
-                    <p>
-                        <span>关注行业</span>&nbsp;&nbsp;
-                        文娱：文娱：文娱：文娱：文娱：
-                    </p>
+                    <div class="in-left">
+                        <span clss="focus">关注行业</span>
+                    </div>
+                    <div class="in-right">
+                        <text-line-clamp line-clamp='2' text="vm.industry">
+                            <div class="text-container">
+                                <p class="text-content">
+                                </p>
+                            </div>
+                        </text-line-clamp>
+                    </div>
                 </div>
         </div>
+        <div class="open-more" ng-click="vm.openMore($event)">
+            <span >点击展开投资人完整信息&nbsp;
+                <img class="open-close" src="/styles/images/bangdan/open-more.png"/></span>
+        </div>
     </div>
+
+
     </section>
     <section class="bd-investor-pro">
         <div class="pro-top">

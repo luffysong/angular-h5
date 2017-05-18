@@ -536,23 +536,32 @@
                  }
              }
             }
+
     .bd-investor-info{
         width: 100%;
         height: auto;
         padding: 15px;
+        position: relative;
 
         .investor-info{
             width: 100%;
-            height: auto;
+            height: 100%;
             background: #FFFFFF;
-            box-shadow: 0 0 0 0 rgba(0,0,0,0.15);
-            border-radius: 2px;
+            box-shadow: 0 0 8px 0 #E0E5EC;
+            border-radius: 4px;
             padding: 20px;
+            overflow:hidden;
+            //border: 1px solid red;
+            position: relative;
+            padding-bottom: 40px;
+
             .info-content{
                 font-size: 15px;
                 color: #5A626D;
                 letter-spacing: 0;
                 line-height: 20px;
+                position: relative;
+
                 .info{
                     border-bottom: 1px solid #f2f4f5;
                     .text-container{
@@ -583,11 +592,9 @@
                         color: #9aa3ac;
                         letter-spacing: 0;
                         line-height: 20px;
-                        width: 30px;
+                        width: 100%;
                         height: 20px;
-                        float:right;
-                        margin-top: -30px;
-                        margin-right: -15px;
+                        text-align: right;
                     }
                     span{
                         word-break: break-all;
@@ -599,6 +606,71 @@
                 }
                 .industry{
                     margin-top: 8px;
+                    background: #FFFFFF;
+                    .in-left,.in-right{height: 100%;float: left;}
+                    .in-right{
+                        width: 80%;
+                        position: relative;
+                        .text-container{
+                            position: relative;
+                            //padding-right: 20px;
+                            .text-content{
+                                text-align: left;
+                                overflow : hidden;
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                line-height: 22px;
+                                font-size: 15px;
+                                color: #5A626D;
+                                letter-spacing: 0px;
+                                //使用after让浏览器重绘文字 使-webkit-line-clamp生效
+                                &:after{
+                                    width: 0;
+                                    height: 0;
+                                    display: inline-block;
+                                    overflow: hidden;
+                                    content: attr(style);
+                                }
+                            }
+                        }
+                        .text-toggle {
+                            display: inline-block;
+                            font-size: 15px;
+                            color: #9aa3ac;
+                            letter-spacing: 0;
+                            line-height: 20px;
+                            width: 100%;
+                            height: 20px;
+                            text-align: right;
+                        }
+
+                    }
+                    .in-left{
+                        width: 20%;
+                    }
+                    .focus{
+                        font-size: 15px;
+                        color: #5A626D;
+                        font-weight: 600;
+                        letter-spacing: 0;
+                        line-height: 20px;
+                    }
+                }
+            }
+            .open-more{
+                width: 100%;
+                background: #F9F9F9;
+                height: 30px;
+                text-align: center;
+                bottom: 1px;
+                position: absolute;
+                left: 1px;
+                right: 1px;
+                span{
+                    font-size: 12px;
+                    background: #F9F9F9;
+                    letter-spacing: 0;
+                    line-height: 30px;
                 }
             }
         }
