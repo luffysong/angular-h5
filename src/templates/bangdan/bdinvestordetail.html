@@ -1,15 +1,48 @@
 <div class="bd-investor-detail">
     <section class="bd-investor-avatar bd-detail-bgp">
+        <div class="bd-orgdetail-logo">
+            <div class="bd-orgdetail-img bd-gold-border"
+                ng-if="vm.rank === '1'" style="background-image: url(https://krplus-pic.b0.upaiyun.com/org_logo/%E5%8C%97%E6%9E%81%E5%85%89%E5%88%9B%E6%8A%95.jpg)">
+                <div class="bd-belt bd-gold-crown" ng-if="vm.rank === '1'"></div>
+            </div>
+            <div class="bd-orgdetail-img bd-silver-border" ng-if="vm.rank === '2'"
+                style="background-image: url(https://krplus-pic.b0.upaiyun.com/org_logo/%E5%8C%97%E6%9E%81%E5%85%89%E5%88%9B%E6%8A%95.jpg)">
+                <div class="bd-belt bd-cilver-crown" ng-if="vm.rank === '2'"></div>
+            </div>
 
+            <div class="bd-orgdetail-img bd-copper-border" ng-if="vm.rank === '3'"
+            style="background-image: url(https://krplus-pic.b0.upaiyun.com/org_logo/%E5%8C%97%E6%9E%81%E5%85%89%E5%88%9B%E6%8A%95.jpg)">
+            </div>
+            <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.rank > 3"
+                style="background-image: url(https://krplus-pic.b0.upaiyun.com/org_logo/%E5%8C%97%E6%9E%81%E5%85%89%E5%88%9B%E6%8A%95.jpg)">
+                    <div class="bd-belt bd-copper-crown" ng-if="vm.rank === '3'"></div>
+            </div>
+            <span>妨碍之</span>
+        </div>
+        <div class="jg-info">
+            <span class="txt-deco">真格基金</span>
+            &nbsp;<span class="bd-dot bd-dot-yel"></span>&nbsp;合伙人
+        </div>
+        <div class="rank-num">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>第&nbsp;{{vm.rank}}&nbsp;名</span><span>/本季度</span>
+        </div>
+
+        <div class="push-right" ng-click="vm.joinpro('forward')">
+                <div>转发支持</div>
+                <div><img src="/styles/images/bangdan/thumup.png"/>&nbsp;5000</div>
+        </div>
     </section>
     <section class="bd-investor-info">
     <div class="investor-info">
         <div class="info-content">
                 <div class="info">
-                    <p>
-                        妨碍之妨碍之妨碍之妨碍之妨碍之妨碍之妨碍之妨碍之妨碍之妨碍之妨碍之妨碍之妨碍
-                        之妨碍之妨碍之妨碍之妨碍之妨碍之妨碍之妨碍之妨碍之妨碍之妨碍之
-                    </p>
+                    <text-line-clamp line-clamp='4' text="vm.intro">
+                        <div class="text-container">
+                            <p class="text-content">
+                            </p>
+                        </div>
+                        <a class="text-toggle" href="javascript:void(0)" >展开</a>
+                    </text-line-clamp>
                 </div>
                 <div class="industry">
                     <p>
@@ -27,11 +60,148 @@
         </div>
         <div class="pro-num">
             <div class="rank-num">
+                <div class="content-num">
+                    <div class="bd-sta">
+                        <div class="num">
+                                28
+                        </div>
+                        <div class="txt">
+                            机构项目数
+                        </div>
+                    </div>
+                    <div class="split-line"> </div>
+                    <div class="bd-sta">
+                        <div class="num">
+                                28
+                        </div>
+                        <div class="txt">
+                            机构项目数
+                        </div>
+                    </div>
+                    <div class="split-line"> </div>
+                    <div class="bd-sta">
+                        <div class="num">
+                                28
+                        </div>
+                        <div class="txt">
+                            机构项目数
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    <div class="txt-intro">
+        * 以下项目按本季度被约谈量排序，每日更新
+    </div>
+    <div class="pro-list">
+        <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+            <li ng-if="vm.prolist" ng-repeat="item in vm.prolist track  by $index"
+            ng-click="vm.goProDetail(item.ccid, $event)" >
+                <div class="icon-left">
+                    <div class="metal " ng-if="$index === 0" >
+                        <img src="/styles/images/bangdan/top1.png" />
+                    </div>
+
+                    <div class="metal " ng-if="$index === 1">
+                        <img src="/styles/images/bangdan/top2.png" />
+                    </div>
+
+                    <div class="metal " ng-if="$index === 2">
+                        <img src="/styles/images/bangdan/top3.png" />
+                    </div>
+                    <div class="metal " ng-if="$index > 2">
+                        <span>{{$index + 1}}</span>
+                    </div>
+                </div>
+                <div class="txt-right" >
+                    <div class="left-logo">
+                        <div class="logo-outer bd-gold-border" ng-if="$index === 0"
+                        style="background-image: url({{item.logo}})"
+                        >
+                        <!--
+                            <img ng-src='{{item.logo}}' />-->
+                            <div class="funding" ng-if="item.isUnderFinancing && vm.investRole">
+                                正在融资
+                            </div>
+                        </div>
+
+                        <div class="logo-outer bd-silver-border" ng-if="$index === 1"
+                        style="background-image: url({{item.logo}})" >
+                        <!--
+                            <img ng-src='{{item.logo}}' />-->
+                            <div class="funding" ng-if="item.isUnderFinancing && vm.investRole">
+                                正在融资
+                            </div>
+                        </div>
+
+                        <div class="logo-outer bd-copper-border" ng-if="$index === 2"
+                        style="background-image: url({{item.logo}})" >
+                        <!--
+                            <img ng-src='{{item.logo}}' />-->
+                            <div class="funding" ng-if="item.isUnderFinancing && vm.investRole">
+                                正在融资
+                            </div>
+                        </div>
+
+                        <div class="logo-outer bd-normal-border" ng-if="$index > 2"
+                            style="background-image: url({{item.logo}})" >
+                            <img ng-style="{'background-color':(item.ccid | demoDefaultColor)}" ng-if="!item.logo">
+                            <span class="logo-name" ng-if="!item.logo && item.name"
+                            ng-style="{'background-color':(item.ccid | demoDefaultColor)}">{{item.name | demoNameDufault}}</span>
+
+                            <div class="funding" ng-if="item.isUnderFinancing && vm.investRole">
+                                正在融资
+                            </div>
+                        </div>
+                    </div>
+                    <div class="txt-middle">
+                        <div class="bd-txt-title" ng-class="{true:'top-3Color',false:''}[$index < 3]">
+                                {{item.name}}
+                        </div>
+                        <div class="bd-txt-brief">
+                            {{item.brief}}
+                        </div>
+                        <div class="bd-txt-phase">
+                            <span >{{item.phase}}</span>
+                            <span class="bd-dot bd-dot-gray" ></span>
+                            <span>{{item.industry}}</span>
+                        </div>
+                    </div>
+                    <div class="sta-right">
+                            <div class="sta-num" ng-class="{true:'top-3Color',false:''}[$index < 3]">
+                                    {{item.interviewCount}}
+                            </div>
+                            <div class="sta-txt">
+                                    约谈量
+                            </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
     </section>
 
     <section class="bd-investor-org">
-
+        <div class="pro-top">
+            <span class="h-line"></span>
+            <span class="p-title">所属机构</span>
+        </div>
+        <div class="jigou-info">
+            <div class="icon-left" >
+                <div class="logo" style="background-image: url(https://krplus-pic.b0.upaiyun.com/com_logo_v3/logo_off_49065.jpg)">
+                </div>
+            </div>
+            <div class="icon-right" >
+                <div class="j-title">
+                    真格资金
+                </div>
+                <div class="j-info">
+                投资le000000
+                </div>
+                <div class="j-info">
+                    2017Q2风口机构排行榜第一名
+                </div>
+            </div>
+        </div>
     </section>
 </div>
