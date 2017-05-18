@@ -451,6 +451,9 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controllerAs: 'vm',
         controller: 'BangdanInvestorDetailController',
         templateUrl: 'templates/bangdan/bdinvestordetail.html',
+        resolve: {
+            investorInfo: getSingleInvestorInfo,
+        }
     });
 
     $stateProvider.state('bangdan.investorshare', {
@@ -728,6 +731,10 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
 
     function getBangdanOrgInfo(BangDanService, $stateParams) {
         return BangDanService.getSingleOrgInfo($stateParams.id);
+    }
+
+    function getSingleInvestorInfo(BangDanService, $stateParams) {
+        return BangDanService.getSingleInvestorInfo($stateParams.id);
     }
 
 });
