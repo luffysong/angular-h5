@@ -127,7 +127,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         };
         if (!vm.inApp) {request.pageSize = 20; };
 
-        BangDanService.getOrgRank(request)
+        BangDanService.getInvestorRank(request)
             .then(function (response) {
                 vm.startloading = false;
                 loading.hide('bangdanLoading');
