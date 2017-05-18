@@ -29,7 +29,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         vm.investorInfo = investorInfo.data;
         angular.forEach(investorInfo.data.focusIndustry, function (data) {
                 if (data) {
-                    vm.industry += data + '&nbsp;·&nbsp;';
+                    vm.industry += (data + '&nbsp;·&nbsp;');
                 }
             });
 
