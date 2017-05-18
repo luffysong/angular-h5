@@ -27,7 +27,7 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
         //     });
 
         $('.J_commonHeaderWrapper').remove();
-        getSingleOrgInfo(vm.id);
+        getSingleInvestorInfo(vm.id);
         getQ();
     }
 
@@ -101,8 +101,8 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
         });
     }
 
-    function getSingleOrgInfo(id) {
-        BangDanService.getSingleOrgInfo(id)
+    function getSingleInvestorInfo(id) {
+        BangDanService.getSingleInvestorInfo(id)
             .then(function (response) {
                 vm.data = response.data;
                 initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.rank, vm.data.logo);

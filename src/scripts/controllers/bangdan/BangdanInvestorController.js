@@ -13,8 +13,8 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
     vm.startloading = true;
     vm.isBottom = false;
     vm.displayMore = displayMore;
-    vm.goOrgDetail = goOrgDetail;
-    vm.joinOrg = joinOrg;
+    vm.goInvestorDetail = goInvestorDetail;
+    vm.joinInvestor = joinInvestor;
     vm.inApp = true;
     vm.total;
     vm.downloadApp = downloadApp;
@@ -28,7 +28,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         }
 
         getQ();
-        getOrgRank();
+        getInvestorRank();
         initPxLoader();
         addAnimate();
     }
@@ -118,7 +118,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         document.title = t;
     }
 
-    function getOrgRank() {
+    function getInvestorRank() {
         if (vm.busy) return;
         vm.busy = true;
         var request = {
@@ -150,7 +150,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             }).catch(fail);
     }
 
-    function goOrgDetail(id, rank) {
+    function goInvestorDetail(id, rank) {
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
         var client = 'H5';
@@ -188,7 +188,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             page: vm.page + 1,
             pageSize: 10,
         };
-        BangDanService.getOrgRank(request)
+        BangDanService.getInvestorRank(request)
             .then(function (response) {
                 $timeout(function () {
                     vm.list = vm.list.concat(response.data.data);
@@ -220,7 +220,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         return Math.abs(number);
     };
 
-    function joinOrg() {
+    function joinInvestor() {
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
         var client = 'H5';
@@ -243,7 +243,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         var krdata = {};
         krdata.type = window.projectEnvConfig.linkmeType;
         krdata.params =
-            '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/bangdan/orgbd' + '","currentRoom":"0"}';
+            '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/bangdan/investorbd' + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey, {
             type: window.projectEnvConfig.linkmeType
         }, function (err, res) {
