@@ -174,7 +174,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             client: client,
         });
 
-        $state.go('bangdan.orgbdDetail', {
+        $state.go('bangdan.investorbddetail', {
             id: id,
             rank: rank,
         });

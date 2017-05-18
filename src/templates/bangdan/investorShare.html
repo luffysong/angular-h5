@@ -21,12 +21,9 @@
   <div class="member">
     <p>我为「<span>{{vm.data.name | splitName: 10}}</span>」助力</p>
   </div>
-  <!--
-  ui-sref="bangdan.orgbdDetail({id: vm.id,rank:vm.rank})"
-  ui-sref="bangdan.orgbd"
-  -->
-  <div class="go-btn go-list"  ng-click="vm.bangdanOrg()">风云投资人榜</div>
-  <div class="go-btn go-detail"  ng-click="vm.bangdanOrgDetail(vm.id, vm.rank)">
+
+  <div class="go-btn go-list"  ng-click="vm.bangdanInvestor()">风云投资人榜</div>
+  <div class="go-btn go-detail"  ng-click="vm.bangdanInvestorDetail(vm.id, vm.rank)">
       <span>{{vm.data.name}}</span>主页
   </div>
 </div>
