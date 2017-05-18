@@ -37,7 +37,7 @@
               <div ng-class="{top3Color: $index < 3}">{{item.name}}</div>
               <div class="investor-position">
                 <span ng-if="item.investorOrgTypeEnum === 'PERSONAL_INVESTOR'">个人投资人</span>
-                <span ng-if="item.investorOrgTypeEnum === 'ORG_INVESTOR'">{{item.orgName}}</span>
+                <span ng-if="item.investorOrgTypeEnum !== 'PERSONAL_INVESTOR'">{{item.orgName}}</span>
                 · <span>{{item.position}}</span></div>
               <div class="hot-project">
                 <span ng-repeat="p in item.hotProject">{{ p }}</span>

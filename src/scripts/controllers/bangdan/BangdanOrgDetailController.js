@@ -227,7 +227,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         });
         if (f) {
             $modal.open({
-                    templateUrl: 'templates/bangdan/shareWin.html',
+                    templateUrl: 'templates/bangdan/investorShareWin.html',
                     windowClass: 'bd-nativeAlert_wrap',
                     controller: defaultControllerNoForm,
                     controllerAs: 'vm',
@@ -239,7 +239,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
                 });
         }else {
             $modal.open({
-                    templateUrl: 'templates/bangdan/shareWin.html',
+                    templateUrl: 'templates/bangdan/investorShareWin.html',
                     windowClass: 'bd-nativeAlert_wrap',
                     controller: defaultController,
                     controllerAs: 'vm',
