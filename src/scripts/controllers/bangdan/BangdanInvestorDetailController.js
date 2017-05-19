@@ -197,13 +197,13 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             client = 'iOS';
         }
 
-        sa.track('OrgTopListClick',
-          {
-            source:'organization',
-            target: tg,
-            org_id: investorInfo.data.orgId + '',
-            client:client,
-        });
+        // sa.track('OrgTopListClick',
+        //   {
+        //     source:'organization',
+        //     target: tg,
+        //     org_id: investorInfo.data.orgId + '',
+        //     client:client,
+        // });
         if (f) {
             $modal.open({
                     templateUrl: 'templates/bangdan/investorShareWin.html',
@@ -245,11 +245,11 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         init();
 
         function init() {
-            sa.track('ViewPage', {
-                    source: 'organization',
-                    org_id: vm.investorInfo.orgId + '',
-                    page: 'org_share',
-                });
+            // sa.track('ViewPage', {
+            //         source: 'organization',
+            //         org_id: vm.investorInfo.orgId + '',
+            //         page: 'org_share',
+            //     });
         }
 
         function cancelModal() {
@@ -268,25 +268,25 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
 
             forwardCount();
             if (hybrid.isInApp) {
-                if (p === 'f') {
-                    sa.track('OrgTopListClick',
-                      {
-                        source:'org_share',
-                        target:'moments',
-                        org_id: vm.investorInfo.orgId + '',
-                        client:client,
-                    });
-                    hybrid.open('weChatShareMoments');
-                }else {
-                    sa.track('OrgTopListClick',
-                      {
-                        source:'org_share',
-                        target:'wechat',
-                        org_id: vm.investorInfo.orgId + '',
-                        client:client,
-                    });
-                    hybrid.open('weChatShareFriend');
-                }
+                // if (p === 'f') {
+                //     sa.track('OrgTopListClick',
+                //       {
+                //         source:'org_share',
+                //         target:'moments',
+                //         org_id: vm.investorInfo.orgId + '',
+                //         client:client,
+                //     });
+                //     hybrid.open('weChatShareMoments');
+                // }else {
+                //     sa.track('OrgTopListClick',
+                //       {
+                //         source:'org_share',
+                //         target:'wechat',
+                //         org_id: vm.investorInfo.orgId + '',
+                //         client:client,
+                //     });
+                //     hybrid.open('weChatShareFriend');
+                // }
 
                 $timeout(function () {
                     window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
@@ -309,16 +309,15 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         vm.inApp = obj.inApp;
         vm.shareWechat = shareWechatNoForm;
         vm.investorInfo = obj;
-        console.log(obj);
 
         init();
 
         function init() {
-            sa.track('ViewPage', {
-                    source: 'organization',
-                    org_id: vm.investorInfo.orgId + '',
-                    page: 'org_share',
-                });
+            // sa.track('ViewPage', {
+            //         source: 'organization',
+            //         org_id: vm.investorInfo.orgId + '',
+            //         page: 'org_share',
+            //     });
         }
 
         function cancelModal() {
@@ -338,22 +337,22 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             forwardCount();
             if (hybrid.isInApp) {
                 if (p === 'f') {
-                    sa.track('OrgTopListClick',
-                      {
-                        source:'org_share',
-                        target:'moments',
-                        org_id: vm.investorInfo.orgId + '',
-                        client:client,
-                    });
+                    // sa.track('OrgTopListClick',
+                    //   {
+                    //     source:'org_share',
+                    //     target:'moments',
+                    //     org_id: vm.investorInfo.orgId + '',
+                    //     client:client,
+                    // });
                     hybrid.open('weChatShareMoments');
                 }else {
-                    sa.track('OrgTopListClick',
-                      {
-                        source:'org_share',
-                        target:'wechat',
-                        org_id: vm.investorInfo.orgId + '',
-                        client:client,
-                    });
+                    // sa.track('OrgTopListClick',
+                    //   {
+                    //     source:'org_share',
+                    //     target:'wechat',
+                    //     org_id: vm.investorInfo.orgId + '',
+                    //     client:client,
+                    // });
                     hybrid.open('weChatShareFriend');
                 }
 
@@ -384,14 +383,14 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             client = 'iOS';
         }
 
-        sa.track('OrgTopListClick',
-          {
-            source:'organization',
-            target:'company',
-            org_id: $stateParams.id + '',
-            company_id:ccid,
-            client:client,
-        });
+        // sa.track('OrgTopListClick',
+        //   {
+        //     source:'organization',
+        //     target:'company',
+        //     org_id: $stateParams.id + '',
+        //     company_id:ccid,
+        //     client:client,
+        // });
 
         if (ccid) {
             if (hybrid.isInApp) {
