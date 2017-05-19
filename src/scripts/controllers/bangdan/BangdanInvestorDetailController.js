@@ -122,7 +122,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
 
     function initWeixin(name, count, q, rank, url, logo) {
         window.WEIXINSHARE = {
-            shareTitle: name + '排名第' + rank + '名 | 2017Q' + q + ' · 风口投资人排行榜',
+            shareTitle: name + '排名第' + rank + '名 | 2017Q' + q + ' · 风云投资人排行榜',
             shareUrl: url,
             shareImg: '' + logo + '',
             shareDesc: '立即查看' + name + '所有' + count + '个投资项目',
