@@ -452,8 +452,16 @@
 .bd-investor-detail{
     background-color: #f9f9f9;
     .bd-detail-common;
+    position: relative;
+    top: 0px;
+    bottom: 100px;
+    padding-bottom: 110px;
+
     .bd-investor-avatar{
             height: 200px;
+            @media screen and (max-width: 320px) {
+                    height:220px;
+            }
             position: relative;
             text-align: center;
             .bd-orgdetail-logo{
@@ -614,7 +622,7 @@
                     background: #FFFFFF;
                     .in-left,.in-right{height: 100%;float: left;}
                     .in-right{
-                        width: 80%;
+                        width: 75%;
                         position: relative;
                         .text-container{
                             position: relative;
@@ -653,7 +661,7 @@
 
                     }
                     .in-left{
-                        width: 20%;
+                        width: 25%;
                     }
                     .focus{
                         font-size: 15px;
@@ -690,6 +698,8 @@
         background-color: #FFFFFF;
         height: auto;
         min-height: 300px;
+        padding-bottom: 15px;
+
         .pro-top{
                 width: 100%;
                 text-align: left;
@@ -765,7 +775,7 @@
             height: auto;
             width: 100%;
             position: relative;
-            top:50px;
+            top:65px;
 
             ul{
                 margin: 0;
@@ -930,13 +940,13 @@
         }
     }
     .bd-investor-org{
-        margin-top: 30px;
+        margin-top: 15px;
         height: auto;
         min-height: 140px;
         width: 100%;
         background-color: #FFFFFF;
         position: relative;
-        top: 30px;
+        top: 45px;
         .pro-top{
             width: 100%;
             text-align: left;
@@ -959,7 +969,7 @@
         .jigou-info{
                 position: relative;
                 top:35px;
-                height: auto;
+                height: 100%;
             .icon-left, .icon-right{
                 float: left;
                 height: 40px;
