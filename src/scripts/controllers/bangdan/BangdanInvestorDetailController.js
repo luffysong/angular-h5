@@ -113,7 +113,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
-        initTitle('2017Q' + vm.currQuarter + '·风口投资人排行榜');
+        initTitle('2017Q' + vm.currQuarter + '·风云投资人排行榜');
     }
 
     function initTitle(t) {
