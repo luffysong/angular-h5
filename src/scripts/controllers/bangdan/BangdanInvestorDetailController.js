@@ -268,25 +268,25 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
 
             forwardCount();
             if (hybrid.isInApp) {
-                // if (p === 'f') {
-                //     sa.track('OrgTopListClick',
-                //       {
-                //         source:'org_share',
-                //         target:'moments',
-                //         org_id: vm.investorInfo.orgId + '',
-                //         client:client,
-                //     });
-                //     hybrid.open('weChatShareMoments');
-                // }else {
-                //     sa.track('OrgTopListClick',
-                //       {
-                //         source:'org_share',
-                //         target:'wechat',
-                //         org_id: vm.investorInfo.orgId + '',
-                //         client:client,
-                //     });
-                //     hybrid.open('weChatShareFriend');
-                // }
+                if (p === 'f') {
+                    // sa.track('OrgTopListClick',
+                    //   {
+                    //     source:'org_share',
+                    //     target:'moments',
+                    //     org_id: vm.investorInfo.orgId + '',
+                    //     client:client,
+                    // });
+                    hybrid.open('weChatShareMoments');
+                }else {
+                    // sa.track('OrgTopListClick',
+                    //   {
+                    //     source:'org_share',
+                    //     target:'wechat',
+                    //     org_id: vm.investorInfo.orgId + '',
+                    //     client:client,
+                    // });
+                    hybrid.open('weChatShareFriend');
+                }
 
                 $timeout(function () {
                     window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
