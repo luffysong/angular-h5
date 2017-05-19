@@ -44,6 +44,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
                 if (!vm.isBottom) {
                     vm.isBottom = true;
                 }
+                console.log(vm.isBottom);
             } else {
                 if (vm.isBottom) {
                     vm.isBottom = false;
@@ -80,7 +81,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
-        initTitle('2017Q' + vm.currQuarter + '·风口机构排行榜');
+        initTitle('2017Q' + vm.currQuarter + '·风云投资人');
     }
 
     function initPxLoader() {
@@ -103,10 +104,10 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
 
     function initWeixin(q, count) {
         window.WEIXINSHARE = {
-            shareTitle: '【2017Q' + q + '· 风口机构排行榜】已有' + count + '家机构加入',
+            shareTitle: '【2017Q' + q + '· 风云投资人排行榜】已有' + count + '位投资人加入',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: '所有机构的被投项目都在这里',
+            shareDesc: '所有投资人的被投项目都在这里',
         };
 
         var obj = {};
@@ -166,13 +167,13 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         //         page: 'organization',
         //     });
 
-        sa.track('OrgTopListClick',
-          {
-            source: 'org_top_list',
-            target: 'organization',
-            org_id: id + '',
-            client: client,
-        });
+        // sa.track('OrgTopListClick',
+        //   {
+        //     source: 'org_top_list',
+        //     target: 'organization',
+        //     org_id: id + '',
+        //     client: client,
+        // });
 
         $state.go('bangdan.investorbddetail', {
             id: id,
@@ -230,12 +231,12 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             client = 'iOS';
         }
 
-        sa.track('OrgTopListClick',
-          {
-            source:'org_top_list',
-            target:'join_org_top_list',
-            client:client,
-        });
+        // sa.track('OrgTopListClick',
+        //   {
+        //     source:'org_top_list',
+        //     target:'join_org_top_list',
+        //     client:client,
+        // });
         window.location.href = 'http://cn.mikecrm.com/70INKZM';
     }
 
@@ -342,12 +343,12 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             client = 'iOS';
         }
 
-        sa.track('OrgTopListClick',
-          {
-            source: 'organization',
-            target: 'share',
-            client: client,
-        });
+        // sa.track('OrgTopListClick',
+        //   {
+        //     source: 'organization',
+        //     target: 'share',
+        //     client: client,
+        // });
     }
 
 }

@@ -1,73 +1,76 @@
 <div ng-if="!loadingInst.bangdanLoading" style="">
-<div class="investorbd-wapper" id ="investorbd-wapper">
-  <div class="investordb-top">
-    <div class="investor-brief">
-      * 按本季度截止今日，各投资人项目被约谈总量排序，实时更新
-    </div>
-  </div>
-  <!--
-  ui-sref="bangdan.orgbdDetail({id: item.orgId, rank: $index + 1})"
-  -->
-  <div class="investorbd-list-content" ng-if="vm.startloading">
-      正在加载数据...&nbsp;
-      <img src="/styles/images/bangdan/loading.svg" alt="loading">
-  </div>
-
-<section class="">
-      <ul class="investorbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
-        <li class="investor-item" ng-repeat="item in vm.list track by $index"
-         ng-click="vm.goInvestorDetail(item.investorId, $index + 1)">
-          <div class="investor-number">
-            <img src="/styles/images/bangdan/top1.png" ng-if="$index === 0">
-            <img src="/styles/images/bangdan/top2.png" ng-if="$index === 1">
-            <img src="/styles/images/bangdan/top3.png" ng-if="$index === 2">
-
-            <span ng-if="$index > 2" class="top-num">{{$index + 1}}</span>
-            <div class="up-arrow" ng-if="item.rise > 0" ng-class="{true:'top-special',false:'top-nromal'}[$index <= 2]"></div>
-            <div class="down-arrow" ng-if="item.rise < 0" ng-class="{true:'top-special',false:'top-nromal'}[$index <= 2]"></div>
-            <div class="number-change" ng-if="item.rise != 0" ng-class="{true:'top-special-num',false:'top-nromal-num'}[$index <= 2]">{{abs(item.rise)}}</div>
-
-          </div>
-          <div class="investor-info">
-            <div class="investor-logo top1-logo" ng-if="$index === 0" style="background-image: url({{item.logo}})"></div>
-            <div class="investor-logo top2-logo" ng-if="$index === 1" style="background-image: url({{item.logo}})"></div>
-            <div class="investor-logo top3-logo" ng-if="$index === 2" style="background-image: url({{item.logo}})"></div>
-            <div class="investor-logo" ng-if="$index > 2" style="background-image: url({{item.logo}})"></div>
-            <div class="investor-name">
-              <div ng-class="{top3Color: $index < 3}">{{item.name}}</div>
-              <div class="investor-position">
-                <span ng-if="item.investorOrgTypeEnum === 'PERSONAL_INVESTOR'">个人投资人</span>
-                <span ng-if="item.investorOrgTypeEnum !== 'PERSONAL_INVESTOR'">{{item.orgName}}</span>
-                · <span>{{item.position}}</span></div>
-              <div class="hot-project">
-                <span ng-repeat="p in item.hotProject">{{ p }}</span>
-              </div>
+    <div class="investorbd-wapper" id="investorbd-wapper">
+        <div class="investordb-top">
+            <div class="investor-brief">
+                * 按本季度截止今日，各投资人项目被约谈总量排序，实时更新
             </div>
-            <div class="interview-num">
-              <div ng-class="{top3Color: $index < 3}">{{item.interviewCount}}</div>
-              <div>约谈量</div>
+        </div>
+        <div class="investorbd-list-content" ng-if="vm.startloading">
+            正在加载数据...&nbsp;
+            <img src="/styles/images/bangdan/loading.svg" alt="loading">
+        </div>
+        <section class="">
+            <ul class="investorbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+                <li class="investor-item" ng-repeat="item in vm.list track by $index" ng-click="vm.goInvestorDetail(item.investorId, $index + 1)">
+                    <div class="investor-number">
+                        <img src="/styles/images/bangdan/top1.png" ng-if="$index === 0">
+                        <img src="/styles/images/bangdan/top2.png" ng-if="$index === 1">
+                        <img src="/styles/images/bangdan/top3.png" ng-if="$index === 2">
+                        <span ng-if="$index > 2" class="top-num">{{$index + 1}}</span>
+                        <div class="up-arrow" ng-if="item.rise > 0" ng-class="{true:'top-special',false:'top-nromal'}[$index <= 2]"></div>
+                        <div class="down-arrow" ng-if="item.rise < 0" ng-class="{true:'top-special',false:'top-nromal'}[$index <= 2]"></div>
+                        <div class="number-change" ng-if="item.rise != 0" ng-class="{true:'top-special-num',false:'top-nromal-num'}[$index <= 2]">{{abs(item.rise)}}</div>
+                    </div>
+                    <div class="investor-info">
+                        <div class="investor-logo top1-logo" ng-if="$index === 0" style="background-image: url({{item.logo}})"></div>
+                        <div class="investor-logo top2-logo" ng-if="$index === 1" style="background-image: url({{item.logo}})"></div>
+                        <div class="investor-logo top3-logo" ng-if="$index === 2" style="background-image: url({{item.logo}})"></div>
+                        <div class="investor-logo" ng-if="$index > 2" style="background-image: url({{item.logo}})"></div>
+                        <div class="investor-name">
+                            <div ng-class="{top3Color: $index < 3}">{{item.name}}</div>
+                            <div class="investor-position" ng-if="item.investorOrgTypeEnum !== 'PERSONAL_INVESTOR'">
+                                <span>{{item.orgName}}</span> · <span>{{item.position}}</span>
+                            </div>
+                            <div class="investor-position" ng-if="item.investorOrgTypeEnum === 'PERSONAL_INVESTOR'">
+                                <span>个人投资人</span>
+                            </div>
+                            <div class="hot-project">
+                                <span ng-repeat="p in item.hotProject">{{ p }}</span>
+                            </div>
+                        </div>
+                        <div class="interview-num">
+                            <div ng-class="{top3Color: $index < 3}">{{item.interviewCount}}</div>
+                            <div>约谈量</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <footer ng-if="vm.busy && !vm.finish &&  vm.page">
+                正在加载更多...&nbsp;
+                <img src="/styles/images/bangdan/loading.svg" alt="loading">
+            </footer>
+            <footer ng-if="vm.finish">已无更多数据</footer>
+        </section>
+        <div class="investorbd-footer" ng-if="vm.inApp">
+            <div>
+                <span>一键加入风云投资人</span>
+                <a ng-click="vm.joinInvestor()">
+                    <div class="register">立即加入</div>
+                </a>
             </div>
-          </div>
-      </li>
-    </ul>
-    <footer ng-if="vm.busy && !vm.finish &&  vm.page">
-          正在加载更多...&nbsp;
-          <img src="/styles/images/bangdan/loading.svg" alt="loading">
-    </footer>
-    <footer ng-if="vm.finish">已无更多数据</footer>
-</section>
-
-
-  <div class="investorbd-footer" ng-if="vm.inApp">
-    <div>
-      <span>榜上无名，30秒入驻</span>
-      <a  ng-click="vm.joinInvestor()"><div class="register">立即入驻</div></a>
+        </div>
+        <section class="bdorg-section-footer" ng-show="!vm.inApp && vm.isBottom">
+            <div class="bd-out-app-ani" id="div-open-app">
+                <div>
+                    <p>
+                        一览最全项目数据库
+                    </p>
+                </div>
+            </div>
+        </section>
+        <div class="bdorg-div-pop-in animated fadeInUp" ng-if="!vm.inApp">
+            <a ng-click="vm.downloadApp()" class="btn-open-app" id="btn-open-app">点击查看更多{{vm.isBottom}}</a>
+        </div>
     </div>
-  </div>
-<!--
-  <div class="bd-out-fixdiv bd-txt-center animated bounceInUp" ng-if="!vm.inApp ">
-           <a  ng-click="vm.downloadApp()">创投助手内打开</a>
-  </div>
--->
-
+</div>
 <loading loading="bangdanLoading"></loading>

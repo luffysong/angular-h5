@@ -26,10 +26,10 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
 
     function initWeixin(name, count, q, rank, logo) {
         window.WEIXINSHARE = {
-            shareTitle: name + '排名第' + rank + '|2017Q' + q + '风口机构排行榜',
+            shareTitle: name + '排名第' + rank + '|2017Q' + q + '风云投资人',
             shareUrl: window.location.href,
             shareImg: '' + logo + '',
-            shareDesc: name + '' + count + '个投资项目都在这里',
+            shareDesc: '立即查看'+ name + '所有' + count + '个投资项目',
         };
 
         var obj = {};
@@ -41,7 +41,7 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
-        initTitle('2017Q' + vm.currQuarter + '·风口机构排行榜');
+        initTitle('2017Q' + vm.currQuarter + '·风云投资人');
     }
 
     function bangdanInvestor() {
@@ -54,13 +54,13 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
             client = 'iOS';
         }
 
-        sa.track('OrgTopListClick',
-          {
-            source:'share_page',
-            target:'org_top_list',
-            org_id: $stateParams.id + '',
-            client:client,
-        });
+        // sa.track('OrgTopListClick',
+        //   {
+        //     source:'share_page',
+        //     target:'org_top_list',
+        //     org_id: $stateParams.id + '',
+        //     client:client,
+        // });
         $state.go('bangdan.investorbd', {
         });
     }
@@ -75,13 +75,13 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
             client = 'iOS';
         }
 
-        sa.track('OrgTopListClick',
-          {
-            source:'share_page',
-            target:'organization',
-            org_id: id + '',
-            client:client,
-        });
+        // sa.track('OrgTopListClick',
+        //   {
+        //     source:'share_page',
+        //     target:'organization',
+        //     org_id: id + '',
+        //     client:client,
+        // });
         $state.go('bangdan.investorbddetail', {
             id: id,
             rank: rank,
@@ -205,13 +205,13 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
             client = 'iOS';
         }
 
-        sa.track('OrgTopListClick',
-          {
-            source:'share_page',
-            target:'share',
-            org_id: $stateParams.id + '',
-            client:client,
-        });
+        // sa.track('OrgTopListClick',
+        //   {
+        //     source:'share_page',
+        //     target:'share',
+        //     org_id: $stateParams.id + '',
+        //     client:client,
+        // });
     }
 
 }
