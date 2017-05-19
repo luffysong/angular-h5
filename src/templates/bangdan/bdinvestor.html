@@ -59,9 +59,9 @@
                 </a>
             </div>
         </div>
-        <section class="bdorg-section-footer" ng-show="!vm.inApp && vm.isBottom">
+        <section class="bdorg-section-footer" ng-if="!vm.inApp && vm.isBottom">
             <div class="bd-out-app-ani" id="div-open-app">
-                <div>
+                <div ng-if="vm.isBottom">
                     <p>
                         一览最全项目数据库
                     </p>

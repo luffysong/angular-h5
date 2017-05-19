@@ -238,7 +238,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         //     target:'join_org_top_list',
         //     client:client,
         // });
-        window.location.href = vm.bdUrl;
+        window.location.href = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
     }
 
     function initLinkme() {

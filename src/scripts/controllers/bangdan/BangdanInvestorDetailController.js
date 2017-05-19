@@ -271,7 +271,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
                 }
 
                 $timeout(function () {
-                    window.location.href = vm.bdUrl;
+                    window.location.href = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
                 }, 1000);
             }
         }
@@ -429,7 +429,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
                         // 用户确认分享后执行的回调函数
                         //shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = vm.bdUrl;
+                            window.location.href = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
                         }
                     },
 
@@ -437,7 +437,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
                         // 用户取消分享后执行的回调函数
                         //shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = vm.bdUrl;
+                            window.location.href = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
                         }
                     }
                 });
@@ -452,14 +452,14 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
                     success: function () {
                         // 用户确认分享后执行的回调函数
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = vm.bdUrl;
+                            window.location.href = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
                         }
                     },
 
                     cancel: function () {
                         // 用户取消分享后执行的回调函数
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = vm.bdUrl;
+                            window.location.href = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
                         }
                     }
                 });
