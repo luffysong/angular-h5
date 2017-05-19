@@ -21,6 +21,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     vm.rank = $stateParams.rank;
     vm.goProDetail = goProDetail;
     vm.h5Href = false;
+    vm.bdUrl = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
     init();
 
     function init() {
@@ -270,7 +271,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
                 }
 
                 $timeout(function () {
-                    window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
+                    window.location.href = vm.bdUrl;
                 }, 1000);
             }
         }
@@ -428,7 +429,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
                         // 用户确认分享后执行的回调函数
                         //shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
+                            window.location.href = vm.bdUrl;
                         }
                     },
 
@@ -436,7 +437,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
                         // 用户取消分享后执行的回调函数
                         //shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
+                            window.location.href = vm.bdUrl;
                         }
                     }
                 });
@@ -451,14 +452,14 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
                     success: function () {
                         // 用户确认分享后执行的回调函数
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
+                            window.location.href = vm.bdUrl;
                         }
                     },
 
                     cancel: function () {
                         // 用户取消分享后执行的回调函数
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
+                            window.location.href = vm.bdUrl;
                         }
                     }
                 });

@@ -18,6 +18,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
     vm.inApp = true;
     vm.total;
     vm.downloadApp = downloadApp;
+    vm.bdUrl = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
 
     init();
 
@@ -237,7 +238,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         //     target:'join_org_top_list',
         //     client:client,
         // });
-        window.location.href = 'http://cn.mikecrm.com/70INKZM';
+        window.location.href = vm.bdUrl;
     }
 
     function initLinkme() {
