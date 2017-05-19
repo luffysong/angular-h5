@@ -245,11 +245,6 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         init();
 
         function init() {
-            // sa.track('ViewPage', {
-            //         source: 'organization',
-            //         org_id: vm.investorInfo.orgId + '',
-            //         page: 'org_share',
-            //     });
         }
 
         function cancelModal() {
@@ -269,28 +264,14 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             forwardCount();
             if (hybrid.isInApp) {
                 if (p === 'f') {
-                    // sa.track('OrgTopListClick',
-                    //   {
-                    //     source:'org_share',
-                    //     target:'moments',
-                    //     org_id: vm.investorInfo.orgId + '',
-                    //     client:client,
-                    // });
                     hybrid.open('weChatShareMoments');
                 }else {
-                    // sa.track('OrgTopListClick',
-                    //   {
-                    //     source:'org_share',
-                    //     target:'wechat',
-                    //     org_id: vm.investorInfo.orgId + '',
-                    //     client:client,
-                    // });
                     hybrid.open('weChatShareFriend');
                 }
 
                 $timeout(function () {
                     window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
-                }, 2000);
+                }, 1000);
             }
         }
 
@@ -337,22 +318,8 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             forwardCount();
             if (hybrid.isInApp) {
                 if (p === 'f') {
-                    // sa.track('OrgTopListClick',
-                    //   {
-                    //     source:'org_share',
-                    //     target:'moments',
-                    //     org_id: vm.investorInfo.orgId + '',
-                    //     client:client,
-                    // });
                     hybrid.open('weChatShareMoments');
                 }else {
-                    // sa.track('OrgTopListClick',
-                    //   {
-                    //     source:'org_share',
-                    //     target:'wechat',
-                    //     org_id: vm.investorInfo.orgId + '',
-                    //     client:client,
-                    // });
                     hybrid.open('weChatShareFriend');
                 }
 
@@ -483,7 +450,6 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
                     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                     success: function () {
                         // 用户确认分享后执行的回调函数
-                        //shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
                             window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
                         }
@@ -491,7 +457,6 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
 
                     cancel: function () {
                         // 用户取消分享后执行的回调函数
-                        //shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
                             window.location.href = 'http://cn.mikecrm.com/RRL7k2h';
                         }
