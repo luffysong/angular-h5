@@ -75,6 +75,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         BangDanService.getInvestorProRank($stateParams.id, params)
         .then(function setdata(response) {
             vm.startloading = false;
+            loading.hide('bangdanDetailLoading');
             vm.prolist = vm.prolist.concat(response.data.data);
             if (response.data.totalPages) {
                 vm.page = response.data.page || 0;
