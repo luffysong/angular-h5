@@ -201,7 +201,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         item.rank = parseInt(vm.rank);
         item.currQuarter = vm.currQuarter;
         item.inApp = vm.inApp;
-        var tg = 'join_investor_top_list';
+        var tg = 'join_investor_company';
         if (f) {
             item.f = f;tg = 'support';
         }else {
