@@ -21,6 +21,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     vm.rank = $stateParams.rank;
     vm.goProDetail = goProDetail;
     vm.h5Href = false;
+    $scope.isEqualHeight = false;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
     init();
 
@@ -38,7 +39,6 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         initPxLoader();
         initUser();
         isDisplayMore();
-
         var HOST = location.host;
         var shareUrl =
         'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
@@ -146,14 +146,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     }
 
     function isDisplayMore() {
-        //var ifObj = $document('#investor-info');
-        // var body = $document.find('body').eq(0);
-        // var ifObj = angular.element(document.querySelector('#investor-info'));
-        // var $infoObj = angular.element('#investor-info').find('.info-content').find('.info').find('.text-content');
-        // var $indObj = angular.element('#investor-info').find('.info-content').find('.industry').find('.in-right').find('.text-content');
-        // console.log(body, $document.find(body).find('.info-content'));
-        // console.log('===', document.querySelector('#investor-info'));
-
+        console.log($scope.isEqualHeight);
     }
 
     function openMore(e) {

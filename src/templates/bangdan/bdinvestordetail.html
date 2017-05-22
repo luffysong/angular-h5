@@ -31,26 +31,29 @@
         </div>
 
         <div class="jg-info" ng-if=" vm.investorInfo.investorOrgTypeEnum === 'PERSONAL_INVESTOR' ">
-            <span class="txt-deco" >个人投资人</span>&nbsp;
+            <span  >个人投资人</span>&nbsp;
+            <!--
             <span class="bd-dot bd-dot-yel" ng-if="vm.investorInfo.position"></span>&nbsp;
             <span ng-if="vm.investorInfo.position">{{vm.investorInfo.position}}</span>
+            -->
 
         </div>
 
         <div class="rank-num">
                 <span>第&nbsp;{{vm.rank}}&nbsp;名</span><span>/本季度</span>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
         </div>
         <div class="push-right" ng-click="vm.joinpro('forward')">
                 <div>转发支持</div>
                 <div><img src="/styles/images/bangdan/thumup.png"/>&nbsp;{{vm.investorInfo.forwardCount}}</div>
         </div>
     </section>
-    <section class="bd-investor-info">
-        <div class="investor-info" id="investor-info">
+    <section class="bd-investor-info" ng-if="vm.investorInfo.intro || vm.industry">
+        <div class="investor-info"
+            ng-class="{true:'padd-Btm-f',false:''}[isEqualHeight]">
             <div class="info-content" >
                     <div class="info">
-                        <text-line-clamp line-clamp='4' text="vm.investorInfo.intro">
+                        <text-line-clamp line-clamp='4' text="vm.investorInfo.intro" isequalheight="isEqualHeight">
                             <div class="text-container">
                                 <p class="text-content">
                                 </p>
@@ -62,7 +65,7 @@
                             <span clss="focus"><b>关注行业</b></span>
                         </div>
                         <div class="in-right">
-                            <text-line-clamp line-clamp='2' text="vm.industry">
+                            <text-line-clamp line-clamp='2' text="vm.industry" isequalheight="isEqualHeight">>
                                 <div class="text-container">
                                     <p class="text-content">
                                     </p>
@@ -71,7 +74,7 @@
                         </div>
                     </div>
             </div>
-            <div class="open-more" ng-click="vm.openMore($event)">
+            <div class="open-more" ng-click="vm.openMore($event)" ng-if="isEqualHeight">
                 <span >
                     点击<span class="open-close-txt">展开</span>投资人完整信息&nbsp;
                     <img class="open-close" src="/styles/images/bangdan/open-more-new.png"/></span>

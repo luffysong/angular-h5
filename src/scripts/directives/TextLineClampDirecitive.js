@@ -18,10 +18,12 @@ angular.module('defaultApp.directive').directive('textLineClamp',
             bindToController: true,
             scope: {
                 lineClamp:'@',
-                text:'='
+                text:'=',
+                isequalheight:'='
             },
             link: function (scope, element) {
                 var vm = scope.vm;
+
                 var $textContent = element.find('.text-content');
                 $textContent.html(vm.text);
                 var $toggle = element.find('.text-toggle');
@@ -33,10 +35,16 @@ angular.module('defaultApp.directive').directive('textLineClamp',
                 var clampHeight = $textContent[0].offsetHeight;
                 $textContent.attr('cla-height', clampHeight);
                 $textContent.css('height', clampHeight + 'px');
+
                 if (clampHeight === height) {
                     $textContent.attr('isEqualHeight', 'true');
                     element.find('.text-toggle').hide();
                     return;
+                } else {
+                    if (!vm.isequalheight) {
+                        //更改过之后不再修改
+                        vm.isequalheight = true;
+                    }
                 }
 
                 vm.collapse = true;
