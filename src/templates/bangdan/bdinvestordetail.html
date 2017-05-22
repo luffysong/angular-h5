@@ -40,8 +40,8 @@
         </div>
 
         <div class="rank-num">
-                <span>第&nbsp;{{vm.rank}}&nbsp;名</span><span>/本季度</span>
-                &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>第&nbsp;{{vm.rank}}&nbsp;名</span><span>/本季度</span>
+
         </div>
         <div class="push-right" ng-click="vm.joinpro('forward')">
                 <div>转发支持</div>
@@ -214,7 +214,7 @@
     </section>
 
     <section class="bd-investor-org"
-    ng-if="vm.investorInfo.investorOrgTypeEnum === 'ORG_INVESTOR' && vm.inApp"
+    ng-if="vm.investorInfo.investorOrgTypeEnum === 'ORG_INVESTOR' && vm.orgInfo && vm.inApp"
     ng-click="vm.gobdOrg(vm.investorInfo.orgId)">
         <div class="pro-top">
             <span class="h-line"></span>
@@ -222,9 +222,20 @@
         </div>
         <div class="jigou-info" ng-if="!vm.loadOrg" >
             <div class="icon-left" ng-if="vm.orgInfo.logo">
-                <div class="logo" style="background-image: url({{vm.orgInfo.logo}})">
+                <!--
+                style="background-image: url({{vm.orgInfo.logo}})"-->
+                <div class="logo"
+                    ng-style="{'background-image': (vm.orgInfo.logo | backgroundUrl)}">
                 </div>
             </div>
+
+            <div class="icon-left" ng-if="!vm.orgInfo.logo">
+                <div class="logo" ng-style="{'background-color':(vm.orgInfo.orgId | demoDefaultColor)}" ng-if="!vm.orgInfo.logo">
+                    <span class="logo-name" ng-if="!vm.orgInfo.logo && vm.orgInfo.name"
+                    ng-style="{'background-color':(vm.orgInfo.orgId | demoDefaultColor)}">{{vm.orgInfo.name | demoNameDufault}}</span>
+                </div>
+            </div>
+
             <div class="icon-right" >
                 <div class="j-title">
                     {{vm.orgInfo.name}}
