@@ -151,7 +151,8 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         // var ifObj = angular.element(document.querySelector('#investor-info'));
         // var $infoObj = angular.element('#investor-info').find('.info-content').find('.info').find('.text-content');
         // var $indObj = angular.element('#investor-info').find('.info-content').find('.industry').find('.in-right').find('.text-content');
-        // console.log(body, $document.find(body).find('.bd-investor-detail'));
+        // console.log(body, $document.find(body).find('.info-content'));
+        // console.log('===', document.querySelector('#investor-info'));
 
     }
 
