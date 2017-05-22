@@ -162,19 +162,13 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             client = 'iOS';
         }
 
-        // sa.track('ViewPage', {
-        //         source: 'org_top_list',
-        //         org_id: $stateParams.id + '',
-        //         page: 'organization',
-        //     });
-
-        // sa.track('OrgTopListClick',
-        //   {
-        //     source: 'org_top_list',
-        //     target: 'organization',
-        //     org_id: id + '',
-        //     client: client,
-        // });
+        sa.track('InvestorTopListClick',
+          {
+            source: 'investor_top_list',
+            target: 'investor',
+            investor_id: id + '',
+            client: client,
+        });
 
         $state.go('bangdan.investorbddetail', {
             id: id,
@@ -232,12 +226,12 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             client = 'iOS';
         }
 
-        // sa.track('OrgTopListClick',
-        //   {
-        //     source:'org_top_list',
-        //     target:'join_org_top_list',
-        //     client:client,
-        // });
+        sa.track('InvestorTopListClick',
+          {
+            source:'investor_top_list',
+            target:'join_investor_top_list',
+            client:client,
+        });
         window.location.href = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
     }
 
@@ -344,12 +338,12 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             client = 'iOS';
         }
 
-        // sa.track('OrgTopListClick',
-        //   {
-        //     source: 'organization',
-        //     target: 'share',
-        //     client: client,
-        // });
+        sa.track('InvestorTopListClick',
+          {
+            source: 'investor_top_list',
+            target: 'share',
+            client: client,
+        });
     }
 
 }
