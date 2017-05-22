@@ -34,6 +34,7 @@ angular.module('defaultApp.directive').directive('textLineClamp',
                 $textContent.attr('cla-height', clampHeight);
                 $textContent.css('height', clampHeight + 'px');
                 if (clampHeight === height) {
+                    $textContent.attr('isEqualHeight', 'true');
                     element.find('.text-toggle').hide();
                     return;
                 }

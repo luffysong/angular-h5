@@ -36,7 +36,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         getQ();
         getOrgInfo(investorInfo.data.orgId);
         initPxLoader();
-        initH5();
+        initUser();
 
         var HOST = location.host;
         var shareUrl =
@@ -133,6 +133,17 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         initH5();
     }
 
+    function initUser() {
+        FindService.getUserProfile()
+            .then(function temp(response) {
+                if (response.data) {
+                    if (response.data.investor) {
+                        vm.investRole = true;
+                    }
+                }
+            });
+    }
+
     function openMore(e) {
         var obj = angular.element(e.currentTarget);
         var openClose = obj.find('.open-close');
@@ -182,7 +193,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         item.rank = parseInt(vm.rank);
         item.currQuarter = vm.currQuarter;
         item.inApp = vm.inApp;
-        var tg = 'join_org';
+        var tg = 'join_investor_top_list';
         if (f) {
             item.f = f;tg = 'support';
         }else {
@@ -198,13 +209,13 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             client = 'iOS';
         }
 
-        // sa.track('OrgTopListClick',
-        //   {
-        //     source:'organization',
-        //     target: tg,
-        //     org_id: investorInfo.data.orgId + '',
-        //     client:client,
-        // });
+        sa.track('InvestorTopListClick',
+          {
+            source:'investor',
+            target: tg,
+            investor_id: investorInfo.data.investorId + '',
+            client:client,
+        });
         if (f) {
             $modal.open({
                     templateUrl: 'templates/bangdan/investorShareWin.html',
@@ -265,8 +276,22 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             forwardCount();
             if (hybrid.isInApp) {
                 if (p === 'f') {
+                    sa.track('InvestorTopListClick',
+                      {
+                        source:'investor_share',
+                        target:'moments',
+                        investor_id: vm.investorInfo.investorId + '',
+                        client:client,
+                    });
                     hybrid.open('weChatShareMoments');
                 }else {
+                    sa.track('InvestorTopListClick',
+                      {
+                        source:'investor_share',
+                        target:'wechat',
+                        org_id: vm.investorInfo.investorId + '',
+                        client:client,
+                    });
                     hybrid.open('weChatShareFriend');
                 }
 
@@ -295,11 +320,11 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         init();
 
         function init() {
-            // sa.track('ViewPage', {
-            //         source: 'organization',
-            //         org_id: vm.investorInfo.orgId + '',
-            //         page: 'org_share',
-            //     });
+            sa.track('ViewPage', {
+                    source: 'investor',
+                    org_id: vm.investorInfo.investorId + '',
+                    page: 'investor_share',
+                });
         }
 
         function cancelModal() {
@@ -319,8 +344,22 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             forwardCount();
             if (hybrid.isInApp) {
                 if (p === 'f') {
+                    sa.track('InvestorTopListClick',
+                      {
+                        source:'investor_share',
+                        target:'moments',
+                        investor_id: vm.investorInfo.investorId + '',
+                        client:client,
+                    });
                     hybrid.open('weChatShareMoments');
                 }else {
+                    sa.track('InvestorTopListClick',
+                      {
+                        source:'investor_share',
+                        target:'wechat',
+                        org_id: vm.investorInfo.investorId + '',
+                        client:client,
+                    });
                     hybrid.open('weChatShareFriend');
                 }
 
@@ -351,14 +390,14 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             client = 'iOS';
         }
 
-        // sa.track('OrgTopListClick',
-        //   {
-        //     source:'organization',
-        //     target:'company',
-        //     org_id: $stateParams.id + '',
-        //     company_id:ccid,
-        //     client:client,
-        // });
+        sa.track('InvestorTopListClick',
+          {
+            source:'investor',
+            target:'company',
+            investor_id: $stateParams.id + '',
+            company_id: ccid,
+            client: client,
+        });
 
         if (ccid) {
             if (hybrid.isInApp) {
