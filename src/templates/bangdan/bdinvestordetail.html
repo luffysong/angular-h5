@@ -47,8 +47,8 @@
         </div>
     </section>
     <section class="bd-investor-info">
-        <div class="investor-info">
-            <div class="info-content">
+        <div class="investor-info" id="investor-info">
+            <div class="info-content" >
                     <div class="info">
                         <text-line-clamp line-clamp='4' text="vm.investorInfo.intro">
                             <div class="text-container">
@@ -72,7 +72,8 @@
                     </div>
             </div>
             <div class="open-more" ng-click="vm.openMore($event)">
-                <span >点击展开投资人完整信息&nbsp;
+                <span >
+                    点击<span class="open-close-txt">展开</span>投资人完整信息&nbsp;
                     <img class="open-close" src="/styles/images/bangdan/open-more-new.png"/></span>
             </div>
         </div>

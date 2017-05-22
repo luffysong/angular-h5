@@ -3,7 +3,7 @@ angular.module('defaultApp.controller')
     .controller('BangdanInvestorDetailController', BangdanInvestorDetailController);
 
 function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, BangDanService, ErrorService, hybrid, $rootScope, $timeout, investorInfo) {
+    $state, UserService, BangDanService, ErrorService, hybrid, $rootScope, $timeout, investorInfo, $document) {
     var vm = this;
     vm.page = 0;
     vm.busy = false;
@@ -37,6 +37,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         getOrgInfo(investorInfo.data.orgId);
         initPxLoader();
         initUser();
+        isDisplayMore();
 
         var HOST = location.host;
         var shareUrl =
@@ -144,9 +145,20 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             });
     }
 
+    function isDisplayMore() {
+        //var ifObj = $document('#investor-info');
+        // var body = $document.find('body').eq(0);
+        // var ifObj = angular.element(document.querySelector('#investor-info'));
+        // var $infoObj = angular.element('#investor-info').find('.info-content').find('.info').find('.text-content');
+        // var $indObj = angular.element('#investor-info').find('.info-content').find('.industry').find('.in-right').find('.text-content');
+        // console.log(body, $document.find(body).find('.bd-investor-detail'));
+
+    }
+
     function openMore(e) {
         var obj = angular.element(e.currentTarget);
         var openClose = obj.find('.open-close');
+        var openCloseTxt = obj.find('.open-close-txt');
 
         var $infoObj = obj.parent().find('.info-content').find('.info').find('.text-content');
         var $indObj = obj.parent().find('.info-content').find('.industry').find('.in-right').find('.text-content');
@@ -165,6 +177,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             $indObj.css('transition', 'height 0.3s');
             $indObj.css('height', ih + 'px');
             openClose.css('transform', 'rotate(180deg)');
+            openCloseTxt.html('收起');
             vm.collapse = false;
         }else {
             $infoObj.css('transition', 'height 0.3s');
@@ -175,6 +188,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             $indObj.css('transition', 'height 0.3s');
             $indObj.css('height',  ihclmp + 'px');
             openClose.css('transform', '');
+            openCloseTxt.html('展开');
             vm.collapse = true;
         }
     }
