@@ -95,10 +95,12 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
             org_id: id + '',
             client:client,
         });
-        $state.go('bangdan.orgbdDetail', {
-            id: id,
-            rank: rank,
-        });
+
+        //禁止访问详情
+        // $state.go('bangdan.orgbdDetail', {
+        //     id: id,
+        //     rank: rank,
+        // });
     }
 
     function getSingleOrgInfo(id) {
