@@ -19,6 +19,11 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
             initLinkme();
             vm.inApp = false;
         }
+        sa.track('ViewPage', {
+                source: 'investor_share_page',
+                investor_id: $stateParams.id + '',
+                page: 'investor_share_page',
+            });
         $('.J_commonHeaderWrapper').remove();
         getSingleInvestorInfo(vm.id);
         getQ();
@@ -54,13 +59,13 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
             client = 'iOS';
         }
 
-        // sa.track('OrgTopListClick',
-        //   {
-        //     source:'share_page',
-        //     target:'org_top_list',
-        //     org_id: $stateParams.id + '',
-        //     client:client,
-        // });
+        sa.track('InvestorTopListClick',
+          {
+            source:'investor_share_page',
+            target:'investor_top_list',
+            investor_id: $stateParams.id + '',
+            client:client,
+        });
         $state.go('bangdan.investorbd', {
         });
     }
@@ -75,13 +80,14 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
             client = 'iOS';
         }
 
-        // sa.track('OrgTopListClick',
-        //   {
-        //     source:'share_page',
-        //     target:'organization',
-        //     org_id: id + '',
-        //     client:client,
-        // });
+        sa.track('InvestorTopListClick',
+          {
+            source:'investor_share_page',
+            target:'investor',
+            org_id: id + '',
+            client:client,
+        });
+
         $state.go('bangdan.investorbddetail', {
             id: id,
             rank: rank,
@@ -205,13 +211,13 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
             client = 'iOS';
         }
 
-        // sa.track('OrgTopListClick',
-        //   {
-        //     source:'share_page',
-        //     target:'share',
-        //     org_id: $stateParams.id + '',
-        //     client:client,
-        // });
+        sa.track('InvestorTopListClick',
+          {
+            source:'investor_share_page',
+            target:'share',
+            org_id: $stateParams.id + '',
+            client:client,
+        });
     }
 
 }
