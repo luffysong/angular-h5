@@ -439,6 +439,30 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         }
     });
 
+    $stateProvider.state('bangdan.investorbd', {
+        url: '/investorbd',
+        controllerAs: 'vm',
+        controller: 'BangdanInvestorController',
+        templateUrl: 'templates/bangdan/bdinvestor.html',
+    });
+
+    $stateProvider.state('bangdan.investorbddetail', {
+        url: '/investorbddetail?{id}&{rank}',
+        controllerAs: 'vm',
+        controller: 'BangdanInvestorDetailController',
+        templateUrl: 'templates/bangdan/bdinvestordetail.html',
+        resolve: {
+            investorInfo: getSingleInvestorInfo,
+        }
+    });
+
+    $stateProvider.state('bangdan.investorshare', {
+        url: '/investorshare?{id}&{rank}',
+        controllerAs: 'vm',
+        controller: 'BangdanInvestorShareController',
+        templateUrl: 'templates/bangdan/investorShare.html',
+    });
+
     $stateProvider.state('bangdan.bdshare', {
         url: '/bdshare?{id}&{rank}',
         controllerAs: 'vm',
@@ -707,6 +731,10 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
 
     function getBangdanOrgInfo(BangDanService, $stateParams) {
         return BangDanService.getSingleOrgInfo($stateParams.id);
+    }
+
+    function getSingleInvestorInfo(BangDanService, $stateParams) {
+        return BangDanService.getSingleInvestorInfo($stateParams.id);
     }
 
 });

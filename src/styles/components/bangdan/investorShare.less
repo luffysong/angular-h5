@@ -1,0 +1,133 @@
+.investorbd-share-wapper {
+  height: 667px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  max-width: 768px;
+  background-color: black;
+  background: url('images/bangdan/share-bg.png') no-repeat center;
+  text-align: center;
+  .logo {
+    margin: 45px auto 0;
+    border: 1px solid #E2B250;
+    border-radius: 35px;
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    background: #fff no-repeat 50%;
+    background-size: contain;
+  }
+  .riband {
+    position: relative;
+    bottom: 85px;
+    right: 30px;
+    img {
+      width: 7%;
+    }
+  }
+  .other-rank {
+    height: 30px;
+  }
+  .name {
+    margin: -15px auto 0;
+    font-size: 18px;
+    color: #E2B250;
+    text-shadow: 0 0 6px rgba(0,0,0,0.80);
+  }
+  .position {
+    font-size: 14px;
+    color: rgba(255,227,168,0.70);
+    letter-spacing: 0;
+  }
+  .number {
+    margin-top: 60px;
+    .num-line {
+      display: inline-block;
+      width: 10px;
+      border-top: 2px solid #ffc144;
+      position: relative;
+      bottom: 7px;
+    }
+    .num {
+      display: inline-block;
+      font-size: 22px;
+      color: #E2B250;
+      margin: 0 10px;
+      span {
+        font-size: 65px;
+        font-weight: bold;
+        margin: 0 10px;
+        font-family: Helvetica-BoldOblique;
+      }
+    }
+    .num-text {
+      margin-top: 25px;
+      font-size: 14px;
+      color: rgba(255,227,168,0.70);
+      line-height: 20px;
+    }
+  }
+  .info {
+    margin-top: 30px;
+    color: rgba(255,227,168,0.70);
+    font-size: 20px;
+    .counts {
+      display: inline-block;
+      text-align: center;
+      div:last-child {
+        font-size: 12px;
+      }
+    }
+    .count-border {
+      width: 30%;
+      margin: 0 25px;
+      border-left: solid 1px #4b4436;
+      border-right: solid 1px #4b4436;
+      height: 25px;
+      position: relative;
+      top: 10px;
+      div {
+        position: relative;
+        bottom: 10px;
+      }
+    }
+  }
+  .member {
+    margin-top: 70px;
+    font-size: 18px;
+    color: #FFC244;
+    line-height: 30px;
+  }
+  .go-btn {
+    display: inline-block;
+    width: 37%;
+    border: solid 1px #665635;
+    border-radius: 25px;
+    font-size: 15px;
+    color: #E2B250;
+    line-height: 45px;
+    margin: 55px 10px 0;
+    background-color: rgba(49, 46, 40, 0.5);
+  }
+  .mgt {
+    margin-top: 25px;
+  }
+}
+
+@media (min-width: 412px) {
+  .investorbd-share-wapper {
+    height: 737px;
+    .riband {
+      bottom: 88px;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .investorbd-share-wapper {
+    .riband {
+      bottom: 83px;
+    }
+  }
+
+}

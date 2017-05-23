@@ -161,6 +161,15 @@ angular.module('defaultApp')
                 }else if (name === 'bangdan.bdshare') {
                     visitingPage = 'share_page';
                     track = true;
+                }else if (name === 'bangdan.investorbd') {
+                    visitingPage = 'investor_top_list';
+                    track = true;
+                }else if (name === 'bangdan.investorbddetail') {
+                    visitingPage = 'investor';
+                    track = true;
+                }else if (name === 'bangdan.investorshare') {
+                    visitingPage = 'investor_share_page';
+                    track = true;
                 }
 
                 if (type === 'name') {
@@ -175,14 +184,20 @@ angular.module('defaultApp')
                 var _orgid = '';
                 if (name === 'bangdan.orgbdDetail'
                     || name === 'bangdan.bdshare'
-                    || name === 'bangdan.orgbd') {
+                    || name === 'bangdan.orgbd'
+                    || name === 'bangdan.investorbddetail'
+                    || name === 'bangdan.investorbd'
+                    || name === 'bangdan.investorshare') {
                     _orgid = toParams.id;
                 }
 
                 if (!_orgid) {
                     if ((location + '').indexOf('bangdan/bdshare')
                 || (location + '').indexOf('bangdan/orgbd')
-                || (location + '').indexOf('bangdan/orgbddetail')) {
+                || (location + '').indexOf('bangdan/orgbddetail')
+                || (location + '').indexOf('bangdan/investorbddetail')
+                || (location + '').indexOf('bangdan/investorbd')
+                || (location + '').indexOf('bangdan/investorshare')) {
                         _orgid = toParams.id;
                     }
                 }
@@ -194,6 +209,7 @@ angular.module('defaultApp')
                 source: getPage(from.name, 'name'),
                 page: getPage(to.name, 'name'),
                 org_id: getOrgId(from.name, 'name'),
+                investor_id: getOrgId(from.name, 'name'),
             });
         });
     }).run(function ($http, $rootScope, $location, $state, notify, Permission, UserService, $q, CredentialService) {

@@ -1,0 +1,32 @@
+<div class="investorbd-share-wapper">
+  <div class="logo" style="background-image: url({{vm.data.logo}})"></div>
+  <div class="riband" ng-if="vm.rank == 1"><img src="/styles/images/bangdan/crown-golden.png" /></div>
+  <div class="riband" ng-if="vm.rank == 2"><img src="/styles/images/bangdan/crown-silver.png" /></div>
+  <div class="riband" ng-if="vm.rank == 3"><img src="/styles/images/bangdan/crown-copper.png" /></div>
+  <div class="riband other-rank" ng-if="vm.rank > 3"></div>
+  <div class="name">{{vm.data.name}}</div>
+  <div class="position">
+    <span class="orgName">{{vm.data.orgName}}</span> · <span class="positionName">{{vm.data.position}}</span>
+  </div>
+  <div class="number">
+    <div class="num-line"></div>
+    <div class="num">第<span>{{vm.rank}}</span>名</div>
+    <div class="num-line"></div>
+    <div class="num-text">
+      <span>2017Q{{vm.currQuarter}} · 风云投资人排行榜</span><br/>
+      <span>共 {{vm.data.totalInvestorCount}} 位投资人排名</span>
+    </div>
+  </div>
+
+  <div class="member">
+    <p>我为「<span>{{vm.data.name | splitName: 10}}</span>」助力</p>
+  </div>
+
+  <div class="go-btn go-list"  ng-click="vm.bangdanInvestor()">风云投资人榜</div>
+  <div class="go-btn go-detail"  ng-click="vm.bangdanInvestorDetail(vm.id, vm.rank)">
+      <span>{{vm.data.name}}</span>主页
+  </div>
+</div>
+<!--
+ <div ng-include="'templates/bangdan/common/downloadApp.html'"></div>
+ -->
