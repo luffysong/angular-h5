@@ -52,7 +52,7 @@
         <div class="investor-info"
             ng-class="{true:'padd-Btm-f',false:''}[isEqualHeight]">
             <div class="info-content" >
-                    <div class="info">
+                    <div class="info" ng-if="vm.investorInfo.intro">
                         <text-line-clamp line-clamp='4' text="vm.investorInfo.intro" isequalheight="isEqualHeight">
                             <div class="text-container">
                                 <p class="text-content">
@@ -214,8 +214,8 @@
     </section>
 
     <section class="bd-investor-org"
-    ng-if="vm.investorInfo.investorOrgTypeEnum === 'ORG_INVESTOR' && vm.inApp"
-    ng-click="vm.gobdOrg(vm.investorInfo.orgId)">
+        ng-if="vm.investorInfo.investorOrgTypeEnum === 'ORG_INVESTOR' && vm.inApp"
+        ng-click="vm.gobdOrg(vm.investorInfo.orgId)">
         <div class="pro-top">
             <span class="h-line"></span>
             <span class="p-title">所属机构</span>
