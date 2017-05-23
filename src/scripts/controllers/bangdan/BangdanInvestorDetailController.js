@@ -39,6 +39,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         initPxLoader();
         initUser();
         isDisplayMore();
+        getTestJson();
         var HOST = location.host;
         var shareUrl =
         'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
@@ -107,6 +108,10 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             id: orgId,
             rank: vm.orgInfo.rank,
         });
+    }
+
+    function getTestJson() {
+        vm.recommend = window.zxhInvestorData.data.data;
     }
 
     function getQ() {
