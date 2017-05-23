@@ -44,6 +44,7 @@ angular.module('defaultApp.directive').directive('textLineClamp',
                     if (!vm.isequalheight) {
                         //更改过之后不再修改
                         vm.isequalheight = true;
+                        scope.$parent.$parent.isEqualHeight = true;
                     }
                 }
 
