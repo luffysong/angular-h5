@@ -111,7 +111,11 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     }
 
     function getTestJson() {
-        vm.recommend = window.zxhInvestorData.data.data;
+        if (vm.investorInfo.name === '朱啸虎'
+            && vm.investorInfo.investorId === 6533) {
+            vm.recommend = window.zxhInvestorData.data.data;
+        }
+
     }
 
     function getQ() {

@@ -83,7 +83,7 @@
         </div>
     </section>
     <!--推荐-->
-    <section class="bd-investor-recommend" ng-if="vm.investorInfo.name === '朱啸虎' && vm.investorInfo.investorId === 6533">
+    <section class="bd-investor-recommend" ng-if="vm.recommend">
         <div class="pro-top">
             <span class="h-line"></span>
             <span class="p-title"><b>推荐项目</b></span>
@@ -125,7 +125,7 @@
         </div>
     </section>
 
-    <section class="bd-investor-pro">
+    <section class="bd-investor-pro" ng-class="{true:'',false:'marg-top'}[!vm.recommend]">
         <div class="pro-top">
             <span class="h-line"></span>
             <span class="p-title"><b>已投项目</b></span>
