@@ -51,10 +51,10 @@
 
     <section class="bd-investor-info" ng-if="vm.investorInfo.intro || vm.industry">
         <div class="investor-info"
-            ng-class="{true:'padd-Btm-f',false:''}[isEqualHeight]">
+            ng-class="{true:'padd-Btm-f',false:''}[vm.isEqualHeight]">
             <div class="info-content" >
                     <div class="info" ng-if="vm.investorInfo.intro">
-                        <text-line-clamp line-clamp='4' text="vm.investorInfo.intro" isequalheight="isEqualHeight" >
+                        <text-line-clamp line-clamp='4' text="vm.investorInfo.intro" isequalheight="vm.isEqualHeight"  >
                             <div class="text-container">
                                 <p class="text-content">
                                 </p>
@@ -66,7 +66,7 @@
                             <span clss="focus"><b>关注行业</b></span>
                         </div>
                         <div class="in-right">
-                            <text-line-clamp line-clamp='2' text="vm.industry" isequalheight="isEqualHeight" >
+                            <text-line-clamp line-clamp='2' text="vm.industry" isequalheight="vm.isEqualHeight">
                                 <div class="text-container">
                                     <p class="text-content">
                                     </p>
@@ -75,7 +75,7 @@
                         </div>
                     </div>
             </div>
-            <div class="open-more" ng-click="vm.openMore($event)" ng-if="isEqualHeight">
+            <div class="open-more" ng-click="vm.openMore($event)" ng-if="vm.isEqualHeight">
                 <span >
                     点击<span class="open-close-txt">展开</span>投资人完整信息&nbsp;
                     <img class="open-close" src="/styles/images/bangdan/open-more-new.png"/></span>
