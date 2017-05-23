@@ -21,7 +21,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     vm.rank = $stateParams.rank;
     vm.goProDetail = goProDetail;
     vm.h5Href = false;
-    $scope.isEqualHeight = false;
+    vm.isEqualHeight = false;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
     init();
 
@@ -38,7 +38,6 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         getOrgInfo(investorInfo.data.orgId);
         initPxLoader();
         initUser();
-        isDisplayMore();
         getTestJson();
         var HOST = location.host;
         var shareUrl =
@@ -152,10 +151,6 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
                     }
                 }
             });
-    }
-
-    function isDisplayMore() {
-        console.log($scope.isEqualHeight);
     }
 
     function openMore(e) {
