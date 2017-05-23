@@ -48,6 +48,7 @@
                 <div><img src="/styles/images/bangdan/thumup.png"/>&nbsp;{{vm.investorInfo.forwardCount}}</div>
         </div>
     </section>
+
     <section class="bd-investor-info" ng-if="vm.investorInfo.intro || vm.industry">
         <div class="investor-info"
             ng-class="{true:'padd-Btm-f',false:''}[isEqualHeight]">
@@ -81,7 +82,50 @@
             </div>
         </div>
     </section>
-    <section class="bd-investor-pro">
+    <!--推荐-->
+    <section class="bd-investor-recommend" ng-if="vm.recommend">
+        <div class="pro-top">
+            <span class="h-line"></span>
+            <span class="p-title"><b>推荐项目</b></span>
+        </div>
+        <div class="pro-list">
+            <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+                <li ng-if="vm.recommend" ng-repeat="item in vm.recommend track  by $index"
+                    ng-click="vm.goProDetail(item.ccid, $event)" >
+                    <div class="txt-right" ng-if="!vm.startloading">
+                        <div class="left-logo">
+                            <div class="logo-outer bd-normal-border"
+                                style="background-image: url({{item.logo}})" >
+                                <img ng-style="{'background-color':(item.ccid | demoDefaultColor)}" ng-if="!item.logo">
+                                <span class="logo-name" ng-if="!item.logo && item.name"
+                                ng-style="{'background-color':(item.ccid | demoDefaultColor)}">{{item.name | demoNameDufault}}</span>
+                                <div class="funding"
+                                    ng-if="item.isUnderFinancing && vm.investRole">
+                                    正在融资
+                                </div>
+                            </div>
+                        </div>
+                        <div class="txt-middle">
+                            <div class="bd-txt-title" ng-if="item.name"
+                            >
+                                    {{item.name}}
+                            </div>
+                            <div class="bd-txt-brief" ng-if="item.brief">
+                                {{item.brief}}
+                            </div>
+                            <div class="bd-txt-phase">
+                                <span ng-if="item.phase">{{item.phase}}</span>
+                                <span class="bd-dot bd-dot-gray" ng-if="item.industry"></span>
+                                <span ng-if="item.industry">{{item.industry}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="bd-investor-pro" ng-class="{true:'',false:'marg-top'}[!vm.recommend]">
         <div class="pro-top">
             <span class="h-line"></span>
             <span class="p-title"><b>已投项目</b></span>

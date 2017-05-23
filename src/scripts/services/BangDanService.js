@@ -43,4 +43,9 @@ angular.module('defaultApp.service').service('BangDanService', function(BasicSer
     this.investorforwardCount = function (id) {
         return $http.put(BASE_URL + '/investor/' + id + '/forwardCount');
     };
+
+    //
+    this.getTestJson = function () {
+        return $http.get('./test.json');
+    };
 });
