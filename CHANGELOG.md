@@ -1,3 +1,19 @@
+<a name="1.36.0"></a>
+# [1.36.0](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.35.13...v1.36.0) (2017-05-23)
+
+
+### Bug Fixes
+
+* 修改投资人首页数据展示条数 ([1f0b068](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/1f0b068))
+* 调整投资人榜单首页排名样式 ([3fadb1e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/3fadb1e))
+
+
+### Features
+
+* 首页及分享页添加埋点 ([02220e2](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/02220e2))
+
+
+
 <a name="1.35.13"></a>
 ## [1.35.13](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.35.12...v1.35.13) (2017-05-22)
 
@@ -12,9 +28,32 @@
 ## [1.35.11](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.35.10...v1.35.11) (2017-05-22)
 
 
+### Bug Fixes
+
+* 修改分享文案 ([d74ed09](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/d74ed09))
+* 修改投资人分享页底部跳转按钮 ([cae025e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/cae025e))
+* 修改投资人榜单首页跳转详情页路径 ([2be8f91](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/2be8f91))
+* 解决首页底部文案不显示问题 ([7a50227](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/7a50227))
+
+
 
 <a name="1.35.10"></a>
 ## [1.35.10](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.35.9...v1.35.10) (2017-05-18)
+
+
+### Bug Fixes
+
+* 调整分享页样式 ([72f44fa](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/72f44fa))
+* 调整投资人榜单样式 ([8c73d4b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/8c73d4b))
+* 调整投资人榜单首页样式 ([b03670b](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b03670b))
+
+
+### Features
+
+* 投资人分享页接入数据 ([ff6b630](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/ff6b630))
+* 添加分享弹窗 ([3cca8e6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/3cca8e6))
+* 添加投资人榜单service ([0e3631d](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/0e3631d))
+* 添加投资人榜单首页及分享页 ([37fe94e](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/37fe94e))
 
 
 
