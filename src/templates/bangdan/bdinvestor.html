@@ -29,7 +29,7 @@
                         <div class="investor-name">
                             <div ng-class="{top3Color: $index < 3}">{{item.name}}</div>
                             <div class="investor-position" ng-if="item.investorOrgTypeEnum !== 'PERSONAL_INVESTOR'">
-                                <span>{{item.orgName}}</span> · <span>{{item.position}}</span>
+                                <span>{{item.orgName}}</span> · <span>{{item.cardPosition}}</span>
                             </div>
                             <div class="investor-position" ng-if="item.investorOrgTypeEnum === 'PERSONAL_INVESTOR'">
                                 <span>个人投资人</span>
