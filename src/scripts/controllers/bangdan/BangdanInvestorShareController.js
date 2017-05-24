@@ -98,9 +98,22 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
         BangDanService.getSingleInvestorInfo(id)
             .then(function (response) {
                 vm.data = response.data;
-                initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.rank, vm.data.logo);
+                initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.data.rank, vm.data.logo);
                 initWeixinH5();
+                compareRank();
             });
+    }
+
+    function compareRank() {
+        if (parseInt(vm.rank) !== parseInt(vm.data.rank)) {
+            vm.numchange = Math.abs(parseInt(vm.rank) - parseInt(vm.data.rank));
+            if (parseInt(vm.rank) > parseInt(vm.data.rank)) {
+                vm.rise = true;
+            }else {
+                vm.rise = false;
+            }
+        }
+
     }
 
     function initTitle(t) {

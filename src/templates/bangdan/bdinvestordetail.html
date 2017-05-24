@@ -26,8 +26,8 @@
         <div class="jg-info" ng-if=" vm.investorInfo.investorOrgTypeEnum === 'ORG_INVESTOR' || vm.investorInfo.investorOrgTypeEnum === 'COMPANY_INVEST_DEPT'">
             <span class="txt-deco" ng-click="vm.gobdOrg(vm.investorInfo.orgId)">{{vm.investorInfo.orgName}}</span>
             &nbsp;
-            <span class="bd-dot bd-dot-yel" ng-if="vm.investorInfo.position"></span>&nbsp;
-            <span ng-if="vm.investorInfo.position">{{vm.investorInfo.position}}</span>
+            <span class="bd-dot bd-dot-yel" ng-if="vm.investorInfo.cardPosition"></span>&nbsp;
+            <span ng-if="vm.investorInfo.cardPosition">{{vm.investorInfo.cardPosition}}</span>
         </div>
 
         <div class="jg-info" ng-if=" vm.investorInfo.investorOrgTypeEnum === 'PERSONAL_INVESTOR' ">
@@ -40,8 +40,12 @@
         </div>
 
         <div class="rank-num">
-                <span>第&nbsp;{{vm.rank}}&nbsp;名</span><span>/本季度</span>
+                <span class="bd-up-arrow" ng-if="vm.rise && vm.numchange" ></span>
+                <span class="bd-down-arrow" ng-if="!vm.rise && vm.numchange"></span>
+                <span class="num-change" ng-if="vm.numchange">{{vm.numchange}}</span>
 
+                <span class="top-rank-num">第&nbsp;{{vm.investorInfo.rank}}&nbsp;名</span>
+                <span class="top-rank-q">/本季度</span>
         </div>
         <div class="push-right" ng-click="vm.joinpro('forward')">
                 <div>转发支持</div>

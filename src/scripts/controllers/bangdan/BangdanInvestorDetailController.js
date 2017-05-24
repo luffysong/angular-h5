@@ -26,23 +26,28 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     init();
 
     function init() {
+        vm.investorInfo = investorInfo.data;
+        vm.industry = '';
+        if (investorInfo.data.focusIndustry) {
+            vm.industry = investorInfo.data.focusIndustry.join('&nbsp;·&nbsp;');
+        }
+
         if (!hybrid.isInApp) {
             initLinkme();
             vm.inApp = false;
         }
 
-        vm.investorInfo = investorInfo.data;
-        vm.industry = investorInfo.data.focusIndustry.join('&nbsp;·&nbsp;');
         getProList();
         getQ();
         getOrgInfo(investorInfo.data.orgId);
         initPxLoader();
         initUser();
         getTestJson();
+        compareRank();
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
-        initWeixin(vm.investorInfo.name, vm.investorInfo.projectCount, vm.currQuarter, vm.rank, shareUrl, vm.investorInfo.logo);
+        'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + vm.investorInfo.rank;
+        initWeixin(vm.investorInfo.name, vm.investorInfo.projectCount, vm.currQuarter, vm.investorInfo.rank, shareUrl, vm.investorInfo.logo);
     }
 
     function initPxLoader() {
@@ -113,6 +118,17 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         if (vm.investorInfo.name === '朱啸虎'
             && vm.investorInfo.investorId === 6533) {
             vm.recommend = window.zxhInvestorData.data.data;
+        }
+    }
+
+    function compareRank() {
+        if (parseInt(vm.rank) !== parseInt(vm.investorInfo.rank)) {
+            vm.numchange = Math.abs(parseInt(vm.rank) - parseInt(vm.investorInfo.rank));
+            if (parseInt(vm.rank) > parseInt(vm.investorInfo.rank)) {
+                vm.rise = true;
+            }else {
+                vm.rise = false;
+            }
         }
 
     }
@@ -202,7 +218,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
 
     function joinpro(f) {
         var item = investorInfo.data;
-        item.rank = parseInt(vm.rank);
+        //item.rank = parseInt(vm.rank);
         item.currQuarter = vm.currQuarter;
         item.inApp = vm.inApp;
         var tg = 'join_investor_company';
@@ -426,7 +442,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         krdata.type = window.projectEnvConfig.linkmeType;
         krdata.params =
             '{"openlink":"https://' + window.projectEnvConfig.rongHost +
-            '/m/#/bangdan/investorbddetail?id=' + $stateParams.id + '&rank=' + $stateParams.rank + '","currentRoom":"0"}';
+            '/m/#/bangdan/investorbddetail?id=' + $stateParams.id + '&rank=' + vm.investorInfo.rank + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey, {
             type: window.projectEnvConfig.linkmeType
         }, function (err, res) {
