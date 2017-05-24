@@ -482,6 +482,9 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controllerAs: 'vm',
         controller: 'BangdanComDetailController',
         templateUrl: 'templates/bangdan/bdcomdetail.html',
+        resolve: {
+            investorInfo: getSingleInvestorInfo,
+        }
     });
 
     $stateProvider.state('bangdan.comshare', {
