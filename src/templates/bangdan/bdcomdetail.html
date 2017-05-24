@@ -1,5 +1,5 @@
 <div ng-if="!loadingInst.bangdanDetailLoading" style="">
-<div class="bd-investor-detail">
+<div class="bd-investor-detail bd-com-detail">
     <section class="bd-investor-avatar bd-detail-bgp">
         <div class="bd-orgdetail-logo">
             <div class="bd-orgdetail-img bd-gold-border"
@@ -22,26 +22,13 @@
             </div>
             <span >{{vm.investorInfo.name}}</span>
         </div>
-
-        <div class="jg-info" ng-if=" vm.investorInfo.investorOrgTypeEnum === 'ORG_INVESTOR' || vm.investorInfo.investorOrgTypeEnum === 'COMPANY_INVEST_DEPT'">
-            <span class="txt-deco" ng-click="vm.gobdOrg(vm.investorInfo.orgId)">{{vm.investorInfo.orgName}}</span>
-            &nbsp;
-            <span class="bd-dot bd-dot-yel" ng-if="vm.investorInfo.position"></span>&nbsp;
-            <span ng-if="vm.investorInfo.position">{{vm.investorInfo.position}}</span>
-        </div>
-
-        <div class="jg-info" ng-if=" vm.investorInfo.investorOrgTypeEnum === 'PERSONAL_INVESTOR' ">
-            <span  >个人投资人</span>&nbsp;
-            <!--
-            <span class="bd-dot bd-dot-yel" ng-if="vm.investorInfo.position"></span>&nbsp;
-            <span ng-if="vm.investorInfo.position">{{vm.investorInfo.position}}</span>
-            -->
-
-        </div>
-
         <div class="rank-num">
-                <span>第&nbsp;{{vm.rank}}&nbsp;名</span><span>/本季度</span>
+                <span class="bd-up-arrow" ng-if="vm.rise && vm.numchange" ></span>
+                <span class="bd-down-arrow" ng-if="!vm.rise && vm.numchange"></span>
+                <span class="num-change" ng-if="vm.numchange">{{vm.numchange}}</span>
 
+                <span class="top-rank-num">第&nbsp;{{vm.investorInfo.rank}}&nbsp;名</span>
+                <span class="top-rank-q">/本季度</span>
         </div>
         <div class="push-right" ng-click="vm.joinpro('forward')">
                 <div>转发支持</div>
@@ -61,23 +48,10 @@
                             </div>
                         </text-line-clamp>
                     </div>
-                    <div class="industry" ng-if="vm.industry">
-                        <div class="in-left">
-                            <span clss="focus"><b>关注行业</b></span>
-                        </div>
-                        <div class="in-right">
-                            <text-line-clamp line-clamp='2' text="vm.industry" isequalheight="vm.isEqualHeight">
-                                <div class="text-container">
-                                    <p class="text-content">
-                                    </p>
-                                </div>
-                            </text-line-clamp>
-                        </div>
-                    </div>
             </div>
             <div class="open-more" ng-click="vm.openMore($event)" ng-if="vm.isEqualHeight">
                 <span >
-                    点击<span class="open-close-txt">展开</span>投资人完整信息&nbsp;
+                    点击<span class="open-close-txt">展开</span>完整介绍&nbsp;
                     <img class="open-close" src="/styles/images/bangdan/open-more-new.png"/></span>
             </div>
         </div>
@@ -128,7 +102,7 @@
     <section class="bd-investor-pro" ng-class="{true:'',false:'marg-top'}[!vm.recommend]">
         <div class="pro-top">
             <span class="h-line"></span>
-            <span class="p-title"><b>已投项目</b></span>
+            <span class="p-title"><b>优质</b></span>
         </div>
         <div class="pro-num">
             <div class="rank-num">
@@ -138,7 +112,7 @@
                                 {{vm.investorInfo.projectCount}}
                         </div>
                         <div class="txt">
-                            已投项目数
+                            项目总数
                         </div>
                     </div>
                     <div class="split-line"> </div>
@@ -255,47 +229,6 @@
         正在加载数据...&nbsp;
         <img src="/styles/images/bangdan/loading.svg" alt="loading">
     </div>
-    </section>
-
-    <section class="bd-investor-org"
-        ng-if="vm.investorInfo.investorOrgTypeEnum === 'ORG_INVESTOR' && vm.inApp"
-        ng-click="vm.gobdOrg(vm.investorInfo.orgId)">
-        <div class="pro-top">
-            <span class="h-line"></span>
-            <span class="p-title"><b>所属机构</b></span>
-        </div>
-        <div class="jigou-info" ng-if="!vm.loadOrg" >
-            <div class="icon-left" ng-if="vm.orgInfo.logo">
-                <!--
-                style="background-image: url({{vm.orgInfo.logo}})"-->
-                <div class="logo"
-                    ng-style="{'background-image': (vm.orgInfo.logo | backgroundUrl)}">
-                </div>
-            </div>
-
-            <div class="icon-left" ng-if="!vm.orgInfo.logo">
-                <div class="logo" ng-style="{'background-color':(vm.orgInfo.orgId | demoDefaultColor)}" ng-if="!vm.orgInfo.logo">
-                    <span class="logo-name" ng-if="!vm.orgInfo.logo && vm.orgInfo.name"
-                    ng-style="{'background-color':(vm.orgInfo.orgId | demoDefaultColor)}">{{vm.orgInfo.name | demoNameDufault}}</span>
-                </div>
-            </div>
-
-            <div class="icon-right" >
-                <div class="j-title">
-                    {{vm.orgInfo.name}}
-                </div>
-                <div class="j-info" ng-if="vm.orgInfo.projectCount">
-                投资了{{vm.orgInfo.projectCount}}个项目
-                </div>
-                <div class="j-info" ng-if="vm.orgInfo.rank">
-                    2017Q{{vm.currQuarter}}风口机构排行榜第{{vm.orgInfo.rank}}名
-                </div>
-            </div>
-        </div>
-        <div class="jigou-info-loading" ng-if="vm.loadOrg">
-            正在加载数据...&nbsp;
-            <img src="/styles/images/bangdan/loading.svg" alt="loading">
-        </div>
     </section>
 
     <div ng-include="'templates/bangdan/common/appbottom.html'" ng-if="vm.inApp"></div>
