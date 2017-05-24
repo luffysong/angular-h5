@@ -415,7 +415,7 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         templateUrl: 'templates/activity/investorSuccess.html',
     });
 
-    //榜单--页面相关------------
+    //榜单--页面相关-----start-------
     $stateProvider.state('bangdan', {
         url: '/bangdan',
         abstract: true,
@@ -468,6 +468,27 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controllerAs: 'vm',
         controller: 'BangdanShareDetailController',
         templateUrl: 'templates/bangdan/bdshare.html',
+    });
+
+    $stateProvider.state('bangdan.combd', {
+        url: '/combd',
+        controllerAs: 'vm',
+        controller: 'BangdanComController',
+        templateUrl: 'templates/bangdan/bdcom.html',
+    });
+
+    $stateProvider.state('bangdan.combddetail', {
+        url: '/combddetail?{id}&{rank}',
+        controllerAs: 'vm',
+        controller: 'BangdanComDetailController',
+        templateUrl: 'templates/bangdan/bdcomdetail.html',
+    });
+
+    $stateProvider.state('bangdan.comshare', {
+        url: '/comshare?{id}&{rank}',
+        controllerAs: 'vm',
+        controller: 'BangdanComShareController',
+        templateUrl: 'templates/bangdan/comshare.html',
     });
 
     //-----------------------
