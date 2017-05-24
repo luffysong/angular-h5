@@ -10,6 +10,10 @@
             replaceBanner();
         }
 
+        if (allowRemoveContainer()) {
+            removeContainer();
+        }
+
         if (location.hash.indexOf('findKrspace') === -1 &&
             location.hash.indexOf('findWise') === -1 &&
             location.hash.indexOf('findIdeaBank') === -1 &&
@@ -41,11 +45,18 @@
             location.hash.indexOf('findStartUp') > -1 ||
             location.hash.indexOf('fractivity') > -1 ||
             location.hash.indexOf('rongzi') > -1 ||
-            location.hash.indexOf('bangdan') > -1 ||
             location.hash.indexOf('investor/apply') > -1
             ) {
             return true;
         } else {
+            return false;
+        }
+    }
+
+    function allowRemoveContainer() {
+        if (location.hash.indexOf('bangdan') > -1) {
+            return true;
+        }else {
             return false;
         }
     }
@@ -56,6 +67,10 @@
 
     function removeHeader() {
         $('.common-header.J_commonHeaderWrapper').remove();
+    }
+
+    function removeContainer() {
+        $('.common-header.J_commonHeaderWrapper > .container').remove();
     }
 
     function replaceBanner() {
@@ -84,7 +99,6 @@
     }
 
     function download() {
-        console.log('test');
         var userSystem = navigator.userAgent; //userAgent
         if (userSystem.indexOf('Android') > -1) {
             krtracker('trackEvent', 'click', 'android.h5.rongh5dingbu.download.' + cid);
