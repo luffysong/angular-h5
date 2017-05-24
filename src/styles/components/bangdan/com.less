@@ -1,0 +1,278 @@
+.combd-wapper {
+    * {
+        user-select: none;
+    }
+  height: auto;
+  width: 100%;
+  margin: 0 auto;
+ // position: relative;
+  max-width: 768px;
+  background-color: white;
+  padding-bottom: 80px;
+  .comdb-top {
+    //position: relative;
+    background-color: black;
+    background: url('images/bangdan/org-top-new.png') no-repeat center;
+    height: 136px;
+    background-size: 100% 136px;
+    .com-brief {
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,227,168,0.70);
+      line-height: 14px;
+      position: relative;
+      top: 110px;
+    }
+  }
+  .com-tabs{
+    ul {
+      overflow: hidden;
+      list-style: none;
+      border-bottom: 1px solid #F2F4F5;
+      color: #222C38;
+      margin-bottom: 0;
+      font-size: 14px;
+      li {
+        float: left;
+        width: 25%;
+        text-align: center;
+        line-height: 45px;
+      }
+    }
+  }
+  .tab-active {
+    border-bottom: solid 3px #CF9D3E;
+    color: #CF9D3E;
+    font-weight: bold;
+  }
+  .combd-list-content{
+     padding-top: 50px;
+     text-align: center;
+     height: 200px;
+  }
+  ul{
+      li{
+          * {
+              user-select: none;
+          }
+      }
+    //   li:last-child{
+    //       text-align: center;
+    //       height: 40px;
+    //   }
+  }
+  .combd-list {
+    .com-item {
+        * {
+            user-select: none;
+        }
+      padding-top: 14px;
+      overflow: hidden;
+      //禁止点击效果
+      &:active{
+          background-color:#E7E7E7;
+      }
+    //   &:hover{
+    //       background-color:#dfdfdf;
+    //       .com-info {
+    //           .com-name{
+    //               color: white;
+    //           }
+    //       }
+    //       .com-number{
+    //         .top-num{
+    //              color: white;
+    //         }
+    //         .number-change{
+    //             color: white;
+    //         }
+    //         .up-arrow{
+    //             border-bottom: 6px solid white;
+    //         }
+    //         .down-arrow{
+    //             border-top: 6px solid white;
+    //         }
+    //       }
+    //   }
+      .com-number {
+        display: inline-block;
+        font-size: 20px;
+        color: #C5CEDA;
+        line-height: 22px;
+        text-align: center;
+        font-weight: bold;
+        position: relative;
+        margin-left: 16px;
+        width: 12px;
+        float: left;
+        .top-num{
+            position: relative;
+            top:7px;
+        }
+
+        .top-special{
+            top:34px;
+        }
+        .top-nromal{
+            top:32px;
+        }
+        .up-arrow {
+          position: absolute;
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          border-bottom: 6px solid #D1D8E1;
+        }
+        .down-arrow {
+          position: absolute;
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          border-top: 6px solid #D1D8E1;
+        }
+
+        .number-change {
+          font-size: 10px;
+          color: #C5CEDA;
+          line-height: 10px;
+          position: absolute;
+          left: 10px;
+        }
+        .top-special-num{
+            top:32px;
+        }
+        .top-nromal-num{
+            top:30px;
+        }
+        img {
+          width: 30px;
+          position: relative;
+          right: 6px;
+          top: 5px;
+        }
+      }
+      .com-info {
+        display: inline-block;
+        width: 85%;
+        border-bottom: 1px solid #F2F4F5;
+        margin-left: 16px;
+        float: right;
+        .com-logo {
+          border: 1px solid #e7e7e7;
+          border-radius: 5px;
+          display: inline-block;
+          width: 40px;
+          height: 40px;
+          background: #fff no-repeat 50%;
+          background-size: contain;
+        }
+        .top1-logo {
+          border: 1.5px solid #e3b24b;
+        }
+        .top2-logo {
+          border: 1.5px solid #b3b1aa;
+        }
+        .top3-logo {
+          border: 1.5px solid #cb865d;
+        }
+        .com-name {
+          display: inline-block;
+          font-size: 11px;
+          color: #969FA9;
+          letter-spacing: 0;
+          line-height: 14px;
+          // width: 64%;
+          margin-left: 10px;
+          div:first-child {
+            font-size: 16px;
+            color: #222C38;
+            line-height: 22px;
+            margin-bottom: 5px;
+            font-weight: bold;
+          }
+          div:last-child {
+             font-size: 12px;
+            margin-bottom: 12px;
+            position: relative;
+            bottom: 3px;
+          }
+        }
+        .interview-num {
+          float: right;
+          text-align: right;
+          display: inline-block;
+          font-size: 12px;
+          color: #969FA9;
+          letter-spacing: 0;
+          line-height: 14px;
+          position: relative;
+          right: 4%;
+          div:first-child {
+            font-size: 23px;
+            color: #222C38;
+            line-height: 22px;
+            margin-bottom: 5px;
+            font-weight: bold;
+          }
+          div:last-child {
+            margin-bottom: 10px;
+            position: relative;
+            bottom: 3px;
+          }
+        }
+        .top3Color {
+          color: #CF9D3E !important;
+        }
+      }
+      @media (min-width: 375px) {
+        .com-info {
+          width: 87%;
+        }
+      }
+    }
+  }
+  footer {
+    text-align: center;
+    margin: 10px 0;
+    height: 50px;
+  }
+  .combd-footer {
+    * {
+          user-select: none;
+     }
+    font-size: 15px;
+    color: #5A626D;
+    border-top: 1px solid #E7E7E7;
+    position: fixed;
+    bottom: 0;
+    max-width: 768px;
+    width: 100%;
+    background-color: #FFF;
+    height: 49px;
+    div{
+        height: 40px;
+        //margin-top: 20px;
+    }
+    span {
+      text-align: left;
+      line-height: 45px;
+      margin-left: 15px;
+    }
+    .register {
+      display: inline-block;
+      background: #6BA2FC;
+      border-radius: 4px;
+      color: #FFF;
+      height: 32px;
+      line-height: 32px;
+      width: 138px;
+      text-align: center;
+      float: right;
+      position: relative;
+      top: 7px;
+      right: 15px;
+      text-align: center;
+    }
+    a {
+      color: #FFF;
+    }
+  }
+}
