@@ -1,26 +1,26 @@
 <div ng-if="!loadingInst.bangdanDetailLoading" style="">
 <div class="bd-investor-detail bd-com-detail">
     <section class="bd-investor-avatar bd-detail-bgp">
-        <div class="bd-orgdetail-logo">
-            <div class="bd-orgdetail-img bd-gold-border"
-                ng-if="vm.rank === '1'"
-                style="background-image: url({{vm.investorInfo.logo}})">
-                <div class="bd-belt bd-gold-crown" ng-if="vm.rank === '1'"></div>
-            </div>
-            <div class="bd-orgdetail-img bd-silver-border" ng-if="vm.rank === '2'"
-                style="background-image: url({{vm.investorInfo.logo}})">
-                <div class="bd-belt bd-silver-crown" ng-if="vm.rank === '2'"></div>
-            </div>
+            <div class="bd-orgdetail-logo">
+                <div class="bd-orgdetail-img bd-gold-border"
+                    ng-if="vm.rank === '1'" style="background-image: url(https://krplus-pic.b0.upaiyun.com/201603/03094503/xy2pxrbbj1yq5nfc.jpg)">
+                </div>
+                <div class="bd-orgdetail-img bd-silver-border" ng-if="vm.rank === '2'"
+                    style="background-image: url(https://krplus-pic.b0.upaiyun.com/201603/03094503/xy2pxrbbj1yq5nfc.jpg)">
+                </div>
 
-            <div class="bd-orgdetail-img bd-copper-border" ng-if="vm.rank === '3'"
-                style="background-image: url({{vm.investorInfo.logo}})">
-            <div class="bd-belt bd-copper-crown" ng-if="vm.rank === '3'"></div>
-            </div>
+                <div class="bd-orgdetail-img bd-copper-border" ng-if="vm.rank === '3'"
+                    style="background-image: url(https://krplus-pic.b0.upaiyun.com/201603/03094503/xy2pxrbbj1yq5nfc.jpg)">
+                </div>
+                <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.rank > 3"
+                    style="background-image: url(https://krplus-pic.b0.upaiyun.com/201603/03094503/xy2pxrbbj1yq5nfc.jpg)">
+                </div>
 
-            <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.rank > 3"
-                style="background-image: url({{vm.investorInfo.logo}})">
-            </div>
-            <span >{{vm.investorInfo.name}}</span>
+                <div class="bd-belt bd-gold-belt" ng-if="vm.rank === '1'"></div>
+                <div class="bd-belt bd-cilver-belt" ng-if="vm.rank === '2'"></div>
+                <div class="bd-belt bd-copper-belt" ng-if="vm.rank === '3'"></div>
+                <div class="bd-belt " ng-if="vm.rank >3"></div>
+                <span >{{vm.investorInfo.name}}</span>
         </div>
         <div class="rank-num">
                 <span class="bd-up-arrow" ng-if="vm.rise && vm.numchange" ></span>
@@ -102,7 +102,7 @@
     <section class="bd-investor-pro" ng-class="{true:'',false:'marg-top'}[!vm.recommend]">
         <div class="pro-top">
             <span class="h-line"></span>
-            <span class="p-title"><b>优质</b></span>
+            <span class="p-title"><b>优质项目</b></span>
         </div>
         <div class="pro-num">
             <div class="rank-num">

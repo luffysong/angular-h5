@@ -32,6 +32,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         getInvestorRank();
         initPxLoader();
         addAnimate();
+        positionItem();
     }
 
     function addAnimate() {
@@ -152,7 +153,11 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             }).catch(fail);
     }
 
-    function goInvestorDetail(id, rank) {
+    function goInvestorDetail(id, rank, e) {
+        var val = angular.element(window).scrollTop();
+        window.sessionStorage.removeItem('investor-position');
+        window.sessionStorage.setItem('investor-position', val);
+
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
         var client = 'H5';
@@ -215,6 +220,15 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
     $scope.abs = function (number) {
         return Math.abs(number);
     };
+
+    function positionItem() {
+        var value = window.sessionStorage.getItem('investor-position');
+        $timeout(function () {
+            $document.scrollTopAnimated(parseInt(value)).then(function () {
+                console && console.log('You just scrolled to the position!');
+            });
+        }, 500);
+    }
 
     function joinInvestor() {
         var isAndroid = !!navigator.userAgent.match(/android/ig);
