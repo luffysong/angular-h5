@@ -3,21 +3,21 @@
     <section class="bd-investor-avatar bd-detail-bgp">
         <div class="bd-orgdetail-logo">
             <div class="bd-orgdetail-img bd-gold-border"
-                ng-if="vm.rank === '1'"
+                ng-if="vm.investorInfo.rank === 1"
                 style="background-image: url({{vm.investorInfo.logo}})">
-                <div class="bd-belt bd-gold-crown" ng-if="vm.rank === '1'"></div>
+                <div class="bd-belt bd-gold-crown" ng-if="vm.investorInfo.rank === 1"></div>
             </div>
-            <div class="bd-orgdetail-img bd-silver-border" ng-if="vm.rank === '2'"
+            <div class="bd-orgdetail-img bd-silver-border" ng-if="vm.investorInfo.rank === 2"
                 style="background-image: url({{vm.investorInfo.logo}})">
-                <div class="bd-belt bd-silver-crown" ng-if="vm.rank === '2'"></div>
-            </div>
-
-            <div class="bd-orgdetail-img bd-copper-border" ng-if="vm.rank === '3'"
-                style="background-image: url({{vm.investorInfo.logo}})">
-            <div class="bd-belt bd-copper-crown" ng-if="vm.rank === '3'"></div>
+                <div class="bd-belt bd-silver-crown" ng-if="vm.investorInfo.rank === 2"></div>
             </div>
 
-            <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.rank > 3"
+            <div class="bd-orgdetail-img bd-copper-border" ng-if="vm.investorInfo.rank === 3"
+                style="background-image: url({{vm.investorInfo.logo}})">
+            <div class="bd-belt bd-copper-crown" ng-if="vm.investorInfo.rank === 3"></div>
+            </div>
+
+            <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.investorInfo.rank > 3"
                 style="background-image: url({{vm.investorInfo.logo}})">
             </div>
             <span >{{vm.investorInfo.name}}</span>

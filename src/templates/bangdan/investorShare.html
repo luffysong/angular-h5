@@ -1,9 +1,9 @@
 <div class="investorbd-share-wapper">
   <div class="logo" style="background-image: url({{vm.data.logo}})"></div>
-  <div class="riband" ng-if="vm.rank == 1"><img src="/styles/images/bangdan/crown-golden.png" /></div>
-  <div class="riband" ng-if="vm.rank == 2"><img src="/styles/images/bangdan/crown-silver.png" /></div>
-  <div class="riband" ng-if="vm.rank == 3"><img src="/styles/images/bangdan/crown-copper.png" /></div>
-  <div class="riband other-rank" ng-if="vm.rank > 3"></div>
+  <div class="riband" ng-if="vm.data.rank == 1"><img src="/styles/images/bangdan/crown-golden.png" /></div>
+  <div class="riband" ng-if="vm.data.rank == 2"><img src="/styles/images/bangdan/crown-silver.png" /></div>
+  <div class="riband" ng-if="vm.data.rank == 3"><img src="/styles/images/bangdan/crown-copper.png" /></div>
+  <div class="riband other-rank" ng-if="vm.data.rank > 3"></div>
   <div class="name">{{vm.data.name}}</div>
   <div class="position">
     <span class="orgName">{{vm.data.orgName}}</span> · <span class="positionName">{{vm.data.cardPosition}}</span>
@@ -29,7 +29,7 @@
   </div>
 
   <div class="go-btn go-list"  ng-click="vm.bangdanInvestor()">风云投资人榜</div>
-  <div class="go-btn go-detail"  ng-click="vm.bangdanInvestorDetail(vm.id, vm.rank)">
+  <div class="go-btn go-detail"  ng-click="vm.bangdanInvestorDetail(vm.id, vm.data.rank)">
       <span>{{vm.data.name}}</span>主页
   </div>
 </div>
