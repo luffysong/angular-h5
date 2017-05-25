@@ -10,7 +10,7 @@
             <img src="/styles/images/bangdan/loading.svg" alt="loading">
         </div>
         <section class="">
-            <ul class="investorbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+            <ul class="investorbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='2'>
                 <li class="investor-item" ng-repeat="item in vm.list track by $index" ng-click="vm.goInvestorDetail(item.investorId, $index + 1, $event)">
                     <div class="investor-number">
                         <img src="/styles/images/bangdan/top1.png" ng-if="$index === 0">

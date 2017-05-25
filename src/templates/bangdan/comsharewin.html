@@ -1,0 +1,65 @@
+<div class="nativeAlert_pop">
+    <div class="bd-share-logo">
+        <div class="bd-share-img bd-gold-border" ng-if="vm.investorInfo.rank === 1"
+            style="background-image: url(https://krplus-pic.b0.upaiyun.com/201603/03094503/xy2pxrbbj1yq5nfc.jpg)">
+        </div>
+        <div class="bd-share-img bd-silver-border" ng-if="vm.investorInfo.rank === 2"
+            style="background-image: url(https://krplus-pic.b0.upaiyun.com/201603/03094503/xy2pxrbbj1yq5nfc.jpg)">
+        </div>
+
+        <div class="bd-share-img bd-copper-border" ng-if="vm.investorInfo.rank === 3"
+            style="background-image: url(https://krplus-pic.b0.upaiyun.com/201603/03094503/xy2pxrbbj1yq5nfc.jpg)">
+        </div>
+        <div class="bd-share-img bd-normal-border" ng-if="vm.investorInfo.rank > 3"
+            style="background-image: url(https://krplus-pic.b0.upaiyun.com/201603/03094503/xy2pxrbbj1yq5nfc.jpg)">
+        </div>
+
+        <div class="bd-belt bd-gold-belt" ng-if="vm.investorInfo.rank === 1"></div>
+        <div class="bd-belt bd-cilver-belt" ng-if="vm.investorInfo.rank === 2"></div>
+        <div class="bd-belt bd-copper-belt" ng-if="vm.investorInfo.rank === 3"></div>
+        <div class="bd-belt " ng-if="vm.investorInfo.rank >3"></div>
+        <span>{{vm.investorInfo.name}}</span>
+    </div>
+    <div class="bd-share-rank">
+        <div class="rank-num">
+                <span class="h-line">-</span>
+                <span class="txt">第</span>
+                <span class="num"><b>{{vm.investorInfo.rank}}</b></span>
+                <span class="txt">名</span>
+                <span class="h-line">-</span>
+        </div>
+        <div class="total-rank">
+            共{{vm.investorInfo.totalOrgCount}}家社群排名
+        </div>
+    </div>
+    <div class="bd-share-promote">
+        <div class="center-div">
+            我是{{vm.investorInfo.name}}家族成员<br />
+            为Ta站台
+        </div>
+    </div>
+    <div class="bd-share-text share-txt-top2" ng-if="vm.inApp">
+        [分享成功后入驻]
+    </div>
+    <div class="bd-share-app" ng-if="vm.inApp">
+            <div class="share-app" ng-click="vm.shareWechat()">
+                <img src="/styles/images/bangdan/wechat-logo.png" />
+            </div>
+            <div class="split-block"> </div>
+            <div class="share-app" ng-click="vm.shareWechat('f')">
+                <img src="/styles/images/bangdan/moments-logo.png" />
+            </div>
+    </div>
+
+    <div class="bd-share-text share-txt-top1" ng-if="!vm.inApp">
+        [点击右上角转发后入驻]
+    </div>
+
+    <div class="bd-share-txt">
+        <span>2017Q{{vm.orgInfo.currQuarter}}</span>
+        <span class="bd-dot bd-dot-yel"></span>
+        <span>风口社群排行榜</span>
+    </div>
+
+    <img class="pop-close" src="/styles/images/find/close@2x.png" ng-click="vm.cancelModal()"/>
+</div>

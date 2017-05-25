@@ -118,7 +118,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         document.title = t;
     }
 
-    function getOrgRank() {
+    function getOrgRank(fn) {
         if (vm.busy) return;
         vm.busy = true;
         var request = {
@@ -131,7 +131,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             .then(function (response) {
                 vm.startloading = false;
                 loading.hide('bangdanLoading');
-                vm.result = response.data;
+                vm.result = response.data.data;
                 vm.list = vm.list.concat(response.data.data);
                 if (!vm.total) {
                     vm.total = response.data.totalCount;
@@ -147,10 +147,23 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
                         vm.more = true;
                     }
                 }
+
+                if (fn) {
+                    fn();
+                } else {
+                    positionItem();
+                }
+
             }).catch(fail);
     }
 
     function goOrgDetail(id, rank) {
+        var val = angular.element(window).scrollTop();
+        window.sessionStorage.removeItem('org-position');
+        window.sessionStorage.removeItem('org-id');
+        window.sessionStorage.setItem('org-position', val);
+        window.sessionStorage.setItem('org-id', id);
+
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
         var client = 'H5';
@@ -220,6 +233,34 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     $scope.abs = function (number) {
         return Math.abs(number);
     };
+
+    function someArray() {
+        var r = vm.result.some(function (data, index, array) {
+            return data.orgId == vm.storageId;
+        });
+
+        if (!r) {
+            getOrgRank(someArray);
+        } else {
+            $document.scrollTopAnimated(parseInt(vm.storagePosition)).then(function () {
+                console && console.log('You just scrolled to the position!');
+            });
+        }
+    }
+
+    function positionItem() {
+        var value = window.sessionStorage.getItem('org-position');
+        var id = window.sessionStorage.getItem('org-id');
+        if (vm.result && value && id && vm.inApp) {
+            vm.storageId = id;
+            vm.storagePosition = value;
+            someArray();
+        } else {
+            $document.scrollTopAnimated(parseInt(value)).then(function () {
+                console && console.log('You just scrolled to the position!');
+            });
+        }
+    }
 
     function joinOrg() {
         var isAndroid = !!navigator.userAgent.match(/android/ig);

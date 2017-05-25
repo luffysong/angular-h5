@@ -16,6 +16,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
     vm.goInvestorDetail = goInvestorDetail;
     vm.joinInvestor = joinInvestor;
     vm.inApp = true;
+    vm.getStorageID = false;
     vm.total;
     vm.downloadApp = downloadApp;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
@@ -32,7 +33,6 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         getInvestorRank();
         initPxLoader();
         addAnimate();
-        positionItem();
     }
 
     function addAnimate() {
@@ -121,21 +121,23 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         document.title = t;
     }
 
-    function getInvestorRank() {
+    function getInvestorRank(fn) {
         if (vm.busy) return;
         vm.busy = true;
         var request = {
             page: vm.page + 1,
             pageSize: 10,
         };
+
         if (!vm.inApp) {request.pageSize = 20; };
 
         BangDanService.getInvestorRank(request)
             .then(function (response) {
                 vm.startloading = false;
                 loading.hide('bangdanLoading');
-                vm.result = response.data;
+                vm.result = response.data.data;
                 vm.list = vm.list.concat(response.data.data);
+
                 if (!vm.total) {
                     vm.total = response.data.totalCount;
                     initWeixin(vm.currQuarter, vm.total);
@@ -150,13 +152,21 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
                         vm.more = true;
                     }
                 }
+
+                if (fn) {
+                    fn();
+                } else {
+                    positionItem();
+                }
             }).catch(fail);
     }
 
     function goInvestorDetail(id, rank, e) {
         var val = angular.element(window).scrollTop();
         window.sessionStorage.removeItem('investor-position');
+        window.sessionStorage.removeItem('investor-id');
         window.sessionStorage.setItem('investor-position', val);
+        window.sessionStorage.setItem('investor-id', id);
 
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
@@ -181,7 +191,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         });
     }
 
-    function displayMore() {
+    function displayMore(fn) {
         if (!vm.inApp) return;
         if (vm.busy) return;
         vm.busy = true;
@@ -207,6 +217,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
                             vm.more = true;
                         }
                     }
+
                 }, 500);
 
             }).catch(fail);
@@ -221,13 +232,32 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         return Math.abs(number);
     };
 
+    function someArray() {
+        var r = vm.result.some(function (data, index, array) {
+            return data.investorId == vm.storageId;
+        });
+
+        if (!r) {
+            getInvestorRank(someArray);
+        } else {
+            $document.scrollTopAnimated(parseInt(vm.storagePosition)).then(function () {
+                console && console.log('You just scrolled to the position!');
+            });
+        }
+    }
+
     function positionItem() {
         var value = window.sessionStorage.getItem('investor-position');
-        $timeout(function () {
+        var id = window.sessionStorage.getItem('investor-id');
+        if (vm.result && value && id && vm.inApp) {
+            vm.storageId = id;
+            vm.storagePosition = value;
+            someArray();
+        } else {
             $document.scrollTopAnimated(parseInt(value)).then(function () {
                 console && console.log('You just scrolled to the position!');
             });
-        }, 500);
+        }
     }
 
     function joinInvestor() {

@@ -39,6 +39,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         initPxLoader();
         initUser();
         getTestJson();
+        compareRank();
         var HOST = location.host;
         var shareUrl =
         'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
@@ -117,12 +118,24 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
 
     }
 
+    function compareRank() {
+        if (parseInt(vm.rank) !== parseInt(vm.investorInfo.rank)) {
+            vm.numchange = Math.abs(parseInt(vm.rank) - parseInt(vm.investorInfo.rank));
+            if (parseInt(vm.rank) > parseInt(vm.investorInfo.rank)) {
+                vm.rise = true;
+            }else {
+                vm.rise = false;
+            }
+        }
+
+    }
+
     function getQ() {
         var myDate = new Date();
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
-        initTitle('2017Q' + vm.currQuarter + ' · 风云投资人排行榜');
+        initTitle('2017Q' + vm.currQuarter + ' · 风口社群排行榜');
     }
 
     function initTitle(t) {
@@ -131,7 +144,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
 
     function initWeixin(name, count, q, rank, url, logo) {
         window.WEIXINSHARE = {
-            shareTitle: name + '排名第' + rank + '名 | 2017Q' + q + ' · 风云投资人排行榜',
+            shareTitle: name + '排名第' + rank + '名 | 2017Q' + q + ' · 风口社群排行榜',
             shareUrl: url,
             shareImg: '' + logo + '',
             shareDesc: '立即查看' + name + '所有' + count + '个投资项目',
@@ -230,7 +243,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         });
         if (f) {
             $modal.open({
-                    templateUrl: 'templates/bangdan/investorShareWin.html',
+                    templateUrl: 'templates/bangdan/comsharewin.html',
                     windowClass: 'bd-nativeAlert_wrap',
                     controller: defaultControllerNoForm,
                     controllerAs: 'vm',
@@ -242,7 +255,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                 });
         }else {
             $modal.open({
-                    templateUrl: 'templates/bangdan/investorShareWin.html',
+                    templateUrl: 'templates/bangdan/comsharewin.html',
                     windowClass: 'bd-nativeAlert_wrap',
                     controller: defaultController,
                     controllerAs: 'vm',

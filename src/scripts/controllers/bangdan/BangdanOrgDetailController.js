@@ -193,6 +193,17 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         }
     }
 
+    function compareRank() {
+        if (parseInt(vm.rank) !== parseInt(vm.orgInfo.rank)) {
+            vm.numchange = Math.abs(parseInt(vm.rank) - parseInt(vm.orgInfo.rank));
+            if (parseInt(vm.rank) > parseInt(vm.orgInfo.rank)) {
+                vm.rise = true;
+            }else {
+                vm.rise = false;
+            }
+        }
+    }
+
     function initWeixin(name, count, q, rank, url, logo) {
         window.WEIXINSHARE = {
             shareTitle: name + '为第' + rank + '名 | 2017Q' + q + ' · 风口机构排行榜',

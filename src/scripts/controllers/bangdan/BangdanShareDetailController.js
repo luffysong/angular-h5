@@ -24,6 +24,10 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
         $('.J_commonHeaderWrapper').remove();
         getSingleOrgInfo(vm.id);
         getQ();
+        if (!hybrid.isInApp) {
+            initLinkme();
+            vm.inApp = false;
+        }
     }
 
     function initWeixin(name, count, q, rank, logo) {
@@ -139,6 +143,7 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
             if (err) {
                 return;
             }
+
             window.linkedme.link(krdata, function (err, data) {
                 if (err) {
                     // 生成深度链接失败，返回错误对象err

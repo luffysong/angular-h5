@@ -1,9 +1,9 @@
 <div class="orgbd-share-wapper">
   <div class="logo" style="background-image: url({{vm.data.logo}})"></div>
-  <div class="riband" ng-if="vm.rank == 1"><img src="/styles/images/bangdan/top1-riband.png" /></div>
-  <div class="riband" ng-if="vm.rank == 2"><img src="/styles/images/bangdan/top2-riband.png" /></div>
-  <div class="riband" ng-if="vm.rank == 3"><img src="/styles/images/bangdan/top3-riband.png" /></div>
-  <div class="name" ng-class="{mgt: vm.rank > 3}">{{vm.data.name}}</div>
+  <div class="riband" ng-if="vm.orgInfo.rank == 1"><img src="/styles/images/bangdan/top1-riband.png" /></div>
+  <div class="riband" ng-if="vm.orgInfo.rank == 2"><img src="/styles/images/bangdan/top2-riband.png" /></div>
+  <div class="riband" ng-if="vm.orgInfo.rank == 3"><img src="/styles/images/bangdan/top3-riband.png" /></div>
+  <div class="name" ng-class="{mgt: vm.orgInfo.rank > 3}">{{vm.data.name}}</div>
   <div class="number">
     <div class="num-line"></div>
     <div class="num">第<span>{{vm.data.rank}}</span>名</div>
