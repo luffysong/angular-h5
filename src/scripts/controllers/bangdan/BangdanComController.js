@@ -13,18 +13,14 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     vm.startloading = true;
     vm.isBottom = false;
     vm.displayMore = displayMore;
-    vm.goInvestorDetail = goInvestorDetail;
-    vm.joinInvestor = joinInvestor;
+    vm.goComDetail = goComDetail;
+    vm.joinCom = joinCom;
     vm.inApp = true;
     vm.total;
     vm.downloadApp = downloadApp;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
     vm.changeTab = changeTab;
-    vm.mqSelected = false;
-    vm.mxSelected = false;
-    vm.faSelected = false;
-    vm.fhqSelected = false;
-    vm.tab = $stateParams.tab || 'mq';
+    vm.communityType = $stateParams.communityType || 1;
     init();
 
     function init() {
@@ -32,45 +28,15 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             initLinkme();
             vm.inApp = false;
         }
-
         getQ();
-        getInvestorRank();
+        getComRank();
         initPxLoader();
         addAnimate();
-        if(vm.tab === 'mq'){
-            vm.mqSelected = true;
-        } else if(vm.tab ==='mx'){
-            vm.mxSelected = true;
-        } else if(vm.tab ==='fa'){
-            vm.faSelected = true;
-        } else if(vm.tab ==='fhq'){
-            vm.fhqSelected = true;
-        }
     }
 
-    function changeTab(tab){
-        if(tab === 'mq'){
-            vm.mqSelected = true;
-            vm.mxSelected = false;
-            vm.faSelected = false;
-            vm.fhqSelected = false;
-        } else if(tab ==='mx'){
-            vm.mxSelected = true;
-            vm.mqSelected = false;
-            vm.faSelected = false;
-            vm.fhqSelected = false;
-        } else if(tab ==='fa'){
-            vm.faSelected = true;
-            vm.mxSelected = false;
-            vm.mqSelected = false;
-            vm.fhqSelected = false;
-        } else if(tab ==='fhq'){
-            vm.fhqSelected = true;
-            vm.mxSelected = false;
-            vm.faSelected = false;
-            vm.mqSelected = false;
-        }
-        $state.go('.', {tab: tab});
+    function changeTab(type){
+        vm.communityType = type;
+        $state.go('.', { communityType: vm.communityType });
     }
 
     function addAnimate() {
@@ -90,29 +56,6 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
                 }
             }
         });
-
-        // $window.onscroll = function () {
-        //     console.log('==');
-        //     console.log($(window).scrollTop(), $(window).height(), $(document).height());
-        //     var t = $(window).scrollTop();
-        //     var h = $(window).height();
-        //     var dh = $(document).height();
-        //     if ((t + h) == dh) {
-        //         vm.isBottom = true;
-        //         console.log('111');
-        //
-        //     }else {
-        //         vm.isBottom = false;
-        //     }
-        // };
-
-        // $(window).scroll(function () {
-        //     if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-        //         vm.isBtm = true;
-        //     }else {
-        //         vm.isBtm = false;
-        //     }
-        // });
     }
 
     function getQ() {
@@ -141,12 +84,12 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         loader.start();
     }
 
-    function initWeixin(q, count) {
+    function initWeixin(q, count, type, totalCount) {
         window.WEIXINSHARE = {
-            shareTitle: '【2017Q' + q + '· 风云投资人排行榜】已有' + count + '位投资人加入',
+            shareTitle: '【2017Q' + q + '· 风口社群排行榜】已有' + count + '家社群加入',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
-            shareDesc: '所有投资人的被投项目都在这里',
+            shareDesc: count + '家' + type +'社群所有项目都在这里',
         };
 
         var obj = {};
@@ -158,16 +101,17 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         document.title = t;
     }
 
-    function getInvestorRank() {
+    function getComRank() {
         if (vm.busy) return;
         vm.busy = true;
         var request = {
             page: vm.page + 1,
             pageSize: 10,
+            communityType: vm.communityType
         };
         if (!vm.inApp) {request.pageSize = 20; };
 
-        BangDanService.getInvestorRank(request)
+        BangDanService.getComRank(request)
             .then(function (response) {
                 vm.startloading = false;
                 loading.hide('bangdanLoading');
@@ -190,7 +134,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             }).catch(fail);
     }
 
-    function goInvestorDetail(id, rank) {
+    function goComDetail(id, rank) {
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
         var client = 'H5';
@@ -208,7 +152,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             client: client,
         });
 
-        $state.go('bangdan.investorbddetail', {
+        $state.go('bangdan.combddetail', {
             id: id,
             rank: rank,
         });
@@ -221,8 +165,9 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         var request = {
             page: vm.page + 1,
             pageSize: 10,
+            communityType: vm.communityType
         };
-        BangDanService.getInvestorRank(request)
+        BangDanService.getComRank(request)
             .then(function (response) {
                 $timeout(function () {
                     vm.list = vm.list.concat(response.data.data);
@@ -230,7 +175,6 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
                         vm.total = response.data.totalCount;
                         initWeixin(vm.currQuarter, vm.total);
                     }
-
                     if (response.data.totalPages) {
                         vm.page = response.data.page || 0;
                         if (response.data.totalPages !== vm.page && response.data.data.length > 0) {
@@ -241,8 +185,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
                         }
                     }
                 }, 500);
-
-            }).catch(fail);
+        }).catch(fail);
     }
 
     function fail(err) {
@@ -254,7 +197,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         return Math.abs(number);
     };
 
-    function joinInvestor() {
+    function joinCom() {
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
         var client = 'H5';
@@ -277,7 +220,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         var krdata = {};
         krdata.type = window.projectEnvConfig.linkmeType;
         krdata.params =
-            '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/bangdan/investorbd' + '","currentRoom":"0"}';
+            '{"openlink":"https://' + window.projectEnvConfig.rongHost + '/m/#/bangdan/combd' + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey, {
             type: window.projectEnvConfig.linkmeType
         }, function (err, res) {

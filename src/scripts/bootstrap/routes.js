@@ -471,7 +471,7 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
     });
 
     $stateProvider.state('bangdan.combd', {
-        url: '/combd?tab',
+        url: '/combd?communityType',
         controllerAs: 'vm',
         controller: 'BangdanComController',
         templateUrl: 'templates/bangdan/bdcom.html',

@@ -44,6 +44,26 @@ angular.module('defaultApp.service').service('BangDanService', function(BasicSer
         return $http.put(BASE_URL + '/investor/' + id + '/forwardCount');
     };
 
+    //社群排行
+    this.getComRank = function (request) {
+        return $http.get(BASE_URL + '/community/list?' + $.param(request));
+    };
+
+    //单个社群详情
+    this.getSingleComInfo = function (id) {
+        return $http.get(BASE_URL + '/community/' + id);
+    };
+
+    //社群项目排行
+    this.getComProRank = function (id, request) {
+        return $http.get(BASE_URL + '/community/' + id + '/projects?' + $.param(request));
+    };
+
+    //社群转发次数
+    this.comforwardCount = function (id) {
+        return $http.put(BASE_URL + '/community/' + id + '/forwardCount');
+    };
+
     //
     this.getTestJson = function () {
         return $http.get('./test.json');

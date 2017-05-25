@@ -10,10 +10,10 @@
   -->
     <section class="com-tabs">
         <ul>
-            <li ng-click="vm.changeTab('mq')" ng-class="{'tab-active': vm.mqSelected}">名企</li>
-            <li ng-click="vm.changeTab('mx')" ng-class="{'tab-active': vm.mxSelected}">名校</li>
-            <li ng-click="vm.changeTab('fa')" ng-class="{'tab-active': vm.faSelected}">FA</li>
-            <li ng-click="vm.changeTab('fhq')" ng-class="{'tab-active': vm.fhqSelected}">孵化器</li>
+            <li ng-click="vm.changeTab(1)" ng-class="{'tab-active': vm.communityType == 1}">名企</li>
+            <li ng-click="vm.changeTab(2)" ng-class="{'tab-active': vm.communityType == 2}">名校</li>
+            <li ng-click="vm.changeTab(3)" ng-class="{'tab-active': vm.communityType == 3}">FA</li>
+            <li ng-click="vm.changeTab(4)" ng-class="{'tab-active': vm.communityType == 4}">孵化器</li>
         </ul>
     </section>
   <div class="combd-list-content" ng-if="vm.startloading">
@@ -24,7 +24,7 @@
 <section class="">
       <ul class="combd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
         <li class="com-item" ng-repeat="item in vm.list track by $index"
-         ng-click="vm.gocomDetail(item.comId, $index + 1)">
+         ng-click="vm.goComDetail(item.orgId, $index + 1)">
           <div class="com-number">
             <img src="/styles/images/bangdan/top1.png" ng-if="$index === 0">
             <img src="/styles/images/bangdan/top2.png" ng-if="$index === 1">
@@ -43,7 +43,7 @@
             <div class="com-logo" ng-if="$index > 2" style="background-image: url({{item.logo}})"></div>
             <div class="com-name">
               <div ng-class="{top3Color: $index < 3}">{{item.name}}</div>
-              <div>浏览量 <span>{{item.accessCount}}</span></div>
+              <div>共 <span>{{item.projectCount}}</span> 个项目</div>
             </div>
             <div class="interview-num">
               <div ng-class="{top3Color: $index < 3}">{{item.interviewCount}}</div>
@@ -52,7 +52,7 @@
           </div>
       </li>
     </ul>
-    <footer ng-if="vm.busy && !vm.finish &&  vm.page">
+    <footer ng-if="vm.busy && !vm.finish && vm.page">
           正在加载更多...&nbsp;
           <img src="/styles/images/bangdan/loading.svg" alt="loading">
     </footer>
@@ -63,7 +63,7 @@
   <div class="combd-footer" ng-if="vm.inApp">
     <div>
       <span>榜上无名，30秒加入</span>
-      <a  ng-click="vm.joincom()"><div class="register">立即加入</div></a>
+      <a  ng-click="vm.joinCom()"><div class="register">立即加入</div></a>
     </div>
   </div>
 <!--
