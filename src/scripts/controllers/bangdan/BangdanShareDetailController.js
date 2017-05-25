@@ -24,10 +24,6 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
         $('.J_commonHeaderWrapper').remove();
         getSingleOrgInfo(vm.id);
         getQ();
-        if (!hybrid.isInApp) {
-            initLinkme();
-            vm.inApp = false;
-        }
     }
 
     function initWeixin(name, count, q, rank, logo) {
