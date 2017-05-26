@@ -125,6 +125,10 @@ angular.module('defaultApp')
                 window.scrollTo(0, 0);
             }
 
+            var _org = false;
+            var _investor = false;
+            var _com = false;
+
             function getPage(name, type) {
                 var track = false;
                 var visitingPage = '';
@@ -155,21 +159,27 @@ angular.module('defaultApp')
                 }else if (name === 'bangdan.orgbdDetail') {
                     visitingPage = 'organization';
                     track = true;
+                    _org = true;
                 }else if (name === 'bangdan.orgbd') {
                     visitingPage = 'org_top_list';
                     track = true;
+                    _org = true;
                 }else if (name === 'bangdan.bdshare') {
                     visitingPage = 'share_page';
                     track = true;
+                    _org = true;
                 }else if (name === 'bangdan.investorbd') {
                     visitingPage = 'investor_top_list';
                     track = true;
+                    _investor = true;
                 }else if (name === 'bangdan.investorbddetail') {
                     visitingPage = 'investor';
                     track = true;
+                    _investor = true;
                 }else if (name === 'bangdan.investorshare') {
                     visitingPage = 'investor_share_page';
                     track = true;
+                    _investor = true;
                 }
 
                 if (type === 'name') {
@@ -177,7 +187,6 @@ angular.module('defaultApp')
                 } else {
                     return track;
                 }
-
             }
 
             function getOrgId(name, type) {
@@ -205,12 +214,20 @@ angular.module('defaultApp')
                 return _orgid;
             }
 
-            getPage(to.name) && sa.track('ViewPage', {
+            var params = {
                 source: getPage(from.name, 'name'),
                 page: getPage(to.name, 'name'),
-                org_id: getOrgId(from.name, 'name'),
-                investor_id: getOrgId(from.name, 'name'),
-            });
+            };
+
+            if (_org) {
+                params.org_id = getOrgId(from.name, 'org');
+            } else if (_investor) {
+                params.investor_id = getOrgId(from.name, 'investor');
+            } else if (_com) {
+                params.com_id = getOrgId(from.name, 'com');
+            }
+
+            getPage(to.name) && sa.track('ViewPage', params);
         });
     }).run(function ($http, $rootScope, $location, $state, notify, Permission, UserService, $q, CredentialService) {
         //Define Roles
