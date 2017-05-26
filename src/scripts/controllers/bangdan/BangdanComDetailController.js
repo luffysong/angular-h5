@@ -10,6 +10,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.prolist = [];
     vm.joinpro = joinpro;
     vm.openMore = openMore;
+    vm.displayMore = displayMore;
     vm.collapse = true;
     vm.startloading = true;
     vm.loadOrg = true;
@@ -66,7 +67,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
 
         var params = {
             page: vm.page + 1,
-            pageSize: 1000,
+            pageSize: 10,
         };
 
         if (!vm.inApp) {params.pageSize = 2;};
@@ -75,6 +76,32 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         .then(function (response) {
             vm.startloading = false;
             loading.hide('bangdanDetailLoading');
+            vm.prolist = vm.prolist.concat(response.data.data);
+            if (response.data.totalPages) {
+                vm.page = response.data.page || 0;
+
+                if (response.data.totalPages !== vm.page && response.data.data.length > 0) {
+                    vm.busy = false;
+                } else {
+                    vm.finish = true;
+                    vm.more = true;
+                }
+            }
+        })
+        .catch(fail);
+    }
+
+    function displayMore() {
+        if (vm.busy) return;
+        vm.busy = true;
+
+        var params = {
+            page: vm.page + 1,
+            pageSize: 10,
+        };
+
+        BangDanService.getComProRank($stateParams.id, params)
+        .then(function (response) {
             vm.prolist = vm.prolist.concat(response.data.data);
             if (response.data.totalPages) {
                 vm.page = response.data.page || 0;
