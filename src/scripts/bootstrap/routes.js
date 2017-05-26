@@ -483,7 +483,7 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
         controller: 'BangdanComDetailController',
         templateUrl: 'templates/bangdan/bdcomdetail.html',
         resolve: {
-            investorInfo: getSingleInvestorInfo,
+            comInfo: getComInfo,
         }
     });
 
@@ -759,6 +759,10 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
 
     function getSingleInvestorInfo(BangDanService, $stateParams) {
         return BangDanService.getSingleInvestorInfo($stateParams.id);
+    }
+
+    function getComInfo(BangDanService, $stateParams) {
+        return BangDanService.getSingleComInfo($stateParams.id);
     }
 
 });

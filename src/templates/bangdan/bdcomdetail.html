@@ -3,23 +3,23 @@
     <section class="bd-investor-avatar bd-detail-bgp">
             <div class="bd-orgdetail-logo">
                 <div class="bd-orgdetail-img bd-gold-border"
-                    ng-if="vm.rank === '1'" style="background-image: url(https://krplus-pic.b0.upaiyun.com/201603/03094503/xy2pxrbbj1yq5nfc.jpg)">
+                    ng-if="vm.comInfo.rank === 1" style="background-image: url({{vm.comInfo.logo}})">
                 </div>
-                <div class="bd-orgdetail-img bd-silver-border" ng-if="vm.rank === '2'"
-                    style="background-image: url(https://krplus-pic.b0.upaiyun.com/201603/03094503/xy2pxrbbj1yq5nfc.jpg)">
-                </div>
-
-                <div class="bd-orgdetail-img bd-copper-border" ng-if="vm.rank === '3'"
-                    style="background-image: url(https://krplus-pic.b0.upaiyun.com/201603/03094503/xy2pxrbbj1yq5nfc.jpg)">
-                </div>
-                <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.rank > 3"
-                    style="background-image: url(https://krplus-pic.b0.upaiyun.com/201603/03094503/xy2pxrbbj1yq5nfc.jpg)">
+                <div class="bd-orgdetail-img bd-silver-border" ng-if="vm.comInfo.rank === 2"
+                    style="background-image: url({{vm.comInfo.logo}})">
                 </div>
 
-                <div class="bd-belt bd-gold-belt" ng-if="vm.rank === '1'"></div>
-                <div class="bd-belt bd-cilver-belt" ng-if="vm.rank === '2'"></div>
-                <div class="bd-belt bd-copper-belt" ng-if="vm.rank === '3'"></div>
-                <div class="bd-belt " ng-if="vm.rank >3"></div>
+                <div class="bd-orgdetail-img bd-copper-border" ng-if="vm.comInfo.rank === 3"
+                    style="background-image: url({{vm.comInfo.logo}})">
+                </div>
+                <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.comInfo.rank > 3"
+                    style="background-image: url({{vm.comInfo.logo}})">
+                </div>
+
+                <div class="bd-belt bd-gold-belt" ng-if="vm.comInfo.rank === 1"></div>
+                <div class="bd-belt bd-cilver-belt" ng-if="vm.comInfo.rank === 2"></div>
+                <div class="bd-belt bd-copper-belt" ng-if="vm.comInfo.rank === 3"></div>
+                <div class="bd-belt " ng-if="vm.comInfo.rank >3"></div>
                 <span >阿里系</span>
         </div>
         <div class="rank-num">
@@ -27,24 +27,24 @@
                 <span class="bd-down-arrow" ng-if="!vm.rise && vm.numchange"></span>
                 <span class="num-change" ng-if="vm.numchange">{{vm.numchange}}</span>
 
-                <span class="top-rank-num">第&nbsp;{{vm.investorInfo.rank}}&nbsp;名</span>
+                <span class="top-rank-num">第&nbsp;{{vm.comInfo.rank}}&nbsp;名</span>
                 <span class="top-rank-q">/本季度</span>
         </div>
         <div class="push-right" ng-click="vm.joinpro('forward')">
                 <div>转发支持</div>
-                <div><img src="/styles/images/bangdan/thumbup.png"/>&nbsp;{{vm.investorInfo.forwardCount}}</div>
+                <div><img src="/styles/images/bangdan/thumbup.png"/>&nbsp;{{vm.comInfo.forwardCount}}</div>
         </div>
-        <div class="f-type">
-            名企
+        <div class="f-type" ng-if="vm.comInfo.communityTypeEnum">
+            {{vm.comInfo.communityName}}
         </div>
     </section>
 
-    <section class="bd-investor-info" ng-if="vm.investorInfo.intro">
+    <section class="bd-investor-info" ng-if="vm.comInfo.intro">
         <div class="investor-info"
             ng-class="{true:'padd-Btm-f',false:''}[vm.isEqualHeight]">
             <div class="info-content" >
-                    <div class="info" ng-if="vm.investorInfo.intro">
-                        <text-line-clamp line-clamp='4' text="vm.investorInfo.intro" isequalheight="vm.isEqualHeight"  >
+                    <div class="info" ng-if="vm.comInfo.intro">
+                        <text-line-clamp line-clamp='4' text="vm.comInfo.intro" isequalheight="vm.isEqualHeight"  >
                             <div class="text-container">
                                 <p class="text-content">
                                 </p>
@@ -112,7 +112,7 @@
                 <div class="content-num">
                     <div class="bd-sta">
                         <div class="num">
-                                {{vm.investorInfo.projectCount}}
+                                {{vm.comInfo.projectCount}}
                         </div>
                         <div class="txt">
                             项目总数
@@ -121,7 +121,7 @@
                     <div class="split-line"> </div>
                     <div class="bd-sta">
                         <div class="num">
-                                {{vm.investorInfo.interviewCount}}
+                                {{vm.comInfo.interviewCount}}
                         </div>
                         <div class="txt">
                             Q{{vm.currQuarter}}总约谈数
@@ -130,7 +130,7 @@
                     <div class="split-line"> </div>
                     <div class="bd-sta">
                         <div class="num">
-                                {{vm.investorInfo.accessCount}}
+                                {{vm.comInfo.accessCount}}
                         </div>
                         <div class="txt">
                             Q{{vm.currQuarter}}总浏览数
@@ -143,9 +143,9 @@
         * 以下项目按本季度被约谈量排序，实时更新
     </div>
     <div class="pro-list">
-        <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+        <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='2'>
             <li ng-if="vm.prolist" ng-repeat="item in vm.prolist track  by $index"
-            ng-click="vm.goProDetail(item.ccid, $event)" >
+                ng-click="vm.goProDetail(item.ccid, $event)" >
                 <div class="icon-left">
                     <div class="metal " ng-if="$index === 0" >
                         <img src="/styles/images/bangdan/top1.png" />
@@ -196,7 +196,7 @@
                             style="background-image: url({{item.logo}})" >
                             <img ng-style="{'background-color':(item.ccid | demoDefaultColor)}" ng-if="!item.logo">
                             <span class="logo-name" ng-if="!item.logo && item.name"
-                            ng-style="{'background-color':(item.ccid | demoDefaultColor)}">{{item.name | demoNameDufault}}</span>
+                                ng-style="{'background-color':(item.ccid | demoDefaultColor)}">{{item.name | demoNameDufault}}</span>
 
                             <div class="funding" ng-if="item.isUnderFinancing && vm.investRole">
                                 正在融资

@@ -3,21 +3,19 @@ angular.module('defaultApp.controller')
     .controller('BangdanComDetailController', BangdanComDetailController);
 
 function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, BangDanService, ErrorService, hybrid, $rootScope, $timeout, investorInfo, $document) {
+    $state, UserService, BangDanService, ErrorService, hybrid, $rootScope, $timeout, comInfo, $document) {
     var vm = this;
     vm.page = 0;
     vm.busy = false;
     vm.prolist = [];
     vm.joinpro = joinpro;
     vm.openMore = openMore;
-    vm.industry = '';
     vm.collapse = true;
     vm.startloading = true;
     vm.loadOrg = true;
     vm.inApp = true;
     vm.downloadApp = downloadApp;
     vm.investRole = false;
-    vm.gobdOrg = gobdOrg;
     vm.rank = $stateParams.rank;
     vm.goProDetail = goProDetail;
     vm.h5Href = false;
@@ -26,24 +24,22 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     init();
 
     function init() {
+        vm.comInfo = comInfo.data;
+        vm.comInfo.communityName = matchType(vm.comInfo.communityTypeEnum);
         if (!hybrid.isInApp) {
             initLinkme();
             vm.inApp = false;
         }
 
-        vm.investorInfo = investorInfo.data;
-        vm.industry = investorInfo.data.focusIndustry.join('&nbsp;·&nbsp;');
         getProList();
         getQ();
-        getOrgInfo(investorInfo.data.orgId);
         initPxLoader();
         initUser();
-        getTestJson();
         compareRank();
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
-        initWeixin(vm.investorInfo.name, vm.investorInfo.projectCount, vm.currQuarter, vm.rank, shareUrl, vm.investorInfo.logo);
+        'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank;
+        initWeixin(vm.comInfo.name, vm.comInfo.totalCommunityCount, vm.currQuarter, vm.comInfo.rank, shareUrl, vm.comInfo.logo, vm.comInfo.communityName);
     }
 
     function initPxLoader() {
@@ -75,8 +71,8 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
 
         if (!vm.inApp) {params.pageSize = 2;};
 
-        BangDanService.getInvestorProRank($stateParams.id, params)
-        .then(function setdata(response) {
+        BangDanService.getComProRank($stateParams.id, params)
+        .then(function (response) {
             vm.startloading = false;
             loading.hide('bangdanDetailLoading');
             vm.prolist = vm.prolist.concat(response.data.data);
@@ -94,34 +90,10 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         .catch(fail);
     }
 
-    function getOrgInfo(id) {
-        BangDanService.getSingleOrgInfo(id)
-        .then(function setdata(response) {
-            vm.loadOrg = false;
-            vm.orgInfo = response.data;
-        })
-        .catch(fail);
-    }
-
-    function gobdOrg(orgId) {
-        $state.go('bangdan.orgbdDetail', {
-            id: orgId,
-            rank: vm.orgInfo.rank,
-        });
-    }
-
-    function getTestJson() {
-        if (vm.investorInfo.name === '朱啸虎'
-            && vm.investorInfo.investorId === 6533) {
-            vm.recommend = window.zxhInvestorData.data.data;
-        }
-
-    }
-
     function compareRank() {
-        if (parseInt(vm.rank) !== parseInt(vm.investorInfo.rank)) {
-            vm.numchange = Math.abs(parseInt(vm.rank) - parseInt(vm.investorInfo.rank));
-            if (parseInt(vm.rank) > parseInt(vm.investorInfo.rank)) {
+        if (parseInt(vm.rank) !== parseInt(vm.comInfo.rank)) {
+            vm.numchange = Math.abs(parseInt(vm.rank) - parseInt(vm.comInfo.rank));
+            if (parseInt(vm.rank) > parseInt(vm.comInfo.rank)) {
                 vm.rise = true;
             }else {
                 vm.rise = false;
@@ -142,12 +114,12 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         document.title = t;
     }
 
-    function initWeixin(name, count, q, rank, url, logo) {
+    function initWeixin(name, count, q, rank, url, logo, communityName) {
         window.WEIXINSHARE = {
-            shareTitle: name + '排名第' + rank + '名 | 2017Q' + q + ' · 风口社群排行榜',
+            shareTitle: name + '为' + communityName + '第' + rank + '名 | 2017Q' + q + ' · 风口社群排行榜',
             shareUrl: url,
             shareImg: '' + logo + '',
-            shareDesc: '立即查看' + name + '所有' + count + '个投资项目',
+            shareDesc: communityName + count + '个项目都在这里',
         };
 
         var obj = {};
@@ -172,21 +144,15 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         var openCloseTxt = obj.find('.open-close-txt');
 
         var $infoObj = obj.parent().find('.info-content').find('.info').find('.text-content');
-        var $indObj = obj.parent().find('.info-content').find('.industry').find('.in-right').find('.text-content');
         var lineClamp  = '-webkit-line-clamp';
         var fhclmp = $infoObj.attr('cla-height');
-        var ihclmp = $indObj.attr('cla-height');
         var fh = $infoObj.attr('o-height');
-        var ih = $indObj.attr('o-height');
 
         if (vm.collapse) {
             $infoObj.css(lineClamp, '');
             $infoObj.css('transition', 'height 0.3s');
             $infoObj.css('height', fh + 'px');
 
-            $indObj.css(lineClamp, '');
-            $indObj.css('transition', 'height 0.3s');
-            $indObj.css('height', ih + 'px');
             openClose.css('transform', 'rotate(180deg)');
             openCloseTxt.html('收起');
             vm.collapse = false;
@@ -194,10 +160,6 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             $infoObj.css('transition', 'height 0.3s');
             $infoObj.css('height',  fhclmp + 'px');
             $infoObj.css(lineClamp, '4');
-            $indObj.css(lineClamp, '2');
-
-            $indObj.css('transition', 'height 0.3s');
-            $indObj.css('height',  ihclmp + 'px');
             openClose.css('transform', '');
             openCloseTxt.html('展开');
             vm.collapse = true;
@@ -214,8 +176,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     }
 
     function joinpro(f) {
-        var item = investorInfo.data;
-        item.rank = parseInt(vm.rank);
+        var item = comInfo.data;
         item.currQuarter = vm.currQuarter;
         item.inApp = vm.inApp;
         var tg = 'join_investor_company';
@@ -238,7 +199,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
           {
             source:'investor',
             target: tg,
-            investor_id: investorInfo.data.investorId + '',
+            investor_id: comInfo.data.investorId + '',
             client:client,
         });
         if (f) {
@@ -277,7 +238,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         vm.cancelModal = cancelModal;
         vm.inApp = obj.inApp;
         vm.shareWechat = shareWechat;
-        vm.investorInfo = obj;
+        vm.comInfo = obj;
 
         init();
 
@@ -305,7 +266,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                       {
                         source:'investor_share',
                         target:'moments',
-                        investor_id: vm.investorInfo.investorId + '',
+                        community_id: vm.comInfo.communityId + '',
                         client:client,
                     });
                     hybrid.open('weChatShareMoments');
@@ -314,20 +275,20 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                       {
                         source:'investor_share',
                         target:'wechat',
-                        org_id: vm.investorInfo.investorId + '',
+                        community_id: vm.comInfo.communityId + '',
                         client:client,
                     });
                     hybrid.open('weChatShareFriend');
                 }
 
                 $timeout(function () {
-                    window.location.href = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
+                    window.location.href = vm.bdUrl;
                 }, 1000);
             }
         }
 
         function forwardCount() {
-            BangDanService.investorforwardCount(vm.investorInfo.investorId)
+            BangDanService.comforwardCount(vm.comInfo.communityId)
             .then(function setdata(response) {
             })
             .catch(fail);
@@ -340,14 +301,14 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         vm.cancelModal = cancelModal;
         vm.inApp = obj.inApp;
         vm.shareWechat = shareWechatNoForm;
-        vm.investorInfo = obj;
+        vm.comInfo = obj;
 
         init();
 
         function init() {
             sa.track('ViewPage', {
                     source: 'investor',
-                    org_id: vm.investorInfo.investorId + '',
+                    community_id: vm.comInfo.communityId + '',
                     page: 'investor_share',
                 });
         }
@@ -373,7 +334,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                       {
                         source:'investor_share',
                         target:'moments',
-                        investor_id: vm.investorInfo.investorId + '',
+                        community_id: vm.comInfo.communityId + '',
                         client:client,
                     });
                     hybrid.open('weChatShareMoments');
@@ -382,7 +343,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                       {
                         source:'investor_share',
                         target:'wechat',
-                        org_id: vm.investorInfo.investorId + '',
+                        community_id: vm.comInfo.communityId + '',
                         client:client,
                     });
                     hybrid.open('weChatShareFriend');
@@ -393,7 +354,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         }
 
         function forwardCount() {
-            BangDanService.investorforwardCount(vm.investorInfo.investorId)
+            BangDanService.comforwardCount(vm.comInfo.communityId)
             .then(function setdata(response) {
             })
             .catch(fail);
@@ -401,10 +362,6 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     }
 
     function goProDetail(ccid, e) {
-        // var obj = angular.element(e.currentTarget);
-        // $timeout(function () {
-        //     obj.css('background-color', 'white');
-        // }, 200);
 
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
@@ -419,7 +376,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
           {
             source:'investor',
             target:'company',
-            investor_id: $stateParams.id + '',
+            community_id: $stateParams.id + '',
             company_id: ccid,
             client: client,
         });
@@ -439,7 +396,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         krdata.type = window.projectEnvConfig.linkmeType;
         krdata.params =
             '{"openlink":"https://' + window.projectEnvConfig.rongHost +
-            '/m/#/bangdan/investorbddetail?id=' + $stateParams.id + '&rank=' + $stateParams.rank + '","currentRoom":"0"}';
+            '/m/#/bangdan/investorbddetail?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey, {
             type: window.projectEnvConfig.linkmeType
         }, function (err, res) {
@@ -462,6 +419,25 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         if (!vm.inApp) {
             window.location.href = vm.openAppUrl;
         }
+    }
+
+    function matchType(type) {
+        switch (type) {
+        case 'FAMOUS_ENTERPRISE':
+            return '名企';
+            break;
+        case 'FAMOUS_SCHOOL':
+            return '名校';
+            break;
+        case 'INCUBATOR':
+            return '孵化器';
+            break;
+        case 'FA':
+            return 'FA';
+            break;
+        default:
+            return '';
+    }
     }
 
     function initH5() {
@@ -493,7 +469,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                         // 用户确认分享后执行的回调函数
                         //shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
+                            window.location.href = vm.bdUrl + '';
                         }
                     },
 
@@ -501,7 +477,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                         // 用户取消分享后执行的回调函数
                         //shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
+                            window.location.href = vm.bdUrl + '';
                         }
                     }
                 });
@@ -516,14 +492,14 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                     success: function () {
                         // 用户确认分享后执行的回调函数
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
+                            window.location.href = vm.bdUrl + '';
                         }
                     },
 
                     cancel: function () {
                         // 用户取消分享后执行的回调函数
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
+                            window.location.href = vm.bdUrl + '';
                         }
                     }
                 });
