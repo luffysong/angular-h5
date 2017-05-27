@@ -15,11 +15,6 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
     init();
 
     function init() {
-        if (!hybrid.isInApp) {
-            initLinkme();
-            vm.inApp = false;
-        }
-
         // sa.track('ViewPage', {
         //         source: 'share_page',
         //         org_id: $stateParams.id + '',
@@ -107,8 +102,12 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
         BangDanService.getSingleOrgInfo(id)
             .then(function (response) {
                 vm.data = response.data;
-                initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.rank, vm.data.logo);
+                initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.data.rank, vm.data.logo);
                 initWeixinH5();
+                if (!hybrid.isInApp) {
+                    initLinkme();
+                    vm.inApp = false;
+                }
             });
     }
 
@@ -121,7 +120,7 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
         krdata.type = window.projectEnvConfig.linkmeType;
         krdata.params =
             '{"openlink":"https://' + window.projectEnvConfig.rongHost +
-            '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank + '","currentRoom":"0"}';
+            '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + vm.data.rank + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey, {
             type: window.projectEnvConfig.linkmeType
         }, function (err, res) {

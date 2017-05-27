@@ -3,35 +3,32 @@
     <section class="bd-orgdetail-head bd-detail-bgp">
             <div class="bd-orgdetail-logo">
                 <div class="bd-orgdetail-img bd-gold-border"
-                ng-if="vm.rank === '1'" style="background-image: url({{vm.orgInfo.logo}})">
-                <!--
-                    <img ng-src="{{vm.orgInfo.logo}}" />-->
+                ng-if="vm.orgInfo.rank === 1" style="background-image: url({{vm.orgInfo.logo}})">
                 </div>
-                <div class="bd-orgdetail-img bd-silver-border" ng-if="vm.rank === '2'"
+                <div class="bd-orgdetail-img bd-silver-border" ng-if="vm.orgInfo.rank === 2"
                 style="background-image: url({{vm.orgInfo.logo}})">
-                <!--
-                    <img ng-src="{{vm.orgInfo.logo}}" />-->
                 </div>
 
-                <div class="bd-orgdetail-img bd-copper-border" ng-if="vm.rank === '3'"
+                <div class="bd-orgdetail-img bd-copper-border" ng-if="vm.orgInfo.rank === 3"
                 style="background-image: url({{vm.orgInfo.logo}})">
-                <!--
-                    <img ng-src="{{vm.orgInfo.logo}}" />-->
                 </div>
-                <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.rank > 3"
+                <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.orgInfo.rank > 3"
                     style="background-image: url({{vm.orgInfo.logo}})">
-                    <!--
-                    <img ng-src="{{vm.orgInfo.logo}}" />-->
                 </div>
 
-                <div class="bd-belt bd-gold-belt" ng-if="vm.rank === '1'"></div>
-                <div class="bd-belt bd-cilver-belt" ng-if="vm.rank === '2'"></div>
-                <div class="bd-belt bd-copper-belt" ng-if="vm.rank === '3'"></div>
-                <div class="bd-belt " ng-if="vm.rank >3"></div>
+                <div class="bd-belt bd-gold-belt" ng-if="vm.orgInfo.rank === 1"></div>
+                <div class="bd-belt bd-cilver-belt" ng-if="vm.orgInfo.rank === 2"></div>
+                <div class="bd-belt bd-copper-belt" ng-if="vm.orgInfo.rank === 3"></div>
+                <div class="bd-belt " ng-if="vm.orgInfo.rank >3"></div>
                 <span>{{vm.orgInfo.name}}</span>
             </div>
             <div class="bd-orgdetail-rank">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>第&nbsp;{{vm.rank}}&nbsp;名</span><span>/本季度</span>
+                <span class="bd-up-arrow" ng-if="vm.rise && vm.numchange" ></span>
+                <span class="bd-down-arrow" ng-if="!vm.rise && vm.numchange"></span>
+                <span class="num-change" ng-if="vm.numchange">{{vm.numchange}}</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span >第&nbsp;{{vm.orgInfo.rank}}&nbsp;名</span>
+                <span class="current-q">/本季度</span>
             </div>
             <div class="bd-orgdetail-sta">
                     <div class="bd-sta">

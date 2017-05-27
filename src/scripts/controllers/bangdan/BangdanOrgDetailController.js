@@ -35,11 +35,12 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
 
         getQ();
         initPxLoader();
+        compareRank();
 
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + $stateParams.rank;
-        initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.rank, shareUrl, vm.orgInfo.logo);
+        'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + vm.orgInfo.rank;
+        initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.orgInfo.rank, shareUrl, vm.orgInfo.logo);
     }
 
     function initUser() {
@@ -146,6 +147,18 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         obj.css('background-color', '#dfdfdf');
     }
 
+    function compareRank() {
+        if (parseInt(vm.rank) !== parseInt(vm.orgInfo.rank)) {
+            vm.numchange = Math.abs(parseInt(vm.rank) - parseInt(vm.orgInfo.rank));
+            if (parseInt(vm.rank) > parseInt(vm.orgInfo.rank)) {
+                vm.rise = true;
+            }else {
+                vm.rise = false;
+            }
+        }
+
+    }
+
     function goProDetail(ccid, e) {
         // var obj = angular.element(e.currentTarget);
         // $timeout(function () {
@@ -199,7 +212,6 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
 
     function joinpro(f) {
         var item = orgInfo.data;
-        item.rank = parseInt(vm.rank);
         item.currQuarter = vm.currQuarter;
         item.inApp = vm.inApp;
         var tg = 'join_org';
@@ -404,7 +416,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         krdata.type = window.projectEnvConfig.linkmeType;
         krdata.params =
             '{"openlink":"https://' + window.projectEnvConfig.rongHost +
-            '/m/#/bangdan/orgbddetail?id=' + $stateParams.id + '&rank=' + $stateParams.rank + '","currentRoom":"0"}';
+            '/m/#/bangdan/orgbddetail?id=' + $stateParams.id + '&rank=' + vm.orgInfo.rank + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey, {
             type: window.projectEnvConfig.linkmeType
         }, function (err, res) {
