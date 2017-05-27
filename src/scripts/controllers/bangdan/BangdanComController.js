@@ -114,7 +114,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         }
     }
 
-    function getComRank() {
+    function getComRank(fn) {
         if (vm.busy) return;
         vm.busy = true;
         var request = {
@@ -145,10 +145,21 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
                         vm.more = true;
                     }
                 }
+                if (fn) {
+                    fn();
+                } else {
+                    positionItem();
+                }
             }).catch(fail);
     }
 
     function goComDetail(id, rank) {
+        var val = angular.element(window).scrollTop();
+        window.sessionStorage.removeItem('com-position');
+        window.sessionStorage.removeItem('com-id');
+        window.sessionStorage.setItem('com-position', val);
+        window.sessionStorage.setItem('com-id', id);
+
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
         var client = 'H5';
@@ -340,6 +351,34 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             target: 'share',
             client: client,
         });
+    }
+
+    function someArray() {
+        var r = vm.result.some(function (data, index, array) {
+            return data.orgId == vm.storageId;
+        });
+
+        if (!r) {
+            getOrgRank(someArray);
+        } else {
+            $document.scrollTopAnimated(parseInt(vm.storagePosition)).then(function () {
+                console && console.log('You just scrolled to the position!');
+            });
+        }
+    }
+
+    function positionItem() {
+        var value = window.sessionStorage.getItem('com-position');
+        var id = window.sessionStorage.getItem('com-id');
+        if (vm.result && value && id && vm.inApp) {
+            vm.storageId = id;
+            vm.storagePosition = value;
+            someArray();
+        } else {
+            $document.scrollTopAnimated(parseInt(value)).then(function () {
+                console && console.log('You just scrolled to the position!');
+            });
+        }
     }
 
 }
