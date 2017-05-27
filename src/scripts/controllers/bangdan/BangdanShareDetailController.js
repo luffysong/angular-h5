@@ -104,11 +104,23 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
                 vm.data = response.data;
                 initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.data.rank, vm.data.logo);
                 initWeixinH5();
+                compareRank();
                 if (!hybrid.isInApp) {
                     initLinkme();
                     vm.inApp = false;
                 }
             });
+    }
+
+    function compareRank() {
+        if (parseInt(vm.rank) !== parseInt(vm.data.rank)) {
+            vm.numchange = Math.abs(parseInt(vm.rank) - parseInt(vm.data.rank));
+            if (parseInt(vm.rank) > parseInt(vm.data.rank)) {
+                vm.rise = true;
+            }else {
+                vm.rise = false;
+            }
+        }
     }
 
     function initTitle(t) {
