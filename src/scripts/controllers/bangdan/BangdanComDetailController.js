@@ -21,7 +21,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.goProDetail = goProDetail;
     vm.h5Href = false;
     vm.isEqualHeight = false;
-    vm.bdUrl = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
+    vm.bdUrl = 'http://bangdanshouji.mikecrm.com/vKzwzTf';
     init();
 
     function init() {
@@ -92,6 +92,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     }
 
     function displayMore() {
+        if (!vm.inApp) return;
         if (vm.busy) return;
         vm.busy = true;
 
