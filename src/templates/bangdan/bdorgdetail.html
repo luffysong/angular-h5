@@ -128,9 +128,9 @@
                             {{item.brief}}
                         </div>
                         <div class="bd-txt-phase">
-                            <span >{{item.phase}}</span>
-                            <span class="bd-dot bd-dot-gray" ></span>
-                            <span>{{item.industry}}</span>
+                            <span ng-if="item.phase">{{item.phase}}</span>
+                            <span ng-if="item.phase && item.industry" class="bd-dot bd-dot-gray" ></span>
+                            <span ng-if="item.industry">{{item.industry}}</span>
                         </div>
                     </div>
                     <div class="sta-right">
