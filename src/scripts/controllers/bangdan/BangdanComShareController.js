@@ -96,7 +96,7 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
         });
 
         //放开访问详情
-        $state.go('bangdan.orgbdDetail', {
+        $state.go('bangdan.combddetail', {
             id: id,
             rank: rank,
         });
