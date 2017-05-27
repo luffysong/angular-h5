@@ -1,5 +1,5 @@
 var angular = require('angular');
-angular.module('defaultApp').config(function($locationProvider, $stateProvider, $urlRouterProvider, $provide, $sceDelegateProvider) {
+angular.module('defaultApp').config(function ($locationProvider, $stateProvider, $urlRouterProvider, $provide, $sceDelegateProvider) {
 
     $sceDelegateProvider.resourceUrlWhitelist([
         'self',
@@ -488,7 +488,7 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
     });
 
     $stateProvider.state('bangdan.comshare', {
-        url: '/comshare?{id}&{rank}',
+        url: '/comshare?{id}&{rank}&{type}',
         controllerAs: 'vm',
         controller: 'BangdanComShareController',
         templateUrl: 'templates/bangdan/comshare.html',
@@ -700,7 +700,7 @@ angular.module('defaultApp').config(function($locationProvider, $stateProvider, 
 
         var deferred = $q.defer(); //通过$q服务注册一个延迟对象 deferred
         var promise = deferred.promise; //通过deferred延迟对象，可以得到一个承诺promise，而promise会返回当前任务的完成结果
-        $timeout(function() {
+        $timeout(function () {
             deferred.resolve();
         }, 10);
 

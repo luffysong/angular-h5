@@ -31,14 +31,13 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
         getQ();
     }
 
-    function initWeixin(name, count, q, rank, logo) {
+    function initWeixin(name, count, q, rank, logo, type) {
         window.WEIXINSHARE = {
-            shareTitle: name + '排名第' + rank + '|2017Q' + q + '风口机构排行榜',
+            shareTitle: name + '为' + type + '第' + rank + '名' + ' | 2017Q' + q + ' · 风口社群排行榜',
             shareUrl: window.location.href,
             shareImg: '' + logo + '',
             shareDesc: name + '' + count + '个投资项目都在这里',
         };
-
         var obj = {};
         window.InitWeixin(obj);
     }
@@ -107,7 +106,7 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
         BangDanService.getSingleComInfo(id)
             .then(function (response) {
                 vm.data = response.data;
-                initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.rank, vm.data.logo);
+                initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.rank, vm.data.logo, vm.type);
                 initWeixinH5();
             });
     }

@@ -32,6 +32,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         getComRank();
         initPxLoader();
         addAnimate();
+        vm.type = getTypeText(vm.communityType);
     }
 
     function changeTab(type){
@@ -86,7 +87,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
 
     function initWeixin(q, count, type, totalCount) {
         window.WEIXINSHARE = {
-            shareTitle: '【2017Q' + q + '· 风口社群排行榜】已有' + count + '家社群加入',
+            shareTitle: '【2017Q' + q + ' · 风口社群排行榜】已有' + totalCount + '家社群加入',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: count + '家' + type +'社群所有项目都在这里',
@@ -99,6 +100,18 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
 
     function initTitle(t) {
         document.title = t;
+    }
+
+    function getTypeText(type){
+        if(type == 1){
+            return '名企';
+        }else if(type == 2){
+            return '名校';
+        }else if(type == 3){
+            return 'FA';
+        }else if(type == 4){
+            return '孵化器';
+        }
     }
 
     function getComRank() {
@@ -115,11 +128,12 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             .then(function (response) {
                 vm.startloading = false;
                 loading.hide('bangdanLoading');
-                vm.result = response.data;
-                vm.list = vm.list.concat(response.data.data);
+                vm.result = response.data.pageData;
+                vm.list = vm.list.concat(response.data.pageData.data);
+                vm.totalCount = response.data.communityCount.totalCount;
                 if (!vm.total) {
-                    vm.total = response.data.totalCount;
-                    initWeixin(vm.currQuarter, vm.total);
+                    vm.total = response.data.communityCount.currentTypeCount;
+                    initWeixin(vm.currQuarter, vm.total, vm.type, vm.totalCount);
                 }
 
                 if (response.data.totalPages) {
@@ -170,10 +184,11 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         BangDanService.getComRank(request)
             .then(function (response) {
                 $timeout(function () {
-                    vm.list = vm.list.concat(response.data.data);
+                    vm.list = vm.list.concat(response.data.pageData.data);
+                    vm.totalCount = response.data.communityCount.totalCount;
                     if (!vm.total) {
-                        vm.total = response.data.totalCount;
-                        initWeixin(vm.currQuarter, vm.total);
+                        vm.total = response.data.communityCount.currentTypeCount;
+                        initWeixin(vm.currQuarter, vm.total, vm.type, vm.totalCount);
                     }
                     if (response.data.totalPages) {
                         vm.page = response.data.page || 0;
