@@ -183,6 +183,17 @@
         }
 
     </script>
+    <script>
+      window.onscroll = function(){
+        var scrollTop = document.body.scrollTop;
+        if(scrollTop >= 1){
+          $('#bannerOther').css('position','fixed');
+          $('#bannerOther').css('width','100%');
+        }else if (scrollTop <= 1){
+          $('#bannerOther').css('position','relative');
+        }
+      }
+    </script>
 </body>
 
 </html>

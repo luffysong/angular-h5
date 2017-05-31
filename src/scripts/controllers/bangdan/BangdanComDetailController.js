@@ -40,7 +40,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         var HOST = location.host;
         var shareUrl =
         'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank;
-        initWeixin(vm.comInfo.name, vm.comInfo.totalCommunityCount, vm.currQuarter, vm.comInfo.rank, shareUrl, vm.comInfo.logo, vm.comInfo.communityName);
+        initWeixin(vm.comInfo.name, vm.comInfo.projectCount, vm.currQuarter, vm.comInfo.rank, shareUrl, vm.comInfo.logo, vm.comInfo.communityName);
     }
 
     function initPxLoader() {
