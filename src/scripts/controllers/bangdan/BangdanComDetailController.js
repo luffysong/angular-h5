@@ -424,7 +424,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         krdata.type = window.projectEnvConfig.linkmeType;
         krdata.params =
             '{"openlink":"https://' + window.projectEnvConfig.rongHost +
-            '/m/#/bangdan/investorbddetail?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '","currentRoom":"0"}';
+            '/m/#/bangdan/combddetail?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '","currentRoom":"0"}';
         window.linkedme.init(window.projectEnvConfig.linkmeKey, {
             type: window.projectEnvConfig.linkmeType
         }, function (err, res) {
