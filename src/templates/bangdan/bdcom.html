@@ -1,5 +1,6 @@
 <div ng-if="!loadingInst.bangdanLoading" style="">
 <div class="combd-wapper" id ="combd-wapper">
+  <div ng-include="'templates/bangdan/topBanner.html'" ng-if="!vm.inApp" ng-click="vm.downloadApp()"></div>
   <div class="comdb-top">
     <div class="com-brief">
       * 按本季度截止今日，各社群项目被约谈总量排序，实时更新
@@ -81,7 +82,7 @@
   </div>
 </section>
 
-<div class="bdorg-div-pop-in animated fadeInUp" ng-if="!vm.inApp ">
+<div class="bdorg-div-pop-in animated fadeInUp" ng-if="!vm.inApp">
     <a  ng-click="vm.downloadApp()"
       class="btn-open-app" id="btn-open-app">点击查看更多</a>
 </div>

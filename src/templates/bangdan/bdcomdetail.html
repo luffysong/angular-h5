@@ -1,5 +1,6 @@
 <div ng-if="!loadingInst.bangdanDetailLoading" style="">
 <div class="bd-investor-detail bd-com-detail">
+    <div ng-include="'templates/bangdan/topBanner.html'" ng-if="!vm.inApp" ng-click="vm.downloadApp()"></div>
     <section class="bd-investor-avatar bd-detail-bgp">
             <div class="bd-orgdetail-logo">
                 <div class="bd-orgdetail-img bd-gold-border"
@@ -210,5 +211,4 @@
     </section>
 </div>
 </div>
-
 <loading loading="bangdanDetailLoading"></loading>

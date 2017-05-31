@@ -33,6 +33,11 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         initPxLoader();
         addAnimate();
         vm.type = getTypeText(vm.communityType);
+        removeHeader();
+    }
+
+    function removeHeader() {
+        $('#bannerOther').remove();
     }
 
     function changeTab(type){
