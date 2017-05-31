@@ -12,6 +12,7 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
     vm.bangdanComDetail = bangdanComDetail;
     vm.inApp = true;
     vm.downloadApp = downloadApp;
+    vm.type = $stateParams.type;
     init();
 
     function init() {
