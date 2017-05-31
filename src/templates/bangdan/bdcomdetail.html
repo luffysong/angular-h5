@@ -20,7 +20,7 @@
                 <div class="bd-belt bd-cilver-belt" ng-if="vm.comInfo.rank === 2"></div>
                 <div class="bd-belt bd-copper-belt" ng-if="vm.comInfo.rank === 3"></div>
                 <div class="bd-belt " ng-if="vm.comInfo.rank >3"></div>
-                <span >阿里系</span>
+                <span >{{vm.comInfo.name}}</span>
         </div>
         <div class="rank-num">
                 <span class="bd-up-arrow" ng-if="vm.rise && vm.numchange" ></span>

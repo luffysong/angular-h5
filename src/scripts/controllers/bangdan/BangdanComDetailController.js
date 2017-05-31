@@ -147,7 +147,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             shareTitle: name + '为' + communityName + '第' + rank + '名 | 2017Q' + q + ' · 风口社群排行榜',
             shareUrl: url,
             shareImg: '' + logo + '',
-            shareDesc: communityName + count + '个项目都在这里',
+            shareDesc: name + count + '个项目都在这里',
         };
 
         var obj = {};
