@@ -180,10 +180,6 @@ angular.module('defaultApp')
                     visitingPage = 'investor_share_page';
                     track = true;
                     _investor = true;
-                }else if (name === 'bangdan.combd') {
-                    visitingPage = 'community_top_list';
-                    track = true;
-                    _com = true;
                 }else if (name === 'bangdan.combddetail') {
                     visitingPage = 'community';
                     track = true;
@@ -210,7 +206,6 @@ angular.module('defaultApp')
                     || name === 'bangdan.investorbd'
                     || name === 'bangdan.investorshare'
                     || name === 'bangdan.combddetail'
-                    || name === 'bangdan.combd'
                     || name === 'bangdan.comshare') {
                     _orgid = toParams.id;
                 }
@@ -223,13 +218,25 @@ angular.module('defaultApp')
                 || (location + '').indexOf('bangdan/investorbd')
                 || (location + '').indexOf('bangdan/investorshare')
                 || (location + '').indexOf('bangdan/combddetail')
-                || (location + '').indexOf('bangdan/combd')
                 || (location + '').indexOf('bangdan/comshare')) {
                         _orgid = toParams.id;
                     }
                 }
 
                 return _orgid;
+            }
+
+            function getCommunityType(){
+                var type = toParams.communityType || 1;
+                if(type == 1){
+                    return 'famous_enterprise';
+                }else if(type == 2){
+                    return 'top_school';
+                }else if(type == 3){
+                    return 'finance_advisor';
+                }else if(type == 4){
+                    return 'incubator';
+                }
             }
 
             var params = {
@@ -243,6 +250,7 @@ angular.module('defaultApp')
                 params.investor_id = getOrgId(from.name, 'investor');
             } else if (_com) {
                 params.community_id = getOrgId(from.name, 'com');
+                params.community_type = getCommunityType();
             }
 
             getPage(to.name) && sa.track('ViewPage', params);

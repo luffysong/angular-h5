@@ -22,6 +22,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.h5Href = false;
     vm.isEqualHeight = false;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/vKzwzTf';
+    vm.communityType = $stateParams.communityType;
     init();
 
     function init() {
@@ -38,10 +39,23 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         initUser();
         compareRank();
         removeHeader();
+        getCommunityType(vm.communityType);
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank;
+        'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '&communityType=' + $stateParams.communityType;
         initWeixin(vm.comInfo.name, vm.comInfo.projectCount, vm.currQuarter, vm.comInfo.rank, shareUrl, vm.comInfo.logo, vm.comInfo.communityName);
+    }
+
+    function getCommunityType(type){
+        if(type == 1){
+            vm.trackType = 'famous_enterprise';
+        }else if(type == 2){
+            vm.trackType = 'top_school';
+        }else if(type == 3){
+            vm.trackType = 'finance_advisor';
+        }else if(type == 4){
+            vm.trackType = 'incubator';
+        }
     }
 
     function removeHeader() {
@@ -218,7 +232,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         }else {
             vm.h5Href = true;
         }
-
+        item.community_type = vm.trackType;
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
         var client = 'H5';
@@ -227,13 +241,13 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         }else if (isIos) {
             client = 'iOS';
         }
-
         sa.track('CommunityTopListClick',
           {
             source:'community',
             target: tg,
             community_id: comInfo.data.communityId + '',
             client:client,
+            community_type: vm.trackType,
         });
         if (f) {
             $modal.open({
@@ -272,7 +286,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         vm.inApp = obj.inApp;
         vm.shareWechat = shareWechat;
         vm.comInfo = obj;
-
+        vm.community_type = obj.community_type;
         init();
 
         function init() {
@@ -301,6 +315,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                         target:'moments',
                         community_id: vm.comInfo.communityId + '',
                         client:client,
+                        community_type: vm.community_type,
                     });
                     hybrid.open('weChatShareMoments');
                 }else {
@@ -310,6 +325,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                         target:'wechat',
                         community_id: vm.comInfo.communityId + '',
                         client:client,
+                        community_type: vm.community_type,
                     });
                     hybrid.open('weChatShareFriend');
                 }
@@ -335,6 +351,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         vm.inApp = obj.inApp;
         vm.shareWechat = shareWechatNoForm;
         vm.comInfo = obj;
+        vm.community_type = obj.community_type;
 
         init();
 
@@ -343,6 +360,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                     source: 'community',
                     community_id: vm.comInfo.communityId + '',
                     page: 'community_share',
+                    community_type: vm.community_type,
                 });
         }
 
@@ -369,6 +387,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                         target:'moments',
                         community_id: vm.comInfo.communityId + '',
                         client:client,
+                        community_type: vm.community_type,
                     });
                     hybrid.open('weChatShareMoments');
                 }else {
@@ -378,6 +397,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                         target:'wechat',
                         community_id: vm.comInfo.communityId + '',
                         client:client,
+                        community_type: vm.community_type,
                     });
                     hybrid.open('weChatShareFriend');
                 }
@@ -412,6 +432,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             community_id: $stateParams.id + '',
             company_id: ccid,
             client: client,
+            community_type: vm.trackType,
         });
 
         if (ccid) {

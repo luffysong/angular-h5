@@ -39,6 +39,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
           {
             source: vm.trackSource,
             page: 'community_top_list',
+            community_type: vm.trackTarget,
         });
     }
 
@@ -70,6 +71,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             source: vm.trackSource,
             target: vm.trackTarget,
             client: client,
+            community_type: vm.trackTarget,
         });
         vm.communityType = type;
         $state.go('.', { communityType: vm.communityType });
@@ -213,11 +215,13 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             target: 'community',
             community_id: id + '',
             client: client,
+            community_type: vm.trackTarget,
         });
 
         $state.go('bangdan.combddetail', {
             id: id,
             rank: rank,
+            communityType: vm.communityType
         });
     }
 
@@ -269,6 +273,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             source: vm.trackSource,
             target: 'join_community_top_list',
             client: client,
+            community_type: vm.trackTarget,
         });
         window.location.href = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
     }
@@ -375,12 +380,13 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         }else if (isIos) {
             client = 'iOS';
         }
-
+        getTrackParams(vm.communityType);
         sa.track('InvestorTopListClick',
           {
             source: 'investor_top_list',
             target: 'share',
             client: client,
+            community_type: vm.trackTarget,
         });
     }
 

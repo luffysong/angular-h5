@@ -13,6 +13,7 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
     vm.inApp = true;
     vm.downloadApp = downloadApp;
     vm.type = $stateParams.type;
+    vm.communityType = $stateParams.communityType;
     init();
 
     function init() {
@@ -30,6 +31,19 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
         $('.J_commonHeaderWrapper').remove();
         getSingleComInfo(vm.id);
         getQ();
+        getCommunityType(vm.communityType);
+    }
+
+    function getCommunityType(type){
+        if(type == 1){
+            vm.trackType = 'famous_enterprise';
+        }else if(type == 2){
+            vm.trackType = 'top_school';
+        }else if(type == 3){
+            vm.trackType = 'finance_advisor';
+        }else if(type == 4){
+            vm.trackType = 'incubator';
+        }
     }
 
     function initWeixin(name, count, q, rank, logo, type) {
@@ -60,16 +74,15 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
         }else if (isIos) {
             client = 'iOS';
         }
-
         sa.track('CommunityTopListClick',
           {
             source:'community_share_page',
             target:'community_top_list',
             community_id: $stateParams.id + '',
             client:client,
+            community_type: vm.trackTarget,
         });
-        $state.go('bangdan.combd', {
-        });
+        $state.go('bangdan.combd', {});
     }
 
     function bangdanComDetail(id, rank) {
@@ -94,12 +107,14 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
             target:'community',
             community_id: id + '',
             client:client,
+            community_type: vm.trackTarget,
         });
 
         //放开访问详情
         $state.go('bangdan.combddetail', {
             id: id,
             rank: rank,
+            communityType: vm.communityType,
         });
     }
 
@@ -226,6 +241,7 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
             target:'share',
             community_id: $stateParams.id + '',
             client:client,
+            community_type: vm.trackTarget,
         });
     }
 

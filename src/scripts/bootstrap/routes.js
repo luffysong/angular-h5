@@ -478,7 +478,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.combddetail', {
-        url: '/combddetail?{id}&{rank}',
+        url: '/combddetail?{id}&{rank}&{communityType}',
         controllerAs: 'vm',
         controller: 'BangdanComDetailController',
         templateUrl: 'templates/bangdan/bdcomdetail.html',
@@ -488,7 +488,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.comshare', {
-        url: '/comshare?{id}&{rank}&{type}',
+        url: '/comshare?{id}&{rank}&{type}&{communityType}',
         controllerAs: 'vm',
         controller: 'BangdanComShareController',
         templateUrl: 'templates/bangdan/comshare.html',
