@@ -61,11 +61,11 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
             client = 'iOS';
         }
 
-        sa.track('OrgTopListClick',
+        sa.track('CommunityTopListClick',
           {
-            source:'share_page',
-            target:'org_top_list',
-            org_id: $stateParams.id + '',
+            source:'community_share_page',
+            target:'community_top_list',
+            community_id: $stateParams.id + '',
             client:client,
         });
         $state.go('bangdan.combd', {
@@ -88,11 +88,11 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
         //         page: 'organization',
         //     });
 
-        sa.track('OrgTopListClick',
+        sa.track('CommunityTopListClick',
           {
-            source:'share_page',
-            target:'organization',
-            org_id: id + '',
+            source:'community_share_page',
+            target:'community',
+            community_id: id + '',
             client:client,
         });
 
@@ -220,11 +220,11 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
             client = 'iOS';
         }
 
-        sa.track('OrgTopListClick',
+        sa.track('CommunityTopListClick',
           {
-            source:'share_page',
+            source:'community_share_page',
             target:'share',
-            org_id: $stateParams.id + '',
+            community_id: $stateParams.id + '',
             client:client,
         });
     }

@@ -212,7 +212,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         var item = comInfo.data;
         item.currQuarter = vm.currQuarter;
         item.inApp = vm.inApp;
-        var tg = 'join_investor_company';
+        var tg = 'join_community_company';
         if (f) {
             item.f = f;tg = 'support';
         }else {
@@ -228,11 +228,11 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             client = 'iOS';
         }
 
-        sa.track('InvestorTopListClick',
+        sa.track('CommunityTopListClick',
           {
-            source:'investor',
+            source:'community',
             target: tg,
-            investor_id: comInfo.data.investorId + '',
+            community_id: comInfo.data.communityId + '',
             client:client,
         });
         if (f) {
@@ -295,18 +295,18 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             forwardCount();
             if (hybrid.isInApp) {
                 if (p === 'f') {
-                    sa.track('InvestorTopListClick',
+                    sa.track('CommunityTopListClick',
                       {
-                        source:'investor_share',
+                        source:'community_share',
                         target:'moments',
                         community_id: vm.comInfo.communityId + '',
                         client:client,
                     });
                     hybrid.open('weChatShareMoments');
                 }else {
-                    sa.track('InvestorTopListClick',
+                    sa.track('CommunityTopListClick',
                       {
-                        source:'investor_share',
+                        source:'community_share',
                         target:'wechat',
                         community_id: vm.comInfo.communityId + '',
                         client:client,
@@ -340,9 +340,9 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
 
         function init() {
             sa.track('ViewPage', {
-                    source: 'investor',
+                    source: 'community',
                     community_id: vm.comInfo.communityId + '',
-                    page: 'investor_share',
+                    page: 'community_share',
                 });
         }
 
@@ -363,18 +363,18 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             forwardCount();
             if (hybrid.isInApp) {
                 if (p === 'f') {
-                    sa.track('InvestorTopListClick',
+                    sa.track('CommunityTopListClick',
                       {
-                        source:'investor_share',
+                        source:'community_share',
                         target:'moments',
                         community_id: vm.comInfo.communityId + '',
                         client:client,
                     });
                     hybrid.open('weChatShareMoments');
                 }else {
-                    sa.track('InvestorTopListClick',
+                    sa.track('CommunityTopListClick',
                       {
-                        source:'investor_share',
+                        source:'community_share',
                         target:'wechat',
                         community_id: vm.comInfo.communityId + '',
                         client:client,
@@ -405,9 +405,9 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             client = 'iOS';
         }
 
-        sa.track('InvestorTopListClick',
+        sa.track('CommunityTopListClick',
           {
-            source:'investor',
+            source:'community',
             target:'company',
             community_id: $stateParams.id + '',
             company_id: ccid,

@@ -34,6 +34,28 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         addAnimate();
         vm.type = getTypeText(vm.communityType);
         removeHeader();
+        getTrackParams(vm.communityType);
+        sa.track('ViewPage',
+          {
+            source: vm.trackSource,
+            page: 'community_top_list',
+        });
+    }
+
+    function getTrackParams(type){
+        if(type == 1){
+            vm.trackSource = 'community_famous_enterprise';
+            vm.trackTarget = 'famous_enterprise';
+        }else if(type == 2){
+            vm.trackSource = 'community_top_school';
+            vm.trackTarget = 'top_school';
+        }else if(type == 3){
+            vm.trackSource = 'community_finance_advisor';
+            vm.trackTarget = 'finance_advisor';
+        }else if(type == 4){
+            vm.trackSource = 'community_incubator';
+            vm.trackTarget = 'incubator';
+        }
     }
 
     function removeHeader() {
@@ -41,6 +63,14 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     }
 
     function changeTab(type){
+        var client = getClient();
+        getTrackParams(type);
+        sa.track('CommunityTopListClick',
+          {
+            source: vm.trackSource,
+            target: vm.trackTarget,
+            client: client,
+        });
         vm.communityType = type;
         $state.go('.', { communityType: vm.communityType });
     }
@@ -158,13 +188,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             }).catch(fail);
     }
 
-    function goComDetail(id, rank) {
-        var val = angular.element(window).scrollTop();
-        window.sessionStorage.removeItem('com-position');
-        window.sessionStorage.removeItem('com-id');
-        window.sessionStorage.setItem('com-position', val);
-        window.sessionStorage.setItem('com-id', id);
-
+    function getClient(){
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
         var client = 'H5';
@@ -173,12 +197,21 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         }else if (isIos) {
             client = 'iOS';
         }
-
-        sa.track('InvestorTopListClick',
+        return client;
+    }
+    function goComDetail(id, rank) {
+        var val = angular.element(window).scrollTop();
+        window.sessionStorage.removeItem('com-position');
+        window.sessionStorage.removeItem('com-id');
+        window.sessionStorage.setItem('com-position', val);
+        window.sessionStorage.setItem('com-id', id);
+        var client = getClient();
+        getTrackParams(vm.communityType);
+        sa.track('CommunityTopListClick',
           {
-            source: 'investor_top_list',
-            target: 'investor',
-            investor_id: id + '',
+            source: vm.trackSource,
+            target: 'community',
+            community_id: id + '',
             client: client,
         });
 
@@ -229,20 +262,13 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     };
 
     function joinCom() {
-        var isAndroid = !!navigator.userAgent.match(/android/ig);
-        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
-        var client = 'H5';
-        if (isAndroid) {
-            client = 'Android';
-        }else if (isIos) {
-            client = 'iOS';
-        }
-
-        sa.track('InvestorTopListClick',
+        var client = getClient();
+        getTrackParams(vm.communityType);
+        sa.track('CommunityTopListClick',
           {
-            source:'investor_top_list',
-            target:'join_investor_top_list',
-            client:client,
+            source: vm.trackSource,
+            target: 'join_community_top_list',
+            client: client,
         });
         window.location.href = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
     }

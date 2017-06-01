@@ -19,11 +19,11 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
             initLinkme();
             vm.inApp = false;
         }
-        sa.track('ViewPage', {
-                source: 'investor_share_page',
-                investor_id: $stateParams.id + '',
-                page: 'investor_share_page',
-            });
+        // sa.track('ViewPage', {
+        //         source: 'investor_share_page',
+        //         investor_id: $stateParams.id + '',
+        //         page: 'investor_share_page',
+        //     });
         $('.J_commonHeaderWrapper').remove();
         getSingleInvestorInfo(vm.id);
         getQ();

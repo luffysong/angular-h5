@@ -180,6 +180,18 @@ angular.module('defaultApp')
                     visitingPage = 'investor_share_page';
                     track = true;
                     _investor = true;
+                }else if (name === 'bangdan.combd') {
+                    visitingPage = 'community_top_list';
+                    track = true;
+                    _com = true;
+                }else if (name === 'bangdan.combddetail') {
+                    visitingPage = 'community';
+                    track = true;
+                    _com = true;
+                }else if (name === 'bangdan.comshare') {
+                    visitingPage = 'community_share_page';
+                    track = true;
+                    _com = true;
                 }
 
                 if (type === 'name') {
@@ -196,7 +208,10 @@ angular.module('defaultApp')
                     || name === 'bangdan.orgbd'
                     || name === 'bangdan.investorbddetail'
                     || name === 'bangdan.investorbd'
-                    || name === 'bangdan.investorshare') {
+                    || name === 'bangdan.investorshare'
+                    || name === 'bangdan.combddetail'
+                    || name === 'bangdan.combd'
+                    || name === 'bangdan.comshare') {
                     _orgid = toParams.id;
                 }
 
@@ -206,7 +221,10 @@ angular.module('defaultApp')
                 || (location + '').indexOf('bangdan/orgbddetail')
                 || (location + '').indexOf('bangdan/investorbddetail')
                 || (location + '').indexOf('bangdan/investorbd')
-                || (location + '').indexOf('bangdan/investorshare')) {
+                || (location + '').indexOf('bangdan/investorshare')
+                || (location + '').indexOf('bangdan/combddetail')
+                || (location + '').indexOf('bangdan/combd')
+                || (location + '').indexOf('bangdan/comshare')) {
                         _orgid = toParams.id;
                     }
                 }
@@ -224,7 +242,7 @@ angular.module('defaultApp')
             } else if (_investor) {
                 params.investor_id = getOrgId(from.name, 'investor');
             } else if (_com) {
-                params.com_id = getOrgId(from.name, 'com');
+                params.community_id = getOrgId(from.name, 'com');
             }
 
             getPage(to.name) && sa.track('ViewPage', params);
