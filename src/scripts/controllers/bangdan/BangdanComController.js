@@ -279,7 +279,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             client: client,
             community_type: vm.trackTarget,
         });
-        window.location.href = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
+        window.location.href = 'http://bangdanshouji.mikecrm.com/JqRkih4';
     }
 
     function initLinkme() {
