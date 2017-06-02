@@ -1,3 +1,14 @@
+<a name="1.37.6"></a>
+## [1.37.6](f2e/kr-rong-h5/compare/v1.37.5...v1.37.6) (2017-06-02)
+
+
+### Bug Fixes
+
+* 替换详情页麦客表单地址 ([ea033d8](f2e/kr-rong-h5/commits/ea033d8))
+* 样式调整 ([638afee](f2e/kr-rong-h5/commits/638afee))
+
+
+
 <a name="1.37.5"></a>
 ## [1.37.5](f2e/kr-rong-h5/compare/v1.37.4...v1.37.5) (2017-06-02)
 
