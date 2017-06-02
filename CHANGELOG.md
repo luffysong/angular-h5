@@ -1,3 +1,13 @@
+<a name="1.37.5"></a>
+## [1.37.5](f2e/kr-rong-h5/compare/v1.37.4...v1.37.5) (2017-06-02)
+
+
+### Bug Fixes
+
+* 样式调整 ([54027ff](f2e/kr-rong-h5/commits/54027ff))
+
+
+
 <a name="1.37.4"></a>
 ## [1.37.4](f2e/kr-rong-h5/compare/v1.37.3...v1.37.4) (2017-06-02)
 
