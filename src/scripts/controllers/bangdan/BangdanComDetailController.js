@@ -331,7 +331,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                 }
 
                 $timeout(function () {
-                    window.location.href = vm.bdUrl;
+                    window.location.href = 'http://bangdanshouji.mikecrm.com/vKzwzTf';
                 }, 1000);
             }
         }
@@ -523,7 +523,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                         // 用户确认分享后执行的回调函数
                         //shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = vm.bdUrl + '';
+                            window.location.href = 'http://bangdanshouji.mikecrm.com/vKzwzTf' + '';
                         }
                     },
 
@@ -531,7 +531,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                         // 用户取消分享后执行的回调函数
                         //shareSA();
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = vm.bdUrl + '';
+                            window.location.href = 'http://bangdanshouji.mikecrm.com/vKzwzTf' + '';
                         }
                     }
                 });
@@ -546,14 +546,14 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                     success: function () {
                         // 用户确认分享后执行的回调函数
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = vm.bdUrl + '';
+                            window.location.href = 'http://bangdanshouji.mikecrm.com/vKzwzTf' + '';
                         }
                     },
 
                     cancel: function () {
                         // 用户取消分享后执行的回调函数
                         if (!hybrid.isInApp && vm.h5Href) {
-                            window.location.href = vm.bdUrl + '';
+                            window.location.href = 'http://bangdanshouji.mikecrm.com/vKzwzTf' + '';
                         }
                     }
                 });
