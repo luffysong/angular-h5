@@ -28,10 +28,6 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     function init() {
         vm.comInfo = comInfo.data;
         vm.comInfo.communityName = matchType(vm.comInfo.communityTypeEnum);
-        if (!hybrid.isInApp) {
-            initLinkme();
-            vm.inApp = false;
-        }
 
         getProList();
         getQ();
@@ -44,6 +40,10 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         var shareUrl =
         'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '&communityType=' + $stateParams.communityType;
         initWeixin(vm.comInfo.name, vm.comInfo.projectCount, vm.currQuarter, vm.comInfo.rank, shareUrl, vm.comInfo.logo, vm.comInfo.communityName);
+        if (!hybrid.isInApp) {
+            initLinkme();
+            vm.inApp = false;
+        }
     }
 
     function getCommunityType(type){
