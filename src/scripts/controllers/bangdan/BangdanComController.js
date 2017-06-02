@@ -83,15 +83,19 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             var scrollTop = $(this).scrollTop();
             var scrollHeight = $(document).height();
             if ((windowHeight +  scrollTop) === scrollHeight) {
-                var queryResult = $document[0].getElementById('div-open-app');
-                $(queryResult).css('height', '80px');
-                if (!vm.isBottom) {
-                    vm.isBottom = true;
-                }
+                $timeout(function () {
+                    if (!vm.isBottom) {
+                        vm.isBottom = true;
+                    }
+                    var queryResult = $document[0].getElementById('div-open-app');
+                    $(queryResult).css('height', '80px');
+                },10);
             } else {
-                if (vm.isBottom) {
-                    vm.isBottom = false;
-                }
+                $timeout(function () {
+                    if (vm.isBottom) {
+                        vm.isBottom = false;
+                    }
+                },10);
             }
         });
     }
@@ -173,9 +177,9 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
                     initWeixin(vm.currQuarter, vm.total, vm.type, vm.totalCount);
                 }
 
-                if (response.data.totalPages) {
-                    vm.page = response.data.page || 0;
-                    if (response.data.totalPages !== vm.page && response.data.data.length > 0) {
+                if (response.data.pageData.totalPages) {
+                    vm.page = response.data.pageData.page || 0;
+                    if (response.data.pageData.totalPages !== vm.page && response.data.pageData.data.length > 0) {
                         vm.busy = false;
                     } else {
                         vm.finish = true;
