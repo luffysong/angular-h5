@@ -247,9 +247,9 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
                         vm.total = response.data.communityCount.currentTypeCount;
                         initWeixin(vm.currQuarter, vm.total, vm.type, vm.totalCount);
                     }
-                    if (response.data.totalPages) {
-                        vm.page = response.data.page || 0;
-                        if (response.data.totalPages !== vm.page && response.data.data.length > 0) {
+                    if (response.data.pageData.totalPages) {
+                        vm.page = response.data.pageData.page || 0;
+                        if (response.data.pageData.totalPages !== vm.page && response.data.pageData.data.length > 0) {
                             vm.busy = false;
                         } else {
                             vm.finish = true;
