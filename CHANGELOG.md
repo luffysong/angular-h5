@@ -1,3 +1,13 @@
+<a name="1.37.2"></a>
+## [1.37.2](f2e/kr-rong-h5/compare/v1.37.1...v1.37.2) (2017-06-02)
+
+
+### Bug Fixes
+
+* 修复没有更多数据提示文案显示问题 ([abfbbd0](f2e/kr-rong-h5/commits/abfbbd0))
+
+
+
 <a name="1.37.1"></a>
 ## [1.37.1](f2e/kr-rong-h5/compare/v1.37.0...v1.37.1) (2017-06-02)
 
