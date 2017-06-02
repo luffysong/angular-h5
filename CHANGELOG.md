@@ -1,3 +1,13 @@
+<a name="1.37.3"></a>
+## [1.37.3](f2e/kr-rong-h5/compare/v1.37.2...v1.37.3) (2017-06-02)
+
+
+### Bug Fixes
+
+* 修复滚动加载问题 ([0d8b9dd](f2e/kr-rong-h5/commits/0d8b9dd))
+
+
+
 <a name="1.37.2"></a>
 ## [1.37.2](f2e/kr-rong-h5/compare/v1.37.1...v1.37.2) (2017-06-02)
 
