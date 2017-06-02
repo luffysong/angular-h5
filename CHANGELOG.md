@@ -1,3 +1,13 @@
+<a name="1.37.1"></a>
+## [1.37.1](f2e/kr-rong-h5/compare/v1.37.0...v1.37.1) (2017-06-02)
+
+
+### Bug Fixes
+
+* 调整分页条数 ([8cb9bea](f2e/kr-rong-h5/commits/8cb9bea))
+
+
+
 <a name="1.37.0"></a>
 # [1.37.0](f2e/kr-rong-h5/compare/v1.36.7...v1.37.0) (2017-06-02)
 
