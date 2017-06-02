@@ -1,3 +1,13 @@
+<a name="1.37.7"></a>
+## [1.37.7](f2e/kr-rong-h5/compare/v1.37.6...v1.37.7) (2017-06-02)
+
+
+### Bug Fixes
+
+* 调试linkme ([260958a](f2e/kr-rong-h5/commits/260958a))
+
+
+
 <a name="1.37.6"></a>
 ## [1.37.6](f2e/kr-rong-h5/compare/v1.37.5...v1.37.6) (2017-06-02)
 
