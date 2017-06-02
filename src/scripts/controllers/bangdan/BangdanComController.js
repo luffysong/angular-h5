@@ -159,7 +159,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             pageSize: 10,
             communityType: vm.communityType
         };
-        if (!vm.inApp) {request.pageSize = 20; };
+        if (!vm.inApp) {request.pageSize = 10; };
 
         BangDanService.getComRank(request)
             .then(function (response) {
