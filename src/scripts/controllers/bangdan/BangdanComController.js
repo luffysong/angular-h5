@@ -64,6 +64,8 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     }
 
     function changeTab(type){
+        window.sessionStorage.removeItem('com-position');
+        window.sessionStorage.removeItem('com-id');
         var client = getClient();
         getTrackParams(type);
         sa.track('CommunityTopListClick',
@@ -205,6 +207,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         }
         return client;
     }
+
     function goComDetail(id, rank) {
         var val = angular.element(window).scrollTop();
         window.sessionStorage.removeItem('com-position');
@@ -396,11 +399,10 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
 
     function someArray() {
         var r = vm.result.some(function (data, index, array) {
-            return data.orgId == vm.storageId;
+            return data.communityId == vm.storageId;
         });
-
         if (!r) {
-            getOrgRank(someArray);
+            getComRank(someArray);
         } else {
             $document.scrollTopAnimated(parseInt(vm.storagePosition)).then(function () {
                 console && console.log('You just scrolled to the position!');
