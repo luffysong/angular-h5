@@ -1,3 +1,13 @@
+<a name="1.37.8"></a>
+## [1.37.8](f2e/kr-rong-h5/compare/v1.37.7...v1.37.8) (2017-06-05)
+
+
+### Bug Fixes
+
+* 修复判断是否在app内状态问题 ([29d3c37](f2e/kr-rong-h5/commits/29d3c37))
+
+
+
 <a name="1.37.7"></a>
 ## [1.37.7](f2e/kr-rong-h5/compare/v1.37.6...v1.37.7) (2017-06-02)
 
