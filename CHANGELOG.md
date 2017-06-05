@@ -1,3 +1,13 @@
+<a name="1.37.11"></a>
+## [1.37.11](f2e/kr-rong-h5/compare/v1.37.10...v1.37.11) (2017-06-05)
+
+
+### Bug Fixes
+
+* 解决app中无法滚动定位问题 ([c2e58bf](f2e/kr-rong-h5/commits/c2e58bf))
+
+
+
 <a name="1.37.10"></a>
 ## [1.37.10](f2e/kr-rong-h5/compare/v1.37.9...v1.37.10) (2017-06-05)
 
