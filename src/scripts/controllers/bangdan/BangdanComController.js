@@ -398,7 +398,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     }
 
     function someArray() {
-        var r = vm.result.some(function (data, index, array) {
+        var r = vm.result.data.some(function (data, index, array) {
             return data.communityId == vm.storageId;
         });
         if (!r) {
@@ -413,7 +413,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     function positionItem() {
         var value = window.sessionStorage.getItem('com-position');
         var id = window.sessionStorage.getItem('com-id');
-        if (vm.result && value && id && vm.inApp) {
+        if (vm.result.data && value && id && vm.inApp) {
             vm.storageId = id;
             vm.storagePosition = value;
             someArray();
