@@ -17,31 +17,7 @@
       <ul class="orgbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
         <li class="org-item" ng-repeat="item in vm.list track by $index"
          ng-click="vm.goOrgDetail(item.orgId, $index + 1)">
-          <div class="org-number">
-            <img src="/styles/images/bangdan/top1.png" ng-if="$index === 0">
-            <img src="/styles/images/bangdan/top2.png" ng-if="$index === 1">
-            <img src="/styles/images/bangdan/top3.png" ng-if="$index === 2">
-
-            <span ng-if="$index > 2" class="top-num">{{$index + 1}}</span>
-            <div class="up-arrow" ng-if="item.rise > 0" ng-class="{true:'top-special',false:'top-nromal'}[$index <= 2]"></div>
-            <div class="down-arrow" ng-if="item.rise < 0" ng-class="{true:'top-special',false:'top-nromal'}[$index <= 2]"></div>
-            <div class="number-change" ng-if="item.rise != 0" ng-class="{true:'top-special-num',false:'top-nromal-num'}[$index <= 2]">{{abs(item.rise)}}</div>
-
-          </div>
-          <div class="org-info">
-            <div class="org-logo top1-logo" ng-if="$index === 0" style="background-image: url({{item.logo}})"></div>
-            <div class="org-logo top2-logo" ng-if="$index === 1" style="background-image: url({{item.logo}})"></div>
-            <div class="org-logo top3-logo" ng-if="$index === 2" style="background-image: url({{item.logo}})"></div>
-            <div class="org-logo" ng-if="$index > 2" style="background-image: url({{item.logo}})"></div>
-            <div class="org-name">
-              <div ng-class="{top3Color: $index < 3}">{{item.name}}</div>
-              <div>浏览量 <span>{{item.accessCount}}</span></div>
-            </div>
-            <div class="interview-num">
-              <div ng-class="{top3Color: $index < 3}">{{item.interviewCount}}</div>
-              <div>约谈量</div>
-            </div>
-          </div>
+            <oict-item item="item" key = '$index'></oict-item>
       </li>
     </ul>
     <footer ng-if="vm.busy && !vm.finish &&  vm.page">
