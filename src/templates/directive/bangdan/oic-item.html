@@ -18,8 +18,9 @@
             <div class="logo normal-logo" ng-if="key > 2" style="background-image: url({{item.logo}})"></div>
         </div>
         <div class="oic-name">
-              <div ng-class="{true:'oic-top3Color',false:''}[key < 3]">{{item.name}}</div>
-              <div class="oic-count">浏览量 <span>{{item.accessCount}}</span></div>
+              <div ng-class="{true:'oic-top3Color',false:''}[key < 3]" class="oic-title">{{item.name}}</div>
+              <div class="oic-count" ng-if="symbol === 'org'">浏览量 <span>{{item.accessCount}}</span></div>
+              <div class="oic-count" ng-if="symbol === 'com'">共 <span>{{item.projectCount}}</span> 个项目</div>
         </div>
         <div class="oic-num">
               <div ng-class="{true:'oic-top3Color',false:''}[key < 3]">{{item.interviewCount}}</div>
