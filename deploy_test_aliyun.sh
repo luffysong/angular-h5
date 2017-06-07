@@ -28,6 +28,8 @@ elif [ $2 = 'test11' ]; then
     target=test11;
 elif [ $2 = 'test12' ]; then
     target=test12;
+elif [ $2 = 'test19' ]; then
+    target=test19;
 fi
 
 gulp build:$target
