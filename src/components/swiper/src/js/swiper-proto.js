@@ -3,10 +3,10 @@
 ====================================================*/
 Swiper.prototype = {
     isSafari: (function () {
-        var ua = window.navigator.userAgent.toLowerCase();
+        var ua = navigator.userAgent.toLowerCase();
         return (ua.indexOf('safari') >= 0 && ua.indexOf('chrome') < 0 && ua.indexOf('android') < 0);
     })(),
-    isUiWebView: /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(window.navigator.userAgent),
+    isUiWebView: /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(navigator.userAgent),
     isArray: function (arr) {
         return Object.prototype.toString.apply(arr) === '[object Array]';
     },
@@ -16,26 +16,18 @@ Swiper.prototype = {
     browser: {
         ie: window.navigator.pointerEnabled || window.navigator.msPointerEnabled,
         ieTouch: (window.navigator.msPointerEnabled && window.navigator.msMaxTouchPoints > 1) || (window.navigator.pointerEnabled && window.navigator.maxTouchPoints > 1),
-        lteIE9: (function() {
-            // create temporary DIV
-            var div = document.createElement('div');
-            // add content to tmp DIV which is wrapped into the IE HTML conditional statement
-            div.innerHTML = '<!--[if lte IE 9]><i></i><![endif]-->';
-            // return true / false value based on what will browser render
-            return div.getElementsByTagName('i').length === 1;
-        })()
     },
     /*==================================================
     Devices
     ====================================================*/
     device: (function () {
-        var ua = window.navigator.userAgent;
+        var ua = navigator.userAgent;
         var android = ua.match(/(Android);?[\s\/]+([\d.]+)?/);
         var ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
         var ipod = ua.match(/(iPod)(.*OS\s([\d_]+))?/);
-        var iphone = !ipad && ua.match(/(iPhone\sOS|iOS)\s([\d_]+)/);
+        var iphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
         return {
-            ios: ipad || iphone || ipod,
+            ios: ipad || iphone || ipad,
             android: android
         };
     })(),
@@ -62,23 +54,6 @@ Swiper.prototype = {
 
         observer: (function () {
             return ('MutationObserver' in window || 'WebkitMutationObserver' in window);
-        })(),
-
-        passiveListener: (function () {
-            var supportsPassive = false;
-            try {
-                var opts = Object.defineProperty({}, 'passive', {
-                    get: function() {
-                        supportsPassive = true;
-                    }
-                });
-                window.addEventListener('testPassiveListener', null, opts);
-            } catch (e) {}
-            return supportsPassive;
-        })(),
-
-        gestures: (function () {
-            return 'ongesturestart' in window;
         })()
     },
     /*==================================================

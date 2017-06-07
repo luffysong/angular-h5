@@ -28,6 +28,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
             return;
         }
         vm.busy = true;
+        console.log(22);
         FindService.getIndustryReportList(vm.sendData).then(function (data) {
             var responseObj = data.data;
             loading.hide('industryReportListLoading');
@@ -45,13 +46,12 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
             }
             vm.sendData.page = responseObj.page + 1;
             vm.busy = false;
-            // window.setTimeout(function() {
-            //     var ym=document.getElementById('block-part-con').innerHTML;//ss是要高亮的区域，div的id值
-            //     var newWord = "<strong style='color:#5A7CB2;'>"+"饿饿饿" +"</strong>";
-            //     document.getElementById('block-part-con').innerHTML=ym.replace(/电商/g, newWord);
-            // }, 0);
-            
-
+            window.setTimeout(function() {
+                if(vm.keyword.length > 0) {  
+                    var body = $('#block-part-con');  
+                    body.highlight(vm.keyword);  
+                } 
+            }, 0);
         }).catch(function (err) {
             loading.hide('industryReportListLoading');
             if (err && err.data) {
@@ -88,13 +88,17 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
         }
     }
     function doSearch(e) {
-        e.preventDefault();
+        // e.preventDefault();
+        vm.busy = false;
+        vm.dataItemLength = '';
+        vm.endLoading = true;
         vm.reportList = [];
         vm.sendData = {
             keyword: vm.keyword,
             pageSize: 20,
             page: 1
         };
+        console.log(1);
         vm.loadMore();
     };
 }
