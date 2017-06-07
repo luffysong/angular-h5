@@ -62,11 +62,13 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     function reportLink(cell, event) {
         event.stopPropagation();
         if (cell.attachLink) {
-            path = '/openEncryptionLink/' + encodeURIComponent(cell.attachLink);
-            openNativePage(path);
+            window.location.href = cell.attachLink;
+            // path = '/openEncryptionLink/' + encodeURIComponent(cell.attachLink);
+            // openNativePage(path);
         } else {
-            path = '/openEncryptionLink/' + encodeURIComponent(cell.link);
-            openNativePage(path);
+            window.location.href = cell.link;
+            // path = '/openEncryptionLink/' + encodeURIComponent(cell.link);
+            // openNativePage(path);
         }
         // a href="{{cell.attachLink}}" target="_blank" 
     }
