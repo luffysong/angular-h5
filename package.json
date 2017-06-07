@@ -1,6 +1,6 @@
 {
   "name": "Kr",
-  "version": "1.37.11",
+  "version": "1.38.0",
   "private": true,
   "scripts": {
     "start": "gulp"
