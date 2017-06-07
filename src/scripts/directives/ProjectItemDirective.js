@@ -10,12 +10,15 @@ angular.module('defaultApp.directive').directive('projectItem',
             restrict: 'E',
             controllerAs: 'vm',
             scope: {
-                isInvestor:'=',
+                isinvestor:'=isinvestor',
                 item: '=',
                 key:'=',
             },
-            templateUrl: 'templates/directive/bangdan/item.html',
+            templateUrl: 'templates/directive/bangdan/pro-item.html',
             link: function (scope, element, attrs) {
+                scope.$watch('isinvestor', function (newValue, oldValue) {
+                    console.log(newValue, oldValue);
+                });
             }
         };
     }

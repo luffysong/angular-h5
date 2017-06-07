@@ -105,7 +105,7 @@
         <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='2'>
             <li ng-if="vm.prolist" ng-repeat="item in vm.prolist track  by $index"
                 ng-click="vm.goProDetail(item.ccid, $event)" >
-                <project-item item="item" key="$index" investRole='vm.investRole'></project-item>
+                <project-item item="item" key="$index" isinvestor='vm.investRole'></project-item>
             </li>
         </ul>
         <div class="more" ng-if="vm.busy && !vm.finish &&  vm.page">

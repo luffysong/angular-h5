@@ -1,0 +1,73 @@
+<div class="project-item">
+    <div class="pi-left">
+        <div class="pi-metal " ng-if="key === 0" >
+            <img src="//krplus-pic.b0.upaiyun.com/avatar/201706/06083028/xqqlmp1u9knyf8v3.png" />
+        </div>
+
+        <div class="pi-metal " ng-if="key === 1">
+            <img src="//krplus-pic.b0.upaiyun.com/avatar/201706/06083059/brz33qbxgvg3tvsl.png" />
+        </div>
+
+        <div class="pi-metal " ng-if="key === 2">
+            <img src="//krplus-pic.b0.upaiyun.com/avatar/201706/06083118/dfsp9tlwfmeflszz.png" />
+        </div>
+        <div class="pi-metal " ng-if="key > 2">
+            <span>{{key + 1}}</span>
+        </div>
+    </div>
+    <div class="pi-right">
+        <div class="pi-logo">
+            <div class="logo-outer pi-gold-border" ng-if=" key === 0"
+                style="background-image: url({{item.logo}})">
+                <div class="funding" ng-if="item.isUnderFinancing && isinvestor">
+                    正在融资
+                </div>
+            </div>
+            <div class="logo-outer pi-silver-border" ng-if="key === 1"
+                style="background-image: url({{item.logo}})" >
+                <div class="funding" ng-if="item.isUnderFinancing && isinvestor">
+                    正在融资
+                </div>
+            </div>
+
+            <div class="logo-outer pi-copper-border" ng-if="key === 2"
+            style="background-image: url({{item.logo}})" >
+                <div class="funding" ng-if="item.isUnderFinancing && isinvestor">
+                    正在融资
+                </div>
+            </div>
+
+            <div class="logo-outer pi-normal-border" ng-if="key > 2"
+                style="background-image: url({{item.logo}})" >
+                <img ng-style="{'background-color':(item.ccid | demoDefaultColor)}" ng-if="!item.logo">
+                <span class="logo-name" ng-if="!item.logo && item.name"
+                ng-style="{'background-color':(item.ccid | demoDefaultColor)}">{{item.name | demoNameDufault}}</span>
+                <div class="funding" ng-if="item.isUnderFinancing">
+                    正在融资
+                </div>
+            </div>
+
+        </div>
+        <div class="pi-txt">
+            <div class="pi-title" ng-class="{true:'pi-top3Color',false:''}[key < 3]">
+                {{item.name}}
+            </div>
+            <div class="pi-brief">
+                {{item.brief}}
+            </div>
+            <div class="pi-phase">
+                <span ng-if="item.phase">{{item.phase}}</span>
+                <span ng-if="item.phase && item.industry" class="pi-dot pi-dot-gray" ></span>
+                <span ng-if="item.industry">{{item.industry}}</span>
+            </div>
+        </div>
+        <div class="pi-sta-num">
+            <div class="num" ng-class="{true:'pi-top3Color',false:''}[key < 3]">
+                    {{item.interviewCount}}
+            </div>
+            <div class="txt">
+                    约谈量
+            </div>
+        </div>
+    </div>
+</div>

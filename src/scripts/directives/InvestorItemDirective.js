@@ -4,17 +4,21 @@
 
 var angular = require('angular');
 
-angular.module('defaultApp.directive').directive('oicItem',
+angular.module('defaultApp.directive').directive('investorItem',
     function ($timeout) {
         return {
             restrict: 'E',
             scope: {
                 item: '=',
                 key:'=',
+                symbol:'@symbol',
+                tempurl:'@tempurl',
             },
-            templateUrl: 'templates/directive/bangdan/oic-item.html',
+
             link: function (scope, element, attrs) {
-            }
+            },
+
+            templateUrl: 'templates/directive/bangdan/inv-item.html',
         };
     }
 );

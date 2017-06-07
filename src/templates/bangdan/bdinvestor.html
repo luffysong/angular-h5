@@ -12,37 +12,7 @@
         <section class="">
             <ul class="investorbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='2'>
                 <li class="investor-item" ng-repeat="item in vm.list track by $index" ng-click="vm.goInvestorDetail(item.investorId, $index + 1, $event)">
-                    <div class="investor-number">
-                        <img src="/styles/images/bangdan/top1.png" ng-if="$index === 0">
-                        <img src="/styles/images/bangdan/top2.png" ng-if="$index === 1">
-                        <img src="/styles/images/bangdan/top3.png" ng-if="$index === 2">
-                        <span ng-if="$index > 2" class="top-num">{{$index + 1}}</span>
-                        <div class="up-arrow" ng-if="item.rise > 0" ng-class="{true:'top-special',false:'top-nromal'}[$index <= 2]"></div>
-                        <div class="down-arrow" ng-if="item.rise < 0" ng-class="{true:'top-special',false:'top-nromal'}[$index <= 2]"></div>
-                        <div class="number-change" ng-if="item.rise != 0" ng-class="{true:'top-special-num',false:'top-nromal-num'}[$index <= 2]">{{abs(item.rise)}}</div>
-                    </div>
-                    <div class="investor-info">
-                        <div class="investor-logo top1-logo" ng-if="$index === 0" style="background-image: url({{item.logo}})"></div>
-                        <div class="investor-logo top2-logo" ng-if="$index === 1" style="background-image: url({{item.logo}})"></div>
-                        <div class="investor-logo top3-logo" ng-if="$index === 2" style="background-image: url({{item.logo}})"></div>
-                        <div class="investor-logo" ng-if="$index > 2" style="background-image: url({{item.logo}})"></div>
-                        <div class="investor-name">
-                            <div ng-class="{top3Color: $index < 3}">{{item.name}}</div>
-                            <div class="investor-position" ng-if="item.investorOrgTypeEnum !== 'PERSONAL_INVESTOR'">
-                                <span>{{item.orgName}}</span> · <span>{{item.cardPosition}}</span>
-                            </div>
-                            <div class="investor-position" ng-if="item.investorOrgTypeEnum === 'PERSONAL_INVESTOR'">
-                                <span>个人投资人</span>
-                            </div>
-                            <div class="hot-project">
-                                <span ng-repeat="p in item.hotProject">{{ p }}</span>
-                            </div>
-                        </div>
-                        <div class="interview-num">
-                            <div ng-class="{top3Color: $index < 3}">{{item.interviewCount}}</div>
-                            <div>约谈量</div>
-                        </div>
-                    </div>
+                    <investor-item item="item" key="$index" ></investor-item>
                 </li>
             </ul>
             <footer ng-if="vm.busy && !vm.finish &&  vm.page">
