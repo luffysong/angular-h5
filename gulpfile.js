@@ -680,6 +680,12 @@ gulp.task('remote:test12', function () {
     gulp.start('remote');
 });
 
+gulp.task('remote:test19', function () {
+    buildMode = 'test19';
+    apiHost = 'http://rongtest19.36kr.com';
+    gulp.start('remote');
+});
+
 //编译页头
 gulp.task('header', function () {
     var headers = {
@@ -695,6 +701,7 @@ gulp.task('header', function () {
         test10: '//huodong.36kr.com/common-module/common-header-test10/script.js',
         test11: '//huodong.36kr.com/common-module/common-header-test11/script.js',
         test12: '//huodong.36kr.com/common-module/common-header-test12/script.js',
+        test19: '//huodong.36kr.com/common-module/common-header-test2/script.js',
         prod: '//sta.36krcnd.com/common-module/common-header/script.js?t=' + (new Date() - 0),
     };
 

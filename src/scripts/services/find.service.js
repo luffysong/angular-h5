@@ -125,4 +125,9 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
     this.getNewsDetail = function (id) {
         return $http.get('/api/mobi-investor/daily-report-content?reportId=' + id);
     };
+
+    // 行业报告list
+    this.getIndustryReportList = function (request) {
+        return $http.get('/api/mobi-investor/company/finance-new/research-report?' + $.param(request));
+    }
 });

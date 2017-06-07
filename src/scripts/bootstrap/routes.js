@@ -190,6 +190,13 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controller: 'DailyNewsController',
         templateUrl: 'templates/find/dailyNewsList.html'
     });
+    //创投助手app---区块行业报告list
+    $stateProvider.state('find.industryReportList', {
+        url:'/industryReportList',
+        controllerAs: 'vm',
+        controller: 'IndustryReportListController',
+        templateUrl: 'templates/find/industryReportList.html'
+    });
 
     $stateProvider.state('find.newsDetail', {
         url:'/newsDetail/:id?ccid&investors&amount&phase',
