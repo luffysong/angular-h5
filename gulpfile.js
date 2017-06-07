@@ -560,6 +560,12 @@ gulp.task('build:test12', ['clean'], function () {
     gulp.start('build');
 });
 
+gulp.task('build:test19', ['clean'], function () {
+    buildMode = 'test19';
+    CDNPrefix = '/m';
+    gulp.start('build');
+});
+
 gulp.task('build:prod', ['clean'], function () {
     buildMode = 'prod';
     DEBUG = false;
