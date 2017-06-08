@@ -14,6 +14,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     vm.openNativePage = openNativePage;
     vm.doSearch = doSearch;
     vm.doCancel = doCancel;
+    vm.doSubmit = doSubmit;
     vm.keyword = '';
     vm.busy = false;
     vm.dataItemLength = '';
@@ -112,6 +113,11 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     function doCancel(e) {
         e.preventDefault();
         vm.keyword = '';
+        vm.doSearch(e);
+    }    
+    function doSubmit(e) {
+        e.preventDefault();
+        document.activeElement.blur();
         vm.doSearch(e);
     }
     function searchFocus(e) {
