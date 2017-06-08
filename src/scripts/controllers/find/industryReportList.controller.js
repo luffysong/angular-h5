@@ -78,7 +78,8 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     }
     function reportPdfLink(cell, event) {
         event.stopPropagation();
-        window.location.href = cell.attachLink;
+        window.open(cell.attachLink);
+        // window.location.href = cell.attachLink;
     }
     function openNativePage(path) {
         console.log(path);
