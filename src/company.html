@@ -113,8 +113,16 @@
                         $('#brief').html(data.brief);
                         $('#tags').html(data.tags);
                         $('#hot').html(data.advantage);
+                        $('#project-ccid').val(data.ccid);
                         if(!data.advantage){
                             $('.hot').hide();
+                        }
+
+                        var isInApp = !!navigator.userAgent.match(/36kr/) || window.isAppAgent;
+                        if (!isInApp) {
+                            if (data.ccid) {
+                                initLinkme(data.ccid);
+                            }
                         }
                     });
                 }else {
@@ -143,7 +151,6 @@
                     $('#brief').html(data.brief);
                     $('#tags').html(data.tags);
                     $('#hot').html(data.advantage);
-                    $('#project-ccid').val(data.ccid);
                     if(!data.advantage){
                         $('.hot').hide();
                     }
@@ -197,15 +204,12 @@
     $(function () {
         var isInApp = !!navigator.userAgent.match(/36kr/) || window.isAppAgent;
         var userSystem=navigator.userAgent; //userAgent;
-        var pccid = $('#project-ccid').val();
         if(!isInApp) {
-            if(p-ccid) {
-                initLinkme(pccid);
-            }else {
+            if (ccid) {
                 initLinkme();
             }
-
         }
+
         if(isUniversalLink() &&
             isWeixin()
         ) {
@@ -262,7 +266,6 @@
             <img  id="logo" src="" />
         </div>
         <h2 id="name"></h2>
-        <input type="hidden" id="project-ccid"/>
         <p  class="tag"><img src="/styles/images/company-share/tag.png" width="9" alt=""> <span id="tags"></span></p>
         <!--
         <p class="hot"><img src="/styles/images/company-share/hot.png" width="9" alt=""> <span id="hot"></span></p>
