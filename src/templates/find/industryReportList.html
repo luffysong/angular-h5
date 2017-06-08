@@ -4,7 +4,7 @@
     <span class="block-part-search-span">
       <form ng-submit="vm.doSearch($event)">
         <img width="17px" src="/styles/images/find/Group8@2x.png" alt="">
-        <input class="block-part-search" type="search" ng-model="vm.keyword" placeholder="搜索行研报告（根据标签、标题搜索）"/>
+        <input class="block-part-search" type="search" ng-model="vm.keyword" placeholder="搜索行研报告（根据标签、标题搜索）" ng-focus="vm.searchFocus()" />
       </form>
     </span>
     <span ng-click="vm.doSearch($event)" class="search-btn">搜索</span>

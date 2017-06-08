@@ -9,6 +9,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     vm.loadMore = loadMore;
     vm.reportLink = reportLink;
     vm.reportPdfLink = reportPdfLink;
+    vm.searchFocus = searchFocus;
     vm.openNativePage = openNativePage;
     vm.doSearch = doSearch;
     vm.keyword = '';
@@ -103,6 +104,11 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
             page: 1
         };
         console.log(1);
+        $('#block-part-con').css("opacity","1");
         vm.loadMore();
     };
+    function searchFocus() {
+        console.log(11);
+        $('#block-part-con').css("opacity","0.05");
+    }
 }
