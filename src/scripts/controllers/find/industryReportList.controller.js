@@ -13,11 +13,12 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     vm.searchBlur = searchBlur;
     vm.openNativePage = openNativePage;
     vm.doSearch = doSearch;
+    vm.doCancel = doCancel;
     vm.keyword = '';
     vm.busy = false;
     vm.dataItemLength = '';
     vm.endLoading = true;
-    // vm.isJump = true; //默认可以跳转
+    vm.searchKey = '搜索';
     init();
     function init() {
         window.WEIXINSHARE = {
@@ -95,6 +96,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     }
     function doSearch(e) {
         e.preventDefault();
+        vm.searchKey = '搜索';
         vm.busy = false;
         vm.dataItemLength = '';
         vm.endLoading = true;
@@ -104,19 +106,22 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
             pageSize: 20,
             page: 1
         };
-        $('#block-part-con').css("opacity","1");
-        // vm.isJump = true;
+        // $('#block-part-con').css("opacity","1");
         vm.loadMore();
-    };
+    }
+    function doCancel(e) {
+        e.preventDefault();
+        vm.keyword = '';
+        vm.doSearch(e);
+    }
     function searchFocus(e) {
         e.preventDefault();
         vm.reportList = [];
-        // vm.isJump = false;
+        vm.searchKey = '取消';
         // $('#block-part-con').css("opacity","0.05");
     }
     function searchBlur(e) {
         e.preventDefault();
-        // vm.isJump = true;
         // $('#block-part-con').css("opacity","1");
     }
 }
