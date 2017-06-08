@@ -5,7 +5,7 @@ angular.module('defaultApp.controller')
 function IndustryReportListController(FindService, ErrorService, loading, hybrid) {
     var vm = this;
     vm.reportList = [];
-    document.title = '行业报告';
+    document.title = '行研报告';
     vm.loadMore = loadMore;
     vm.reportLink = reportLink;
     vm.reportPdfLink = reportPdfLink;
