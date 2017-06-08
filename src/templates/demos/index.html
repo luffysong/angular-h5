@@ -52,9 +52,10 @@
                     ng-repeat="item in vm.demos track
                     by $index" ng-click="vm.companyTrack('ClickSet',{target:'company',company_id:item.rcid,set_id:vm.id,set_index:$index})">
                     <!--   pid="item.ccid" tou-open path="'crmCompany/' + item.ccid + '?ktm_source=xiangmuji.native.' + vm.id + '.' + item.ccid"-->
+                    <!---href="http://36kr.com/company/{{item.rcid}}?ktm_source=chuangtou.h5.xiangmuji.{{vm.id}}.{{item.rcid}}"-->
                     <a class="projectList-content-href"
-                       href="http://36kr.com/company/{{item.rcid}}?ktm_source=chuangtou.h5.xiangmuji.{{vm.id}}.{{item.rcid}}"
-                    >
+                        ng-click="vm.openApp(item.id, item.rcid, item.ccid)"
+                        >
                         <div class="base-info-detail">
                             <div  class="logo-wrapper" >
                                 <img ng-src="{{item.logo | image}}" alt="" ng-if="item.logo">

@@ -4,7 +4,7 @@ angular.module('defaultApp.controller')
 .controller('DemosController', DemosController);
 
 function DemosController(demosService, projectColumnService,
-    $state, $stateParams, cover, loading, ErrorService) {
+    $state, $stateParams, cover, loading, ErrorService, hybrid) {
     var vm = this;
     $('body').css({
         backgroundColor: '#fff'
@@ -16,6 +16,7 @@ function DemosController(demosService, projectColumnService,
     vm.demos = [];
     vm.type = $stateParams.type;
     vm.needPwd = false;
+    vm.openApp = openApp;
 
     vm.isColumn = isColumn;
     vm.goProjects = goProjects;
@@ -195,7 +196,22 @@ function DemosController(demosService, projectColumnService,
         }
     }
 
+    function openApp(id, rcid, ccid) {
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        if (!hybrid.isInApp) {
+            if (isAndroid) {
+                window.location.href = 'http://36kr.com/company/' + rcid + '?ktm_source=chuangtou.h5.xiangmuji.' + id + '.' + rcid;
+            } else if (isIos) {
+                window.location.href = 'http://36kr.com/company/' + ccid + '?ktm_source=chuangtou.h5.xiangmuji.' + id + '.' + ccid;
+            }
+        }else {
+            hybrid.open('crmCompany/' + ccid);
+        }
+    }
+
     function error(err) {
         ErrorService.alert(err);
     }
+
 }
