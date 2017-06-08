@@ -8,9 +8,9 @@
     </form>
   </div>
   <div id="block-part-con" class="block-part-con" infinite-scroll='vm.loadMore()' infinite-scroll-disabled='0' infinite-scroll-distance='0'>
-      <div class="block-part-report" ng-repeat="(i,cell) in vm.reportList" ng-click="vm.reportLink(cell, $event)" ng-if="vm.reportList.length">
+      <div class="block-part-report" ng-repeat="(i,cell) in vm.reportList" ng-if="vm.reportList.length">
         <div>
-          <span class="float-left block-part-report-title">
+          <span class="float-left block-part-report-title" ng-click="vm.reportLink(cell, $event)">
             {{cell.title}}
           </span>
           <span class="float-right block-part-report-time">
@@ -22,9 +22,10 @@
                 {{tag}}
               </span>
           </span>
-          <span class="float-right block-part-report-webs" ng-show="cell.tags.length">
+       <!--    <span class="float-right block-part-report-webs" ng-show="cell.tags.length">
             {{cell.website}}
-          </span>
+          </span> -->
+           <span  class="float-right block-part-report-down" ng-click="vm.reportPdfLink(cell, $event)" ng-show="cell.attachLink">下载研报</span>
           <div class="report-clear"></div>
         </div>
       </div>

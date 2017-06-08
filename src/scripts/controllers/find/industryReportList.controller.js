@@ -8,6 +8,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     document.title = '行业报告';
     vm.loadMore = loadMore;
     vm.reportLink = reportLink;
+    vm.reportPdfLink = reportPdfLink;
     vm.openNativePage = openNativePage;
     vm.doSearch = doSearch;
     vm.keyword = '';
@@ -68,16 +69,12 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
 
     function reportLink(cell, event) {
         event.stopPropagation();
-        if (cell.attachLink) {
-            window.location.href = cell.attachLink;
-            // path = '/openEncryptionLink/' + encodeURIComponent(cell.attachLink);
-            // openNativePage(path);
-        } else {
-            window.location.href = cell.link;
-            // path = '/openEncryptionLink/' + encodeURIComponent(cell.link);
-            // openNativePage(path);
-        }
-        // a href="{{cell.attachLink}}" target="_blank"
+        window.location.href = cell.link;
+ 
+    }
+    function reportPdfLink(cell, event) {
+        event.stopPropagation();
+        window.location.href = cell.attachLink;
     }
     function openNativePage(path) {
         console.log(path);
