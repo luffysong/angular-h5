@@ -23,12 +23,14 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
         };
         vm.loadMore();
     }
+
     function loadMore() {
         if (vm.busy) {
             return;
         }
+
         vm.busy = true;
-        console.log(22);
+
         FindService.getIndustryReportList(vm.sendData).then(function (data) {
             var responseObj = data.data;
             loading.hide('industryReportListLoading');
@@ -36,21 +38,22 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
             if (!vm.dataItemLength) {
                 vm.busy = true;
                 vm.endLoading = false;
-                loading.hide('industryReportListLoading');
                 return;
             }
+
             if(!vm.reportList) {
                 vm.reportList = responseObj.data;
             } else {
                 vm.reportList = vm.reportList.concat(responseObj.data);
             }
+
             vm.sendData.page = responseObj.page + 1;
             vm.busy = false;
-            window.setTimeout(function() {
-                if(vm.keyword.length > 0) {  
-                    var body = $('#block-part-con');  
-                    body.highlight(vm.keyword);  
-                } 
+            window.setTimeout(function () {
+                if(vm.keyword.length > 0) {
+                    var body = $('#block-part-con');
+                    body.highlight(vm.keyword);
+                }
             }, 0);
         }).catch(function (err) {
             loading.hide('industryReportListLoading');
@@ -59,6 +62,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
             }
         });
     }
+
     function reportLink(cell, event) {
         event.stopPropagation();
         if (cell.attachLink) {
@@ -70,7 +74,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
             // path = '/openEncryptionLink/' + encodeURIComponent(cell.link);
             // openNativePage(path);
         }
-        // a href="{{cell.attachLink}}" target="_blank" 
+        // a href="{{cell.attachLink}}" target="_blank"
     }
     function openNativePage(path) {
         console.log(path);

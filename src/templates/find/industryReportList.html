@@ -1,5 +1,5 @@
 <!-- 行业报告 -->
-<div>
+<div ng-if="vm.dataItemLength">
   <div class="block-part-div">
     <form ng-submit="vm.doSearch($event)">
       <img width="16px" src="/styles/images/find/SearchReport@2x.png" alt="">
@@ -8,9 +8,7 @@
     </form>
   </div>
   <div id="block-part-con" class="block-part-con" infinite-scroll='vm.loadMore()' infinite-scroll-disabled='0' infinite-scroll-distance='0'>
-      <loading loading="industryReportListLoading"></loading>
       <div class="block-part-report" ng-repeat="(i,cell) in vm.reportList" ng-click="vm.reportLink(cell, $event)" ng-if="vm.reportList.length">
-        <loading loading="industryReportListLoading"></loading>
         <div>
           <span class="float-left block-part-report-title">
             {{cell.title}}
@@ -41,4 +39,8 @@
           <p>全部数据加载完毕</p>
       </div>
   </div>
+</div>
+
+<div ng-if="!vm.dataItemLength">
+    <loading loading="industryReportListLoading"></loading>
 </div>
