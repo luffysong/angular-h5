@@ -143,6 +143,7 @@
                     $('#brief').html(data.brief);
                     $('#tags').html(data.tags);
                     $('#hot').html(data.advantage);
+                    $('#project-ccid').val(data.ccid);
                     if(!data.advantage){
                         $('.hot').hide();
                     }
@@ -164,14 +165,13 @@
         return location.href.indexOf('universallink') > -1;
     }
 
-    function initLinkme() {
+    function initLinkme(pccid) {
         var krdata = {};
         krdata.type =  'live';
-        if (cid) {
+        if(pccid){
             krdata.params =
-            '{"openlink":"https://' + HOST + '/m/company.html?cid='+cid+'","krtou":"krtou://company/'+cid+'"  }';
-        }
-        if(ccid){
+            '{"openlink":"https://' + HOST + '/m/company.html?ccid='+pccid+'","krtou":"krtou://crmCompany/'+pccid+'"  }';
+        } else if (ccid) {
             krdata.params =
             '{"openlink":"https://' + HOST + '/m/company.html?ccid='+ccid+'","krtou":"krtou://crmCompany/'+ccid+'"  }';
         }
@@ -197,8 +197,14 @@
     $(function () {
         var isInApp = !!navigator.userAgent.match(/36kr/) || window.isAppAgent;
         var userSystem=navigator.userAgent; //userAgent;
+        var pccid = $('#project-ccid').val();
         if(!isInApp) {
-            initLinkme();
+            if(p-ccid) {
+                initLinkme(pccid);
+            }else {
+                initLinkme();
+            }
+
         }
         if(isUniversalLink() &&
             isWeixin()
@@ -256,6 +262,7 @@
             <img  id="logo" src="" />
         </div>
         <h2 id="name"></h2>
+        <input type="hidden" id="project-ccid"/>
         <p  class="tag"><img src="/styles/images/company-share/tag.png" width="9" alt=""> <span id="tags"></span></p>
         <!--
         <p class="hot"><img src="/styles/images/company-share/hot.png" width="9" alt=""> <span id="hot"></span></p>
