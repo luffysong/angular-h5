@@ -12,7 +12,7 @@ angular.module('defaultApp.directive').directive('slideTabs',
             template: '<div class="slide-tabs" ng-if="tabs.length"><div class="wrapper"><a href="javascript:void(0)" class="tab" ng-repeat="tab in tabs" ng-click="setTab(tab)" ng-class="{selected:tab.selected}" }"><span>{{tab.label}}</span></a><span class="bar" ng-style="{width:bar.width,transform:bar.transform}"></span></div></div>',
             scope: {
                 tabs: '=slideTabs',
-                isspan:'@isspan'
+                isspan:'=isspan'
             },
             link: function (scope, element, attrs, ngModelCtrl) {
 
@@ -21,7 +21,7 @@ angular.module('defaultApp.directive').directive('slideTabs',
                         var selected = $('.tab', element).eq(index);
                         var width = selected.find('span').width();
                         var offsetLeft = selected.find('span').offset().left;
-                        if (!isspan) {
+                        if (!scope.isspan) {
                             var width = selected.width();
                             var offsetLeft = selected.offset().left;
                         }
