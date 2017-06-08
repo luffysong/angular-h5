@@ -5,26 +5,23 @@
       * 按本季度截止今日，各机构项目被约谈总量排序，实时更新
     </div>
   </div>
-  <!--
-  ui-sref="bangdan.orgbdDetail({id: item.orgId, rank: $index + 1})"
-  -->
-  <div class="orgbd-list-content" ng-if="vm.startloading">
+  <div class="orgbd-list-content-load" ng-if="vm.startloading">
       正在加载数据...&nbsp;
       <img src="/styles/images/bangdan/loading.svg" alt="loading">
   </div>
 
-<section class="">
+<section class="orgbd-list-content">
       <ul class="orgbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
         <li class="org-item" ng-repeat="item in vm.list track by $index"
          ng-click="vm.goOrgDetail(item.orgId, $index + 1)">
             <oic-item item="item" key = '$index' symbol='org'></oic-item>
       </li>
     </ul>
-    <footer ng-if="vm.busy && !vm.finish &&  vm.page">
+    <div class="orgbd-load" ng-if="vm.busy && !vm.finish &&  vm.page">
           正在加载更多...&nbsp;
           <img src="/styles/images/bangdan/loading.svg" alt="loading">
-    </footer>
-    <footer ng-if="vm.finish">已无更多数据</footer>
+    </div>
+    <div class="orgbd-nodata" ng-if="vm.finish">已无更多数据</div>
 </section>
 
 
