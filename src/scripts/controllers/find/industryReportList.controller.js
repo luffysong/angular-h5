@@ -16,6 +16,9 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     vm.endLoading = true;
     init();
     function init() {
+        window.WEIXINSHARE = {
+            shareButton: 'hide'
+        };
         vm.sendData = {
             keyword: vm.keyword,
             pageSize: 20,
