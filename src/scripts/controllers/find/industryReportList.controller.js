@@ -93,7 +93,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
         }
     }
     function doSearch(e) {
-        // e.preventDefault();
+        e.preventDefault();
         vm.busy = false;
         vm.dataItemLength = '';
         vm.endLoading = true;
@@ -103,12 +103,11 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
             pageSize: 20,
             page: 1
         };
-        console.log(1);
         $('#block-part-con').css("opacity","1");
         vm.loadMore();
     };
-    function searchFocus() {
-        console.log(11);
+    function searchFocus(e) {
+        e.preventDefault();
         $('#block-part-con').css("opacity","0.05");
     }
 }
