@@ -25,6 +25,8 @@
     }
   }
   .com-tabs{
+      position: relative;
+      overflow: hidden;
     ul {
       overflow: hidden;
       list-style: none;
@@ -39,7 +41,37 @@
         line-height: 45px;
       }
     }
+    .slide-tabs{
+        .wrapper{
+            position: relative;
+            background: white;
+            a{
+                text-align: center;
+                width: 25%;
+                color: #222c38;
+                span{
+                    font-size: 14px;
+                }
+            }
+            a.selected{
+                color: #CF9D3E;
+                font-weight: bold;
+                span{
+                    border-bottom: 1px solid #CF9D3E;
+                }
+            }
+        }
+        .bar {
+            position: absolute;
+            bottom:0;
+            left:0;
+            transition: transform 0.3s;
+            height:0.15rem;
+            background: #CF9D3E;
+        }
+    }
   }
+
   .tab-active {
     border-bottom: solid 3px #CF9D3E;
     color: #CF9D3E;

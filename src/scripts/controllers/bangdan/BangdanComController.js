@@ -21,6 +21,22 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
     vm.changeTab = changeTab;
     vm.communityType = $stateParams.communityType || 1;
+    var comType = [{
+        label: '名企',
+        value: '1'
+    }, {
+        label: '名校',
+        value: '2'
+    }, {
+        label: 'FA',
+        value: '3'
+    },
+    {
+        label: '孵化器',
+        value: '4'
+    }];
+    $scope.comType = comType;
+    $scope.currentComType = $stateParams.communityType || 1;
     init();
 
     function init() {
@@ -35,6 +51,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         vm.type = getTypeText(vm.communityType);
         removeHeader();
         getTrackParams(vm.communityType);
+        changeTab();
         sa.track('ViewPage',
           {
             source: vm.trackSource,
@@ -63,11 +80,45 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         $('#bannerOther').remove();
     }
 
-    function changeTab(type){
-        window.sessionStorage.removeItem('com-position');
-        window.sessionStorage.removeItem('com-id');
+    function changeTab(type) {
+
         var client = getClient();
-        getTrackParams(type);
+
+        $scope.$on('tabClicked', function (e, item) {
+            if (item.value === '1') {
+                window.sessionStorage.removeItem('com-position');
+                window.sessionStorage.removeItem('com-id');
+                getTrackParams(item.value);
+                saTrack(client, item);
+            }else if (item.value === '2') {
+                window.sessionStorage.removeItem('com-position');
+                window.sessionStorage.removeItem('com-id');
+                getTrackParams(item.value);
+                saTrack(client, item);
+            }else if (item.value === '3') {
+                window.sessionStorage.removeItem('com-position');
+                window.sessionStorage.removeItem('com-id');
+                getTrackParams(item.value);
+                saTrack(client, item);
+            }else if (item.value === '4') {
+                window.sessionStorage.removeItem('com-position');
+                window.sessionStorage.removeItem('com-id');
+                getTrackParams(item.value);
+                saTrack(client, item);
+            }
+        });
+    }
+
+    function resetData() {
+        vm.list = [];
+        vm.more = false;
+        vm.busy = false;
+        vm.finish = false;
+        vm.page = 0;
+        vm.startloading = true;
+    }
+
+    function saTrack(client, item) {
         sa.track('CommunityTopListClick',
           {
             source: vm.trackSource,
@@ -75,8 +126,13 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             client: client,
             community_type: vm.trackTarget,
         });
-        vm.communityType = type;
-        $state.go('.', { communityType: vm.communityType });
+
+        vm.communityType = item.value;
+        resetData();
+        getComRank();
+
+        //$state.go('.', { communityType: vm.communityType });
+
     }
 
     function addAnimate() {
@@ -188,6 +244,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
                         vm.more = true;
                     }
                 }
+
                 if (fn) {
                     fn();
                 } else {
@@ -196,7 +253,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             }).catch(fail);
     }
 
-    function getClient(){
+    function getClient() {
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
         var client = 'H5';

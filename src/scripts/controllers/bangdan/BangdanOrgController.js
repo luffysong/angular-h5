@@ -50,29 +50,6 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
                 }
             }
         });
-
-        // $window.onscroll = function () {
-        //     console.log('==');
-        //     console.log($(window).scrollTop(), $(window).height(), $(document).height());
-        //     var t = $(window).scrollTop();
-        //     var h = $(window).height();
-        //     var dh = $(document).height();
-        //     if ((t + h) == dh) {
-        //         vm.isBottom = true;
-        //         console.log('111');
-        //
-        //     }else {
-        //         vm.isBottom = false;
-        //     }
-        // };
-
-        // $(window).scroll(function () {
-        //     if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-        //         vm.isBtm = true;
-        //     }else {
-        //         vm.isBtm = false;
-        //     }
-        // });
     }
 
     function getQ() {
@@ -130,6 +107,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         BangDanService.getOrgRank(request)
             .then(function (response) {
                 vm.startloading = false;
+                vm.hasInit = true;
                 loading.hide('bangdanLoading');
                 vm.result = response.data.data;
                 vm.list = vm.list.concat(response.data.data);

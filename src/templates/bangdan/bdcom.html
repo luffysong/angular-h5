@@ -10,12 +10,15 @@
   ui-sref="bangdan.combdDetail({id: item.comId, rank: $index + 1})"
   -->
     <section class="com-tabs">
+        <div slide-tabs="comType" ng-model="currentComType" isspan = 'false'></div>
+        <!--
         <ul>
             <li ng-click="vm.changeTab(1)" ng-class="{'tab-active': vm.communityType == 1}">名企</li>
             <li ng-click="vm.changeTab(2)" ng-class="{'tab-active': vm.communityType == 2}">名校</li>
             <li ng-click="vm.changeTab(3)" ng-class="{'tab-active': vm.communityType == 3}">FA</li>
             <li ng-click="vm.changeTab(4)" ng-class="{'tab-active': vm.communityType == 4}">孵化器</li>
         </ul>
+    -->
     </section>
   <div class="combd-list-content" ng-if="vm.startloading">
       正在加载数据...&nbsp;
