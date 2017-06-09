@@ -36,7 +36,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         value: '4'
     }];
     $scope.comType = comType;
-    $scope.currentComType = $stateParams.communityType || 1;
+    $scope.currentComType = $stateParams.communityType || '1';
     init();
 
     function init() {
