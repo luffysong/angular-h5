@@ -10,6 +10,7 @@ var _ = require('lodash');
 var gulp = require('gulp');
 var karma = require('karma');
 var $ = require('gulp-load-plugins')();
+var pug = require('gulp-pug');
 var es = require('event-stream');
 var loadDictionary = require('./tasks/loadDictionary.js');
 var urlAdjuster = require('gulp-css-url-adjuster');
@@ -62,6 +63,14 @@ gulp.task('html', ['header'], function () {
     gulp.src(['src/*.html', 'src/templates/**/*.html'])
 
         //.pipe(gulp.dest('.tmp'))
+        .pipe(reloadPage());
+});
+
+gulp.task('pug', function () {
+    gulp.src('./src/*.pug')
+        .pipe(pug({
+            pretty:true
+        }))
         .pipe(reloadPage());
 });
 
