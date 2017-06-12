@@ -2,7 +2,7 @@ var  angular = require('angular');
 angular.module('defaultApp.controller')
     .controller('NewsDetailController', NewsDetailController);
 
-function NewsDetailController(FindService, ErrorService, loading, $stateParams, hybrid) {
+function NewsDetailController(FindService, ErrorService, UserService, CredentialService, loading, $stateParams, hybrid) {
     var vm = this;
     vm.news = {
         id: $stateParams.id || 0,
@@ -27,6 +27,31 @@ function NewsDetailController(FindService, ErrorService, loading, $stateParams, 
         vm.news.phase = decodeURIComponent($stateParams.phase);
     }
 
+    vm.mergerGoTo = mergerGoTo;
+    // 三种类型并购方
+    function mergerGoTo (id, type, event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (id === 0) return;
+      var path;
+      if (type === 'INVESTOR') {
+        path = 'investor/' + id;
+      } else if (type === 'ORGANIZATION') {
+        path = 'org/' + id;
+      } else if (type === 'COMPANY') {
+        path = 'crmCompany/' + id;
+      }
+      openNativePage(path, id, event);
+    }
+                
+    function openNativePage(path, cid, event) {
+        event && event.stopPropagation();
+        if (!UserService.getUID()) {
+            CredentialService.directToLogin();
+        } else {
+            hybrid.open(path);
+        }
+    }
     FindService.getNewsDetail(vm.news.id).then(function (data) {
         loading.hide('newsDetailLoading');
         if (data && data.data && data.data) {
