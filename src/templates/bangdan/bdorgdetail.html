@@ -1,6 +1,6 @@
 <div ng-if="!loadingInst.bangdanDetailLoading" style="">
-<div class="bd-org-detail">
-    <section class="bd-orgdetail-head bd-detail-bgp">
+<div class="bd-org-detail" ng-class="{true:'bd-paddingTop62',false:''}[!vm.inApp]">
+    <section class="bd-orgdetail-head bd-detail-bgp" >
             <div class="bd-orgdetail-logo">
                 <div class="bd-orgdetail-img bd-gold-border"
                 ng-if="vm.orgInfo.rank === 1" style="background-image: url({{vm.orgInfo.logo}})">
