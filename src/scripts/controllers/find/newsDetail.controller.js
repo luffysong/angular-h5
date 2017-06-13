@@ -4,6 +4,12 @@ angular.module('defaultApp.controller')
 
 function NewsDetailController(FindService, ErrorService, UserService, CredentialService, loading, $stateParams, hybrid) {
     var vm = this;
+    vm.sendData = {
+        reportId: $stateParams.id || 0,
+        type: 'opportunity',
+        investmentId: $stateParams.investmentId || 0
+    };
+    console.log($stateParams);
     vm.news = {
         id: $stateParams.id || 0,
         investors: '',
@@ -45,6 +51,7 @@ function NewsDetailController(FindService, ErrorService, UserService, Credential
     }
                 
     function openNativePage(path, cid, event) {
+        console.log(path);
         event && event.stopPropagation();
         if (!UserService.getUID()) {
             CredentialService.directToLogin();
@@ -52,6 +59,7 @@ function NewsDetailController(FindService, ErrorService, UserService, Credential
             hybrid.open(path);
         }
     }
+    // FindService.getNewsDetail(vm.sendData).then(function (data) {
     FindService.getNewsDetail(vm.news.id).then(function (data) {
         loading.hide('newsDetailLoading');
         if (data && data.data && data.data) {

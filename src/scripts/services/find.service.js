@@ -126,6 +126,11 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
         return $http.get('/api/mobi-investor/daily-report-content?reportId=' + id);
     };
 
+    // 新闻详情新接口
+    // this.getNewsDetail = function (params) {
+    //     return $http.get('/api/mobi-investor/daily-report-content?' + $.param(params));
+    // };
+
     // 行业报告list
     this.getIndustryReportList = function (request) {
         return $http.get('/api/mobi-investor/company/finance-new/research-report?' + $.param(request));

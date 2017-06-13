@@ -13,16 +13,6 @@
         </div>
         <div class="find-news-info-invest-con">
             {{vm.news.investors}}
-            <!-- <span ng-repeat="(index,cell) in vm.news.data.investorList track by $index" class="margin-r">
-                <span ng-click="vm.mergerGoTo(cell.id, cell.type, $event)" class="color-blue" ng-if="cell.id">
-                    {{cell.name}}
-                    <span ng-show="index !== vm.news.data.investorList.length-1">，</span>
-                </span>
-                <span ng-if="!cell.id">
-                    {{cell.name}}
-                    <span ng-show="index !== vm.news.data.investorList.length-1">，</span>
-                </span>
-            </span> -->
         </div>
     </div>
     <div class="find-news-info" ng-show="vm.news.amount || vm.news.phase">
@@ -36,6 +26,37 @@
             {{vm.news.phase}}
         </div>
     </div>
+
+<!--     <div class="find-news-info" ng-show="vm.news.data.investors">
+        <div class="find-news-info-invest">
+            <span class="find-news-info-icon"></span>
+            投资方
+        </div>
+        <div class="find-news-info-invest-con">
+            <span ng-repeat="(index,cell) in vm.news.data.investors track by $index" class="margin-r">
+                <span ng-click="vm.mergerGoTo(cell.id, cell.type, $event)" class="color-blue" ng-if="cell.id">
+                    {{cell.name}}
+                    <span ng-show="index !== vm.news.data.investors.length-1">，</span>
+                </span>
+                <span ng-if="!cell.id">
+                    {{cell.name}}
+                    <span ng-show="index !== vm.news.data.investors.length-1">，</span>
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="find-news-info" ng-show="vm.news.data.amount || vm.news.data.phase">
+        <div class="find-news-info-invest">
+            <span class="find-news-info-icon"></span>
+            融资明细
+        </div>
+        <div class="find-news-info-invest-con">
+            {{vm.news.data.amount}}
+            <span ng-show="vm.news.data.amount && vm.news.data.phase">·</span>
+            {{vm.news.data.phase}}
+        </div>
+    </div> -->
+
     <div class="find-news-info-line"></div>
     <div class="find-news-content" dynamic-html="vm.news.data.content"></div>
     <loading loading="newsDetailLoading"></loading>

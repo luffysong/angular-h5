@@ -199,7 +199,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('find.newsDetail', {
-        url:'/newsDetail/:id?ccid&investors&amount&phase',
+        url:'/newsDetail/:id?ccid&investors&amount&phase&investmentId',
         controllerAs: 'vm',
         controller: 'NewsDetailController',
         templateUrl: 'templates/find/newsDetail.html'
