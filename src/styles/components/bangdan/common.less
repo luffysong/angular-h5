@@ -12,6 +12,54 @@
  }
 }
 
+.bd-tab-section{
+    height: 60px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    .slide-tabs{
+        z-index: 10;
+        height: 60px;
+
+        .wrapper{
+            position: relative;
+            background: white;
+            z-index: 10;
+            height: 60px;
+            a{
+                text-align: center;
+                width: 25%;
+                float: left;
+                display: inline-block;
+                color: #222c38;
+                height: 60px;
+                line-height: 60px;
+                span{
+                    font-size: 14px;
+                }
+            }
+            a.selected{
+                color: white;
+                font-weight: bold;
+                background-color: #CF9D3E;
+                span{
+                    //border-bottom: 1px solid #CF9D3E;
+                }
+            }
+        }
+        .bar {
+            position: absolute;
+            bottom:0;
+            left:0;
+            transition: transform 0.3s;
+            height:0.15rem;
+            background: #CF9D3E;
+        }
+    }
+}
+
+
 //详情页面背景
 .bd-detail-bgp{
     background: url('images/bangdan/bddetailhead.png') no-repeat center;

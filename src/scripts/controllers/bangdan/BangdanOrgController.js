@@ -18,6 +18,28 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.inApp = true;
     vm.total;
     vm.downloadApp = downloadApp;
+    var industryArr = [{
+        label: '名企',
+        value: '1'
+    }, {
+        label: '名校',
+        value: '2'
+    }, {
+        label: 'FA',
+        value: '3'
+    },
+    {
+        label: '孵化器',
+        value: '4'
+    },{
+        label: '孵1',
+        value: '5'
+    },{
+        label: '孵3',
+        value: '6'
+    }];
+    $scope.industryArr = industryArr;
+    $scope.currentIndustry = $stateParams.industryArr || '1';
 
     init();
 
