@@ -11,22 +11,25 @@
   </div>
 
   <section class="bd-tab-section">
-      <div dynamic-tabs="industryArr" ng-model="currentIndustry" isspan='false'></div>
+      <div dynamic-tabs="industryArr" ng-model="currentIndustry" isspan='true' setFn ='vm.moveAction'></div>
   </section>
 
-<section class="orgbd-list-content">
-      <ul class="orgbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='2'>
-        <li class="org-item" ng-repeat="item in vm.list track by $index"
-         ng-click="vm.goOrgDetail(item.orgId, $index + 1)">
-            <oic-item item="item" key = '$index' symbol='org'></oic-item>
-      </li>
-    </ul>
-    <div class="orgbd-load" ng-if="vm.busy && !vm.finish &&  vm.page">
-          正在加载更多...&nbsp;
-          <img src="/styles/images/bangdan/loading.svg" alt="loading">
-    </div>
-    <div class="orgbd-nodata" ng-if="vm.finish">已无更多数据</div>
-</section>
+    <section class="orgbd-list-content"
+        ng-swipe-left = "vm.moveAction($event, true)"
+        ng-swipe-right = "vm.moveAction($event, false)"
+      >
+        <ul class="orgbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='2'>
+          <li class="org-item" ng-repeat="item in vm.list track by $index"
+             ng-click="vm.goOrgDetail(item.orgId, $index + 1)">
+                <oic-item item="item" key = '$index' symbol='org'></oic-item>
+          </li>
+        </ul>
+        <div class="orgbd-load" ng-if="vm.busy && !vm.finish &&  vm.page">
+              正在加载更多...&nbsp;
+              <img src="/styles/images/bangdan/loading.svg" alt="loading">
+        </div>
+        <div class="orgbd-nodata" ng-if="vm.finish">已无更多数据</div>
+    </section>
 
 
   <div class="orgbd-footer" ng-if="vm.inApp">

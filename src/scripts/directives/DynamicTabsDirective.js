@@ -13,6 +13,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
             scope: {
                 tabs: '=dynamicTabs',
                 isspan:'=isspan',
+                setFn: '&setFn'
             },
             link: function (scope, element, attrs, ngModelCtrl) {
 
@@ -34,6 +35,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         var width = selected.find('span').width();
                         var offsetLeft = selected.find('span').offset().left;
                         var wl = Math.abs(wrapper.css('left').replace('px',''));
+
                         if (!scope.isspan) {
                             var width = selected.width();
                             var offsetLeft = selected.offset().left;
@@ -41,10 +43,14 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         if (wl) {
                             offsetLeft = offsetLeft + wl;
                         }
-
+                        var plusLeft = 0;
+                        if ((width - 18) > 0 ) {
+                            plusLeft = parseInt(width - 18);
+                        }
+                        offsetLeft = offsetLeft + parseInt(plusLeft/2);
                         var leftProp = 'translate3d(' + offsetLeft + 'px,0,0)';
                         scope.bar = {
-                            width:width + 'px',
+                            width: '18px',
                             transform: leftProp
                         };
                     }, 100);
@@ -106,7 +112,8 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                             l = l + 1;
                         }
                     }
-                }
+                };
+
             }
         };
     }

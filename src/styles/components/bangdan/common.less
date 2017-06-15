@@ -13,48 +13,52 @@
 }
 
 .bd-tab-section{
-    height: 60px;
+    height: 50px;
     width: 100%;
     position: relative;
     overflow: hidden;
 
     .slide-tabs{
         z-index: 10;
-        height: 60px;
+        height: 50px;
 
         .wrapper{
             position: relative;
             background: white;
             z-index: 10;
-            height: 60px;
+            height: 50px;
             a{
                 text-align: center;
                 width: 25%;
                 float: left;
                 display: inline-block;
-                color: #222c38;
-                height: 60px;
-                line-height: 60px;
+                font-size: 14px;
+                color: #5A626D;
+                height: 50px;
+                line-height: 50px;
                 span{
                     font-size: 14px;
                 }
             }
             a.selected{
-                color: white;
+                font-size: 16px;
+                color: #222C38;
                 font-weight: bold;
-                background-color: #CF9D3E;
                 span{
-                    //border-bottom: 1px solid #CF9D3E;
+                    font-size: 16px;
                 }
             }
         }
         .bar {
             position: absolute;
-            bottom:0;
+            bottom:5px;
             left:0;
             transition: transform 0.3s;
             height:0.15rem;
             background: #CF9D3E;
+            width: 18px;
+            height: 3px;
+            border-radius: 2px;
         }
     }
 }

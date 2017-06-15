@@ -18,6 +18,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.inApp = true;
     vm.total;
     vm.downloadApp = downloadApp;
+    vm.moveAction = moveAction;
     var industryArr = [{
         label: '名企',
         value: '1'
@@ -390,6 +391,33 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             target: 'share',
             client: client,
         });
+    }
+
+    function moveAction(e ,c) {
+        console.log(e, c);
+        var l = $scope.industryArr.length;
+        if (c) {
+
+            $scope.callDirFunc = function(){
+              $scope.directiveFunction();
+            };
+
+            // $scope.industryArr.forEach(function (item, index){
+            //     if ((index + 1) == $scope.currentIndustry) {
+            //         $scope.setTab(item);
+            //     }
+            // })
+            //
+            // if ($scope.currentIndustry < l){
+            //     l = l +1;
+            //     $scope.currentIndustry = l + '';
+            // }
+        } else {
+            if ($scope.currentIndustry >=0 &&  $scope.currentIndustry < l){
+                l = l - 1;
+                $scope.currentIndustry = l + '';
+            }
+        }
     }
 
 }
