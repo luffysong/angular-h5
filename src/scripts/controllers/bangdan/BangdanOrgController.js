@@ -54,6 +54,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         getOrgRank();
         initPxLoader();
         addAnimate();
+        changeTab();
     }
 
     function addAnimate() {
@@ -418,6 +419,13 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
                 $scope.currentIndustry = l + '';
             }
         }
+    }
+
+    function changeTab(type) {
+        $scope.$on('tabClicked', function (e, item) {
+            console.log(e, item);
+            console.log('切换代码');
+        });
     }
 
 }
