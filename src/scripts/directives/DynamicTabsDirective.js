@@ -13,7 +13,8 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
             scope: {
                 tabs: '=dynamicTabs',
                 isspan:'=isspan',
-                setFn: '&setFn'
+                setFn: '&setFn',
+                barwidth: '@barwidth'
             },
             link: function (scope, element, attrs, ngModelCtrl) {
 
@@ -44,13 +45,13 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                             offsetLeft = offsetLeft + wl;
                         }
                         var plusLeft = 0;
-                        if ((width - 18) > 0 ) {
-                            plusLeft = parseInt(width - 18);
+                        if ((width - parseInt(scope.barwidth)) > 0 ) {
+                            plusLeft = parseInt(width - parseInt(scope.barwidth));
                         }
                         offsetLeft = offsetLeft + parseInt(plusLeft/2);
                         var leftProp = 'translate3d(' + offsetLeft + 'px,0,0)';
                         scope.bar = {
-                            width: '18px',
+                            width: parseInt(scope.barwidth) + 'px',
                             transform: leftProp
                         };
                     }, 100);
