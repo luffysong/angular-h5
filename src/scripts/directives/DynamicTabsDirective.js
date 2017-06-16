@@ -14,27 +14,37 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                 tabs: '=dynamicTabs',
                 isspan:'=isspan',
                 setFn: '&setFn',
-                barwidth: '@barwidth'
+                barwidth: '@barwidth',
+                limit:'@limit'
             },
             link: function (scope, element, attrs, ngModelCtrl) {
+                var _tabLength = scope.tabs.length;
+                var clienWidth = element.width();
+                var barwidth = scope.barwidth;
+                var limit = parseInt(scope.limit);
+                function setWrapper(fn, index) {
+                    $timeout(function () {
+                        var wrapper = element.find('.wrapper');
+                        var w = wrapper.find('.selected').width();
+                        if (_tabLength < limit ||  _tabLength == limit) {
+                            w = clienWidth /(_tabLength);
+                        }
+                        wrapper.css('width',(_tabLength * w + 'px' ));
+                        wrapper.find('a').css('width', w);
 
-                function setWrapper() {
-                    var wrapper = element.find('.wrapper');
-                    var w = wrapper.find('.selected').width();
-                    wrapper.css('width',(scope.tabs.length * w + 'px' ));
-                    wrapper.find('a').css('width', w);
+                        if (fn) {
+                            fn(index);
+                        }
+                    },200);
                 }
 
-                $timeout(function () {
-                    setWrapper();
-                },200);
-
                 function setBarState(index) {
-                    $timeout(function () {
                         var selected = $('.tab', element).eq(index);
                         var wrapper = selected.parent();
                         var width = selected.find('span').width();
                         var offsetLeft = selected.find('span').offset().left;
+                        var _aw = wrapper.find('a').css('width').replace('px','');
+                        var _w =  clienWidth /(_tabLength);
                         var wl = Math.abs(wrapper.css('left').replace('px',''));
 
                         if (!scope.isspan) {
@@ -45,16 +55,22 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                             offsetLeft = offsetLeft + wl;
                         }
                         var plusLeft = 0;
-                        if ((width - parseInt(scope.barwidth)) > 0 ) {
-                            plusLeft = parseInt(width - parseInt(scope.barwidth));
+                        if ((width - parseInt(barwidth)) > 0 ) {
+                            plusLeft = parseInt(width - parseInt(barwidth));
                         }
-                        offsetLeft = offsetLeft + parseInt(plusLeft/2);
-                        var leftProp = 'translate3d(' + offsetLeft + 'px,0,0)';
+
+                        if (_aw != _w && _tabLength < limit) {
+                            var _w2 =  clienWidth /(_tabLength)/2;
+                            offsetLeft = _w2 - parseInt(barwidth/2);
+                        } else {
+                            offsetLeft = offsetLeft + parseInt(plusLeft/2);
+                        }
+
+                        var leftProp = 'translate3d(' + offsetLeft+ 'px,0,0)';
                         scope.bar = {
-                            width: parseInt(scope.barwidth) + 'px',
+                            width: parseInt(barwidth) + 'px',
                             transform: leftProp
                         };
-                    }, 100);
                 }
 
                 ngModelCtrl.$formatters.push(function (modelValue) {
@@ -63,7 +79,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         if (modelValue === tab.value) {
                             result = tab;
                             tab.selected = true;
-                            setBarState(index);
+                            setWrapper(setBarState,index);
                         }
                     });
 
@@ -77,7 +93,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                     scope.tabs.forEach(function (tab, index) {
                         if (viewValue === tab) {
                             tab.selected = true;
-                            setBarState(index);
+                            setWrapper(setBarState,index);
                         }else {
                             tab.selected = false;
                         }
@@ -91,14 +107,14 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                     ngModelCtrl.$setViewValue(item, 'change');
                 };
 
-                var l =scope.tabs.length - 4, tl = scope.tabs.length ;
+                var l =scope.tabs.length - limit, tl = scope.tabs.length ;
                 scope.moveAction = function (e, c) {
                     e.stopPropagation();
                     var wrapper = element.find('.wrapper');
                     var wd = wrapper.find('.selected').width();
                     if (c) {
                         var wl = wrapper.css('left').replace('px','');
-                          if ( l > 0 && l <= (tl-4)) {
+                          if ( l > 0 && l <= (tl-limit)) {
                               wl = Math.abs(wl) + wd;
                               wrapper.css('transition', 'left 0.3s');
                               wrapper.css('left','-' + wl + 'px');
@@ -106,7 +122,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                           }
                     } else {
                         var wl = wrapper.css('left').replace('px','');
-                        if (l >= 0 && l < (tl-4)) {
+                        if (l >= 0 && l < (tl-limit)) {
                             wl = parseInt(wl) + wd;
                             wrapper.css('transition', 'left 0.3s');
                             wrapper.css('left', wl + 'px');

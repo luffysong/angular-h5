@@ -28,15 +28,14 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     }, {
         label: 'FA',
         value: '3'
-    },
-    {
-        label: '孵化器',
+    }, {
+        label: 'FA4',
         value: '4'
-    },{
-        label: '孵1',
+    }, {
+        label: 'FA5',
         value: '5'
-    },{
-        label: '孵3',
+    }, {
+        label: 'FA6',
         value: '6'
     }];
     $scope.industryArr = industryArr;
