@@ -27,8 +27,8 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             initLinkme();
             vm.inApp = false;
         }
-
-        getProList();
+        getOrgIndustry();
+        changeTab();
         if (UserService.getUID()) {
             initUser();
         }
@@ -80,6 +80,35 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         loader.start();
     }
 
+    function getOrgIndustry() {
+        var f = {
+            label: '全行业',
+            value: 0,
+            id: 0,
+            name: '全行业'
+        }
+        var industryArr = orgInfo.data.industryList.map(function (item, index) {
+            item['label'] = item.name;
+            item['value'] = index + 1 ;
+            return item;
+        });
+        industryArr.push(f);
+        industryArr.sort(function(a, b) {
+            return a.id > b.id;
+        });
+
+        $scope.industryArr = industryArr;
+        console.log(industryArr.length);
+         if ($stateParams.industry &&
+             $stateParams.industry >= industryArr.length) {
+            $scope.currentIndustry = 0;
+         } else {
+             $scope.currentIndustry = parseInt($stateParams.industry) || 0;
+         }
+         vm.industry = parseInt($stateParams.industry) == 0 ? '' : parseInt($stateParams.industry);
+         getProList();
+    }
+
     function getProList() {
         if (vm.busy) return;
         vm.busy = true;
@@ -87,6 +116,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         var params = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry || ''
         };
 
         if (!vm.inApp) {params.pageSize = 2;};
@@ -106,7 +136,6 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
                     vm.more = true;
                 }
             }
-
         })
         .catch(fail);
     }
@@ -119,6 +148,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         var params = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry || ''
         };
 
         BangDanService.getOrgProRank($stateParams.id, params)
@@ -545,6 +575,25 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             target:'share',
             org_id: $stateParams.id + '',
             client:client,
+        });
+    }
+
+    function resetData() {
+        vm.prolist = [];
+        vm.more = false;
+        vm.busy = false;
+        vm.finish = false;
+        vm.page = 0;
+        vm.startloading = true;
+    }
+
+    function changeTab() {
+        $scope.$on('tabClicked', function (e, item) {
+            if (item.value == 0 || item.value) {
+                vm.industry = item.value == 0 ? '' : item.value;
+                resetData();
+                getProList();
+            }
         });
     }
 

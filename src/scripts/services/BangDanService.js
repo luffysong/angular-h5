@@ -68,4 +68,19 @@ angular.module('defaultApp.service').service('BangDanService', function(BasicSer
     this.getTestJson = function () {
         return $http.get('./test.json');
     };
+
+    //机构行业
+    this.getOrgIndustry= function () {
+        return $http.get(BASE_URL + '/org/industry');
+    };
+
+    //投资人行业
+    this.getInvesorIndustry= function () {
+        return $http.get(BASE_URL + '/investor/industry');
+    };
+
+    //社群行业
+    this.getComIndustry= function () {
+        return $http.get(BASE_URL + '/community/industry');
+    };
 });

@@ -58,7 +58,9 @@
             <div class="pi-phase">
                 <span ng-if="item.phase">{{item.phase}}</span>
                 <span ng-if="item.phase && item.industry" class="pi-dot pi-dot-gray" ></span>
-                <span ng-if="item.industry">{{item.industry}}</span>
+                <span ng-if="item.industry">
+                    {{item.industry.name}}
+                </span>
             </div>
         </div>
         <div class="pi-sta-num">

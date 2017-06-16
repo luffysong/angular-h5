@@ -423,14 +423,17 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.orgbd', {
-        url: '/orgbd',
+        url: '/orgbd?{industry}',
         controllerAs: 'vm',
         controller: 'BangdanOrgController',
         templateUrl: 'templates/bangdan/bdorg.html',
+        resolve: {
+            industry: getOrgIndustry,
+        }
     });
 
     $stateProvider.state('bangdan.orgbdDetail', {
-        url: '/orgbddetail?{id}&{rank}',
+        url: '/orgbddetail?{id}&{rank}&{industry}',
         controllerAs: 'vm',
         controller: 'BangdanOrgDetailController',
         templateUrl: 'templates/bangdan/bdorgdetail.html',
@@ -763,6 +766,18 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
 
     function getComInfo(BangDanService, $stateParams) {
         return BangDanService.getSingleComInfo($stateParams.id);
+    }
+
+    function getOrgIndustry(BangDanService) {
+        return BangDanService.getOrgIndustry();
+    }
+
+    function getInvesorIndustry(BangDanService) {
+        return BangDanService.getInvesorIndustry();
+    }
+
+    function getComIndustry(BangDanService) {
+        return BangDanService.getComIndustry();
     }
 
 });

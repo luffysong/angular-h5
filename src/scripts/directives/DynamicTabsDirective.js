@@ -9,7 +9,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
         return {
             require: '^ngModel',
             restrict: 'AE',
-            template: '<div class="slide-tabs" ng-if="tabs.length" ng-swipe-left="moveAction($event,true)" ng-swipe-right="moveAction($event,false)"><div class="wrapper" ><a href="javascript:void(0)" class="tab" ng-repeat="tab in tabs" ng-click="setTab(tab)" ng-class="{selected:tab.selected}" }"><span>{{tab.label}}</span></a><span class="bar" ng-style="{width:bar.width,transform:bar.transform}"></span></div></div>',
+            template: '<div class="slide-tabs" ng-if="tabs.length" ng-swipe-left="moveAction($event,true)" ng-swipe-right="moveAction($event,false)"><div class="wrapper" ><a href="javascript:void(0)" class="tab" ng-repeat="tab in tabs" id="{{tab.id}}" ng-click="setTab(tab)" ng-class="{selected:tab.selected}" }"><span>{{tab.label}}</span></a><span class="bar" ng-style="{width:bar.width,transform:bar.transform}"></span></div></div>',
             scope: {
                 tabs: '=dynamicTabs',
                 isspan:'=isspan',
@@ -32,12 +32,22 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         }
                         wrapper.css('width',(_tabLength * w + 'px' ));
                         wrapper.find('a').css('width', w);
-                        console.log('==', w);
-
                         if (fn) {
                             fn(index, f);
                         }
+
+                        if (f === 'f' && (index +1) > limit ) {
+                            setCurrentTab(index, w);
+                        }
                     },200);
+                }
+
+                function setCurrentTab(index, wd) {
+                    var wrapper = element.find('.wrapper');
+                    var ww = wrapper.width();
+                    wd = wd * (index + 1 - limit);
+                    wrapper.css('transition', 'left 0.3s');
+                    wrapper.css('left', '-' + wd + 'px');
                 }
 
                 function setBarState(index, f) {
@@ -56,6 +66,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         if (wl) {
                             offsetLeft = offsetLeft + wl;
                         }
+
                         var plusLeft = 0;
                         if ((width - parseInt(barwidth)) > 0 ) {
                             plusLeft = parseInt(width - parseInt(barwidth));
@@ -64,11 +75,10 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         if (_aw != _w && f === 'f') {
                             var _w2;
                             if (_tabLength >limit ) {
-                                _w2=  clienWidth /limit/2;
+                                _w2=  clienWidth /limit/2 +  clienWidth /limit * index;
                             } else {
                                 _w2=  clienWidth /_tabLength/2;
                             }
-
                             offsetLeft = _w2 - parseInt(barwidth/2);
                         } else {
                             offsetLeft = offsetLeft + parseInt(plusLeft/2);
@@ -79,6 +89,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                             width: parseInt(barwidth) + 'px',
                             transform: leftProp
                         };
+
                 }
 
                 ngModelCtrl.$formatters.push(function (modelValue) {
@@ -115,30 +126,25 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                     ngModelCtrl.$setViewValue(item, 'change');
                 };
 
-                var l =scope.tabs.length - limit, tl = scope.tabs.length ;
                 scope.moveAction = function (e, c) {
                     e.stopPropagation();
                     var wrapper = element.find('.wrapper');
                     var wd = wrapper.find('.selected').width();
+                    var wl = wrapper.css('left').replace('px','');
+                    var leftProp;
                     if (c) {
-                        var wl = wrapper.css('left').replace('px','');
-                          if ( l > 0 && l <= (tl-limit)) {
-                              wl = Math.abs(wl) + wd;
-                              wrapper.css('transition', 'left 0.3s');
-                              wrapper.css('left','-' + wl + 'px');
-                              l = l - 1;
-                          }
+                        var l = wl/wd ? wl/wd : 0;
+                        //console.log(l);
+                        leftProp = (Math.abs(l) + 1) <= (_tabLength-limit) ? ((l-1) * wd) : 0;
+                        //console.log('left', wd, wl, leftProp);
                     } else {
-                        var wl = wrapper.css('left').replace('px','');
-                        if (l >= 0 && l < (tl-limit)) {
-                            wl = parseInt(wl) + wd;
-                            wrapper.css('transition', 'left 0.3s');
-                            wrapper.css('left', wl + 'px');
-                            l = l + 1;
-                        }
+                        var l = wl/wd ? wl/wd : 0;
+                        leftProp = l==0 ? 0: ((l+1) * wd);
+                        //console.log('right', wd, wl, leftProp);
                     }
+                    wrapper.css('transition', 'left 0.3s');
+                    wrapper.css('left', leftProp + 'px');
                 };
-
             }
         };
     }

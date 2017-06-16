@@ -3,7 +3,7 @@ angular.module('defaultApp.controller')
     .controller('BangdanOrgController', BangdanOrgController);
 
 function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window, $document) {
+    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window, $document, industry) {
 
     var vm = this;
     vm.list = [];
@@ -19,28 +19,6 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.total;
     vm.downloadApp = downloadApp;
     vm.moveAction = moveAction;
-    var industryArr = [{
-        label: '名企',
-        value: '1'
-    }, {
-        label: '名校',
-        value: '2'
-    }, {
-        label: 'FA',
-        value: '3'
-    }, {
-        label: 'FA4',
-        value: '4'
-    }, {
-        label: 'FA5',
-        value: '5'
-    }, {
-        label: 'FA6',
-        value: '6'
-    }];
-    $scope.industryArr = industryArr;
-    $scope.currentIndustry = $stateParams.industryArr || '1';
-
     init();
 
     function init() {
@@ -49,6 +27,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             vm.inApp = false;
         }
 
+        getOrgIndustry();
         getQ();
         getOrgRank();
         initPxLoader();
@@ -118,12 +97,34 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         document.title = t;
     }
 
+    function getOrgIndustry() {
+        var f = {
+            label: '全行业',
+            value: 0,
+            id: 0,
+            name: '全行业'
+        }
+        var industryArr = industry.data.map(function (item, index) {
+            item['label'] = item.name;
+            item['value'] = index + 1;
+            return item;
+        });
+        industryArr.push(f);
+        industryArr.sort(function(a, b) {
+            return a.id > b.id;
+        });
+
+        $scope.industryArr = industryArr;
+        $scope.currentIndustry = $stateParams.industry || 0;
+    }
+
     function getOrgRank(fn) {
         if (vm.busy) return;
         vm.busy = true;
         var request = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry || ''
         };
         if (!vm.inApp) {request.pageSize = 20; };
 
@@ -192,6 +193,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         $state.go('bangdan.orgbdDetail', {
             id: id,
             rank: rank,
+            industry: vm.industry
         });
     }
 
@@ -202,6 +204,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         var request = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry || ''
         };
         BangDanService.getOrgRank(request)
             .then(function (response) {
@@ -420,10 +423,24 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         }
     }
 
-    function changeTab(type) {
+    function resetData() {
+        vm.list = [];
+        vm.more = false;
+        vm.busy = false;
+        vm.finish = false;
+        vm.page = 0;
+        vm.startloading = true;
+    }
+
+    function changeTab() {
         $scope.$on('tabClicked', function (e, item) {
-            console.log(e, item);
-            console.log('切换代码');
+            window.sessionStorage.removeItem('org-position');
+            window.sessionStorage.removeItem('org-id');
+            if (item.value == 0 || item.value) {
+                vm.industry = item.value == 0 ? '' : item.value;
+                resetData();
+                getOrgRank();
+            }
         });
     }
 
