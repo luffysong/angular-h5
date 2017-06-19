@@ -137,6 +137,6 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     }
     function searchBlur(e) {
         e.preventDefault();
-        $('#block-part-con').css("opacity","1");
+        $('#block-part-con').css("display","block");
     }
 }
