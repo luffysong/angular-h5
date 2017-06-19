@@ -11,7 +11,14 @@
     </section>
 
     <section class="bd-tab-section" ng-if="industryArr.length > 1" >
-        <div dynamic-tabs="industryArr" ng-model="currentIndustry" isspan='true' barwidth='18' limit='4' changeobj="changeobj"></div>
+        <div
+        dynamic-tabs="industryArr"
+        ng-model="currentIndustry"
+        isspan='true'
+        barwidth='18'
+        limit='4'
+        changeobj="changeobj"
+        ></div>
     </section>
 
   <div class="combd-list-content" ng-if="vm.startloading">
@@ -34,6 +41,9 @@
             <img src="/styles/images/bangdan/loading.svg" alt="loading">
       </footer>
       <footer ng-if="vm.finish">已无更多数据</footer>
+      <div class="no-data"  ng-if="!vm.list.length > 0">
+          暂无数据
+      </div>
   </section>
 
 

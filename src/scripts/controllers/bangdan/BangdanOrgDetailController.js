@@ -589,7 +589,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
     function changeTab() {
         $scope.$on('tabClicked', function (e, item) {
             if (item.value == 0 || item.value) {
-                vm.industry = item.value == 0 ? '' : item.value;
+                vm.industry = item.value == 0 ? '' : item.id;
                 resetData();
                 getProList();
             }
@@ -604,6 +604,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             vm.cTab <l ? vm.cTab++ : 0;
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
+                    vm.industry = ind.id;
                     $scope.changeobj = ind;
                 }
             });
@@ -612,6 +613,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             vm.cTab > 0 ? vm.cTab-- : l-1;
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
+                    vm.industry = ind.id;
                     $scope.changeobj = ind;
                 }
             });

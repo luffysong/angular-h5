@@ -110,11 +110,10 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         var industryArr = [];
         industryArr.push(f);
         industry.data.forEach(function (item, index) {
-            var obj ={};
-            obj['label'] = item.name;
-            obj['value'] = index + 1;
-            industryArr.push(angular.extend({},obj,item));
-
+                var obj ={};
+                obj['label'] = item.name;
+                obj['value'] = index + 1;
+                industryArr.push(angular.extend({},obj,item));
         });
         $scope.industryArr = industryArr;
         $scope.currentIndustry = $stateParams.industry || 0;
@@ -406,6 +405,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             vm.cTab <l ? vm.cTab++ : 0;
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
+                    vm.industry = ind.id;
                     $scope.changeobj = ind;
                 }
             });
@@ -414,6 +414,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             vm.cTab > 0 ? vm.cTab-- : l-1;
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
+                    vm.industry = ind.id;
                     $scope.changeobj = ind;
                 }
             });
@@ -430,11 +431,11 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     }
 
     function changeTab() {
-        $scope.$on('tabClicked', function (e, item) {
+        $scope.$on('DynamicTabClicked', function (e, item) {
             window.sessionStorage.removeItem('org-position');
             window.sessionStorage.removeItem('org-id');
             if (item.value == 0 || item.value) {
-                vm.industry = item.value == 0 ? '' : item.value;
+                vm.industry = item.value == 0 ? '' : item.id;
                 resetData();
                 getOrgRank();
             }

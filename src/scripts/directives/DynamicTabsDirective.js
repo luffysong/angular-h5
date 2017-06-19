@@ -134,7 +134,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                 });
 
                 scope.setTab = function (item) {
-                    scope.$emit('tabClicked', item);
+                    scope.$emit('DynamicTabClicked', item);
                     ngModelCtrl.$setViewValue(item, 'change');
                 };
 
@@ -154,10 +154,18 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                     wrapper.css('transition', 'left 0.3s');
                     wrapper.css('left', leftProp + 'px');
                 };
-
+                //监听变化对象，以此来实现左右滑动
                 scope.$watch('changeobj', function (obj) {
                     if(obj && 'id' in obj ||
-                        obj && 'id' in obj && obj.id == 0){
+                        obj && 'id' in obj
+                        && obj.id == 0){
+                        scope.setTab(obj);
+                        setCurrentTab(obj.value);
+                    }
+                });
+                //父级tab发生变化
+                scope.$watch('changeparenttab', function (obj) {
+                    if(obj){
                         scope.setTab(obj);
                         setCurrentTab(obj.value);
                     }

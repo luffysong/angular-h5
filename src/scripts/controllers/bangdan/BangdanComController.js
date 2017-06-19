@@ -39,6 +39,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     $scope.currentComType = $stateParams.communityType || '1';
     vm.moveAction = moveAction;
     $scope.changeobj = {};
+    $scope.changeptab = {};
     $scope.industryArr =[];
     init();
 
@@ -56,6 +57,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         removeHeader();
         getTrackParams(vm.communityType);
         changeTab();
+        changeDynamicTab();
         sa.track('ViewPage',
           {
             source: vm.trackSource,
@@ -89,6 +91,14 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         var client = getClient();
 
         $scope.$on('tabClicked', function (e, item) {
+            //父级tab切换都返回第一条；
+            $scope.industryArr.forEach(function (ind, index) {
+                if (index === 0) {
+                    $scope.changeobj = {};
+                    $scope.changeobj = ind;
+                }
+            });
+
             if (item.value === '1') {
                 window.sessionStorage.removeItem('com-position');
                 window.sessionStorage.removeItem('com-id');
@@ -224,7 +234,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             page: vm.page + 1,
             pageSize: 10,
             communityType: vm.communityType,
-            industry: $scope.currentIndustry || ''
+            industry: vm.industry || ''
         };
         if (!vm.inApp) {request.pageSize = 10; };
 
@@ -302,7 +312,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             page: vm.page + 1,
             pageSize: 10,
             communityType: vm.communityType,
-            industry: $scope.currentIndustry || ''
+            industry: vm.industry || ''
         };
         BangDanService.getComRank(request)
             .then(function (response) {
@@ -497,11 +507,10 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         var industryArr = [];
         industryArr.push(f);
         industry.data.forEach(function (item, index) {
-            var obj ={};
-            obj['label'] = item.name;
-            obj['value'] = index + 1;
-            industryArr.push(angular.extend({},obj,item));
-
+                var obj ={};
+                obj['label'] = item.name;
+                obj['value'] = index + 1;
+                industryArr.push(angular.extend({},obj,item));
         });
         $scope.industryArr = industryArr;
         $scope.currentIndustry = $stateParams.industry || 0;
@@ -515,6 +524,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             vm.cTab <l ? vm.cTab++ : 0;
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
+                    vm.industry = vm.cTab;
                     $scope.changeobj = ind;
                 }
             });
@@ -523,10 +533,23 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             vm.cTab > 0 ? vm.cTab-- : l-1;
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
+                    vm.industry = vm.cTab;
                     $scope.changeobj = ind;
                 }
             });
         }
+    }
+
+    function changeDynamicTab() {
+        $scope.$on('DynamicTabClicked', function (e, item) {
+            window.sessionStorage.removeItem('org-position');
+            window.sessionStorage.removeItem('org-id');
+            if (item.value == 0 || item.value) {
+                vm.industry = item.value == 0 ? '' : item.id;
+                resetData();
+                getComRank();
+            }
+        });
     }
 
 }
