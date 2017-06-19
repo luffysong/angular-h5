@@ -22,7 +22,6 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     vm.searchKey = '搜索';
     init();
     function init() {
-        $("body").css('background-color', '#f9f9f9');
         window.WEIXINSHARE = {
             shareButton: 'hide'
         };
@@ -35,6 +34,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     }
 
     function loadMore() {
+        $("body").css('background-color', '#f9f9f9');
         if (vm.busy) {
             return;
         }
@@ -148,10 +148,12 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
         vm.endLoading = true;
         vm.searchKey = '取消';
         $('#block-part-con').css("display","none");
+        $('#block-part-con2').css("display","block");
     }
     function searchBlur(e) {
         e.preventDefault();
         $('#block-part-con').css("display","block");
-        doSearch(e);
+        $('#block-part-con2').css("display","none");
+        // doSearch(e);
     }
 }
