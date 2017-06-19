@@ -19,15 +19,19 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.total;
     vm.downloadApp = downloadApp;
     vm.moveAction = moveAction;
+    $scope.changeobj = {};
+    vm.dataHandle = false;
+    $scope.industryArr =[];
+
     init();
 
     function init() {
+        getOrgIndustry();
         if (!hybrid.isInApp) {
             initLinkme();
             vm.inApp = false;
         }
 
-        getOrgIndustry();
         getQ();
         getOrgRank();
         initPxLoader();
@@ -104,18 +108,18 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             id: 0,
             name: '全行业'
         }
-        var industryArr = industry.data.map(function (item, index) {
-            item['label'] = item.name;
-            item['value'] = index + 1;
-            return item;
-        });
+        var industryArr = [];
         industryArr.push(f);
-        industryArr.sort(function(a, b) {
-            return a.id > b.id;
-        });
+        industry.data.forEach(function (item, index) {
+            var obj ={};
+            obj['label'] = item.name;
+            obj['value'] = index + 1;
+            industryArr.push(angular.extend({},obj,item));
 
+        });
         $scope.industryArr = industryArr;
         $scope.currentIndustry = $stateParams.industry || 0;
+        vm.dataHandle = true;
     }
 
     function getOrgRank(fn) {
@@ -396,30 +400,26 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         });
     }
 
+    vm.cTab = parseInt($scope.currentIndustry);
     function moveAction(e ,c) {
-        console.log(e, c);
         var l = $scope.industryArr.length;
+
         if (c) {
+            vm.cTab <l ? vm.cTab++ : 0;
+            $scope.industryArr.forEach(function (ind, index) {
+                console.log(index);
+                if(index == vm.cTab) {
+                    $scope.changeobj = ind;
+                }
+            });
 
-            $scope.callDirFunc = function(){
-              $scope.directiveFunction();
-            };
-
-            // $scope.industryArr.forEach(function (item, index){
-            //     if ((index + 1) == $scope.currentIndustry) {
-            //         $scope.setTab(item);
-            //     }
-            // })
-            //
-            // if ($scope.currentIndustry < l){
-            //     l = l +1;
-            //     $scope.currentIndustry = l + '';
-            // }
         } else {
-            if ($scope.currentIndustry >=0 &&  $scope.currentIndustry < l){
-                l = l - 1;
-                $scope.currentIndustry = l + '';
-            }
+            vm.cTab > 0 ? vm.cTab-- : l-1;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    $scope.changeobj = ind;
+                }
+            });
         }
     }
 

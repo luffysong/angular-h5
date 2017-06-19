@@ -17,7 +17,7 @@ angular.module('defaultApp.directive').directive('projectItem',
             templateUrl: 'templates/directive/bangdan/pro-item.html',
             link: function (scope, element, attrs) {
                 scope.$watch('isinvestor', function (newValue, oldValue) {
-                    console.log(newValue, oldValue);
+                    //console.log(newValue, oldValue);
                 });
             }
         };

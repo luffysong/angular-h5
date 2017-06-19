@@ -19,6 +19,8 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.investRole = false;
     vm.hoverFunction = hoverFunction;
     vm.startloading = true;
+    vm.moveAction = moveAction;
+    $scope.changeobj = {};
     init();
 
     function init() {
@@ -87,18 +89,15 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             id: 0,
             name: '全行业'
         }
-        var industryArr = orgInfo.data.industryList.map(function (item, index) {
-            item['label'] = item.name;
-            item['value'] = index + 1 ;
-            return item;
-        });
+        var industryArr = [];
         industryArr.push(f);
-        industryArr.sort(function(a, b) {
-            return a.id > b.id;
+        orgInfo.data.industryList.forEach(function (item, index) {
+            var obj ={};
+            obj['label'] = item.name;
+            obj['value'] = index + 1;
+            industryArr.push(angular.extend({},obj,item));
         });
-
         $scope.industryArr = industryArr;
-        console.log(industryArr.length);
          if ($stateParams.industry &&
              $stateParams.industry >= industryArr.length) {
             $scope.currentIndustry = 0;
@@ -595,6 +594,28 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
                 getProList();
             }
         });
+    }
+
+    vm.cTab = parseInt($scope.currentIndustry);
+    function moveAction(e ,c) {
+        var l = $scope.industryArr.length;
+
+        if (c) {
+            vm.cTab <l ? vm.cTab++ : 0;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    $scope.changeobj = ind;
+                }
+            });
+
+        } else {
+            vm.cTab > 0 ? vm.cTab-- : l-1;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    $scope.changeobj = ind;
+                }
+            });
+        }
     }
 
 }
