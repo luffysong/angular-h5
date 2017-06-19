@@ -64,6 +64,11 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
                     body.highlight(vm.keyword);
                 }
             }, 0);
+            if (responseObj.totalPages - vm.sendData.page < 0) {
+                vm.busy = true;
+                vm.endLoading = false;
+                vm.dataItemLength = 0;
+            }
             if (vm.reportList.length < 10) {
                 vm.loadMore();
             }
@@ -134,7 +139,6 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
         vm.endLoading = true;
         vm.searchKey = '取消';
         $('#block-part-con').css("display","none");
-        $('.block-part-div').css("position","fixed");
     }
     function searchBlur(e) {
         e.preventDefault();

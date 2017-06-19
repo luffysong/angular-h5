@@ -28,7 +28,7 @@
        <!--    <span class="float-right block-part-report-webs" ng-show="cell.tags.length">
             {{cell.website}}
           </span> -->
-           <span  class="float-right block-part-report-down" ng-click="vm.reportPdfLink(cell, $event)" ng-show="cell.attachLink">下载研报</span>
+           <span  class="float-right block-part-report-down" ng-click="vm.reportPdfLink(cell, $event)" ng-show="cell.attachLink">查看研报</span>
           <div class="report-clear"></div>
         </div>
       </div>
@@ -42,6 +42,8 @@
       <div class="load-more" ng-if="!vm.dataItemLength && vm.reportList.length">
           <p>全部数据加载完毕</p>
       </div>
+  </div>
+  <div class="block-part-con">
   </div>
 </div>
 
