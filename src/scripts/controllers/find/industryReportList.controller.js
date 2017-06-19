@@ -74,15 +74,16 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
 
     function reportLink(cell, event) {
         event.stopPropagation();
-        window.open(cell.link);
-        // $('#report-list').style.display = 'none';
+        // window.open(cell.link);
+        window.location.href = cell.link;
+        $('#report-list').style.display = 'none';
         vm.reportList = [];
-        // window.location.href = cell.link;
     }
     function reportPdfLink(cell, event) {
         event.stopPropagation();
-        window.open(cell.attachLink);
-        // $('#report-list').style.display = 'none';
+        // window.open(cell.attachLink);
+        window.location.href = cell.attachLink;
+        $('#report-list').style.display = 'none';
         vm.reportList = [];
     }
     function openNativePage(path) {
@@ -128,6 +129,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     function searchFocus(e) {
         e.preventDefault();
         vm.reportList = [];
+        vm.endLoading = false;
         vm.searchKey = '取消';
         // $('#block-part-con').css("opacity","0.05");
     }
