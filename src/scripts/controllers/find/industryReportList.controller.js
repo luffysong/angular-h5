@@ -64,6 +64,9 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
                     body.highlight(vm.keyword);
                 }
             }, 0);
+            if (vm.reportList.length < 10) {
+                vm.loadMore();
+            }
         }).catch(function (err) {
             loading.hide('industryReportListLoading');
             if (err && err.data) {
@@ -74,15 +77,14 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
 
     function reportLink(cell, event) {
         event.stopPropagation();
-        // window.open(cell.link);
-        window.location.href = cell.link;
+        window.open(cell.link);
+        // window.location.href = cell.link;
         $('#report-list').style.display = 'none';
         vm.reportList = [];
     }
     function reportPdfLink(cell, event) {
         event.stopPropagation();
-        // window.open(cell.attachLink);
-        window.location.href = cell.attachLink;
+        window.open(cell.attachLink);
         $('#report-list').style.display = 'none';
         vm.reportList = [];
     }
@@ -129,7 +131,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     function searchFocus(e) {
         e.preventDefault();
         vm.reportList = [];
-        vm.endLoading = false;
+        vm.endLoading = true;
         vm.searchKey = '取消';
         // $('#block-part-con').css("opacity","0.05");
     }
