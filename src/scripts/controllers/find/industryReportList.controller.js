@@ -43,7 +43,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
         FindService.getIndustryReportList(vm.sendData).then(function (data) {
             var responseObj = data.data;
             loading.hide('industryReportListLoading');
-            vm.dataItemLength = responseObj.data.length;
+            vm.dataItemLength = responseObj.data && responseObj.data.length;
             if (!vm.dataItemLength) {
                 vm.busy = true;
                 vm.endLoading = false;
@@ -75,13 +75,15 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     function reportLink(cell, event) {
         event.stopPropagation();
         window.open(cell.link);
-        $('#report-list').style('display', 'none');
+        $('#report-list').style.display = 'none';
+        vm.reportList = [];
         // window.location.href = cell.link;
     }
     function reportPdfLink(cell, event) {
         event.stopPropagation();
         window.open(cell.attachLink);
-        $('#report-list').style('display', 'none');
+        $('#report-list').style.display = 'none';
+        vm.reportList = [];
     }
     function openNativePage(path) {
         console.log(path);
