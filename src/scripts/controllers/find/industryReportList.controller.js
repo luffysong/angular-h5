@@ -49,7 +49,12 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
                 vm.endLoading = false;
                 return;
             }
-
+            if (responseObj.totalPages - vm.sendData.page < 0) {
+                vm.busy = true;
+                vm.endLoading = false;
+                vm.dataItemLength = 0;
+                return;
+            }
             if(!vm.reportList) {
                 vm.reportList = responseObj.data;
             } else {
@@ -64,11 +69,6 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
                     body.highlight(vm.keyword);
                 }
             }, 0);
-            if (responseObj.totalPages - vm.sendData.page < 0) {
-                vm.busy = true;
-                vm.endLoading = false;
-                vm.dataItemLength = 0;
-            }
             if (vm.reportList.length < 10) {
                 vm.loadMore();
             }
