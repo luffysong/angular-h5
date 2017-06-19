@@ -92,12 +92,12 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
 
         $scope.$on('tabClicked', function (e, item) {
             //父级tab切换都返回第一条；
-            $scope.industryArr.forEach(function (ind, index) {
-                if (index === 0) {
-                    $scope.changeobj = {};
-                    $scope.changeobj = ind;
-                }
-            });
+            // $scope.industryArr.forEach(function (ind, index) {
+            //     if (index === 0) {
+            //         $scope.changeobj = ind;
+            //         console.log($scope.changeobj.name)
+            //     }
+            // });
 
             if (item.value === '1') {
                 window.sessionStorage.removeItem('com-position');
@@ -300,7 +300,8 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         $state.go('bangdan.combddetail', {
             id: id,
             rank: rank,
-            communityType: vm.communityType
+            communityType: vm.communityType,
+            industry: vm.industry,
         });
     }
 

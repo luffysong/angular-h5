@@ -85,7 +85,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                             if (_tabLength >limit ) {
                                 _w2=  clienWidth /limit/2 +  clienWidth /limit * index;
                             } else {
-                                _w2=  clienWidth /_tabLength/2;
+                                _w2=  (clienWidth /_tabLength) * index + clienWidth /_tabLength/2;
                             }
                             offsetLeft = _w2 - parseInt(barwidth/2);
                         } else {

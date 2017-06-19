@@ -21,6 +21,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.startloading = true;
     vm.moveAction = moveAction;
     $scope.changeobj = {};
+    $scope.currentIndustry = 0;
     init();
 
     function init() {
@@ -98,14 +99,20 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             industryArr.push(angular.extend({},obj,item));
         });
         $scope.industryArr = industryArr;
-         if ($stateParams.industry &&
-             $stateParams.industry >= industryArr.length) {
-            $scope.currentIndustry = 0;
-         } else {
-             $scope.currentIndustry = parseInt($stateParams.industry) || 0;
-         }
-         vm.industry = parseInt($stateParams.industry) == 0 ? '' : parseInt($stateParams.industry);
+
+         setTab();
          getProList();
+    }
+
+    function setTab() {
+        $scope.industryArr.forEach(function (item, index) {
+            if (item.id == parseInt($stateParams.industry)) {
+                $scope.currentIndustry = index;
+            }
+        });
+
+        console.log('==', $scope.currentIndustry);
+        vm.industry = parseInt($scope.currentIndustry) == 0 ? '' : parseInt($scope.currentIndustry);
     }
 
     function getProList() {
@@ -587,7 +594,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
     }
 
     function changeTab() {
-        $scope.$on('tabClicked', function (e, item) {
+        $scope.$on('DynamicTabClicked', function (e, item) {
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
                 resetData();

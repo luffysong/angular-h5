@@ -453,7 +453,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.investorbddetail', {
-        url: '/investorbddetail?{id}&{rank}',
+        url: '/investorbddetail?{id}&{rank}&{industry}',
         controllerAs: 'vm',
         controller: 'BangdanInvestorDetailController',
         templateUrl: 'templates/bangdan/bdinvestordetail.html',
@@ -487,7 +487,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.combddetail', {
-        url: '/combddetail?{id}&{rank}&{communityType}',
+        url: '/combddetail?{id}&{rank}&{communityType}&{industry}',
         controllerAs: 'vm',
         controller: 'BangdanComDetailController',
         templateUrl: 'templates/bangdan/bdcomdetail.html',

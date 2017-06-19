@@ -40,6 +40,17 @@
         </div>
     </section>
 
+    <section class="bd-tab-section" ng-if="industryArr.length > 1" >
+        <div
+        dynamic-tabs="industryArr"
+        ng-model="currentIndustry"
+        isspan='true'
+        barwidth='18'
+        limit='4'
+        changeobj="changeobj"
+        ></div>
+    </section>
+
     <section class="bd-investor-info" ng-if="vm.comInfo.intro">
         <div class="investor-info"
             ng-class="{true:'padd-Btm-f',false:''}[vm.isEqualHeight]">
@@ -101,7 +112,10 @@
     <div class="txt-intro">
         * 以下项目按本季度被约谈量排序，实时更新
     </div>
-    <div class="pro-list">
+    <div class="pro-list"
+        ng-swipe-left = "vm.moveAction($event, true)"
+        ng-swipe-right = "vm.moveAction($event, false)"
+    >
         <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='2'>
             <li ng-if="vm.prolist" ng-repeat="item in vm.prolist track  by $index"
                 ng-click="vm.goProDetail(item.ccid, $event)" >

@@ -23,6 +23,9 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.isEqualHeight = false;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/vKzwzTf';
     vm.communityType = $stateParams.communityType;
+    vm.moveAction = moveAction;
+    $scope.changeobj = {};
+    $scope.currentIndustry = 1;
     init();
 
     function init() {
@@ -32,7 +35,8 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             initLinkme();
             vm.inApp = false;
         }
-        getProList();
+        getComIndustry();
+        //getProList();
         getQ();
         initPxLoader();
         initUser();
@@ -86,6 +90,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         var params = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry,
         };
 
         if (!vm.inApp) {params.pageSize = 2;};
@@ -117,6 +122,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         var params = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry,
         };
 
         BangDanService.getComProRank($stateParams.id, params)
@@ -566,6 +572,61 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             });
 
         }, 'jsonp');
+    }
+
+
+    function getComIndustry() {
+        var f = {
+            label: '全行业',
+            value: 0,
+            id: 0,
+            name: '全行业'
+        }
+        var industryArr = [];
+        industryArr.push(f);
+        comInfo.data.industryList.forEach(function (item, index) {
+            var obj ={};
+            obj['label'] = item.name;
+            obj['value'] = index + 1;
+            industryArr.push(angular.extend({},obj,item));
+        });
+        $scope.industryArr = industryArr;
+
+        setTab();
+        getProList();
+    }
+
+    function setTab() {
+        $scope.industryArr.forEach(function (item, index) {
+            if (item.id == parseInt($stateParams.industry)) {
+                $scope.currentIndustry = index;
+            }
+        });
+        vm.industry = parseInt($scope.currentIndustry) == 0 ? '' : parseInt($scope.currentIndustry);
+    }
+
+    vm.cTab = parseInt($scope.currentIndustry);
+    function moveAction(e ,c) {
+        var l = $scope.industryArr.length;
+
+        if (c) {
+            vm.cTab <l ? vm.cTab++ : 0;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    $scope.changeobj = ind;
+                }
+            });
+
+        } else {
+            vm.cTab > 0 ? vm.cTab-- : l-1;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    $scope.changeobj = ind;
+                }
+            });
+        }
     }
 
 }
