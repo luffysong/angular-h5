@@ -82,6 +82,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
         // window.open(cell.attachLink);
         // hybrid.open('/openEncryptionLink/' + encodeURIComponent(cell.attachLink));
         window.location.href = cell.attachLink;
+        vm.reportList = [];
     }
     function openNativePage(path) {
         console.log(path);
