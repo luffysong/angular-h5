@@ -24,11 +24,15 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                 var limit = parseInt(scope.limit);
                 var wrapper;
                 var setCurrentTab;
+                var aWidth;
 
                 function setWrapper(fn, index, f) {
                     $timeout(function () {
                         wrapper = element.find('.wrapper');
                         var w = wrapper.find('.selected').width();
+                        if (!aWidth) {
+                            aWidth = w;
+                        }
                         if (_tabLength < limit ||  _tabLength == limit) {
                             w = clienWidth /(_tabLength);
                         }
@@ -45,8 +49,9 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                     $timeout(function () {
                         var wrapper = element.find('.wrapper');
                         var w = wrapper.find('.selected').width();
-                        var wrapper = element.find('.wrapper');
-                        var ww = wrapper.width();
+                        if (aWidth) {
+                            w = aWidth;
+                        }
                         w = w * (index + 1 - limit);
                         wrapper.css('transition', 'left 0.3s');
                         wrapper.css('left', '-' + w + 'px');
