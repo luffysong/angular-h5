@@ -75,14 +75,12 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     function reportLink(cell, event) {
         event.stopPropagation();
         window.open(cell.link);
-        vm.reportList = [];
         $('#report-list').style('display', 'none');
         // window.location.href = cell.link;
     }
     function reportPdfLink(cell, event) {
         event.stopPropagation();
         window.open(cell.attachLink);
-        vm.reportList = [];
         $('#report-list').style('display', 'none');
     }
     function openNativePage(path) {
