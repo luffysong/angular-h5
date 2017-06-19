@@ -21,17 +21,17 @@ function NewsDetailController(FindService, ErrorService, UserService, Credential
     if($stateParams.ccid) {
         hybrid.open('addBottomViewInWeb/' + $stateParams.ccid);
     }
-    if($stateParams.investors) {
-        vm.news.investors = decodeURIComponent($stateParams.investors);
-        var investorsArr = vm.news.investors.split('·');
-        vm.news.investors = investorsArr.join('，');
-    }
-    if($stateParams.amount) {
-        vm.news.amount = decodeURIComponent($stateParams.amount);
-    }
-    if($stateParams.phase) {
-        vm.news.phase = decodeURIComponent($stateParams.phase);
-    }
+    // if($stateParams.investors) {
+    //     vm.news.investors = decodeURIComponent($stateParams.investors);
+    //     var investorsArr = vm.news.investors.split('·');
+    //     vm.news.investors = investorsArr.join('，');
+    // }
+    // if($stateParams.amount) {
+    //     vm.news.amount = decodeURIComponent($stateParams.amount);
+    // }
+    // if($stateParams.phase) {
+    //     vm.news.phase = decodeURIComponent($stateParams.phase);
+    // }
 
     vm.mergerGoTo = mergerGoTo;
     // 三种类型并购方
@@ -59,8 +59,8 @@ function NewsDetailController(FindService, ErrorService, UserService, Credential
             hybrid.open(path);
         }
     }
-    // FindService.getNewsDetail(vm.sendData).then(function (data) {
-    FindService.getNewsDetail(vm.news.id).then(function (data) {
+    FindService.getNewsDetail(vm.sendData).then(function (data) {
+    // FindService.getNewsDetail(vm.news.id).then(function (data) {
         loading.hide('newsDetailLoading');
         if (data && data.data && data.data) {
             vm.news.data = data.data;

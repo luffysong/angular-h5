@@ -122,14 +122,14 @@ angular.module('defaultApp.service').service('FindService', function (BasicServi
     };
 
     // 新闻详情
-    this.getNewsDetail = function (id) {
-        return $http.get('/api/mobi-investor/daily-report-content?reportId=' + id);
-    };
+    // this.getNewsDetail = function (id) {
+    //     return $http.get('/api/mobi-investor/daily-report-content?reportId=' + id);
+    // };
 
     // 新闻详情新接口
-    // this.getNewsDetail = function (params) {
-    //     return $http.get('/api/mobi-investor/daily-report-content?' + $.param(params));
-    // };
+    this.getNewsDetail = function (params) {
+        return $http.get('/api/mobi-investor/daily-report-content?' + $.param(params));
+    };
 
     // 行业报告list
     this.getIndustryReportList = function (request) {
