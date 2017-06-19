@@ -447,6 +447,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'BangdanInvestorController',
         templateUrl: 'templates/bangdan/bdinvestor.html',
+        resolve: {
+            industry: getInvestorIndustry,
+        }
     });
 
     $stateProvider.state('bangdan.investorbddetail', {
@@ -478,6 +481,9 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         controllerAs: 'vm',
         controller: 'BangdanComController',
         templateUrl: 'templates/bangdan/bdcom.html',
+        resolve: {
+            industry: getComIndustry,
+        }
     });
 
     $stateProvider.state('bangdan.combddetail', {
@@ -772,8 +778,8 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
         return BangDanService.getOrgIndustry();
     }
 
-    function getInvesorIndustry(BangDanService) {
-        return BangDanService.getInvesorIndustry();
+    function getInvestorIndustry(BangDanService) {
+        return BangDanService.getInvestorIndustry();
     }
 
     function getComIndustry(BangDanService) {

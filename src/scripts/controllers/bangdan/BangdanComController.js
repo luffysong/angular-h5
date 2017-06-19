@@ -3,7 +3,7 @@ angular.module('defaultApp.controller')
     .controller('BangdanComController', BangdanComController);
 
 function BangdanComController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window, $document) {
+    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window, $document, industry) {
 
     var vm = this;
     vm.list = [];
@@ -37,9 +37,13 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     }];
     $scope.comType = comType;
     $scope.currentComType = $stateParams.communityType || '1';
+    vm.moveAction = moveAction;
+    $scope.changeobj = {};
+    $scope.industryArr =[];
     init();
 
     function init() {
+        getComIndustry();
         if (!hybrid.isInApp) {
             initLinkme();
             vm.inApp = false;
@@ -219,7 +223,8 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         var request = {
             page: vm.page + 1,
             pageSize: 10,
-            communityType: vm.communityType
+            communityType: vm.communityType,
+            industry: $scope.currentIndustry || ''
         };
         if (!vm.inApp) {request.pageSize = 10; };
 
@@ -296,7 +301,8 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         var request = {
             page: vm.page + 1,
             pageSize: 10,
-            communityType: vm.communityType
+            communityType: vm.communityType,
+            industry: $scope.currentIndustry || ''
         };
         BangDanService.getComRank(request)
             .then(function (response) {
@@ -462,7 +468,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             getComRank(someArray);
         } else {
             $document.scrollTopAnimated(parseInt(vm.storagePosition)).then(function () {
-                console && console.log('You just scrolled to the position!');
+                //console && console.log('You just scrolled to the position!');
             });
         }
     }
@@ -476,7 +482,49 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             someArray();
         } else {
             $document.scrollTopAnimated(parseInt(value)).then(function () {
-                console && console.log('You just scrolled to the position!');
+                //console && console.log('You just scrolled to the position!');
+            });
+        }
+    }
+
+    function getComIndustry() {
+        var f = {
+            label: '全行业',
+            value: 0,
+            id: 0,
+            name: '全行业'
+        }
+        var industryArr = [];
+        industryArr.push(f);
+        industry.data.forEach(function (item, index) {
+            var obj ={};
+            obj['label'] = item.name;
+            obj['value'] = index + 1;
+            industryArr.push(angular.extend({},obj,item));
+
+        });
+        $scope.industryArr = industryArr;
+        $scope.currentIndustry = $stateParams.industry || 0;
+    }
+
+    vm.cTab = parseInt($scope.currentIndustry);
+    function moveAction(e ,c) {
+        var l = $scope.industryArr.length;
+
+        if (c) {
+            vm.cTab <l ? vm.cTab++ : 0;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    $scope.changeobj = ind;
+                }
+            });
+
+        } else {
+            vm.cTab > 0 ? vm.cTab-- : l-1;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    $scope.changeobj = ind;
+                }
             });
         }
     }

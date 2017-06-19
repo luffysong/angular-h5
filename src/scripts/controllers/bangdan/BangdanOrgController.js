@@ -20,7 +20,6 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.downloadApp = downloadApp;
     vm.moveAction = moveAction;
     $scope.changeobj = {};
-    vm.dataHandle = false;
     $scope.industryArr =[];
 
     init();
@@ -119,7 +118,6 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         });
         $scope.industryArr = industryArr;
         $scope.currentIndustry = $stateParams.industry || 0;
-        vm.dataHandle = true;
     }
 
     function getOrgRank(fn) {
@@ -407,7 +405,6 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         if (c) {
             vm.cTab <l ? vm.cTab++ : 0;
             $scope.industryArr.forEach(function (ind, index) {
-                console.log(index);
                 if(index == vm.cTab) {
                     $scope.changeobj = ind;
                 }

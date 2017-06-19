@@ -75,7 +75,7 @@ angular.module('defaultApp.service').service('BangDanService', function(BasicSer
     };
 
     //投资人行业
-    this.getInvesorIndustry= function () {
+    this.getInvestorIndustry= function () {
         return $http.get(BASE_URL + '/investor/industry');
     };
 
