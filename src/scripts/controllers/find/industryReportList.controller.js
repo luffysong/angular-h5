@@ -133,10 +133,10 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
         vm.reportList = [];
         vm.endLoading = true;
         vm.searchKey = '取消';
-        // $('#block-part-con').css("opacity","0.05");
+        $('#block-part-con').css("display","none");
     }
     function searchBlur(e) {
         e.preventDefault();
-        // $('#block-part-con').css("opacity","1");
+        $('#block-part-con').css("opacity","1");
     }
 }
