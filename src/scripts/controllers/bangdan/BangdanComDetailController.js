@@ -92,7 +92,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             pageSize: 10,
             industry: vm.industry,
         };
-
+        console.log(params);
         if (!vm.inApp) {params.pageSize = 2;};
 
         BangDanService.getComProRank($stateParams.id, params)
@@ -602,7 +602,8 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                 $scope.currentIndustry = index;
             }
         });
-        vm.industry = parseInt($scope.currentIndustry) == 0 ? '' : parseInt($scope.currentIndustry);
+
+        vm.industry = parseInt($stateParams.industry) == 0 ? '' : parseInt($stateParams.industry);
     }
 
     vm.cTab = parseInt($scope.currentIndustry);

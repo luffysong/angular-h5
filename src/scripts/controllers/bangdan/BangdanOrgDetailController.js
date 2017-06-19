@@ -111,8 +111,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             }
         });
 
-        console.log('==', $scope.currentIndustry);
-        vm.industry = parseInt($scope.currentIndustry) == 0 ? '' : parseInt($scope.currentIndustry);
+        vm.industry = parseInt($stateParams.industry) == 0 ? '' : parseInt($stateParams.industry);
     }
 
     function getProList() {
