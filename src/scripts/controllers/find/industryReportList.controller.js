@@ -134,6 +134,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
         vm.endLoading = true;
         vm.searchKey = '取消';
         $('#block-part-con').css("display","none");
+        $('.block-part-div').css("position","fixed");
     }
     function searchBlur(e) {
         e.preventDefault();
