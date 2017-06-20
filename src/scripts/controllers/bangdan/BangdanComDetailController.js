@@ -25,7 +25,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.communityType = $stateParams.communityType;
     vm.moveAction = moveAction;
     $scope.changeobj = {};
-    $scope.currentIndustry = 1;
+    $scope.currentIndustry = 0;
     init();
 
     function init() {
@@ -37,6 +37,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         }
         getComIndustry();
         //getProList();
+        changeTab();
         getQ();
         initPxLoader();
         initUser();
@@ -92,7 +93,6 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             pageSize: 10,
             industry: vm.industry,
         };
-        console.log(params);
         if (!vm.inApp) {params.pageSize = 2;};
 
         BangDanService.getComProRank($stateParams.id, params)
@@ -602,8 +602,12 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                 $scope.currentIndustry = index;
             }
         });
+        if ($stateParams.industry) {
+            vm.industry = parseInt($stateParams.industry) == 0 ? '' : parseInt($stateParams.industry);
+        } else {
+            vm.industry = '';
+        }
 
-        vm.industry = parseInt($stateParams.industry) == 0 ? '' : parseInt($stateParams.industry);
     }
 
     vm.cTab = parseInt($scope.currentIndustry);
@@ -628,6 +632,25 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                 }
             });
         }
+    }
+
+    function resetData() {
+        vm.prolist = [];
+        vm.more = false;
+        vm.busy = false;
+        vm.finish = false;
+        vm.page = 0;
+        vm.startloading = true;
+    }
+
+    function changeTab() {
+        $scope.$on('DynamicTabClicked', function (e, item) {
+            if (item.value == 0 || item.value) {
+                vm.industry = item.value == 0 ? '' : item.id;
+                resetData();
+                getProList();
+            }
+        });
     }
 
 }

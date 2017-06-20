@@ -40,17 +40,6 @@
         </div>
     </section>
 
-    <section class="bd-tab-section" ng-if="industryArr.length > 1" >
-        <div
-        dynamic-tabs="industryArr"
-        ng-model="currentIndustry"
-        isspan='true'
-        barwidth='18'
-        limit='4'
-        changeobj="changeobj"
-        ></div>
-    </section>
-
     <section class="bd-investor-info" ng-if="vm.comInfo.intro">
         <div class="investor-info"
             ng-class="{true:'padd-Btm-f',false:''}[vm.isEqualHeight]">
@@ -77,6 +66,18 @@
             <span class="h-line"></span>
             <span class="p-title"><b>优质项目</b></span>
         </div>
+
+        <section class="bd-tab-section com-detail" ng-if="industryArr.length > 1" >
+            <div
+            dynamic-tabs="industryArr"
+            ng-model="currentIndustry"
+            isspan='true'
+            barwidth='18'
+            limit='4'
+            changeobj="changeobj"
+            ></div>
+        </section>
+
         <div class="pro-num">
             <div class="rank-num">
                 <div class="content-num">

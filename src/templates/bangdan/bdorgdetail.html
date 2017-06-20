@@ -56,6 +56,29 @@
             </div>
     </section>
 
+    <section class="bd-org-info" ng-if="vm.orgInfo.intro">
+        <div class="org-info"
+            ng-class="{true:'padd-Btm-f',false:''}[vm.isEqualHeight]">
+            <div class="info-content" >
+                <div class="info">
+                    <text-line-clamp line-clamp='4' text="vm.orgInfo.intro" isequalheight="vm.isEqualHeight"  >
+                        <div class="text-container">
+                            <p class="text-content">
+                            </p>
+                        </div>
+                    </text-line-clamp>
+                </div>
+            </div>
+            <div class="open-more" ng-click="vm.openMore($event)" ng-if="vm.isEqualHeight">
+                <span >
+                    点击<span class="open-close-txt">展开</span>完整介绍&nbsp;
+                    <img class="open-close" src="/styles/images/bangdan/open-more-new.png"/></span>
+            </div>
+        </div>
+
+    </section>
+
+
     <section class="bd-tab-section" ng-if="industryArr.length > 1">
         <div dynamic-tabs="industryArr" ng-model="currentIndustry" isspan='true' barwidth='18' limit='4' changeobj="changeobj"></div>
     </section>

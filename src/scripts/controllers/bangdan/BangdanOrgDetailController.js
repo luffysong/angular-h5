@@ -20,6 +20,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.hoverFunction = hoverFunction;
     vm.startloading = true;
     vm.moveAction = moveAction;
+    vm.openMore = openMore;
     $scope.changeobj = {};
     $scope.currentIndustry = 0;
     init();
@@ -111,7 +112,11 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             }
         });
 
-        vm.industry = parseInt($stateParams.industry) == 0 ? '' : parseInt($stateParams.industry);
+        if ($stateParams.industry) {
+            vm.industry = parseInt($stateParams.industry) == 0 ? '' : parseInt($stateParams.industry);
+        } else {
+            vm.industry = '';
+        }
     }
 
     function getProList() {
@@ -445,6 +450,34 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             .then(function setdata(response) {
             })
             .catch(fail);
+        }
+    }
+
+    function openMore(e) {
+        var obj = angular.element(e.currentTarget);
+        var openClose = obj.find('.open-close');
+        var openCloseTxt = obj.find('.open-close-txt');
+
+        var $infoObj = obj.parent().find('.info-content').find('.info').find('.text-content');
+        var lineClamp  = '-webkit-line-clamp';
+        var fhclmp = $infoObj.attr('cla-height');
+        var fh = $infoObj.attr('o-height');
+
+        if (vm.collapse) {
+            $infoObj.css(lineClamp, '');
+            $infoObj.css('transition', 'height 0.3s');
+            $infoObj.css('height', fh + 'px');
+
+            openClose.css('transform', 'rotate(180deg)');
+            openCloseTxt.html('收起');
+            vm.collapse = false;
+        }else {
+            $infoObj.css('transition', 'height 0.3s');
+            $infoObj.css('height',  fhclmp + 'px');
+            $infoObj.css(lineClamp, '4');
+            openClose.css('transform', '');
+            openCloseTxt.html('展开');
+            vm.collapse = true;
         }
     }
 
