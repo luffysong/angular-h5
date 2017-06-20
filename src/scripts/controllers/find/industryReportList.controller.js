@@ -12,7 +12,6 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     vm.searchFocus = searchFocus;
     vm.searchBlur = searchBlur;
     vm.openNativePage = openNativePage;
-    vm.doSearch = doSearch;
     vm.doCancel = doCancel;
     vm.doSubmit = doSubmit;
     vm.keyword = '';
@@ -118,8 +117,14 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
             hybrid.open(path);
         }
     }
-    function doSearch(e) {
+    function doCancel(e) {
         e.preventDefault();
+        vm.keyword = '';
+        vm.doSubmit(e);
+    }    
+    function doSubmit(e) {
+        e.preventDefault();
+        document.activeElement.blur();
         vm.searchKey = '搜索';
         vm.busy = false;
         vm.dataItemLength = '';
@@ -131,16 +136,6 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
             page: 1
         };
         vm.loadMore();
-    }
-    function doCancel(e) {
-        e.preventDefault();
-        vm.keyword = '';
-        vm.doSearch(e);
-    }    
-    function doSubmit(e) {
-        e.preventDefault();
-        document.activeElement.blur();
-        vm.doSearch(e);
     }
     function searchFocus(e) {
         e.preventDefault();
@@ -154,6 +149,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
     }
     function searchBlur(e) {
         e.preventDefault();
+        // vm.searchKey = '搜索';
         $('#block-part-con').css("display", "block");
         $('.block-part-div').css("position", "fixed");
     }
