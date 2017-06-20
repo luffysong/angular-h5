@@ -25,8 +25,24 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                 var wrapper;
                 var setCurrentTab;
                 var aWidth;
+                var cutLeft;
 
-                function setWrapper(fn, index, f) {
+                cutLeft = function (_aw, _w, offsetLeft, index) {
+                    if (_aw != _w) {
+                        var _w2;
+                        if (_tabLength >limit ) {
+                            _w2=  clienWidth /limit/2 +  clienWidth /limit * index;
+                        } else {
+                            _w2=  (clienWidth /_tabLength) * index + clienWidth /_tabLength/2;
+                        }
+                        offsetLeft = _w2 - parseInt(barwidth/2);
+                    }
+
+                    return offsetLeft;
+                }
+
+
+                function setWrapper(fn, index) {
                     $timeout(function () {
                         wrapper = element.find('.wrapper');
                         var w = wrapper.find('.selected').width();
@@ -40,7 +56,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         wrapper.find('a').css('width', w);
 
                         if (fn) {
-                            fn(index, f);
+                            fn(index);
                         }
                     },200);
                 }
@@ -58,7 +74,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                     },500);
                 }
 
-                function setBarState(index, f) {
+                function setBarState(index) {
                         var selected = $('.tab', element).eq(index);
                         var wrapper = selected.parent();
                         var width = selected.find('span').width();
@@ -80,14 +96,9 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                             plusLeft = parseInt(width - parseInt(barwidth));
                         }
 
-                        if (_aw != _w && f === 'f') {
-                            var _w2;
-                            if (_tabLength >limit ) {
-                                _w2=  clienWidth /limit/2 +  clienWidth /limit * index;
-                            } else {
-                                _w2=  (clienWidth /_tabLength) * index + clienWidth /_tabLength/2;
-                            }
-                            offsetLeft = _w2 - parseInt(barwidth/2);
+                        if (cutLeft) {
+                            offsetLeft = cutLeft(_aw, _w, offsetLeft, index);
+                            cutLeft = null;
                         } else {
                             offsetLeft = offsetLeft + parseInt(plusLeft/2);
                         }
@@ -107,7 +118,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         if (modelValue === tab.value) {
                             result = tab;
                             tab.selected = true;
-                            setWrapper(setBarState,index, 'f');
+                            setWrapper(setBarState,index);
                             if ((index +1) > limit){
                                 setCurrentTab(index);
                             }
@@ -154,6 +165,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                     wrapper.css('transition', 'left 0.3s');
                     wrapper.css('left', leftProp + 'px');
                 };
+
                 //监听变化对象，以此来实现左右滑动
                 scope.$watch('changeobj', function (obj) {
                     if(obj && 'id' in obj ||
@@ -163,13 +175,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         setCurrentTab(obj.value);
                     }
                 });
-                //父级tab发生变化
-                scope.$watch('changeparenttab', function (obj) {
-                    if(obj){
-                        scope.setTab(obj);
-                        setCurrentTab(obj.value);
-                    }
-                });
+
             }
         };
     }
