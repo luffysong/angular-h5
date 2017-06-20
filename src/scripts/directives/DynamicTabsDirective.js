@@ -9,7 +9,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
         return {
             require: '^ngModel',
             restrict: 'AE',
-            template: '<div class="slide-tabs" ng-if="tabs.length" ng-swipe-left="moveAction($event,true)" ng-swipe-right="moveAction($event,false)"><div class="wrapper" ><a href="javascript:void(0)" class="tab" ng-repeat="tab in tabs" id="{{tab.id}}" index="{{tab.value}}" ng-click="setTab(tab)" ng-class="{selected:tab.selected}" }"><span>{{tab.label}}</span></a><span class="bar" ng-style="{width:bar.width,transform:bar.transform}"></span></div></div>',
+            template: '<div class="slide-tabs" ng-if="tabs.length" ng-swipe-left="moveAction($event,true)" ng-swipe-right="moveAction($event,false)"><div class="wrapper" ><a href="javascript:void(0)" class="tab" ng-repeat="tab in tabs" id="{{tab.id}}" index="{{tab.value}}" ng-click="setTab(tab)" ng-class="{selected:tab.selected}" }"><span>{{tab.label}}</span></a><span class="bar" ng-style="{width:bar.width,transform:bar.transform}"></span><span class="more" ng-style="{left:more.left,display:more.display,transform:more.transform}"> <img src="//krplus-pic.b0.upaiyun.com/avatar/201706/20115202/87mjqzf5sgfty5eu.png" </span></div></div>',
             scope: {
                 tabs: '=dynamicTabs',
                 isspan:'=isspan',
@@ -69,7 +69,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                             w = aWidth;
                         }
                         w = w * (index + 1 - limit);
-                        wrapper.css('transition', 'left 0.3s');
+                        //wrapper.css('transition', 'left 0.3s');
                         wrapper.css('left', '-' + w + 'px');
                     },500);
                 }
@@ -111,6 +111,28 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
 
                 }
 
+                function setMore(index) {
+                    var offsetLeft = 0;
+                    var f = "block";
+                    var tf ='';
+                    // if ((index +1) > limit) {
+                    //     f = "none";
+                    // }
+                    if (_tabLength > limit ) {
+                        if ((index +1) > limit) {
+                            offsetLeft = 5;
+                            tf = 'rotate(180deg)';
+                        } else {
+                            offsetLeft = clienWidth - 20;
+                        }
+                        var leftProp = 'translate3d(' + offsetLeft+ 'px,0,0)';
+                        scope.more = {
+                            display: f + '',
+                            left:offsetLeft + 'px',
+                            transform: tf
+                        };
+                    }
+                }
 
                 ngModelCtrl.$formatters.push(function (modelValue) {
                     var result;
@@ -122,6 +144,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                             if ((index +1) > limit){
                                 setCurrentTab(index);
                             }
+                            setMore(index);
                         }
                     });
 
@@ -173,6 +196,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         && obj.id == 0){
                         scope.setTab(obj);
                         setCurrentTab(obj.value);
+                        setMore(obj.value);
                     }
                 });
 
