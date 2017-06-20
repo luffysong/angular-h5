@@ -152,5 +152,6 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
         // vm.searchKey = '搜索';
         $('#block-part-con').css("display", "block");
         $('.block-part-div').css("position", "fixed");
+        vm.reportList = [];vm.endLoading = true;
     }
 }
