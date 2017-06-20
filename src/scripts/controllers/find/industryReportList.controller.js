@@ -89,17 +89,19 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
 
     function reportLink(cell, event) {
         event.stopPropagation();
-        window.open(cell.link);
+        // window.open(cell.link);
         // window.location.href = cell.link;
-        vm.reportList = [];
-        vm.endLoading = true;
+        // vm.reportList = [];
+        // vm.endLoading = true;
+        hybrid.open('openEncryptionLink/' + encodeURIComponent(cell.link));
         $("body").css('background-color', '#fff');
     }
     function reportPdfLink(cell, event) {
         event.stopPropagation();
-        window.open(cell.attachLink);
-        vm.reportList = [];
-        vm.endLoading = true;
+        // window.open(cell.attachLink);
+        // vm.reportList = [];
+        // vm.endLoading = true;
+        hybrid.open('openEncryptionLink/' + encodeURIComponent(cell.attachLink));
         $("body").css('background-color', '#fff');
     }
     function openNativePage(path) {
