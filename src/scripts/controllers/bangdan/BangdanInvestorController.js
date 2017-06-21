@@ -3,7 +3,7 @@ angular.module('defaultApp.controller')
     .controller('BangdanInvestorController', BangdanInvestorController);
 
 function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window, $document) {
+    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window, $document, industry) {
 
     var vm = this;
     vm.list = [];
@@ -24,6 +24,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
     init();
 
     function init() {
+        getInvestorIndustry();
         if (!hybrid.isInApp) {
             initLinkme();
             vm.inApp = false;
@@ -33,6 +34,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         getInvestorRank();
         initPxLoader();
         addAnimate();
+        changeTab();
     }
 
     function addAnimate() {
@@ -121,12 +123,32 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         document.title = t;
     }
 
+    function getInvestorIndustry() {
+        var f = {
+            label: '全行业',
+            value: 0,
+            id: 0,
+            name: '全行业'
+        }
+        var industryArr = [];
+        industryArr.push(f);
+        industry.data.forEach(function (item, index) {
+                var obj ={};
+                obj['label'] = item.name;
+                obj['value'] = index + 1;
+                industryArr.push(angular.extend({},obj,item));
+        });
+        $scope.industryArr = industryArr;
+        $scope.currentIndustry = $stateParams.industry || 0;
+    }
+
     function getInvestorRank(fn) {
         if (vm.busy) return;
         vm.busy = true;
         var request = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry || ''
         };
 
         if (!vm.inApp) {request.pageSize = 20; };
@@ -188,6 +210,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         $state.go('bangdan.investorbddetail', {
             id: id,
             rank: rank,
+            industry: vm.industry
         });
     }
 
@@ -198,6 +221,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         var request = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry || ''
         };
         BangDanService.getInvestorRank(request)
             .then(function (response) {
@@ -387,6 +411,51 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             source: 'investor_top_list',
             target: 'share',
             client: client,
+        });
+    }
+
+    vm.cTab = parseInt($scope.currentIndustry);
+    function moveAction(e ,c) {
+        var l = $scope.industryArr.length;
+
+        if (c) {
+            vm.cTab <l ? vm.cTab++ : 0;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    $scope.changeobj = ind;
+                }
+            });
+
+        } else {
+            vm.cTab > 0 ? vm.cTab-- : l-1;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    $scope.changeobj = ind;
+                }
+            });
+        }
+    }
+
+    function resetData() {
+        vm.list = [];
+        vm.more = false;
+        vm.busy = false;
+        vm.finish = false;
+        vm.page = 0;
+        vm.startloading = true;
+    }
+
+    function changeTab() {
+        $scope.$on('DynamicTabClicked', function (e, item) {
+            window.sessionStorage.removeItem('investor-position');
+            window.sessionStorage.removeItem('investor-id');
+            if (item.value == 0 || item.value) {
+                vm.industry = item.value == 0 ? '' : item.id;
+                resetData();
+                getInvestorRank();
+            }
         });
     }
 

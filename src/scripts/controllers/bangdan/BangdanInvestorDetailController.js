@@ -10,7 +10,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     vm.prolist = [];
     vm.joinpro = joinpro;
     vm.openMore = openMore;
-    vm.industry = '';
+    vm.focusIndustry = '';
     vm.collapse = true;
     vm.startloading = true;
     vm.loadOrg = true;
@@ -23,21 +23,24 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     vm.h5Href = false;
     vm.isEqualHeight = false;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
+    $scope.currentIndustry = 0;
+
     init();
 
     function init() {
         vm.investorInfo = investorInfo.data;
-        vm.industry = '';
+        vm.focusIndustry = '';
         if (investorInfo.data.focusIndustry) {
-            vm.industry = investorInfo.data.focusIndustry.join('&nbsp;·&nbsp;');
+            vm.focusIndustry = investorInfo.data.focusIndustry.join('&nbsp;·&nbsp;');
         }
 
         if (!hybrid.isInApp) {
             initLinkme();
             vm.inApp = false;
         }
-
-        getProList();
+        getComIndustry();
+        // getProList();
+        changeTab();
         getQ();
         getOrgInfo(investorInfo.data.orgId);
         initPxLoader();
@@ -75,6 +78,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         var params = {
             page: vm.page + 1,
             pageSize: 1000,
+            industry: vm.industry,
         };
 
         if (!vm.inApp) {params.pageSize = 2;};
@@ -540,6 +544,85 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             });
 
         }, 'jsonp');
+    }
+
+    function getComIndustry() {
+        var f = {
+            label: '全行业',
+            value: 0,
+            id: 0,
+            name: '全行业'
+        }
+        var industryArr = [];
+        industryArr.push(f);
+        console.log(investorInfo.data);
+        investorInfo.data.industryList.forEach(function (item, index) {
+            var obj ={};
+            obj['label'] = item.name;
+            obj['value'] = index + 1;
+            industryArr.push(angular.extend({},obj,item));
+        });
+        $scope.industryArr = industryArr;
+
+        setTab();
+        getProList();
+    }
+
+    function setTab() {
+        $scope.industryArr.forEach(function (item, index) {
+            if (item.id == parseInt($stateParams.industry)) {
+                $scope.currentIndustry = index;
+            }
+        });
+        if ($stateParams.industry) {
+            vm.industry = parseInt($stateParams.industry) == 0 ? '' : parseInt($stateParams.industry);
+        } else {
+            vm.industry = '';
+        }
+
+    }
+
+    vm.cTab = parseInt($scope.currentIndustry);
+    function moveAction(e ,c) {
+        var l = $scope.industryArr.length;
+
+        if (c) {
+            vm.cTab <l ? vm.cTab++ : 0;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    $scope.changeobj = ind;
+                }
+            });
+
+        } else {
+            vm.cTab > 0 ? vm.cTab-- : l-1;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    $scope.changeobj = ind;
+                }
+            });
+        }
+    }
+
+    function resetData() {
+        vm.prolist = [];
+        vm.more = false;
+        vm.busy = false;
+        vm.finish = false;
+        vm.page = 0;
+        vm.startloading = true;
+    }
+
+    function changeTab() {
+        $scope.$on('DynamicTabClicked', function (e, item) {
+            if (item.value == 0 || item.value) {
+                vm.industry = item.value == 0 ? '' : item.id;
+                resetData();
+                getProList();
+            }
+        });
     }
 
 }

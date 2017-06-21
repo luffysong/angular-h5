@@ -443,7 +443,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.investorbd', {
-        url: '/investorbd',
+        url: '/investorbd?{industry}',
         controllerAs: 'vm',
         controller: 'BangdanInvestorController',
         templateUrl: 'templates/bangdan/bdinvestor.html',
