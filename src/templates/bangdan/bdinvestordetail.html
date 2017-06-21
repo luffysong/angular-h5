@@ -65,12 +65,12 @@
                             </div>
                         </text-line-clamp>
                     </div>
-                    <div class="industry" ng-if="vm.industry">
+                    <div class="industry" ng-if="vm.focusIndustry">
                         <div class="in-left">
                             <span clss="focus"><b>关注行业</b></span>
                         </div>
                         <div class="in-right">
-                            <text-line-clamp line-clamp='2' text="vm.industry" isequalheight="vm.isEqualHeight">
+                            <text-line-clamp line-clamp='2' text="vm.focusIndustry" isequalheight="vm.isEqualHeight">
                                 <div class="text-container">
                                     <p class="text-content">
                                     </p>
@@ -85,6 +85,17 @@
                     <img class="open-close" src="/styles/images/bangdan/open-more-new.png"/></span>
             </div>
         </div>
+    </section>
+
+    <section class="bd-tab-section com-detail" ng-if="industryArr.length > 1" >
+        <div
+        dynamic-tabs="industryArr"
+        ng-model="currentIndustry"
+        isspan='true'
+        barwidth='18'
+        limit='4'
+        changeobj="changeobj"
+        ></div>
     </section>
     <!--推荐-->
     <section class="bd-investor-recommend" ng-if="vm.recommend">

@@ -5,17 +5,23 @@
                 * 按本季度截止今日，各投资人项目被约谈总量排序，实时更新
             </div>
         </div>
+        <section class="bd-tab-section" ng-if="industryArr.length > 1">
+            <div dynamic-tabs="industryArr" ng-model="currentIndustry" isspan='true' barwidth='18' limit='4' changeobj="changeobj"></div>
+        </section>
         <div class="investorbd-list-content" ng-if="vm.startloading">
             正在加载数据...&nbsp;
             <img src="/styles/images/bangdan/loading.svg" alt="loading">
         </div>
-        <section class="">
-            <ul class="investorbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='2'>
+        <section class=""
+        ng-swipe-left = "vm.moveAction($event, true)"
+        ng-swipe-right = "vm.moveAction($event, false)">
+            <ul class="investorbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy'
+                infinite-scroll-distance='2'>
                 <li class="investor-item" ng-repeat="item in vm.list track by $index" ng-click="vm.goInvestorDetail(item.investorId, $index + 1, $event)">
-                    <investor-item item="item" key="$index" ></investor-item>
+                    <investor-item item="item" key="$index"></investor-item>
                 </li>
             </ul>
-            <footer ng-if="vm.busy && !vm.finish &&  vm.page">
+            <footer ng-if="vm.busy && !vm.finish && vm.page">
                 正在加载更多...&nbsp;
                 <img src="/styles/images/bangdan/loading.svg" alt="loading">
             </footer>
