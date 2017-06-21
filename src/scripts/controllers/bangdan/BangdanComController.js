@@ -38,8 +38,9 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     $scope.comType = comType;
     $scope.currentComType = $stateParams.communityType || '1';
     vm.moveAction = moveAction;
-    $scope.changeobj = {};
-    $scope.changeptab = {};
+    vm.hasInit = false;
+    //$scope.changeobj = {};
+    //$scope.changeptab = {};
     $scope.industryArr =[];
     init();
 
@@ -130,6 +131,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         vm.finish = false;
         vm.page = 0;
         vm.startloading = true;
+        vm.hasInit = false;
     }
 
     function saTrack(client, item) {
@@ -242,6 +244,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             .then(function (response) {
                 vm.startloading = false;
                 loading.hide('bangdanLoading');
+                vm.hasInit = true;
                 vm.result = response.data.pageData;
                 vm.list = vm.list.concat(response.data.pageData.data);
                 vm.totalCount = response.data.communityCount.totalCount;
@@ -520,13 +523,14 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     vm.cTab = parseInt($scope.currentIndustry);
     function moveAction(e ,c) {
         var l = $scope.industryArr.length;
-
+        var changeobj= {};
         if (c) {
             vm.cTab <l ? vm.cTab++ : 0;
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
                     vm.industry = vm.cTab;
-                    $scope.changeobj = ind;
+                    //$scope.changeobj = ind;
+                    changeobj = ind;
                 }
             });
 
@@ -535,10 +539,13 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
                     vm.industry = vm.cTab;
-                    $scope.changeobj = ind;
+                    //$scope.changeobj = ind;
+                    changeobj = ind;
                 }
             });
         }
+
+        $scope.$broadcast('bdSwipeMoveAction', changeobj);
     }
 
     function changeDynamicTab() {

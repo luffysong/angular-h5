@@ -19,8 +19,9 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.total;
     vm.downloadApp = downloadApp;
     vm.moveAction = moveAction;
-    $scope.changeobj = {};
+    //$scope.changeobj = {};
     $scope.industryArr =[];
+    vm.hasInit = false;
 
     init();
 
@@ -400,13 +401,14 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.cTab = parseInt($scope.currentIndustry);
     function moveAction(e ,c) {
         var l = $scope.industryArr.length;
+        var changeobj = {};
 
         if (c) {
             vm.cTab <l ? vm.cTab++ : 0;
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
                     vm.industry = ind.id;
-                    $scope.changeobj = ind;
+                    changeobj = ind;
                 }
             });
 
@@ -415,10 +417,12 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
                     vm.industry = ind.id;
-                    $scope.changeobj = ind;
+                    changeobj = ind;
                 }
             });
         }
+
+        $scope.$broadcast('bdSwipeMoveAction', changeobj);
     }
 
     function resetData() {
@@ -428,6 +432,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         vm.finish = false;
         vm.page = 0;
         vm.startloading = true;
+        vm.hasInit = false;
     }
 
     function changeTab() {

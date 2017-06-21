@@ -7,7 +7,14 @@
   </div>
 
   <section class="bd-tab-section" ng-if="industryArr.length > 1" >
-      <div dynamic-tabs="industryArr" ng-model="currentIndustry" isspan='true' barwidth='18' limit='4' changeobj="changeobj"></div>
+      <div
+      dynamic-tabs="industryArr"
+      ng-model="currentIndustry"
+      isspan='true'
+      barwidth='18'
+      limit='4'
+      currtab='vm.cTab'
+      ></div>
   </section>
 
   <div class="orgbd-list-content-load" ng-if="vm.startloading">
@@ -35,8 +42,10 @@
               <img src="/styles/images/bangdan/loading.svg" alt="loading">
         </div>
         <div class="orgbd-nodata" ng-if="vm.finish">已无更多数据</div>
-        <div class="orgbd-nodata" ng-if="!vm.list.length > 0">
-            暂无数据
+
+        <div class="nodata" ng-if="vm.hasInit && !vm.list.length > 0">
+            <img src="//krplus-pic.b0.upaiyun.com/avatar/201706/21094046/ksv02hcp4zz8jou2.png" alt="数据为空">
+            <p>暂无相关数据</p>
         </div>
     </section>
 

@@ -74,7 +74,7 @@
             isspan='true'
             barwidth='18'
             limit='4'
-            changeobj="changeobj"
+            currtab='vm.cTab'
             ></div>
         </section>
 
@@ -128,8 +128,10 @@
             <img src="/styles/images/bangdan/loading.svg" alt="loading">
         </div>
         <div class="no-more" ng-if="vm.finish">已无更多数据</div>
-        <div class="no-more" ng-if = "!vm.prolist.length > 0">
-            暂无数据
+
+        <div class="no-more-data" ng-if = "vm.hasInit && !vm.prolist.length > 0">
+            <img src="//krplus-pic.b0.upaiyun.com/avatar/201706/21094046/ksv02hcp4zz8jou2.png" alt="数据为空">
+            <p>暂无相关数据</p>
         </div>
     </div>
     </section>

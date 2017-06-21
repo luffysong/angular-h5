@@ -21,7 +21,8 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.startloading = true;
     vm.moveAction = moveAction;
     vm.openMore = openMore;
-    $scope.changeobj = {};
+    //$scope.changeobj = {};
+    vm.hasInit = false;
     $scope.currentIndustry = 0;
     init();
 
@@ -134,6 +135,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         BangDanService.getOrgProRank($stateParams.id, params)
         .then(function setdata(response) {
             vm.startloading = false;
+            vm.hasInit = true;
             loading.hide('bangdanDetailLoading');
             vm.prolist = vm.prolist.concat(response.data.data);
             if (response.data.totalPages) {
@@ -623,6 +625,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         vm.finish = false;
         vm.page = 0;
         vm.startloading = true;
+        vm.hasInit = false;
     }
 
     function changeTab() {
@@ -638,13 +641,15 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.cTab = parseInt($scope.currentIndustry);
     function moveAction(e ,c) {
         var l = $scope.industryArr.length;
+        var changeobj ={};
 
         if (c) {
             vm.cTab <l ? vm.cTab++ : 0;
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
                     vm.industry = ind.id;
-                    $scope.changeobj = ind;
+                    //$scope.changeobj = ind;
+                    changeobj = ind;
                 }
             });
 
@@ -653,10 +658,13 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
                     vm.industry = ind.id;
-                    $scope.changeobj = ind;
+                    //$scope.changeobj = ind;
+                    changeobj = ind;
                 }
             });
         }
+
+        $scope.$broadcast('bdSwipeMoveAction', changeobj);
     }
 
 }
