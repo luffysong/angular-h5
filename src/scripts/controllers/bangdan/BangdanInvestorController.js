@@ -469,11 +469,9 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
 
 
     function defaultController($modalInstance){
-        console.log(11111111);
         var vm = this;
         vm.cancelModal = cancelModal;
         function cancelModal() {
-            console.log(11111111);
             $modalInstance.dismiss();
         }
     }
