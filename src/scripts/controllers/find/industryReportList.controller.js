@@ -101,7 +101,11 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
         // window.open(cell.attachLink);
         // vm.reportList = [];
         // vm.endLoading = true;
-        hybrid.open('openEncryptionLink/' + encodeURIComponent(cell.attachLink));
+        if (isIos) {
+            hybrid.open('openEncryptionLinkNoShare/' + encodeURIComponent(cell.attachLink));
+        } else {
+            ​hybrid.open('openEncryptionLink/' + encodeURIComponent(cell.attachLink));
+        }
         $("body").css('background-color', '#fff');
     }
     function openNativePage(path) {
