@@ -109,7 +109,6 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                 }
 
                 function setBarState(index, aWidth) {
-                    console.log('11111111');
                         var selected = $('.tab', element).eq(index);
                         var wrapper = selected.parent();
                         var width = selected.find('span').width();
@@ -227,7 +226,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                             obj && 'id' in obj
                             && obj.id == 0){
                             scope.setTab(obj);
-                            setCurrentTab(obj.value);
+                            //setCurrentTab(obj.value);
                         }
                 });
             }
