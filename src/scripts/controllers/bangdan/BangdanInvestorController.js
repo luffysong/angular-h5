@@ -19,8 +19,8 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
     vm.getStorageID = false;
     vm.total;
     vm.downloadApp = downloadApp;
+    vm.addWechat = addWechat;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
-
     init();
 
     function init() {
@@ -48,7 +48,6 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
                 if (!vm.isBottom) {
                     vm.isBottom = true;
                 }
-                console.log(vm.isBottom);
             } else {
                 if (vm.isBottom) {
                     vm.isBottom = false;
@@ -458,5 +457,26 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             }
         });
     }
+
+    function addWechat(){
+        $modal.open({
+            templateUrl: 'templates/bangdan/addWechat.html',
+            windowClass: 'bd-add-wechat-wrap',
+            controller: defaultController,
+            controllerAs: 'vm',
+        });
+    }
+
+
+    function defaultController($modalInstance){
+        console.log(11111111);
+        var vm = this;
+        vm.cancelModal = cancelModal;
+        function cancelModal() {
+            console.log(11111111);
+            $modalInstance.dismiss();
+        }
+    }
+
 
 }
