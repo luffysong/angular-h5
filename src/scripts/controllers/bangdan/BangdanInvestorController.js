@@ -21,6 +21,8 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
     vm.downloadApp = downloadApp;
     vm.addWechat = addWechat;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
+    vm.moveAction = moveAction;
+    vm.hasInit = false;
     init();
 
     function init() {
@@ -156,6 +158,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             .then(function (response) {
                 vm.startloading = false;
                 loading.hide('bangdanLoading');
+                vm.hasInit = true;
                 vm.result = response.data.data;
                 vm.list = vm.list.concat(response.data.data);
 
@@ -416,13 +419,14 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
     vm.cTab = parseInt($scope.currentIndustry);
     function moveAction(e ,c) {
         var l = $scope.industryArr.length;
-
+        var changeobj = {};
         if (c) {
             vm.cTab <l ? vm.cTab++ : 0;
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
                     vm.industry = ind.id;
-                    $scope.changeobj = ind;
+                    // $scope.changeobj = ind;
+                    changeobj = ind;
                 }
             });
 
@@ -431,10 +435,12 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             $scope.industryArr.forEach(function (ind, index) {
                 if(index == vm.cTab) {
                     vm.industry = ind.id;
-                    $scope.changeobj = ind;
+                    // $scope.changeobj = ind;
+                    changeobj = ind;
                 }
             });
         }
+        $scope.$broadcast('bdSwipeMoveAction', changeobj);
     }
 
     function resetData() {
@@ -444,6 +450,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         vm.finish = false;
         vm.page = 0;
         vm.startloading = true;
+        vm.hasInit = false;
     }
 
     function changeTab() {

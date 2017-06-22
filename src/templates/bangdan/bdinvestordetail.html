@@ -87,14 +87,17 @@
         </div>
     </section>
 
-    <section class="bd-tab-section com-detail" ng-if="industryArr.length > 1" >
+    <section class="bd-tab-section com-detail" ng-if="industryArr.length > 1"
+        ng-swipe-left = "vm.moveAction($event, true)"
+        ng-swipe-right = "vm.moveAction($event, false)"
+        >
         <div
         dynamic-tabs="industryArr"
         ng-model="currentIndustry"
         isspan='true'
         barwidth='18'
         limit='4'
-        changeobj="changeobj"
+        currtab='vm.cTab'
         ></div>
     </section>
     <!--推荐-->
@@ -180,7 +183,10 @@
     <div class="txt-intro">
         * 以下项目按本季度被约谈量排序，实时更新
     </div>
-    <div class="pro-list">
+    <div class="pro-list"
+    ng-swipe-left = "vm.moveAction($event, true)"
+    ng-swipe-right = "vm.moveAction($event, false)"
+    >
         <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
             <li ng-if="vm.prolist" ng-repeat="item in vm.prolist track  by $index"
             ng-click="vm.goProDetail(item.ccid, $event)" >
@@ -191,6 +197,10 @@
     <div class="pro-list-loading" ng-if="vm.startloading">
         正在加载数据...&nbsp;
         <img src="/styles/images/bangdan/loading.svg" alt="loading">
+    </div>
+    <div class="no-more-data" ng-if="vm.hasInit && !vm.prolist.length > 0">
+        <img src="//krplus-pic.b0.upaiyun.com/avatar/201706/21094046/ksv02hcp4zz8jou2.png" alt="数据为空">
+        <p>暂无相关数据</p>
     </div>
     </section>
 
