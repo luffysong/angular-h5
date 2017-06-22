@@ -90,6 +90,11 @@
         ></div>
     </section>
 
+    <section class="bd-orgdetail-content-start" ng-if="vm.startloading" >
+        正在加载数据...&nbsp;
+        <img src="/styles/images/bangdan/loading.svg" alt="loading">
+    </section>
+
     <section class="bd-orgdetail-content"
         ng-swipe-left = "vm.moveAction($event, true)"
         ng-swipe-right = "vm.moveAction($event, false)"
@@ -118,11 +123,6 @@
 
     <section class="bd-outapp-overlap" ng-if="!vm.inApp">
 
-    </section>
-
-    <section class="bd-orgdetail-content-start" ng-if="vm.startloading" >
-        正在加载数据...&nbsp;
-        <img src="/styles/images/bangdan/loading.svg" alt="loading">
     </section>
 
     <footer ng-if="vm.inApp">

@@ -29,6 +29,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                 var cutWidth;
                 var cutLeft;
                 var checkIfMoveTab;
+                var finalAWidth;
 
                 cutWidth = function(w) {
                     //当修改露出下一个tab的时候，是露出一半，把一半的距离转嫁到所有的tab上；
@@ -68,6 +69,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                     $timeout(function () {
                         wrapper = element.find('.wrapper');
                         var w = wrapper.find('.selected').width();
+                        //由于w获取的值，总是和正确值偏差太大，所以就用aWidth的值；
                         if (!aWidth) {
                             aWidth = w;
                         }
@@ -78,6 +80,10 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         if (cutWidth) {
                             w = cutWidth(w);
                             cutWidth = null;
+                        }
+
+                        if (!finalAWidth) {
+                            finalAWidth = w;
                         }
 
                         wrapper.css('width',(_tabLength * w + 'px' ));
@@ -93,11 +99,16 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                     $timeout(function () {
                         var wrapper = element.find('.wrapper');
                         var w = wrapper.find('.selected').width();
+                        //由于w获取的值，总是和正确值偏差太大，所以就用aWidth的值；
+                        if (finalAWidth) {
+                            w = finalAWidth;
+                        }
                         var _w = w;
-                        if ((index +1) == _tabLength) {
-                            w = w * (index - limit) + _w/2;
-                        } else if(index < limit){
+                        if (index < limit) {
                             w = 0;
+                        } else if ((index +1) == _tabLength) {
+                            //为了处理最后一个没有显示全部的问题，本来可以取一半，现在取1/3
+                            w = w * (index + 1 - limit) - _w*(1/3);
                         } else {
                             w = w * (index + 1 - limit);
                         }
