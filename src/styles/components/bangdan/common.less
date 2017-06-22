@@ -231,6 +231,72 @@
     }
 }
 
+.bd-add-wechat-wrap {
+    overflow: visible;
+    .modal-dialog {
+        margin-top: 145px;
+        margin-left: 18%;
+        margin-right: 18%;
+        @media screen and (max-width: 320px) {
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+    }
+    .modal-content {
+        width: 100%;
+        padding-bottom: 0;
+        overflow: visible;
+        border: none 0;
+    }
+    .wechat-top {
+        text-align: center;
+        background-color: #E2B250;
+        height: 80px;
+        line-height: 80px;
+        border-radius: 5px 5px 0 0;
+        img {
+            position: relative;
+            bottom: 5px;
+            margin-right: 5px;
+        }
+        span {
+            font-size: 22px;
+            color: #FFFFFF;
+        }
+        .bump {
+            height: 5px;
+            width: 10%;
+            background-color: #FFFFFF;
+            margin: 0 auto;
+            position: relative;
+            bottom: 8px;
+        }
+    }
+    .wechat-content {
+        font-size: 17px;
+        color: #5A626D;
+        text-align: center;
+        padding-bottom: 70px;
+        div:first-child{
+            margin-top: 55px;
+        }
+        .number {
+            font-size: 24px;
+            color: #CF9D3E;
+            margin: 20px 0 25px;
+        }
+    }
+    .pop-close {
+        position: absolute;
+        bottom: -56px;
+        width: 36px;
+        height: 36px;
+        -webkit-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+        left: 50%;
+    }
+}
+
 .bd-nativeAlert_wrap {
     overflow: visible;
     .modal-dialog {
