@@ -19,6 +19,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     vm.total;
     vm.downloadApp = downloadApp;
     vm.moveAction = moveAction;
+    vm.addWechat = addWechat;
     //$scope.changeobj = {};
     $scope.industryArr =[];
     vm.hasInit = false;
@@ -445,6 +446,24 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
                 getOrgRank();
             }
         });
+    }
+
+    function addWechat(){
+        $modal.open({
+            templateUrl: 'templates/bangdan/addWechat.html',
+            windowClass: 'bd-add-wechat-wrap',
+            controller: defaultController,
+            controllerAs: 'vm',
+        });
+    }
+
+
+    function defaultController($modalInstance){
+        var vm = this;
+        vm.cancelModal = cancelModal;
+        function cancelModal() {
+            $modalInstance.dismiss();
+        }
     }
 
 }

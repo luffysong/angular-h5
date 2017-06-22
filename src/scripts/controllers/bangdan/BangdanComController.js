@@ -20,6 +20,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     vm.downloadApp = downloadApp;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
     vm.changeTab = changeTab;
+    vm.addWechat = addWechat;
     vm.communityType = $stateParams.communityType || 1;
     var comType = [{
         label: '名企',
@@ -558,6 +559,24 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
                 getComRank();
             }
         });
+    }
+
+    function addWechat(){
+        $modal.open({
+            templateUrl: 'templates/bangdan/addWechat.html',
+            windowClass: 'bd-add-wechat-wrap',
+            controller: defaultController,
+            controllerAs: 'vm',
+        });
+    }
+
+
+    function defaultController($modalInstance){
+        var vm = this;
+        vm.cancelModal = cancelModal;
+        function cancelModal() {
+            $modalInstance.dismiss();
+        }
     }
 
 }
