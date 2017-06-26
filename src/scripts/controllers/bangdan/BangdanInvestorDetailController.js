@@ -618,6 +618,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         vm.page = 0;
         vm.startloading = true;
         vm.hasInit = false;
+        getProList();
     }
 
     function changeTab() {
@@ -635,7 +636,6 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
                 resetData();
-                getProList();
             }
         });
     }

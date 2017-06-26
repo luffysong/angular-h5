@@ -434,6 +434,8 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         vm.page = 0;
         vm.startloading = true;
         vm.hasInit = false;
+        //为了确保数据被清空；
+        getOrgRank();
     }
 
     function changeTab() {
@@ -453,7 +455,6 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
                 resetData();
-                getOrgRank();
             }
         });
     }

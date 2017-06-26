@@ -451,6 +451,8 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         vm.page = 0;
         vm.startloading = true;
         vm.hasInit = false;
+        //为了确保数据被清空；
+        getInvestorRank();
     }
 
     function changeTab() {
@@ -470,7 +472,6 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
                 resetData();
-                getInvestorRank();
             }
         });
     }
