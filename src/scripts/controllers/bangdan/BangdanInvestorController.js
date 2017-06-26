@@ -23,6 +23,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
     vm.moveAction = moveAction;
     vm.hasInit = false;
+    vm.isRise = false;
     init();
 
     function init() {
@@ -140,7 +141,18 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
                 industryArr.push(angular.extend({},obj,item));
         });
         $scope.industryArr = industryArr;
-        $scope.currentIndustry = $stateParams.industry || 0;
+        var iix = window.sessionStorage.getItem('industryIndex');
+        var ind = window.sessionStorage.getItem('industry');
+        if (ind && ind != 'undefined') {
+            vm.industry = ind;
+        }
+        if (iix && iix != 'undefined') {
+            $scope.currentIndustry = $stateParams.industry || parseInt(iix);
+        } else {
+            $scope.currentIndustry = $stateParams.industry || 0;
+            vm.isRise = true;
+        }
+        //$scope.currentIndustry = $stateParams.industry || 0;
     }
 
     function getInvestorRank(fn) {
@@ -189,8 +201,12 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         var val = angular.element(window).scrollTop();
         window.sessionStorage.removeItem('investor-position');
         window.sessionStorage.removeItem('investor-id');
+        window.sessionStorage.removeItem('industryIndex');
+        window.sessionStorage.removeItem('industry');
         window.sessionStorage.setItem('investor-position', val);
         window.sessionStorage.setItem('investor-id', id);
+        window.sessionStorage.setItem('industryIndex', vm.industryIndex);
+        window.sessionStorage.setItem('industry', vm.industry);
 
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
@@ -469,8 +485,16 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
 
             window.sessionStorage.removeItem('investor-position');
             window.sessionStorage.removeItem('investor-id');
+            window.sessionStorage.removeItem('industryIndex');
+            window.sessionStorage.removeItem('industry');
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
+                vm.industryIndex = item.value;
+                if (item.value == 0){
+                    vm.isRise = true;
+                } else {
+                    vm.isRise = false;
+                }
                 resetData();
             }
         });

@@ -28,7 +28,7 @@
             <ul class="investorbd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy'
                 infinite-scroll-distance='2'>
                 <li class="investor-item" ng-repeat="item in vm.list track by $index" ng-click="vm.goInvestorDetail(item.investorId, $index + 1, $event)">
-                    <investor-item item="item" key="$index"></investor-item>
+                    <investor-item item="item" key="$index" isrise="vm.isRise"></investor-item>
                 </li>
             </ul>
             <footer ng-if="vm.busy && !vm.finish && vm.page">
@@ -44,7 +44,7 @@
         <div class="investorbd-footer" ng-if="vm.inApp">
             <div>
                 <span>一键加入风云投资人</span>
-                <a ng-click="vm.addWechat()">
+                <a ui-sref="bangdan.orgbd">
                     <div class="register">立即加入</div>
                 </a>
             </div>

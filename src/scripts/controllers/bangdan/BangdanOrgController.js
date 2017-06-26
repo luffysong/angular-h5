@@ -23,6 +23,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     //$scope.changeobj = {};
     $scope.industryArr =[];
     vm.hasInit = false;
+    $scope.isRise = false;
 
     init();
 
@@ -118,7 +119,18 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
                 industryArr.push(angular.extend({},obj,item));
         });
         $scope.industryArr = industryArr;
-        $scope.currentIndustry = $stateParams.industry || 0;
+        var iix = window.sessionStorage.getItem('industryIndex');
+        var ind = window.sessionStorage.getItem('industry');
+        if (ind && ind != 'undefined') {
+            vm.industry = ind;
+        }
+        if (iix && iix != 'undefined') {
+            $scope.currentIndustry = $stateParams.industry || parseInt(iix);
+        } else {
+            $scope.currentIndustry = $stateParams.industry || 0;
+            $scope.isRise = true;
+        }
+
     }
 
     function getOrgRank(fn) {
@@ -133,32 +145,33 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
 
         BangDanService.getOrgRank(request)
             .then(function (response) {
-                vm.startloading = false;
-                vm.hasInit = true;
-                loading.hide('bangdanLoading');
-                vm.result = response.data.data;
-                vm.list = vm.list.concat(response.data.data);
-                if (!vm.total) {
-                    vm.total = response.data.totalCount;
-                    initWeixin(vm.currQuarter, vm.total);
-                }
-
-                if (response.data.totalPages) {
-                    vm.page = response.data.page || 0;
-                    if (response.data.totalPages !== vm.page && response.data.data.length > 0) {
-                        vm.busy = false;
-                    } else {
-                        vm.finish = true;
-                        vm.more = true;
+                $timeout(function () {
+                    vm.startloading = false;
+                    vm.hasInit = true;
+                    loading.hide('bangdanLoading');
+                    vm.result = response.data.data;
+                    vm.list = vm.list.concat(response.data.data);
+                    if (!vm.total) {
+                        vm.total = response.data.totalCount;
+                        initWeixin(vm.currQuarter, vm.total);
                     }
-                }
 
-                if (fn) {
-                    fn();
-                } else {
-                    positionItem();
-                }
+                    if (response.data.totalPages) {
+                        vm.page = response.data.page || 0;
+                        if (response.data.totalPages !== vm.page && response.data.data.length > 0) {
+                            vm.busy = false;
+                        } else {
+                            vm.finish = true;
+                            vm.more = true;
+                        }
+                    }
 
+                    if (fn) {
+                        fn();
+                    } else {
+                        positionItem();
+                    }
+                },200);
             }).catch(fail);
     }
 
@@ -166,8 +179,12 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         var val = angular.element(window).scrollTop();
         window.sessionStorage.removeItem('org-position');
         window.sessionStorage.removeItem('org-id');
+        window.sessionStorage.removeItem('industryIndex');
+        window.sessionStorage.removeItem('industry');
         window.sessionStorage.setItem('org-position', val);
         window.sessionStorage.setItem('org-id', id);
+        window.sessionStorage.setItem('industryIndex', vm.industryIndex);
+        window.sessionStorage.setItem('industry', vm.industry);
 
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
@@ -442,6 +459,8 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         $scope.$on('DynamicTabClicked', function (e, item) {
             window.sessionStorage.removeItem('org-position');
             window.sessionStorage.removeItem('org-id');
+            window.sessionStorage.removeItem('industryIndex');
+            window.sessionStorage.removeItem('industry', vm.industry);
             if (sa) {
                 sa.track('OrgTopListClick',
                   {
@@ -454,6 +473,12 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
 
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
+                vm.industryIndex = item.value;
+                if (item.value == 0){
+                    $scope.isRise = true;
+                } else {
+                    $scope.isRise = false;
+                }
                 resetData();
             }
         });

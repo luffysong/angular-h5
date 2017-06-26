@@ -32,12 +32,12 @@
         <ul class="orgbd-list"
           infinite-scroll='vm.displayMore()'
           infinite-scroll-disabled='vm.busy'
-          infinite-scroll-distance='2'
+          infinite-scroll-distance='0'
           ng-if="vm.list.length > 0"
         >
           <li class="org-item" ng-repeat="item in vm.list track by $index"
              ng-click="vm.goOrgDetail(item.orgId, $index + 1)">
-                <oic-item item="item" key = '$index' symbol='org'></oic-item>
+                <oic-item item="item" key = '$index' symbol='org' isrise="isRise"></oic-item>
           </li>
         </ul>
         <div class="orgbd-load" ng-if="vm.busy && !vm.finish &&  vm.page">

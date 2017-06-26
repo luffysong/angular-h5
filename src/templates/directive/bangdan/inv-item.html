@@ -4,9 +4,9 @@
         <img src="//krplus-pic.b0.upaiyun.com/avatar/201706/06083059/brz33qbxgvg3tvsl.png" ng-if="key === 1">
         <img src="//krplus-pic.b0.upaiyun.com/avatar/201706/06083118/dfsp9tlwfmeflszz.png" ng-if="key === 2">
         <span ng-if="key > 2">{{key + 1}}</span>
-        <div class="up-arrow" ng-if="item.rise > 0" ng-class="{true:'top-special',false:'top-normal'}[key <= 2]"></div>
-        <div class="down-arrow" ng-if="item.rise < 0" ng-class="{true:'top-special',false:'top-normal'}[key <= 2]"></div>
-        <div class="number-change" ng-if="item.rise != 0" ng-class="{true:'top-special-num',false:'top-normal-num'}[key <= 2]">
+        <div class="up-arrow" ng-if="item.rise > 0 && isrise" ng-class="{true:'top-special',false:'top-normal'}[key <= 2]"></div>
+        <div class="down-arrow" ng-if="item.rise < 0 && isrise" ng-class="{true:'top-special',false:'top-normal'}[key <= 2]"></div>
+        <div class="number-change" ng-if="item.rise != 0 && isrise" ng-class="{true:'top-special-num',false:'top-normal-num'}[key <= 2]">
             {{item.rise | absNumber}}
         </div>
     </div>

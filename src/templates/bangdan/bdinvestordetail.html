@@ -107,7 +107,10 @@
             <span class="p-title"><b>推荐项目</b></span>
         </div>
         <div class="pro-list">
-            <ul infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
+            <ul
+            infinite-scroll='vm.displayMore()'
+            infinite-scroll-disabled='vm.busy'
+            infinite-scroll-distance='0'>
                 <li ng-if="vm.recommend" ng-repeat="item in vm.recommend track  by $index"
                     ng-click="vm.goProDetail(item.ccid, $event)" >
                     <div class="txt-right" ng-if="!vm.startloading">

@@ -21,7 +21,8 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
     vm.changeTab = changeTab;
     vm.addWechat = addWechat;
-    vm.communityType = $stateParams.communityType || 1;
+    vm.isRise = false;
+
     var comType = [{
         label: '名企',
         value: '1'
@@ -37,7 +38,16 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         value: '4'
     }];
     $scope.comType = comType;
-    $scope.currentComType = $stateParams.communityType || '1';
+    var ct = window.sessionStorage.getItem('comType');
+    if (ct && ct != 'undefined') {
+        //vm.communityType = $stateParams.communityType || ct;
+        $scope.currentComType = $stateParams.communityType || ct;
+        vm.communityType = $stateParams.communityType || parseInt(ct);
+    } else {
+        $scope.currentComType = $stateParams.communityType || '1';
+        vm.communityType = $stateParams.communityType || 1;
+    }
+
     vm.moveAction = moveAction;
     vm.hasInit = false;
     //$scope.changeobj = {};
@@ -288,8 +298,15 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         var val = angular.element(window).scrollTop();
         window.sessionStorage.removeItem('com-position');
         window.sessionStorage.removeItem('com-id');
+        window.sessionStorage.removeItem('comType');
+        window.sessionStorage.removeItem('industryIndex');
+        window.sessionStorage.removeItem('industry');
+
         window.sessionStorage.setItem('com-position', val);
         window.sessionStorage.setItem('com-id', id);
+        window.sessionStorage.setItem('comType', vm.communityType);
+        window.sessionStorage.setItem('industryIndex', vm.industryIndex);
+        window.sessionStorage.setItem('industry', vm.industry);
         var client = getClient();
         getTrackParams(vm.communityType);
         sa.track('CommunityTopListClick',
@@ -518,7 +535,19 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
                 industryArr.push(angular.extend({},obj,item));
         });
         $scope.industryArr = industryArr;
-        $scope.currentIndustry = $stateParams.industry || 0;
+
+        var iix = window.sessionStorage.getItem('industryIndex');
+        var ind = window.sessionStorage.getItem('industry');
+        if (ind && ind != 'undefined') {
+            vm.industry = ind;
+        }
+        if (iix && iix != 'undefined') {
+            $scope.currentIndustry = $stateParams.industry || parseInt(iix);
+        } else {
+            $scope.currentIndustry = $stateParams.industry || 0;
+            vm.isRise = true;
+        }
+        //$scope.currentIndustry = $stateParams.industry || 0;
     }
 
     vm.cTab = parseInt($scope.currentIndustry);
@@ -561,10 +590,19 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
                     community_type: vm.trackTarget,
                 });
             }
-            window.sessionStorage.removeItem('org-position');
-            window.sessionStorage.removeItem('org-id');
+            window.sessionStorage.removeItem('com-position');
+            window.sessionStorage.removeItem('com-id');
+            window.sessionStorage.setItem('comType', vm.communityType);
+            window.sessionStorage.setItem('industryIndex', vm.industryIndex);
+            window.sessionStorage.setItem('industry', vm.industry);
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
+                vm.industryIndex = item.value;
+                if (item.value == 0){
+                    vm.isRise = true;
+                } else {
+                    vm.isRise = false;
+                }
                 resetData();
                 getComRank();
             }

@@ -33,10 +33,13 @@
       ng-swipe-left = "vm.moveAction($event, true)"
       ng-swipe-right = "vm.moveAction($event, false)"
       >
-        <ul class="combd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='2'>
+        <ul class="combd-list"
+        infinite-scroll='vm.displayMore()'
+        infinite-scroll-disabled='vm.busy'
+        infinite-scroll-distance='0'>
           <li class="com-item" ng-repeat="item in vm.list track by $index"
            ng-click="vm.goComDetail(item.communityId, $index + 1)">
-              <oic-item item="item" key = '$index' symbol='com'></oic-item>
+              <oic-item item="item" key = '$index' symbol='com' isrise="vm.isRise"></oic-item>
         </li>
       </ul>
       <footer ng-if="vm.busy && !vm.finish && vm.page">

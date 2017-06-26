@@ -11,7 +11,8 @@ angular.module('defaultApp.directive').directive('oicItem',
             scope: {
                 item: '=',
                 key:'=',
-                symbol:'@symbol'
+                symbol:'@symbol',
+                isrise:'=isrise'
             },
             templateUrl: 'templates/directive/bangdan/oic-item.html',
             link: function (scope, element, attrs) {

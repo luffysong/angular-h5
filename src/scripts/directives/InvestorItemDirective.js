@@ -13,6 +13,7 @@ angular.module('defaultApp.directive').directive('investorItem',
                 key:'=',
                 symbol:'@symbol',
                 tempurl:'@tempurl',
+                isrise:'=isrise'
             },
 
             link: function (scope, element, attrs) {
