@@ -551,6 +551,16 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
 
     function changeDynamicTab() {
         $scope.$on('DynamicTabClicked', function (e, item) {
+            if (sa && item) {
+                sa.track('CommunityTopListClick',
+                  {
+                    source: vm.trackSource,
+                    company_industry: item.name,
+                    client: getClient(),
+                    target: 'industry_tab',
+                    community_type: vm.trackTarget,
+                });
+            }
             window.sessionStorage.removeItem('org-position');
             window.sessionStorage.removeItem('org-id');
             if (item.value == 0 || item.value) {
@@ -577,6 +587,18 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         function cancelModal() {
             $modalInstance.dismiss();
         }
+    }
+
+    function getClient() {
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+        return client;
     }
 
 }

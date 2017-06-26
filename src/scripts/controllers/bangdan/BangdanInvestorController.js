@@ -455,6 +455,16 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
 
     function changeTab() {
         $scope.$on('DynamicTabClicked', function (e, item) {
+            if (sa && item) {
+                sa.track('InvestorTopListClick',
+                  {
+                    source: 'investor_top_list',
+                    target: 'industry_tab',
+                    company_industry: item.name,
+                    client: getClient(),
+                });
+            }
+
             window.sessionStorage.removeItem('investor-position');
             window.sessionStorage.removeItem('investor-id');
             if (item.value == 0 || item.value) {
@@ -483,5 +493,15 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         }
     }
 
-
+    function getClient(){
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+        return client;
+    }
 }

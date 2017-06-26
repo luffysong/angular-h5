@@ -622,12 +622,34 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
 
     function changeTab() {
         $scope.$on('DynamicTabClicked', function (e, item) {
+            if (sa && item) {
+                sa.track('InvestorTopListClick',
+                  {
+                    source: 'investor',
+                    target: 'industry_tab',
+                    company_industry: item.name,
+                    investor_id: $stateParams.id + '',
+                    client: getClient(),
+                });
+            }
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
                 resetData();
                 getProList();
             }
         });
+    }
+
+    function getClient(){
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+        return client;
     }
 
 }

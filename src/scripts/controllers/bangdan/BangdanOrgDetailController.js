@@ -630,6 +630,17 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
 
     function changeTab() {
         $scope.$on('DynamicTabClicked', function (e, item) {
+            if (sa) {
+                sa.track('OrgTopListClick',
+                  {
+                    source: 'organization',
+                    target: 'industry_tab',
+                    company_industry: item.name,
+                    org_id: $stateParams.id + '',
+                    client: getClient(),
+                });
+            }
+
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
                 resetData();
@@ -665,6 +676,18 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         }
 
         $scope.$broadcast('bdSwipeMoveAction', changeobj);
+    }
+
+    function getClient(){
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+        return client;
     }
 
 }
