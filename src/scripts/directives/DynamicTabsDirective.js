@@ -10,7 +10,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
             require: '^ngModel',
             restrict: 'AE',
             //ng-swipe-left="moveAction($event,true)" ng-swipe-right="moveAction($event,false)"
-            template: '<div class="slide-tabs" ng-if="tabs.length" ><div class="wrapper" ><a href="javascript:void(0)" class="tab" ng-repeat="tab in tabs" id="{{tab.id}}" index="{{tab.value}}" ng-click="setTab(tab)" ng-class="{selected:tab.selected}" }"><span>{{tab.label}}</span></a><span class="bar" ng-style="{width:bar.width,transform:bar.transform}"></span></div></div>',
+            template: '<div class="slide-tabs" ng-if="tabs.length" ng-swipe-left="moveAction($event,true)" ng-swipe-right="moveAction($event,false)" ><div class="wrapper" ><a href="javascript:void(0)" class="tab" ng-repeat="tab in tabs" id="{{tab.id}}" index="{{tab.value}}" ng-click="setTab(tab)" ng-class="{selected:tab.selected}" }"><span>{{tab.label}}</span></a><span class="bar" ng-style="{width:bar.width,transform:bar.transform}"></span></div></div>',
             scope: {
                 tabs: '=dynamicTabs',
                 isspan:'=isspan',
@@ -203,22 +203,31 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                     e.stopPropagation();
                     var wrapper = element.find('.wrapper');
                     var wd = wrapper.find('.selected').width();
-                    var wl = wrapper.css('left').replace('px','');
-                    //当tab减半的时候加的
-                    if (_tabLength > limit) {
-                        wd = wd / 2;
-                    }
-
+                    //var wl = wrapper.css('left').replace('px','');
+                    // //当tab减半的时候加的
+                    // if (_tabLength > limit) {
+                    //     wd = wd / 2;
+                    // }
+                    //
                     var leftProp;
-                    if (c) {
-                        var l = wl/wd ? wl/wd : 0;
-                        leftProp = (Math.abs(l) + 1) <= (_tabLength-limit) ? ((l-1) * wd) : 0;
+                    // if (c) {
+                    //     var l = wl/wd ? wl/wd : 0;
+                    //     leftProp = (Math.abs(l) + 1) <= (_tabLength-limit) ? ((l-1) * wd) : 0;
+                    // } else {
+                    //     var l = wl/wd ? wl/wd : 0;
+                    //     leftProp = l==0 ? 0: ((l+1) * wd);
+                    // }
+                    if (c){
+                        if (_tabLength > limit){
+                             leftProp = (_tabLength - limit) * wd - wd/2;
+                             leftProp = -leftProp;
+                        }
+
                     } else {
-                        var l = wl/wd ? wl/wd : 0;
-                        leftProp = l==0 ? 0: ((l+1) * wd);
+                        leftProp = 0;
                     }
 
-                    wrapper.css('transition', 'left 0.3s');
+                    wrapper.css('transition', 'left 0.2s');
                     wrapper.css('left', leftProp + 'px');
                 };
 

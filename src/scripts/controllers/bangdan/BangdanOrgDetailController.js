@@ -24,6 +24,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
     //$scope.changeobj = {};
     vm.hasInit = false;
     $scope.currentIndustry = 0;
+    vm.rankName ='总榜';
     init();
 
     function init() {

@@ -26,7 +26,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     vm.isEqualHeight = false;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
     $scope.currentIndustry = 0;
-
+    vm.rankName ='总榜';
     init();
 
     function init() {

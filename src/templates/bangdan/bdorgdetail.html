@@ -27,8 +27,9 @@
                 <span class="num-change" ng-if="vm.numchange">{{vm.numchange}}</span>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <span>第&nbsp;{{vm.orgInfo.rank}}&nbsp;名</span>
-                <span class="current-q">/本季度</span>
+                <span class="current-q">/{{vm.rankName}}</span>
             </div>
+            <!--
             <div class="bd-orgdetail-sta">
                     <div class="bd-sta">
                         <div class="num" >{{vm.orgInfo.projectCount}}</div>
@@ -45,9 +46,13 @@
                         <div class="txt">Q{{vm.currQuarter}}总浏览数</div>
                     </div>
             </div>
+        -->
             <div class="bd-orgdetail-push">
+
                 <div class="push-left">
+                    <!--
                     * 以下项目按本季度被约谈量排序，实时更新
+                    -->
                 </div>
                 <div class="push-right" ng-click="vm.joinpro('forward')">
                         <div>转发支持</div>
@@ -80,8 +85,6 @@
 
 
     <section class="bd-tab-section" ng-if="industryArr.length > 1"
-        ng-swipe-left = "vm.moveAction($event, true)"
-        ng-swipe-right = "vm.moveAction($event, false)"
         >
         <div
         dynamic-tabs="industryArr"
@@ -98,10 +101,54 @@
         <img src="/styles/images/bangdan/loading.svg" alt="loading">
     </section>
 
+    <section class="bd-orgdetail-pro" ng-class="{true:'',false:'marg-top'}[!vm.recommend]">
+        <div class="pro-top">
+            <span class="h-line"></span>
+            <span class="p-title"><b>已投项目</b></span>
+        </div>
+        <div class="pro-num">
+            <div class="rank-num">
+                <div class="content-num">
+                    <div class="bd-sta">
+                        <div class="num">
+                                {{vm.orgInfo.projectCount}}
+                        </div>
+                        <div class="txt">
+                            已投项目数
+                        </div>
+                    </div>
+                    <div class="split-line"> </div>
+                    <div class="bd-sta">
+                        <div class="num">
+                                {{vm.orgInfo.interviewCount}}
+                        </div>
+                        <div class="txt">
+                            Q{{vm.currQuarter}}总约谈数
+                        </div>
+                    </div>
+                    <div class="split-line"> </div>
+                    <div class="bd-sta">
+                        <div class="num">
+                                {{vm.orgInfo.accessCount}}
+                        </div>
+                        <div class="txt">
+                            Q{{vm.currQuarter}}总浏览数
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="txt-intro">
+        * 以下项目按本季度被约谈量排序，实时更新
+    </div>
+    </section>
+
     <section class="bd-orgdetail-content"
         ng-swipe-left = "vm.moveAction($event, true)"
         ng-swipe-right = "vm.moveAction($event, false)"
         >
+
+
         <ul
             infinite-scroll='vm.displayMore()'
             infinite-scroll-disabled='vm.busy'

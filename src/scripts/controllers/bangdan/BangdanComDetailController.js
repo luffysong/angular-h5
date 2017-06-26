@@ -28,6 +28,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.hasInit = false;
     $scope.currentIndustry = 0;
     vm.changeTabDataState = false;
+    vm.rankName ='总榜';
     init();
 
     function init() {

@@ -29,7 +29,7 @@
                 <span class="num-change" ng-if="vm.numchange">{{vm.numchange}}</span>
 
                 <span class="top-rank-num">第&nbsp;{{vm.comInfo.rank}}&nbsp;名</span>
-                <span class="top-rank-q">/本季度</span>
+                <span class="top-rank-q">/{{vm.rankName}}</span>
         </div>
         <div class="push-right" ng-click="vm.joinpro('forward')">
                 <div>转发支持</div>
@@ -68,8 +68,6 @@
         </div>
 
         <section class="bd-tab-section com-detail" ng-if="industryArr.length > 1"
-            ng-swipe-left = "vm.moveAction($event, true)"
-            ng-swipe-right = "vm.moveAction($event, false)"
             >
             <div
             dynamic-tabs="industryArr"
