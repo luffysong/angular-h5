@@ -575,6 +575,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         $scope.industryArr.forEach(function (item, index) {
             if (item.id == parseInt($stateParams.industry)) {
                 $scope.currentIndustry = index;
+                vm.rankName = item.name;
             }
         });
         if ($stateParams.industry) {
@@ -607,6 +608,11 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
                 }
             });
         }
+        if (changeobj.value == 0) {
+            vm.rankName = '总榜';
+        } else {
+            vm.rankName = changeobj.name;
+        }
         $scope.$broadcast('bdSwipeMoveAction', changeobj);
     }
 
@@ -635,6 +641,12 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             }
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
+                if (item.value == 0) {
+                    vm.rankName = '总榜';
+                } else {
+                    vm.rankName = item.name;
+                }
+                getSingleInvestorInfo();
                 resetData();
             }
         });
@@ -650,6 +662,23 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             client = 'iOS';
         }
         return client;
+    }
+
+    function getSingleInvestorInfo(){
+        var senddata ={
+            industryId: vm.industry,
+        }
+        BangDanService.getSingleInvestorInfo($stateParams.id, senddata)
+        .then(function(response) {
+            if (response.data) {
+                vm.investorInfo.projectCount = response.data.projectCount;
+                vm.investorInfo.interviewCount = response.data.interviewCount;
+                vm.investorInfo.accessCount = response.data.accessCount;
+                vm.investorInfo.rank = response.data.rank;
+            }
+
+        })
+        .catch(fail);
     }
 
 }

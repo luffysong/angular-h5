@@ -604,6 +604,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         $scope.industryArr.forEach(function (item, index) {
             if (item.id == parseInt($stateParams.industry)) {
                 $scope.currentIndustry = index;
+                vm.rankName = item.name;
             }
         });
         if ($stateParams.industry) {
@@ -636,6 +637,12 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                 }
             });
         }
+        // if (changeobj.value == 0) {
+        //     vm.rankName = '总榜';
+        // } else {
+        //     vm.rankName = changeobj.name;
+        // }
+
         $scope.$broadcast('bdSwipeMoveAction', changeobj);
     }
 
@@ -665,6 +672,13 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
 
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
+                //vm.rankName = item.name;
+                if (item.value == 0) {
+                    vm.rankName = '总榜';
+                } else {
+                    vm.rankName = item.name;
+                }
+                getSingleComInfo();
                 resetData();
                 getProList();
             }
@@ -681,6 +695,23 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             client = 'iOS';
         }
         return client;
+    }
+
+    function getSingleComInfo(){
+        var senddata ={
+            industryId: vm.industry,
+        }
+        BangDanService.getSingleComInfo($stateParams.id, senddata)
+        .then(function(response) {
+            if (response.data) {
+                vm.comInfo.projectCount = response.data.projectCount;
+                vm.comInfo.interviewCount = response.data.interviewCount;
+                vm.comInfo.accessCount = response.data.accessCount;
+                vm.comInfo.rank = response.data.rank;
+            }
+
+        })
+        .catch(fail);
     }
 
 }

@@ -645,6 +645,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
 
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
+                getSingleOrgInfo();
                 resetData();
             }
         });
@@ -675,7 +676,11 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
                 }
             });
         }
-
+        if (changeobj.value == 0) {
+            vm.rankName = '总榜';
+        } else {
+            vm.rankName = changeobj.name;
+        }
         $scope.$broadcast('bdSwipeMoveAction', changeobj);
     }
 
@@ -689,6 +694,23 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             client = 'iOS';
         }
         return client;
+    }
+
+    function getSingleOrgInfo(){
+        var senddata ={
+            industryId: vm.industry,
+        }
+        BangDanService.getSingleOrgInfo($stateParams.id, senddata)
+        .then(function(response) {
+            if (response.data) {
+                vm.orgInfo.projectCount = response.data.projectCount;
+                vm.orgInfo.interviewCount = response.data.interviewCount;
+                vm.orgInfo.accessCount = response.data.accessCount;
+                vm.orgInfo.rank = response.data.rank;
+            }
+
+        })
+        .catch(fail);
     }
 
 }

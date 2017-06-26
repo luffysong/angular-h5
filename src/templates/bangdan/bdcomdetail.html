@@ -13,14 +13,14 @@
                 <div class="bd-orgdetail-img bd-copper-border" ng-if="vm.comInfo.rank === 3"
                     style="background-image: url({{vm.comInfo.logo}})">
                 </div>
-                <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.comInfo.rank > 3"
+                <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.comInfo.rank > 3 || vm.comInfo.rank == 0"
                     style="background-image: url({{vm.comInfo.logo}})">
                 </div>
 
                 <div class="bd-belt bd-gold-belt" ng-if="vm.comInfo.rank === 1"></div>
                 <div class="bd-belt bd-cilver-belt" ng-if="vm.comInfo.rank === 2"></div>
                 <div class="bd-belt bd-copper-belt" ng-if="vm.comInfo.rank === 3"></div>
-                <div class="bd-belt " ng-if="vm.comInfo.rank >3"></div>
+                <div class="bd-belt " ng-if="vm.comInfo.rank >3 || vm.comInfo.rank == 0"></div>
                 <span >{{vm.comInfo.name}}</span>
         </div>
         <div class="rank-num">

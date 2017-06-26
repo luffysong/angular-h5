@@ -763,15 +763,33 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     }
 
     function getBangdanOrgInfo(BangDanService, $stateParams) {
-        return BangDanService.getSingleOrgInfo($stateParams.id);
+        var r;
+        if ($stateParams.industry) {
+            r = BangDanService.getSingleOrgInfo($stateParams.id, {industryId: $stateParams.industry});
+        } else {
+            r = BangDanService.getSingleOrgInfo($stateParams.id);
+        }
+        return r;
     }
 
     function getSingleInvestorInfo(BangDanService, $stateParams) {
-        return BangDanService.getSingleInvestorInfo($stateParams.id);
+        var r;
+        if ($stateParams.industry) {
+            r = BangDanService.getSingleInvestorInfo($stateParams.id, {industryId: $stateParams.industry});
+        } else {
+            r = BangDanService.getSingleInvestorInfo($stateParams.id);
+        }
+        return r;
     }
 
     function getComInfo(BangDanService, $stateParams) {
-        return BangDanService.getSingleComInfo($stateParams.id);
+        var r;
+        if ($stateParams.industry) {
+            r = BangDanService.getSingleComInfo($stateParams.id, {industryId: $stateParams.industry});
+        } else {
+            r = BangDanService.getSingleComInfo($stateParams.id);
+        }
+        return r;
     }
 
     function getOrgIndustry(BangDanService) {
