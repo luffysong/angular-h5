@@ -192,7 +192,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
         //initTitle('2017Q' + vm.currQuarter + ' · 风口社群排行榜');
-        initTitle('2017Q · 风口社群排行榜');
+        initTitle('2017 · 风口社群排行榜');
     }
 
     function initPxLoader() {
