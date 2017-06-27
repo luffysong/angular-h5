@@ -24,6 +24,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
     $scope.industryArr =[];
     vm.hasInit = false;
     $scope.isRise = false;
+    vm.industryName ='全行业';
 
     init();
 
@@ -88,7 +89,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
 
     function initWeixin(q, count) {
         window.WEIXINSHARE = {
-            shareTitle: '【2017Q' + q + '· 风口机构排行榜】已有' + count + '家机构加入',
+            shareTitle: '【2017 · 风口机构排行榜】已有' + count + '家机构加入',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '所有机构的被投项目都在这里',
@@ -121,8 +122,15 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         $scope.industryArr = industryArr;
         var iix = window.sessionStorage.getItem('industryIndex');
         var ind = window.sessionStorage.getItem('industry');
+        var indName = window.sessionStorage.getItem('industryName');
         if (ind && ind != 'undefined') {
             vm.industry = ind;
+        }
+        if (indName && indName != 'undefined' && indName != '全行业') {
+            vm.industryName = indName;
+            window.WEIXINSHARE.shareDesc ='所有机构的'+vm.industryName+'项目都在这里';
+            var obj = {};
+            window.InitWeixin(obj);
         }
         if (iix && iix != 'undefined') {
             $scope.currentIndustry = $stateParams.industry || parseInt(iix);
@@ -181,10 +189,12 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         window.sessionStorage.removeItem('org-id');
         window.sessionStorage.removeItem('industryIndex');
         window.sessionStorage.removeItem('industry');
+        window.sessionStorage.removeItem('industryName');
         window.sessionStorage.setItem('org-position', val);
         window.sessionStorage.setItem('org-id', id);
         window.sessionStorage.setItem('industryIndex', vm.industryIndex);
         window.sessionStorage.setItem('industry', vm.industry);
+        window.sessionStorage.setItem('industryName', vm.industryName);
 
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
@@ -460,7 +470,8 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             window.sessionStorage.removeItem('org-position');
             window.sessionStorage.removeItem('org-id');
             window.sessionStorage.removeItem('industryIndex');
-            window.sessionStorage.removeItem('industry', vm.industry);
+            window.sessionStorage.removeItem('industry');
+            window.sessionStorage.removeItem('industryName');
             if (sa) {
                 sa.track('OrgTopListClick',
                   {
@@ -474,6 +485,12 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
                 vm.industryIndex = item.value;
+                vm.industryName = item.name;
+                if (item.value != 0) {
+                    window.WEIXINSHARE.shareDesc ='所有机构的'+vm.industryName+'项目都在这里';
+                    var obj = {};
+                    window.InitWeixin(obj);
+                }
                 if (item.value == 0){
                     $scope.isRise = true;
                 } else {

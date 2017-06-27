@@ -22,6 +22,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     vm.changeTab = changeTab;
     vm.addWechat = addWechat;
     vm.isRise = false;
+    vm.industryName ='全行业';
 
     var comType = [{
         label: '名企',
@@ -213,7 +214,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
 
     function initWeixin(q, count, type, totalCount) {
         window.WEIXINSHARE = {
-            shareTitle: '【2017Q' + q + ' · 风口社群排行榜】已有' + totalCount + '家社群加入',
+            shareTitle: '【2017 · 风口社群排行榜】已有' + totalCount + '家社群加入',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: count + '家' + type +'社群所有项目都在这里',
@@ -301,12 +302,14 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         window.sessionStorage.removeItem('comType');
         window.sessionStorage.removeItem('industryIndex');
         window.sessionStorage.removeItem('industry');
+        window.sessionStorage.removeItem('industryName');
 
         window.sessionStorage.setItem('com-position', val);
         window.sessionStorage.setItem('com-id', id);
         window.sessionStorage.setItem('comType', vm.communityType);
         window.sessionStorage.setItem('industryIndex', vm.industryIndex);
         window.sessionStorage.setItem('industry', vm.industry);
+        window.sessionStorage.setItem('industryName', vm.industryName);
         var client = getClient();
         getTrackParams(vm.communityType);
         sa.track('CommunityTopListClick',
@@ -538,8 +541,15 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
 
         var iix = window.sessionStorage.getItem('industryIndex');
         var ind = window.sessionStorage.getItem('industry');
+        var indName = window.sessionStorage.getItem('industryName');
         if (ind && ind != 'undefined') {
             vm.industry = ind;
+        }
+        if (indName && indName != 'undefined' && indName != '全行业') {
+            vm.industryName = indName;
+            window.WEIXINSHARE.shareDesc = vm.total + '家' +vm.type + '所有' +vm.industryName+'项目都在这里';
+            var obj = {};
+            window.InitWeixin(obj);
         }
         if (iix && iix != 'undefined') {
             $scope.currentIndustry = $stateParams.industry || parseInt(iix);
@@ -598,6 +608,12 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
                 vm.industryIndex = item.value;
+                vm.industryName = item.name;
+                if (item.value != 0) {
+                    window.WEIXINSHARE.shareDesc = vm.total + '家' +vm.type + '所有' +vm.industryName+'项目都在这里';
+                    var obj = {};
+                    window.InitWeixin(obj);
+                }
                 if (item.value == 0){
                     vm.isRise = true;
                 } else {

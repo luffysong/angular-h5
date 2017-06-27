@@ -24,6 +24,8 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
     vm.moveAction = moveAction;
     vm.hasInit = false;
     vm.isRise = false;
+    vm.industryName ='全行业';
+
     init();
 
     function init() {
@@ -110,7 +112,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
 
     function initWeixin(q, count) {
         window.WEIXINSHARE = {
-            shareTitle: '【2017Q' + q + '· 风云投资人排行榜】已有' + count + '位投资人加入',
+            shareTitle: '【2017 · 风云投资人排行榜】已有' + count + '位投资人加入',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '所有投资人的被投项目都在这里',
@@ -143,8 +145,15 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         $scope.industryArr = industryArr;
         var iix = window.sessionStorage.getItem('industryIndex');
         var ind = window.sessionStorage.getItem('industry');
+        var indName = window.sessionStorage.getItem('industryName');
         if (ind && ind != 'undefined') {
             vm.industry = ind;
+        }
+        if (indName && indName != 'undefined' && indName != '全行业') {
+            vm.industryName = indName;
+            window.WEIXINSHARE.shareDesc ='所有投资人的'+vm.industryName+'项目都在这里';
+            var obj = {};
+            window.InitWeixin(obj);
         }
         if (iix && iix != 'undefined') {
             $scope.currentIndustry = $stateParams.industry || parseInt(iix);
@@ -203,10 +212,12 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         window.sessionStorage.removeItem('investor-id');
         window.sessionStorage.removeItem('industryIndex');
         window.sessionStorage.removeItem('industry');
+        window.sessionStorage.removeItem('industryName');
         window.sessionStorage.setItem('investor-position', val);
         window.sessionStorage.setItem('investor-id', id);
         window.sessionStorage.setItem('industryIndex', vm.industryIndex);
         window.sessionStorage.setItem('industry', vm.industry);
+        window.sessionStorage.setItem('industryName', vm.industryName);
 
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
@@ -487,9 +498,16 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             window.sessionStorage.removeItem('investor-id');
             window.sessionStorage.removeItem('industryIndex');
             window.sessionStorage.removeItem('industry');
+            window.sessionStorage.removeItem('industryName');
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
                 vm.industryIndex = item.value;
+                vm.industryName = item.name;
+                if (item.value != 0) {
+                    window.WEIXINSHARE.shareDesc ='所有投资人的'+vm.industryName+'项目都在这里';
+                    var obj = {};
+                    window.InitWeixin(obj);
+                }
                 if (item.value == 0){
                     vm.isRise = true;
                 } else {
