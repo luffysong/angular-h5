@@ -250,6 +250,9 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                               translateX: leftProp,
                             }, {
                               type: dynamics.spring,
+                              frequency: 200,
+                              friction: 200,
+                              duration: 1000
                             //   complete:function(){
                             //       wrapper.css('transform', 'none');
                             //       wrapper.css('left', leftProp + 'px');
