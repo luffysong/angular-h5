@@ -103,7 +103,7 @@ function IndustryReportListController(FindService, ErrorService, loading, hybrid
         if (isIos) {
             hybrid.open('openEncryptionLinkNoShare/' + encodeURIComponent(cell.attachLink));
         } else {
-            ​hybrid.open('openEncryptionLink/' + encodeURIComponent(cell.attachLink));
+            hybrid.open('openEncryptionLink/' + encodeURIComponent(cell.attachLink));
         }
     }
     function openNativePage(path) {
