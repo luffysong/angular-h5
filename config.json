@@ -66,7 +66,8 @@
         "src/components/to-markdown/dist/to-markdown.js",
         "src/components/angular-markdown-text/dist/angular-markdown-text.min.js",
         "src/components/PxLoader/dist/pxloader-all.min.js",
-        "src/components/PxLoader/dist/pxloader-images.min.js"
+        "src/components/PxLoader/dist/pxloader-images.min.js",
+        "src/components/dynamics.js/lib/dynamics.min.js"
     ],
     "angularUiTpls": [
     ],

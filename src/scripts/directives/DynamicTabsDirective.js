@@ -23,6 +23,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                 var clienWidth = element.width();
                 var barwidth = scope.barwidth;
                 var limit = parseInt(scope.limit);
+                var wrapperWidth;
                 var wrapper;
                 var setCurrentTab;
                 var aWidth;
@@ -85,7 +86,9 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         if (!finalAWidth) {
                             finalAWidth = w;
                         }
-
+                        if (!wrapperWidth) {
+                            wrapperWidth = _tabLength * w;
+                        }
                         wrapper.css('width',(_tabLength * w + 'px' ));
                         wrapper.find('a').css('width', w);
 
@@ -114,8 +117,19 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         }
                         w = Math.ceil(w);
 
-                        wrapper.css('transition', 'left 0.3s');
-                        wrapper.css('left', w == 0 ? '0px' : '-' + w + 'px');
+                        //wrapper.removeAttr("style");
+                        var leftProp = w == 0 ? '0' : '-' + w;
+                        if(dynamics){
+                            dynamics.animate(wrapper[0], {
+                                  translateX: leftProp,
+                                }, {
+                                  type: dynamics.spring,
+                              });
+                        } else {
+                            wrapper.css('transition', 'left 0.3s');
+                            wrapper.css('left', leftProp + 'px');
+                        }
+
                     },500);
                 }
 
@@ -125,29 +139,31 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         var width = selected.find('span').width();
                         var offsetLeft = selected.find('span').offset().left;
 
-                        var _aw = wrapper.find('a').css('width').replace('px','');
-                        var _w =  clienWidth /(_tabLength);
+                        //var _aw = wrapper.find('a').css('width').replace('px','');
+                        // var _w =  clienWidth /(_tabLength);
 
-                        var wl = Math.abs(wrapper.css('left').replace('px',''));
-                        if (!scope.isspan) {
-                            var width = selected.width();
-                            var offsetLeft = selected.offset().left;
-                        }
-                        if (wl) {
-                            offsetLeft = offsetLeft + wl;
-                        }
+                        // var wl = Math.abs(wrapper.css('left').replace('px',''));
+                        // if (!scope.isspan) {
+                        //     var width = selected.width();
+                        //     var offsetLeft = selected.offset().left;
+                        // }
+                        // if (wl) {
+                        //     offsetLeft = offsetLeft + wl;
+                        // }
+                        //
+                        // var plusLeft = 0;
+                        // if ((width - parseInt(barwidth)) > 0 ) {
+                        //     plusLeft = parseInt(width - parseInt(barwidth));
+                        // }
+                        //
+                        // if (cutLeft) {
+                        //     offsetLeft = cutLeft(aWidth, index, offsetLeft, plusLeft);
+                        //     cutLeft = null;
+                        // } else {
+                        //     offsetLeft = offsetLeft + parseInt(plusLeft/2);
+                        // }
 
-                        var plusLeft = 0;
-                        if ((width - parseInt(barwidth)) > 0 ) {
-                            plusLeft = parseInt(width - parseInt(barwidth));
-                        }
-
-                        if (cutLeft) {
-                            offsetLeft = cutLeft(aWidth, index, offsetLeft, plusLeft);
-                            cutLeft = null;
-                        } else {
-                            offsetLeft = offsetLeft + parseInt(plusLeft/2);
-                        }
+                        offsetLeft = Math.abs((aWidth * (index+1)) - parseInt(barwidth/2) - aWidth/2);
 
                         var leftProp = 'translate3d(' + offsetLeft+ 'px,0,0)';
                         scope.bar = {
@@ -181,6 +197,7 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                     scope.tabs.forEach(function (tab, index) {
                         if (viewValue === tab) {
                             tab.selected = true;
+                            //element.find('.wrapper').css('transform', 'none');
                             setWrapper(setBarState,index);
                             scope.currtab = index;
                             setCurrentTab(index);
@@ -227,8 +244,25 @@ angular.module('defaultApp.directive').directive('dynamicTabs',
                         leftProp = 0;
                     }
 
-                    wrapper.css('transition', 'left 0.2s');
-                    wrapper.css('left', leftProp + 'px');
+                    if (dynamics) {
+                        //wrapper.css('left', '');
+                        dynamics.animate(wrapper[0], {
+                              translateX: leftProp,
+                            }, {
+                              type: dynamics.spring,
+                            //   complete:function(){
+                            //       wrapper.css('transform', 'none');
+                            //       wrapper.css('left', leftProp + 'px');
+                            //   }
+                          });
+                          //wrapper.css('left', leftProp + 'px');
+                          //wrapper.css('transform', '');
+                    } else {
+                        wrapper.css('transition', 'left 0.2s');
+                        wrapper.css('left', leftProp + 'px');
+                    }
+                    // wrapper.css('transition', 'left 0.2s');
+                    // wrapper.css('left', leftProp + 'px');
                 };
 
                 // //监听变化对象，以此来实现左右滑动
