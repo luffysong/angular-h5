@@ -1,3 +1,8 @@
+<a name="1.38.7"></a>
+## [1.38.7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.38.6...v1.38.7) (2017-06-27)
+
+
+
 <a name="1.38.6"></a>
 ## [1.38.6](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.38.5...v1.38.6) (2017-06-27)
 
@@ -185,11 +190,6 @@
 * 添加社群榜单首页 ([4163746](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/4163746))
 * 社群首页及分享页接入数据 ([3187578](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/3187578))
 * 返回首页列表添加定位 ([b8028be](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/commit/b8028be))
-
-
-
-<a name="1.36.7"></a>
-## [1.36.7](https://gitlab.corp.36kr.com/f2e/kr-rong-h5/compare/v1.36.6...v1.36.7) (2017-05-27)
 
 
 
