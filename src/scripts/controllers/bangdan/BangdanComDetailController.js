@@ -29,6 +29,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     $scope.currentIndustry = 0;
     vm.changeTabDataState = false;
     vm.rankName ='总榜';
+    vm.industryName ='全行业';
     init();
 
     function init() {
@@ -172,7 +173,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
 
     function initWeixin(name, count, q, rank, url, logo, communityName) {
         window.WEIXINSHARE = {
-            shareTitle: name + '为' + communityName + '第' + rank + '名 | 2017Q' + q + ' · 风口社群排行榜',
+            shareTitle: name + '为' + communityName + '第' + rank + '名 | 2017 · 风口社群排行榜',
             shareUrl: url,
             shareImg: '' + logo + '',
             shareDesc: name + count + '个项目都在这里',
@@ -605,6 +606,15 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             if (item.id == parseInt($stateParams.industry)) {
                 $scope.currentIndustry = index;
                 vm.rankName = item.name;
+                vm.industryName = item.name;
+                if (item.value != 0){
+                    $timeout(function() {
+                        window.WEIXINSHARE.shareTitle = vm.comInfo.name + '为' +vm.comInfo.communityName + vm.industryName +'排名第' + vm.comInfo.rank+ '名 | 2017 · 风口社群排行榜';
+                        window.WEIXINSHARE.shareDesc =  vm.comInfo.name + vm.comInfo.projectCount +'个'+vm.industryName+'项目都在这里';
+                        var obj = {};
+                        window.InitWeixin(obj);
+                    },200);
+                }
             }
         });
         if ($stateParams.industry) {
@@ -679,6 +689,18 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                     vm.rankName = item.name;
                 }
                 getSingleComInfo();
+                vm.industryName = item.name;
+                if (item.value != 0) {
+                    window.WEIXINSHARE.shareTitle = vm.comInfo.name + '为' +vm.comInfo.communityName + vm.industryName +'排名第' + vm.comInfo.rank+ '名 | 2017 · 风口社群排行榜';
+                    window.WEIXINSHARE.shareDesc =  vm.comInfo.name + vm.comInfo.projectCount +'个'+vm.industryName+'项目都在这里';
+                    var obj = {};
+                    window.InitWeixin(obj);
+                } else {
+                    window.WEIXINSHARE.shareTitle = vm.comInfo.name + '为' +vm.comInfo.communityName +'排名第' + vm.comInfo.rank+ '名 | 2017 · 风口社群排行榜';
+                    window.WEIXINSHARE.shareDesc = vm.comInfo.name + vm.comInfo.projectCount +'个投资项目都在这里';
+                    var obj = {};
+                    window.InitWeixin(obj);
+                }
                 resetData();
                 getProList();
             }

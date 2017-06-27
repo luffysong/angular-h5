@@ -27,6 +27,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
     $scope.currentIndustry = 0;
     vm.rankName ='总榜';
+    vm.industryName ='全行业';
     init();
 
     function init() {
@@ -154,7 +155,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
 
     function initWeixin(name, count, q, rank, url, logo) {
         window.WEIXINSHARE = {
-            shareTitle: name + '排名第' + rank + '名 | 2017Q' + q + ' · 风云投资人排行榜',
+            shareTitle: name + '排名第' + rank + '名 | 2017 · 风云投资人排行榜',
             shareUrl: url,
             shareImg: '' + logo + '',
             shareDesc: '立即查看' + name + '所有' + count + '个投资项目',
@@ -576,6 +577,15 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             if (item.id == parseInt($stateParams.industry)) {
                 $scope.currentIndustry = index;
                 vm.rankName = item.name;
+                vm.industryName = item.name;
+                if (item.value != 0){
+                    $timeout(function() {
+                        window.WEIXINSHARE.shareTitle = vm.investorInfo.name + '在' + vm.industryName +'排名第' + vm.investorInfo.rank+ '名 | 2017 · 风云投资人排行榜';
+                        window.WEIXINSHARE.shareDesc = '立即查看' + vm.investorInfo.name +'所有'+ vm.investorInfo.projectCount +'个'+vm.industryName+'项目';
+                        var obj = {};
+                        window.InitWeixin(obj);
+                    },200);
+                }
             }
         });
         if ($stateParams.industry) {
@@ -647,6 +657,18 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
                     vm.rankName = item.name;
                 }
                 getSingleInvestorInfo();
+                vm.industryName = item.name;
+                if (item.value != 0) {
+                    window.WEIXINSHARE.shareTitle = vm.investorInfo.name + '在' + vm.industryName +'排名第' + vm.investorInfo.rank+ '名 | 2017 · 风云投资人排行榜';
+                    window.WEIXINSHARE.shareDesc = '立即查看' + vm.investorInfo.name +'所有'+ vm.investorInfo.projectCount +'个'+vm.industryName+'项目';
+                    var obj = {};
+                    window.InitWeixin(obj);
+                } else {
+                    window.WEIXINSHARE.shareTitle = vm.investorInfo.name + '排名第' + vm.investorInfo.rank + '名 | 2017 · 风云投资人排行榜';
+                    window.WEIXINSHARE.shareDesc = '立即查看' + vm.investorInfo.name + '所有' + vm.investorInfo.projectCount + '个投资项目';
+                    var obj = {};
+                    window.InitWeixin(obj);
+                }
                 resetData();
             }
         });

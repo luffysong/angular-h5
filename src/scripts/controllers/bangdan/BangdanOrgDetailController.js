@@ -25,6 +25,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.hasInit = false;
     $scope.currentIndustry = 0;
     vm.rankName ='总榜';
+    vm.industryName ='全行业';
     init();
 
     function init() {
@@ -111,6 +112,16 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         $scope.industryArr.forEach(function (item, index) {
             if (item.id == parseInt($stateParams.industry)) {
                 $scope.currentIndustry = index;
+                vm.industryName = item.name;
+                vm.rankName = item.name;
+                if (item.value != 0){
+                    $timeout(function() {
+                        window.WEIXINSHARE.shareTitle = vm.orgInfo.name + '在' + vm.industryName +'排名第' + vm.orgInfo.rank+ '名 | 2017 · 风口机构排行榜';
+                        window.WEIXINSHARE.shareDesc = vm.orgInfo.name + vm.orgInfo.projectCount +'个'+vm.industryName+'项目都在这里';
+                        var obj = {};
+                        window.InitWeixin(obj);
+                    },200);
+                }
             }
         });
 
@@ -249,7 +260,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
 
     function initWeixin(name, count, q, rank, url, logo) {
         window.WEIXINSHARE = {
-            shareTitle: name + '为第' + rank + '名 | 2017Q' + q + ' · 风口机构排行榜',
+            shareTitle: name + '排名第' + rank + '名 | 2017 · 风口机构排行榜',
             shareUrl: url,
             shareImg: '' + logo + '',
             shareDesc: name + '' + count + '个投资项目都在这里',
@@ -643,9 +654,27 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
                 });
             }
 
+            if (item.value == 0) {
+                vm.rankName = '总榜';
+            } else {
+                vm.rankName = item.name;
+            }
+
             if (item.value == 0 || item.value) {
                 vm.industry = item.value == 0 ? '' : item.id;
                 getSingleOrgInfo();
+                vm.industryName = item.name;
+                if (item.value != 0) {
+                    window.WEIXINSHARE.shareTitle = vm.orgInfo.name + '在' + vm.industryName +'排名第' + vm.orgInfo.rank+ '名 | 2017 · 风口机构排行榜';
+                    window.WEIXINSHARE.shareDesc = vm.orgInfo.name + vm.orgInfo.projectCount +'个'+vm.industryName+'项目都在这里';
+                    var obj = {};
+                    window.InitWeixin(obj);
+                } else {
+                    window.WEIXINSHARE.shareTitle = vm.orgInfo.name + '排名第' + vm.orgInfo.rank + '名 | 2017 · 风口机构排行榜';
+                    window.WEIXINSHARE.shareDesc = vm.orgInfo.name + '' + vm.orgInfo.projectCount + '个投资项目都在这里';
+                    var obj = {};
+                    window.InitWeixin(obj);
+                }
                 resetData();
             }
         });
@@ -676,11 +705,6 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
                 }
             });
         }
-        if (changeobj.value == 0) {
-            vm.rankName = '总榜';
-        } else {
-            vm.rankName = changeobj.name;
-        }
         $scope.$broadcast('bdSwipeMoveAction', changeobj);
     }
 
@@ -708,7 +732,6 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
                 vm.orgInfo.accessCount = response.data.accessCount;
                 vm.orgInfo.rank = response.data.rank;
             }
-
         })
         .catch(fail);
     }

@@ -17,7 +17,7 @@
             <div class="bd-belt bd-copper-crown" ng-if="vm.investorInfo.rank === 3"></div>
             </div>
 
-            <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.investorInfo.rank > 3"
+            <div class="bd-orgdetail-img bd-normal-border" ng-if="vm.investorInfo.rank > 3 || vm.investorInfo.rank == 0"
                 style="background-image: url({{vm.investorInfo.logo}})">
             </div>
             <span >{{vm.investorInfo.name}}</span>
