@@ -52,7 +52,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         compareRank();
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + vm.investorInfo.rank + '&industry=' + vm.industry + '&industryName=' + vm.industryName;
+        'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + vm.investorInfo.rank + '&industry=' + vm.industry;
         initWeixin(vm.investorInfo.name, vm.investorInfo.projectCount, vm.currQuarter, vm.investorInfo.rank, shareUrl, vm.investorInfo.logo);
     }
 
@@ -713,7 +713,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     function reInitWechat(){
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + vm.investorInfo.rank + '&industry=' + vm.industry + '&industryName=' + vm.industryName;
+        'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + vm.investorInfo.rank + '&industry=' + vm.industry;
         initWeixin(vm.investorInfo.name, vm.investorInfo.projectCount, vm.currQuarter, vm.investorInfo.rank, shareUrl, vm.investorInfo.logo);
     }
 

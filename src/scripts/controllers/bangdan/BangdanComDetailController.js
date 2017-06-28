@@ -50,7 +50,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         getCommunityType(vm.communityType);
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '&communityType=' + $stateParams.communityType + '&industry=' + vm.industry + '&industryName=' + vm.industryName;
+        'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '&communityType=' + $stateParams.communityType + '&industry=' + vm.industry;
         initWeixin(vm.comInfo.name, vm.comInfo.projectCount, vm.currQuarter, vm.comInfo.rank, shareUrl, vm.comInfo.logo, vm.comInfo.communityName);
     }
 
@@ -746,7 +746,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     function reInitWechat() {
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '&communityType=' + $stateParams.communityType + '&industry=' + vm.industry + '&industryName=' + vm.industryName;
+        'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '&communityType=' + $stateParams.communityType + '&industry=' + vm.industry;
         initWeixin(vm.comInfo.name, vm.comInfo.projectCount, vm.currQuarter, vm.comInfo.rank, shareUrl, vm.comInfo.logo, vm.comInfo.communityName);
     }
 

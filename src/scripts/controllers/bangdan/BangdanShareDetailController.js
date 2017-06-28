@@ -9,7 +9,7 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
     vm.id = $stateParams.id;
     vm.rank = $stateParams.rank;
     vm.industry = $stateParams.industry;
-    vm.industryName = $stateParams.industryName;
+    //vm.industryName = $stateParams.industryName;
     vm.bangdanOrg = bangdanOrg;
     vm.bangdanOrgDetail = bangdanOrgDetail;
     vm.inApp = true;
@@ -117,6 +117,12 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
         BangDanService.getSingleOrgInfo(id, senddata)
             .then(function (response) {
                 vm.data = response.data;
+                vm.rank = response.data.rank;
+                vm.data.industryList.forEach(function (item, index) {
+                    if(item.id == vm.industry) {
+                        vm.industryName = item.name
+                    }
+                });
                 initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.data.rank, vm.data.logo);
                 initWeixinH5();
                 compareRank();

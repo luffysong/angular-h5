@@ -518,6 +518,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
                 vm.industryIndex = item.value;
                 vm.industryName = item.name;
                 if (item.value != 0) {
+                    reInitWechat();
                     window.WEIXINSHARE.shareDesc ='所有投资人的'+vm.industryName+'项目都在这里';
                     var obj = {};
                     window.InitWeixin(obj);
@@ -560,5 +561,9 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             client = 'iOS';
         }
         return client;
+    }
+
+    function reInitWechat() {
+        initWeixin(vm.currQuarter, vm.total);
     }
 }

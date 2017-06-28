@@ -488,6 +488,7 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
                 vm.industryIndex = item.value;
                 vm.industryName = item.name;
                 if (item.value != 0) {
+                    reInitWechat();
                     window.WEIXINSHARE.shareDesc ='所有机构的'+vm.industryName+'项目都在这里';
                     var obj = {};
                     window.InitWeixin(obj);
@@ -530,6 +531,10 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
             client = 'iOS';
         }
         return client;
+    }
+
+    function reInitWechat() {
+        initWeixin(vm.currQuarter, vm.total);
     }
 
 }

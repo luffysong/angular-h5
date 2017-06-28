@@ -46,7 +46,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
 
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + vm.orgInfo.rank + '&industry=' + vm.industry + '&industryName=' + vm.industryName;
+        'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + vm.orgInfo.rank + '&industry=' + vm.industry;
         initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.orgInfo.rank, shareUrl, vm.orgInfo.logo);
     }
 
@@ -747,7 +747,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
     function reInitWechat(){
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + vm.orgInfo.rank + '&industry=' + vm.industry + '&industryName=' + vm.industryName;
+        'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + vm.orgInfo.rank + '&industry=' + vm.industry;
         initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.orgInfo.rank, shareUrl, vm.orgInfo.logo);
     }
 
