@@ -273,6 +273,11 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
                     if (!vm.total) {
                         vm.total = response.data.totalCount;
                         initWeixin(vm.currQuarter, vm.total);
+                        if(vm.industryName !== '全行业') {
+                            window.WEIXINSHARE.shareDesc ='所有投资人的'+vm.industryName+'项目都在这里';
+                            var obj = {};
+                            window.InitWeixin(obj);
+                        }
                     }
 
                     if (response.data.totalPages) {
