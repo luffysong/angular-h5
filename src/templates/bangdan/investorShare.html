@@ -12,7 +12,7 @@
     <div class="num-line"></div>
     <div class="num">第<span>{{vm.data.rank}}</span>名</div>
     <div class="num-line"></div>
-    <div ng-if="vm.numchange" class="rank-riseDown">
+    <div ng-if="vm.numchange" class="rank-riseDown" ng-if="vm.industryName === '全行业'">
         <span ng-if="vm.rise">上升</span>
         <span ng-if="!vm.rise">下降</span>
         {{vm.numchange}}

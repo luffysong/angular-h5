@@ -669,11 +669,13 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
                 getSingleOrgInfo();
                 vm.industryName = item.name;
                 if (item.value != 0) {
+                    reInitWechat();
                     window.WEIXINSHARE.shareTitle = vm.orgInfo.name + '在' + vm.industryName +'排名第' + vm.orgInfo.rank+ '名 | 2017 · 风口机构排行榜';
                     window.WEIXINSHARE.shareDesc = vm.orgInfo.name + vm.orgInfo.projectCount +'个'+vm.industryName+'项目都在这里';
                     var obj = {};
                     window.InitWeixin(obj);
                 } else {
+                    reInitWechat();
                     window.WEIXINSHARE.shareTitle = vm.orgInfo.name + '排名第' + vm.orgInfo.rank + '名 | 2017 · 风口机构排行榜';
                     window.WEIXINSHARE.shareDesc = vm.orgInfo.name + '' + vm.orgInfo.projectCount + '个投资项目都在这里';
                     var obj = {};
@@ -740,6 +742,13 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             }
         })
         .catch(fail);
+    }
+
+    function reInitWechat(){
+        var HOST = location.host;
+        var shareUrl =
+        'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + vm.orgInfo.rank + '&industry=' + vm.industry + '&industryName=' + vm.industryName;
+        initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.orgInfo.rank, shareUrl, vm.orgInfo.logo);
     }
 
 }
