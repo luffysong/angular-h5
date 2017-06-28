@@ -64,7 +64,7 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
-        initTitle('2017 · 风口机构排行榜');
+        initTitle('2017 · 风口社群排行榜');
     }
 
     function bangdanCom() {
@@ -113,12 +113,20 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
         });
 
         //放开访问详情
-        $state.go('bangdan.combddetail', {
-            id: id,
-            rank: rank,
-            communityType: vm.communityType,
-            industry:parseInt($stateParams.industry)
-        });
+        if (parseInt($stateParams.industry)) {
+            $state.go('bangdan.combddetail', {
+                id: id,
+                rank: rank,
+                communityType: vm.communityType,
+                industry:parseInt($stateParams.industry)
+            });
+        } else {
+            $state.go('bangdan.combddetail', {
+                id: id,
+                rank: rank,
+                communityType: vm.communityType,
+            });
+        }
     }
 
     function getSingleComInfo(id) {

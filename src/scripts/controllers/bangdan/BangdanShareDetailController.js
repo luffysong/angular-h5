@@ -95,11 +95,18 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
         });
 
         //放开访问详情
-        $state.go('bangdan.orgbdDetail', {
-            id: id,
-            rank: rank,
-            industry:parseInt($stateParams.industry)
-        });
+        if (parseInt($stateParams.industry)){
+            $state.go('bangdan.orgbdDetail', {
+                id: id,
+                rank: rank,
+                industry:parseInt($stateParams.industry)
+            });
+        } else {
+            $state.go('bangdan.orgbdDetail', {
+                id: id,
+                rank: rank,
+            });
+        }
     }
 
     function getSingleOrgInfo(id) {

@@ -237,6 +237,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         var item = vm.comInfo;
         item.currQuarter = vm.currQuarter;
         item.inApp = vm.inApp;
+        item.industry = vm.industry;
         item.industryName = vm.industryName;
         var tg = 'join_community_company';
         if (f) {

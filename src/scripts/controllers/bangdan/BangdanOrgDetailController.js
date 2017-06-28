@@ -282,6 +282,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         item.inApp = vm.inApp;
         item.industryName = vm.industryName;
         item.industry = vm.industry;
+
         var tg = 'join_org';
         if (f) {
             item.f = f;tg = 'support';

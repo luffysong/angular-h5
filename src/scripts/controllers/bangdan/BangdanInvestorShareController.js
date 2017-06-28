@@ -90,12 +90,18 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
             org_id: id + '',
             client:client,
         });
-
-        $state.go('bangdan.investorbddetail', {
-            id: id,
-            rank: rank,
-            industry:parseInt($stateParams.industry)
-        });
+        if (parseInt($stateParams.industry)){
+            $state.go('bangdan.investorbddetail', {
+                id: id,
+                rank: rank,
+                industry:parseInt($stateParams.industry)
+            });
+        } else {
+            $state.go('bangdan.investorbddetail', {
+                id: id,
+                rank: rank,
+            });
+        }
     }
 
     function getSingleInvestorInfo(id) {
