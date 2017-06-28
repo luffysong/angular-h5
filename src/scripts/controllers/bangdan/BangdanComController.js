@@ -264,11 +264,11 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
                 if (!vm.total) {
                     vm.total = response.data.communityCount.currentTypeCount;
                     initWeixin(vm.currQuarter, vm.total, vm.type, vm.totalCount);
-                    if(vm.industryName !== '全行业'){
-                        window.WEIXINSHARE.shareDesc = vm.total + '家' +vm.type + '所有' +vm.industryName+'项目都在这里';
-                        var obj = {};
-                        window.InitWeixin(obj);
-                    }
+                    // if(vm.industryName !== '全行业'){
+                    //     window.WEIXINSHARE.shareDesc = vm.total + '家' +vm.type + '所有' +vm.industryName+'项目都在这里';
+                    //     var obj = {};
+                    //     window.InitWeixin(obj);
+                    // }
                 }
 
                 if (response.data.pageData.totalPages) {
@@ -615,12 +615,12 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
                 vm.industry = item.value == 0 ? '' : item.id;
                 vm.industryIndex = item.value;
                 vm.industryName = item.name;
-                if (item.value != 0) {
-                    reInitWechat();
-                    window.WEIXINSHARE.shareDesc = vm.total + '家' +vm.type + '所有' +vm.industryName+'项目都在这里';
-                    var obj = {};
-                    window.InitWeixin(obj);
-                }
+                // if (item.value != 0) {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareDesc = vm.total + '家' +vm.type + '所有' +vm.industryName+'项目都在这里';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // }
                 if (item.value == 0){
                     vm.isRise = true;
                 } else {

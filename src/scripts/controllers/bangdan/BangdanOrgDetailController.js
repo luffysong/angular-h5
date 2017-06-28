@@ -282,7 +282,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         item.inApp = vm.inApp;
         item.industryName = vm.industryName;
         item.industry = vm.industry;
-        reInitWechat();
+        //reInitWechat();
         var tg = 'join_org';
         if (f) {
             item.f = f;tg = 'support';
@@ -668,19 +668,19 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
                 vm.industry = item.value == 0 ? '' : item.id;
                 getSingleOrgInfo();
                 vm.industryName = item.name;
-                if (item.value != 0) {
-                    reInitWechat();
-                    window.WEIXINSHARE.shareTitle = vm.orgInfo.name + '在' + vm.industryName +'排名第' + vm.orgInfo.rank+ '名 | 2017 · 风口机构排行榜';
-                    window.WEIXINSHARE.shareDesc = vm.orgInfo.name + vm.orgInfo.projectCount +'个'+vm.industryName+'项目都在这里';
-                    var obj = {};
-                    window.InitWeixin(obj);
-                } else {
-                    reInitWechat();
-                    window.WEIXINSHARE.shareTitle = vm.orgInfo.name + '排名第' + vm.orgInfo.rank + '名 | 2017 · 风口机构排行榜';
-                    window.WEIXINSHARE.shareDesc = vm.orgInfo.name + '' + vm.orgInfo.projectCount + '个投资项目都在这里';
-                    var obj = {};
-                    window.InitWeixin(obj);
-                }
+                // if (item.value != 0) {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareTitle = vm.orgInfo.name + '在' + vm.industryName +'排名第' + vm.orgInfo.rank+ '名 | 2017 · 风口机构排行榜';
+                //     window.WEIXINSHARE.shareDesc = vm.orgInfo.name + vm.orgInfo.projectCount +'个'+vm.industryName+'项目都在这里';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // } else {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareTitle = vm.orgInfo.name + '排名第' + vm.orgInfo.rank + '名 | 2017 · 风口机构排行榜';
+                //     window.WEIXINSHARE.shareDesc = vm.orgInfo.name + '' + vm.orgInfo.projectCount + '个投资项目都在这里';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // }
                 resetData();
             }
         });

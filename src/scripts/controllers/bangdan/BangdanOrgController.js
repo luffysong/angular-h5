@@ -163,11 +163,11 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
                     if (!vm.total) {
                         vm.total = response.data.totalCount;
                         initWeixin(vm.currQuarter, vm.total);
-                        if(vm.industryName !== '全行业') {
-                            window.WEIXINSHARE.shareDesc ='所有机构的'+vm.industryName+'项目都在这里';
-                            var obj = {};
-                            window.InitWeixin(obj);
-                        }
+                        // if(vm.industryName !== '全行业') {
+                        //     window.WEIXINSHARE.shareDesc ='所有机构的'+vm.industryName+'项目都在这里';
+                        //     var obj = {};
+                        //     window.InitWeixin(obj);
+                        // }
                     }
 
                     if (response.data.totalPages) {
@@ -492,12 +492,12 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
                 vm.industry = item.value == 0 ? '' : item.id;
                 vm.industryIndex = item.value;
                 vm.industryName = item.name;
-                if (item.value != 0) {
-                    reInitWechat();
-                    window.WEIXINSHARE.shareDesc ='所有机构的'+vm.industryName+'项目都在这里';
-                    var obj = {};
-                    window.InitWeixin(obj);
-                }
+                // if (item.value != 0) {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareDesc ='所有机构的'+vm.industryName+'项目都在这里';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // }
                 if (item.value == 0){
                     $scope.isRise = true;
                 } else {

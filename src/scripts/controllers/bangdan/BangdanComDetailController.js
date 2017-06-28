@@ -239,7 +239,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         item.inApp = vm.inApp;
         item.industry = vm.industry;
         item.industryName = vm.industryName;
-        reInitWechat();
+        //reInitWechat();
         var tg = 'join_community_company';
         if (f) {
             item.f = f;tg = 'support';
@@ -694,19 +694,19 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                 }
                 getSingleComInfo();
                 vm.industryName = item.name;
-                if (item.value != 0) {
-                    reInitWechat();
-                    window.WEIXINSHARE.shareTitle = vm.comInfo.name + '为' +vm.comInfo.communityName + vm.industryName +'排名第' + vm.comInfo.rank+ '名 | 2017 · 风口社群排行榜';
-                    window.WEIXINSHARE.shareDesc =  vm.comInfo.name + vm.comInfo.projectCount +'个'+vm.industryName+'项目都在这里';
-                    var obj = {};
-                    window.InitWeixin(obj);
-                } else {
-                    reInitWechat();
-                    window.WEIXINSHARE.shareTitle = vm.comInfo.name + '为' +vm.comInfo.communityName +'排名第' + vm.comInfo.rank+ '名 | 2017 · 风口社群排行榜';
-                    window.WEIXINSHARE.shareDesc = vm.comInfo.name + vm.comInfo.projectCount +'个投资项目都在这里';
-                    var obj = {};
-                    window.InitWeixin(obj);
-                }
+                // if (item.value != 0) {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareTitle = vm.comInfo.name + '为' +vm.comInfo.communityName + vm.industryName +'排名第' + vm.comInfo.rank+ '名 | 2017 · 风口社群排行榜';
+                //     window.WEIXINSHARE.shareDesc =  vm.comInfo.name + vm.comInfo.projectCount +'个'+vm.industryName+'项目都在这里';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // } else {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareTitle = vm.comInfo.name + '为' +vm.comInfo.communityName +'排名第' + vm.comInfo.rank+ '名 | 2017 · 风口社群排行榜';
+                //     window.WEIXINSHARE.shareDesc = vm.comInfo.name + vm.comInfo.projectCount +'个投资项目都在这里';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // }
                 resetData();
                 getProList();
             }
