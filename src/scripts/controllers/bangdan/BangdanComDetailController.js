@@ -694,11 +694,13 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                 getSingleComInfo();
                 vm.industryName = item.name;
                 if (item.value != 0) {
+                    reInitWechat();
                     window.WEIXINSHARE.shareTitle = vm.comInfo.name + '为' +vm.comInfo.communityName + vm.industryName +'排名第' + vm.comInfo.rank+ '名 | 2017 · 风口社群排行榜';
                     window.WEIXINSHARE.shareDesc =  vm.comInfo.name + vm.comInfo.projectCount +'个'+vm.industryName+'项目都在这里';
                     var obj = {};
                     window.InitWeixin(obj);
                 } else {
+                    reInitWechat();
                     window.WEIXINSHARE.shareTitle = vm.comInfo.name + '为' +vm.comInfo.communityName +'排名第' + vm.comInfo.rank+ '名 | 2017 · 风口社群排行榜';
                     window.WEIXINSHARE.shareDesc = vm.comInfo.name + vm.comInfo.projectCount +'个投资项目都在这里';
                     var obj = {};
@@ -739,6 +741,13 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
 
         })
         .catch(fail);
+    }
+
+    function reInitWechat() {
+        var HOST = location.host;
+        var shareUrl =
+        'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '&communityType=' + $stateParams.communityType + '&industry=' + vm.industry + '&industryName=' + vm.industryName;
+        initWeixin(vm.comInfo.name, vm.comInfo.projectCount, vm.currQuarter, vm.comInfo.rank, shareUrl, vm.comInfo.logo, vm.comInfo.communityName);
     }
 
 }
