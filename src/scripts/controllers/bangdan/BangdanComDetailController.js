@@ -239,6 +239,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         item.inApp = vm.inApp;
         item.industry = vm.industry;
         item.industryName = vm.industryName;
+        reInitWechat();
         var tg = 'join_community_company';
         if (f) {
             item.f = f;tg = 'support';
