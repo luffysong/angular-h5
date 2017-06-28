@@ -156,13 +156,26 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             var obj = {};
             window.InitWeixin(obj);
         }
-        if (iix && iix != 'undefined') {
-            $scope.currentIndustry = $stateParams.industry || parseInt(iix);
+
+        if ($stateParams.industry) {
+            setTab();
         } else {
-            $scope.currentIndustry = $stateParams.industry || 0;
-            vm.isRise = true;
+            if (iix && iix != 'undefined') {
+                $scope.currentIndustry = parseInt($stateParams.industry) || parseInt(iix);
+            } else {
+                $scope.currentIndustry = parseInt($stateParams.industry) || 0;
+                vm.isRise = true;
+            }
         }
         //$scope.currentIndustry = $stateParams.industry || 0;
+    }
+
+    function setTab(iix){
+        $scope.industryArr.forEach(function (item, index) {
+            if (item.id == parseInt($stateParams.industry)) {
+                $scope.currentIndustry = index;
+            }
+        });
     }
 
     function getInvestorRank(fn) {

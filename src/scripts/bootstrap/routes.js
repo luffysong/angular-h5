@@ -423,7 +423,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.orgbd', {
-        url: '/orgbd?{industry}',
+        url: '/orgbd?{industry}&{refresh}',
         controllerAs: 'vm',
         controller: 'BangdanOrgController',
         templateUrl: 'templates/bangdan/bdorg.html',
@@ -433,7 +433,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.orgbdDetail', {
-        url: '/orgbddetail?{id}&{rank}&{industry}',
+        url: '/orgbddetail?{id}&{rank}&{industry}&{refresh}',
         controllerAs: 'vm',
         controller: 'BangdanOrgDetailController',
         templateUrl: 'templates/bangdan/bdorgdetail.html',
@@ -443,7 +443,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.investorbd', {
-        url: '/investorbd?{industry}',
+        url: '/investorbd?{industry}&{refresh}',
         controllerAs: 'vm',
         controller: 'BangdanInvestorController',
         templateUrl: 'templates/bangdan/bdinvestor.html',
@@ -453,7 +453,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.investorbddetail', {
-        url: '/investorbddetail?{id}&{rank}&{industry}',
+        url: '/investorbddetail?{id}&{rank}&{industry}&{refresh}',
         controllerAs: 'vm',
         controller: 'BangdanInvestorDetailController',
         templateUrl: 'templates/bangdan/bdinvestordetail.html',
@@ -477,7 +477,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.combd', {
-        url: '/combd?communityType',
+        url: '/combd?&{communityTyp}e&{industry}',
         controllerAs: 'vm',
         controller: 'BangdanComController',
         templateUrl: 'templates/bangdan/bdcom.html',
