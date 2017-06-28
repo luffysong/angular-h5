@@ -52,7 +52,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         compareRank();
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + vm.investorInfo.rank;
+        'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + vm.investorInfo.rank + '&industry=' + vm.industry + '&industryName=' + vm.industryName;
         initWeixin(vm.investorInfo.name, vm.investorInfo.projectCount, vm.currQuarter, vm.investorInfo.rank, shareUrl, vm.investorInfo.logo);
     }
 
@@ -226,10 +226,12 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     }
 
     function joinpro(f) {
-        var item = investorInfo.data;
+        var item = vm.investorInfo;
         //item.rank = parseInt(vm.rank);
         item.currQuarter = vm.currQuarter;
         item.inApp = vm.inApp;
+        item.industryName = vm.industryName;
+        item.industry = vm.industry;
         var tg = 'join_investor_company';
         if (f) {
             item.f = f;tg = 'support';
@@ -698,6 +700,8 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
                 vm.investorInfo.interviewCount = response.data.interviewCount;
                 vm.investorInfo.accessCount = response.data.accessCount;
                 vm.investorInfo.rank = response.data.rank;
+                vm.investorInfo.totalInvestorCount = response.data.totalInvestorCount;
+                vm.investorInfo.currentIndustryInvestorCount = response.data.currentIndustryInvestorCount;
             }
 
         })

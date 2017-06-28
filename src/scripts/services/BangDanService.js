@@ -12,7 +12,7 @@ angular.module('defaultApp.service').service('BangDanService', function(BasicSer
     //单个机构详情
     this.getSingleOrgInfo = function (id, request) {
         var r ;
-        if (request) {
+        if (request && angular.isDefined(request.industryId)) {
             r =$http.get(BASE_URL + '/org/' + id + '?'+ $.param(request));
         } else {
             r =$http.get(BASE_URL + '/org/' + id);
@@ -38,7 +38,7 @@ angular.module('defaultApp.service').service('BangDanService', function(BasicSer
     //单个投资人详情
     this.getSingleInvestorInfo = function (id, request) {
         var r ;
-        if (request) {
+        if (request && angular.isDefined(request.industryId)) {
             r =  $http.get(BASE_URL + '/investor/' + id + '?'+ $.param(request));
         } else {
             r =  $http.get(BASE_URL + '/investor/' + id);
@@ -64,7 +64,7 @@ angular.module('defaultApp.service').service('BangDanService', function(BasicSer
     //单个社群详情
     this.getSingleComInfo = function (id, request) {
         var r ;
-        if (request) {
+        if (request && angular.isDefined(request.industryId)) {
             r = $http.get(BASE_URL + '/community/' + id + '?'+ $.param(request));
         } else {
             r = $http.get(BASE_URL + '/community/' + id);

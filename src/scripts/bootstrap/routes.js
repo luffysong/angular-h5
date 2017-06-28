@@ -463,21 +463,21 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.investorshare', {
-        url: '/investorshare?{id}&{rank}',
+        url: '/investorshare?{id}&{rank}&{industry}&{industryName}',
         controllerAs: 'vm',
         controller: 'BangdanInvestorShareController',
         templateUrl: 'templates/bangdan/investorShare.html',
     });
 
     $stateProvider.state('bangdan.bdshare', {
-        url: '/bdshare?{id}&{rank}',
+        url: '/bdshare?{id}&{rank}&{industry}&{industryName}',
         controllerAs: 'vm',
         controller: 'BangdanShareDetailController',
         templateUrl: 'templates/bangdan/bdshare.html',
     });
 
     $stateProvider.state('bangdan.combd', {
-        url: '/combd?&{communityTyp}e&{industry}',
+        url: '/combd?&{communityTyp}&{industry}',
         controllerAs: 'vm',
         controller: 'BangdanComController',
         templateUrl: 'templates/bangdan/bdcom.html',
@@ -497,7 +497,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.comshare', {
-        url: '/comshare?{id}&{rank}&{type}&{communityType}',
+        url: '/comshare?{id}&{rank}&{type}&{communityType}&{industry}&{industryName}',
         controllerAs: 'vm',
         controller: 'BangdanComShareController',
         templateUrl: 'templates/bangdan/comshare.html',

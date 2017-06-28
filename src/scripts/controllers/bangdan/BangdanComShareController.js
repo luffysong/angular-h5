@@ -8,6 +8,8 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
     var vm = this;
     vm.id = $stateParams.id;
     vm.rank = $stateParams.rank;
+    vm.industry = $stateParams.industry;
+    vm.industryName = $stateParams.industryName;
     vm.bangdanCom = bangdanCom;
     vm.bangdanComDetail = bangdanComDetail;
     vm.inApp = true;
@@ -115,11 +117,16 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
             id: id,
             rank: rank,
             communityType: vm.communityType,
+            industry:parseInt($stateParams.industry)
         });
     }
 
     function getSingleComInfo(id) {
-        BangDanService.getSingleComInfo(id)
+        var senddata = {};
+        if (parseInt($stateParams.industry)) {
+            senddata = {industryId: parseInt($stateParams.industry)};
+        }
+        BangDanService.getSingleComInfo(id, senddata)
             .then(function (response) {
                 vm.data = response.data;
                 initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.rank, vm.data.logo, vm.type);

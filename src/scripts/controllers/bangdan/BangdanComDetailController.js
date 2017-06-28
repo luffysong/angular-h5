@@ -50,7 +50,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         getCommunityType(vm.communityType);
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '&communityType=' + $stateParams.communityType;
+        'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '&communityType=' + $stateParams.communityType + '&industry=' + vm.industry + '&industryName=' + vm.industryName;
         initWeixin(vm.comInfo.name, vm.comInfo.projectCount, vm.currQuarter, vm.comInfo.rank, shareUrl, vm.comInfo.logo, vm.comInfo.communityName);
     }
 
@@ -234,9 +234,10 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     }
 
     function joinpro(f) {
-        var item = comInfo.data;
+        var item = vm.comInfo;
         item.currQuarter = vm.currQuarter;
         item.inApp = vm.inApp;
+        item.industryName = vm.industryName;
         var tg = 'join_community_company';
         if (f) {
             item.f = f;tg = 'support';
@@ -731,6 +732,8 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
                 vm.comInfo.interviewCount = response.data.interviewCount;
                 vm.comInfo.accessCount = response.data.accessCount;
                 vm.comInfo.rank = response.data.rank;
+                vm.comInfo.totalCommunityCount = response.data.totalCommunityCount;
+                vm.comInfo.currentTypeCommunityCount = response.data.currentTypeCommunityCount;
             }
 
         })

@@ -32,7 +32,15 @@
                 <span class="h-line">-</span>
         </div>
         <div class="total-rank">
-            共&nbsp;{{vm.investorInfo.totalInvestorCount}}&nbsp;位投资人排名
+            <span ng-if="vm.investorInfo.industryName">{{vm.investorInfo.industryName}}&nbsp;·&nbsp;</span>
+            共&nbsp;
+            <span ng-if="vm.investorInfo.currentIndustryInvestorCount && vm.investorInfo.industryName !== '全行业' ">
+                {{vm.investorInfo.currentIndustryInvestorCount}}
+            </span>
+            <span ng-if="vm.investorInfo.totalInvestorCount && vm.investorInfo.industryName === '全行业'">
+                {{vm.investorInfo.totalInvestorCount}}
+            </span>
+            &nbsp;位投资人排名
         </div>
     </div>
     <div class="bd-investor-share-promote">

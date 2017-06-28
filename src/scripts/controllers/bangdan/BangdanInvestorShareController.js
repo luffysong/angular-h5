@@ -8,6 +8,8 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
     var vm = this;
     vm.id = $stateParams.id;
     vm.rank = $stateParams.rank;
+    vm.industry = $stateParams.industry;
+    vm.industryName = $stateParams.industryName;
     vm.bangdanInvestor = bangdanInvestor;
     vm.bangdanInvestorDetail = bangdanInvestorDetail;
     vm.inApp = true;
@@ -92,11 +94,16 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
         $state.go('bangdan.investorbddetail', {
             id: id,
             rank: rank,
+            industry:parseInt($stateParams.industry)
         });
     }
 
     function getSingleInvestorInfo(id) {
-        BangDanService.getSingleInvestorInfo(id)
+        var senddata = {};
+        if (parseInt($stateParams.industry)) {
+            senddata = {industryId: parseInt($stateParams.industry)};
+        }
+        BangDanService.getSingleInvestorInfo(id, senddata)
             .then(function (response) {
                 vm.data = response.data;
                 initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.data.rank, vm.data.logo);

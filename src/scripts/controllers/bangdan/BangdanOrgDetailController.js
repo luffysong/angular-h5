@@ -46,7 +46,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
 
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + vm.orgInfo.rank;
+        'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + vm.orgInfo.rank + '&industry=' + vm.industry + '&industryName=' + vm.industryName;
         initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.orgInfo.rank, shareUrl, vm.orgInfo.logo);
     }
 
@@ -277,9 +277,11 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
     }
 
     function joinpro(f) {
-        var item = orgInfo.data;
+        var item = vm.orgInfo;
         item.currQuarter = vm.currQuarter;
         item.inApp = vm.inApp;
+        item.industryName = vm.industryName;
+        item.industry = vm.industry;
         var tg = 'join_org';
         if (f) {
             item.f = f;tg = 'support';
@@ -732,6 +734,8 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
                 vm.orgInfo.interviewCount = response.data.interviewCount;
                 vm.orgInfo.accessCount = response.data.accessCount;
                 vm.orgInfo.rank = response.data.rank;
+                vm.orgInfo.currentIndustryOrgCount = response.data.currentIndustryOrgCount;
+                vm.orgInfo.totalOrgCount = response.data.totalOrgCount;
             }
         })
         .catch(fail);

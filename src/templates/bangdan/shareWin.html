@@ -37,7 +37,12 @@
                 <span class="h-line">-</span>
         </div>
         <div class="total-rank">
-            共{{vm.orgInfo.totalOrgCount}}家机构排名
+            <span ng-if="vm.orgInfo.industryName">{{vm.orgInfo.industryName}} · </span>
+            共
+            <span ng-if="vm.orgInfo.totalOrgCount && vm.orgInfo.industryName === '全行业' ">{{vm.orgInfo.totalOrgCount}}</span>
+            <span ng-if="vm.orgInfo.currentIndustryOrgCount && vm.orgInfo.industryName !== '全行业'">
+                {{vm.orgInfo.currentIndustryOrgCount}}</span>
+            家机构排名
         </div>
     </div>
     <div class="bd-share-promote">
