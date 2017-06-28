@@ -14,6 +14,7 @@ function BangdanShareDetailController(loading, $scope, $modal, $stateParams, Fin
     vm.bangdanOrgDetail = bangdanOrgDetail;
     vm.inApp = true;
     vm.downloadApp = downloadApp;
+    vm.industryName = '全行业';
     init();
 
     function init() {

@@ -16,6 +16,7 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
     vm.downloadApp = downloadApp;
     vm.type = $stateParams.type;
     vm.communityType = $stateParams.communityType;
+    vm.industryName = '全行业';
     init();
 
     function init() {
