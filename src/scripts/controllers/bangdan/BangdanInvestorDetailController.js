@@ -50,10 +50,15 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         initUser();
         getTestJson();
         compareRank();
+        removeHeader()
         var HOST = location.host;
         var shareUrl =
         'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + vm.investorInfo.rank + '&industry=' + vm.industry;
         initWeixin(vm.investorInfo.name, vm.investorInfo.projectCount, vm.currQuarter, vm.investorInfo.rank, shareUrl, vm.investorInfo.logo);
+    }
+
+    function removeHeader() {
+        $('#bannerOther').remove();
     }
 
     function initPxLoader() {

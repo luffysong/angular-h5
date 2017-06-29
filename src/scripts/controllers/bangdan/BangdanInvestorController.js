@@ -40,6 +40,11 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         initPxLoader();
         addAnimate();
         changeTab();
+        removeHeader()
+    }
+
+    function removeHeader() {
+        $('#bannerOther').remove();
     }
 
     function addAnimate() {

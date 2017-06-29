@@ -40,6 +40,11 @@ function BangdanOrgController(loading, $scope, $modal, $stateParams, FindService
         initPxLoader();
         addAnimate();
         changeTab();
+        removeHeader();
+    }
+
+    function removeHeader() {
+        $('#bannerOther').remove();
     }
 
     function addAnimate() {
