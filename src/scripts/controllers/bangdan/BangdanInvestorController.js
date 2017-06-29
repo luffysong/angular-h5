@@ -29,18 +29,17 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
     init();
 
     function init() {
+        removeHeader();
         getInvestorIndustry();
         if (!hybrid.isInApp) {
             initLinkme();
             vm.inApp = false;
         }
-
         getQ();
         getInvestorRank();
         initPxLoader();
         addAnimate();
         changeTab();
-        removeHeader()
     }
 
     function removeHeader() {
