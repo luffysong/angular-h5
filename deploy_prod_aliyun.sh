@@ -40,6 +40,8 @@ elif [ $1 = 'all' ]; then
     rsync -rvltOD ./dist/* ali-rong-api-02:$pathstr
 elif [ $1 = 'sim' ]; then
     rsync -rvltOD ./dist/* ali-rong-sim-01:$pathstr
+elif [ $1 = 'alpha' ]; then
+    rsync -rvltOD ./dist/* ali-rong-alpha-01:$pathstr
 fi
 
 
