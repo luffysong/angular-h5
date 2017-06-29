@@ -88,17 +88,7 @@
         </div>
     </section>
 
-    <section class="bd-tab-section com-detail" ng-if="industryArr.length > 1"
-        >
-        <div
-        dynamic-tabs="industryArr"
-        ng-model="currentIndustry"
-        isspan='true'
-        barwidth='18'
-        limit='4'
-        currtab='vm.cTab'
-        ></div>
-    </section>
+
     <!--推荐
     <section class="bd-investor-recommend" ng-if="vm.recommend">
         <div class="pro-top">
@@ -152,6 +142,17 @@
             <span class="h-line"></span>
             <span class="p-title"><b>已投项目</b></span>
         </div>
+        <section class="bd-tab-section com-detail" ng-if="industryArr.length > 1"
+            >
+            <div
+            dynamic-tabs="industryArr"
+            ng-model="currentIndustry"
+            isspan='true'
+            barwidth='18'
+            limit='4'
+            currtab='vm.cTab'
+            ></div>
+        </section>
         <div class="pro-num">
             <div class="rank-num">
                 <div class="content-num">

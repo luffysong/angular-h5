@@ -57,7 +57,9 @@
                 </div>
                 <div class="push-right" ng-click="vm.joinpro('forward')">
                         <div>转发支持</div>
-                        <div>已有{{vm.orgInfo.forwardCount}}人转发</div>
+                        <!--
+                        <div>已有{{vm.orgInfo.forwardCount}}人转发</div>-->
+                        <div><img src="/styles/images/bangdan/thumbup.png"/>&nbsp;{{vm.orgInfo.forwardCount}}</div>
                 </div>
             </div>
     </section>
@@ -85,17 +87,7 @@
     </section>
 
 
-    <section class="bd-tab-section" ng-if="industryArr.length > 1"
-        >
-        <div
-        dynamic-tabs="industryArr"
-        ng-model="currentIndustry"
-        isspan='true'
-        barwidth='18'
-        limit='4'
-        currtab='vm.cTab'
-        ></div>
-    </section>
+
 
     <section class="bd-orgdetail-content-start" ng-if="vm.startloading" >
         正在加载数据...&nbsp;
@@ -107,6 +99,19 @@
             <span class="h-line"></span>
             <span class="p-title"><b>已投项目</b></span>
         </div>
+
+        <section class="bd-tab-section com-detail" ng-if="industryArr.length > 1"
+            >
+            <div
+            dynamic-tabs="industryArr"
+            ng-model="currentIndustry"
+            isspan='true'
+            barwidth='18'
+            limit='4'
+            currtab='vm.cTab'
+            ></div>
+        </section>
+
         <div class="pro-num">
             <div class="rank-num">
                 <div class="content-num">
