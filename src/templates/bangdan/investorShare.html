@@ -12,15 +12,21 @@
     <div class="num-line"></div>
     <div class="num">第<span>{{vm.data.rank}}</span>名</div>
     <div class="num-line"></div>
-    <div ng-if="vm.numchange" class="rank-riseDown">
+    <div ng-if="vm.numchange" class="rank-riseDown" ng-if="!vm.industry">
         <span ng-if="vm.rise">上升</span>
         <span ng-if="!vm.rise">下降</span>
         {{vm.numchange}}
         名
     </div>
     <div class="num-text">
-      <span>2017Q{{vm.currQuarter}} · 风云投资人排行榜</span><br/>
-      <span>共 {{vm.data.totalInvestorCount}} 位投资人排名</span>
+      <span>2017 · 风云投资人排行榜</span><br/>
+      <span>
+          <span ng-if="vm.industryName">{{vm.industryName}}&nbsp;·&nbsp;</span>
+          共
+          <span ng-if="vm.data.totalInvestorCount && !vm.industry">{{vm.data.totalInvestorCount}}</span>
+          <span ng-if="vm.data.currentIndustryInvestorCount &&  vm.industry">
+            {{vm.data.currentIndustryInvestorCount}}</span>
+          位投资人排名</span>
     </div>
   </div>
 

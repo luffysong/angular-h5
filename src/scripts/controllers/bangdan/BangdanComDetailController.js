@@ -23,6 +23,13 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.isEqualHeight = false;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/vKzwzTf';
     vm.communityType = $stateParams.communityType;
+    vm.moveAction = moveAction;
+    //$scope.changeobj = {};
+    vm.hasInit = false;
+    $scope.currentIndustry = 0;
+    vm.changeTabDataState = false;
+    vm.rankName ='总榜';
+    vm.industryName ='全行业';
     init();
 
     function init() {
@@ -32,7 +39,9 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             initLinkme();
             vm.inApp = false;
         }
-        getProList();
+        getComIndustry();
+        //getProList();
+        changeTab();
         getQ();
         initPxLoader();
         initUser();
@@ -41,7 +50,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         getCommunityType(vm.communityType);
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '&communityType=' + $stateParams.communityType;
+        'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '&communityType=' + $stateParams.communityType + '&industry=' + vm.industry;
         initWeixin(vm.comInfo.name, vm.comInfo.projectCount, vm.currQuarter, vm.comInfo.rank, shareUrl, vm.comInfo.logo, vm.comInfo.communityName);
     }
 
@@ -86,13 +95,14 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         var params = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry == '' ? '': parseInt(vm.industry),
         };
-
         if (!vm.inApp) {params.pageSize = 2;};
 
         BangDanService.getComProRank($stateParams.id, params)
         .then(function (response) {
             vm.startloading = false;
+            vm.hasInit = true;
             loading.hide('bangdanDetailLoading');
             vm.prolist = vm.prolist.concat(response.data.data);
             if (response.data.totalPages) {
@@ -117,6 +127,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         var params = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry,
         };
 
         BangDanService.getComProRank($stateParams.id, params)
@@ -153,7 +164,8 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
-        initTitle('2017Q' + vm.currQuarter + ' · 风口社群排行榜');
+        //initTitle('2017Q' + vm.currQuarter + ' · 风口社群排行榜');
+        initTitle('2017 · 风口社群排行榜');
     }
 
     function initTitle(t) {
@@ -162,7 +174,7 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
 
     function initWeixin(name, count, q, rank, url, logo, communityName) {
         window.WEIXINSHARE = {
-            shareTitle: name + '为' + communityName + '第' + rank + '名 | 2017Q' + q + ' · 风口社群排行榜',
+            shareTitle: name + '为' + communityName + '第' + rank + '名 | 2017 · 风口社群排行榜',
             shareUrl: url,
             shareImg: '' + logo + '',
             shareDesc: name + count + '个项目都在这里',
@@ -222,9 +234,12 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
     }
 
     function joinpro(f) {
-        var item = comInfo.data;
+        var item = vm.comInfo;
         item.currQuarter = vm.currQuarter;
         item.inApp = vm.inApp;
+        item.industry = vm.industry;
+        item.industryName = vm.industryName;
+        //reInitWechat();
         var tg = 'join_community_company';
         if (f) {
             item.f = f;tg = 'support';
@@ -566,6 +581,174 @@ function BangdanComDetailController(loading, $scope, $modal, $stateParams, FindS
             });
 
         }, 'jsonp');
+    }
+
+
+    function getComIndustry() {
+        var f = {
+            label: '全行业',
+            value: 0,
+            id: 0,
+            name: '全行业'
+        }
+        var industryArr = [];
+        industryArr.push(f);
+        comInfo.data.industryList.forEach(function (item, index) {
+            var obj ={};
+            obj['label'] = item.name;
+            obj['value'] = index + 1;
+            industryArr.push(angular.extend({},obj,item));
+        });
+        $scope.industryArr = industryArr;
+
+        setTab();
+        getProList();
+    }
+
+    function setTab() {
+        $scope.industryArr.forEach(function (item, index) {
+            if (item.id == parseInt($stateParams.industry)) {
+                $scope.currentIndustry = index;
+                vm.rankName = item.name;
+                vm.industryName = item.name;
+                if (item.value != 0){
+                    $timeout(function() {
+                        window.WEIXINSHARE.shareTitle = vm.comInfo.name + '为' +vm.comInfo.communityName + vm.industryName +'排名第' + vm.comInfo.rank+ '名 | 2017 · 风口社群排行榜';
+                        window.WEIXINSHARE.shareDesc =  vm.comInfo.name + vm.comInfo.projectCount +'个'+vm.industryName+'项目都在这里';
+                        var obj = {};
+                        window.InitWeixin(obj);
+                    },200);
+                }
+            }
+        });
+        if ($stateParams.industry) {
+            vm.industry = parseInt($stateParams.industry) == 0 ? '' : parseInt($stateParams.industry);
+        } else {
+            vm.industry = '';
+        }
+
+    }
+
+    vm.cTab = parseInt($scope.currentIndustry);
+    function moveAction(e ,c) {
+        var l = $scope.industryArr.length;
+        var changeobj = {};
+        if (c) {
+            vm.cTab <l ? vm.cTab++ : 0;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    changeobj = ind;
+                }
+            });
+
+        } else {
+            vm.cTab > 0 ? vm.cTab-- : l-1;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    changeobj = ind;
+                }
+            });
+        }
+        // if (changeobj.value == 0) {
+        //     vm.rankName = '总榜';
+        // } else {
+        //     vm.rankName = changeobj.name;
+        // }
+
+        $scope.$broadcast('bdSwipeMoveAction', changeobj);
+    }
+
+    function resetData() {
+        vm.prolist = [];
+        vm.more = false;
+        vm.busy = false;
+        vm.finish = false;
+        vm.page = 0;
+        vm.startloading = true;
+        vm.hasInit = false;
+    }
+
+    function changeTab() {
+        $scope.$on('DynamicTabClicked', function (e, item) {
+            if (sa && item) {
+                sa.track('CommunityTopListClick',
+                  {
+                    source: 'community',
+                    company_industry: item.name,
+                    client: getClient(),
+                    target: 'industry_tab',
+                    community_type: vm.trackType,
+                    community_id:$stateParams.id,
+                });
+            }
+
+            if (item.value == 0 || item.value) {
+                vm.industry = item.value == 0 ? '' : item.id;
+                //vm.rankName = item.name;
+                if (item.value == 0) {
+                    vm.rankName = '总榜';
+                } else {
+                    vm.rankName = item.name;
+                }
+                getSingleComInfo();
+                vm.industryName = item.name;
+                // if (item.value != 0) {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareTitle = vm.comInfo.name + '为' +vm.comInfo.communityName + vm.industryName +'排名第' + vm.comInfo.rank+ '名 | 2017 · 风口社群排行榜';
+                //     window.WEIXINSHARE.shareDesc =  vm.comInfo.name + vm.comInfo.projectCount +'个'+vm.industryName+'项目都在这里';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // } else {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareTitle = vm.comInfo.name + '为' +vm.comInfo.communityName +'排名第' + vm.comInfo.rank+ '名 | 2017 · 风口社群排行榜';
+                //     window.WEIXINSHARE.shareDesc = vm.comInfo.name + vm.comInfo.projectCount +'个投资项目都在这里';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // }
+                resetData();
+                getProList();
+            }
+        });
+    }
+
+    function getClient() {
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+        return client;
+    }
+
+    function getSingleComInfo(){
+        var senddata ={
+            industryId: vm.industry,
+        }
+        BangDanService.getSingleComInfo($stateParams.id, senddata)
+        .then(function(response) {
+            if (response.data) {
+                vm.comInfo.projectCount = response.data.projectCount;
+                vm.comInfo.interviewCount = response.data.interviewCount;
+                vm.comInfo.accessCount = response.data.accessCount;
+                vm.comInfo.rank = response.data.rank;
+                vm.comInfo.totalCommunityCount = response.data.totalCommunityCount;
+                vm.comInfo.currentTypeCommunityCount = response.data.currentTypeCommunityCount;
+            }
+
+        })
+        .catch(fail);
+    }
+
+    function reInitWechat() {
+        var HOST = location.host;
+        var shareUrl =
+        'https://' + HOST + '/m/#/bangdan/comshare?id=' + $stateParams.id + '&rank=' + vm.comInfo.rank + '&communityType=' + $stateParams.communityType + '&industry=' + vm.industry;
+        initWeixin(vm.comInfo.name, vm.comInfo.projectCount, vm.currQuarter, vm.comInfo.rank, shareUrl, vm.comInfo.logo, vm.comInfo.communityName);
     }
 
 }

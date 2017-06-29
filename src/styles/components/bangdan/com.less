@@ -12,7 +12,7 @@
   .comdb-top {
     //position: relative;
     background-color: black;
-    background: url('images/bangdan/com-top-new.png') no-repeat center;
+    background: url('images/bangdan/com-bgm.jpg') no-repeat center;
     height: 136px;
     background-size: 100% 136px;
     .com-brief {
@@ -25,6 +25,8 @@
     }
   }
   .com-tabs{
+      position: relative;
+      overflow: hidden;
     ul {
       overflow: hidden;
       list-style: none;
@@ -39,7 +41,40 @@
         line-height: 45px;
       }
     }
+    .slide-tabs{
+        z-index: 10;
+        .wrapper{
+            position: relative;
+            z-index: 10;
+            background-color: #f2f4f5;
+            a{
+                text-align: center;
+                width: 25%;
+                color: #222c38;
+                span{
+                    font-size: 14px;
+                }
+            }
+            a.selected{
+                color: #CF9D3E;
+                font-weight: bold;
+                background: white;
+                span{
+                    border-bottom: 1px solid #CF9D3E;
+                }
+            }
+        }
+        .bar {
+            position: absolute;
+            left:0;
+            top:0;
+            transition: transform 0.3s;
+            height:3px;
+            background: #CF9D3E;
+        }
+    }
   }
+
   .tab-active {
     border-bottom: solid 3px #CF9D3E;
     color: #CF9D3E;
@@ -66,7 +101,8 @@
         * {
             user-select: none;
         }
-      padding-top: 14px;
+      //padding-top: 14px;
+      list-style-type: none;
       overflow: hidden;
       //禁止点击效果
       &:active{
@@ -229,7 +265,29 @@
   footer {
     text-align: center;
     margin: 10px 0;
-    height: 50px;
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .no-data {
+    text-align: center;
+    margin: 10px 0;
+    height: 160px;
+    line-height: 160px;
+    img {
+        display: block;
+        margin: 0 auto;
+        width: 60px;
+        margin-top: 20px;
+    }
+    p {
+        font-size: 15px;
+        color: #5A626D;
+        letter-spacing: 0;
+        line-height: 22px;
+        text-align: center;
+        margin-top: 20px;
+    }
   }
   .combd-footer {
     * {

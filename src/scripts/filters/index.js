@@ -1,3 +1,4 @@
+require('./AbsNumber.filter');
 require('./EntityLink');
 require('./Image');
 require('./InvestorLink');

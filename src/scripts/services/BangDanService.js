@@ -10,8 +10,14 @@ angular.module('defaultApp.service').service('BangDanService', function(BasicSer
     };
 
     //单个机构详情
-    this.getSingleOrgInfo = function (id) {
-        return $http.get(BASE_URL + '/org/' + id);
+    this.getSingleOrgInfo = function (id, request) {
+        var r ;
+        if (request && angular.isDefined(request.industryId)) {
+            r =$http.get(BASE_URL + '/org/' + id + '?'+ $.param(request));
+        } else {
+            r =$http.get(BASE_URL + '/org/' + id);
+        }
+        return r;
     };
 
     //机构项目排行
@@ -30,8 +36,14 @@ angular.module('defaultApp.service').service('BangDanService', function(BasicSer
     };
 
     //单个投资人详情
-    this.getSingleInvestorInfo = function (id) {
-        return $http.get(BASE_URL + '/investor/' + id);
+    this.getSingleInvestorInfo = function (id, request) {
+        var r ;
+        if (request && angular.isDefined(request.industryId)) {
+            r =  $http.get(BASE_URL + '/investor/' + id + '?'+ $.param(request));
+        } else {
+            r =  $http.get(BASE_URL + '/investor/' + id);
+        }
+        return r;
     };
 
     //投资人项目排行
@@ -50,8 +62,14 @@ angular.module('defaultApp.service').service('BangDanService', function(BasicSer
     };
 
     //单个社群详情
-    this.getSingleComInfo = function (id) {
-        return $http.get(BASE_URL + '/community/' + id);
+    this.getSingleComInfo = function (id, request) {
+        var r ;
+        if (request && angular.isDefined(request.industryId)) {
+            r = $http.get(BASE_URL + '/community/' + id + '?'+ $.param(request));
+        } else {
+            r = $http.get(BASE_URL + '/community/' + id);
+        }
+        return r;
     };
 
     //社群项目排行
@@ -67,5 +85,20 @@ angular.module('defaultApp.service').service('BangDanService', function(BasicSer
     //
     this.getTestJson = function () {
         return $http.get('./test.json');
+    };
+
+    //机构行业
+    this.getOrgIndustry= function () {
+        return $http.get(BASE_URL + '/org/industry');
+    };
+
+    //投资人行业
+    this.getInvestorIndustry= function () {
+        return $http.get(BASE_URL + '/investor/industry');
+    };
+
+    //社群行业
+    this.getComIndustry= function () {
+        return $http.get(BASE_URL + '/community/industry');
     };
 });

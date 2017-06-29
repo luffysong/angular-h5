@@ -430,14 +430,17 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.orgbd', {
-        url: '/orgbd',
+        url: '/orgbd?{industry}&{refresh}',
         controllerAs: 'vm',
         controller: 'BangdanOrgController',
         templateUrl: 'templates/bangdan/bdorg.html',
+        resolve: {
+            industry: getOrgIndustry,
+        }
     });
 
     $stateProvider.state('bangdan.orgbdDetail', {
-        url: '/orgbddetail?{id}&{rank}',
+        url: '/orgbddetail?{id}&{rank}&{industry}&{refresh}',
         controllerAs: 'vm',
         controller: 'BangdanOrgDetailController',
         templateUrl: 'templates/bangdan/bdorgdetail.html',
@@ -447,14 +450,17 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.investorbd', {
-        url: '/investorbd',
+        url: '/investorbd?{industry}&{refresh}',
         controllerAs: 'vm',
         controller: 'BangdanInvestorController',
         templateUrl: 'templates/bangdan/bdinvestor.html',
+        resolve: {
+            industry: getInvestorIndustry,
+        }
     });
 
     $stateProvider.state('bangdan.investorbddetail', {
-        url: '/investorbddetail?{id}&{rank}',
+        url: '/investorbddetail?{id}&{rank}&{industry}&{refresh}',
         controllerAs: 'vm',
         controller: 'BangdanInvestorDetailController',
         templateUrl: 'templates/bangdan/bdinvestordetail.html',
@@ -464,28 +470,31 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.investorshare', {
-        url: '/investorshare?{id}&{rank}',
+        url: '/investorshare?{id}&{rank}&{industry}&{industryName}',
         controllerAs: 'vm',
         controller: 'BangdanInvestorShareController',
         templateUrl: 'templates/bangdan/investorShare.html',
     });
 
     $stateProvider.state('bangdan.bdshare', {
-        url: '/bdshare?{id}&{rank}',
+        url: '/bdshare?{id}&{rank}&{industry}&{industryName}',
         controllerAs: 'vm',
         controller: 'BangdanShareDetailController',
         templateUrl: 'templates/bangdan/bdshare.html',
     });
 
     $stateProvider.state('bangdan.combd', {
-        url: '/combd?communityType',
+        url: '/combd?&{communityTyp}&{industry}',
         controllerAs: 'vm',
         controller: 'BangdanComController',
         templateUrl: 'templates/bangdan/bdcom.html',
+        resolve: {
+            industry: getComIndustry,
+        }
     });
 
     $stateProvider.state('bangdan.combddetail', {
-        url: '/combddetail?{id}&{rank}&{communityType}',
+        url: '/combddetail?{id}&{rank}&{communityType}&{industry}',
         controllerAs: 'vm',
         controller: 'BangdanComDetailController',
         templateUrl: 'templates/bangdan/bdcomdetail.html',
@@ -495,7 +504,7 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     });
 
     $stateProvider.state('bangdan.comshare', {
-        url: '/comshare?{id}&{rank}&{type}&{communityType}',
+        url: '/comshare?{id}&{rank}&{type}&{communityType}&{industry}&{industryName}',
         controllerAs: 'vm',
         controller: 'BangdanComShareController',
         templateUrl: 'templates/bangdan/comshare.html',
@@ -761,15 +770,45 @@ angular.module('defaultApp').config(function ($locationProvider, $stateProvider,
     }
 
     function getBangdanOrgInfo(BangDanService, $stateParams) {
-        return BangDanService.getSingleOrgInfo($stateParams.id);
+        var r;
+        if ($stateParams.industry) {
+            r = BangDanService.getSingleOrgInfo($stateParams.id, {industryId: $stateParams.industry});
+        } else {
+            r = BangDanService.getSingleOrgInfo($stateParams.id);
+        }
+        return r;
     }
 
     function getSingleInvestorInfo(BangDanService, $stateParams) {
-        return BangDanService.getSingleInvestorInfo($stateParams.id);
+        var r;
+        if ($stateParams.industry) {
+            r = BangDanService.getSingleInvestorInfo($stateParams.id, {industryId: $stateParams.industry});
+        } else {
+            r = BangDanService.getSingleInvestorInfo($stateParams.id);
+        }
+        return r;
     }
 
     function getComInfo(BangDanService, $stateParams) {
-        return BangDanService.getSingleComInfo($stateParams.id);
+        var r;
+        if ($stateParams.industry) {
+            r = BangDanService.getSingleComInfo($stateParams.id, {industryId: $stateParams.industry});
+        } else {
+            r = BangDanService.getSingleComInfo($stateParams.id);
+        }
+        return r;
+    }
+
+    function getOrgIndustry(BangDanService) {
+        return BangDanService.getOrgIndustry();
+    }
+
+    function getInvestorIndustry(BangDanService) {
+        return BangDanService.getInvestorIndustry();
+    }
+
+    function getComIndustry(BangDanService) {
+        return BangDanService.getComIndustry();
     }
 
 });

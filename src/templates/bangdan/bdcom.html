@@ -6,65 +6,57 @@
       * 按本季度截止今日，各社群项目被约谈总量排序，实时更新
     </div>
   </div>
-  <!--
-  ui-sref="bangdan.combdDetail({id: item.comId, rank: $index + 1})"
-  -->
     <section class="com-tabs">
-        <ul>
-            <li ng-click="vm.changeTab(1)" ng-class="{'tab-active': vm.communityType == 1}">名企</li>
-            <li ng-click="vm.changeTab(2)" ng-class="{'tab-active': vm.communityType == 2}">名校</li>
-            <li ng-click="vm.changeTab(3)" ng-class="{'tab-active': vm.communityType == 3}">FA</li>
-            <li ng-click="vm.changeTab(4)" ng-class="{'tab-active': vm.communityType == 4}">孵化器</li>
-        </ul>
+        <div slide-tabs="comType" ng-model="currentComType" isspan='false'></div>
     </section>
+
+    <section class="bd-tab-section" ng-if="industryArr.length > 1"
+        >
+        <div
+        dynamic-tabs="industryArr"
+        ng-model="currentIndustry"
+        isspan='true'
+        barwidth='18'
+        limit='4'
+        currtab='vm.cTab'
+        ></div>
+    </section>
+
   <div class="combd-list-content" ng-if="vm.startloading">
       正在加载数据...&nbsp;
       <img src="/styles/images/bangdan/loading.svg" alt="loading">
   </div>
 
-<section class="">
-      <ul class="combd-list" infinite-scroll='vm.displayMore()' infinite-scroll-disabled='vm.busy' infinite-scroll-distance='0'>
-        <li class="com-item" ng-repeat="item in vm.list track by $index"
-         ng-click="vm.goComDetail(item.communityId, $index + 1)">
-          <div class="com-number">
-            <img src="/styles/images/bangdan/top1.png" ng-if="$index === 0">
-            <img src="/styles/images/bangdan/top2.png" ng-if="$index === 1">
-            <img src="/styles/images/bangdan/top3.png" ng-if="$index === 2">
+  <section class=""
+      ng-swipe-left = "vm.moveAction($event, true)"
+      ng-swipe-right = "vm.moveAction($event, false)"
+      >
+        <ul class="combd-list"
+        infinite-scroll='vm.displayMore()'
+        infinite-scroll-disabled='vm.busy'
+        infinite-scroll-distance='0'>
+          <li class="com-item" ng-repeat="item in vm.list track by $index"
+           ng-click="vm.goComDetail(item.communityId, $index + 1)">
+              <oic-item item="item" key = '$index' symbol='com' isrise="vm.isRise"></oic-item>
+        </li>
+      </ul>
+      <footer ng-if="vm.busy && !vm.finish && vm.page">
+            正在加载更多...&nbsp;
+            <img src="/styles/images/bangdan/loading.svg" alt="loading">
+      </footer>
+      <footer ng-if="vm.finish">已无更多数据</footer>
 
-            <span ng-if="$index > 2" class="top-num">{{$index + 1}}</span>
-            <div class="up-arrow" ng-if="item.rise > 0" ng-class="{true:'top-special',false:'top-nromal'}[$index <= 2]"></div>
-            <div class="down-arrow" ng-if="item.rise < 0" ng-class="{true:'top-special',false:'top-nromal'}[$index <= 2]"></div>
-            <div class="number-change" ng-if="item.rise != 0" ng-class="{true:'top-special-num',false:'top-nromal-num'}[$index <= 2]">{{abs(item.rise)}}</div>
-
-          </div>
-          <div class="com-info">
-            <div class="com-logo top1-logo" ng-if="$index === 0" style="background-image: url({{item.logo}})"></div>
-            <div class="com-logo top2-logo" ng-if="$index === 1" style="background-image: url({{item.logo}})"></div>
-            <div class="com-logo top3-logo" ng-if="$index === 2" style="background-image: url({{item.logo}})"></div>
-            <div class="com-logo" ng-if="$index > 2" style="background-image: url({{item.logo}})"></div>
-            <div class="com-name">
-              <div ng-class="{top3Color: $index < 3}">{{item.name}}</div>
-              <div>共 <span>{{item.projectCount}}</span> 个项目</div>
-            </div>
-            <div class="interview-num">
-              <div ng-class="{top3Color: $index < 3}">{{item.interviewCount}}</div>
-              <div>约谈量</div>
-            </div>
-          </div>
-      </li>
-    </ul>
-    <footer ng-if="vm.busy && !vm.finish && vm.page">
-          正在加载更多...&nbsp;
-          <img src="/styles/images/bangdan/loading.svg" alt="loading">
-    </footer>
-    <footer ng-if="vm.finish">已无更多数据</footer>
-</section>
+      <div class="no-data"  ng-if="vm.hasInit && !vm.list.length > 0">
+          <img src="//krplus-pic.b0.upaiyun.com/avatar/201706/21094046/ksv02hcp4zz8jou2.png" alt="数据为空">
+          <p>暂无相关数据</p>
+      </div>
+  </section>
 
 
   <div class="combd-footer" ng-if="vm.inApp">
     <div>
       <span>榜上无名，30秒加入</span>
-      <a  ng-click="vm.joinCom()"><div class="register">立即加入</div></a>
+      <a  ng-click="vm.addWechat()"><div class="register">立即加入</div></a>
     </div>
   </div>
 <!--
@@ -72,23 +64,23 @@
            <a  ng-click="vm.downloadApp()">创投助手内打开</a>
   </div>
 -->
-<section class="bdorg-section-footer" ng-if="!vm.inApp && vm.isBottom">
-  <div class="bd-out-app-ani" id="div-open-app">
-      <div>
-          <p>
-              一览最全项目数据库
-          </p>
-      </div>
+  <section class="bdorg-section-footer" ng-if="!vm.inApp && vm.isBottom">
+    <div class="bd-out-app-ani" id="div-open-app">
+        <div>
+            <p>
+                一览最全项目数据库
+            </p>
+        </div>
+    </div>
+  </section>
+
+  <div class="bdorg-div-pop-in animated fadeInUp" ng-if="!vm.inApp">
+      <a  ng-click="vm.downloadApp()"
+        class="btn-open-app" id="btn-open-app">点击查看更多</a>
   </div>
-</section>
 
-<div class="bdorg-div-pop-in animated fadeInUp" ng-if="!vm.inApp">
-    <a  ng-click="vm.downloadApp()"
-      class="btn-open-app" id="btn-open-app">点击查看更多</a>
-</div>
-
-</div>
-<!--
-<div ng-include="'templates/bangdan/common/downloadApp.html'"></div>-->
-</div>
+  </div>
+  <!--
+  <div ng-include="'templates/bangdan/common/downloadApp.html'"></div>-->
+  </div>
 <loading loading="bangdanLoading"></loading>

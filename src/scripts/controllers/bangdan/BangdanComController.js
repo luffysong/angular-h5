@@ -3,7 +3,7 @@ angular.module('defaultApp.controller')
     .controller('BangdanComController', BangdanComController);
 
 function BangdanComController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window, $document) {
+    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window, $document, industry) {
 
     var vm = this;
     vm.list = [];
@@ -20,10 +20,44 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
     vm.downloadApp = downloadApp;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
     vm.changeTab = changeTab;
-    vm.communityType = $stateParams.communityType || 1;
+    vm.addWechat = addWechat;
+    vm.isRise = false;
+    vm.industryName ='全行业';
+
+    var comType = [{
+        label: '名企',
+        value: '1'
+    }, {
+        label: '名校',
+        value: '2'
+    }, {
+        label: 'FA',
+        value: '3'
+    },
+    {
+        label: '孵化器',
+        value: '4'
+    }];
+    $scope.comType = comType;
+    var ct = window.sessionStorage.getItem('comType');
+    if (ct && ct != 'undefined') {
+        //vm.communityType = $stateParams.communityType || ct;
+        $scope.currentComType = $stateParams.communityType || ct;
+        vm.communityType = $stateParams.communityType || parseInt(ct);
+    } else {
+        $scope.currentComType = $stateParams.communityType || '1';
+        vm.communityType = $stateParams.communityType || 1;
+    }
+
+    vm.moveAction = moveAction;
+    vm.hasInit = false;
+    //$scope.changeobj = {};
+    //$scope.changeptab = {};
+    $scope.industryArr =[];
     init();
 
     function init() {
+        getComIndustry();
         if (!hybrid.isInApp) {
             initLinkme();
             vm.inApp = false;
@@ -35,6 +69,8 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         vm.type = getTypeText(vm.communityType);
         removeHeader();
         getTrackParams(vm.communityType);
+        changeTab();
+        changeDynamicTab();
         sa.track('ViewPage',
           {
             source: vm.trackSource,
@@ -63,11 +99,54 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         $('#bannerOther').remove();
     }
 
-    function changeTab(type){
-        window.sessionStorage.removeItem('com-position');
-        window.sessionStorage.removeItem('com-id');
+    function changeTab(type) {
+
         var client = getClient();
-        getTrackParams(type);
+
+        $scope.$on('tabClicked', function (e, item) {
+            //父级tab切换都返回第一条；
+            // $scope.industryArr.forEach(function (ind, index) {
+            //     if (index === 0) {
+            //         $scope.changeobj = ind;
+            //         console.log($scope.changeobj.name)
+            //     }
+            // });
+
+            if (item.value === '1') {
+                window.sessionStorage.removeItem('com-position');
+                window.sessionStorage.removeItem('com-id');
+                getTrackParams(item.value);
+                saTrack(client, item);
+            }else if (item.value === '2') {
+                window.sessionStorage.removeItem('com-position');
+                window.sessionStorage.removeItem('com-id');
+                getTrackParams(item.value);
+                saTrack(client, item);
+            }else if (item.value === '3') {
+                window.sessionStorage.removeItem('com-position');
+                window.sessionStorage.removeItem('com-id');
+                getTrackParams(item.value);
+                saTrack(client, item);
+            }else if (item.value === '4') {
+                window.sessionStorage.removeItem('com-position');
+                window.sessionStorage.removeItem('com-id');
+                getTrackParams(item.value);
+                saTrack(client, item);
+            }
+        });
+    }
+
+    function resetData() {
+        vm.list = [];
+        vm.more = false;
+        vm.busy = false;
+        vm.finish = false;
+        vm.page = 0;
+        vm.startloading = true;
+        vm.hasInit = false;
+    }
+
+    function saTrack(client, item) {
         sa.track('CommunityTopListClick',
           {
             source: vm.trackSource,
@@ -75,8 +154,13 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             client: client,
             community_type: vm.trackTarget,
         });
-        vm.communityType = type;
-        $state.go('.', { communityType: vm.communityType });
+
+        vm.communityType = item.value;
+        resetData();
+        getComRank();
+
+        //$state.go('.', { communityType: vm.communityType });
+
     }
 
     function addAnimate() {
@@ -107,7 +191,8 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
-        initTitle('2017Q' + vm.currQuarter + ' · 风口社群排行榜');
+        //initTitle('2017Q' + vm.currQuarter + ' · 风口社群排行榜');
+        initTitle('2017 · 风口社群排行榜');
     }
 
     function initPxLoader() {
@@ -130,7 +215,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
 
     function initWeixin(q, count, type, totalCount) {
         window.WEIXINSHARE = {
-            shareTitle: '【2017Q' + q + ' · 风口社群排行榜】已有' + totalCount + '家社群加入',
+            shareTitle: '【2017 · 风口社群排行榜】已有' + totalCount + '家社群加入',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: count + '家' + type +'社群所有项目都在这里',
@@ -163,7 +248,8 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         var request = {
             page: vm.page + 1,
             pageSize: 10,
-            communityType: vm.communityType
+            communityType: vm.communityType,
+            industry: vm.industry || ''
         };
         if (!vm.inApp) {request.pageSize = 10; };
 
@@ -171,12 +257,18 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             .then(function (response) {
                 vm.startloading = false;
                 loading.hide('bangdanLoading');
+                vm.hasInit = true;
                 vm.result = response.data.pageData;
                 vm.list = vm.list.concat(response.data.pageData.data);
                 vm.totalCount = response.data.communityCount.totalCount;
                 if (!vm.total) {
                     vm.total = response.data.communityCount.currentTypeCount;
                     initWeixin(vm.currQuarter, vm.total, vm.type, vm.totalCount);
+                    // if(vm.industryName !== '全行业'){
+                    //     window.WEIXINSHARE.shareDesc = vm.total + '家' +vm.type + '所有' +vm.industryName+'项目都在这里';
+                    //     var obj = {};
+                    //     window.InitWeixin(obj);
+                    // }
                 }
 
                 if (response.data.pageData.totalPages) {
@@ -188,6 +280,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
                         vm.more = true;
                     }
                 }
+
                 if (fn) {
                     fn();
                 } else {
@@ -196,7 +289,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             }).catch(fail);
     }
 
-    function getClient(){
+    function getClient() {
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
         var client = 'H5';
@@ -212,8 +305,17 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         var val = angular.element(window).scrollTop();
         window.sessionStorage.removeItem('com-position');
         window.sessionStorage.removeItem('com-id');
+        window.sessionStorage.removeItem('comType');
+        window.sessionStorage.removeItem('industryIndex');
+        window.sessionStorage.removeItem('industry');
+        window.sessionStorage.removeItem('industryName');
+
         window.sessionStorage.setItem('com-position', val);
         window.sessionStorage.setItem('com-id', id);
+        window.sessionStorage.setItem('comType', vm.communityType);
+        window.sessionStorage.setItem('industryIndex', vm.industryIndex);
+        window.sessionStorage.setItem('industry', vm.industry);
+        window.sessionStorage.setItem('industryName', vm.industryName);
         var client = getClient();
         getTrackParams(vm.communityType);
         sa.track('CommunityTopListClick',
@@ -228,7 +330,8 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         $state.go('bangdan.combddetail', {
             id: id,
             rank: rank,
-            communityType: vm.communityType
+            communityType: vm.communityType,
+            industry: vm.industry,
         });
     }
 
@@ -239,7 +342,8 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
         var request = {
             page: vm.page + 1,
             pageSize: 10,
-            communityType: vm.communityType
+            communityType: vm.communityType,
+            industry: vm.industry || ''
         };
         BangDanService.getComRank(request)
             .then(function (response) {
@@ -405,7 +509,7 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             getComRank(someArray);
         } else {
             $document.scrollTopAnimated(parseInt(vm.storagePosition)).then(function () {
-                console && console.log('You just scrolled to the position!');
+                //console && console.log('You just scrolled to the position!');
             });
         }
     }
@@ -419,9 +523,147 @@ function BangdanComController(loading, $scope, $modal, $stateParams, FindService
             someArray();
         } else {
             $document.scrollTopAnimated(parseInt(value)).then(function () {
-                console && console.log('You just scrolled to the position!');
+                //console && console.log('You just scrolled to the position!');
             });
         }
+    }
+
+    function getComIndustry() {
+        var f = {
+            label: '全行业',
+            value: 0,
+            id: 0,
+            name: '全行业'
+        }
+        var industryArr = [];
+        industryArr.push(f);
+        industry.data.forEach(function (item, index) {
+                var obj ={};
+                obj['label'] = item.name;
+                obj['value'] = index + 1;
+                industryArr.push(angular.extend({},obj,item));
+        });
+        $scope.industryArr = industryArr;
+
+        var iix = window.sessionStorage.getItem('industryIndex');
+        var ind = window.sessionStorage.getItem('industry');
+        var indName = window.sessionStorage.getItem('industryName');
+        if (ind && ind != 'undefined') {
+            vm.industry = ind;
+        }
+        if (indName && indName != 'undefined' && indName != '全行业') {
+            vm.industryName = indName;
+            window.WEIXINSHARE.shareDesc = vm.total + '家' +vm.type + '所有' +vm.industryName+'项目都在这里';
+            var obj = {};
+            window.InitWeixin(obj);
+        }
+        if (iix && iix != 'undefined') {
+            $scope.currentIndustry = $stateParams.industry || parseInt(iix);
+        } else {
+            $scope.currentIndustry = $stateParams.industry || 0;
+            vm.isRise = true;
+        }
+        //$scope.currentIndustry = $stateParams.industry || 0;
+    }
+
+    vm.cTab = parseInt($scope.currentIndustry);
+    function moveAction(e ,c) {
+        var l = $scope.industryArr.length;
+        var changeobj= {};
+        if (c) {
+            vm.cTab <l ? vm.cTab++ : 0;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = vm.cTab;
+                    //$scope.changeobj = ind;
+                    changeobj = ind;
+                }
+            });
+
+        } else {
+            vm.cTab > 0 ? vm.cTab-- : l-1;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = vm.cTab;
+                    //$scope.changeobj = ind;
+                    changeobj = ind;
+                }
+            });
+        }
+
+        $scope.$broadcast('bdSwipeMoveAction', changeobj);
+    }
+
+    function changeDynamicTab() {
+        $scope.$on('DynamicTabClicked', function (e, item) {
+            if (sa && item) {
+                sa.track('CommunityTopListClick',
+                  {
+                    source: vm.trackSource,
+                    company_industry: item.name,
+                    client: getClient(),
+                    target: 'industry_tab',
+                    community_type: vm.trackTarget,
+                });
+            }
+            window.sessionStorage.removeItem('com-position');
+            window.sessionStorage.removeItem('com-id');
+            window.sessionStorage.setItem('comType', vm.communityType);
+            window.sessionStorage.setItem('industryIndex', vm.industryIndex);
+            window.sessionStorage.setItem('industry', vm.industry);
+            if (item.value == 0 || item.value) {
+                vm.industry = item.value == 0 ? '' : item.id;
+                vm.industryIndex = item.value;
+                vm.industryName = item.name;
+                // if (item.value != 0) {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareDesc = vm.total + '家' +vm.type + '所有' +vm.industryName+'项目都在这里';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // }
+                if (item.value == 0){
+                    vm.isRise = true;
+                } else {
+                    vm.isRise = false;
+                }
+                resetData();
+                getComRank();
+            }
+        });
+    }
+
+    function addWechat(){
+        $modal.open({
+            templateUrl: 'templates/bangdan/addWechat.html',
+            windowClass: 'bd-add-wechat-wrap',
+            controller: defaultController,
+            controllerAs: 'vm',
+        });
+    }
+
+
+    function defaultController($modalInstance){
+        var vm = this;
+        vm.cancelModal = cancelModal;
+        function cancelModal() {
+            $modalInstance.dismiss();
+        }
+    }
+
+    function getClient() {
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+        return client;
+    }
+
+    function reInitWechat(){
+        initWeixin(vm.currQuarter, vm.total, vm.type, vm.totalCount);
     }
 
 }

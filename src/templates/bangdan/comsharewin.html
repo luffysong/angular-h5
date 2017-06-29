@@ -29,7 +29,14 @@
                 <span class="h-line">-</span>
         </div>
         <div class="total-rank">
-            共{{vm.comInfo.totalCommunityCount}}家社群排名
+            <span ng-if="vm.comInfo.industryName">
+                {{vm.comInfo.industryName}}&nbsp;·&nbsp;</span>
+            共
+            <span ng-if="vm.comInfo.totalCommunityCount && vm.comInfo.industryName === '全行业' ">
+                {{vm.comInfo.totalCommunityCount}}</span>
+            <span ng-if="vm.comInfo.currentTypeCommunityCount && vm.comInfo.industryName !== '全行业'">
+                {{vm.comInfo.currentTypeCommunityCount}}</span>
+            家社群排名
         </div>
     </div>
     <div class="bd-share-promote">
@@ -56,7 +63,7 @@
     </div>
 
     <div class="bd-share-txt">
-        <span>2017Q{{vm.comInfo.currQuarter}}</span>
+        <span>2017</span>
         <span class="bd-dot bd-dot-yel"></span>
         <span>风口社群排行榜</span>
     </div>

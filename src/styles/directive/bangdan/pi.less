@@ -1,0 +1,147 @@
+.project-item {
+    width:100%;
+    height: auto;
+    background-color: white;
+    overflow: hidden;
+    padding-top: 15px;
+
+    .pi-top3Color {
+      color: #CF9D3E !important;
+    }
+    .pi-dot-gray {
+        background: #969FA9;
+    }
+    .pi-dot {
+        display: inline-block;
+        width: 2px;
+        height: 2px;
+        border-radius: 50%;
+        vertical-align: middle;
+    }
+
+    .pi-gold-border{
+        border:1px solid #CF9D3E;
+    }
+
+    .pi-silver-border{
+        border:1px solid #D9D6CE ;
+    }
+
+    .pi-copper-border{
+        border:1px solid #D99557;
+    }
+
+    .pi-normal-border{
+        border:1px solid #E7E7E7;
+    }
+
+    .pi-left,.pi-right{
+        float: left;
+        height: 100%;
+        overflow: hidden;
+    }
+    .pi-left{
+        width: 12%;
+        text-align: center;
+        .pi-metal{
+            margin-top: 12.5px;
+            img{
+                width: 30px;
+            }
+            span{
+                font-size: 20px;
+                color: #C5CEDA;
+                letter-spacing: 0;
+                line-height: 22px;
+                margin: 0 auto;
+            }
+        }
+    }
+    .pi-right{
+        width: 88%;
+        border-bottom: 1px solid #F2F4F5;
+        padding-bottom: 10px;
+        .pi-logo,.pi-txt,.pi-sta-num{
+            float: left;
+        }
+        .pi-logo{
+            width: 20%;
+            .logo-outer{
+                border-radius: 5px;
+                text-align: center;
+                overflow: hidden;
+                height: 55px;
+                width: 55px;
+                position: relative;
+                background-size: contain;
+                background-position: center;
+                background-color: #fff;
+                background-repeat:repeat-x;
+                img{
+                    border-radius: 5px;
+                    height: 55px;
+                    width: 55px;
+                }
+                .funding{
+                    position: absolute;
+                    text-align: center;
+                    height: 18px;
+                    width: 55px;
+                    font-size: 8px;
+                    color: #FFFFFF;
+                    font-weight: bold;
+                    letter-spacing: 0;
+                    line-height: 18px;
+                    background-color: black;
+                    opacity: 0.6;
+                    margin-top: 35px;
+                }
+            }
+        }
+        .pi-txt{
+            width: 60%;
+            .pi-title,
+            .pi-brief,
+            .pi-phase{
+                padding: 2px 0px;
+            }
+            .pi-title{
+                    font-size: 16px;
+                    letter-spacing: 0;
+                    line-height: 16px;
+                    color: #222C38;
+                    font-weight: bold;
+            }
+            .pi-brief{
+                    font-size: 13px;
+                    color: #969FA9;
+                    letter-spacing: 0;
+                    line-height: 16px;
+            }
+            .pi-phase{
+                font-size: 13px;
+                color: #969FA9;
+                letter-spacing: 0;
+                line-height: 16px;
+            }
+        }
+        .pi-sta-num{
+            width: 20%;
+            text-align: center;
+            margin-top: 14px;
+
+            .num{
+                font-size: 23px;
+                color: #222C38;
+                letter-spacing: 0;
+                line-height: 24px;
+            }
+            .txt{
+                font-size: 12px;
+                color: #969FA9;
+                letter-spacing: 0;
+                line-height: 14px;
+            }
+        }
+    }
+}

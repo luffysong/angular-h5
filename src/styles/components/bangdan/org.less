@@ -1,18 +1,19 @@
+
+body{
+    padding-bottom: 50px;
+}
 .orgbd-wapper {
     * {
         user-select: none;
     }
   height: auto;
   width: 100%;
-  margin: 0 auto;
- // position: relative;
+  margin: 0;
   max-width: 768px;
   background-color: white;
-  padding-bottom: 80px;
   .orgdb-top {
-    //position: relative;
     background-color: black;
-    background: url('images/bangdan/org-top-new.png') no-repeat center;
+    background: url('images/bangdan/org-bgm.jpg') no-repeat center;
     height: 136px;
     background-size: 100% 136px;
     .org-brief {
@@ -24,195 +25,62 @@
       top: 110px;
     }
   }
-  .orgbd-list-content{
+
+  .orgbd-list-content-load{
      padding-top: 50px;
      text-align: center;
      height: 200px;
   }
-  ul{
-      li{
-          * {
-              user-select: none;
+
+  .orgbd-list-content{
+      padding-bottom: 50px;
+      .orgbd-list {
+          margin: 0;
+          padding: 0;
+          list-style-type: none;
+        .org-item {
+            * {
+                user-select: none;
+            }
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          list-style-type: none;
+          //禁止点击效果
+          &:active{
+              background-color:#E7E7E7;
           }
-      }
-    //   li:last-child{
-    //       text-align: center;
-    //       height: 40px;
-    //   }
-  }
-  .orgbd-list {
-    .org-item {
-        * {
-            user-select: none;
-        }
-      padding-top: 14px;
-      overflow: hidden;
-      //禁止点击效果
-      &:active{
-          background-color:#E7E7E7;
-      }
-    //   &:hover{
-    //       background-color:#dfdfdf;
-    //       .org-info {
-    //           .org-name{
-    //               color: white;
-    //           }
-    //       }
-    //       .org-number{
-    //         .top-num{
-    //              color: white;
-    //         }
-    //         .number-change{
-    //             color: white;
-    //         }
-    //         .up-arrow{
-    //             border-bottom: 6px solid white;
-    //         }
-    //         .down-arrow{
-    //             border-top: 6px solid white;
-    //         }
-    //       }
-    //   }
-      .org-number {
-        display: inline-block;
-        font-size: 20px;
-        color: #C5CEDA;
-        line-height: 22px;
-        text-align: center;
-        font-weight: bold;
-        position: relative;
-        margin-left: 16px;
-        width: 12px;
-        float: left;
-        .top-num{
-            position: relative;
-            top:7px;
-        }
-
-        .top-special{
-            top:34px;
-        }
-        .top-nromal{
-            top:32px;
-        }
-        .up-arrow {
-          position: absolute;
-          border-left: 4px solid transparent;
-          border-right: 4px solid transparent;
-          border-bottom: 6px solid #D1D8E1;
-        }
-        .down-arrow {
-          position: absolute;
-          border-left: 4px solid transparent;
-          border-right: 4px solid transparent;
-          border-top: 6px solid #D1D8E1;
-        }
-
-        .number-change {
-          font-size: 10px;
-          color: #C5CEDA;
-          line-height: 10px;
-          position: absolute;
-          left: 10px;
-        }
-        .top-special-num{
-            top:32px;
-        }
-        .top-nromal-num{
-            top:30px;
-        }
-        img {
-          width: 30px;
-          position: relative;
-          right: 6px;
-          top: 10px;
         }
       }
-      .org-info {
-        display: inline-block;
-        width: 85%;
-        border-bottom: 1px solid #F2F4F5;
-        margin-left: 16px;
-        float: right;
-        .org-logo {
-          border: 1px solid #e7e7e7;
-          border-radius: 5px;
-          display: inline-block;
-          width: 40px;
+      .orgbd-load,.orgbd-nodata{
           height: 40px;
-          background: #fff no-repeat 50%;
-          background-size: contain;
-        }
-        .top1-logo {
-          border: 1.5px solid #e3b24b;
-        }
-        .top2-logo {
-          border: 1.5px solid #b3b1aa;
-        }
-        .top3-logo {
-          border: 1.5px solid #cb865d;
-        }
-        .org-name {
-          display: inline-block;
-          font-size: 11px;
-          color: #969FA9;
-          letter-spacing: 0;
-          line-height: 14px;
-          // width: 64%;
-          margin-left: 10px;
-          div:first-child {
-            font-size: 16px;
-            color: #222C38;
-            line-height: 22px;
-            margin-bottom: 5px;
-            font-weight: bold;
-          }
-          div:last-child {
-             font-size: 12px;
-            margin-bottom: 12px;
-            position: relative;
-            bottom: 3px;
-          }
-        }
-        .interview-num {
-          float: right;
-          text-align: right;
-          display: inline-block;
-          font-size: 12px;
-          color: #969FA9;
-          letter-spacing: 0;
-          line-height: 14px;
+          line-height: 40px;
+          text-align: center;
+          width: 100%;
           position: relative;
-          right: 4%;
-          div:first-child {
-            font-size: 23px;
-            color: #222C38;
-            line-height: 22px;
-            margin-bottom: 5px;
-            font-weight: bold;
-          }
-          div:last-child {
-            margin-bottom: 10px;
-            position: relative;
-            bottom: 3px;
-          }
-        }
-        .top3Color {
-          color: #CF9D3E !important;
-        }
+          margin: 15px 0;
       }
-      @media (min-width: 375px) {
-        .org-info {
-          width: 87%;
-        }
+      .nodata{
+          height: 200px;
+          line-height: 100px;
+          text-align: center;
+          img {
+              display: block;
+              margin: 0 auto;
+              width: 60px;
+              margin-top: 20px;
+          }
+          p {
+              font-size: 15px;
+              color: #5A626D;
+              letter-spacing: 0;
+              line-height: 22px;
+              text-align: center;
+              margin-top: 20px;
+          }
       }
-    }
   }
-  footer {
-    text-align: center;
-    margin: 10px 0;
-    height: 50px;
-  }
+
   .orgbd-footer {
     * {
           user-select: none;

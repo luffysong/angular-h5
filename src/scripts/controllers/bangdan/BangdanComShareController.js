@@ -8,12 +8,15 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
     var vm = this;
     vm.id = $stateParams.id;
     vm.rank = $stateParams.rank;
+    vm.industry = $stateParams.industry;
+    //vm.industryName = $stateParams.industryName;
     vm.bangdanCom = bangdanCom;
     vm.bangdanComDetail = bangdanComDetail;
     vm.inApp = true;
     vm.downloadApp = downloadApp;
     vm.type = $stateParams.type;
     vm.communityType = $stateParams.communityType;
+    vm.industryName = '全行业';
     init();
 
     function init() {
@@ -62,7 +65,7 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
-        initTitle('2017Q' + vm.currQuarter + '·风口机构排行榜');
+        initTitle('2017 · 风口社群排行榜');
     }
 
     function bangdanCom() {
@@ -111,17 +114,36 @@ function BangdanComShareController(loading, $scope, $modal, $stateParams, FindSe
         });
 
         //放开访问详情
-        $state.go('bangdan.combddetail', {
-            id: id,
-            rank: rank,
-            communityType: vm.communityType,
-        });
+        if (parseInt($stateParams.industry)) {
+            $state.go('bangdan.combddetail', {
+                id: id,
+                rank: rank,
+                communityType: vm.communityType,
+                industry:parseInt($stateParams.industry)
+            });
+        } else {
+            $state.go('bangdan.combddetail', {
+                id: id,
+                rank: rank,
+                communityType: vm.communityType,
+            });
+        }
     }
 
     function getSingleComInfo(id) {
-        BangDanService.getSingleComInfo(id)
+        var senddata = {};
+        if (parseInt($stateParams.industry)) {
+            senddata = {industryId: parseInt($stateParams.industry)};
+        }
+        BangDanService.getSingleComInfo(id, senddata)
             .then(function (response) {
                 vm.data = response.data;
+                vm.rank = response.data.rank;
+                vm.data.industryList.forEach(function (item, index) {
+                    if(item.id == vm.industry) {
+                        vm.industryName = item.name;
+                    }
+                });
                 initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.rank, vm.data.logo, vm.type);
                 initWeixinH5();
             });

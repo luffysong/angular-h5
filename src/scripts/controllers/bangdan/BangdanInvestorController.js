@@ -3,7 +3,7 @@ angular.module('defaultApp.controller')
     .controller('BangdanInvestorController', BangdanInvestorController);
 
 function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindService,
-    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window, $document) {
+    $state, UserService, ErrorService, hybrid, $rootScope, $timeout, BangDanService, $window, $document, industry) {
 
     var vm = this;
     vm.list = [];
@@ -19,20 +19,31 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
     vm.getStorageID = false;
     vm.total;
     vm.downloadApp = downloadApp;
+    vm.addWechat = addWechat;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/MqEpIPR';
+    vm.moveAction = moveAction;
+    vm.hasInit = false;
+    vm.isRise = false;
+    vm.industryName ='全行业';
 
     init();
 
     function init() {
+        removeHeader();
+        getInvestorIndustry();
         if (!hybrid.isInApp) {
             initLinkme();
             vm.inApp = false;
         }
-
         getQ();
         getInvestorRank();
         initPxLoader();
         addAnimate();
+        changeTab();
+    }
+
+    function removeHeader() {
+        $('#bannerOther').remove();
     }
 
     function addAnimate() {
@@ -46,7 +57,6 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
                 if (!vm.isBottom) {
                     vm.isBottom = true;
                 }
-                console.log(vm.isBottom);
             } else {
                 if (vm.isBottom) {
                     vm.isBottom = false;
@@ -83,7 +93,8 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
-        initTitle('2017Q' + vm.currQuarter + ' · 风云投资人排行榜');
+        //initTitle('2017Q' + vm.currQuarter + ' · 风云投资人排行榜');
+        initTitle('2017 · 风云投资人排行榜');
     }
 
     function initPxLoader() {
@@ -106,7 +117,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
 
     function initWeixin(q, count) {
         window.WEIXINSHARE = {
-            shareTitle: '【2017Q' + q + '· 风云投资人排行榜】已有' + count + '位投资人加入',
+            shareTitle: '【2017 · 风云投资人排行榜】已有' + count + '位投资人加入',
             shareUrl: window.location.href,
             shareImg: 'https://krplus-cdn.b0.upaiyun.com/m/images/8fba4777.investor-app.png',
             shareDesc: '所有投资人的被投项目都在这里',
@@ -121,12 +132,63 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         document.title = t;
     }
 
+    function getInvestorIndustry() {
+        var f = {
+            label: '全行业',
+            value: 0,
+            id: 0,
+            name: '全行业'
+        }
+        var industryArr = [];
+        industryArr.push(f);
+        industry.data.forEach(function (item, index) {
+                var obj ={};
+                obj['label'] = item.name;
+                obj['value'] = index + 1;
+                industryArr.push(angular.extend({},obj,item));
+        });
+        $scope.industryArr = industryArr;
+        var iix = window.sessionStorage.getItem('industryIndex');
+        var ind = window.sessionStorage.getItem('industry');
+        var indName = window.sessionStorage.getItem('industryName');
+        if (ind && ind != 'undefined') {
+            vm.industry = ind;
+        }
+        if (indName && indName != 'undefined' && indName != '全行业') {
+            vm.industryName = indName;
+            window.WEIXINSHARE.shareDesc ='所有投资人的'+vm.industryName+'项目都在这里';
+            var obj = {};
+            window.InitWeixin(obj);
+        }
+
+        if ($stateParams.industry) {
+            setTab();
+        } else {
+            if (iix && iix != 'undefined') {
+                $scope.currentIndustry = parseInt($stateParams.industry) || parseInt(iix);
+            } else {
+                $scope.currentIndustry = parseInt($stateParams.industry) || 0;
+                vm.isRise = true;
+            }
+        }
+        //$scope.currentIndustry = $stateParams.industry || 0;
+    }
+
+    function setTab(iix){
+        $scope.industryArr.forEach(function (item, index) {
+            if (item.id == parseInt($stateParams.industry)) {
+                $scope.currentIndustry = index;
+            }
+        });
+    }
+
     function getInvestorRank(fn) {
         if (vm.busy) return;
         vm.busy = true;
         var request = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry || ''
         };
 
         if (!vm.inApp) {request.pageSize = 20; };
@@ -135,6 +197,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
             .then(function (response) {
                 vm.startloading = false;
                 loading.hide('bangdanLoading');
+                vm.hasInit = true;
                 vm.result = response.data.data;
                 vm.list = vm.list.concat(response.data.data);
 
@@ -165,8 +228,14 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         var val = angular.element(window).scrollTop();
         window.sessionStorage.removeItem('investor-position');
         window.sessionStorage.removeItem('investor-id');
+        window.sessionStorage.removeItem('industryIndex');
+        window.sessionStorage.removeItem('industry');
+        window.sessionStorage.removeItem('industryName');
         window.sessionStorage.setItem('investor-position', val);
         window.sessionStorage.setItem('investor-id', id);
+        window.sessionStorage.setItem('industryIndex', vm.industryIndex);
+        window.sessionStorage.setItem('industry', vm.industry);
+        window.sessionStorage.setItem('industryName', vm.industryName);
 
         var isAndroid = !!navigator.userAgent.match(/android/ig);
         var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
@@ -188,6 +257,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         $state.go('bangdan.investorbddetail', {
             id: id,
             rank: rank,
+            industry: vm.industry
         });
     }
 
@@ -198,6 +268,7 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         var request = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry || ''
         };
         BangDanService.getInvestorRank(request)
             .then(function (response) {
@@ -206,6 +277,11 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
                     if (!vm.total) {
                         vm.total = response.data.totalCount;
                         initWeixin(vm.currQuarter, vm.total);
+                        // if(vm.industryName !== '全行业') {
+                        //     window.WEIXINSHARE.shareDesc ='所有投资人的'+vm.industryName+'项目都在这里';
+                        //     var obj = {};
+                        //     window.InitWeixin(obj);
+                        // }
                     }
 
                     if (response.data.totalPages) {
@@ -390,4 +466,113 @@ function BangdanInvestorController(loading, $scope, $modal, $stateParams, FindSe
         });
     }
 
+    vm.cTab = parseInt($scope.currentIndustry);
+    function moveAction(e ,c) {
+        var l = $scope.industryArr.length;
+        var changeobj = {};
+        if (c) {
+            vm.cTab <l ? vm.cTab++ : 0;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    // $scope.changeobj = ind;
+                    changeobj = ind;
+                }
+            });
+
+        } else {
+            vm.cTab > 0 ? vm.cTab-- : l-1;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    // $scope.changeobj = ind;
+                    changeobj = ind;
+                }
+            });
+        }
+        $scope.$broadcast('bdSwipeMoveAction', changeobj);
+    }
+
+    function resetData() {
+        vm.list = [];
+        vm.more = false;
+        vm.busy = false;
+        vm.finish = false;
+        vm.page = 0;
+        vm.startloading = true;
+        vm.hasInit = false;
+        //为了确保数据被清空；
+        getInvestorRank();
+    }
+
+    function changeTab() {
+        $scope.$on('DynamicTabClicked', function (e, item) {
+            if (sa && item) {
+                sa.track('InvestorTopListClick',
+                  {
+                    source: 'investor_top_list',
+                    target: 'industry_tab',
+                    company_industry: item.name,
+                    client: getClient(),
+                });
+            }
+
+            window.sessionStorage.removeItem('investor-position');
+            window.sessionStorage.removeItem('investor-id');
+            window.sessionStorage.removeItem('industryIndex');
+            window.sessionStorage.removeItem('industry');
+            window.sessionStorage.removeItem('industryName');
+            if (item.value == 0 || item.value) {
+                vm.industry = item.value == 0 ? '' : item.id;
+                vm.industryIndex = item.value;
+                vm.industryName = item.name;
+                // if (item.value != 0) {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareDesc ='所有投资人的'+vm.industryName+'项目都在这里';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // }
+                if (item.value == 0){
+                    vm.isRise = true;
+                } else {
+                    vm.isRise = false;
+                }
+                resetData();
+            }
+        });
+    }
+
+    function addWechat(){
+        $modal.open({
+            templateUrl: 'templates/bangdan/addWechat.html',
+            windowClass: 'bd-add-wechat-wrap',
+            controller: defaultController,
+            controllerAs: 'vm',
+        });
+    }
+
+
+    function defaultController($modalInstance){
+        var vm = this;
+        vm.cancelModal = cancelModal;
+        function cancelModal() {
+            $modalInstance.dismiss();
+        }
+    }
+
+    function getClient(){
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+        return client;
+    }
+
+    function reInitWechat() {
+        initWeixin(vm.currQuarter, vm.total);
+    }
 }

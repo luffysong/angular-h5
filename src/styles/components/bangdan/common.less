@@ -7,14 +7,84 @@
     body {
         header.common-header {
         border-bottom: solid 1px black !important;
+        position: fixed;
     }
  }
 }
 
+.bd-tab-section{
+    height: 50px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    .slide-tabs{
+        z-index: 10;
+        height: 50px;
+
+        .wrapper{
+            position: relative;
+            background: white;
+            z-index: 10;
+            height: 50px;
+            a{
+                text-align: center;
+                width: 25%;
+                float: left;
+                display: inline-block;
+                font-size: 14px;
+                color: #5A626D;
+                height: 50px;
+                line-height: 50px;
+                span{
+                    font-size: 14px;
+                }
+            }
+            a.selected{
+                font-size: 16px;
+                color: #222C38;
+                font-weight: bold;
+                span{
+                    font-size: 16px;
+                }
+            }
+        }
+        .bar {
+            position: absolute;
+            bottom:5px;
+            left:0;
+            transition: transform 0.3s;
+            height:0.15rem;
+            background: #CF9D3E;
+            width: 18px;
+            height: 3px;
+            border-radius: 2px;
+        }
+        .more{
+            position: fixed;
+            transition: transform 0.3s;
+            color: #cf9d3e;
+            font-size: 14px;
+            font-weight: bold;
+            width: 12px;
+            height: 50px;
+            border-radius: 2px;
+            display: inline-block;
+            line-height: 50px;
+            display: none;
+            img{
+                width: 12px;
+                height: 18px;
+            }
+        }
+    }
+}
+
+
 //详情页面背景
 .bd-detail-bgp{
     background: url('images/bangdan/bddetailhead.png') no-repeat center;
-    height: 256px;
+    height: 196px;
     width: 100%;
 }
 .bd-gold-belt{
@@ -65,6 +135,10 @@
 
 .bd-normal-border{
     border:1px solid #E7E7E7;
+}
+
+.bd-paddingTop62{
+    padding-top: 62px;
 }
 
 .bd-dot{
@@ -154,6 +228,72 @@
 
     @media screen and (max-width: 320px) {
             height: 50px;
+    }
+}
+
+.bd-add-wechat-wrap {
+    overflow: visible;
+    .modal-dialog {
+        margin-top: 100px;
+        margin-left: 18%;
+        margin-right: 18%;
+        @media screen and (max-width: 320px) {
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+    }
+    .modal-content {
+        width: 100%;
+        padding-bottom: 0;
+        overflow: visible;
+        border: none 0;
+    }
+    .wechat-top {
+        text-align: center;
+        background-color: #E2B250;
+        height: 80px;
+        line-height: 80px;
+        border-radius: 5px 5px 0 0;
+        img {
+            position: relative;
+            bottom: 5px;
+            margin-right: 5px;
+        }
+        span {
+            font-size: 22px;
+            color: #FFFFFF;
+        }
+        .bump {
+            height: 5px;
+            width: 10%;
+            background-color: #FFFFFF;
+            margin: 0 auto;
+            position: relative;
+            bottom: 8px;
+        }
+    }
+    .wechat-content {
+        font-size: 17px;
+        color: #5A626D;
+        text-align: center;
+        padding-bottom: 70px;
+        div:first-child{
+            margin-top: 55px;
+        }
+        .number {
+            font-size: 24px;
+            color: #CF9D3E;
+            margin: 20px 0 25px;
+        }
+    }
+    .pop-close {
+        position: absolute;
+        bottom: -56px;
+        width: 36px;
+        height: 36px;
+        -webkit-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+        left: 50%;
     }
 }
 

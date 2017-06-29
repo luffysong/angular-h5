@@ -10,7 +10,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     vm.prolist = [];
     vm.joinpro = joinpro;
     vm.openMore = openMore;
-    vm.industry = '';
+    vm.focusIndustry = '';
     vm.collapse = true;
     vm.startloading = true;
     vm.loadOrg = true;
@@ -20,34 +20,45 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     vm.gobdOrg = gobdOrg;
     vm.rank = $stateParams.rank;
     vm.goProDetail = goProDetail;
+    vm.moveAction = moveAction;
+    vm.hasInit = false;
     vm.h5Href = false;
     vm.isEqualHeight = false;
     vm.bdUrl = 'http://bangdanshouji.mikecrm.com/5z1XNRv';
+    $scope.currentIndustry = 0;
+    vm.rankName ='总榜';
+    vm.industryName ='全行业';
     init();
 
     function init() {
         vm.investorInfo = investorInfo.data;
-        vm.industry = '';
+        vm.focusIndustry = '';
         if (investorInfo.data.focusIndustry) {
-            vm.industry = investorInfo.data.focusIndustry.join('&nbsp;·&nbsp;');
+            vm.focusIndustry = investorInfo.data.focusIndustry.join('&nbsp;·&nbsp;');
         }
 
         if (!hybrid.isInApp) {
             initLinkme();
             vm.inApp = false;
         }
-
-        getProList();
+        getComIndustry();
+        // getProList();
+        changeTab();
         getQ();
         getOrgInfo(investorInfo.data.orgId);
         initPxLoader();
         initUser();
         getTestJson();
         compareRank();
+        removeHeader()
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + vm.investorInfo.rank;
+        'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + vm.investorInfo.rank + '&industry=' + vm.industry;
         initWeixin(vm.investorInfo.name, vm.investorInfo.projectCount, vm.currQuarter, vm.investorInfo.rank, shareUrl, vm.investorInfo.logo);
+    }
+
+    function removeHeader() {
+        $('#bannerOther').remove();
     }
 
     function initPxLoader() {
@@ -75,6 +86,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         var params = {
             page: vm.page + 1,
             pageSize: 1000,
+            industry: vm.industry,
         };
 
         if (!vm.inApp) {params.pageSize = 2;};
@@ -82,6 +94,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         BangDanService.getInvestorProRank($stateParams.id, params)
         .then(function setdata(response) {
             vm.startloading = false;
+            vm.hasInit = true;
             loading.hide('bangdanDetailLoading');
             vm.prolist = vm.prolist.concat(response.data.data);
             if (response.data.totalPages) {
@@ -138,7 +151,8 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
-        initTitle('2017Q' + vm.currQuarter + ' · 风云投资人排行榜');
+        //initTitle('2017Q' + vm.currQuarter + ' · 风云投资人排行榜');
+        initTitle('2017 · 风云投资人排行榜');
     }
 
     function initTitle(t) {
@@ -147,7 +161,7 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
 
     function initWeixin(name, count, q, rank, url, logo) {
         window.WEIXINSHARE = {
-            shareTitle: name + '排名第' + rank + '名 | 2017Q' + q + ' · 风云投资人排行榜',
+            shareTitle: name + '排名第' + rank + '名 | 2017 · 风云投资人排行榜',
             shareUrl: url,
             shareImg: '' + logo + '',
             shareDesc: '立即查看' + name + '所有' + count + '个投资项目',
@@ -217,10 +231,13 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
     }
 
     function joinpro(f) {
-        var item = investorInfo.data;
+        var item = vm.investorInfo;
         //item.rank = parseInt(vm.rank);
         item.currQuarter = vm.currQuarter;
         item.inApp = vm.inApp;
+        item.industryName = vm.industryName;
+        item.industry = vm.industry;
+        //reInitWechat();
         var tg = 'join_investor_company';
         if (f) {
             item.f = f;tg = 'support';
@@ -540,6 +557,170 @@ function BangdanInvestorDetailController(loading, $scope, $modal, $stateParams, 
             });
 
         }, 'jsonp');
+    }
+
+    function getComIndustry() {
+        var f = {
+            label: '全行业',
+            value: 0,
+            id: 0,
+            name: '全行业'
+        }
+        var industryArr = [];
+        industryArr.push(f);
+        console.log(investorInfo.data);
+        investorInfo.data.industryList.forEach(function (item, index) {
+            var obj ={};
+            obj['label'] = item.name;
+            obj['value'] = index + 1;
+            industryArr.push(angular.extend({},obj,item));
+        });
+        $scope.industryArr = industryArr;
+
+        setTab();
+        getProList();
+    }
+
+    function setTab() {
+        $scope.industryArr.forEach(function (item, index) {
+            if (item.id == parseInt($stateParams.industry)) {
+                $scope.currentIndustry = index;
+                vm.rankName = item.name;
+                vm.industryName = item.name;
+                if (item.value != 0){
+                    $timeout(function() {
+                        window.WEIXINSHARE.shareTitle = vm.investorInfo.name + '在' + vm.industryName +'排名第' + vm.investorInfo.rank+ '名 | 2017 · 风云投资人排行榜';
+                        window.WEIXINSHARE.shareDesc = '立即查看' + vm.investorInfo.name +'所有'+ vm.investorInfo.projectCount +'个'+vm.industryName+'项目';
+                        var obj = {};
+                        window.InitWeixin(obj);
+                    },200);
+                }
+            }
+        });
+        if ($stateParams.industry) {
+            vm.industry = parseInt($stateParams.industry) == 0 ? '' : parseInt($stateParams.industry);
+        } else {
+            vm.industry = '';
+        }
+
+    }
+
+    vm.cTab = parseInt($scope.currentIndustry);
+    function moveAction(e ,c) {
+        var l = $scope.industryArr.length;
+        var changeobj = {};
+        if (c) {
+            vm.cTab <l ? vm.cTab++ : 0;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    changeobj = ind;
+                }
+            });
+
+        } else {
+            vm.cTab > 0 ? vm.cTab-- : l-1;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    changeobj = ind;
+                }
+            });
+        }
+        if (changeobj.value == 0) {
+            vm.rankName = '总榜';
+        } else {
+            vm.rankName = changeobj.name;
+        }
+        $scope.$broadcast('bdSwipeMoveAction', changeobj);
+    }
+
+    function resetData() {
+        vm.prolist = [];
+        vm.more = false;
+        vm.busy = false;
+        vm.finish = false;
+        vm.page = 0;
+        vm.startloading = true;
+        vm.hasInit = false;
+        getProList();
+    }
+
+    function changeTab() {
+        $scope.$on('DynamicTabClicked', function (e, item) {
+            if (sa && item) {
+                sa.track('InvestorTopListClick',
+                  {
+                    source: 'investor',
+                    target: 'industry_tab',
+                    company_industry: item.name,
+                    investor_id: $stateParams.id + '',
+                    client: getClient(),
+                });
+            }
+            if (item.value == 0 || item.value) {
+                vm.industry = item.value == 0 ? '' : item.id;
+                if (item.value == 0) {
+                    vm.rankName = '总榜';
+                } else {
+                    vm.rankName = item.name;
+                }
+                getSingleInvestorInfo();
+                vm.industryName = item.name;
+                // if (item.value != 0) {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareTitle = vm.investorInfo.name + '在' + vm.industryName +'排名第' + vm.investorInfo.rank+ '名 | 2017 · 风云投资人排行榜';
+                //     window.WEIXINSHARE.shareDesc = '立即查看' + vm.investorInfo.name +'所有'+ vm.investorInfo.projectCount +'个'+vm.industryName+'项目';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // } else {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareTitle = vm.investorInfo.name + '排名第' + vm.investorInfo.rank + '名 | 2017 · 风云投资人排行榜';
+                //     window.WEIXINSHARE.shareDesc = '立即查看' + vm.investorInfo.name + '所有' + vm.investorInfo.projectCount + '个投资项目';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // }
+                resetData();
+            }
+        });
+    }
+
+    function getClient(){
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+        return client;
+    }
+
+    function getSingleInvestorInfo(){
+        var senddata ={
+            industryId: vm.industry,
+        }
+        BangDanService.getSingleInvestorInfo($stateParams.id, senddata)
+        .then(function(response) {
+            if (response.data) {
+                vm.investorInfo.projectCount = response.data.projectCount;
+                vm.investorInfo.interviewCount = response.data.interviewCount;
+                vm.investorInfo.accessCount = response.data.accessCount;
+                vm.investorInfo.rank = response.data.rank;
+                vm.investorInfo.totalInvestorCount = response.data.totalInvestorCount;
+                vm.investorInfo.currentIndustryInvestorCount = response.data.currentIndustryInvestorCount;
+            }
+
+        })
+        .catch(fail);
+    }
+
+    function reInitWechat(){
+        var HOST = location.host;
+        var shareUrl =
+        'https://' + HOST + '/m/#/bangdan/investorshare?id=' + $stateParams.id + '&rank=' + vm.investorInfo.rank + '&industry=' + vm.industry;
+        initWeixin(vm.investorInfo.name, vm.investorInfo.projectCount, vm.currQuarter, vm.investorInfo.rank, shareUrl, vm.investorInfo.logo);
     }
 
 }

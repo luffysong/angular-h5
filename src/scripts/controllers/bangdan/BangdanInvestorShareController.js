@@ -8,10 +8,13 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
     var vm = this;
     vm.id = $stateParams.id;
     vm.rank = $stateParams.rank;
+    vm.industry = $stateParams.industry;
+    // vm.industryName = $stateParams.industryName;
     vm.bangdanInvestor = bangdanInvestor;
     vm.bangdanInvestorDetail = bangdanInvestorDetail;
     vm.inApp = true;
     vm.downloadApp = downloadApp;
+    vm.industryName = '全行业';
     init();
 
     function init() {
@@ -46,7 +49,8 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
-        initTitle('2017Q' + vm.currQuarter + ' · 风云投资人排行榜');
+        //initTitle('2017Q' + vm.currQuarter + ' · 风云投资人排行榜');
+        initTitle('2017 · 风云投资人排行榜');
     }
 
     function bangdanInvestor() {
@@ -87,17 +91,34 @@ function BangdanInvestorShareController(loading, $scope, $modal, $stateParams, F
             org_id: id + '',
             client:client,
         });
-
-        $state.go('bangdan.investorbddetail', {
-            id: id,
-            rank: rank,
-        });
+        if (parseInt($stateParams.industry)){
+            $state.go('bangdan.investorbddetail', {
+                id: id,
+                rank: rank,
+                industry:parseInt($stateParams.industry)
+            });
+        } else {
+            $state.go('bangdan.investorbddetail', {
+                id: id,
+                rank: rank,
+            });
+        }
     }
 
     function getSingleInvestorInfo(id) {
-        BangDanService.getSingleInvestorInfo(id)
+        var senddata = {};
+        if (parseInt($stateParams.industry)) {
+            senddata = {industryId: parseInt($stateParams.industry)};
+        }
+        BangDanService.getSingleInvestorInfo(id, senddata)
             .then(function (response) {
                 vm.data = response.data;
+                vm.rank = response.data.rank;
+                vm.data.industryList.forEach(function (item, index) {
+                    if(item.id == vm.industry) {
+                        vm.industryName = item.name
+                    }
+                });
                 initWeixin(vm.data.name, vm.data.projectCount, vm.currQuarter, vm.data.rank, vm.data.logo);
                 initWeixinH5();
                 compareRank();

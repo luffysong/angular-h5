@@ -73,137 +73,6 @@
             &:active{
                 background-color:#E7E7E7;
             }
-            .icon-left,.txt-right{
-                float: left;
-                height: 100%;
-                overflow: hidden;
-            }
-            .icon-left{
-                width: 13%;
-                 display:table;
-                 padding: 12px 0px;
-
-                .metal{
-                    display:table-cell;
-                    vertical-align:middle;
-                    width: 30px;
-                    height: 30px;
-                    background-size: 30px 30px;
-                    top: 10.5px;
-                    position: relative;
-                    text-align: center;
-                    img{
-                        width: 30px;
-                    }
-                    span{
-                        font-size: 20px;
-                        color: #C5CEDA;
-                        letter-spacing: 0;
-                        line-height: 22px;
-                        margin: 0 auto;
-                    }
-                }
-            }
-            .txt-right{
-                width:100%;
-                padding: 12px 0px;
-                border-bottom: 1px solid #F2F4F5;
-                .left-logo,.txt-middle,.sta-right{
-                    float: left;
-                }
-                .left-logo{
-                    width:20%;
-                    padding-left: 15px;
-                    .logo-outer{
-                        border-radius: 5px;
-                        text-align: center;
-                        overflow: hidden;
-                        height: 55px;
-                        width: 55px;
-                        position: relative;
-                        background-size: contain;
-                        background-repeat:no-repeat;
-                        background-position: center;
-                        img{
-                            border-radius: 5px;
-                            height: 55px;
-                            width: 55px;
-                        }
-                        .funding{
-                            position: absolute;
-                            text-align: center;
-                            height: 18px;
-                            width: 55px;
-                            font-size: 8px;
-                            color: #FFFFFF;
-                            font-weight: bold;
-                            letter-spacing: 0;
-                            line-height: 18px;
-                            background-color: black;
-                            opacity: 0.6;
-                            margin-top: 35px;
-                        }
-                        .logo-name {
-                            position: absolute;
-                            text-align: center;
-                            color: #fff;
-                            height: 100%;
-                            line-height: 55px;
-                            left: 0;
-                            font-size: 15px;
-                            width: 100%;
-                            top: 0;
-                        }
-                    }
-                }
-                .txt-middle{
-                    width:80%;
-                    padding-left: 4px;
-                    .bd-txt-title,
-                    .bd-txt-brief,
-                    .bd-txt-phase{
-                        padding: 2px 0px;
-                    }
-                    .bd-txt-title{
-                        font-size: 16px;
-                        //color: #CF9D3E;
-                        letter-spacing: 0;
-                        line-height: 16px;
-                        color: #222C38;
-                        font-weight: bold;
-                    }
-                    .bd-txt-brief{
-                        font-size: 13px;
-                        color: #969FA9;
-                        letter-spacing: 0;
-                        line-height: 16px;
-                    }
-                    .bd-txt-phase{
-                        font-size: 13px;
-                        color: #969FA9;
-                        letter-spacing: 0;
-                        line-height: 16px;
-                    }
-                }
-                .sta-right{
-                    width: 20%;
-                    text-align: center;
-                    margin-top:14px;
-                    .sta-num{
-                        font-size: 23px;
-                        color: #CF9D3E;
-                        color: #222C38;
-                        letter-spacing: 0;
-                        line-height: 24px;
-                    }
-                    .sta-txt{
-                        font-size: 12px;
-                        color: #969FA9;
-                        letter-spacing: 0;
-                        line-height: 14px;
-                    }
-                }
-            }
         }
     }
 }
@@ -336,7 +205,7 @@
 
         }
         .bd-orgdetail-push{
-            top:36px;
+            top:16px;
             .push-left,.push-right{
                 float: left;
             }
@@ -382,11 +251,184 @@
             }
         }
     }
+    //机构详情；
+
+    .bd-org-info{
+       width: 100%;
+       height: auto;
+       padding: 15px;
+       position: relative;
+
+       .padd-Btm-f{
+           padding-bottom: 40px;
+       }
+
+       .org-info{
+          width: 100%;
+          height: 100%;
+          background: #FFFFFF;
+          box-shadow: 0 0 8px 0 #E0E5EC;
+          border-radius: 4px;
+          padding-left: 20px;
+          padding-right: 20px;
+          padding-top: 20px;
+          overflow: hidden;
+          position: relative;
+          .info-content{
+            font-size: 15px;
+            color: #5A626D;
+            letter-spacing: 0;
+            line-height: 20px;
+            position: relative;
+            .info{
+              .text-container{
+                  position: relative;
+                  //padding-right: 20px;
+                  .text-content{
+                      text-align: left;
+                      overflow : hidden;
+                      display: -webkit-box;
+                      -webkit-box-orient: vertical;
+                      line-height: 20px;
+                      font-size: 15px;
+                      color: #5A626D;
+                      letter-spacing: 0px;
+
+                      //使用after让浏览器重绘文字 使-webkit-line-clamp生效
+                      &:after{
+                          width: 0;
+                          height: 0;
+                          display: inline-block;
+                          overflow: hidden;
+                          content: attr(style);
+                      }
+                  }
+              }
+
+              .text-toggle {
+                  display: inline-block;
+                  font-size: 15px;
+                  color: #9aa3ac;
+                  letter-spacing: 0;
+                  line-height: 20px;
+                  width: 100%;
+                  height: 20px;
+                  text-align: right;
+              }
+            }
+          }
+       }
+
+       .open-more{
+           width: 100%;
+           background: #F9F9F9;
+           height: 30px;
+           text-align: center;
+           bottom: 0px;
+           position: absolute;
+           left: 0px;
+           right: 0px;
+           color: #ACB5BF;
+           span{
+               font-size: 12px;
+               background: #F9F9F9;
+               letter-spacing: 0;
+               line-height: 30px;
+               img{
+                   margin-top: -2px;
+                   width: 10px;
+                   height: 10px;
+               }
+           }
+       }
+     }
+
     .bd-orgdetail-content-start{
         position: relative;
         height: 200px;
         top:50px;
         text-align: center;
+    }
+    .bd-orgdetail-pro{
+        width: 100%;
+        background-color: #FFFFFF;
+        height: 160px;
+        position: relative;
+        .pro-top{
+                width: 100%;
+                text-align: left;
+                padding: 0px;
+                height: 25px;
+                line-height: 25px;
+                position: relative;
+                top: 20px;
+                span{
+                    display: inline-block;
+                    background-color: #FFFFFF;
+                }
+
+            .h-line{
+                .detail-h-line;
+            }
+            .p-title{
+                .detail-p-title;
+            }
+        }
+
+        .com-detail{
+          top:18px;
+        }
+        .pro-num{
+            height: 64px;
+            width: 100%;
+            padding: 15px;
+            position: relative;
+            top:13px;
+            .rank-num{
+                height: 64px;
+                width: 100%;
+                background: #F9F9F9;
+                border-radius: 4px;
+                padding: 10px 0px;
+                //border: 1px solid red;
+                line-height: 64px;
+                .content-num{
+                    height: 34px;
+                    .bd-sta{
+                        width: 33%;
+                        height: 34px;
+                        float: left;
+                        line-height: 25px;
+                        text-align: center;
+                        .num{
+                            font-size: 20px;
+                            color: #222C38;
+                            letter-spacing: 0;
+                        }
+                        .txt{
+                            font-size: 12px;
+                            color: #5A626D;
+                            letter-spacing: 0;
+                            line-height: 14px;
+                        }
+
+                    }
+                    .split-line{
+                            .detail-split-line;
+                            margin-top: 10px;
+                    }
+                }
+            }
+        }
+        .txt-intro{
+            position: relative;
+            top:50px;
+            font-size: 12px;
+            color: #969FA9;
+            letter-spacing: 0;
+            line-height: 14px;
+            padding-left: 15px;
+        }
     }
 
     .bd-orgdetail-content{
@@ -410,164 +452,6 @@
                 &:active{
                     background-color:#E7E7E7;
                 }
-
-                // &:hover{
-                //     background-color:#dfdfdf;
-                //     .icon-left{
-                //         .metal{
-                //             span{
-                //                 color: white;
-                //             }
-                //         }
-                //     }
-                //     .txt-right{
-                //         border-bottom: 1px solid #C5CEDA;
-                //         .txt-middle{
-                //             .bd-txt-title,.bd-txt-brief,.bd-txt-phase{
-                //                 color: white;
-                //             }
-                //         }
-                //         .sta-right{
-                //             .sta-num,
-                //             .sta-txt{
-                //                 color: white;
-                //             }
-                //         }
-                //     }
-                // }
-                .icon-left,.txt-right{
-                    float: left;
-                    height: 100%;
-                    overflow: hidden;
-                }
-                .icon-left{
-                    width: 13%;
-                     display:table;
-                     padding: 12px 0px;
-
-                    .metal{
-                        display:table-cell;
-                        vertical-align:middle;
-                        width: 30px;
-                        height: 30px;
-                        background-size: 30px 30px;
-                        top: 10.5px;
-                        position: relative;
-                        text-align: center;
-                        img{
-                            width: 30px;
-                        }
-                        span{
-                            font-size: 20px;
-                            color: #C5CEDA;
-                            letter-spacing: 0;
-                            line-height: 22px;
-                            margin: 0 auto;
-                        }
-                    }
-                }
-                .txt-right{
-                    width:87%;
-                    padding: 12px 0px;
-                    border-bottom: 1px solid #F2F4F5;
-                    .left-logo,.txt-middle,.sta-right{
-                        float: left;
-                    }
-                    .left-logo{
-                        width:20%;
-                        .logo-outer{
-                            border-radius: 5px;
-                            text-align: center;
-                            overflow: hidden;
-                            height: 55px;
-                            width: 55px;
-                            position: relative;
-                            background-size: contain;
-                            background-repeat:no-repeat;
-                            background-position: center;
-                            img{
-                                border-radius: 5px;
-                                height: 55px;
-                                width: 55px;
-                            }
-                            .funding{
-                                position: absolute;
-                                text-align: center;
-                                height: 18px;
-                                width: 55px;
-                                font-size: 8px;
-                                color: #FFFFFF;
-                                font-weight: bold;
-                                letter-spacing: 0;
-                                line-height: 18px;
-                                background-color: black;
-                                opacity: 0.6;
-                                margin-top: 35px;
-                            }
-                            .logo-name {
-                                position: absolute;
-                                text-align: center;
-                                color: #fff;
-                                height: 100%;
-                                line-height: 55px;
-                                left: 0;
-                                font-size: 15px;
-                                width: 100%;
-                                top: 0;
-                            }
-                        }
-                    }
-                    .txt-middle{
-                        width:60%;
-                        padding-left: 4px;
-                        .bd-txt-title,
-                        .bd-txt-brief,
-                        .bd-txt-phase{
-                            padding: 2px 0px;
-                        }
-                        .bd-txt-title{
-                            font-size: 16px;
-                            //color: #CF9D3E;
-                            letter-spacing: 0;
-                            line-height: 16px;
-                            color: #222C38;
-                            font-weight: bold;
-                        }
-                        .bd-txt-brief{
-                            font-size: 13px;
-                            color: #969FA9;
-                            letter-spacing: 0;
-                            line-height: 16px;
-                        }
-                        .bd-txt-phase{
-                            font-size: 13px;
-                            color: #969FA9;
-                            letter-spacing: 0;
-                            line-height: 16px;
-                        }
-                    }
-                    .sta-right{
-                        width: 20%;
-                        text-align: center;
-                        margin-top:14px;
-                        .sta-num{
-                            font-size: 23px;
-                            color: #CF9D3E;
-                            color: #222C38;
-                            letter-spacing: 0;
-                            line-height: 24px;
-                        }
-                        .sta-txt{
-                            font-size: 11px;
-                            color: #969FA9;
-                            letter-spacing: 0;
-                            line-height: 14px;
-                        }
-                    }
-                }
-                .txt-right-loading{
-
-                }
             }
         }
         .more,.no-more{
@@ -577,6 +461,28 @@
               font-size: 14px;
               height: 100px;
               line-height: 100px;
+        }
+        .no-more-data{
+            background-color: white;
+             text-align: center;
+             color: #888;
+             font-size: 14px;
+             height: 100px;
+             line-height: 100px;
+             img {
+                 display: block;
+                 margin: 0 auto;
+                 width: 60px;
+                 margin-top: 20px;
+             }
+             p {
+                 font-size: 15px;
+                 color: #5A626D;
+                 letter-spacing: 0;
+                 line-height: 22px;
+                 text-align: center;
+                 margin-top: 20px;
+             }
         }
     }
 
@@ -982,6 +888,10 @@
                 .detail-p-title;
             }
         }
+
+        .com-detail{
+          top:18px;
+        }
         .pro-num{
             height: 64px;
             width: 100%;
@@ -1054,140 +964,6 @@
                     &:active{
                         background-color:#E7E7E7;
                     }
-                    .icon-left,.txt-right{
-                        float: left;
-                        height: 100%;
-                        overflow: hidden;
-                    }
-                    .icon-left{
-                        width: 12%;
-                         display:table;
-                         padding: 12px 0px;
-
-                        .metal{
-                            display:table-cell;
-                            vertical-align:middle;
-                            width: 30px;
-                            height: 30px;
-                            background-size: 30px 30px;
-                            top: 10.5px;
-                            position: relative;
-                            text-align: center;
-                            img{
-                                width: 30px;
-                            }
-                            span{
-                                font-size: 20px;
-                                color: #C5CEDA;
-                                letter-spacing: 0;
-                                line-height: 22px;
-                                margin: 0 auto;
-                            }
-                        }
-                    }
-                    .txt-right{
-                        width:87%;
-                        padding: 12px 0px;
-                        border-bottom: 1px solid #F2F4F5;
-                        .left-logo,.txt-middle,.sta-right{
-                            float: left;
-                        }
-                        .left-logo{
-                            width:18%;
-                            .logo-outer{
-                                border-radius: 5px;
-                                text-align: center;
-                                overflow: hidden;
-                                height: 55px;
-                                width: 55px;
-                                position: relative;
-                                background-size: contain;
-                                background-repeat:no-repeat;
-                                background-position: center;
-                                img{
-                                    border-radius: 5px;
-                                    height: 55px;
-                                    width: 55px;
-                                }
-                                .funding{
-                                    position: absolute;
-                                    text-align: center;
-                                    height: 18px;
-                                    width: 55px;
-                                    font-size: 8px;
-                                    color: #FFFFFF;
-                                    font-weight: bold;
-                                    letter-spacing: 0;
-                                    line-height: 18px;
-                                    background-color: black;
-                                    opacity: 0.6;
-                                    margin-top: 35px;
-                                }
-                                .logo-name {
-                                    position: absolute;
-                                    text-align: center;
-                                    color: #fff;
-                                    height: 100%;
-                                    line-height: 55px;
-                                    left: 0;
-                                    font-size: 15px;
-                                    width: 100%;
-                                    top: 0;
-                                }
-                            }
-                        }
-                        .txt-middle{
-                            width:60%;
-                            padding-left: 4px;
-                            .bd-txt-title,
-                            .bd-txt-brief,
-                            .bd-txt-phase{
-                                padding: 2px 0px;
-                            }
-                            .bd-txt-title{
-                                font-size: 16px;
-                                //color: #CF9D3E;
-                                letter-spacing: 0;
-                                line-height: 16px;
-                                color: #222C38;
-                                font-weight: bold;
-                            }
-                            .bd-txt-brief{
-                                font-size: 13px;
-                                color: #969FA9;
-                                letter-spacing: 0;
-                                line-height: 16px;
-                            }
-                            .bd-txt-phase{
-                                font-size: 13px;
-                                color: #969FA9;
-                                letter-spacing: 0;
-                                line-height: 16px;
-                            }
-                        }
-                        .sta-right{
-                            width: 20%;
-                            text-align: center;
-                            margin-top:14px;
-                            .sta-num{
-                                font-size: 23px;
-                                color: #CF9D3E;
-                                color: #222C38;
-                                letter-spacing: 0;
-                                line-height: 24px;
-                                font-weight: bold;
-                            }
-                            .sta-txt{
-                                font-size: 12px;
-                                color: #969FA9;
-                                letter-spacing: 0;
-                                line-height: 14px;
-                            }
-                        }
-                    }
-                    // div:last-child{
-                    //     border-bottom: 1px solid white;
-                    // }
                 }
             }
         }
@@ -1201,6 +977,29 @@
             font-size: 15px;
             color: #969FA9;
         }
+        .no-more-data{
+            background-color: white;
+             text-align: center;
+             color: #888;
+             font-size: 14px;
+             height: 100px;
+             line-height: 100px;
+             img {
+                 display: block;
+                 margin: 0 auto;
+                 width: 60px;
+                 margin-top: 20px;
+             }
+             p {
+                 font-size: 15px;
+                 color: #5A626D;
+                 letter-spacing: 0;
+                 line-height: 22px;
+                 text-align: center;
+                 margin-top: 20px;
+             }
+        }
+
     }
     .bd-investor-org{
         margin-top: 15px;
@@ -1364,6 +1163,28 @@
                   font-size: 14px;
                   height: 80px;
                   line-height: 80px;
+            }
+            .no-more-data{
+                background-color: white;
+                 text-align: center;
+                 color: #888;
+                 font-size: 14px;
+                 height: 100px;
+                 line-height: 100px;
+                 img {
+                     display: block;
+                     margin: 0 auto;
+                     width: 60px;
+                     margin-top: 20px;
+                 }
+                 p {
+                     font-size: 15px;
+                     color: #5A626D;
+                     letter-spacing: 0;
+                     line-height: 22px;
+                     text-align: center;
+                     margin-top: 20px;
+                 }
             }
         }
     }

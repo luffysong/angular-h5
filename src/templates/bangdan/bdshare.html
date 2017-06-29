@@ -8,15 +8,20 @@
     <div class="num-line"></div>
     <div class="num">第<span>{{vm.data.rank}}</span>名</div>
     <div class="num-line"></div>
-    <div ng-if="vm.numchange" class="rank-riseDown">
+    <div ng-if="vm.numchange" class="rank-riseDown" ng-if="!vm.industry">
         <span ng-if="vm.rise">上升</span>
         <span ng-if="!vm.rise">下降</span>
         {{vm.numchange}}
         名
     </div>
     <div class="num-text">
-      <span>2017Q{{vm.currQuarter}} · 风口机构排行榜</span><br/>
-      <span>共 {{vm.data.totalOrgCount}} 家机构排名</span>
+      <span>2017 · 风口机构排行榜</span><br/>
+      <span>
+          <span ng-if="vm.industryName">{{vm.industryName}} · </span>
+          共
+          <span ng-if="vm.data.totalOrgCount && !vm.industry">{{vm.data.totalOrgCount}}</span>
+          <span ng-if="vm.data.currentIndustryOrgCount && vm.industry">{{vm.data.currentIndustryOrgCount}}</span>
+          家机构排名</span>
     </div>
   </div>
   <div class="info">
@@ -26,11 +31,11 @@
     </div>
     <div class="counts count-border">
       <div>{{vm.data.interviewCount}}</div>
-      <div>Q2总约谈数</div>
+      <div>总约谈数</div>
     </div>
     <div class="counts">
       <div>{{vm.data.accessCount}}</div>
-      <div>Q2总浏览数</div>
+      <div>总浏览数</div>
     </div>
   </div>
   <div class="member">

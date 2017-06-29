@@ -19,6 +19,13 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
     vm.investRole = false;
     vm.hoverFunction = hoverFunction;
     vm.startloading = true;
+    vm.moveAction = moveAction;
+    vm.openMore = openMore;
+    //$scope.changeobj = {};
+    vm.hasInit = false;
+    $scope.currentIndustry = 0;
+    vm.rankName ='总榜';
+    vm.industryName ='全行业';
     init();
 
     function init() {
@@ -27,8 +34,8 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             initLinkme();
             vm.inApp = false;
         }
-
-        getProList();
+        getOrgIndustry();
+        changeTab();
         if (UserService.getUID()) {
             initUser();
         }
@@ -36,12 +43,17 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         getQ();
         initPxLoader();
         compareRank();
-
+        removeHeader();
         var HOST = location.host;
         var shareUrl =
-        'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + vm.orgInfo.rank;
+        'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + vm.orgInfo.rank + '&industry=' + vm.industry;
         initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.orgInfo.rank, shareUrl, vm.orgInfo.logo);
     }
+
+    function removeHeader() {
+        $('#bannerOther').remove();
+    }
+
 
     function initUser() {
         FindService.getUserProfile()
@@ -59,7 +71,8 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         var currMonth = myDate.getMonth(); //获取当前月份(0-11,0代表1月)
         var currQuarter = Math.floor((currMonth % 3 == 0 ? (currMonth / 3) : (currMonth / 3 + 1)));
         vm.currQuarter = currQuarter;
-        initTitle('2017Q' + vm.currQuarter + '·风口机构排行榜');
+        //initTitle('2017Q' + vm.currQuarter + '·风口机构排行榜');
+        initTitle('2017 · 风口机构排行榜');
     }
 
     function initPxLoader() {
@@ -80,6 +93,51 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         loader.start();
     }
 
+    function getOrgIndustry() {
+        var f = {
+            label: '全行业',
+            value: 0,
+            id: 0,
+            name: '全行业'
+        }
+        var industryArr = [];
+        industryArr.push(f);
+        orgInfo.data.industryList.forEach(function (item, index) {
+            var obj ={};
+            obj['label'] = item.name;
+            obj['value'] = index + 1;
+            industryArr.push(angular.extend({},obj,item));
+        });
+        $scope.industryArr = industryArr;
+
+         setTab();
+         getProList();
+    }
+
+    function setTab() {
+        $scope.industryArr.forEach(function (item, index) {
+            if (item.id == parseInt($stateParams.industry)) {
+                $scope.currentIndustry = index;
+                vm.industryName = item.name;
+                vm.rankName = item.name;
+                if (item.value != 0){
+                    $timeout(function() {
+                        window.WEIXINSHARE.shareTitle = vm.orgInfo.name + '在' + vm.industryName +'排名第' + vm.orgInfo.rank+ '名 | 2017 · 风口机构排行榜';
+                        window.WEIXINSHARE.shareDesc = vm.orgInfo.name + vm.orgInfo.projectCount +'个'+vm.industryName+'项目都在这里';
+                        var obj = {};
+                        window.InitWeixin(obj);
+                    },200);
+                }
+            }
+        });
+
+        if ($stateParams.industry) {
+            vm.industry = parseInt($stateParams.industry) == 0 ? '' : parseInt($stateParams.industry);
+        } else {
+            vm.industry = '';
+        }
+    }
+
     function getProList() {
         if (vm.busy) return;
         vm.busy = true;
@@ -87,6 +145,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         var params = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry || ''
         };
 
         if (!vm.inApp) {params.pageSize = 2;};
@@ -94,6 +153,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         BangDanService.getOrgProRank($stateParams.id, params)
         .then(function setdata(response) {
             vm.startloading = false;
+            vm.hasInit = true;
             loading.hide('bangdanDetailLoading');
             vm.prolist = vm.prolist.concat(response.data.data);
             if (response.data.totalPages) {
@@ -106,7 +166,6 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
                     vm.more = true;
                 }
             }
-
         })
         .catch(fail);
     }
@@ -119,6 +178,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         var params = {
             page: vm.page + 1,
             pageSize: 10,
+            industry: vm.industry || ''
         };
 
         BangDanService.getOrgProRank($stateParams.id, params)
@@ -206,7 +266,7 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
 
     function initWeixin(name, count, q, rank, url, logo) {
         window.WEIXINSHARE = {
-            shareTitle: name + '为第' + rank + '名 | 2017Q' + q + ' · 风口机构排行榜',
+            shareTitle: name + '排名第' + rank + '名 | 2017 · 风口机构排行榜',
             shareUrl: url,
             shareImg: '' + logo + '',
             shareDesc: name + '' + count + '个投资项目都在这里',
@@ -222,9 +282,12 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
     }
 
     function joinpro(f) {
-        var item = orgInfo.data;
+        var item = vm.orgInfo;
         item.currQuarter = vm.currQuarter;
         item.inApp = vm.inApp;
+        item.industryName = vm.industryName;
+        item.industry = vm.industry;
+        //reInitWechat();
         var tg = 'join_org';
         if (f) {
             item.f = f;tg = 'support';
@@ -413,6 +476,34 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
         }
     }
 
+    function openMore(e) {
+        var obj = angular.element(e.currentTarget);
+        var openClose = obj.find('.open-close');
+        var openCloseTxt = obj.find('.open-close-txt');
+
+        var $infoObj = obj.parent().find('.info-content').find('.info').find('.text-content');
+        var lineClamp  = '-webkit-line-clamp';
+        var fhclmp = $infoObj.attr('cla-height');
+        var fh = $infoObj.attr('o-height');
+
+        if (vm.collapse) {
+            $infoObj.css(lineClamp, '');
+            $infoObj.css('transition', 'height 0.3s');
+            $infoObj.css('height', fh + 'px');
+
+            openClose.css('transform', 'rotate(180deg)');
+            openCloseTxt.html('收起');
+            vm.collapse = false;
+        }else {
+            $infoObj.css('transition', 'height 0.3s');
+            $infoObj.css('height',  fhclmp + 'px');
+            $infoObj.css(lineClamp, '4');
+            openClose.css('transform', '');
+            openCloseTxt.html('展开');
+            vm.collapse = true;
+        }
+    }
+
     function fail(err) {
         loading.hide('bangdanDetailLoading');
         if (err.code === '403') {
@@ -546,6 +637,123 @@ function BangdanOrgDetailController(loading, $scope, $modal, $stateParams, FindS
             org_id: $stateParams.id + '',
             client:client,
         });
+    }
+
+    function resetData() {
+        vm.prolist = [];
+        vm.more = false;
+        vm.busy = false;
+        vm.finish = false;
+        vm.page = 0;
+        vm.startloading = true;
+        vm.hasInit = false;
+        getProList();
+    }
+
+    function changeTab() {
+        $scope.$on('DynamicTabClicked', function (e, item) {
+            if (sa) {
+                sa.track('OrgTopListClick',
+                  {
+                    source: 'organization',
+                    target: 'industry_tab',
+                    company_industry: item.name,
+                    org_id: $stateParams.id + '',
+                    client: getClient(),
+                });
+            }
+
+            if (item.value == 0) {
+                vm.rankName = '总榜';
+            } else {
+                vm.rankName = item.name;
+            }
+
+            if (item.value == 0 || item.value) {
+                vm.industry = item.value == 0 ? '' : item.id;
+                getSingleOrgInfo();
+                vm.industryName = item.name;
+                // if (item.value != 0) {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareTitle = vm.orgInfo.name + '在' + vm.industryName +'排名第' + vm.orgInfo.rank+ '名 | 2017 · 风口机构排行榜';
+                //     window.WEIXINSHARE.shareDesc = vm.orgInfo.name + vm.orgInfo.projectCount +'个'+vm.industryName+'项目都在这里';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // } else {
+                //     reInitWechat();
+                //     window.WEIXINSHARE.shareTitle = vm.orgInfo.name + '排名第' + vm.orgInfo.rank + '名 | 2017 · 风口机构排行榜';
+                //     window.WEIXINSHARE.shareDesc = vm.orgInfo.name + '' + vm.orgInfo.projectCount + '个投资项目都在这里';
+                //     var obj = {};
+                //     window.InitWeixin(obj);
+                // }
+                resetData();
+            }
+        });
+    }
+
+    vm.cTab = parseInt($scope.currentIndustry);
+    function moveAction(e ,c) {
+        var l = $scope.industryArr.length;
+        var changeobj ={};
+
+        if (c) {
+            vm.cTab <l ? vm.cTab++ : 0;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    //$scope.changeobj = ind;
+                    changeobj = ind;
+                }
+            });
+
+        } else {
+            vm.cTab > 0 ? vm.cTab-- : l-1;
+            $scope.industryArr.forEach(function (ind, index) {
+                if(index == vm.cTab) {
+                    vm.industry = ind.id;
+                    //$scope.changeobj = ind;
+                    changeobj = ind;
+                }
+            });
+        }
+        $scope.$broadcast('bdSwipeMoveAction', changeobj);
+    }
+
+    function getClient(){
+        var isAndroid = !!navigator.userAgent.match(/android/ig);
+        var isIos = !!navigator.userAgent.match(/iphone|ipod|ipad/ig);
+        var client = 'H5';
+        if (isAndroid) {
+            client = 'Android';
+        }else if (isIos) {
+            client = 'iOS';
+        }
+        return client;
+    }
+
+    function getSingleOrgInfo(){
+        var senddata ={
+            industryId: vm.industry,
+        }
+        BangDanService.getSingleOrgInfo($stateParams.id, senddata)
+        .then(function(response) {
+            if (response.data) {
+                vm.orgInfo.projectCount = response.data.projectCount;
+                vm.orgInfo.interviewCount = response.data.interviewCount;
+                vm.orgInfo.accessCount = response.data.accessCount;
+                vm.orgInfo.rank = response.data.rank;
+                vm.orgInfo.currentIndustryOrgCount = response.data.currentIndustryOrgCount;
+                vm.orgInfo.totalOrgCount = response.data.totalOrgCount;
+            }
+        })
+        .catch(fail);
+    }
+
+    function reInitWechat(){
+        var HOST = location.host;
+        var shareUrl =
+        'https://' + HOST + '/m/#/bangdan/bdshare?id=' + $stateParams.id + '&rank=' + vm.orgInfo.rank + '&industry=' + vm.industry;
+        initWeixin(vm.orgInfo.name, vm.orgInfo.projectCount, vm.currQuarter, vm.orgInfo.rank, shareUrl, vm.orgInfo.logo);
     }
 
 }

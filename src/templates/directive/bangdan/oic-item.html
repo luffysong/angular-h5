@@ -1,0 +1,31 @@
+<div class="oic-item">
+    <div class="oic-left">
+        <img src="//krplus-pic.b0.upaiyun.com/avatar/201706/06083028/xqqlmp1u9knyf8v3.png" ng-if="key === 0">
+        <img src="//krplus-pic.b0.upaiyun.com/avatar/201706/06083059/brz33qbxgvg3tvsl.png" ng-if="key === 1">
+        <img src="//krplus-pic.b0.upaiyun.com/avatar/201706/06083118/dfsp9tlwfmeflszz.png" ng-if="key === 2">
+        <span ng-if="key > 2">{{key + 1}}</span>
+        <div class="up-arrow" ng-if="item.rise > 0 && isrise" ng-class="{true:'top-special',false:'top-normal'}[key <= 2]"></div>
+        <div class="down-arrow" ng-if="item.rise < 0 && isrise" ng-class="{true:'top-special',false:'top-normal'}[key <= 2]"></div>
+        <div class="number-change" ng-if="item.rise != 0 && isrise" ng-class="{true:'top-special-num',false:'top-normal-num'}[key <= 2]">
+            {{item.rise | absNumber}}
+        </div>
+    </div>
+    <div class="oic-right">
+        <div class="oic-logo">
+            <div class="logo top1-logo" ng-if="key === 0" style="background-image: url({{item.logo}})"></div>
+            <div class="logo top2-logo" ng-if="key === 1" style="background-image: url({{item.logo}})"></div>
+            <div class="logo top3-logo" ng-if="key === 2" style="background-image: url({{item.logo}})"></div>
+            <div class="logo normal-logo" ng-if="key > 2" style="background-image: url({{item.logo}})"></div>
+        </div>
+        <div class="oic-name">
+              <div ng-class="{true:'oic-top3Color',false:''}[key < 3]" class="oic-title">{{item.name}}</div>
+              <!--
+              <div class="oic-count" ng-if="symbol === 'org'">浏览量 <span>{{item.accessCount}}</span></div>-->
+              <div class="oic-count">共 <span>{{item.projectCount}}</span> 个项目</div>
+        </div>
+        <div class="oic-num">
+              <div ng-class="{true:'oic-top3Color',false:''}[key < 3]">{{item.interviewCount}}</div>
+              <div class="oic-count">约谈量</div>
+        </div>
+    </div>
+</div>
