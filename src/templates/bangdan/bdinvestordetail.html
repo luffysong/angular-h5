@@ -99,7 +99,7 @@
         currtab='vm.cTab'
         ></div>
     </section>
-    <!--推荐-->
+    <!--推荐
     <section class="bd-investor-recommend" ng-if="vm.recommend">
         <div class="pro-top">
             <span class="h-line"></span>
@@ -112,6 +112,7 @@
             infinite-scroll-distance='0'>
                 <li ng-if="vm.recommend" ng-repeat="item in vm.recommend track  by $index"
                     ng-click="vm.goProDetail(item.ccid, $event)" >
+                    <!--
                     <div class="txt-right" ng-if="!vm.startloading">
                         <div class="left-logo">
                             <div class="logo-outer bd-normal-border"
@@ -140,11 +141,12 @@
                             </div>
                         </div>
                     </div>
+                <project-item item="item" key="$index" isinvestor='vm.investRole'></project-item>
                 </li>
             </ul>
         </div>
     </section>
-
+    -->
     <section class="bd-investor-pro" ng-class="{true:'',false:'marg-top'}[!vm.recommend]">
         <div class="pro-top">
             <span class="h-line"></span>
